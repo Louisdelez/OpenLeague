@@ -1,6 +1,6 @@
 # OpenLeague
 
-Projet de **LOUIS DELEZ** : reconstruction locale du périmètre historique de League of Legends 4.20, avec un moteur en Rust, un serveur autoritaire UDP et un launcher historique en Rust/Tauri.
+Reconstruction locale du périmètre historique de League of Legends 4.20, avec un moteur en Rust, un serveur autoritaire UDP et un launcher historique en Rust/Tauri.
 
 **En développement — ce dépôt ne constitue pas un jeu terminé.** Les modèles importés et les tests de composants ne prouvent pas que les 122 champions sont intégralement jouables.
 
@@ -58,9 +58,9 @@ Des tests spécifiques nécessitent Windows, un GPU, les ressources LFS ou un cl
 - [État et preuves](docs/coverage.json)
 - [Contribution](CONTRIBUTING.md)
 
-## Auteur et licences
+## Licence
 
-Code original et assets distribués par OpenLeague : Copyright (c) 2026 **LOUIS DELEZ**, sous [licence MIT](LICENSE), avec conservation des attributions des titulaires d'origine.
+Le code original et les assets distribués par OpenLeague sont sous [licence MIT](LICENSE), avec conservation des attributions des titulaires d'origine.
 Les dépendances tierces conservent leurs licences et mentions de copyright ; voir [LICENSING.md](docs/LICENSING.md).
 
 OpenLeague est un projet indépendant ; aucune affiliation ou approbation de Riot Games n'est revendiquée.

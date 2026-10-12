@@ -1,6 +1,6 @@
 # Licences
 
-Le code original, la documentation et les assets distribués par OpenLeague sont sous [licence MIT](../LICENSE). Copyright (c) 2026 LOUIS DELEZ. Conserver les mentions et attributions des titulaires d'origine présentes dans les fichiers.
+Le code original, la documentation et les assets distribués par OpenLeague sont sous [licence MIT](../LICENSE). Conserver les mentions et attributions des titulaires d'origine présentes dans les fichiers.
 
 ## Dépendances et contenus tiers
 
