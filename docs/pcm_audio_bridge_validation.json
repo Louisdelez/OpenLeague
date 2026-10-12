@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "source_sha256": {
+    "crates/core/src/audio_media.rs": "39b5a632eefce537fbd80a676337c2362ec662add40cad419e72c6c1e76a9e8e",
+    "crates/client/src/pcm_audio.rs": "2555388a27ae019270f5570d1259e4c2b687c96bb4007f0ec33863d7db363358",
+    "crates/client/src/main.rs": "648ca75b153828720bbb359da38145e2831bdac2b060ab90005b446508d248e7"
+  },
+  "checks": [
+    {
+      "command": "cargo check -p openleague-client --tests --offline -j1",
+      "session": 80880,
+      "exit_code": 0
+    },
+    {
+      "command": "cargo test -p openleague-client --offline -j1 pcm_audio::",
+      "session": 57503,
+      "passed": 1,
+      "exit_code": 0
+    },
+    {
+      "command": "cargo test -p openleague-core --offline -j1 audio_media::",
+      "session": 92982,
+      "passed": 4,
+      "exit_code": 0
+    }
+  ],
+  "scope": "PcmAudio Bevy asset, Decodable/Source bridge registered after DefaultPlugins. Shared Arc PCM storage and independent generic core Playback cursors. Interleaved output, source rate, finite duration, exact end; callback refill no allocation.",
+  "limits": [
+    "No ambient event is yet routed to PcmAudio; backend availability remains false.",
+    "No physical audio acceptance or runtime client rebuild/run demonstrated. Bevy output resampling/mixing not native-qualified."
+  ]
+}

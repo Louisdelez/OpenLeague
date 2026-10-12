@@ -1,0 +1,37 @@
+{
+  "updated_utc": "2026-10-04T23:45:35.096049+00:00",
+  "complete": false,
+  "client_tests_passed": 124,
+  "client_build_passed": true,
+  "native_event_creations_and_callbacks": 2,
+  "native_addresses": 2258,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Original6B3B80/66D460 constructs/registers a view on an empty supplied dispatcher sentinel. Original66CA40/66C970/66D240 create the event object/control and first subscriber storage; original tree insertion changes event count0->1. No precreated event/list/control supplied.",
+    "InitializeCriticalSection import identified through PE import table atFA41A0. Original call site66D282 is explicitly adapted to supplied24-byte critical-section storage. Other original event, registry, buffer and subscriber construction logic executes.",
+    "Source retirement invokes the newly created event/subscriber and native view callback, retiring counts/pixels. Rust ViewRegistry tracks lazy typed retirement-event creation separately from its subscriber slots. Native constructor/event/callback comparison and full124client tests pass; build passed."
+  ],
+  "limits": [
+    "Original view constructor including6B7D70 self-wrapper shared initialization, zero buffers,68CF70 subscriber creation,66D460 existing-event registration and6B2D10 stencil allocation executes. Original source creation/removal and registered view callback retire the applied stencil.",
+    "Allocator/mutex boundaries adapted; original InitializeCriticalSection import at66D282 supplied initialized24-byte storage in this single-thread probe. Empty dispatcher sentinel supplied; original event map insertion, event/list/control creation and first subscription growth execute.",
+    "View destruction/unsubscription, first argument semantics and full texture/GPU activation remain unqualified. Fields1C and48 retain preexistingCC bytes; not assigned fabricated defaults.",
+    "Rust ports typed retirement event presence and dispatch semantics; native red-black map layout and generic unrelated event types are not reimplemented.",
+    "Only first subscriber/list growth and one event key qualified here. Repeated subscriptions, list expansion, ordering and concurrent delivery remain open. Mutex adaptation qualifies this single-thread probe only.",
+    "No ordinary source/view activation, live server/GPU fog binding or current graphical rerun."
+  ],
+  "next_actions": [
+    "Qualify repeated subscriptions/list growth and pending-source view destruction.",
+    "Qualify extent/camera/configuration and entity field producers; activate native source/view lifecycle in ordinary gameplay.",
+    "Bind qualified masks to authoritative filtering and GPU rendering and verify current restored Map10 gameplay."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_event_creation_contract.json": "36107b7d9a3be0e01f5ee08add372072ee7a0f29a0c2a41a112f74604da7eeda",
+    "tools/probe_fow_event_creation.py": "b68604212251503dd3c9935e3204611f0b5459c2a576d6507b8abcc2b0fc1729",
+    "tools/probe_fow_event_creation_generated.py": "47814352d406a048c16524d978ab45444cde1d54d7923ffbda976f064daacc32",
+    "crates/client/src/fow_view_registry.rs": "024304b7cd718e01fc11b324d4b584b9ac1472a82ce8f9cc6374911ee21d7226",
+    "logs/native-event-creation-tests.log": "68ce943c97ba01f1735e265655f2aa7a6ad554607d3a835d7409df241ac56249",
+    "logs/native-event-creation-build.log": "7684dfd1a8e024ecfe560ac6ea28e236211a357297c598f9f4932322939ce81a",
+    "target/debug/openleague-client.exe": "63c7af5af0bb7b0f9e77495107e80088792756965d1414b31e7d5dc208de89ea"
+  }
+}

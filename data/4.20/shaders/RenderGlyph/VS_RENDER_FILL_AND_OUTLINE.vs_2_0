@@ -1,0 +1,42 @@
+////////////////////////////////////////////////////////////////
+///
+/// Constants
+///
+////////////////////////////////////////////////////////////////
+
+column_major float4x4 pMtx : register(c4);
+
+struct VERTEX
+{
+	float3 m_Position : X3D_VSIN_POSITION;
+	float4 m_Color0: X3D_VSIN_COLOR0;
+	float4 m_Color1: X3D_VSIN_COLOR1;
+	float2 m_TexCoord0 : X3D_VSIN_TEXCOORD0;
+    float2 m_TexCoord1 : X3D_VSIN_TEXCOORD1;
+};
+
+struct INTERPOLANTS
+{
+	float4 m_Position : POSITION;
+	float4 m_Color0: COLOR0;
+	float4 m_Color1: COLOR1;
+	float2 m_TexCoord0 : TEXCOORD0;
+    float2 m_TexCoord1 : TEXCOORD1;
+};
+
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// Shader
+///
+/////////////////////////////////////////////////////////////////////////////////////
+void main ( VERTEX vertex, out INTERPOLANTS interpolants)
+{
+	// Output homogeneous position
+	interpolants.m_Position = mul(pMtx, float4(vertex.m_Position, 1.0f)); 
+	
+	// Pass through all other
+	interpolants.m_Color0 = vertex.m_Color0.VCOLORSWIZZLE;
+	interpolants.m_Color1 = vertex.m_Color1.VCOLORSWIZZLE;
+	interpolants.m_TexCoord0 = vertex.m_TexCoord0;
+    interpolants.m_TexCoord1 = vertex.m_TexCoord1;
+}

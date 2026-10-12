@@ -1,0 +1,10 @@
+from pathlib import Path
+import sys,json,hashlib
+sys.path.insert(0,'E:/OpenLeague/tools/pythonlibs')
+import pefile
+from capstone import Cs,CS_ARCH_X86,CS_MODE_32
+r=Path('E:/OpenLeague');source=Path('D:/LeagueOfLegendsV2/4.20/Client/League of Legends_UNPACKED/League-of-Legends-4-20/RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/League of Legends.exe');b=source.read_bytes();digest=hashlib.sha256(b).hexdigest();assert digest=='402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862';p=pefile.PE(data=b);base=p.OPTIONAL_HEADER.ImageBase;md=Cs(CS_ARCH_X86,CS_MODE_32)
+start,end=0xb06950,0xb069f6;raw=p.get_data(start-base,end-start);instructions=[{'address':hex(i.address),'bytes':i.bytes.hex(),'mnemonic':i.mnemonic,'operands':i.op_str}for i in md.disasm(raw,start)]
+assert instructions[-1]['address']=='0xb069f5'and instructions[-1]['mnemonic']=='ret'
+receipt={'complete':False,'native_sha256':digest,'start':hex(start),'end':hex(end),'sha256':hashlib.sha256(raw).hexdigest(),'instructions':instructions,'calls':[i for i in instructions if i['mnemonic']=='call'],'next_dependencies':['B0FB40 frame quota retained in EBX; each completed frame decrements quota and loops back to command consumer, including final zero-quota pass','B06C60 actual command consumer','B07E50 ordered pre-callback update','B1C590 optional branch controlled by global14A82E4','B06987 qualified callback loop only when EBX nonzero','AF5B10/B14140 frame count advance and ordered post-callback consumers','B19EC0/AF3F80/B0FDB0/AF3AA0/B15110 other ordered consumers; exact bodies still required','Mutex14A7A44 acquire/release physical transport'],'limits':['Verified bytes/disassembly, not runtime qualification of complete frame or any unported callees. Existing callback loop qualification does not close the full producer.']}
+(r/'data/4.20/audio_normal_frame_producer_discovery.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8');print('Normal frame producer B06950:',len(instructions),'instructions;',len(receipt['calls']),'calls')

@@ -1,0 +1,77 @@
+FUNCTION 0x5d32b0
+005d32b0 push ebp
+005d32b1 mov ebp, esp
+005d32b3 push esi
+005d32b4 call 0x5d5730
+005d32b9 mov esi, eax
+005d32bb lea eax, [esi + 0x10]
+005d32be mov word ptr [esi + 0xc], 0
+005d32c4 test eax, eax
+005d32c6 je 0x5d32d9
+005d32c8 mov ecx, dword ptr [ebp + 0xc]
+005d32cb mov ecx, dword ptr [ecx]
+005d32cd mov ecx, dword ptr [ecx]
+005d32cf mov dword ptr [eax], ecx
+005d32d1 lea ecx, [eax + 4]
+005d32d4 call 0x576000
+005d32d9 mov eax, esi
+005d32db pop esi
+005d32dc pop ebp
+005d32dd ret 0xc
+005d32e0 push ebp
+005d32e1 mov ebp, esp
+005d32e3 push -1
+005d32e5 push 0xf1d200
+005d32ea mov eax, dword ptr fs:[0]
+005d32f0 push eax
+005d32f1 sub esp, 0x14
+005d32f4 push ebx
+005d32f5 push esi
+005d32f6 push edi
+005d32f7 mov eax, dword ptr [0x1222ed0]
+005d32fc xor eax, ebp
+005d32fe push eax
+005d32ff lea eax, [ebp - 0xc]
+005d3302 mov dword ptr fs:[0], eax
+005d3308 mov dword ptr [ebp - 0x10], esp
+005d330b mov ebx, ecx
+FUNCTION 0x5d34f0
+005d34f0 push ebp
+005d34f1 mov ebp, esp
+005d34f3 sub esp, 8
+005d34f6 push esi
+005d34f7 call 0x5d57b0
+005d34fc mov esi, eax
+005d34fe lea ecx, [esi + 0x10]
+005d3501 mov word ptr [esi + 0xc], 0
+005d3507 test ecx, ecx
+005d3509 je 0x5d3524
+005d350b mov eax, dword ptr [ebp + 0xc]
+005d350e push ecx
+005d350f push ecx
+005d3510 mov edx, esp
+005d3512 mov eax, dword ptr [eax]
+005d3514 mov dword ptr [edx], eax
+005d3516 mov eax, dword ptr [ebp + 8]
+005d3519 movzx eax, byte ptr [eax]
+005d351c push eax
+005d351d call 0x5e3da0
+005d3522 mov eax, esi
+005d3524 pop esi
+005d3525 mov esp, ebp
+005d3527 pop ebp
+005d3528 ret 0xc
+005d352b int3 
+005d352c int3 
+005d352d int3 
+005d352e int3 
+005d352f int3 
+FUNCTION 0x5ddb70
+005ddb70 mov ecx, dword ptr [ecx + 0xc]
+005ddb73 test ecx, ecx
+005ddb75 je 0x5ddb7e
+005ddb77 mov eax, dword ptr [ecx]
+005ddb79 push 1
+005ddb7b call dword ptr [eax + 0x10]
+005ddb7e ret 
+005ddb7f int3 

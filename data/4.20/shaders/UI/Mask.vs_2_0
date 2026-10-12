@@ -1,0 +1,14 @@
+float4x4 pMtx : register(c0);
+float4 uvScale : register(c8);
+
+void main(	float2 pos: X3D_VSIN_POSITION,
+			float4 col0: X3D_VSIN_COLOR0,
+			float2 tex0: X3D_VSIN_TEXCOORD0,
+			out float4 posOut: POSITION,
+			out float2 tex0Out: TEXCOORD0,
+      out float2 tex1Out: TEXCOORD1)
+{
+  posOut = mul(pMtx, float4(pos,0,1));
+  tex0Out = tex0;
+  tex1Out = (tex0 + uvScale.xy) * uvScale.zw;
+}

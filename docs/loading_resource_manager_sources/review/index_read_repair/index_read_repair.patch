@@ -1,0 +1,172 @@
+--- crates/core/src/audio_loading_resource_manager_index.rs (installed)
++++ crates/core/src/audio_loading_resource_manager_index.rs (candidate)
+@@ -70,6 +70,7 @@
+     let pivot = word(b, node, side)?;
+     let child = word(b, pivot, opposite)?;
+     put(b, node, side, child)?;
++    let child = word(b, pivot, opposite)?;
+     if !nil(b, child)? {
+         put(b, child, 4, node)?;
+     }
+@@ -78,10 +79,13 @@
+     let head = word(b, tree, 0)?;
+     if word(b, head, 4)? == node {
+         put(b, head, 4, pivot)?;
+-    } else if word(b, parent, opposite)? == node {
+-        put(b, parent, opposite, pivot)?;
+-    } else {
+-        put(b, parent, side, pivot)?;
++    } else {
++        let parent = word(b, node, 4)?;
++        if word(b, parent, opposite)? == node {
++            put(b, parent, opposite, pivot)?;
++        } else {
++            put(b, parent, side, pivot)?;
++        }
+     }
+     put(b, pivot, opposite, node)?;
+     put(b, node, 4, pivot)
+@@ -104,30 +108,35 @@
+     put(b, node, 4, parent)?;
+     let head = word(b, tree, 0)?;
+     if parent == head {
+-        for offset in [4, 0, 8] {
+-            put(b, head, offset, node)?;
+-        }
++        put(b, head, 4, node)?;
++        let head = word(b, tree, 0)?;
++        put(b, head, 0, node)?;
++        let head = word(b, tree, 0)?;
++        put(b, head, 8, node)?;
+     } else {
+         let side = if left { 0 } else { 8 };
+         put(b, parent, side, node)?;
++        let head = word(b, tree, 0)?;
+         if word(b, head, side)? == parent {
+             put(b, head, side, node)?;
+         }
+     }
+     let mut current = node;
+-    loop {
++    let parent = word(b, current, 4)?;
++    if byte(b, parent, 12)? == 0 { loop {
+         let parent = word(b, current, 4)?;
+-        if byte(b, parent, 12)? != 0 {
+-            break;
+-        }
+         let grandparent = word(b, parent, 4)?;
+-        let is_left = parent == word(b, grandparent, 0)?;
+-        let uncle = word(b, grandparent, if is_left { 8 } else { 0 })?;
++        let left_child = word(b, grandparent, 0)?;
++        let is_left = parent == left_child;
++        let uncle = if is_left { word(b, grandparent, 8)? } else { left_child };
+         if byte(b, uncle, 12)? == 0 {
+             color(b, parent, 1)?;
+             color(b, uncle, 1)?;
++            let parent = word(b, current, 4)?;
++            let grandparent = word(b, parent, 4)?;
+             color(b, grandparent, 0)?;
+-            current = grandparent;
++            let parent = word(b, current, 4)?;
++            current = word(b, parent, 4)?;
+         } else {
+             if current == word(b, parent, if is_left { 8 } else { 0 })? {
+                 current = parent;
+@@ -135,11 +144,17 @@
+             }
+             let parent = word(b, current, 4)?;
+             color(b, parent, 1)?;
++            let parent = word(b, current, 4)?;
+             let grandparent = word(b, parent, 4)?;
+             color(b, grandparent, 0)?;
++            let parent = word(b, current, 4)?;
++            let grandparent = word(b, parent, 4)?;
+             rotate(b, tree, grandparent, !is_left)?;
+         }
+-    }
++        let parent = word(b, current, 4)?;
++        if byte(b, parent, 12)? != 0 { break; }
++    }}
++    let head = word(b, tree, 0)?;
+     let root = word(b, head, 4)?;
+     color(b, root, 1)?;
+     Ok(node)
+@@ -174,43 +189,56 @@
+ }
+ ///5D2950 is equivalent to663240 below its differing stack/SEH prologue; it accepts the lower_bound hint retained before allocation.
+ fn insert_hint(b: &mut impl Boundary, owner: &mut Record, tree: u32, node: u32, hint: u32) -> Result<u32, Error> {
+-    let head = word(b, tree, 0)?;
+     if word(b, tree, 4)? == 0 {
++        let head = word(b, tree, 0)?;
+         return insert_at(b, owner, tree, node, head, true);
+     }
+-    let key = word(b, node, 16)?;
++    let head = word(b, tree, 0)?;
+     if hint == word(b, head, 0)? {
++        let key = word(b, node, 16)?;
+         if key < word(b, hint, 16)? {
+             return insert_at(b, owner, tree, node, hint, true);
+         }
+     } else if hint == head {
+         let maximum = word(b, head, 8)?;
+-        if word(b, maximum, 16)? < key {
++        let maximum_key = word(b, maximum, 16)?;
++        let key = word(b, node, 16)?;
++        if maximum_key < key {
+             return insert_at(b, owner, tree, node, maximum, false);
+         }
+-    } else if key < word(b, hint, 16)? {
+-        let previous = adjacent(b, hint, false)?;
+-        if word(b, previous, 16)? < key {
+-            let right = word(b, previous, 8)?;
+-            return if nil(b, right)? {
+-                insert_at(b, owner, tree, node, previous, false)
+-            } else {
+-                insert_at(b, owner, tree, node, hint, true)
+-            };
+-        }
+-    } else if word(b, hint, 16)? < key {
+-        let next = adjacent(b, hint, true)?;
+-        if next == head || key < word(b, next, 16)? {
+-            let right = word(b, hint, 8)?;
+-            return if nil(b, right)? {
+-                insert_at(b, owner, tree, node, hint, false)
+-            } else {
+-                insert_at(b, owner, tree, node, next, true)
+-            };
++    } else {
++        let key = word(b, node, 16)?;
++        let mut hint_key = word(b, hint, 16)?;
++        if key < hint_key {
++            let previous = adjacent(b, hint, false)?;
++            if word(b, previous, 16)? < key {
++                let right = word(b, previous, 8)?;
++                return if nil(b, right)? {
++                    insert_at(b, owner, tree, node, previous, false)
++                } else {
++                    insert_at(b, owner, tree, node, hint, true)
++                };
++            }
++            hint_key = word(b, hint, 16)?;
++        }
++        if hint_key < key {
++            let next = adjacent(b, hint, true)?;
++            if next == head || key < word(b, next, 16)? {
++                let right = word(b, hint, 8)?;
++                return if nil(b, right)? {
++                    insert_at(b, owner, tree, node, hint, false)
++                } else {
++                    insert_at(b, owner, tree, node, next, true)
++                };
++            }
+         }
+     }
+     insert_unhinted(b, owner, tree, node)
+ }
++
++#[cfg(test)]
++#[path="audio_loading_resource_manager_index_read_tests.rs"]
++mod read_tests;
+ ///5D2710 shares5D54A0 with661F80; it rereads caller key after allocation.
+ fn allocate_node(b:&mut impl Boundary, owner:&mut Record, tree:u32, key_ref:u32)->Result<u32,Error> {
+     let node=owner.allocate(b,24)?;

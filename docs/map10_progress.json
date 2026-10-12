@@ -1,0 +1,50 @@
+{
+  "updated_utc": "2026-10-02T19:35:35.536758+00:00",
+  "complete": false,
+  "native_lua": {
+    "first_wave_seconds": 75,
+    "wave_interval_seconds": 30,
+    "unit_spacing_seconds": 0.8,
+    "xp_radius": 1250,
+    "upgrade_seconds": 90,
+    "cannon_change_seconds": 720
+  },
+  "entities": {
+    "definitions": 27,
+    "initial_structures": 18,
+    "normal_camps": 6,
+    "normal_monsters": 16,
+    "boss_camps": 1
+  },
+  "implemented": [
+    "Basic NPC movement/attacks and authoritative rewards",
+    "Structure dependency guards and Nexus victory",
+    "Inhibitor respawn and lane-specific super waves",
+    "Champion baseline respawn",
+    "Native GLB scene and animation binding",
+    "Health bars and native ruin model transitions",
+    "Central relic pickup, heal/resource restore, haste and 90-second respawn state",
+    "Fountain periodic allied healing; community coefficients still unqualified",
+    "Client relic countdown and native pickup audio event",
+    "Partial altar capture/contest/locks, last-hit gold and two-altar attack bonus",
+    "Native altar GLBs, verified animation roles, event sounds and HUD"
+  ],
+  "limits": [
+    "Full native AI and combat timing not qualified",
+    "Vilemaw special attacks and buff missing",
+    "Altar trigger/timing/bonus qualification, capture reward, mana regeneration, AP and full fog remain incomplete; relic coefficients, decay curve, particles and audible output unqualified",
+    "Monster level scaling and turret item modifiers missing",
+    "Native minion formation, body collision, fog and visual fidelity unqualified",
+    "Native champion death scaling not implemented"
+  ],
+  "proofs": [
+    "world_network_validation.json",
+    "respawn_network_validation.json",
+    "../logs/core-tests.log",
+    "../data/4.20/map10_interactions.json",
+    "../data/4.20/native_tooltips_map10.json",
+    "relic_network_validation.json",
+    "altar_network_validation.json",
+    "altar_model_loading_validation.json"
+  ]
+}

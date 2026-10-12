@@ -1,0 +1,31 @@
+{
+  "updated_utc": "2026-10-04T01:27:14.772146+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_voice_constructor.py": "33ce04c2c6b332095bd1c6ae048f9cbe03a788abae140d97e022ca7c63f6959d",
+    "data/4.20/audio_voice_constructor_contract.json": "125e4e385f7860f7224e12ae1f20e498dfa693fa1460cb00a92e382d8513ff5e",
+    "crates/core/src/audio_voice_constructor.rs": "48fa5eb5acce141b467201d52056e45dd1556c7e66bfcd55700b976c8121a453",
+    "logs/native-audio-voice-constructor-core-tests.log": "0f2a41adefeae0de3e4ff700f872e8ecf6445eb2dcdab93cbd83fa3a73fefd41",
+    "crates/core/src/lib.rs": "7a14bafe61785a98fba5ecce1758470fec647d261358e9afd341881033f5234b"
+  },
+  "native_cases": 540,
+  "core_tests_passed": 238,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "control_flow_ported": true,
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false,
+  "limits": [
+    "Original706C70 constructor executed. String copy564AF0 and clock virtual readiness/getter inputs supplied explicitly; x87 clock return/field write executed.",
+    "Missing/not-ready clock branches run only up to706D21 fatal assertion entry; logging/crash excluded. Rust must return explicit error instead of silently inventing time.",
+    "Field49 is raw1; its meaning is not inferred. Bytes4A/4B preserve allocator seed and are not zero-initialized by constructor.",
+    "Actual string allocator, time-manager clock source, voice storage/control block and physical launch association remain separate qualification.",
+    "Rust port uses caller-supplied actual backend results; tests use explicit adapters. Full audio integration remains unfinished; standalone binaries unchanged."
+  ],
+  "native_clock_prerequisite_branches": 2,
+  "ported": [
+    "706C70 actual playing/object/record identities and event strings",
+    "released byte false, raw flag49=1 and exact f32 constructor timestamp",
+    "explicit errors for unavailable/non-finite clock",
+    "Post -> construction -> seconds refresh -> stop release bridge"
+  ]
+}

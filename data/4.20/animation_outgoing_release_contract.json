@@ -1,0 +1,126 @@
+{
+  "passed": true,
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "entry": "0x890ea0",
+  "actual_node_release": "0x8892a0",
+  "cases": [
+    {
+      "present": false,
+      "node": false,
+      "initial_refcount": 0,
+      "final_refcount": 0,
+      "calls": []
+    },
+    {
+      "present": false,
+      "node": false,
+      "initial_refcount": 2,
+      "final_refcount": 2,
+      "calls": []
+    },
+    {
+      "present": false,
+      "node": false,
+      "initial_refcount": 3,
+      "final_refcount": 3,
+      "calls": []
+    },
+    {
+      "present": false,
+      "node": true,
+      "initial_refcount": 0,
+      "final_refcount": 0,
+      "calls": []
+    },
+    {
+      "present": false,
+      "node": true,
+      "initial_refcount": 2,
+      "final_refcount": 2,
+      "calls": []
+    },
+    {
+      "present": false,
+      "node": true,
+      "initial_refcount": 3,
+      "final_refcount": 3,
+      "calls": []
+    },
+    {
+      "present": true,
+      "node": false,
+      "initial_refcount": 0,
+      "final_refcount": 0,
+      "calls": []
+    },
+    {
+      "present": true,
+      "node": false,
+      "initial_refcount": 2,
+      "final_refcount": 2,
+      "calls": []
+    },
+    {
+      "present": true,
+      "node": false,
+      "initial_refcount": 3,
+      "final_refcount": 3,
+      "calls": []
+    },
+    {
+      "present": true,
+      "node": true,
+      "initial_refcount": 0,
+      "final_refcount": 0,
+      "calls": [
+        {
+          "receiver": 1073791744,
+          "node": 1073791488,
+          "node_event": 0,
+          "node_shared": 0,
+          "record_node": 1073791488
+        }
+      ]
+    },
+    {
+      "present": true,
+      "node": true,
+      "initial_refcount": 2,
+      "final_refcount": 1,
+      "calls": [
+        {
+          "receiver": 1073791744,
+          "node": 1073791488,
+          "node_event": 0,
+          "node_shared": 0,
+          "record_node": 1073791488
+        }
+      ]
+    },
+    {
+      "present": true,
+      "node": true,
+      "initial_refcount": 3,
+      "final_refcount": 2,
+      "calls": [
+        {
+          "receiver": 1073791744,
+          "node": 1073791488,
+          "node_event": 0,
+          "node_shared": 0,
+          "record_node": 1073791488
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "Outgoing record fields reset, native node event/shared pointers cleared, shared strong count decremented when retained elsewhere.",
+    "Controller release receives outgoing node after its native event detach and before record node pointer is cleared.",
+    "Blend references and timestamps cleared even with absent outgoing record."
+  ],
+  "limits": [
+    "Controller virtual8 captured at explicit synthetic boundary; ownership/pool behavior not qualified.",
+    "Shared count1 destructor branch excluded. No full outgoing layer update here."
+  ]
+}

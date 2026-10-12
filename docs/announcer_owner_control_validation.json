@@ -1,0 +1,61 @@
+{
+  "saved_utc": "2026-10-10T08:34:31.701169+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "audio_tests_passed": 662,
+  "filtered_tests_not_run": 480,
+  "isolated_production_tests_passed": 91,
+  "native_owner_control_factory_cases_ported": 104,
+  "native_real_control_lifetimes_ported": 64,
+  "native_scalar_delete_cases_ported": 36,
+  "shared_reference_threads_verified": 8,
+  "native_metadata_lifetimes_prepared": 96,
+  "contracts": {
+    "audio_announcer_owner_control_factory_contract.json": {
+      "cases": 104,
+      "sha256": "b5d9168c214514fa244539779e7aa0aab4f83b27838eb070e50c2d6df55f2ea3"
+    },
+    "audio_announcer_owner_real_control_lifecycle_contract.json": {
+      "cases": 64,
+      "sha256": "2d07c8c6a445c5470fcfdd816d7db59b1e1fa6e645e1410cbbcf6ccb5c0408bd"
+    },
+    "audio_announcer_owner_control_scalar_delete_contract.json": {
+      "cases": 36,
+      "sha256": "4ac176ca62e5d04c62f695fc07efe07051a1b9ad73635b5bcaf615434eb341d1"
+    },
+    "audio_announcer_owner_metadata_lifecycle_contract.json": {
+      "cases": 96,
+      "sha256": "b2006914f82aec379c66598f08ef4afacf7393a43a062c1a24e2c73247592f9d"
+    }
+  },
+  "regression_log_sha256": "6aae302900e33879ac1c4dac260cc235ec789169f11961f8195a51528f4e2b65",
+  "isolated_log_sha256": "ae4b5a0b0e5455e4fdb16ae5dac8bc264fbb05c7b53d5def6931352833cc358f",
+  "test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_core-5b2a9def275dcedd.exe",
+  "test_executable_sha256": "0a75ca0795ffe171da58211c0cd41314baa7f6177f33096ceb79d75417f3c17c",
+  "source_hashes": {
+    "crates/core/src/audio_announcer_owner_control.rs": "02fe496188a9525a5db3266dd5f97661f93adca7ccf318a83d65abd313d42fd0",
+    "crates/core/src/audio_announcer_owner_component_destructor.rs": "93609fa8e33a133c0d362388e11c25c7c55bc78a61afac3067ea8c01cf835733",
+    "crates/core/src/lib.rs": "ff88cb08d71c634d04920af53984a04157fea3cf0178a1671f68861962c7c2c2",
+    "tools/announcer_owner_control_production_tests.rs": "3c079d1f0fbbdbc2e223beeb819a92dc24944fdae59d09de41decc41ab1b4cd7",
+    "tools/qualify_owner_control_factory.py": "a188a8ddc2fea5bdd4ebb19b914f36fbd5f0f484e98e7ff73b17f0e330a5187d",
+    "tools/qualify_owner_real_control_lifecycle.py": "6c03a3c8f319d03a87b29fa3a5343e7a9db7310ad4ad2256ecb77f6f29b48aa1",
+    "tools/qualify_owner_control_scalar_delete.py": "8f7fa8b8e45d65bb5fdc1a259970d3b6f51e65b34af82720a847dd3c1794bb25",
+    "tools/qualify_owner_metadata_lifecycle.py": "a53e8b0d36e40da8534299c6217a20c7730f6ea7ed09ad2d7c2c2f27a2ee0d88"
+  },
+  "behavior": [
+    "Native5D1FA0 control replacement ported:16-byte control, vtable1085F4C, strong/weak1, raw object, allocation before old selection, old release before publication, control-first/raw-object-second stores and native null-allocation behavior.104 original cases matched.",
+    "Actual5A3220 disposal,5D5B40 release and5D6840 scalar control delete ported.64 native construction/destruction lifetimes matched using real control frees and no control virtual-result adapters; object-specific scalar disposal remains a boundary.36 native scalar flags/custom/standard free cases matched, including header107C834 mutation before deallocator selection.",
+    "Persistent AtomicU32 reference counters added with SeqCst wrapping fetch_sub. Shared8-thread release check yields one final disposal/release; zero underflow preserved. Sequential physical owned-byte backend composes these real counters with original lifetime APIs. Released controls are inaccessible; no post-free reads used."
+  ],
+  "limits": [
+    "Reference counter concurrency is verified; whole actor/metadata storage synchronization and live engine atomic ownership integration remain open. Object-specific scalar delete callback records object/flag1 without releasing object bytes in the lifecycle proof.",
+    "Actual6B26F0 metadata constructor, four native listener-base constructors, callback clone/scalar deletion and real metadata scalar destructor newly qualified in96 lifetimes with service manager2D787B8 absent. Their Rust metadata/listener implementations remain open.",
+    "Metadata proof uses allocator startup flag2D77B20=1, clone allocator14BEF58=0 and supplied C9F39B operator-new primitive; engine allocator startup/service-present listener registration/unregistration and event delivery remain required. Full actor destructor, simulation integration, queues/priorities/mixing/playback and full game remain incomplete."
+  ],
+  "next_action": "Port metadata6B26F0 constructor and real6B28C0 scalar destructor against96 native lifetimes in audio_announcer_owner_metadata_lifecycle_contract.json. Preserve56-byte layout, four callback/listener bases, callback clone allocation class, handler owner/method fields, byte/word padding, borrowed actor/owner fields and global default. Qualify service-present listener registration/unregistration and callback delivery before connecting actual actor metadata, shared-control lifetime, simulation events and announcement queues/priorities/mixing/playback. Preserve24domains114tasks37requirements."
+}

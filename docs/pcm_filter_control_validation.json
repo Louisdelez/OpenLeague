@@ -1,0 +1,32 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T08:49:39.709580+00:00",
+  "change": [
+    "PcmAudio.controlled_filter returns one voice control handle; updates and reset epochs share an atomic snapshot.",
+    "Decoder applies updates at the next PCM block while retaining prepared samples and independent channel histories.",
+    "Native reset reaches Controller.reset before the next control consumption; invalid targets leave the snapshot intact."
+  ],
+  "validation": {
+    "passed": 15,
+    "failed": 0,
+    "session": 26421,
+    "log": "logs/pcm-filter-control-tests.log",
+    "native_nonempty_blocks": 51,
+    "native_sequences": 3,
+    "comparison": "Bit-exact PCM, controller state and histories for alignment0 native retarget traces, across44100/48000/96000 rates; fixture-driven block geometries.",
+    "concurrency": "Writer on another thread; buffered samples unchanged; distinct admitted voice controls isolated."
+  },
+  "sha256": {
+    "crates/client/src/pcm_audio.rs": "3768843fe3e68dce5f186679a556035d5bce3dea11ef8acd2460e3acbf9027de",
+    "crates/core/src/audio_filter_transition.rs": "e6605cff45978884a4c35498305c8d60455daf8a1e0b27b875e3343faad4fd1f",
+    "data/4.20/audio_filter_retarget_contract.json": "c8e40ed6a4cec61672f61862681bb1c2aefc19c763a6b15b838250f0fff9630a",
+    "logs/pcm-filter-control-tests.log": "295f478cdb2de8ce380e4302ec389c07beadcae697646024ed892bfcb86a1b77",
+    "target/debug/deps/openleague_client-5d530a836c9029e8.exe": "580e69129fa1b3daa79afa4b0c92575c513c358f8e9043ad734820cfac56d6bc"
+  },
+  "limits": [
+    "Native runtime processing cadence and upstream control aggregation are still caller inputs, not inferred by this bridge.",
+    "Zero-frame fixture passes are skipped at decoder scope; core controller qualification covers those separately.",
+    "Filtered seek policy, normal logical worker/device admission, sink completion and native callback mapping remain open.",
+    "No normal executable rebuilt or audible hardware/runtime acceptance."
+  ]
+}

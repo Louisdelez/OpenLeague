@@ -1,0 +1,111 @@
+{
+  "schema": 1,
+  "reviewed_at_utc": "2026-10-10T20:51:29.552761+00:00",
+  "status": "read_only_review_with_concrete_read_order_findings",
+  "scope": "Assembled generic manager/index, cache and ownership; focus on publication, retirement cursor, insertion and typed cleanup.",
+  "files": [
+    {
+      "path": "E:\\mapslol3v3\\loading_resource_manager_integration\\production\\crates\\core\\src\\audio_loading_resource_manager.rs",
+      "bytes": 13856,
+      "sha256": "f675e96033a1245f83bba5958857c7d8dcb099012a9c493a962dfebe43a45591"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_resource_manager_integration\\production\\crates\\core\\src\\audio_loading_resource_manager_index.rs",
+      "bytes": 8993,
+      "sha256": "b671fc4a35a1bc6dfe7d95d6fe0ee0256b63d4eb6790788b5d9233c35899e9ff"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_resource_manager_integration\\production\\crates\\core\\src\\audio_loading_resource_cache.rs",
+      "bytes": 7578,
+      "sha256": "c323ab1d4abfa5cb3c4c161fe9257b4796957f353999db860b16e6f6b731c0e8"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_resource_manager_integration\\production\\crates\\core\\src\\audio_loading_owned_string.rs",
+      "bytes": 13570,
+      "sha256": "b858b526cf523ddb28c8609f9fd8e9a1fbe6e788ab4a17e7cdecbcce9c296cf5"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_resource_manager_integration\\production\\crates\\core\\src\\audio_loading_resource_manager_tests.rs",
+      "bytes": 11810,
+      "sha256": "49201e6e43c7e4900eddfd1e260e15f58f31e1f74fa373934b18e6713be223d8"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_resource_manager_integration\\production\\crates\\core\\src\\audio_loading_resource_cache_tests.rs",
+      "bytes": 13583,
+      "sha256": "367781b1fa12c7267df8038b59344e8a60831c877765efb6894aa377f95f9dcd"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_resource_manager_integration\\production\\crates\\core\\src\\audio_loading_screen_packet.rs",
+      "bytes": 8534,
+      "sha256": "e0b4030052022e5cf8a29816be7134c35595378d8843c2abb6cfb333162ab34d"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_resource_manager_integration\\manager\\manager_source.txt",
+      "bytes": 38188,
+      "sha256": "5d156f94e60b38b1fa8b3eb7fa34b24fc3e7e6117fda1a3218e877896536ed1f"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_resource_manager_integration\\manager\\manager_source.json",
+      "bytes": 23557,
+      "sha256": "781eb158b0ca9a8ab1ba22d868d9af95d84d3dbb2b7f1d0e88a2bf092acdb669"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_resource_manager_integration\\cache\\source_cache_functions.txt",
+      "bytes": 12219,
+      "sha256": "e81d4bf0917b9b72b4b79e2be4869bbe9d7f8901818588bf40338e2fb7cbf81a"
+    }
+  ],
+  "findings": [
+    {
+      "id": "INDEX-READ-01",
+      "priority": 2,
+      "file": "E:\\mapslol3v3\\loading_resource_manager_integration\\production\\crates\\core\\src\\audio_loading_resource_manager_index.rs",
+      "lines": [
+        105,
+        109,
+        143,
+        144
+      ],
+      "title": "insert_at suppresses native head rereads",
+      "observed": "The port reads head once and reuses it for three first-node header writes and the final root-color operation. Source5DA61C reads tree,5DA625 and5DA629 reread it before min/max publication;5DA76A rereads it before loading root. The non-root branch also rereads tree after parent-link publication at5DA638/5DA645.",
+      "reproduction_to_cover": "Record native Memory reads of tree during the first manager index insertion, including header parent/min/max writes and final root color, and compare a Rust backend trace. Current tests record allocation/write/free and cannot detect these missing reads.",
+      "minimum_correction": "Reload tree head at the original source positions instead of carrying one cached head through the insertion. Retain existing Record allocation ownership.",
+      "verification": "Static instruction/source comparison; no compiler or new oracle executed in this review."
+    },
+    {
+      "id": "INDEX-READ-02",
+      "priority": 2,
+      "file": "E:\\mapslol3v3\\loading_resource_manager_integration\\production\\crates\\core\\src\\audio_loading_resource_manager_index.rs",
+      "lines": [
+        177,
+        188
+      ],
+      "title": "insert_hint changes count/head/key read order",
+      "observed": "The port reads tree/head before tree.count and then reads node.key before checking head.min. Source5D2984 reads count first; the empty branch reads tree at5D2991. The nonempty branch reads tree at5D29B1 and head.min at5D29B9 before reading the node key on the minimum-hint branch at5D29BD.",
+      "reproduction_to_cover": "Trace the first empty insertion and the second minimum-hint insertion from the fixed manager hashes; assert count-before-head and minimum-before-key ordering. Add a read failure at each affected point to make the different first failing access observable.",
+      "minimum_correction": "Branch on count before loading head and delay node.key reads until the actual branch needs them, following5D2950.",
+      "verification": "Static instruction/source comparison; no compiler or new oracle executed in this review."
+    }
+  ],
+  "ownership_observations": [
+    "Every successful manager allocation is inventoried before its fallible initialization; constructor failures use raw inventory retirement while the constructed flag remains false.",
+    "publication_attempted is set before the fallible global write, including the null allocation path; a failed publication remains represented until its explicit clear succeeds.",
+    "The retirement cursor advances only after a completed write or atomic release; the final global-clear failure keeps the completed action cursor and cannot trigger another free on retry.",
+    "Retirement planning is bounded to four tracked index nodes and nine distinct tracked sentinels and makes no writes before validation succeeds.",
+    "Temporary pending/Detached states preserve fresh buffers across copy publication errors; reset state advances after each successful564900 write and Group retains all failed slots in reverse cleanup order.",
+    "Cache hits borrow the provider value; MissFactory does not create a provider. Full lookup comparison ordering is directly asserted by the prepared cache trace tests."
+  ],
+  "nontermination_limits": [
+    "Cache lower_bound and index search/iterator traversals have visited-node guards.",
+    "Index balancing assumes the private builder-owned tree stays structurally valid; this review did not prove termination under arbitrary allocator callbacks that rewrite tree topology. No such mutation exists in the inspected Windows allocation adapter."
+  ],
+  "compiler_executed": false,
+  "client_executed": false,
+  "production_modified": false,
+  "tests_executed_by_reviewer": false,
+  "verification_limits": [
+    "No Rust execution in this review; root pipeline is responsible for qualification.",
+    "Native fixture success alone does not prove that unrecorded read order matches the Rust port.",
+    "No complete provider cache, real miss factory, populated manager destruction or nonempty UI claim."
+  ]
+}

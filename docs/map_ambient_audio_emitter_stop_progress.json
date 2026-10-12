@@ -1,0 +1,39 @@
+{
+  "updated_utc": "2026-10-04T03:27:58.038910+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_emitter_stop.py": "644db35bef69be7c1f3b1be2f27deb14b98fb3d7f55ec49e0a29d562edd894fe",
+    "data/4.20/audio_emitter_stop_contract.json": "d93acc50c04d20cb5c0377c53130d579165a228a38d33c557b51dc855782b82b",
+    "crates/core/src/audio_emitter_stop.rs": "3ab2967407e5349c669414f8859a754193d3e45efaa02b0cb0501f7ff90db243",
+    "crates/core/src/lib.rs": "cc0b0280ae322c0f5abeaa4cf9c689fca74490f4d5f2c28f18172f3ca959278a",
+    "logs/native-audio-emitter-stop-core-tests.log": "a9851e4e21d24d1cad093007552f059574c422a8cd8cf82afa63123cde9a03c4"
+  },
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_emitter_stop_cases": 216,
+  "core_tests_passed": 284,
+  "static_effect_removal_chain": [
+    "6C8F43 invokes6CEEE0, receives weak pair stored controller11C/120",
+    "6CEEE0 global2D78AA8 virtual4; initializer928B4D assigns factory from928B70",
+    "Factory928B70 vtable10D6C70 virtual4=92BD30;92BD30 allocates15C and constructs93FD60",
+    "93FD60 writes effect vtable10D6DB4; virtualA0=9289B0 sets effect144 bit400 only",
+    "6C9360 controller removal calls target virtualA0 before detaching weak; no direct emitter handle release",
+    "Effect update9406E8 checks bit400 and9412C0/9413C0, native clock, then93FA10 on effect114 emitter",
+    "Actual93FA10 sets emitter flags50, stop time148, conditionally releases1AC/1B0 if source1BC bit10, queues emitter in engineD0"
+  ],
+  "ported": [
+    "Original93FA10 stop transition: existing40 flag no-op, clear1/set50 and capture time",
+    "Release both handles except signed-1 only when source config1BC bit10 set; preserve handles otherwise",
+    "Queue stopped emitter by unsigned identity; repeated stop no-op"
+  ],
+  "limits": [
+    "Actual93FA10 plus735880/736DC0/736E10/6B6530/5ED350 queue insertion executed with spare capacity; logical release virtual20 and CRTmemmove adapted.",
+    "Stop bit40 already set makes entire method no-op; otherwise clears bit1, sets50, writes stop time, queues emitter exactly once.",
+    "Config byte1BC bit10 controls immediate release of both signed handles except -1. Without this bit handles remain for later cleanup.",
+    "Full effect update940.. and actual cleanup scheduling/audio backend consumer remain unqualified.",
+    "Static chain inspected against original PE; full factory/constructor/effect-update execution not qualified in this receipt.",
+    "Rust stop module source only, actual map emitter config binding and client lifecycle/mixer integration incomplete.",
+    "Prior client18test evidence and standalone executables unchanged."
+  ],
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false
+}

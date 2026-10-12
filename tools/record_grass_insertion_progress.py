@@ -1,0 +1,20 @@
+from pathlib import Path
+import json
+s=Path('E:/OpenLeague/tools/record_grass_parent_progress.py').read_text(encoding='utf-8')
+s=s.replace('199','201').replace("replace('198 tests'","replace('199 tests'").replace("replace('198tests'","replace('199tests'")
+s=s.replace('grass_parent_progress','grass_insertion_progress').replace('grass-parent-tests','grass-parent-insertion-tests').replace('grass-parent-build','grass-parent-insertion-build').replace('grass_parent_contract.json','grass_parent_insertion_contract.json')
+s=s.replace("paths=['data/4.20/grass_parent_insertion_contract.json'","paths=['data/4.20/grass_insertion_contract.json','crates/client/src/grass_insertion.rs','data/4.20/grass_parent_insertion_contract.json'")
+s=s.replace('native_parent_cases=864,','native_parent_cases=864,native_insertion_cases=324,parent_insertion_functions_connected=True,child_selection_ported=True,subdivision_queue_scheduling_ported=True,')
+s=s.replace('native_parent_control_ported=True,','native_parent_control_ported=True,native_parent_insertion_functions_connected=True,native_subdivision_queue_scheduling_ported=True,')
+a=s.index('findings=[');b=s.index(',files_sha256=',a)
+findings=['Actual960000/9600F0/8A87E0/8A8400/95EDA0 execute324cases withvalid populatedmemberlists/queue: childselection viawrapping midpoint,descendonlyifbothcornerscontained,append,parentassignment,verticalupdates andscheduleabove16members. Only12byteallocatorboundary adapted.','Connected Rustparentreindex_and_insert matches864original95FF10compoundcases withactualrootinsertion: removal/pruningcallbacks,remainingmembers,count,ancestor/rootverticalbits andfinalrootparent assignment. Destructor/free boundary remainsadapted.']
+limits=['Finite supplied tree/list/queue states anddefaultcontrols only. Nativeallocatorfailure/capacity exceptions, actualsubdivisionprocessing anddestructor/pool lifecycle remainopen.','Connectedparent/insertionfunctions stillnotcalledbyactualactorregistry; normalcollector/mask/WALL integration andsixclientmatch remainopen. All24domainsunfinished.']
+next_actions=['Qualify actualsubdivision processing9603C0 anddestructor95FDA0 withqueued-node removal andpool2D712A8/AC/B0; complete lifecycle.','Connectparentupdatesfromspatialactorchain, realregistry/modelbounds/camera/collector/mask/WALL normalrender andinspectMap10match.','Continuefull24domainplan,allchampionkits,sixclientvictory/results anddelivery.']
+s=s[:a]+'findings='+repr(findings)+',limits='+repr(limits)+',next_actions='+repr(next_actions)+s[b:]
+old='qualifier insertion960000/9600F0, allocation8A87E0, file95EDA0 et destruction95FDA0, puis relier parent/registre réel des acteurs au collecteur/masque/WALL. Contrôle parent, extension verticale, retrait et suppression récursive portés :864cas natifs comparés ;201tests et compilation réussis. Réinsertion complète, producteurs et branchement à la partie restent ouverts.'
+new='qualifier traitement des subdivisions9603C0, destruction95FDA0 et pool, puis relier parent/registre réel des acteurs au collecteur/masque/WALL. Réinsertion et file portées :324cas natifs ; parent et réinsertion reliés :864cas natifs ;201tests et compilation réussis. Cycle de vie, producteurs et branchement à la partie restent ouverts.'
+assert old in s;s=s.replace(old,new)
+s=s.replace('Extension, retrait et suppression récursive portés ; réinsertion, cycle de vie et rendu restent ouverts.','Réinsertion et file portées, parent relié ; subdivision, cycle de vie et rendu restent ouverts.')
+s=s.replace('Réinsertion complète et intégration normale restent ouvertes.','Traitement des subdivisions, cycle de vie et intégration normale restent ouverts.')
+s=s.replace("for name in ['record_grass_insertion_progress.py','probe_native_grass_parent.py'", "for name in ['record_grass_insertion_progress.py','probe_native_grass_insertion.py','probe_native_grass_parent_insertion.py','inspect_native_grass_subdivision.py','native-grass-subdivision-inspection.json','probe_native_grass_parent.py'")
+exec(compile(s,'recordinsertionreceipt','exec'))

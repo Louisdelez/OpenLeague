@@ -1,0 +1,73 @@
+// Diffuse map
+sampler	DIFFUSE_MAP :			register (s0);
+
+// Highlight and alpha
+float4 kGrassFade : register(c23);
+
+// Self illumination value
+float3 SELF_ILLUMINATION : register(c24);
+
+float4	AMBIENT_COLOR  :		register(c21);
+
+#ifdef TINTING
+float3 TINT_COLOR : register(c29);
+#endif
+
+#include "../ShadowMap/pcf1.hls"
+#include "../DeathScreen.hls"
+#include "../MipLevels.hls"
+#include "../FogOfWar/FogOfWar_PS.hls"
+
+struct FRAGMENT
+{
+	float4	m_Color0 : COLOR0;	
+};
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+///
+///
+///
+///////////////////////////////////////////////////////////////////////////////////////
+FRAGMENT
+	main
+	(
+		float2	uv1 :			TEXCOORD0,
+		float2  uv2 :			TEXCOORD1
+#ifdef LIGHTING
+		,
+		float4 sunColor :		COLOR0
+#endif
+	)
+{
+	// Read the diffuse texture
+	float4 texelDiffuse = tex2D(DIFFUSE_MAP, uv1.xy);
+
+	// Compute albedo color using a combination of diffuse and emissive values
+	float4 finalColor;
+	finalColor.rgb = texelDiffuse.rgb;
+#ifdef LIGHTING
+	finalColor.rgb *= saturate(AMBIENT_COLOR.rgb + sunColor.rgb + SELF_ILLUMINATION);	
+#endif
+#ifdef TINTING
+    finalColor.rgb *= TINT_COLOR;
+#endif
+
+	// Alpha
+	finalColor.a = texelDiffuse.a * kGrassFade.a;
+
+#ifndef DISABLE_FOW
+    float4 fowFactors = GetFogOfWarFactors(uv2.xy);
+	finalColor.rgb = lerp(fowFactors.rgb, finalColor.rgb, fowFactors.a);
+#endif
+
+	// Return fragment
+	FRAGMENT fragment;
+	fragment.m_Color0 = finalColor;
+	
+    fragment.m_Color0.rgb = GetEnvironmentDeathColor(fragment.m_Color0.rgb);
+    fragment.m_Color0.rgb = ApplyMipColorsVisualization(fragment.m_Color0.rgb, uv1);
+
+	return fragment;
+
+}

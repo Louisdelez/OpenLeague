@@ -1,0 +1,57 @@
+{
+  "updated_utc": "2026-10-06T11:48:53.119082+00:00",
+  "passed": true,
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "slice": [
+    "0x9c2435",
+    "0x9c2456"
+  ],
+  "mapping_table": "0x10e2b0c",
+  "cases": [
+    {
+      "descriptor": [
+        0,
+        4,
+        0,
+        2,
+        0
+      ],
+      "d3d_primitive": 4,
+      "device": 1073770496,
+      "args": [
+        0,
+        0,
+        4,
+        0,
+        2
+      ]
+    },
+    {
+      "descriptor": [
+        4,
+        3,
+        6,
+        2,
+        3
+      ],
+      "d3d_primitive": 3,
+      "device": 1073770496,
+      "args": [
+        0,
+        4,
+        3,
+        6,
+        2
+      ]
+    }
+  ],
+  "findings": [
+    "Native descriptor0 maps to D3D9TRIANGLELIST4 for two basequad triangles; descriptor3 maps to D3D9LINESTRIP3 for two line segments through the three line vertices.",
+    "Trait is an indexed line strip, not a filled triangle. Original UI effect draw99F850 passes prepared source descriptors to this graphics interface."
+  ],
+  "limits": [
+    "Prior graphics preparation9C22E0/debug branches bypassed; D3D wrapper captures primitive and arguments instead of executing a device draw.",
+    "Actual rasterizer line coverage, effect blend/render states and complete GPU framebuffer still unqualified."
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "updated_utc": "2026-10-06T19:45:02.904568+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "core_tests_passed": 518,
+  "scratch_cases": 16,
+  "scratch_native_footprint_bytes": 300,
+  "scratch_constructor_and_noop_drop_ported": true,
+  "ordinary_emitter_consumer_bound": false,
+  "ordinary_applications_rebuilt": false,
+  "artifacts_sha256": {
+    "data/4.20/troy_scratch_contract.json": "c077f2848c44c054a83c4241d7746912a630a7d5e30252793b2ddf721ee5cd80",
+    "tools/probe_native_troy_scratch.py": "2482e0bb57d279013731b47c0a649aad5915b88ed0a8137e4455db29093953b9",
+    "crates/core/src/native_troy_scratch.rs": "87ccb64776237263047923bc0afcabe1bb8a687d3b22df2aa4839b52033bf03c",
+    "data/4.20/troy_resume_contract.json": "63ddb1c2e4b487fe3fbaec7df934f75f8cc0b1f26743ceebe340438db30f2555",
+    "tools/probe_native_troy_resume.py": "5bc136d3a4ccbc16c27da986a99db15fd03999967299f84db95b73471d32b185",
+    "crates/core/src/native_troy_resume.rs": "420cac2bbbbe504badd60b396ccdbdaa5389782b7a95671b6bb5f81a77990b69",
+    "data/4.20/troy_pause_contract.json": "e9f44304568e57c2c40224679cccfbd7de00299af3f831f3a0d01ae910af262c",
+    "tools/probe_native_troy_pause.py": "912330698623712e7d190dd72ffbf3b11aef62b25046a73fc485392b186bb4c2",
+    "data/4.20/troy_prewarm_contract.json": "b04563a7533c24cdf1ef758544cce0243567a994e6f89944b9fbdf2819b164c3",
+    "tools/probe_native_troy_prewarm.py": "4bd4692dddf278d4fbe0909a32ee627d3b2e8874264bfd27c37201dbccd32a2e",
+    "crates/core/src/native_troy_prewarm.rs": "d1efb93b7c557d4b7f70c115caf5a45980507e4eec15551f1f77d3fe159e8098",
+    "data/4.20/troy_reset_caller_contract.json": "d99924afb290d663a0236e0a433b2099ccd8b979460279b8fc824453faf53725",
+    "tools/probe_native_troy_reset_caller.py": "b9ce598eb68b027375836dc5101d5e2769ef11828bc0e4d5a77f9ab3bcb9eb05",
+    "data/4.20/troy_reset_contract.json": "09aaaf6b1f3ca336c3e6abe4befc3dc902604254e7748a9bac1d7ee5b5041523",
+    "tools/probe_native_troy_reset.py": "099c874f1059415343e00d8673ae7815b14ae11e28970c3e66a0723ad79b7553",
+    "crates/core/src/native_troy_reset.rs": "d4bfed0fe60df6ff6c696e1b8f282a9769b82dcf184758a23a1f1ad0ae483c55",
+    "crates/core/src/native_complex_particle_storage.rs": "d0f4aeac72a17f11075801d198766a8187fc4e164f10fa1278a584ad09ca56b0",
+    "data/4.20/troy_scalar_contract.json": "54005518faa9000dc9f0f330e569cb21e66b5d6e916727e469a8e66d24ce6b0d",
+    "crates/core/src/native_troy_scalar.rs": "f782ab31c463cddfda369c52344103c5147d5db616ba2a0eb626d08c13fb74e1",
+    "data/4.20/troy_position_bounds_contract.json": "9191b4d30eb9a3dba97c2eec59a54648a138f5237ce60c20a2427803e7d30a5e",
+    "crates/core/src/native_troy_position_bounds.rs": "8f16435291e0b3551d72fcc28eac8a6e71bf32a31c4549dad63f34cff4bf69ad",
+    "crates/core/src/native_troy_properties.rs": "f906ec120d6681fae9743760184d7f75eb050cdda49d9e2563c12fa7c038e0f2",
+    "crates/core/src/lib.rs": "57b46ed385a7c493b112352070462624f7b43a92f01e473f6647b43905be87e2",
+    "logs/native-troy-scratch-core-tests.log": "d9bd97055e9d52a2060510c17f6635304a9ebf099c72f6ba837dfd600e2200e0",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "75738b3c6665d48a96b712c2507af3e8691fc13567959956502700c2fc967d1e"
+  },
+  "findings": [
+    "Whole8E2E80 constructor compared byte-for-byte over16cases: zero/CC/FF/random contents and four alignments.300bytes initialized, tail bytes and16-byte guards preserved.",
+    "Native six6BD9D0 constructors execute viaC982E4; subsequent memsets overwrite their temporary values. Final footprint zero except114/118/11C=7F7FFFFF and120/124/128=FF7FFFFF.",
+    "OriginalC97C54 vector destruction executes six5642D0 no-op destructors. Stack ret16 and unchanged bytes/guards verified. Rust ownership drop is no-op.",
+    "Rust raw75-word packet retains unnamed channels until frame producers qualified. initialize_into rejects undersized destinations before writing."
+  ],
+  "adapters": [
+    "Whole constructor executes including six native6BD9D0 element constructors viaC982E4, original memset and raw writes. Stack balance, returned this pointer and16-byte guards checked.",
+    "Original vector destructionC97C54 executes six5642D0 no-op element destructors, with four stack arguments and ret16 checked. Scratch bytes and guards unchanged.",
+    "Allocator/security setup inherited; no graphical/audio frame producer is executed."
+  ],
+  "limits": [
+    "Scratch consumption/frame93F2F0 and graphical/audio integration remain incomplete. Exceptional construction/destruction not qualified here.",
+    "Frame93F2F0 and ordinary graphical/audio integration remain incomplete. No domain/champion kit complete."
+  ],
+  "next_action": "Qualifier la mise à jour complète93F2F0, ses entrées de visibilité et ses producteurs de particules, les producteurs audio réels, les émetteurs à la mort, la carte audio8000, le flag enfant10000 et les mises à jour des émetteurs ; qualifier les corps du gestionnaire et les producteurs natifs, composer le cycle complet puis le raccorder au rendu normal des52groupes/244placements Map10, reconstruire les applications et poursuivre les24domaines."
+}

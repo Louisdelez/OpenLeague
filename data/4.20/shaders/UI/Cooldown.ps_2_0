@@ -1,0 +1,27 @@
+float4 params : register(c0);
+float4 color0 : register(c1);
+float4 color1 : register(c2);
+
+float4 main(float4 col0 : COLOR0, float2 tex0 : TEXCOORD0) : COLOR
+{
+	float2 vec = tex0*2-1;
+	float2 dir = normalize(vec);
+
+	// calculate the angle of this pixel to determine
+	// whether it's part of the remainder or elapsed pie
+	float PI = 3.141592653;
+	float angle = PI + atan2(dir.x, dir.y);
+	float gradAngle = .5; //controls the angle of the gradient 1 - 7
+		
+	// remaining time
+	float4 color;	
+	if(angle < params.x)
+		//float4(clamp((gradAngle-(params.x-angle)),0,1)*0.6*color0.xyz+color0.xyz*.4,color0.a)
+		color = color1;
+	else
+		color = (gradAngle - (angle - params.x))+color0;
+		//color = color0;
+	// elapsed time
+	return float4(color.rgb, color.a);
+}
+

@@ -1,0 +1,55 @@
+{
+  "updated_utc": "2026-10-06T05:32:21.621832+00:00",
+  "complete": false,
+  "client_source_tests_passed": 316,
+  "font_raster_tests_passed": 13,
+  "last_qualified_application_tests": 315,
+  "current_binary_sha256": "caeb3493faae7afbdaff4973d26c73db9c57e91c0f1a70376318d34c47fd38cb",
+  "application_rebuilt_after_changes": false,
+  "native_simple_measure_rust_cases": 864,
+  "native_glyph_node_rust_cases": 384,
+  "source_text_measure_binding_count": 154,
+  "simple_measure_kerning_applied": false,
+  "atlas_discovery_static_only": true,
+  "atlas_page_candidates": [
+    256,
+    512
+  ],
+  "atlas_packing_ported": false,
+  "gpu_text_rendering_qualified": false,
+  "hud_widgets_drawn": false,
+  "artifacts": [
+    "crates/font-raster/src/native_text_measure.rs",
+    "crates/font-raster/src/lib.rs",
+    "crates/client/src/native_font_metrics.rs",
+    "data/4.20/native_glyph_node_metrics_contract.json",
+    "data/4.20/native_simple_text_measure_contract.json",
+    "data/4.20/native_font_atlas_discovery.json",
+    "logs/native-text-measure-client-tests.log",
+    "logs/native-text-measure-raster-tests.log",
+    "data/4.20/native_font_atlas_uv_contract.json"
+  ],
+  "hashes": {
+    "crates/font-raster/src/native_text_measure.rs": "e21fddb983fb8b7a5dce728db3c9f00d897f6a753b4982911a0de30638520fb6",
+    "crates/font-raster/src/lib.rs": "238c9ca2aec61f4bf44b2c848ba22510347a921dcc0f7bf82a38ddc2766d089c",
+    "crates/client/src/native_font_metrics.rs": "10327bab2bfd90eba0d0083872502cc0fa697c72ef61fb04cad3094649ffbb53",
+    "data/4.20/native_glyph_node_metrics_contract.json": "9b669c1fa05c6a1ce95be80b71df24f076526ae52bee15a0b474ba558f9d7697",
+    "data/4.20/native_simple_text_measure_contract.json": "42fa475564ae3e2347420ab9ba4e9f64b1dc2cd025c6442e47230e63c1a2dec6",
+    "data/4.20/native_font_atlas_discovery.json": "77aebef9e665549dc638e56f488417d0a5e55c44f76588635d56b3e258936f4f",
+    "logs/native-text-measure-client-tests.log": "7e3ca84a293f35262c6ae9980b1dd7bcbea8ced2bb6670bffccf5274cf4d95bc",
+    "logs/native-text-measure-raster-tests.log": "1b937fdada3bc2f9d1531e8188c3eeeb8f7a833af170501e2d386473220d07c7",
+    "data/4.20/native_font_atlas_uv_contract.json": "dd89bc2c59f1684799073c48bd390c89d7a95eeb75ff2bd1e590c14f410c19de"
+  },
+  "next_action": "Qualifier et porter placement/UV/rafraîchissement des atlas natifs, puis rich layout et rendu GPU des textes. Raccorder widgets/interactions HUD, corriger zones bleues de la carte et poursuivre tous les domaines.",
+  "limits": [
+    "Original glyph-cell384 and simple-measure864 cases execute with explicit shared-glyph/cache providers. Native heap/reference lifecycle, actual cache failure producers and GPU pages are unqualified.",
+    "Simple measure uses wrapping advance sums, space advance, NUL termination and failure zero dimensions. This method does not prove rich layout, wrapping, alignment or drawing.",
+    "Source API uses original font metrics and owned glyph caches for154bindings; tests compare source results and empty/space/NUL behavior. Widget runtime callers absent.",
+    "Atlas discovery records882instructions across6functions;256/512pages and right-edge UV adjustment are observations, not executed packing or GPU proof.",
+    "New source316tests not rebuilt; preceding315test application remains last Vulkan/DX12 inspected build. Full map/game requirements remain open.",
+    "216existing-row UV suffix cases executed with supplied packing state; exact half-pixel right inset qualified. Row packing/allocation still open; UV Rust port pending."
+  ],
+  "native_atlas_uv_assignment_cases": 216,
+  "native_atlas_uv_assignment_rust_ported": false,
+  "native_atlas_right_edge_inset": 0.5
+}

@@ -1,0 +1,31 @@
+from pathlib import Path
+import json,hashlib,re,datetime,shutil
+root=Path('E:/OpenLeague')
+def load(path):return json.loads(path.read_text(encoding='utf-8-sig'))
+def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
+def write(path,value):
+ temporary=path.with_suffix(path.suffix+'.tmp');temporary.write_text(json.dumps(value,indent=2,ensure_ascii=False)+'\n',encoding='utf-8');load(temporary);temporary.replace(path)
+log=root/'logs/audio-announcer-actor-registration-regression.log';text=log.read_text(encoding='utf-8-sig');assert '642 passed; 0 failed; 0 ignored; 0 measured; 480 filtered out' in text
+small=root/'logs/announcer-actor-registration-production-tests.log';assert '71 passed; 0 failed' in small.read_text(encoding='utf-8-sig')
+executable=root/re.search(r'Running unittests .*?\(([^)]+\.exe)\)',text)[1].replace('\\','/')
+plan=load(root/'docs/completion_plan.json');scope={'domains':len(plan['domains']),'tasks':sum(len(d['tasks']) for d in plan['domains']),'additional_requirements':sum(len(d['additional_requirements']) for d in plan['domains'])};assert scope=={'domains':24,'tasks':114,'additional_requirements':37}
+for reference in load(root/'docs/audio_test_fixture_loading.json')['references']:
+ path=root/reference['fixture'];assert path.stat().st_size==reference['bytes'] and sha(path)==reference['sha256']
+contracts={}
+for name,count in [('audio_announcer_actor_registration_full_contract.json',1024),('audio_announcer_secondary_owner_registries_contract.json',144)]:
+ path=root/'data/4.20'/name;data=load(path);assert data['passed'] and len(data['cases'])==count;contracts[name]={'cases':count,'sha256':sha(path)}
+secondary=load(root/'data/4.20/audio_announcer_secondary_owner_registries_contract.json');assert sum(len(c['steps']) for c in secondary['cases'])==288
+now=datetime.datetime.now(datetime.timezone.utc)
+sources=['crates/core/src/audio_announcer_actor_registration.rs','crates/core/src/audio_announcer_actor_admission.rs','crates/core/src/audio_announcer_object_lookup.rs','crates/core/src/lib.rs','tools/announcer_actor_registration_production_tests.rs','tools/qualify_announcer_actor_registration_full.py','tools/qualify_announcer_secondary_owner_registries.py']
+receipt={'saved_utc':now.isoformat(),'passed':True,'complete':False,'scope':scope,'audio_tests_passed':642,'filtered_tests_not_run':480,'isolated_production_tests_passed':71,'native_full_actor_registration_cases_ported':1024,'native_secondary_owner_registry_sequences_prepared':144,'native_secondary_owner_registration_calls_prepared':288,'contracts':contracts,'regression_log_sha256':sha(log),'isolated_log_sha256':sha(small),'test_executable':str(executable),'test_executable_sha256':sha(executable),'source_hashes':{name:sha(root/name) for name in sources},'behavior':['Complete normal-return62A140 orchestration integrated: primary actor admission, fresh secondary key lookup/register, metadata owner pointer, sentinel skip, component owner dispatch and AL-only failure diagnostic.1024 native cases matched.','Tail metadata is read after preceding callbacks; missing context returns an explicit error while preserving earlier actor publication. Secondary/owner helper calls remain explicit backend boundaries.'],'limits':['Actual5BDD80/64C270/6B5990/6B59F0 helper internals newly qualified in144 repeated sequences288 registrations; direct unsigned identity buckets differ from primary signed CRT hash. Not yet ported.','Native helper proof executes actual raw-key lookup/insertion and pointer-vector append/growth; malloc/free, engine array allocator5CC6B0, lock imports and returning diagnostics supplied. Engine allocator internals, real lock objects, threshold diagnostics and throwing paths remain open.','Current orchestration is a core API with qualified provider composition. Real world actor/metadata ownership, destruction and shutdown are not yet fully connected. Normal announcement queues, priorities, mixing and audible playback remain incomplete. Full24domains114tasks37requirements preserved.'],'next_action':'Port actual secondary/owner5BDD80/64C270/6B5990/6B59F0 helpers against144 sequences288 registrations. Preserve direct unsigned identity hash, existing-zero vs missing-node distinction, returning null-actor diagnostics before lookup, paired locks, pointer-vector growth and helper return AL. Qualify10000-entry threshold diagnostics, engine5CC6B0 allocator and removal/shutdown; connect actor/metadata ownership and normal announcement queue/priorities/mixing/playback. Preserve all24domains114tasks37requirements.'}
+backup=root/'docs/plan_history'/('announcer-actor-registration-'+now.strftime('%Y%m%dT%H%M%SZ'));backup.mkdir(parents=True)
+for name in ['coverage.json','resume_checkpoint.json','completion_plan.json','completion_plan.html']:shutil.copy2(root/'docs'/name,backup/name)
+write(root/'docs/announcer_actor_registration_validation.json',receipt)
+for name in ['coverage.json','resume_checkpoint.json','completion_plan.json']:
+ path=root/'docs'/name;document=load(path);document['announcer_actor_registration_validation']=receipt
+ if name!='coverage.json':document['next_action']=receipt['next_action'];document['updated_utc']=now.isoformat()
+ write(path,document);assert load(path)['announcer_actor_registration_validation']==receipt
+page=root/'docs/completion_plan.html';markup=page.read_text(encoding='utf-8');section='<section id="announcer-actor-registration-validation"><h2>Annonces : enregistrement complet des acteurs</h2><p>Orchestration native complete integree : 1024 cas, table secondaire, proprietaire, diagnostics et erreurs explicites. 71 tests isoles et 642 tests audio reussis. Registres secondaires et proprietaires prepares : 144 sequences, 288 appels natifs. Leurs buckets utilisent les identifiants bruts. Helpers Rust, gestion des acteurs, arret et lecture des annonces restent a terminer.</p></section>';assert '</body>' in markup and 'id="announcer-actor-registration-validation"' not in markup
+temporary=page.with_suffix('.html.tmp');temporary.write_text(markup.replace('</body>',section+'</body>'),encoding='utf-8');temporary.replace(page)
+shutil.copy2(Path(__file__),root/'tools/record_announcer_actor_registration.py')
+print(json.dumps({'audio_tests':642,'isolated_tests':71,'scope':scope,'complete':False}))

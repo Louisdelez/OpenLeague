@@ -1,0 +1,41 @@
+{
+  "updated_utc": "2026-10-04T22:16:21.225319+00:00",
+  "complete": false,
+  "client_tests_passed": 112,
+  "client_build_passed": true,
+  "native_sequences": 16,
+  "native_frames": 64,
+  "native_source_queries": 52,
+  "native_addresses": 2059,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "priority_absolute_tolerance": 1e-06,
+  "findings": [
+    "Original update6B3FA0 now invokes original generator6B14E0 on native Map10 cells:16sequences/64frames, source movement and radius change, partial/complete frame budgets and forced clean-cache refresh. No mask-generation adapter.",
+    "Rust comparison matches every source mask word/rectangle, per-cell count, texture pixel, applied/dirty/pending flags and work order after each frame.52native terrain source queries match Rust rebuild counts; clean masks are reused without a new terrain query.",
+    "CircleSource.regenerate_cached rebuilds only dirty masks, recomputes current bounds for cached masks, applies them and clears generation_dirty. Circle.bounds shared with rasterizer; enqueue radius fallback corrected to source scale/bias as proven by native6B17E0 field loads and existing owner contract."
+  ],
+  "limits": [
+    "Original complete frame6B3FA0 invokes original generation6B14E0, source query8F3390, fan/rays/circle predicates, counters, dirty clearing and heap processing; no mask-generation adapter.",
+    "Entity lookup supplied absent, spectator false, QPC/clock initialization and allocator boundaries adapted. Original terrain constructor, full view initialization, entities and camera/extent producers remain unqualified.",
+    "Source bit buffers supplied preallocated, null owners and tag100 only. No live gameplay/GPU binding.",
+    "Frame comparison qualifies null-owner source caches; owner modifier changes during complete frames, other teams, real actor eligibility and constructor/registration remain open.",
+    "Frame priority float comparison uses absolute tolerance1e-6; exact priority bits across emulator/hardware estimates remain unqualified.",
+    "Corrected source modifier fallback follows native getter/720owner cases; nondefault cached modifiers have not yet been compared through a complete frame.",
+    "112client tests and build current. Earlier427core tests/10UDPchecks remain unchanged-core/server evidence; current graphical gameplay and ordinary entity-driven fog are unverified. All24domains remain unfinished."
+  ],
+  "next_actions": [
+    "Qualify complete-frame owner/cached radius modifier changes, actual source team/identity producers and native actor eligibility.",
+    "Qualify complete view initialization/subscription and camera/world extent producers.",
+    "Drive source creation/update/removal and this qualified frame generator from ordinary entities; reconcile authoritative filtering and bind fog processing to GPU rendering; verify current gameplay."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_map10_frames_contract.json": "74e4069ab0c844ee82806fcd34fa6c29c567b1c2b1a2bd4bd0beb21646944ce4",
+    "tools/probe_fow_map10_frames.py": "28f36f64e1a6152730dea49c03c2609fd82e8c15494f293dc89bf87d27de4867",
+    "crates/client/src/fow_source_factory.rs": "687440a8ec03dedd02fe3919ce9e9bde9202a1c0ead5730d0819ffb3339ee4c9",
+    "crates/client/src/fow_shapes.rs": "6b453e198f1a31a3958eaa415cedcfc6d8df96b9b47ba931e3c90316cfafb9b7",
+    "logs/native-map10-frame-tests.log": "63f82852e556072b0358405d663362161222951b08679b3a3901b96a152a6c35",
+    "logs/native-map10-frame-build.log": "813e94921c285fb8137f35c87c5ed0dcd182cfca9051b3bc04daf34e4c2eb139",
+    "target/debug/openleague-client.exe": "dcdceb66c1824fa6788f75a643ea06578498fcdd93cd6f0bb0063f61ece2cfb2"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "updated_utc": "2026-10-04T01:53:17.961591+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_backend_release.py": "b7c66e846032181d1485f4743a7cd109346455199cb37fe4e8229bee40a00080",
+    "data/4.20/audio_backend_release_contract.json": "81d4ba97a0e2685e2c47b85673cb697afcfe12e172af64cb40d95c6a10e7880e",
+    "crates/core/src/audio_backend_references.rs": "dd3f5ccd7017707d0bc1ed397a6a8b3d565148607be868f8bcda501c83c20618",
+    "crates/core/src/audio_managed_voice.rs": "f66d7bc8fe2a3072ea04a844f4d284537ff634056044928918f6231b03407772",
+    "crates/core/src/audio_object_association.rs": "497d4bacc0d0dd70a1908e501763a7dbd61a4d64b0e5c249d454084dcd69a3d5",
+    "crates/core/src/audio_logical_registration.rs": "0828974d6355c34ddfe4df98ef7d8d26c7e19f5f499c7ee6d54bd1cf76035bd6",
+    "logs/native-audio-backend-release-core-tests.log": "6d8388cb45752aa1522208ecad605b49b37213c570608c38156fa03f221b3c39",
+    "tools/qualify_native_audio_release.py": "9b8f238ba28998404fa777dd0fa03d9fc90ab0c6888fcf84526766e88f9c3f91"
+  },
+  "native_registry_release_cases": 192,
+  "native_invocations": 384,
+  "core_tests_passed": 253,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "ported": [
+    "6CE2D0 raw unsigned backend reference lookup; missing/repeated release no-op",
+    "706EA0 tail to706F90 release before owner/map entry removal",
+    "logical manager -> backend registry -> managed voice -> weak object association lifecycle bridge",
+    "retained external owner delays final voice destruction but not explicit stop; no duplicate stop on finalizer",
+    "explicit backend access error preserves registered owner for recovery"
+  ],
+  "logical_backend_lifecycle_bridge_verified": true,
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false,
+  "limits": [
+    "Original6CE2D0 unsigned tree lookup/706EA0 tailcall/706F90 release/AEB740 fallback message executed on empty and balanced three-key trees. Missing/zero/high-bit/FFFFFFFF keys tested; duplicate release after erase is ignored.",
+    "Map erase5DEE10 is explicit adapter recording removal and rebuilding fixture tree; actual red-black erase/owner destructor is not executed here. Shared final-owner destruction separately qualified144 cases.",
+    "Readiness/PostStopEvent/queue/logging adapters retained; no actual PCM/fade or client consumer. Non-null registered voice invariant; invalid null node payload excluded.",
+    "Bridge tests use actual Rust manager/registry/ownership modules and explicit recording Post/teardown callbacks. Actual live Wwise/mixer queue and PCM output not executed.",
+    "Rust access-error preservation is explicit recovery behavior, not a qualified native exception path. Unmanaged allocation remains caller-owned; null registered voice excluded by native invariant.",
+    "Standalone binaries unchanged; full24-domain game incomplete."
+  ]
+}

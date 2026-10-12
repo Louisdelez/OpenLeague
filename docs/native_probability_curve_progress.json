@@ -1,0 +1,42 @@
+{
+  "updated_utc": "2026-10-06T14:16:08.699171+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "reader_cases": 191,
+  "map_reader_cases": 108,
+  "sample_cases": 1128,
+  "consumer_cases": 96,
+  "consumer_steps": 768,
+  "core_tests_passed": 440,
+  "last_client_tests_passed": 364,
+  "product_rust_sources_changed": true,
+  "ordinary_emitter_consumer_bound": false,
+  "ordinary_applications_rebuilt": false,
+  "reader_original_instruction_addresses": 501,
+  "consumer_original_instruction_addresses": 211,
+  "artifacts_sha256": {
+    "data/4.20/probability_curve_contract.json": "2db63c9c1ce03aced0d97e29d132f3d3b50e9305a094a2ad636090b626e4be77",
+    "data/4.20/probability_random_consumer_contract.json": "8fe88f1a130451ed24b686e4c2bfccd044a8f905f5f1dcdff1772274c078906b",
+    "tools/probe_native_probability_curve.py": "dd691eb032d3a6dcd1ec52b572bf0a04d00117a2b8c7e8e4087feea192b93d7d",
+    "tools/probe_native_probability_random_consumer.py": "1442b7e2a94cf0aeef0f3d6e570d44e484b53985d7686aedf14dbd37893f4a56",
+    "crates/core/src/native_probability_curve.rs": "e6d275b5d10ee0253214c2a631c863567f4f061c456296fba1f6aa8e0b8dfd6e",
+    "crates/core/src/native_random.rs": "3937914287799461892e1afba53a5f9e49cdca4da2d7180a59a074cbe7bbba58",
+    "crates/core/src/lib.rs": "883548f5c1ad8ecb44f534e2bfa8e8c601f7ec08877e829860acccbdea31cd13",
+    "logs/native-probability-curve-core-tests.log": "f928646e990c8e2334a7a84880d16d95ba1d3f42494caccf5b4d8ebd43135b97",
+    "logs/native-probability-random-consumer-core-tests.log": "10be677646ca1f16c5cd8d204649d6cee40be1bffc9ca6c50668a8e3114cf8e6",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "cb37a6dfe4a680b1e793c02bf0d4fd05bf7ae73190d93a9c80f4ae1ebaa780dc"
+  },
+  "findings": [
+    "Original91B410 parsed-numeric reader and91B770 SSE interpolation ported and compared bit for bit. The exact two-point fast-path endpoint tolerances are captured.",
+    "Authored knot order retained, including descending p-lifeP keys in TT_Ghost and TT_Ghost2. Original generic evaluator scans for first key strictly greater than parameter; duplicate exact keys use last duplicate.",
+    "Original93C37A consumer and original RNG seed/state transitions captured. Null and constant parameters consume no draw; nonconstant curves consume one, round fraction to f32, choose fast/generic path and multiply by supplied base. Rust matches768outputs and all55words/indices after each step."
+  ],
+  "limits": [
+    "Native raw getters, cache, lexical conversion and malformed field behavior not qualified.",
+    "Caller parameter binding and age input before consumer fragment, vector/color handling and ordinary emitter activation/rendering remain incomplete.",
+    "Null, constant and explicit seeded finite cases qualified; no arbitrary clock/global call-order parity claimed.",
+    "Reader and consumer are Rust building blocks; not yet bound to ordinary Map10 rendering. No new graphical/client qualification, no ordinary binary rebuild.",
+    "No whole-map, champion kit, six-client match or domain complete."
+  ],
+  "next_action": "Achever les courbes vectorielles/couleurs et la lecture native des tables selon âge, puis connecter les lecteurs/variations au cycle émission/naissance/pose et au rendu des 52 groupes Map10. Préserver les clés descendantes des fantômes et les tirages RNG. Résoudre TT_Mist_circle/fogcircle et poursuivre les 24 domaines."
+}

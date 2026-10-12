@@ -1,0 +1,67 @@
+{
+  "updated_utc": "2026-10-07T11:43:00.772425+00:00",
+  "complete": false,
+  "graphical_build_complete": true,
+  "health_camera_scenario_passed": true,
+  "results": {
+    "dx12": {
+      "capture": "docs/projected_core_cycle_capture_v28_health_dx12.json",
+      "pixels": "docs/projected_pair_control_v28_health_dx12.json",
+      "qualified_identities": [
+        1,
+        2
+      ],
+      "baseline": {
+        "frames": 33,
+        "nonzero_frames": 0,
+        "changed_pixels_min": 0,
+        "changed_pixels_max": 0,
+        "max_rgb_difference": 0
+      },
+      "visually_inspected_owner": 1,
+      "phases": [
+        "initial",
+        "hidden",
+        "returned"
+      ],
+      "observation": "Champion bars absent in base view; structure bars attached to base structures; champion bars restored at lane return. No stale bars observed in these six inspected images."
+    },
+    "vulkan": {
+      "capture": "docs/projected_core_cycle_capture_v28_health_vulkan.json",
+      "pixels": "docs/projected_pair_control_v28_health_vulkan.json",
+      "qualified_identities": [
+        1,
+        2
+      ],
+      "baseline": {
+        "frames": 62,
+        "nonzero_frames": 0,
+        "changed_pixels_min": 0,
+        "changed_pixels_max": 0,
+        "max_rgb_difference": 0
+      },
+      "visually_inspected_owner": 1,
+      "phases": [
+        "initial",
+        "hidden",
+        "returned"
+      ],
+      "observation": "Champion bars absent in base view; structure bars attached to base structures; champion bars restored at lane return. No stale bars observed in these six inspected images."
+    }
+  },
+  "dx12_resize_defect_open": true,
+  "limits": [
+    "Six images inspected by agent, not human fidelity approval.",
+    "Diagnostic camera jump and seeded match; free camera endurance and resize remain unqualified.",
+    "Blue background visible outside eastern map geometry remains to investigate."
+  ],
+  "artifacts_sha256": {
+    "logs/health-camera-client-build.log": "cd534364843e425c411de754161c3133109acc77a6944f78f7894df20bcdaf65",
+    "target/debug/openleague-client.exe": "a7cc89755d938949bfdc0e32e1d5998225005f1aa76514cd3efd1e01eb254597",
+    "docs/projected_core_cycle_capture_v28_health_dx12.json": "3d215aad027b6caadb004e79dde778655392cbe7a90529f9a73f5e7c1cd929b9",
+    "docs/projected_pair_control_v28_health_dx12.json": "3d25646b4ba2982d15dcd2d5f9561eb996f9b94aa13fb496f615295dc72fc4f5",
+    "docs/projected_core_cycle_capture_v28_health_vulkan.json": "336a69ba96b9cfa78196fd643300d8d191238bb0ad7078d40d55e7763086fb2e",
+    "docs/projected_pair_control_v28_health_vulkan.json": "b71b49001a2fffc0baa22d4119c913576604797b95cef3b746d61db0675b8f6f"
+  },
+  "next_action": "Reproduire et corriger le defaut DX12 ResizeBuffers/Invalid surface observe en v26, puis qualifier redimensionnement et restauration. HUD camera corrige: 14 tests et captures v28 DX12/Vulkan. Ne pas confondre ce scenario diagnostique avec acceptation du jeu complet. Poursuivre les 24 domaines du plan."
+}

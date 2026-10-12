@@ -1,0 +1,29 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-03T14:45:58.493160+00:00",
+  "rules": "data/4.20/exhaust_rules.json",
+  "source_validation": "docs/exhaust_source_validation.json",
+  "source_verifier": "tools/verify_exhaust_sources.py",
+  "network_verifier": "tools/verify_exhaust.py",
+  "network_validation": "docs/exhaust_network_validation.json",
+  "render_validation": "docs/exhaust_render_validation.json",
+  "core_checks": 6,
+  "client_target_checks": 1,
+  "network_checks": 11,
+  "current_server_sha256": "2db0ebf8525badd7918e53d153b1f19c019c8f7fb44a8c18fc13f452f03abf3c",
+  "implemented": [
+    "Authoritative targeted enemy champion cast with living/range/vision/end/loadout/cooldown guards; native range 650 and cooldown 210 seconds.",
+    "Thirty percent slow, thirty percent AS bonus subtraction and ten flat armor/MR reduction for 2.5 seconds; no stacking across refresh.",
+    "Forty percent outgoing physical/magical reduction evaluated at impact for known champion source through shared damage API, including champion/world targets and shield outcomes.",
+    "Actual non-damaging enemy ability hit interrupts Garen passive; Q purges slow independently and other debuff remains.",
+    "D/F native-radius/height enemy cursor targeting, Fatigue HUD name and Tauri allowed selection."
+  ],
+  "limits": [
+    "Original native Riot server spell body unavailable.",
+    "Duration/CC split, flat defensive modifier ordering, AS bonus subtraction, true damage exemptions, impact timing, range and refresh policies require historical runtime qualification.",
+    "Native particles/audio and human targeting not integrated.",
+    "True damage exemption, item/AS/defensive ordering, range contact geometry and W control split are explicit reconstructions, not original-runtime qualification.",
+    "Full champion damage events/pet ownership, general cleanse/CC/shields/cast-trigger/stealth and complete modifier fidelity remain incomplete.",
+    "Spell metadata native particle paths recovered but particle/audio runtime not integrated; full historical HUD and human input acceptance incomplete."
+  ]
+}

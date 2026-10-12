@@ -1,0 +1,135 @@
+{
+  "updated_utc": "2026-10-05T19:32:54.492408+00:00",
+  "passed": true,
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "entry": "0x987830",
+  "vector_append": "0x77de90",
+  "cases": [
+    {
+      "enabled": false,
+      "quality": -1,
+      "macros": []
+    },
+    {
+      "enabled": false,
+      "quality": 0,
+      "macros": []
+    },
+    {
+      "enabled": false,
+      "quality": 1,
+      "macros": []
+    },
+    {
+      "enabled": false,
+      "quality": 2,
+      "macros": []
+    },
+    {
+      "enabled": false,
+      "quality": 3,
+      "macros": []
+    },
+    {
+      "enabled": false,
+      "quality": 4,
+      "macros": []
+    },
+    {
+      "enabled": true,
+      "quality": -1,
+      "macros": [
+        {
+          "name": "FOG_PIXELSHADER_BLEND",
+          "value": "1"
+        },
+        {
+          "name": "FOG_TEXTURED_OPACITY",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "enabled": true,
+      "quality": 0,
+      "macros": [
+        {
+          "name": "VERTEX_FOG",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "enabled": true,
+      "quality": 1,
+      "macros": [
+        {
+          "name": "FOG_PIXELSHADER_BLEND",
+          "value": "1"
+        },
+        {
+          "name": "FOG_QUALITY_LOW",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "enabled": true,
+      "quality": 2,
+      "macros": [
+        {
+          "name": "FOG_PIXELSHADER_BLEND",
+          "value": "1"
+        },
+        {
+          "name": "FOG_TEXTURED_OPACITY",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "enabled": true,
+      "quality": 3,
+      "macros": [
+        {
+          "name": "FOG_PIXELSHADER_BLEND",
+          "value": "1"
+        },
+        {
+          "name": "FOG_TEXTURED_OPACITY",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "enabled": true,
+      "quality": 4,
+      "macros": [
+        {
+          "name": "FOG_PIXELSHADER_BLEND",
+          "value": "1"
+        },
+        {
+          "name": "FOG_TEXTURED_OPACITY",
+          "value": "1"
+        }
+      ]
+    }
+  ],
+  "initial_pe_quality": 2,
+  "quality_address": "0x1225904",
+  "native_addresses": 74,
+  "findings": [
+    "Fog quality is independent from general environment quality12258D8.",
+    "Quality0 selects vertex fog;1 selects single-layer pixel fog;>=2 selects dual-layer textured-opacity pixel fog.",
+    "The Map10 native radius term is nonpositive; that does not imply zero top opacity. Top opacity=1-heightFog at opacity1."
+  ],
+  "adapters": [
+    "Supplied vector storage and capacity; native builder and pair append execute without call adapters. Controlled enabled/quality values."
+  ],
+  "limits": [
+    "Initial PE fog quality does not prove final game settings after initialization. Native quality producer and global macro merge/registry/compiler remain open.",
+    "Top-layer formula belongs to high-quality variant; native shader selection and clouds texture producer must be bound before claiming complete runtime fidelity."
+  ]
+}

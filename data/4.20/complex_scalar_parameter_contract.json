@@ -1,0 +1,4072 @@
+{
+  "updated_utc": "2026-10-06T14:18:49.539072+00:00",
+  "passed": true,
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "entry": "0x94a7f0",
+  "cases": [
+    {
+      "name": "absent",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {},
+      "returned": false,
+      "maximum_bits": "0x0",
+      "table_bits": [],
+      "probability": null,
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        }
+      ]
+    },
+    {
+      "name": "constant",
+      "key": "p-life",
+      "default": 1.0,
+      "fields": {
+        "p-life": [
+          2.0
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x40000000",
+      "table_bits": [
+        "0x40000000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "XP-only",
+      "key": "p-life",
+      "default": 1.0,
+      "fields": {
+        "p-life": [
+          2.0
+        ],
+        "p-lifeXP1": [
+          0.0,
+          10.0
+        ],
+        "p-lifeXP2": [
+          1.0,
+          20.0
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x40000000",
+      "table_bits": [
+        "0x40000000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeXP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeXP3",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "P-over-XP",
+      "key": "p-life",
+      "default": 1.0,
+      "fields": {
+        "p-life": [
+          2.0
+        ],
+        "p-lifeXP1": [
+          0.0,
+          10.0
+        ],
+        "p-lifeXP2": [
+          1.0,
+          20.0
+        ],
+        "p-lifeP1": [
+          0.0,
+          0.5
+        ],
+        "p-lifeP2": [
+          1.0,
+          1.5
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x40000000",
+      "table_bits": [
+        "0x40000000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": true,
+        "begin_bits": "0x3f000000",
+        "difference_bits": "0x3f800000",
+        "times": [
+          0.0,
+          1.0
+        ],
+        "values": [
+          0.5,
+          1.5
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeXP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeXP3",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "scaled-base",
+      "key": "p-life",
+      "default": 1.0,
+      "fields": {
+        "p-life": [
+          2.0
+        ],
+        "p-life1": [
+          0.0,
+          1.0
+        ],
+        "p-life2": [
+          1.0,
+          3.0
+        ],
+        "p-lifeP": [
+          0.5
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x40c00000",
+      "table_bits": [
+        "0x40000000",
+        "0x40010000",
+        "0x40020000",
+        "0x40030000",
+        "0x40040000",
+        "0x40050000",
+        "0x40060000",
+        "0x40070000",
+        "0x40080000",
+        "0x40090000",
+        "0x400a0000",
+        "0x400b0000",
+        "0x400c0000",
+        "0x400d0000",
+        "0x400e0000",
+        "0x400f0000",
+        "0x40100000",
+        "0x40110000",
+        "0x40120000",
+        "0x40130000",
+        "0x40140000",
+        "0x40150000",
+        "0x40160000",
+        "0x40170000",
+        "0x40180000",
+        "0x40190000",
+        "0x401a0000",
+        "0x401b0000",
+        "0x401c0000",
+        "0x401d0000",
+        "0x401e0000",
+        "0x401f0000",
+        "0x40200000",
+        "0x40210000",
+        "0x40220000",
+        "0x40230000",
+        "0x40240000",
+        "0x40250000",
+        "0x40260000",
+        "0x40270000",
+        "0x40280000",
+        "0x40290000",
+        "0x402a0000",
+        "0x402b0000",
+        "0x402c0000",
+        "0x402d0000",
+        "0x402e0000",
+        "0x402f0000",
+        "0x40300000",
+        "0x40310000",
+        "0x40320000",
+        "0x40330000",
+        "0x40340000",
+        "0x40350000",
+        "0x40360000",
+        "0x40370000",
+        "0x40380000",
+        "0x40390000",
+        "0x403a0000",
+        "0x403b0000",
+        "0x403c0000",
+        "0x403d0000",
+        "0x403e0000",
+        "0x403f0000",
+        "0x40400000",
+        "0x40410000",
+        "0x40420000",
+        "0x40430000",
+        "0x40440000",
+        "0x40450000",
+        "0x40460000",
+        "0x40470000",
+        "0x40480000",
+        "0x40490000",
+        "0x404a0000",
+        "0x404b0000",
+        "0x404c0000",
+        "0x404d0000",
+        "0x404e0000",
+        "0x404f0000",
+        "0x40500000",
+        "0x40510000",
+        "0x40520000",
+        "0x40530000",
+        "0x40540000",
+        "0x40550000",
+        "0x40560000",
+        "0x40570000",
+        "0x40580000",
+        "0x40590000",
+        "0x405a0000",
+        "0x405b0000",
+        "0x405c0000",
+        "0x405d0000",
+        "0x405e0000",
+        "0x405f0000",
+        "0x40600000",
+        "0x40610000",
+        "0x40620000",
+        "0x40630000",
+        "0x40640000",
+        "0x40650000",
+        "0x40660000",
+        "0x40670000",
+        "0x40680000",
+        "0x40690000",
+        "0x406a0000",
+        "0x406b0000",
+        "0x406c0000",
+        "0x406d0000",
+        "0x406e0000",
+        "0x406f0000",
+        "0x40700000",
+        "0x40710000",
+        "0x40720000",
+        "0x40730000",
+        "0x40740000",
+        "0x40750000",
+        "0x40760000",
+        "0x40770000",
+        "0x40780000",
+        "0x40790000",
+        "0x407a0000",
+        "0x407b0000",
+        "0x407c0000",
+        "0x407d0000",
+        "0x407e0000",
+        "0x407f0000",
+        "0x40800000",
+        "0x40808000",
+        "0x40810000",
+        "0x40818000",
+        "0x40820000",
+        "0x40828000",
+        "0x40830000",
+        "0x40838000",
+        "0x40840000",
+        "0x40848000",
+        "0x40850000",
+        "0x40858000",
+        "0x40860000",
+        "0x40868000",
+        "0x40870000",
+        "0x40878000",
+        "0x40880000",
+        "0x40888000",
+        "0x40890000",
+        "0x40898000",
+        "0x408a0000",
+        "0x408a8000",
+        "0x408b0000",
+        "0x408b8000",
+        "0x408c0000",
+        "0x408c8000",
+        "0x408d0000",
+        "0x408d8000",
+        "0x408e0000",
+        "0x408e8000",
+        "0x408f0000",
+        "0x408f8000",
+        "0x40900000",
+        "0x40908000",
+        "0x40910000",
+        "0x40918000",
+        "0x40920000",
+        "0x40928000",
+        "0x40930000",
+        "0x40938000",
+        "0x40940000",
+        "0x40948000",
+        "0x40950000",
+        "0x40958000",
+        "0x40960000",
+        "0x40968000",
+        "0x40970000",
+        "0x40978000",
+        "0x40980000",
+        "0x40988000",
+        "0x40990000",
+        "0x40998000",
+        "0x409a0000",
+        "0x409a8000",
+        "0x409b0000",
+        "0x409b8000",
+        "0x409c0000",
+        "0x409c8000",
+        "0x409d0000",
+        "0x409d8000",
+        "0x409e0000",
+        "0x409e8000",
+        "0x409f0000",
+        "0x409f8000",
+        "0x40a00000",
+        "0x40a08000",
+        "0x40a10000",
+        "0x40a18000",
+        "0x40a20000",
+        "0x40a28000",
+        "0x40a30000",
+        "0x40a38000",
+        "0x40a40000",
+        "0x40a48000",
+        "0x40a50000",
+        "0x40a58000",
+        "0x40a60000",
+        "0x40a68000",
+        "0x40a70000",
+        "0x40a78000",
+        "0x40a80000",
+        "0x40a88000",
+        "0x40a90000",
+        "0x40a98000",
+        "0x40aa0000",
+        "0x40aa8000",
+        "0x40ab0000",
+        "0x40ab8000",
+        "0x40ac0000",
+        "0x40ac8000",
+        "0x40ad0000",
+        "0x40ad8000",
+        "0x40ae0000",
+        "0x40ae8000",
+        "0x40af0000",
+        "0x40af8000",
+        "0x40b00000",
+        "0x40b08000",
+        "0x40b10000",
+        "0x40b18000",
+        "0x40b20000",
+        "0x40b28000",
+        "0x40b30000",
+        "0x40b38000",
+        "0x40b40000",
+        "0x40b48000",
+        "0x40b50000",
+        "0x40b58000",
+        "0x40b60000",
+        "0x40b68000",
+        "0x40b70000",
+        "0x40b78000",
+        "0x40b80000",
+        "0x40b88000",
+        "0x40b90000",
+        "0x40b98000",
+        "0x40ba0000",
+        "0x40ba8000",
+        "0x40bb0000",
+        "0x40bb8000",
+        "0x40bc0000",
+        "0x40bc8000",
+        "0x40bd0000",
+        "0x40bd8000",
+        "0x40be0000",
+        "0x40be8000",
+        "0x40bf0000",
+        "0x40bf8000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f000000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life2",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life3",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        }
+      ]
+    },
+    {
+      "name": "negative",
+      "key": "p-life",
+      "default": 1.0,
+      "fields": {
+        "p-life": [
+          -2.0
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0xc0000000",
+      "table_bits": [
+        "0xc0000000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:Chaos_Spawn.troy:mist:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rate": [
+          1
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3f800000",
+      "table_bits": [
+        "0x3f800000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:Chaos_Spawn.troy:mist:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-life": [
+          4
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x40800000",
+      "table_bits": [
+        "0x40800000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:Order_Spawn.troy:mist:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rate": [
+          1
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3f800000",
+      "table_bits": [
+        "0x3f800000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:Order_Spawn.troy:mist:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-life": [
+          4
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x40800000",
+      "table_bits": [
+        "0x40800000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_01_Blue.troy:TT_Fire_Glow:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rateP1": [
+          0.0,
+          0.2
+        ],
+        "e-rate": [
+          20
+        ],
+        "e-rateP2": [
+          1.0,
+          1.0
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x41a00000",
+      "table_bits": [
+        "0x41a00000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": true,
+        "begin_bits": "0x3e4ccccd",
+        "difference_bits": "0x3f4ccccd",
+        "times": [
+          0.0,
+          1.0
+        ],
+        "values": [
+          0.20000000298023224,
+          1.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP2",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_01_Blue.troy:TT_Fire_Glow:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-lifeP1": [
+          0.0,
+          1.0
+        ],
+        "p-life": [
+          0.5
+        ],
+        "p-lifeP2": [
+          1.0,
+          4.0
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3f000000",
+      "table_bits": [
+        "0x3f000000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": true,
+        "begin_bits": "0x3f800000",
+        "difference_bits": "0x40400000",
+        "times": [
+          0.0,
+          1.0
+        ],
+        "values": [
+          1.0,
+          4.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_01_Blue.troy:TT_Embers:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rate": [
+          25
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x41c80000",
+      "table_bits": [
+        "0x41c80000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_01_Blue.troy:TT_Embers:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-lifeP3": [
+          0.9,
+          1.0
+        ],
+        "p-lifeP1": [
+          0.0,
+          0.5
+        ],
+        "p-life": [
+          0.5
+        ],
+        "p-lifeP4": [
+          1.0,
+          2.0
+        ],
+        "p-lifeP2": [
+          0.5,
+          0.5
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3f000000",
+      "table_bits": [
+        "0x3f000000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [
+          0.0,
+          0.5,
+          0.8999999761581421,
+          1.0
+        ],
+        "values": [
+          0.5,
+          0.5,
+          1.0,
+          2.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP4",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP5",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_01_Blue.troy:TT_Fire_01:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rate": [
+          100
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x42c80000",
+      "table_bits": [
+        "0x42c80000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_01_Blue.troy:TT_Fire_01:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-lifeP1": [
+          0.0,
+          0.5
+        ],
+        "p-life": [
+          0.75
+        ],
+        "p-lifeP2": [
+          1.0,
+          1.0
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3f400000",
+      "table_bits": [
+        "0x3f400000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": true,
+        "begin_bits": "0x3f000000",
+        "difference_bits": "0x3f000000",
+        "times": [
+          0.0,
+          1.0
+        ],
+        "values": [
+          0.5,
+          1.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_01_Blue.troy:TT_Fire_02:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rate": [
+          25
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x41c80000",
+      "table_bits": [
+        "0x41c80000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_01_Blue.troy:TT_Fire_02:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-lifeP1": [
+          0.0,
+          1.0
+        ],
+        "p-life": [
+          1
+        ],
+        "p-lifeP2": [
+          1.0,
+          1.5
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3f800000",
+      "table_bits": [
+        "0x3f800000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": true,
+        "begin_bits": "0x3f800000",
+        "difference_bits": "0x3f000000",
+        "times": [
+          0.0,
+          1.0
+        ],
+        "values": [
+          1.0,
+          1.5
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_01_Blue.troy:TT_Fire_Sub2:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rate": [
+          50
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x42480000",
+      "table_bits": [
+        "0x42480000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_01_Blue.troy:TT_Fire_Sub2:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-lifeP1": [
+          0.0,
+          0.5
+        ],
+        "p-life": [
+          1.5
+        ],
+        "p-lifeP2": [
+          1.0,
+          1.0
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3fc00000",
+      "table_bits": [
+        "0x3fc00000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": true,
+        "begin_bits": "0x3f000000",
+        "difference_bits": "0x3f000000",
+        "times": [
+          0.0,
+          1.0
+        ],
+        "values": [
+          0.5,
+          1.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_02_Yellow.troy:TT_Fire_Glow:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rateP1": [
+          0.0,
+          0.2
+        ],
+        "e-rate": [
+          20
+        ],
+        "e-rateP2": [
+          1.0,
+          1.0
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x41a00000",
+      "table_bits": [
+        "0x41a00000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": true,
+        "begin_bits": "0x3e4ccccd",
+        "difference_bits": "0x3f4ccccd",
+        "times": [
+          0.0,
+          1.0
+        ],
+        "values": [
+          0.20000000298023224,
+          1.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP2",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_02_Yellow.troy:TT_Fire_Glow:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-lifeP1": [
+          0.0,
+          1.0
+        ],
+        "p-life": [
+          0.5
+        ],
+        "p-lifeP2": [
+          1.0,
+          4.0
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3f000000",
+      "table_bits": [
+        "0x3f000000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": true,
+        "begin_bits": "0x3f800000",
+        "difference_bits": "0x40400000",
+        "times": [
+          0.0,
+          1.0
+        ],
+        "values": [
+          1.0,
+          4.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_02_Yellow.troy:TT_Embers:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rate": [
+          25
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x41c80000",
+      "table_bits": [
+        "0x41c80000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_02_Yellow.troy:TT_Embers:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-lifeP3": [
+          0.9,
+          1.0
+        ],
+        "p-lifeP1": [
+          0.0,
+          0.5
+        ],
+        "p-life": [
+          0.5
+        ],
+        "p-lifeP4": [
+          1.0,
+          2.0
+        ],
+        "p-lifeP2": [
+          0.5,
+          0.5
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3f000000",
+      "table_bits": [
+        "0x3f000000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [
+          0.0,
+          0.5,
+          0.8999999761581421,
+          1.0
+        ],
+        "values": [
+          0.5,
+          0.5,
+          1.0,
+          2.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP4",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP5",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_02_Yellow.troy:TT_Fire_01:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rate": [
+          100
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x42c80000",
+      "table_bits": [
+        "0x42c80000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_02_Yellow.troy:TT_Fire_01:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-lifeP1": [
+          0.0,
+          0.5
+        ],
+        "p-life": [
+          0.75
+        ],
+        "p-lifeP2": [
+          1.0,
+          1.0
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3f400000",
+      "table_bits": [
+        "0x3f400000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": true,
+        "begin_bits": "0x3f000000",
+        "difference_bits": "0x3f000000",
+        "times": [
+          0.0,
+          1.0
+        ],
+        "values": [
+          0.5,
+          1.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_02_Yellow.troy:TT_Fire_02:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rate": [
+          25
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x41c80000",
+      "table_bits": [
+        "0x41c80000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_02_Yellow.troy:TT_Fire_02:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-lifeP1": [
+          0.0,
+          1.0
+        ],
+        "p-life": [
+          1
+        ],
+        "p-lifeP2": [
+          1.0,
+          1.5
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3f800000",
+      "table_bits": [
+        "0x3f800000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": true,
+        "begin_bits": "0x3f800000",
+        "difference_bits": "0x3f000000",
+        "times": [
+          0.0,
+          1.0
+        ],
+        "values": [
+          1.0,
+          1.5
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_02_Yellow.troy:TT_Fire_Sub2:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rate": [
+          50
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x42480000",
+      "table_bits": [
+        "0x42480000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_02_Yellow.troy:TT_Fire_Sub2:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-lifeP1": [
+          0.0,
+          0.5
+        ],
+        "p-life": [
+          1.5
+        ],
+        "p-lifeP2": [
+          1.0,
+          1.0
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3fc00000",
+      "table_bits": [
+        "0x3fc00000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": true,
+        "begin_bits": "0x3f000000",
+        "difference_bits": "0x3f000000",
+        "times": [
+          0.0,
+          1.0
+        ],
+        "values": [
+          0.5,
+          1.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_03_Orange.troy:TT_Fire_Glow:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rateP1": [
+          0.0,
+          0.2
+        ],
+        "e-rate": [
+          20
+        ],
+        "e-rateP2": [
+          1.0,
+          1.0
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x41a00000",
+      "table_bits": [
+        "0x41a00000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": true,
+        "begin_bits": "0x3e4ccccd",
+        "difference_bits": "0x3f4ccccd",
+        "times": [
+          0.0,
+          1.0
+        ],
+        "values": [
+          0.20000000298023224,
+          1.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP2",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_03_Orange.troy:TT_Fire_Glow:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-lifeP1": [
+          0.0,
+          1.0
+        ],
+        "p-life": [
+          0.5
+        ],
+        "p-lifeP2": [
+          1.0,
+          4.0
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3f000000",
+      "table_bits": [
+        "0x3f000000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": true,
+        "begin_bits": "0x3f800000",
+        "difference_bits": "0x40400000",
+        "times": [
+          0.0,
+          1.0
+        ],
+        "values": [
+          1.0,
+          4.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_03_Orange.troy:TT_Embers:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rate": [
+          25
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x41c80000",
+      "table_bits": [
+        "0x41c80000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_03_Orange.troy:TT_Embers:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-lifeP3": [
+          0.9,
+          1.0
+        ],
+        "p-lifeP1": [
+          0.0,
+          0.5
+        ],
+        "p-life": [
+          0.5
+        ],
+        "p-lifeP4": [
+          1.0,
+          2.0
+        ],
+        "p-lifeP2": [
+          0.5,
+          0.5
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3f000000",
+      "table_bits": [
+        "0x3f000000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [
+          0.0,
+          0.5,
+          0.8999999761581421,
+          1.0
+        ],
+        "values": [
+          0.5,
+          0.5,
+          1.0,
+          2.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP4",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP5",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_03_Orange.troy:TT_Fire_01:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rate": [
+          100
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x42c80000",
+      "table_bits": [
+        "0x42c80000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_03_Orange.troy:TT_Fire_01:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-lifeP1": [
+          0.0,
+          0.5
+        ],
+        "p-life": [
+          0.75
+        ],
+        "p-lifeP2": [
+          1.0,
+          1.0
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3f400000",
+      "table_bits": [
+        "0x3f400000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": true,
+        "begin_bits": "0x3f000000",
+        "difference_bits": "0x3f000000",
+        "times": [
+          0.0,
+          1.0
+        ],
+        "values": [
+          0.5,
+          1.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_03_Orange.troy:TT_Fire_02:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rate": [
+          25
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x41c80000",
+      "table_bits": [
+        "0x41c80000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_03_Orange.troy:TT_Fire_02:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-lifeP1": [
+          0.0,
+          1.0
+        ],
+        "p-life": [
+          1
+        ],
+        "p-lifeP2": [
+          1.0,
+          1.5
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3f800000",
+      "table_bits": [
+        "0x3f800000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": true,
+        "begin_bits": "0x3f800000",
+        "difference_bits": "0x3f000000",
+        "times": [
+          0.0,
+          1.0
+        ],
+        "values": [
+          1.0,
+          1.5
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_03_Orange.troy:TT_Fire_Sub2:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rate": [
+          50
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x42480000",
+      "table_bits": [
+        "0x42480000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_03_Orange.troy:TT_Fire_Sub2:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-lifeP1": [
+          0.0,
+          0.5
+        ],
+        "p-life": [
+          1.5
+        ],
+        "p-lifeP2": [
+          1.0,
+          1.0
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3fc00000",
+      "table_bits": [
+        "0x3fc00000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": true,
+        "begin_bits": "0x3f000000",
+        "difference_bits": "0x3f000000",
+        "times": [
+          0.0,
+          1.0
+        ],
+        "values": [
+          0.5,
+          1.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_04_Purple.troy:TT_Fire_Glow:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rateP1": [
+          0.0,
+          0.2
+        ],
+        "e-rate": [
+          20
+        ],
+        "e-rateP2": [
+          1.0,
+          1.0
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x41a00000",
+      "table_bits": [
+        "0x41a00000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": true,
+        "begin_bits": "0x3e4ccccd",
+        "difference_bits": "0x3f4ccccd",
+        "times": [
+          0.0,
+          1.0
+        ],
+        "values": [
+          0.20000000298023224,
+          1.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP2",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_04_Purple.troy:TT_Fire_Glow:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-lifeP1": [
+          0.0,
+          1.0
+        ],
+        "p-life": [
+          0.5
+        ],
+        "p-lifeP2": [
+          1.0,
+          4.0
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3f000000",
+      "table_bits": [
+        "0x3f000000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": true,
+        "begin_bits": "0x3f800000",
+        "difference_bits": "0x40400000",
+        "times": [
+          0.0,
+          1.0
+        ],
+        "values": [
+          1.0,
+          4.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_04_Purple.troy:TT_Embers:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rate": [
+          25
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x41c80000",
+      "table_bits": [
+        "0x41c80000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_04_Purple.troy:TT_Embers:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-lifeP3": [
+          0.9,
+          1.0
+        ],
+        "p-lifeP1": [
+          0.0,
+          0.5
+        ],
+        "p-life": [
+          0.5
+        ],
+        "p-lifeP4": [
+          1.0,
+          2.0
+        ],
+        "p-lifeP2": [
+          0.5,
+          0.5
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3f000000",
+      "table_bits": [
+        "0x3f000000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [
+          0.0,
+          0.5,
+          0.8999999761581421,
+          1.0
+        ],
+        "values": [
+          0.5,
+          0.5,
+          1.0,
+          2.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP4",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP5",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_04_Purple.troy:TT_Fire_01:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rate": [
+          100
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x42c80000",
+      "table_bits": [
+        "0x42c80000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_04_Purple.troy:TT_Fire_01:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-lifeP1": [
+          0.0,
+          0.5
+        ],
+        "p-life": [
+          0.75
+        ],
+        "p-lifeP2": [
+          1.0,
+          1.0
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3f400000",
+      "table_bits": [
+        "0x3f400000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": true,
+        "begin_bits": "0x3f000000",
+        "difference_bits": "0x3f000000",
+        "times": [
+          0.0,
+          1.0
+        ],
+        "values": [
+          0.5,
+          1.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_04_Purple.troy:TT_Fire_02:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rate": [
+          25
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x41c80000",
+      "table_bits": [
+        "0x41c80000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_04_Purple.troy:TT_Fire_02:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-lifeP1": [
+          0.0,
+          1.0
+        ],
+        "p-life": [
+          1
+        ],
+        "p-lifeP2": [
+          1.0,
+          1.5
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3f800000",
+      "table_bits": [
+        "0x3f800000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": true,
+        "begin_bits": "0x3f800000",
+        "difference_bits": "0x3f000000",
+        "times": [
+          0.0,
+          1.0
+        ],
+        "values": [
+          1.0,
+          1.5
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_04_Purple.troy:TT_Fire_Sub2:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rate": [
+          50
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x42480000",
+      "table_bits": [
+        "0x42480000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_04_Purple.troy:TT_Fire_Sub2:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-lifeP1": [
+          0.0,
+          0.5
+        ],
+        "p-life": [
+          1.5
+        ],
+        "p-lifeP2": [
+          1.0,
+          1.0
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3fc00000",
+      "table_bits": [
+        "0x3fc00000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": true,
+        "begin_bits": "0x3f000000",
+        "difference_bits": "0x3f000000",
+        "times": [
+          0.0,
+          1.0
+        ],
+        "values": [
+          0.5,
+          1.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Ghosts_01.troy:TT_Firefly_01:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rateP1": [
+          0.0,
+          0.05
+        ],
+        "e-rate": [
+          0.5
+        ],
+        "e-rateP2": [
+          1.0,
+          1.0
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3f000000",
+      "table_bits": [
+        "0x3f000000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": true,
+        "begin_bits": "0x3d4ccccd",
+        "difference_bits": "0x3f733333",
+        "times": [
+          0.0,
+          1.0
+        ],
+        "values": [
+          0.05000000074505806,
+          1.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP2",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Ghosts_01.troy:TT_Firefly_01:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-lifeP1": [
+          0.0,
+          0.5
+        ],
+        "p-life": [
+          5
+        ],
+        "p-lifeP2": [
+          1.0,
+          4.0
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x40a00000",
+      "table_bits": [
+        "0x40a00000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": true,
+        "begin_bits": "0x3f000000",
+        "difference_bits": "0x40600000",
+        "times": [
+          0.0,
+          1.0
+        ],
+        "values": [
+          0.5,
+          4.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Ghosts_01.troy:TT_Ghost:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rateP1": [
+          0.0,
+          0.0
+        ],
+        "e-rate": [
+          0.2
+        ],
+        "e-rateP2": [
+          0.95,
+          0.0
+        ],
+        "e-rateP3": [
+          1.0,
+          1.0
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3e4ccccd",
+      "table_bits": [
+        "0x3e4ccccd"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [
+          0.0,
+          0.949999988079071,
+          1.0
+        ],
+        "values": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP2",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP3",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP4",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Ghosts_01.troy:TT_Ghost:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-lifeP1": [
+          1.0,
+          1.0
+        ],
+        "p-life": [
+          10
+        ],
+        "p-lifeP2": [
+          0.0,
+          0.5
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x41200000",
+      "table_bits": [
+        "0x41200000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [
+          1.0,
+          0.0
+        ],
+        "values": [
+          1.0,
+          0.5
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Ghosts_01.troy:TT_Ghost2:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rateP1": [
+          0.0,
+          0.0
+        ],
+        "e-rate": [
+          0.05
+        ],
+        "e-rateP2": [
+          0.95,
+          0.0
+        ],
+        "e-rateP3": [
+          1.0,
+          1.0
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3d4ccccd",
+      "table_bits": [
+        "0x3d4ccccd"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [
+          0.0,
+          0.949999988079071,
+          1.0
+        ],
+        "values": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP2",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP3",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP4",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Ghosts_01.troy:TT_Ghost2:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-lifeP1": [
+          1.0,
+          1.0
+        ],
+        "p-life": [
+          10
+        ],
+        "p-lifeP2": [
+          0.0,
+          0.5
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x41200000",
+      "table_bits": [
+        "0x41200000"
+      ],
+      "probability": {
+        "constant": false,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [
+          1.0,
+          0.0
+        ],
+        "values": [
+          1.0,
+          0.5
+        ]
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP2",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP3",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Mist_01.troy:TT_Mist_01:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rate": [
+          0.2
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3e4ccccd",
+      "table_bits": [
+        "0x3e4ccccd"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Mist_01.troy:TT_Mist_01:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-life": [
+          10
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x41200000",
+      "table_bits": [
+        "0x41200000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Mist_02.troy:TT_Mist_01:e-rate",
+      "key": "e-rate",
+      "default": 0.0,
+      "fields": {
+        "e-rate": [
+          0.1
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x3dcccccd",
+      "table_bits": [
+        "0x3dcccccd"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "e-rate",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rate1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "e-rateXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "e-rateP",
+          "kind": "scalar"
+        },
+        {
+          "key": "e-rateP1",
+          "kind": "pair"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Mist_02.troy:TT_Mist_01:p-life",
+      "key": "p-life",
+      "default": 3.0,
+      "fields": {
+        "p-life": [
+          20
+        ]
+      },
+      "returned": true,
+      "maximum_bits": "0x41a00000",
+      "table_bits": [
+        "0x41a00000"
+      ],
+      "probability": {
+        "constant": true,
+        "constant_bits": "0x3f800000",
+        "fast": false,
+        "begin_bits": "0x0",
+        "difference_bits": "0x0",
+        "times": [],
+        "values": []
+      },
+      "lookups": [
+        {
+          "key": "p-life",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-life1",
+          "kind": "scalar-raw"
+        },
+        {
+          "key": "p-lifeXP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeXP1",
+          "kind": "pair"
+        },
+        {
+          "key": "p-lifeP",
+          "kind": "scalar"
+        },
+        {
+          "key": "p-lifeP1",
+          "kind": "pair"
+        }
+      ]
+    }
+  ],
+  "original_instruction_addresses": 1060,
+  "adapters": [
+    "Decoded field getters, CRT/string/format transport, allocation/free/cookie. Original94A7F0/94C060/94CB60/94D080/94EC10/91B410 execute. Probability global initializer marked already initialized."
+  ],
+  "limits": [
+    "Raw getter/cache/lexical parity and global startup initializer not qualified.",
+    "Missing emitter-field caller fallback is outside this reader and covered by separate prior contract.",
+    "Ordinary emitter/render integration pending."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-03T13:36:38.923097+00:00",
+  "native_profiles": "data/4.20/collision_profiles.json",
+  "native_source_validation": "docs/collision_source_validation.json",
+  "native_champions": 122,
+  "native_numeric_fields": 277,
+  "implemented": [
+    "Client right-click and cursor-targeted R use each native champion SelectionRadius instead of fixed 100 world units.",
+    "Core radius profile API separates pathfinding, selection and optional gameplay collision fields.",
+    "23 native NPC selection radii replace prior uniform 160 circle.",
+    "Actor height projection and grid-height raycast replace fixed height 6."
+  ],
+  "limits": [
+    "Cursor ground-plane projection and circle interpretation remain reconstructed; actual desktop clicking and historical selection shape/priority unqualified.",
+    "89 champions lack explicit native GameplayCollisionRadius; no silent fallback or general body-collision implementation.",
+    "Native gameplay radii present for 33 champions imported as data only, not applied to authoritative combat range.",
+    "Four structure types lack native selection fields and retain explicit previous 160 reconstruction; see terrain picking receipt."
+  ]
+}

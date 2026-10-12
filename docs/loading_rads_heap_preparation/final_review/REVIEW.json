@@ -1,0 +1,1133 @@
+{
+  "schema": 1,
+  "review_passed": true,
+  "unresolved_concrete_defects": [],
+  "method": "Independent read-only delta review plus hashes, JSON assertions and static PE bytes; no probe/test/compiler executed by reviewer.",
+  "native_manifest_sha256": "74cda6f69c1528da36fef6d11faefc548b9cd56d38bc73bdffc90d6e4cfc4dbf",
+  "archived_native_files": 75,
+  "external_dependencies_hashed": 190,
+  "documentary_review": "README and NATIVE_STRLEN_TAIL distinguish real partial initialization, isolated checks, injected failures, CRT host cleanup and the surviving engine arena; no contradictory completion claim found.",
+  "suite": {
+    "reported_checks": 1034,
+    "reports": 17,
+    "strlen_checks": 354,
+    "slist_checks": 13,
+    "remaining_adapter_checks": 667,
+    "synthetic_x86_abi_checks_included": 23
+  },
+  "common_generator_count": 12,
+  "profiles": {
+    "empty": {
+      "before_cleanup_distinct_instruction_addresses": 19167,
+      "dll_distinct_instruction_addresses": 5536,
+      "returned_c": 5,
+      "returned_cpp": 50,
+      "interrupted_cpp_ordinal": 51,
+      "stop": "GetModuleHandleA(kernel32)",
+      "real_realloc_old_size": 128,
+      "real_realloc_new_size": 256,
+      "real_realloc_moved": true,
+      "physical_tail_reads": 2,
+      "completed_strlen_invocations": 3,
+      "crt_raw_and_mirrors_after_cleanup": 0,
+      "engine_arena_allocations_without_native_teardown": 928
+    },
+    "controlled": {
+      "before_cleanup_distinct_instruction_addresses": 19254,
+      "dll_distinct_instruction_addresses": 5624,
+      "returned_c": 5,
+      "returned_cpp": 50,
+      "interrupted_cpp_ordinal": 51,
+      "stop": "GetModuleHandleA(kernel32)",
+      "real_realloc_old_size": 128,
+      "real_realloc_new_size": 256,
+      "real_realloc_moved": true,
+      "physical_tail_reads": 7,
+      "completed_strlen_invocations": 12,
+      "crt_raw_and_mirrors_after_cleanup": 0,
+      "engine_arena_allocations_without_native_teardown": 928
+    }
+  },
+  "limits": [
+    "Neither native profile completes DLL attachment or returns a provider; no usable UI resource, INI or renderer is claimed.",
+    "Host cleanup is separate from normal native shutdown. The 928 surviving engine-arena allocations are not the cleaned CRT mirrors.",
+    "Observed x64 host heap padding is not historical x86 allocator parity. EDX depends on the observed DWORD; no transitive register independence is claimed.",
+    "1034 checks aggregate isolated reports, not game integration tests. Synthetic ABI/guard snippets and original 19-byte SList/139-byte strlen tests remain distinguished.",
+    "Actual OS null realloc was not observed; null/failure phases are separately injected tests.",
+    "Review checks stored evidence and final source deltas; it does not independently replay the two native profiles."
+  ],
+  "verified_files": {
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\manifest.json": {
+      "bytes": 51004,
+      "sha256": "74cda6f69c1528da36fef6d11faefc548b9cd56d38bc73bdffc90d6e4cfc4dbf"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\adapter_checks.json": {
+      "bytes": 7304,
+      "sha256": "e231d97c4a00b1de166178e2556b8a488a477f62e00df3ba6dc3b0f06862e1b8"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\attempts\\010.json": {
+      "bytes": 964528,
+      "sha256": "a58d6e815471ec0044aafa2a3cb43e7a27faeaa4683b624890b6098c4807c31d"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\attempts\\014.json": {
+      "bytes": 964843,
+      "sha256": "dd26d84fa0f02b00431af558e919b7f2ebd9e4ffe076d440ca63de78e91279e3"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\attempts\\015.json": {
+      "bytes": 913585,
+      "sha256": "d73296a3b1093e76d9fbbe2c959def6e72ced3cb0967d032cccb36fa7ad2fd95"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\attempts\\adapter_checks_001.json": {
+      "bytes": 1560,
+      "sha256": "7ab61cd115081ab9ebace953af12681e25304ddece0588559224cdd3ae6b0b6e"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\attempts\\adapter_checks_002.json": {
+      "bytes": 2732,
+      "sha256": "64507a82864182cd62750eef985539a1baa6de6b41d5f4e65e2f0f333bb3e6c5"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\attempts\\adapter_checks_before_bounds_diagnostics.json": {
+      "bytes": 6824,
+      "sha256": "52267fdbde32311c6cd1b952f9cdd1c65b9abf3d5fd896b42b3ca6fe7ced3e36"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\attempts\\adapter_checks_before_native_finish.json": {
+      "bytes": 6821,
+      "sha256": "62881191fae6d6bff35894f60bb74322feda26176f1683179df92b7e546866e8"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\attempts\\adapter_checks_before_strlen_policy.json": {
+      "bytes": 6822,
+      "sha256": "92a0e654300f91ddf54dac553da2c5e7afbd3f468723e893e1358c1e6a812b6e"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\attempts\\before_full_suite_heap_boundary_tests.json": {
+      "bytes": 1999,
+      "sha256": "8633589aa97d473c0e55be7734d72b1744c4fcfbcaea5b8c163bbfc299163200"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\attempts\\before_full_suite_heap_mirrors_tests.json": {
+      "bytes": 30674,
+      "sha256": "1572b362e83bd5bb25059ba0150fa7ec57417adbd7bbf1748643ad9aaa9bf6cd"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\attempts\\harness_finish_test.py": {
+      "bytes": 7270,
+      "sha256": "f153893cb2bc89107598b1d6a514ceaeaa7890753d5311e0b5df2311ee711cf8"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\attempts\\harness_finish_tests.json": {
+      "bytes": 3365,
+      "sha256": "38fa75444b06922ed636e1bc4b2b061a052e769042cab80a2ec1d48e49f7f168"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\attempts\\inherited_test_crt_heap_ownership.py": {
+      "bytes": 3152,
+      "sha256": "0099358fa38ac23d3f02e157fd5c91c25ef3666308f1b0467fa298d6d418e876"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\attempts\\inherited_test_heap_size.py": {
+      "bytes": 2405,
+      "sha256": "9c68fce7a8602e256c434abddd6e2c7cec510b313282ec1878bc6da3468e291e"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\attempts\\prior_heap_boundary_tests.json": {
+      "bytes": 1448,
+      "sha256": "8d4dd0e4a8b795df84ef4d2e782a1ea4ea4335502ffe9db5d130cd38fa7e899f"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\attempts\\prior_heap_mirrors_tests.json": {
+      "bytes": 30566,
+      "sha256": "4102bd1f8e00daeb99da7a8fa514c52fec1dee8e92429533e600139250a9dd5f"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\attempts\\strlen_tail_before_frame_tests.json": {
+      "bytes": 83745,
+      "sha256": "abe02a4a4d0356203651b01d4ea9150b3aeaf4bc55992e8a55a839a8686bd880"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\attempts\\strlen_tail_initial_tests.json": {
+      "bytes": 82943,
+      "sha256": "c144aec80dddbc7301ce43ef24ed8578d9dff21753967d53a8e2cc3eef24fdc2"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\callback_batch_tests.json": {
+      "bytes": 820,
+      "sha256": "d749d95b8197efe0588f80efb2ac2de9f8ea903851c3019418b52e37ae58c9be"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\callback_batches.py": {
+      "bytes": 619,
+      "sha256": "c89be90bdbb4b2b3e5c6cd26ea489d275c045cfe0fc0275dbdf72aa945d560f5"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\copied_sources.json": {
+      "bytes": 3541,
+      "sha256": "06cf4728ecbde35f61f578c06f42a979a1869fda7ece29e17211d10b41de14f1"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\crt_heap_ownership_tests.json": {
+      "bytes": 11625,
+      "sha256": "b5f6c5e982349ac2e6ec9437fbdb61696ceb02cc8229e783ef154c212178e116"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\crt_os.py": {
+      "bytes": 25387,
+      "sha256": "4ed057911fcb7e2299e62e12bd96ee040c73972ea843ce36ac0f9d4870f1e578"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\diagnostic_pipe_open.py": {
+      "bytes": 1767,
+      "sha256": "942a6d1581e7e7857bf1d3f5e352bbdbb584d933c2a3e944c5fae4043e7d33e8"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\environment_profile_tests.json": {
+      "bytes": 2252,
+      "sha256": "5d8568df5425786edc239bb010f5f7e223c87bf98b6a2566bf0111233e4db5ad"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\extract_strlen_source.py": {
+      "bytes": 1482,
+      "sha256": "e5a479a70a78f8cbdee48251ba8e11f23f33e267680acfd9b3c0a037b5533ca4"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\freeze.py": {
+      "bytes": 8264,
+      "sha256": "b95072331b236a7ff646497f46dd7b29bc30af492cc0d9c53dbefc47bf5cf941"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\heap_boundary_tests.json": {
+      "bytes": 2802,
+      "sha256": "028a596b3ac308df5a475e83b7807b548c145d6d00ef2d3b72a22c54793be6f7"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\heap_mirrors.py": {
+      "bytes": 14328,
+      "sha256": "6be233a6a2e8fc6fd89452be391ab2b9fffd80897d024df89444b3c9aba55a52"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\heap_mirrors_tests.json": {
+      "bytes": 30717,
+      "sha256": "6660b9aaec6c73e31bde0237879a430626094507dcee481f77013057041fd21e"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\heap_realloc_x86_tests.json": {
+      "bytes": 3623,
+      "sha256": "425b63a1f47c5d21daf91b5ff2ef77f3a8f8571724ad111f0e874d2f87840c2f"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\heap_size_tests.json": {
+      "bytes": 15391,
+      "sha256": "269c44af6a723bafb55fe8ad38082eb6d44f24c2865bb369624330150e8f0612"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\io_isolation_tests.json": {
+      "bytes": 10178,
+      "sha256": "55d33ca263141619a4397235a77798a2b53c7b0f54e23481eea51e84c01cdb1f"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\isolated_io.py": {
+      "bytes": 13535,
+      "sha256": "f127283ca56d8859d09b8ba57f918f58b7f0a11174c3e269c3d6d85f27baa3d6"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\loader_structure_tests.json": {
+      "bytes": 1450,
+      "sha256": "fa2111a547ed182e78a3c00f3e65c7390bf7d8b78cb2fe651cfa3e84738b9437"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\logs_bridge_tests.json": {
+      "bytes": 4448,
+      "sha256": "92db0de6db4640022b3358790c207adc1c6442667d1b5dfaab193bc11aae152b"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\native_slist.py": {
+      "bytes": 3456,
+      "sha256": "7d73739f62c6d6a724a5ee5b0f6169604f17e78c0c9672099423ff3e5a727610"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\native_slist_tests.json": {
+      "bytes": 2952,
+      "sha256": "8a6f6b0fc5647f37aec434ac053425d7fafc58acb0ded42f83fe10c420e1dc8d"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\NATIVE_STRLEN_TAIL.md": {
+      "bytes": 2840,
+      "sha256": "2bd8a1beebf9dddfde64943f1b85170f8d8bc570a0fbc69bc900cc2c1c2758ce"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\native_strlen_tail.py": {
+      "bytes": 6694,
+      "sha256": "41f54747fae90a0f5cb8d1bd20e2be897865e8de6c28e4ba4466806c9f892151"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\native_strlen_tail_tests.json": {
+      "bytes": 83906,
+      "sha256": "941f11099c25e4660f60c1c210f0b55eae3d3ee94007e9fc00372985e7503a89"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\nls_query_tests.json": {
+      "bytes": 16112,
+      "sha256": "52fd5433733528e3a845fab38f0b050c1f2d662871ad6d611bc0050ecea6e572"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\pe_x86_loader.py": {
+      "bytes": 7890,
+      "sha256": "da41ec6fe07c0caea6dce447a853ec76fdb0951dd08f869fdda5a58b69eb6343"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\probe_rads_provider.py": {
+      "bytes": 24069,
+      "sha256": "9f720ef2c5ffa34e627dd11ce811d1324858891aea205b8783bb1c6497a83b16"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\process_profile.py": {
+      "bytes": 4772,
+      "sha256": "0a71769961212cce5256942c11fecbdb4a5cd6778a2eb9038b9f9cb26943f76f"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\process_profile_tests.json": {
+      "bytes": 1693,
+      "sha256": "092fc6bca1be789ea47d90162350abee1b0a509a7fd83032901523ee56b0b7a9"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\rads_provider_controlled_oracle.json": {
+      "bytes": 1075335,
+      "sha256": "b0642e0c949c61efb0e37301c3cd08502af1350ed2ea7dfa4f1a068c3c5de922"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\rads_provider_oracle.json": {
+      "bytes": 1063894,
+      "sha256": "a901b3c3b1e50d0f0e6a23983faaf188dec9c9858c1821c8b484739c02303193"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\README.md": {
+      "bytes": 3991,
+      "sha256": "c6149eb8bbdb2cb0e54b81d491033d8cbbfc318a30e3466b00463d8a72ce196a"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\run_checks.py": {
+      "bytes": 2553,
+      "sha256": "762a18718e7faac0024a438732a9a185835618382c26f3a93b8cd65b7700a5df"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\slot_namespaces_tests.json": {
+      "bytes": 7200,
+      "sha256": "931f9835f32808d708e77397cd8698abc82f9d344395054d5b001e57fd2bd92f"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\strlen_source.json": {
+      "bytes": 6353,
+      "sha256": "9d869730dcf3c3361c005dd22bfe197bbcc0d5b97645d06c3a302c6927b0cdd8"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\sync_os.py": {
+      "bytes": 3458,
+      "sha256": "f800841377fb5e250356034bcf0279eb827364281b5c6f7ac0cf1ba5aff797c7"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\sync_os_tests.json": {
+      "bytes": 3402,
+      "sha256": "02748e7e386f92ab52541ee19b8413d7b2d076cb7bb7f66023d6ff4fefaebbbb"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\test_callback_batches.py": {
+      "bytes": 2123,
+      "sha256": "40436151f9bfcc2de3436d79051559f476c80ee5ceb42632f49109772a4d5f5e"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\test_crt_heap_ownership.py": {
+      "bytes": 11911,
+      "sha256": "1d1f18f3ab4b93294733790c6fef414ed7db332ae4b4e6584f07043ce92e9e24"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\test_environment_profile.py": {
+      "bytes": 3120,
+      "sha256": "4f0fdbd9498e9d904626a8dc7e674c019246367782e182effc0645be99e4e5fd"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\test_heap_boundary.py": {
+      "bytes": 6043,
+      "sha256": "15da9b1ec9b70fa167bb9e1e45e55d42a1621c43735742363c83e568182c9d54"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\test_heap_mirrors.py": {
+      "bytes": 10591,
+      "sha256": "528a85b2a642aab11935cdf74ce02d66af5ef6c17dd58b9b06edad691de2ca24"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\test_heap_realloc_x86.py": {
+      "bytes": 8235,
+      "sha256": "d3738095b4d0c2eba1512cd38f50a487dc72bc5eb76020c0e268d952b10b9683"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\test_heap_size.py": {
+      "bytes": 7172,
+      "sha256": "a5425f35a22283d470d7627f5284159025d4d665858da90f7ad9b475b7624642"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\test_isolated_io.py": {
+      "bytes": 7559,
+      "sha256": "ffa002385d60614ff24dc48c7fc610c603c041c044cd5a7f8c98c31b8e3ab5db"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\test_loader_structure.py": {
+      "bytes": 3727,
+      "sha256": "c0a6e6cba70471f523bf4b24b0b8c453c4ab0948d2a0e5c570a8a43ffd665018"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\test_logs_bridge.py": {
+      "bytes": 4071,
+      "sha256": "6cc073aa85eae38dace5e854e1c76658ade3a9694986c3bdfdbd8653cb738664"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\test_native_slist.py": {
+      "bytes": 1948,
+      "sha256": "bbb460c6795f472cbcbfb5dae09bce9bc10c6da6f1d81cc4378a03ab5b06454b"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\test_native_strlen_tail.py": {
+      "bytes": 9169,
+      "sha256": "d081df7593e091f776428dceadca2fbe67f9ebc7da266a0a82b7b55ca05764ac"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\test_nls_queries.py": {
+      "bytes": 5089,
+      "sha256": "7bdc413c91162c2bd213850cd7e763f5d8c59813bd6b1637e7dceeeefd77968f"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\test_process_profile.py": {
+      "bytes": 2572,
+      "sha256": "3e5102ccb33a55e3877f9bd963d6e3d4866e277dae0eeadbccc4069fdc2bbf75"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\test_slot_namespaces.py": {
+      "bytes": 2715,
+      "sha256": "87ac933150135ac5df7f4bd6f7fcc36d680388a8c33211ec0cb06350c8cedeb5"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\test_sync_os.py": {
+      "bytes": 4275,
+      "sha256": "4b3e478d69bc82f96e25e6e7311766d3692c2e2b7b4903dbc12eee083c6b733f"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\test_thread_queries.py": {
+      "bytes": 2689,
+      "sha256": "f8bf09f44ca1590c4ae4069d618fc061e14ececd46d1110bf311d00c6e30d73d"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\thread_query_tests.json": {
+      "bytes": 1450,
+      "sha256": "7ff6442da9c0a66454f5af0d1573978c36136844e3a7fc6f028869036dbf7cb7"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\verify_inputs.py": {
+      "bytes": 1612,
+      "sha256": "e93865ff3d03de94910643a45675ff948647a6467e889137269412d8fcc2d816"
+    },
+    "E:\\mapslol3v3\\loading_rads_heap_probe\\WORKSTATE.md": {
+      "bytes": 6306,
+      "sha256": "a04c2da1da9e4c27a22a74b5d87ac59ea034b754e516721ca3d92390ad812163"
+    },
+    "C:\\Windows\\SysWOW64\\kernel32.dll": {
+      "bytes": 687472,
+      "sha256": "bafd9e061964642802d62f1eb694e7e4af60de739a8df1a492f90006dc5680f3"
+    },
+    "C:\\Windows\\SysWOW64\\ntdll.dll": {
+      "bytes": 1822400,
+      "sha256": "7e15bd30890e9bf93b47fc894a68b2445618ee7528eb39584a263b21e112f9df"
+    },
+    "E:\\OpenLeague\\crates\\client\\src\\map10_native_config.rs": {
+      "bytes": 8252,
+      "sha256": "bb8e062b7c61e8887cd99f3f1ef3e52a6900597a4056ee526bdd288864a03593"
+    },
+    "E:\\OpenLeague\\crates\\client\\src\\map_resource_provider.rs": {
+      "bytes": 19449,
+      "sha256": "4c81457bf6b5d7122f0d0e0cee228d3bd9c92fe1de72ab6d5512f6569955ca74"
+    },
+    "E:\\OpenLeague\\data\\4.20\\search_context_defaults_contract.json": {
+      "bytes": 1509,
+      "sha256": "53a47842b1bfdeb106c89f7d0c86b38deb1f563f20227645f9842228a51643b3"
+    },
+    "E:\\OpenLeague\\docs\\loading_standard_resource_preparation\\extract_resource.py": {
+      "bytes": 6272,
+      "sha256": "3b775a30a61024c7e361becba399e06c786e99e9ca3671fdf578632173eb2a34"
+    },
+    "E:\\OpenLeague\\docs\\loading_standard_resource_preparation\\probe_resource.py": {
+      "bytes": 12263,
+      "sha256": "aa647e2edc6bef5cb49c2b58b2c3cda5ef9a564e76b9701d64d3df1615e2dfc7"
+    },
+    "E:\\OpenLeague\\docs\\loading_standard_resource_preparation\\source_data_regions.json": {
+      "bytes": 5873,
+      "sha256": "7da276b96120b2fd1e6886ba434c18fb34095013b1fc9dd361264d4f21e5d678"
+    },
+    "E:\\OpenLeague\\docs\\loading_standard_resource_preparation\\source_dependency_regions.json": {
+      "bytes": 39881,
+      "sha256": "4ef265be90168fed41cf6a605a5a1115ce639d6359a91c3e37ed143a75d81ac3"
+    },
+    "E:\\OpenLeague\\docs\\loading_standard_resource_preparation\\source_regions.json": {
+      "bytes": 24102,
+      "sha256": "f14bb259fe8b5143c5b1ab6b56fea096626dc8b539829e675aa0b5a0e694e811"
+    },
+    "E:\\OpenLeague\\tools\\probe_native_audio_crt_thread_system_startup.py": {
+      "bytes": 7183,
+      "sha256": "5910309ca6eaf4f9ee8fc633e1df0bb1bb8b8b14257efb46d6eeb7564d8b0abf"
+    },
+    "E:\\OpenLeague\\tools\\probe_replay_object_commands.py": {
+      "bytes": 3298,
+      "sha256": "43701bd1fabaf35e7b455e70d526ac512bf7e1f3de638bcda60a2037d84a939b"
+    },
+    "E:\\OpenLeague\\tools\\probe_replay_stream_opening.py": {
+      "bytes": 3386,
+      "sha256": "935499ba63e1c1b752fc0d65c502201af84daede2328520dd4710d93eb3c34a0"
+    },
+    "E:\\mapslol3v3\\loading_provider_io_probe\\README.md": {
+      "bytes": 6913,
+      "sha256": "84442746c8810f53ab06599618adc6dbb4ce060768afddc192c507aff9b6c59a"
+    },
+    "E:\\mapslol3v3\\loading_provider_io_probe\\freeze.py": {
+      "bytes": 3480,
+      "sha256": "18712b0cb8d415084329bbb92b737187f15d3950340ec4b963dfa332a762b395"
+    },
+    "E:\\mapslol3v3\\loading_provider_io_probe\\io_isolation_tests.json": {
+      "bytes": 10208,
+      "sha256": "342810a2d4b9dc2ccea116245180eb78cae89b79ddf2f383a38ad017d5d28dfa"
+    },
+    "E:\\mapslol3v3\\loading_provider_io_probe\\isolated_io.py": {
+      "bytes": 12680,
+      "sha256": "a51c2da8685858208b87f1116610273e60666cd98ce90ffe58c5581c1d06c776"
+    },
+    "E:\\mapslol3v3\\loading_provider_io_probe\\manifest.json": {
+      "bytes": 3523,
+      "sha256": "d275c6dc2ab1cfb0416bfff6e6fdecc3bbf2512988b3ae8932507a5c368cb698"
+    },
+    "E:\\mapslol3v3\\loading_provider_io_probe\\native_io_oracle.json": {
+      "bytes": 108852,
+      "sha256": "6d0faed540f97cd61a36373311d1cd340ac49084d51220e5a7fa9cf83d5add51"
+    },
+    "E:\\mapslol3v3\\loading_provider_io_probe\\native_io_uninitialized_crt.json": {
+      "bytes": 108528,
+      "sha256": "a775dd1d5440930e3fc4e0be4134e3e9dc9ea83ecd98756fec444b7bd41dc682"
+    },
+    "E:\\mapslol3v3\\loading_provider_io_probe\\probe_native_io.py": {
+      "bytes": 6273,
+      "sha256": "7ec56941b6b9979ac288382755fd098761f270bcc89825149e024efaa2bf87da"
+    },
+    "E:\\mapslol3v3\\loading_provider_io_probe\\source_regions.json": {
+      "bytes": 1390,
+      "sha256": "dee630a3f4a9d9613aeaf600bdb3ff66afac44d408933e5296d38d6b61964d7e"
+    },
+    "E:\\mapslol3v3\\loading_provider_io_probe\\test_isolated_io.py": {
+      "bytes": 7559,
+      "sha256": "ffa002385d60614ff24dc48c7fc610c603c041c044cd5a7f8c98c31b8e3ab5db"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\NEXT_API.md": {
+      "bytes": 3766,
+      "sha256": "3c2e7b8f8af2d2748af59d29b60ca77e9432a3338dd8a84126d8e512b7349a5c"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\PROCESS_PROFILE.md": {
+      "bytes": 5885,
+      "sha256": "aec16c56902aec4566b030fba03c7cd1a3cfb12e9038182c9cf537611461633a"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\README.md": {
+      "bytes": 3619,
+      "sha256": "55a25254e9d810cc335a5627e2f9b4a96e6ba8030ec3beb45bd55afe8ab8f3e6"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\adapter_checks.json": {
+      "bytes": 5375,
+      "sha256": "dcb4133ebdb5ef424ec25d30f2102870f0b6c610de5fc83183c02487f8425bc1"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\attempts\\001.json": {
+      "bytes": 839651,
+      "sha256": "5a3949285484b81ab2ce970ba2e4c3a13540fdee19cb35ab0de560de7e1587c3"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\attempts\\002.json": {
+      "bytes": 856471,
+      "sha256": "c23293d63b349859e5c210e027610429977aebe78572beef257f44c55c68f3a3"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\attempts\\003.json": {
+      "bytes": 859230,
+      "sha256": "7545175316cc82e30278600ad1c1424cf8653d708571c41feb77ee13d93040a4"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\attempts\\005.json": {
+      "bytes": 867243,
+      "sha256": "e2b862076c0be3e7353049a00e53fedeb9a207fb2a3e8727e710654d14251d08"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\attempts\\006.json": {
+      "bytes": 931460,
+      "sha256": "da1a37b78b4b19a63db0c21062365f367fc3e18e0296b9e3ad17f0b72de10629"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\attempts\\007.json": {
+      "bytes": 934820,
+      "sha256": "530d024172b4eecd888d7f76d60b8b02c150b799e96323e0d5e564ca235b31e1"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\attempts\\008.json": {
+      "bytes": 937098,
+      "sha256": "3b1996e545b3655d2fb27f2a36d5d1f4046475f61d226c49ea4a8a6088a8a3f6"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\attempts\\009.json": {
+      "bytes": 938629,
+      "sha256": "1be942a008aaf5d762a80a40a3d46b7ca1182b9b5eaafa437c62804d5d17b99a"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\attempts\\010.json": {
+      "bytes": 864282,
+      "sha256": "fdf3554c776d4b60dc7be6e91be09ac2deb8235da260a5013f7faee8cacd1a26"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\attempts\\adapter_checks_001.json": {
+      "bytes": 5504,
+      "sha256": "c8dd61c1f19b4fa3750130b1f7b35d120d1c0a78b7437fccccfc4c047709d6ce"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\callback_batch_tests.json": {
+      "bytes": 820,
+      "sha256": "d749d95b8197efe0588f80efb2ac2de9f8ea903851c3019418b52e37ae58c9be"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\callback_batches.py": {
+      "bytes": 619,
+      "sha256": "c89be90bdbb4b2b3e5c6cd26ea489d275c045cfe0fc0275dbdf72aa945d560f5"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\copied_inputs.json": {
+      "bytes": 557,
+      "sha256": "29cbc927a0346c8208be97d661fcc6f81f650f631297671c500fbed56fd9bb3e"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\crt_heap_ownership_tests.json": {
+      "bytes": 1341,
+      "sha256": "8a8896612be9cf3fc35d4dbc76536fe6a24ccdd91e9e783b72e68839282188d7"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\crt_os.py": {
+      "bytes": 25409,
+      "sha256": "c0ad1e7cd7bcc84a7abccf30ee46034da410a8d9b39118d39a10d94c09aa0f98"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\diagnostic_pipe_open.py": {
+      "bytes": 1767,
+      "sha256": "942a6d1581e7e7857bf1d3f5e352bbdbb584d933c2a3e944c5fae4043e7d33e8"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\environment_profile_tests.json": {
+      "bytes": 2252,
+      "sha256": "5d8568df5425786edc239bb010f5f7e223c87bf98b6a2566bf0111233e4db5ad"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\freeze.py": {
+      "bytes": 7599,
+      "sha256": "d348df35b01b8c68b12dc0a037b4e8ac23144d2738da3d46572a1dd7896a490b"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\heap_size_tests.json": {
+      "bytes": 3216,
+      "sha256": "fad03756415abf14c92ac85346e1bbc64fd27e766cc3afe979bc125ea28c352e"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\io_isolation_tests.json": {
+      "bytes": 10283,
+      "sha256": "c0922ecd256f5c0dac53daf97af5579ad8291ef1a0e2af1a242aa3345b703f8e"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\isolated_io.py": {
+      "bytes": 13542,
+      "sha256": "a33d93f19c17fbaf373eb94ea8ee0de48ef71d0930e140e3ef774ca837867cb0"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\loader_structure_tests.json": {
+      "bytes": 1450,
+      "sha256": "fa2111a547ed182e78a3c00f3e65c7390bf7d8b78cb2fe651cfa3e84738b9437"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\logs_bridge_tests.json": {
+      "bytes": 4553,
+      "sha256": "fedc06ead8d1bdf04d90823873aea816c5ee4c1f0df7f617407909291e6eb201"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\manifest.json": {
+      "bytes": 25618,
+      "sha256": "de3171f52c7387491f4be3883996bbee71209270f3f64293ae4679a85ba1c71c"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\native_slist.py": {
+      "bytes": 3456,
+      "sha256": "7d73739f62c6d6a724a5ee5b0f6169604f17e78c0c9672099423ff3e5a727610"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\native_slist_tests.json": {
+      "bytes": 2952,
+      "sha256": "8a6f6b0fc5647f37aec434ac053425d7fafc58acb0ded42f83fe10c420e1dc8d"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\nls_query_tests.json": {
+      "bytes": 16112,
+      "sha256": "225ed1ca00e9ffcc2343ba8e908d52ab48bdd40270a1aeba7e180293afa007a4"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\pe_x86_loader.py": {
+      "bytes": 7890,
+      "sha256": "da41ec6fe07c0caea6dce447a853ec76fdb0951dd08f869fdda5a58b69eb6343"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\probe_rads_provider.py": {
+      "bytes": 22724,
+      "sha256": "e30139666c3a0b18c7fb149752c1c57409f557a15732687f66f2400ce1f209e1"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\process_profile.py": {
+      "bytes": 4772,
+      "sha256": "0a71769961212cce5256942c11fecbdb4a5cd6778a2eb9038b9f9cb26943f76f"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\process_profile_tests.json": {
+      "bytes": 1693,
+      "sha256": "092fc6bca1be789ea47d90162350abee1b0a509a7fd83032901523ee56b0b7a9"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\rads_provider_controlled_oracle.json": {
+      "bytes": 1059366,
+      "sha256": "108200ff17bfdcb590ae4f94b635859ad61890835eedd6a077908a8716f790e1"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\rads_provider_oracle.json": {
+      "bytes": 1056071,
+      "sha256": "41d77b85aeccb9ba0afc1a89b4e9659d93768cce772010925c1f5185f274e8b3"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\run_checks.py": {
+      "bytes": 2193,
+      "sha256": "63847ef92116d41d0d04ce7c43db34f6904ea50c414d60320f7551f0b63eafe9"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\slot_namespaces_tests.json": {
+      "bytes": 6916,
+      "sha256": "d9dd61b03c28c5c05ef1180d42d47fc6cfd0f5d0a951ad716f48fe79ec94fca5"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\sync_os.py": {
+      "bytes": 3458,
+      "sha256": "f800841377fb5e250356034bcf0279eb827364281b5c6f7ac0cf1ba5aff797c7"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\sync_os_tests.json": {
+      "bytes": 3402,
+      "sha256": "02748e7e386f92ab52541ee19b8413d7b2d076cb7bb7f66023d6ff4fefaebbbb"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\test_callback_batches.py": {
+      "bytes": 2123,
+      "sha256": "40436151f9bfcc2de3436d79051559f476c80ee5ceb42632f49109772a4d5f5e"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\test_crt_heap_ownership.py": {
+      "bytes": 3152,
+      "sha256": "0099358fa38ac23d3f02e157fd5c91c25ef3666308f1b0467fa298d6d418e876"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\test_environment_profile.py": {
+      "bytes": 3120,
+      "sha256": "4f0fdbd9498e9d904626a8dc7e674c019246367782e182effc0645be99e4e5fd"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\test_heap_size.py": {
+      "bytes": 2405,
+      "sha256": "9c68fce7a8602e256c434abddd6e2c7cec510b313282ec1878bc6da3468e291e"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\test_isolated_io.py": {
+      "bytes": 7559,
+      "sha256": "ffa002385d60614ff24dc48c7fc610c603c041c044cd5a7f8c98c31b8e3ab5db"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\test_loader_structure.py": {
+      "bytes": 3727,
+      "sha256": "c0a6e6cba70471f523bf4b24b0b8c453c4ab0948d2a0e5c570a8a43ffd665018"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\test_logs_bridge.py": {
+      "bytes": 4071,
+      "sha256": "6cc073aa85eae38dace5e854e1c76658ade3a9694986c3bdfdbd8653cb738664"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\test_native_slist.py": {
+      "bytes": 1948,
+      "sha256": "bbb460c6795f472cbcbfb5dae09bce9bc10c6da6f1d81cc4378a03ab5b06454b"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\test_nls_queries.py": {
+      "bytes": 5089,
+      "sha256": "7bdc413c91162c2bd213850cd7e763f5d8c59813bd6b1637e7dceeeefd77968f"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\test_process_profile.py": {
+      "bytes": 2572,
+      "sha256": "3e5102ccb33a55e3877f9bd963d6e3d4866e277dae0eeadbccc4069fdc2bbf75"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\test_slot_namespaces.py": {
+      "bytes": 2570,
+      "sha256": "1ad70e49d21a19aaa113b2f15ddb0090e3d5948c928e26e8a796b8f96f4f81d3"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\test_sync_os.py": {
+      "bytes": 4275,
+      "sha256": "4b3e478d69bc82f96e25e6e7311766d3692c2e2b7b4903dbc12eee083c6b733f"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\test_thread_queries.py": {
+      "bytes": 2689,
+      "sha256": "f8bf09f44ca1590c4ae4069d618fc061e14ececd46d1110bf311d00c6e30d73d"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\thread_query_tests.json": {
+      "bytes": 1450,
+      "sha256": "83053571d39096d90d4561bdb28617a6c2ba53e880a0336c318380ecc4bf9881"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_probe\\verify_inputs.py": {
+      "bytes": 1612,
+      "sha256": "e93865ff3d03de94910643a45675ff948647a6467e889137269412d8fcc2d816"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_review\\REVIEW.json": {
+      "bytes": 13808,
+      "sha256": "4aacb3df495ffac45a9abea78f7107417bd48e145229d2d7e76f1e6799ca529d"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_review\\continuation_disassembly.txt": {
+      "bytes": 53328,
+      "sha256": "1a079881e0ca569cc4da58c2c1be6ceef6995b9dd6a2f56ac6d5c177c254e70c"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_review\\continuation_static.json": {
+      "bytes": 223989,
+      "sha256": "608d260f9c064aec41943d8d963580ccebba560ac587329a3d104098b25c7b58"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_review\\inspect_continuation.py": {
+      "bytes": 5032,
+      "sha256": "d2d39a0b3ad0c160fe6af53869a0dfe43b9ac93f54c991706635dbfa987dc63a"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_review\\manifest.json": {
+      "bytes": 1854,
+      "sha256": "a09060fecef18a5f4ad7b639cccf9bb349e762db451a6cc5374ed233e906250f"
+    },
+    "E:\\mapslol3v3\\loading_rads_commandline_review\\seal.py": {
+      "bytes": 1315,
+      "sha256": "0eae06c8e121402b1040aafb075b10abbda1673581f432d7c368c6891cf106a1"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\README.md": {
+      "bytes": 6318,
+      "sha256": "f4cb239eaf06f0a30d24c4acd02b90b638b6fdb1b5b0b0cc5aa3f6b44bc9c59c"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\attempts\\001.json": {
+      "bytes": 838305,
+      "sha256": "beb6e9b5acbcc6b22f1a9cc637b9a0916bbe26b22a4aa3f2aef78cabf781c64c"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\attempts\\002.json": {
+      "bytes": 838193,
+      "sha256": "3722a66f05d974bdbb5f3784f0f52a88a13a6210a14a376cb84b7f1b5ac05f3e"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\callback_batch_tests.json": {
+      "bytes": 820,
+      "sha256": "d749d95b8197efe0588f80efb2ac2de9f8ea903851c3019418b52e37ae58c9be"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\callback_batches.py": {
+      "bytes": 619,
+      "sha256": "c89be90bdbb4b2b3e5c6cd26ea489d275c045cfe0fc0275dbdf72aa945d560f5"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\copied_inputs.json": {
+      "bytes": 157,
+      "sha256": "a4b1a74986becaa1332af73b906f01ae842686c41685e45bfd3b4df5128fddaf"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\crt_heap_ownership_tests.json": {
+      "bytes": 1341,
+      "sha256": "2f2b646b541193f5e7e8e3adbc80bd26c473bfba02211005527a110ec28adc21"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\crt_os.py": {
+      "bytes": 18877,
+      "sha256": "ced1275e7b597d48ecdf1e3dec06aa6ec6e530c57cac84b6830599097a3d3341"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\diagnostic_pipe_open.py": {
+      "bytes": 1767,
+      "sha256": "942a6d1581e7e7857bf1d3f5e352bbdbb584d933c2a3e944c5fae4043e7d33e8"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\freeze.py": {
+      "bytes": 3135,
+      "sha256": "481829b9d25a98de01c2632a92cfdb589923efbd00946f0ff354e9947abd486c"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\hardlink_sentinel_195eeacbe8.bin": {
+      "bytes": 8,
+      "sha256": "fdd5b18d0d6e7d3c33870cff243d12410eaf09faaf2fdee173a03fc61414ea81"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\io_isolation_tests.json": {
+      "bytes": 10208,
+      "sha256": "66223ddc76f760e8464928a3aa43837c738fcf2f97a43e56efde63d812c97045"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\isolated_io.py": {
+      "bytes": 13537,
+      "sha256": "673d163a10e7e4af4856a8d1dedad8171bfd25e4813a5705f67cde2ac1d80374"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\loader_structure_tests.json": {
+      "bytes": 1450,
+      "sha256": "fa2111a547ed182e78a3c00f3e65c7390bf7d8b78cb2fe651cfa3e84738b9437"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\logs_bridge_tests.json": {
+      "bytes": 4478,
+      "sha256": "e4ca7544772a9f917d90e2faaea1e48d2f6dc7a003da3985dd04c8bc3461d245"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\manifest.json": {
+      "bytes": 5102,
+      "sha256": "c3d545178f5f37a25bd331a8af4a6a6cf3b282ba0fa6d118e71594708762f3ea"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\pe_x86_loader.py": {
+      "bytes": 7890,
+      "sha256": "da41ec6fe07c0caea6dce447a853ec76fdb0951dd08f869fdda5a58b69eb6343"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\probe_rads_provider.py": {
+      "bytes": 16659,
+      "sha256": "a55a9952e641b6d7314293bc7a3321f0f36b887758acf541801b5157ad512433"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\rads_provider_oracle.json": {
+      "bytes": 838377,
+      "sha256": "0746cc73c836093c26a5c9a3aed08103b57b353f87d6b96b7eb9b066b4b6e7b1"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\slot_namespaces_tests.json": {
+      "bytes": 6916,
+      "sha256": "967aacf2e6395d15243f71300e1646225d6b7175e407ed5d0f1194b6c3d6e71b"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\test_callback_batches.py": {
+      "bytes": 2123,
+      "sha256": "40436151f9bfcc2de3436d79051559f476c80ee5ceb42632f49109772a4d5f5e"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\test_crt_heap_ownership.py": {
+      "bytes": 3152,
+      "sha256": "0099358fa38ac23d3f02e157fd5c91c25ef3666308f1b0467fa298d6d418e876"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\test_isolated_io.py": {
+      "bytes": 7559,
+      "sha256": "ffa002385d60614ff24dc48c7fc610c603c041c044cd5a7f8c98c31b8e3ab5db"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\test_loader_structure.py": {
+      "bytes": 3727,
+      "sha256": "c0a6e6cba70471f523bf4b24b0b8c453c4ab0948d2a0e5c570a8a43ffd665018"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\test_logs_bridge.py": {
+      "bytes": 4071,
+      "sha256": "6cc073aa85eae38dace5e854e1c76658ade3a9694986c3bdfdbd8653cb738664"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\test_slot_namespaces.py": {
+      "bytes": 2570,
+      "sha256": "1ad70e49d21a19aaa113b2f15ddb0090e3d5948c928e26e8a796b8f96f4f81d3"
+    },
+    "E:\\mapslol3v3\\loading_rads_native_probe\\verify_inputs.py": {
+      "bytes": 1612,
+      "sha256": "e93865ff3d03de94910643a45675ff948647a6467e889137269412d8fcc2d816"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\REALLOCATION_CONTRACT.md": {
+      "bytes": 9955,
+      "sha256": "00f418e706f1b0c3e65fc7a1dfb77ffd4a08546120f20d29b97c361a66b13531"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\NEXT_API.md": {
+      "bytes": 3766,
+      "sha256": "3c2e7b8f8af2d2748af59d29b60ca77e9432a3338dd8a84126d8e512b7349a5c"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\PROCESS_PROFILE.md": {
+      "bytes": 5885,
+      "sha256": "aec16c56902aec4566b030fba03c7cd1a3cfb12e9038182c9cf537611461633a"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\README.md": {
+      "bytes": 3619,
+      "sha256": "55a25254e9d810cc335a5627e2f9b4a96e6ba8030ec3beb45bd55afe8ab8f3e6"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\adapter_checks.json": {
+      "bytes": 5375,
+      "sha256": "dcb4133ebdb5ef424ec25d30f2102870f0b6c610de5fc83183c02487f8425bc1"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\attempts\\001.json": {
+      "bytes": 839651,
+      "sha256": "5a3949285484b81ab2ce970ba2e4c3a13540fdee19cb35ab0de560de7e1587c3"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\attempts\\002.json": {
+      "bytes": 856471,
+      "sha256": "c23293d63b349859e5c210e027610429977aebe78572beef257f44c55c68f3a3"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\attempts\\003.json": {
+      "bytes": 859230,
+      "sha256": "7545175316cc82e30278600ad1c1424cf8653d708571c41feb77ee13d93040a4"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\attempts\\005.json": {
+      "bytes": 867243,
+      "sha256": "e2b862076c0be3e7353049a00e53fedeb9a207fb2a3e8727e710654d14251d08"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\attempts\\006.json": {
+      "bytes": 931460,
+      "sha256": "da1a37b78b4b19a63db0c21062365f367fc3e18e0296b9e3ad17f0b72de10629"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\attempts\\007.json": {
+      "bytes": 934820,
+      "sha256": "530d024172b4eecd888d7f76d60b8b02c150b799e96323e0d5e564ca235b31e1"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\attempts\\008.json": {
+      "bytes": 937098,
+      "sha256": "3b1996e545b3655d2fb27f2a36d5d1f4046475f61d226c49ea4a8a6088a8a3f6"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\attempts\\009.json": {
+      "bytes": 938629,
+      "sha256": "1be942a008aaf5d762a80a40a3d46b7ca1182b9b5eaafa437c62804d5d17b99a"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\attempts\\010.json": {
+      "bytes": 864282,
+      "sha256": "fdf3554c776d4b60dc7be6e91be09ac2deb8235da260a5013f7faee8cacd1a26"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\attempts\\adapter_checks_001.json": {
+      "bytes": 5504,
+      "sha256": "c8dd61c1f19b4fa3750130b1f7b35d120d1c0a78b7437fccccfc4c047709d6ce"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\callback_batch_tests.json": {
+      "bytes": 820,
+      "sha256": "d749d95b8197efe0588f80efb2ac2de9f8ea903851c3019418b52e37ae58c9be"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\callback_batches.py": {
+      "bytes": 619,
+      "sha256": "c89be90bdbb4b2b3e5c6cd26ea489d275c045cfe0fc0275dbdf72aa945d560f5"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\copied_inputs.json": {
+      "bytes": 557,
+      "sha256": "29cbc927a0346c8208be97d661fcc6f81f650f631297671c500fbed56fd9bb3e"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\crt_heap_ownership_tests.json": {
+      "bytes": 1341,
+      "sha256": "8a8896612be9cf3fc35d4dbc76536fe6a24ccdd91e9e783b72e68839282188d7"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\crt_os.py": {
+      "bytes": 25409,
+      "sha256": "c0ad1e7cd7bcc84a7abccf30ee46034da410a8d9b39118d39a10d94c09aa0f98"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\diagnostic_pipe_open.py": {
+      "bytes": 1767,
+      "sha256": "942a6d1581e7e7857bf1d3f5e352bbdbb584d933c2a3e944c5fae4043e7d33e8"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\environment_profile_tests.json": {
+      "bytes": 2252,
+      "sha256": "5d8568df5425786edc239bb010f5f7e223c87bf98b6a2566bf0111233e4db5ad"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\freeze.py": {
+      "bytes": 7599,
+      "sha256": "d348df35b01b8c68b12dc0a037b4e8ac23144d2738da3d46572a1dd7896a490b"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\heap_size_tests.json": {
+      "bytes": 3216,
+      "sha256": "fad03756415abf14c92ac85346e1bbc64fd27e766cc3afe979bc125ea28c352e"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\io_isolation_tests.json": {
+      "bytes": 10283,
+      "sha256": "c0922ecd256f5c0dac53daf97af5579ad8291ef1a0e2af1a242aa3345b703f8e"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\isolated_io.py": {
+      "bytes": 13542,
+      "sha256": "a33d93f19c17fbaf373eb94ea8ee0de48ef71d0930e140e3ef774ca837867cb0"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\loader_structure_tests.json": {
+      "bytes": 1450,
+      "sha256": "fa2111a547ed182e78a3c00f3e65c7390bf7d8b78cb2fe651cfa3e84738b9437"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\logs_bridge_tests.json": {
+      "bytes": 4553,
+      "sha256": "fedc06ead8d1bdf04d90823873aea816c5ee4c1f0df7f617407909291e6eb201"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\manifest.json": {
+      "bytes": 25618,
+      "sha256": "de3171f52c7387491f4be3883996bbee71209270f3f64293ae4679a85ba1c71c"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\native_slist.py": {
+      "bytes": 3456,
+      "sha256": "7d73739f62c6d6a724a5ee5b0f6169604f17e78c0c9672099423ff3e5a727610"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\native_slist_tests.json": {
+      "bytes": 2952,
+      "sha256": "8a6f6b0fc5647f37aec434ac053425d7fafc58acb0ded42f83fe10c420e1dc8d"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\nls_query_tests.json": {
+      "bytes": 16112,
+      "sha256": "225ed1ca00e9ffcc2343ba8e908d52ab48bdd40270a1aeba7e180293afa007a4"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\pe_x86_loader.py": {
+      "bytes": 7890,
+      "sha256": "da41ec6fe07c0caea6dce447a853ec76fdb0951dd08f869fdda5a58b69eb6343"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\probe_rads_provider.py": {
+      "bytes": 22724,
+      "sha256": "e30139666c3a0b18c7fb149752c1c57409f557a15732687f66f2400ce1f209e1"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\process_profile.py": {
+      "bytes": 4772,
+      "sha256": "0a71769961212cce5256942c11fecbdb4a5cd6778a2eb9038b9f9cb26943f76f"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\process_profile_tests.json": {
+      "bytes": 1693,
+      "sha256": "092fc6bca1be789ea47d90162350abee1b0a509a7fd83032901523ee56b0b7a9"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\rads_provider_controlled_oracle.json": {
+      "bytes": 1059366,
+      "sha256": "108200ff17bfdcb590ae4f94b635859ad61890835eedd6a077908a8716f790e1"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\rads_provider_oracle.json": {
+      "bytes": 1056071,
+      "sha256": "41d77b85aeccb9ba0afc1a89b4e9659d93768cce772010925c1f5185f274e8b3"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\run_checks.py": {
+      "bytes": 2193,
+      "sha256": "63847ef92116d41d0d04ce7c43db34f6904ea50c414d60320f7551f0b63eafe9"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\slot_namespaces_tests.json": {
+      "bytes": 6916,
+      "sha256": "d9dd61b03c28c5c05ef1180d42d47fc6cfd0f5d0a951ad716f48fe79ec94fca5"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\sync_os.py": {
+      "bytes": 3458,
+      "sha256": "f800841377fb5e250356034bcf0279eb827364281b5c6f7ac0cf1ba5aff797c7"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\sync_os_tests.json": {
+      "bytes": 3402,
+      "sha256": "02748e7e386f92ab52541ee19b8413d7b2d076cb7bb7f66023d6ff4fefaebbbb"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\test_callback_batches.py": {
+      "bytes": 2123,
+      "sha256": "40436151f9bfcc2de3436d79051559f476c80ee5ceb42632f49109772a4d5f5e"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\test_crt_heap_ownership.py": {
+      "bytes": 3152,
+      "sha256": "0099358fa38ac23d3f02e157fd5c91c25ef3666308f1b0467fa298d6d418e876"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\test_environment_profile.py": {
+      "bytes": 3120,
+      "sha256": "4f0fdbd9498e9d904626a8dc7e674c019246367782e182effc0645be99e4e5fd"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\test_heap_size.py": {
+      "bytes": 2405,
+      "sha256": "9c68fce7a8602e256c434abddd6e2c7cec510b313282ec1878bc6da3468e291e"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\test_isolated_io.py": {
+      "bytes": 7559,
+      "sha256": "ffa002385d60614ff24dc48c7fc610c603c041c044cd5a7f8c98c31b8e3ab5db"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\test_loader_structure.py": {
+      "bytes": 3727,
+      "sha256": "c0a6e6cba70471f523bf4b24b0b8c453c4ab0948d2a0e5c570a8a43ffd665018"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\test_logs_bridge.py": {
+      "bytes": 4071,
+      "sha256": "6cc073aa85eae38dace5e854e1c76658ade3a9694986c3bdfdbd8653cb738664"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\test_native_slist.py": {
+      "bytes": 1948,
+      "sha256": "bbb460c6795f472cbcbfb5dae09bce9bc10c6da6f1d81cc4378a03ab5b06454b"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\test_nls_queries.py": {
+      "bytes": 5089,
+      "sha256": "7bdc413c91162c2bd213850cd7e763f5d8c59813bd6b1637e7dceeeefd77968f"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\test_process_profile.py": {
+      "bytes": 2572,
+      "sha256": "3e5102ccb33a55e3877f9bd963d6e3d4866e277dae0eeadbccc4069fdc2bbf75"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\test_slot_namespaces.py": {
+      "bytes": 2570,
+      "sha256": "1ad70e49d21a19aaa113b2f15ddb0090e3d5948c928e26e8a796b8f96f4f81d3"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\test_sync_os.py": {
+      "bytes": 4275,
+      "sha256": "4b3e478d69bc82f96e25e6e7311766d3692c2e2b7b4903dbc12eee083c6b733f"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\test_thread_queries.py": {
+      "bytes": 2689,
+      "sha256": "f8bf09f44ca1590c4ae4069d618fc061e14ececd46d1110bf311d00c6e30d73d"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\thread_query_tests.json": {
+      "bytes": 1450,
+      "sha256": "83053571d39096d90d4561bdb28617a6c2ba53e880a0336c318380ecc4bf9881"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline\\verify_inputs.py": {
+      "bytes": 1612,
+      "sha256": "e93865ff3d03de94910643a45675ff948647a6467e889137269412d8fcc2d816"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\baseline_verification.json": {
+      "bytes": 8800,
+      "sha256": "0c31efbcfd91e3988a524b4df2ce8a0b6b96a72259be800419ec8ca2a9bb0642"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\preparation_manifest.json": {
+      "bytes": 9925,
+      "sha256": "e01c0e15e4c4d81ad6bf5d17b308def0d428ad51d4ee1327bb6208ad6ef0741f"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\prepare.py": {
+      "bytes": 4376,
+      "sha256": "a827f1903f1b82c309425b80ad51e63a4aa7cef62846e3e09596acd1b74caba8"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\prepare_attempt001.json": {
+      "bytes": 362,
+      "sha256": "5188f2e65655729daa813fb17dacb621bbbe746bdb11eaaf7cbb59f857605c2d"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\reallocation_source.json": {
+      "bytes": 23366,
+      "sha256": "265e6ac5e772e482ed0c84d6095e0e16288f427e14f81a9bf50540b43f6c7f0c"
+    },
+    "E:\\mapslol3v3\\loading_rads_reallocation_preparation\\seal.py": {
+      "bytes": 1356,
+      "sha256": "7c8895aefdb82d301a47d11b763e51a949ec070d902079ca7d3bc3b418439c68"
+    },
+    "E:\\mapslol3v3\\loading_resource_provider_next\\README.md": {
+      "bytes": 8018,
+      "sha256": "1f500d2e34442500aa00e64dc428f28451d79158fb102a4971b2ad7f8828e55d"
+    },
+    "E:\\mapslol3v3\\loading_resource_provider_next\\SCRATCH_ENVIRONMENT.md": {
+      "bytes": 4546,
+      "sha256": "c9ff103ab11e142cf178bf029b95ad47bc7a4bdb5c7535118c050f30359c42db"
+    },
+    "E:\\mapslol3v3\\loading_resource_provider_next\\asset_inventory.json": {
+      "bytes": 25531,
+      "sha256": "bbd379fcacd4399debdc6c401a231c2ce6bedbca4e79966c10ab96fc36f75707"
+    },
+    "E:\\mapslol3v3\\loading_resource_provider_next\\directory_lifecycle_oracle.json": {
+      "bytes": 70498,
+      "sha256": "2fe48af67925297fd8a1a9c44bcfbd5c4b390c6bdd1f56c9992c5b21458b17c4"
+    },
+    "E:\\mapslol3v3\\loading_resource_provider_next\\empty_context_provider_oracle.json": {
+      "bytes": 30069,
+      "sha256": "e505fc6d76c96a9152a4616072f620ee7a9ba69fdf7f6c837aabd49380c00a67"
+    },
+    "E:\\mapslol3v3\\loading_resource_provider_next\\extract_provider.py": {
+      "bytes": 1791,
+      "sha256": "1a87c8af5e27f59a5900b9c73f6b3df04414ca92847dfd910bbb9a79fb0712f0"
+    },
+    "E:\\mapslol3v3\\loading_resource_provider_next\\freeze.py": {
+      "bytes": 3379,
+      "sha256": "e0abfacbdc590fd91130bed2c26830c0570532b35bae08b39c2ef495b5df4908"
+    },
+    "E:\\mapslol3v3\\loading_resource_provider_next\\inventory_assets.py": {
+      "bytes": 5085,
+      "sha256": "924686c833f2ac0c9eeed01a377da8f10aa16409a6b56eb90144d7f2fbe884a5"
+    },
+    "E:\\mapslol3v3\\loading_resource_provider_next\\manifest.json": {
+      "bytes": 4777,
+      "sha256": "dde701270da710c68c49890a8eb4669a89b91da4c582fa7670904a5aeff61232"
+    },
+    "E:\\mapslol3v3\\loading_resource_provider_next\\probe_directory_lifecycle.py": {
+      "bytes": 4384,
+      "sha256": "dad74960cac6f8cfe37deaa0af4e5e2a029fc1ca57577e19f35471d2a98e4ff1"
+    },
+    "E:\\mapslol3v3\\loading_resource_provider_next\\probe_empty_provider.py": {
+      "bytes": 12252,
+      "sha256": "09f9c21d2d9a2b310de89d91d06aa0e33be8c16976e00de845f834ed6a81334f"
+    },
+    "E:\\mapslol3v3\\loading_resource_provider_next\\probe_provider.py": {
+      "bytes": 12127,
+      "sha256": "8559c6ee31a047ba4c29ad1d9b811eb32d7bd00b86adfdf77f07fedb19f1c2d0"
+    },
+    "E:\\mapslol3v3\\loading_resource_provider_next\\provider_probe_state.json": {
+      "bytes": 107248,
+      "sha256": "85a93e570ce0b08cf48272f37567a2bc888fa29fe3436e09210dbdbda7de249b"
+    },
+    "E:\\mapslol3v3\\loading_resource_provider_next\\provider_source.json": {
+      "bytes": 59987,
+      "sha256": "59f9b55cd3033a8b48160024d065b76f2deb11e8f0b40a259b4069712747e2d0"
+    },
+    "E:\\mapslol3v3\\loading_resource_provider_next\\provider_source.txt": {
+      "bytes": 79745,
+      "sha256": "bb00318521cba72565785ed97fc597b27a09a3350b083e6477a63c5e53ed6b52"
+    },
+    "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\RiotRadsIO.dll": {
+      "bytes": 1707520,
+      "sha256": "60833cd552d93b93304d4937912951e144e38db5d70793eb60a0c5f5d579e521"
+    },
+    "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\League of Legends.exe": {
+      "bytes": 15973880,
+      "sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862"
+    }
+  }
+}

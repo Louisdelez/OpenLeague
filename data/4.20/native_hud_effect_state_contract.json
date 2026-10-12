@@ -1,0 +1,188 @@
+{
+  "updated_utc": "2026-10-06T11:56:27.718986+00:00",
+  "passed": true,
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "entry": "0x99f3a0",
+  "case_count": 20,
+  "cases": [
+    {
+      "old_mode": 0,
+      "mode": 0,
+      "events": [],
+      "final_flags": 0
+    },
+    {
+      "old_mode": 0,
+      "mode": 1,
+      "events": [
+        {
+          "state": 27,
+          "value": 1
+        }
+      ],
+      "final_flags": 134217728
+    },
+    {
+      "old_mode": 0,
+      "mode": 2,
+      "events": [],
+      "final_flags": 0
+    },
+    {
+      "old_mode": 0,
+      "mode": 3,
+      "events": [
+        {
+          "state": 27,
+          "value": 1
+        }
+      ],
+      "final_flags": 134217728
+    },
+    {
+      "old_mode": 0,
+      "mode": 4294967295,
+      "events": [
+        {
+          "state": 27,
+          "value": 1
+        }
+      ],
+      "final_flags": 134217728
+    },
+    {
+      "old_mode": 1,
+      "mode": 0,
+      "events": [
+        {
+          "state": 27,
+          "value": 0
+        }
+      ],
+      "final_flags": 0
+    },
+    {
+      "old_mode": 1,
+      "mode": 1,
+      "events": [],
+      "final_flags": 134217728
+    },
+    {
+      "old_mode": 1,
+      "mode": 2,
+      "events": [
+        {
+          "state": 27,
+          "value": 0
+        }
+      ],
+      "final_flags": 0
+    },
+    {
+      "old_mode": 1,
+      "mode": 3,
+      "events": [],
+      "final_flags": 134217728
+    },
+    {
+      "old_mode": 1,
+      "mode": 4294967295,
+      "events": [],
+      "final_flags": 134217728
+    },
+    {
+      "old_mode": 2,
+      "mode": 0,
+      "events": [],
+      "final_flags": 0
+    },
+    {
+      "old_mode": 2,
+      "mode": 1,
+      "events": [
+        {
+          "state": 27,
+          "value": 1
+        }
+      ],
+      "final_flags": 134217728
+    },
+    {
+      "old_mode": 2,
+      "mode": 2,
+      "events": [],
+      "final_flags": 0
+    },
+    {
+      "old_mode": 2,
+      "mode": 3,
+      "events": [
+        {
+          "state": 27,
+          "value": 1
+        }
+      ],
+      "final_flags": 134217728
+    },
+    {
+      "old_mode": 2,
+      "mode": 4294967295,
+      "events": [
+        {
+          "state": 27,
+          "value": 1
+        }
+      ],
+      "final_flags": 134217728
+    },
+    {
+      "old_mode": 3,
+      "mode": 0,
+      "events": [
+        {
+          "state": 27,
+          "value": 0
+        }
+      ],
+      "final_flags": 0
+    },
+    {
+      "old_mode": 3,
+      "mode": 1,
+      "events": [],
+      "final_flags": 134217728
+    },
+    {
+      "old_mode": 3,
+      "mode": 2,
+      "events": [
+        {
+          "state": 27,
+          "value": 0
+        }
+      ],
+      "final_flags": 0
+    },
+    {
+      "old_mode": 3,
+      "mode": 3,
+      "events": [],
+      "final_flags": 134217728
+    },
+    {
+      "old_mode": 3,
+      "mode": 4294967295,
+      "events": [],
+      "final_flags": 134217728
+    }
+  ],
+  "findings": [
+    "Original packet setup for kind2 preserves cached target/matrix/tint/declaration then enables/disables D3D9 alpha blend state27 from modebit1 only; cache hit produces no state call.",
+    "Effect producer always mode1. Previously qualified reset99F170 sets RGB/alpha factors ONE/INVSRCALPHA, ADD and separate-alpha enabled; effect packet does not change factors."
+  ],
+  "limits": [
+    "Supplied equal zero matrices and cached target/tint/declaration bypass their upload branches, not qualified in this harness. Alpha helpers and their original state cache execute. D3D state captured, no device draw. Stack cookie adapted.",
+    "Projection matrices, gamma, samplers, viewport and native line rasterizer/full framebuffer remain open."
+  ]
+}

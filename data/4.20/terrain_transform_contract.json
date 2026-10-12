@@ -1,0 +1,244 @@
+{
+  "updated_utc": "2026-10-05T05:17:26.510139+00:00",
+  "passed": true,
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "bounds_entry": "0x86fa49",
+  "transform_entry": "0x86fb74",
+  "upload_entry": "0x95c97d",
+  "native_addresses": 65,
+  "resource": {
+    "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\Scene\\__LevelSize_.SCB",
+    "sha256": "16138f6f4d50fe54eaae63e6ec4f3c3a48d632a874dbd74c93306b44048f00b4",
+    "size": 454,
+    "format": "r3d2Mesh 2.2",
+    "bounds_offset": 152,
+    "authored_bounds": [
+      0.0,
+      -1440.2152099609375,
+      -0.0,
+      15398.671875,
+      0.0,
+      15398.671875
+    ]
+  },
+  "cases": [
+    {
+      "bounds_bits": [
+        0,
+        3300132579,
+        2147483648,
+        1181784752,
+        0,
+        1181784752
+      ],
+      "span_bits": [
+        1181784752,
+        1152648931,
+        1181784752
+      ],
+      "center_bits": [
+        1173396144,
+        0,
+        1173396144
+      ],
+      "params_bits": [
+        948449473,
+        948449473,
+        2147483648,
+        2147483648
+      ],
+      "uploaded_bits": [
+        948449473,
+        948449473,
+        2147483648,
+        2147483648
+      ],
+      "register": 233,
+      "count": 1
+    },
+    {
+      "bounds_bits": [
+        1065353216,
+        1073741824,
+        1077936128,
+        1148862464,
+        1094713344,
+        1157259264
+      ],
+      "span_bits": [
+        1148846080,
+        1092616192,
+        1157234688
+      ],
+      "center_bits": [
+        1140490240,
+        0,
+        1148895232
+      ],
+      "params_bits": [
+        981668463,
+        973279855,
+        3129152111,
+        3133447078
+      ],
+      "uploaded_bits": [
+        981668463,
+        973279855,
+        3129152111,
+        3133447078
+      ],
+      "register": 233,
+      "count": 1
+    },
+    {
+      "bounds_bits": [
+        3287941120,
+        3267887104,
+        3279552512,
+        1140457472,
+        1128792064,
+        1144750080
+      ],
+      "span_bits": [
+        1148846080,
+        1133903872,
+        1148846080
+      ],
+      "center_bits": [
+        0,
+        0,
+        1132068864
+      ],
+      "params_bits": [
+        981668463,
+        981668463,
+        1056964608,
+        1048576000
+      ],
+      "uploaded_bits": [
+        981668463,
+        981668463,
+        1056964608,
+        1048576000
+      ],
+      "register": 233,
+      "count": 1
+    },
+    {
+      "bounds_bits": [
+        2147483648,
+        2147483648,
+        2147483648,
+        0,
+        0,
+        0
+      ],
+      "span_bits": [
+        0,
+        0,
+        0
+      ],
+      "center_bits": [
+        0,
+        0,
+        0
+      ],
+      "params_bits": [
+        2139095040,
+        2139095040,
+        2143289344,
+        2143289344
+      ],
+      "uploaded_bits": [
+        2139095040,
+        2139095040,
+        2143289344,
+        2143289344
+      ],
+      "register": 233,
+      "count": 1
+    },
+    {
+      "bounds_bits": [
+        3407386240,
+        3231711232,
+        3407386240,
+        1259902592,
+        1084227584,
+        1259902592
+      ],
+      "span_bits": [
+        1268291200,
+        1092616192,
+        1268291200
+      ],
+      "center_bits": [
+        0,
+        0,
+        0
+      ],
+      "params_bits": [
+        861323157,
+        861323157,
+        1056964608,
+        1056964608
+      ],
+      "uploaded_bits": [
+        861323157,
+        861323157,
+        1056964608,
+        1056964608
+      ],
+      "register": 233,
+      "count": 1
+    },
+    {
+      "bounds_bits": [
+        1065353217,
+        0,
+        3212836865,
+        1065353218,
+        1065353216,
+        1065353218
+      ],
+      "span_bits": [
+        872415232,
+        1065353216,
+        1073741826
+      ],
+      "center_bits": [
+        1065353218,
+        0,
+        872415232
+      ],
+      "params_bits": [
+        1258291200,
+        1056964604,
+        3405774850,
+        1056964606
+      ],
+      "uploaded_bits": [
+        1258291200,
+        1056964604,
+        3405774850,
+        1056964606
+      ],
+      "register": 233,
+      "count": 1
+    }
+  ],
+  "findings": [
+    "Original native SCB bounds arithmetic feeds original SSE terrain transform producer; c233 upload reads those exact four f32 bits.",
+    "Transform has reciprocal X/Z spans and centered offset: -(center-span*0.5)*reciprocal.",
+    "Actual Map10 native span is15398.671875 on X/Z, not the prior reconstructed15360UV divisor."
+  ],
+  "runtime_adapters": [
+    "SCB bounds field layout supplied from original header, as existing bounds qualification; native SCB resource registration/loader remains open.",
+    "Producer entered through bounds-ready branch; stack frame supplied. GPU constant uploader records register/count/data and returns, no D3D submission."
+  ],
+  "limits": [
+    "Original producer and upload bits qualified in recorded scope; full world geometry transform, all camera/animation coordinates and native framebuffer equivalence remain open.",
+    "Zero-span native infinities/NaNs retained in bit fixtures; runtime must reject invalid geometry rather than invent usable coordinates."
+  ]
+}

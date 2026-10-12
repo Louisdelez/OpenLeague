@@ -1,0 +1,36 @@
+{
+  "updated_utc": "2026-10-05T10:07:20.318776+00:00",
+  "complete": false,
+  "client_tests_passed": 191,
+  "client_build_passed": true,
+  "native_aabb_cases": 192,
+  "native_aabb_copy_cases": 3,
+  "native_addresses": 92,
+  "actor_aabb_calculation_ported": true,
+  "explicit_collector_source_adapter": true,
+  "live_grass_mask_integrated": false,
+  "findings": [
+    "Original6151A0 prefix writes sixfloat AABB at actor95..A9. Rustmatches192bit-exact outputs and0/4modelgetter calls, including changing fourgetter responses, scales0/negative/fractional and large/negative positions.",
+    "NativeX/Zside uses average of modelX/Zspans timesmodelscale*actorscale; minYoffset added unscaled, height scaled. No-model fallback25width/85height. Maxima are rounded minimum+span, not position+half. Inverted/degeneratebounds retained.",
+    "Native716F60 copy prefix executes3sixword vectors containing finite/extreme/subnormal/negativezero/Inf/NaN bits. This is emulated native copy evidence only; no additional Rust copy API required."
+  ],
+  "limits": [
+    "Native AABB calculation prefix and sixfield copy execute through actual writes at actor+95..A9. Stop before71A5B0 spatial propagation and later metric updates.",
+    "Model/provider constructors, original model bounds getter/producers, actual actor calls, camera and live grass render integration remain open.",
+    "Collector source adapter accepts explicit raw gates/position/scales/model bounds; not connected to actual actor registry. Native spatial propagation and full6151A0 post-AABB side effects remain open.",
+    "NaN copy behavior observed in Unicorn, not original x87 hardware exception/rounding acceptance. No normal-match/GPU capture. All24domains incomplete."
+  ],
+  "next_actions": [
+    "Recover actual model bounds virtual+4 getter, scale/position producers and actor calls to6151A0; qualify71A5B0 propagation/fullmethod side effects.",
+    "Qualify camera/viewport providers and connect actual actor collector into normal grass mask/WALL rendering; inspect Map10 match.",
+    "Continue full24domainplan, remainingchampionkits, sixclientvictory/results and delivery."
+  ],
+  "files_sha256": {
+    "data/4.20/grass_actor_aabb_contract.json": "3beab11f46ebf9d7ae1d9019845f8252564d077efe327c88e39141aa3084d8f0",
+    "crates/client/src/grass_actor_aabb.rs": "20881aa525c730da44b88a78d1a6f27d7bdf51f8520c23f3b005d024fead9f48",
+    "crates/client/src/main.rs": "44a58aa79469439b8397c89e9b8657ead405903ef07f7e9a1879a84491f8d51c",
+    "logs/grass-actor-aabb-tests.log": "3b570c5a503361c3420422d98c5bfb6a190b0f5a55a991b1f7f36ebbe651ed59",
+    "logs/grass-actor-aabb-build.log": "51aabae203c64e977db2aa9c9c5446dca92a55fa639ee33fcbadd4f5d0532365",
+    "target/debug/openleague-client.exe": "78c3c224e3d5225963b0eb36abb8e1b606aae56b20db3232e5e47efe6fef998e"
+  }
+}

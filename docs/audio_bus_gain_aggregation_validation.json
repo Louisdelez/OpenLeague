@@ -1,0 +1,62 @@
+{
+  "updated_utc": "2026-10-08T16:31:26.728276+00:00",
+  "complete": false,
+  "audio_tests_passed": 292,
+  "test_session": 95535,
+  "test_exit_code": 0,
+  "change": [
+    "Port B02CE0/B03610 gain aggregation with actual Bus property/source/list/baseline/parent graph lookups and mixed SSEf32/x87 arithmetic. Preserve whole parent-chain x87 precision and caller control word.",
+    "Port actual cached-state AFEF40 chain and connect qualified manager records/curves; retain last scaling0 curve plus preceding f32 sum until Bus addition, without prematurely rounding manager result. Reject unqualified retained logarithmic scaling2 explicitly.",
+    "Pass the live changed Graph into Gain evaluation so refreshed effect IDs and parent processing gates are observed; actual gain evaluation drives B03D40/B04BC0 cache/dispatch, with application remaining mandatory.",
+    "Prepare native B0EC10/B0EBB0/B088B0/B27310/B26FB0 gain application reference, including true spatial/default consumer writes, for next port."
+  ],
+  "native_cases": {
+    "aggregation": 3456,
+    "precision": 84,
+    "consumers": 864,
+    "rtpc_precision": 84,
+    "application": 1344
+  },
+  "precision_findings": {
+    "f64_parent_mismatches": 26,
+    "premature_f32_rtpc_mismatches": 46
+  },
+  "files_sha256": {
+    "crates/core/src/audio_bus_gain_aggregation.rs": "670f7bdd7271ccedc1257d381ff749a5a717a43565b6327bb5acfc76923f172d",
+    "crates/core/src/audio_bus_effects_changed.rs": "0cf28d0633d1d3d8bb41148cf216b6b94b8aab29ed5adc8ca2ff2c955b3014e9",
+    "crates/core/src/audio_bus_effect_callbacks_composition_test.rs": "f14135d09585bb4d363e587e915f73f2b64ce59fb7c36a1d6080958fa1c9f778",
+    "crates/core/src/lib.rs": "5200b6c2891c431ae5c4fdb93e074475126e7aa996dcb2635d7d17f340cff4cc",
+    "tools/probe_native_audio_bus_gain_aggregation.py": "b1987a7413a4d17fcc314161bb36343fd59623773d292028db576d60888671c3",
+    "tools/probe_native_audio_bus_gain_precision.py": "51dc90b8013e6e1d6fb0d9347cd7d4cd876542fb639e20096ec3d3ce103336b5",
+    "tools/probe_native_audio_bus_gain_consumers.py": "2f03e4f3f538ca090e9f18ffa190df697fb4519976b9cb81e6ac6a3b234ba0dc",
+    "tools/probe_native_audio_bus_gain_rtpc_precision.py": "08aa0187863663e3dbb269f18681bf3f9142c91c6a67b0471d47ebefc8f23aa6",
+    "tools/probe_native_audio_bus_gain_application.py": "648510995549025641a5d0e05b8ae38b417afc9935fa5ae4a3b36513a78dc60e",
+    "data/4.20/audio_bus_gain_aggregation_contract.json": "9ca9bd26af0f85b4e36ae44822e1d97c8ad1c042011a9111350dd8f702912875",
+    "data/4.20/audio_bus_gain_precision_contract.json": "94e69c68610a3a54b86412ea2be2469de7b60c64237f7c0297345f86d9c9ba31",
+    "data/4.20/audio_bus_gain_consumers_contract.json": "9ca77c7c7b62f9b4df65cbb4151b91a5dcdd146ba6dd50660a704579dcbb63b2",
+    "data/4.20/audio_bus_gain_rtpc_precision_contract.json": "83067cc6f1e2e2e3aefa18f41f49238089ad74a93c89782191ed5e85513d1536",
+    "data/4.20/audio_bus_gain_application_contract.json": "0d1ec731fa96fe6880ac2149f23d3449a34ef948f95e4fb261c83d719234604d",
+    "logs/audio-bus-gain-aggregation-tests.log": "5c01d594cbb9e6db88fff96d16e3bfb697c8cf8e86fe0e97baaba5e6e1684775",
+    "logs/audio-bus-gain-consumers-tests.log": "fc2685d1184c5a871c53d65398dfcc4ba0d79207f54cdf0c5317f892b5cdae89",
+    "logs/audio-bus-gain-final-tests.log": "6ff9bdc0b80683d367a2bdcfd6ba1e61eb96c850cd002d625d2df5b8d6cb2776",
+    "logs/audio-bus-gain-precision-probe.log": "b7b8ea058511c442ee6d72e9efb7f4dd1bc84651b3b4ee5a294ef0624a625aa9",
+    "logs/audio-bus-gain-consumers-probe.log": "36c7d24da46d0ff16dbf00e790b1ace68bd9abcec214f6ab9fde655d6cd01de3",
+    "logs/audio-bus-gain-rtpc-precision-probe.log": "fed7c4f029015ef272b3fb7c22e0eeaca2e0692319d925cd0bb9e5ade7d989c5",
+    "logs/audio-bus-gain-application-probe.log": "3c080ebe46936d4c369009387a21cbebdd83d7ef34f040e05c32cf3a9795b970",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "36a03ead1db9a345b7e3c2e772bce964f24385a4aa6a991fdfff5b9ad7fe8794"
+  },
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "acceptance": "Bit-exact results/calls for3456 gain cases,84 parent cancellation cases,864 actual state/manager/cache refresh cases with complete Bus byte arrays,84 RTPC cancellation cases; explicit invalid state/graph/scaling guards and control-word preservation test.292 audio regression tests passed.",
+  "interfaces": [
+    "Isolated3456-case reference supplies state and RTPC f32 contributions; actual864-case reference executes AFEF40, manager, curves and cache refresh without state/RTPC result adapters.",
+    "Gain application remains required interface in Rust composition;1344 native application cases have been prepared but no corresponding Rust port is claimed."
+  ],
+  "limits": [
+    "Finite values and acyclic Bus/list/state graphs; property0/4 and traverse0/1 only. Invalid inputs rejected explicitly.",
+    "Extended consumer currently qualifies scaling0 curve returns; logarithmic scaling2 returns retained x87 values and is explicitly unsupported in this new path until ported. Existing curve module support does not prove retained return precision.",
+    "Actual gain evaluator is connected to changed/cache API and verified on controlled resource layouts. Normal factory/cache/state/curve loading and runtime bindings/lifetimes remain incomplete.",
+    "Whole effects reader previously qualified with gain adapters still requires new actual-gain/application composition; resource replacement B270B0 remains incomplete.",
+    "No current normal client/audio mixing/device, audible, full-game, six-client victory or delivered-package acceptance. All original domains remain open."
+  ],
+  "next_action": "Port B0EC10/B0EBB0 gain application using1344 native cases (identified mode2 included, root selector low-byte/zero-key versus all nonzero-key descriptors, B088B0 conversion and B27310/B26FB0 spatial/default writes), connect to actual gain/cache and whole effects reader; qualify retained logarithmic RTPC scaling2 without f32 narrowing and B270B0 effect resource replacement. Then actual RTPC/state/position bank readers, HIRC8 factory/shared storage, binding/smoothing/admission/refcounts and normal audio/device integration. B02CE0/B03610 gain aggregation3456, parent precision84, actual state/manager/cache864 and retained RTPC precision84 match Rust;292 audio tests pass. Full24domains/114tasks/37requirements remain incomplete."
+}

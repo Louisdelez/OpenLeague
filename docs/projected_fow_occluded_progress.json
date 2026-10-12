@@ -1,0 +1,41 @@
+{
+  "updated_utc": "2026-10-04T19:21:20.293828+00:00",
+  "complete": false,
+  "client_tests_passed": 90,
+  "client_build_passed": true,
+  "native_complete_occluded_masks": 32,
+  "native_complete_instruction_addresses": 1041,
+  "native_fan_cases": 16,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Ported original ordered radial fan including duplicate rays, exact quarter-cell step and measured native radius multiplier.",
+    "Composed native fan/clipping/terrain traversal into occluded circular stencils; all32full original masks and rectangles match.",
+    "Composed stencils feed existing native counted-visibility update; selected counts and flipped texture bytes match original generator."
+  ],
+  "limits": [
+    "Full occluded source mask pipeline executed on diagnostic8x8grid; actual Map10 terrain and source-flag provider not qualified.",
+    "Owner-dependent scale/bias/height, cone composition and normal client lifecycle remain open.",
+    "Complete tests are8cell synthetic grids, unowned circles with scale1/bias0, source metric64 and zero terrain origins.",
+    "Source flag query8F3390 uses an explicit controlled boundary adapter; its actual provider is not qualified.",
+    "Actual128cell occluded composition, cone composition, nonzero terrain origins, Map10 packed terrain loader and live source lifecycle remain open.",
+    "Previous GPU fixture evidence is separate; current normal graphical client not rerun and live FOW not bound.",
+    "All24game domains remain unfinished."
+  ],
+  "next_actions": [
+    "Qualify actual Map10 terrain cell loader and source flag/metric/radius/extent providers.",
+    "Extend full original occluded comparisons to128cells and cone sources before binding actual source lifecycle.",
+    "Integrate counted visibility, native upload/timing and quantized GPU stages in ordinary rendering; verify current gameplay captures."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_occluded_circle_contract.json": "974b036470db8158f402ec74fd7eaa45416ce9698d67124caaa60cedadd75af6",
+    "data/4.20/fow_radial_fan_contract.json": "5e782903dce11327192b4bfedf0f1ae1e44c7ae65c7b1cf795c1dc2e49a9fd08",
+    "crates/client/src/fow_radial_fan.rs": "785e38bb6d43aa2cc9cdfa3a89bb74d5beadaa17655575c69c6ce0c31188db90",
+    "crates/client/src/fow_occluded.rs": "6f8236993db0cc2d4b7f697359e86a4e135dc6a5b799b412b27fb82b3040f3ab",
+    "crates/client/src/fow_terrain_ray.rs": "90afad288f2672655bb3632fdbb5846dad3899a4dca18e99b255fdc0dba89882",
+    "tools/probe_fow_occluded_circle.py": "735fa20d441ec54c8fee7aaa7bcc3e98fe073c2594402086606b4617aa1f02ef",
+    "logs/fow-occluded-tests.log": "2fad3c38a020b68b121d721885947dc2faaf64402662243fb36ddae8e1c6e0a9",
+    "logs/fow-occluded-build.log": "c5620cf79c7fc691cd8e26e08474e1a64ff4d7c3d78e2d97ddfc333b76e7de69",
+    "target/debug/openleague-client.exe": "4e3deb98b1db3edf877402a02a89eb6f2bc84923df3bda6d358ceb7d97d6466e"
+  }
+}

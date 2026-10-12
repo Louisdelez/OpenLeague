@@ -1,0 +1,40 @@
+{
+  "updated_utc": "2026-10-04T19:14:58.874759+00:00",
+  "complete": false,
+  "client_tests_passed": 88,
+  "client_build_passed": true,
+  "native_terrain_cases": 96,
+  "native_fan_cases": 16,
+  "native_terrain_addresses": 319,
+  "native_fan_addresses": 285,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Native6B09E0 terrain traversal ported and all96 output masks match supplied synthetic grid cases.",
+    "Preserved sampling2.5, scalar step order, source-value dependence and opaque flag tests; no generic visibility algorithm substituted.",
+    "Original6B1140 radial fan initialization/dispatch executed for16cases, step0.25, measured radius multiplier1.1313709020614624; full fan Rust composition remains open."
+  ],
+  "limits": [
+    "96terrain cases use grid8, zero terrain origins and a diagnostic flag column with source metrics0/64/512 and always-in-range circle; real Map10 layout and varied source geometry remain open.",
+    "Field at packed terrain origin+0x0B used by native source-distance arithmetic is deliberately retained; nonzero-origin interpretation remains unqualified.",
+    "Native fan proof records arguments at clipping boundary and skips downstream tracing; separate contracts cover those components.",
+    "Original owner/source-height/source-flag providers, actual source collection and complete occluded mask composition remain open.",
+    "Current ordinary client rendering is not rerun; prior96-stage GPU fixture evidence does not prove real FOW or whole-game completion."
+  ],
+  "next_actions": [
+    "Port native radial fan6B1140 and compose dispatch/clipping/terrain into complete occluded masks; compare full native generator outputs.",
+    "Qualify original Map10 terrain loader and source height/flag/radius providers, including nonzero terrain origins.",
+    "Bind actual sources, lifecycle/counts and GPU upload/fade/blur/overlay, then verify current gameplay rendering."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_terrain_ray_contract.json": "f393039e83ea851331a1e26e78c2f306d05ead307625bb4f1fa9ef22e856f046",
+    "data/4.20/fow_radial_fan_contract.json": "5e782903dce11327192b4bfedf0f1ae1e44c7ae65c7b1cf795c1dc2e49a9fd08",
+    "crates/client/src/fow_terrain_ray.rs": "90afad288f2672655bb3632fdbb5846dad3899a4dca18e99b255fdc0dba89882",
+    "tools/probe_fow_terrain_ray.py": "6f16b87a2c209e606d0e9be50541f3ad16bb0ad0a19abf7a27afc2ba22d5fcd9",
+    "tools/expand_fow_terrain_contract.py": "6e4cf9e3cb8f6f88873f93500f74a0c52a5f4f9588b4dbc9bf5fd37ca106beb0",
+    "tools/probe_fow_radial_fan.py": "81237f69fab6bbc998f18bb83048cfec6f39f7d6d93f59cc120c712b11a8f1cb",
+    "logs/fow-terrain-ray-tests.log": "53bdb9a822b69eb21b283fcfec2454a7eee86aeaf6b5082f0dcbae634cfca81f",
+    "logs/fow-terrain-ray-build.log": "072c2c714e65cbf0186d024f32503e3ccb1f67c23222e0ddd58208bf1ce6118e",
+    "target/debug/openleague-client.exe": "cec918eb6bc8150ee7f89ed318744e2118cb0acd2c1aebad8adcaa159d187387"
+  }
+}

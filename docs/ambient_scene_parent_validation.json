@@ -1,0 +1,30 @@
+{
+  "verified_utc": "2026-10-08T05:44:10.213347+00:00",
+  "complete": false,
+  "implemented": [
+    "AmbientParent update_scene resolves real NativeCamera volume into native Scratch planes.",
+    "Resource config flags/build-up/group-vis and explicit quality setting supply parent scheduling inputs.",
+    "Missing camera pose fails before any audio mutation.",
+    "Known SoundEndsOnEmitterEnd and SoundsPlayWhileOffScreen accepted as boolean policy rather than rejected as secondary events."
+  ],
+  "tests": {
+    "command": "cargo test -p openleague-client native_ambient_parent --offline -j1",
+    "session": 4775,
+    "exit_code": 0,
+    "passed": 4,
+    "failed": 0,
+    "filtered": 407
+  },
+  "scene_test": "Actual shopkeeper native document, real NativeCamera pose, two viewport aspects, visible->outside->visible yields logical create1/release1/create2 and preserves root clock77. Missing pose leaves manager and handles unchanged.",
+  "files": {
+    "crates/client/src/native_ambient_parent.rs": "f587220107ae949d52e4fa19476180a2829177f8e6f1648cefe406fe81161a3c",
+    "crates/client/src/camera_native.rs": "e0217734913addd0c87e1a93d013aa4bc17b209a13b3335dc86837d497be4f86",
+    "crates/core/src/native_troy_simulation_flags.rs": "e441b0b2a182a1971baff828a8be7c8685fb7a98900611dedc1e5ac086f15997"
+  },
+  "limits": [
+    "Scene adapter callable and tested; normal map_audio_requests system still uses old simplified producer.",
+    "Test caller supplies instance/source flags, quality3, rootclock77,status0 and RNGseed17; this does not qualify their live producers.",
+    "Actual audio launch, mixer, registry/voice/PCM and age seek remain unintegrated.",
+    "No normal executable rebuild or audible runtime validation."
+  ]
+}

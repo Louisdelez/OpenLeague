@@ -1,0 +1,35 @@
+{
+  "updated_utc": "2026-10-07T05:11:20.945278+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "effect_gate_cases": 48,
+  "native_instruction_addresses": 36,
+  "focused_core_tests_passed": 2,
+  "filtered_core_tests": 598,
+  "full_core_suite_rerun": false,
+  "artifacts_sha256": {
+    "data/4.20/missile_impact_effect_gate_contract.json": "9b3d64a698f67d738a1e856e0314c8363131da023ac6eb91d1b031e570ad2dfa",
+    "tools/probe_native_missile_impact_effect_gate.py": "6d5149d4c89454c7e156fe477b57df680e3d3a215ae21abf2596955279618d38",
+    "crates/core/src/native_missile_impact.rs": "16b53444d47e19b84927ee571d0f11182d82b6e6b770abff4ea4310f96a03b6a",
+    "crates/core/src/lib.rs": "351942ab9f955b38ba8ee50ea30e6d8a4251d18c4f72efb5f0b633eb00133b4f",
+    "logs/native-missile-impact-effect-gate-tests.log": "1ab753235ac5846b538eff84ed1e82746ad6923f8b01f5b49255020dbdf8dac1"
+  },
+  "findings": [
+    "Outer gate: CastInfo3B9 nonzero or SpellData37D bit2; hit branch uses37F bit40; after gate uses380 bit1 and nonnull effect string pointer.",
+    "Original loader HaveHitEffect stores inner34B bit40; HaveAfterEffect stores inner34C bit1. Prefix34 agrees with consumer37F/380.",
+    "Rust selects none/hit-branch/after-request using native raw fields;48original routes match. The192impact-callback cases still pass in the same module run.",
+    "HaveHitEffect andHaveAfterEffect are independent activation bits. Merely finding a named texture/Troy does not authorize automatic effect emission."
+  ],
+  "adapters": [
+    "Execution stops at hit branch76F346, after-effect call751BE0 or no-named-effect continuation76F5F9; no downstream effect consumer is substituted."
+  ],
+  "limits": [
+    "Gate section only; hit branch effect creation and other impact consumers unqualified.",
+    "After string heap pointer mode only, capacity16; no-null inline string does not prove nonempty text.",
+    "No live game/particle/audio acceptance.",
+    "Fixture key point_flag is a synthetic label for raw SpellData37D bit2; it is not HavePointEffect. Native HavePointEffect is inner34C bit2, outer380 bit2. Raw gate property semantic name remains unqualified.",
+    "Hit branch effects, downstream751BE0 creation and other76F0D0 behavior remain unqualified.",
+    "Core-only; no client rebuild or live rendering. Two focused tests,598filtered;24domains114tasks retained,zero domains closed."
+  ],
+  "next_action": "Qualifier la création d’effet de la branche d’impact et le contexte751BE0, puis la copie de position vers le propriétaire10B0D20 et le rendu normal ; poursuivre les collisions, scale/alpha/récepteurs terrain et les24domaines."
+}

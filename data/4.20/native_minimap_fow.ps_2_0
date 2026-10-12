@@ -1,0 +1,8 @@
+sampler fowTexture : register (s0);
+
+float4 main(float2 texcoord : TEXCOORD0) : COLOR0
+{
+    float factor = tex2D(fowTexture, texcoord).r;
+    
+    return float4(0.0f, 0.0f, 0.0f, (1-factor)*0.64f);
+}

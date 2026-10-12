@@ -1,0 +1,30 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T08:41:46.220022+00:00",
+  "change": [
+    "PcmAudio.filtered applies the qualified native low-pass controller to actual decoder buffers; interleaved channels become planar for processing then are reinterleaved.",
+    "Evaluated control, mode and block cadence are mandatory caller inputs; histories remain per decoder.",
+    "DSP failure stops output and reports Failed to the observer plus Decoder.failure; filtered seek rejects before mutation until native history policy is qualified."
+  ],
+  "validation": {
+    "passed": 13,
+    "failed": 0,
+    "native_first_blocks": 12,
+    "native_comparison": "bit-exact interleaved outputs against original retarget contract first blocks",
+    "session": 75046,
+    "log": "logs/pcm-filter-transport-tests.log"
+  },
+  "sha256": {
+    "crates/client/src/pcm_audio.rs": "31d9e231533f999426025f417b56308d41176c594e3b55c8306fc9935d9a6776",
+    "crates/core/src/audio_filter_transition.rs": "e6605cff45978884a4c35498305c8d60455daf8a1e0b27b875e3343faad4fd1f",
+    "data/4.20/audio_filter_retarget_contract.json": "c8e40ed6a4cec61672f61862681bb1c2aefc19c763a6b15b838250f0fff9630a",
+    "logs/pcm-filter-transport-tests.log": "979d9a1050f2f125be5e7d2a3ee56ffe6c165ec29a8d40450ecc1ad1deab714d",
+    "target/debug/deps/openleague_client-5d530a836c9029e8.exe": "8474f70d1f3513bb099125bb61704da96668e48faa0e571e66df4f6ee8a8bbdf"
+  },
+  "limits": [
+    "No inferred mix aggregation or native block cadence; normal gameplay adapter still absent.",
+    "Only initial native blocks compared through this bridge; transition controller has separate existing qualification.",
+    "Native filtered seek/history, variable control updates, allocation performance and effect tail completion still open.",
+    "No new normal executable or physical audible validation."
+  ]
+}

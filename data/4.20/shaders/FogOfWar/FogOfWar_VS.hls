@@ -1,0 +1,39 @@
+// This module is intended for us by VERTEX SHADERS
+
+
+float4 FOG_OF_WAR_PARAMS            : register(c230);
+float4 FOG_OF_WAR_ALWAYS_BELOW_Y    : register(c250);   // -- Contrls fade to fogged with distance
+float4 FOW_HEIGHT_FADE              : register(c251);   // R3D_SHADER_VS_CONSTANT_FOW_HEIGHT_FADE -- Controls fade to visible with distance
+
+
+// We use a float4 as our output where xy are the texture coordinates, and zw are fade control parameters.
+// Input is World space (X East, Y up, Z North)
+float4 FogOfWarTextureCoordinates(float3 worldPosition)
+{
+    float4 result;
+
+    // Fog of war UV coordinates from world horizontal location
+	result.xy = worldPosition.xz*FOG_OF_WAR_PARAMS.xy + FOG_OF_WAR_PARAMS.zw;
+
+
+    // TODO:  The two operations below are mathematically identical and should probably be combined into one and interpreted as
+    //        necessary by the associated pixel shaders.
+    // UPDATE:  Even in the pixel shaders, the math for these is nearly identical -- the only difference is WHAT linear equation the
+    //          the engine sets up for these values.
+
+    // Additional FoW parameter to let us control the fade OUT with height (world space Y)
+    // Used with pixel shader GetFogOfWarFactorsWithFadeTowardClear call.  
+    // 0.0 means let visiblity map decide.  1.0 means forced fully clear.
+    // NOTE:  This operation is expected to be optimized away if the value is unused by the caller
+    result.z = saturate(worldPosition.y * FOW_HEIGHT_FADE.x + FOW_HEIGHT_FADE.y);
+
+    // Additional FoW parameter to let us control the fade IN with height (world space Y)
+    // Used with pixel shader GetFogOfWarFactorsWithFadeTowardFogged call.  
+    // 0.0 means forced fogged.  1.0 means let visiblity map decide.
+    // NOTE:  This operation is expected to be optimized away if the value is unused by the caller
+	result.w = saturate(worldPosition.y * FOG_OF_WAR_ALWAYS_BELOW_Y.z + FOG_OF_WAR_ALWAYS_BELOW_Y.w);
+
+    return result;
+}
+
+

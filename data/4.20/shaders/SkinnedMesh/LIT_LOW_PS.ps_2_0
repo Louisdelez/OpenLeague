@@ -1,0 +1,65 @@
+#include "../DeathScreen.hls"
+#include "../MipLevels.hls"
+
+// Diffuse map
+sampler DIFFUSE_MAP :           register (s0);
+
+
+#ifdef REFLECTIVE
+    samplerCUBE REFLECTION_MAP : register (s2);
+    sampler     GLOSS_MAP      : register (s11);
+#endif
+
+
+float4 FRESNEL :            register(c30);
+
+// Highlight the character when selected
+float4 kGrassFade : register(c23);
+
+///////////////////////////////////////////////////////////////////////////////////////
+///
+///
+///
+///////////////////////////////////////////////////////////////////////////////////////
+float4
+    main
+    (
+
+#ifdef REFLECTIVE
+        float4  reflectRay  : TEXCOORD5,
+        float3  normal  : TEXCOORD6,
+        float3  reflTint: TEXCOORD7,
+#endif
+
+        float2  uv1 :           TEXCOORD0
+    ) : COLOR0
+{
+    // Read the diffuse texture
+    float4 texelDiffuse = tex2D(DIFFUSE_MAP, uv1.xy);
+
+    float4 finalColor = texelDiffuse;
+    finalColor.a *= kGrassFade.a;  // apply any global alpha factor (e.g., the fading associated with being in the grass)
+
+#ifdef REFLECTIVE   
+    float3 gloss = tex2D(GLOSS_MAP, uv1.xy);  // sample per pixel tinting and attenuation of reflections
+
+    //This reflection vector is used to look up the Reflection color in the cube map.
+    //This color is masked and tinted by the gloss map and also the opacity stored in eyeRay.w (computed in the vertex shader).
+    float3 reflectionColor = gloss * texCUBE(REFLECTION_MAP, reflectRay.xyz).rgb * reflectRay.w;
+
+    // The reflection color is modified by the RGB Reflection Tint (computed in the vertex shader)
+    //and added to the pixel color (finalColor).
+    finalColor.rgb += reflectionColor*reflTint;
+  
+    // Also additively apply the 'fresnel rolling' effect (e.g. Zac bubble gum look)
+    // We want to mask the intensity of this by the gloss map, but not apply the tint that may be present in the map
+    float gloss_mask = GetLuminance( gloss );   // convert color to luminance (just a single dot product)
+    finalColor.rgb += (FRESNEL.xyz * 0.25f * gloss_mask);        // Cheap hack just to get it to look close-ish
+#endif
+
+    // Return final color
+    finalColor.rgb = GetEnvironmentDeathColor(finalColor.rgb);
+    finalColor.rgb = ApplyMipColorsVisualization(finalColor.rgb, uv1);
+
+    return finalColor;
+}

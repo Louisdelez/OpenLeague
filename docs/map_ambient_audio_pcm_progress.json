@@ -1,0 +1,40 @@
+{
+  "updated_utc": "2026-10-03T22:20:08.505336+00:00",
+  "contract": "data/4.20/audio_pcm_contract.json",
+  "contract_sha256": "c427160b5e09add7314e10cbf04190ac2a8b93419c1a3924fedb4596a521596e",
+  "module": "crates/core/src/audio_pcm.rs",
+  "module_sha256": "a97d3180a756134049f2b193847becc95dc47555c8b89c0c38d688b6df0e03be",
+  "setter_module": "crates/core/src/audio_filter_expand.rs",
+  "setter_module_sha256": "410cc795fa85fb66b9a67d56d8fad305df3942638b149910ebb0ea307b33052f",
+  "native_pcm_sequences": 180,
+  "native_pcm_blocks": 540,
+  "samples_compared": 8260,
+  "alignment_bytes_tested": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "channels_tested": 2,
+  "comparison": "Exact f32bits for expanded coefficients, output samples and final channel histories",
+  "native_region_hashes": {
+    "0xb2bb30": "26743be46dbb06a49e20ee8c279a987a5778d2f00ed6f8c50ee64cb602e5337a",
+    "0xb2b870": "ffa65869acd66e126f964302aab7ddda891178a60bfddf3357374b6bd2ea6979",
+    "0xb2b9d0": "567cef0af329d654ddd6c027e0ed14cb7d466d7807049968570caea9fb726dff"
+  },
+  "core_tests": 183,
+  "rust_pcm_tests": 2,
+  "test_log": "logs/native-audio-pcm-core-tests.log",
+  "test_log_sha256": "9eb1d0a54732ffe0bccaa14a107bfdc772f5c2342d11d2bb3291ec6efb835b49",
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "client_integration_enabled": false,
+  "ambient_playback_enabled": false,
+  "complete": false,
+  "limits": [
+    "Original fixed-coefficient setter and PCM routines executed, including aligned four-sample path and scalar prefixes/tails.",
+    "Parameter transitions, bypass and denormal/NaN/Inf modes not qualified. No ambient playback or audible acceptance.",
+    "Rust preserves original four-lane arithmetic using scalar lane expressions, not hardware SIMD acceleration. Performance remains to profile.",
+    "Defensive nonfinite/overflow rejection and transactional buffer allocation differ from native invalid-input behavior.",
+    "Generated setter follows source SSE operation order. Running client remains unchanged; no audible PCM acceptance."
+  ]
+}

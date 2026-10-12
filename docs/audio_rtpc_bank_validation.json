@@ -1,0 +1,57 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T09:37:19.410901+00:00",
+  "change": [
+    "Port B008B0 reader with unchanged RTPC/ParamID/curveID, native flags, ordered callbacks, original point-only remaining counter and safe truncation errors.",
+    "Fresh manager initial_snapshot accepts explicit live subscriber references and verified bank blocks/defaults, preserves curve ordering and raw scaling.",
+    "Already-existing curve IDs and unsupported runtime parameters explicitly rejected; no guessed replacement semantics."
+  ],
+  "validation": {
+    "passed": 6,
+    "failed": 0,
+    "session": 20663,
+    "terminal_exit_code": 0,
+    "log": "logs/audio-rtpc-bank-tests.log",
+    "native_reader_cases": 2280,
+    "native_bank_manager_cases": 63,
+    "native_prior_manager_cases": 3456,
+    "reader_blocks": 95,
+    "byte_verified_defaults": 21,
+    "comparison": "Exact native reader flags/cursor/remaining/subscription payload and callback order; actual bank manager outputs and curve inputs exact bits."
+  },
+  "sha256": {
+    "crates/core/src/audio_rtpc_bank.rs": "f2da113d007ecbebd2aaf834f12d17f20aef333de15fe0eb87f3c27f40b851d3",
+    "crates/core/src/audio_rtpc_manager.rs": "37ba1cb8daad2924cedfcf0c33c8dad03bcd16be9395170029d0f74a9354cf04",
+    "crates/core/src/audio_curves.rs": "5d23dcea4c208757106a0d66ef2ad4c114844a9d4172b54f546e5823073e3519",
+    "crates/core/src/lib.rs": "db0d666c6741341bead1ce753fef6d7a5c04f1eb45d00221054d117f80de9f4a",
+    "tools/probe_native_audio_rtpc_bank_reader.py": "0917ffa122d4de742544cf61b670a30f3cbe79fcbf894481c06fcd8f0e273c3e",
+    "tools/probe_native_audio_rtpc_bank_snapshot.py": "4a073bea2e2350631459ce9c5963be50c20309f58f9de6eb9d581b0eeca759b3",
+    "tools/probe_native_audio_rtpc_manager.py": "78772381d4a0b27c7c835a0a11fd6d67b7a9391e1c4c0660c2b544c4c598ec9b",
+    "data/4.20/audio_rtpc_bank_reader_contract.json": "18d96dbac990f9fbaa0d3b91792e0aa29c4777209533b636f48aa5cadb2032da",
+    "data/4.20/audio_rtpc_bank_snapshot_contract.json": "a9af7a4cc1099d57e4a1121ca28ef72735532721e10e43afb9c5535d65ea7706",
+    "data/4.20/ambient_audio_context.json": "c3d2a21f91a21b25ed3957a5101e8d213efaf990bdb60b2991d49e5f0489f094",
+    "logs/audio-rtpc-bank-reader-probe.log": "673bc687a213a0721d501ccbd4c5b2086664b7eaf54ed9a30a634a606b971e65",
+    "logs/audio-rtpc-bank-snapshot-probe.log": "47d3dc61300999ec6785dd007232dfc155d1626cb563699c62f8aefcedc9cda1",
+    "logs/audio-rtpc-bank-tests.log": "c3f71ef8286259c335de2406ee67506b191ad12a2e63c465f09aa3816a3b1175",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "56ba85fc0b536de8e8b766e0c35f0e1f16fa935bbdbb28883c31f2084a68ddc3"
+  },
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_reader_sha256": "2419bd92ac03618bee3f6a44b081b65c3463331cc1f9d5733c3cdf1788dbf159",
+  "banks": {
+    "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\ENV_Map10_SFX_events.bnk": "e6f34e9d864610f419d185587861cda62bd0780da500b7508442a655da97a5b6",
+    "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\Init.bnk": "41d3befb0b934fc609c7b9d5305a8d361cbc77c35e713d37b66e1ac87de3f004",
+    "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\NPC_Map10_SFX_events.bnk": "613e6c75090ed1277e2e737cce1d5f24431be9d1fb5835cc71ad4816e0353e26"
+  },
+  "limits": [
+    "Subscription allocation/replacement/notification side effects not executed.",
+    "RTPC flags beyond63 are captured as original behavior; runtime use remains unsupported.",
+    "No voice mixer/device output claim.",
+    "Initial bank subscriptions only; native update/smoothing and node notification side effects remain open.",
+    "Raw scaling2 bus controls evaluated without invented preprocessing; downstream bus aggregation/gain still separate.",
+    "No device/audio runtime acceptance.",
+    "B008B0 generic parameter-node reader executed on verified RTPC blocks. CAkBus-specific full bank loader/class getter and downstream volume consumer are not qualified by this test.",
+    "initial_snapshot supplies fresh manager inputs; it does not execute native B124E0 allocation/replacement/notification or runtime smoothing.",
+    "No automatic substitution of bank IDs for runtime references; caller must provide actual node subscribers.",
+    "No normal client rebuild, physical voice admission, audible output or complete-game acceptance."
+  ]
+}

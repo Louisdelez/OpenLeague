@@ -1,0 +1,38 @@
+{
+  "updated_utc": "2026-10-07T04:38:59.250320+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_initial_direction_cases": 144,
+  "native_fixed_direction_cases": 96,
+  "actual_cpu_rsqrt_operations": 278,
+  "focused_core_tests_passed": 1,
+  "filtered_core_tests": 594,
+  "full_core_suite_rerun": false,
+  "ordinary_projected_binding": false,
+  "client_rebuilt": false,
+  "artifacts_sha256": {
+    "crates/core/src/native_missile_initial_direction.rs": "df5b3ba3e752d2cc14754cf4b9130d6f04914cdfabbea8805f66f4224e84be7b",
+    "crates/core/src/lib.rs": "3d8ab86758053764162ed52d12e5720f15b7032d215f3d59da538490e6fe750f",
+    "logs/native-missile-initial-direction-tests-failed-v1.log": "1c44c295eb0febcb1a9025563aed816b79e75ad204b5a7775860b3b9fbe996e1",
+    "data/4.20/missile_initial_direction_speed_contract.json": "879e8583abaea236416af8824ef5dc937a218d3acc638cba16da890abb6371e2",
+    "data/4.20/missile_initial_direction_contract.json": "b0c915a86c942d491ababc8bbdd271d8ceba5b2c418cee58406d6a2a55f28f2e",
+    "tools/probe_native_missile_initial_direction.py": "5caeffe185fb6c49e21e1f78e71e20b525a1d5649f27c314ea76086102f21c49",
+    "tools/probe_native_missile_initial_speed.py": "4ebdbae7b901c4f30756d522c9b3cf195f1291360e08b12b13478e7e185528b5",
+    "logs/native-missile-initial-direction-tests.log": "4a4c3899cd7e4a61041afb5660c4064747c6f1cd681c5ffad298918210ae74f7"
+  },
+  "findings": [
+    "Whole75FB00 initializes direction using target minus launch origin, height augmentation,66D6E0 inverse-root correction and fixed/min travel time.",
+    "Zero fixed time executes whole75FF20 estimate and75EF50 scaling. The estimate uses integer bit square-root approximations; replacing them with exact sqrt changes outputs.",
+    "Original loader767170..769xxx identifies fields:5C4 MissileSpeed,5C8 MissileAccel,5CC MaxSpeed,5D0 MinSpeed,5D4 FixedTravelTime,5D8 MinTravelTime,574 TargetHeightAugment. Cast wrapper prefix34 explains consumer offsets. This mapping is static evidence.",
+    "96positive fixed-time cases and144fixed/speed1400 zero-acceleration cases execute. Rust matches144direction/time raw outputs.",
+    "Native75EF50 renormalizes horizontal speed when vertical direction is nonzero; initial reversed Rust branch corrected after mismatch case12. Failed test retained in separate log.",
+    "Supplied community MissileType enum names Target=1; retained as a navigation reference, not native dispatch proof."
+  ],
+  "limits": [
+    "Zero-acceleration1400speed/min/max profile only; other speed/acceleration values, independent current position and exceptional fields remain unqualified.",
+    "Exact targeted-Annie subtype selection and movement-frame direction producer unproven; this is initialization evidence.",
+    "No ordinary game integration, client rebuild or GPU/audio acceptance.",
+    "One focused test run,594filtered; no new full core-suite result."
+  ],
+  "next_action": "Qualifier la sélection native du projectile ciblé d’Annie et sa direction pendant le déplacement, raccorder la pose10B0D20 au rendu, puis contrôler scale/alpha/récepteurs terrain et poursuivre les24domaines."
+}

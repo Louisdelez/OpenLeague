@@ -1,0 +1,41 @@
+    /// Access the single canonical CRT bank; no mutable clock copy is kept here.
+    pub(crate) fn clock_crt_read(&self, address: u32, width: u32) -> Result<u32, String> {
+        if !matches!(width, 1 | 4) { return Err("invalid clock CRT read width".into()); }
+        self.root.context.with(|c| crate::audio_path_source_virtual_cleanup::get(&c.memory, &c.dead, address, width as usize))
+            .map_err(|e| format!("clock CRT context: {e:?}"))?
+            .map_err(|e| format!("clock CRT read: {e:?}"))
+    }
+    pub(crate) fn clock_crt_write(&self, address: u32, width: u32, value: u32) -> Result<(), String> {
+        if !matches!(width, 1 | 4) { return Err("invalid clock CRT write width".into()); }
+        self.root.context.with(|c| crate::audio_path_source_virtual_cleanup::put(&mut c.memory, &c.dead, address, width as usize, value))
+            .map_err(|e| format!("clock CRT context: {e:?}"))?
+            .map_err(|e| format!("clock CRT write: {e:?}"))
+    }
+    pub(crate) fn clock_validate_cs_dispatch(&self, function: u32) -> Result<(), String> {
+        if function == 0 { return Ok(()); }
+        self.root.context.with(|c| crate::audio_crt_windows_dispatch_resolver::Lookup::export_pointer(&c.services, function, "InitializeCriticalSectionEx").map(|_| ()))
+            .map_err(|e| format!("clock CRT context: {e:?}"))?
+            .map_err(|e| format!("clock critical-section dispatch: {e:?}"))
+    }
+    pub(crate) fn clock_crt_calloc(&self, count: u32, size: u32) -> Result<u32, String> {
+        self.root.context.with(|c| crate::audio_crt_heap::calloc(&mut c.memory, &mut c.dead, count, size, &mut c.services.inner))
+            .map_err(|e| format!("clock CRT context: {e:?}"))?
+            .map_err(|e| format!("clock CRT calloc: {e:?}"))
+    }
+    pub(crate) fn clock_crt_release(&self, address: u32) -> Result<(), String> {
+        self.root.context.with(|c| -> Result<(), String> {
+            crate::audio_crt_heap::free(&mut c.memory, &mut c.dead, address, &mut c.services.inner)
+                .map_err(|e| format!("clock CRT free: {e:?}"))?;
+            if address != 0 && !c.dead.contains(&address) { return Err("clock CRT block was not freed".into()); }
+            Ok(())
+        }).map_err(|e| format!("clock CRT context: {e:?}"))?
+    }
+    pub(crate) fn clock_crt_retire(&self) -> Result<(), String> {
+        self.root.context.with(|c| c.services.inner.heap.retire_mirrors(&mut c.memory, &mut c.dead).map(|_| ()))
+            .map_err(|e| format!("clock CRT context: {e:?}"))?
+            .map_err(|e| format!("clock CRT mirror retirement: {e:?}"))
+    }
+    pub(crate) fn clock_crt_free(&self, address: u32) -> Result<(), String> {
+        self.clock_crt_release(address)?; self.clock_crt_retire()
+    }
+

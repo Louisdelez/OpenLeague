@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "tests": [
+    {
+      "filter": "native_ambient_parent",
+      "passed": 2,
+      "filtered": 407,
+      "session": 14914,
+      "exit_code": 0
+    },
+    {
+      "filter": "native_projected_parent",
+      "passed": 1,
+      "filtered": 408,
+      "exit_code": 0
+    }
+  ],
+  "source_sha256": {
+    "crates/client/src/native_ambient_parent.rs": "ebfd94574e7b7de89dffa680dff9031eb850087d88a03137d307ba79597c9f11",
+    "crates/client/src/native_projected_parent.rs": "f7626fa2e110f8948dd667874c99662bdd6e97dbc33d80a0eb1cf7b2af3c826b",
+    "crates/client/src/main.rs": "14078e1105558c94e465842d036a783624f079789ecccd598d657e8cad46b1b2"
+  },
+  "scope": "Native parent drives actual Simple child and real logical Manager. Persistent creation, continuing-frame positions, visibility pause/release/reacquisition or configured retention and one-time transient creation tested. Existing projected parent regression passes.",
+  "limits": [
+    "Adapter exercised by tests only; Bevy ambient update still uses previous producer.",
+    "Frame source flags/config/time/radius/camera scratch and RNG supplied explicitly.",
+    "Presence-only host descriptors map to owned event strings; no claim of native heap string/pointer reproduction.",
+    "Physical worker, playing voices, mix and age seek not connected. No audible or normal executable validation."
+  ]
+}

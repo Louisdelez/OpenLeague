@@ -1,0 +1,55 @@
+{
+  "saved_utc": "2026-10-10T10:46:36.804761+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "native_text_conversion_cases": 2151,
+  "native_layering_cases": 243,
+  "isolated_production_tests_passed": 124,
+  "client_replay_tests_passed": 4,
+  "client_existing_settings_tests_passed": 4,
+  "client_tests_filtered_per_run": 429,
+  "client_executable": "E:\\OpenLeague\\target\\debug\\openleague-client.exe",
+  "client_executable_sha256": "00b0d7f38bac513f04713317e67a95cf76a98df52471faf5aba1463534feac71",
+  "client_test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_client-5d530a836c9029e8.exe",
+  "client_test_executable_sha256": "c0a6257ab90bdb8f8e70814289e8e31a4f7ac5baf22d1fd2d4175f8422a68168",
+  "isolated_executable_sha256": "d64be576b168a102050e85c58d217df51894b84b8637f64f14a05c23e5f281b5",
+  "native_contract_sha256": "60490ef5eb0331fd5ae77c7d9b297a3c5abc45cc179a1c60fc5c89d0e7cea433",
+  "executable_proof_sha256": "f4875d938935f9df2734ab1e1d2dfd8b4526ad2f9f7a779ab18ddd9126521c84",
+  "scene_proof_sha256": "642118eca9deb08c2b2d42c3b15273fc3d43841ab9784face283af4b83724dff",
+  "source_hashes": {
+    "crates/client/src/native_replay_settings.rs": "606b5cfa69e175761666ec67304f8d65df6787d9ac73f1154e1e901b0c16eff9",
+    "crates/client/src/native_replay_service.rs": "1f9b8f68da1960a7ba5a691ea0a0d4d6d784f4e6bcffc0a6553434e4085167f6",
+    "crates/client/src/native_game_cfg_text.rs": "54b4d9df1bc56d78a07eb51f0fe15128e1d702a2e19d1acf17d46f02d89857b1",
+    "crates/client/src/native_graphics_options.rs": "b90de36a36fd33887c5758f641497c643f8cd3520eaa3bde087e23934e81cbb2",
+    "crates/client/src/native_user_settings.rs": "f13aa64b4349d6bb250a888e147e2bec8f0422b98a4e61a3dd22c2837b6f7e1c",
+    "crates/client/src/main.rs": "69388df1cd060afa573154d132517465a67d9d542bbbfaca46f62ac561b89492",
+    "crates/core/src/audio_game_service_lifecycle.rs": "be0ff2049487dcd3f73dabc72548ff01fa8a65a08596693985e465f5ebfed71a",
+    "tools/qualify_replay_config_values.py": "f35f95874cc198e3e651b13e2f0a08aeaf64ff48b197d844bb9972fa6614a19b",
+    "tools/replay-service-configuration-tests.rs": "c269e48e0552c490fbf8fa0d64e9f0db7465c5b8f1bc2ff2d415ccdd8001dcf3",
+    "tools/verify_replay_service_executable.py": "798a1c91aa23bc7d268e2c828135b802723fe0ffb72c54c9fb6bccdb9157f45a",
+    "tools/capture_replay_configured_scene.py": "f851b0569f50dbc00d095a796b951715eee23c8803d479a3030d0032976d7a35"
+  },
+  "log_hashes": {
+    "logs\\client-replay-settings-tests.log": "415d96cdc8ad23b3a7244a19e3b975820ab0b8a35af680f8c6f168e3bed86cbc",
+    "logs\\client-user-settings-regression.log": "ff74c66e52ccc78819605aff6b5b0e781f7af88bca9b455868770e1afa4d4afd",
+    "logs\\replay-service-configuration-tests.log": "b3037135fd7a778348f592868f2f687ca614330c4a735c7cdeb4018ebae1d443",
+    "logs\\client-replay-service-build.log": "ae8effac1f8ef27fe84116ffbabffb1ab471de2e9031bfd176cae9a74bc4683d"
+  },
+  "behavior": [
+    "Actual8AFB10/8AFC30 text configuration readers,8AE0E0 map lookup and original CRT conversion/string bodies execute2151 cases: missing/empty strings, marker$##$, bool literal matching, decimal prefixes, exponents, negative zero, overflow/subnormal/boundary values, NUL and all256 leading byte values. Rust text conversion matches returned value bits and found state for these cases.",
+    "Actual8B20F0/8B1910/8B1C20 complete routing executes243 configurations with real inner text readers, baseline/user and optional overlay pairs supplied at the cache boundary. New Rust provider preserves overlay-before-primary and baseline-before-user, including found sentinel values and missing fallback.",
+    "native_user_settings now retains separate baseline/user configuration for replay while preserving existing merged settings. Normal graphical main creates and owns a real392-byte service through the Rust72A3B0 composition, using original default file plus actual user settings. Owned memory, callback cloning, history/curve allocations and normal72A530 destruction are connected without replaying fixture results.",
+    "Built client diagnostic exercised four separate real on-disk roots: native defaults, user override, empty/missing settings, malformed file rejection. Successful cases matched service fields and released all owned allocations; project user files untouched. Actual graphical client also started with local server, published configured service and rendered the inspected scene."
+  ],
+  "limits": [
+    "Configuration support is the qualified text-file/C-locale profile. Typed INIBIN, binary64 conversion sources, localized file overlay discovery, live cache reload and alternate FP/locale modes remain open. Rust decimal parsing is verified on the recorded cases; complete original CRT errno/exception/FP-status behavior is not implemented. Native text fixtures use supplied valid map storage and top-level cache-pair resolution, not full original file/resource initialization.",
+    "Normal client holds the service resource, but its frame callbacks734130/72C780, live replay streams, actor listener registration and simulation event consumption remain unconnected; unsupported object/listener operations return explicit errors. Generic shared-control machinery is present, but startup tests leave those controls empty. Fixed native curve controls and an explicit opaque byte0 are supplied; there is no claim of native stack padding semantics.",
+    "Graphical capture uses a fixed diagnostic camera and terminates only the two processes it created. It does not prove graceful graphical shutdown, six-client match completion, original visual equivalence, map completeness or human acceptance. No champion, domain or whole game is marked complete."
+  ],
+  "next_action": "Continue actual replay/service frame integration: port734130 invocation and72C780 target, which dispatches through global2D78520/729370 or shared object manager729CF0 and8F8CF0/8F89D0/8F8B30 depending packet flags. Preserve real actor/world ownership and frame inputs, qualify replay stream types and metadata listener registration before exposing those operations. New normal client startup owns the72A3B0 service with Configuration parsed from original defaults plus actual user Game.cfg; destruction is linked through owned resource Drop and diagnostic teardown is proved, but no live replay event/frame dispatch is implemented. Qualify typed INIBIN readers, binary64 integer-to-float path8AE180/8AF330, localized overlays and runtime configuration cache reload; retain native text conversion quirks and source provenance. Full normal graphical AppExit teardown still needs a graceful-exit test (capture helper terminates only its owned processes). Continue simulation, maps/champions, audio queues/mixing/playback and all24domains114tasks37requirements."
+}

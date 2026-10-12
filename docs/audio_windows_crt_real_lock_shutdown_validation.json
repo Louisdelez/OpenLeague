@@ -1,0 +1,52 @@
+{
+  "saved_utc": "2026-10-09T20:33:06.981818+00:00",
+  "passed": true,
+  "complete": false,
+  "audio_tests_passed": 535,
+  "actual_windows_crt_real_lock_shutdown_full_core_cases": 12,
+  "actual_windows_crt_real_lock_shutdown_hardware_cases": 24,
+  "actual_windows_critical_section_hardware_ownership_cases": 14,
+  "actual_windows_critical_section_core_tests": 3,
+  "actual_windows_crt_shutdown_failure_modes": 2,
+  "test_log": "logs/audio-windows-crt-real-lock-shutdown-qualified-tests.log",
+  "test_executable": "target\\debug\\deps\\openleague_core-92fab3f20accd79c.exe",
+  "test_executable_sha256": "53a4b6519453e67215a6315c05994238e6ebe0c4b1d1408a155f1456737e8d30",
+  "previous_receipt": "docs/audio_windows_shared_fls_getter_validation.json",
+  "next_action": "Implement actual production thread-record/optional-buffer heap ownership and original global CRT startup services, including verified Windows export dispatch/security-cookie bootstrap. Reuse the real production critical-section provider and callback-safe shared FLS shutdown; qualify full startup/getter/worker exit/cleanup against native lifetimes, dynamic lock teardown and failure states. Integrate into normal audio worker dispatch/progression/retirement/physical playback. Full24-domain114-task37-requirement scope and normal client integration remain unfinished.",
+  "evidence": [
+    "Production Windows critical-section Bank/Provider now owns stable boxed host OS storage mapped to canonical CRT references. Actual InitializeCriticalSectionEx/AndSpinCount, Enter/Leave/TryEnter and DeleteCriticalSection executed. Recursive and contended operations retained; duplicate initialization, missing references, busy deletion and wrong-thread release return explicit errors. A thread-affine guard releases during unwinding; unsafe owned-at-drop deletion avoided by retaining opaque storage and exposing a failure report.",
+    "Original CB027B lock retirement factored into a common unchanged two-pass algorithm: dynamic delete/free/clear first, static delete/retain pointers next. Original CA9341 cleanup still uses it; prior native cleanup tests remain passing. Shared-slot shutdown releases canonical context lock during real FlsFree callbacks, publishes retired global index, then resumes source lock-table cleanup with actual OS deletion. Successful shutdown is idempotent. Failed destructors or deletion retain/report incomplete state instead of unsafe repeated deletion.",
+    "One shared global CRT slot now claims one canonical context by Weak identity, rejecting independent global banks or expired/reassigned contexts before binding/publication/getter/shutdown.",
+    "Full-core12 actual shutdown scenarios compare all original non-opaque record/global/lock-table bytes after natural exits and owner close; two record free identities, all OS locks removed, source global indexMAX, no duplicate callbacks and repeated shutdown success. Three actual OS lock tests cover both initializer routes/spin values, recursive guard ownership, real cross-thread try/block entry,4000 contended load/store increments, wrong-thread release and explicit owned-drop failure. Two callback free error/panic modes execute through actual production locks and FLS: failures remain visible, no false completed destructor, unretired record retained; panic contained at native ABI and canonical mutex poisoning exposed.",
+    "Unchanged production modules also execute in x86/x64 isolated executables:24 real-lock shutdown cases and14 lock ownership/contention cases. Shared component24, paired-native callback96 and getter12 hardware regression cases replayed after source changes.535 full core audio tests pass;59 historical runtime fixture hashes unchanged;24domains114tasks37requirements retained."
+  ],
+  "limits": [
+    "Actual OS critical-section opaque storage uses architecture-specific pinned host objects rather than source24-byte opaque banks. Opaque captured5A/DD source storage excluded from numerical final-bank checks; no synthesized bytes used as real locks. All remaining canonical bytes checked.",
+    "Native root contexts remain preinitialized original captures, with allocation/free supplied by an explicit canonical memory boundary. Production heap/global resolver/security-cookie bootstrap and normal client workers remain unfinished.",
+    "Deliberate invalid owned-lock Drop is diagnosed and retains native storage to avoid deleting an owned critical section. No blanket leak-free/complete lock lifetime or full native SEH claim. External direct native mutation, arbitrary fiber migration and forced thread termination remain unqualified.",
+    "Canonical mutex poisoning on callback panic prevents further trusted mutation; this is an explicit failed state rather than reconstructed native SEH recovery. Body panic/error containment exercised, not every possible user-service destructor Drop panic."
+  ],
+  "build_note": "Initial live compilation was explicitly stopped after review found the new context-identity test would compare a published real OS index against fixed source index5. Corrected that test to use the explicit existing normalization, then rebuilt and passed the full suite. Interrupted build log retained as diagnostic only.",
+  "files_sha256": {
+    "docs/audio_windows_crt_real_lock_shutdown_hardware_discovery.json": "0151de5c110b0f08161edeaee4f141d943244f9e962725d13e9e0d2850e47a9a",
+    "docs/audio_windows_shared_fls_component_hardware_discovery.json": "a88d93eb7cda553b760aedd1fe75ab83228cc8d1621d8abb3990cbec6f2ce85a",
+    "docs/audio_windows_shared_fls_native_pair_hardware_discovery.json": "b0455f78658f88e9aefc9363566d14ef70d43600d8e073bbcfe5839070ab6cb8",
+    "docs/audio_windows_shared_fls_getter_hardware_discovery.json": "b9bf5bfc919d22eaaaf3498ce1b3dfbca7daee2411cc4385b4d334abed9637f9",
+    "logs/audio-windows-crt-real-lock-shutdown-qualified-tests.log": "2196347ed9ae6c8017c6e150bfeed1d407713ac503073a4f1c8cc700474096e9",
+    "logs/audio-windows-crt-real-lock-shutdown-tests.log": "d39a902a5664fda0288e81f152c56bfd48b69006968653f3fe96c93acad50377",
+    "docs/audio_crt_heap_entry_discovery.json": "3acddf814cf516f8c3d7f737da0c2c4f8ca3f7666832424203821d73f5daa005",
+    "tools/discover_audio_crt_heap_entries.py": "60d1f0afc7098c76e340b36a6493809437e9b4eb20ae9009409ac3fda84c1d9c",
+    "crates/core/src/lib.rs": "fcca60b4443cf4b7f01afa9883f247752effda2bedf349ecbe2749e5c195c414",
+    "crates/core/src/audio_crt_windows_critical_sections.rs": "74d49c37dfd2c0610d9b044f6cdd5d18ce66b12db91078270bd7428dfc900da3",
+    "crates/core/src/audio_crt_windows_shared_fls.rs": "f0cb0371d1d57600f96e66e7b8c955c9107f9e0e6a8aff3f4f02c1e9d6826135",
+    "crates/core/src/audio_crt_windows_shared_fls_tests.rs": "3a168883f691adebcd62d06f37e13539c56cf14c0080aa656e6fa6874134bda8",
+    "crates/core/src/audio_crt_thread_system_startup.rs": "be24706a5d3e08e25e614bc8e34e1058570c8f1439a91b4e1f3529ac99378a53",
+    "tools/implement_audio_windows_critical_sections.py": "dbfe4521edbae7f16fafcdb157a1bce60e7720ec1b09ad81b7598d5d6bbef89c",
+    "tools/implement_audio_windows_critical_sections_tests.py": "a83614aba2b2a63d6dfa14b148d7db7203a551eefd02366ebeb77522249b9559",
+    "tools/finalize_audio_windows_crt_cleanup.py": "a3feea3b4e70b22d90c7ee35f06a5249f0b22af524b242e91e07f91d5be71cb0",
+    "tools/implement_audio_windows_crt_shutdown_failures.py": "1ff80ab0340529d02be3ebe592871d786a2ecef1f8d490d9f05bd61bce8df591",
+    "tools/fix_audio_windows_crt_context_identity_test.py": "a6bb26014d619b93a9b6f0d65bed8cfa84663b2b85c9804ccaca0a0cdf1fb2bb",
+    "tools/probe_windows_crt_real_lock_shutdown.py": "3bfbb5b017571cda45224cf9661e44e757fba75617c96ef272b38a6be0403005",
+    "tools/record_audio_windows_crt_real_lock_shutdown_progress.py": "57cdc2655e03f73291ce901010c077ab741706dbffe4e9b4e24efd5918970126"
+  }
+}

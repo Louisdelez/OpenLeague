@@ -1,0 +1,33 @@
+{
+  "updated_utc": "2026-10-04T04:03:34.241232+00:00",
+  "files_sha256": {
+    "tools/qualify_native_camera_parameters.py": "dd30caeeec2fe3be9e50ae56d91492a589f62e69e9f23cd6962a23081b1b8a32",
+    "data/4.20/camera_parameters_contract.json": "6dc8474c91d5ef9c03878928025023c1ea56f4458806133d24ddba192d2bb2f1",
+    "crates/core/src/camera_parameters.rs": "7dc65a682ee6bd4faea06e5901ba015c2ca9b6e6d632a100f8c1d3a937edc608",
+    "crates/core/src/lib.rs": "78166cf2fd9701e418b07448238a6900ba4a1e2ec290a0eda1bef8aa414c9d12",
+    "logs/native-camera-parameters-core-tests.log": "20f616c91875d44313dc8a40f828af8016e51e564cc4569d3bcb4a134f0f4a53"
+  },
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_camera_initialization_cases": 4,
+  "native_camera_dual_dispatch_cases": 30,
+  "core_tests_passed": 297,
+  "ported": [
+    "Original986150 initial camera position/direction/up, depth50/65000, angle103, rawmode0, dimensions1000/1000, auxiliary0",
+    "Original9861D0 render type1/2 orthographic, other rawtypes perspective; SSE f32 degrees factor",
+    "Original986485 culling mode0 perspective elseorthographic, native x87 degree conversion, original depth forwarding order retained"
+  ],
+  "acceptance": "all16initialcamera words and all4projectionargument words compared bitexact, kinds exact",
+  "static_followup": "Only direct986150 caller located at95E61A in renderer initialization.9863A0 full culling caller computes view transform via986250, signs flips, inverse8DEC10 and8DE500 before dispatch; that matrix construction remains unqualified.",
+  "limits": [
+    "Actual986150 initialization and9861D0 render dispatcher executed; projection matrix constructors explicitly capture-only adapters.",
+    "Actual986485 culling dispatcher fragment executed with supplied matrix storage; earlier9863A0 view conversion/inversion excluded, volume constructors capture-only adapters.",
+    "Mode1/2 render orthographic, other modes perspective; culling mode0 perspective and allnonzero orthographic. Raw mismatch retained.",
+    "Generic defaults are not proven final in-game camera settings; subsequent camera setters/global aspect initialization and real camera runtime binding unqualified.",
+    "Rust camera_parameters is an explicit input/default/dispatch API, not applied to client camera. Final map3v3 defaults/overrides and renderer aspect source still unqualified.",
+    "Source core297passed; prior client18test evidence and standalone executable hashes unchanged; audio output unverified."
+  ],
+  "client_camera_integrated": false,
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false
+}

@@ -1,0 +1,122 @@
+{
+  "passed": true,
+  "complete": false,
+  "case_count": 1,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "case": {
+    "before": "000000000000000000000000000000000000000000000000005800300200000002000000020000000000000000000000010000003000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001503000000000000c801000000000000000000000000000000000000",
+    "initial_allocations": [
+      {
+        "reference": 805328896,
+        "size": 16,
+        "freed": false,
+        "raw": "00640030300000000066003030000000"
+      },
+      {
+        "reference": 805331968,
+        "size": 64,
+        "freed": false,
+        "raw": "1800ffff000102030405060708090a0b0c0d0e0f101112131800ffff000102030405060708090a0b0c0d0e0f10111213a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+      },
+      {
+        "reference": 805332480,
+        "size": 64,
+        "freed": false,
+        "raw": "1800ffff000102030405060708090a0b0c0d0e0f101112131800ffff000102030405060708090a0b0c0d0e0f10111213a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+      }
+    ],
+    "packet": "1800ffff000102030405060708090a0b0c0d0e0f10111213",
+    "result": 1,
+    "context": "000000000000000000000000000000000000000000000000005800300200000002000000020000000100000030000000000000001800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001503000000000000c801000000000000000000000000000000000000",
+    "processed": 4,
+    "allocations": [
+      {
+        "reference": 805328896,
+        "size": 16,
+        "freed": false,
+        "raw": "00640030180000000066003030000000"
+      },
+      {
+        "reference": 805331968,
+        "size": 64,
+        "freed": false,
+        "raw": "1800ffff000102030405060708090a0b0c0d0e0f101112131800ffff000102030405060708090a0b0c0d0e0f10111213a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+      },
+      {
+        "reference": 805332480,
+        "size": 64,
+        "freed": false,
+        "raw": "1800ffff000102030405060708090a0b0c0d0e0f101112131800ffff000102030405060708090a0b0c0d0e0f10111213a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+      }
+    ],
+    "calls": [
+      {
+        "kind": "lock",
+        "scope": "audio_common_queue"
+      },
+      {
+        "kind": "reset_event",
+        "handle": 456
+      },
+      {
+        "kind": "unlock",
+        "scope": "audio_common_queue"
+      },
+      {
+        "kind": "set_event",
+        "handle": 789
+      },
+      {
+        "kind": "wait_event",
+        "handle": 456,
+        "timeout": 4294967295
+      },
+      {
+        "kind": "lock",
+        "scope": "audio_common_queue"
+      },
+      {
+        "kind": "unlock",
+        "scope": "audio_common_queue"
+      },
+      {
+        "kind": "lock",
+        "scope": "audio_common_queue"
+      },
+      {
+        "kind": "unlock",
+        "scope": "audio_common_queue"
+      },
+      {
+        "kind": "lock",
+        "scope": "audio_common_queue"
+      },
+      {
+        "kind": "unlock",
+        "scope": "audio_common_queue"
+      },
+      {
+        "kind": "set_event",
+        "handle": 456
+      },
+      {
+        "kind": "native_consumer_return",
+        "result": 1
+      },
+      {
+        "kind": "lock",
+        "scope": "audio_common_queue"
+      },
+      {
+        "kind": "unlock",
+        "scope": "audio_common_queue"
+      }
+    ]
+  },
+  "adapters": [
+    "Physical event wait schedules actual B06C60 consumer with separate saved CPU/stack context,then restores producer CPU. No logical ring drain or fake queue success stub. Actual B054D0 reader/B05530 commit/unknown-opcode native drop/producer retry execute."
+  ],
+  "limits": [
+    "Preparatory controlled64-byte pages/four24-byte unknown-opcode packets and one blocked enqueue;actual command consumers/game output/OS threads remain required."
+  ]
+}

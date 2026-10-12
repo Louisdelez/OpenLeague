@@ -1,0 +1,81 @@
+{
+  "verified_utc": "2026-10-08T06:53:08.404865+00:00",
+  "complete": false,
+  "native_evidence": {
+    "position_cases": 16,
+    "orientation_cases": 12,
+    "cpu_rsqrt_operations": 9,
+    "name_lookup_cases": 4,
+    "behavior": "719930 uses actor XYZ on failed bone lookup;719C50 uses actor virtual20 matrix and native718F70 normalization. Chain4-3 does not alias Chain4_3.",
+    "contracts": [
+      "data/4.20/animation_owner_fallback_contract.json",
+      "data/4.20/chain_bone_lookup_contract.json"
+    ]
+  },
+  "implementation": [
+    "Normal ambient requests resolve source-proven missing bone references to the live AmbientPlayer scene root.",
+    "Disappeared root/attachment or unqualified source remains unresolved. No source rename or invented bone.",
+    "Owner orientation uses the existing CPU-qualified native row normalization. Fallbacks exposed separately in diagnostics."
+  ],
+  "tests": {
+    "command": "cargo test -p openleague-client --offline -j1 map_audio_requests",
+    "passed": 12,
+    "failed": 0,
+    "exit_code": 0,
+    "session": 9042
+  },
+  "build": {
+    "session": 34354,
+    "exit_code": 0,
+    "log": "logs/ambient-owner-fallback-build.log",
+    "client_sha256": "a6530970dae51eff7d225eb6983467f775426541807b80836e37e0307532e21c"
+  },
+  "runtime": {
+    "session": 87159,
+    "exit_code": 0,
+    "passed": true,
+    "report": "docs/ambient_owner_fallback_runtime_validation.json",
+    "samples": 56,
+    "rejected_samples": 0,
+    "unresolved_samples": 0,
+    "observed_fallbacks": [
+      {
+        "source": [
+          "LevelProp_TT_Chains_Bot_Lane.001",
+          416
+        ],
+        "samples": 2
+      },
+      {
+        "source": [
+          "LevelProp_TT_Chains_Bot_Lane.001",
+          304
+        ],
+        "samples": 1
+      }
+    ],
+    "ended_parents_at_last_sample": 95,
+    "owned_processes_stopped": true
+  },
+  "limits": [
+    "Prior strict failed capture docs/ambient_parent_runtime_validation.json preserved with its original executable.",
+    "Current capture uses fixture server/fixed DX12 camera. No framebuffer inspection or audible acceptance.",
+    "Physical worker still unconnected; ended parents95 and position-update queue require native lifecycle/worker integration before endurance validation.",
+    "Shared RNG across other effects/camera and full status/direction producers remain open.",
+    "Lookup table qualification uses actual source name in supplied one-entry structure, not complete skeleton loader."
+  ],
+  "next_native_cleanup_pointers": {
+    "wrapper_vtable": "10A4960",
+    "update_virtual5C": "6C97B0",
+    "deleting_destructor_virtual8": "6C8D10 ->6C8D60",
+    "note": "Static inspection only: derived destructor clears weak target before base716BE0; do not infer immediate audio release or manager retirement from End."
+  },
+  "sha256": {
+    "crates/client/src/map_audio_requests.rs": "cd49fa49a3d5a94ab09b7e09d1b40c57c8202f47e83a255434b843e6d82ab044",
+    "tools/probe_native_animation_owner_fallback.py": "dc0e6f99daa60496d28c1c2046f1bdbb91e6899d772542c5973b8c3232c41c5b",
+    "tools/probe_native_chain_bone_lookup.py": "87458106321fbaa35ad855d546657c078db248f0175533947f7bca39843a7c27",
+    "tools/capture_ambient_owner_fallback_runtime.py": "6900768513e430ee5d2eb58fafbe34e2a0060f5385673b1891c810b8ee23ad73",
+    "data/4.20/animation_owner_fallback_contract.json": "d3f8fde9a0cfa927523cd07ac1648cfe33b010a7cd0341c4a88cb723332af7b7",
+    "data/4.20/chain_bone_lookup_contract.json": "14d2aa36afa2716ce6e89a3a0bb704dd1b9a56fa96b26395150a9d4fdadca421"
+  }
+}

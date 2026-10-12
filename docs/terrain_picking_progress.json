@@ -1,0 +1,21 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-03T13:36:38.923097+00:00",
+  "implementation": [
+    "Cursor actor targeting projects the ray onto each native replicated actor height.",
+    "Champion selection uses original radius for all 122 champions; NPC selection uses original fields for 23 definitions.",
+    "Movement ray intersects nearest forward cell plane in native navigation height grid instead of fixed render height 6.",
+    "Blocked cells remain click targets; authoritative server rejects unreachable move rather than redirecting click elsewhere."
+  ],
+  "native_npc_source_validation": "docs/npc_selection_source_validation.json",
+  "core_geometry_checks": 3,
+  "client_selection_checks": 2,
+  "build_log": "logs/terrain-picking-build.log",
+  "client_sha256": "ee83777c18d2ee48c19e631672ced494d47472245b42b82764c829c158d987f8",
+  "limits": [
+    "Native triangle/render-mesh picking, original selection geometry and priority not qualified; piecewise-flat grid and circular actor selection are reconstructed.",
+    "Four inhib/Nexus types lack explicit native SelectionRadius and retain previous 160 fallback documented as reconstruction.",
+    "Actual human cursor input/desktop targeting remains unqualified; mathematical client/core fixtures do not prove desktop acceptance.",
+    "General body collisions, dashes and historical exact navigation remain incomplete."
+  ]
+}

@@ -1,0 +1,81 @@
+00991e60 push ebp
+00991e61 mov ebp, esp
+00991e63 and esp, 0xfffffff8
+00991e66 push -1
+00991e68 push 0xf53abb
+00991e6d mov eax, dword ptr fs:[0]
+00991e73 push eax
+00991e74 sub esp, 0x428
+00991e7a mov eax, dword ptr [0x1222ed0]
+00991e7f xor eax, esp
+00991e81 mov dword ptr [esp + 0x420], eax
+00991e88 push ebx
+00991e89 push esi
+00991e8a push edi
+00991e8b mov eax, dword ptr [0x1222ed0]
+00991e90 xor eax, esp
+00991e92 push eax
+00991e93 lea eax, [esp + 0x438]
+00991e9a mov dword ptr fs:[0], eax
+00991ea0 mov ebx, dword ptr [ebp + 8]
+00991ea3 lea eax, [ebp + 0x1c]
+00991ea6 mov edi, dword ptr [ebp + 0xc]
+00991ea9 mov esi, dword ptr [ebp + 0x14]
+00991eac push eax
+00991ead push dword ptr [ebp + 0x18]
+00991eb0 lea eax, [esp + 0x34]
+00991eb4 push -1
+00991eb6 push 0x400
+00991ebb push eax
+00991ebc call 0xc9b551
+00991ec1 add esp, 0x14
+00991ec4 cmp eax, -1
+00991ec7 jne 0x991ed3
+00991ec9 call 0xc9b780
+00991ece call 0xc9b780
+00991ed3 mov dword ptr [esp + 0x28], 0xf
+00991edb mov dword ptr [esp + 0x24], 0
+00991ee3 mov byte ptr [esp + 0x14], 0
+00991ee8 lea eax, [esp + 0x2c]
+00991eec mov dword ptr [esp + 0x440], 0
+00991ef7 push eax
+00991ef8 push esi
+00991ef9 mov esi, dword ptr [ebp + 0x10]
+00991efc lea ecx, [esp + 0x1c]
+00991f00 push esi
+00991f01 push edi
+00991f02 mov edx, ebx
+00991f04 call 0x991cb0
+00991f09 cmp dword ptr [esp + 0x38], 0x10
+00991f0e lea ecx, [esp + 0x24]
+00991f12 push esi
+00991f13 cmovae ecx, dword ptr [esp + 0x28]
+00991f18 mov edx, edi
+00991f1a call 0x5b4560
+00991f1f add esp, 0x14
+00991f22 mov dword ptr [esp + 0x440], 0xffffffff
+00991f2d cmp dword ptr [esp + 0x28], 0x10
+00991f32 jb 0x991f5a
+00991f34 mov eax, dword ptr [0x14bef40]
+00991f39 test eax, eax
+00991f3b jne 0x991f4b
+00991f3d push dword ptr [esp + 0x14]
+00991f41 call 0xc98528
+00991f46 add esp, 4
+00991f49 jmp 0x991f5a
+00991f4b push dword ptr [0x14bef44]
+00991f51 push dword ptr [esp + 0x18]
+00991f55 call eax
+00991f57 add esp, 8
+00991f5a mov ecx, dword ptr [esp + 0x438]
+00991f61 mov dword ptr fs:[0], ecx
+00991f68 pop ecx
+00991f69 pop edi
+00991f6a pop esi
+00991f6b pop ebx
+00991f6c mov ecx, dword ptr [esp + 0x420]
+00991f73 xor ecx, esp
+00991f75 call 0xc975f5
+00991f7a mov esp, ebp
+00991f7c pop ebp
+00991f7d ret 

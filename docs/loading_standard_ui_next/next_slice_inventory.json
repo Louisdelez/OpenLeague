@@ -1,0 +1,89 @@
+{
+  "scope": "Candidate selection prefix only, stopping before package resource provider90AD00",
+  "native_source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\League of Legends.exe",
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "caller_slice": {
+    "start": 5756670,
+    "end_exclusive": 5756789,
+    "rva": 1562366,
+    "bytes": 119
+  },
+  "native_execution": {
+    "passed": true,
+    "lifetimes": 128,
+    "stops_before_resource": 64,
+    "stops_before_diagnostic": 64,
+    "native_provider_results_simulated": false,
+    "events": 10144
+  },
+  "code_already_ported": [
+    {
+      "address": 7515536,
+      "api": "audio_loading_metadata::service_name(b,out24,key,scratch8)"
+    },
+    {
+      "address": 7515712,
+      "api": "audio_loading_metadata::service_extra(b,key,scratch8)"
+    },
+    {
+      "address": 7505152,
+      "api": "audio_loading_metadata::extra"
+    },
+    {
+      "address": 5758126,
+      "api": "audio_loading_screen_packet private drop_string; preserve no-reset behavior"
+    }
+  ],
+  "source_proven_missing": [
+    {
+      "address": 5756670,
+      "scope": "Caller override selection and retained-service +4C dispatch"
+    },
+    {
+      "address": 10034784,
+      "scope": "Negative-skin diagnostic; its format/consumer helpers remain unqualified"
+    },
+    {
+      "address": 9481472,
+      "scope": "Provider lookup plus temporary String24 lifetime"
+    },
+    {
+      "address": 9490976,
+      "scope": "Provider lower bound"
+    },
+    {
+      "address": 9445120,
+      "scope": "Provider key equality/order"
+    },
+    {
+      "address": 9483552,
+      "scope": "Provider cache miss construction/publication"
+    },
+    {
+      "address": 9450704,
+      "scope": "Provider constructor and ownership"
+    }
+  ],
+  "api_constraints": [
+    "Keep retained service pointer from first-name lookup; current initialize_standard_record signature lacks this value",
+    "Do not reload SERVICE_GLOBAL as an invented substitute for passing the retained pointer",
+    "Reuse service_extra exact native chain and caller-exclusive scratch8 under existing launch lock",
+    "Do not use fresh-string copy to replace an owned nonempty String24",
+    "Private metadata::assign is a candidate after prefix parity, not a general alias-safe public API",
+    "Until actual991E60 and90AD00 dependencies are connected, keep explicit unsupported boundaries and caller cleanup"
+  ],
+  "resource_constraints": [
+    "SERVICE_GLOBAL is mapped but its normal publisher remains unported; diagnostics restore real service pointer binding before teardown",
+    "Package manager2D78F1C is unmapped in runtime package and initial PE value0 does not create a provider",
+    "Hit90AD00 can allocate the temporary name copy; absence of a new provider is not absence of allocation",
+    "Bitmap/UI/Flash/table resources occur beyond90AD00 and are outside this proposed tranche"
+  ],
+  "next_actions": [
+    "Qualify reusable owned String24 assignment against these prefix contracts before exposing a broader API",
+    "Port caller selection and service+4C boundary with retained service, preserving negative diagnostic refusal",
+    "Integrate and test only that prefix; preserve explicit error at90AD00 and exact caller cleanup",
+    "Qualify real package manager ownership and cache-hit90AD00 separately from miss90B520"
+  ],
+  "rust_port_created": false,
+  "application_integration": false
+}

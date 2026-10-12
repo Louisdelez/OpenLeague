@@ -1,0 +1,74 @@
+from pathlib import Path
+import json,struct,itertools,datetime,hashlib
+r=Path('E:/OpenLeague')
+prefix=(r/'tools/probe_fow_registered_filter_generated.py').read_text().split('\ncases=[]')[0]
+prefix=prefix.replace("adapters.append('mask_generation_boundary');finish(16)","pass").replace('count=200000','count=4000000')
+exec(compile(prefix,'native complete frame prerequisites','exec'))
+def invoke(entry,this,args=b''):
+ write32(sp,end);u.mem_write(sp+4,args);u.reg_write(UC_X86_REG_ESP,sp);u.reg_write(UC_X86_REG_ECX,this)
+ u.reg_write(UC_X86_REG_MXCSR,0x1f80);u.reg_write(UC_X86_REG_FPCW,0x037f);u.reg_write(UC_X86_REG_FPTAG,0xffff);u.reg_write(UC_X86_REG_FPSW,0)
+ u.emu_start(entry,end,count=4000000);assert u.reg_read(UC_X86_REG_EIP)==end,hex(u.reg_read(UC_X86_REG_EIP))
+u.mem_map(0x50000000,0x10000);counts=0x50000000;pixels=0x50004000;bits=0x50008000
+terrain=0x60000000;cells=terrain+0x1000;u.mem_map(terrain,0x300000)
+nav_proof=json.loads((r/'data/4.20/fow_map10_owned_contract.json').read_text());nav_meta=nav_proof['terrain'];nav_raw=Path(nav_meta['source']).read_bytes();assert hashlib.sha256(nav_raw).hexdigest()==nav_meta['sha256']
+u.mem_write(cells,nav_raw[39:39+56*nav_meta['width']*nav_meta['height']]);write32(terrain+0x20,cells)
+for off,val in [(7,nav_meta['origin'][0]),(0xb,nav_meta['origin'][1]),(0xf,nav_meta['origin'][2]),(0x314,nav_meta['cell_size']),(0x318,1./nav_meta['cell_size']),(0x320,nav_meta['cell_size']*.5)]:f(terrain+off,val)
+write32(terrain+0x30c,nav_meta['width']);write32(terrain+0x310,nav_meta['height']);write32(0x14c7f1c,terrain)
+queries=[]
+def generation_trace(uc,a,size,user):
+ if a==0x8f3390:queries.append(list(struct.unpack('<3f',u.mem_read(u.reg_read(UC_X86_REG_ESP)+4,12))))
+u.hook_add(unicorn.UC_HOOK_CODE,generation_trace)
+def state():
+ return dict(pending=pending_state(),smoothed_delta_bits=read32(view+0x4c),counts=[[i,v] for i,v in enumerate(u.mem_read(counts,16384)) if v],pixels=[[i,v] for i,v in enumerate(u.mem_read(pixels,16384)) if v],sources=[dict(center=[struct.unpack('<f',u.mem_read(obj+o,4))[0] for o in [4,8]],radius=struct.unpack('<f',u.mem_read(obj+0xc,4))[0],applied=bool(u.mem_read(obj+0x44,1)[0]),dirty=bool(u.mem_read(obj+0x45,1)[0]),pending=bool(u.mem_read(obj+0x5c,1)[0]),rect=[read32(obj+o) for o in [0x4c,0x54,0x50,0x58]],words=list(struct.unpack('<512I',u.mem_read(read32(obj+0x40),2048)))) for obj,_ in sources])
+cases=[]
+centers=[nav_proof['cases'][0]['center'],nav_proof['cases'][12]['center'],[4000.,6000.]]
+for presence,radius,force,initial_applied,delta in itertools.product(['actor','absent_actor'],[200.,800.],[False,True],[False,True],[.01,3.]):
+ actor_tag=100;flag_ad=True;flag_118=False;flag_24=True;flag_2c=False
+ u.mem_write(0x71000000,bytes(0x10000))
+ first=0x71000000;head=first+0x100;bucket=first+0x200;nodes=first+0x300;payloads=first+0x1000
+ write32(0x2d789c0,first);write32(first+4,head);write32(first+0xc,bucket);write32(first+0x18,0);write32(first+0x1c,1)
+ count=0 if presence=='absent_registration' else 3
+ write32(head,nodes if count else head);write32(head+4,nodes+64 if count else head);write32(bucket,nodes if count else head);write32(bucket+4,nodes+64 if count else head)
+ second=0x2110a10;head2=first+0x3000;bucket2=first+0x3100;nodes2=first+0x3200;actor_base=first+0x4000
+ write32(second+4,head2);write32(second+8,3 if presence=='actor' else 0);write32(second+0xc,bucket2);write32(second+0x18,0);write32(second+0x1c,1)
+ actor_count=3 if presence=='actor' else 0
+ write32(head2,nodes2 if actor_count else head2);write32(head2+4,nodes2+64 if actor_count else head2);write32(bucket2,nodes2 if actor_count else head2);write32(bucket2+4,nodes2+64 if actor_count else head2)
+ for i in range(count):
+  node=nodes+32*i;payload=payloads+32*i
+  for address,value in [(node,nodes+32*(i+1) if i<2 else head),(node+4,nodes+32*(i-1) if i else head),(node+8,55+i),(node+0xc,payload),(payload+8,0x12340000+i)]:write32(address,value)
+ for i in range(actor_count):
+  node=nodes2+32*i;actor=actor_base+0x400*i;descriptor=first+0x6000+0x100*i
+  for address,value in [(node,nodes2+32*(i+1) if i<2 else head2),(node+4,nodes2+32*(i-1) if i else head2),(node+8,0x12340000+i),(node+0xc,actor),(actor+0x18,actor_tag),(actor+0x124,0x1090e60),(actor+0x17c,descriptor)]:write32(address,value)
+  for address,value in [(actor+0xad,flag_ad),(actor+0x118,flag_118),(descriptor+0x24,flag_24),(descriptor+0x2c,flag_2c)]:u.mem_write(address,bytes([value]))
+
+
+ allocation_cursor=heap+0x19000;sources=[];captures.clear();generated.clear();adapters.clear();queries.clear();ticks=4999
+ for pointer,size in [(manager,64),(entries,32),(output,24),(view,256),(player,4096),(context,256),(camera_root,16),(camera,512)]:u.mem_write(pointer,bytes(size))
+ for address,value in [(manager+4,entries),(manager+8,entries),(manager+0xc,entries+32),(0x2d77f48,player),(0x2d787b8,context),(0x2d798ac,manager),(0x2d78d24,camera_root),(0x2d7c06c,7),(0x2d7c074,0),(player+0x18,100),(camera_root,camera),(view+0x10,128),(view+0x14,counts),(view+0x18,pixels),(view+0x3c,pending_storage),(view+0x40,pending_storage),(view+0x44,pending_storage+64),(0x14bef50,1000),(0x14bef54,0),(0x14bef48,0),(0x14bef4c,0)]:write32(address,value)
+ write32(context,0x71007000)
+ u.mem_write(0x2d7c078,bytes([1]));f(view+0xc,15398.671875);f(camera+0x104,7700.);f(camera+0x10c,7000.);u.mem_write(counts,bytes(16384));u.mem_write(pixels,bytes(16384))
+ for i,center in enumerate(centers):
+  invoke(0x6b1b20,manager,struct.pack('<5IfI5f',output+8*i,0,55+i,66,100,radius,0,128.,64.,0.,*center))
+  obj=read32(output+8*i);sources.append((obj,read32(output+8*i+4)));bp=bits+i*2048;write32(obj+0x40,bp);write32(obj+0x48,512);u.mem_write(bp,bytes(2048))
+  if initial_applied:invoke(0x6b14e0,obj,struct.pack('<IfII',128,15398.671875,pixels,view+0x14))
+ initial=state();frames=[]
+ for step in range(4):
+  captures.clear();generated.clear();queries.clear();adapters.clear();ticks=4999+100*step
+  if step==1:
+   f(sources[0][0]+4,centers[0][0]+128.);u.mem_write(sources[0][0]+0x45,bytes([1]));f(sources[1][0]+0xc,radius*1.25);u.mem_write(sources[1][0]+0x45,bytes([1]))
+  actor_states=[]
+  for i in range(3):
+   actor=actor_base+0x400*i;descriptor=first+0x6000+0x100*i
+   tag=300 if i==1 and step<2 else (200 if i==2 and step<3 else 100)
+   ad=not (i==0 and step in [1,2]);disabled=i==2 and step==2;d24=True;d2c=step==3
+   write32(actor+0x18,tag)
+   for address,value in [(actor+0xad,ad),(actor+0x118,disabled),(descriptor+0x24,d24),(descriptor+0x2c,d2c)]:u.mem_write(address,bytes([value]))
+   actor_states.append(dict(team_tag=tag,flag_ad=ad,flag_118=disabled,descriptor_24=d24,descriptor_2c=d2c))
+  frame_force=force or step>=2;frame_delta=3. if step==3 else delta;u.mem_write(view+0x1c,bytes([frame_force]))
+  invoke(0x6b3fa0,view,struct.pack('<f',frame_delta));assert len(captures)==1
+  frames.append(dict(actor_states=actor_states,step=step,force=frame_force,delta=frame_delta,now=ticks/1000.,before_processing=captures[0],generated=list(generated),source_queries=list(queries),after=state(),adapters=sorted(set(adapters))))
+ assert not frames[-1]['after']['pending'];assert all(not s['dirty'] and s['applied'] for s in frames[-1]['after']['sources'])
+ cases.append(dict(presence=presence,radius=radius,force=force,initial_applied=initial_applied,delta=delta,initial=initial,frames=frames))
+proof=dict(updated_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),passed=True,complete=False,native_sha256=digest,native_addresses=len(visited-{0xc9f39b,0x9933e0,0xc98528,0x9941b0,0x994210,0xc975f5,0x6b41de,0x6b420a,0x6b439b,0x993d0f,0x993d24}),terrain=nav_meta,dimension=128,extent=15398.671875,camera=[7700.,7000.],centers=centers,cases=cases,limits=['Original complete frame6B3FA0 invokes original generation6B14E0, source query8F3390, fan/rays/circle predicates, counters, dirty clearing and heap processing; no mask-generation adapter.','Original identity and actor registries execute with supplied nodes/actors. Actor flags and neutral tags change between frames; spectator false, QPC/clock and allocator boundaries adapted. Original terrain constructor, full view initialization, entities and camera/extent producers remain unqualified.','Source bit buffers supplied preallocated, null owners and tag100 only. No live gameplay/GPU binding.'])
+(r/'data/4.20/fow_registered_map10_contract.json').write_text(json.dumps(proof,indent=2)+'\n',encoding='utf-8')
+print(json.dumps(dict(sequences=len(cases),frames=sum(len(c['frames']) for c in cases),native_addresses=proof['native_addresses'],queries=sum(len(f['source_queries']) for c in cases for f in c['frames']))))

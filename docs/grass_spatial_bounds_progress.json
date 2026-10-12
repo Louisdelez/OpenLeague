@@ -1,0 +1,45 @@
+{
+  "updated_utc": "2026-10-05T10:31:01.585943+00:00",
+  "complete": false,
+  "client_tests_passed": 194,
+  "client_build_passed": true,
+  "native_spatial_rounding_cases": 200,
+  "native_prior_spatial_bounds_cases": 20,
+  "native_addresses": 251,
+  "finite_spatial_bounds_ported": true,
+  "nonfinite_spatial_crt_qualified": false,
+  "live_grass_mask_integrated": false,
+  "findings": [
+    "Complete95F370 and originalCRT execute200finitecases across10coordinate inputs,5localbounds and2integer x2ceil profiles without adapters. Rustmatchesall200 plusprevious20bounds cases.",
+    "MinimumX/Z usefloor thenCVTTinvalidINT_MIN. MaximumX/Z useceil with explicitSSE orlegacyCRT conversion. At2^32 legacylowwordreturns0 whileSSEreturnsINT_MIN; profile is explicit instead ofsaturating Rustcast.",
+    "Nonfinite/overflowedsums return explicit unqualified error, withno synthetic CRT result adopted. Original CPUprofile producer and nondefaultcontrol modes remainopen."
+  ],
+  "limits": [
+    "Complete95F370 and originalCRT run with twointeger-conversion/twoceil profiles, defaultnearest SSE and x87control037F. Finite positions/localbounds supplied.",
+    "NaN/Inf prerequisite path remainsunqualified afterunmappedCRT read; notsubstituted. Hardwareexceptions, nondefaultrounding/FTZ/DAZ, originalCPU-profile producer and index lifecycle/renderintegration remainopen.",
+    "Rustfinitebounds helper is not yet connected to registered spatialdispatch.95F060/95FF10 andactualregistration/model/camera providers remainopen.",
+    "No normal-match/GPU capture; all24domains incomplete."
+  ],
+  "initial_native_probe_failure": {
+    "completed_cases": 180,
+    "input": "NaN",
+    "integer_sse": false,
+    "ceil_sse": false,
+    "instruction": "0xdf64c8",
+    "error": "UC_ERR_READ_UNMAPPED"
+  },
+  "next_actions": [
+    "Connect ported95F370 finitebounds toregistereddispatch and compare original compoundcall; qualify95F060/95FF10 andactualregistration.",
+    "Resolve nonfiniteCRT prerequisites andoriginalCPUprofile producer; recover modelbounds/camera andliveactorcollectormask/WALL integration.",
+    "Continue full24domainplan, allchampionkits, sixclientvictory/results and delivery."
+  ],
+  "files_sha256": {
+    "data/4.20/grass_spatial_rounding_contract.json": "7e8049de686d1c3c4334f36267a140b992b2a52734f54ddbfa23eb059f84c973",
+    "data/4.20/grass_spatial_bounds_contract.json": "e517b701af1e0dabc4131e867f0ce8e08269293f946c26f24f8751c4c48227d2",
+    "crates/client/src/grass_spatial_bounds.rs": "805d49ba26b267f89af159d89154b0b9ba8e71a583f9f19d9faa0ca5c09e7fcd",
+    "crates/client/src/main.rs": "81d13b102e1601903f503fa3b416f7043f1e0b54a5a8f9fdfc58aa58fbdd56ab",
+    "logs/grass-spatial-bounds-tests.log": "5d5a8976ed3dee4d04eb3c5315df339f8894b2b8daf3374dac98b00da5ab982d",
+    "logs/grass-spatial-bounds-build.log": "c75fc16d3e4922368a000d27009e272d0c81c65e5aa17995360c6f940b429781",
+    "target/debug/openleague-client.exe": "2189dbbdf79daafa03753c0b08f9102d6ab0f8a5777e6a686b0a470badea0038"
+  }
+}

@@ -1,0 +1,385 @@
+{
+  "recorded_utc": "2026-10-10T21:47:43.374389+00:00",
+  "mode": "read-only integration readiness audit",
+  "complete": false,
+  "production_changed": false,
+  "rust_compiled": false,
+  "client_executed": false,
+  "native_probe_executed": false,
+  "native_source": {
+    "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\League of Legends.exe",
+    "sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+    "hash_checked_now": true
+  },
+  "decision": "Reuse the existing application CRT owner and qualified algorithms; keep90B520 unavailable until real CRT-to-provider oracle, additional INIBIN types, provider publication/ownership and populated destruction are qualified.",
+  "components": [
+    {
+      "scope": "CRT dispatch and static locks",
+      "files": [
+        "crates/core/src/audio_crt_global_dispatch_initialization.rs",
+        "crates/core/src/audio_crt_static_lock_startup.rs",
+        "crates/core/src/audio_crt_windows_dispatch_resolver.rs"
+      ],
+      "api": [
+        "initialize (C9A0B9/CABDE8)",
+        "initialize (CB0378)"
+      ],
+      "reusable": "Encoded null/terminate handlers, 33 export slots, static lock selection/spin/ignored OS result; real Windows export registry uses canonical labels, not truncated pointers.",
+      "qualified_cases": [
+        72,
+        64
+      ],
+      "limits": "Resolution tokens are not callable source-code pointers; caller must supply qualified ABI adapters."
+    },
+    {
+      "scope": "CRT root, actual thread/FLS and locale lifetime",
+      "files": [
+        "crates/core/src/audio_crt_thread_system_startup.rs",
+        "crates/core/src/audio_crt_thread_context.rs",
+        "crates/core/src/audio_crt_encoded_thread_provider.rs",
+        "crates/core/src/audio_crt_windows_root_startup.rs",
+        "crates/core/src/audio_crt_windows_shared_fls.rs"
+      ],
+      "api": [
+        "thread_system_startup::initialize/cleanup/cleanup_lock_table",
+        "thread_context::get_context/initialize_from_locale",
+        "Startup::current/shutdown",
+        "initialize_with_cookie"
+      ],
+      "reusable": "CA92CB/CA9341/CB027B, CA91A9/CA9218 context956 and reference-counted locale. Existing real root creates actual Windows FLS callbacks and retains its context until callback retirement.",
+      "qualified_cases": {
+        "native_startup": 48,
+        "native_thread_get": 72,
+        "real_windows_root_pairs": 12
+      },
+      "limits": "Fresh PE globals only; never call root initialize twice. Windows root requires resolved FLS and explicitly rejects unsupported legacy TLS branch."
+    },
+    {
+      "scope": "CRT heap and package predicate",
+      "files": [
+        "crates/core/src/audio_crt_heap.rs",
+        "crates/core/src/audio_crt_windows_process_heap.rs",
+        "crates/core/src/audio_crt_worker_com_startup.rs",
+        "crates/core/src/audio_crt_windows_global_services.rs"
+      ],
+      "api": [
+        "Heap::initialize/allocate/free/retire_mirrors",
+        "package_state (CABDA8)",
+        "NativeGlobal::package_query"
+      ],
+      "reusable": "Actual Windows heap backing with independent canonical references and retained mirrors. CABDA8 cache is already implemented using real GetCurrentPackageId dispatch.",
+      "limits": "NativeGlobal::thread_context and invoke_handler still return explicit errors; success-path root/heap qualification does not prove errno/new-handler failure paths for new consumers. Do not substitute zero context. Free, dead marking and mirror retirement are distinct phases."
+    },
+    {
+      "scope": "Canonical application owner",
+      "files": [
+        "crates/core/src/audio_replay_windows_application.rs",
+        "crates/core/src/audio_crt_windows_engine_worker.rs",
+        "crates/core/src/audio_replay_windows_transport.rs"
+      ],
+      "api": [
+        "Application::new/close",
+        "Bridge::loading_c_locale_is_default",
+        "Bridge::clock_crt_read/write/calloc/release/retire",
+        "Runtime::shutdown"
+      ],
+      "reusable": "Application owns one Root, Arc<Bridge> and transport. Bridge already reaches the same CRT bank used by loading locale and clock; extend this facade after native qualification, without a second Root or private locale/errno bank.",
+      "limits": "Call Startup::current outside SharedContext::with (no recursive context acquisition). Runtime shutdown drains workers and temporary leases before resource manager, clock and Application CRT shutdown. Existing clock helpers are useful architecture, not a provider-ready API."
+    },
+    {
+      "scope": "Cache miss and multi-owner cleanup",
+      "files": [
+        "crates/core/src/audio_loading_resource_cache.rs",
+        "crates/core/src/audio_loading_owned_string.rs",
+        "crates/core/src/audio_replay_windows_loading_packets.rs",
+        "crates/core/src/audio_replay_windows_resource_manager.rs",
+        "crates/core/src/audio_loading_resource_manager.rs"
+      ],
+      "api": [
+        "cache::initialize_key/resolve",
+        "Outcome::MissFactory { manager, original_name, skin }",
+        "Group<2>/Temporary::new_reset",
+        "Runtime::initialize_loading_resources",
+        "resource::retire_empty"
+      ],
+      "reusable": "Native cache lookup leaves original String24 intact and returns explicit factory boundary. Windows lease64 retains caller name and normalized key; cleanup retries preserve both ownership and descriptor leases.",
+      "limits": "Provider factory90B520 not implemented. Current manager destructor accepts empty provider structures only. A real provider must extend persistent ownership and populated teardown before installation; temporary Group<2> does not own published providers."
+    },
+    {
+      "scope": "Existing physical file access, independent host CRT domain",
+      "files": [
+        "crates/client/src/native_filesystem_provider.rs",
+        "crates/client/src/native_config_resource_dispatch.rs",
+        "crates/core/src/audio_replay_windows_stdio.rs"
+      ],
+      "api": [
+        "native_filesystem_provider::read",
+        "native_config_resource_dispatch::open/status/mode_flags"
+      ],
+      "reusable": "Native C++ simple-provider/read algorithm uses actual Windows default CRT _access/fopen_s/setvbuf64000/ftell/fseek/fread/fclose; historical60case text integration test passes. Dispatcher7695case contract independently qualified.",
+      "limits": "Does not model CAFF53, native FILE/lowIO canonical state or provider vtables. ASCII paths only; negative positions rejected, short fread ignored as native source, concurrent file changes/failure branches not fully qualified. FILE handles from default UCRT must never reach private msvcrt fopen/fclose/fprintf used by recording."
+    },
+    {
+      "scope": "INI/configuration decisions and partial INIBIN decode",
+      "files": [
+        "crates/client/src/native_config_cache.rs",
+        "crates/client/src/native_config_cache_reload.rs",
+        "crates/client/src/native_config_path_parts.rs",
+        "crates/client/src/native_game_cfg_text.rs",
+        "crates/client/src/map10_native_config.rs",
+        "crates/client/src/native_particle_class.rs"
+      ],
+      "api": [
+        "native_config_cache::decide",
+        "native_config_cache_reload::plan_with_resources",
+        "native_game_cfg_text::parse/load_text_files/Parsed::lookup",
+        "map10_native_config::Config::decode"
+      ],
+      "reusable": "Cache decision1080cases, reload call plan3456cases, native text parsing/lookup and exactly53 actual terrain INIBIN entries are qualified subsets.",
+      "limits": "No full8B0630/8B0380 resource cache/object constructor or FallbackPackage chain. INIBIN only bits1/4/5/7/12; character files use additional types. native_particle_class only supplies proven default/class selection, not the underlying INI provider."
+    },
+    {
+      "scope": "Logical tables and ZIP provider",
+      "files": [
+        "crates/client/src/map_resource_provider.rs",
+        "crates/client/src/native_zip_provider.rs",
+        "crates/client/src/native_zip_archive.rs",
+        "crates/client/src/native_archive_index.rs"
+      ],
+      "api": [
+        "Provider::from_native_files/resolve",
+        "SearchProvider::resolve/contains",
+        "RecoveredGlobalCatalog::default",
+        "native_zip_provider::Provider::from_catalog/read_optional"
+      ],
+      "reusable": "Native alias/lookup rules and explicit recovered context snapshot; historical ZIP payload qualification1066entries/48570309bytes across5archives. Native directory ordering remains distinct from manifest order.",
+      "limits": "These client-owned Rust objects do not supply provider56/directory32 native ownership, factory publication or context2D78F20. Recovered logical catalog is not a physical asset import. ZIP historical receipt is not a rebuilt current-binary proof."
+    }
+  ],
+  "canonical_globals": {
+    "CRT_existing": {
+      "0x1222ED0": "security cookie",
+      "0x2DA5300..0x2DA5383": "33 encoded Windows dispatch slots",
+      "0x12230CC": "owned FLS index; initially FFFFFFFF",
+      "0x1223580": "36-entry lock table (8bytes each)",
+      "0x14AE988": "static lock storage (24bytes per native CS)",
+      "0x14AE87C": "process heap label",
+      "0x14AE870": "locale predicate (cache C98719 checks each byte)",
+      "0x122343C": "CABDA8 cached package state",
+      "0x2DA5374": "encoded GetCurrentPackageId slot",
+      "0x122323C": "current locale pointer",
+      "0x1222BB0": "static multibyte locale",
+      "0x1222998/0x122299C": "native fallback errno/doserrno only when qualified context accessor returns0",
+      "record+0x08/0x0C": "errno/doserrno",
+      "record+0x68/0x6C": "multibyte/locale retained references",
+      "0x14AE620/0x14AF110/0x14AE868": "encoded new handler / new-mode / retry interval"
+    },
+    "manager_existing": {
+      "0x2D78F1C": "manager global, present in runtime image; constructor may reload it"
+    },
+    "next_image_and_lifetime_requirements": {
+      "0x2D78F20": "search context list producer9063E0, absent from current REGIONS; exact initial bytes/lifetime must be qualified",
+      "0x2D78DB4": "filesystem dispatch/service used by INIBIN open adapter, absent from current REGIONS; no production owner found",
+      "0x10D64A8": "provider vtable52bytes in frozen provider_source.json; absent from current REGIONS",
+      "0x10D6364": "directory callback vtable28bytes, absent from current REGIONS",
+      "0x10D6458": "provider callback vtable28bytes, absent from current REGIONS",
+      "CAFF53 lowIO globals": "No Rust port found by bounded crates/*.rs address/lowIO search; require exact native startup oracle/global list from current parent agent, not a guessed seed"
+    }
+  },
+  "ownership_requirements": [
+    "Keep canonical engine objects/strings in Shared.bank; keep CRT globals/thread/locale/lowIO in Root.context. Any bridge must route addresses explicitly, not duplicate live global states.",
+    "Directory32 is manager-owned; provider56+0x14 borrows it. Provider owns tree/string fields. Cache insertion occurs before INI lookup; failed or recursive fallback must retain already-published owners.",
+    "Native callback24 and provider parent assignment905000 need exact retain/release/retirement proof. Existing empty-manager retirement must not be used after provider publication.",
+    "Keep source name and normalized key leases through factory use; finish key first then caller name, preserving primary and cleanup failures. Additional factory temporaries need independent guards if fallible cleanup survives call return.",
+    "Retire provider/file/iterator handles and configuration caches after consumers drain, before directories/manager and before Application::close retires CRT FLS/locks/heap. Native exact object order must come from the oracle.",
+    "If current-context is needed, obtain/validate it through real owned FLS machinery without holding or recursively reacquiring SharedContext. NativeGlobal missing errno/new-handler services remain explicit until supplied."
+  ],
+  "pending_native_chain": [
+    "CA92CB/C9A0B9/CABDE8/CB0378 then CAFF53 actual lowIO state",
+    "903590 ->993860/C9B551 bounded formatter using real thread/locale",
+    "9063E0 context + directory32 population through physical iterators",
+    "90B520 provider56 publication ->9041E0/903EE0 ->8B0630/8B0380 INIBIN/text/cache",
+    "FallbackPackage empty/default or recursive90AD00 same skin ->905000 + callback24 -> populated teardown",
+    "standard loading UI consumer after real returned provider"
+  ],
+  "physical_import": {
+    "existing_conventions": [
+      "E:/mapslol3v3/tools/bootstrap_openleague.py::resource records source/target/bytes/sha256 in docs/import_receipt.json (historical whole-project bootstrap, do not rerun for targeted imports).",
+      "E:/OpenLeague/tools/recover_native_champion_portraits.py and recover_native_spell_icons.py preserve DDS bytes, source/config hashes/native fields, asset relative to assets/, width/height/mips/fourcc; existing targets must have identical contents.",
+      "E:/OpenLeague/tools/install_native_inibin_loader.py preserves native terrain INIBIN bytes in data/4.20/map10_terrain.inibin; provenance is native_map10_inibin_loader_contract.json.",
+      "E:/OpenLeague/tools/install_recovered_global_catalog.py writes logical manifest rows and Rust only; it does not copy files."
+    ],
+    "inventory": "E:/mapslol3v3/loading_resource_manager_integration/next_provider_preparation/asset_inventory.json",
+    "inventory_scope": "31 native Ahri/Annie files (16 INIBIN +15 LoadScreen DDS); absence search was bounded filenames/five ZIP catalogues and recovered global rows, not a content hash scan of all assets.",
+    "recommended_targeted_import": "Copy original bytes into one explicit native resource root preserving original relative path/case (path choice belongs to root); bind original logical paths to imported assets through a dedicated manifest. Reuse equal SHA+bytes if already physically imported under another name; fail on differing target bytes. Keep INIBIN parsing and DDS conversion as separate derivative records.",
+    "receipt_fields": [
+      "native_root",
+      "source_absolute",
+      "source_relative_case_preserved",
+      "source_sha256",
+      "bytes",
+      "physical_target",
+      "target_sha256",
+      "DDS header fields and optional decoded RGBA hash",
+      "equivalent/reused_target if duplicate",
+      "imported=true",
+      "runtime_bound=false",
+      "complete=false"
+    ],
+    "limits": [
+      "IconSquare portraits are different resources; do not replace them with LoadScreen files.",
+      "No named per-character loose importer was found in OpenLeague tools; existing examples are targeted scripts, not an all-assets copying command.",
+      "Import provenance does not prove native provider lookup, fallback, texture upload, loading UI or game completion."
+    ]
+  },
+  "evidence": {
+    "core_log": {
+      "path": "E:\\mapslol3v3\\loading_resource_manager_integration\\review\\metadata_cache_repair\\core-tests-before-cache-fix.log",
+      "sha256": "dbacee076170a68c10f741a7d03aed4e55dfe6253320fce4a5d68ebbb79fabca",
+      "only_listed_tests_are_claimed_passed": [
+        "test audio_crt_global_dispatch_initialization::tests::audio_crt_global_dispatch_initialization_matches72_original_encoded_null_static_terminate_pointer_default_handlers_real33_export_resolver_and_all_entry_banks ... ok",
+        "test audio_crt_static_lock_startup::tests::audio_crt_static_lock_startup_matches64_original_flag_selection_pointer_publish_encoded_dispatch_spin_opaque_windows_writes_and_ignored_result_cases ... ok",
+        "test audio_crt_thread_context::tests::audio_crt_thread_context_matches72_original_existing_creation_calloc_tls_failure_error_preservation_complete_global_refcount_wrap_cases ... ok",
+        "test audio_crt_thread_system_startup::tests::audio_crt_thread_system_startup_matches48_original_global_handlers_exports_static_locks_tls_fls_allocation_real_constructor_failure_cleanup_and_all_native_banks ... ok",
+        "test audio_crt_windows_root_startup::tests::audio_windows_root_startup_creates12_fresh_context_pairs_matching_native_banks_and_cleans_through_shutdown_or_drop ... ok",
+        "test audio_crt_windows_root_startup::tests::audio_windows_worker_com_stage_integrates_actual_package_query_or_cached_positive_gate_real_initializer_and_complete_worker_exit_in12_fresh_contexts ... ok"
+      ],
+      "whole_run_was_failed": true,
+      "scope": "Archived891pass/1fail resource-cache assertion run; listed pre-existing CRT contracts individually passed, not a complete qualification receipt."
+    },
+    "historical_client_tests": [
+      {
+        "path": "E:\\OpenLeague\\logs\\native-filesystem-provider-tests.log",
+        "sha256": "2015f5a3cf8c13b021a0dc7bf4e5f9f5f0274f0d7e97ec0e1559a9a05ec4f0b9",
+        "matching_test": "test native_filesystem_provider::tests::real_files_through_crt_provider_match_native_full_text_pipeline ... ok",
+        "historical_only": true,
+        "rerun_in_this_audit": false
+      },
+      {
+        "path": "E:\\OpenLeague\\logs\\native-config-resource-dispatch-tests.log",
+        "sha256": "656ddacd6eafb6ee9bfb0eeed92c77053692cbb93613ac65c3b38b3a209dc541",
+        "matching_test": "test native_config_resource_dispatch::tests::provider_order_modes_and_status_match_all_native_dispatch_cases ... ok",
+        "historical_only": true,
+        "rerun_in_this_audit": false
+      },
+      {
+        "path": "E:\\OpenLeague\\logs\\native-inibin-tests.log",
+        "sha256": "d05771509fffa150d7b267a35efa34f1b06d32ec34bbd884c34bf4f812c7288b",
+        "matching_test": "test map10_native_config::tests::map10_bytes_and_all_values_match_original_binary_loader_and_accessors ... ok",
+        "historical_only": true,
+        "rerun_in_this_audit": false
+      }
+    ],
+    "native_fixtures": [
+      {
+        "path": "E:\\OpenLeague\\data\\4.20\\native_map10_inibin_loader_contract.json",
+        "sha256": "9f7560324564b951d54f78d29ac0ba5d63bfd5fc6b6ce2446da34c2d0558646d",
+        "passed": true,
+        "complete": false,
+        "case_count": null,
+        "limits": [
+          "Original binary path construction, header, all type reader calls, native vector allocation and string table load execute against actual original terrain INIBIN bytes.",
+          "File open/read/destructor and thread import are adapters. Key-vector container and config object storage supplied; whole config constructor/cache and text/default overlay remain open.",
+          "Allocator/mutex/cookie boundaries adapted; no normal GPU fog completion or whole original filesystem/archive IO acceptance claimed."
+        ]
+      },
+      {
+        "path": "E:\\OpenLeague\\data\\4.20\\native_config_resource_dispatch_contract.json",
+        "sha256": "f31a6218696035eb88411df0fa1a6e136897e2b2b62bb52aee159b19ce1e9776",
+        "passed": true,
+        "complete": false,
+        "case_count": 7695,
+        "limits": [
+          "Dispatch contract only; status0 is the successful predicate case. Nonzero causes open-provider skip; predicate wrapper returns first0 or last nonzero status, -1 with no providers.",
+          "Localized filename branch uses this status as a nonzero test; previously supplied booleans do not qualify actual file existence/providers.",
+          "No complete resource provider/cache/runtime menu/game proof."
+        ]
+      },
+      {
+        "path": "E:\\OpenLeague\\data\\4.20\\native_config_cache_policy_contract.json",
+        "sha256": "c347b77b31265a79ffe291b5cbee0862791bd45a631979315b0990a1874b8438",
+        "passed": true,
+        "complete": false,
+        "case_count": 1080,
+        "limits": [
+          "Cache decision prefix only; full8ACEF0 reload, constructor, ownership/insertion and filesystem pipeline remain open.",
+          "Case-insensitive last-path equality does not normalize slashes at this prefix. Only low flag byte controls forced reload.",
+          "No runtime cache/menu/persistence or complete game acceptance proof."
+        ]
+      },
+      {
+        "path": "E:\\OpenLeague\\data\\4.20\\native_config_cache_reload_flow_contract.json",
+        "sha256": "8b68a090d109a905726d69f16f1b6b9c0eae6247dca62b263b69ed72b6b5067c",
+        "passed": true,
+        "complete": false,
+        "case_count": 3456,
+        "limits": [
+          "Cache control-flow/call contract only; original path resolver, constructor contents, dictionary allocation/lookup/lifetime, loader/file handling and localized file predicates remain open.",
+          "Successful allocation only; allocation failure/exception cleanup and concurrency unqualified.",
+          "No runtime live cache/options/menu/persistence or complete game acceptance proof."
+        ]
+      },
+      {
+        "path": "E:\\OpenLeague\\data\\4.20\\native_filesystem_text_flow_contract.json",
+        "sha256": "539f0f8bbb3001386d67a142cd49f586bea9b3a31709d7956896034bdd1c5c9e",
+        "passed": true,
+        "complete": false,
+        "case_count": 60,
+        "limits": [
+          "Native C++ provider/stream control flow only; actual CRT/Windows encoding/file permissions/failure/partial-read behavior and archive provider still open.",
+          "Successful open/read/seek/allocation plus missing/empty files; error cleanup, concurrent modifications and process-global initialization not fully qualified.",
+          "No complete configuration cache/menu/persistence or full game proof."
+        ]
+      },
+      {
+        "path": "E:\\OpenLeague\\data\\4.20\\search_resource_provider_contract.json",
+        "sha256": "8c20b7fb0a82d19fd0a413a48362e1859bfeb2f21e8517d231c2486e16f96f4a",
+        "passed": true,
+        "complete": false,
+        "case_count": null,
+        "limits": [
+          "Original derived provider cached-context lookup, native string/tree searches, chain traversal and basic-provider delegation execute. Explicit cached tables and linked search contexts supplied.",
+          "Search-context producer2D78F20, cold cache insertion/enumeration and actual per-map/global constructor remain open. Diagnostic context order/paths are not inferred production selections.",
+          "Native contains ignores parent when search-context list is empty; path getter still falls back to parent. Empty context path skipped by path getter while contains remains true.",
+          "Lazy global empty-string initialization bypassed with original layout; no file/lookup/string comparison adapters."
+        ]
+      }
+    ],
+    "source_hashes_at_read": {
+      "crates/client/src/map10_native_config.rs": "bb8e062b7c61e8887cd99f3f1ef3e52a6900597a4056ee526bdd288864a03593",
+      "crates/client/src/map_resource_provider.rs": "4c81457bf6b5d7122f0d0e0cee228d3bd9c92fe1de72ab6d5512f6569955ca74",
+      "crates/client/src/native_archive_index.rs": "6f8863951fada6b0c30d650df900a506023b5b7a7fd6af1f2ee7765fa8518dcb",
+      "crates/client/src/native_config_cache.rs": "57abe50efb61386f7b6cf4ce916bf7ef3dd8f4277eecaa7fd6f569d855c8c3f9",
+      "crates/client/src/native_config_cache_reload.rs": "a6148a0384f70ffb730288d90b0ce8271e4c779d53adddaae29143df833e2b96",
+      "crates/client/src/native_config_path_parts.rs": "0a967b0988efb6be02b779eed1eccc9a0058a40d1c18337066458af618644a8f",
+      "crates/client/src/native_config_resource_dispatch.rs": "d057175dd746193199949fd7d8f8cb9623217c4b11b7dd9a446442811c81bea4",
+      "crates/client/src/native_filesystem_provider.rs": "3c3eb72049957a5ab7f6a62e525e35e602093487081ccdfb2c25a16a8a562e4f",
+      "crates/client/src/native_game_cfg_text.rs": "54b4d9df1bc56d78a07eb51f0fe15128e1d702a2e19d1acf17d46f02d89857b1",
+      "crates/client/src/native_particle_class.rs": "d7c437ac5600dfb3c97c3a9d0a6bfc4fa0fd6dd71462e18a50ca8d593e2af0de",
+      "crates/client/src/native_zip_archive.rs": "5780ccef30d8c536ec75631bfa6f13624b874a309a204998b7f3765037da2a3f",
+      "crates/client/src/native_zip_provider.rs": "84f31115bf4413eb2617aa7eedf353d0fd36ee18d8afd2b5d4b35475eceacb6c",
+      "crates/core/src/audio_crt_encoded_thread_provider.rs": "43a92f8b752b7447468346384690c717a8fa6b96248ab91ab8221eb959a3f928",
+      "crates/core/src/audio_crt_global_dispatch_initialization.rs": "13b293c8d3b640d13bd01e73d0abf1764fdba261fe3dbb0a6dd437888e49818e",
+      "crates/core/src/audio_crt_heap.rs": "f840cc0df266c31578672df7614a86d8ba9ac478b3e353a028d125d8dc9988e8",
+      "crates/core/src/audio_crt_static_lock_startup.rs": "fd01e361f61ef15f79cab912ac1e9d9ad7060224b1c924efa97f72213ff14161",
+      "crates/core/src/audio_crt_thread_context.rs": "13fb900ada714bef38e2e03046e94fbefed343ed511bd1fe0bd9e7e59502cbca",
+      "crates/core/src/audio_crt_thread_system_startup.rs": "be24706a5d3e08e25e614bc8e34e1058570c8f1439a91b4e1f3529ac99378a53",
+      "crates/core/src/audio_crt_windows_dispatch_resolver.rs": "70d2e6aa35fe446eb796fcf1d52da097e3511b262d610ff32bdd8ab6d7975f84",
+      "crates/core/src/audio_crt_windows_engine_worker.rs": "a51596b84b4fe0a3ac4ae3ade8bb39afe7d4112e75cd28f31c890ec201fd6557",
+      "crates/core/src/audio_crt_windows_global_services.rs": "32bbbd7506cf41181cce4516a35ec3f69f48e4498045b53d99a6daf7c20cc765",
+      "crates/core/src/audio_crt_windows_process_heap.rs": "87e1482d8a7a00417658282943e8010d5357fec7864beeaca13d149d968b1abb",
+      "crates/core/src/audio_crt_windows_root_startup.rs": "7f599d2b8b367384482801b18495ed25240bc787428a5039d73b9c74bec2f1c4",
+      "crates/core/src/audio_crt_windows_shared_fls.rs": "8c00192c2f752aeffd96f6353821a4e3899ccb4d5e96c5d4d2c3de7836fd2325",
+      "crates/core/src/audio_crt_worker_com_startup.rs": "5d5a6ddbb21dd5100afcc764a067e26bdf33f784b06fe7bad63dd7b18d2d993d",
+      "crates/core/src/audio_loading_owned_string.rs": "b858b526cf523ddb28c8609f9fd8e9a1fbe6e788ab4a17e7cdecbcce9c296cf5",
+      "crates/core/src/audio_loading_resource_cache.rs": "c323ab1d4abfa5cb3c4c161fe9257b4796957f353999db860b16e6f6b731c0e8",
+      "crates/core/src/audio_loading_resource_manager.rs": "f675e96033a1245f83bba5958857c7d8dcb099012a9c493a962dfebe43a45591",
+      "crates/core/src/audio_replay_windows_application.rs": "01adbebf1fc1c56a0e814e0c24353f887513aadef7acfe2fd99df02d10e55fc3",
+      "crates/core/src/audio_replay_windows_loading_packets.rs": "eeb6e6fd939dffaff0c699d5750313625f85d535f9a195d8519dfbfada93d539",
+      "crates/core/src/audio_replay_windows_resource_manager.rs": "65cbaa5faef5acedd7613c2396074d212369ed31698914856bb811434cfe4acc",
+      "crates/core/src/audio_replay_windows_stdio.rs": "8558906f64244ad585f05dbd65f04776aa54b6bec919cde951caf92f351afbcf",
+      "crates/core/src/audio_replay_windows_transport.rs": "7f7e0376b69f5e8520d58430790f464464b2c883f3deb6eab7ac5ae09cc3da6f"
+    }
+  },
+  "next_action": "Wait for parent_order real CRT/provider oracle before choosing new Rust ports or changing Windows production. Extend only proven missing surfaces; source scan is readiness evidence, not runtime acceptance."
+}

@@ -1,0 +1,51 @@
+{
+  "updated_utc": "2026-10-06T14:07:56.604062+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "bake_cases": 98,
+  "table_values": 4518,
+  "unique_direct_sample_cases": 211,
+  "product_rust_sources_changed": true,
+  "ordinary_emitter_consumer_bound": false,
+  "ordinary_applications_rebuilt": false,
+  "core_full_suite_passed": 437,
+  "core_full_suite_scope": "Latest full suite after scalar reader source and fixture changes",
+  "latest_extended_fixture_tests_passed": 2,
+  "latest_extended_fixture_tests_filtered": 434,
+  "last_client_tests_passed": 364,
+  "artifacts_sha256": {
+    "data/4.20/scalar_curve_bake_contract.json": "2071e5d4c0ea8b755aa751c3559f2076638db3184985366b01ed081ec2040d21",
+    "data/4.20/scalar_curve_extra_counts_contract.json": "d971087eef8a6f68e4f1d8eed7cce8321d5c6ef0629dfc2d15b02f6578aece2e",
+    "tools/probe_native_scalar_curve_bake.py": "fdcd648226c7c41b3f7d28712cdb84ecdd066986c4bcaa879f5e20b1dc86f022",
+    "tools/probe_native_scalar_curve_extra_counts.py": "a89b600438c9e92c7974728f6922c812f6c1ac96449b7051dbb90bb7c5ac2d21",
+    "crates/core/src/native_scalar_curve.rs": "3f809cd3db3cd3bb8e7a9126391593a1892b15b6c1d9b46fd2cb36bc7a360744",
+    "crates/core/src/lib.rs": "82d2eb63fa486366093aeadb10831fe05b63b6e7fef0c910e2e8527571d48a2a",
+    "logs/native-scalar-curve-core-tests.log": "e1f8f33246185db4a2a384f835c584c1cf20aedd58e98c639002133e05aae9de",
+    "logs/native-scalar-curve-extra-count-tests.log": "544719a0ff540da4ed12357586bc87573934ceb7d6a5c6bca248a12b4b0693b7",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "22a98f821d0e8cc5dc1bbffe720a52c8504374ddccb3a9ffa5464fbf9e70e0e4",
+    "data/4.20/scalar_field_reader_contract.json": "f8b8aa03b13d68bc6cdc649c9a36410304324e5ed415fef904cf5d3d2c45cf1a",
+    "tools/probe_native_scalar_field_reader.py": "037a2dc48494845fe359e895b90d872142f9e140f9d88c48046943b163f19667",
+    "logs/native-scalar-field-reader-core-tests.log": "0d83743c3fae3bbbf7ac14730146f09c279220b1f8e500ca2d8a1be78439d4da"
+  },
+  "findings": [
+    "Scalar lower-bound interpolation and baker execute original instructions; Rust output bits match all captured cases.",
+    "Duplicate exact keys choose first duplicate, then the last duplicate becomes the lower endpoint immediately after that key.",
+    "Multi-knot tables use i/count and exclude final endpoint; constant knots always create one value, including requested count zero.",
+    "Original94CB60 control flow ported after decoded numeric field conversion: numbered keys start at1, first missing/incomplete pair stops reading; base/default scales numbered values; no keys returns absent, constant-only creates one knot.",
+    "Case-sensitive e-rgba normalizes authored base by native f32 factor1/255, but does not normalize the default when base is absent."
+  ],
+  "limits": [
+    "Finite sorted scalar knots only; f64 intermediates match captured x87 output, not exhaustive IEEE parity.",
+    "Original INIBIN lookup/cache and CRT lexical parsing not executed. Malformed lexical input, float extremes and lookup flags unqualified.",
+    "Numbered key formatter output supplied; original formatting implementation not qualified.",
+    "Native execution of reader is not ordinary emitter integration.",
+    "Probability/RNG, vector/color curves, age table lookup, ordinary rendering and rebuilt applications still pending.",
+    "Latest437core tests passed; no new client/GPU/visual checks; no champion kit, map, six-client match or domain closed."
+  ],
+  "next_action": "Achever les probabilités/aléatoire 94A7F0/91B410 et les courbes vectorielles/couleurs ; qualifier la conversion lexicale/getter INIBIN et la lecture des tables en fonction de l’âge, puis intégrer les 52 groupes et 244 placements Map10. Résoudre TT_Mist_circle/fogcircle et poursuivre les 24 domaines.",
+  "scalar_field_reader_cases": 64,
+  "map_scalar_field_reader_cases": 54,
+  "scalar_reader_adapters": [
+    "Supplied field lookup 8B0750, string storage 564C20, numbered-key formatting 5D74C0, CRT sscanf 993BA0 for explicitly supplied whitespace-separated finite numbers, allocation/free/cookie. Native hashing, reader branches, scaling and vector appends execute."
+  ]
+}

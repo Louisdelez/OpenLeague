@@ -1,0 +1,15 @@
+from pathlib import Path
+import shutil,datetime
+r=Path('E:/OpenLeague');stage=Path('E:/mapslol3v3');history=r/'docs/plan_history'/('cooldown-totals-'+datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ'));history.mkdir(parents=True)
+def edit(path,replacements):
+ p=r/path;shutil.copy2(p,history/p.name);s=p.read_text(encoding='utf-8')
+ for a,b in replacements:assert a in s,(path,a);s=s.replace(a,b)
+ p.write_text(s,encoding='utf-8')
+edit('crates/core/src/lib.rs',[('    pub cooldowns: [u64; 4],','    pub cooldowns: [u64; 4],\n    /// Duration committed by an accepted cast; absent in older snapshots is unknown.\n    #[serde(default)]\n    pub cooldown_totals: [Option<u64>; 4],'),('                cooldowns: [0; 4],','                cooldowns: [0; 4],\n                cooldown_totals: [None; 4],'),('pub mod cooldown;','pub mod cooldown;\n#[cfg(test)] mod cooldown_totals_tests;')])
+edit('crates/core/src/annie.rs',[(f'p.cooldowns[{i}]=self.tick+cd;',f'p.cooldowns[{i}]=self.tick+cd;p.cooldown_totals[{i}]=Some(cd);') for i in [0,2]])
+for file,slot in [('annie_w.rs',1),('annie_r.rs',3)]:edit('crates/core/src/'+file,[(f'p.cooldowns[{slot}]=self.tick+cd;',f'p.cooldowns[{slot}]=self.tick+cd;p.cooldown_totals[{slot}]=Some(cd);')])
+edit('crates/core/src/spells.rs',[('        p.cooldowns[slot as usize] = self.tick + cooldown;','        p.cooldowns[slot as usize] = self.tick + cooldown;\n        p.cooldown_totals[slot as usize] = Some(cooldown);')])
+shutil.copy2(stage/'cooldown_totals_tests.rs',r/'crates/core/src/cooldown_totals_tests.rs')
+edit('crates/client/src/native_hud_recharge.rs',[('#[cfg(test)] mod tests {','pub fn player_params(p:&openleague_core::Champion,tick:u64)->Result<[Option<Vec4>;4],&\'static str> {\n let mut result=[None;4];\n for slot in 0..4 {let remaining=p.cooldowns[slot].saturating_sub(tick);if remaining==0 {continue;}let total=p.cooldown_totals[slot].ok_or("authoritative total cooldown duration unknown")?;result[slot]=Some(angle(remaining as f32/openleague_core::TICK_RATE as f32,total as f32/openleague_core::TICK_RATE as f32)?);}\n Ok(result)\n}\n#[cfg(test)] mod tests {'),(' use super::*;',' use super::*;\n #[test] fn server_cast_duration_drives_half_recharge_expiry_and_unknown_is_rejected() {\n  let nav=openleague_core::Navigation::load(include_str!("../../../assets/maps/tt_navigation_grid.json"),include_bytes!("../../../assets/maps/tt_navigation_grid.cells.bin")).unwrap();let mut s=openleague_core::Simulation::new(nav).unwrap();let a=s.join("annie").unwrap();s.learn(a,2).unwrap();s.cast(a,2,None).unwrap();assert_eq!(player_params(&s.players[&a],0).unwrap()[2].unwrap().x,std::f32::consts::TAU);assert_eq!(player_params(&s.players[&a],150).unwrap()[2].unwrap().x,std::f32::consts::PI);assert_eq!(player_params(&s.players[&a],300).unwrap(),[None;4]);let mut p=s.players[&a].clone();p.cooldown_totals[2]=None;assert!(player_params(&p,1).is_err());p.cooldown_totals[2]=Some(0);assert!(player_params(&p,1).is_err());\n }')])
+shutil.copy2(Path(__file__),r/'tools'/Path(__file__).name)
+print('Authoritative duration captured by all eight implemented spell commits; unknown legacy totals explicit.')

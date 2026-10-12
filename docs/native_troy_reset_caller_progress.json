@@ -1,0 +1,23 @@
+{
+  "updated_utc": "2026-10-06T19:23:34.381393+00:00",
+  "complete": false,
+  "native_cases": 363,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "actual_cpu_x87_copies": 484,
+  "emulator_cpu_case_disagreements": 42,
+  "threshold_bits": "0x3dcccccd",
+  "rust_ported": true,
+  "adapters": [
+    "Reset endpoint captures ECX, raw x87-copied stack arguments and ret8; whole reset separately qualified by troy_reset_contract.json.",
+    "Original COMISS, branch, BH write and local-time store execute with default masked FP modes. Actual CPU x87 copies preserve independent VM reference."
+  ],
+  "limits": [
+    "Prewarm loop and full ordinary frame/render integration remain unqualified. Reset body not executed by this caller-specific probe."
+  ],
+  "artifacts_sha256": {
+    "data/4.20/troy_reset_caller_contract.json": "d99924afb290d663a0236e0a433b2099ccd8b979460279b8fc824453faf53725",
+    "tools/probe_native_troy_reset_caller.py": "b9ce598eb68b027375836dc5101d5e2769ef11828bc0e4d5a77f9ab3bcb9eb05"
+  },
+  "current_port_evidence": "docs/native_troy_prewarm_progress.json",
+  "core_tests_passed": 515
+}

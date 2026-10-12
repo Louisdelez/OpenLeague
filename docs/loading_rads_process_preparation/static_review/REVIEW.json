@@ -1,0 +1,115 @@
+{
+  "schema": 1,
+  "kind": "bounded_static_crt_commandline_continuation_review",
+  "source_sha256": "60833cd552d93b93304d4937912951e144e38db5d70793eb60a0c5f5d579e521",
+  "native_execution": false,
+  "host_dll_load": false,
+  "probe_executed": false,
+  "production_modified": false,
+  "scope": "Continuation of the already reviewed CRT entry, argument/environment/low-IO ownership, then the first synchronization and ETW initializer boundaries. This is not a repeated whole-DLL audit.",
+  "findings": [
+    {
+      "id": "ATTACH_SEQUENCE",
+      "evidence": ["100F2AE9", "100F2AEF", "100F2AF4", "100F2AFE", "100F2B0E", "100F2B17", "100F2B22"],
+      "facts": [
+        "GetCommandLineA returns a borrowed process pointer, stored verbatim in DLL global10199AB8. No copy is made at this call site.",
+        "The next routine100FF7AE immediately calls GetEnvironmentStringsW at100FF7B3. Thus supporting only GetCommandLineA must next stop before this environment boundary; argv parsing has not yet run.",
+        "The environment conversion result is stored in101950AC. The path then runs low-IO100FB602, argv construction100FF3FC, environment-table construction100FF62B, and only then initializer routine100F40E1.",
+        "Attach counter101950A8 increments only after all those stages succeed. Null environment is not checked immediately; low-IO and argv can execute before100FF62B rejects it."
+      ],
+      "action": "Keep the explicit virtual command-line page alive through the complete native-machine lifetime. A successful getter is not evidence that argv, environment or DLL attach completed."
+    },
+    {
+      "id": "ENVIRONMENT_CONVERSION",
+      "evidence": ["100FF7AE", "100FF7C4", "100FF7E7", "100FF7F5", "100FF80D", "100FF818", "100FF821", "100FF82C"],
+      "facts": [
+        "100FF7AE scans the UTF16 environment block through its terminating empty string, then invokes WideCharToMultiByte with CodePage0, flags0, explicit WCHAR count, null default-character/used-default outputs.",
+        "It first queries output size with null output and size0, allocates exactly that many bytes via100F52AA, and performs a second real conversion into the owned CRT allocation.",
+        "For an explicitly empty double-NUL UTF16 block, the first WCHAR is zero, so this routine converts only one WCHAR, yielding one ACP zero byte. The incoming environment allocation must still obey the double-NUL block contract.",
+        "A null environment pointer returns null without FreeEnvironmentStringsW. Every nonnull input path calls FreeEnvironmentStringsW, including query failure and allocation failure. Failed second conversion first frees the ACP allocation via100ED4FA, then frees the UTF16 input.",
+        "GetEnvironmentStringsW storage and the returned ACP CRT allocation are distinct owners. The native caller never owns the command-line page through either of these allocators."
+      ],
+      "action": "A future virtual environment requires its own explicit immutable input profile and pointer/lifetime registry, accurate codepage conversion and matching FreeEnvironmentStringsW ownership. Do not return host64 pointers or host environment contents. Keep errors and partial acquisition visible."
+    },
+    {
+      "id": "ARGV_CONSUMER",
+      "evidence": ["100FF3FC", "100FF426", "100FF42C", "100FF44D", "100FF470", "100FF48A", "100FF4AF"],
+      "facts": [
+        "100FF3FC initializes multibyte state if10199AB0 is zero, then calls GetModuleFileNameA(NULL,10195A70,260), with an explicit extra NUL at10195B74.101950E0 points at that module-name buffer.",
+        "It uses10199AB8 unless the pointer is null or points at an empty byte, in which case it falls back to the module-name buffer.",
+        "Parser100FF4AF runs twice on the same input: a count pass with null output, then a copy pass after one allocation containing the pointer table and string bytes. Bounds check pointer-count multiplication, character count and addition overflow before allocation.",
+        "The argv pointer array is published in101950D0, argc excluding its null sentinel in101950CC. The parser implements executable-name quote handling and further argument backslash/quote handling;100FE592 supplies multibyte lead-byte classification.",
+        "The declared quoted ASCII virtual executable without arguments is an input profile, not a reconstruction of the game's normal match parameters. An expected argc1 remains to be verified by native execution when the environment boundary is crossed."
+      ],
+      "action": "GetModuleFileNameA(NULL) must remain consistent with the same virtual EXE identity. Preserve the genuine parser and multibyte prerequisites rather than writing argv or argc directly."
+    },
+    {
+      "id": "ENV_TABLE_OWNERSHIP",
+      "evidence": ["100FF62B", "100FF66A", "100FF69B", "100FF6C8", "100FF6E8", "100F3FA9"],
+      "facts": [
+        "100FF62B rejects null101950AC. It counts NUL-separated ACP entries, omitting entries whose first byte is '=', allocates a zeroed(count+1)*4 pointer table and publishes it in101950D8.",
+        "Each included string has its own calloc(length+1) allocation and checked copy100F081E. Successful completion frees the contiguous ACP block, clears101950AC, terminates the pointer table and sets10199AB4=1.",
+        "On per-string allocation failure, the visible local path frees the pointer table and clears101950D8, but does not walk earlier string allocations and does not free101950AC. Do not infer complete native failure cleanup from this routine.",
+        "Normal100F3FA9 cleanup walks/frees the wide and narrow environment tables101950DC/101950D8, frees argv allocations101950D4/101950D0 and clears those globals. It does not free the borrowed command-line pointer10199AB8."
+      ],
+      "action": "Track actual allocations across partial native initialization separately from terminal host hygiene; never replace partial native ownership with a synthetic successful teardown."
+    },
+    {
+      "id": "LOW_IO_AND_DETACH",
+      "evidence": ["100FB602", "100FB695", "100FB729", "100FB823", "100FB836", "100FB8B6", "100F612B", "100F7ADD", "100FAA18", "100F421B"],
+      "facts": [
+        "100FB602 uses DLL-specific table10195120 and count10199A18, allocating32 records of64 bytes per block. It calls GetStartupInfoW and may read cbReserved2/lpReserved2 inherited descriptors, capped at2048 descriptors.",
+        "Inherited and standard handles are inspected via GetFileType; GetStdHandle is used for descriptors0..2 where no valid inherited handle was adopted. Each live record can own a critical section at+0C, marked by depth/count field+8.",
+        "100FB8B6 walks64 block pointers through10195220, deletes initialized per-record critical sections, frees each block and clears its slot. No CloseHandle call appears in this bounded low-IO teardown; it must not close borrowed host standard handles by assumption.",
+        "Failure after argv/environment/initializer stages calls low-IO teardown, then100F612B for FLS/TLS and CRT-lock cleanup, then100FAA18.100FAA18 only clears heap-global10195118, not HeapDestroy.",
+        "100F612B calls100F7ADD for non-invalid slot101902F0, then marks it invalid.100F7ADD invokes the decoded dynamic FLS-free target or the TlsFree import fallback. Its native callback must preserve the existing deferred callback ownership contract.",
+        "Normal process detach calls100F40D2/100F421B when needed, then100F3FA9; low-IO/thread/heap cleanup only follows when the reserved detach argument is zero.100F421B clears each encoded atexit entry before calling it and re-reads table bounds after callback mutation."
+      ],
+      "action": "Keep DLL and EXE CRT globals separate. Existing startup-info bridge rejects nonempty inherited descriptor data: retain that stop until actual x64-to-x86 descriptor/handle translation is qualified. Host hygiene remains distinct from the native detach path."
+    },
+    {
+      "id": "LCMAP_STRING_EX_BOUNDARY",
+      "evidence": ["1010B82F", "1010B841", "1010B856", "1010B873"],
+      "public_contract": "https://learn.microsoft.com/en-us/windows/win32/api/winnls/nf-winnls-lcmapstringex",
+      "facts": [
+        "Native wrapper1010B82F decodes function pointer10199A90 with cookie101902C0. The present-export branch pushes three literal zero optional arguments, then the six caller arguments and invokes the target at1010B856. The imported API consumes36 stack bytes; the wrapper itself is caller-cleaned.",
+        "The zero decoded-export branch calls1010B72F to convert locale naming, replaces the first argument with that result, then invokes LCMapStringW at1010B873. Neither a successful load nor a forced nonzero function pointer may substitute for this branch.",
+        "Microsoft documents character counts for mapping mode, an ignored destination pointer for capacity0 queries, and possibly partial destination contents on failure. A bounded adapter should preserve those bytes and the actual OS result/error.",
+        "Lowercase/uppercase permit identical input/output buffers in the OS API. An initial adapter may explicitly reject overlap, but that remains a profile restriction rather than complete API equivalence. Sort-key/hash/handle modes have different output units and should remain outside a case-mapping-only adapter.",
+        "The current native stop trace records only seven arguments. Arguments8 and9 being zero are established by this original wrapper's pushes, not by that truncated dynamic trace."
+      ],
+      "action": "Preserve NULL versus an empty locale name. For the bounded case-mapping profile, translate owned UTF16 buffers, preserve positive explicit counts and embedded NULs, ignore destination for capacity0, reject nonzero optional parameters, return actual Windows result/error, and stop before unsupported modes."
+    },
+    {
+      "id": "SYNCHRONIZATION_FIRST_EFFECTS",
+      "evidence": ["1005BFDF", "1003F76B", "1003F7A0", "1005C018", "1005C050"],
+      "facts": [
+        "The initializer first initializes CS10198EEC, then calls CreateSemaphoreA(NULL,4,0x7FFFFFFF,NULL). On OS failure it stores a null wrapper in10198F04.",
+        "After successful semaphore creation1003F7A0 allocates a4-byte wrapper. Its null allocation path publishes null without locally closing the already obtained semaphore handle. The bridge must retain any acquired OS handle independently until terminal cleanup.",
+        "Four calls CreateEventA(NULL,TRUE,FALSE,NULL) populate10198ED0..10198EDC. Results are stored without success checks in this constructor.",
+        "Destructor1005C050 calls CloseHandle on all four event values, including zero on creation failure, then closes the semaphore only when its wrapper exists, frees that wrapper through the native allocator callback/fallback and deletes CS10198EEC.",
+        "This constructor has no thread launch in the bounded inspected body. This does not establish absence of threads in later initializer descendants."
+      ],
+      "action": "Use real labelled Win32 handle owners with exact BOOL/last-error behavior, or stop before acquisition. Preserve real creation failure; no fake handles or no-op wait/signal. Track OS ownership even before native wrapper adoption."
+    },
+    {
+      "id": "ETW_CALLBACK_ORDER",
+      "evidence": ["1005D4D8", "1005D3C0", "1005D270", "1005D565", "1005D3F0"],
+      "facts": [
+        "The later initializer loads Advapi32.dll and resolves EventRegister/EventWrite/EventUnregister. Four registrations use true x86 callback1005D270 and writable64-bit output handles.",
+        "Callback1005D270 consumes nine x86 stack DWORDs and returns ret0x24: SourceId pointer, control code, byte level in a DWORD slot, MatchAnyKeyword low/high, MatchAllKeyword low/high, filter descriptor pointer, context pointer.",
+        "The inspected callback reads context and control/level/keyword fields, updates context flags and bitsets, and does not read SourceId/filter data in the observed body. This is not permission to expose raw host64 addresses as guest pointers.",
+        "After all registrations1005D565 immediately reads enabled bit0 at101998C0 and can invoke EventWrite. Any callback delivered while a registration boundary runs must affect guest state before execution crosses the subsequent observable enabled-state read.",
+        "The old FLS queue only proves synchronous deferred callbacks on the owning emulator thread. Concurrent ETW callbacks require a separately qualified serialization, ownership and unregister protocol; do not run Unicorn reentrantly from arbitrary host callback threads.",
+        "The bounded destructor1005D3F0 invokes EventUnregister when both function and handle exist, then clears the64-bit handle. Host callback closures and context mappings must remain owned for every possible invocation through unregister completion."
+      ],
+      "action": "Stop before these imports until the actual OS callback ABI/lifetime and scheduling adaptation are qualified. Preserve notification values and ordering; do not force tracing disabled or fabricate successful registrations."
+    }
+  ],
+  "limits": [
+    "All conclusions above are static source observations. No DLL, native probe, compiler or OS effect was executed by this review.",
+    "The selected CFG extractor follows bounded direct branches and records indirect calls as boundaries. Instruction hashes concatenate selected instruction bytes, not a claim of one contiguous function extent.",
+    "Multibyte initialization, conversion API implementations, SEH unwinds and the complete transitive initializer/shutdown graph are not newly qualified.",
+    "Actual Win32 event/semaphore/ETW adapter contracts and asynchronous races require their own implementation evidence; static native call sites do not prove an adapter correct."
+  ]
+}

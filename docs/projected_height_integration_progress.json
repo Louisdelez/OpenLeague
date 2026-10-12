@@ -1,0 +1,47 @@
+{
+  "updated_utc": "2026-10-07T14:18:55.039782+00:00",
+  "complete": false,
+  "implementation": [
+    "Native height center uses current particleY; range/fading read authored values with verified5/200 defaults.",
+    "Evaluate original vertex native height before CPU footprint clipping; interpolate unclamped scalar across cut edges.",
+    "Float32x4 vertex color carries fade in alpha; fragment multiplies texture alpha by max(interpolant,0). Warmup uses same vertex layout."
+  ],
+  "sources": [
+    "data/4.20/shaders/Environment/UNLIT_DECAL_VS.vs_2_0",
+    "data/4.20/shaders/Environment/UNLIT_DECAL_PS.ps_2_0",
+    "data/4.20/projected_height_upload_contract.json",
+    "data/4.20/annie_projection_height_reader_contract.json"
+  ],
+  "test_session": null,
+  "test_log": "logs/projected-height-tests.log",
+  "gpu_verified": true,
+  "limits": [
+    "CPU arithmetic follows original shader source; GPU bit equivalence unproven.",
+    "Zero/negative fading rejected explicitly pending qualification.",
+    "Native clipping and color-stage sampler/upload still incomplete.",
+    "Live RGB attribution does not isolate height alpha: additive ONE/ONE color blend is independent of alpha. Height arithmetic/interpolation verified separately; full production alpha-channel numeric attribution remains unproven."
+  ],
+  "tests_passed": 32,
+  "raster_probes": [
+    "logs/projected-height-raster-Vulkan.json",
+    "logs/projected-height-raster-Dx12.json"
+  ],
+  "raster_cases_per_backend": 24,
+  "raster_maximum_error": 3.874302e-07,
+  "build_session": null,
+  "build_log": "logs/projected-height-client-build.log",
+  "raster_probe_limit": "Standalone raster probe checks production CPU height helper, GPU perspective interpolation and equivalent fragment max; not full production material. Two unit labels duplicate each12 unique height/perspective combinations.",
+  "build_passed": true,
+  "runtime_receipts": [
+    "docs/projected_core_cycle_capture_v39_receivers_dx12.json",
+    "docs/projected_core_cycle_capture_v39_receivers_vulkan.json"
+  ],
+  "pixel_receipts": [
+    "docs/projected_receiver_pixels_v39_dx12.json",
+    "docs/projected_receiver_pixels_v39_vulkan.json"
+  ],
+  "cleanup_receipt": "docs/receiver_cleanup_v39.json",
+  "runtime_smoke_verified": true,
+  "client_sha256": "40d2e5d5ee0ced2290ef7a6198c7239ef00c2adaf50d168e91ba9f4f5091c1b6",
+  "visual_inspection": "Initial images inspected both backends: restored map, actors and HUD present without obvious new corruption."
+}

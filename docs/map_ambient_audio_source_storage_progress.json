@@ -1,0 +1,36 @@
+{
+  "updated_utc": "2026-10-03T23:32:42.790922+00:00",
+  "native_storage_cases": 720,
+  "native_queue13_cases": 48,
+  "core_tests": 197,
+  "new_core_tests": 2,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "files": {
+    "tools/qualify_native_audio_source_storage.py": "b877f219f8f5acaa5d9ebc94600ac6314c82198e026e82f4c13d30bc930be27f",
+    "data/4.20/audio_source_storage_contract.json": "b45ab359029b04ad984fcf2d9c080fee7fcb61889eb64a2469e51e8bccd283a8",
+    "crates/core/src/audio_source_storage.rs": "4aac5c70c2a9cc836be47a37c19d9af08ae338ca791711674e05b4f8d316436f",
+    "logs/native-audio-source-storage-core-tests.log": "044c8a44d9887fe4ccdd12b2c97a9490b1f0ccb5e5cbb1e7b41e31fbf2b7ce48"
+  },
+  "native_regions": {
+    "0xb0743a": "bc16482c776a7bbfea691b4f9223e0f0551f7c186e7b5c69cc33fbee22f41eb7",
+    "0xb09fe0": "c457260c499ea1004cd4bfde9e48241239decf8da20fca5ae518fd187ad46cb6",
+    "0xaf6400": "0573fbfcaf4b4df85b3648dd384dd910b3e934650f5fb3dca9b0bf43497727d7",
+    "0xaeedc0": "043673920c0c1de6368d9be09cb4749e3696b6cc1a1e7b89ac575db3c9082df2"
+  },
+  "native_storage_layout": "Object+4 pointer; +8 u16 count; +A listener mask; +B low3 mode bits (upper5 retained); +60 dirty flags OR40000000; each source24bytes XYZ/raw orientation.",
+  "native_error_behavior": "Missing object returns2 unchanged; registered object returns1 even if resize allocator fails (internal52, old sources freed, count0, mode and dirty still updated).",
+  "bridge": "Qualified point-only producer -> six-word RawSource -> existing object storage -> qualified distance API; opaque orientation words never interpreted as XYZ.",
+  "ambient_playback_enabled": false,
+  "client_integration_enabled": false,
+  "complete": false,
+  "limits": [
+    "Full queue scheduler and registration/unregistration lifecycle not executed; bucket linked nodes are explicit fixtures.",
+    "Orientation remains raw opaque words; no normalized or default direction inferred.",
+    "Actual heap allocator/memcpy optimizations, audio DSP, rendering and audible acceptance not qualified.",
+    "Native manager returns1 for existing object even when descriptor allocation reports52 and old positions are lost.",
+    "Rust preserves descriptor data/mode/mask/dirty semantics; BTree/hash registration and full native queue scheduler are not ported.",
+    "Guard for more than65535 sources returns explicit Rust error, instead of truncating a slice length to u16.",
+    "No original constructor default state inferred: RegisteredSources::restore requires explicit source state.",
+    "No new standalone binary, live audio output or current client rendering acceptance. Client13 tests from prior emitter integration remain historical."
+  ]
+}

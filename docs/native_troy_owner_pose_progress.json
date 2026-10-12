@@ -1,0 +1,46 @@
+{
+  "updated_utc": "2026-10-06T18:45:46.345456+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "core_tests_passed": 506,
+  "native_troy_owner_pose_cases": 288,
+  "actual_cpu_sse_operations": 768,
+  "actual_cpu_x87_copies": 1536,
+  "emulator_cpu_case_disagreements": 41,
+  "owner_pose_phase_ported": true,
+  "ordinary_emitter_consumer_bound": false,
+  "ordinary_applications_rebuilt": false,
+  "artifacts_sha256": {
+    "data/4.20/troy_owner_pose_contract.json": "f78964e55bf3fc9cbe0e032fd3e696369b84b0372fdedbbe218477bd6d6647e5",
+    "tools/probe_native_troy_owner_pose.py": "afe0624997bee8f6e6da11c41dd81e562f3740d8ad1aadb5138faaabd6a39c02",
+    "crates/core/src/native_troy_owner_pose.rs": "0452a7da3a06b1eb3cefc949b73c8cefb9c485e1b13bd72a0a513ff9a4c22cf3",
+    "data/4.20/troy_scalar_contract.json": "54005518faa9000dc9f0f330e569cb21e66b5d6e916727e469a8e66d24ce6b0d",
+    "crates/core/src/native_troy_scalar.rs": "f782ab31c463cddfda369c52344103c5147d5db616ba2a0eb626d08c13fb74e1",
+    "data/4.20/troy_position_bounds_contract.json": "9191b4d30eb9a3dba97c2eec59a54648a138f5237ce60c20a2427803e7d30a5e",
+    "crates/core/src/native_troy_position_bounds.rs": "8f16435291e0b3551d72fcc28eac8a6e71bf32a31c4549dad63f34cff4bf69ad",
+    "crates/core/src/lib.rs": "e18eb3b54c3ba6c7700aac5bb7a9349e44fdc7fa9f7e0d2041085927b25357c9",
+    "logs/native-troy-owner-pose-core-tests.log": "1e92dfd505a355f3a0f12037eae360cbda74479d873d77ffdefd03e0f535ecf7",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "85bc20ce8f98f3a7aecc31ec2b66f9db1f9a0906fa25b2d017308bcbe35ff2f0"
+  },
+  "findings": [
+    "Original94099A..940AEE and whole93F1A0 owner status/deferred dispatch captured in288cases. Rust matches native position/bounds/direction, matrices, source flag8, pending queue length and exact callback sequence.",
+    "Owner absent or eligibility byte0 skips the entire phase and preserves queued callbacks. Nonzero eligibility invokes position then direction; failed producers preserve old fields.",
+    "Orientation is queried only when wrapper flags10 set and20 clear. Two x87 matrix copies quiet signalingNaN; source and emitter matrix components12,13,14 reset to0.",
+    "Secondary owner byte queried first and saved on stack; primary virtual takes no arguments. Both bytes are passed raw to93F1A0. Config flags2/4 individually suppress owner contributions to emitter source flag8. Other bits preserved.",
+    "Original pending callback vector copied and cleared before callbacks; callbacks observe empty original queue. Rust uses explicit handler IDs and dispatch backend, never executes an imported code pointer.",
+    "768actualCPU SSE operations and1536actualCPU x87 copies;41original VM discrepancies retained separately."
+  ],
+  "adapters": [
+    "Original entire owner phase,921F60/8DE480/8DE500/921F20 and93F1A0 execute including snapshot/copy/clear/deferred dispatch.",
+    "Owner virtual endpoints supply explicit eligibility, position/direction/matrix success and raw status bytes. Deferred callback endpoint records arguments and remaining queue length.",
+    "Allocator/free/security inherited; mutex endpoints adapted for single-thread execution. Original temporary vector copy and callback iteration execute.",
+    "Separate actual CPU SSE and x87 operand copies; original emulator output retained independently."
+  ],
+  "limits": [
+    "Owner virtual producer bodies, full940frame, reset/audio/child flag phases, ordinary rendering and resource acquisition incomplete.",
+    "Deferred queue non-reentrant here; concurrent mutation/mutex semantics and allocation failure not qualified.",
+    "Default masked arithmetic modes only.",
+    "505previous core tests and the new property comparison pass; this does not qualify complete game/champion kits or graphical rendering."
+  ],
+  "next_action": "Achever le reste du cycle Troy : reset200, carte audio8000, flag enfant10000, pose du second propriétaire et reset final des requêtes ; qualifier les producteurs virtuels et les paramètres natifs, raccorder le cycle complet au rendu normal des52groupes/244placements Map10, reconstruire les applications puis poursuivre les24domaines."
+}

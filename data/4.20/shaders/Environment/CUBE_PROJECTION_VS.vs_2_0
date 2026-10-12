@@ -1,0 +1,39 @@
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// Constants
+///
+/////////////////////////////////////////////////////////////////////////////////////
+
+column_major float4x4 WORLD_VIEW_PROJECTION_MATRIX	: register(c0);
+column_major float4x4 WORLD_MATRIX				 	: register(c4);
+
+struct VERTEX
+{
+	float3 m_Position : X3D_VSIN_POSITION;
+};
+
+struct INTERPOLANTS
+{
+	float4 m_Position : POSITION;
+	float4 m_TexCoord0 : TEXCOORD0;
+};
+
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// Shader
+///
+/////////////////////////////////////////////////////////////////////////////////////
+void 
+	main
+	(
+		VERTEX vertex,
+		out INTERPOLANTS interpolants
+	)
+{
+	// Output homogeneous position
+	interpolants.m_Position = mul(float4(vertex.m_Position, 1.0f), WORLD_VIEW_PROJECTION_MATRIX ); 
+	
+	// World position
+	float4 worldPosition = float4(vertex.m_Position, 1.f); //mul(float4(vertex.m_Position, 1.f), WORLD_MATRIX);
+	interpolants.m_TexCoord0 = worldPosition;
+}

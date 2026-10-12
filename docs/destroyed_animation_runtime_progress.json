@@ -1,0 +1,95 @@
+{
+  "updated_utc": "2026-10-05T14:21:05.271881+00:00",
+  "complete": false,
+  "client_tests_passed": 223,
+  "client_build_passed": true,
+  "diagnostic_rendered_destroyed_models": 4,
+  "runtime": {
+    "checked_utc": "2026-10-05T14:19:43.320796+00:00",
+    "complete": false,
+    "diagnostic_fixture": true,
+    "ordinary_combat_destruction_verified": false,
+    "intact_models": [],
+    "destroyed_models": [
+      "OrderNexus_destroyed",
+      "TT_ChaosInhibitor_destroyed",
+      "TT_OrderInhibitor_destroyed",
+      "TT_OrderTurret1_destroyed"
+    ],
+    "sample_count": 131,
+    "capture": "E:\\OpenLeague\\logs\\destroyed-animation-runtime.png",
+    "capture_sha256": "ae4398b1811a3042caaeb87e8b851fcf7e074008134071a1b5cbef2dcaf642ab",
+    "probe_sha256": "0e93d1a1914c248aa0ba26bc06df3b00c3a92597fa643edcd15af0dd174e1093",
+    "client_sha256": "ea252e9840f5fd8b8ca42c3ea00db85327c1abcc40f7ed201976b561312c57af",
+    "fixture_sha256": "9a7750afb901749da4a5bd5c9516ad50e6b4619418ca6ea8967d398a8071c6a7",
+    "visual_inspection_required": false,
+    "limits": [
+      "Outgoing snapshot health/position seeded by explicit diagnostic fixture; ordinary combat destruction not verified.",
+      "Actual client model replacement, death role and AnimationPlayer elapsed time observed. Native loop flags, native events and materials/FX remain open."
+    ],
+    "visual_inspected": true,
+    "animation_players": {
+      "OrderNexus_destroyed": {
+        "samples": 135,
+        "first_elapsed": 0.09295500069856644,
+        "last_elapsed": 27.930652618408203,
+        "max_completions": 30,
+        "loop_observed": true,
+        "native_loop_semantics_verified": false
+      },
+      "TT_ChaosInhibitor_destroyed": {
+        "samples": 135,
+        "first_elapsed": 0.09295500069856644,
+        "last_elapsed": 27.930652618408203,
+        "max_completions": 11,
+        "loop_observed": true,
+        "native_loop_semantics_verified": false
+      },
+      "TT_OrderInhibitor_destroyed": {
+        "samples": 135,
+        "first_elapsed": 0.09295500069856644,
+        "last_elapsed": 27.930652618408203,
+        "max_completions": 11,
+        "loop_observed": true,
+        "native_loop_semantics_verified": false
+      },
+      "TT_OrderTurret1_destroyed": {
+        "samples": 135,
+        "first_elapsed": 0.09295500069856644,
+        "last_elapsed": 27.930652618408203,
+        "max_completions": 30,
+        "loop_observed": true,
+        "native_loop_semantics_verified": false
+      }
+    },
+    "visual_observations": [
+      "Actual Vulkan client framebuffer inspected: four relocated original destroyed resources rendered with textures on restored Map10, champion and development HUD visible.",
+      "Tower/nexus rubble in foreground and two inhibitor variants behind. Diagnostic placements can overlap authored scenery.",
+      "AnimationPlayer elapsed time and repeated completions observed for all four death roles; screenshot alone does not establish joint motion or native fidelity."
+    ]
+  },
+  "files_sha256": {
+    "crates/client/src/animation.rs": "3713954b2c44bea055b77ccaa4e29e8ea508fa3f94e86bb13d4800e0f4036dc1",
+    "crates/client/src/main.rs": "240deed63044e7723ff91873d947b271bc264fb44b3ecf850548915fe5708a08",
+    "crates/server/examples/destroyed_animation_fixture.rs": "dd7486321552ecbb6b2489995dd2588b0b4a9523da77aa32cd7ec92337ef11d3",
+    "logs/destroyed-animation-probe-tests.log": "0bd552febaa70a736da8af1aefd32b29ca19a76157b8f22870a43025e3d3f1d1",
+    "logs/destroyed-animation-probe-build.log": "de5df2f7e1662a723c39bcad56ebcca4ecdf9eae76632edfbd0dc16e382f114c",
+    "logs/destroyed-animation-runtime.jsonl": "650bb732773c36b78ba6b79458396cb5a5caaf779fe316dbd94bc783a2bbeb02",
+    "logs/destroyed-animation-runtime.png": "ae4398b1811a3042caaeb87e8b851fcf7e074008134071a1b5cbef2dcaf642ab",
+    "docs/destroyed_animation_runtime.json": "f0ee14d02e86a006807c1cdcd92da93f19e608514c343349f7259aec08281986",
+    "target/debug/openleague-client.exe": "ea252e9840f5fd8b8ca42c3ea00db85327c1abcc40f7ed201976b561312c57af",
+    "target/debug/examples/destroyed_animation_fixture.exe": "9a7750afb901749da4a5bd5c9516ad50e6b4619418ca6ea8967d398a8071c6a7",
+    "data/4.20/world_animation_manifest.json": "37db38a0bf9dfcaf5b41ca559b7903de37c826f9a881a9d03c0f236e915533f7"
+  },
+  "next_actions": [
+    "Qualify original BLND state/clip loop and event flags against the native reader; actual client presently repeats shared idle/death clip. Verify actual joint poses and native material/FX response.",
+    "Verify ordinary combat destruction lifecycle and native model/skin producers, then connect eligibility/camera/collector to normal brush mask/WALL.",
+    "Continue all24 domains, champion kits, six-client complete victory/results and delivered package qualification."
+  ],
+  "limits": [
+    "Outgoing snapshot health/position seeded by explicit diagnostic fixture; ordinary combat destruction not verified.",
+    "Actual client model replacement, death role and AnimationPlayer elapsed time observed. Native loop flags, native events and materials/FX remain open.",
+    "Four model transitions and playback verified in explicit diagnostic fixture; no ordinary combat destruction or six-client victory qualification.",
+    "No native BLND loop semantic qualification, no separate joint pose motion comparison."
+  ]
+}

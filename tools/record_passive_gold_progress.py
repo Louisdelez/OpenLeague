@@ -1,0 +1,18 @@
+from pathlib import Path
+import json,hashlib,datetime
+r=Path('E:/OpenLeague');now=datetime.datetime.now(datetime.timezone.utc).isoformat()
+def load(p):return json.loads((r/p).read_text(encoding='utf-8'))
+def save(p,d):(r/p).write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+network=load('docs/passive_gold_network_validation.json');assert network['passed'] and network['checks']==4
+exe=[{'path':p,'bytes':(r/p).stat().st_size,'sha256':hashlib.sha256((r/p).read_bytes()).hexdigest()} for p in ['target/debug/openleague-server.exe','target/debug/openleague-client.exe','launcher/src-tauri/target/debug/openleague-launcher.exe']]
+assert exe[0]['sha256']==network['server_sha256']
+files=['crates/core/src/passive_gold.rs','crates/core/src/lib.rs','crates/core/src/altars/tests.rs','crates/core/src/world_tests.rs','data/4.20/passive_gold_rules.json','data/4.20/passive_gold_native_contract.json','tools/qualify_native_passive_gold_defaults.py','tools/verify_passive_gold_network.py','logs/passive-gold-tests.log','logs/passive-gold-build.log','docs/passive_gold_network_validation.json']
+proof={'updated_utc':now,'passed':True,'complete':False,'core_tests_passed':355,'client_tests_passed':28,'unit_checks':5,'network_checks':4,'native_initializer_cases':4,'executables':exe,'files_sha256':{p:hashlib.sha256((r/p).read_bytes()).hexdigest() for p in files},'limits':load('data/4.20/passive_gold_rules.json')['limits']+['ActualUDP initialgold825, first833 at75sec, second841 at80sec, latejoin825 then833 verified. Death/winner/firstblood tested in core.','Client rebuilt; existing running graphical session uses prior binary. New rendering and audible fidelity not verified by economy tests. Entire game remains incomplete.']};save('docs/passive_gold_integration_progress.json',proof)
+for p in ['docs/coverage.json','docs/completion_plan.json']:
+ d=load(p);d['updated_utc']=now;d['complete']=False;d['current_evidence'].update(core_tests_passed=355,client_tests_passed=28);d['current_evidence']['passive_gold']={'receipt':'docs/passive_gold_integration_progress.json','unit_checks':5,'network_checks':4,'complete':False}
+ if p.endswith('coverage.json'):
+  for item in ['docs/passive_gold_integration_progress.json','docs/passive_gold_network_validation.json','data/4.20/passive_gold_native_contract.json','logs/passive-gold-tests.log']:
+   if item not in d['evidence']:d['evidence'].append(item)
+ save(p,d)
+p='docs/resume_checkpoint.json';d=load(p);d['saved_utc']=now;d['state']='active';d['complete']=False;d['last_verified'].update(core_tests=355,client_tests=28,passive_gold_unit_checks=5,passive_gold_network_checks=4,native_passive_gold_initializer_cases=4);d['executables']=exe;d['build']='Server/client rebuilt with Map10 passive gold;355 core28 client tests and4 actualUDP checks. Running graphical session remains previous binary; no current render claim.';d['latest_changes'].append('Integrated Map10 ambientgold8 per5seconds fromnative defaults/Map10Constants(delay75,deadflag0). First/global payment cadence reconstructed. Five coretests firstboundary/dead/latejoin/winner/ordinaryfirstblood;355core28client pass. Four actuallocalhostUDP checks until80sec include latejoin no backfill. Rebuiltserver/client. No completegame claim.');d['restart_next'].insert(0,'Continue shared economy and progression: native bounty streak/death/farm adjustments, assist/sharedXP policies, gold items and fullshop. Passivegold completed basicintegration(355core28client,4UDP), modifiers and originalserver cadence unresolved. Requalify currentGUI from newbinary before claimingcurrentvisualproof.');save(p,d)
+print('Saved passivegold receipts/tracking; fullgoal incomplete',exe)

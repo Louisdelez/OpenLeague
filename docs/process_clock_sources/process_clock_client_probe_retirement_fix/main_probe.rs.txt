@@ -1,0 +1,240 @@
+// Append to client/src/main.rs. Uses its existing NativeReplayService and
+// attach_native_replay_runtime; this function never creates a second Application.
+#[cfg(windows)]
+fn native_process_clock_probe(root: &std::path::Path) {
+    use openleague_core::{
+        audio_native_process_clock::RawSample,
+        audio_replay_windows_application::Application,
+        audio_replay_windows_transport::ProcessClockSnapshot,
+    };
+    use serde_json::{Value, json};
+
+    fn require(condition: bool, message: &str) -> Result<(), String> {
+        if condition { Ok(()) } else { Err(message.into()) }
+    }
+    fn clock_json(s: &ProcessClockSnapshot) -> Value {
+        json!({
+            "initialized":s.initialized,"origin":s.origin,"frequency":s.frequency,
+            "qpf_calls":s.qpf_calls,"qpc_calls":s.qpc_calls,
+            "crt_allocations":s.crt_allocations,"pending_mirrors":s.pending_mirrors,
+            "inner_mutexes":s.inner_mutexes,"registered_cleanups":s.registered_cleanups,
+            "events_created":s.events_created,"events_closed":s.events_closed,
+            "event_close_failures":s.event_close_failures,"failure":s.failure,
+        })
+    }
+    fn raw_json(s: RawSample) -> Result<Value, String> {
+        let bits = s.f32_bits().map_err(|e| format!("raw clock arithmetic: {e:?}"))?;
+        require(f32::from_bits(bits).is_finite(), "raw clock is not finite")?;
+        Ok(json!({"counter":s.counter,"origin":s.origin,"frequency":s.frequency,
+            "wall_f32_bits":bits}))
+    }
+    fn follows(first: RawSample, previous: RawSample, next: RawSample) -> Result<(), String> {
+        require((first.origin, first.frequency) == (next.origin, next.frequency),
+            "canonical clock identity changed")?;
+        require(next.counter > previous.counter, "raw counter did not advance across real frames")
+    }
+    fn effect_json(app: &App) -> Value {
+        json!({"clock":app.world().resource::<native_effect_clock::EffectClock>().diagnostic(),
+            "animation_delta_bits":app.world().resource::<bevy::animation::AnimationDelta>().0.to_bits()})
+    }
+    fn healthy_effect(app: &App) -> Result<(), String> {
+        let clock = app.world().resource::<native_effect_clock::EffectClock>();
+        require(clock.diagnostic()["failed"] == false && clock.now.is_finite(),
+            "effect clock stopped or produced a non-finite time")
+    }
+
+    let report = (|| -> Result<Value, String> {
+        let loaded = native_user_settings::load(root).map_err(|e| format!("load normal Game.cfg: {e}"))?;
+        require(loaded.default_loaded && loaded.text_loaded, "normal Game.cfg defaults are unavailable")?;
+        let configuration = json!({"default_path":loaded.default_path,"user_path":loaded.user_path,
+            "default_loaded":loaded.default_loaded,"user_loaded":loaded.user_loaded,
+            "parse_warnings":loaded.parse_warnings,"layout_mode":loaded.layout_mode});
+        let replay = native_replay_service::Service::new(loaded.replay)
+            .map_err(|e| format!("construct configured service: {e:?}"))?;
+        let mut app = App::new();
+        app.insert_resource(NativeReplayService(replay));
+        attach_native_replay_runtime(&mut app)?;
+        app.add_plugins(native_effect_clock::Plugin);
+        let source = app.world().non_send_resource::<Application>().transport()?.clock_handle()?;
+        // This report owns neither Runtime nor Shared. Bank and each Section
+        // hold one report Arc, so it can observe their final retirement below.
+        let critical_sections = app.world().non_send_resource::<Application>()
+            .transport()?.critical_section_report();
+        let mut trace = Vec::<Value>::new();
+
+        // An error inside the exercise still reaches explicit owner cleanup.
+        let exercise = (|| -> Result<Value, String> {
+            let configured = app.world_mut().resource_mut::<NativeReplayService>().0.diagnostic()
+                .map_err(|e| format!("configured service diagnostic: {e:?}"))?;
+            require(configured["canonical_runtime_bank"] == true, "service did not attach to the canonical bank")?;
+            let before = source.process_clock_snapshot()?;
+            require(!before.initialized && before.qpf_calls == 0 && before.qpc_calls == 0,
+                "clock initialized before its first consumer")?;
+            trace.push(json!({"phase":"attached","process_clock":clock_json(&before)}));
+
+            // Sample the process API before the first effects frame. This is
+            // the same canonical producer used by the loading boundary, but
+            // this probe does not claim it dispatched a loading packet.
+            let first = source.raw_clock_sample()?;
+            require(first.frequency > 0, "Windows QPF did not produce a positive frequency")?;
+            app.update();
+            healthy_effect(&app)?;
+            require(app.world().resource::<native_effect_clock::EffectClock>().now == 0.,
+                "first frame included time before the effect frame origin")?;
+            trace.push(json!({"phase":"first_effect_frame","raw":raw_json(first)?,"effects":effect_json(&app)}));
+
+            // Real waits create elapsed time; there is no synthetic QPC or epoch.
+            std::thread::sleep(std::time::Duration::from_millis(20));
+            app.update();
+            healthy_effect(&app)?;
+            let warm = source.raw_clock_sample()?;
+            follows(first, first, warm)?;
+            let held_time = app.world().resource::<native_effect_clock::EffectClock>().now;
+            require(held_time > 0. && app.world().resource::<bevy::animation::AnimationDelta>().0 > 0.,
+                "unpaused frame did not advance effects and animation delta")?;
+            trace.push(json!({"phase":"running","raw":raw_json(warm)?,"effects":effect_json(&app)}));
+
+            let mut pause = [0u8; 14];
+            pause[9..13].copy_from_slice(&30i32.to_le_bytes());
+            pause[13] = 1;
+            app.world_mut().resource_mut::<native_effect_clock::EffectClock>()
+                .receive(1, 0xa1, &pause).map_err(str::to_string)?;
+            require(app.world().resource::<native_effect_clock::EffectClock>().paused(), "pause was not applied")?;
+            let mut previous = warm;
+            for frame in 0..4 {
+                std::thread::sleep(std::time::Duration::from_millis(10));
+                app.update();
+                healthy_effect(&app)?;
+                let effects = app.world().resource::<native_effect_clock::EffectClock>();
+                require(effects.paused() && effects.acknowledged_ordinal() == 1,
+                    "pause state changed during a paused frame")?;
+                require(effects.now.to_bits() == held_time.to_bits(), "paused effects advanced")?;
+                require(app.world().resource::<bevy::animation::AnimationDelta>().0 == 0.,
+                    "paused animation delta was not zero")?;
+                let raw = source.raw_clock_sample()?;
+                follows(first, previous, raw)?;
+                trace.push(json!({"phase":"paused","frame":frame,"raw":raw_json(raw)?,"effects":effect_json(&app)}));
+                previous = raw;
+            }
+            app.world_mut().resource_mut::<native_effect_clock::EffectClock>()
+                .receive(2, 0x0a, &[0; 10]).map_err(str::to_string)?;
+            std::thread::sleep(std::time::Duration::from_millis(20));
+            app.update();
+            healthy_effect(&app)?;
+            let effects = app.world().resource::<native_effect_clock::EffectClock>();
+            require(!effects.paused() && effects.acknowledged_ordinal() == 2, "resume was not applied")?;
+            require(effects.now > held_time && app.world().resource::<bevy::animation::AnimationDelta>().0 > 0.,
+                "resumed effects and animation delta did not advance")?;
+            let resumed = source.raw_clock_sample()?;
+            follows(first, previous, resumed)?;
+            let process_f32 = source.wall_clock_f32_bits()?;
+            require(f32::from_bits(process_f32).is_finite() && f32::from_bits(process_f32) > 0.,
+                "canonical f32 clock sample is invalid")?;
+            let live = source.process_clock_snapshot()?;
+            require(live.initialized && live.qpf_calls == 1 && live.qpc_calls >= 2,
+                "canonical clock did not initialize QPF exactly once")?;
+            require((live.origin, live.frequency) == (first.origin, first.frequency),
+                "pause or resume changed the process clock origin/frequency")?;
+            require(live.crt_allocations == 1 && live.pending_mirrors == 0 && live.inner_mutexes == 1,
+                "clock mutex ownership is unexpected before shutdown")?;
+            require(live.registered_cleanups == [
+                openleague_core::audio_clock_once::OUTER_CLEANUP,
+                openleague_core::audio_clock_once::MUTEX_CLEANUP,
+            ], "clock cleanup registrations are missing or out of order")?;
+            require(live.failure.is_none() && live.event_close_failures == 0 && live.events_created == live.events_closed,
+                "process clock reported a failure or retained a waiter event")?;
+            trace.push(json!({"phase":"resumed","raw":raw_json(resumed)?,"effects":effect_json(&app),
+                "process_clock":clock_json(&live),"wall_clock_api_f32_bits":process_f32}));
+            Ok(json!({"configured_service":configured,"frame_updates":7,"paused_frames":4,
+                "origin":first.origin,"frequency":first.frequency,"qpf_calls":live.qpf_calls}))
+        })();
+
+        let mut cleanup_errors = Vec::<String>::new();
+        if let Err(e) = app.world_mut().resource_mut::<NativeReplayService>().0.close() {
+            cleanup_errors.push(format!("close configured service: {e:?}"));
+        }
+        let service_allocations = app.world().resource::<NativeReplayService>().0.live_allocations();
+        if service_allocations != 0 { cleanup_errors.push(format!("service retained {service_allocations} allocations")); }
+        let retired = (|| -> Result<Value, String> {
+            let runtime = app.world().non_send_resource::<Application>().transport()?;
+            runtime.shutdown()?;
+            let state = runtime.snapshot()?;
+            require(state.engine_allocations == 0 && state.active_workers == 0 && state.handles == 0,
+                "runtime retained allocations, workers or handles")?;
+            // Native-logger attach creates one Shared-scope section at
+            // startup::MUTEX+8. shutdown retires dynamic sections but this
+            // section stays alive until the retained Service/Clock handles die.
+            require(state.critical_sections == 1,
+                "runtime did not retain exactly its single Shared-scope critical section")?;
+            let report_owners = std::sync::Arc::strong_count(&critical_sections);
+            require(report_owners == 3,
+                "critical-section report must have probe, Bank and single Section owners")?;
+            require(critical_sections.failures().is_empty(), "critical-section report recorded a shutdown failure")?;
+            require(runtime.errors().is_empty(), "runtime recorded an error")?;
+            Ok(json!({"engine_allocations":state.engine_allocations,"active_workers":state.active_workers,
+                "handles":state.handles,"critical_sections":state.critical_sections,
+                "scope_critical_section_reference":openleague_core::audio_replay_transport_startup::MUTEX + 8,
+                "critical_section_report_owners":report_owners,"errors":runtime.errors()}))
+        })();
+        if let Err(e) = &retired { cleanup_errors.push(format!("runtime cleanup: {e}")); }
+        if let Err(e) = app.world_mut().non_send_resource_mut::<Application>().close() {
+            cleanup_errors.push(format!("application cleanup: {e}"));
+        }
+        let closed = (|| -> Result<Value, String> {
+            let snapshot = source.process_clock_snapshot()?;
+            require(snapshot.crt_allocations == 0 && snapshot.pending_mirrors == 0 && snapshot.inner_mutexes == 0
+                && snapshot.registered_cleanups.is_empty(), "clock retained cleanup owners")?;
+            require(snapshot.events_created == snapshot.events_closed && snapshot.event_close_failures == 0,
+                "clock retained an event or failed to close one")?;
+            require(snapshot.failure.is_none(), "clock recorded an error before shutdown")?;
+            let raw_rejection = source.raw_clock_sample().err().ok_or("closed raw clock accepted a sample")?;
+            let f32_rejection = source.wall_clock_f32_bits().err().ok_or("closed f32 clock accepted a sample")?;
+            require(snapshot == source.process_clock_snapshot()?, "closed clock calls mutated counters or ownership")?;
+            let diagnostic = app.world().non_send_resource::<Application>().diagnostic()?;
+            require(diagnostic["closed"] == true, "application did not close")?;
+            require(diagnostic["workers_created"] == diagnostic["workers_closed"]
+                && diagnostic["workers_created"] == diagnostic["worker_completions"]
+                && diagnostic["worker_failures"] == json!([]) && diagnostic["handle_failures"] == 0,
+                "application retained workers or handle failures")?;
+            for key in ["heap_blocks", "retained_mirrors", "critical_sections", "heap_failures", "lock_failures"] {
+                require(diagnostic["crt"][key] == 0, &format!("CRT {key} did not clear"))?;
+            }
+            require(diagnostic["crt"]["heap_allocations"] == diagnostic["crt"]["heap_frees"],
+                "CRT allocation/free counts differ")?;
+            Ok(json!({"process_clock":clock_json(&snapshot),"application":diagnostic,
+                "raw_handle_rejection":raw_rejection,"f32_handle_rejection":f32_rejection,
+                "rejected_calls_preserved_clock_snapshot":true}))
+        })();
+        if let Err(e) = &closed { cleanup_errors.push(format!("closed lifetime checks: {e}")); }
+        // All reports above contain values, not owners. Drop both resources in
+        // App (Service + EffectClock) and the final explicit ClockHandle before
+        // inspecting the independent report. No clock call follows these drops.
+        drop(app);
+        drop(source);
+        let report_owners = std::sync::Arc::strong_count(&critical_sections);
+        let section_failures: Vec<String> = critical_sections.failures().into_iter()
+            .map(|failure| format!("{failure:?}")).collect();
+        if report_owners != 1 {
+            cleanup_errors.push(format!("critical-section Bank/Section still owns report after drops: {report_owners}"));
+        }
+        if !section_failures.is_empty() {
+            cleanup_errors.push(format!("critical-section failure after final drops: {section_failures:?}"));
+        }
+        let shared_drop = json!({"app_dropped":true,"clock_handle_dropped":true,
+            "critical_section_report_owners":report_owners,"critical_section_failures":section_failures,
+            "bank_and_sections_retired":report_owners == 1,"direct_os_deletion_count_observed":false});
+        let passed = exercise.is_ok() && cleanup_errors.is_empty();
+        Ok(json!({"probe":"native-process-clock","passed":passed,"complete":false,
+            "normal_application_attachment":true,"application_instances":1,"configuration":configuration,
+            "exercise":exercise.as_ref().ok(),"exercise_error":exercise.as_ref().err(),"trace":trace,
+            "retired_runtime":retired.as_ref().ok(),"closed":closed.as_ref().ok(),
+            "shared_drop":shared_drop,
+            "service_allocations_after_close":service_allocations,"cleanup_errors":cleanup_errors,
+            "scope":{"canonical_windows_clock":true,"effect_plugin_frames":true,"pause_resume_delivery":"local ordered adapter",
+                "loading_packet_dispatched":false,"network_packet_delivery":false,"ui_rendered":false,
+                "animation_clips_played":false,"gameplay_complete":false,"fifo_contention_exercised":false}}))
+    })().unwrap_or_else(|error| json!({"probe":"native-process-clock","passed":false,"complete":false,"setup_error":error}));
+    let passed = report["passed"] == true;
+    println!("{report}");
+    assert!(passed, "native process clock probe failed; see JSON report");
+}

@@ -1,0 +1,585 @@
+{
+  "saved_utc": "2026-10-10T20:31:35.849249+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": "Standard nonempty loading-name/skin selection and owned temporary lifetime",
+  "core_tests": {
+    "passed": 865,
+    "failed": 0,
+    "filtered": 480,
+    "log": "logs/core-loading-standard-tests.log",
+    "log_sha256": "2542d2fcd463f3b5f5337174409c9672b8ac0df38c789f6084b9c9246a2972e8",
+    "executable": "target/debug/deps/openleague_core-49a622d61db58080.exe",
+    "executable_sha256": "e452b14865d84464122a481594dae288e648351e52a6c501b00e66f129ebca16",
+    "required_tests": [
+      "audio_loading_owned_string_matches128_native_success_cases_and_final_read_order",
+      "audio_loading_owned_string_partial_publication_never_releases_old_buffer_twice",
+      "audio_loading_owned_string_retains_primary_cleanup_and_recoverable_ownership",
+      "audio_loading_owned_string_failures_before_transfer_preserve_both_owners",
+      "audio_loading_screen_packet_matches1600_existing_native_records_all_flags",
+      "audio_loading_screen_packet_tutorial_matches256_first_name_native_contracts",
+      "audio_loading_screen_packet_x87_bits_match26_physical_load_store_cases",
+      "audio_loading_screen_packet_reports_absent_ui_and_cleans_tutorial_name_on_clock_error",
+      "audio_loading_screen_packet_standard_matches64_native_empty_name_calls",
+      "audio_loading_screen_packet_standard_drops_name_after_unsupported_ui_without_reset",
+      "audio_loading_standard_prefix_matches128_native_stops_and_distinct_cleanup",
+      "audio_loading_standard_prefix_keeps_service_captured_before_name_provider",
+      "audio_loading_standard_prefix_consumer_retires16_partial_publications_without_second_old_free",
+      "audio_loading_standard_prefix_consumer_returns_owned_failure_until_explicit_retry",
+      "audio_replay_windows_loading_uses_real_trees_and_consumer_for48_hot_packets",
+      "audio_replay_windows_loading_rejects_truncation_before_any_runtime_mutation",
+      "audio_replay_windows_loading_keeps_missing_standard_ui_and_unknown_targets_explicit",
+      "audio_replay_windows_loading_standard_matches64_empty_names_through_real_metadata",
+      "audio_replay_windows_loading_tutorial_first_names_use_real_clock_once_and_retire_with_owner",
+      "audio_replay_windows_loading_standard_prefix_uses_real_name_skin_and_owned_override_at_both_stops",
+      "audio_replay_windows_loading_deferred_descriptor_survives_nested_lease_and_failed_close_then_retry_releases_keepalive",
+      "audio_replay_windows_loading_nested_slots_do_not_reuse_active_descriptors_or_retain_successful_keepalives"
+    ]
+  },
+  "client": {
+    "passed": true,
+    "complete": false,
+    "commands": 11,
+    "workers": 16,
+    "workers_scope": "nine legacy commands plus clock; events publishes only final active workers",
+    "events_workers_created_reported": false,
+    "executable_sha256": "b1386df99219072e08a97132bb1ba8375ae622f7bcb6f51ec0e39f7acf150df7",
+    "executable": "E:\\OpenLeague\\target\\debug\\openleague-client.exe",
+    "command_flags": [
+      "--native-process-clock-probe",
+      "--native-replay-events-probe",
+      "--native-replay-game-manager-probe",
+      "--native-replay-recording-stream-probe",
+      "--native-replay-recording-file-probe",
+      "--native-replay-stream-running-probe",
+      "--native-replay-stream-opening-probe",
+      "--native-replay-stream-transport-probe",
+      "--native-replay-configuration-probe",
+      "--native-replay-runtime-probe",
+      "--native-replay-service-probe"
+    ],
+    "logs": {
+      "logs/client-loading-standard-command-run.json": "c362ed32621726b55e97e09b0b171ae455352e6501acc92ba8c2ed541e2115fd",
+      "logs/client-loading-standard-clock.json": "529e1d59b5311f78b1a2edb74e281314d03fa797d4db46c10f6b255050919600",
+      "logs/client-loading-standard-clock.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "logs/client-loading-standard-events.json": "c4251bb3afd7cce856338454c1d48cdc2913d998c14ca851f18f1aea62092f53",
+      "logs/client-loading-standard-events.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "logs/client-loading-standard-probe.json": "9f0f960e9e36b86e240170e9ad0e0de3c6f882f1cde89c8ddb5870038250b947",
+      "logs/client-loading-standard-probe.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "logs/client-loading-standard-stream-regression.json": "c42c5e73e47a25a05ca51f5785284e0c6ca9bd1ecf75e4215057274ad1b212e5",
+      "logs/client-loading-standard-stream-regression.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "logs/client-loading-standard-file-regression.json": "c53c86f1467905de5a5c1044cf5f88d87c98725cb6afc4e2b72145b2baac8bb3",
+      "logs/client-loading-standard-file-regression.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "logs/client-loading-standard-running-regression.json": "17b46d14b52eb520315ba58bb3a10cddcc3912b4d109c8862e10396ef3b22d92",
+      "logs/client-loading-standard-running-regression.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "logs/client-loading-standard-opening-regression.json": "eb80f007fd56c956af4d66f3d7c62e15a1200540f2363defe8aaf2f71872ee72",
+      "logs/client-loading-standard-opening-regression.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "logs/client-loading-standard-transport-regression.json": "e144a72795518ddae9c53af7aa6e9bce443d2da9c673c7876e202c04590e140e",
+      "logs/client-loading-standard-transport-regression.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "logs/client-loading-standard-base-regression.json": "536485f6e059f9f8857131ba17d3868a8093f0bb5af4c2865510c6b780a1cd57",
+      "logs/client-loading-standard-base-regression.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "logs/client-loading-standard-runtime-regression.json": "88aa848fd21753f30b225599351e87a730d63f2a890a6ed88069612171544f0c",
+      "logs/client-loading-standard-runtime-regression.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "logs/client-loading-standard-service-regression.json": "10a3ae0d555c113713b1323e078d8943acebfc2b0cb54a0e91bc405083734030",
+      "logs/client-loading-standard-service-regression.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "disk_outputs": [
+      {
+        "path": "E:\\OpenLeague\\logs\\native-manager-diagnostic-1791664259317204000-1.log",
+        "sha256": "13c6e1c264ee7669d8da73cc3089ae494234cee36f3fad2c4c49c4234be6ae2c",
+        "bytes": 241,
+        "lines": 4,
+        "probe": "game-manager"
+      },
+      {
+        "path": "E:\\OpenLeague\\logs\\native-stream-diagnostic-1791664261317365000.log",
+        "sha256": "69dd4af9063d81fabb77b3646bbd1eb40a87ee203326172b3e2189ef61cd5c9d",
+        "bytes": 233,
+        "lines": 4,
+        "probe": "recording-stream-regression"
+      }
+    ],
+    "clock_summary": {
+      "frame_updates": 7,
+      "paused_frames": 4,
+      "qpf_calls": 1,
+      "qpc_calls": 33,
+      "origin": 822424716047,
+      "frequency": 10000000,
+      "workers": 0,
+      "events_created": 0,
+      "events_closed": 0,
+      "effect_time_after_resume": 0.04056539386510849,
+      "closed_handle_refused_without_mutation": true,
+      "scope_critical_section_reference": 47639896,
+      "scope_critical_sections_before_drop": 1,
+      "critical_section_report_owners_before_drop": 3,
+      "critical_section_report_owners_after_drop": 1,
+      "bank_and_sections_retired": true,
+      "direct_os_deletion_count_observed": false
+    },
+    "events_summary": {
+      "notifications": 4100,
+      "array_frames": 1,
+      "text_frames": 2,
+      "active_workers_after_close": 0,
+      "workers_created_reported": false
+    },
+    "clock_report": {
+      "application_instances": 1,
+      "cleanup_errors": [],
+      "closed": {
+        "application": {
+          "closed": true,
+          "crt": {
+            "cookie": 2139141701,
+            "cookie_complement": 2155825594,
+            "critical_sections": 0,
+            "heap_allocations": 2,
+            "heap_blocks": 0,
+            "heap_failures": 0,
+            "heap_frees": 2,
+            "locale_references": 1,
+            "lock_failures": 0,
+            "mb_references": 0,
+            "retained_mirrors": 0,
+            "slot_index": 4294967295
+          },
+          "handle_failures": 0,
+          "native_source_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+          "transport": null,
+          "worker_completions": 0,
+          "worker_failures": [],
+          "workers_closed": 0,
+          "workers_created": 0
+        },
+        "f32_handle_rejection": "process clock runtime is shut down",
+        "process_clock": {
+          "crt_allocations": 0,
+          "event_close_failures": 0,
+          "events_closed": 0,
+          "events_created": 0,
+          "failure": null,
+          "frequency": 10000000,
+          "initialized": true,
+          "inner_mutexes": 0,
+          "origin": 822424716047,
+          "pending_mirrors": 0,
+          "qpc_calls": 33,
+          "qpf_calls": 1,
+          "registered_cleanups": []
+        },
+        "raw_handle_rejection": "process clock runtime is shut down",
+        "rejected_calls_preserved_clock_snapshot": true
+      },
+      "complete": false,
+      "configuration": {
+        "default_loaded": true,
+        "default_path": "\\\\?\\E:\\OpenLeague\\data\\4.20\\configuration\\defaults\\Game.cfg",
+        "layout_mode": 0,
+        "parse_warnings": 0,
+        "user_loaded": false,
+        "user_path": "E:/OpenLeague/Config/Game.cfg"
+      },
+      "exercise": {
+        "configured_service": {
+          "DisableCatchup": 1,
+          "PingTimeForReconnectMessage": 5000,
+          "UseLookAhead": 1,
+          "canonical_runtime_bank": true,
+          "float_bits": {
+            "FastForwardSpeed": 1120403456,
+            "HeartbeatDelay": 1036831949,
+            "LagUpdateFreq": 1065353216,
+            "MaxLiveTimeBehind": 1036831949,
+            "SlowFastForwardSpeed": 1082130432,
+            "SpeedupSpeed": 1067869798
+          },
+          "history_mode": 0,
+          "live_allocations": 11,
+          "pointer": 956301312
+        },
+        "frame_updates": 7,
+        "frequency": 10000000,
+        "origin": 822424716047,
+        "paused_frames": 4,
+        "qpf_calls": 1
+      },
+      "exercise_error": null,
+      "normal_application_attachment": true,
+      "passed": true,
+      "probe": "native-process-clock",
+      "retired_runtime": {
+        "active_workers": 0,
+        "critical_section_report_owners": 3,
+        "critical_sections": 1,
+        "engine_allocations": 0,
+        "errors": [],
+        "handles": 0,
+        "scope_critical_section_reference": 47639896
+      },
+      "scope": {
+        "animation_clips_played": false,
+        "canonical_windows_clock": true,
+        "effect_plugin_frames": true,
+        "fifo_contention_exercised": false,
+        "gameplay_complete": false,
+        "loading_packet_dispatched": false,
+        "network_packet_delivery": false,
+        "pause_resume_delivery": "local ordered adapter",
+        "ui_rendered": false
+      },
+      "service_allocations_after_close": 0,
+      "shared_drop": {
+        "app_dropped": true,
+        "bank_and_sections_retired": true,
+        "clock_handle_dropped": true,
+        "critical_section_failures": [],
+        "critical_section_report_owners": 1,
+        "direct_os_deletion_count_observed": false
+      },
+      "trace": [
+        {
+          "phase": "attached",
+          "process_clock": {
+            "crt_allocations": 0,
+            "event_close_failures": 0,
+            "events_closed": 0,
+            "events_created": 0,
+            "failure": null,
+            "frequency": 0,
+            "initialized": false,
+            "inner_mutexes": 0,
+            "origin": 0,
+            "pending_mirrors": 0,
+            "qpc_calls": 0,
+            "qpf_calls": 0,
+            "registered_cleanups": []
+          }
+        },
+        {
+          "effects": {
+            "animation_delta_bits": 0,
+            "clock": {
+              "delta_bits": 0,
+              "failed": false,
+              "ordinal": 0,
+              "paused": false,
+              "remaining": 0.0,
+              "resume_pending": false,
+              "time": 0.0,
+              "time_bits": 0
+            }
+          },
+          "phase": "first_effect_frame",
+          "raw": {
+            "counter": 822424716077,
+            "frequency": 10000000,
+            "origin": 822424716047,
+            "wall_f32_bits": 910775196
+          }
+        },
+        {
+          "effects": {
+            "animation_delta_bits": 1017551250,
+            "clock": {
+              "delta_bits": 1017551250,
+              "failed": false,
+              "ordinal": 0,
+              "paused": false,
+              "remaining": 0.0,
+              "resume_pending": false,
+              "time": 0.020336899906396866,
+              "time_bits": 1017551250
+            }
+          },
+          "phase": "running",
+          "raw": {
+            "counter": 822424925846,
+            "frequency": 10000000,
+            "origin": 822424716047,
+            "wall_f32_bits": 1017896458
+          }
+        },
+        {
+          "effects": {
+            "animation_delta_bits": 0,
+            "clock": {
+              "delta_bits": 0,
+              "failed": false,
+              "ordinal": 1,
+              "paused": true,
+              "remaining": 0.0,
+              "resume_pending": false,
+              "time": 0.020336899906396866,
+              "time_bits": 1017551250
+            }
+          },
+          "frame": 0,
+          "phase": "paused",
+          "raw": {
+            "counter": 822425028292,
+            "frequency": 10000000,
+            "origin": 822424716047,
+            "wall_f32_bits": 1023396486
+          }
+        },
+        {
+          "effects": {
+            "animation_delta_bits": 0,
+            "clock": {
+              "delta_bits": 0,
+              "failed": false,
+              "ordinal": 1,
+              "paused": true,
+              "remaining": 0.0,
+              "resume_pending": false,
+              "time": 0.020336899906396866,
+              "time_bits": 1017551250
+            }
+          },
+          "frame": 1,
+          "phase": "paused",
+          "raw": {
+            "counter": 822425132437,
+            "frequency": 10000000,
+            "origin": 822424716047,
+            "wall_f32_bits": 1026198952
+          }
+        },
+        {
+          "effects": {
+            "animation_delta_bits": 0,
+            "clock": {
+              "delta_bits": 0,
+              "failed": false,
+              "ordinal": 1,
+              "paused": true,
+              "remaining": 0.0,
+              "resume_pending": false,
+              "time": 0.020336899906396866,
+              "time_bits": 1017551250
+            }
+          },
+          "frame": 2,
+          "phase": "paused",
+          "raw": {
+            "counter": 822425239400,
+            "frequency": 10000000,
+            "origin": 822424716047,
+            "wall_f32_bits": 1029070218
+          }
+        },
+        {
+          "effects": {
+            "animation_delta_bits": 0,
+            "clock": {
+              "delta_bits": 0,
+              "failed": false,
+              "ordinal": 1,
+              "paused": true,
+              "remaining": 0.0,
+              "resume_pending": false,
+              "time": 0.020336899906396866,
+              "time_bits": 1017551250
+            }
+          },
+          "frame": 3,
+          "phase": "paused",
+          "raw": {
+            "counter": 822425341532,
+            "frequency": 10000000,
+            "origin": 822424716047,
+            "wall_f32_bits": 1031805294
+          }
+        },
+        {
+          "effects": {
+            "animation_delta_bits": 1017493051,
+            "clock": {
+              "delta_bits": 1017493051,
+              "failed": false,
+              "ordinal": 2,
+              "paused": false,
+              "remaining": 0.0,
+              "resume_pending": false,
+              "time": 0.04056539386510849,
+              "time_bits": 1025910758
+            }
+          },
+          "phase": "resumed",
+          "process_clock": {
+            "crt_allocations": 1,
+            "event_close_failures": 0,
+            "events_closed": 0,
+            "events_created": 0,
+            "failure": null,
+            "frequency": 10000000,
+            "initialized": true,
+            "inner_mutexes": 1,
+            "origin": 822424716047,
+            "pending_mirrors": 0,
+            "qpc_calls": 33,
+            "qpf_calls": 1,
+            "registered_cleanups": [
+              13521601,
+              13510997
+            ]
+          },
+          "raw": {
+            "counter": 822425543941,
+            "frequency": 10000000,
+            "origin": 822424716047,
+            "wall_f32_bits": 1034521981
+          },
+          "wall_clock_api_f32_bits": 1034522209
+        }
+      ]
+    },
+    "event_report": {
+      "complete": false,
+      "consumers": {
+        "array_frames": 1,
+        "complete": false,
+        "counts": [
+          2,
+          1,
+          41,
+          43
+        ],
+        "decoded_event_ingress": true,
+        "metadata_references": 1,
+        "network_decoder_connected": false,
+        "notifications": 4100,
+        "passed": true,
+        "samples": [
+          17,
+          19,
+          23,
+          29,
+          31,
+          37
+        ],
+        "scratch_bounded": true,
+        "service_packets": {
+          "complete": false,
+          "filtered_context_unchanged": true,
+          "filtered_or_dd_packets": 12,
+          "gameplay_actions": 0,
+          "network_decoder_connected": false,
+          "packet95_empty_receiver_packets": 4,
+          "parent_callback_connected": true,
+          "passed": true,
+          "truncated_packets_rejected": 5
+        },
+        "six_argument_callbacks": 1,
+        "states": {
+          "0": 2,
+          "4294967295": 2,
+          "7": 2
+        },
+        "text_frames": 2,
+        "texts": [
+          "restored-native-replay-metadata",
+          "restored-native-replay-metadata"
+        ]
+      },
+      "passed": true,
+      "retired": {
+        "allocations": 0,
+        "errors": [],
+        "handles": 0,
+        "workers": 0
+      }
+    },
+    "legacy_verifier": {
+      "path": "tools/record_replay_game_manager.py",
+      "sha256": "7f2502bb1739b712acce43d77e72c7f990d9efb7abe7a112315cf5273b4c8810",
+      "prefix": "client-loading-standard-",
+      "command_slice_start": 2,
+      "body_modified": false
+    },
+    "verifier_sha256": "7701fcf6cec4fd862b5579f54f2f0018a2a8208672308abbd43bf0ec8b35966b",
+    "build_and_test_receipts_verified_here": false
+  },
+  "client_unit_tests_run_this_lot": false,
+  "prior_client_unit_test_receipt": "docs/process_clock_validation.json",
+  "source_and_resource_hashes": {
+    "crates/core/src/audio_loading_owned_string.rs": "fb68ab9f8b7b0a7a1c42a4b816f965c5173885e9eaa0ffb9226b38c303d40520",
+    "crates/core/src/audio_loading_owned_string_tests.rs": "eaf3fec1ba2f2e36c9fae138828341db1ecb235e8071ce7f6efb079a40374b85",
+    "crates/core/src/audio_loading_screen_packet.rs": "388ccd93864f9cdc017cc870155a6dcb837c0765467a87ea5fd096c0ef22c485",
+    "crates/core/src/audio_loading_screen_packet_tests.rs": "f25f1cb61afa4d1df81510cf89e2a3cce17b92f89e0483d388349c717ce58e39",
+    "crates/core/src/audio_loading_standard_prefix.rs": "a666ba0aba0881a1f1f06c87072bfdc72b2d9ef475e82a1df5685270c8000721",
+    "crates/core/src/audio_loading_standard_prefix_tests.rs": "af01f4b88050cd2672419ddeaade06c9ead3ddfb592eab38006d5daa36267654",
+    "data/4.20/loading_owned_string_probe.json": "06cd6b0c83598264e7d5761d58cbb2c5557cac71f92d379c0eb099f953d5851f",
+    "data/4.20/loading_standard_prefix_probe.json": "1351a1daaffaab8e0ea1f1c40d0fa9bd041643f08896daaba4e000abcde0ec6a",
+    "crates/core/src/audio_replay_windows_loading_packets.rs": "9e0ff0b29685673467a20aa253db0df760c66a20c3caec46be3476bae8144063",
+    "crates/core/src/audio_replay_windows_loading_packets_tests.rs": "43a031e7bd5c5ab0f10f0506075528e56a27d3b525447d2718d439639149df2a",
+    "crates/core/src/audio_replay_windows_loading_retirement.rs": "c06c83666387c4e57c5de16404d00fcda25242f597f1387e52982c4d3b7cb0bf",
+    "crates/core/src/audio_replay_windows_loading_retirement_tests.rs": "3a58b979baf4aba5b46b619bbb8f2b830a8e74d6c97453c922b663dd2aed9533",
+    "crates/core/src/audio_replay_windows_transport.rs": "ee7fa229a1780107254c6a3bf19a1255a666bfd5fa189f471fc044d1de25158c",
+    "crates/core/src/lib.rs": "49d7417a2444e7244a19bb0f689fb5827c1768264f63e1c27d021445ab5d0198",
+    "tools/extract_replay_runtime_image.py": "33fb737c6104a390146c5c691b2f52b8727058749ff76990031c766bedd650d5",
+    "crates/core/src/audio_replay_runtime_image.rs": "2639f3f639ba47938f3af64c3aa02500230e1da64815eed86b40abb94046e86c",
+    "data/4.20/runtime/replay_runtime_image.bin": "a23f6215d9a876ee38115a3350b7330c9af795da09645dcc8c3e541f715c9c97",
+    "data/4.20/runtime/replay_runtime_image_manifest.json": "f62f27a939809710b0c8b2cbbbf729f0707f668a9138fa6d6ef00de5cf8daa38",
+    "tools/run_loading_standard_probes.ps1": "73f6ffbd5d826784d908da60285b361e33093090403ede0ab0c5f4d4ce16b072"
+  },
+  "qualified_repairs": [],
+  "build_log": {
+    "path": "logs/client-loading-standard-build.log",
+    "sha256": "008feea497d3cc930eecc8e8954e4a89aa059332da61a775d21784d91e209aef"
+  },
+  "image": {
+    "regions": 62,
+    "bytes": 20872,
+    "sha256": "a23f6215d9a876ee38115a3350b7330c9af795da09645dcc8c3e541f715c9c97",
+    "independent_audit": "docs/loading_standard_sources/independent_image_verification.json"
+  },
+  "native_prefix_cases_reused": 128,
+  "native_owned_string_cases_reused": 128,
+  "consumer_service_global_mutations": 6,
+  "consumer_partial_publication_fault_cases": 16,
+  "windows_prefix_cases": 4,
+  "windows_new_test_functions": 3,
+  "prefix_connected": true,
+  "typed_owned_failure_connected": true,
+  "scratch_retirement_connected": true,
+  "normal_screen_factory_connected": false,
+  "normal_service_global_publication_connected": false,
+  "resource90AD00_connected": false,
+  "normal_loading_screen_complete": false,
+  "limits": [
+    "Standard prefix stops before diagnostic991E60 or resource90AD00. No resource provider, texture, UI view, normal recipient factory or rendered loading screen is completed by this lot.",
+    "The128 native prefix cases are reused archived executions. Native successful selection and deliberately separate abandoned-boundary cleanup are compared; these are not new native executions or native SEH equivalence.",
+    "Owned String24 adapts returned host failures for exclusive nonalias temporaries after successful name construction. Earlier provider rollback, metadata cache assignment, tutorial cleanup, arbitrary custom deallocators and panic/OOM unwind are unchanged and not universally qualified here.",
+    "Deferred cleanup deliberately keeps the shared bank alive. A still-unresolved owner makes close fail; a successful retry releases its keepalive. This is explicit retention on failure, not successful shutdown.",
+    "Windows tests use real metadata/index/name/skin providers with explicitly bound diagnostic recipients/service globals. Normal process publication remains required.",
+    "The eleven final executable commands verify existing application/clock/replay behavior on the new build. The new standard prefix and injected cleanup failures are exercised by core Windows tests; these CLI commands do not render or dispatch its UI.",
+    "Prior14 selected client unit tests are historical evidence from process_clock_validation; they were not rerun in this lot. No visual, audio, network, endurance or human fidelity acceptance is claimed."
+  ],
+  "next_action": "Continue the normal loading screen through its real resource manager using docs/loading_standard_resource_preparation/preparation_manifest.json: port90B7C0/90A4C0 publication at2D78F1C together with four static hash initializers531A50/531A90/531AD0/531B10, postpublication backpointers592E49..592E6A and nine container sentinels; then90AD00 normalized-name/skin cache and real miss provider/configuration lifecycle,57D775 UI continuation and actual rendering. Prepared cache-hit fixture tokens do not establish real providers or populated destruction. Standard nonempty57D6FE..57D775 now preserves the original service, applies override String24, calls the real skin provider and reaches explicit991E60/90AD00 boundaries. Temporary String24 ownership and its scratch survive failed cleanup and retire on retry. Normal5765F0 screen selection/factories, service-global publication, locale setup, actual transport/event delivery, UI/audio/gameplay fidelity and all24 domains114 tasks37 requirements remain required. Qualify normal GUI cleanup failures reaching the exit status separately; that proposal remains unintegrated. No completed screen or complete game is claimed.",
+  "evidence": {
+    "manifest": "docs/loading_standard_sources/index.json",
+    "sha256": "f7d4327c27c2f126a1712b007a1590afa91e8ee8001ef1d5faf41807fe45b57e"
+  },
+  "next_resource_preparation": {
+    "manifest": "docs/loading_standard_resource_preparation/preparation_manifest.json",
+    "sha256": "883e26f470dceaaa4c21d1d0469035eeb9d080b25fa8a9a8689b3e54e7710cbc",
+    "status": "preparation_only_not_integrated",
+    "complete": false,
+    "source_regions_byte_verified": 57,
+    "native_manager_lifetimes": 2,
+    "cache_hits_with_opaque_fixture_tokens": 66,
+    "misses_stopped_before_factory_body": 8,
+    "table_publication_selection_cases": 8,
+    "real_provider_cache_constructed": false,
+    "real_provider_cache_destroyed": false,
+    "normal_nonempty_ui_usable": false,
+    "next_action": [
+      "Port manager172 real producer90B7C0/90A4C0 with four static hash initializers531A50/531A90/531AD0/531B10, postpublication backpointers592E49..592E6A, nine actual container sentinels and empty-provider lifecycle.",
+      "Port90AD00 with actual99A310 normalization/copy/temporary cleanup and borrowed return; pass original name to the miss path. Do not treat cache-hit fixture tokens as constructed providers.",
+      "Qualify actual context/character directory object32 and provider56 construction, INIBIN path alias/read and real LoadScreen DDS resolution, FallbackPackage inheritance and populated-provider destruction before normal UI activation."
+    ]
+  }
+}

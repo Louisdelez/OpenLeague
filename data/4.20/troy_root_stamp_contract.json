@@ -1,0 +1,49 @@
+{
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "passed": true,
+  "complete": false,
+  "cases": [
+    {
+      "initial": 0,
+      "result": 1
+    },
+    {
+      "initial": 1,
+      "result": 2
+    },
+    {
+      "initial": 42,
+      "result": 43
+    },
+    {
+      "initial": 2147483647,
+      "result": 2147483648
+    },
+    {
+      "initial": 2147483648,
+      "result": 2147483649
+    },
+    {
+      "initial": 4294967294,
+      "result": 4294967295
+    },
+    {
+      "initial": 4294967295,
+      "result": 0
+    }
+  ],
+  "entries": [
+    "928BFB",
+    "92B306",
+    "922060"
+  ],
+  "vtable": "10D6C70+2C",
+  "findings": [
+    "Root getter returns raw field88; initialization writes0; increment wraps u32. It is not floating-point elapsed seconds."
+  ],
+  "limits": [
+    "Initializer and increment instructions executed in isolation with supplied object registers.",
+    "Whole92B306 caller, branches and host scheduling frequency remain unqualified.",
+    "No Bevy runtime binding in this probe."
+  ]
+}

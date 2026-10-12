@@ -1,0 +1,52 @@
+{
+  "updated_utc": "2026-10-03T23:54:44.658160+00:00",
+  "native_case_counts": {
+    "position_cases": 48,
+    "unregister_packet_cases": 4,
+    "acquire_cases": 20,
+    "unregister_cases": 40,
+    "unregister_all_cases": 40
+  },
+  "native_cases_total": 152,
+  "core_tests": 206,
+  "new_core_tests": 4,
+  "files": {
+    "tools/qualify_native_audio_object_lifecycle.py": "d5a0044970224336875305fec3eb092a7ccc95cff8184c9c78234472bb1c5895",
+    "data/4.20/audio_object_lifecycle_contract.json": "7721aae74a45ce0891fa4bcdaef9b531859584ce2f2dc02a1c37b70801527c29",
+    "crates/core/src/audio_object_registration.rs": "1294c912354716cec4b272717310afede581a834c7b1e464853a3192ae1883a6",
+    "logs/native-audio-object-lifecycle-core-tests.log": "f7970d108b26cc98e9ccc84127280d1d231506831a64d3bcba170de25128f9c1"
+  },
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_regions": {
+    "0x707420": "53ae15084a345f23a74baae3da463ea698fedee525a5f2bd432d85e0d95527c2",
+    "0xaeb1c0": "d6735f3655afbc3202317780592384ad0cee0b9baa57405f32102d61d7f3e064",
+    "0xaeb1e0": "c8621b153687be7b1aae208981169a7b8c29c9dee5b315815c4d4e52197b1587",
+    "0xaebc10": "c7b083643662b96970e8fdfcdbf00ed6c01a17a25fdc37840666059325b551db",
+    "0xb0a1a0": "fb7dfdd719c48d513e282e6b62bb5c977c0d5d5931f93fb3aab1b8aff29ca3e0",
+    "0xb09970": "d817100cc2241e89604c7b33cd471076caba68d83408659d36b3787a1bfab89a",
+    "0xb098f0": "34f5d70106cfc0cbaef5e552c038565b7b6d82456a3442a675692b553ee78e8c",
+    "0xb099d0": "4f181ee8818adb4059173d8b9d1221e3bab17f7e7644ad50394e9e25b43ceeaf",
+    "0xb0a0c0": "71e8a26bad4931ad05194c6d257de706ffe430ab663d16bf865886ffa15eda42",
+    "0xb10810": "41773c045ca7ef699130434db8a1cbcd6079ccd013b14fee64ce5ce5a1dbfbd5"
+  },
+  "native_position_behavior": "707420 caches suppliedXYZ, submits[X,field14*-2500,Z], opaque orientation stack tail; engine unavailable cachesXYZ only; ID0 rejected,FFFFFFFF accepted on this path.",
+  "native_reference_behavior": "B099D0 increments low30 bits, preserves high2 flags. Single unregisterB0A1A0 removes hash node, clears bit31 and decrements low30, destroys only count0. GlobalB0A0C0 skipsID0, decrements low30 preserving high2 flags, removes other nodes; retained source descriptors returned as Rust owned values.",
+  "native_stubs": [
+    "Availability;packet size56;queue packet capture;security check. Native707420 changes cached XYZ then submits source[X,heightField14*-2500,Z];opaque tail explicit.",
+    "ADA3E0 captures node/object free;AF5D80 captures destruction. Original hash find/erase and reference flag mutations executed."
+  ],
+  "client_integration_enabled": false,
+  "ambient_playback_enabled": false,
+  "complete": false,
+  "limits": [
+    "Game-object point setter differs from ambient706DF0: it overwrites sourceY using field14, even though cachedXYZ retains inputY. Native height-control producer not qualified.",
+    "Unregister removes registry node immediately; object stays allocated when low30 reference count remains nonzero. Native destruction and final retained-voice release internals not executed.",
+    "Unregister-all B0A0C0 skips objectID0 and decrements other objects without clearing upper registered bit; single-object B0A1A0 clears bit31 first. Original all-worker/iteration executed; full scheduler not executed.",
+    "Invalid zero-reference states included for bit-exact wrapping behavior, not evidence such states occur in ordinary playback.",
+    "No live audio or full ownership/queue worker scheduling acceptance.",
+    "Registry source ownership represented as returned Rust values; actual retained voice handles, final reference release, native full object destructor and callback scheduling still missing.",
+    "Wrapper cached-vector field renamed from initial_orientation_words to cached_vector_words because707420 overwrites it with pointXYZ.",
+    "Rust finite guards explicit; original nonfinite/fatal behavior not qualified.",
+    "No new client build, scene-source capture or audible PCM proof; prior client13 tests remain historical."
+  ]
+}

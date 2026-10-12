@@ -1,0 +1,53 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T13:24:14.339433+00:00",
+  "change": [
+    "Port actual FF1380 Bus B03530 initializer, verified virtual38=0 classification/flagbit1, registry1 selection,193-bucket hashing, previous-head link and wrapping count increment.",
+    "Preserve untouched200-byte node fields and initialize the exact native control-list words/default capacities after registration. Mandatory lock/unlock interfaces preserve ordering; wrong class and unresolved node identity fail before mutation."
+  ],
+  "validation": {
+    "new_targeted_tests_passed": 2,
+    "audio_regression_tests_passed": 258,
+    "failed": 0,
+    "session": 62856,
+    "terminal_exit_code": 0,
+    "native_initializer_registry_cases": 432,
+    "preparatory_native_bank_orchestration_cases": 2304,
+    "preparatory_native_factory_constructor_initializer_cases": 10,
+    "comparison": "Exact200 node bytes, selected registry bucket/count, unchanged other registry and native lock/unlock call sequence; IDs across modulo boundaries, prior heads, raw flags and count wrap.",
+    "log": "logs/audio-bus-registry-tests.log"
+  },
+  "sha256": {
+    "crates/core/src/audio_bus_registry.rs": "68983279888e0d489eef015b045f831c9a74db333d19820d72176009803d10f5",
+    "crates/core/src/lib.rs": "aaa60812a0c0cefb444ac8f01d27acf97e836e3e72d10e9f413eef824d9d2932",
+    "tools/probe_native_audio_bus_initializer.py": "2d50149794e68cc9ae9bb193d798d35859caf1f362774901d36e0e36dc5cfb41",
+    "tools/probe_native_audio_bus_bank_orchestration.py": "e6aa3df981f0836f7c77d663931e0222149e3092912c57ce685d8595692ed204",
+    "tools/probe_native_audio_bus_factory_initializer.py": "6c18e1d5cc61fec9e45c0df306238e2cbb700843453e9f4fc0ede382e0af10ab",
+    "data/4.20/audio_bus_initializer_contract.json": "48c489ff58138b90e837b21d0aea3113b1f1c6ad988bcd0a4d14a66a5f8e10b6",
+    "data/4.20/audio_bus_bank_orchestration_contract.json": "59c7915b0fb166f606053ce6737fd73477e0f89bbdb5d7159f65d9bdad2c894e",
+    "data/4.20/audio_bus_factory_initializer_contract.json": "1572052c0974f29df43873c7b73a4648c84a843357f3937c7036a77761dc682a",
+    "logs/audio-bus-initializer-probe.log": "6b07d702721635b9704e6f25c3f5351418ecf94a9cf1a626a107aa276ea35eb4",
+    "logs/audio-bus-bank-orchestration-probe.log": "e8f35c35d240e13c1bd31012e4f6bd2a1bd62c58be39ce02f7fee315b809b086",
+    "logs/audio-bus-factory-initializer-probe.log": "4bd183ec37d06678a630d0947c32c7e7187466d9a0f70846dd62a24f516e5e4d",
+    "logs/audio-bus-registry-tests.log": "b69ff1e423d50166f6fe576fe837967cf1729cb224e421ac518656f975f5580f",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "a125c13777f124c5645b1c5aa64b5240e74efad30488150c16ef661f577b51e4"
+  },
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "interfaces": [
+    "Initializer reference executes actual B03530/AFE420/AF6430 and FF1380 virtual38 unchanged; only OS locks adapted. Rust synchronization remains a mandatory caller interface.",
+    "Bank reference executes actual virtual144 B044E0 and B02430 control-list allocator/link/mutation logic; parent lookup/retain/attach/release and property/effects/RTPC/state/position loaders are explicit result interfaces consuming zero bytes. Fixture payload is not a complete native bank format.",
+    "Factory composition executes actual HIRC8 dispatcher/handler/factory/constructors and B03530 registration; reader/reserve/lookup/allocator/OS locks and virtual144 bank loading remain dependency interfaces."
+  ],
+  "findings": [
+    "Native bank loader updates the first matching control ID instead of appending a duplicate; updates preserve list position and allocator count.",
+    "Zero parent selects main/secondary bus roots using globals and raw bitC4. Nonzero parent lookup failure returns2; attachment result is propagated after release.",
+    "Property/effects/RTPC/state/position stages short-circuit on any result other than1; control allocation failure returns2."
+  ],
+  "limits": [
+    "Initializer is a qualified callable module; normal HIRC8 constructor/factory/bank resource creation is not yet connected in Rust.",
+    "Bank orchestration/control-list and factory composition are preparatory native evidence, not new Rust bank loading. Dependency loader bodies and real payload integration remain required.",
+    "Native registry synchronization/lifetime, duplicate registration/lookup/unregistration semantics and normal runtime ownership remain unqualified outside the proven insertion path.",
+    "No normal device/backend integration, normal client rebuild, audible verification or complete-project acceptance."
+  ],
+  "next_action": "Port actual Bus virtual144 B044E0 orchestration/control-list mutation from2304 native cases with mandatory parent/property/effects/RTPC/state/position loader dependencies; qualify/connect those bodies and real bank payloads. Port native constructor/factory registration composition from10 cases and integrate qualified432-case bus initializer with HIRC8 resource creation. Production flags/ownership, live state/RTPC/device lifecycle remain open."
+}

@@ -1,0 +1,12 @@
+from pathlib import Path
+r=Path('E:/OpenLeague')
+s=(r/'tools/probe_fow_registered_filter_generated.py').read_text(encoding='utf-8')
+s=s.replace('[0x6b41de,0x6b420a,0x6b439b]', '[0x6b4175,0x6b418f,0x6b41de,0x6b420a,0x6b439b]')
+s=s.replace('for presence,actor_tag,flag_ad,flag_118,flag_24,flag_2c,applied in itertools.product(', 'for source_tag,presence,actor_tag,flag_ad,flag_118,flag_24,flag_2c,applied in itertools.product([100,200,300],')
+s=s.replace('output+8*i,0,55+i,66,100,radius,','output+8*i,0,55+i,66,source_tag,radius,')
+s=s.replace('cases.append(dict(presence=presence,','cases.append(dict(source_tag=source_tag,presence=presence,')
+s=s.replace('0x6b41de,0x6b420a,0x6b439b,0x993d0f','0x6b4175,0x6b418f,0x6b41de,0x6b420a,0x6b439b,0x993d0f')
+s=s.replace('Local source tag100 and spectator false supplied at three virtual call sites;', 'Source tags100/200/300 with local tag100 and spectator false supplied at five virtual call sites;')
+s=s.replace('fow_registered_filter_contract.json','fow_team_filter_contract.json')
+(r/'tools/probe_fow_team_filter_generated.py').write_text(s,encoding='utf-8')
+exec(compile(s,'native non-spectator team filter','exec'))

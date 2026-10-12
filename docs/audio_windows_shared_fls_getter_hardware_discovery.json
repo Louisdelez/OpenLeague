@@ -1,0 +1,45 @@
+{
+  "saved_utc": "2026-10-09T20:27:58.313348+00:00",
+  "passed": true,
+  "complete": false,
+  "actual_windows_shared_fls_getter_cases": 12,
+  "actual_windows_critical_sections_used": true,
+  "runs": [
+    {
+      "target": "x86_64-pc-windows-msvc",
+      "pointer_width": 64,
+      "cases": 6,
+      "passed": true
+    },
+    {
+      "target": "i686-pc-windows-msvc",
+      "pointer_width": 32,
+      "cases": 6,
+      "passed": true
+    }
+  ],
+  "files_sha256": {
+    "tools\\hardware\\windows_shared_fls_getter\\case_0.tsv": "f932031c5c823c2eb2fdbfa1fee54f5467f1a4231e03c50a4420826cf383ba62",
+    "tools\\hardware\\windows_shared_fls_getter\\case_1.tsv": "68fd60cc58bf2e31ee7f45cfb7947dac52fc5ea66861d6fbd48857874c2bce24",
+    "tools\\hardware\\windows_shared_fls_getter\\case_2.tsv": "cb8356860736efaced4116b1ef608e8927673020f0d35e04ab353cce945c1ece",
+    "tools\\hardware\\windows_shared_fls_getter\\case_3.tsv": "d7e485269fbe2a763555a935303b6ad7d4fb9a37e790359868cc6433bfc36530",
+    "tools\\hardware\\windows_shared_fls_getter\\case_4.tsv": "b44727f08d7de73861d1eda170575daad79cd0c4ba678e09c1f67ebbe504b758",
+    "tools\\hardware\\windows_shared_fls_getter\\case_5.tsv": "f67cd0aaedf919e349f00bf31b9f139d3ce9c96f340c922e26e817ef24882604",
+    "tools\\hardware\\windows_shared_fls_getter\\probe.rs": "b40f79811fb099630710f73969fd1850e55688f56a44468cae1125c2a847f6e4",
+    "tools\\hardware\\windows_shared_fls_getter\\probe-64.exe": "21e67bc3f5b5220ccf77cf7da15bc9a8d4dd1e949e5fdb3ed6383acaa84d2264",
+    "tools\\hardware\\windows_shared_fls_getter\\probe-64.log": "3945ab83a908c987d44066cedd3858d0eadae16cf72984be5d45905b5ba73ee6",
+    "tools\\hardware\\windows_shared_fls_getter\\probe-32.exe": "d2ca01fa6ba3705ab685b249e389689a27c42ebdb4f2317775224e89e8bdf7bb",
+    "tools\\hardware\\windows_shared_fls_getter\\probe-32.log": "9812f6aa08cd4b97af4c143852131b7c5a144173de51a72dae3b369ed6c0e68b",
+    "crates\\core\\src\\audio_crt_windows_shared_fls.rs": "f0cb0371d1d57600f96e66e7b8c955c9107f9e0e6a8aff3f4f02c1e9d6826135",
+    "crates\\core\\src\\audio_crt_windows_fls_slot.rs": "9f5a15639d0c51fc21637c89bedb5035f0815d0f4d33f7d079676eae008cc1ac",
+    "crates\\core\\src\\audio_crt_thread_context.rs": "2819db814d818f49e66c0fecb244b7c13149d804499b14ba58614931756e13ca",
+    "crates\\core\\src\\audio_crt_thread_destructor.rs": "e83d88136d6ba1ce167fb0bad98231a312108b9e102369372479d6c7aedbd6c4",
+    "crates\\core\\src\\audio_crt_tls_value_wrappers.rs": "76b74801faa1d8311caba8c3f5007e12228cdc2765934837363ede1c190fa1fd",
+    "data\\4.20\\audio_crt_paired_thread_lifetime_preparation.json": "eeb8dcd1054e4a4170493ab749f612590fd58e8d2edcd6e49becd778f2da044c"
+  },
+  "limits": [
+    "Unchanged production shared slot/getter/constructor/destructor executed in x86/x64 processes. Native paired banks match after second-context creation and retirement; only actual OS slot index and second-thread ID normalized. Actual current thread ID separately checked. Existing getter returns original record without extra allocation and LastError97 is restored.",
+    "Actual Windows critical sections initialized with spin4000 flags0, enter/leave operations used by constructors/destructors and deleted after balanced release. Native canonical opaque bytes retain captures; real OS objects reside in separate host storage. This is an isolated explicit service provider, not yet production lock-bank/bootstrap integration.",
+    "Heap allocation/free boundary remains canonical memory adapter; normal client/worker connection, full root startup, static/dynamic lock lifecycle, security cookie and SEH not qualified."
+  ]
+}

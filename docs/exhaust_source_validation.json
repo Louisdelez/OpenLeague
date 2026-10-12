@@ -1,0 +1,90 @@
+{
+  "verified_at": "2026-10-03T14:43:46.906390+00:00",
+  "passed": true,
+  "native_source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerExhaust.inibin",
+  "native_sha256": "6a5abea4267a826834be6789b34d340db6839275c4cc580a8ff8d7111a0a4175",
+  "native_fields": {
+    "CastRange": "650.0000",
+    "Cooldown": "210.0000",
+    "Cooldown1": "210.0000",
+    "CanCastWhileDisabled": true
+  },
+  "menu_source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Menu\\fontconfig_en_US.txt",
+  "menu_sha256": "315319cfeb654fe3c404de9551c95e16ee046f5f291de9c10583ad10ab97787d",
+  "native_description": "tr \"game_spell_description_SummonerExhaust\" = \"Exhausts target enemy champion, reducing their Movement Speed and Attack Speed by 30%, their Armor and Magic Resist by 10, and their damage dealt by 40% for 2.5 seconds.\"",
+  "community_source": "D:\\LeagueOfLegendsV2\\4.20\\GameServer\\Content\\LeagueSandbox-Scripts\\Buffs\\Summoners\\SummonerExhaustDebuff.cs",
+  "community_sha256": "c13c8ff86d22a8ebe0f68e9f0b2a92ecc6c1de98655befb362f21523da76631a",
+  "community_missing_damage_reduction": true,
+  "historical_primary_document_copy": {
+    "author": "Riot patch communiqu\u00e9 republished by NERFPLZ",
+    "patch": "4.13",
+    "url": "https://www.nerfplz.com/2014/07/official-patch-413-notes-released.html",
+    "facts": [
+      "Damage reduction changed from 50 to 40 percent",
+      "Added 10 flat armor and magic resistance reduction"
+    ]
+  },
+  "limits": [
+    "Original native Riot server spell body unavailable.",
+    "Duration/CC split, flat defensive modifier ordering, AS bonus subtraction, true damage exemptions, impact timing, range and refresh policies require historical runtime qualification.",
+    "Native particles/audio and human targeting not integrated."
+  ],
+  "native_lua": [
+    {
+      "source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerExhaust.luaobj",
+      "sha256": "7bc7595f2d87ee6acef8fdeab35b5f22e09dd7b975ad001eb6dd648246954618",
+      "child_functions": 0,
+      "initialization": {
+        "globals": {
+          "NotSingleTargetSpell": true,
+          "DoesntBreakShields": true,
+          "DoesntTriggerSpellCasts": true,
+          "CastingBreaksStealth": true,
+          "BuffTextureName": "Summoner_Exhaust.dds",
+          "BuffName": "SummonerExhaustDebuff",
+          "AutoBuffActivateEffect": "Global_ss_exhaust.troy",
+          "AutoBuffActivateAttachBoneName": "Buffbone_Glb_Ground_Loc"
+        },
+        "stopped": null
+      }
+    },
+    {
+      "source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerExhaustDebuff.luaobj",
+      "sha256": "ba4876807c3403fb5f9f1e1cb6fb888ba832e487ada1a4f6873e95feedf5771f",
+      "child_functions": 0,
+      "initialization": {
+        "globals": {
+          "BuffTextureName": "35.dds",
+          "BuffName": "SummonerExhaustDebuff"
+        },
+        "stopped": null
+      }
+    },
+    {
+      "source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerExhaustSlow.luaobj",
+      "sha256": "a7a6e468755313c06df56d2f9bc936c274088c574b95157d5f335c78deb29504",
+      "child_functions": 0,
+      "initialization": {
+        "globals": {
+          "BuffTextureName": "Summoner_Exhaust.dds",
+          "BuffName": "SummonerExhaustSlow",
+          "AutoBuffActivateEffect": "GLOBAL_SLOW.TROY",
+          "PopupMessage1": "game_floatingtext_Slowed"
+        },
+        "stopped": null
+      }
+    }
+  ],
+  "compiled_rule_checks": 7,
+  "mismatches": [],
+  "native_server_body_recovered": false,
+  "native_effect_metadata": {
+    "primary_effect": "Global_ss_exhaust.troy",
+    "attachment": "Buffbone_Glb_Ground_Loc",
+    "slow_effect": "GLOBAL_SLOW.TROY",
+    "DoesntBreakShields": true,
+    "DoesntTriggerSpellCasts": true,
+    "CastingBreaksStealth": true,
+    "integration": "Native metadata audited; particle runtime/spell-shield/cast-trigger/stealth systems remain incomplete."
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "saved_utc": "2026-10-09T20:12:49.030057+00:00",
+  "passed": true,
+  "complete": false,
+  "audio_tests_passed": 529,
+  "actual_windows_shared_fls_full_core_paired_cases": 48,
+  "actual_windows_shared_fls_full_core_getter_cases": 6,
+  "actual_windows_shared_fls_getter_hardware_cases": 12,
+  "actual_windows_shared_fls_native_pair_hardware_cases": 96,
+  "existing_fixture_hashes_preserved": 59,
+  "test_log": "logs/audio-windows-shared-fls-getter-tests.log",
+  "test_executable": "target\\debug\\deps\\openleague_core-92fab3f20accd79c.exe",
+  "test_executable_sha256": "9fd1c4f8cc81bcf5de2fe0139cd5d0a43e31790e30b5dfc93517c239b62aa0f7",
+  "previous_receipt": "docs/audio_windows_shared_fls_validation.json",
+  "next_action": "Connect production real Windows critical-section/heap services and original global CRT startup and cleanup to the shared FLS provider. Cleanup must execute FlsFree outside the canonical context mutex so same-caller callbacks can access state, then resume original lock deletion/global index retirement. Finish callback destructor panic/error and worker concurrency tests with actual providers, and connect normal client audio worker dispatch/progression/retirement/physical playback. Preserve full24-domain114-task37-requirement scope; normal client integration and complete audio remain unproved.",
+  "evidence": [
+    "Production shared FLS now publishes allocated OS index into original CRT global and executes actual reconstructed CA91A9 getter/CA9218 constructor. Encoded TLS-value wrappers validate decoded canonical function identities and map logical record payloads to real per-thread Windows FLS values. Constructor binding occurs under the existing shared-state lock without recursive state-lock acquisition. Original LastError save/restore, calloc NULL branch, existing-record reuse, actual current thread ID and shared refcount changes retained.",
+    "Four full-core tests added with actual crate types:48 paired native captures through actual OS shared FLS callbacks, all lock/free entry bytes, two retirement orders, final banks, free identities and callback affinity;6 actual worker-context creations compare original service entries/intermediate banks after explicit normalization of OS slot index/second-thread ID; missing publication/incorrect dispatch/NULL allocation paths; same-thread busy callback failure without false retirement.",
+    "Actual unchanged production getter/constructor tested in12 x86/x64 cases with initialized real Windows critical sections, spin4000 flags0, actual enter/leave/delete services. Original paired constructor/final banks match after explicitly normalizing OS slot index and second-thread ID; actual worker ID independently checked. Isolated service boundary uses canonical allocation/free adapter, not complete native CRT heap.",
+    "Shared component24 and paired callback96 x86/x64 hardware checks replayed after production source addition. Full529 audio tests pass,59 historical runtime fixture hashes unchanged, new paired fixture loaded at runtime and explicitly hashed. No new domain or task closure."
+  ],
+  "limits": [
+    "Original root global/static-lock startup and cleanup providers not yet connected. publish_index is explicit adapter publication, not a complete bootstrap. TLS fallback dispatch is deliberately unsupported by this FLS-only adapter rather than silently substituted.",
+    "Full-core test locks/heap are explicit canonical service boundaries. Real OS critical sections in the separate hardware probe are not a production lock-bank provider, full contention proof or normal client audio worker integration.",
+    "FlsFree on a caller holding canonical state reports StateBusy; orchestration must release that state lock before OS cleanup. Native SEH/security-cookie, full heap ownership, dynamic/static critical-section teardown and arbitrary fiber migration remain open.",
+    "Construction contexts originate from verified native root-startup captures. Code-generated source contexts and normal client audio dispatch/progression/retirement/physical playback are not yet proved."
+  ],
+  "sources": [
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-initializecriticalsectionex",
+      "use": "Stable initialized host critical-section storage; spin count and flags semantics."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-deletecriticalsection",
+      "use": "Delete only unowned critical sections after balanced releases and worker completion."
+    }
+  ],
+  "files_sha256": {
+    "docs/audio_windows_shared_fls_component_hardware_discovery.json": "0ace4474de26b3f4f5e99608105ca6b3a1160f4928b8433d38888c19f4ad8cda",
+    "docs/audio_windows_shared_fls_native_pair_hardware_discovery.json": "4d41dbd8cf39398dc4ae1f57ea1434f4b139d518d432dcbc143fc83bb85065c3",
+    "docs/audio_windows_shared_fls_getter_hardware_discovery.json": "fa6e20949a2e0b4cdcc9369aa673eea3dadd7c248f49a93bc7738a54972b328a",
+    "logs/audio-windows-shared-fls-getter-tests.log": "fdbd1129920fab8886cc905c22486a4fa26b93dec00036d0de07f5ee9a1676f7",
+    "crates/core/src/audio_crt_windows_shared_fls.rs": "18ff2477864d18c5bd756bbe0d1f544a568e76dddba91cadce51e2e711621c16",
+    "crates/core/src/audio_crt_windows_shared_fls_tests.rs": "65eeb98146bd66ad0bf2a74b167fb35550b2b0872f3c71e83a0a534502930711",
+    "data/4.20/audio_crt_paired_thread_lifetime_preparation.json": "eeb8dcd1054e4a4170493ab749f612590fd58e8d2edcd6e49becd778f2da044c",
+    "tools/implement_audio_windows_shared_fls_getter.py": "9b1181e5398dc50f74229a142aad9f17d4a9a21bc6b35e052120e4058805d205",
+    "tools/implement_audio_windows_shared_fls_tests.py": "ead33c499459407e88fa44708b42d9ceb0e63335eec34774f1950917bc7c39be",
+    "tools/fix_audio_windows_shared_fls_getter_identity.py": "f00feea1f2b4bff6a66dffcecc769970ec9b460ab974d6e08e083adb6a402c42",
+    "tools/probe_windows_shared_fls_getter.py": "55e0c1b94de736bc4ce8612d2e40d8053b7a58dbab3afa9a200bd28486bca4f0",
+    "tools/record_audio_windows_shared_fls_getter_progress.py": "e4a8384164e66559132a3defb249a169c58e1e3f589be6377bce21ae543d593c"
+  }
+}

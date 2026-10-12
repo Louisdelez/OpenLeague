@@ -1,0 +1,202 @@
+{
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "kind": "static table assignments and constant type getters",
+  "classes": [
+    {
+      "vtable": "0xff0420",
+      "type_value": 7,
+      "type_getter": "0x8700d0",
+      "reader": "0xae28d0",
+      "assignments": [
+        {
+          "address": "0xae1d97",
+          "instruction": "dword ptr [esi], 0xff0420"
+        },
+        {
+          "address": "0xae1ee7",
+          "instruction": "dword ptr [esi], 0xff0420"
+        }
+      ]
+    },
+    {
+      "vtable": "0xff0594",
+      "type_value": 8,
+      "type_getter": "0x574a60",
+      "reader": "0xae3250",
+      "assignments": [
+        {
+          "address": "0xae2cce",
+          "instruction": "dword ptr [esi], 0xff0594"
+        },
+        {
+          "address": "0xae2d56",
+          "instruction": "dword ptr [esi], 0xff0594"
+        }
+      ]
+    },
+    {
+      "vtable": "0xff06f0",
+      "type_value": 9,
+      "type_getter": "0xa1f510",
+      "reader": "0xae3870",
+      "assignments": [
+        {
+          "address": "0xae34e2",
+          "instruction": "dword ptr [esi], 0xff06f0"
+        },
+        {
+          "address": "0xae3529",
+          "instruction": "dword ptr [esi], 0xff06f0"
+        }
+      ]
+    },
+    {
+      "vtable": "0xff0850",
+      "type_value": 6,
+      "type_getter": "0x87a950",
+      "reader": "0x5e4c90",
+      "assignments": [
+        {
+          "address": "0xae3dce",
+          "instruction": "dword ptr [esi], 0xff0850"
+        },
+        {
+          "address": "0xae3e53",
+          "instruction": "dword ptr [esi], 0xff0850"
+        }
+      ]
+    },
+    {
+      "vtable": "0xff1754",
+      "type_value": 11,
+      "type_getter": "0x868ac0",
+      "reader": "0xb1cb80",
+      "assignments": [
+        {
+          "address": "0xb1c746",
+          "instruction": "dword ptr [esi], 0xff1754"
+        },
+        {
+          "address": "0xb1c884",
+          "instruction": "dword ptr [esi], 0xff1754"
+        }
+      ]
+    },
+    {
+      "vtable": "0xff189c",
+      "type_value": 2,
+      "type_getter": "0x7838b0",
+      "reader": "0xb1dfe0",
+      "assignments": [
+        {
+          "address": "0xb1d37e",
+          "instruction": "dword ptr [esi], 0xff189c"
+        },
+        {
+          "address": "0xb1d406",
+          "instruction": "dword ptr [esi], 0xff189c"
+        }
+      ]
+    },
+    {
+      "vtable": "0xff1cd8",
+      "type_value": 3,
+      "type_getter": "0x75a270",
+      "reader": "0xb228e0",
+      "assignments": [
+        {
+          "address": "0xb22669",
+          "instruction": "dword ptr [esi], 0xff1cd8"
+        },
+        {
+          "address": "0xb226c7",
+          "instruction": "dword ptr [esi], 0xff1cd8"
+        }
+      ]
+    },
+    {
+      "vtable": "0xff1e20",
+      "type_value": 1,
+      "type_getter": "0x5eb4b0",
+      "reader": "0x5e4c90",
+      "assignments": [
+        {
+          "address": "0xb22c1b",
+          "instruction": "dword ptr [esi], 0xff1e20"
+        }
+      ]
+    },
+    {
+      "vtable": "0xff1f70",
+      "type_value": 12,
+      "type_getter": "0x83bb30",
+      "reader": "0xb02630",
+      "assignments": [
+        {
+          "address": "0xb22ca6",
+          "instruction": "dword ptr [esi], 0xff1f70"
+        },
+        {
+          "address": "0xb22d11",
+          "instruction": "dword ptr [esi], 0xff1f70"
+        }
+      ]
+    },
+    {
+      "vtable": "0xff20b8",
+      "type_value": 4,
+      "type_getter": "0x79ce80",
+      "reader": "0xb238b0",
+      "assignments": [
+        {
+          "address": "0xb22e54",
+          "instruction": "dword ptr [edi], 0xff20b8"
+        },
+        {
+          "address": "0xb22f27",
+          "instruction": "dword ptr [edi], 0xff20b8"
+        }
+      ]
+    },
+    {
+      "vtable": "0xff2218",
+      "type_value": 5,
+      "type_getter": "0x874300",
+      "reader": "0xb24c90",
+      "assignments": [
+        {
+          "address": "0xb24ad3",
+          "instruction": "dword ptr [ebx], 0xff2218"
+        },
+        {
+          "address": "0xb24c47",
+          "instruction": "dword ptr [esi], 0xff2218"
+        }
+      ]
+    },
+    {
+      "vtable": "0xff23a8",
+      "type_value": 10,
+      "type_getter": "0x6009c0",
+      "reader": "0xb02630",
+      "assignments": [
+        {
+          "address": "0xb257b8",
+          "instruction": "dword ptr [esi], 0xff23a8"
+        },
+        {
+          "address": "0xb25947",
+          "instruction": "dword ptr [esi], 0xff23a8"
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "Shared retainAFE1A0/releaseB00180 establishes table alignment; instruction assignments located for concrete type tables.",
+    "Do not equate internal virtual38 type values with bank HIRC tags without factory evidence."
+  ],
+  "limits": [
+    "Assignments can occur in constructors or destructors; individual functions require classification.",
+    "Reader entrypoints not executed; semantic sound/container mapping remains open."
+  ]
+}

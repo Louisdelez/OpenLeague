@@ -1,0 +1,47 @@
+{
+  "updated_utc": "2026-10-06T06:45:47.602920+00:00",
+  "complete": false,
+  "native_sequence_cases": 2016,
+  "native_sequence_addresses": 233,
+  "native_prepare_cases": 256,
+  "native_prepare_addresses": 145,
+  "font_raster_tests_passed": 24,
+  "client_source_tests_last_passed": 319,
+  "last_visually_qualified_application_tests": 319,
+  "last_visually_qualified_application_font_tests": 20,
+  "native_prepared_cell_builder_ported": true,
+  "native_sequence_ported": true,
+  "native_widget_runtime_connected": false,
+  "application_rebuilt_after_sequence_port": false,
+  "artifacts": [
+    "data/4.20/native_font_sequence_contract.json",
+    "data/4.20/native_font_prepare_contract.json",
+    "crates/font-raster/src/native_font_sequence.rs",
+    "crates/font-raster/src/lib.rs",
+    "tools/qualify_native_font_sequence.py",
+    "tools/qualify_native_font_prepare.py",
+    "logs/native-font-sequence-raster-tests.log",
+    "logs/native-font-prepare-raster-tests.log"
+  ],
+  "hashes": {
+    "data/4.20/native_font_sequence_contract.json": "1692665b8edf913ddad8ab9716fcee8eabbe08f0fc2ef13723afd4a92d44867e",
+    "data/4.20/native_font_prepare_contract.json": "dc1d59013b4e42e02ce7d2659d03871e34b89029c2e92b8cc5019730ad921c02",
+    "crates/font-raster/src/native_font_sequence.rs": "c905824b793570b4b4b0fcb723a0b04bc1c63d7166f031cb503164ae17b3427a",
+    "crates/font-raster/src/lib.rs": "df07f997af7cf024db330273ee5f827e3c57ead4652f152c242c26a192f7aa01",
+    "tools/qualify_native_font_sequence.py": "0da4d180b4327b097c0af585c8847061f0d13478662ca40da251bf39a11857a8",
+    "tools/qualify_native_font_prepare.py": "456fc1f9aa854522dce81641bb3df268f38e2a1fed27fa04c6c3b403abd9edfd",
+    "logs/native-font-sequence-raster-tests.log": "acf0d5a60f7469fafc899b20b9386f671eaed90f106babc85edae7d946d4155a",
+    "logs/native-font-prepare-raster-tests.log": "2ef1dee4e3f0ba46a71e67fddb9b1f3b437685e6f502078b572c884fbce5890a"
+  },
+  "limits": [
+    "Input Text list, glyph vector, metrics, scale and kerning virtual providers supplied. Glyph-vector producer/wrapping/clipping, original allocation/failure/lifetime and ordinary widgets remain open.",
+    "Selected patterns, finite origins, horizontal0..2/vertical0..3, integer advances13/17, scales1/.75 and1/.5; negative/overflow advances and extreme float/x87 rounding not qualified.",
+    "Native output vector capacity reserved; no growth/reallocation failure evidence. No original framebuffer reference.",
+    "Native cache lookup adapted to supplied glyph result/miss. Original string setter truncates at firstNUL separately; direct stored-length probe includesNUL.",
+    "Reserved vector capacity avoids growth/reallocation/error lifetimes. No high-level wrapping/clipping parser or ordinary HUD widgets proof.",
+    "Selected dimensions/scales stay in CVTTSS2SI range; overflow/nonfinite conversion remains unqualified.",
+    "Port uses f64 for selected x87 multiply/add operations; qualified cases match bit-for-bit, extreme/double-rounding/x87-control configurations remain open.",
+    "Last visually inspected application remains319client/20backend version. New backend24tests is not rebuilt into ordinary application; real glyph-widget runtime is absent."
+  ],
+  "next_action": "Qualifier les champs de métriques natifs du constructeur de face, raccorder préparation/séquence/quads aux glyphes source du client, puis dessiner les textes dans les widgets HUD réels et vérifier les exécutables Vulkan/DX12. Continuer tous les autres domaines du plan."
+}

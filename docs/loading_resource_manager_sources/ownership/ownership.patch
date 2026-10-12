@@ -1,0 +1,696 @@
+--- a/crates/core/src/audio_loading_owned_string.rs
++++ b/crates/core/src/audio_loading_owned_string.rs
+@@ -42,6 +42,17 @@
+     Detached(u32),
+     None,
+ }
++/// The normalized key uses564900, unlike the caller name's discard-only
++/// destructor. Each successful reset write commits one step; a later failure
++/// keeps the descriptor lease alive without restoring freed heap ownership.
++#[derive(Debug, Clone, Copy, PartialEq, Eq)]
++pub enum Reset {
++    NotRequired,
++    Capacity,
++    Length,
++    Terminator,
++    Complete,
++}
+ #[derive(Debug, PartialEq, Eq)]
+ #[must_use = "The caller must finish or retain this temporary's ownership"]
+ pub struct Temporary {
+@@ -49,22 +60,31 @@
+     authority: Authority,
+     pending: Option<u32>,
+     phase: Phase,
++    reset: Reset,
+ }
+ impl Temporary {
+     /// Transfer a valid caller-owned descriptor after successful service_name.
+     /// No allocation/read/write is performed. Never use this for shared cache
+     /// state; the descriptor is private and discarded after its caller returns.
+     pub fn new(address: u32) -> Self {
+-        Self { address, authority: Authority::Descriptor, pending: None, phase: Phase::Original }
+-    }
++        Self { address, authority: Authority::Descriptor, pending: None, phase: Phase::Original, reset: Reset::NotRequired }
++    }
++    /// Transfer an already initialized, exclusive descriptor whose cleanup is
++    ///564900: optional free, then capacity15, length0 and first byte0.
++    pub fn new_reset(address:u32)->Self { Self {reset:Reset::Capacity,..Self::new(address)} }
+     pub fn address(&self) -> u32 { self.address }
+     pub fn authority(&self) -> Authority { self.authority }
+     pub fn pending(&self) -> Option<u32> { self.pending }
+     pub fn phase(&self) -> Phase { self.phase }
+-    pub fn is_retired(&self) -> bool { self.authority == Authority::None && self.pending.is_none() }
+-
+-    /// No descriptor reset. On failure, retained ownership stays in this guard
+-    /// and may be retried only through the explicit atomic-release contract.
++    pub fn reset(&self) -> Reset { self.reset }
++    pub fn is_retired(&self) -> bool {
++        self.authority == Authority::None && self.pending.is_none()
++            && matches!(self.reset,Reset::NotRequired|Reset::Complete)
++    }
++
++    /// Discard-only for new(), or resumable564900 reset for new_reset(). A
++    /// failure retains heap ownership or unfinished writes in this guard; its
++    /// descriptor lease must survive until is_retired() becomes true.
+     pub fn retire(&mut self, b: &mut impl Boundary) -> Result<(), Error> {
+         let mut result = Ok(());
+         if let Some(pointer) = self.pending {
+@@ -87,9 +107,76 @@
+         };
+         if attempt.is_ok() { self.authority=Authority::None; }
+         result=combine(result,attempt);
++        if self.authority==Authority::None && self.pending.is_none() {
++            let reset_result=(|| {
++                if self.reset==Reset::Capacity {
++                    put(b,self.address,20,15)?;self.reset=Reset::Length;
++                }
++                if self.reset==Reset::Length {
++                    put(b,self.address,16,0)?;self.reset=Reset::Terminator;
++                }
++                if self.reset==Reset::Terminator {
++                    byte(b,self.address,0,0)?;self.reset=Reset::Complete;
++                }
++                Ok(())
++            })();
++            result=combine(result,reset_result);
++        }
+         if self.is_retired() { self.phase=Phase::Retired; }
+         result
+     }
++}
++
++/// Fixed-capacity ownership reserved on the caller stack before acquisition.
++/// Slot order is construction order; cleanup runs in reverse and attempts
++/// every owner even if an earlier cleanup fails. No Vec growth can lose a guard.
++#[derive(Debug, PartialEq, Eq)]
++#[must_use = "Every occupied slot and its descriptor lease must be finished or retained"]
++pub struct Group<const N:usize> { slots:[Option<Temporary>;N] }
++pub struct Vacant<'a> { slot:&'a mut Option<Temporary> }
++impl<'a> Vacant<'a> {
++    /// Capacity/slot availability was checked before constructing the owner.
++    /// Adoption itself performs no allocation, read, write or fallible action.
++    pub fn adopt(self,owner:Temporary)->&'a mut Temporary { self.slot.insert(owner) }
++}
++impl<const N:usize> Group<N> {
++    pub fn new(slots:[Option<Temporary>;N])->Self {Self {slots}}
++    pub fn get(&self,index:usize)->Option<&Temporary> {self.slots.get(index)?.as_ref()}
++    pub fn get_mut(&mut self,index:usize)->Option<&mut Temporary> {self.slots.get_mut(index)?.as_mut()}
++    pub fn vacant(&mut self,index:usize)->Result<Vacant<'_>,Error> {
++        let slot=self.slots.get_mut(index).ok_or(Error::Boundary("temporary group slot is out of range"))?;
++        if slot.is_some(){return Err(Error::Boundary("temporary group slot is already owned"));}
++        Ok(Vacant {slot})
++    }
++    pub fn remaining_count(&self)->usize {self.slots.iter().filter(|s|s.is_some()).count()}
++    pub fn into_array(self)->[Option<Temporary>;N] {self.slots}
++    pub fn retire(&mut self,b:&mut impl Boundary)->[Option<Error>;N] {
++        let mut errors=std::array::from_fn(|_|None);
++        for index in (0..N).rev() {
++            if let Some(owner)=&mut self.slots[index] {
++                errors[index]=owner.retire(b).err();
++                if owner.is_retired(){self.slots[index]=None;}
++            }
++        }
++        errors
++    }
++}
++#[derive(Debug, PartialEq, Eq)]
++#[must_use = "Retain all remaining guards and their descriptor leases before reporting"]
++pub struct GroupFailure<const N:usize> {
++    pub primary:Option<Error>,
++    /// First cleanup errors stay separate by owner, even after successful retry.
++    pub cleanup:[Option<Error>;N],
++    pub remaining:Group<N>,
++}
++pub fn finish_group<T,const N:usize>(
++    b:&mut impl Boundary,mut owners:Group<N>,primary:Result<T,Error>,
++)->Result<T,GroupFailure<N>> {
++    let cleanup=owners.retire(b);
++    if cleanup.iter().all(Option::is_none) {
++        if let Ok(value)=primary {return Ok(value);}
++    }
++    Err(GroupFailure {primary:primary.err(),cleanup,remaining:owners})
+ }
+ 
+ /// The caller must retain `remaining` on cleanup failure. Dropping or formatting
+--- a/crates/core/src/audio_loading_owned_string_tests.rs
++++ b/crates/core/src/audio_loading_owned_string_tests.rs
+@@ -3,7 +3,7 @@
+ use crate::audio_announcer_registry_init::{self as init,OwnedMemory};
+ use crate::audio_announcer_registry_remove::Backend as Free;
+ use serde_json::{json,Value};
+-use std::collections::{BTreeMap,VecDeque};
++use std::collections::{BTreeMap,BTreeSet,VecDeque};
+ fn n(v:&Value)->u32 {v.as_u64().unwrap() as u32}
+ fn decode(s:&str)->Vec<u8> {s.as_bytes().chunks_exact(2).map(|b|u8::from_str_radix(std::str::from_utf8(b).unwrap(),16).unwrap()).collect()}
+ fn fixture()->Value {serde_json::from_str(&crate::audio_test_fixture("data/4.20/loading_owned_string_probe.json")).unwrap()}
+@@ -12,7 +12,7 @@
+ struct Host {
+     memory:OwnedMemory,live:BTreeMap<u32,u32>,queue:VecDeque<Value>,old:u32,
+     released:Vec<u32>,attempted:Vec<u32>,events:Vec<Value>,fault:Option<Fault>,
+-    seen:u32,fail_release:Option<u32>,release_failed:bool,
++    seen:u32,fail_release:Option<u32>,release_failed:bool,blocked:BTreeSet<u32>,
+ }
+ impl Host {
+     fn bytes(&self,p:u32,size:u32)->Vec<u8> {(p..p+size).map(|p|self.memory.read_byte(p).unwrap()).collect()}
+@@ -46,7 +46,8 @@
+     fn write_word(&mut self,p:u32,value:u32)->Result<(),removal::Error> {Storage::write_word(self,p,value).map_err(removal::Error::Owned)}
+     fn deallocator(&mut self)->Result<Deallocator,removal::Error> {self.events.push(json!(["route"]));Ok(Deallocator::Standard)}
+     fn free(&mut self,p:u32,_:Deallocator)->Result<(),removal::Error> {
+-        self.attempted.push(p);
++        self.attempted.push(p);self.events.push(json!(["free",p]));
++        if self.blocked.contains(&p){return Err(removal::Error::Backend("blocked group owner"));}
+         if self.fail_release==Some(p) && !self.release_failed {self.release_failed=true;return Err(removal::Error::Backend("injected atomic release failure"));}
+         assert!(self.live.contains_key(&p),"double free or unowned release {p:08x}");
+         self.memory.release(p).map_err(removal::Error::Owned)?;self.live.remove(&p);self.released.push(p);Ok(())
+@@ -65,7 +66,7 @@
+ fn host(c:&Value)->Host {
+     let mut b=Host {memory:OwnedMemory::new(0x38000000,n(&c["fill"]) as u8),live:BTreeMap::new(),queue:VecDeque::new(),
+         old:c["destination_heap"]["pointer"].as_u64().unwrap_or(0) as u32,released:vec![],attempted:vec![],events:vec![],fault:None,seen:0,
+-        fail_release:None,release_failed:false};
++        fail_release:None,release_failed:false,blocked:BTreeSet::new()};
+     for (p,hex) in [(n(&c["source"]),c["source_descriptor_hex"].as_str().unwrap()),
+                     (n(&c["destination"]),c["destination_descriptor_hex"].as_str().unwrap())] {
+         b.memory.reserve_at(p,24).unwrap();b.set(p,&decode(hex));
+@@ -176,3 +177,106 @@
+         assert_eq!(b.released,vec![raw,old]);assert_eq!(b.bytes(p,24),descriptor);assert_eq!(b.live.len(),1);
+     }
+ }
++
++fn group_host()->Host {
++    Host {memory:OwnedMemory::new(0x39000000,0xa5),live:BTreeMap::new(),queue:VecDeque::new(),old:0,
++        released:vec![],attempted:vec![],events:vec![],fault:None,seen:0,fail_release:None,
++        release_failed:false,blocked:BTreeSet::new()}
++}
++fn group_string(b:&mut Host,p:u32,raw:Option<u32>)->Temporary {
++    b.memory.reserve_at(p,24).unwrap();
++    if let Some(raw)=raw {
++        b.memory.reserve_at(raw,32).unwrap();assert!(b.live.insert(raw,32).is_none());
++        Storage::write_word(&mut b.memory,p,raw).unwrap();
++        Storage::write_word(&mut b.memory,p+16,20).unwrap();Storage::write_word(&mut b.memory,p+20,31).unwrap();
++    }else {
++        Storage::write_word(&mut b.memory,p+16,3).unwrap();Storage::write_word(&mut b.memory,p+20,15).unwrap();b.set(p,b"AbC\0");
++    }
++    Temporary::new(p)
++}
++#[test]
++fn audio_loading_owned_group_preserves_two_cleanup_failures_and_retries_each_owner_independently() {
++    let mut b=group_host();let name=0x31001000;let key=0x31002000;let nr=0x32001000;let kr=0x32002000;
++    let caller=group_string(&mut b,name,Some(nr));let _=group_string(&mut b,key,Some(kr));
++    b.blocked.extend([nr,kr]);
++    let owners=Group::new([Some(caller),Some(Temporary::new_reset(key))]);
++    let mut failure=finish_group(&mut b,owners,Err::<(),_>(Error::Boundary("primary cache failure"))).unwrap_err();
++    assert_eq!(failure.primary,Some(Error::Boundary("primary cache failure")));
++    let blocked=||Error::Free(removal::Error::Backend("blocked group owner"));
++    assert_eq!(failure.cleanup,[Some(blocked()),Some(blocked())]);
++    assert_eq!(failure.remaining.remaining_count(),2);assert_eq!(b.attempted,vec![kr,nr]);
++    assert_eq!(b.live.len(),2);assert!(b.released.is_empty());
++    // Key is still blocked. The name must nevertheless retire in this retry.
++    b.blocked.remove(&nr);let retry=failure.remaining.retire(&mut b);
++    assert!(retry[0].is_none()&&retry[1].is_some());assert_eq!(failure.remaining.remaining_count(),1);
++    assert!(failure.remaining.get(0).is_none());assert_eq!(b.released,vec![nr]);
++    let before=b.events.len();b.blocked.remove(&kr);
++    assert_eq!(failure.remaining.retire(&mut b),[None,None]);assert_eq!(failure.remaining.remaining_count(),0);
++    assert_eq!(b.released,vec![nr,kr]);assert_eq!(b.attempted,vec![kr,nr,kr,nr,kr]);
++    assert!(b.events[before..].iter().all(|e|e!=&json!(["read",name+20,4])),"retired name must not be reread");
++    assert_eq!(failure.primary,Some(Error::Boundary("primary cache failure")));
++    assert!(failure.cleanup.iter().all(Option::is_some),"original cleanup errors survive retry");
++    assert!(b.live.is_empty());
++}
++#[test]
++fn audio_loading_owned_group_retains_reset_only_key_after_each_fallible_reset_write() {
++    for heap in [false,true] {for (address,width,expected_reset) in [
++        (0x31002014,4,Reset::Capacity),(0x31002010,4,Reset::Length),(0x31002000,1,Reset::Terminator),
++    ] {
++        let mut b=group_host();let name=0x31001000;let key=0x31002000;let nr=0x32001000;let kr=0x32002000;
++        let caller=group_string(&mut b,name,Some(nr));let _=group_string(&mut b,key,heap.then_some(kr));
++        b.fault=Some(Fault {address,width,occurrence:1,after_old_free:false});
++        let owners=Group::new([Some(caller),Some(Temporary::new_reset(key))]);
++        let mut failure=finish_group(&mut b,owners,Ok(())).unwrap_err();
++        assert_eq!(failure.primary,None);assert_eq!(failure.cleanup[0],None);
++        assert_eq!(failure.cleanup[1],Some(primary_write_error()));assert_eq!(failure.remaining.remaining_count(),1);
++        let key_owner=failure.remaining.get(1).unwrap();assert_eq!(key_owner.authority(),Authority::None);
++        assert_eq!(key_owner.reset(),expected_reset);assert!(!key_owner.is_retired());
++        assert!(b.live.is_empty(),"only reset writes, no heap ownership, remain");
++        assert_eq!(b.released,if heap {vec![kr,nr]}else{vec![nr]});
++        let before=b.events.len();let frees=b.attempted.len();
++        assert_eq!(failure.remaining.retire(&mut b),[None,None]);
++        assert_eq!(failure.remaining.remaining_count(),0);assert_eq!(b.attempted.len(),frees);
++        assert!(b.events[before..].iter().all(|e|e[0]=="write"),"retry must not reread a retired descriptor or route");
++        let expected=match expected_reset {
++            Reset::Capacity=>vec![json!(["write",key+20,4]),json!(["write",key+16,4]),json!(["write",key,1])],
++            Reset::Length=>vec![json!(["write",key+16,4]),json!(["write",key,1])],
++            Reset::Terminator=>vec![json!(["write",key,1])],_=>unreachable!(),
++        };
++        assert_eq!(b.events[before..],expected);assert_eq!(b.memory.word(key+20).unwrap(),15);
++        assert_eq!(b.memory.word(key+16).unwrap(),0);assert_eq!(b.memory.read_byte(key).unwrap(),0);
++    }}
++}
++#[test]
++fn audio_loading_owned_group_success_obeys_key_reset_then_name_discard_and_rejects_occupied_slot() {
++    let mut b=group_host();let name=0x31001000;let key=0x31002000;let nr=0x32001000;let kr=0x32002000;
++    let caller=group_string(&mut b,name,Some(nr));let _=group_string(&mut b,key,Some(kr));
++    let original=b.bytes(name,24);let mut group=Group::new([Some(caller),None]);
++    assert!(group.vacant(0).is_err());assert!(group.vacant(2).is_err());
++    group.vacant(1).unwrap().adopt(Temporary::new_reset(key));
++    let start=b.events.len();assert_eq!(group.retire(&mut b),[None,None]);
++    assert_eq!(b.events[start..],vec![json!(["read",key+20,4]),json!(["route"]),json!(["read",key,4]),json!(["free",kr]),
++        json!(["write",key+20,4]),json!(["write",key+16,4]),json!(["write",key,1]),
++        json!(["read",name+20,4]),json!(["route"]),json!(["read",name,4]),json!(["free",nr])]);
++    assert_eq!(b.bytes(name,24),original);assert_eq!(group.remaining_count(),0);
++    let after=b.events.len();assert_eq!(group.retire(&mut b),[None,None]);assert_eq!(b.events.len(),after);
++    assert!(b.live.is_empty());
++}
++#[test]
++fn audio_loading_owned_group_keeps_pending_key_allocation_and_original_name_on_assignment_failure() {
++    let proof=fixture();let c=proof["cases"].as_array().unwrap().iter().find(|c|c["profile"]=="heap_growth").unwrap();
++    let mut b=host(c);let key=n(&c["destination"]);let fresh=n(&c["new_allocation"]["pointer"]);let old=b.old;
++    let name=0x31001000;let nr=0x32001000;let caller=group_string(&mut b,name,Some(nr));
++    let mut owners=Group::new([Some(caller),Some(Temporary::new_reset(key))]);
++    b.fault=Some(Fault{address:fresh,width:1,occurrence:1,after_old_free:false});
++    let primary=assign_owned_non_alias(&mut b,owners.get_mut(1).unwrap(),n(&c["source"]));
++    assert_eq!(primary,Err(primary_write_error()));assert_eq!(owners.get(1).unwrap().pending(),Some(fresh));
++    b.blocked.extend([nr,old,fresh]);
++    let mut failure=finish_group(&mut b,owners,primary).unwrap_err();
++    assert_eq!(failure.remaining.remaining_count(),2);assert_eq!(b.attempted,vec![fresh,old,nr]);
++    assert!(matches!(failure.cleanup[1],Some(Error::Cleanup{..})),"both key buffers failed independently");
++    assert!(failure.cleanup[0].is_some());assert!(b.released.is_empty());
++    b.blocked.clear();assert_eq!(failure.remaining.retire(&mut b),[None,None]);
++    assert_eq!(b.released,vec![fresh,old,nr]);assert_eq!(failure.remaining.remaining_count(),0);
++    assert_eq!(b.live.len(),1,"only borrowed fixture source survives");
++}
+--- a/crates/core/src/audio_loading_screen_packet.rs
++++ b/crates/core/src/audio_loading_screen_packet.rs
+@@ -17,6 +17,7 @@
+ pub enum ReceiveFailure {
+     Operation(Error),
+     Owned(owned::Failure),
++    OwnedGroup(owned::GroupFailure<2>),
+ }
+ impl From<Error> for ReceiveFailure {
+     fn from(error: Error) -> Self { Self::Operation(error) }
+@@ -61,6 +62,17 @@
+     ) -> Result<(), Error> {
+         Err(Error::Boundary("native loading-screen UI continuation57D6FE is not connected"))
+     }
++    /// Slot0 holds the caller name. A nested cache call can reserve slot1 before
++    /// initializing/adopting its normalized key. Both descriptor leases must
++    /// remain alive through cleanup and any returned OwnedGroup failure.
++    /// The default preserves the single-name provider contract and its tests.
++    fn initialize_standard_record_owned(
++        &mut self,recipient:u32,record:u32,payload:u32,retained_service:u32,
++        owners:&mut owned::Group<2>,
++    )->Result<(),Error> {
++        let name=owners.get_mut(0).ok_or(Error::Boundary("loading caller name owner is missing"))?;
++        self.initialize_standard_record(recipient,record,payload,retained_service,name)
++    }
+ }
+ fn add(a: u32, n: u32) -> Result<u32, Error> {
+     a.checked_add(n).ok_or(Error::AddressOverflow)
+@@ -152,14 +164,19 @@
+         let target = word(b, table, 0x48)?;
+         b.service_name(service, target, scratch, key)
+             .map_err(Error::Boundary)?;
+-        let mut name = owned::Temporary::new(scratch);
++        let mut owners = owned::Group::new([Some(owned::Temporary::new(scratch)),None]);
+         let primary = (|| -> Result<(), Error> {
+             if word(b, scratch, 16)? != 0 {
+-                b.initialize_standard_record(recipient, record, payload, service, &mut name)?;
++                b.initialize_standard_record_owned(recipient, record, payload, service, &mut owners)?;
+             }
+             Ok(())
+         })();
+-        return owned::finish(b, name, primary).map_err(ReceiveFailure::Owned);
++        if owners.get(1).is_some() {
++            return owned::finish_group(b,owners,primary).map_err(ReceiveFailure::OwnedGroup);
++        }
++        // Preserve the original typed result when no nested owner was acquired.
++        let [name,_]=owners.into_array();
++        return owned::finish(b,name.expect("caller name guard retained"),primary).map_err(ReceiveFailure::Owned);
+     }
+     let key = b.word(payload)?;
+     let service = b.word(SERVICE_GLOBAL)?;
+--- a/crates/core/src/audio_loading_screen_packet_tests.rs
++++ b/crates/core/src/audio_loading_screen_packet_tests.rs
+@@ -46,6 +46,7 @@
+     freed: Vec<u32>,
+     clock_calls: u32,
+     standard_calls: u32,
++    group_test:bool,
+ }
+ impl Host {
+     fn raw(&mut self, p: u32) -> u32 {
+@@ -215,6 +216,21 @@
+         assert_ne!(self.raw(SCR + 16), 0);
+         self.standard_calls += 1;
+         Err(Error::Boundary("native loading-screen UI continuation57D6FE is not connected"))
++    }
++    fn initialize_standard_record_owned(
++        &mut self,recipient:u32,record:u32,payload:u32,service:u32,owners:&mut owned::Group<2>,
++    )->Result<(),Error> {
++        if !self.group_test {
++            return self.initialize_standard_record(recipient,record,payload,service,owners.get_mut(0).unwrap());
++        }
++        // Ownership-boundary exercise only, not a synthetic cache provider.
++        // Copying uses the actual String24 assignment port, then the explicit
++        // consumer failure tests delivery of both guards to the caller.
++        let slot=owners.vacant(1)?;let key=SCR+32;
++        Storage::write_word(self,key+20,15)?;Storage::write_word(self,key+16,0)?;self.write_byte(key,0)?;
++        let owner=slot.adopt(owned::Temporary::new_reset(key));
++        owned::assign_owned_non_alias(self,owner,SCR)?;
++        Err(Error::Boundary("injected nested consumer failure"))
+     }
+ }
+ fn node(i: usize) -> u32 {
+@@ -250,6 +266,7 @@
+         freed: vec![],
+         clock_calls: 0,
+         standard_calls: 0,
++        group_test:false,
+     };
+     b.memory.reserve_at(H, 0x4000).unwrap();
+     b.memory.reserve_at(SERVICE_GLOBAL, 4).unwrap();
+@@ -594,3 +611,30 @@
+     assert_eq!(b.standard_calls, 0);
+     assert_eq!(b.clock_calls, 0);
+ }
++
++#[test]
++fn audio_loading_screen_packet_delivers_two_owners_and_independent_cleanup_errors_to_its_caller() {
++    for failed_cleanup in [false,true] {
++        let mut b=host(Kind::Standard,165,4);let record=b.target;
++        b.put(record+0x40,0);b.put(PAYLOAD,KEYS[4]);
++        b.name=b"CallerNameThatOwnsHeapStorage".to_vec();b.group_test=true;b.fail_free=failed_cleanup;
++        let result=receive(&mut b,Kind::Standard,RECIP,PAYLOAD,SCR);
++        let Err(ReceiveFailure::OwnedGroup(mut failure))=result else {panic!("nested typed ownership was lost")};
++        assert_eq!(failure.primary,Some(Error::Boundary("injected nested consumer failure")));
++        let key=SCR+32;let key_buffer=b.raw(key);
++        if failed_cleanup {
++            assert!(failure.cleanup.iter().all(Option::is_some));assert_eq!(failure.remaining.remaining_count(),2);
++            assert_eq!(failure.remaining.get(0).unwrap().address(),SCR);
++            assert_eq!(failure.remaining.get(1).unwrap().address(),key);assert!(b.freed.is_empty());
++            b.fail_free=false;assert_eq!(failure.remaining.retire(&mut b),[None,None]);
++        }else {
++            assert_eq!(failure.cleanup,[None,None]);assert_eq!(failure.remaining.remaining_count(),0);
++        }
++        assert_eq!(b.freed.len(),2);assert_ne!(b.freed[0],DATA);assert_eq!(b.freed[1],DATA);
++        if failed_cleanup {assert_eq!(b.freed[0],key_buffer);}
++        assert_eq!(b.raw(key+20),15);assert_eq!(b.raw(key+16),0);assert_eq!(b.memory.read_byte(key).unwrap(),0);
++        assert_eq!(b.raw(SCR),DATA);assert_eq!(b.raw(SCR+16),b.name.len() as u32);
++        assert_eq!(b.clock_calls,0);assert_eq!(failure.remaining.remaining_count(),0);
++        assert!(b.memory.allocations.iter().all(|&(_,p)|b.memory.read_byte(p).is_err()),"copied key allocation was retired");
++    }
++}
+--- a/crates/core/src/audio_replay_windows_loading_retirement.rs
++++ b/crates/core/src/audio_replay_windows_loading_retirement.rs
+@@ -5,11 +5,12 @@
+ use crate::{audio_loading_owned_string as owned,audio_loading_screen_packet::ReceiveFailure,
+             audio_replay_metadata::Error};
+ 
+-const BYTES:u32=32; // String24 plus the prefix's scratch shared pair8.
++const BYTES:u32=64; // Name24 + prefix pair8 + normalized key28 + padding4.
+ struct Lease { address:u32, bytes:u32 }
+ struct Record<N> {
+     lease:Lease, active:bool, failure:Option<ReceiveFailure>,
+     retry_error:Option<Error>, scratch_error:Option<init::Error>,
++    group_retry_errors:[Option<Error>;2],
+     // Deliberate lifetime retention on unresolved cleanup. Retirement drops
+     // this Arc; a vacant slot MUST NOT retain the Shared bank.
+     _keepalive:Arc<Shared<N>>,
+@@ -89,7 +90,8 @@
+         };
+         let address=lease.address;
+         shared.loading_retirements.lock().unwrap_or_else(|p|p.into_inner()).slots[index]=Slot::Live(Record {
+-            lease,active:true,failure:None,retry_error:None,scratch_error:None,_keepalive:shared.clone(),
++            lease,active:true,failure:None,retry_error:None,scratch_error:None,
++            group_retry_errors:[None,None],_keepalive:shared.clone(),
+         });
+         let result=f(self,address);
+         {
+@@ -107,7 +109,7 @@
+                 // reserved slot. Formatting never consumes Failure.remaining.
+                 let ledger=shared.loading_retirements.lock().unwrap_or_else(|p|p.into_inner());
+                 if let Slot::Live(r)=&ledger.slots[index] {
+-                    self.failure((&r.failure,&r.retry_error,&r.scratch_error),e);
++                    self.failure((&r.failure,&r.retry_error,&r.group_retry_errors,&r.scratch_error),e);
+                 }
+                 Err(e)
+             }
+@@ -127,6 +129,18 @@
+                 if !retry{return Err("loading name cleanup deferred with owned scratch");}
+                 if let Err(e)=owner.retire(self){record.retry_error=Some(e);return Err("loading name cleanup remains unresolved");}
+                 failure.remaining=None;record.retry_error=None;
++            }
++        }
++        if let Some(ReceiveFailure::OwnedGroup(failure))=&mut record.failure {
++            if failure.remaining.remaining_count()!=0 {
++                if !retry{return Err("loading group cleanup deferred with owned scratch");}
++                // Try every remaining owner, including the caller name when
++                // key cleanup fails. A reset-only guard also retains the lease.
++                record.group_retry_errors=failure.remaining.retire(self);
++                if record.group_retry_errors.iter().any(Option::is_some)
++                    || failure.remaining.remaining_count()!=0 {
++                    return Err("loading group cleanup remains unresolved");
++                }
+             }
+         }
+         if let Err(e)=self.release_loading_lease(&record.lease){
+@@ -151,6 +165,7 @@
+                     let ledger=shared.loading_retirements.lock().unwrap_or_else(|p|p.into_inner());
+                     if let Slot::Live(r)=&ledger.slots[index] {
+                         self.failure(("original_failure",&r.failure,"retry_cleanup",&r.retry_error,
++                            "group_retry_cleanup",&r.group_retry_errors,
+                             "scratch_cleanup",&r.scratch_error),e);
+                     }
+                     return Err(e);
+@@ -168,7 +183,11 @@
+         for slot in &ledger.slots {match slot {
+             Slot::Vacant=>{},Slot::Reserved=>active+=1,
+             Slot::Live(r)=>{if r.active{active+=1;}else{pending+=1;}retained_bytes+=u64::from(r.lease.bytes);
+-                if matches!(&r.failure,Some(ReceiveFailure::Owned(f)) if f.remaining.is_some()){descriptors+=1;}}
++                match &r.failure {
++                    Some(ReceiveFailure::Owned(f))=>descriptors+=usize::from(f.remaining.is_some()),
++                    Some(ReceiveFailure::OwnedGroup(f))=>descriptors+=f.remaining.remaining_count(),
++                    _=>{},
++                }}
+         }}
+         serde_json::json!({"active":active,"pending":pending,"owned_string_guards":descriptors,
+             "retained_scratch_bytes":retained_bytes,"ledger_poisoned":self.shared.loading_retirements.is_poisoned()})
+--- a/crates/core/src/audio_replay_windows_loading_retirement_tests.rs
++++ b/crates/core/src/audio_replay_windows_loading_retirement_tests.rs
+@@ -72,7 +72,7 @@
+     assert_eq!(Arc::strong_count(&shared),baseline+1);
+     assert_eq!(r.loading_retirement_snapshot()["pending"],1);
+     assert_eq!(r.loading_retirement_snapshot()["owned_string_guards"],1);
+-    assert_eq!(r.loading_retirement_snapshot()["retained_scratch_bytes"],32);
++    assert_eq!(r.loading_retirement_snapshot()["retained_scratch_bytes"],64);
+     assert!(r.errors().iter().any(|e|e.contains("test primary failure")&&e.contains("engine does not own allocation")));
+     b.loading_name_temporary(|_,other|{assert_ne!(other,scratch);Ok(())}).unwrap();
+     assert_eq!(Arc::strong_count(&shared),baseline+1);
+@@ -107,3 +107,150 @@
+     assert_eq!(r.loading_retirement_snapshot()["active"],0);assert_eq!(r.loading_retirement_snapshot()["pending"],0);
+     assert_eq!(r.snapshot().unwrap().engine_allocations,0);drop(b);drop(shared);app.close().unwrap();
+ }
++
++#[test]
++fn audio_replay_windows_loading_group_retains_both_descriptors_until_independent_retries_complete() {
++    let mut app=Application::new().unwrap();let r=app.transport().unwrap();
++    let shared=r.shared.clone();let mut b=Backend::new(shared.clone());let baseline=Arc::strong_count(&shared);
++    let mut scratch=0;let mut raw=[0,0];
++    let result=b.loading_name_temporary(|b,s| {
++        scratch=s;
++        for index in 0..2 {
++            raw[index]=b.allocate(32).unwrap();let p=s+index as u32*32;
++            write(b,p,raw[index]);write(b,p+16,20);write(b,p+20,31);
++            assert!(b.shared.bank.lock().unwrap().owned.remove(&raw[index]));
++        }
++        let group=owned::Group::new([Some(owned::Temporary::new(s)),Some(owned::Temporary::new_reset(s+32))]);
++        let failure=owned::finish_group(b,group,Err::<(),_>(owned::Error::Boundary("both-owner primary failure"))).unwrap_err();
++        assert!(failure.cleanup.iter().all(Option::is_some));assert_eq!(failure.remaining.remaining_count(),2);
++        Err(loading::ReceiveFailure::OwnedGroup(failure))
++    });
++    assert!(result.is_err());assert_eq!(Arc::strong_count(&shared),baseline+1);
++    assert_eq!(r.loading_retirement_snapshot()["owned_string_guards"],2);
++    assert_eq!(r.loading_retirement_snapshot()["retained_scratch_bytes"],64);
++    b.loading_name_temporary(|_,other|{assert_ne!(other,scratch);Ok(())}).unwrap();
++    // Name may retire although the key still refuses release. The whole lease
++    // stays retained, and a nested packet cannot reuse either descriptor.
++    assert!(shared.bank.lock().unwrap().owned.insert(raw[0]));
++    assert!(app.close().unwrap_err().contains("loading group cleanup remains unresolved"));
++    let r=app.transport().unwrap();
++    assert_eq!(app.diagnostic().unwrap()["closed"],false);
++    assert_eq!(r.loading_retirement_snapshot()["owned_string_guards"],1);
++    assert_eq!(r.loading_retirement_snapshot()["retained_scratch_bytes"],64);
++    assert!(shared.bank.lock().unwrap().memory.read_byte(raw[0]).is_err());
++    assert!(shared.bank.lock().unwrap().memory.read_byte(raw[1]).is_ok());
++    assert_eq!(b.word(scratch+32).unwrap(),raw[1]);assert_eq!(Arc::strong_count(&shared),baseline+1);
++    assert!(r.errors().iter().any(|e|e.contains("both-owner primary failure")&&e.contains("group_retry_cleanup")));
++    assert!(shared.bank.lock().unwrap().owned.insert(raw[1]));b.retire_loading_temporaries().unwrap();
++    assert_eq!(Arc::strong_count(&shared),baseline);assert!(b.word(scratch).is_err());
++    assert_eq!(r.loading_retirement_snapshot()["pending"],0);
++    let bank=shared.bank.lock().unwrap();
++    for raw in raw {assert_eq!(bank.memory.released_labels.iter().filter(|&&p|p==raw).count(),1);}
++    drop(bank);drop(b);drop(shared);app.close().unwrap();
++}
++
++struct ResetWriteFault<'a,N> {backend:&'a mut Backend<N>,address:u32,failed:bool}
++impl<N:startup::Network+Send+'static> Memory for ResetWriteFault<'_,N> {
++    fn word(&mut self,p:u32)->Result<u32,read::Error>{self.backend.word(p)}
++}
++impl<N:startup::Network+Send+'static> Storage for ResetWriteFault<'_,N> {
++    fn allocate(&mut self,n:u32)->Result<u32,init::Error>{self.backend.allocate(n)}
++    fn write_word(&mut self,p:u32,v:u32)->Result<(),init::Error>{
++        if p==self.address&&!self.failed {self.failed=true;return Err(init::Error::Backend("injected key reset write failure"));}
++        Storage::write_word(self.backend,p,v)
++    }
++    fn write_byte(&mut self,p:u32,v:u8)->Result<(),init::Error>{Storage::write_byte(self.backend,p,v)}
++    fn register_shutdown(&mut self,p:u32)->Result<(),init::Error>{self.backend.register_shutdown(p)}
++}
++impl<N:startup::Network+Send+'static> remove::Backend for ResetWriteFault<'_,N> {
++    fn write_word(&mut self,p:u32,v:u32)->Result<(),remove::Error>{Storage::write_word(self,p,v).map_err(remove::Error::Owned)}
++    fn deallocator(&mut self)->Result<remove::Deallocator,remove::Error>{remove::Backend::deallocator(self.backend)}
++    fn free(&mut self,p:u32,r:remove::Deallocator)->Result<(),remove::Error>{remove::Backend::free(self.backend,p,r)}
++}
++impl<N:startup::Network+Send+'static> metadata::Boundary for ResetWriteFault<'_,N> {
++    fn read_byte(&mut self,p:u32)->Result<u8,read::Error>{metadata::Boundary::read_byte(self.backend,p)}
++    fn initialize_lock(&mut self,p:u32)->Result<(),&'static str>{metadata::Boundary::initialize_lock(self.backend,p)}
++    fn destroy_lock(&mut self,p:u32)->Result<(),&'static str>{metadata::Boundary::destroy_lock(self.backend,p)}
++    fn enter_lock(&mut self,p:u32)->Result<(),&'static str>{metadata::Boundary::enter_lock(self.backend,p)}
++    fn leave_lock(&mut self,p:u32)->Result<(),&'static str>{metadata::Boundary::leave_lock(self.backend,p)}
++}
++impl<N:startup::Network+Send+'static> owned::Boundary for ResetWriteFault<'_,N> {
++    fn release_owned(&mut self,p:u32,r:remove::Deallocator)->Result<(),remove::Error>{owned::Boundary::release_owned(self.backend,p,r)}
++}
++#[test]
++fn audio_replay_windows_loading_group_retains_reset_only_lease_after_all_heap_buffers_are_released() {
++    let mut app=Application::new().unwrap();let r=app.transport().unwrap();
++    let shared=r.shared.clone();let mut b=Backend::new(shared.clone());let baseline=Arc::strong_count(&shared);
++    let mut scratch=0;let mut raw=[0,0];
++    let result=b.loading_name_temporary(|b,s| {
++        scratch=s;
++        for index in 0..2 {raw[index]=b.allocate(32).unwrap();let p=s+index as u32*32;
++            write(b,p,raw[index]);write(b,p+16,20);write(b,p+20,31);}
++        let group=owned::Group::new([Some(owned::Temporary::new(s)),Some(owned::Temporary::new_reset(s+32))]);
++        let mut fault=ResetWriteFault {backend:b,address:s+32+16,failed:false};
++        let failure=owned::finish_group(&mut fault,group,Err::<(),_>(owned::Error::Boundary("reset-only primary failure"))).unwrap_err();
++        assert!(fault.failed);assert_eq!(failure.cleanup[0],None);assert!(failure.cleanup[1].is_some());
++        let key=failure.remaining.get(1).unwrap();assert_eq!(key.authority(),owned::Authority::None);
++        assert_eq!(key.reset(),owned::Reset::Length);assert_eq!(failure.remaining.remaining_count(),1);
++        Err(loading::ReceiveFailure::OwnedGroup(failure))
++    });
++    assert!(result.is_err());assert_eq!(r.snapshot().unwrap().engine_allocations,0);
++    assert_eq!(r.loading_retirement_snapshot()["owned_string_guards"],1);
++    assert_eq!(r.loading_retirement_snapshot()["retained_scratch_bytes"],64);
++    assert_eq!(Arc::strong_count(&shared),baseline+1);assert_eq!(b.word(scratch+32+20).unwrap(),15);
++    b.loading_name_temporary(|_,other|{assert_ne!(other,scratch);Ok(())}).unwrap();
++    b.retire_loading_temporaries().unwrap();assert_eq!(Arc::strong_count(&shared),baseline);
++    assert_eq!(r.loading_retirement_snapshot()["pending"],0);assert!(b.word(scratch).is_err());
++    let bank=shared.bank.lock().unwrap();
++    for raw in raw {assert_eq!(bank.memory.released_labels.iter().filter(|&&p|p==raw).count(),1);}
++    drop(bank);drop(b);drop(shared);app.close().unwrap();
++}
++
++#[test]
++fn audio_replay_windows_loading_standard_packet_uses_real_resource_manager_and_retires_normalized_key_on_factory_boundary() {
++    for name in [b"AhRi".as_slice(),b"OriginalRealMetadataLongerThanFifteen".as_slice()] {
++        let mut app=Application::new().unwrap();let r=app.transport().unwrap();
++        let manager=r.initialize_loading_resources().unwrap();
++        let service=r.configure_service(Defaults).unwrap();r.initialize_game_manager().unwrap();
++        let parent=r.game_manager_snapshot().unwrap().unwrap();let mut b=Backend::new(r.shared.clone());
++        initialize_index(&mut b,parent.pointer);
++        prepare_name(&mut b,parent.metadata[0],Some(42),123,456,Some(name));
++        let service_pointer=service.diagnostic().unwrap()["pointer"].as_u64().unwrap() as u32;
++        let binding=DiagnosticServiceGlobal::bind(&mut b,service_pointer);
++        let recipient=Recipient::create(&mut b,Kind::Standard);write(&mut b,recipient.p+0x1a0,13);
++        let record=recipient.record(&mut b,42);let local=b.word(crate::audio_replay_service_receive::LOCAL_OWNER).unwrap();
++        let packet_bytes=packet(local,42,1,false);let before=r.snapshot().unwrap().engine_allocations;
++        let frees=r.shared.bank.lock().unwrap().memory.released_labels.len();
++        assert_eq!(b.word(standard_prefix::PACKAGE_GLOBAL).unwrap(),manager);
++        assert!(r.receive_game_event(0,3,2,1,&packet_bytes).is_err());
++        assert!(r.errors().iter().any(|e|e.contains("loading resource factory90B520 is unavailable")));
++        assert_eq!(r.snapshot().unwrap().engine_allocations,before);
++        assert_eq!(r.shared.bank.lock().unwrap().memory.released_labels.len(),frees+if name.len()>=16{2}else{0});
++        assert_eq!(b.word(record+0x40).unwrap(),0);assert_eq!(r.loading_retirement_snapshot()["pending"],0);
++        query_name(&mut b,42,name);
++        // Inspect the actual Windows hook while both descriptors still live.
++        // The packet path above uses this same hook but retires its stack data
++        // before returning; no test-only provider or packet observer is added.
++        b.event_temporary(25,|b,payload| {
++            b.event_reference(payload,42)?;
++            let result=b.loading_name_temporary(|b,s| {
++                names::service_name(b,s,42,s+24).map_err(loading::ReceiveFailure::Operation)?;
++                let mut owners=owned::Group::new([Some(owned::Temporary::new(s)),None]);
++                let primary=loading::Boundary::initialize_standard_record_owned(b,recipient.p,record,payload,service_pointer,&mut owners);
++                assert_eq!(primary,Err(owned::Error::Boundary("loading resource factory90B520 is unavailable")));
++                let key=owners.get(1).unwrap().address();assert_eq!(key,s+32);
++                assert_eq!(b.word(key+24).unwrap(),13);assert_eq!(b.word(key+16).unwrap(),name.len() as u32);
++                let key_data=if name.len()>=16 {b.word(key).unwrap()}else{key};
++                let name_data=if name.len()>=16 {b.word(s).unwrap()}else{s};
++                assert_eq!(read_bytes(b,key_data,name.len() as u32),name.iter().map(u8::to_ascii_lowercase).collect::<Vec<_>>());
++                assert_eq!(read_bytes(b,name_data,name.len() as u32),name);
++                owned::finish_group(b,owners,primary).map_err(loading::ReceiveFailure::OwnedGroup)
++            });
++            assert!(result.is_err());Ok(())
++        }).unwrap();
++        assert_eq!(r.snapshot().unwrap().engine_allocations,before);assert_eq!(r.loading_retirement_snapshot()["pending"],0);
++        assert_eq!(r.process_clock_snapshot().unwrap().qpc_calls,0);query_name(&mut b,42,name);
++        recipient.destroy(&mut b);binding.restore(&mut b);r.close_game_manager().unwrap();service.close().unwrap();
++        drop(b);app.close().unwrap();assert_eq!(app.diagnostic().unwrap()["closed"],true);
++    }
++}
+--- a/crates/core/src/audio_replay_windows_loading_packets.rs
++++ b/crates/core/src/audio_replay_windows_loading_packets.rs
+@@ -5,6 +5,7 @@
+     audio_loading_metadata as names, audio_loading_record_tree::Kind,
+     audio_loading_screen_packet as loading, audio_replay_packet95 as packet95,
+     audio_loading_standard_prefix as standard_prefix, audio_loading_owned_string as owned,
++    audio_loading_resource_cache as resource_cache,
+ };
+ 
+ impl<N: startup::Network + Send + 'static> loading::Boundary for Backend<N> {
+@@ -32,13 +33,44 @@
+         &mut self, recipient:u32, _record:u32, payload:u32,
+         retained_service:u32, name:&mut owned::Temporary,
+     ) -> Result<(), owned::Error> {
+-        // The Windows name lease reserves32 bytes: descriptor24 + pair8.
++        // The Windows name lease reserves64 bytes: name24 + pair8 + key28.
+         // This pair has the same lifetime/identity as its owned descriptor.
+         let scratch=name.address().checked_add(24).ok_or(owned::Error::AddressOverflow)?;
+         let stop=standard_prefix::prepare(self,recipient,retained_service,payload,name,scratch)?;
+         // Preserve the typed error through owned::finish and the lease ledger.
+         // Neither unported call is represented as completed loading UI.
+         Err(owned::Error::Boundary(stop.unavailable()))
++    }
++    fn initialize_standard_record_owned(
++        &mut self,recipient:u32,_record:u32,payload:u32,retained_service:u32,
++        owners:&mut owned::Group<2>,
++    )->Result<(),owned::Error> {
++        let name=owners.get_mut(0).ok_or(owned::Error::Boundary("loading caller name owner is missing"))?;
++        let pair=name.address().checked_add(24).ok_or(owned::Error::AddressOverflow)?;
++        let stop=standard_prefix::prepare(self,recipient,retained_service,payload,name,pair)?;
++        match stop {
++            standard_prefix::Stop::Resource90AD00 {manager,name24,skin}=>{
++                if manager==0 {
++                    // Host preflight: no native manager has been published.
++                    // This rejects an unavailable lifecycle, not a cache miss.
++                    return Err(owned::Error::Boundary("resource provider90AD00 manager is not published"));
++                }
++                // The slot and complete descriptor lease exist before a key
++                // allocation is possible. Adoption after fresh initialization
++                // has no fallible operation which could discard ownership.
++                let slot=owners.vacant(1)?;
++                let address=name24.checked_add(32).ok_or(owned::Error::AddressOverflow)?;
++                resource_cache::initialize_key(self,address)?;
++                let key=slot.adopt(owned::Temporary::new_reset(address));
++                match resource_cache::resolve(self,manager,name24,skin,key)? {
++                    resource_cache::Outcome::HitBorrowed {provider:_}=>Err(owned::Error::Boundary(
++                        "loading resource is borrowed; standard UI continuation after90AD00 is unavailable")),
++                    resource_cache::Outcome::MissFactory {..}=>Err(owned::Error::Boundary(
++                        "loading resource factory90B520 is unavailable")),
++                }
++            }
++            other=>Err(owned::Error::Boundary(other.unavailable())),
++        }
+     }
+ }
+ 

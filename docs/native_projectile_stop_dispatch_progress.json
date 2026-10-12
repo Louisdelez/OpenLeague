@@ -1,0 +1,44 @@
+{
+  "updated_utc": "2026-10-07T07:15:37.470483+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_cases": 120,
+  "native_instruction_addresses": 215,
+  "focused_core_tests_passed": 1,
+  "focused_client_tests_passed": 3,
+  "full_suites_rerun": false,
+  "graphical_client_rebuilt": true,
+  "current_runtime_capture": true,
+  "artifacts_sha256": {
+    "data/4.20/projectile_stop_dispatch_contract.json": "3b06437788a2a544972fd4e259884e4be1335db1794449c57ccd3c041b3cf9be",
+    "tools/probe_native_projectile_stop_dispatch.py": "19cacfe3bd4210192b95d1bd05ba793168793cfe7fe126814916d16e05151190",
+    "crates/core/src/native_projectile_stop_dispatch.rs": "0d0923449b50dd5764e2822babd77f80cd7efe1e64b06e1ecd274a07e93c5f08",
+    "crates/core/src/lib.rs": "538b6a0cc91c9b7cd7f9fe1517568d35d3b4500cec1945f823a0c5194ef7c563",
+    "crates/client/src/projected_live.rs": "3d2e635f6dbdf247351149ae312ae1d71dfbbb35f9faeec1231ee5235eed14e1",
+    "logs/native-projectile-stop-dispatch-tests.log": "931ce35c1af50f1cab86f86e61b97d08d4b3422f52b44013076a759f7a8ed064",
+    "logs/annie-native-stop-dispatch-tests.log": "63a32e74a56d3d262b061af8606bfa6057075ffc5cb59ee9efb80b851283cef4"
+  },
+  "findings": [
+    "Projectile vtable10B2B5C slot48 is763240; controller578 stop763CF0 locks helper weak reference and marks wrapper124=1 when lock yields a nonnull object.",
+    "Wrapper6C97B0 returns false for marked effects; non-marked effects continue past6C9824, where this probe stops.",
+    "Wrapper virtual48 at6C9360 calls concrete Troy virtualA0/9289B0: requests144 |=400, then clears its weak link. Repeated cleanup does not call stop again.",
+    "Original5BD6F0/5EC2A0/5CCF80 execute weak lock and temporary reference release; supplied live/expired/absent/null profiles distinguish eligibility."
+  ],
+  "adapters": [
+    "Troy finished query virtual14 returns false. Control block virtual destroy/dispose callbacks record events; their bodies are not qualified.",
+    "Controller optional collectionC is empty; wrapper registry188 is empty; supplied ownership objects and counters."
+  ],
+  "limits": [
+    "Live registry decides when wrapper cleanup is invoked; that scheduler and network projectile removal semantics are not yet qualified.",
+    "Non-marked wrapper pose update body, nonempty controller collections, registry removal and concurrent ownership remain open.",
+    "Client integration, original audio stop, GPU lifetime and complete Annie kit remain incomplete.",
+    "Native marker/cleanup/request port connected to client Lifetime; existing 50 original owner-end frames and asset-release test pass.",
+    "Rust port covers semantic state only; native ownership counters are oracle evidence, not a Rust shared-ownership implementation.",
+    "Live disappearance still supplies controller end; local cleanup runs in the same frame. Full original registry scheduling remains unqualified.",
+    "Full objective remains incomplete; zero accepted domains."
+  ],
+  "next_action": "Recompiler le client graphique avec la chaîne native d’arrêt du projectile, vérifier nettoyage et rendu DX12/Vulkan ; qualifier ensuite pose et ordonnancement natifs et poursuivre les 24 domaines.",
+  "status": "terminal_build_and_dx12_vulkan_captures_passed",
+  "build_log": "logs/annie-native-stop-dispatch-client-build.log",
+  "runtime_progress": "docs/annie_native_stop_dispatch_runtime_progress.json"
+}

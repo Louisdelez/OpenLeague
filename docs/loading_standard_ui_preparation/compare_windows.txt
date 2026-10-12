@@ -1,0 +1,57 @@
+BOUNDED WINDOW 005fa6b0 bytes=112
+005fa6b0 push ebp
+005fa6b1 mov ebp, esp
+005fa6b3 mov ecx, dword ptr [ebp + 0x10]
+005fa6b6 test ecx, ecx
+005fa6b8 jne 0x5fa6be
+005fa6ba xor eax, eax
+005fa6bc pop ebp
+005fa6bd ret 
+005fa6be mov edx, dword ptr [ebp + 8]
+005fa6c1 push esi
+005fa6c2 mov esi, dword ptr [ebp + 0xc]
+005fa6c5 sub ecx, 4
+005fa6c8 jb 0x5fa6e1
+005fa6ca lea ebx, [ebx]
+005fa6d0 mov eax, dword ptr [edx]
+005fa6d2 cmp eax, dword ptr [esi]
+005fa6d4 jne 0x5fa6e6
+005fa6d6 add edx, 4
+005fa6d9 add esi, 4
+005fa6dc sub ecx, 4
+005fa6df jae 0x5fa6d0
+005fa6e1 cmp ecx, -4
+005fa6e4 je 0x5fa71b
+005fa6e6 mov al, byte ptr [edx]
+005fa6e8 cmp al, byte ptr [esi]
+005fa6ea jne 0x5fa713
+005fa6ec cmp ecx, -3
+005fa6ef je 0x5fa71b
+005fa6f1 mov al, byte ptr [edx + 1]
+005fa6f4 cmp al, byte ptr [esi + 1]
+005fa6f7 jne 0x5fa713
+005fa6f9 cmp ecx, -2
+005fa6fc je 0x5fa71b
+005fa6fe mov al, byte ptr [edx + 2]
+005fa701 cmp al, byte ptr [esi + 2]
+005fa704 jne 0x5fa713
+005fa706 cmp ecx, -1
+005fa709 je 0x5fa71b
+005fa70b mov al, byte ptr [edx + 3]
+005fa70e cmp al, byte ptr [esi + 3]
+005fa711 je 0x5fa71b
+005fa713 sbb eax, eax
+005fa715 or eax, 1
+005fa718 pop esi
+005fa719 pop ebp
+005fa71a ret 
+005fa71b xor eax, eax
+005fa71d pop esi
+005fa71e pop ebp
+005fa71f ret 
+BOUNDED WINDOW 00c9cf31 bytes=16
+00c9cf31 push ebp
+00c9cf32 mov ebp, esp
+00c9cf34 cmp dword ptr [0x14ae870], 0
+00c9cf3b jne 0xc9cf66
+00c9cf3d cmp dword ptr [ebp + 8], 0

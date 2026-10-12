@@ -1,0 +1,266 @@
+//! Private24-byte index map for90A4C0; not a generic provider cache.
+use super::{Boundary,Error,Record};
+use crate::audio_announcer_registry_init::Storage;
+use std::collections::BTreeSet;
+const MAX_SIZE:u32=0x0aaa_aaa9;
+fn add(p: u32, offset: u32) -> Result<u32, Error> {
+    p.checked_add(offset).ok_or(Error::AddressOverflow)
+}
+fn word(b: &mut impl Boundary, p: u32, offset: u32) -> Result<u32, Error> {
+    Ok(b.word(add(p, offset)?)?)
+}
+fn put(b: &mut impl Boundary, p: u32, offset: u32, value: u32) -> Result<(), Error> {
+    Ok(Storage::write_word(b, add(p, offset)?, value)?)
+}
+fn byte(b: &mut impl Boundary, p: u32, offset: u32) -> Result<u8, Error> {
+    Ok(b.read_byte(add(p, offset)?)?)
+}
+fn set_byte(b: &mut impl Boundary, p: u32, offset: u32, value: u8) -> Result<(), Error> {
+    Ok(b.write_byte(add(p, offset)?, value)?)
+}
+fn nil(b: &mut impl Boundary, p: u32) -> Result<bool, Error> {
+    Ok(byte(b, p, 13)? != 0)
+}
+fn color(b: &mut impl Boundary, p: u32, value: u8) -> Result<(), Error> {
+    set_byte(b, p, 12, value)
+}
+fn free(b: &mut impl Boundary, owner: &mut Record, p: u32) -> Result<(), Error> {
+    owner.release(b, p)
+}
+fn visit(seen: &mut BTreeSet<u32>, p: u32) -> Result<(), Error> {
+    if seen.insert(p) {
+        Ok(())
+    } else {
+        Err(Error::InvalidTree)
+    }
+}
+///5CCFE0/5C23E0 iterator decrement/increment; the header is its own nil node.
+fn adjacent(b: &mut impl Boundary, mut node: u32, next: bool) -> Result<u32, Error> {
+    let side = if next { 8 } else { 0 };
+    let opposite = 8 - side;
+    if nil(b, node)? {
+        return if next { Ok(node) } else { word(b, node, 8) };
+    }
+    let child = word(b, node, side)?;
+    let mut seen = BTreeSet::new();
+    if !nil(b, child)? {
+        node = child;
+        loop {
+            visit(&mut seen, node)?;
+            let child = word(b, node, opposite)?;
+            if nil(b, child)? {
+                return Ok(node);
+            }
+            node = child;
+        }
+    }
+    let mut parent = word(b, node, 4)?;
+    while !nil(b, parent)? && node == word(b, parent, side)? {
+        visit(&mut seen, parent)?;
+        node = parent;
+        parent = word(b, parent, 4)?;
+    }
+    Ok(parent)
+}
+///5C64E0/5C6540, also inlined twice in5DA5E0. Identical node/link contracts
+///to the diagnostic registry tree, including header-root and extrema updates.
+fn rotate(b: &mut impl Boundary, tree: u32, node: u32, left: bool) -> Result<(), Error> {
+    let side = if left { 8 } else { 0 };
+    let opposite = 8 - side;
+    let pivot = word(b, node, side)?;
+    let child = word(b, pivot, opposite)?;
+    put(b, node, side, child)?;
+    let child = word(b, pivot, opposite)?;
+    if !nil(b, child)? {
+        put(b, child, 4, node)?;
+    }
+    let parent = word(b, node, 4)?;
+    put(b, pivot, 4, parent)?;
+    let head = word(b, tree, 0)?;
+    if word(b, head, 4)? == node {
+        put(b, head, 4, pivot)?;
+    } else {
+        let parent = word(b, node, 4)?;
+        if word(b, parent, opposite)? == node {
+            put(b, parent, opposite, pivot)?;
+        } else {
+            put(b, parent, side, pivot)?;
+        }
+    }
+    put(b, pivot, opposite, node)?;
+    put(b, node, 4, pivot)
+}
+///5DA5E0 owns the pending node on the capacity failure path.
+fn insert_at(
+    b: &mut impl Boundary,
+    owner: &mut Record,
+    tree: u32,
+    node: u32,
+    parent: u32,
+    left: bool,
+) -> Result<u32, Error> {
+    let count = word(b, tree, 4)?;
+    if count >= MAX_SIZE {
+        free(b, owner, node)?;
+        return Err(Error::Boundary("resource index capacity exceeded"));
+    }
+    put(b, tree, 4, count + 1)?;
+    put(b, node, 4, parent)?;
+    let head = word(b, tree, 0)?;
+    if parent == head {
+        put(b, head, 4, node)?;
+        let head = word(b, tree, 0)?;
+        put(b, head, 0, node)?;
+        let head = word(b, tree, 0)?;
+        put(b, head, 8, node)?;
+    } else {
+        let side = if left { 0 } else { 8 };
+        put(b, parent, side, node)?;
+        let head = word(b, tree, 0)?;
+        if word(b, head, side)? == parent {
+            put(b, head, side, node)?;
+        }
+    }
+    let mut current = node;
+    let parent = word(b, current, 4)?;
+    if byte(b, parent, 12)? == 0 { loop {
+        let parent = word(b, current, 4)?;
+        let grandparent = word(b, parent, 4)?;
+        let left_child = word(b, grandparent, 0)?;
+        let is_left = parent == left_child;
+        let uncle = if is_left { word(b, grandparent, 8)? } else { left_child };
+        if byte(b, uncle, 12)? == 0 {
+            color(b, parent, 1)?;
+            color(b, uncle, 1)?;
+            let parent = word(b, current, 4)?;
+            let grandparent = word(b, parent, 4)?;
+            color(b, grandparent, 0)?;
+            let parent = word(b, current, 4)?;
+            current = word(b, parent, 4)?;
+        } else {
+            if current == word(b, parent, if is_left { 8 } else { 0 })? {
+                current = parent;
+                rotate(b, tree, current, is_left)?;
+            }
+            let parent = word(b, current, 4)?;
+            color(b, parent, 1)?;
+            let parent = word(b, current, 4)?;
+            let grandparent = word(b, parent, 4)?;
+            color(b, grandparent, 0)?;
+            let parent = word(b, current, 4)?;
+            let grandparent = word(b, parent, 4)?;
+            rotate(b, tree, grandparent, !is_left)?;
+        }
+        let parent = word(b, current, 4)?;
+        if byte(b, parent, 12)? != 0 { break; }
+    }}
+    let head = word(b, tree, 0)?;
+    let root = word(b, head, 4)?;
+    color(b, root, 1)?;
+    Ok(node)
+}
+///5DA8C0 fallback unique insertion frees its new node when the key exists.
+fn insert_unhinted(b: &mut impl Boundary, owner: &mut Record, tree: u32, node: u32) -> Result<u32, Error> {
+    let head = word(b, tree, 0)?;
+    let key = word(b, node, 16)?;
+    let mut parent = head;
+    let mut current = word(b, head, 4)?;
+    let mut left = true;
+    let mut seen = BTreeSet::new();
+    while !nil(b, current)? {
+        visit(&mut seen, current)?;
+        parent = current;
+        left = key < word(b, current, 16)?;
+        current = word(b, current, if left { 0 } else { 8 })?;
+    }
+    let mut previous = parent;
+    if left {
+        if parent == word(b, head, 0)? {
+            return insert_at(b, owner, tree, node, parent, true);
+        }
+        previous = adjacent(b, previous, false)?;
+    }
+    if word(b, previous, 16)? < key {
+        insert_at(b, owner, tree, node, parent, left)
+    } else {
+        free(b, owner, node)?;
+        Ok(previous)
+    }
+}
+///5D2950 is equivalent to663240 below its differing stack/SEH prologue; it accepts the lower_bound hint retained before allocation.
+fn insert_hint(b: &mut impl Boundary, owner: &mut Record, tree: u32, node: u32, hint: u32) -> Result<u32, Error> {
+    if word(b, tree, 4)? == 0 {
+        let head = word(b, tree, 0)?;
+        return insert_at(b, owner, tree, node, head, true);
+    }
+    let head = word(b, tree, 0)?;
+    if hint == word(b, head, 0)? {
+        let key = word(b, node, 16)?;
+        if key < word(b, hint, 16)? {
+            return insert_at(b, owner, tree, node, hint, true);
+        }
+    } else if hint == head {
+        let maximum = word(b, head, 8)?;
+        let maximum_key = word(b, maximum, 16)?;
+        let key = word(b, node, 16)?;
+        if maximum_key < key {
+            return insert_at(b, owner, tree, node, maximum, false);
+        }
+    } else {
+        let key = word(b, node, 16)?;
+        let mut hint_key = word(b, hint, 16)?;
+        if key < hint_key {
+            let previous = adjacent(b, hint, false)?;
+            if word(b, previous, 16)? < key {
+                let right = word(b, previous, 8)?;
+                return if nil(b, right)? {
+                    insert_at(b, owner, tree, node, previous, false)
+                } else {
+                    insert_at(b, owner, tree, node, hint, true)
+                };
+            }
+            hint_key = word(b, hint, 16)?;
+        }
+        if hint_key < key {
+            let next = adjacent(b, hint, true)?;
+            if next == head || key < word(b, next, 16)? {
+                let right = word(b, hint, 8)?;
+                return if nil(b, right)? {
+                    insert_at(b, owner, tree, node, hint, false)
+                } else {
+                    insert_at(b, owner, tree, node, next, true)
+                };
+            }
+        }
+    }
+    insert_unhinted(b, owner, tree, node)
+}
+
+#[cfg(test)]
+#[path="audio_loading_resource_manager_index_read_tests.rs"]
+mod read_tests;
+///5D2710 shares5D54A0 with661F80; it rereads caller key after allocation.
+fn allocate_node(b:&mut impl Boundary, owner:&mut Record, tree:u32, key_ref:u32)->Result<u32,Error> {
+    let node=owner.allocate(b,24)?;
+    if node==0 { return Err(Error::AllocationFailed(24)); }
+    for offset in [0,4,8] { let head=word(b,tree,0)?; put(b,node,offset,head)?; }
+    set_byte(b,node,12,0)?;set_byte(b,node,13,0)?;
+    let key=b.word(key_ref)?;put(b,node,16,key)?;put(b,node,20,0)?;Ok(node)
+}
+///5BD9B0: lower_bound retains a pointer; key is reread for equality and after
+///allocation. Do not call metadata_state::value_slot, which accepts a value.
+pub(super) fn value_slot(b:&mut impl Boundary,owner:&mut Record,tree:u32,key_ref:u32)->Result<u32,Error> {
+    let head=word(b,tree,0)?;let mut hint=head;let mut node=word(b,head,4)?;
+    if !nil(b,node)? {
+        let key=b.word(key_ref)?;let mut seen=BTreeSet::new();
+        loop {
+            visit(&mut seen,node)?;
+            if word(b,node,16)? >= key { hint=node;node=word(b,node,0)?; }
+            else { node=word(b,node,8)?; }
+            if nil(b,node)? { break; }
+        }
+    }
+    if hint!=head { let key=b.word(key_ref)?;if key>=word(b,hint,16)? { return add(hint,20); } }
+    let node=allocate_node(b,owner,tree,key_ref)?;
+    add(insert_hint(b,owner,tree,node,hint)?,20)
+}

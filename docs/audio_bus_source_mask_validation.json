@@ -1,0 +1,56 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T15:48:41.730354+00:00",
+  "change": [
+    "Port Bus virtualDC B041B0 source14 raw byte10: absent pointer suppresses access, existing source applies (old & ~low8(mask)) | low8(value) without masking incoming value. Preserve all unrelated source bytes.",
+    "Connect source Backend through effect reader and actual qualified root/identified target application; other callbacks and allocation stay mandatory dependencies. Expose source flags to notification snapshot bridge."
+  ],
+  "validation": {
+    "audio_regression_tests_passed": 281,
+    "failed": 0,
+    "new_targeted_tests_passed": 3,
+    "native_source_callback_cases": 576,
+    "native_effects_source_populated_targets_cases": 1440,
+    "comparison": "Exact200-byte Bus,20-byte source,36-byte cache and full1280-byte target snapshots, result, consumed pointer/remaining and allocation/change/slot/mask order. Source absence/presence, value outside mask, cache allocation failure and populated root/identified targets covered.",
+    "session": 45053,
+    "terminal_exit_code": 0,
+    "log": "logs/audio-bus-source-mask-tests.log",
+    "preparatory_slot_dispatch_cases": 960,
+    "preparatory_effect_changed_cases": 3456
+  },
+  "sha256": {
+    "crates/core/src/audio_bus_source_mask.rs": "ea9a2692b2e8169e8d4f17167c4f5d063f90220ec700dd52d49abbf9b1c1889c",
+    "crates/core/src/audio_bus_bank.rs": "6438255ac443d9a50c9032ff4792ccec42ac37b6bab47e88ef8642cb91060697",
+    "crates/core/src/lib.rs": "dd2d6e89b3880c59d59b095e20331c32c5e0d6b13e9220b1c2c712fc8b4e6549",
+    "tools/probe_native_audio_bus_source_mask.py": "a773643eb795d0619afcc82a8ef2484b792d8ac4728cac7e619731834731c856",
+    "tools/probe_native_audio_bus_effects_source_targets.py": "e51713188ce2cde4da1ec7ddc45b23bbe85051d8f7e95a411e2378c3e48ac0f7",
+    "tools/probe_native_audio_bus_effect_slot_dispatch.py": "31ac953a5d58d7b6d43b73eb9c122e0eee7bcf21c186901e2121ca0dce6b9164",
+    "tools/probe_native_audio_bus_effects_changed.py": "8a80b7636d419a07522c5409d2cecdcb651344bc509bfc5607ef45447ef57b7b",
+    "data/4.20/audio_bus_source_mask_contract.json": "82732977549d4033806d273397e414d04aba47964794503ab4a97937d0647d0b",
+    "data/4.20/audio_bus_effects_source_targets_contract.json": "fb5269e45c9b5ce724fd953b1abae31949613bc2ba5d1a4002adf86fbb4ff0e8",
+    "data/4.20/audio_bus_effect_slot_dispatch_contract.json": "ac40d3fbb44fc50c3d943aff9b0e099dc7ca8ca28f30add96f925729efd688a7",
+    "data/4.20/audio_bus_effects_changed_contract.json": "dd87fb1357dba56ff96193e9afe357206b8bd6a71dd9288460444e0e5a396b43",
+    "logs/audio-bus-source-mask-tests.log": "5c380bfc070f208e722465dec7d71d99cc812005eb7976a422767944569c4cab",
+    "logs/audio-bus-effects-source-targets-probe.log": "890c78fad511dc33327c148fad1ad362232ff1d0f61c23072c7ad787dcbd86bd",
+    "logs/audio-bus-effect-slot-dispatch-probe.log": "f32edd4961c0b78b6cf27a4b8508da10fbc6d1a6020fd85de9a38c38f8f1c8f1",
+    "logs/audio-bus-effects-changed-probe.log": "1d44784316b345a2b9fe39d8729d9275293a2e41c267a8486d07ba71705ae71c",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "ebfef6bef615a06fc28d8eb0a9ad2d1cc79e2af3fa9f362b465b396ef104d914"
+  },
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "interfaces": [
+    "Source callback executes actual B041B0 without result adapter. Composed reference executes actual effect reader/cache/mask/source and root/identified target flag application; allocator plus virtualCC/84 callbacks remain supplied.",
+    "Slot dispatch preparation executes actual B04B80/B0F960/B0F9C0/B27CD0; B270B0 effect refresh consumer is mandatory recorded interface, not executed.",
+    "Effect changed preparation executes actual B03D40/B04BC0 with child virtualCC recursion. Gain B02CE0 and root/identified gain application B0EC10/B0EBB0 remain mandatory interfaces."
+  ],
+  "findings": [
+    "Identified slot dispatch skips target mode4D4==2; root dispatch does not filter that mode. Root passes primary binding address14A7AAC; identified passes target+4D0 address, preserving indirection.",
+    "B03D40/B04BC0 evaluate effect IDs, channel mask60, flags2F and parent24 to choose gain dispatch and cached fieldsBC/C0; clear then restore C4bit0 around cache refresh.",
+    "Child refresh visits group1C array24/count28 in order and calls virtualCC only when child group words30 or32 are nonzero."
+  ],
+  "limits": [
+    "Slot dispatch Rust consumer and actual B270B0 effect instance/resource replacement still pending.",
+    "Effect changed/gain/hierarchy Rust consumer and actual gain aggregation/application bodies remain pending.",
+    "Snapshot source/cache bridges do not prove normal shared resource ownership, factory creation, voice admission or lifecycle.",
+    "Other bank readers, binding/smoothing, DSP/mixing/device output remain incomplete; no audible acceptance or new normal-client qualification."
+  ]
+}

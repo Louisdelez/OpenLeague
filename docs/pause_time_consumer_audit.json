@@ -1,0 +1,31 @@
+{
+  "complete": false,
+  "method": "Source audit of client time consumers; does not establish historical pause behavior for every subsystem.",
+  "implemented": {
+    "annie_ready": "Native EffectClock birth/sampling; latest live pause/crossfade v82/v83 passes, raw GPU verified. Emitter reconstruction fidelity remains partial.",
+    "animation.rs": "Scoped native AnimationDelta integration;3 Rust tests and live DX12/Vulkan idle+activefade evidence in animation_clock_live_pause.json and animation_clock_live_crossfade.json. Full native blending fidelity remains partial.",
+    "map_ambient.rs": "Scoped native AnimationDelta integration;3 Rust tests and live DX12/Vulkan idle+activefade evidence in animation_clock_live_pause.json and animation_clock_live_crossfade.json. Full native blending fidelity remains partial.",
+    "map_events.rs": "Scoped native AnimationDelta integration;3 Rust tests and live DX12/Vulkan idle+activefade evidence in animation_clock_live_pause.json and animation_clock_live_crossfade.json. Full native blending fidelity remains partial.",
+    "native_high_fog.rs": "Native GameClock12sequences,Rust2tests,live cloud freeze/resume DX12v84/Vulkanv85. Subsequent Ready ordering fix v90Vulkan/v91DX12 gives exact paused on/off RGB equality; see ready_vulkan_residual_audit.json. Full native rendering fidelity remains partial.",
+    "map_audio_requests.rs": "Native source initialization and manager36frames,whole-frame10cases,tail24cases establish GameClock wrapper and previousB0-age ordering. Rust uses EffectClock.now and stored previous_time;6 focused tests pass including pause/resume with walltime advancing. See audio_request_clock_integration.json. Audible backend and full lifecycle remain open. LiveDX12v92 passes20samples19distinctframes,4active2persistent0unresolved0rejected; request ages freeze then resume, -1 retained. ClientSHA6b8d67bbe496e5c6adfdd8d0a866612140df314d652f59fad6a99aeb1850db24"
+  },
+  "open": {
+    "map_audio_requests.rs": "Actual backend playback, native visibility/pause gates and ended emitter cleanup remain partial; live request ages now verified DX12v92.",
+    "fow_champion_sources.rs": "Combines simulation tick time and real delta; inspect native update source."
+  },
+  "preserve_real_time": [
+    "UDP liveness/retransmission",
+    "diagnostic screenshot timers",
+    "camera input responsiveness pending native fidelity",
+    "endgame local timeline pending separate qualification"
+  ],
+  "source_hashes": {
+    "animation.rs": "4df62ce60435874362aae2c621ca19d69d9b5b107004ef8b85e6cb83fa291a0e",
+    "map_ambient.rs": "9058523058f6d7fe472bd22a4347a77acdd808347cbc49484742e771b24aedc2",
+    "map_events.rs": "c2390c4af2c244b39d7df5603f8829ff6491385d43628dbed4149373c5363a4d",
+    "map_audio_requests.rs": "38d2d0e532269a69f5c8435e8f1f18892d5fa88994022e1bac655aa863349547",
+    "native_high_fog.rs": "689c6962949e53892a9a81b74e242e96dad4119f6ffb528539d98d7c13298d4a",
+    "fow_champion_sources.rs": "49835e77f85e0a7e76e15f24de340f601401d13412e7e71f203f81547b186bcf",
+    "annie_ready.rs": "5b7b403cc568f17a4c74e3d1588df91e96c0a1606560b28564d94515310c6f7b"
+  }
+}

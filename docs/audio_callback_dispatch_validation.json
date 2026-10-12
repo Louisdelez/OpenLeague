@@ -1,0 +1,50 @@
+{
+  "saved_utc": "2026-10-09T02:24:21.109823+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_registered_meter_callback_compositions_prepared": 8,
+  "native_registered_meter_callback_rust_compositions_validated": 8,
+  "native_reverse_callback_dispatch_cases": 400,
+  "native_meter_frame_callback_slice_compositions_validated": 8,
+  "native_callback_registry_cases": 720,
+  "register_cases": 480,
+  "unregister_cases": 240,
+  "audio_tests_passed": 375,
+  "files_sha256": {
+    "tools/discover_audio_normal_frame_producer.py": "59728e91fc843079213aa6e18ffa938f2c5e22441863abadc94000d70f42c840",
+    "data/4.20/audio_normal_frame_producer_discovery.json": "651fd1fcf5744d1de9e5d721773937e2c40c3662e2a22e7b718b59f2eb3f5d41",
+    "tools/probe_native_audio_callback_dispatch.py": "86d1dadf0c27bdcc2de449a9a283332f46948a177853891e5a0934887eb0a5d9",
+    "data/4.20/audio_callback_dispatch_preparation.json": "062a0abe508b72140747203242a91d58d250056bb2b76448f389b47cb2550f75",
+    "logs/audio-callback-dispatch-probe.log": "5956ce61995fdde8a95af5c036df6dfc290dfbb562657b0f1b73de8e9f778cc3",
+    "tools/probe_native_audio_bank_meter_frame_callback_unload.py": "90fe3aa1e283b125ba68bb5c9739855931c5323e7d0254c9971b00f6fd498aaa",
+    "data/4.20/audio_bank_meter_frame_callback_unload_preparation.json": "99c2336af89055b3afe2264fdc7fbee9c4855d220f3f3b7e6e2e0ff73d473970",
+    "logs/audio-bank-meter-frame-callback-unload-probe.log": "1c076a8cddc0912727c89a9a77cf0682c1d8e7ea789d85b0a6222a0e6b56730f",
+    "crates/core/src/audio_bank_voice_effects.rs": "bf3a0506262c6ab073506ef20604eea357dc060ac261d5cb36b9fc0cc0353902",
+    "crates/core/src/audio_meter_lifecycle.rs": "8f62d5ad5efc71dc5805af3c44d67408ee7167b372f3b9f35c0ef10be06f96fb",
+    "crates/core/src/audio_rtpc_output_setter.rs": "465944712d8980971984522e0128aaf13fcb87ef479c9d009a8f6aa1ae8dbfa7",
+    "tools/discover_audio_callback_dispatch.py": "6e9afcecc0f15813ce2d01eabda30fea8bcc4bb51c940a02f099eace48b5f1f6",
+    "data/4.20/audio_callback_dispatch_discovery.json": "08ff96ebe7a8f807d09f016b75dacdc12c9bfd02330c129be0c9215a22195c0c",
+    "tools/probe_native_audio_bank_meter_registered_callback_unload.py": "d12f42a5e57bcfcb3597af0b42a3a9543b471c6d8dd48a4f5cff37c35e3fba49",
+    "data/4.20/audio_bank_meter_registered_callback_unload_preparation.json": "01b491f89af153d11ff80ec9d244efc4f2870698530ec55a62fee2b31a2c8090",
+    "logs/audio-bank-meter-registered-callback-unload-probe.log": "1c076a8cddc0912727c89a9a77cf0682c1d8e7ea789d85b0a6222a0e6b56730f",
+    "crates/core/src/audio_callback_registry.rs": "f2ab08af997d4b084d3bc1f0092d18091d015f361c146f0d1aee47822b72dc04",
+    "crates/core/src/lib.rs": "b2c5d00a72e90e3ec230d66706e6b364756b6468892916b4630b693ec6edab20",
+    "tools/probe_native_audio_callback_registry.py": "429fa852e1aa08992070b14ce0eb71d4b220a7257bdefb98de96e28b63d05457",
+    "data/4.20/audio_callback_registry_preparation.json": "2b263f99fc8f72bf72d14c18dfa672cbb753fb400acd51199094bee599872f49",
+    "logs/audio-callback-registry-probe.log": "69ae8374e81892280b3131d3e56e15a299f18eff07fa2e6588d52149094f15ca",
+    "logs/audio-callback-dispatch-tests.log": "f6e7ba051e0837f0f85c9a8adb056bd2c0ff54f74185c5a54597b4799a7f7367",
+    "tools/record_audio_callback_dispatch_progress.py": "89e6bfdd75ac7ac8a3affcf488ac464c4141e2ee17b15a6c0aa25e83e8789434",
+    "target/debug/deps/openleague_core-92fab3f20accd79c.exe": "2cce101a0ac5739128676a8850308e49c1d67ea198aeaf6f3aac38805889b879"
+  },
+  "acceptance": [
+    "Reverse dispatch captures initial count, reloads storage after each callback, preserves first/last removal consequences, allocation failure and physical call order in400 native cases.",
+    "Eight native frame-loop slice compositions call the actual Meter subscriber setter and retire their callback while retaining vector ownership.",
+    "Actual Rust owned header and full allocation bytes/status/call order match all720 native sequences.",
+    "No filtering of duplicate or null callback keys; first-match removal retains capacity and trailing bytes; failed growth preserves old state."
+  ],
+  "limits": [
+    "Owned Meter Init registration and unload removal are qualified on controlled native compositions. Reverse callback loop slices and owned Meter delivery are qualified. Normal producer construction, complete audio-frame invocation, shutdown vector disposal and synchronization remain unqualified.",
+    "Storage acceptance does not prove arbitrary callback invocation, synchronization, DSP/device output or complete game."
+  ],
+  "next_action": "Qualify and implement the complete normal audio-frame producer around B06987 callbacks, including B0FB40 frame quota, repeated command processing plus final zero-quota pass, ordered dependencies and normal bank/voice/RTPC producer construction. Reverse dispatch now matches400 native mutation sequences and8 actual Meter unload compositions through the native frame callback loop slice. Owned registration at Meter Init and removal at unload now replay eight complete native compositions. Registry storage/removal now matches720 native cases;375 selected audio tests pass. Full audio/DSP/device acceptance and all24domains/114tasks/37requirements remain open."
+}

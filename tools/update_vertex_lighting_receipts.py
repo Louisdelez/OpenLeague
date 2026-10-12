@@ -1,0 +1,32 @@
+"""Refresh current renderer receipts without claiming full game completion."""
+import json,hashlib,datetime
+from pathlib import Path
+r=Path(__file__).resolve().parents[1];now=datetime.datetime.now(datetime.timezone.utc).isoformat()
+def read(name):return json.loads((r/name).read_text(encoding='utf-8-sig'))
+def write(name,data):(r/name).write_text(json.dumps(data,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+def sha(path):return hashlib.sha256((r/path).read_bytes()).hexdigest()
+source=read('docs/environment_vertex_source_validation.json');blender=read('docs/map_blender_source_validation.json');gpu=read('docs/environment_vertex_render_validation.json');terrain=read('docs/terrain_native_render_validation.json');fog=read('docs/native_fog_render_validation.json');map_sha=sha('assets/maps/twisted_treeline.glb');client_sha=sha('target/debug/openleague-client.exe')
+assert source['map_after_sha256']==blender['source_sha256']==map_sha
+assert gpu['map_sha256']==terrain['map_sha256']==fog['map_sha256']==map_sha
+assert gpu['client_sha256']==fog['client_sha256']==client_sha
+executables=[{'path':path,'bytes':(r/path).stat().st_size,'sha256':sha(path)} for path in ['target/debug/openleague-server.exe','target/debug/openleague-client.exe','launcher/src-tauri/target/debug/openleague-launcher.exe']]
+progress={'updated_utc':now,'complete':False,'native_vertex_meshes':source['mesh_count'],'native_vertices':source['vertices'],'native_vertex_materials':source['material_count'],'native_index_triangle_increase':source['restored_triangles'],'blender_removed_degenerate_duplicate_faces':sum(x['triangles'] for x in blender['blender_validation_removed_faces']),'blender_native_vertex_materials_verified':blender['native_vertex_lighting_materials_verified'],'source_controls_exact':True,'source_regeneration_byte_reproducible':True,'map_sha256':map_sha,'client_sha256':client_sha,'actual_gpu_probe_passed':gpu['passed'],'actual_gpu_samples':len(gpu['samples']),'maximum_gpu_rgb_error':gpu['maximum_rgb_error'],'source_receipt':'docs/environment_vertex_source_validation.json','control_receipt':'docs/environment_vertex_control_validation.json','render_receipt':'docs/environment_vertex_render_validation.json','blender_receipt':'docs/map_blender_source_validation.json','limits':source['limits']+gpu['limits']}
+write('docs/environment_vertex_progress.json',progress)
+receipt=read('docs/build_receipt.json');receipt.update(date=now,executables=executables,latest_build_log='logs/vertex-lighting-client-build.log',latest_build_scope='client only: native vertex controls, diagnostic MSAA option and deferred capture; server/core/launcher unchanged',game_complete=False)
+for path in ['docs/environment_vertex_source_validation.json','docs/environment_vertex_control_validation.json','docs/environment_vertex_render_validation.json','docs/environment_vertex_progress.json','logs/vertex-lighting-client-tests.log','logs/vertex-lighting-client-build.log','logs/vertex-lighting-blender-build.log','logs/vertex-lighting-blender-verify.log']:
+ if path not in receipt['test_logs']:receipt['test_logs'].append(path)
+receipt['native_vertex_lighting']=progress;write('docs/build_receipt.json',receipt)
+coverage=read('docs/coverage.json');e=coverage['current_evidence'];e.update(native_vertex_meshes=1971,native_vertex_controls=854890,native_vertex_materials=70,native_vertex_gpu_probe_passed=gpu['passed'],native_vertex_gpu_samples=len(gpu['samples']),native_vertex_gpu_maximum_error=gpu['maximum_rgb_error'],map_sha256=map_sha,current_client_sha256=client_sha)
+e['visual_verification']='Native vertex controls restored in Rust and 70 editable Blender materials. GPU probe outcome recorded in environment_vertex_render_validation.json; no full native renderer acceptance. Height blend and opaque-height fog independently checked. Shader variants, spatial transform, shadows, actors and full gameplay remain incomplete.'
+coverage.update(generated_utc=now,complete=False);write('docs/coverage.json',coverage)
+checkpoint=read('docs/resume_checkpoint.json');checkpoint.update(saved_utc=now,state='active',executables=executables,complete=False,build='Client native vertex controls and capture diagnostics rebuilt; six client tests pass; server/core/launcher unchanged. Full OpenLeague objective incomplete.')
+checkpoint['latest_changes'].append('Native non-lightmapped controls restored exactly on 1971 meshes / 854890 vertices / 70 materials. Native indices retained, +62 triangles; Blender removes only verified degenerate/duplicate faces. Reopened native material nodes verified. See current GPU proof and explicit limits.')
+checkpoint['last_verified'].update(native_vertex_meshes=1971,native_vertex_controls=854890,blender_native_vertex_materials=70,native_vertex_gpu_probe_passed=gpu['passed'])
+checkpoint['restart_next'].insert(0,'Resolve every failed native vertex pixel measurement if any; qualify native shader variants/lightmaps/emissive/shadows and exact world-to-texture transforms. Keep all 24 domains active; renderer probes do not close full map or game.')
+write('docs/resume_checkpoint.json',checkpoint)
+asset=read('docs/map_render_asset_validation.json');asset.update(map_sha256=map_sha,updated_utc=now,geometry_texture_bytes_match_restored_source=False,original_binary_bytes_preserved=True,vertex_repair_receipt='docs/environment_vertex_source_validation.json',native_render_index_triangles=1013104)
+asset['limits']=['Three alpha fixes and 82 terrain UV restorations; 1971 native geometry/control bindings restored directly from NVR, with +62 native index triangles. Original binary/image bytes remain but active position/index bindings have changed.','GLB standard viewers treat COLOR_0 as ordinary tint; exact native gain/display math requires the Rust shader or Blender node adapters.','Full native lighting/shadows/gamma/spatial transform and visual/gameplay fidelity remain incomplete.'];write('docs/map_render_asset_validation.json',asset)
+plan=read('docs/completion_plan.json');plan['current_evidence']=e;plan['updated_utc']=now;write('docs/completion_plan.json',plan)
+for name,render in [('docs/terrain_native_progress.json',terrain),('docs/native_fog_progress.json',fog)]:
+ p=read(name);p.update(updated_utc=now,map_sha256=map_sha,client_sha256=client_sha,complete=False,current_render_probe_passed=render['passed']);write(name,p)
+print(json.dumps({'map_sha256':map_sha,'client_sha256':client_sha,'vertex_gpu_passed':gpu['passed'],'full_complete':False}))

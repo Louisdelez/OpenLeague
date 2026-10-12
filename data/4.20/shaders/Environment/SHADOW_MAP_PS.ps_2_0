@@ -1,0 +1,20 @@
+#include "../ShadowMap/pcf1.hls"
+
+#ifdef ALPHA_TEST_SHADOWS
+	sampler DIFFUSE_MAP : register(s0);
+#endif
+
+float4 main(
+		float Depth : TEXCOORD0
+#ifdef ALPHA_TEST_SHADOWS
+		, float2 m_TexCoord : TEXCOORD1
+#endif
+) : COLOR0
+{
+#ifdef ALPHA_TEST_SHADOWS
+	const float diffuse_alpha = tex2D(DIFFUSE_MAP, m_TexCoord).a;
+	clip( diffuse_alpha - 0.01f );
+#endif
+	const float3 packed_depth = packFloatToVec3(Depth);
+	return float4(packed_depth, 0.0f);
+}

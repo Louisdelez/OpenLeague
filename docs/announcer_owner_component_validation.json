@@ -1,0 +1,59 @@
+{
+  "saved_utc": "2026-10-10T08:19:53.161335+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "audio_tests_passed": 658,
+  "filtered_tests_not_run": 480,
+  "isolated_production_tests_passed": 87,
+  "native_owner_component_destructor_cases_ported": 208,
+  "native_owner_component_mutation_cases_ported": 40,
+  "native_owner_control_factory_cases_prepared": 104,
+  "native_real_control_lifetimes_prepared": 64,
+  "contracts": {
+    "audio_announcer_owner_component_destructor_contract.json": {
+      "cases": 208,
+      "sha256": "6d03725f2de0c50b52073ecce27997fbf90997bb68f7d58af455b206e956a8b5"
+    },
+    "audio_announcer_owner_component_mutations_contract.json": {
+      "cases": 40,
+      "sha256": "5ce08f0e8eece17929bdc2ad8f7bcc36884dfcec2a4c3149fa8f979d4a722199"
+    },
+    "audio_announcer_owner_control_factory_contract.json": {
+      "cases": 104,
+      "sha256": "b5d9168c214514fa244539779e7aa0aab4f83b27838eb070e50c2d6df55f2ea3"
+    },
+    "audio_announcer_owner_real_control_lifecycle_contract.json": {
+      "cases": 64,
+      "sha256": "2d07c8c6a445c5470fcfdd816d7db59b1e1fa6e645e1410cbbcf6ccb5c0408bd"
+    }
+  },
+  "regression_log_sha256": "ef27959288b4121ca3f6a5ba8d1aa231d99b1bb8e5b39c44baf5d62b3f13dd1f",
+  "isolated_log_sha256": "37efd640ba3122da01d2af3616a510434dfd67321c5d126c033bf8fdbaf4631d",
+  "test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_core-5b2a9def275dcedd.exe",
+  "test_executable_sha256": "412d078df5c4b4e61dbb8beafb84ce4acc1a8c2aac058738799d04ca8d3a417e",
+  "source_hashes": {
+    "crates/core/src/audio_announcer_owner_component_destructor.rs": "93609fa8e33a133c0d362388e11c25c7c55bc78a61afac3067ea8c01cf835733",
+    "crates/core/src/lib.rs": "b94bf4d146114471cb28136f1d170f340baa0ea53aa4b8656fb32c6ee4a03be2",
+    "tools/announcer_owner_component_production_tests.rs": "e882810eeec85ca75446e9fe0aef6bc27816ed809456daee85c6ee86685f1378",
+    "tools/qualify_owner_component_destructor.py": "f3fd1efec2c85648907b6a7361788711e5d18b1bf5c917d575a3029ee0c414c4",
+    "tools/qualify_owner_component_mutations.py": "d7f1de3ea7077448284905f089892676d019f22cea660580f5d662317a000c89",
+    "tools/qualify_owner_control_factory.py": "a188a8ddc2fea5bdd4ebb19b914f36fbd5f0f484e98e7ff73b17f0e330a5187d",
+    "tools/qualify_owner_real_control_lifecycle.py": "6c03a3c8f319d03a87b29fa3a5343e7a9db7310ad4ad2256ecb77f6f29b48aa1"
+  },
+  "behavior": [
+    "Full6B2B20 normal-return owner-component destructor ported: sentinel skip, fresh owner metadata reads, nonzero query before unregister, control selected after unregister, strong1-to0 disposal, weak1-to0 release after disposal and fresh release vtable.208 complete native cases matched.",
+    "40 native mutation cases matched with control swap during unregister free/leave, weak change during disposal, vtable change during disposal and component control replacement during disposal. Selected control is cached across disposal; fresh weak count/vtable dispatch preserved.",
+    "Disposal failure keeps preceding owner unregister and strong decrement, with no weak release claimed. Physical owned table/control bytes and explicit primitive callbacks preserve partial effects."
+  ],
+  "limits": [
+    "Atomic decrement and virtual callbacks remain runtime boundary contracts. Sequential fixture decrement adapter does not prove live atomic synchronization; object-specific disposal and native exception unwinding remain open.",
+    "Actual5D1FA0 control construction/replacement newly qualified in104 cases, including native allocation failure still publishing raw object/null control after old release.64 lifetimes execute actual native construction,6B2B20 destruction,5A3220 disposal,5D5B40 release and actual scalar slot8 delete with real control frees. These control factory/virtual bodies are prepared, not yet ported.",
+    "Raw-object scalar disposal callback and allocator/lock/memmove primitives supplied in real-control proof. Live world metadata/actor ownership, full actor destructor, normal announcement queues, priorities, mixing and audible playback remain incomplete. Full game scope preserved."
+  ],
+  "next_action": "Port actual owner shared-control factory5D1FA0 against104 cases and real control virtual functions5A3220/5D5B40/slot8 scalar delete against64 native lifetimes in audio_announcer_owner_real_control_lifecycle_contract.json. Preserve native16-byte control vtable1085F4C, strong/weak1, raw object, release old before final pair publication, null allocation behavior, raw-object scalar-delete flag1 and standard/custom free route. Implement actual shared runtime atomic ownership and complete metadata/actor disposal; then simulation lifecycle and announcement queues/priorities/mixing/playback. Preserve24domains114tasks37requirements."
+}

@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "complete": false,
+  "saved_utc": "2026-10-09T15:18:01.008456+00:00",
+  "operation": "B110A0 input FLD m32fp followed by FSTP m32fp before ADECF0; PC64nearest037f; actual CPU execution on this Windows PC",
+  "case_count": 9,
+  "cases": [
+    {
+      "input_bits": 0,
+      "output_bits": 0
+    },
+    {
+      "input_bits": 2147483648,
+      "output_bits": 2147483648
+    },
+    {
+      "input_bits": 1056964608,
+      "output_bits": 1056964608
+    },
+    {
+      "input_bits": 2139095040,
+      "output_bits": 2139095040
+    },
+    {
+      "input_bits": 4286578688,
+      "output_bits": 4286578688
+    },
+    {
+      "input_bits": 2143363909,
+      "output_bits": 2143363909
+    },
+    {
+      "input_bits": 4290847557,
+      "output_bits": 4290847557
+    },
+    {
+      "input_bits": 2139169605,
+      "output_bits": 2143363909
+    },
+    {
+      "input_bits": 4286653253,
+      "output_bits": 4290847557
+    }
+  ],
+  "source": "tools/rtpc_input_x87_hardware_probe.rs",
+  "source_sha256": "23c763858d04b68996c12786a6fc1890458b74cd52f6965f5d64a69795258c42",
+  "executable": "tools/rtpc_input_x87_hardware_probe.exe",
+  "executable_sha256": "4c403ff15a83b350c626fd4ecbc336613e02f2490091da1a1711d5d1736a0527",
+  "stdout": "00000000,00000000\n80000000,80000000\n3f000000,3f000000\n7f800000,7f800000\nff800000,ff800000\n7fc12345,7fc12345\nffc12345,ffc12345\n7f812345,7fc12345\nff812345,ffc12345\n",
+  "limits": [
+    "Critical FLD/FSTP operations replayed on actual x86_64 CPU, same legacy x87 binary32 load/store operations as original32-bit routine; entire original32-bit game not invoked by this CPU probe.",
+    "Unicorn original126-case oracle does not quiet signaling NaNs at this load/store boundary. Preserve original fixture unchanged; corrected boundary arguments explicitly derive from measured CPU mapping, never from the production Rust result. No complete game/audio output claim."
+  ]
+}

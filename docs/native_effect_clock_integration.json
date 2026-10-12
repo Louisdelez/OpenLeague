@@ -1,0 +1,66 @@
+{
+  "complete": false,
+  "phase": "v69_live_dx12_vulkan_verified",
+  "build_session": null,
+  "native_activation_contract": "data/4.20/game_clock_activation_frame_contract.json",
+  "native_frame_cases": 40,
+  "activation_frame_cases": 4,
+  "physical_rust_checks_passed": true,
+  "client_check": "logs/native-effect-clock-check.log",
+  "integration": "Annie Q owner timeline and projected render-frame selection consume native_effect_clock::EffectClock. Windows QPC source, native frame delta clamp, native GameClock accumulation and TroyClock sample.",
+  "source_hashes": {
+    "crates/core/src/native_game_clock.rs": "989c7387acc2cebc113e8fe390d03a819d3c6eb1a4bb483209d639de2418c378",
+    "crates/client/src/native_effect_clock.rs": "1d5a85865e5a91c1a758d9e255acfc352c4eb43ebed080f7f2f20e09b29b06c6",
+    "crates/client/src/annie_q_vfx.rs": "977caa854d0e9400928a09be376c4eebf157925162e706f8e3266beb2fa59c3e",
+    "crates/client/src/projected_live.rs": "8415ed7dd466989f1c3255f01676cd1907bf36205b656665a4b2a18a996c6846",
+    "crates/client/src/main.rs": "6f8141d0bcdc7673bf0b579302c9242e805146a2c83bfe5d12d62ba01991fc27"
+  },
+  "limits": [
+    "Normal scale1 path only; runtime pause controller and resync not wired.",
+    "Bevy consecutive First boundaries delimit frame plus pacing; native frame work/limiter scheduling equivalence not proven.",
+    "Diagnostic seeded fixture; successful consumer rendering is not original framebuffer equivalence, full Q or full game acceptance."
+  ],
+  "v68_failure": "docs/native_effect_clock_v68_failed.json",
+  "binary_sha256": "d78d68557c38624d62891ce3b7419e6318fcf17164b8044f6a8dfee07775db90",
+  "build_log": "logs/native-effect-clock-v69-build.log",
+  "runtime": {
+    "dx12": {
+      "capture": "docs/projected_core_cycle_capture_v69_receivers_dx12.json",
+      "pixels": "docs/projected_receiver_pixels_v69_dx12.json",
+      "camera_reentry": [
+        2
+      ],
+      "peak_changed_pixels": [
+        107606,
+        110470
+      ],
+      "two_casts": true,
+      "clock_failure_logged": false
+    },
+    "vulkan": {
+      "capture": "docs/projected_core_cycle_capture_v69_receivers_vulkan.json",
+      "pixels": "docs/projected_receiver_pixels_v69_vulkan.json",
+      "camera_reentry": [
+        1,
+        2
+      ],
+      "peak_changed_pixels": [
+        110366,
+        110454
+      ],
+      "two_casts": true,
+      "clock_failure_logged": false
+    }
+  },
+  "cleanup": "docs/receiver_cleanup_v69_verified_raw.json",
+  "visual_inspection": {
+    "images": [
+      "logs/projected-core-cycle-v69-receivers-dx12-on.owner-2-returned.png",
+      "logs/projected-core-cycle-v69-receivers-vulkan-on.owner-1-hidden.png",
+      "logs/projected-core-cycle-v69-receivers-vulkan-on.owner-1-returned.png"
+    ],
+    "observed": "Hidden phase shows displaced camera; returned phases show both actors and red/orange trail on terrain. No original frame reference comparison."
+  },
+  "later_pause_integration": "docs/annie_pause_graphics_progress.json",
+  "historical_scope_note": "Existing v69 fields describe earlier normal-clock validation; see later_pause_integration for current pause evidence."
+}

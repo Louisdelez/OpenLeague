@@ -1,0 +1,36 @@
+{
+  "updated_utc": "2026-10-04T18:39:17.472403+00:00",
+  "complete": false,
+  "client_tests_passed": 80,
+  "client_build_passed": true,
+  "native_fade_parameter_cases": 10,
+  "native_fade_cadence_cases": 8,
+  "native_upload_gate_cases": 8,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Ported native fade parameters: first frame threshold0, subsequent threshold1.1, reveal2*elapsed and conceal0.5*elapsed; third component0 unused by shader.",
+    "Ported strict elapsed>0.0333 gate and native SUBSS/x87 remainder update, matched bitwise including large clock values.",
+    "Ported strict elapsed>0.2 gate for fourfold texture uploader; no clock mutation before caller draw/upload."
+  ],
+  "limits": [
+    "Clock inputs/guards outside supplied native cases are explicit Rust validation, not original runtime behavior proof.",
+    "Full original GPU texture allocation/initialization/formats, transfer failure behavior, ping-pong draws and binding remain open.",
+    "Prior 44-case GPU diagnostic remains separate from current client; native visibility source and normal graphical rerun still absent.",
+    "All24domains remain unfinished."
+  ],
+  "next_actions": [
+    "Qualify native texture formats/allocation/initialization, upload failure behavior and ping-pong stage order.",
+    "Qualify production128-cell expansion and native visibility stencil generation.",
+    "Resolve Map10 extent/config and connect the true visibility provider with upload, fade, blur and overlay to normal rendering."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_fade_parameters_contract.json": "4aff5f5100c9e661f090158a2385d0638cb9df8d1f672def358e4f753ad59c3c",
+    "data/4.20/fow_cadence_contract.json": "2e481d3b939acd53ee8835e336e483380e3f151c44c15f57e8c1e9d5eedf10fd",
+    "data/4.20/fow_upload_cadence_contract.json": "52c2c1616ad530e134b19a3d06598d1ecf69da6771cb484d014b713d85c48194",
+    "crates/client/src/fow_timing.rs": "cc45008cb9f9795f7ae7c1a16508940f48e58b6f9dd2b08e8dd6d405d34c9cac",
+    "logs/fow-timing-tests.log": "cd99b5417b9bf15dea883b53dd08fdcd196fdcec4537595e291143fe1d2697c4",
+    "logs/fow-timing-build.log": "d8fa1f242032b1318e00be58d6a6fad9af72b1a49dcca0b0c457c69b4bc30958",
+    "target/debug/openleague-client.exe": "d0229ff10753dc900f30d712e9963b16cf01626bd1527b7150eeda7930e245b3"
+  }
+}

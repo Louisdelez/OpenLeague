@@ -1,0 +1,31 @@
+from pathlib import Path
+import json,datetime,hashlib,shutil
+r=Path('E:/OpenLeague');now=datetime.datetime.now(datetime.timezone.utc).isoformat()
+load=lambda p:json.loads((r/p).read_text(encoding='utf-8-sig'))
+save=lambda p,d:(r/p).write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+sha=lambda p:hashlib.sha256((r/p).read_bytes()).hexdigest()
+log=(r/'logs/fow-stat-state-tests.log').read_text(encoding='utf-8-sig');assert '425 passed; 0 failed' in log and '94 passed; 0 failed' in log
+assert 'Finished `dev`' in (r/'logs/fow-stat-state-build.log').read_text(encoding='utf-8-sig')
+proof=load('data/4.20/fow_stat_fields_contract.json');assert len(proof['cases'])==4 and all(c['result_bits']==[0,0] for c in proof['cases'])
+files=['data/4.20/fow_stat_fields_contract.json','data/4.20/vision_rules.json','crates/core/src/vision.rs','crates/core/src/vision/tests.rs','crates/core/src/lib.rs','crates/client/src/fow_owner.rs','tools/probe_fow_stat_fields.py','logs/fow-stat-state-tests.log','logs/fow-stat-state-build.log','target/debug/openleague-client.exe','target/debug/openleague-server.exe']
+receipt=dict(updated_utc=now,complete=False,core_tests_passed=425,client_tests_passed=94,client_and_server_build_passed=True,native_stat_initialization_cases=4,native_stat_instruction_addresses=proof['native_addresses'],live_fow_gpu_bound=False,current_client_graphical_rerun=False,current_network_rerun=False,
+ findings=['Native debug dump609A95/609AC0 identifies mFlatBubbleRadiusMod/mPercentBubbleRadiusMod at stat offsets160/164, corresponding to actor778/77C.','Actor constructor612BE0 sets up stat block+618 and calls6086D0 at612E93. Original stat constructor and reset6088D0 execute and produce zero modifier bits in4cases. Full actor constructors not executed.','Shared Rust RadiusModifiers initialized to native zeros; used by server champion visibility and client qualified owner parameter resolution. Champion state serializes these fields in snapshots; missing fields in older snapshots default to zero.','Actual Map10 simulation test verifies modified champion radius hides enemy state in private snapshot, roundtrip preserves modifiers and reset restores visibility. Existing720native owner cases and24owned masks remain green through shared parameter calculation.'],
+ limits=proof['limits']+['Base sight radii remain community-derived and need native qualification. Server line-of-sight remains reconstructed; graphical native counted masks are not bound to ordinary rendering.','Champion modifier state now wired to authoritative visibility, but actual ability/buff stat aggregation, lifespan and resets are not yet supplied by complete kits. Unit/minion/structure modifier state and Rust owner identity mapping remain open.','No network process or newly built ordinary client graphical/audio run in this step. All24domains unfinished.'],
+ next_actions=['Trace native stat aggregation/network writers for bubble-radius fields and implement ability/buff application/removal; cover unit, minion and structure sources.','Qualify original base source radius/metric, world extent and terrain/source lifecycle providers before connecting Rust actors to counted fog masks.','Integrate native-timed GPU upload/fade/blur/overlays in ordinary rendering and verify real current gameplay/network snapshots.'],files_sha256={p:sha(p) for p in files})
+network=load('docs/vision_stat_network_validation.json');assert network['passed'] and network['checks']==8 and network['server_sha256']==sha('target/debug/openleague-server.exe')
+receipt.update(current_network_rerun=True,current_network_checks=8)
+receipt['findings'].append('Actual ordinary server UDP run passes8checks with2peers: zero modifier state transmitted, hidden opponent absent from snapshots and hidden target attacks rejected.')
+receipt['limits']=[v for v in receipt['limits'] if not v.startswith('No network process')]
+receipt['limits'].append('UDP run checks defaults/privacy; modified radius buff commands and native original protocol not qualified. No newly built ordinary client graphical/audio run. All24domains unfinished.')
+for path in ['tools/verify_vision_stat_network.py','docs/vision_stat_network_validation.json','logs/vision-stat-network-server.log']:receipt['files_sha256'][path]=sha(path)
+save('docs/projected_vision_stat_state_progress.json',receipt)
+b=r/'docs/plan_history'/datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ');b.mkdir(parents=True,exist_ok=True)
+for name in ['coverage.json','completion_plan.json','resume_checkpoint.json']:
+ p='docs/'+name;shutil.copy2(r/p,b/name);d=load(p);d['updated_utc']=now;d['complete']=False;d['projected_vision_stat_state_progress']=receipt
+ if name=='resume_checkpoint.json':d['saved_utc']=now;d['last_verified'].update(client_tests=94,core_tests=425);d['next_projected_action']=' '.join(receipt['next_actions'])
+ else:d['current_evidence'].update(client_tests_passed=94,core_tests_passed=425,current_build_receipt='docs/projected_vision_stat_state_progress.json',current_client_sha256=sha('target/debug/openleague-client.exe'),current_server_sha256=sha('target/debug/openleague-server.exe'),projected_current_binary_vulkan_verified=False)
+ if name=='completion_plan.json':d['next_execution_steps']=receipt['next_actions']
+ save(p,d)
+p=r/'docs/completion_plan.html';s=p.read_text(encoding='utf-8');s=s.replace('</body>','<section><h2>Vision — champs natifs dans la simulation</h2><p>425 tests moteur et94tests client ; client et serveur compilés. Initialisation et réinitialisation de quatre cas natifs exécutées. Champs de rayon désormais dans les champions/snapshots et utilisés par la visibilité autoritaire. Un contrôle sur Map10 vérifie masquage, transmission et restauration. Les rayons de base, producteurs de buffs, autres unités et brouillard graphique complet restent ouverts.</p><a href="projected_vision_stat_state_progress.json">Preuves et limites actuelles</a></section></body>');p.write_text(s,encoding='utf-8')
+shutil.copy2(Path('E:/mapslol3v3/record_vision_stat_state.py'),r/'tools/record_vision_stat_state.py')
+print(json.dumps(dict(core_tests=425,client_tests=94,actor_state_connected=True,complete=False,live_fow_bound=False)))

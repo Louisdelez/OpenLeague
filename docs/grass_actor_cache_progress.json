@@ -1,0 +1,40 @@
+{
+  "updated_utc": "2026-10-05T09:40:44.285612+00:00",
+  "complete": false,
+  "client_tests_passed": 183,
+  "client_build_passed": true,
+  "native_actor_cache_cases": 300,
+  "native_actor_cache_addresses": 80,
+  "native_actor_cache_ported": true,
+  "live_grass_mask_integrated": false,
+  "terrain_query_qualified": true,
+  "findings": [
+    "Executed original6197B0 and actual5FFFD0 position getter across300 cases, including unchanged/moved positions, ignored Y, radius override/fallback, threshold boundary, NaN/infinity and arbitrary noncanonical result bytes.",
+    "Rust cache matches query argument bits, call/no-call decisions, result byte and final cache fields in every native case. Radius refresh uses >=epsilon or unordered; position refresh uses >epsilon or unordered.",
+    "Original6197B0 ->5FFFD0 ->8F3390 executed without adapters against verified original Map10 packed cell grid:12 scenarios, repeated unchanged call reuses cache. Radius0/34/35/64 at flag1 sampled centers returns1; radius500/501 returns0 at same selected center. No bit-only synthetic predicate substituted."
+  ],
+  "limits": [
+    "Actual cache method and original motion position getter execute; actor/provider fields explicitly supplied.",
+    "Actor classes, radius and position producers, terrain query semantics and live grass integration remain open.",
+    "No new full-match rendering, gameplay or GPU verification in this change; previous GPU receipts remain separately scoped. All24domains remain open.",
+    "Original actor cache, motion getter and terrain predicate execute against verified original Map10 packed56byte cell grid. Actor position/radius fields explicitly supplied.",
+    "12 radius/position scenarios with repeated calls; not exhaustive terrain boundaries, actual actor field producers or live renderer integration."
+  ],
+  "next_actions": [
+    "Port terrain predicate8F3390 with additional native boundary cases and original Map10 data; connect actual actor eligibility/AABB and camera providers.",
+    "Integrate recovered grass mask/WALL_OF_GRASS into normal renderer and inspect actual match output.",
+    "Continue full24domain plan and six-client victory/results qualification."
+  ],
+  "files_sha256": {
+    "data/4.20/grass_actor_cache_contract.json": "f726df8a73dfbdd38c610acca0ec19ff67bc4440f3a258e632e0d3d23c8318bd",
+    "crates/client/src/grass_actor_cache.rs": "57165b2583bfd0aa9714d786d82c263bb78705c7ded6ed88793c98e71218ae58",
+    "crates/client/src/main.rs": "4a4ca973db6051f50cb9eca5b7a0feeee48c9926a1b96364099bbba764e7be2c",
+    "logs/grass-actor-cache-tests.log": "9b281adec47d6a5e3731582d48d93a545b27ff2f013199f67e4e255a155aad9e",
+    "logs/grass-actor-cache-build.log": "cdb3b9119e65dd88ee8db36d3445d4c389f269cdcb674dba096b7cbcfeccb521",
+    "target/debug/openleague-client.exe": "c2d4041c085b88da4119cd5cbff6676d372b03ec24cbae6afaf3cae0eee50cf1",
+    "data/4.20/grass_actor_map10_contract.json": "8f8d3c6989a0ddec28e575d4ad515a621191517715d3c0c60a8efabe4d58880c"
+  },
+  "native_map10_cache_cases": 12,
+  "native_map10_cache_addresses": 296,
+  "terrain_query_qualification_scope": "12 original Map10 positions/radii, each initial query and unchanged repeat; not exhaustive or a Rust terrain-query port."
+}

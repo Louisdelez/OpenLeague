@@ -1,0 +1,23 @@
+from pathlib import Path
+import json,datetime,hashlib,shutil,sys
+r=Path('E:/OpenLeague');pending='--pending' in sys.argv;now=datetime.datetime.now(datetime.timezone.utc).isoformat();sha=lambda p:hashlib.sha256((r/p).read_bytes()).hexdigest();load=lambda p:json.loads((r/p).read_text(encoding='utf-8'))
+tests=299 if pending else 300
+log='logs/native-hud-viewport-tests.log' if pending else 'logs/native-hud-textures-tests.log'
+assert f'{tests} passed; 0 failed' in (r/log).read_text(encoding='utf-8')
+action='Terminer les tests du registre HUD puis qualifier producteurs/chargement et assignation GPU des textures nommées ; polices/effets, widgets et interactions ; cycle resize/réglages, carte/zones bleues, six clients graphiques puis24domaines.' if pending else 'Qualifier producteurs/chargement et assignation GPU des textures HUD nommées ; polices/effets, widgets et interactions ; reconstruire/inspecter Vulkan/DX12, cycle resize/réglages, carte/zones bleues, six clients graphiques puis24domaines.'
+artifacts=['crates/client/src/native_hud_textures.rs','crates/client/src/native_zip_provider.rs','crates/client/src/main.rs','data/4.20/native_hud_texture_creation_contract.json','data/4.20/native_hud_texture_cache_contract.json',log]
+proof=dict(updated_utc=now,complete=False,client_source_tests_passed=tests,current_source_suite_pending=pending,last_qualified_application_tests=299,current_binary_sha256=sha('target/debug/openleague-client.exe'),application_rebuilt_after_changes=False,native_creation_cases=176,native_lookup_cases=172,source_texture_names=84,registry_rust_ported=True,registry_rust_compared=not pending,source_provider_integrated=True,actual_source_registry_verified=not pending,gpu_texture_handles_resolved=False,texture_lifecycle_complete=False,hud_widgets_drawn=False,artifacts=artifacts,hashes={p:sha(p) for p in artifacts},next_action=action,limits=['Native cache hash lookup and creation fields qualified with supplied pool allocation and ordered-tree insertion. Native pool/tree/resource lifecycle remains open.','Rust registry owns named entries and pending descriptors; provider registers84source names, not GPU textures. LiteralNone is preserved as source name; no invented fallback.','Zeroed allocation storage is explicit engine boundary; native creation comparison also coversA5prefill.','Latest graphical acceptance remains299test viewport build; new source not rebuilt or visually inspected.','No complete HUD/game/map/champion claim.'])
+proof.update(native_texture_binding_cases=549,texture_binding_rust_ported=False,texture_binding_proof='data/4.20/native_hud_texture_bindings_contract.json')
+(r/'docs/native_hud_textures_progress.json').write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+history=r/'docs/plan_history'/('native-hud-textures-'+datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ'));history.mkdir(parents=True)
+for name in ['coverage.json','completion_plan.json','resume_checkpoint.json']:
+ p=r/'docs'/name;shutil.copy2(p,history/name);d=load('docs/'+name);d.update(updated_utc=now,complete=False,native_hud_textures_progress=proof)
+ e=d['last_verified'] if name=='resume_checkpoint.json' else d['current_evidence'];e.update(client_tests=tests,current_source_suite_pending=pending,current_client_application_tests=299,client_test_source_matches_current_build=False,current_source_progress='docs/native_hud_textures_progress.json')
+ if name=='resume_checkpoint.json':d.update(saved_utc=now,next_projected_action=action,pending_native_jobs=[dict(session_id=7009,command='cargo test -p openleague-client --bin openleague-client -j1',log='logs/native-hud-textures-tests.log',state='verified_live_at_last_poll')] if pending else [])
+ if name=='completion_plan.json':d['next_execution_steps']=[action]+d.get('next_execution_steps',[])[1:]
+ p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+p=r/'docs/completion_plan.html';s=p.read_text(encoding='utf-8');marker='<section id="native-hud-textures-progress">'
+if marker in s:
+ start=s.index(marker);end=s.index('</section>',start)+len('</section>');s=s[:start]+s[end:]
+section=marker+'<h2>Textures HUD nommées</h2><p>176créations et172recherches natives qualifiées ; registreRust/84noms source intégrés. '+('Tests en cours ;299tests précédents.' if pending else '300tests source réussis.')+' Chargement et assignationGPU, polices/effets et widgets ouverts. Application précédente299tests.</p><a href="native_hud_textures_progress.json">Preuves et limites</a></section>'
+p.write_text(s.replace('</body>',section+'</body>'),encoding='utf-8');shutil.copy2(Path(__file__),r/'tools'/Path(__file__).name);print(json.dumps(dict(tests=tests,pending=pending,complete=False)))

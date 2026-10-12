@@ -1,0 +1,50 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T12:59:36.552677+00:00",
+  "change": [
+    "Connect non-unit actor global and owner state10 to the qualified gain-entry updater as separate keys distinguished by flagbit0; connect actual bus global state10 likewise.",
+    "Preserve captured full caller flags, existing flags on a match, insertion order and exact gain bits. Missing native flags remain an explicit error; do not infer opaque upper bits.",
+    "Preflight nonfinite existing entries and invalid low flag bits before actor/bus controls."
+  ],
+  "validation": {
+    "new_targeted_tests_passed": 2,
+    "audio_regression_tests_passed": 252,
+    "failed": 0,
+    "session": 62848,
+    "terminal_exit_code": 0,
+    "native_actor_bus_gain_cases": 1024,
+    "native_whole_gain_refresh_cases": 512,
+    "preparatory_native_mixed_class_inheritance_cases": 384,
+    "mixed_class_results_differing_from_all_sound": 60,
+    "comparison": "All84 bytes, extras/RNG, raw gain entries and exact actor/bus/RTPC/random/gain trace; whole refresh also compares flags/cache/pair and actual native prune/product/clamp.",
+    "log": "logs/audio-state-gain-tests.log"
+  },
+  "sha256": {
+    "crates/core/src/audio_actor_controls.rs": "4f718c6dfacdc19a4f27156b63d9a2bc16da3bf02bba8a7d3c07df451ae1f5ee",
+    "crates/core/src/audio_bus_controls.rs": "e03ed71a49fc2e419717cc0c6a98858bfd0b9599af632bcb170933bcfa214f26",
+    "crates/core/src/audio_gain_entries.rs": "3469b84cbbc46dbc4909e48a9482e8e98c12f1736e14339ed7fcdb52d185eb6a",
+    "crates/core/src/audio_control_refresh.rs": "4bebd1f4d4e330cae3c7fe653c5fb76b1edf492b0fe479ae7eb8a541371e9293",
+    "tools/probe_native_audio_state_gain_refresh.py": "07a97683379fddce4995c9db9a7f707d3bcfd70298e4363eafb17d75422f0f32",
+    "tools/probe_native_audio_actor_bus_state_gain.py": "6123470ec5cdea2a63003cb4f571315b2f2143556b0e55ef392f1880a9dbc9a9",
+    "tools/probe_native_audio_bus_parameter_inheritance.py": "90b05c9dc5e9f0db3b3228b4cc415468fe41bda1e9b17242c9063f8ce7a8e26e",
+    "data/4.20/audio_state_gain_refresh_contract.json": "e4eb9421f4a53597f80cfc2ef36d14936f07b6429cbe7e745f29d76b8aed38c5",
+    "data/4.20/audio_actor_bus_state_gain_contract.json": "69f39680813e181e66951dc75e262c8b595604c9a148068ef358f2a57b580232",
+    "data/4.20/audio_bus_parameter_inheritance_contract.json": "8c0a431abcefe5c184e033fe17ba4fc86048f36d6ce0c907c2416be653b70580",
+    "logs/audio-state-gain-refresh-probe.log": "3d60c46c21b40e7dd549a8b0ce18e569b4592e877b5d2c553e0443603403b55c",
+    "logs/audio-bus-parameter-inheritance-probe.log": "5a8359c47f3507edfe3d471c834dca68f2141a7fffddc128dac61c26a27a89bd",
+    "logs/audio-state-gain-tests.log": "d8b70ed757b08dcb5cad3ea846d64383247fc82d32da53d96b22dd60d2da9ba7",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "7f5b325d37b0c5aeb1edd7e5c8b42cf0e5f7846a3963e1935a6aea42d54441cf"
+  },
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "interfaces": [
+    "Native raw gain caller flags are explicit captured inputs for each executed caller; unused fixture branches have declared low-bit-only flags that never contribute. Tests do not qualify production upper-bit generation.",
+    "Whole native refresh uses explicit spatial no-op, flag0 and unchanged pair[0,3.25] interfaces; source/routing disabled. Actual refresh, actor, bus, state gain lookup/mutation and RTPC execute unchanged; CRT draws adapted to qualified seed17 stream.",
+    "Preparatory mixed-class reference executes actual FF1380 virtual100 AFF1E0 versus Sound AF1900; local Sound getters remain explicit x87 adapters."
+  ],
+  "limits": [
+    "Production gain caller flags/native opaque upper bits, normal state updates/smoothing and ownership remain unqualified; caller flags are required inputs.",
+    "Mixed-class inheritance reference is not yet ported into Rust. Actual bus getters, shared full routing with actual bus, initialization, bank loading/effects and native allocator growth/lifetime remain open.",
+    "No normal device-output integration, client rebuild, audible verification or complete-project acceptance."
+  ],
+  "next_action": "Port verified actual FF1380 bus inheritance class difference from384 mixed-class native cases (60 differ from all-Sound graph), qualify actual bus local getter110/114 and shared routing integration. Qualify production gain caller flags/ownership, initialization/bank/effects and normal audio runtime; current state10 flags remain explicit captured inputs."
+}

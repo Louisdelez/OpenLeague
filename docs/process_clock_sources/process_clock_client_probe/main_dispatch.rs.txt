@@ -1,0 +1,11 @@
+    // Insert after `arguments` is collected in main(), before the other probes.
+    if let Some(index) = arguments.iter().position(|a| a == "--native-process-clock-probe") {
+        #[cfg(windows)] {
+            let probe_root = arguments.get(index + 1).map(std::path::PathBuf::from)
+                .unwrap_or_else(|| root.clone());
+            native_process_clock_probe(&probe_root);
+            return;
+        }
+        #[cfg(not(windows))]
+        panic!("Native process clock requires Windows");
+    }

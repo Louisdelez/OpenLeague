@@ -1,0 +1,59 @@
+{
+  "passed": true,
+  "complete": false,
+  "production_modified": false,
+  "scope": "Scratch-only generic metadata728150/7281C0 scalar port",
+  "tests": {
+    "passed": 4,
+    "failed": 0,
+    "filtered": 8,
+    "seconds": 0.06,
+    "new_tests": 2,
+    "lifecycle_regressions": 2,
+    "native_setter_calls_compared": 72,
+    "native_getter_calls_compared": 360
+  },
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "oracle": "E:/mapslol3v3/replay_manager_agent/replay_metadata_setters_audit.json",
+  "oracle_sha256": "c261df7c77265c610f85c39546367a89dd2c6d959dafc50dd3f7a0f22c68aa73",
+  "production_base_sha256": {
+    "audio_replay_metadata.rs": "abf3bee9e4d1384d3b22c776ec8d1e58c8c056118cc5b1f49e3a013cf720e82c",
+    "audio_replay_metadata_tests.rs": "7541978791b6ce92ab5b86fd79f9d473ed0a9b86f635e6fb05194122dcac3989"
+  },
+  "hashes": {
+    "audio_replay_metadata.rs": "c7933f275c73f47621e44f673384498e2b2adadc426fce5d3c7884dec4cffe95",
+    "audio_replay_metadata_tests.rs": "7ba839274ada0c63753d85a75d3fbef17a2b3aa393e68341cfd4cb793c9e7ffe",
+    "count_functions.rs": "04d6e3c42c1ec5bc5d1adf1b5a0bd6719ed423bf06c31280fc15fe9d6b5276d5",
+    "count_tests.rs": "a2ec6eca9a640e2fa062fffeb8e3a5811dc889ae9a545ab2c78a4fa2c40d9b19",
+    "metadata_count.patch": "e2eefeb7cd37a79d8edde4495bcaecead204e23fb105762be40fc9223be3fa81",
+    "metadata_count_harness.rs": "974852c41b1463a3af4f7958a8e7438b6b94e143b16dfcc30bfe0b0d9aa3db4d",
+    "metadata_count_harness.exe": "783bb3057614723c967b2ea31f03a7e0f7476008d73abc3056a472394fd5016a",
+    "metadata_count_build.log": "e3a8b0494a604eea9e17cb9ae913e5a492a723499b98ba174074db9f44a46977",
+    "metadata_count_tests.log": "6a170643a5ecfcd00da2e328e0888ae03e54545dce6c5c16a02d37055a0f33be",
+    "prepare_count_port.py": "36457c0f8edb5b9b9260f0fd3ec4b0978e6897b98a8d519388906c8914b9f69f",
+    "replay_metadata_count_probe.json": "ae390cd512c7a25bff588b40fe41a8db3cbda963eb45250f360c0394c1ecda41"
+  },
+  "compile": [
+    "C:/Users/loicd/.cargo/bin/rustc.exe",
+    "--edition=2024",
+    "--test",
+    "E:\\mapslol3v3\\replay_metadata_count_agent\\metadata_count_harness.rs",
+    "--extern",
+    "serde_json=E:/OpenLeague/target/debug/deps/libserde_json-06e1b1b57f0ae5f7.rlib",
+    "-L",
+    "dependency=E:/OpenLeague/target/debug/deps",
+    "-o",
+    "E:\\mapslol3v3\\replay_metadata_count_agent\\metadata_count_harness.exe"
+  ],
+  "run": [
+    "E:\\mapslol3v3\\replay_metadata_count_agent\\metadata_count_harness.exe",
+    "audio_replay_metadata",
+    "--nocapture"
+  ],
+  "limits": [
+    "No production integration, Windows dispatch, frame consumer729D70 or string-map changes.",
+    "Native limit48 preserved; this does not qualify count-driven frame copying beyond the24-entry fixed arrays.",
+    "Result cleanup follows the existing metadata clear pattern; injected boundary read/write/lock failures are not covered by the native parity fixtures.",
+    "Only the selected metadata tests ran; this is not the full core test suite."
+  ]
+}

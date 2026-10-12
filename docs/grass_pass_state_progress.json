@@ -1,0 +1,83 @@
+{
+  "updated_utc": "2026-10-05T08:25:47.689688+00:00",
+  "complete": false,
+  "client_tests_passed": 174,
+  "client_build_passed": true,
+  "native_grass_pass_prefix_ported": true,
+  "native_clear_shared_by_gpu": true,
+  "native_target_format_shared_by_gpu": true,
+  "live_grass_mask_integrated": false,
+  "native_cull_enable_cases": 16,
+  "native_cull_setter_cases": 16,
+  "native_grass_prefix_cases": 128,
+  "native_clear_cases": 144,
+  "native_target_format_cases": 36,
+  "gpu": {
+    "adapter": "NVIDIA GeForce RTX 3060",
+    "backend": "Vulkan",
+    "channels_checked": 2097152,
+    "complete": false,
+    "covered_pixels": 196608,
+    "height": 512,
+    "limits": [
+      "Actual Vulkan raster uses recovered decoded original brush, native quad parameter helper and ported native vertex/pixel shader expressions.",
+      "Nearest/clamp sampling, screen matrix and vertex topology remain explicit qualification adapters; native BGRA8 target format and clear color now verified through original D3D API boundaries.",
+      "CPU expected pixels cover copied alpha, preserved outside clear and overlapping last-write order; no original D3D framebuffer comparison or full historical filtered precision acceptance.",
+      "Not connected to live actors/camera or normal grass pass; all game domains remain unfinished."
+    ],
+    "native_d3d_format": 21,
+    "overwritten_pixels": 16384,
+    "passed": true,
+    "pixels_checked": 524288,
+    "production_parameters": "crates/client/src/grass_quad.rs",
+    "production_shader": "assets/shaders/native_grass_mask.wgsl",
+    "quad_draws": 4,
+    "target_format": "Bgra8Unorm",
+    "width": 1024
+  },
+  "native_hypothesis_correction": "Main123FF20bit10000000is culling enable (D3Dstate22), not stencil; secondary123FF60samebitis depthwrite. Earlier possible-stencil notes superseded in this scope.",
+  "findings": [
+    "Grass selectors3/4prefix sets depth on/write on, blend off, culling mode1enabled ->D3DCCW3. Full latermaterial state/order remains open.",
+    "Native980290->9C2510->9C57E0dispatch reaches actualD3DCleararguments0,0,1,FFFFFFFF,1.0,0; maskclearcoloropaque white verified throughAPIboundary and shared inGPUprobe.",
+    "Native virtual60CreateTexture translates type2toformat21(A8R8G8B8), poolDEFAULT0, usage1rendertarget. WGSLGPUtarget now usesBGRA8Unormlogical channels; sourcebrush remains decodedRGBA.",
+    "174clienttests/currentbuild and524288GPUtargetpixels pass afterclear/format changes."
+  ],
+  "semantic_sources": [
+    "https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dcull",
+    "https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-clear",
+    "https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dformat"
+  ],
+  "visual_inspection_required": true,
+  "limits": [
+    "Fullgrass material alpha/blend persistence, originalsceneordering and Vulkanwinding bridge are not proven by prefixstate.",
+    "Targetpushviewport, matrixproducer, originalquadbuffer/index/vertexdata, nativefilter/minmag/mip and compressedDDSprecision remain open.",
+    "GPUfixturestill explicitly usesnearest/clamp, suppliedscreenmatrix andproceduralvertices; no nativeD3Dpixelcomparison or actualactors/camera binding.",
+    "Latestnormalclient executable compiled but no normalmatch capture performed; priorcaptures retain their ownhashes.",
+    "All24domains and complete six-client victory/results remain unfinished."
+  ],
+  "next_actions": [
+    "Qualify driver sampler initialization/filtering (wrapper9C1430/9C1B40/9C3BF0), targetpushviewport/screenmatrix and nativequadbuffers; retain qualifiedclear/BGRAformat.",
+    "Resolve actualactorAABB/eligibility and camera/viewportproducers, connectmaskandWALL_OF_GRASSrender to normalMap10and capturepixels.",
+    "Continue allnativevision/rendering and six-client victory/results, then every remaining full-plan requirement."
+  ],
+  "files_sha256": {
+    "crates/client/src/grass_pass_state.rs": "d33dc96443e28d15a427ffb3048d8b4499304da7d1c54dcbc6482a5c229d5887",
+    "crates/client/src/main.rs": "c86142f970d5fb87042f08824adee3ec10487f53ae832377ae84ee6754141bac",
+    "crates/client/examples/grass_mask_gpu_probe.rs": "2e54a794d341086d9133bfdc068a0e315dbab32b7fa81fbff3a6170b2ad450a9",
+    "data/4.20/grass_culling_contract.json": "8bb52c683814783de4c47224e84855e91d751bdfad4a2063c5a5c2980710df85",
+    "data/4.20/grass_clear_contract.json": "641a225eabf5dccc3685c8f4e50c3a63913f75b8812dcdc7c19b44315cdb734d",
+    "data/4.20/grass_target_format_contract.json": "cdbd2a693d8ba20dc564a70ded6288bbbe76808731b6759f38929dd17213b45a",
+    "logs/grass-pass-state-tests.log": "0a8d473c6adbac1fd55ef5101ad999078b71cf4578f8b888db5aca7c96c596b2",
+    "logs/grass-pass-state-build.log": "ea2f7d00d47ee9911f4eb1fc8e1ca8989bb6f2ed1e15b2377ba89ced185c83f0",
+    "logs/grass-target-format-tests.log": "da277e20a772a05d337b5d1374c938b5efa7476d49bd7924ed117bc663eb3e24",
+    "logs/grass-target-format-build.log": "898bab13dc59c51e7042ba24b229d9a82d1b8112309579fe8511e0d12785f64d",
+    "logs/grass-mask-native-clear-gpu.log": "941c74144004d92f5a573d44bd674b3cc4d16e091350b7a61917590a0a51f644",
+    "logs/grass-mask-native-format-gpu.log": "bb131bfcb4284d2db0f6939b6836c37d915a505f53b0c2525adddf644f37d5a5",
+    "logs/grass-mask-gpu.json": "5c23460760cfd153b7dbb47329919093f1538e3ba66b181a6da7d6d639d65cf0",
+    "logs/grass-mask-gpu.rgba": "5f9426d1740801a05f8749f50c0e8a6326f0c3d2a084d5830e86011a85800005",
+    "logs/grass-mask-native-format.png": "eb152ec5387f48d0d3faa77da9340a6cbeaf0a4665b1692400febbed59bb3ce9",
+    "logs/grass-mask-native-format-alpha.png": "a05a91709a41da49f4d4d6e526a2170ec8d6fed76dbf01b890a053197a94d15e",
+    "target/debug/examples/grass_mask_gpu_probe.exe": "7e9c427a87ecaeacea45c545b42af93a253459182ecd18e73e314d73e65debc3",
+    "target/debug/openleague-client.exe": "5d193cecd45759f2ab6454714918eee79c84ebf990de302588a8155f32ab33b7"
+  }
+}

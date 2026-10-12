@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "check_count": 9,
+  "checks": [
+    "failed HeapFree preserves actual error",
+    "failed HeapFree retains host block and native mirror",
+    "successful retry releases exactly once",
+    "mirror failure keeps primary error",
+    "actual allocated raw block adopted by pending owner",
+    "cleanup failure retains pending raw block",
+    "cleanup failure recorded as failure",
+    "cleanup retry releases pending allocation",
+    "repeated cleanup remains empty"
+  ],
+  "error": null,
+  "remaining_heap_backing": 0,
+  "events": [
+    {
+      "api": "HeapFree",
+      "result": 1,
+      "last_error": 6,
+      "pointer": 855638016
+    },
+    {
+      "api": "host_cleanup_unadopted_HeapFree",
+      "bytes": 64,
+      "success": false,
+      "last_error": 6
+    },
+    {
+      "api": "host_cleanup_unadopted_HeapFree",
+      "bytes": 64,
+      "success": true,
+      "last_error": 6
+    }
+  ],
+  "scope": "Bridge fault injection with actual process-heap blocks. Failed HeapFree and mirror failure are deliberately injected; no native provider result is simulated.",
+  "source_hashes": {
+    "test_crt_heap_ownership.py": "0099358fa38ac23d3f02e157fd5c91c25ef3666308f1b0467fa298d6d418e876",
+    "crt_os.py": "c0ad1e7cd7bcc84a7abccf30ee46034da410a8d9b39118d39a10d94c09aa0f98"
+  }
+}

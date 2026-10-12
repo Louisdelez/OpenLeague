@@ -1,0 +1,381 @@
+{
+  "passed": true,
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "cases": [
+    {
+      "initial_cache": 0,
+      "draw_index": 0,
+      "stage_caches": [
+        [
+          2,
+          2,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          2,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          2,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ]
+      ],
+      "api_calls": [
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          1,
+          1,
+          3
+        ],
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          2,
+          1,
+          3
+        ],
+        [
+          2,
+          2,
+          3
+        ]
+      ]
+    },
+    {
+      "initial_cache": 0,
+      "draw_index": 1,
+      "stage_caches": [
+        [
+          2,
+          2,
+          0,
+          0,
+          2,
+          2,
+          0,
+          0
+        ],
+        [
+          2,
+          2,
+          0,
+          0,
+          2,
+          2,
+          2,
+          0
+        ],
+        [
+          2,
+          2,
+          0,
+          0,
+          2,
+          2,
+          2,
+          0
+        ]
+      ],
+      "api_calls": [
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          0,
+          7,
+          0
+        ]
+      ]
+    },
+    {
+      "initial_cache": 4294967295,
+      "draw_index": 0,
+      "stage_caches": [
+        [
+          2,
+          2,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          2,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          2,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ]
+      ],
+      "api_calls": [
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          1,
+          1,
+          3
+        ],
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          2,
+          1,
+          3
+        ],
+        [
+          2,
+          2,
+          3
+        ]
+      ]
+    },
+    {
+      "initial_cache": 4294967295,
+      "draw_index": 1,
+      "stage_caches": [
+        [
+          2,
+          2,
+          0,
+          0,
+          2,
+          2,
+          0,
+          0
+        ],
+        [
+          2,
+          2,
+          0,
+          0,
+          2,
+          2,
+          2,
+          0
+        ],
+        [
+          2,
+          2,
+          0,
+          0,
+          2,
+          2,
+          2,
+          0
+        ]
+      ],
+      "api_calls": [
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          0,
+          7,
+          0
+        ]
+      ]
+    },
+    {
+      "initial_cache": 305419896,
+      "draw_index": 0,
+      "stage_caches": [
+        [
+          2,
+          2,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          2,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          2,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ]
+      ],
+      "api_calls": [
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          1,
+          1,
+          3
+        ],
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          2,
+          1,
+          3
+        ],
+        [
+          2,
+          2,
+          3
+        ]
+      ]
+    },
+    {
+      "initial_cache": 305419896,
+      "draw_index": 1,
+      "stage_caches": [
+        [
+          2,
+          2,
+          0,
+          0,
+          2,
+          2,
+          0,
+          0
+        ],
+        [
+          2,
+          2,
+          0,
+          0,
+          2,
+          2,
+          2,
+          0
+        ],
+        [
+          2,
+          2,
+          0,
+          0,
+          2,
+          2,
+          2,
+          0
+        ]
+      ],
+      "api_calls": [
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          0,
+          7,
+          0
+        ]
+      ]
+    }
+  ],
+  "findings": [
+    "Stage1 U/V clamp is explicit. MAG/MIN are POINT after reset, LINEAR after prior projected draw restoration in this selected sequence.",
+    "Stage1 MIP starts NONE after reset, becomes LINEAR after prior projected draw restoration; stage0 is explicitly reset to NONE each draw."
+  ],
+  "adapters": [
+    "D3D9 SetSamplerState boundary returns S_OK; cookie check adapted."
+  ],
+  "limits": [
+    "Sequence executes selected native routines; interleaved renderer/texture-binding and particle state routine932A60 not executed. Not final ordinary draw state proof.",
+    "Color-hold native8x8 texture is uniformly opaque white, so these filter variants are not visually distinguishable on this resource."
+  ]
+}

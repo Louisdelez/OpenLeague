@@ -1,0 +1,29 @@
+{
+  "updated_utc": "2026-10-04T16:04:34.646429+00:00",
+  "complete": false,
+  "client_tests_passed": 56,
+  "native_stop_states": 512,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "runtime_annie_projected_emitter_bound": false,
+  "current_build_gpu_rerun": false,
+  "findings": [
+    "Native93FA10 preserves startA8, writes stop148 once, clears persistent bit0and sets end/stopped bits0x50. Already-stopped bit0x40 preserves fields.",
+    "Rust stop state matches512native states; drives all50previous native emitter frames without resetting system time.",
+    "Static setter9289B0 sets request400; caller940719 invokes93FA10 after consuming this bit. Missile-owner call chain remains unqualified."
+  ],
+  "limits": [
+    "First-stop probe ends after native field writes, before audio callback and manager bookkeeping.",
+    "Already-stopped branch runs full function through native return.",
+    "Caller request0x400 statically leads to93FA10; owner/missile request producer remains unqualified.",
+    "Full first-stop audio and manager bookkeeping not executed; normal gameplay binding and GPU fidelity remain incomplete."
+  ],
+  "files_sha256": {
+    "data/4.20/particle_stop_contract.json": "d3f86e3c3e751c13725a18a97be519f70c0e1d3593012d0f169a385a62a8d58f",
+    "data/4.20/particle_stop_request_setters.json": "1bd4f014be7b52592b3b9e60ebc9b5d051d918bcb657a1446242aea58ec372d8",
+    "crates/client/src/simple_system.rs": "21cb6ee65229b06749722b6b1254a6473c8b4029678792f55f6b482356fba8a9",
+    "crates/client/src/main.rs": "d91b3f3ad1e16a316b459ba3cdd5d42c36fd7b89e8caeb63a188fc620397d273",
+    "logs/simple-system-tests.log": "2fd938ce3a14f60418275dce07721193264120843d63290b91fc69298df36785",
+    "logs/simple-system-build.log": "714630932830cd6167cc5fef8ce6f8f3daa1f820839132dbc3ad3d586e116697",
+    "target/debug/openleague-client.exe": "d721c05b1873d21c25d953bcc4d7c5a51f069eeada84802f4fe595cea67bee8e"
+  }
+}

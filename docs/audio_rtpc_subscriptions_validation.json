@@ -1,0 +1,51 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T09:48:24.617861+00:00",
+  "change": [
+    "Port B124E0 subscription creation/replacement/removal with original curveID identity, remove+append ordering and retained initial owner/class.",
+    "Port B13540/B135C0 notify-all order: wrapping193-bucket traversal and newest collision binding first, class0 control, class1/2 invalidate, class4 bus control.",
+    "Port AEED80 bus state handling for parameter13/14. Empty replacement returns31, no notifications and retires binding when last curve removed."
+  ],
+  "validation": {
+    "passed": 8,
+    "failed": 0,
+    "session": 50309,
+    "terminal_exit_code": 0,
+    "log": "logs/audio-rtpc-subscriptions-tests.log",
+    "native_subscription_sequences": 128,
+    "native_subscription_mutations": 512,
+    "regression_native_reader_cases": 2280,
+    "regression_native_manager_cases": 3456,
+    "regression_native_bank_manager_cases": 63,
+    "comparison": "Exact binding curve/owner/class snapshots, native return statuses, ordered notifications and class4 bus float bits after every mutation."
+  },
+  "sha256": {
+    "crates/core/src/audio_rtpc_subscriptions.rs": "75f6e6b01240468cacebb1f12d7937444c830173f9292c9e28e88c789a7b8762",
+    "crates/core/src/audio_rtpc_manager.rs": "37ba1cb8daad2924cedfcf0c33c8dad03bcd16be9395170029d0f74a9354cf04",
+    "crates/core/src/audio_rtpc_bank.rs": "f2da113d007ecbebd2aaf834f12d17f20aef333de15fe0eb87f3c27f40b851d3",
+    "crates/core/src/audio_curves.rs": "5d23dcea4c208757106a0d66ef2ad4c114844a9d4172b54f546e5823073e3519",
+    "crates/core/src/lib.rs": "507e3790d54b9bd5ea5dc4dbabad15db6deedf63168b9345a1b3b5ade4e0bf70",
+    "tools/probe_native_audio_rtpc_subscriptions.py": "1b11af345754e9eb5f2359777c9068ebdc8e7a5c0b8bb0d41727e6d387c47517",
+    "tools/qualify_native_audio_object_registration.py": "d4c43f7fe9cbc92d6205def89587d0253b0e899913fa0d7591f9e6d4ff3e166c",
+    "data/4.20/audio_rtpc_subscriptions_contract.json": "d46bd62dac7d2e7690c84965ffbc4b7a9a6e4742760f9077ca6bcc6f36f7876b",
+    "logs/audio-rtpc-subscriptions-tests.log": "56603dda3ca93d8b7df71850c41def7857473292896057a69a4ddfcc3d0329df",
+    "logs/audio-rtpc-subscriptions-probe.log": "9d21f1e38e4a14440d39eea4f7e398026cb13b2d387645e319e9afd98abbbc80",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "1ad963faced7658c02961732b73b78471ecff0f0906eb14c2ffcfd7770b84a4c"
+  },
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "adapters": [
+    "Allocator supplies zeroed bounded memory; free and memcpy explicit C ABI adapters.",
+    "Original B124E0/hash chains/vector growth/copy/curve replacement/ref-list mutation/B13540/B135C0 execute native code.",
+    "Class0 virtual control consumer and class1/2 invalidate captured. Class4 original AEED80 bus state update executes. RTPC record defaults and owner overrides are explicit verified-layout fixtures."
+  ],
+  "limits": [
+    "Allocator failure paths and absent global-record construction not exercised.",
+    "Class3 subscriber-specific path remains unqualified.",
+    "Native runtime smoothing/device voice aggregation still unconnected.",
+    "Rust subscription path requires already-initialized RTPC records; missing records and unsupported class3/parameters>=64 are explicit errors. Native allocation failures and special empty class3/parameter64 path remain open.",
+    "set_record initializes supplied records; actual native value changes, notification propagation and smoothing are not implemented by that method.",
+    "Control/invalidate notifications are returned for backend delivery; real callback mutation/reentrancy not qualified.",
+    "Native bus state port does not prove bus volume-to-gain aggregation; B148B0 state table preprocessing must not be assumed for bank RTPC.",
+    "No normal client rebuilt, physical voice admission, audible output or complete-game acceptance."
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "updated_utc": "2026-10-04T03:47:13.544123+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_emitter_planes.py": "c2c7c2a65ae3d9a73c18b396084de6a9ddbd829159519ac70e3f97a5d2892987",
+    "data/4.20/audio_emitter_planes_contract.json": "ab7d6b064ca90f8c1929eb6f37f048c0181c1859e021c32215c25457a7586813",
+    "crates/core/src/audio_emitter_planes.rs": "bbc12e09c81df201a78b11ad08ecffb61e3f01e4325e0b22bcb106b4e0974d63",
+    "crates/core/src/lib.rs": "fc864f9eb34959c1fc60d37f899a135f6ce05fed09536d033f1a1f7c929a3cd9",
+    "logs/native-audio-emitter-planes-core-tests.log": "22b1bbc4c0b3ef90b5cab6c6d51e1bdbb325d81686d1089d625f5d2496053397"
+  },
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_emitter_plane_cases": 50,
+  "native_emitter_plane_indices_cases": 343,
+  "core_tests_passed": 292,
+  "ported": [
+    "Original8E3350 perspective and8E33E0 orthographic triples from nine corners",
+    "Original8E3AA0 triangle cross-product and66D6E0 SSErsqrt/Newton normalization, tiny/degenerate plane behavior",
+    "Original8E30D0 raw sign selection: negative selects low, zero/negativezero/NaN selects high"
+  ],
+  "coefficient_acceptance_tolerance": "max(1e-5 absolute, abs(native)*1e-6); explicit processor/emulator SSE estimate variation; not bit-identical coefficients",
+  "indices_acceptance": "exact all343cases and all50constructed six-plane sets",
+  "limits": [
+    "Actual perspective8E3350 and orthographic8E33E0 constructors,8E3AA0 planes,66D6E0 SSErsqrt/Newton refinement and8E30D0 selection executed. Security-cookie check explicitly adapted.",
+    "Inputs are controlled nine corners; camera projection constructor8E2F30/8E3480 and world transforms8E1220 not executed here.",
+    "SSErsqrt estimate can vary by processor/emulator; resulting coefficient tolerance must be explicit in Rust comparison, not claimed bit-identical.",
+    "Degenerate zero cross-product yields all-zero plane; negative normals select low values, zero/NaN select high values.",
+    "Actual Rust camera/config/bounds and particle lifecycle integration remain incomplete.",
+    "Rust uses x86/x86_64 SSE estimate; unsupported architectures explicit errors where normalization is required.",
+    "Source core292passed; actual camera projection parameters/world-space corners and runtime emitter bindings still incomplete.",
+    "Prior client18test evidence and standalone executables unchanged; actual audible output unverified."
+  ],
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false
+}

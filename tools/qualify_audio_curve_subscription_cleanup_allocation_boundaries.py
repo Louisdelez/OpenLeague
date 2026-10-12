@@ -1,0 +1,6 @@
+from pathlib import Path
+r=Path('E:/OpenLeague');p=r/'crates/core/src/audio_resource_curve_admission.rs';s=p.read_text(encoding='utf-8');head,tail=s.split('#[cfg(test)]mod subscription_cleanup_tests{',1)
+tail=tail.replace('let b=crate::audio_path_memory::read(m,*r,*z).unwrap();','let b=(0..*z).map(|j|crate::audio_path_memory::read(m,r+j as u32,1).unwrap()[0]).collect::<Vec<_>>();')
+old='let mut m=regions.iter().map(|(n,r,_)|(*r,Memory{reference:*r,raw:bytes(row["before"][n].as_str().unwrap())})).collect();'
+new='let mut m=BTreeMap::new();for(n,r,z)in &regions{let raw=bytes(row["before"][n].as_str().unwrap());let chunk=if n=="heap_active"||(n=="arena"&&!row["embedded"].as_bool().unwrap()){8}else{*z};for(j,b)in raw.chunks(chunk).enumerate(){let reference=r+j as u32*chunk as u32;m.insert(reference,Memory{reference,raw:b.to_vec()});}}'
+assert old in tail;tail=tail.replace(old,new);p.write_text(head+'#[cfg(test)]mod subscription_cleanup_tests{'+tail,encoding='utf-8');(r/'tools/qualify_audio_curve_subscription_cleanup_allocation_boundaries.py').write_text(Path(__file__).read_text(encoding='utf-8'),encoding='utf-8');print('Separate actual independent heap nodes, retain actual arena allocation identity')

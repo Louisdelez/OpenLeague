@@ -1,0 +1,38 @@
+{
+  "updated_utc": "2026-10-04T20:42:06.085372+00:00",
+  "complete": false,
+  "client_tests_passed": 96,
+  "client_build_passed": true,
+  "native_source_update_cases": 216,
+  "map10_source_mask_cases": 24,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Ported native6198F0 source parameter updates, missing-character-data fallback100, strict-positive metric overrides, percent/flat modifiers and dirty-state preservation.",
+    "All216 original cases compare bit-for-bit, including live, expired and absent references. Original weak-reference acquisition/release retained reference counts; destruction paths remain untested.",
+    "Updated source parameters feed existing occluded circle mask composition;24Map10 cases compare to previously executed original generator masks."
+  ],
+  "limits": [
+    "Original complete source update and native weak-reference acquisition/release execute. Supplied objects/control blocks start with retained reference counts; final deletion paths not exercised.",
+    "Character-data source radius, metric overrides/fallbacks and modifier state are supplied fields; original actor constructor/cache loaders and field producers remain open.",
+    "Source position/team/creation/eligibility and GPU binding are separate paths not qualified by this update. Actor class name not assigned without constructor provenance.",
+    "The new source update is available to mask composition but is not yet called by ordinary gameplay source lifecycle. Actual source creation/team/position/eligibility, actor field producers, full buff aggregation and live GPU binding remain unqualified.",
+    "Native probes cover supplied finite values; no complete qualification of nonfinite actor parameter inputs.",
+    "Core427tests and10UDPchecks are prior unchanged-core/server results, not newly rerun. Current client96tests and build are fresh; current graphical gameplay remains unverified.",
+    "All24domains remain unfinished."
+  ],
+  "next_actions": [
+    "Qualify native source position/team/creation/removal and eligibility; map actual Rust source lifecycle without inventing actor fields.",
+    "Qualify actor CharacterData cache, metric field producers and stat/buff application/removal.",
+    "Qualify world extent and terrain initialization; reconcile native masks with authoritative server filtering and bind counted fog plus GPU processing into ordinary rendering."
+  ],
+  "files_sha256": {
+    "crates/client/src/fow_source_update.rs": "ed639210bb66aec14bac88616d54a0ce6e377fe4032e98764a5b0749f7fae065",
+    "crates/client/src/main.rs": "1cfc7bac7e001376d18f84a65a4d12fe2cc74635e0afccab02e191787d0d0a32",
+    "data/4.20/fow_source_update_contract.json": "bc8d775a974936ecf9a5e57d4863ccb0614aaa7b91ade950b9263efd7813f187",
+    "tools/probe_fow_source_update.py": "8f097d2d6ad489bdf5b9723b751f5d1304676fedcf15cfbf089b071363e3cf74",
+    "logs/native-source-update-tests.log": "0b0644617eb4bb28850f5e5aaa0d5a5eab71b1abb7239aff2f9018ec32c9bde7",
+    "logs/native-source-update-build.log": "c6472048461132f3debd4ca1159469971cce0e7595286454ee87ab13c24b8bc8",
+    "target/debug/openleague-client.exe": "86bb0a99eca2272e7fb930deb35ed89fa56c423efc8d6f96a922f6f5487bb2c0"
+  }
+}

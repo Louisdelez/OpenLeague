@@ -1,0 +1,73 @@
+#include "../ColorPalette.hls"
+
+sampler DIFFUSE_MAP 	: register (s0);
+sampler PARTICLE_COLOR_TEXTURE : register (s1);
+sampler FALLOFF_TEXTURE : register (s2);
+
+float4	REFERENCE_POSITION : register(c0);
+float4	ATTENUATION : register(c1);
+float4	COLOR_UV : register(c2);
+
+float3x3 ROTATION_MATRIX : register(c3);
+
+#if defined(COLORPALETTE_COLORBLIND) || defined(COLORPALETTE_SPECTATOR)
+   float4 APPLY_TEAM_COLOR_CORRECTION : register(c11);
+#endif
+
+struct FRAGMENT
+{
+	float4 m_Color0 : COLOR0;
+};
+
+
+struct INTERPOLANTS
+{
+	float4 m_Position : POSITION;
+	float4 m_TexCoord0 : TEXCOORD0;
+};
+
+FRAGMENT 
+	main
+	(
+		INTERPOLANTS interpolants
+	)
+{
+	FRAGMENT fragment;
+
+	// Diffuse
+	float3 v = interpolants.m_TexCoord0.xyz - REFERENCE_POSITION.xyz;
+	float3 uvw = normalize(v);
+	uvw = mul(uvw, ROTATION_MATRIX);
+	float4 texelDiffuse = texCUBE(DIFFUSE_MAP, uvw);
+	
+	// Read the color texture
+	float4 texelColor = tex2D(PARTICLE_COLOR_TEXTURE, COLOR_UV.xy);
+
+	// Final color
+	float4 finalColor = texelColor * texelDiffuse;
+
+	// Attenuation
+	float d = length(v);
+	float a = d / ATTENUATION.x;
+	float4 attenuation = tex2D(FALLOFF_TEXTURE, float2(a, 0.f));
+	
+	finalColor *= attenuation;
+	
+	#ifdef COLORPALETTE_COLORBLIND
+		if (APPLY_TEAM_COLOR_CORRECTION.r != 0.0f)
+		{
+			ApplyColorCorrectionColorblind(finalColor);
+		}
+	#endif 
+	#ifdef COLORPALETTE_SPECTATOR
+		if (APPLY_TEAM_COLOR_CORRECTION.r != 0.0f)
+		{
+			ApplyColorCorrectionSpectator(finalColor);
+		}
+	#endif 
+	
+	// Output
+	fragment.m_Color0 = finalColor;
+	
+	return fragment;
+}

@@ -1,0 +1,31 @@
+{
+  "complete": false,
+  "status": "Rust focused tests passed;400 additional physical-x87 comparisons and sequential pause/resume/acceleration passed",
+  "native_entry": "0x9283c0",
+  "native_cases": 512,
+  "contract": "data/4.20/clock_scale_transition_contract.json",
+  "probe": "tools/probe_native_clock_scale.py",
+  "rust": "crates/core/src/native_troy_clock.rs",
+  "test_session": 47890,
+  "test_log": "logs/native-clock-scale-tests.log",
+  "findings": [
+    "Native mutator reads source twice, preserving distinct first sample and second origin observations.",
+    "Offset/origin stores are f64; Rust keeps x87 extended arithmetic to qword store.",
+    "Absent source retains old offset as origin and offset."
+  ],
+  "limits": [
+    "Original underlying time source, live pause/speed integration, alternate x87 control words and nonfinite profiles remain unqualified.",
+    "Finite512native dyadic and400physical-x87 cases; not a proof of all floating point inputs."
+  ],
+  "test_exit_code": 0,
+  "focused_tests_passed": 2,
+  "precision_contract": "data/4.20/clock_scale_precision_contract.json",
+  "precision_cases": 400,
+  "precision_emulator_cpu_disagreements": 0,
+  "precision_verifier": "tools/verify_clock_scale_precision.rs",
+  "artifacts_sha256": {
+    "crates\\core\\src\\native_troy_clock.rs": "e0fb5f6d0b730f64b08a8c34e729138bcce80607a81741d6a8acac85093129e6",
+    "data\\4.20\\clock_scale_precision_contract.json": "bf2af79c839fc1a7c7f7cd1fe9d14e9dff561f2f1b0fc79a2b5a92917e42ee73",
+    "target\\clock-scale-precision-verify.exe": "d36b6fbc624b9684026296341879897e1484d15e8f7383c701c241b60cddc872"
+  }
+}

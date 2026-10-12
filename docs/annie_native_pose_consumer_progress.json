@@ -1,0 +1,55 @@
+{
+  "updated_utc": "2026-10-07T07:45:55.316117+00:00",
+  "complete": false,
+  "passed": true,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_cases": 180,
+  "native_instruction_addresses": 1859,
+  "actual_cpu_rsqrt_operations": 27,
+  "focused_core_tests_passed": 2,
+  "prior_native_binding_profiles": 72,
+  "focused_client_tests_passed": 4,
+  "native_client_pose_profiles": 45,
+  "native_client_owner_end_frames": 50,
+  "full_suites_rerun": false,
+  "graphical_client_rebuilt": true,
+  "current_runtime_capture": true,
+  "artifacts_sha256": {
+    "data/4.20/projectile_pose_composition_contract.json": "05b3df09e4b2a257f6b0feed575217fb5f7e715eef6df06ce6748f404561e6df",
+    "tools/probe_native_projectile_pose_composition.py": "a36b7870c9fc6595c1eef56a8a745899aa6d3b993d9c161358208590f8775835",
+    "crates/core/src/native_projectile_factory_pose.rs": "50d47f132ab91e65303df6032a84ede3c1038bcffcb36f53c1c4525711335099",
+    "crates/core/src/native_missile_owner_pose.rs": "c39e42f35ebad98c4852efb5579295fdcc396a89a2a4180b1deddfad9ce7ded9",
+    "crates/client/src/projected_live.rs": "14ffc11f0d20a5e785135faa50ad02fc97169a27b08c3ee4a59e54a25341bfdf",
+    "crates/client/src/annie_q_vfx.rs": "067012cbfba40a04e3c1b63f6342a4661e2a3dd3e486d7e7dde7ad8ddcb87442",
+    "logs/native-projectile-pose-composition-tests.log": "d744825599b5b358c056a99efb246947badbd8321d13c21ee4529ec7e909b1f2",
+    "logs/annie-native-pose-consumer-tests.log": "2543addca90a6de46b9b35d46b744731dc86a94d1cc35b40d61ba49d6c4bdd6a"
+  },
+  "findings": [
+    "Position synchronization7631C0, actual factory/load, bound provider update and concrete Troy owner phase execute in sequence.",
+    "Initial pending flags determine orientation gate after binding; empty provider assumptions from prior factory qualification are removed here.",
+    "Failed owner acquisition reaches native wrapper termination marking; final Troy owner phase does not overwrite absent-owner state.",
+    "Annie projection now consumes native moving position directly, preserving exact words instead of divide20/multiply20 round-trip.",
+    "Native motion direction retained and passed to provider orientation gate; initial factory flags0 use native constructor matrix.",
+    "Client pose bridge compared to45 live original composition profiles, plus50 owner-end frames and resource release controls."
+  ],
+  "adapters": [
+    "Factory adapters inherited from projectile_factory_pose_contract, including supplied allocation/resource weak lifetime and omitted collision/logging.",
+    "Concrete10B0D20 methods execute; no pose/status callback returns substituted. Physical CPU supplies original RSQRTSS arithmetic.",
+    "Mutex endpoints9941B0/994210 omitted for a single-threaded empty deferred queue.",
+    "Troy114 emitter resource instance supplied with position/direction/matrix sentinels, extent500, config flags0 and source flags80; its construction is separate."
+  ],
+  "limits": [
+    "Direction input comes from supplied body6C; native motion producer qualified separately and must be connected in the client.",
+    "Allocation/parser/registry/collision bookkeeping, concurrent lifetime, populated deferred queues and full940 frame remain open.",
+    "Original primary/secondary actor statuses supplied as flags400, status1, current8/previous7; their live producers remain unqualified.",
+    "No client-renderer or whole-game acceptance.",
+    "Rust composition test uses original before-state for final owner phase; complete bound-wrapper scheduling and property updates are not ported as a single full frame.",
+    "Client connects finite pose/orientation subset, not primary/secondary owner status or deferred callback queues. Initial flags0 are verified; later flag producers still open.",
+    "Network disappearance supplies end trigger; bone launch, target acquisition, weak ownership, ordinary source timing and registry scheduling remain unqualified.",
+    "Zero accepted domains; all24domains114tasks retained."
+  ],
+  "next_action": "Recompiler Annie avec la pose native et vérifier deux tirs/leur nettoyage en DX12 et Vulkan ; poursuivre acquisition propriétaire, ordonnancement et les 24 domaines du plan complet.",
+  "status": "terminal_build_and_dx12_vulkan_captures_passed",
+  "build_log": "logs/annie-native-pose-client-build.log",
+  "runtime_progress": "docs/annie_native_pose_runtime_progress.json"
+}

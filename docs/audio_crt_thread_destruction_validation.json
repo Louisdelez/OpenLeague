@@ -1,0 +1,42 @@
+{
+  "saved_utc": "2026-10-09T18:50:34.804111+00:00",
+  "passed": true,
+  "complete": false,
+  "audio_tests_passed": 517,
+  "native_crt_thread_lifecycle_cases_rust_validated": 72,
+  "native_crt_optional_thread_buffer_cases_rust_validated": 126,
+  "native_crt_custom_locale_destruction_cases_prepared": 96,
+  "native_crt_custom_locale_destruction_cases_rust_validated": 0,
+  "test_log": "logs/audio-crt-thread-destruction-tests.log",
+  "test_executable": "target\\debug\\deps\\openleague_core-92fab3f20accd79c.exe",
+  "test_executable_sha256": "77792171b0599bc02bce0da8574daf685a2a2a9710367d758cd8499a2d2a323c",
+  "previous_receipt": "docs/audio_crt_encoded_context_cleanup_validation.json",
+  "evidence": [
+    "Actual CA915B detachment, CA9026 destruction and CA8B6F locale reference release implemented.72 original full CA92CB startup -> detach/destructor -> CA9341 cleanup lifetimes match every allocator/import entry bank, both intermediate stages and all33 final canonical regions. Getter-based detach resetsLastError through actual TLS/FLSGet; explicit record bypasses lookup. Slot clears before destruction, record freed exactly once and system cleanup subsequently releases empty slot/static locks.",
+    "126 original optional-buffer cases match exact7-string order, exception default literal retention and native free(NULL) branch, NULL/static/custom multibyte refcount0/1/2/MAX wrapping and static buffer retention. Complete52-region banks and every imported/free entry matched. Distinct32byte optional payload allocations used; NULL frees observed but not marked dead; exact original nonNULL freed identities tracked.",
+    "96 actual CA8A15 custom locale destruction cases captured with original CC7E5A/CC82F7/CC8564 helpers executing. Conversion NULL/static/copied-default/dynamic pointers, zero/live references, ctype original FE/80 rebasing, string group predicates and static/custom time retained. Distinct dynamic allocation identities. Only allocator free boundary supplied. Rust custom-locale replay pending.",
+    "Full517-test audio suite passes;59 earlier fixture hashes retained unchanged."
+  ],
+  "limits": [
+    "Custom locale destruction is an explicit service currently unsupported unless provided; standalone original96 cases prepared for faithful implementation. Normal optional-buffer/custom-locale producers and actual OS-triggered FLS callback remain open.",
+    "Logical reference updates preserve native wrapping/alias order but actual interlocked concurrency and SEH failure cleanup not qualified. Imported heap/OS/critical storage outcomes still explicit controlled boundaries; actual providers/security-cookie bootstrap not finished.",
+    "These complete core context lifetimes are not proof of normal client audio startup/dispatch, physical playback or a complete game. All24 domains/114tasks/37requirements retained without closing domains or tasks."
+  ],
+  "next_action": "Implement/replay96 actual CA8A15 custom locale destructor cases with original conversion/time helper order and interior-pointer rebasing; extend custom time payloads and compose custom locale destruction into whole thread lifecycle. Qualify OS-triggered FLS callback, actual OS/heap/security-cookie providers, then connect normal audio worker startup/dispatch/progression/retirement and physical playback. Continue full24-domain114-task37-requirement scope.",
+  "files_sha256": {
+    "logs/audio-crt-thread-destruction-tests.log": "ef9da6ddb089b8b931b0da7743d91e34797b96bba277b99f3dec192d6c498d5d",
+    "docs/audio_crt_encoded_context_cleanup_validation.json": "cc7d6f9223814c4d946bc3ee79c8c65d5c4c660c3c5c9103c0612f6a04fa3cca",
+    "crates/core/src/lib.rs": "12214a1f201e5e210984da408769cf3deb774fb3ffd7f926de060c86f0388827",
+    "crates/core/src/audio_crt_thread_context.rs": "2819db814d818f49e66c0fecb244b7c13149d804499b14ba58614931756e13ca",
+    "crates/core/src/audio_crt_thread_destructor.rs": "93fb258d31f5ec4c09f527c9dddec7ee364a648515b9f8a9d734d70d48f276f9",
+    "crates/core/src/audio_crt_thread_system_startup.rs": "8ca26194e3b80acb9f2617a0a73cee350ed5f88e0acc0db8ac49353b10bd6e54",
+    "tools/implement_audio_crt_thread_destruction.py": "92abf2ea5b4b1d43159a38a4ac02157fc8f8f28107eef2a856b81de0611e465f",
+    "tools/record_audio_crt_thread_destruction_progress.py": "c00023428380c7e0017c939f6ba3eef92186e2c41d6cfcdeb504668a85b6a690",
+    "data/4.20/audio_crt_thread_lifecycle_preparation.json": "888dc67d96a4800455c1e2d737031b795660d8c903d9859446be257fa394b6fb",
+    "tools/probe_native_audio_crt_thread_lifecycle.py": "220c787b245e186f2fc78e4bcd234250e79d065895f4307d21aaf991bccde603",
+    "data/4.20/audio_crt_optional_thread_buffers_preparation.json": "073ca3d61dc0c36f4bfaa3e004b11162105dd61dcaeac49ea61b49ad1c53da6b",
+    "tools/probe_native_audio_crt_optional_thread_buffers.py": "e4a5cf018703666870f252f1c6a499018f196662781b21ef2a8ad409cbdbb861",
+    "data/4.20/audio_crt_custom_locale_destruction_preparation.json": "10c727372551dcaed4a01347224599fadad4868dd7f11c11d9789e3b859bbb62",
+    "tools/probe_native_audio_crt_custom_locale_destruction.py": "422c5b2535d00ceaf281ad040cd2a63c15bfe825e6ec9815a834b441224d084d"
+  }
+}

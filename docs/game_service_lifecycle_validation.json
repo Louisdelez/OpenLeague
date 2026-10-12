@@ -1,0 +1,52 @@
+{
+  "saved_utc": "2026-10-10T10:28:27.472592+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "audio_tests_passed": 680,
+  "filtered_tests_not_run": 480,
+  "isolated_production_tests_passed": 109,
+  "native_callback16_lifetimes_ported": 64,
+  "native_replay_member_lifetimes_ported": 28,
+  "native_whole_service_lifetimes_ported": 8,
+  "whole_service_storage_bytes": 392,
+  "settings_provider_ported": false,
+  "native_config_bytes_read_via_windows": false,
+  "direct_audible_playback_proved": false,
+  "contract_sha256": "524206c64e8e32dceb0996fa34a0a33b75a2f43e477fa61d13b58e001268e578",
+  "callback_contract_sha256": "e1ee3e1180102de6befb00fa7769a0723ae18802a05c01860cec4c0bfc61b625",
+  "regression_log_sha256": "ad04ab2a07d86ea9bb16a3b77c78aca0e089909cfcc95fc775ea1b179f0a1822",
+  "isolated_log_sha256": "486d212443b1a17be4e783a563416d1c5985427a5f158eaa49407f82c907b998",
+  "test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_core-5b2a9def275dcedd.exe",
+  "test_executable_sha256": "384543ecd541fb9a51a388229607fe14489ccdb5f0fc67a3dad5fe1cdba3edcc",
+  "isolated_executable_sha256": "a117066acc583e8c80dc3451926902b8a1ce430870cdb3055356c2fcc8e61d9a",
+  "source_hashes": {
+    "crates/core/src/audio_game_service_lifecycle.rs": "be0ff2049487dcd3f73dabc72548ff01fa8a65a08596693985e465f5ebfed71a",
+    "crates/core/src/audio_game_service_lifecycle_tests.rs": "9da13d113797dd4cb1c27543f5ec692180ecd325feefa550d4a983d643649878",
+    "crates/core/src/audio_game_service_buffers.rs": "43b354df67af938c67a2f585c5a988b69019406f813a52bd9b45c716e2d06634",
+    "crates/core/src/audio_announcer_owner_metadata.rs": "452f7bb3b33b8ffddb29205cf773e5a1d2cfc7b89dae464855a1d6f19a746d33",
+    "crates/core/src/audio_announcer_owner_control.rs": "02fe496188a9525a5db3266dd5f97661f93adca7ccf318a83d65abd313d42fd0",
+    "crates/core/src/audio_announcer_active_service.rs": "2bf6ca214bd9417292ed6e7a83923fcb4f55b09c4d20acba0fe3b0485514cdca",
+    "crates/core/src/audio_announcer_service_teardown.rs": "542f509f06cdb633d331426203847a70242b87ef875d492b15b6665000d1cde6",
+    "crates/core/src/lib.rs": "d45fe82c0c276d5bb1e166d9f7f1e6df2ad54cbf994cc29573c728ac619d22e4",
+    "tools/announcer_service_activation_production_tests.rs": "6e44b38b7745c34f420c6e0961ef98cdbfe69fb0ede4c85dd2e0d841ec54a602",
+    "tools/qualify_game_service_lifecycle.py": "37394b33218a14810a6081f089315fc51449d012f95b7543e777737a430e1c19",
+    "tools/probe_whole_announcer_startup.py": "70782bb900e803318fd9507fa7c191366b6e72cef24fda2152fc23d30a3118bb",
+    "docs/replay_config_dependency_inventory.json": "b5619eb4376f743616be86a1bfbf34c5b31afc80aa63a6158dd4a6a927113b07"
+  },
+  "behavior": [
+    "Rust7340C0 sixteen-byte callback clone and shared578010 scalar delete compare64 native lifetimes with null/non-null owner/method, extra offset words, allocator fills and flags0,1,256,257. Clone copies fresh source fields after allocation and publishes native vtable.",
+    "Rust59CC60 replay member construction preserves all212 bytes including untouched padding and unaligned zero fields, performs six float/two bool queries in native order, and borrows/clones the input callback slot. Rust59CF40 destroys shared control before vector, callback and stream;28 actual native lifetimes cover nullable callbacks, vectors, supplied supported scalar-deletable stream objects and real1085F4C controls with last/shared/weak/zero counts.",
+    "Rust72A3B0 full normal-return constructor composes active registries, replay member, history and curves;72A530 scalar teardown composes their actual destruction in native order and honors low flag bit. Eight native lifetimes compare all live words, allocations and frees on392-byte owned service storage. Native opaque stack byte and curve controls are explicit inputs; full Rust core regression680 and isolated production109 tests pass."
+  ],
+  "limits": [
+    "Actual native settings getters execute in the warmed missing-RADS/no-optional-export profile. Rust Settings is an explicit external provider boundary: test backend replays observed setting results and temporary allocations/frees, not an implementation of native settings getters. Configuration initialization/resource loading and their internal effects are not proved by service composition. Native Windows ReadFile does not read Game.cfg in this profile.",
+    "Populated replay fields are explicit native preconditions; supported callback objects used for stream scalar-deletion tests do not establish native replay file loading or stream types. Custom allocators, allocations failing/throwing, constructor unwind, reentrant mutations, invalid callback kinds and live thread interactions need further qualification. Callback invocation734130/72C780 remains unimplemented.",
+    "Service composition exists in the core as public APIs but is not wired to the delivered client frame/world lifecycle. Audio-prefixed grouping is historical; no direct audible playback proven. All24 domains, champions, maps, gameplay, delivered executable fidelity and acceptance remain incomplete."
+  ],
+  "next_action": "Connect the new Rust72A3B0/72A530 service lifecycle to a real settings/resource provider and live frame/world ownership. Existing client modules native_user_settings, native_game_cfg_text, native_graphics_options, native_config_cache and native_config_resource_dispatch already implement portions: reuse verified code rather than duplicate. Qualify native float8AFB10/bool8AFC30 readers and complete8B20F0/8B1910/8B1C20 configuration layering. Original RiotRadsIO.dll has now been located in the supplied RADS root, SHA25660833cd552d93b93304d4937912951e144e38db5d70793eb60a0c5f5d579e521; it is missing only from the startup probe search directories. Do not infer normal loading from fallback tests or blindly execute copied DLLs. Port734130 callback invocation and72C780 target with actual frame inputs, qualify populated replay streaming/ownership and allocation failures/reentrancy/custom routes. Continue metadata shared-control disposal and simulation announcements/queues/mixing/audible playback. Preserve24domains114tasks37requirements."
+}

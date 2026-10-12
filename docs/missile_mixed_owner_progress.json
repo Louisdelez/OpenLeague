@@ -1,0 +1,31 @@
+{
+  "complete": false,
+  "status": "v63 simultaneous two-owner runtime and final global GPU cleanup passed on rebuilt binary; exact staggered v59 replay remains unqualified",
+  "reversals": [
+    {
+      "identity": 1,
+      "previous": 26.124040603637695,
+      "next": 26.095218658447266,
+      "previous_path": "Continue",
+      "next_path": "Continue"
+    }
+  ],
+  "source": "crates/client/src/projected_live.rs",
+  "fix": "Track last invocation per Effect independently of native simulation time, which freezes offscreen.",
+  "build_session": 54739,
+  "build_log": "logs/missile-monotonic-client-build.log",
+  "next_test": "tools/capture_projected_batch_v60.py",
+  "limits": [
+    "v63 sends two casts consecutively; it is not the exact staggered v59 schedule.",
+    "One final GPU atlas proves global cleanup; per-effect retirement is separate CPU evidence.",
+    "Reconnect/session reset and original pose/clock fidelity remain open."
+  ],
+  "build_exit_code": 0,
+  "verification": "docs/missile_mixed_v63_verified.json",
+  "client_sha256": "811b9e513498aabeeb590ad08671b8d3f1bc82a0300898149690c5fbaaf75816",
+  "inconclusive_runs": {
+    "v60": "no server overlap",
+    "v61": "no server overlap after waiting for client effect",
+    "v62": "no overlap after warm-up"
+  }
+}

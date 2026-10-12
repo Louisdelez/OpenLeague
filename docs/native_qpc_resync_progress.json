@@ -1,0 +1,27 @@
+{
+  "complete": false,
+  "status": "216 composed native counter/resync cases match physical-x87 Rust; client check passed",
+  "native_provider": "0x993ce0",
+  "native_update": "0x99c5e0",
+  "source": "crates/core/src/native_game_clock.rs",
+  "method": "GameClock::advance_counter",
+  "contract": "data/4.20/qpc_resync_contract.json",
+  "verifier": "tools/verify_native_qpc_resync.rs",
+  "check_log": "logs/native-qpc-resync-check.log",
+  "cases": 216,
+  "findings": [
+    "Unsigned64 counter subtraction wraps like native SUB/SBB.",
+    "Unsigned conversion and division remain on x87 stack through the drift subtraction; no intermediate f64 quotient store.",
+    "Physical x87 Rust output matches original composed Unicorn reference for216 supplied cases."
+  ],
+  "limits": [
+    "OS counter output and initialized origin/frequency supplied in reference; actual lazy init and scheduler still unqualified.",
+    "Callback absent; live game clock not yet switched to this module.",
+    "Synthetic wrap/frequency boundaries are arithmetic tests, not hardware behavior claims."
+  ],
+  "sha256": {
+    "crates\\core\\src\\native_game_clock.rs": "c0fdb4670d690f5e67a99a3edc8cd92b708cf71d8c293fc2301169577a3bd43a",
+    "data\\4.20\\qpc_resync_contract.json": "2f360b155ba3d7b94203fa8866ee28e7f43d1b9144ec8af2328f4a1f83b275c5",
+    "tools\\probe_native_qpc_resync.py": "4ac1599e6a11a264661c808fd4356a09c18903c6d36c2c05605ea583c072ed58"
+  }
+}

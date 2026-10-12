@@ -1,0 +1,28 @@
+{
+  "complete": false,
+  "status": "Normal source port matches480 native frames and960 getter outputs; live source integration pending",
+  "constructor": "0x99c410",
+  "global": "0x2d791a8",
+  "writer": "0x58fcfd",
+  "vtable": "0x10deb08",
+  "time_getter": "0x99c4e0 reads f32 object+2c",
+  "delta_getter": "0x6416e0 reads f32 object+30",
+  "update": "0x99c5e0, receiver object+20",
+  "embedded_vtable": "0x10dea8c",
+  "contract": "data/4.20/game_clock_source_contract.json",
+  "source": "crates/core/src/native_game_clock.rs",
+  "verifier": "tools/verify_native_game_clock.rs",
+  "reference_repair": "Getter thunks use distinct addresses to avoid Unicorn translation-cache reuse; initial bad getter reference corrected and full comparison rerun successfully.",
+  "check_log": "logs/native-game-clock-client-check.log",
+  "limits": [
+    "Mode bit1000000 cleared and callback absent only.",
+    "Delta producer/scheduler, wall-time resynchronization and native pause controller not qualified.",
+    "Exact dyadic finite profiles, default x87 control only.",
+    "No live replacement yet; no domain or full-Q completion."
+  ],
+  "sha256": {
+    "data\\4.20\\game_clock_source_contract.json": "09a45d2017131c9332536e89ce011120af32632b1263afcbf0a3d0c5094d14a0",
+    "crates\\core\\src\\native_game_clock.rs": "9f826f6ff57f801a1d6d32609fb056ed3c4643810ad4aa75aac29c52034ab5e5",
+    "tools\\probe_native_game_clock.py": "ea3e12225120a40a81bc20a376f0ce1974af661f048ed833c7667fb0eaf6e044"
+  }
+}

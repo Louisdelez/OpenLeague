@@ -1,0 +1,56 @@
+{
+  "saved_utc": "2026-10-10T08:01:09.097943+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "audio_tests_passed": 653,
+  "filtered_tests_not_run": 480,
+  "isolated_production_tests_passed": 82,
+  "native_secondary_owner_unregister_calls_ported": 332,
+  "native_secondary_owner_teardown_lifetimes_ported": 32,
+  "native_secondary_owner_teardown_free_calls_ported": 744,
+  "native_actor_unregister_segment_calls_prepared": 96,
+  "contracts": {
+    "audio_announcer_secondary_unregister_contract.json": {
+      "cases": 16,
+      "sha256": "dcf16bfd38ea4978fb10a015cfbecbe8ea3915cb74d99892bf2cb4b44a53ad5e"
+    },
+    "audio_announcer_secondary_teardown_contract.json": {
+      "cases": 32,
+      "sha256": "a3ee2542e12ac809f887b9be5d4f29cb67cda8aa124452a0899ba9ffd6027cd8"
+    },
+    "audio_announcer_actor_unregister_segment_contract.json": {
+      "cases": 48,
+      "sha256": "c2f3b38f2d8e1630e260118655660e9c802994fe041467be1894ae115e91aaa3"
+    }
+  },
+  "regression_log_sha256": "e02b0b2c9df77f6b31cb17206be76347688c3762551fcbf944e259db268467c7",
+  "isolated_log_sha256": "61d88e0b6118a4c3c75cceea621700606fcb718b14e6af0134930079cc231a11",
+  "test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_core-5b2a9def275dcedd.exe",
+  "test_executable_sha256": "f97b8c37fd396c092edddaedd9c00d5a7c4927021ab003dbbabcb4cf13bc94b6",
+  "source_hashes": {
+    "crates/core/src/audio_announcer_secondary_unregister.rs": "fe16febfaa98b8fba6acc114c00fc76823b0de1c5d7a5221dd9d3afbfbd9d9f0",
+    "crates/core/src/audio_announcer_registry_remove.rs": "e5f3941b1abeeccaa07a0cba138780dda687325ebeb11db279abcede0a4efbc6",
+    "crates/core/src/audio_announcer_registry_shutdown.rs": "c34c73f620e6464274b24390ff1bf26a79201ba763ef1a7852a2dc1bcfad2aba",
+    "crates/core/src/lib.rs": "8d5fa577cd4ca3667743b3c48965b6ca289eccda0a5ff4258b4573a6280df9e7",
+    "tools/announcer_secondary_unregister_production_tests.rs": "33898421a26fec3ceecb4f1a4783b58d792d506ea4a50a8e96b116a62a56f236",
+    "tools/qualify_secondary_unregister.py": "33ccc2ae0eaf9d6cfc8f34d12e9df63625649c58b1054acec6cd04971eac1e36",
+    "tools/qualify_secondary_teardown.py": "eeb542b43775120369ed06fcb991bfb1266152b8a8169832a71fa971a26a62c6",
+    "tools/qualify_actor_unregister_segment.py": "13cfda1524cd5a296ac69949f4c4800d668d18ca66be08400e6c48ab689ef409"
+  },
+  "behavior": [
+    "Actual64C330/6B5AB0 normal-return unregister ported with identity-hash64F3E0/6B6400 node deletion, independent key-node and actor-vector checks, first matching actor, stable vector shift and native index-or-FFFFFFFF return.332 native calls matched including grown tables, null/duplicate actors, mismatched pairs and absent keys/actors.",
+    "Free failure retains preceding node unlink/count decrement and pending vector entries; native exception unwinding is not claimed. Original primary signed-hash removal API remains unchanged.",
+    "Actual64C400/6B5B80 one-shot secondary/owner teardown ported through shared table destructor.32 native lifetimes744 frees matched: critical-section deletion first, vector release/reset, bucket release/reset, node clear, sentinel free. Fixed global table bytes and borrowed actor labels retained; stale post-teardown sentinel cannot be reused."
+  ],
+  "limits": [
+    "Lock/critical-section deletion imports, engine owner array allocation and standard/custom free callbacks remain explicit primitive boundaries. Real Windows lock lifetime and native exceptions/concurrency are not qualified.",
+    "48 native lifetimes96 actual actor-destructor registry segment calls newly qualified after full composed actor registration. Segment629921 through62997C is prepared, not yet ported. Owner-component and later actor destructor fields/release remain open.",
+    "Real game-world metadata/ID integration, normal announcement queues, priorities, mixing and audible playback remain incomplete. Full game scope preserved."
+  ],
+  "next_action": "Port actor destructor registry-removal segment629921 through62997C against48 native lifetimes96 calls in audio_announcer_actor_unregister_segment_contract.json. Preserve fresh actor+8 secondary key before unregister and actor+FC primary ID after callbacks; lazy primary init, missing-node skip and owner registry untouched at this segment. Qualify owner-component destructor and complete actor ownership release. Then integrate with simulation lifecycle and normal announcement queues/priorities/mixing/playback. Preserve24domains114tasks37requirements."
+}

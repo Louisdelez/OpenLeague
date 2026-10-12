@@ -1,0 +1,40 @@
+{
+  "source": "E:\\mapslol3v3\\loading_clock_integration\\verify_client_commands.py",
+  "source_sha256": "7701fcf6cec4fd862b5579f54f2f0018a2a8208672308abbd43bf0ec8b35966b",
+  "candidate": "E:\\mapslol3v3\\client_shutdown_integration\\verify_client_commands.py",
+  "candidate_sha256": "ef0dc38d291541c2382a3b719a5195e7d6eba7dc648cf894a7b60174b6d48de7",
+  "ast_syntax_passed": true,
+  "verify_executed": true,
+  "client_executed": false,
+  "compiler_executed": false,
+  "unchanged_function_asts": [
+    "require",
+    "sha",
+    "_pairs",
+    "load",
+    "integer",
+    "f32",
+    "_round_ratio",
+    "native_ratio_bits",
+    "verify_events",
+    "_snapshot",
+    "verify_clock",
+    "_claims"
+  ],
+  "adapted_functions": [
+    "_legacy",
+    "verify"
+  ],
+  "predicate_changes": false,
+  "routing": "Only command_path/path assignments in legacy verify_client point at stage; actual file content checks remain ROOT/logs.",
+  "complete": false,
+  "strict_verification_passed": true,
+  "strict_receipt": "strict_cli_validation.json",
+  "strict_receipt_sha256": "cf53e9d4315b2a39b219dc827292c746c6d9f548c22513915f31d4215b589755",
+  "initial_adaptation": {
+    "candidate_sha256": "30fa4becb3642f0b273d9365b42fb230d3fc5553d9cfc49278e42ecd647b49e7",
+    "verification_result": "aborted before receipt: legacy path expression changed",
+    "reason": "A third assignment path=Path(row[requested_path]) was incorrectly selected as a log path. Restrict the selector to division expressions; the two required ROOT/logs assignments and all predicates remain exact.",
+    "initial_receipt_backup": "E:\\mapslol3v3\\client_shutdown_integration\\verify_client_commands_adaptation.initial.json"
+  }
+}

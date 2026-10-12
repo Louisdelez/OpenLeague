@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "complete": false,
+  "cases": 32,
+  "cases_per_architecture": 16,
+  "architectures": [
+    32,
+    64
+  ],
+  "limits": [
+    "Captured first context and supplied custom-locale allocations restored explicitly, with original default-locale references already released in the capture. Normal locale producer is not yet implemented.",
+    "Real FLS exit/close callbacks and real heap/locks exercise original nested destruction; 87 distinct time payload fields are freed in their original destructor; all/alternating input states and count1/count2 ownership exercised.",
+    "Shared count2 retains custom locale buffers until explicit context teardown; automatic retirement only removes source-freed blocks.",
+    "Normal audio worker dispatch, dynamic lock allocations and full original startup remain incomplete."
+  ],
+  "files_sha256": {
+    "tools\\hardware\\fls_time_locale_owned_heap\\case_0.tsv": "7cdad0b40054ce0401817439aa44b892a56861d211f7c693649e709cb1fee133",
+    "tools\\hardware\\fls_time_locale_owned_heap\\case_1.tsv": "b2de60c2661ebe00e91b74fb569c026857847d2d8a80e4033b68624ee160d528",
+    "tools\\hardware\\fls_time_locale_owned_heap\\case_2.tsv": "6a3794be3b0b90d43674c4f7f74d5bd255fb0dd1fbf9ab6f52914aeb01a261b1",
+    "tools\\hardware\\fls_time_locale_owned_heap\\case_3.tsv": "9f3cc1e2ce01a847294cdc6f27552762bfe7aa924df5481c8292fdb4a5bda98b",
+    "tools\\hardware\\fls_time_locale_owned_heap\\case_4.tsv": "b850278d70a4d5055395f093596c3a34f6d8940ee6bada076ad6d9e839530a5c",
+    "tools\\hardware\\fls_time_locale_owned_heap\\case_5.tsv": "a1e64abc726886bb8dd0f571a6143de65cb3da9d453cae705e3985d3ea756f91",
+    "tools\\hardware\\fls_time_locale_owned_heap\\case_6.tsv": "ffdce0935112d86b3df0c97b2e7897a2e84b4760e10cd1bdd19eef48edb4e07e",
+    "tools\\hardware\\fls_time_locale_owned_heap\\case_7.tsv": "938fe877bc3adce7ace38eebff7384fba9d89d1a0f015e20c46289c5a715808b",
+    "tools\\hardware\\fls_time_locale_owned_heap\\probe.rs": "7f301c437a92fdab168cc800f5a97dc8e5ebd98232a178230395771a5fdce2b0",
+    "tools\\hardware\\fls_time_locale_owned_heap\\probe-64.exe": "4cab7d6ef127a30888cceab9e93b2bad7b8270f452d48025419e64e91b04c4e7",
+    "tools\\hardware\\fls_time_locale_owned_heap\\probe-64.log": "2a1e1bd48d2f27c368bb40a2259bef6889de8a34e0f03ac6d5c8a3ff7b7c542a",
+    "tools\\hardware\\fls_time_locale_owned_heap\\probe-32.exe": "660e278a2721ac87b4b5184251c2acbb49d6fb9b4e524326ff161c61695f26b9",
+    "tools\\hardware\\fls_time_locale_owned_heap\\probe-32.log": "d9a6d3ae0a299ae2401053f1cff967d41d5ef7327c2628678220d28756b00877",
+    "tools\\probe_audio_fls_time_locale_owned_heap.py": "3360f64d6d1abddbd7ecc7d21bc5c0733f38faec201344cf6b5926ce54e4f6bf",
+    "crates\\core\\src\\audio_crt_windows_process_heap.rs": "52184af7e17c75b04e47f247f250561d769a9c95278ab430fe6f8c7151836e63",
+    "crates\\core\\src\\audio_crt_windows_shared_fls.rs": "c8b77c5a197b9855069e2cef961f2a99649746cadb01eccfb83c7ebff8d76660",
+    "crates\\core\\src\\audio_crt_custom_locale_destructor.rs": "b73371be735ca7c6c5276fb4469af9e5f6e92fcd70f6b5f213335e3f55116812",
+    "data\\4.20\\audio_crt_time_locale_lifecycle_preparation.json": "a8357ed78221de08e0f5db172cf219bf3ae4e129d58717741f89f2debc597ad0"
+  }
+}

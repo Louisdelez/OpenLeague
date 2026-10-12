@@ -1,0 +1,40 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T09:01:10.346208+00:00",
+  "change": [
+    "Native sound virtual100 AF1900 and base AFF1E0 inheritance ported to Rust.",
+    "Preserves bus/parent/static/object property order, first-call marker/reference rules, additive versus replacement branches and static bus traversal blocking.",
+    "Malformed graphs and nonfinite controls fail explicitly."
+  ],
+  "validation": {
+    "passed": 2,
+    "failed": 0,
+    "session": 32047,
+    "log": "logs/audio-parameter-inheritance-tests.log",
+    "native_cases": 384,
+    "comparison": "Bit-exact raw control slots, marker/reference and inherited call/getter order."
+  },
+  "sha256": {
+    "crates/core/src/audio_parameter_inheritance.rs": "5d6e319334086ddf8fc19a1b1d5baefcdb3d8d6de515845cd3361578d1ef8bdf",
+    "crates/core/src/lib.rs": "150b0e63b759dd27e7d3a8102804e61b71bf55c49a9395aa5813d2b9eb27499e",
+    "tools/probe_native_audio_parameter_inheritance.py": "ead6bbde1005d52c007d735d2b588f6a968787031d9010a74c5a94f3ef9e3f96",
+    "data/4.20/audio_parameter_inheritance_contract.json": "abcc2e9cf2d2bb04b068597dfed949bbb3e33a153e0caeab0dca2dbd68f7d457",
+    "logs/audio-parameter-inheritance-tests.log": "f4ee9978051ed2ce5d4973668355cd3065bc4dfabf25516e61cfd80be5a169d1",
+    "logs/audio-parameter-inheritance-probe.log": "5a8359c47f3507edfe3d471c834dca68f2141a7fffddc128dac61c26a27a89bd",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "270edb448ef85ad8406ebce6323faca6065cc02c5579717913148b0c892fa846"
+  },
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "limits": [
+    "Local virtual110/114 getter return values supplied through tiny x87 machine-code adapters. Their full RTPC/random-range evaluation is not executed.",
+    "Constructed acyclic parent/bus graphs and property stores; no native graph allocation.",
+    "Fields4/8/C preserved as raw control slots; semantic final gain/filter/pitch mapping is not inferred here.",
+    "Runtime actor/container class differences, state/RTPC aggregation and full voice admission remain open.",
+    "No PCM/device output or audible fidelity acceptance.",
+    "Core port only; no normal client build or physical audio validation."
+  ],
+  "next_getters": {
+    "sound_slot110": "AF1700 -> AFF150: property8 and flag20000000 RTPC path29, plus range store48",
+    "sound_slot114": "AF1660 -> AFF0C0: property9 and flag40000000 RTPC path30, plus range store48",
+    "status": "Pointers and code inspected; full getter/random/RTPC execution remains to qualify."
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "status": "frozen_preparation_not_compiled_not_integrated",
+  "production_modified": false,
+  "frozen_prior_stages_modified": false,
+  "compiler_executed": false,
+  "rust_tests_executed": false,
+  "new_native_execution": false,
+  "native_source": {
+    "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\League of Legends.exe",
+    "bytes": 15973880,
+    "sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862"
+  },
+  "native_region_source": {
+    "path": "E:\\mapslol3v3\\loading_metadata_stage\\loading_metadata_sources.json",
+    "bytes": 13353,
+    "sha256": "0970a5870d41a9574ad616dc93c3db663f457525de7d66ff0298fa479d0d2002"
+  },
+  "regions": [
+    {
+      "address": 5655280,
+      "address_hex": "0x564af0",
+      "rva": 1460976,
+      "bytes": 288,
+      "sha256": "4b51e8d059b1fe5554d27ad2d3347b997038a9abc948ba3dcbcf2fe17631733a",
+      "matches_native": true
+    },
+    {
+      "address": 5656368,
+      "address_hex": "0x564f30",
+      "rva": 1462064,
+      "bytes": 407,
+      "sha256": "78e720363c5ff7e6155c44c085864dc2e82431175df5b250cd0fe04a382ba010",
+      "matches_native": true
+    }
+  ],
+  "original_native_oracle": {
+    "path": "E:\\mapslol3v3\\loading_standard_ui_next\\prefix_native_probe.json",
+    "bytes": 18528912,
+    "sha256": "e321a049a6ef3af573549b578fa7f3f79dc51f302808a4dcbd29b2f061a6d521"
+  },
+  "checks_actually_executed": [
+    "Python fixture derivation after frozen native-oracle SHA check",
+    "Full source PE SHA and both source regions compared byte-for-byte",
+    "Derived fixture count, poison values, descriptor and heap sizes checked",
+    "Static ownership review, including independent review by replay_path_registry"
+  ],
+  "native_success_evidence": {
+    "original_lifetimes": 128,
+    "actual_assignments": 96,
+    "empty_override_skips": 32,
+    "new_execution": false,
+    "rust_comparison_executed": false
+  },
+  "proposed_tests": {
+    "count": 4,
+    "executed": 0,
+    "post_old_free_write_fault_profiles": 16,
+    "other_fault_scenarios": [
+      "primary plus cleanup error and explicit retry",
+      "copy failure before old free",
+      "atomic old-free error"
+    ]
+  },
+  "windows_reachability": "Generic fallible-boundary defect; no demonstrated normal Windows failure for valid exclusive storage in a healthy bank. Returned atomic release contract excludes panic/OOM.",
+  "integration_blockers": [
+    "Candidate module and tests have not compiled or run",
+    "Consumer must pass mutable ownership guard and preserve typed Failure",
+    "Runtime must preserve scratch lease plus remaining guard before string-only error conversion",
+    "Deferred retirement owner/slot must be reserved before the operation and qualified"
+  ],
+  "source_order": {
+    "old_free_before_publish": true,
+    "detached_switch_before_fallible_write": true,
+    "final_capacity_read_before_length_write": true,
+    "native_exception_unwind_claimed": false
+  },
+  "production_read_snapshot": [
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\audio_loading_metadata.rs",
+      "bytes": 10381,
+      "sha256": "43455b8356c1ada57a157c65987f75bc9aca3d31b0af45662ff41f65de74d8f8"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\audio_loading_screen_packet.rs",
+      "bytes": 6267,
+      "sha256": "053e53b23ffa8bd3eae4c163a4be515507bb50a03f13bf948a2f8b0d7454a1e6"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_loading_packets.rs",
+      "bytes": 3345,
+      "sha256": "a26e7a1b9f9751ad8b17a6509294603fd6a75845af31fb1c025799d4b09def50"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_transport.rs",
+      "bytes": 39390,
+      "sha256": "5b8e046a45e75994400d2750f783eab46bf04d73caa55fcee75eef80430c5ffd"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_events.rs",
+      "bytes": 18204,
+      "sha256": "0c9da334b3080af20c955ee957255b1e8e1b4ade0fc3f06f2e12b8a0de00ae69"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\audio_announcer_registry_init.rs",
+      "bytes": 11089,
+      "sha256": "adc0044cd068c10683783022e2ca8d85608f8e6a9dac43c8d79380373185545d"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\audio_replay_metadata.rs",
+      "bytes": 9179,
+      "sha256": "c7933f275c73f47621e44f673384498e2b2adadc426fce5d3c7884dec4cffe95"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\audio_announcer_registry_remove.rs",
+      "bytes": 8779,
+      "sha256": "e5f3941b1abeeccaa07a0cba138780dda687325ebeb11db279abcede0a4efbc6"
+    }
+  ],
+  "files": [
+    {
+      "path": "E:\\mapslol3v3\\loading_string24_ownership_repair\\audio_loading_owned_string.rs",
+      "bytes": 9235,
+      "sha256": "fb68ab9f8b7b0a7a1c42a4b816f965c5173885e9eaa0ffb9226b38c303d40520"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_string24_ownership_repair\\audio_loading_owned_string_tests.rs",
+      "bytes": 12292,
+      "sha256": "eaf3fec1ba2f2e36c9fae138828341db1ecb235e8071ce7f6efb079a40374b85"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_string24_ownership_repair\\loading_owned_string_probe.json",
+      "bytes": 125063,
+      "sha256": "06cd6b0c83598264e7d5761d58cbb2c5557cac71f92d379c0eb099f953d5851f"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_string24_ownership_repair\\prepare_fixture.py",
+      "bytes": 3901,
+      "sha256": "af1d6fa6259631aa7da7274a462d1b784c3d177000991d7dd0d227a8daa62cba"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_string24_ownership_repair\\README.md",
+      "bytes": 7582,
+      "sha256": "0bdb5ecc7fa6bc50440dda9384af30c5b62146df5475952cb8b36c7ecdeb2386"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_string24_ownership_repair\\CALLER_INTEGRATION.md",
+      "bytes": 5673,
+      "sha256": "6a97f1f37b819c706c77a669a11c3eed70bab970f2c4cbb45a78c87f8f95b102"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_string24_ownership_repair\\freeze_preparation.py",
+      "bytes": 5475,
+      "sha256": "28973b1a0bb6f55d6921df21a07eae5285b48d65b23720ebe5bb72f25e0521dd"
+    }
+  ]
+}

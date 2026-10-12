@@ -1,0 +1,14 @@
+#define FXAA_HLSL_3 1
+#include "FXAA.hls"
+
+sampler tex : register (s0);
+
+float2 fxaaQualityRcpFrame : register (c0);
+float4 fxaaQualityOptions  : register (c1); // (subpix, edgeThreshold, edgeThresholdMin, _)
+
+void main(float2        in_texcoord0    : TEXCOORD0,
+          out float4    out_color0      : COLOR0)
+{
+    out_color0 = FxaaPixelShader(in_texcoord0, tex, fxaaQualityRcpFrame, float4(0,0,0,0),
+                                 fxaaQualityOptions.x, fxaaQualityOptions.y, fxaaQualityOptions.z);
+}

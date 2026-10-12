@@ -1,0 +1,65 @@
+{
+  "updated_utc": "2026-10-04T13:05:47.576598+00:00",
+  "complete": false,
+  "client_tests_passed": 36,
+  "executables": [
+    {
+      "path": "target/debug/openleague-server.exe",
+      "bytes": 4609536,
+      "sha256": "396824a372935c5a2ee409701c995e0edde0bb018d990633cf884a463b04d3e6"
+    },
+    {
+      "path": "target/debug/openleague-client.exe",
+      "bytes": 119506944,
+      "sha256": "9bbc4a5233a9dc41c8d9759bb47d917bc2881597fec1f96aa785ee9c4119d381"
+    },
+    {
+      "path": "launcher/src-tauri/target/debug/openleague-launcher.exe",
+      "bytes": 12411904,
+      "sha256": "ac22a8346c0b2af574bdee16311acc510e657c73ca5f85584223f0049c4f57de"
+    }
+  ],
+  "before_visibility": {
+    "frames": 120,
+    "max_in_view": 89,
+    "samples": 453,
+    "back_facing_samples": 446,
+    "max_local_global_distance": 5.602367027229497
+  },
+  "after_visibility": {
+    "frames": 120,
+    "max_in_view": 88,
+    "samples": 465,
+    "back_facing_samples": 455,
+    "max_local_global_distance": 0.0
+  },
+  "gpu_capture": "docs/annie_q_culling_render_capture.json",
+  "community_reference": "tools/references/reyengine/VfxParticleRenderer.cs:370",
+  "changes": [
+    "Disable particle-quad face culling according to referenced community renderer; original4.20 state remains unqualified.",
+    "Move Q update into Update before transform propagation so current local/global positions agree at camera visibility check.",
+    "Restore UTF8 HUD text corrupted by diagnostic edit."
+  ],
+  "limits": [
+    "View visibility counts do not alone establish rasterization; inspect captured framebuffer separately.",
+    "Only Fire/Fire_Head Q groups integrated; Glow/Embers/Projected/skins/birth RNG/curve/bind/orbit/pass/linger/FOW/original runtime fidelity still incomplete.",
+    "ActualGPU captures use separate seeded fixture; no ordinary progression or human/native-fidelity acceptance.",
+    "Core423 last recorded unchanged, not rerun; all24domains and122fullkits incomplete."
+  ],
+  "files_sha256": {
+    "crates/client/src/annie_q_vfx.rs": "1af7fd17441d92eeb1fdc3dc701fd2e7035d0bec07584860f92ef61ed55e4acc",
+    "crates/client/src/annie_ready.rs": "36bb3499367862d0d87f06d0933efdd5b18128fd60669e97f43a0a7c177ca1de",
+    "crates/client/src/main.rs": "aadaebf447cdbbf3a10df8597c5771718056a97772703e15ebc2ffdce99a76d3",
+    "logs/annie-q-culling-views.json": "7bcdf49043d755535cf2bfd8a40bce98b266302b214c12e29e8129d0c10d2160",
+    "logs/annie-q-culling-tests.log": "8b6edd2d7a9f83b7909375a1e6ebd9f0443d3023eb5379ae1f0205a16ad08409",
+    "logs/annie-q-culling-build.log": "990686a6b14c04d1d66224ac39950cc4a7bb0d1bdf6240d339538238e20fd4d5",
+    "tools/references/reyengine/VfxParticleRenderer.cs": "f79a1e647deb7cf8b31e675407edc34a613f153d43788200531a750be4c004fe"
+  },
+  "visual_inspection": {
+    "checked_utc": "2026-10-04T13:06:32.372782+00:00",
+    "projectile_fire_visible": true,
+    "image": "logs/annie-q-culling-flight.png",
+    "observation": "Actual Vulkan framebuffer shows a small red fire plume between Annie and Garen, absent from prior capture. HUD accent encoding correct. This qualifies visible output of two integrated emitters only, not fullQ or original4.20 appearance."
+  },
+  "visual_fidelity_qualified": false
+}

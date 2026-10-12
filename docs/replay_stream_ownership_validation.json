@@ -1,0 +1,58 @@
+{
+  "saved_utc": "2026-10-10T11:28:49.224121+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "native_move_cases": 576,
+  "native_control_factory_cases": 104,
+  "native_full_manager_control_lifetimes": 40,
+  "native_direct_manager_deletion_lifetimes": 32,
+  "native_stream_initialization_lifetimes_prepared_not_yet_ported": 32,
+  "isolated_tests_passed": 137,
+  "core_audio_tests_passed": 693,
+  "core_tests_filtered_not_run": 480,
+  "core_test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_core-5b2a9def275dcedd.exe",
+  "core_test_executable_sha256": "ce6b32225a622645ac18b69c087079c2181956dc3c7f3fa9ccb98796d301fc9a",
+  "isolated_test_executable_sha256": "6b0c0d5d58ef08cc457767f21f0d88dbb26fb396e39244c5b0930c49a4d26a08",
+  "native_source_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "source_hashes": {
+    "crates/core/src/audio_replay_shared_pair.rs": "46c25e1eae30084524df71e57f5ee45254f6064471b4e385057d1a13f69f061d",
+    "crates/core/src/audio_replay_shared_pair_tests.rs": "234ae1907983ba19244de7140e3bff9e56ebf5c1929cf988a3dc678ee47ff776",
+    "crates/core/src/audio_replay_pair_move_tests.rs": "fa7de4c0c41dcbbf67938aa4ab066a8348818d7e6839fc8b092940948c5f93d3",
+    "crates/core/src/audio_replay_manager_control.rs": "adf1edd2855b0ac6beaaf2e3a9741334ac86f96dd21904d37af01c6e42ade21d",
+    "crates/core/src/audio_replay_manager_control_tests.rs": "1472f0dcef53cf889241a1be22b3743841c395a8dac8760775ef4e0d9d16b386",
+    "crates/core/src/audio_replay_object_manager.rs": "a02688bf3d7e9ed40c4876cf52f975c7b57617d36725058329bab651873d5196",
+    "crates/core/src/audio_replay_object_manager_tests.rs": "d65888aa3fd69157fbe3f6a7718cf18d7ff7a3e1d0bb9a3b8b72dcf0a0636240",
+    "crates/core/src/audio_replay_object_commands.rs": "bc175082a04e68fd286d12ca7505b1910b80b820d60f2c1c740598b3b48a20ae",
+    "crates/core/src/audio_announcer_owner_control.rs": "fe1f99c1759fe50842a031ef8c59f15732837173aa05c169538f278c9e9512b5",
+    "crates/core/src/lib.rs": "79cb17367031353c598db04066c1055742c505d4316f6a78735c38c70022c5dc",
+    "tools/qualify_replay_stream_ownership.py": "c45a2e4196315eee3d7bd5d8a6ee1fa495f80f2c2bf9931d961951fc13dbdecf",
+    "tools/qualify_replay_stream_initialization.py": "2f8fe3f3728dd9b364f6f6bb9b96ddeda6efe18cdac440a1cf00ea376d0dca54",
+    "tools/replay-stream-ownership-tests.rs": "26660f36f1f0c252848ad7ee1f0236425bb7422f906594e596cb6dce74fe164d"
+  },
+  "contract_hashes": {
+    "replay_stream_ownership_contract.json": "018f2ff450880248e72e5d6362abdcea895808565879239c3ac531b8bb2182a2",
+    "replay_stream_initialization_contract.json": "d800ee8a3dc5140022f380ebdef5dea91e69d4b4cb7528923114af6ce038c4f8"
+  },
+  "log_hashes": {
+    "logs\\replay-stream-ownership-tests.log": "f15e4f7ab1087bb4dc91554efb7ea4b92d040cee9932a8d966255a591cce57c4",
+    "logs\\core-replay-stream-ownership-tests.log": "e364e71f933a7a0a7b6180089b82f477978a64f507ff28bb2ff5a41cbf119891",
+    "logs\\replay-stream-ownership-build.log": "fa3b0ef1b9b47412138fddbfa9b17f23b6230e83312296abcfc62af7b9a44d42"
+  },
+  "behavior": [
+    "Native5BD4E0 move clears source control then object, reads old destination afterward, publishes destination before disposal, and leaves callback mutations intact. Self-move, shared-control aliases, counter wrapping and callback observation/mutation order match576 native normal-return cases.",
+    "Native9019A0 uses shared control vtable10D6030 and the same qualified normal-return replacement algorithm as5D1FA0.104 native cases cover old references, zero/wrapping counts, null raw objects and null primitive allocations.901B40 directly destroys both manager trees and mutex then frees the raw manager; it never treats the manager first word as an object virtual table.",
+    "Forty complete control/manager lifetimes and32 direct901B00 deletions compare all live allocated bytes, allocation/free order, lock-boundary calls and packet ID/value virtual calls, including populated duplicate-value trees, replacement of existing managers, standard/custom deallocation and external weak-owner release. All owned allocations are released in these lifetimes.901B00 frees regardless of its ignored stack argument.",
+    "A separate32-case native stream fixture now records8F6700/8FB3C0/8FB9A0 construction and8F67C0/8F6800/8FB920/8FB490 destruction. It covers fill/padding, scalar flags, custom frees and explicitly attached shared object managers. The actual initial56FF60 no-op callback executes. These stream bodies are prepared evidence, not a Rust implementation or live-stream validation."
+  ],
+  "limits": [
+    "Synthetic move/factory callbacks are explicit retaining boundaries. They qualify ordering and normal-return counter behavior, not arbitrary ownership validity, partial overlapping pair storage, exception/unwind or concurrent object use. Primitive malloc null behavior is supplied.",
+    "Native lifetime qualifiers supply existing engine mutex9941B0/994210, Windows critical-section and memory primitives. External weak-owner release and optional stream object-manager attachment are explicit preconditions. Stream cases retain initial state1 with no running thread, file/network I/O or replay frame delivery.",
+    "Normal client executable was not rebuilt or graphically retested; this milestone changes core ownership infrastructure and prepares the stream lifecycle contract.137 isolated tests and693 selected core tests passed;480 other core tests were filtered. No whole domain, champion or full-game completion is claimed."
+  ],
+  "next_action": "Port native stream8F6700/8F6800/8F67C0 and base8FB3C0/8FB490 against32 prepared lifetimes in replay_stream_initialization_contract.json. Initialization constructs five state nodes and13 retained callbacks (19 live allocations including stream), invokes real no-op56FF60 through66A0FF/5CCE30, and leaves both implementation+64/+68 and object-manager+6C/+70 pairs null. Preserve exact clone allocator classes, state hierarchy, padding and teardown order. Then port FSM transitions990BB0/990DC0 and actual stream8F68D0 selection/configuration, callback bundle and metadata727DE0 to complete manager728E20/728FD0/728EE0. Shared manager9019A0/901B40/901B00 ownership and5BD4E0 move are now ported:576 move cases,104 replacements,40 complete control/manager lifetimes and32 direct deletions match native, with custom frees and external weak-owner preconditions. No real replay data or simulation events are delivered by the client yet; configured service startup remains the last client integration milestone. Continue configuration overlays/cache, graceful graphical AppExit, actor listener integration, maps/champions/audio and all24domains114tasks37requirements."
+}

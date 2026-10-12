@@ -1,0 +1,25 @@
+from pathlib import Path
+import itertools,json,struct,hashlib
+r=Path('E:/OpenLeague');setup=(r/'tools/probe_native_audio_effect_bank_loader.py').read_text(encoding='utf-8').split('\nactual=json.loads')[0];setup=setup.replace('u.hook_add(unicorn.UC_HOOK_CODE,guard_loader)','loader_hook=u.hook_add(unicorn.UC_HOOK_CODE,guard_loader)');exec(compile(setup,'header_setup','exec'))
+u.mem_map(heap+0x30000,0x10000);manager=heap+0x30000;out=heap+0x5500
+regions.extend([(0xaf9960,0xaf9d15),(0xaf8a20,0xaf8aa7),(0xb21a30,0xb21a84),(0xafb630,0xafb8dc),(0xaff610,0xaff67c),(0xaf7750,0xaf78f8),(0xaf7900,0xaf7931),(0xaf7d90,0xaf7eca),(0xafc410,0xafc4b3),(0xafb080,0xafb10d),(0xaf7d70,0xaf7d86),(0xaf7a70,0xaf7a84),(0xaf7720,0xaf774b)])
+def guard_outer(uc,a,n,d):
+ if a in locks and read(u.reg_read(UC_X86_REG_ESP)+4,'I')[0]==0x14a8314:calls.append({'kind':locks[a],'scope':'bank_registry','category':None});ret(1,4);return
+ guard_loader(uc,a,n,d)
+u.hook_del(loader_hook);u.hook_add(unicorn.UC_HOOK_CODE,guard_outer)
+actual=json.loads((r/'data/4.20/audio_effect_actual_bank_contract.json').read_text(encoding='utf-8'));source=actual['sources'][0];original=Path(source['bank_path']).read_bytes();assert hashlib.sha256(original).hexdigest()==source['bank_sha256'];bkhd=original[:40];bank_id=int.from_bytes(bkhd[12:16],'little');payloads=[bytes.fromhex(v['payload'])for v in actual['sources']]
+section=lambda records:struct.pack('<I',len(records))+b''.join(bytes([tag])+struct.pack('<I',len(data))+data for tag,data in records)
+chunk=lambda name,data:name+struct.pack('<I',len(data))+data
+packets=[('header_only',bkhd),('one',bkhd+chunk(b'HIRC',section([(19,payloads[0])]))),('both',bkhd+chunk(b'HIRC',section([(19,payloads[0]),(19,payloads[1])]))),('repeat',bkhd+chunk(b'HIRC',section([(19,payloads[0])]*3))),('unknown_chunk',bkhd+chunk(b'XXXX',b'abcdef')+chunk(b'HIRC',section([(19,payloads[0])]))),('short_chunk_header',bkhd+b'HIRC'),('short_unknown_chunk',bkhd+b'XXXX'+struct.pack('<I',10)+b'abcde'),('version87',bkhd[:8]+struct.pack('<I',87)+bkhd[12:])]
+rows=[]
+for(packet,data),pattern,fail_nth in itertools.product(packets,[0,0xa5],range(6)):
+ calls.clear();allocations.clear();next_pointer=heap+0xc000;count_allocate=0;consumed=0;u.mem_write(manager,bytes(0x500));u.mem_write(manager+0x7c,b'\x01');put(out,'I',0);u.mem_write(registries,bytes(0x2600));u.mem_write(bank,data)
+ result=invoke(0xaf9960,[0,0,0,1,bank_id,0xffffffff,bank,len(data),0,out,0,0],manager);reference=read(out,'I')[0]
+ def snapshot(stage,result):return {'stage':stage,'result':result,'manager':bytes(u.mem_read(manager,0x500)).hex(),'holder':bytes(u.mem_read(reference,80)).hex()if reference else None,'custom_count':read(registries+0x1f40+0x31c,'I')[0],'shared_count':read(registries+0x1c20+0x31c,'I')[0],'allocations':[{**v,'raw':bytes(u.mem_read(v['reference'],v['size'])).hex()}for v in allocations],'calls':list(calls)}
+ stages=[snapshot('read',result)];calls.clear()
+ if reference:
+  invoke(0xafc410,(),reference);sp=stack+0x8000;put(sp,'III',trap,0xffffffff,reference);u.reg_write(UC_X86_REG_ESP,sp);u.emu_start(0xada3e0,trap,count=20000)
+ stages.append(snapshot('release_fixture_holder',0));assert all(v['freed']for v in allocations)
+ rows.append({'packet':packet,'pattern':pattern,'failure_nth':fail_nth,'bank_payload':data.hex(),'holder_reference':reference,'stages':stages})
+proof={'passed':True,'complete':False,'case_count':len(rows),'cases':rows,'source':source,'native_sha256':hashlib.sha256(b).hexdigest(),'regions':[{'start':hex(a),'end':hex(e),'sha256':hashlib.sha256(p.get_data(a-base,e-a)).hexdigest()}for a,e in regions],'adapters':['Only physical pool/virtual allocation/free/mutex/memcpy. Actual AF9960 bank reader,empty31-bucket bank lookup,80-byte holder constructor,memory attachment,BKHD/chunk dispatch,HIRC loop/resource lifetime and final stream close execute.'],'findings':['Memory-mode reader checks cache under recursive bank-registry lock,allocates80-byte holder,attaches original-format header and sections,then closes/reset stream on success and failure.','Unknown chunks skip declared bytes;partial chunk header or short skip returns7;BKHD unsupported version returns64. Allocation failure preserves holder/reference prefix for caller cleanup.'],'limits':['Native evidence prepared;Rust outer reader/holder integration pending. Controlled effect-only banks assembled from original BKHD and two original effect payloads,not whole original Init.bnk.','Cache empty,explicit memory manager/configuration flag7C1 suppresses scope object;other chunk readers,file/provider IO,scope owner,cached registration,caller destruction and audible acceptance remain required.','Final fixture releases effects and physically frees holder;this is not qualification of native full caller holder destructor/registration.']}
+(r/'data/4.20/audio_bank_outer_reader_contract.json').write_text(json.dumps(proof,indent=2)+'\n',encoding='utf-8');print('PASS',len(rows),'native memory bank outer reader/chunk/holder/cleanup cases')

@@ -1,0 +1,50 @@
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// Constants
+///
+/////////////////////////////////////////////////////////////////////////////////////
+
+// World x view x projection
+column_major float4x4 VIEW_PROJECTION_MATRIX	: register(c0);
+
+struct VERTEX
+{
+	float3 m_Position : X3D_VSIN_POSITION;
+//	float3 m_Normal : X3D_VSIN_NORMAL;
+#if ALPHA_TEST_SHADOWS
+	float2 m_TexCoord0 : X3D_VSIN_TEXCOORD0;
+#endif
+};
+
+struct INTERPOLANTS
+{
+	float4	m_Position : POSITION;
+	float		m_Depth : TEXCOORD0; // depth gets passed as a texture coordinate
+#if ALPHA_TEST_SHADOWS
+	float2	m_TexCoord : TEXCOORD1; // this is the real texture coord
+#endif
+};
+
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// Shader
+///
+/////////////////////////////////////////////////////////////////////////////////////
+void 
+	main
+	(
+		VERTEX vertex,
+		out INTERPOLANTS interpolants
+	)
+{
+	// Output homogeneous position
+	interpolants.m_Position = mul(float4(vertex.m_Position, 1.0f), VIEW_PROJECTION_MATRIX); 
+	
+	// Output world position
+	interpolants.m_Depth = interpolants.m_Position.z;
+
+#if ALPHA_TEST_SHADOWS
+	// Copy the texcoord over for alpha-tested shadows
+	interpolants.m_TexCoord = vertex.m_TexCoord0;
+#endif
+}

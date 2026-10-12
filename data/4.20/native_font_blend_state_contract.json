@@ -1,0 +1,133 @@
+{
+  "updated_utc": "2026-10-06T05:54:27.546338+00:00",
+  "passed": true,
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "entry": "0x9ac600",
+  "case_count": 4,
+  "native_addresses": 70,
+  "cases": [
+    {
+      "pass": "fill_outline",
+      "cached": false,
+      "source_enum": 1,
+      "destination_enum": 6,
+      "calls": [
+        [
+          19,
+          2
+        ],
+        [
+          207,
+          2
+        ],
+        [
+          20,
+          5
+        ],
+        [
+          208,
+          5
+        ],
+        [
+          171,
+          1
+        ],
+        [
+          206,
+          1
+        ]
+      ]
+    },
+    {
+      "pass": "fill_outline",
+      "cached": true,
+      "source_enum": 1,
+      "destination_enum": 6,
+      "calls": [
+        [
+          206,
+          1
+        ]
+      ]
+    },
+    {
+      "pass": "glow",
+      "cached": false,
+      "source_enum": 6,
+      "destination_enum": 7,
+      "calls": [
+        [
+          19,
+          5
+        ],
+        [
+          207,
+          5
+        ],
+        [
+          20,
+          6
+        ],
+        [
+          208,
+          6
+        ],
+        [
+          171,
+          1
+        ],
+        [
+          206,
+          1
+        ]
+      ]
+    },
+    {
+      "pass": "glow",
+      "cached": true,
+      "source_enum": 6,
+      "destination_enum": 7,
+      "calls": [
+        [
+          206,
+          1
+        ]
+      ]
+    }
+  ],
+  "blend_mapping": [
+    1,
+    2,
+    3,
+    4,
+    9,
+    10,
+    5,
+    6,
+    7,
+    8,
+    10139440,
+    10139456
+  ],
+  "operation_mapping": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "native_draw_calls_static": {
+    "fill_outline": "0x8bed8f..0x8bed9a then0x8beeb3",
+    "glow": "0x8beea8..0x8beeb5"
+  },
+  "findings": [
+    "Native enum1 mapsD3DBLEND_ONE=2, enum6 mapsSRCALPHA=5, enum7 mapsINVSRCALPHA=6; operation0 mapsD3DBLENDOP_ADD=1.",
+    "Fill/outline draw-site numeric settings are sourceONE,destinationSRCALPHA for RGB and alpha; source shader alpha is inverse coverage.",
+    "Glow numeric settings sourceSRCALPHA,destinationINVSRCALPHA for RGB and alpha. Separate alpha blend enabled in both contexts."
+  ],
+  "limits": [
+    "Blend setter executes through adapted successful D3D SetRenderState provider with supplied device/global cache. Actual renderer draw pass, alpha write mask, render target format, sampler and GPU output remain unqualified.",
+    "Native draw-site argument identification is static disassembly; full draw/layout call not executed. OpenGL/disabled backend path unqualified."
+  ]
+}

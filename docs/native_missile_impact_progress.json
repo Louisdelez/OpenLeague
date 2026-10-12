@@ -1,0 +1,36 @@
+{
+  "updated_utc": "2026-10-07T05:05:58.634768+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "impact_callback_cases": 192,
+  "actual_cpu_rsqrt_operations": 144,
+  "native_instruction_addresses": 162,
+  "focused_core_tests_passed": 1,
+  "filtered_core_tests": 598,
+  "full_core_suite_rerun": false,
+  "artifacts_sha256": {
+    "data/4.20/missile_impact_callback_contract.json": "a12b070fd5e9e3da38bec7d8a988c904ca6e0c8fadf40ac5e921e7b29eabecbf",
+    "tools/probe_native_missile_impact_callback.py": "63dda2fd99d0ee1fb6374e125597744b3e774376b1293fceee8615291bc8c34a",
+    "crates/core/src/native_missile_impact.rs": "944ecd79b84588788d58535178d8c67d13a0fed49e0b2483b4067f036070f2af",
+    "crates/core/src/lib.rs": "351942ab9f955b38ba8ee50ea30e6d8a4251d18c4f72efb5f0b633eb00133b4f",
+    "logs/native-missile-impact-tests.log": "42443fa7df04dfaf80c5a217d1b037d6ff9018f65ca564824fc7f9a37aea7766"
+  },
+  "findings": [
+    "Whole7631D0 invokes7647B0 and actual763740 no-bone target selection. Empty target span uses stored fallback; present target adds native target height.",
+    "Impact request76F0D0 receives normalized direction while body still has original direction and updated impact position. Only after request does7631D0 zero direction and returnfalse.",
+    "192original cases cover8direction profiles,3positions,present/absent targets,flags0/400 andheight0/100. Rust matches original position,direction,request and callback order.",
+    "One focused core test passed;598filtered. No full-suite/client/GPU/audio claim."
+  ],
+  "adapters": [
+    "76F0D0 impact-effect consumer is intercepted to record request; concrete consumer internals unexecuted.",
+    "Physical CPU RSQRTSS for original66D6E0; actual target selection executes with no target bone resource."
+  ],
+  "limits": [
+    "Empty/present target span,flags0/400,bone lookup null,height0/100. Nonempty bone resource and missing target object remain unqualified.",
+    "Request dispatch and direction-zero order only; particle/audio consumer, damage and object deletion unqualified.",
+    "No client binding/GPU/audio acceptance or full-suite rerun.",
+    "Rust port is core-only; consumer76F0D0, object deletion and live renderer binding remain incomplete.",
+    "24domains114tasks retained; zero domains closed."
+  ],
+  "next_action": "Qualifier le consommateur d’impact76F0D0 et la copie de position vers le propriétaire10B0D20, puis raccorder au rendu normal ; poursuivre les collisions, scale/alpha/récepteurs terrain et les24domaines."
+}

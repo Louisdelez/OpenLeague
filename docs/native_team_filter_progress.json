@@ -1,0 +1,37 @@
+{
+  "updated_utc": "2026-10-04T23:04:25.110067+00:00",
+  "complete": false,
+  "client_tests_passed": 118,
+  "client_build_passed": true,
+  "native_team_filter_frames": 864,
+  "native_addresses": 1331,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Original6B3FA0 executes864frames crossing source tags100/200/300, registration absent/actor absent/actor present, actor teams100/200/300, actorAD/118 and descriptor24/2C flags, initially applied/unapplied masks. Original actor lookups/getters execute for local sources.",
+    "When source tag differs from local player tag and spectator query is false, original6B4175/6B418F skips the source at6B4350. It does not withdraw an applied mask or enqueue an update.576 nonlocal cases establish this preservation, including with invalid/missing actors.",
+    "Rust CircleView.select_local_source now returns false for unmatched source tags while retaining their existing masks. Previous local actor gates remain in place.864native comparisons check queue, priority, applied/pending flags and cell counts before/after processing; all118client tests and build passed."
+  ],
+  "limits": [
+    "Original source enumeration, dirty/applied/pending gates, circle effective-radius getter, distance approximation, priority calculation, heap enqueue/pop and frame budget execute.",
+    "Both original identity and handle lookups execute on supplied registries; actor virtual getters600830 and617360 execute. Source tags100/200/300 with local tag100 and spectator false supplied at five virtual call sites; actor/descriptor flag producers and constructors remain unqualified. QPC/clock and mask generation boundaries adapted; no generated mask is applied.",
+    "Allocator boundaries adapted; camera/world extent supplied. No live gameplay/GPU integration.",
+    "Spectator false supplied at five original virtual call sites; spectator true, view initialization and tag mutation producers remain unqualified.",
+    "Source tags/masks are supplied and cache generation is adapted for these864frames. Prior128 full Map10 frames with registered actors are separate local-source generation evidence.",
+    "No ordinary entity source activation, server/GPU fog binding or current graphical rerun."
+  ],
+  "next_actions": [
+    "Qualify spectator modes and original view initialization/subscriptions.",
+    "Qualify registry/actor field producers and connect native source creation, update and retirement to ordinary entities.",
+    "Integrate qualified fog masks into authoritative filtering and GPU rendering, then verify restored Map10 gameplay."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_team_filter_contract.json": "d48965417e545a07c43a2aac7817080e7283185fc06d0a0d3c47b992cac9dce9",
+    "tools/probe_fow_team_filter.py": "ecfc28fc1e50c79a7970e3c7ef09231edae8788bda41a64cf7a7bd8ab80f3347",
+    "tools/probe_fow_team_filter_generated.py": "9fc18673a8edab48caa0e7808be8abad97558cc878a8cfc37292aae3a1c6814c",
+    "crates/client/src/fow_registered_filter.rs": "7b679c0591b8525cd2577f3371d42432afdd2abd4147b0f4d632d5d78879d35a",
+    "logs/native-team-filter-tests.log": "df9107ab6ec9262627452b242162cc57874790c2f2901877af6272cbbf7faf1a",
+    "logs/native-team-filter-build.log": "4a1b814eaea72ef2ad11f80e7436246dc863201c8244f7ad48719cf6a30eac96",
+    "target/debug/openleague-client.exe": "ea9db0b6f7f6547cf7e7d00279318642271fd02ab1166eb8aae04ae70ca9111a"
+  }
+}

@@ -1,0 +1,5 @@
+from pathlib import Path
+import shutil
+r=Path('E:/OpenLeague');p=r/'crates/client/src/native_environment_draw.rs';s=p.read_text(encoding='utf-8').replace('pub fn apply_pipeline(', 'pub fn depth_write(mode:u32)->bool {assert!(matches!(mode,1|2));mode==1}\npub fn apply_pipeline(').replace('depth.depth_write_enabled=Some(mode==1);','depth.depth_write_enabled=Some(depth_write(mode));').replace('let d=proof("material_draw_state_contract.json");assert_eq!(d["passed"],true);','for filename in ["material_draw_state_contract.json","map10_material_draw_state_contract.json"] {let d=proof(filename);assert_eq!(d["passed"],true);').replace('assert_eq!(c["depth_enabled_after"],true);}}','assert_eq!(c["depth_enabled_after"],true);assert_eq!(depth_write(mode),c["depth_write_after"].as_bool().unwrap());}}}')
+p.write_text(s,encoding='utf-8');shutil.copy2('E:/mapslol3v3/environment_draw_gpu_probe.rs',r/'crates/client/examples/environment_draw_gpu_probe.rs')
+print('Installed GPU blend/depth probe and actual Map10 native state fixture comparisons.')

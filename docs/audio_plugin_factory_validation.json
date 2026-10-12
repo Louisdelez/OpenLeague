@@ -1,0 +1,55 @@
+{
+  "updated_utc": "2026-10-08T17:35:15.333993+00:00",
+  "complete": false,
+  "audio_tests_passed": 302,
+  "test_exit_code": 0,
+  "native_factory_cases": 216,
+  "native_integrated_meter_creator_cases": 12,
+  "native_parameter_init_clone_cases": 24,
+  "preparatory_lifecycle_cases": {
+    "set": 280,
+    "reset": 15,
+    "term": 12,
+    "init": 12
+  },
+  "preparatory_registration_cases": 432,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "files_sha256": {
+    "crates/core/src/audio_plugin_factory.rs": "a2d5ea1a7f1910ebb885d930e578250262c2d11d429d8fdf178d9c423ec3e05d",
+    "crates/core/src/lib.rs": "f4ba62fab44d92213471e37ef0d1c0beedf076f76851acad6c999c4cf6e0088b",
+    "tools/probe_native_audio_plugin_factory.py": "28e69f9cdb08230bb7343f89c564c75c9902b7a48fae635e1c3b57c3d9ccd90a",
+    "tools/probe_native_audio_meter_plugin.py": "c68b9d52103e66eca0ea690fd1f4ff853734642da5d03de08ac92ed3a98199fa",
+    "tools/probe_native_audio_meter_lifecycle.py": "67cb82f5275fec4236182c8da946520815644195fae1e0c7701f43b9048ea124",
+    "tools/probe_native_audio_plugin_registration.py": "769d110f92abff43f2fad3b37790c50cae7534b3add7e13130d24fb2c6fa5439",
+    "tools/record_audio_plugin_factory_progress.py": "e60362503c607b525a439b6fb4dd308f7ff0d7d5adaefa3614287460cbb7e51c",
+    "data/4.20/audio_plugin_factory_contract.json": "01fde1f2d2744828ed5330251dbc211834115fda91bd994b5014329de73f94c6",
+    "data/4.20/audio_meter_plugin_contract.json": "cf4d95e019c9bc6fde46997f32f546b9872c436093acba3573c5a94ea1980bc4",
+    "data/4.20/audio_meter_lifecycle_contract.json": "34551fffc66eae84950a7ebfdf08c13753e89a55a8242fbd23597c8d4e0af2da",
+    "data/4.20/audio_plugin_registration_contract.json": "1707795388de0aa0407d940b8b070fda05ae8d53288dff5cfc1e8a3b4ac4cd51",
+    "logs/audio-plugin-registration-probe.log": "f958beea534c403f2e00d78bcedfa5280d5e8af5f4894ee5541d144e4ef7cec9",
+    "logs/audio-plugin-factory-integrated-tests.log": "3922645c5fed4c6576bbe908b168ef0960dbecda1f320f706d432296e019110f",
+    "logs/audio-meter-lifecycle-probe.log": "84a21cce31be9ea84da0d9ad7bc235b1d109909fbf14ed0591519aedd29c7816",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "6f69d1bc371c82248341acade5da66f5561b17977fc1ec04bdbd1771368ed48e"
+  },
+  "implementation": [
+    "Ordered B09360/B094B0 registry first-match lookup, output clearing and statuses1/2. Null optional parameter creator is1/null, null effect creator is explicit unsupported error.",
+    "Builtin Meter creator dispatch integrated through the Rust ordered registry to an explicit allocator and raw object store; unknown creator addresses return explicit error. Constructors preserve unspecified caller memory.",
+    "Meter effect info raw8 bytes, parameter default initialization,25-byte block reader independent of nonzero declared length and clone of all7 opaque words. Truncated backing returns explicit error before mutation."
+  ],
+  "acceptance": "216 native factory status/output/callback comparisons;12 actual native wrapper/creator/raw info/memory/allocation comparisons against composed Rust factory+creator dispatch;24 parameter initialization/clone/raw source/allocation comparisons.302 selected audio tests pass.",
+  "preparatory_findings": [
+    "432 actual native registration cases: wrapping ID packing, duplicate rejection before validation, both creators required, append and capacity-growth failure. Successful reallocation remains unqualified.",
+    "280 actual SetParam cases: low16 signed ID;float indices0/1/4/5/6,integer2and32767,invalid3andother IDs;declared length ignored.",
+    "15 actual Reset cases set10 per-channel words from parameterwordC and clearword1C.",
+    "12 actual Term cases: effect with manager defers via byte50; otherwise destructors rewrite class before explicit allocator free.",
+    "12 actual Init+singleton manager cases: actual allocation and callback registration boundaries, intrusive queue insertion, allocation failure partial writes and return2."
+  ],
+  "limits": [
+    "Meter Init/Reset/SetParam/Term/Process and deferred manager delivery are prepared native evidence only, not Rust lifecycle/DSP implementation.",
+    "Allocator/physical lifetime and normal registration producer are mandatory external boundaries; ordered registry currently consumes caller entries, does not yet load all normal historical plugin registrations.",
+    "Meter creator/parameters are not yet normal effect bank/runtime/device integration or audible output. No unrelated plugin is mapped to Meter.",
+    "Lifecycle x87 parameter/reset reference covers finite/signed-zero/positive infinity; NaN and altered FP modes unqualified. Block and clone preserve raw bits according to native SSE/copy bodies.",
+    "All24domains/114tasks/37requirements remain active and unfinished; audio tests do not qualify kits, game, network sessions or installation."
+  ],
+  "next_action": "Port Meter SetParam B3E100/Reset B3E390/Term B3E080+B3E350/Init B3E2E0 and singleton manager B3EB60 from280/15/12/12 native cases; effect Term with manager defers destruction via byte50, so qualify manager update B3EBC0/callback delivery and actual Process B3E400 before replacing mandatory instance plugin bodies. Port registration producer B09590/B09610 from432 duplicate/packing/insertion/growth-failure cases and qualify successful capacity reallocation; then normal HIRC8 resources, release/ownership, RTPC binding B124E0/unsubscribe B12E20 and context lifetime. Ordered factory216 cases and integrated Meter creator12 plus parameter init/clone24 cases now match Rust;302 audio tests pass. Unknown creators explicitly error, no plugin substituted. Current Meter creators retain raw allocations but are not yet wired into normal bank/device runtime. Preserve all24domains/114tasks/37requirements; logarithmic retained RTPC scaling2, exact extended nonzero bypass, bank RTPC/state/position readers, normal smoothing/admission/refcounts and device/game acceptance remain incomplete."
+}

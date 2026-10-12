@@ -1,0 +1,36 @@
+{
+  "updated_utc": "2026-10-04T18:07:18.941424+00:00",
+  "complete": false,
+  "client_tests_passed": 72,
+  "native_lookup_cases": 72,
+  "native_add_cases": 36,
+  "native_remove_cases": 36,
+  "live_fow_gpu_bound": false,
+  "current_build_gpu_rerun": false,
+  "findings": [
+    "Original6B3F20 point query and native6B2D80/6B2E60add/remove executed without runtime adapters; raw count ordering and texture row reversal qualified for supplied cases.",
+    "Rust source stencil counter operations saturate0/255; removing one overlapping source preserves visibility from remaining sources.",
+    "Add only writes selected pixels, while remove refreshes every pixel in its rectangle; cells outside rectangles remain unchanged.",
+    "Initial point port failed a cell-edge regression due rounded f64 reciprocal; quotient formulation corrected it and72client tests plus compilation pass."
+  ],
+  "limits": [
+    "Point-index port matches recorded cases; native startup x87 precision modes and all cell-edge cases are not fully qualified.",
+    "Stencil region generation, native Map10 extent/config providers, fade/blur, GPU upload and normal rendering coupling remain open.",
+    "No current Vulkan rerun: new modules are not yet bound to live FOW. Last capture remains tied to its recorded old executable."
+  ],
+  "next_actions": [
+    "Qualify native x87 precision and dense cell boundaries before binding raw mask queries.",
+    "Recover region stencil generation6B14E0and visibility upload/fade/blur; archive original Fade/FastSeparableGaussianBlur shaders, port their GPU stages.",
+    "Resolve Map10FOWTexture config and world extent, then bind real native FOW textures to projected terrain; keep all24domains open."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_lookup_contract.json": "f2a1f66196390551de67c9e81f7b9d5c270063623cdc208c954dc5bfaf1d1e0b",
+    "data/4.20/fow_add_region_contract.json": "c5362f97bd484acd8ea3865cbe427eb60497391f0bc4b98c1f069f4124f3f299",
+    "data/4.20/fow_remove_region_contract.json": "41b2f246903c4e988c7da382e875ef0de8425dee6e30e52414be87a6325ac848",
+    "crates/client/src/native_fow.rs": "eae253ebff8f9eee6aa9829e5f459e40083dcf1d566030c89cfa4d6e9063e7ec",
+    "crates/client/src/fow_regions.rs": "2577b918d3d22ef37ee7c0e4a4554b406492b8b18c322cc9564551e5f6f459f0",
+    "logs/native-fow-regions-tests.log": "427fffc74174b5b4e3dead9981972a90b24415047d9853f12b95034d2d1d3c1a",
+    "logs/native-fow-regions-build.log": "decfe394d45c9080cac07833f2a925fba80b8b2433586955c442b451753ed4ec",
+    "target/debug/openleague-client.exe": "fb8c3b0e341d75ed59924addb272cd17a0faca61f1e4af4d0725dc1b49a0e8a3"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "complete": false,
+  "saved_utc": "2026-10-10T21:21:45.098325+00:00",
+  "assembled_sha256": "a07e6fa9a55207acb233a750cfca64331f5d54da498ef687f5ce1bbe5fd39d9e",
+  "installed_sha256": "195932cf414ea3cbd6e80053cf297b502f36d64c4d94750186e9f839c15347f8",
+  "index_repair_manifest_sha256": "467914aefc209b70c01212083728447cbc8302e0abc167f674d1d1d233e9bec6",
+  "index_repair_installed_sha256": "50cc55387d9f1460d08fa71b5d6b0f0336ab7de267793b0449fbc6f7a051af16",
+  "test_order_repair_manifest_sha256": "b17f1699ebb35154690809891d34090f828706223b30787f4dfafb8ba3c74c86",
+  "test_order_repair_installed_sha256": "28a34e1f434e903ec59c84ae7dccfe9cc6daa68a9b0bebff878f2ef6dd35814e",
+  "files": {
+    "crates/core/src/audio_replay_windows_loading_retirement_tests.rs": {
+      "before_sha256": "1a2a311948cc8e40b93f85992df8e4b6c21a0ff10458ad02de770ca5f877b530",
+      "after_sha256": "1a42819dabcf94f6b7b67ba1b509752c20dd5f4ef7d872fbbe395778a2f8879d",
+      "bytes": 21049,
+      "candidate": "review/metadata_cache_repair/audio_replay_windows_loading_retirement_tests.rs"
+    }
+  },
+  "added_tests": [],
+  "proof_files": {
+    "review/metadata_cache_repair/audio_replay_windows_loading_retirement_tests.rs": {
+      "bytes": 21049,
+      "sha256": "1a42819dabcf94f6b7b67ba1b509752c20dd5f4ef7d872fbbe395778a2f8879d"
+    },
+    "review/metadata_cache_repair/core-tests-before-cache-fix.log": {
+      "bytes": 126684,
+      "sha256": "dbacee076170a68c10f741a7d03aed4e55dfe6253320fce4a5d68ebbb79fabca"
+    },
+    "review/metadata_cache_repair/decision.json": {
+      "bytes": 2531,
+      "sha256": "d23836d8c07dce632cf503767607f50aa7ec2415f031a8ae60bc1d61b18b504f"
+    },
+    "review/metadata_cache_repair/freeze.py": {
+      "bytes": 2936,
+      "sha256": "eaad4cf69f4e57f6d269721693aac236bceb91fba18f846263122f1a54c17f16"
+    },
+    "review/metadata_cache_repair/prepare_candidate.py": {
+      "bytes": 7518,
+      "sha256": "79827838cca870615c9429ca1f2eff0daf9da4e6304c1c279dc720c85b70143a"
+    },
+    "review/metadata_cache_repair/test-only.patch": {
+      "bytes": 4374,
+      "sha256": "dd571821cf870ca33588a61d40559aece087a9a67a47fad23b1ee711741d75ce"
+    },
+    "apply_metadata_cache_repair.py": {
+      "bytes": 6495,
+      "sha256": "815e0b8948d806a7edfda0432257916ca71f7de1c1be18eb6acefbd74efdd758"
+    }
+  },
+  "failed_run": {
+    "pipeline_session": 76418,
+    "log": "review/metadata_cache_repair/core-tests-before-cache-fix.log",
+    "sha256": "dbacee076170a68c10f741a7d03aed4e55dfe6253320fce4a5d68ebbb79fabca",
+    "passed": 891,
+    "failed": 1,
+    "filtered": 480,
+    "failed_test": "audio_replay_windows_transport::loading_packets::tests::audio_replay_windows_loading_standard_packet_uses_real_resource_manager_and_retires_normalized_key_on_factory_boundary",
+    "client_build_executed": false,
+    "qualification_evidence": false
+  },
+  "production_modified": false,
+  "rust_compiled": false,
+  "rust_tests_executed": false,
+  "qualification_required": {
+    "exact_test_first": "audio_replay_windows_transport::loading_packets::tests::audio_replay_windows_loading_standard_packet_uses_real_resource_manager_and_retires_normalized_key_on_factory_boundary",
+    "then_full_core_passed": 892,
+    "filtered": 480,
+    "required_names": 51,
+    "rebuilt_client_commands": 11
+  },
+  "limits": [
+    "Only the existing diagnostic test changes; no runtime ownership guard is relaxed.",
+    "The cold cache pointer is required to be the only added persistent owner and to retire exactly once.",
+    "This candidate has not been compiled or executed. The full previous run failed891/1 and is not a qualification.",
+    "No actual provider, native INI, full startup or complete loading UI is claimed."
+  ]
+}

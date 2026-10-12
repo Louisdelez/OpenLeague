@@ -1,0 +1,400 @@
+{
+  "schema": "map_direct_coordinates_progress_v1",
+  "recorded_utc": "2026-10-11T19:44:47.762099+00:00",
+  "status": "automated_qualified_runtime_observed_open_findings",
+  "automated_client_qualification_passed": true,
+  "client_tests_passed": 607,
+  "runtime_build_input": {
+    "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime_preparation_v2\\runtime_build_input.json",
+    "sha256": "32c71dca0331a92693bb3ad60861ad433ea23f4705f68fde9aa542118baa5330",
+    "bytes": 33753
+  },
+  "qualification": {
+    "path": "E:\\mapslol3v3\\map_direct_coordinates_compile_fix_v2\\qualify-20261011T191901.807758Z-946d7fd831bb47849ac9a5074670daa6\\receipt.json",
+    "sha256": "ac047b684b78b743c83526a246e97eaa37bae7b992c3b4c00606862891a028a0",
+    "bytes": 189922
+  },
+  "source_adjustments_and_failed_attempts": {
+    "kind": "test_fixture_compile_compatibility_fix",
+    "path": "crates/client/src/map_coordinates_probe.rs",
+    "before": {
+      "path": "E:\\mapslol3v3\\map_coordinates_probe_compile_fix\\original.rs",
+      "sha256": "2d5efaebf6a8db7018f578804fb7e5cf4a55a44aa9edb813bb3cc890a464e0ba",
+      "bytes": 9325
+    },
+    "after": {
+      "path": "E:\\mapslol3v3\\map_coordinates_probe_compile_fix\\fixed.rs",
+      "sha256": "0808cbd148a88bf408f83d32ce2b52be201851364b4db3e7036508fe8d158f65",
+      "bytes": 9358
+    },
+    "replacement_before": "let parents=state.get(&world);",
+    "replacement_after": "let parents=state.get(&world).expect(\"read-only parent query\");",
+    "reason": "Bevy 0.19 SystemState::get returns Result; unwrap the prepared read-only test query explicitly. No production-runtime branch changed.",
+    "references": {
+      "original_preparation": {
+        "path": "E:\\mapslol3v3\\map_direct_coordinates_integration\\manifest.json",
+        "sha256": "d65b762509075ff9b7e8d6a218fe5cb1cbde6ce5398b49dad2ed799b010f6c77",
+        "bytes": 1947
+      },
+      "original_installation": {
+        "path": "E:\\mapslol3v3\\map_direct_coordinates_integration\\installed.json",
+        "sha256": "f00ed7fd3d5faf7ca98eb31db93299a9a0fe496382a331ea25e5da0dca79785d",
+        "bytes": 9315
+      },
+      "failed_qualification": {
+        "path": "E:\\mapslol3v3\\map_direct_coordinates_integration\\qualify-20261011T190714.100063Z-ecd699c7814c4b8bb56a113907787554\\receipt.json",
+        "sha256": "3b68586c1faf2c01937ba4783b3b8dd3c09f6a99d64313472d166f154b399eea",
+        "bytes": 115360
+      },
+      "failed_versions_cargo": {
+        "path": "E:\\mapslol3v3\\map_direct_coordinates_integration\\qualify-20261011T190714.100063Z-ecd699c7814c4b8bb56a113907787554\\versions_cargo.log",
+        "sha256": "e18efb6caebf2254f7da0f021489eb09bf5eed8f325435cee5c3fe128ba9824c",
+        "bytes": 36
+      },
+      "failed_versions_rustc": {
+        "path": "E:\\mapslol3v3\\map_direct_coordinates_integration\\qualify-20261011T190714.100063Z-ecd699c7814c4b8bb56a113907787554\\versions_rustc.log",
+        "sha256": "2d65913be579a9932e833cc5a9ec9da203ac9b56868eee0f01b450c929001c40",
+        "bytes": 36
+      },
+      "failed_client_test_build": {
+        "path": "E:\\mapslol3v3\\map_direct_coordinates_integration\\qualify-20261011T190714.100063Z-ecd699c7814c4b8bb56a113907787554\\client_test_build.log",
+        "sha256": "b93ad2f2b3ede51cc4f0730add922c19b652be295891f95e2aa060ce1e246b9c",
+        "bytes": 513608
+      },
+      "previous_overlay": {
+        "path": "E:\\mapslol3v3\\map_direct_coordinates_compile_fix\\manifest.json",
+        "sha256": "2e52549b8e06448858d28cb02f07f71d75d28871b9a10c5c9a24c3c7fde78ac2",
+        "bytes": 1063
+      },
+      "failed_second_qualification": {
+        "path": "E:\\mapslol3v3\\map_direct_coordinates_compile_fix\\qualify-20261011T191046.890458Z-dc81aa2ca3fb4f95ac749c2d33eff0bd\\receipt.json",
+        "sha256": "18832d5569185b2a782a079f7fb80aba6c30d03cbd432646bf2db43f79f9a8c7",
+        "bytes": 183429
+      },
+      "failed_second_versions_cargo": {
+        "path": "E:\\mapslol3v3\\map_direct_coordinates_compile_fix\\qualify-20261011T191046.890458Z-dc81aa2ca3fb4f95ac749c2d33eff0bd\\versions_cargo.log",
+        "sha256": "e18efb6caebf2254f7da0f021489eb09bf5eed8f325435cee5c3fe128ba9824c",
+        "bytes": 36
+      },
+      "failed_second_versions_rustc": {
+        "path": "E:\\mapslol3v3\\map_direct_coordinates_compile_fix\\qualify-20261011T191046.890458Z-dc81aa2ca3fb4f95ac749c2d33eff0bd\\versions_rustc.log",
+        "sha256": "2d65913be579a9932e833cc5a9ec9da203ac9b56868eee0f01b450c929001c40",
+        "bytes": 36
+      },
+      "failed_second_client_test_build": {
+        "path": "E:\\mapslol3v3\\map_direct_coordinates_compile_fix\\qualify-20261011T191046.890458Z-dc81aa2ca3fb4f95ac749c2d33eff0bd\\client_test_build.log",
+        "sha256": "48405f81f1fe4d4b124f9df6637eb3fbf257963a0f66a4db9433c4f8fd1172fe",
+        "bytes": 506200
+      },
+      "failed_second_client_test_inventory": {
+        "path": "E:\\mapslol3v3\\map_direct_coordinates_compile_fix\\qualify-20261011T191046.890458Z-dc81aa2ca3fb4f95ac749c2d33eff0bd\\client_test_inventory.log",
+        "sha256": "d8dddc6b260c6c4f80910653e34d87c873afab141f4a8fc389cca1b60c9556c8",
+        "bytes": 61889
+      },
+      "failed_second_client_all_tests": {
+        "path": "E:\\mapslol3v3\\map_direct_coordinates_compile_fix\\qualify-20261011T191046.890458Z-dc81aa2ca3fb4f95ac749c2d33eff0bd\\client_all_tests.log",
+        "sha256": "f233b27e9d4fdf56cadb848ee30f909c60fdb5f390474d3129d5c1da367a30a2",
+        "bytes": 66182
+      }
+    },
+    "expected_client_tests": 607,
+    "executed_by_preparer": false,
+    "additional_source_adjustments": [
+      {
+        "kind": "test_fixture_direct_coordinates_fix",
+        "path": "crates/client/src/projected_terrain.rs",
+        "before": {
+          "path": "E:\\mapslol3v3\\map_coordinates_quality_fixture_fix\\original.rs",
+          "sha256": "f9b5daef0d97548f0f3ff078794bdc0f789bb92b4375533d2edbee7fcfa1d877",
+          "bytes": 16215
+        },
+        "after": {
+          "path": "E:\\mapslol3v3\\map_coordinates_quality_fixture_fix\\fixed.rs",
+          "sha256": "d4c11cea0f06c270e7777498306e7237998df0d07c8891023bf0ffece9545049",
+          "bytes": 16210
+        },
+        "replacement_before": "\"bounds\":[0.,-10.,15000.,2000.,10.,15400.]",
+        "replacement_after": "\"bounds\":[0.,-10.,0.,2000.,10.,2000.]",
+        "reason": "Synthetic receiver bounds now cover the direct-coordinate projection; quality assertions and all607 names unchanged."
+      }
+    ]
+  },
+  "binaries": {
+    "client": {
+      "path": "E:\\OpenLeague\\target\\debug\\openleague-client.exe",
+      "sha256": "dbc573f24468f6e1dbc4728b996a910fb62d3386376c5455c883a51e9b69e87c",
+      "bytes": 142031360
+    },
+    "server": {
+      "path": "E:\\OpenLeague\\target\\debug\\openleague-server.exe",
+      "sha256": "0571bc0e489267e3c28bf53d9001dbd0ba70ae3e1af014c495772f6c5341d377",
+      "bytes": 5093376
+    },
+    "launcher": {
+      "path": "E:\\OpenLeague\\launcher\\src-tauri\\target\\debug\\openleague-launcher.exe",
+      "sha256": "67ca45b094b24674fa6b7b263c742d2c89c41dd84f935c35abf421d970d3b42b",
+      "bytes": 12508160
+    }
+  },
+  "source_guard_count": 172,
+  "root_review": {
+    "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\root_visual_review.json",
+    "sha256": "d0487e1fadac601cce1949ae8821c9ff932a09526e933e91e9a461829c0a7287",
+    "bytes": 12899
+  },
+  "runtime_observations": [
+    "Root directly inspected the launcher, ordinary Garen spawn, fountain/base path, minion route beside the wall, gate, jungle camp and west altar through native application captures. Movement used ordinary right clicks and Y camera follow; no position, level or timing injection was used.",
+    "The formerly offset plaza/wall geometry appeared coherent with Garen and minions along the inspected route. The gate and wall no longer showed the large old plaza gap in the comparable region. This is a bounded observation, not an identical-camera before/after comparison or proof for the whole map.",
+    "Root directly observed remaining cyan and blue-gray openings behind jungle trees and beside the west altar, including a turquoise polygon at the lower-left edge of its base. Captures 07 through 11 preserve the visible defects.",
+    "Garen reached the center of the west altar in capture 11. The archive shows ordinary gameplay time 9:39. No Vilemaw visit, combat, spell, inventory drag, HUD reconnection scenario or full match was qualified during this run.",
+    "Archived startup and final probe analysis confirms the unique direct-coordinate map root, the eight selected floor assets and their ancestry/transforms, and the seventeen ambient placements. Both altar position bindings agree within the recorded tolerance. Inherited visibility does not prove a GPU draw or correct fog pixels.",
+    "The launcher displayed Session terminee after normal client closure. Retained process handles reported exit code zero for the launcher, client and server. The observer also recorded an empty-path exception, so its owned_processes_closed_cleanly flag remains false. A separate elevated CIM query after closure returned no OpenLeague launcher, client or server process.",
+    "Screenshots and probes were archived at different instants. File save times do not establish frame synchronization; later altar frames show a changed plate/grate state."
+  ],
+  "unresolved_findings": [
+    {
+      "id": "remaining_cyan_gaps",
+      "status": "open",
+      "detail": "Visible jungle and altar-base openings remain. Geometry, draw/alpha/background/fog causes are not yet isolated."
+    },
+    {
+      "id": "nexus_vertical_binding",
+      "status": "open",
+      "detail": "HQ_T1 source placement height 56.5487 differs from observed runtime height 14.1094255. Server spawn and NPC updates use navigation ground height. The native intended consumer height remains unqualified; no causal claim about the visually absent crystal is made."
+    },
+    {
+      "id": "camera_horizontal_bridge",
+      "status": "open",
+      "detail": "Native qualified view/projection convention has right +X; Bevy runtime camera and positive-X projection show the opposite horizontal sign. A corrected projection and picking/culling verification are pending. This does not explain the cyan gaps."
+    },
+    {
+      "id": "observer_empty_child_path",
+      "status": "open_in_this_receipt",
+      "detail": "Observer caught GetFullPath on an empty child path. Both actual children were later adopted with identity checks and exited zero. Preserve the error and false aggregate closure flag; do not rewrite this receipt as clean."
+    },
+    {
+      "id": "navigation_rejection_feedback",
+      "status": "open",
+      "detail": "Several blocked right clicks caused no visible movement or user-facing explanation on the observed route."
+    }
+  ],
+  "process_exit": {
+    "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\process-exit.json",
+    "sha256": "7aa4ef67129d4c393657ee821d98a4ab8957e472fff36f41837030fc352f2801",
+    "bytes": 777
+  },
+  "normal_process_closure_observed": false,
+  "map_visual_qualified": false,
+  "cyan_resolved": false,
+  "nexus_height_qualified": false,
+  "native_camera_fidelity": false,
+  "native_renderer_parity": false,
+  "actual_pixels_qualified": false,
+  "complete_game": false,
+  "historical_hud": {
+    "receipt": {
+      "path": "E:\\OpenLeague\\docs\\ordinary_camera_hud_progress.json",
+      "sha256": "13c47a0dc10d59c93a13d8a0ce33aeca5aab9b844588b6938cde6671f36910a0",
+      "bytes": 26223
+    },
+    "rerun_on_current_map_build": false
+  },
+  "evidence": [
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime_preparation_v2\\runtime_build_input.json",
+      "sha256": "32c71dca0331a92693bb3ad60861ad433ea23f4705f68fde9aa542118baa5330",
+      "bytes": 33753
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_compile_fix_v2\\qualify-20261011T191901.807758Z-946d7fd831bb47849ac9a5074670daa6\\receipt.json",
+      "sha256": "ac047b684b78b743c83526a246e97eaa37bae7b992c3b4c00606862891a028a0",
+      "bytes": 189922
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_candidate\\manifest.json",
+      "sha256": "ed36f3dedc225d1402f8561cc1a8a2c8dac5a9965a1b6b30382d2ae9bb495d75",
+      "bytes": 25241
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_compile_fix_v2\\manifest.json",
+      "sha256": "6ce10ff152672028c213d8c9713884ff53b2b23f56a4c21877cbcbd19ddfb056",
+      "bytes": 1066
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_integration\\installed.json",
+      "sha256": "f00ed7fd3d5faf7ca98eb31db93299a9a0fe496382a331ea25e5da0dca79785d",
+      "bytes": 9315
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_compile_fix_v2\\qualify-20261011T191901.807758Z-946d7fd831bb47849ac9a5074670daa6\\versions_cargo.log",
+      "sha256": "e18efb6caebf2254f7da0f021489eb09bf5eed8f325435cee5c3fe128ba9824c",
+      "bytes": 36
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_compile_fix_v2\\qualify-20261011T191901.807758Z-946d7fd831bb47849ac9a5074670daa6\\versions_rustc.log",
+      "sha256": "2d65913be579a9932e833cc5a9ec9da203ac9b56868eee0f01b450c929001c40",
+      "bytes": 36
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_compile_fix_v2\\qualify-20261011T191901.807758Z-946d7fd831bb47849ac9a5074670daa6\\client_test_build.log",
+      "sha256": "abe0450d35e50752fe209e533d60957723c11a6b039322465ef7b8d7bf5b8e1f",
+      "bytes": 506200
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_compile_fix_v2\\qualify-20261011T191901.807758Z-946d7fd831bb47849ac9a5074670daa6\\client_test_inventory.log",
+      "sha256": "d8dddc6b260c6c4f80910653e34d87c873afab141f4a8fc389cca1b60c9556c8",
+      "bytes": 61889
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_compile_fix_v2\\qualify-20261011T191901.807758Z-946d7fd831bb47849ac9a5074670daa6\\client_all_tests.log",
+      "sha256": "4edb11a0226e79f7f4b4547354c5fd4a385972269e124a42639ab225c91de033",
+      "bytes": 65623
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_compile_fix_v2\\qualify-20261011T191901.807758Z-946d7fd831bb47849ac9a5074670daa6\\client_build.log",
+      "sha256": "b632e62c5f0891a37b01424f5dfe9799c450c574b557219e4dd8908116bb0645",
+      "bytes": 612314
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\01_launcher.jpg",
+      "sha256": "6c1927fec10f02a7faf61598ba10dbc4f375bab38037d965019729c369fe4ae0",
+      "bytes": 62344
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\02_spawn.jpg",
+      "sha256": "f67ef282a083cefd3c0dbc3ecfbbc34771eb43c0b05656e43da42b4ea1751517",
+      "bytes": 170103
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\03_base_path.jpg",
+      "sha256": "efcf35cc0a574e4ef17def6817feecc92e52629fdb18a880f3c5fa41efc6afcb",
+      "bytes": 190135
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\04_wall_and_minions.jpg",
+      "sha256": "58f706fab41636b03e8c4cad002c1379d07e3c5b543e3cc445e4cee3ca41381f",
+      "bytes": 174355
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\05_gate.jpg",
+      "sha256": "41bce80ca04ee4be9662d639fe3539f304cbfcb00cb40e7b430377cd735926dc",
+      "bytes": 175505
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\06_outside_wall.jpg",
+      "sha256": "32f804fafa4ebe0525bb21a1204ae2a36d18831f76248af1a3f6c7246a78a5bb",
+      "bytes": 172243
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\07_camp_and_remaining_cyan_gap.jpg",
+      "sha256": "dbd755fb3fc223d229345edea5afd08bc9fead5b088581651651f95a966be6c8",
+      "bytes": 170824
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\08_camp_cyan_background.jpg",
+      "sha256": "d3b6230949e506eca6dd4d55e2a045da93ff96dd39858df63c1cfe9c56486842",
+      "bytes": 152316
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\09_altar_approach_and_gaps.jpg",
+      "sha256": "83467f5f86312f541121bc89e986e3b8e5656bef380254002a515dac211729cf",
+      "bytes": 147477
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\10_altar_edge_cyan.jpg",
+      "sha256": "b288c7d8b3145e165cfac4cf45803d6cbc0b47990939e6a2ae91ec69e9fb7018",
+      "bytes": 122025
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\11_altar_center.jpg",
+      "sha256": "2d29d795d5bfb520358e99117de8eb0956be88d7f801dccea03a85b076b7896d",
+      "bytes": 124726
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\12_session_closed.jpg",
+      "sha256": "6fc68da1ea89b2776cc498215cb7ed76ce823572519b85484a2a0dce181203ce",
+      "bytes": 64226
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\02_spawn.probe.json",
+      "sha256": "75ee8f5dd9649ff6f7c4f8bb5f0aeefab11af276e42601ec3441fd13808c2a3f",
+      "bytes": 1546187
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\03_base_path.probe.json",
+      "sha256": "aaac9201d50eac285eebaaff9282a26784ebcd70798713d33af6d70a3db54225",
+      "bytes": 1770419
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\04_wall_and_minions.probe.json",
+      "sha256": "1129578f084dd71f3bb5d4bbd370676d86497da10bec8fd47630677033685522",
+      "bytes": 1770548
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\06_outside_wall.probe.json",
+      "sha256": "39405e53cd91bbc633437d336fba2c69396f9f14a83a12a4c2c9b22a8c0c3623",
+      "bytes": 1770944
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\07_jungle_entry.probe.json",
+      "sha256": "c37adcc6f5e4854404f0b5c084897266c2e4a50415e64a73234fc0e1525a7941",
+      "bytes": 1770556
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\07b_camp.probe.json",
+      "sha256": "17612baf19b13f9e419580c99c1030107f5d334459b9453b867fdf55194e660d",
+      "bytes": 1770284
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\09_altar_approach.probe.json",
+      "sha256": "24f2331ebadf5a65c9f97df3d7b63bc74b8c881a02595abd8d595c22d9831ee6",
+      "bytes": 1770513
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\10_altar_edge.probe.json",
+      "sha256": "f6aed3fae94e648476c6780b3242f460a77b1c9d55aea4a8311904732c305b86",
+      "bytes": 1770300
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\11_altar_center.probe.json",
+      "sha256": "118cb9ec75523b8779beb844d21f6914b397d541ecf3fe55d49811c9fbb5dad7",
+      "bytes": 1771039
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\final.probe.json",
+      "sha256": "b608070732fb111e8547e16f1b563531506ca7c87ee7ab13c5e9acfe50fd41cd",
+      "bytes": 1771041
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\root_visual_review.json",
+      "sha256": "d0487e1fadac601cce1949ae8821c9ff932a09526e933e91e9a461829c0a7287",
+      "bytes": 12899
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\process-exit.json",
+      "sha256": "7aa4ef67129d4c393657ee821d98a4ab8957e472fff36f41837030fc352f2801",
+      "bytes": 777
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\launch.json",
+      "sha256": "2e3135809d525946dab29a990309ac3d4b8284a1a8b38b9c6f1612986016d94b",
+      "bytes": 389
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\launcher.stdout.log",
+      "sha256": "bb2b8398b0914e1ba2aebc22e4b9d8e22c45e55ac283c6140aa76e23495fb869",
+      "bytes": 61191
+    },
+    {
+      "path": "E:\\mapslol3v3\\map_direct_coordinates_runtime\\run-20261011T212849042\\launcher.stderr.log",
+      "sha256": "0fce0141c1a876c86555da5d467869793be1fcae49969800d305580110310768",
+      "bytes": 6216
+    }
+  ],
+  "limits": [
+    "Root observations are attributed to the supplied review; the preparer did not inspect pixels.",
+    "No automatic runtime PASS or full map qualification follows from tests or a normal process exit.",
+    "Server/launcher binaries are retained; this qualification built and tested the client only.",
+    "Prior HUD evidence remains intact and does not qualify HUD/reconnection on the new executable."
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "updated_utc": "2026-10-07T14:40:45.755146+00:00",
+  "complete": false,
+  "files": {
+    "logs/receiver_95bff0.txt": "72df761921aff7dd6f76c6b121a582ad9c01a21784ecc72286b8a04233731d93",
+    "logs/legacy_batch_dispatch.txt": "00b3f1ae6908371a4e15f8618094e74e96bb93262d42b8ace051c278bfc7eb75",
+    "logs/legacy_receiver_setup.txt": "ce25f24d090fb7b38f32c7a77aa4e4a4fe328c1cdfabf2b75dbc664236f8195e",
+    "data/4.20/projected_native_batch_draw_contract.json": "0cd86748a59ef6d149da85dde32cc8db7d7be04dcad2cb5bd51b98f0bacf1edb",
+    "data/4.20/map10_receiver_tree_contract.json": "a87fa1c17c84d4dd10063c95e976eccdfbdbaac8086c6484f46dfda5b73e983f",
+    "crates/client/src/projected_terrain.rs": "196a62925074af68abf65fe9c551d9cc380973e805fe71b4e626e2d7ece75c9b"
+  },
+  "findings": [
+    "Selector5 rectangle branch95C47E..95C4AD enters95B670, selecting full objects as already qualified by195 native tree cases.",
+    "95B140 dispatch copies/coalesces40byte draw packets, then calls95AFC0 with full vertex/index ranges;2281 real object draw ranges were previously verified.",
+    "95CC10 changes filtering only for stages0 and2. No per-particle scissor or clip-plane setup found in inspected selector5 dispatch. Upstream global state not fully qualified."
+  ],
+  "implementation": "Removed additional CPU per-triangle XZ rejection and UV0..1 polygon clipping from selected objects. Whole original triangles and unclamped UVs now reach GPU; native object selection and per-original-vertex height fade retained.",
+  "test_session": null,
+  "test_log": "logs/projected-whole-receiver-tests.log",
+  "gpu_verified": true,
+  "limits": [
+    "Native whole-triangle submission supported; final D3D framebuffer equivalence not proven.",
+    "Sampler-edge RGB is nonzero in58 native edge samples, so visible differences from prior CPU clipping are expected and must be inspected.",
+    "Global clip/scissor state and general color texture filter/upload still remain open.",
+    "Per-frame projection rebuild now handles up to207051 duplicated vertices; no performance acceptance.",
+    "One raw Vulkan cleanup frame precedes JSON journal publication by1 frame at shutdown. Complete embedded-header GPU atlas proves zero contribution; atomic raw+metadata publication still needs improvement."
+  ],
+  "tests_passed": 32,
+  "build_session": null,
+  "build_log": "logs/projected-whole-receiver-build.log",
+  "capture_series": "v40",
+  "build_passed": true,
+  "client_sha256": "ed6f0fd81b02b578892e863ab0e668ad6786fb7c9724719d694a452fa7cf3d17",
+  "runtime_series": "v40",
+  "pixel_receipts": [
+    "docs/projected_receiver_pixels_v40_dx12.json",
+    "docs/projected_receiver_pixels_v40_vulkan.json"
+  ],
+  "cleanup_receipt": "docs/receiver_cleanup_v40_raw.json",
+  "strict_journal_cleanup_passed": false,
+  "peak_vertices": 207051,
+  "visual_inspection": "Initial captures inspected both backends: map/actors/HUD visible without obvious gross corruption. Exact native edge/color equivalence unqualified."
+}

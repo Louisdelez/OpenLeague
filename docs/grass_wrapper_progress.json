@@ -1,0 +1,40 @@
+{
+  "updated_utc": "2026-10-05T12:23:33.073107+00:00",
+  "complete": false,
+  "client_tests_passed": 212,
+  "client_build_passed": true,
+  "native_wrapper_cases": 24,
+  "native_empty_wrapper_cases": 1,
+  "native_object_growth_cases": 24,
+  "native_pool_sequence_cases": 42,
+  "native_pool_sequence_steps": 504,
+  "wrapper_lifecycle_ported": true,
+  "object_pool_growth_ported": true,
+  "normal_actor_registry_integrated": false,
+  "live_grass_mask_integrated": false,
+  "findings": [
+    "Native71A560 unregisters a present spatial object, clears wrapper+8, frees wrapper once and returns its address; empty wrappers skip object removal. 24 registered cases, each repeated after explicit wrapper-storage reinitialization, plus one empty wrapper case.",
+    "Rust dispose shares object withdrawal and node pruning, clears its object handle and emits exactly one release. Releasing an already released wrapper returns an explicit ownership error; this is a Rust safety contract rather than claimed native double-free behavior.",
+    "Object recycling uses the shared qualified native vector growth policy and a logical capacity independent of host Vec allocation. Native969E60/96A9A0/96B010/96B050 and actualC97610 copy execute 42 supplied sequences totaling504 pushes; all handle order, reservations and capacities match Rust, including internal-source relocation."
+  ],
+  "limits": [
+    "Native allocation/free boundaries adapted; small successful allocations only. OOM/custom allocator ABI and global cross-context ownership remain unqualified.",
+    "Registration/withdrawal fixtures use the default root; deep object withdrawal topology remains open. Real actor/model/camera producers and normal collector/mask/WALL rendering are not connected.",
+    "No live match/framebuffer proof in this turn. All24 domains remain unfinished."
+  ],
+  "next_actions": [
+    "Connect actor AABB/dispatch updates to object registry parent/reindex functions; qualify deep withdrawal and cross-context ownership.",
+    "Qualify real actor/model/camera producers and connect Bevy actor registry, collector/mask/WALL normal rendering; inspect Map10 match.",
+    "Continue the full24-domain plan, all champion kits, six-client victory/results and delivery."
+  ],
+  "files_sha256": {
+    "crates/client/src/grass_object_registry.rs": "6f1d86be559c36145ef86931ab08df6d825175400f825c63597af4c9988c12e7",
+    "crates/client/src/grass_pool.rs": "7194d1b7f64359768c68cf62dc755c2dd4dcb213eea5661a1634bf6e9ebc457d",
+    "data/4.20/grass_wrapper_contract.json": "57ce33073ee2c6079367eae9aa61f6b98d1430b1dc16d917b1e8a180de4feabb",
+    "data/4.20/grass_object_growth_contract.json": "d3c4a891086b2e9e909a6d917c00da1a35abc5d8c11cdbb0253fcd7f7482432c",
+    "data/4.20/grass_object_pool_sequences_contract.json": "6322a04d408a2d8191d319512c4449273f11ba8f3b76910782ca2cffdfd9e207",
+    "logs/grass-wrapper-tests.log": "c1af5861f8eeb793d2b8f39b5533b9e9b148cf99ad506b6515142721d7677aba",
+    "logs/grass-wrapper-build.log": "45460fb85c47fd7283153cd5d65752a4d36e47ca66f4720f2d3c1be4bba5211c",
+    "target/debug/openleague-client.exe": "8ecfaa40c01e82cf6d317476e84ca78d6bc204d94c83c6cc310f853bb24a64b3"
+  }
+}

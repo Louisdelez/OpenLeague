@@ -1,0 +1,30 @@
+{
+  "updated_utc": "2026-10-04T01:41:00.340236+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_voice_destruction.py": "96203a125b9603a42fd859020d2524cf1c7c652c3743657f4213966e7b278606",
+    "data/4.20/audio_voice_destruction_contract.json": "2223b1942959c4c5551331795e2a4c1a39749a8a568607e744c66f8395ae30d7",
+    "crates/core/src/audio_voice_constructor.rs": "3f5e2373dc143b8cdb7b1101c99d244d842bf73507af8a02feea7a69b6fc1b37",
+    "logs/native-audio-voice-destruction-core-tests.log": "2c6b4f8bcaed9047d5bd4965a1a4efa685ca08d20524bb6970d77fc7e2c4bff2",
+    "tools/qualify_native_audio_release.py": "9b8f238ba28998404fa777dd0fa03d9fc90ab0c6888fcf84526766e88f9c3f91"
+  },
+  "native_cases": 768,
+  "core_tests_passed": 247,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "control_flow_ported": true,
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false,
+  "limits": [
+    "Original706BC0 destructor,706F90 release,AEB740 StopPlaying message path executed. Engine availability, PostStopEvent, queue capture, strings/free/logging adapted as explicitly recorded.",
+    "Byte49 nonzero gates release; deleted storage follows low bit of delete flags. Stop string destroyed before play string, then storage. Unavailable engine still destroys strings/storage without queued stop.",
+    "Default free path only; configured free callback excluded. Actual allocator side effects, PCM/fade execution and automatic host drop integration remain required.",
+    "Backend operations remain explicit caller-supplied actions; standalone binaries unchanged. Full24-domain game remains incomplete.",
+    "Finalization is explicit and not yet called automatically at final Arc owner release. Shared mutable voice state and actual backend drop queue must be integrated before playback."
+  ],
+  "ported": [
+    "706BC0 raw49 nonzero gates release706F90",
+    "stop post/fallback before stop string then play string destruction",
+    "external storage free follows low bit of deletion flags",
+    "consuming explicit finalization prevents reusing owned state"
+  ]
+}

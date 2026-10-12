@@ -1,0 +1,11 @@
+from pathlib import Path
+import itertools,json,hashlib
+r=Path('E:/OpenLeague');setup=(r/'tools/probe_native_audio_bank_cached_reader.py').read_text(encoding='utf-8').split('\nactual=json.loads')[0];exec(compile(setup,'cached_setup','exec'))
+rows=[]
+for scope,provider,pattern in itertools.product([0,1],[0,1,0xffffffff],[0,0xa5]):
+ calls.clear();allocations.clear();next_pointer=heap+0xc000;count_allocate=0;fail_nth=0;consumed=0;u.mem_write(manager,bytes(0x500));u.mem_write(manager,bytes([pattern])*40);put(manager+28,'I',provider);u.mem_write(manager+0x7c,bytes([scope]));put(out,'I',0);u.mem_write(seed,bytes([pattern])*80);invoke(0xaf8a20,[0x12345,0xffffffff,1,3,1],seed);invoke(0xb21ad0,[0x12345,bank,seed],cache);before=bytes(u.mem_read(manager,0x500)).hex();initial_holder=bytes(u.mem_read(seed,80)).hex();calls.clear()
+ result=invoke(0xaf9960,[0,0,0,1,0x12345,0xffffffff,bank,0,0,out,0,0],manager)
+ assert result==69 and read(out,'I')[0]==0;assert bytes(u.mem_read(manager,0x500)).hex()==before;assert bytes(u.mem_read(seed,80)).hex()==initial_holder;assert not allocations
+ rows.append({'scope':scope,'provider':provider,'pattern':pattern,'initial_manager':before,'initial_holder':initial_holder,'result':result,'holder_reference':read(out,'I')[0],'calls':list(calls)})
+proof={'passed':True,'complete':False,'case_count':len(rows),'cases':rows,'native_sha256':hashlib.sha256(b).hexdigest(),'regions':[{'start':hex(a),'end':hex(e),'sha256':hashlib.sha256(p.get_data(a-base,e-a)).hexdigest()}for a,e in [(0xaf9960,0xaf9d15),(0xb21a30,0xb21a84)]],'adapters':['Only physical bank-registry mutex calls. Actual AF9960/B21A30 loaded-bank shortcut runs;no provider/scope implementation substituted.'],'findings':['Loaded cache status69 precedes consumption of scope flag7C,provider28,backing length/stream contents and fresh holder allocation. All1280 manager bytes and80 holder bytes remain unchanged.'],'limits':['Native preparation;Rust guard ordering fix pending. Memory command0/owner0 and explicitly registered loaded bank;inactive/fresh provider and scope implementations remain required.']}
+(r/'data/4.20/audio_bank_cached_shortcut_contract.json').write_text(json.dumps(proof,indent=2)+'\n',encoding='utf-8');print('PASS',len(rows),'native loaded cache shortcuts before provider/scope guards')

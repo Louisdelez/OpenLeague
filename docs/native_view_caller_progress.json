@@ -1,0 +1,45 @@
+{
+  "updated_utc": "2026-10-05T00:12:45.398154+00:00",
+  "complete": false,
+  "client_tests_passed": 127,
+  "client_build_passed": true,
+  "native_caller_cases": 24,
+  "native_addresses": 1222,
+  "map10_startup_view_implemented": true,
+  "map10_startup_view_runtime_verified": true,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": true,
+  "findings": [
+    "Original6B3462 caller fragment passes global X extent into original6B3B80 constructor in24cases. Two independently supplied config floats are saved separately and do not change extent. Constructor creates original empty event/subscription and zero mask buffers.",
+    "Rust Map10VisionView reads authored SCB geometry and constructs its registered view. Main startup inserts this resource and places restored map from its native extent instead of a duplicated constant.",
+    "Full127client tests and build passed. Startup resource and native caller correspondence are unit tested; no current graphical runtime acceptance claimed.",
+    "Current executable launched on Vulkan and stayed alive until actual framebuffer capture; restored Map10 architecture/terrain/vegetation visible. Startup path reached renderer without panic. No server connected or gameplay vision source processed."
+  ],
+  "limits": [
+    "Original caller fragment reads native global extent, allocates view and passes X extent as second argument to original constructor. Original empty event creation and subscription execute.",
+    "Upstream config reader, resource lookup and whole6B3180 initialization are not executed. Fixture x87 config value supplied using original FLD instruction; extent global supplied from separately qualified bounds producer.",
+    "First argument retains supplied stack contents and is unused by constructor. Config value is stored separately atEBP-44 and does not become extent.",
+    "Native constructor accepts zero extent; Rust explicitly rejects invalid extent before live startup. No allocation failure, complete view activation or GPU fog qualification.",
+    "Allocator, mutex and InitializeCriticalSection boundaries adapted as documented by event-construction prerequisite.",
+    "Client source/view runtime activation remains partial: startup creates the registered view, but no normal entity source production, authoritative mask binding or GPU fog output is connected to it.",
+    "Current graphical rerun covers standalone startup and one restored-map camera view only; no live fog masks, authoritative visibility or six-client gameplay acceptance."
+  ],
+  "next_actions": [
+    "Qualify resource lookup, camera/configuration producers and ordinary gameplay source creation.",
+    "Connect normal entity sources to registered views, authoritative visibility and GPU rendering.",
+    "Verify restored Map10 through a current six-client match and continue all completion-plan domains."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_view_caller_contract.json": "965fb5114ef900d3e090ab87e7e3a1174b9b8fa192f6a5ab4f723355a55364e7",
+    "tools/probe_fow_view_caller.py": "a485d656bda340865bd753b378378e3e1ad9fb1f89e40531e57d25196172a738",
+    "assets/maps/tt_level_size.scb": "16138f6f4d50fe54eaae63e6ec4f3c3a48d632a874dbd74c93306b44048f00b4",
+    "crates/client/src/map10_vision_view.rs": "bb9b6a68c645f5b721fddc20ae4a12e2f3028b2fff889fa28ff0aab5e90a2413",
+    "crates/client/src/main.rs": "5af825c3f4600ea06aca3007462cd8716ec548c3999c573f3c5ecbd70ef91206",
+    "logs/native-view-caller-tests.log": "48beae495d1c41dc2785c832e7aa1fa40de2d3afd73870a6a4dc06d5019f011c",
+    "logs/native-view-caller-build.log": "b082f72e781e63590cc36a1d718afde5cf02fe3b6f5051b541f3fd45c41a9ea4",
+    "target/debug/openleague-client.exe": "a00297f63907df26ed042f166d0cca19f14317de710deceac02e8e8c10eb4a9c",
+    "logs/map10-view-startup-127.png": "6a765a532c8797fb920cf935ee609f7038f44ba7cf86b1b4985760e7b2b31bf1",
+    "logs/map10-view-startup-127.log": "a69d37c3518bed7162986a4a7ae00e31939a83bda8b3281bb1e46303be52dcfd"
+  },
+  "current_startup_capture_receipt": "docs/map10_view_startup_capture.json"
+}

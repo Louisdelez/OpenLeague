@@ -1,0 +1,46 @@
+{
+  "updated_utc": "2026-10-04T00:00:59.260258+00:00",
+  "native_case_counts": {
+    "setter_cases": 36,
+    "height_tick_cases": 1080,
+    "final_reference_cases": 20
+  },
+  "native_cases_total": 1136,
+  "core_tests": 209,
+  "new_core_tests": 3,
+  "files": {
+    "tools/qualify_native_audio_object_height_reference.py": "00a027a51fcdfa481b27112fde9de14280daea98c603d190d04cd40a7d0b84f9",
+    "data/4.20/audio_object_height_reference_contract.json": "053f45448c0d2ae3c88613aa74eb884b657bd617844010645aa6bf8d0505118e",
+    "crates/core/src/audio_object_registration.rs": "265ac600279320b107106129d77a1fbc838aa0ebb2f45883655ab1e7201b226f",
+    "logs/native-audio-object-height-reference-core-tests.log": "9e8d498c1b029aa2c884eb5707d6ba1a6da31e074b826fe62e23a815037c773b"
+  },
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_regions": {
+    "0x7074b0": "27bafe27884305e8b0516e83e82a76a565bf2932a43cb083b129b56b7231573e",
+    "0x707610": "c6a64d9c154580ed2921869bf0c9025a3bf31c2dd75016fcdd80d3a4e0a53861",
+    "0xaeb1c0": "d6735f3655afbc3202317780592384ad0cee0b9baa57405f32102d61d7f3e064",
+    "0xaeb1e0": "c8621b153687be7b1aae208981169a7b8c29c9dee5b315815c4d4e52197b1587",
+    "0xaeefd3": "850f046aff97a5aaa549b5e9a2e9d3675287ec147742f52e796c391fccfc1e4b",
+    "0xb24612": "7e3643416998158afa2c44318bf3d97b0348f5913caf7abbafcde041b6538fa8"
+  },
+  "native_height_behavior": "7074B0 raw flag setter optionally forces height0 (nonzero flag) or1 (zero flag), no position post.707610 nonzero flag resets positive height to0, otherwise unchanged; zero flag and height<1 increments by delta capped1, admits negative delta. On update posts[X,height*-2500,Z] only available/id!=0; local height still updated when unavailable.",
+  "native_final_reference_behavior": "Two native final-voice release fragments decrement low30 references, preserve upper2 flag bits, destroy/free at zero. RegisteredSources::release_reference returns destruction decision; caller must discard after true.",
+  "bridge": "Flag toggle -> native height tick -> point words -> registered sources -> scaled distance -> acquire -> single unregister retains -> final reference reaches zero tested.",
+  "native_stubs": [
+    "Availability/queue size/packet capture/security check. Native setter/height updates and source packetXYZ executed.",
+    "Final-release native blocksAE_EFD3..AEF005 andB24612..B24646 execute flag math/destruction decision; AF5D80 destructor andADA3E0 heap free captured, surrounding voice destruction not executed."
+  ],
+  "client_integration_enabled": false,
+  "ambient_playback_enabled": false,
+  "complete": false,
+  "limits": [
+    "Field18 byte treated raw (zero/nonzero), without inferring all callers or audibility semantics.",
+    "Height tick admits negative delta and negative/above-one supplied states; native behavior preserved, no default clamping invented.",
+    "Native object full destructor/PCM/stream callbacks and retained ownership handles remain separate.",
+    "No full game-frame scheduling, original clock delta source or live client audio acceptance.",
+    "Final release arithmetic/destruction decision qualified from bounded fragments; full surrounding voice teardown and object destructor callbacks not executed.",
+    "Returned source descriptor ownership is explicit Rust value, not fully integrated native shared voice handle lifetime.",
+    "Finite guards reject nonfinite height/delta/used source positions; unqualified original nonfinite behavior remains outside contract.",
+    "No new client build, audible capture or human fidelity acceptance. Previous client13 checks remain historical."
+  ]
+}

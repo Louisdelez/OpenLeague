@@ -1,0 +1,88 @@
+{
+  "updated_utc": "2026-10-04T01:47:29.875827+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_voice_factory.py": "21fa24c22418730f4b1260b13cd90dc326463b05a6eb4b5ce64f615718cd2c66",
+    "data/4.20/audio_voice_factory_contract.json": "65771576ca43bc0086c050ece1b42e83d2cac7313f267c37c5a985adb2a690e1",
+    "crates/core/src/audio_voice_factory.rs": "fd8e776d5d32edd09474a4242bb7f109f076dc39674155a1f97a9e87b65f86cf",
+    "logs/native-audio-voice-factory-core-tests.log": "c389b93268c12ce342dba3df4a0bfd32938a58d97741f2f8a0a9779d18d73dae",
+    "crates/core/src/lib.rs": "d03e4d71907af395cbefbdfbe4e435a9ecddca3a4c44a9b2faca9d872f1756fb",
+    "tools/qualify_native_audio_voice_constructor.py": "33ce04c2c6b332095bd1c6ae048f9cbe03a788abae140d97e022ca7c63f6959d",
+    "data/4.20/audio_voice_constructor_contract.json": "125e4e385f7860f7224e12ae1f20e498dfa693fa1460cb00a92e382d8513ff5e",
+    "crates/core/src/audio_voice_constructor.rs": "48fa5eb5acce141b467201d52056e45dd1556c7e66bfcd55700b976c8121a453",
+    "crates/core/src/audio_object_association.rs": "25a3632f4459ac7e371e661d8abfbebb174cab9151791dfcce1eceb2755e8f7d",
+    "logs/native-audio-object-association-core-tests.log": "a129f45393e09ce8192cab3557014cfcc203a302ebbfc47d96f1a1dba3002055",
+    "crates/core/src/audio_managed_voice.rs": "f66d7bc8fe2a3072ea04a844f4d284537ff634056044928918f6231b03407772",
+    "logs/native-audio-managed-voice-core-tests.log": "5b5bd93f524a630838b81852f830c0968d90b6e1ba0c75cc3b99e489ef610c54"
+  },
+  "native_cases": 256,
+  "core_tests_passed": 250,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "control_flow_ported": true,
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false,
+  "limits": [
+    "Original705A10 factory,706C70 constructor and shared helpers5D1FA0/5CC070/5C1DF0/5BD3C0 executed. Engine launch7067B0, stop resolution704A80, allocators, string operations, clock inputs and actual object association7074E0/weak append707F20/copy5BDE40 executed; remaining backend calls explicitly adapted.",
+    "Object association consumes a shared copy and stores weak ownership. Final strong count1 belongs to output only; weak count2 includes association plus implicit live control reference when voice exists. Supersedes earlier adapter strong-retention assumption.",
+    "Native allocates a control block even for null voice; failed control allocation can return non-null raw voice without shared control. Neither condition is silently normalized to successful managed playback.",
+    "Clock-ready normal path only in factory; missing/not-ready constructor branches separately qualified. No actual audio playback or shared final destructors executed.",
+    "Actual queue/mixer playback remains incomplete; standalone binaries unchanged."
+  ],
+  "ported": [
+    "705A10 engine availability and launch/object prerequisites",
+    "native event hash, stop lookup,76-byte voice allocation and16-byte control allocation ordering",
+    "association after managed-null or unmanaged voice allocation outcomes",
+    "Actual weak association, output-only strong owner, expiration without resurrection; native association/shared helpers executed"
+  ],
+  "extra_evidence_inputs": [
+    "tools/qualify_native_audio_voice_constructor.py",
+    "data/4.20/audio_voice_constructor_contract.json",
+    "crates/core/src/audio_voice_constructor.rs"
+  ],
+  "history": [
+    {
+      "updated_utc": "2026-10-04T01:27:14.772146+00:00",
+      "files_sha256": {
+        "tools/qualify_native_audio_voice_factory.py": "21fa24c22418730f4b1260b13cd90dc326463b05a6eb4b5ce64f615718cd2c66",
+        "data/4.20/audio_voice_factory_contract.json": "65771576ca43bc0086c050ece1b42e83d2cac7313f267c37c5a985adb2a690e1",
+        "crates/core/src/audio_voice_factory.rs": "084b498fd224da08324c31918356146077873bb59704d696687d76cf99fe4aa9",
+        "logs/native-audio-voice-factory-core-tests.log": "c389b93268c12ce342dba3df4a0bfd32938a58d97741f2f8a0a9779d18d73dae",
+        "crates/core/src/lib.rs": "040ef49163156e46acd49de1674aefccce6a5f0d820ccb39933ad37a5ff2a3b1",
+        "tools/qualify_native_audio_voice_constructor.py": "33ce04c2c6b332095bd1c6ae048f9cbe03a788abae140d97e022ca7c63f6959d",
+        "data/4.20/audio_voice_constructor_contract.json": "125e4e385f7860f7224e12ae1f20e498dfa693fa1460cb00a92e382d8513ff5e",
+        "crates/core/src/audio_voice_constructor.rs": "48fa5eb5acce141b467201d52056e45dd1556c7e66bfcd55700b976c8121a453",
+        "crates/core/src/audio_object_association.rs": "25a3632f4459ac7e371e661d8abfbebb174cab9151791dfcce1eceb2755e8f7d",
+        "logs/native-audio-object-association-core-tests.log": "a129f45393e09ce8192cab3557014cfcc203a302ebbfc47d96f1a1dba3002055"
+      },
+      "native_cases": 256,
+      "core_tests_passed": 241,
+      "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+      "control_flow_ported": true,
+      "client_consumer_integrated": false,
+      "audible_playback_verified": false,
+      "complete": false,
+      "limits": [
+        "Original705A10 factory,706C70 constructor and shared helpers5D1FA0/5CC070/5C1DF0/5BD3C0 executed. Engine launch7067B0, stop resolution704A80, allocators, string operations, clock inputs and object association virtual18 explicitly adapted.",
+        "Object association consumes a shared copy retained by the adapter; final strong count2 represents output plus supplied association owner. Actual object association side effects remain unqualified.",
+        "Native allocates a control block even for null voice; failed control allocation can return non-null raw voice without shared control. Neither condition is silently normalized to successful managed playback.",
+        "Clock-ready normal path only in factory; missing/not-ready constructor branches separately qualified. No actual audio playback or shared final destructors executed.",
+        "Rust port uses caller-supplied actual backend results; tests use explicit adapters. Full audio integration remains unfinished; standalone binaries unchanged."
+      ],
+      "ported": [
+        "705A10 engine availability and launch/object prerequisites",
+        "native event hash, stop lookup,76-byte voice allocation and16-byte control allocation ordering",
+        "association after managed-null or unmanaged voice allocation outcomes",
+        "Actual weak association, output-only strong owner, expiration without resurrection; native association/shared helpers executed"
+      ],
+      "extra_evidence_inputs": [
+        "tools/qualify_native_audio_voice_constructor.py",
+        "data/4.20/audio_voice_constructor_contract.json",
+        "crates/core/src/audio_voice_constructor.rs"
+      ],
+      "superseded_reason": "Association adapter previously retained a strong reference. Actual7074E0 stores weak ownership; corrected current qualification supersedes this assumption."
+    }
+  ],
+  "current_validation_log": "logs/native-audio-managed-voice-core-tests.log",
+  "automatic_managed_finalization_integrated": true,
+  "mutable_shared_voice_evidence": "docs/map_ambient_audio_managed_voice_progress.json"
+}

@@ -1,0 +1,62 @@
+{
+  "complete": false,
+  "timestamp": "2026-10-08T07:08:44.615441+00:00",
+  "implementation": [
+    "End retains last owner pose and updates parent in creation order alongside active parents.",
+    "Normal game phase ordering delays stop until the particle pass after wrapper retirement.",
+    "93FA10 StopState preserves birth, applies config stop policy, and registers a nonzero checked u32 host identity.",
+    "Finished bit2 and stopped membership gate cleanup; 93E4C0 handle release helper queues logical releases once."
+  ],
+  "native_evidence": [
+    "Existing projectile removal audit normal game state2: particles58D12C precede registry drain58D1AB.",
+    "Existing wrapper stop dispatch120 profiles, emitter stop216 cases, emitter drain128 cases."
+  ],
+  "source_sha256": {
+    "crates/client/src/map_audio_requests.rs": "802846bfc7d29152a25586fb34840b7cee1d8b2c3cb9aceb8181d730fcd764ad",
+    "crates/core/src/audio_emitter_stop.rs": "3ab2967407e5349c669414f8859a754193d3e45efaa02b0cb0501f7ff90db243",
+    "crates/core/src/audio_emitter_drain.rs": "f239a58d2c21a8da7fd50e153d5392cc9af5200879413fc635bfdee2c00df4a0",
+    "docs/projectile_removal_order_audit.json": "7ce3cdfdc6adee888491cc2be2514a795491838485a0765c1361ae263741477a",
+    "data/4.20/projectile_stop_dispatch_contract.json": "3b06437788a2a544972fd4e259884e4be1335db1794449c57ccd3c041b3cf9be",
+    "data/4.20/audio_emitter_stop_contract.json": "d93acc50c04d20cb5c0377c53130d579165a228a38d33c557b51dc855782b82b",
+    "data/4.20/audio_emitter_drain_contract.json": "6df9071030b81e9292e9aa94ceb976ab0113dda603560cade30b1fcdd12f52ce"
+  },
+  "validation": "Tests PASS12; build PASS60329; runtime gate FAILED79998 on two uninitialized ended owners. Partial cleanup improvement measured, not full lifecycle acceptance.",
+  "limits": [
+    "Never-initialized same-frame Start/End host entries retained explicitly; native creation ordering not yet integrated.",
+    "Logical worker queues remain unconsumed; physical voices, mixing, admission and seek not integrated.",
+    "Owner loss and spontaneous resource finish wrapper scheduling still require integration.",
+    "No full match, audio acceptance or endurance claim."
+  ],
+  "tests": {
+    "passed": 12,
+    "failed": 0,
+    "session": 80921,
+    "log": "logs/ambient-retirement-tests.log"
+  },
+  "build": {
+    "session": 60329,
+    "exit_code": 0,
+    "sha256": "2919de764324719563fa0625c4124a2892b965607b338a65b8ac8b5eb90a93f5",
+    "log": "logs/ambient-retirement-build.log"
+  },
+  "runtime": {
+    "session": 79998,
+    "passed": false,
+    "report": "docs/ambient_retirement_runtime_first_failure.json",
+    "metrics": {
+      "samples": 140,
+      "cleaned": 221,
+      "max_ended": 12,
+      "last_ended": 2,
+      "last_uninitialized": 2,
+      "unresolved_samples": 0,
+      "rejected_samples": 0
+    },
+    "owned_processes_stopped": true
+  },
+  "next_creation_evidence": [
+    "map_audio::ambient_cues removes positions on End before map_audio_requests::update. A same-frame Start/End loses the position record before lazy parent initialization.",
+    "Native5B54C0 start callback reads owner XYZ at5B551F..5530, attempts bone lookup5B55A8..55C3, passes initial XYZ to factory7172B0 at5B56AA, applies start flags6C96F0 at5B56C1 and attaches ordinary animation owner719C10 via6C9BD0 at5B5805.",
+    "Existing audio_emitter_creation_contract has factory-adapted initialization; full same-frame start/end lifecycle still needs qualification. Preserve source cue attachment and qualify initialization ordering rather than discard pending entries."
+  ]
+}

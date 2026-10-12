@@ -1,0 +1,2 @@
+from pathlib import Path
+r=Path('E:/OpenLeague');p=r/'crates/client/src/actor_fow.rs';s=p.read_text(encoding='utf-8');needle=' let report=serde_json::json!({"native_alpha_meshes":native_alpha_meshes';assert needle in s;s=s.replace(needle,' let native_draw_meshes=query.iter().filter(|(h,_)|materials.get(&h.0).is_some_and(|m|m.extension.native_draw_mode!=0)).count();\n let report=serde_json::json!({"native_draw_meshes":native_draw_meshes,"native_alpha_meshes":native_alpha_meshes');p.write_text(s,encoding='utf-8')

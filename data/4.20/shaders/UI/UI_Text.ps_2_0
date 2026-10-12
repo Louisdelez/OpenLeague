@@ -1,0 +1,19 @@
+sampler sampler0: register(s0);
+
+float4 main(float4 col0 : COLOR0, 
+			float2 tex0 : TEXCOORD0) : COLOR
+{
+	float4 tex = tex2D(sampler0, tex0);
+		
+	float3 fillCol = col0.rgb;
+	float fillAlpha = col0.a*tex.r;
+	
+	float3 outlineCol = float3(0,0,0);
+	float outlineAlpha = tex.g;
+	
+	float3 col = fillCol * fillAlpha + outlineCol * outlineAlpha;
+	float alpha = fillAlpha+outlineAlpha;
+
+	return float4(col,alpha);
+}
+

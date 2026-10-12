@@ -1,0 +1,21 @@
+from pathlib import Path
+import json,datetime,hashlib,shutil
+r=Path('E:/OpenLeague');now=datetime.datetime.now(datetime.timezone.utc).isoformat()
+load=lambda p:json.loads((r/p).read_text(encoding='utf-8'))
+save=lambda p,d:(r/p).write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+sha=lambda p:hashlib.sha256((r/p).read_bytes()).hexdigest()
+assert '90 passed; 0 failed' in (r/'logs/fow-occluded-tests.log').read_text(encoding='utf-8-sig')
+assert 'Finished `dev`' in (r/'logs/fow-occluded-build.log').read_text(encoding='utf-8-sig')
+proof=load('data/4.20/fow_occluded_circle_contract.json');assert len(proof['cases'])==32
+files=['data/4.20/fow_occluded_circle_contract.json','data/4.20/fow_radial_fan_contract.json','crates/client/src/fow_radial_fan.rs','crates/client/src/fow_occluded.rs','crates/client/src/fow_terrain_ray.rs','tools/probe_fow_occluded_circle.py','logs/fow-occluded-tests.log','logs/fow-occluded-build.log','target/debug/openleague-client.exe']
+receipt={'updated_utc':now,'complete':False,'client_tests_passed':90,'client_build_passed':True,'native_complete_occluded_masks':32,'native_complete_instruction_addresses':proof['original_instruction_addresses'],'native_fan_cases':16,'live_fow_gpu_bound':False,'current_client_graphical_rerun':False,'findings':['Ported original ordered radial fan including duplicate rays, exact quarter-cell step and measured native radius multiplier.','Composed native fan/clipping/terrain traversal into occluded circular stencils; all32full original masks and rectangles match.','Composed stencils feed existing native counted-visibility update; selected counts and flipped texture bytes match original generator.'],'limits':proof['limits']+['Complete tests are8cell synthetic grids, unowned circles with scale1/bias0, source metric64 and zero terrain origins.','Source flag query8F3390 uses an explicit controlled boundary adapter; its actual provider is not qualified.','Actual128cell occluded composition, cone composition, nonzero terrain origins, Map10 packed terrain loader and live source lifecycle remain open.','Previous GPU fixture evidence is separate; current normal graphical client not rerun and live FOW not bound.','All24game domains remain unfinished.'],'next_actions':['Qualify actual Map10 terrain cell loader and source flag/metric/radius/extent providers.','Extend full original occluded comparisons to128cells and cone sources before binding actual source lifecycle.','Integrate counted visibility, native upload/timing and quantized GPU stages in ordinary rendering; verify current gameplay captures.'],'files_sha256':{p:sha(p) for p in files}}
+save('docs/projected_fow_occluded_progress.json',receipt)
+b=r/'docs/plan_history'/datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ');b.mkdir(parents=True,exist_ok=True)
+for name in ['coverage.json','completion_plan.json','resume_checkpoint.json']:
+ p='docs/'+name;shutil.copy2(r/p,b/name);d=load(p);d['updated_utc']=now;d['complete']=False;d['projected_fow_occluded_progress']=receipt
+ if name=='resume_checkpoint.json':d['saved_utc']=now;d['last_verified']['client_tests']=90;d['next_projected_action']=' '.join(receipt['next_actions'])
+ else:d['current_evidence'].update(client_tests_passed=90,current_build_receipt='docs/projected_fow_occluded_progress.json',current_client_sha256=sha('target/debug/openleague-client.exe'),projected_current_binary_vulkan_verified=False)
+ save(p,d)
+p=r/'docs/completion_plan.html';s=p.read_text(encoding='utf-8');s=s.replace('</body>','<section><h2>Brouillard — générateur composé avec obstacles</h2><p>90 tests client et compilation réussis.32masques complets du générateur original comparés à l’assemblage Rust, compteurs et pixels compris. Les tests utilisent une grille contrôlée et une valeur de source fournie explicitement ; Map10 et le rendu réel restent à intégrer.</p><a href="projected_fow_occluded_progress.json">Preuves et limites</a></section></body>');p.write_text(s,encoding='utf-8')
+shutil.copy2(Path('E:/mapslol3v3/record_fow_occluded.py'),r/'tools/record_fow_occluded.py')
+print(json.dumps({'client_tests':90,'complete_mask_cases':32,'native_addresses':proof['original_instruction_addresses'],'live_fow_bound':False,'complete':False}))

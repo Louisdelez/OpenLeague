@@ -1,0 +1,73 @@
+{
+  "updated_utc": "2026-10-04T09:05:33.208352+00:00",
+  "passed": true,
+  "complete": false,
+  "core_tests_passed": 368,
+  "client_tests_passed": 30,
+  "unit_checks": 7,
+  "client_category_checks": 1,
+  "network_economy_checks": 8,
+  "active_items": 30,
+  "native_item_catalog_checked": 849,
+  "executables": [
+    {
+      "path": "target/debug/openleague-server.exe",
+      "bytes": 4415488,
+      "sha256": "42109285349cdde7f91f306d61e3b993c299c63b6908151217a400618921ffa3"
+    },
+    {
+      "path": "target/debug/openleague-client.exe",
+      "bytes": 118103040,
+      "sha256": "f8c3e8f7519d74cf9b20cd00ed7102374d04f001cdbf8587ef270f44318f3fbd"
+    },
+    {
+      "path": "launcher/src-tauri/target/debug/openleague-launcher.exe",
+      "bytes": 12411904,
+      "sha256": "ac22a8346c0b2af574bdee16311acc510e657c73ca5f85584223f0049c4f57de"
+    }
+  ],
+  "runtime": {
+    "checked_utc": "2026-10-04T09:03:27.894300+00:00",
+    "client": 12848,
+    "server": 15028,
+    "port": 5936,
+    "client_sha256": "f8c3e8f7519d74cf9b20cd00ed7102374d04f001cdbf8587ef270f44318f3fbd",
+    "server_sha256": "42109285349cdde7f91f306d61e3b993c299c63b6908151217a400618921ffa3",
+    "diagnostic": true,
+    "complete": false,
+    "shop_query": "brutal",
+    "shop_preview_item": 3134
+  },
+  "files_sha256": {
+    "crates/core/src/penetration.rs": "7a4e2b53c0f8bbcdd0c0047a880e393d2dfcfaa6e6496ddff6bc83acdc87fd41",
+    "crates/core/src/shop.rs": "ff91bc3deb0751e1edfd0cb5644698e2ba319d18ac63ed8609da35215b109062",
+    "crates/core/src/progression.rs": "5fddb9706ebcde5133ffb72ac78f4cf8b26d4085da3d26d8a1c20370cb3e0964",
+    "crates/core/src/damage.rs": "d2cb9558808b8477c2b1be2aca102f23a1dba1452334df35b6d36c0c00f78329",
+    "crates/core/src/world.rs": "5e34cd749419e310f7757a64bf97eb71cb9f1ef5ad5a839fdcbddd17de5888c3",
+    "crates/core/src/spells.rs": "88e4788b466fe111ddf7af410e2873ca9dc11eb38d26817af75ee392370a8ed2",
+    "crates/core/src/lib.rs": "b229d4d9a916f5e7c5d54006e4a64e5d214ef3eaa3c672a5e80701ff10998503",
+    "crates/client/src/shop_ui.rs": "b0f338bbc087cb219c5113bb362ab07e1a961c2e380c377a21052e3034d6bf67",
+    "data/4.20/shop_foundation.json": "e9d650db86cfb7e6752a1a947838058c6a067cbaa2fec936dc41ccccaf7c8efc",
+    "docs/penetration_item_sources.json": "3751bd1990f3658495079954f2d7ea01dc015ca4ca76a24fa4da1bd467483986",
+    "docs/penetration_network_validation.json": "045d761a2b65a9dfc7f7df424643efb36a85a1dc57fd24166b0c990318a554e4",
+    "tools/recover_penetration_items.py": "827718cf83ddc39a9388419b28c598c668a71e5eebab2355ca0c12b0117eb228",
+    "tools/integrate_penetration_items.py": "d8510cc0021081275daa0bbc93ac6ec39457dfe492a02c0116705b6e4ead6548",
+    "tools/verify_penetration_network.py": "3833cfce93b15b755a3dd389057eb1514bf717f7b1effec9e2cbef33c2a73f60",
+    "tools/verify_native_items.py": "d03671e57d8483b9a7c40434d5e0960c6d98b071bb548466c5965ad0b5acdcc2",
+    "logs/penetration-tests.log": "08a957827cd295feb5ea067ee266d652ce4cd7699193be39b5740f0a4d802056",
+    "logs/penetration-build.log": "d5cf317e1ae6b7ed45890d7dda1c05db12e62825b5d6ce41af8a0611d56cb083",
+    "logs/penetration-map10.png": "7902e7de401814f7d2062f46352f067e6ae05f11db0defbdf9eae3f9ed74c46c"
+  },
+  "sources": "docs/penetration_item_sources.json",
+  "network": "docs/penetration_network_validation.json",
+  "limits": [
+    "Native tooltip and official4.20.1effect values corroborate percentage-before-flat order. Native item server code missing.",
+    "Nonpositive resistance unaffected by penetration, zero floor, per-item uniqueness and percentage composition reconstructed; debuff/pet/champion/mastery/rune penetration policies remain incomplete.",
+    "SorcererShoes assigned existingBootsNormal group to enforce single boots/allow upgrade; native3020 lacks this field, reconstructed group behavior. Official4.20.1per-map availability flags absent.",
+    "All30activeitem sale values now explicit official4.20.1integers; previous fractionalrefund policy replaced. Full inventory/items/map-specific restrictions/UI/particles/audio remain incomplete.",
+    "Core sevenchecks validate numericorder/zero/negative/invalid/type/sourceownership/targetstats/truebypass/duplicateuniqueness/worlddamageonce/bootupgrade/salerefunds/GarenRpenetration-and-killercredit.",
+    "ActualUDP eightchecks validate initial825/Bootspurchase325/Sorcupgradeinsufficient/Bootsrefund227/twoLongswords720/Brutupgradeinsufficientatomic/twoLongrefunds252/Tomerefund305. Networkdamage withnewitems not exercised; coredatafixtures not gameplayacceptance.",
+    "Nativeaudit849files/30activeitems numeric/localization/sale agreement verified. Fresh1280x800Vulkan framebuffer visually inspected. All24-domain game still incomplete."
+  ],
+  "live_receipt": "docs/penetration_live_validation.json"
+}

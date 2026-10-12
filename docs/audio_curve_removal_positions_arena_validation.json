@@ -1,0 +1,34 @@
+{
+  "saved_utc": "2026-10-09T17:20:23.445589+00:00",
+  "passed": true,
+  "complete": false,
+  "audio_tests_passed": 502,
+  "native_curve_removal_positions_arena_cases_rust_validated": 256,
+  "native_curve_removal_allocator_effects_cases_prepared": 64,
+  "native_curve_removal_allocator_effects_cases_rust_validated": 0,
+  "test_log": "logs/audio-curve-removal-positions-arena-tests.log",
+  "test_executable": "target\\debug\\deps\\openleague_core-92fab3f20accd79c.exe",
+  "test_executable_sha256": "f370b1d28535b12197c441f38edb6e05435ccb8960cfc0e0ec50fddac03352e5",
+  "previous_receipt": "docs/audio_curve_subscription_cleanup_removal_validation.json",
+  "evidence": [
+    "B11F20/B131D0/B12870 Rust composition matches256 original terminal cases at head/interior/tail and missing-key positions, NULL and duplicate recipients, heap or original24byte arena ownership, points retirement, pending same-target unlink and delayed allocation failure. Every allocator/free/unlink entry bank, final bank, allocated sizes/references and retired identities agree.",
+    "Arena members are retained during individual free traversal; original arena is freed once. Multi-curve links/head/tail/count/free-node publication and no-op missing-key behavior match. Existing post-unlink traversal semantics preserved. No production change was needed beyond preceding501-test implementation.",
+    "Full502-test audio suite passes, preserving prior cleanup/removal/admission/RTPC regressions. This does not establish normal game audio integration.",
+    "64 additional original-body cases captured with explicitly supplied allocator/free memory effects: modified pending free head or tail at allocation, scribble released point bytes, successes/failures. These are controlled service contracts, not recovered real allocator behavior; Rust replay pending."
+  ],
+  "limits": [
+    "Supplied valid curve lists with other curves lacking bound subscribers. Cross-curve matching recipients, integer range overflow/malformed/cyclic memory and allocation side effects require separate evidence.",
+    "Fresh CRT/thread setup and global/game providers, normal-frame dispatch/progression/retirement, physical playback and complete24-domain game remain open."
+  ],
+  "next_action": "Replay64 original B11F20 removal cases with explicit allocator/free memory effects. Qualify cross-curve recipient order and compose resource admission failures as needed, then advance fresh CRT/thread context and actual global startup/game providers, normal-frame dispatch/retirement and physical audio. Preserve full24-domain114-task37-requirement scope.",
+  "files_sha256": {
+    "logs/audio-curve-removal-positions-arena-tests.log": "8056d41472695d5f0490eb7aaf50506db1f1688e3cb427cdfb0a433a0cfa254b",
+    "crates/core/src/audio_resource_curve_admission.rs": "27fce9e6134bf9330c5018d5b512950f76771a126a7639c052b352fcb0720e67",
+    "data/4.20/audio_curve_removal_positions_arena_preparation.json": "725468d8128eb828e6c70c3f24b545a2134a432365074726109ae0aaa8aaa5ad",
+    "tools/probe_native_audio_curve_removal_positions_arena.py": "50f365a2efd7a2022883bdad063c655ad58ce7b3e0f39db2b2f4939ece6c26e7",
+    "tools/qualify_audio_curve_removal_positions_arena.py": "d3613c3947afe3216713183dab2d50fd77b1456ea5cb4c1dd502b101e1dd05d3",
+    "data/4.20/audio_curve_removal_allocator_effects_preparation.json": "7372801ea0b130d9adfd3c9a2f4a326e9bc464662bc14757788383f07e61f680",
+    "tools/probe_native_audio_curve_removal_allocator_effects.py": "d0369a563cbcec8dc31663b490c44936f27d0b2ff2c81b039c6fc53146d85b20",
+    "tools/record_audio_curve_removal_positions_arena_progress.py": "5191ba3281a1bbbe61f00a4577f81ddeba70aebb26a33a5a17b3ba17eec5f0d2"
+  }
+}

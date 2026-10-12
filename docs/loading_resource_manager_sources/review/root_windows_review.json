@@ -1,0 +1,111 @@
+{
+  "schema": 1,
+  "reviewed_at_utc": "2026-10-10T20:45:08.283401+00:00",
+  "scope": "Read-only review of root Windows resource-manager adapter, four prepared tests and transport shutdown insertion. No additional investigation beyond requested versions.",
+  "reviewer": "receive_adapter_review",
+  "files": [
+    {
+      "path": "E:\\mapslol3v3\\loading_resource_manager_integration\\windows\\audio_replay_windows_resource_manager.rs",
+      "bytes": 5329,
+      "sha256": "65cbaa5faef5acedd7613c2396074d212369ed31698914856bb811434cfe4acc"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_resource_manager_integration\\windows\\audio_replay_windows_resource_manager_tests.rs",
+      "bytes": 5466,
+      "sha256": "7c5f750ae83a32f9a3d3fa747357744e9f45990969ae21611ad140b278cc39c1"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_resource_manager_integration\\production\\crates\\core\\src\\audio_replay_windows_transport.rs",
+      "bytes": 41234,
+      "sha256": "7f7e0376b69f5e8520d58430790f464464b2c883f3deb6eab7ac5ae09cc3da6f"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_resource_manager_integration\\manager\\audio_loading_resource_manager.rs",
+      "bytes": 13856,
+      "sha256": "f675e96033a1245f83bba5958857c7d8dcb099012a9c493a962dfebe43a45591"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_events.rs",
+      "bytes": 18204,
+      "sha256": "0c9da334b3080af20c955ee957255b1e8e1b4ade0fc3f06f2e12b8a0de00ae69"
+    }
+  ],
+  "staged_mirrors": [],
+  "open_concrete_defects": [],
+  "resolved_finding": {
+    "topic": "active worker gate before resource-manager retirement",
+    "adapter_lines": [
+      84,
+      91
+    ],
+    "transport_lines": [
+      329,
+      341
+    ],
+    "resolution": "Adapter rejects active!=0 before taking the state lock or mutating readiness; transport calls it after the active check and configuration retirement.",
+    "test_lines": [
+      58,
+      69
+    ],
+    "test_limit": "The test injects active status; it does not claim an actual surviving-worker race was exercised."
+  },
+  "static_observations": [
+    {
+      "lines": [
+        33,
+        38,
+        55,
+        68
+      ],
+      "file": "audio_replay_windows_resource_manager.rs",
+      "observation": "Initialization holds launch then resource state; nested backend operations take short bank locks. No reverse resource->launch path or callback into this state mutex was identified in reviewed paths."
+    },
+    {
+      "lines": [
+        15,
+        19,
+        55,
+        73,
+        88,
+        97
+      ],
+      "file": "audio_replay_windows_resource_manager.rs",
+      "observation": "Record and Arc keepalive are installed before source initialization; errors retain native allocation inventory and last_error; state is removed only after successful retire_empty."
+    },
+    {
+      "lines": [
+        60,
+        65
+      ],
+      "file": "audio_replay_windows_resource_manager.rs",
+      "observation": "Borrowed scratch4 is confined to produce. Generic Record tracks every successful allocation before fallible publication and its retirement does not retain scratch4."
+    },
+    {
+      "lines": [
+        30,
+        31,
+        79,
+        81
+      ],
+      "file": "audio_replay_windows_resource_manager.rs",
+      "observation": "Comments and snapshot retain explicit false claims for complete original startup and real provider connectivity."
+    },
+    {
+      "lines": [
+        73,
+        98
+      ],
+      "file": "audio_replay_windows_resource_manager_tests.rs",
+      "observation": "Prepared test withholds only final allocation ownership token, expects prior thirteen frees once, bank/global lifetime retained, then restores token and retries. It does not simulate physical free success reported as failure."
+    }
+  ],
+  "compiler_executed": false,
+  "client_executed": false,
+  "tests_executed_by_reviewer": false,
+  "production_modified": false,
+  "verification_limits": [
+    "Static bounded review only; test outcomes await root qualification.",
+    "Mutex poisoning, panic/abort and side-effecting custom deallocator contracts are not dynamically exercised.",
+    "No populated-provider lifetime, full normal startup or nonempty UI proof."
+  ]
+}

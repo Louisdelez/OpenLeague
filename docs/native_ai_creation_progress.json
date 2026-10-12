@@ -1,0 +1,38 @@
+{
+  "updated_utc": "2026-10-04T22:33:21.537692+00:00",
+  "complete": false,
+  "client_tests_passed": 114,
+  "client_build_passed": true,
+  "native_creations_and_removals": 36,
+  "native_addresses": 908,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Original649040 source creation entry-to-return executes identity getters601110/617340, shared secondary pose getters600F60/5FFFD0, circular factory6B1B20 and non-null weak-provider constructor5ED740/6B0790.36cases with two tags/poses, three radii and three flat values.617AB0 pre-initialization boundary explicitly skipped.",
+    "First source identity comes from actor+FC via interface128. Second identity comes from descriptor(actor+17C)+34 via interface3D8. Source output reference stored atactor2294/2298. Weak provider comes from actorF4/F8 and is retained once.",
+    "Initial radius follows characterRadius*(flat+1)+flat usingactor778 twice; actor77C is ignored on this creation path. Rust AiInputs/CircleFactory.create_ai_source preserves the native arithmetic, secondary center, owner handle/tag, metrics, dirty state and known raw flags/stamp. Uninitialized native byte67 is not fabricated.",
+    "Original manager removal/source destruction/final weak release execute for36cases and return retained provider weak count to baseline. Rust provider weak reference drops on source retirement. Full114client tests passed; targeted creation/release comparison rerun passed after extending the native contract."
+  ],
+  "limits": [
+    "Whole649040entry/return executes original identity getters, secondary position provider, circle factory, non-null weak provider constructor and weak output assignment.617AB0 pre-initialization boundary skipped; original actor/provider/CharacterData constructors not executed.",
+    "Allocator/free boundaries adapted; source manager capacity, actor/descriptor/character fields and retained provider controls supplied.",
+    "Original source stamp uses14CD324 and native flags64/65 differ from base constructor; semantic roles and ordinary lifecycle not yet qualified. No gameplay/GPU activation.",
+    "Retained provider strong count avoids provider object final destruction. Actor initialization617AB0, actor/provider constructors, field producers and complete view registration remain unqualified.",
+    "Rust source creation port is qualified against native cases; actual source roles, filtering eligibility and ordinary entity creation are not yet hooked to live gameplay.",
+    "Current client rebuilt but not graphically checked. Earlier427core tests/10UDPchecks remain unchanged-core/server historical evidence; all24domains unfinished."
+  ],
+  "next_actions": [
+    "Qualify actor pre-initialization617AB0 and source roles/eligibility, reconcile separate base590/AI2294/auxiliary229C source paths with native lifecycle.",
+    "Qualify actual registry lookup and filtering within complete frames, view registration and camera/world extent initialization.",
+    "Connect qualified sources to ordinary entities and authoritative filtering, bind GPU fog processing and verify current gameplay."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_ai_creation_contract.json": "41a3005ca3f74c377bb6505837e28780cbc1d5c863619ebfe0282ded2b904138",
+    "tools/probe_fow_ai_creation.py": "a461cfd84ca3a6183eb39167a2c9d3e01770b302c63ae40982db6eb803bd6272",
+    "crates/client/src/fow_source_factory.rs": "1c24127e423134331f265a18f3a31cca3e9ba924c3530c758f9602abcf3fdcca",
+    "logs/native-ai-source-creation-tests.log": "a991f0feb3d19b96cf80a313463237d9887723c22f6b7f4cc9aea2fca439ac0e",
+    "logs/native-ai-provider-release-tests.log": "a6973811dd69b5c75bc02f3e039fb97063718cfab0038f5a8632a551316ba071",
+    "logs/native-ai-source-creation-build.log": "1a246be8786cf2686926a86aa84a1d0b6cf0ade67dbf7b4f203b20f3df196418",
+    "target/debug/openleague-client.exe": "8412f1495dbbe2a38309bdb687bd60bc8b78fd638e376f1738bce620115767fe"
+  }
+}

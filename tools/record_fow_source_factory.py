@@ -1,0 +1,26 @@
+from pathlib import Path
+import json,datetime,hashlib,shutil
+r=Path('E:/OpenLeague');now=datetime.datetime.now(datetime.timezone.utc).isoformat()
+load=lambda p:json.loads((r/p).read_text(encoding='utf-8-sig'))
+save=lambda p,d:(r/p).write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+sha=lambda p:hashlib.sha256((r/p).read_bytes()).hexdigest()
+assert '105 passed; 0 failed' in (r/'logs/native-source-factory-tests.log').read_text(encoding='utf-8-sig')
+assert 'Finished `dev`' in (r/'logs/native-source-factory-build.log').read_text(encoding='utf-8-sig')
+constructor=load('data/4.20/fow_source_constructor_contract.json');factory=load('data/4.20/fow_circle_factory_contract.json')
+assert constructor['passed'] and len(constructor['cases'])==24 and factory['passed'] and len(factory['cases'])==24
+files=['data/4.20/fow_source_constructor_contract.json','data/4.20/fow_circle_factory_contract.json','data/4.20/fow_map10_owned_contract.json','tools/probe_fow_source_constructor.py','tools/probe_fow_circle_factory.py','crates/client/src/fow_source_factory.rs','crates/client/src/main.rs','logs/native-source-factory-tests.log','logs/native-source-factory-build.log','target/debug/openleague-client.exe']
+receipt=dict(updated_utc=now,complete=False,client_tests_passed=105,client_build_passed=True,native_base_constructor_cases=24,native_circle_factory_cases=24,created_source_map10_masks=24,live_fow_gpu_bound=False,current_client_graphical_rerun=False,
+ findings=['Ported qualified base source radius, center, metrics, lifetime, opaque identity inputs, owner tag/handle, empty region, pending flag and generation invalidation;24original constructor cases match recorded fields.','Executed complete original circular factory6B1B20/base constructor6B0790/shared control/vector append in24cases, adapting only allocation and optional cookie boundaries with supplied vector capacity. Manager retains one strong reference and returned handle is weak.','Rust CircleFactory retains Arc/Mutex sources and returns Weak handles. Count comparison explicitly includes native implicit weak reference; factory and initial source state match24native cases.','Created sources feed owner resolution, terrain-aware stencil generation and CountedLayer.24previously qualified Map10 masks compare word/rectangle results and verify applied counts/pixels then full removal.'],
+ limits=constructor['limits']+factory['limits']+['Only qualified runtime constructor fields are ported. Unused native stamp/flags, opaque identifiers and actual actor/team field producers remain unqualified. Non-null weak-provider constructor branch and cone factory remain open.','CircleSource region state and CountedLayer contributions are not yet unified under ordinary source scheduling; no real gameplay creation/activation/removal queue, final destructor or GPU integration claimed.','105client tests and build are current;427core tests and10UDPchecks remain prior unchanged-core/server evidence. Current graphical gameplay remains unverified.','All24domains remain unfinished.'],
+ next_actions=['Qualify original removal6B1F90 from a genuinely created circular source, its callback queue and source/control destructors; verify visibility rollback before final release.','Qualify source weak-provider/cone factory branches, native actor/team/opaque identity producers and count scheduling; unify source cache/applied state with CountedLayer.','Connect actual sources to authoritative filtering and ordinary GPU fog, qualifying world extent/terrain initialization and then checking real gameplay.'],files_sha256={p:sha(p) for p in files})
+save('docs/native_source_factory_progress.json',receipt)
+b=r/'docs/plan_history'/datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ');b.mkdir(parents=True,exist_ok=True)
+for name in ['coverage.json','completion_plan.json','resume_checkpoint.json']:
+ p='docs/'+name;shutil.copy2(r/p,b/name);d=load(p);d['updated_utc']=now;d['complete']=False;d['native_source_factory_progress']=receipt
+ if name=='resume_checkpoint.json':d['saved_utc']=now;d['last_verified']['client_tests']=105;d['next_projected_action']=' '.join(receipt['next_actions'])
+ else:d['current_evidence'].update(client_tests_passed=105,current_build_receipt='docs/native_source_factory_progress.json',current_client_sha256=sha('target/debug/openleague-client.exe'),projected_current_binary_vulkan_verified=False)
+ if name=='completion_plan.json':d['next_execution_steps']=receipt['next_actions']
+ save(p,d)
+p=r/'docs/completion_plan.html';s=p.read_text(encoding='utf-8');s=s.replace('</body>','<section><h2>Vision — création circulaire</h2><p>105 tests client et compilation réussis.24constructeurs natifs,24créations circulaires avec allocations adaptées et24masques Map10 de sources Rust créées comparés. Activation de partie, sélection par équipe, cache des régions, suppression complète et rendu ordinaire restent ouverts.</p><a href="native_source_factory_progress.json">Preuves et limites</a></section></body>');p.write_text(s,encoding='utf-8')
+shutil.copy2(Path('E:/mapslol3v3/record_fow_source_factory.py'),r/'tools/record_fow_source_factory.py')
+print(json.dumps(dict(client_tests=105,constructor_cases=24,factory_cases=24,map10_masks=24,complete=False)))

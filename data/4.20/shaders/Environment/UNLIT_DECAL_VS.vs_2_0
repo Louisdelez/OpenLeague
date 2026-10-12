@@ -1,0 +1,59 @@
+#include "../FogOfWar/FogOfWar_VS.hls"
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// Constants
+///
+/////////////////////////////////////////////////////////////////////////////////////
+
+column_major float4x4 WORLD_VIEW_PROJECTION_MATRIX	: register(c0);
+column_major float4x4 WORLD_TO_DECAL_UV_MATRIX		: register(c233);
+
+float3	              PROJECTION_Y_RANGE            : register(c227);		// x == center, y == range, z == fading
+
+struct VERTEX
+{
+	float3 m_Position : X3D_VSIN_POSITION;
+};
+
+struct INTERPOLANTS
+{
+	float4 m_Position : POSITION;
+	float4 m_TexCoord0 : TEXCOORD0;
+	float2 m_TexCoord1 : TEXCOORD1;
+	float2 m_TexCoord2 : TEXCOORD2;
+};
+
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// Shader
+///
+/////////////////////////////////////////////////////////////////////////////////////
+void 
+	main
+	(
+		VERTEX vertex,
+		out INTERPOLANTS interpolants
+	)
+{
+	// Output homogeneous position
+	interpolants.m_Position = mul(float4(vertex.m_Position, 1.0f), WORLD_VIEW_PROJECTION_MATRIX ); 
+	
+	interpolants.m_TexCoord0 = mul(float4(vertex.m_Position, 1.0f), WORLD_TO_DECAL_UV_MATRIX ); 
+	interpolants.m_TexCoord0.z = 1.f - interpolants.m_TexCoord0.z;
+	
+	// Fog of war
+	interpolants.m_TexCoord2 =  FogOfWarTextureCoordinates( vertex.m_Position.xyz );
+	
+	// Projection Y Range cut
+	float yDifference = abs(vertex.m_Position.y - PROJECTION_Y_RANGE.x);
+	if (yDifference <= PROJECTION_Y_RANGE.y)
+	{
+		interpolants.m_TexCoord1.x = 1.0f;
+	}
+	else
+	{
+		interpolants.m_TexCoord1.x = 1.0f - (yDifference - PROJECTION_Y_RANGE.y) / PROJECTION_Y_RANGE.z;
+	}
+}

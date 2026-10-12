@@ -1,0 +1,43 @@
+{
+  "updated_utc": "2026-10-06T14:36:43.203464+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "vector_birth_cases": 136,
+  "vector_birth_steps": 1088,
+  "vector_update_cases": 56,
+  "rotation_bake_capture_cases": 36,
+  "rotation_bake_capture_vectors": 2484,
+  "rotation_bake_rust_ported": false,
+  "core_tests_passed": 448,
+  "last_client_tests_passed": 364,
+  "product_rust_sources_changed": true,
+  "ordinary_emitter_consumer_bound": false,
+  "ordinary_applications_rebuilt": false,
+  "artifacts_sha256": {
+    "data/4.20/vector_instance_consumer_contract.json": "c9be44c480d5203c5f3a449de237431b9f29e6f1b80e2d1f68f6c059a92d53a8",
+    "data/4.20/vector_rotation_bake_contract.json": "641b12a17c271dd2b56ba3b19311da3ff63ebbf35251e3ce8ae6626758a86292",
+    "tools/probe_native_vector_instance_consumer.py": "93c0cc5e6504ce703c0256a515183104b2e210043568b4a5f3dcbfe16020a2ca",
+    "tools/probe_native_vector_rotation_bake.py": "97521e67e53aa1d4151105eb37046acb6b217897a255acf7cfd11bc13babe48a",
+    "crates/core/src/native_vector_parameter.rs": "3587c9fafba4debaaaf895242c19e68b82a4691246fef6cdc96530e7d4baafca",
+    "crates/core/src/native_probability_curve.rs": "e6d275b5d10ee0253214c2a631c863567f4f061c456296fba1f6aa8e0b8dfd6e",
+    "crates/core/src/native_random.rs": "3937914287799461892e1afba53a5f9e49cdca4da2d7180a59a074cbe7bbba58",
+    "logs/native-vector-instance-core-tests.log": "73a2c379f5202c15f7ffadddc3f6ad2ef5166b74d7cfe9a540da7126583a53d2",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "3575c9db88083d63fb5bc2105fcb2dcfc6121ed5af280b810460b18771c2706a",
+    "target/debug/openleague-client.exe": "25be4121bb71f207d0905700fc2b88efcefe37fe635ccbf4c33e50226b7000aa"
+  },
+  "findings": [
+    "Original9492F0 consumes independent X/Y/Z probability fields in axis order, skipping RNG draws for null/constant axes. Rust matches1088birth outputs and all55words/indices after each step across17profiles, including actualMap10probabilities.",
+    "Original93C21F..93C2BA selects the baked vector by supplied normalized age and multiplies by stored birth factors. It consumes no new RNG draw. Rust matches56frame updates.",
+    "VectorParameter now exposes separate create_instance_multiplier and sample_instance_age operations so construction randomness is retained rather than rerolled each frame.",
+    "Original94D6B0 mode1 coefficient/table generation executed on36fixtures. It retains requested count for constant knots and accumulates values, unlike mode0. Output references captured; Rust implementation pending."
+  ],
+  "limits": [
+    "Native ownership/lifecycle call sites and normalized-age source not qualified. Rotation-mode bake and ordinary Map10 rendering still pending.",
+    "Update fragment stops before postoffset addition and later scalar/life consumers. Finite ages tested here; scalar selector previously qualified nonfinite conversion.",
+    "Finite strictly increasing knot fixtures; rotation input field call sites, units, missing/default semantics and ordinary rendered consumers remain unqualified.",
+    "Original output captured; Rust port of this mode still pending. Constant curves retain requested count in this mode.",
+    "448latest full core tests passed. Existing ordinary client executable verified unchanged; no new renderer/client/visual qualification.",
+    "No full map, champion kit, six-client match or domain closed."
+  ],
+  "next_action": "Porter le mode rotation/intégration94D6B0, capturé sur36cas, avec ses coefficients et calculs SSE exacts. Qualifier la normalisation de l’âge, les défauts aux appels, puis raccorder les composants natifs au cycle émission/naissance/pose et au rendu Map10. Conserver les variations X/Y/Z tirées à la création et stockées, sans nouveau tirage en mise à jour. Résoudre TT_Mist_circle/fogcircle et poursuivre les24domaines."
+}

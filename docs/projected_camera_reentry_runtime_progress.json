@@ -1,0 +1,67 @@
+{
+  "updated_utc": "2026-10-07T11:26:53.287433+00:00",
+  "complete": false,
+  "projection_transition_verified": true,
+  "client_sha256": "0b78941642d630d059096de9285ad5aa28d2e091eeb8cfa0796ba2bdfe95f6fe",
+  "backends": {
+    "dx12": {
+      "qualified_transition_ids": [
+        1
+      ],
+      "casts": 2,
+      "cleaned": 2,
+      "pixel_attribution_passed": true,
+      "visual_scope": "Three phases of second cast inspected on Vulkan; both casts inspected on DX12. Camera leaves lane and returns; projection resumes. Health bars visibly lag camera."
+    },
+    "vulkan": {
+      "qualified_transition_ids": [
+        1,
+        2
+      ],
+      "casts": 2,
+      "cleaned": 2,
+      "pixel_attribution_passed": true,
+      "visual_scope": "Three phases of second cast inspected on Vulkan; both casts inspected on DX12. Camera leaves lane and returns; projection resumes. Health bars visibly lag camera."
+    }
+  },
+  "open_defects": [
+    {
+      "id": "HUD-CAMERA-LAG",
+      "observed": "Health bars remain at previous screen positions during camera transitions on both backends.",
+      "source": "health::update runs Update and reads propagated GlobalTransform before current camera propagation."
+    },
+    {
+      "id": "DX12-RESIZE-SURFACE",
+      "observed": "v26 DX12 exited with ResizeBuffers0x887A0001 and Invalid surface after invalid viewport/culling aspect. Fresh v27 completed; root cause unresolved."
+    },
+    {
+      "id": "DIAGNOSTIC-SCREENSHOT-DUPLICATE",
+      "observed": "Phase and legacy shot screenshots can target same frame; v25 harness timed out on missing legacy screenshot. v26/v27 use phase screenshots."
+    }
+  ],
+  "limits": [
+    "Controlled local readiness fixture and abrupt opt-in camera movement; normal progression and full game not qualified.",
+    "Explicit local quality3/status0/root clock0, disabled team/FOW filtering remain adapters.",
+    "DX12 receipt qualifies one complete transition identity; two casts cleaned. Vulkan qualifies two."
+  ],
+  "artifacts_sha256": {
+    "logs/projected-reentry-client-build.log": "cd534364843e425c411de754161c3133109acc77a6944f78f7894df20bcdaf65",
+    "logs/projected-reentry-camera-tests.log": "737057d9e567d2cbbbfa9f776ecb0f5af04692187d16e04549f4911249f1c2b8",
+    "logs/projected-core-cycle-v26-reentry-dx12-client.log": "8556fd927f9cbef8fa4d97b3dbe026296660ef8d27fb8cff24b51ed0a550ebcb",
+    "logs/projected-reentry-dx12-capture.log": "3822c2c5a6cae69b9622ecae9bae6e24b7b00dba89bd0ebb8e069aac145af0dc",
+    "docs/projected_core_cycle_capture_v27_reentry_dx12.json": "010a133aabff3cb6a17330c889a887fc02770bb49c39ce80e4441bb5b7c54bbd",
+    "docs/projected_pair_control_v27_reentry_dx12.json": "81d1fa5627d998df1b2f387d4911128407065e3888875b4b74a2e177afe4a961",
+    "logs\\projected-core-cycle-v27-reentry-dx12-on.owner-1-initial.png": "76de9a9866785f37f81e6619748a57f6f5457182defcfe8e65fef5a8cdd56333",
+    "logs\\projected-core-cycle-v27-reentry-dx12-on.owner-1-hidden.png": "3091702bca57ea2de492e6c5394c4a9ad7136d7355c2822c8b0ed1e4c75d3ea4",
+    "logs\\projected-core-cycle-v27-reentry-dx12-on.owner-1-returned.png": "a3fb1b313c75e268075bca75a6034c6c718a608a55e9c313296a67fb1f92ba2d",
+    "docs/projected_core_cycle_capture_v26_reentry_vulkan.json": "e6d558dad8b1d3a08a5418269198c176d3781bcbdbc7815f7eb6745c14c37316",
+    "docs/projected_pair_control_v26_reentry_vulkan.json": "0257ba5777536e62691671e316566c3ee8db94c3fa39d9a4867a51f32c1f606d",
+    "logs\\projected-core-cycle-v26-reentry-vulkan-on.owner-1-initial.png": "f87512d95567a702b9819aece81ba5815042497a5a5e8cf0e4232b0ec44ae483",
+    "logs\\projected-core-cycle-v26-reentry-vulkan-on.owner-1-hidden.png": "7b7bceb6d36b11f2023efefda9432249195a655543d42dfd4c715b3220e6487e",
+    "logs\\projected-core-cycle-v26-reentry-vulkan-on.owner-1-returned.png": "eca68f41b885b228cd401f0b7f19db75da56b6e2ac48cee7f463bb45dc73440e",
+    "logs\\projected-core-cycle-v26-reentry-vulkan-on.owner-2-initial.png": "cdd965111c4bfe65fcb1c516cd35f1dae63f69eccda21fb14874d8286a398722",
+    "logs\\projected-core-cycle-v26-reentry-vulkan-on.owner-2-hidden.png": "cb1df5926afcd5be4677dc7eff5633340c0759ae5bd279242ff3adc1e0cb5bce",
+    "logs\\projected-core-cycle-v26-reentry-vulkan-on.owner-2-returned.png": "8742543bc3a4bf72c23065456a4e0ea645fe5d9dcf33be0b31505e178539a9c2"
+  },
+  "next_action": "Corriger health::update: actuellement Update avec GlobalTransform de la camera precedente. Utiliser TransformHelper pour la pose actuelle et ordonner apres CameraUpdateSystems avant UiSystems::Prepare en PostUpdate (ne pas imposer apres TransformSystems::Propagate car UiLayout doit preceder cette propagation). Tester et rejouer camera mobile. Investiguer aussi DX12 ResizeBuffers invalid surface apres viewport nul (v26 log); echec reste ouvert. Eviter les demandes screenshot dupliquees du diagnostic. Poursuivre tous les domaines."
+}

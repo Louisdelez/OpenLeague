@@ -1,0 +1,63 @@
+////////////////////////////////////////////////////////////////
+///
+/// Samplers
+///
+////////////////////////////////////////////////////////////////
+sampler SAMPLER_VISIBILITY_TARGET : register (s0);		///< texture contains target visibility
+sampler SAMPLER_VISIBILITY_CURRENT : register (s1);		///< texture contains current visibility
+
+////////////////////////////////////////////////////////////////
+///
+/// Constants
+///
+////////////////////////////////////////////////////////////////
+float4   PARAMETERS : register(c0);			///< (fade in amount, fade out amount, min visibility, instant fade level)
+
+////////////////////////////////////////////////////////////////
+///
+/// main
+///
+////////////////////////////////////////////////////////////////
+void
+	main
+	(
+		float2		in_texcoord0	: TEXCOORD0,		///< Input texture coord
+		out float4	out_color0		: COLOR0			///< Output color
+	)
+{
+	float texelVisibilityTarget = tex2D(SAMPLER_VISIBILITY_TARGET, in_texcoord0).r;
+	float texelVisibilityCurrent = tex2D(SAMPLER_VISIBILITY_CURRENT, in_texcoord0).r;
+
+	// read current value from alpha
+	float current_value = texelVisibilityCurrent;
+
+	// read target value
+	float target_value = texelVisibilityTarget;
+
+	// accumulate here
+	float result = target_value;
+
+	// if the target value is equal or above a certain amount, we don't fade
+	if (target_value >= PARAMETERS.w)
+	{
+		result = target_value;
+	}
+	else
+	{
+		// Are we fading in or out?
+		if (current_value < target_value)
+		{
+			// fading in
+			result = current_value + PARAMETERS.x;
+			result = min(target_value, result);
+		}
+		else if (current_value > target_value)
+		{
+			// fading out
+			result = current_value - PARAMETERS.y;
+			result = max(target_value, result);
+		}
+	}
+	
+	out_color0 = float4(result, result, result, 1.0f);
+} // main

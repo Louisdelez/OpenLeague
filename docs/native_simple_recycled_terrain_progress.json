@@ -1,0 +1,36 @@
+{
+  "updated_utc": "2026-10-06T23:59:11.322415+00:00",
+  "complete": false,
+  "core_tests_passed": 571,
+  "simple_recycled_terrain_native_cases": 288,
+  "simple_recycled_terrain_composition_qualified": true,
+  "real_terrain_height_provider_qualified": false,
+  "latest_native_execution_progress": "docs/native_simple_recycled_terrain_progress.json",
+  "latest_core_test_log": "logs/native-simple-recycled-terrain-core-tests.log",
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "adapters": [
+    "Virtual height provider58 captures phase and X/Z/Y, returns supplied binary32 sequence through actual FLD/RET12 stub; real terrain provider unqualified."
+  ],
+  "artifacts_sha256": {
+    "crates/core/src/native_simple_birth_insert.rs": "f8ed52219f5c3d361d5d66f503e8beb1a84760ef693e4ba72b71566d3fe924b0",
+    "crates/core/src/native_simple_terrain_follow.rs": "83ff156e11a87ff65b9c17d16e3d2fe64756a04f68ecb9799473c02cb3403d87",
+    "crates/core/src/native_simple_storage.rs": "f6a031794d626197a07bb95b4173b8eb5566a02df38fff4fb85b5475bda3d76d",
+    "crates/core/src/native_simple_particle_update.rs": "afbe2f1cf544cfdbc20e368e38c98454513a14b7b1709bce5873e47f1582430c",
+    "crates/core/src/lib.rs": "1e43c8b8f0563ddb2b36b08b01c40ea31621f266904ead58b66fffdf0cb449f5",
+    "data/4.20/simple_recycled_terrain_contract.json": "2ba93a024c1f78d31cfc9cf099d8100acb7a0f2666b2522bb3f518bdd4a43faa",
+    "tools/probe_native_simple_recycled_terrain.py": "7d693539d3e9a105bdeb0b2da4ea32e7058e93659a0318e9a46c89041c199a75",
+    "docs/native_simple_normal_frame_storage_progress.json": "e28e679f2a50031149369b100fe1bec937e815c22ac7325929bb3cc25303f56b",
+    "logs/native-simple-recycled-terrain-core-tests.log": "de50b83227378c501e2ade7f2f7d5d299f9a594b70a01489357b2af67959aa59",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "ac0966be3b5d22bbaf1d2a874001245db48f1d9ff882266d97273d94e3f9ae65"
+  },
+  "findings": [
+    "Native reset retains height98 independently of cleared particle arrays. Appended births append to the end of that retained array; terrain following reads the active prefix and preserves its suffix.",
+    "Rust insertion and terrain-follow validation now support retained extra heights; the composed reset/birth/follow matches288 native CPU cases, including empty/nonempty previous storage, retained length0/1/4/8,1/2/4 births, terrain and lock flags and bind windows.1344 hardware scalar SSE operations, zero VM/CPU differences."
+  ],
+  "limits": [
+    "Already allocated capacities, finite supplied parameters, constant scale and no probability resources. Actual recycle caller/reset/insertion/follow bodies execute; no native whole emission or whole frame in this fixture.",
+    "Real terrain provider, memory backend and ordinary rendering remain incomplete.",
+    "Controlled terrain provider only. Missing logical height slot reuse, native capacity growth, allocator and release are not qualified.",
+    "Ordinary executable integration, rendered and audio acceptance remain pending; no complete champion, task or domain claimed."
+  ]
+}

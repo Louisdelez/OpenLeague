@@ -1,0 +1,468 @@
+{
+  "passed": true,
+  "check_count": 30,
+  "checks": [
+    "allocation adopts a real Win32 block and publishes exact mirror",
+    "actual HeapSize proves raw backing capacity",
+    "initial zero bytes are copied from real backing",
+    "injected HeapFree failure returns false with error six",
+    "failed free keeps same raw owner and live mapped bytes",
+    "helper preserves injected Windows failure",
+    "helper failure also preserves ownership",
+    "actual retry frees the same allocation successfully",
+    "successful retry frees once and retires raw plus mapping",
+    "stale free is rejected before another Win32 call",
+    "allocate_after_os: primary fault remains visible",
+    "allocate_after_os: no guest result published",
+    "allocate_after_os: actual allocation retained under interrupted owner",
+    "allocate_after_os: guest access to unpublished mirror rejected",
+    "allocate_after_os: injected terminal free failure is recorded",
+    "allocate_after_os: failed cleanup retains raw and mapping plus primary",
+    "allocate_after_os: retry releases exact owner once",
+    "allocate_after_os: repeated cleanup performs no OS free",
+    "allocate_before_publish: primary fault remains visible",
+    "allocate_before_publish: no guest result published",
+    "allocate_before_publish: actual allocation retained under interrupted owner",
+    "allocate_before_publish: guest access to unpublished mirror rejected",
+    "allocate_before_publish: injected terminal free failure is recorded",
+    "allocate_before_publish: failed cleanup retains raw and mapping plus primary",
+    "allocate_before_publish: retry releases exact owner once",
+    "allocate_before_publish: repeated cleanup performs no OS free",
+    "post-free interruption keeps original error",
+    "successful OS free removes raw authority before fallible unmap",
+    "post-free retry only retires mapping without double free",
+    "legacy allocator and release were never used"
+  ],
+  "error": null,
+  "cleanup_error": null,
+  "remaining_heap_backing": 0,
+  "remaining_mapped_regions": 0,
+  "remaining": [
+    {
+      "raw_owners": 0,
+      "mapped_regions": 0,
+      "live_owners": 0,
+      "reserved_regions": 1,
+      "allocated_owners": 1,
+      "interrupted": []
+    },
+    {
+      "raw_owners": 0,
+      "mapped_regions": 0,
+      "live_owners": 0,
+      "reserved_regions": 1,
+      "allocated_owners": 1,
+      "interrupted": []
+    },
+    {
+      "raw_owners": 0,
+      "mapped_regions": 0,
+      "live_owners": 0,
+      "reserved_regions": 1,
+      "allocated_owners": 1,
+      "interrupted": []
+    },
+    {
+      "raw_owners": 0,
+      "mapped_regions": 0,
+      "live_owners": 0,
+      "reserved_regions": 1,
+      "allocated_owners": 1,
+      "interrupted": []
+    }
+  ],
+  "events": [
+    {
+      "api": "HeapAlloc",
+      "result": 1342177280,
+      "last_error": 0,
+      "size": 64,
+      "flags": 8
+    },
+    {
+      "api": "HeapFree",
+      "result": 0,
+      "last_error": 6,
+      "pointer": 1342177280
+    },
+    {
+      "api": "HeapFree",
+      "result": 1,
+      "last_error": 6,
+      "pointer": 1342177280
+    },
+    {
+      "api": "host_cleanup_heap_mirrors",
+      "errors": [],
+      "remaining": {
+        "raw_owners": 0,
+        "mapped_regions": 0,
+        "live_owners": 0,
+        "reserved_regions": 1,
+        "allocated_owners": 1,
+        "interrupted": []
+      }
+    },
+    {
+      "api": "host_cleanup_heap_mirrors",
+      "errors": [],
+      "remaining": {
+        "raw_owners": 0,
+        "mapped_regions": 0,
+        "live_owners": 0,
+        "reserved_regions": 1,
+        "allocated_owners": 1,
+        "interrupted": []
+      }
+    },
+    {
+      "api": "host_cleanup_heap_mirrors",
+      "errors": [
+        {
+          "owner": 0,
+          "error": "OSError(6, 'actual/injected HeapFree failure during terminal cleanup')"
+        }
+      ],
+      "remaining": {
+        "raw_owners": 1,
+        "mapped_regions": 1,
+        "live_owners": 0,
+        "reserved_regions": 1,
+        "allocated_owners": 1,
+        "interrupted": [
+          {
+            "owner": 0,
+            "phase": "interrupted",
+            "raw_owned": true,
+            "pointer": 1342177280,
+            "mapped": [
+              1342177280
+            ],
+            "primary_error": "RuntimeError('injected allocate_after_os')"
+          }
+        ]
+      }
+    },
+    {
+      "api": "host_cleanup_heap_mirrors",
+      "errors": [],
+      "remaining": {
+        "raw_owners": 0,
+        "mapped_regions": 0,
+        "live_owners": 0,
+        "reserved_regions": 1,
+        "allocated_owners": 1,
+        "interrupted": []
+      }
+    },
+    {
+      "api": "host_cleanup_heap_mirrors",
+      "errors": [],
+      "remaining": {
+        "raw_owners": 0,
+        "mapped_regions": 0,
+        "live_owners": 0,
+        "reserved_regions": 1,
+        "allocated_owners": 1,
+        "interrupted": []
+      }
+    },
+    {
+      "api": "host_cleanup_heap_mirrors",
+      "errors": [],
+      "remaining": {
+        "raw_owners": 0,
+        "mapped_regions": 0,
+        "live_owners": 0,
+        "reserved_regions": 1,
+        "allocated_owners": 1,
+        "interrupted": []
+      }
+    },
+    {
+      "api": "host_cleanup_heap_mirrors",
+      "errors": [
+        {
+          "owner": 0,
+          "error": "OSError(6, 'actual/injected HeapFree failure during terminal cleanup')"
+        }
+      ],
+      "remaining": {
+        "raw_owners": 1,
+        "mapped_regions": 1,
+        "live_owners": 0,
+        "reserved_regions": 1,
+        "allocated_owners": 1,
+        "interrupted": [
+          {
+            "owner": 0,
+            "phase": "interrupted",
+            "raw_owned": true,
+            "pointer": 1342177280,
+            "mapped": [
+              1342177280
+            ],
+            "primary_error": "RuntimeError('injected allocate_before_publish')"
+          }
+        ]
+      }
+    },
+    {
+      "api": "host_cleanup_heap_mirrors",
+      "errors": [],
+      "remaining": {
+        "raw_owners": 0,
+        "mapped_regions": 0,
+        "live_owners": 0,
+        "reserved_regions": 1,
+        "allocated_owners": 1,
+        "interrupted": []
+      }
+    },
+    {
+      "api": "host_cleanup_heap_mirrors",
+      "errors": [],
+      "remaining": {
+        "raw_owners": 0,
+        "mapped_regions": 0,
+        "live_owners": 0,
+        "reserved_regions": 1,
+        "allocated_owners": 1,
+        "interrupted": []
+      }
+    },
+    {
+      "api": "host_cleanup_heap_mirrors",
+      "errors": [],
+      "remaining": {
+        "raw_owners": 0,
+        "mapped_regions": 0,
+        "live_owners": 0,
+        "reserved_regions": 1,
+        "allocated_owners": 1,
+        "interrupted": []
+      }
+    },
+    {
+      "api": "HeapAlloc",
+      "result": 1342177280,
+      "last_error": 0,
+      "size": 128,
+      "flags": 8
+    },
+    {
+      "api": "host_cleanup_heap_mirrors",
+      "errors": [],
+      "remaining": {
+        "raw_owners": 0,
+        "mapped_regions": 0,
+        "live_owners": 0,
+        "reserved_regions": 1,
+        "allocated_owners": 1,
+        "interrupted": []
+      }
+    },
+    {
+      "api": "host_cleanup_heap_mirrors",
+      "errors": [],
+      "remaining": {
+        "raw_owners": 0,
+        "mapped_regions": 0,
+        "live_owners": 0,
+        "reserved_regions": 1,
+        "allocated_owners": 1,
+        "interrupted": []
+      }
+    }
+  ],
+  "mirror_events": [
+    {
+      "operation": "HeapAlloc",
+      "owner": 0,
+      "phase": "live",
+      "pointer": 1342177280,
+      "result": 1342177280,
+      "size": 64,
+      "flags": 8
+    },
+    {
+      "operation": "HeapFree",
+      "owner": 0,
+      "phase": "live",
+      "pointer": 1342177280,
+      "result": 0,
+      "last_error": 6
+    },
+    {
+      "operation": "HeapFree",
+      "owner": 0,
+      "phase": "live",
+      "pointer": 1342177280,
+      "result": 0,
+      "last_error": 6
+    },
+    {
+      "operation": "HeapFree",
+      "owner": 0,
+      "phase": "retired",
+      "pointer": 1342177280,
+      "result": 1,
+      "last_error": 6
+    },
+    {
+      "operation": "host_cleanup_HeapFree",
+      "owner": 0,
+      "phase": "interrupted",
+      "pointer": 1342177280,
+      "result": 0,
+      "last_error": 6
+    },
+    {
+      "operation": "host_cleanup_HeapFree",
+      "owner": 0,
+      "phase": "raw_freed",
+      "pointer": 1342177280,
+      "result": 1,
+      "last_error": 6
+    },
+    {
+      "operation": "host_cleanup_HeapFree",
+      "owner": 0,
+      "phase": "interrupted",
+      "pointer": 1342177280,
+      "result": 0,
+      "last_error": 6
+    },
+    {
+      "operation": "host_cleanup_HeapFree",
+      "owner": 0,
+      "phase": "raw_freed",
+      "pointer": 1342177280,
+      "result": 1,
+      "last_error": 6
+    },
+    {
+      "operation": "HeapAlloc",
+      "owner": 0,
+      "phase": "live",
+      "pointer": 1342177280,
+      "result": 1342177280,
+      "size": 128,
+      "flags": 8
+    }
+  ],
+  "os_calls": [
+    {
+      "api": "HeapAlloc",
+      "injected": false,
+      "heap": 1608594817024,
+      "flags": 8,
+      "size": 64,
+      "result": 1608604018000
+    },
+    {
+      "api": "HeapFree",
+      "injected": true,
+      "heap": 1608594817024,
+      "flags": 0,
+      "raw": 1608604018000,
+      "result": 0,
+      "last_error": 6
+    },
+    {
+      "api": "HeapFree",
+      "injected": true,
+      "heap": 1608594817024,
+      "flags": 0,
+      "raw": 1608604018000,
+      "result": 0,
+      "last_error": 6
+    },
+    {
+      "api": "HeapFree",
+      "injected": false,
+      "heap": 1608594817024,
+      "flags": 0,
+      "raw": 1608604018000,
+      "result": 1,
+      "last_error": 6
+    },
+    {
+      "api": "HeapAlloc",
+      "injected": false,
+      "heap": 1608594817024,
+      "flags": 8,
+      "size": 96,
+      "result": 1608604105536
+    },
+    {
+      "api": "HeapFree",
+      "injected": true,
+      "heap": 1608594817024,
+      "flags": 0,
+      "raw": 1608604105536,
+      "result": 0,
+      "last_error": 6
+    },
+    {
+      "api": "HeapFree",
+      "injected": false,
+      "heap": 1608594817024,
+      "flags": 0,
+      "raw": 1608604105536,
+      "result": 1,
+      "last_error": 6
+    },
+    {
+      "api": "HeapAlloc",
+      "injected": false,
+      "heap": 1608594817024,
+      "flags": 8,
+      "size": 96,
+      "result": 1608604099936
+    },
+    {
+      "api": "HeapFree",
+      "injected": true,
+      "heap": 1608594817024,
+      "flags": 0,
+      "raw": 1608604099936,
+      "result": 0,
+      "last_error": 6
+    },
+    {
+      "api": "HeapFree",
+      "injected": false,
+      "heap": 1608594817024,
+      "flags": 0,
+      "raw": 1608604099936,
+      "result": 1,
+      "last_error": 6
+    },
+    {
+      "api": "HeapAlloc",
+      "injected": false,
+      "heap": 1608594817024,
+      "flags": 8,
+      "size": 128,
+      "result": 1608604078144
+    },
+    {
+      "api": "HeapFree",
+      "injected": false,
+      "heap": 1608594817024,
+      "flags": 0,
+      "raw": 1608604078144,
+      "result": 1,
+      "last_error": 0
+    }
+  ],
+  "native_pe_execution": false,
+  "scope": "Real Windows process-heap allocations/frees. Failure returns and interruption points are explicitly injected; no provider or CRT source body is executed.",
+  "source_hashes": {
+    "test_crt_heap_ownership.py": "1d1f18f3ab4b93294733790c6fef414ed7db332ae4b4e6584f07043ce92e9e24",
+    "crt_os.py": "4ed057911fcb7e2299e62e12bd96ee040c73972ea843ce36ac0f9d4870f1e578",
+    "heap_mirrors.py": "6be233a6a2e8fc6fd89452be391ab2b9fffd80897d024df89444b3c9aba55a52",
+    "isolated_io.py": "f127283ca56d8859d09b8ba57f918f58b7f0a11174c3e269c3d6d85f27baa3d6"
+  }
+}

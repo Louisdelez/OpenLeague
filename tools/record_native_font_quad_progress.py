@@ -1,0 +1,31 @@
+from pathlib import Path
+import json,hashlib,datetime,shutil
+r=Path('E:/OpenLeague');now=datetime.datetime.now(datetime.timezone.utc).isoformat()
+load=lambda p:json.loads((r/p).read_text(encoding='utf-8-sig'));sha=lambda p:hashlib.sha256((r/p).read_bytes()).hexdigest()
+assert '21 passed; 0 failed' in (r/'logs/native-font-quad-raster-tests.log').read_text(encoding='utf-8')
+proof=load('docs/native_font_gpu_progress.json');captures=[]
+for backend in ['vulkan','dx12']:
+ p='docs/native-font-gpu-startup-'+backend+'-capture.json';c=load(p);assert c['font_metric_runtime_observed'] and c['persistent_face_count']==19 and c['source_text_count']==154
+ assert c['client_sha256']==sha('target/debug/openleague-client.exe');assert c['capture_sha256']==hashlib.sha256(Path(c['capture']).read_bytes()).hexdigest()
+ c.update(visual_inspected=True,visual_observation='Restored map visible; blue background regions remain. Development text present, original HUD widgets absent.19source fonts/154textbindings initialized. Offscreen native font GPU qualified separately; no native glyph widget draw in ordinary startup.')
+ (r/p).write_text(json.dumps(c,indent=2)+'\n',encoding='utf-8');captures.append(c)
+proof.update(updated_utc=now,last_visually_qualified_application_tests=319,last_visually_qualified_application_font_tests=20,current_binary_sha256=sha('target/debug/openleague-client.exe'),backend_captures=captures,application_rebuilt_after_changes=True)
+proof['limits']=[v for v in proof['limits'] if not v.startswith('319source tests/20backend tests')]+['319client/20backend application rebuilt and startup visually inspected Vulkan/DX12. Native GPU glyph widgets still absent in ordinary game; map blue regions and full game requirements remain open.']
+(r/'docs/native_font_gpu_runtime_progress.json').write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+contract=load('data/4.20/native_font_quad_contract.json');assert contract['passed'] and contract['case_count']==216
+quad={'updated_utc':now,'complete':False,'native_quad_cases':216,'native_executed_addresses':contract['native_addresses'],'font_raster_tests_passed':21,'client_source_tests_last_passed':319,'last_visually_qualified_application_tests':319,'last_visually_qualified_application_font_tests':20,'native_quad_ported':True,'ordinary_hud_uses_native_quad':False,'application_rebuilt_after_quad_port':False,'artifacts':['data/4.20/native_font_quad_contract.json','crates/font-raster/src/native_font_quad.rs','tools/qualify_native_font_quad.py','logs/native-font-quad-raster-tests.log'],'limits':contract['limits'],'next_action':'Qualifier et porter le placement natif des glyphes/texte : origine, baseline, avance, kerning, clipping, wrap, alignement et couleurs. Raccorder ensuite les widgets HUD réels et qualifier Vulkan/DX12 avant de poursuivre les autres domaines.'}
+quad['hashes']={p:sha(p) for p in quad['artifacts']}
+(r/'docs/native_font_quad_progress.json').write_text(json.dumps(quad,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+history=r/'docs/plan_history'/('native-font-quad-'+datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ'));history.mkdir(parents=True)
+gp=r/'docs/GOAL-OPENLEAGUE-ACTUALISE.txt';shutil.copy2(gp,history/gp.name);goal=gp.read_text(encoding='utf-8').replace('319 tests client et 20 tests FreeType réussis.','319 tests client et 21 tests FreeType réussis.').replace('Client reconstruit : 319 tests ; dernières captures Vulkan/DX12 : 317 tests.','Captures Vulkan/DX12 : client 319 tests, backend 20 ; port des quads testé séparément.');assert len(goal)<=4000;gp.write_text(goal,encoding='utf-8');Path('E:/mapslol3v3/GOAL-OPENLEAGUE-ACTUALISE.txt').write_text(goal,encoding='utf-8')
+for name in ['coverage.json','completion_plan.json','resume_checkpoint.json']:
+ p=r/'docs'/name;shutil.copy2(p,history/name);d=load('docs/'+name);d.update(updated_utc=now,complete=False,native_font_gpu_runtime_progress=proof,native_font_quad_progress=quad)
+ e=d['last_verified'] if name=='resume_checkpoint.json' else d['current_evidence'];e.update(client_tests=319,client_tests_passed=319,font_raster_tests_passed=21,current_client_application_tests=319,last_visually_qualified_application_font_tests=20,client_test_source_matches_current_build=False,current_client_sha256=proof['current_binary_sha256'],client_binary_sha256=proof['current_binary_sha256'],pending_client_build=False,client_build_pending=False,current_source_progress='docs/native_font_quad_progress.json')
+ if 'goal_plan_revision' in d:d['goal_plan_revision'].update(last_visually_qualified_application_tests=319,font_raster_tests_passed=21,objective_sha256=hashlib.sha256(goal.encode()).hexdigest())
+ if name=='resume_checkpoint.json':d.update(saved_utc=now,pending_native_jobs=[],next_projected_action=quad['next_action'])
+ if name=='completion_plan.json':d['goal_objective_proposed']=goal;d['next_execution_steps']=[quad['next_action']]+d.get('next_execution_steps',[])[1:]
+ p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+p=r/'docs/completion_plan.html';s=p.read_text(encoding='utf-8');s=s.replace('</body>','<section id="native-font-quad-progress"><h2>Quads des glyphes natifs</h2><p>Fonction originale8BF370 :216cas/194adresses exécutées, vertices144octets et6indices comparés exactement. Port Rust :21tests backend ; captures du client319tests/backend20 observées Vulkan/DX12. Layout/widgets ordinaires et carte toujours incomplets.</p><a href="native_font_quad_progress.json">Preuves et limites</a></section></body>');p.write_text(s,encoding='utf-8')
+p=r/'docs/goal_plan_revision.json';d=load('docs/goal_plan_revision.json');d.update(updated_utc=now,last_visually_qualified_application_tests=319,font_raster_tests_passed=21,objective_sha256=hashlib.sha256(goal.encode()).hexdigest());p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+for name in ['record_native_font_quad_progress.py','capture_native_font_gpu_startup.py']:shutil.copy2(Path('E:/mapslol3v3')/name,r/'tools'/name)
+print(json.dumps({'source_client_tests':319,'source_font_tests':21,'last_application_font_tests':20,'backends_inspected':2,'native_quad_cases':216,'complete':False}))

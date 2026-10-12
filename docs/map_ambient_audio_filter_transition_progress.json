@@ -1,0 +1,57 @@
+{
+  "updated_utc": "2026-10-03T22:32:07.558299+00:00",
+  "contract": "data/4.20/audio_filter_transition_contract.json",
+  "contract_sha256": "5485c0f9c58159caa1a13aeab151b4fdfdd9030662145b56ff83403ed981ba03",
+  "module": "crates/core/src/audio_filter_transition.rs",
+  "module_sha256": "ac0c55ddfa867e3b4b036eb965a4607e3487b54d8a8ef0770d8e5cc89b2c8f7a",
+  "native_sequences": 80,
+  "native_blocks": 560,
+  "valid_pcm_samples_compared": 188160,
+  "native_coefficient_updates": 272,
+  "sample_rates_tested": [
+    48000
+  ],
+  "channels_tested": 2,
+  "alignment_bytes_tested": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "valid_frames_tested": [
+    0,
+    1,
+    2,
+    3,
+    129,
+    1024,
+    17
+  ],
+  "native_block_size": 128,
+  "native_transition_steps": 8,
+  "native_bypass_threshold": 0.10000000149011612,
+  "comparison": "Exact f32 bits for PCM output and histories; exact current/target/step/mode/bypass/dirty/immediate state after each invocation. Padding preserved.",
+  "native_region_hashes": {
+    "0xb2b4f0": "a8f3b889a66132a863f4e89402d3b4fab5020ab10425023919a82e9ea82976eb",
+    "0xb2be10": "7ab31711766b0a7c25f6196ad9deda4679aa2ff9cbb094295b9d527f4fc5e719",
+    "0xb35530": "02287b89402db1803d093047483a61bc0eec5615b9f69bb3e4bed424a70a12df",
+    "0xb2bb30": "26743be46dbb06a49e20ee8c279a987a5778d2f00ed6f8c50ee64cb602e5337a",
+    "0xb2b870": "ffa65869acd66e126f964302aab7ddda891178a60bfddf3357374b6bd2ea6979",
+    "0xb2b9d0": "567cef0af329d654ddd6c027e0ed14cb7d466d7807049968570caea9fb726dff"
+  },
+  "core_tests": 185,
+  "rust_transition_tests": 2,
+  "test_log": "logs/native-audio-filter-transition-core-tests.log",
+  "test_log_sha256": "c4f771942f2fdaaf145a229c3327f1117bfb6db3dfb1127a994767eae2869114",
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "ambient_playback_enabled": false,
+  "client_integration_enabled": false,
+  "complete": false,
+  "limits": [
+    "Consumer states injected; external target/mode writers and allocator constructor not executed.",
+    "48000Hz planar two-channel tests; valid finite inputs only. Other rates have separate frequency/coefficient qualification.",
+    "No client mixer integration, audible acceptance or complete game qualification.",
+    "Defensive API validates finite inputs and supported geometry; native invalid-state behavior not qualified. DSP overflow can leave partial transition.",
+    "No native target/mode producer qualification or real-time performance acceptance. Existing frequency/coefficient APIs cover other rates separately; planar transition reference is 48000Hz only."
+  ]
+}

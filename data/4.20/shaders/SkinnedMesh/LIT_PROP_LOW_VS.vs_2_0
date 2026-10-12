@@ -1,0 +1,78 @@
+#include "IOParam/IODefine_VS.hls"
+#include "../FogOfWar/FogOfWar_VS.hls"
+
+
+/// Bones
+column_major float4x3 BONES[68] 	: register(c24);
+
+/////////////////////////////////////////////////////////////////////////////////////
+///
+///
+///
+/////////////////////////////////////////////////////////////////////////////////////
+void 
+	main
+	(
+		float3		vPos :			X3D_VSIN_POSITION,
+		float3		vNormal:		X3D_VSIN_NORMAL,
+		float2		vUV1:			X3D_VSIN_TEXCOORD0,
+		blendindex4	vBlendIndices: 		X3D_VSIN_BLENDINDICES,
+		float4		vBlendWeight: 		X3D_VSIN_BLENDWEIGHT,
+		out float4	vPosOut:		POSITION,
+#ifdef LIGHTING
+		out float4	vColorOut:		COLOR0,		
+#endif
+		out float2	vTexOut1:		TEXCOORD0,
+		out float2  vTexOut2:			TEXCOORD1
+	)
+{
+#ifdef NO_SKINNING
+    float3 worldPosition = mul(float4(vPos, 1.f), BONES[0]);
+#else
+	// Compute skinned local position
+	float3 worldPosition = float3(0,0,0);
+	for (int i = 0; i < NUM_BLEND_WEIGHTS; ++i)
+	{
+		blendindex boneIndex = vBlendIndices[i];
+		float weight = vBlendWeight[i];
+		worldPosition += (mul(float4(vPos, 1.f), BONES[boneIndex]) * weight);
+	}	
+#endif // NO_SKINNING
+
+	// Output homogeneous position
+	vPosOut = mul(float4(worldPosition.xyz, 1.0f), mProj ); 
+
+	// Output texture coordinate using texture transform
+	vTexOut1.xy = vUV1 * vUVTransform.xy + vUVTransform.zw;
+	
+	// Fog of war
+    vTexOut2.xy = FogOfWarTextureCoordinates(worldPosition.xyz).xy;
+
+#ifdef LIGHTING
+	// Compute world normal
+#ifdef NO_SKINNING
+    float3 worldNormal = mul(float4(vNormal, 0.f), BONES[0]);
+#else
+	float3 worldNormal = float3(0,0,0);
+	for (int j = 0; j < NUM_BLEND_WEIGHTS; ++j)
+	{
+		blendindex boneIndex = vBlendIndices[j];
+		float weight = vBlendWeight[j];
+		worldNormal += (mul(float4(vNormal, 0.f), BONES[boneIndex]) * weight);
+	}
+#endif // NO_SKINNING
+	worldNormal = normalize(worldNormal.xyz);  
+
+	/////////////////////////////////////////////////
+	//Lighting.
+	// N dot L saturated
+	float NdotL = saturate(dot(-vLightVec1.xyz, worldNormal.xyz));
+
+	// Incident sun light
+	float3 incidentSunLight = NdotL * vLightColor.xyz;
+
+	// Output sun light is incident sun light
+	vColorOut.rgb = saturate(incidentSunLight);
+	vColorOut.a=1;
+#endif
+}

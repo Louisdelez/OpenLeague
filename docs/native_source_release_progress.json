@@ -1,0 +1,42 @@
+{
+  "updated_utc": "2026-10-04T21:29:19.662234+00:00",
+  "complete": false,
+  "client_tests_passed": 106,
+  "client_build_passed": true,
+  "native_release_cases": 12,
+  "source_owned_map10_mask_cases": 24,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Executed original circular creation/removal6B1B20/6B1F90, event dispatch64E8D0, subscriber constructor68CF70, view callback6B4860, region rollback, source destructor and failed weak promotion in12cases/1316native addresses. Heap/free/mutex OS boundaries explicitly adapted.",
+    "Original removal notification is synchronous, not a deferred queue: callback sees source strong count1 and removes applied region before destructor requests source deallocation. Without observer there is no visibility rollback. Source weak reference becomes expired with native strong0/weak1.",
+    "Rust CircleFactory.retire notifies while manager still owns source, then erases owner. Twelve native case outputs match counts/pixels and weak expiration; expired source cannot notify twice.",
+    "Source-owned mask cache now carries the applied flag; CountedLayer external replacement/retirement operates on that exact cache. Existing24Map10 factory mask checks now apply/withdraw through source state instead of duplicating cached region ownership."
+  ],
+  "limits": [
+    "Complete original circular creation/removal, synchronous event dispatch, original subscriber callback/count rollback, source destructor and weak expiration execute; allocator/mutex OS boundaries adapted.",
+    "Event tree, receiver/shared controls and empty pending-source heap supplied, not created through complete view initialization/registration. Only one source and one observer exercised.",
+    "No gameplay source creation callers/team field producers, non-null weak provider, cone source, live GPU or current graphical verification qualified.",
+    "Source/control deallocation requests are recorded at allocator boundary; emulator memory is retained. Final retained weak-control release not executed. This is not original OS allocator/mutex qualification.",
+    "Only one source, one optional observer and an empty pending-source heap are exercised. Multiple source compaction, multiple observers, view initialization/registration, concurrency and pending heap removal remain open.",
+    "Ordinary actor/team/identity producers, non-null constructor provider, cone creation, mask scheduling/world extent/terrain initialization, authoritative mask filtering and GPU binding remain incomplete.",
+    "106client tests and build are current;427core tests and10UDPchecks remain prior unchanged-core/server evidence. Current graphical gameplay remains unverified.",
+    "All24domains remain unfinished."
+  ],
+  "next_actions": [
+    "Qualify multi-source removal/compaction, multiple observer dispatch and pending-source heap cleanup; execute final retained weak-control release and view subscription initialization.",
+    "Qualify actual actor/team/opaque identity producers and source generation scheduling; drive unified source caches and counters from real gameplay entities.",
+    "Qualify world extent/terrain initialization, reconcile native mask visibility with server filtering and bind fog texture processing to ordinary rendering; verify current gameplay."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_source_release_contract.json": "4f6fc9e7664a12b1ea0b1edcbfb64e6237d1fbde8de738405ae44d85f0d6e8f2",
+    "tools/probe_fow_source_release.py": "3b2d2eeb0ca0aa42cc54c525bf23a80cd272a0b3e6ba16e929e1092548363caf",
+    "data/4.20/fow_circle_factory_contract.json": "490c7cd8bf6ec3326d38c74657c8578443f9fdea3eb652bc4b1261bbfd84d420",
+    "data/4.20/fow_map10_owned_contract.json": "4842007773829b1f0e5be836e360ebe06626b840d9aa4a5a3d737719e90c34af",
+    "crates/client/src/fow_source_factory.rs": "fb96ec4af40046a614c1fd4a918ab3b35413f7b3a954073bec296254b2f449d8",
+    "crates/client/src/fow_regions.rs": "07fd45f1faa7e87f9019919c283eda3bdf82131626405ef88bb4047e24af7ef1",
+    "logs/native-source-release-tests.log": "cbcbc1f702e0d025aa353f6eb611b6e9d10e5e6b2704a77bb09efdf920c22b30",
+    "logs/native-source-release-build.log": "50f0e82b6d01efd754411803147fc20cdce65d117b853aadf374b75653b40ee6",
+    "target/debug/openleague-client.exe": "ede3c701ae5f3237aa5af9c30bf6458ddb1933134a538e24d63d476dd2b839f3"
+  }
+}

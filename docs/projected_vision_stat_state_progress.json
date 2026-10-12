@@ -1,0 +1,48 @@
+{
+  "updated_utc": "2026-10-04T20:13:32.806115+00:00",
+  "complete": false,
+  "core_tests_passed": 425,
+  "client_tests_passed": 94,
+  "client_and_server_build_passed": true,
+  "native_stat_initialization_cases": 4,
+  "native_stat_instruction_addresses": 183,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "current_network_rerun": true,
+  "findings": [
+    "Native debug dump609A95/609AC0 identifies mFlatBubbleRadiusMod/mPercentBubbleRadiusMod at stat offsets160/164, corresponding to actor778/77C.",
+    "Actor constructor612BE0 sets up stat block+618 and calls6086D0 at612E93. Original stat constructor and reset6088D0 execute and produce zero modifier bits in4cases. Full actor constructors not executed.",
+    "Shared Rust RadiusModifiers initialized to native zeros; used by server champion visibility and client qualified owner parameter resolution. Champion state serializes these fields in snapshots; missing fields in older snapshots default to zero.",
+    "Actual Map10 simulation test verifies modified champion radius hides enemy state in private snapshot, roundtrip preserves modifiers and reset restores visibility. Existing720native owner cases and24owned masks remain green through shared parameter calculation.",
+    "Actual ordinary server UDP run passes8checks with2peers: zero modifier state transmitted, hidden opponent absent from snapshots and hidden target attacks rejected."
+  ],
+  "limits": [
+    "Original stat constructor/reset executed with empty modifier collection; full actor constructor not executed.",
+    "Actor+618 constructor call and native debug labels identify fields; native buff aggregation and network decoding producers remain open.",
+    "Base sight radii remain community-derived and need native qualification. Server line-of-sight remains reconstructed; graphical native counted masks are not bound to ordinary rendering.",
+    "Champion modifier state now wired to authoritative visibility, but actual ability/buff stat aggregation, lifespan and resets are not yet supplied by complete kits. Unit/minion/structure modifier state and Rust owner identity mapping remain open.",
+    "UDP run checks defaults/privacy; modified radius buff commands and native original protocol not qualified. No newly built ordinary client graphical/audio run. All24domains unfinished."
+  ],
+  "next_actions": [
+    "Trace native stat aggregation/network writers for bubble-radius fields and implement ability/buff application/removal; cover unit, minion and structure sources.",
+    "Qualify original base source radius/metric, world extent and terrain/source lifecycle providers before connecting Rust actors to counted fog masks.",
+    "Integrate native-timed GPU upload/fade/blur/overlays in ordinary rendering and verify real current gameplay/network snapshots."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_stat_fields_contract.json": "4a2b01bdca42bc1e0cb8acc421cf1fba1b2bb045a394dad84624ff76d698a61e",
+    "data/4.20/vision_rules.json": "bc3c5ba77de8cc55cd78179764abe07901177bc04f3511a1c3d0d08cc49e4704",
+    "crates/core/src/vision.rs": "42a3ea3caab7fd8c621e71c2c338c33b742489257e682166fd62abaac7a20ce4",
+    "crates/core/src/vision/tests.rs": "e6322943ca755b0ad6bd089b96c4a17b8bb2e7b700c3fa7c9316dfef74263e8e",
+    "crates/core/src/lib.rs": "84a93dce5a3ad2bc556339f26d89a0830903b51acc77ce1bad63986965b76a26",
+    "crates/client/src/fow_owner.rs": "b79cc10de4316b676001568cbfd61aced93fc0846f3b2898530ab4e3d4431b11",
+    "tools/probe_fow_stat_fields.py": "e6368588efeef963b118f832f800e6083083cd08ac21d9fbfb7f7ed832c68568",
+    "logs/fow-stat-state-tests.log": "31e097ebe902de67538bc7ac2580e41e6b370e70d3613212877d75414544d415",
+    "logs/fow-stat-state-build.log": "dfb18a50a4a1999559172f9f6bee2010d81c6c767207e2a628646c596a80d999",
+    "target/debug/openleague-client.exe": "5f7f71c4e1fbf59e35c6c7f19d5816389c25939020d96840ea8a5ba075a10c40",
+    "target/debug/openleague-server.exe": "c03a9a46f3739ae5c97efa657f38336e5858dcca0a4307c6f3714338ca71dd7c",
+    "tools/verify_vision_stat_network.py": "6ce2d34264db5fe2c0aeaf897f2ef50618d6de1899a6b5d11da79fc0e8868298",
+    "docs/vision_stat_network_validation.json": "421329c366d257e34d218e17c208c747949d24bef8213222e5119cb11338549a",
+    "logs/vision-stat-network-server.log": "10eeb423f70c658cdc37cfdb8d453e7381993ed330b85cfdf18437740f1064b6"
+  },
+  "current_network_checks": 8
+}

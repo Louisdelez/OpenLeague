@@ -1,0 +1,25 @@
+from pathlib import Path
+import json,datetime,hashlib,shutil,html
+r=Path('E:/OpenLeague');staging=Path('E:/mapslol3v3');now=datetime.datetime.now(datetime.timezone.utc).isoformat();load=lambda p:json.loads((r/p).read_text(encoding='utf-8-sig'));save=lambda p,d:(r/p).write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+proofs={}
+for name in ['structure_native_pose_contract.json','structure_runtime_native_pose_contract.json','structure_native_construction_contract.json']:
+ d=json.loads((staging/name).read_text());assert d['passed'];save('data/4.20/'+name,d);proofs[name]=d
+pose=proofs['structure_native_pose_contract.json'];runtime=proofs['structure_runtime_native_pose_contract.json'];construction=proofs['structure_native_construction_contract.json'];assert len(pose['models'])==16 and len(runtime['measurements'])==16 and len(construction['states'])==48
+assert hashlib.sha256((r/'target/debug/openleague-client.exe').read_bytes()).hexdigest()==runtime['client_sha256']
+paths=['data/4.20/'+name for name in proofs]+['target/debug/openleague-client.exe','crates/client/src/animation.rs','crates/client/src/structure_animation_clock.rs']
+receipt=dict(updated_utc=now,complete=False,client_tests_passed=226,client_build_passed=True,product_code_changed=False,native_simple_constructor_states=48,native_pose_models=16,native_v4_original_resources=2,native_v3_adapted_resources=14,all_key_and_midpoint_pose_samples=sum(m['all_key_and_midpoint_samples'] for m in pose['models']),actual_client_pose_samples=sum(m['samples'] for m in runtime['measurements'].values()),actual_client_joint_samples=sum(m['joint_samples'] for m in runtime['measurements'].values()),max_actual_translation_error=max(m['max_translation_error'] for m in runtime['measurements'].values()),max_actual_normalized_quaternion_error=max(m['max_normalized_quaternion_error'] for m in runtime['measurements'].values()),files_sha256={p:hashlib.sha256((r/p).read_bytes()).hexdigest() for p in paths},limits=pose['limits']+construction['limits']+runtime['limits'])
+save('docs/structure_native_pose_progress.json',receipt)
+actions=['Verify ordinary structure destruction with retained final frame on the current binary, then inhibitor respawn, protection, nexus victory/results. Complete original structure materials/FX.','Qualify original legacy ANM conversion, skeleton/resource loaders and full BLND state/blend selection; simple derived construction/joint binding and uncompressed pose evaluator now executed with explicit resource adapters.','Connect visibility to normal brush mask/WALL; complete all champion kits and all24domains, six-client victory/results and final delivery.']
+archive=r/'docs/plan_history'/('structure-native-pose-'+datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ'));archive.mkdir(parents=True)
+for name in ['coverage.json','completion_plan.json','resume_checkpoint.json']:
+ p='docs/'+name;shutil.copy2(r/p,archive/name);d=load(p);d.update(updated_utc=now,complete=False,structure_native_pose_progress=receipt)
+ if name=='resume_checkpoint.json':d.update(saved_utc=now,pending_native_jobs=[],next_projected_action=' '.join(actions))
+ else:d['current_evidence'].update(structure_native_uncompressed_pose_evaluator_verified=True,structure_native_simple_constructor_with_adapters_verified=True,structure_native_legacy_loader_verified=False,structure_native_controller_complete=False)
+ if name=='completion_plan.json':d['next_execution_steps']=actions
+ save(p,d)
+p=r/'docs/goal_objective_current_request.txt';s=p.read_text(encoding='utf-8');i=s.index('PROCHAINE ÉTAPE :');j=s.index('\n\nOUTILS :',i)
+s=s[:i]+'PROCHAINE ÉTAPE : vérifier destruction normale sur le binaire actuel, puis réapparitions, protection, victoire et résultats ; achever matériaux/effets. Construction simple native exécutée pour48états avec adaptateurs explicites ; calcul des poses de16modèles comparé aux GLB et à20078articulations observées. Conversion ANM v3, chargeurs et sélection BLND complète restent ouverts.226tests client et compilation réussis ; tous les24domaines et la livraison restent inachevés.'+s[j:];p.write_text(s,encoding='utf-8')
+(r/'docs/goal_objective_current_request.html').write_text('<!doctype html><html lang="fr"><meta charset="utf-8"><title>Goal actualisé</title><pre>'+html.escape(s)+'</pre></html>',encoding='utf-8')
+p=r/'docs/completion_plan.html';s=p.read_text(encoding='utf-8');p.write_text(s.replace('</body>','<section><h2>Construction et poses des bâtiments</h2><p>48constructions simples natives exécutées avec adaptateurs explicites.16modèles comparés au calculateur de poses natif ;20078articulations réelles contrôlées. Chargeurs ANM v3/ressources/squelettes, sélection complète des états et gameplay complet restent ouverts.</p><a href="structure_native_pose_progress.json">Preuves et limites</a></section></body>'),encoding='utf-8')
+for name in ['qualify_structure_native_pose.py','qualify_structure_runtime_native_poses.py','qualify_structure_native_construction.py','record_structure_native_pose_progress.py']:shutil.copy2(staging/name,r/'tools'/name)
+print(json.dumps(receipt,ensure_ascii=False))

@@ -1,0 +1,61 @@
+{
+  "source": "Map10/AIPath.aimesh_ngrid",
+  "version": "3.1",
+  "min": [
+    59.981903,
+    -114.9697,
+    4009.2402
+  ],
+  "max": [
+    15357.703,
+    179.1286,
+    10444.85
+  ],
+  "cellSize": 50,
+  "width": 306,
+  "height": 129,
+  "cellCount": 39474,
+  "layout": "row-major; index = y * width \u002B x",
+  "cellBinary": {
+    "file": "TwistedTreeline_NavigationGrid.cells.bin",
+    "strideBytes": 11,
+    "fields": [
+      "centerHeight:f32le@0",
+      "flags:u16le@4",
+      "region:u32le@6",
+      "open:u8@10"
+    ]
+  },
+  "flagBits": {
+    "HAS_GRASS": 1,
+    "NOT_PASSABLE": 2,
+    "BUSY": 4,
+    "TARGETTED": 8,
+    "MARKED": 16,
+    "PATHED_ON": 32,
+    "SEE_THROUGH": 64,
+    "OTHER_DIRECTION_END_TO_START": 128,
+    "HAS_GLOBAL_VISION": 256
+  },
+  "sampledHeights": {
+    "width": 613,
+    "height": 259,
+    "distance": [
+      24.996277,
+      24.944221
+    ],
+    "file": "TwistedTreeline_NavigationGrid.sampled-heights.bin",
+    "format": "row-major f32le"
+  },
+  "hintGrid": {
+    "file": "TwistedTreeline_NavigationGrid.hints.bin",
+    "nodeCount": 900,
+    "format": "per node: 900 f32le distances followed by locator x:i16le,y:i16le",
+    "bytes": 3243600
+  },
+  "previews": [
+    "TwistedTreeline_Walkability.pgm",
+    "TwistedTreeline_Grass.pgm"
+  ],
+  "unreadTrailingBytes": 0
+}

@@ -1,0 +1,29 @@
+{
+  "updated_utc": "2026-10-04T04:12:48.091599+00:00",
+  "files_sha256": {
+    "tools/qualify_native_camera_aspect.py": "02151d1555cf2f797a10a716eb590ed80a0fc5c315223f1d46fc0feea362ceae",
+    "data/4.20/camera_aspect_contract.json": "e89f14f1787080d00ba20068728406d8d6023ec12fab9cec225a6e0d217be436",
+    "crates/core/src/camera_aspect.rs": "e3ac3fc3d267c9c01c8b4cca1abcb1afcff9153d4afa93856f92088ee28dbb5c",
+    "crates/core/src/lib.rs": "9e7bf420a30df99568fa51c91690d0deb5ed010046f91d3dc594f0adb21dcd27",
+    "logs/native-camera-aspect-core-tests.log": "4f51d74f30d855b5ceb689082b4ca59a298eb287aada9f57725053cf7166d139"
+  },
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_camera_aspect_cases": 162,
+  "core_tests_passed": 298,
+  "ported": [
+    "Original982000 unsigned width/height conversion, x87 division and global14BEEA0 store",
+    "Original980FEF signed width/height conversion, SSE division and global14BEEA0 store"
+  ],
+  "acceptance": "All162aspect floats compared bitexact, including zero dimensions, high-bit dimensions, infinity and NaN. Native unsigned initializer field copies and initialization side writes checked.",
+  "static_followup": "986250 view construction: rawmode2 invokes8DE480/716810/8DF600/8DF790 matrix path; other modes build target=position+direction then call8DFFA0 with position,target,up. Constructors remain unqualified.",
+  "limits": [
+    "Actual982000..982085 renderer initialization prefix executed including unsigned dimensions copies and aspect store; downstream981E90/982B40 excluded.",
+    "Actual980FEF..981032 signed device setup fragment executed with supplied registers and frame; previous device/service setup and subsequent allocation excluded.",
+    "Dimensions are raw32bit source values; zero height and high-bit dimensions retained without clamping.",
+    "Final game camera field overrides and client integration remain unqualified.",
+    "Rust module is not yet bound to the visible Bevy camera; complete camera view/projection, runtime setters and resize sequence remain to qualify.",
+    "Prior client18test evidence and standalone executable hashes unchanged."
+  ],
+  "client_camera_integrated": false,
+  "complete": false
+}

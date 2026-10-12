@@ -1,0 +1,111 @@
+--- a/audio_replay_windows_transport.rs
++++ b/audio_replay_windows_transport.rs
+@@ -45,6 +45,8 @@
+ mod loading_owner;
+ #[path = "audio_replay_windows_loading_packets.rs"]
+ mod loading_packets;
++#[path = "audio_replay_windows_loading_retirement.rs"]
++mod loading_retirement;
+ #[path = "audio_replay_windows_opening.rs"]
+ mod opening;
+ #[path = "audio_replay_windows_receive.rs"]
+@@ -90,6 +92,7 @@
+     service_settings: Mutex<Option<Box<dyn crate::audio_game_service_lifecycle::Settings + Send>>>,
+     game_manager: Mutex<Option<game_manager::Record>>,
+     game_manager_attempted: Mutex<bool>,
++    loading_retirements: Mutex<loading_retirement::Ledger<N>>,
+     launch: Mutex<bool>,
+     active: AtomicUsize,
+     errors: Mutex<Vec<String>>,
+@@ -257,6 +260,7 @@
+                 service_settings: Mutex::new(None),
+                 game_manager: Mutex::new(None),
+                 game_manager_attempted: Mutex::new(false),
++                loading_retirements: Mutex::new(loading_retirement::Ledger::default()),
+                 launch: Mutex::new(false),
+                 active: AtomicUsize::new(0),
+                 errors: Mutex::new(vec![]),
+@@ -319,6 +323,9 @@
+         }
+         let mut b = Backend::new(self.shared.clone());
+         thread::drain(&mut b).map_err(|e| format!("transport drain: {e:?}"))?;
++        // Retained name descriptors must outlive failed String24 cleanup and
++        // retire before their service/metadata/CRT bank can be destroyed.
++        b.retire_loading_temporaries().map_err(str::to_string)?;
+         self.close_game_manager_owned(&mut b)?;
+         self.close_service_owned(&mut b)?;
+         self.close_stream_owned(&mut b)?;
+--- a/audio_replay_windows_loading_packets.rs
++++ b/audio_replay_windows_loading_packets.rs
+@@ -4,6 +4,7 @@
+ use crate::{
+     audio_loading_metadata as names, audio_loading_record_tree::Kind,
+     audio_loading_screen_packet as loading, audio_replay_packet95 as packet95,
++    audio_loading_standard_prefix as standard_prefix, audio_loading_owned_string as owned,
+ };
+ 
+ impl<N: startup::Network + Send + 'static> loading::Boundary for Backend<N> {
+@@ -27,8 +28,18 @@
+     fn clock_f32_bits(&mut self) -> Result<u32, &'static str> {
+         self.loading_clock_f32_bits()
+     }
+-    // A real empty metadata name completes without UI. The nonempty standard
+-    // UI continuation remains an explicit default error.
++    fn initialize_standard_record(
++        &mut self, recipient:u32, _record:u32, payload:u32,
++        retained_service:u32, name:&mut owned::Temporary,
++    ) -> Result<(), owned::Error> {
++        // The Windows name lease reserves32 bytes: descriptor24 + pair8.
++        // This pair has the same lifetime/identity as its owned descriptor.
++        let scratch=name.address().checked_add(24).ok_or(owned::Error::AddressOverflow)?;
++        let stop=standard_prefix::prepare(self,recipient,retained_service,payload,name,scratch)?;
++        // Preserve the typed error through owned::finish and the lease ledger.
++        // Neither unported call is represented as completed loading UI.
++        Err(owned::Error::Boundary(stop.unavailable()))
++    }
+ }
+ 
+ impl<N: startup::Network + Send + 'static> Backend<N> {
+@@ -43,6 +54,13 @@
+             0x5b3230 => Kind::Tutorial,
+             _ => return Err(self.failure((recipient, target), "unknown native packet95 recipient")),
+         };
++        if matches!(kind, Kind::Standard) {
++            return self.loading_name_temporary(|b,scratch| {
++                loading::receive(b,kind,recipient,payload,scratch)
++            });
++        }
++        // Tutorial keeps its existing provider/cleanup contract. Operation is
++        // not a universal guarantee of no ownership for that separate path.
+         self.event_temporary(loading::NAME_SCRATCH_BYTES, |b, scratch| {
+             loading::receive(b, kind, recipient, payload, scratch)
+                 .map_err(|e| b.failure(e, "native loading-screen packet consumer failed"))
+--- a/audio_replay_windows_loading_packets_tests.rs
++++ b/audio_replay_windows_loading_packets_tests.rs
+@@ -1,4 +1,5 @@
+ use super::*;
++include!("audio_replay_windows_loading_retirement_tests.rs");
+ use crate::audio_replay_windows_application::Application;
+ use crate::{
+     audio_loading_record_tree as tree, audio_replay_manager_control as index_control,
+@@ -375,6 +376,11 @@
+         .word(crate::audio_replay_service_receive::LOCAL_OWNER)
+         .unwrap();
+     let recipient = Recipient::create(&mut b, Kind::Standard);
++    // Diagnostic input String24 and sentinel skin; no UI factory is claimed.
++    write(&mut b, recipient.p + 0x1a0, u32::MAX);
++    write(&mut b, recipient.p + 0x1b8, 0);
++    write(&mut b, recipient.p + 0x1bc, 15);
++    b.write_byte(recipient.p + 0x1a8, 0).unwrap();
+     let p = packet(local, 42, 1, false);
+     let before = r.snapshot().unwrap().engine_allocations;
+     let frees = r.shared.bank.lock().unwrap().memory.released_labels.len();
+@@ -386,7 +392,7 @@
+     assert_eq!(read_bytes(&mut b, record, 25), expected);
+     assert_eq!(r.snapshot().unwrap().engine_allocations, before + 1);
+     assert!(
+-        r.errors().iter().any(|e| e.contains("UI continuation57D6FE")),
++        r.errors().iter().any(|e| e.contains("resource provider90AD00")),
+         "expected unavailable UI after real name lookup; runtime errors: {:?}",
+         r.errors()
+     );

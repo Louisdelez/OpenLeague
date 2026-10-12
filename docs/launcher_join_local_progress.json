@@ -1,0 +1,283 @@
+{
+  "recorded_utc": "2026-10-11T23:46:09.832010+00:00",
+  "state": "two_graphical_clients_join_and_normal_departure_observed",
+  "runtime_build": {
+    "path": "E:\\mapslol3v3\\launcher_join_local_runtime_build.json",
+    "sha256": "5973ec076246eceb10133071c8e6b34241eabe3512591c5906bae94fe34008dd"
+  },
+  "candidate": {
+    "path": "E:\\mapslol3v3\\launcher_join_local_candidate_v2\\manifest.json",
+    "sha256": "2b3a1162b50cf6d2f78c2802892842fd19341cb37b90dbf1f2c019d85ab646af"
+  },
+  "installation": {
+    "path": "E:\\OpenLeague\\backups\\launcher-join-local-v2-20261011T232431-f3a0746e9f1d4474b9b3138ce031d886\\installed.json",
+    "sha256": "0552360efe29f54d13e54c52005cd1d1cf1de6f3b7c801aea4e553d42edb9c04"
+  },
+  "qualification": {
+    "path": "E:\\mapslol3v3\\launcher_join_local_qualification_v2\\20261011T232459-b89e9b8e5d67474db51aee653009c6c3\\receipt.json",
+    "sha256": "dfb540faa05806f4df55a1d82270385defad3d406248ab10eb4235ab05379e5d",
+    "bytes": 402744
+  },
+  "tests_passed_by_crate": {
+    "core": 1495,
+    "server": 37,
+    "client": 696,
+    "launcher": 32
+  },
+  "tests_execution_by_crate": {
+    "core": "reused_unchanged_parent696",
+    "server": "reused_unchanged_parent696",
+    "client": "reused_unchanged_parent696",
+    "launcher": "fresh"
+  },
+  "launcher_ignored_helper": [
+    "sessions::tests::owned_child_fixture"
+  ],
+  "javascript_checks": {
+    "js_recovery": 12,
+    "js_status": 11,
+    "js_join": 17
+  },
+  "changes": [
+    "Rejoindre la partie locale opens a client without owning or draining the host server.",
+    "Joined launcher retains its own process and private recovery credentials.",
+    "Pending actions immediately display Demande en cours; stale replies cannot reopen actions."
+  ],
+  "previous_failed_attempt": {
+    "path": "E:\\mapslol3v3\\launcher_join_local_qualification\\20261011T231531-205177bb65e143b9a821fea8f6c102a7\\receipt.json",
+    "sha256": "400d44206b89d59d6df156346a6a590dfa7427f0444eb7a7a75889fa2037dddd",
+    "failure": "js_join: previous idle text remained visible while invoke was pending; corrected before v2 qualification"
+  },
+  "ordinary_runtime_verified": true,
+  "secure_join_runtime_verified": true,
+  "six_clients_qualified": false,
+  "historical_launcher_complete": false,
+  "complete": false,
+  "limits": [
+    "Exactly two real graphical clients were observed: one host and one joined player. Six-client admission, team balancing and a complete 3v3 match are not qualified.",
+    "No joined crash/recovery, lost-handshake recovery or launcher restart was exercised. Private credentials were not inspected or persisted by this review.",
+    "Leave is best-effort without an observed acknowledgement; normal client exit does not prove reservation release.",
+    "The observer reports process/provenance observations with its runtime/admission/pixels flags false. The scoped two-client admission conclusion here additionally uses saved public session/player probes and independently inspected images.",
+    "Inventory probes contain the last recorded inventory state at ticks108 and1772, not a synchronized pair of continuously sampled frames; exact session equality and different accepted player IDs are the bounded claim.",
+    "The same host-server handle was alive at the joined-client exit observation, followed by an independently inspected host image. This does not prove host health at every instant.",
+    "Two Vulkan loader ERROR lines per launcher concern a missing TikTok LIVE Studio layer JSON; both clients rendered. Logs are not error-free, and no system layer was changed.",
+    "Native shutdown reports passed=true/errors=[] and cleanup_failed=false, but complete=false is retained. Process closure does not establish full historical native teardown.",
+    "Build-before/build-after are exact archived verifier outputs for the Join v2/696 build. Current production may already contain Crown; this review does not rehash or requalify that later source/binary state.",
+    "No champion combat, Vilemaw attack/reset, six-player result, full LoL4.20 fidelity, GPU/native pixel equivalence or whole-product completion is established by this stationary join/close check."
+  ],
+  "next_action": "Finish the separate Crown build/qualification and inspect its actual rendering after success. Then qualify six real launcher clients and a complete ordinary3v3 match; continue Vilemaw attack/retreat and remaining gameplay checks. This two-client observation does not qualify those steps.",
+  "ordinary_runtime_scope": "Two stationary graphical clients; same-session admission, joined close guard and normal host/join ownership closure only.",
+  "ordinary_two_client_runtime": {
+    "run": "E:\\mapslol3v3\\launcher_join_ordinary_observer\\runs\\20261012T013431880-65ea945e0be7449d92872392f29cf9bc",
+    "process_receipt": {
+      "path": "E:\\mapslol3v3\\launcher_join_ordinary_observer\\runs\\20261012T013431880-65ea945e0be7449d92872392f29cf9bc\\process-exit.json",
+      "sha256": "ca0001f626d6533764b5968d2226f533480f9b1c9aa2872c1ad37a14df0f56e4",
+      "bytes": 5211
+    },
+    "build_before": {
+      "path": "E:\\mapslol3v3\\launcher_join_ordinary_observer\\runs\\20261012T013431880-65ea945e0be7449d92872392f29cf9bc\\build-before.json",
+      "sha256": "fdfe2f57c22549f713aa0e8f16c9d7558469efda0246e99a7d30773b7cfd6b7c",
+      "bytes": 1883
+    },
+    "build_after": {
+      "path": "E:\\mapslol3v3\\launcher_join_ordinary_observer\\runs\\20261012T013431880-65ea945e0be7449d92872392f29cf9bc\\build-after.json",
+      "sha256": "fdfe2f57c22549f713aa0e8f16c9d7558469efda0246e99a7d30773b7cfd6b7c",
+      "bytes": 1883
+    },
+    "same_session_evidence": {
+      "path": "E:\\mapslol3v3\\launcher_join_ordinary_observer\\runs\\20261012T013431880-65ea945e0be7449d92872392f29cf9bc\\02_same_session_inventory.json",
+      "sha256": "6aa95b58a9416e1b5d2e0322eb7f9d2811d0e2f06135d1f869fa3556315bbea7",
+      "bytes": 1138
+    },
+    "session": 1791761711592156000,
+    "players": [
+      21,
+      22
+    ],
+    "accepted_graphical_clients": 2,
+    "host_launcher_pid": 8984,
+    "host_client_pid": 11880,
+    "host_server_pid": 13912,
+    "joined_launcher_pid": 3640,
+    "joined_client_pid": 19872,
+    "same_host_server_alive_at_joined_exit": {
+      "client_started_utc": "2026-10-11T23:36:09.5014826Z",
+      "client_pid": 19872,
+      "client_exit": 0,
+      "host": {
+        "observed_utc": "2026-10-11T23:41:01.7973086Z",
+        "path": "E:\\OpenLeague\\target\\debug\\openleague-server.exe",
+        "pid": 13912,
+        "alive": true,
+        "observed": true,
+        "started_utc": "2026-10-11T23:35:11.5182481Z"
+      }
+    },
+    "joined_launcher_close_guard_observed": true,
+    "close_attempt_action_evidence": "Root reports ordinary close attempt; saved screenshot/accessibility message and retained owner corroborate the resulting guard.",
+    "all_five_observed_processes_exit_zero": true,
+    "source_and_binary_verifier_before_after_equal": true,
+    "captures": [
+      {
+        "capture": {
+          "path": "E:\\mapslol3v3\\launcher_join_ordinary_observer\\runs\\20261012T013431880-65ea945e0be7449d92872392f29cf9bc\\launcher-00\\01_host_spawn.jpg",
+          "sha256": "fcdf3e07a939e0b678c1e2a11b89e0d9f2a5fd25f0a0f51c541e1476ea086843",
+          "bytes": 168789
+        },
+        "observed_in_saved_image": "Rendered Garen at the blue fountain; visible clock 0:14.",
+        "independently_inspected": true
+      },
+      {
+        "capture": {
+          "path": "E:\\mapslol3v3\\launcher_join_ordinary_observer\\runs\\20261012T013431880-65ea945e0be7449d92872392f29cf9bc\\launcher-01\\01_peer_spawn.jpg",
+          "sha256": "753d538af09cff39af951206455b82ad3a281f46aee05718e206fbcd85d344b3",
+          "bytes": 157706
+        },
+        "observed_in_saved_image": "Rendered Garen at the purple fountain; visible clock 1:12.",
+        "independently_inspected": true
+      },
+      {
+        "capture": {
+          "path": "E:\\mapslol3v3\\launcher_join_ordinary_observer\\runs\\20261012T013431880-65ea945e0be7449d92872392f29cf9bc\\launcher-01\\03_close_guard_settled.jpg",
+          "sha256": "c127e27ef5c731c6e67cad4507c32ae403a10fcde25ae1edafec340ee3def929",
+          "bytes": 68227
+        },
+        "observed_in_saved_image": "Joined launcher remains open and displays the instruction to close its joined client first.",
+        "independently_inspected": true
+      },
+      {
+        "capture": {
+          "path": "E:\\mapslol3v3\\launcher_join_ordinary_observer\\runs\\20261012T013431880-65ea945e0be7449d92872392f29cf9bc\\launcher-00\\02_host_after_peer_departure.jpg",
+          "sha256": "1001d9ecb3af4028bad9a3d53d2dc0577bcad794538ecc4ed835c92680184e6e",
+          "bytes": 170484
+        },
+        "observed_in_saved_image": "Host Garen remains rendered at the fountain; visible clock 6:22.",
+        "independently_inspected": true
+      },
+      {
+        "capture": {
+          "path": "E:\\mapslol3v3\\launcher_join_ordinary_observer\\runs\\20261012T013431880-65ea945e0be7449d92872392f29cf9bc\\launcher-00\\03_host_session_ended.jpg",
+          "sha256": "93040d9d859811564f3bc287c5e93beafe8bca3e857a4ce514df7a9d1b1b202b",
+          "bytes": 67569
+        },
+        "observed_in_saved_image": "Host launcher displays Session terminee and offers a new local game.",
+        "independently_inspected": true
+      }
+    ],
+    "log_diagnostics": [
+      {
+        "slot": 0,
+        "stderr": {
+          "path": "E:\\mapslol3v3\\launcher_join_ordinary_observer\\runs\\20261012T013431880-65ea945e0be7449d92872392f29cf9bc\\launcher-00\\launcher.stderr.log",
+          "sha256": "a3eddeb57f1a815b14bbd769bf34a2742a3954dea22d74dc55a1f4963121e126",
+          "bytes": 6214
+        },
+        "error_lines": 2,
+        "missing_vulkan_layer_json": true,
+        "native_shutdown_passed": true,
+        "native_cleanup_failed": false,
+        "native_complete": false
+      },
+      {
+        "slot": 1,
+        "stderr": {
+          "path": "E:\\mapslol3v3\\launcher_join_ordinary_observer\\runs\\20261012T013431880-65ea945e0be7449d92872392f29cf9bc\\launcher-01\\launcher.stderr.log",
+          "sha256": "ba5e2cf55a0e8a8b22bff399408588546b8b069004e93bf2054ba9e0d5071c4a",
+          "bytes": 6216
+        },
+        "error_lines": 2,
+        "missing_vulkan_layer_json": true,
+        "native_shutdown_passed": true,
+        "native_cleanup_failed": false,
+        "native_complete": false
+      }
+    ],
+    "six_clients_qualified": false,
+    "leave_ack_observed": false,
+    "lease_release_qualified": false,
+    "crash_resume_qualified": false,
+    "complete_match_qualified": false,
+    "native_pixel_parity": false
+  },
+  "crash_resume_runtime_verified": false,
+  "lease_release_qualified": false,
+  "actual_pixels_qualified": false,
+  "history": [
+    {
+      "previous_document": {
+        "path": "E:\\mapslol3v3\\launcher_join_ordinary_runtime_review\\original\\launcher_join_local_progress.json",
+        "sha256": "25958f9204cc1a4d26ee4710d6a940ca196b7e5105ca2e8b50f74973cf0c45a2",
+        "bytes": 3218
+      },
+      "progress": {
+        "recorded_utc": "2026-10-11T23:29:15.095869+00:00",
+        "state": "launcher_build_qualified_ordinary_join_pending",
+        "runtime_build": {
+          "path": "E:\\mapslol3v3\\launcher_join_local_runtime_build.json",
+          "sha256": "5973ec076246eceb10133071c8e6b34241eabe3512591c5906bae94fe34008dd"
+        },
+        "candidate": {
+          "path": "E:\\mapslol3v3\\launcher_join_local_candidate_v2\\manifest.json",
+          "sha256": "2b3a1162b50cf6d2f78c2802892842fd19341cb37b90dbf1f2c019d85ab646af"
+        },
+        "installation": {
+          "path": "E:\\OpenLeague\\backups\\launcher-join-local-v2-20261011T232431-f3a0746e9f1d4474b9b3138ce031d886\\installed.json",
+          "sha256": "0552360efe29f54d13e54c52005cd1d1cf1de6f3b7c801aea4e553d42edb9c04"
+        },
+        "qualification": {
+          "path": "E:\\mapslol3v3\\launcher_join_local_qualification_v2\\20261011T232459-b89e9b8e5d67474db51aee653009c6c3\\receipt.json",
+          "sha256": "dfb540faa05806f4df55a1d82270385defad3d406248ab10eb4235ab05379e5d",
+          "bytes": 402744
+        },
+        "tests_passed_by_crate": {
+          "core": 1495,
+          "server": 37,
+          "client": 696,
+          "launcher": 32
+        },
+        "tests_execution_by_crate": {
+          "core": "reused_unchanged_parent696",
+          "server": "reused_unchanged_parent696",
+          "client": "reused_unchanged_parent696",
+          "launcher": "fresh"
+        },
+        "launcher_ignored_helper": [
+          "sessions::tests::owned_child_fixture"
+        ],
+        "javascript_checks": {
+          "js_recovery": 12,
+          "js_status": 11,
+          "js_join": 17
+        },
+        "changes": [
+          "Rejoindre la partie locale opens a client without owning or draining the host server.",
+          "Joined launcher retains its own process and private recovery credentials.",
+          "Pending actions immediately display Demande en cours; stale replies cannot reopen actions."
+        ],
+        "previous_failed_attempt": {
+          "path": "E:\\mapslol3v3\\launcher_join_local_qualification\\20261011T231531-205177bb65e143b9a821fea8f6c102a7\\receipt.json",
+          "sha256": "400d44206b89d59d6df156346a6a590dfa7427f0444eb7a7a75889fa2037dddd",
+          "failure": "js_join: previous idle text remained visible while invoke was pending; corrected before v2 qualification"
+        },
+        "ordinary_runtime_verified": false,
+        "secure_join_runtime_verified": false,
+        "six_clients_qualified": false,
+        "historical_launcher_complete": false,
+        "complete": false,
+        "limits": [
+          "Only launcher is rebuilt/retested; core1495/server37/client696 evidence is reused with unchanged game sources/binaries.",
+          "All earlier visual/gameplay observations remain parent history and do not qualify this modified launcher.",
+          "Joined launcher owns no server, cannot drain it, and cannot confirm admission or a best-effort Leave acknowledgment.",
+          "Closing launcher after a client crash loses its in-memory key and can orphan a reservation until host drain/server lifetime ends.",
+          "Six graphical clients, actual Tauri close guards, joined crash/recovery, GPU load and host-versus-joined shutdown require a future ordinary runtime."
+        ],
+        "next_action": "Run ordinary host and joined clients from the verified launcher; observe admission to the same session, normal joined departure with host preserved, then normal host closure. Continue Vilemaw approach/attack/retreat and Nexus rendering afterward."
+      }
+    }
+  ],
+  "independent_review": {
+    "path": "E:\\mapslol3v3\\launcher_join_ordinary_runtime_review\\review.json",
+    "sha256": "a43ee26482a56ed13f405d5a1e261a6714db4030979dae8213554d79c6f3f0c9",
+    "bytes": 8465
+  }
+}

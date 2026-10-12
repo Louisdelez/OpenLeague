@@ -1,0 +1,51 @@
+{
+  "scope": "one test only; preserve the cold first getter and identify the exact legitimate persistent owner",
+  "reason": "728410 assigns the persistent String24 metadata+0x1B0 before copying its temporary output. The first long name allocates its cache buffer; teardown frees it in metadata.destroy_base.",
+  "source_path": [
+    "audio_loading_metadata::name -> assign(cached,source)",
+    "audio_loading_screen_packet::receive -> finish_group(key then name)",
+    "audio_replay_metadata::destroy_base -> destroy_string(metadata+0x1B0)"
+  ],
+  "expected_observation_to_qualify": "SSO case has identical owned set; long case adds only the pointer stored at metadata+0x1B0. Both stack temporaries retire. The cache pointer survives repeated lookup and is freed exactly once at close_game_manager.",
+  "real_runtime_changes": false,
+  "tests_added": [],
+  "test_names_unchanged": true,
+  "rust_compiled": false,
+  "rust_tests_executed": false,
+  "full_original_startup_order_qualified": false,
+  "before_sha256": "1a2a311948cc8e40b93f85992df8e4b6c21a0ff10458ad02de770ca5f877b530",
+  "after_sha256": "1a42819dabcf94f6b7b67ba1b509752c20dd5f4ef7d872fbbe395778a2f8879d",
+  "unchanged_source_guards": {
+    "audio_loading_metadata.rs": {
+      "sha256": "43455b8356c1ada57a157c65987f75bc9aca3d31b0af45662ff41f65de74d8f8",
+      "bytes": 10381
+    },
+    "audio_replay_metadata.rs": {
+      "sha256": "c7933f275c73f47621e44f673384498e2b2adadc426fce5d3c7884dec4cffe95",
+      "bytes": 9179
+    },
+    "audio_loading_owned_string.rs": {
+      "sha256": "b858b526cf523ddb28c8609f9fd8e9a1fbe6e788ab4a17e7cdecbcce9c296cf5",
+      "bytes": 13570
+    },
+    "audio_replay_windows_loading_retirement.rs": {
+      "sha256": "67c3af0c595f3033b8c8c1ca58f5dc6c37d6113c5ada5fa0591b2b98a011cc86",
+      "bytes": 10901
+    },
+    "audio_replay_windows_loading_packets.rs": {
+      "sha256": "eeb6e6fd939dffaff0c699d5750313625f85d535f9a195d8519dfbfada93d539",
+      "bytes": 6415
+    }
+  },
+  "failed_run": {
+    "pipeline_session": 76418,
+    "log": "core-tests-before-cache-fix.log",
+    "sha256": "dbacee076170a68c10f741a7d03aed4e55dfe6253320fce4a5d68ebbb79fabca",
+    "passed": 891,
+    "failed": 1,
+    "filtered": 480,
+    "failed_test": "audio_replay_windows_transport::loading_packets::tests::audio_replay_windows_loading_standard_packet_uses_real_resource_manager_and_retires_normalized_key_on_factory_boundary",
+    "client_build_executed": false,
+    "qualification_evidence": false
+  }
+}

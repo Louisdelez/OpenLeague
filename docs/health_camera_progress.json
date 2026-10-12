@@ -1,0 +1,23 @@
+{
+  "updated_utc": "2026-10-07T11:43:00.772425+00:00",
+  "complete": false,
+  "passed": true,
+  "camera_tests": 14,
+  "graphical_validation": true,
+  "active_build_session": null,
+  "health_pose_fix_implemented": true,
+  "duplicate_diagnostic_capture_fix_implemented": true,
+  "dx12_resize_defect_open": true,
+  "scope": "Health bars use TransformHelper and run PostUpdate after CameraUpdateSystems before UI Prepare; current hierarchy is read before propagation. Camera regression leaves GlobalTransform stale deliberately.",
+  "artifacts_sha256": {
+    "crates/client/src/health.rs": "2bff2ae5ca1de5f5162ca4e8fec3a9f5e413d36472ad2d5250e849b39a94e983",
+    "crates/client/src/main.rs": "6d00a1a0cb03f103f2e1047f610d7c2c69d88db476f83c483cbfa8355fda72d5",
+    "crates/client/src/projected_live.rs": "85fc188637fdc09d55e36b08d24174f4a4295e2a8eee39b1e6ab7c39c1947f2f",
+    "tools/capture_projected_core_cycle_v28_health_dx12.py": "02daffc0c82bb2492a0fab29e8fdf1203e9bff323d36242b88adde9948f76dc8",
+    "tools/capture_projected_core_cycle_v28_health_vulkan.py": "302d2770cc75e84f2707438d8ce18a0e6b7fde3ccf9b83463ed77052a33a5ecd",
+    "logs/health-camera-tests.log": "d4ae73ee656859caf314f100126f483b9976a5d8ffb7549a5191d48467b4d07f"
+  },
+  "next_action": "Reproduire et corriger le defaut DX12 ResizeBuffers/Invalid surface observe en v26, puis qualifier redimensionnement et restauration. HUD camera corrige: 14 tests et captures v28 DX12/Vulkan. Ne pas confondre ce scenario diagnostique avec acceptation du jeu complet. Poursuivre les 24 domaines du plan.",
+  "health_camera_runtime_progress": "docs/health_camera_runtime_progress.json",
+  "graphical_validation_scope": "v28 camera jump, owner1 initial/hidden/returned in DX12 and Vulkan"
+}

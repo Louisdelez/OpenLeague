@@ -1,0 +1,61 @@
+{
+  "passed": false,
+  "native_pe_execution": "Only the19-byte Windows x86 SList leaf. Heap mirror/ABI suites additionally execute synthetic x86 guard/call snippets; no original game or RADS instructions.",
+  "checks": 110,
+  "runs": [
+    {
+      "script": "test_loader_structure.py",
+      "report": "loader_structure_tests.json",
+      "exit_code": 0,
+      "stdout": "{\"passed\": true, \"checks\": 21, \"error\": null}\n",
+      "stderr": "",
+      "seconds": 0.32318949699401855,
+      "report_sha256": "fa2111a547ed182e78a3c00f3e65c7390bf7d8b78cb2fe651cfa3e84738b9437",
+      "passed": true,
+      "checks": 21
+    },
+    {
+      "script": "test_isolated_io.py",
+      "report": "io_isolation_tests.json",
+      "exit_code": 0,
+      "stdout": "{\"passed\": true, \"checks\": 36, \"error\": null, \"root\": \"E:\\\\mapslol3v3\\\\loading_rads_heap_probe\\\\test_root_0415e4a7bc\"}\n",
+      "stderr": "",
+      "seconds": 0.150848388671875,
+      "report_sha256": "0a68d8bb0558ed85364ab8dba7c1a3129a5d28caed617280d6c465e139d8f183",
+      "passed": true,
+      "checks": 36
+    },
+    {
+      "script": "test_logs_bridge.py",
+      "report": "logs_bridge_tests.json",
+      "exit_code": 0,
+      "stdout": "{\"passed\": true, \"checks\": 23, \"error\": null}\n",
+      "stderr": "",
+      "seconds": 0.10572671890258789,
+      "report_sha256": "88e419fd63e6a4cbc909aa088e4831b1bb08df550297395a7218d53f52104bb4",
+      "passed": true,
+      "checks": 23
+    },
+    {
+      "script": "test_crt_heap_ownership.py",
+      "report": "crt_heap_ownership_tests.json",
+      "exit_code": 0,
+      "stdout": "{\"passed\": true, \"checks\": 30, \"error\": null, \"cleanup_error\": null}\n",
+      "stderr": "",
+      "seconds": 0.15482211112976074,
+      "report_sha256": "8fb00f01238fa830e68da6dc1b40c249462837539b2d394ada396f19b2132e8c",
+      "passed": true,
+      "checks": 30
+    },
+    {
+      "script": "test_slot_namespaces.py",
+      "report": "slot_namespaces_tests.json",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\mapslol3v3\\loading_rads_heap_probe\\test_slot_namespaces.py\", line 14, in <module>\n    crt=c.CrtOs(m,IO())\n        ^^^^^^^^^^^^^^^\n  File \"E:\\mapslol3v3\\loading_rads_heap_probe\\crt_os.py\", line 65, in __init__\n    from heap_mirrors import HeapMirrors\n  File \"E:\\mapslol3v3\\loading_rads_heap_probe\\heap_mirrors.py\", line 9, in <module>\n    import unicorn\nModuleNotFoundError: No module named 'unicorn'\n",
+      "seconds": 0.1009058952331543,
+      "passed": false
+    }
+  ],
+  "generator_sha256": "245d3faa4513373fbbc00a7c277facadd5055c4bd67d237037304dffe6abdc30"
+}

@@ -1,0 +1,49 @@
+FUNCTION 0x5c23e0
+005c23e0 mov edx, ecx
+005c23e2 mov eax, dword ptr [edx]
+005c23e4 cmp byte ptr [eax + 0xd], 0
+005c23e8 jne 0x5c242c
+005c23ea mov ecx, dword ptr [eax + 8]
+005c23ed cmp byte ptr [ecx + 0xd], 0
+005c23f1 jne 0x5c240f
+005c23f3 mov eax, dword ptr [ecx]
+005c23f5 cmp byte ptr [eax + 0xd], 0
+005c23f9 jne 0x5c240a
+005c23fb jmp 0x5c2400
+005c23fd lea ecx, [ecx]
+005c2400 mov ecx, eax
+005c2402 mov eax, dword ptr [ecx]
+005c2404 cmp byte ptr [eax + 0xd], 0
+005c2408 je 0x5c2400
+005c240a mov dword ptr [edx], ecx
+005c240c mov eax, edx
+005c240e ret 
+005c240f mov eax, dword ptr [eax + 4]
+005c2412 cmp byte ptr [eax + 0xd], 0
+005c2416 jne 0x5c242a
+005c2418 mov ecx, dword ptr [edx]
+005c241a cmp ecx, dword ptr [eax + 8]
+005c241d jne 0x5c242a
+005c241f mov dword ptr [edx], eax
+005c2421 mov eax, dword ptr [eax + 4]
+005c2424 cmp byte ptr [eax + 0xd], 0
+005c2428 je 0x5c2418
+005c242a mov dword ptr [edx], eax
+005c242c mov eax, edx
+005c242e ret 
+005c242f int3 
+005c2430 push ebp
+005c2431 mov ebp, esp
+005c2433 mov ecx, dword ptr [ebp + 0x14]
+005c2436 mov eax, dword ptr [ebp + 0xc]
+005c2439 mov dword ptr [ecx], eax
+005c243b mov ecx, dword ptr [ebp + 0x20]
+005c243e mov eax, dword ptr [ebp + 0x18]
+005c2441 mov dword ptr [ecx], eax
+005c2443 mov eax, 3
+005c2448 pop ebp
+005c2449 ret 0x1c
+005c244c int3 
+005c244d int3 
+005c244e int3 
+005c244f int3 

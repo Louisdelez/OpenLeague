@@ -1,0 +1,13 @@
+float4x4 pMtx : register(c0);
+
+void main(	float2 pos: X3D_VSIN_POSITION,
+			float4 col0: X3D_VSIN_COLOR0,
+			float2 tex0: X3D_VSIN_TEXCOORD0,
+			out float4 posOut: POSITION,
+			out float4 color0Out: COLOR0,
+			out float2 tex0Out: TEXCOORD0 )
+{
+	posOut = mul(pMtx, float4(pos,0,1));
+	color0Out = col0;
+	tex0Out = tex0;
+}

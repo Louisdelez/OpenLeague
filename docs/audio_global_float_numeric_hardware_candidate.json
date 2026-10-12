@@ -1,0 +1,23 @@
+{
+  "saved_utc": "2026-10-09T16:20:31.496914+00:00",
+  "passed": true,
+  "complete": false,
+  "case_count": 384,
+  "source": "tools/global_float_numeric_hardware_candidate_aligned.rs",
+  "executable": "tools/global_float_numeric_hardware_candidate_aligned.exe",
+  "output": "logs/global-float-numeric-hardware-candidate-aligned.log",
+  "source_sha256": "ef798a835c4ec9c4a17383ff6de5dcd139ea032972198bb410e6a25b3bd63b4d",
+  "executable_sha256": "de7eabdc30c37dd8d9baae4f056b5d90e4e36c54d98f0cae50eb0b748aa27b71",
+  "output_sha256": "6913a89ef8380bef6bbc07098fb2d897443804dbd923953c0f242098c81337f3",
+  "reference": "data/4.20/audio_global_float_configuration_tls_preparation.json",
+  "reference_sha256": "1a869ecf5b787173e9c95a8872522ecbb79495f10eb33df1fb7e4245872f6357",
+  "evidence": [
+    "Actual processor executes lifted AEB43E..AEB6ED SSE/x87 numerical operations with original constants, explicit PC64nearest037F and MXCSR1F80 inside lifted block, and16byte-aligned local MOVAPS buffers. All384 active numeric cases compare final threshold/value words and conversion-cache words exactly to original-body emulation.",
+    "Host Rust f64 powf is an explicit candidate for original CRT CA2FA0; not a port of its full body. Native full setter/oracle still runs original CRT. Candidate power output is rounded f32 at the same original stored result boundary before lifted numerical block.",
+    "First standalone candidate had unaligned MOVAPS locals and produced no numerical results; original source/executable retained. Corrected aligned executable exits0 and all384 pass."
+  ],
+  "limits": [
+    "This is focused64bit actual-CPU numerical qualification with candidate pow, not whole original32bit game/CRT execution. Finite tested inputs, quiet NaN and supplied cache states only; signaling NaNs, broader numeric boundaries and alternate startup/CRT hardware dispatch not yet qualified.",
+    "Production global float setter/resource wiring not implemented; direct qualification does not close audio/game domain."
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "updated_utc": "2026-10-04T02:21:17.240513+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_legacy_paths.py": "77082ada43db983a3f79c636a157b122c3bce5a87405a1935dc6544d57ba087d",
+    "data/4.20/audio_legacy_paths_contract.json": "b0d5987eb80c32d6e8978349ec568265d9c466798642f0699a78aaab1b7df7ab",
+    "crates/core/src/audio_legacy_paths.rs": "40e8a8c1f001c549f2f791aa2d7b612a054d52f3a898a051999524faa805d313",
+    "crates/core/src/lib.rs": "574cb34ac4835d0a36aa049af84708edf5875d2ff806355faf47df00e505f336",
+    "logs/native-audio-legacy-paths-core-tests.log": "f5a78795f1c011333a447099c8a27e0a2471259f331825fd0866472f72f430e5"
+  },
+  "native_legacy_path_cases": 128,
+  "native_path_hash_cases": 131,
+  "core_tests_passed": 265,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "ported": [
+    "Native case-insensitive path hash8E45D0 distinct from event FNV",
+    "7042C0 cache lookup before parsing; cache matches raw hash, no insertion",
+    "Case-sensitive announcer marker; first-slash prefix, last-slash filename, all dots replaced",
+    "6F7360 provider receives empty namespace and actual filename/prefix; explicit unavailable provider error"
+  ],
+  "limits": [
+    "Original hash, cache lookup, parser, dot replacement and provider invocation executed. CRT/string storage/security and service virtual10 explicitly adapted.",
+    "Service event composition, actual cache population and announcer playback remain unqualified. No invented event-name format.",
+    "ASCII/no-NUL paths only; malformed matched paths without a subsequent slash excluded (native unsafe pointer subtraction).",
+    "6F79D0 launch wrapper not qualified; client mixer/output integration absent; standalone binaries unchanged."
+  ],
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false
+}

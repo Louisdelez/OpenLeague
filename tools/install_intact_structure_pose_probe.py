@@ -1,0 +1,12 @@
+from pathlib import Path
+r=Path('E:/OpenLeague')
+p=r/'crates/client/src/animation.rs';s=p.read_text(encoding='utf-8');old='actors: Query<(&AnimationPlayer, &Actor)>, mut last: Local<f32>';assert old in s;s=s.replace(old,'actors: Query<(Entity, &AnimationPlayer, &Actor)>, children: Query<&Children>, joints: Query<(&Name,&Transform)>, mut last: Local<f32>')
+s=s.replace('actors.iter().filter(|(_,a)|a.playback.model_name.contains','actors.iter().filter(|(_,_,a)|a.playback.model_name.contains').replace(').map(|(player,actor)| {',').map(|(entity,player,actor)| {')
+needle='serde_json::json!({"id":actor.playback.id,"model":actor.playback.model_name,"role":actor.role,"active_clips":clips})';assert needle in s
+s=s.replace(needle,'''let pose:Vec<_>=children.iter_descendants(entity).filter_map(|e|joints.get(e).ok()).map(|(name,t)|serde_json::json!({"name":name.as_str(),"translation":t.translation.to_array(),"rotation":t.rotation.to_array(),"scale":t.scale.to_array()})).collect();
+        serde_json::json!({"id":actor.playback.id,"model":actor.playback.model_name,"role":actor.role,"active_clips":clips,"joint_pose":pose})''');p.write_text(s,encoding='utf-8')
+p=r/'crates/client/src/main.rs';s=p.read_text(encoding='utf-8').replace('animation::destruction_probe.after(bevy::animation::advance_animations)','animation::destruction_probe.after(bevy::animation::animate_targets)');p.write_text(s,encoding='utf-8')
+s=(r/'crates/server/examples/destroyed_animation_fixture.rs').read_text(encoding='utf-8');s=s.replace('//! Diagnostic visual fixture: authored model identity, relocated structures and outgoing health transition. Does not qualify ordinary combat destruction.','//! Diagnostic render fixture:12authored structure identities relocated for playback/pose inspection. Ordinary placement/combat not qualified.')
+s=s.replace('let wanted=["TT_OrderTurret1","OrderNexus","TT_OrderInhibitor","TT_ChaosInhibitor"];','let wanted=["OrderNexus","ChaosNexus","TT_OrderInhibitor","TT_ChaosInhibitor","TT_OrderTurret1","TT_OrderTurret2","TT_OrderTurret3","TT_OrderTurret4","TT_ChaosTurret1","TT_ChaosTurret2","TT_ChaosTurret3","TT_ChaosTurret4"];')
+s=s.replace('x:7500.+(i%2) as f32*650.,z:6800.+(i/2) as f32*650.','x:6800.+(i%4) as f32*650.,z:6300.+(i/4) as f32*750.').replace('unit.health=if game.tick>=450 {0.} else {unit.max_health};','unit.health=unit.max_health;')
+(r/'crates/server/examples/intact_structure_animation_fixture.rs').write_text(s,encoding='utf-8');print('Added optional actual joint pose observation and12structure diagnostic render scene.')

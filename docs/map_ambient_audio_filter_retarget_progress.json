@@ -1,0 +1,56 @@
+{
+  "updated_utc": "2026-10-03T22:39:31.844625+00:00",
+  "contract": "data/4.20/audio_filter_retarget_contract.json",
+  "contract_sha256": "c8e40ed6a4cec61672f61862681bb1c2aefc19c763a6b15b838250f0fff9630a",
+  "module": "crates/core/src/audio_filter_transition.rs",
+  "module_sha256": "e6605cff45978884a4c35498305c8d60455daf8a1e0b27b875e3343faad4fd1f",
+  "native_sequences": 12,
+  "native_blocks": 216,
+  "native_target_writer_cases": 84,
+  "valid_pcm_samples_compared": 60384,
+  "native_coefficient_updates": 252,
+  "sample_rates_tested": [
+    44100,
+    48000,
+    96000
+  ],
+  "channels_tested": 2,
+  "alignment_bytes_tested": [
+    0,
+    4,
+    8,
+    12
+  ],
+  "native_regions": {
+    "0xb1505f": "7137803d802e544744615f53d73c604aba08ed6ba4ba94a7ffc0b0134b5482c2",
+    "0xb2b410": "30245ed22b26270e584b1144aded6dad1195445408678866862b91d569757410",
+    "0xb2b7e0": "2339fcf647a618702d8443309bfbb663958a0b6bf773066b4370535d7c8c0851",
+    "0xb2bb00": "5b98cab06a7f1422548f3465375428a14cc3a632ec9ac58b758348571e40f18b",
+    "0xb2b4f0": "a8f3b889a66132a863f4e89402d3b4fab5020ab10425023919a82e9ea82976eb",
+    "0xb2be10": "7ab31711766b0a7c25f6196ad9deda4679aa2ff9cbb094295b9d527f4fc5e719",
+    "0xb35530": "02287b89402db1803d093047483a61bc0eec5615b9f69bb3e4bed424a70a12df",
+    "0xb2bb30": "26743be46dbb06a49e20ee8c279a987a5778d2f00ed6f8c50ee64cb602e5337a",
+    "0xb2b870": "ffa65869acd66e126f964302aab7ddda891178a60bfddf3357374b6bd2ea6979",
+    "0xb2b9d0": "567cef0af329d654ddd6c027e0ed14cb7d466d7807049968570caea9fb726dff"
+  },
+  "comparison": "Exact f32bits for PCM output, history and target; exact consumer flags, current and step after each native voice invocation, including retarget, identical targets, below-threshold gate, high-control clamp and reset.",
+  "core_tests": 187,
+  "rust_transition_tests_total": 4,
+  "new_retarget_tests": 2,
+  "test_log": "logs/native-audio-filter-retarget-core-tests.log",
+  "test_log_sha256": "92125ed812cb2b68ff2efa479439dc8cb668b6303aac2c389858dab2071d21ca",
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "stubs": [
+    "ada670 returns allocated history storage; ca1d00 clears requested history bytes. No PCM/control routines stubbed."
+  ],
+  "client_integration_enabled": false,
+  "ambient_playback_enabled": false,
+  "complete": false,
+  "limits": [
+    "Voice gate and target writer executed with preexisting filter and buffer. Allocation failure and upstream LPF aggregation unqualified.",
+    "Constructor/initializer and reset executed with bounded allocator/memset stubs. Native voice creator mode1 argument source inspected separately; other callers not qualified.",
+    "Finite controls, two channels, three supported sample rates and four alignments. No live audio playback acceptance.",
+    "Input writer API changed from unconditional dirty/immediate request to native clamped update_target preserving pending immediate/dirty; reset clears histories and sets immediate only.",
+    "Finite-input defenses differ from native NaN/Inf behavior. Original upstream LPF and voice allocation failures not qualified."
+  ]
+}

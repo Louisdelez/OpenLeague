@@ -1,0 +1,128 @@
+{
+  "updated_utc": "2026-10-05T03:32:58.569822+00:00",
+  "complete": false,
+  "client_tests_passed": 147,
+  "client_build_passed": true,
+  "native_driver_cases": 14,
+  "native_driver_addresses": 42,
+  "runtime": {
+    "checked_utc": "2026-10-05T03:28:58.518718+00:00",
+    "complete": false,
+    "normal_server": true,
+    "gpu_stages": {
+      "before_camera": true,
+      "complete": false,
+      "format": "Rgba8Unorm",
+      "frames": 719,
+      "height": 512,
+      "last_fade_parameters": [
+        0.07736968994140625,
+        0.019342422485351562,
+        0.0,
+        1.100000023841858
+      ],
+      "limits": [
+        "Live raw GPU mask drives native-rate fade/horizontal/vertical stages; current/previous textures ping-pong.",
+        "Original D3D target rounding, full native constructor/override and normal overlay/material factors remain open."
+      ],
+      "live_source_bound": true,
+      "normal_fog_factors_enabled": false,
+      "passes": 2157,
+      "previous": 25.041791915893555,
+      "session": [
+        1791170901207153300,
+        0
+      ],
+      "width": 512
+    },
+    "gpu_readback": {
+      "alpha_ready": true,
+      "bytes": 1048576,
+      "complete": false,
+      "distinct_red_values": 88,
+      "expected_bytes": 1048576,
+      "gpu_readback": true,
+      "limits": [
+        "Asynchronous readback of the actual final live GPU texture; this is not an original D3D comparison or frame-aligned CPU reference."
+      ],
+      "nonzero_texels": 23558,
+      "rgb_equal": true
+    },
+    "client_sha256": "b901531a654ac75a09b30942aa0539aa212fc8796c8ec068a126c2688dc10aeb",
+    "measurement": {
+      "binary_configuration": "Levels/Map10/terrain.inibin",
+      "complete": false,
+      "configuration_profile": "native_map10_inibin_no_launch_override",
+      "error": null,
+      "format": "R8Unorm",
+      "gpu_readback_verified": false,
+      "height": 512,
+      "limits": [
+        "Raw visibility only; native fade/blur and material binding pending.",
+        "Corner allocation and sampler are explicit Bevy adapters; original initialization/device producers remain open."
+      ],
+      "logical_configuration": "Levels/Map10/terrain.ini",
+      "material_bound": false,
+      "native_blur_sigma": -1.0,
+      "native_upscale": true,
+      "nonzero_texels": 20328,
+      "render_asset_registered": true,
+      "uploads": 121,
+      "width": 512
+    },
+    "capture": "E:\\OpenLeague\\logs\\fow-live-gpu-147.png",
+    "capture_sha256": "ea88134a81234eddc018e4e11b521b096f804fd7b9a0d2d3678b58b69f68af6a",
+    "visual_inspection_required": false,
+    "limits": [
+      "Final actual live GPU texture read back: RGBA8, matching RGB and initialized alpha,88distinct red levels at recorded observation.",
+      "Three native-rate stages drive terrain/environment diagnostic sampling. Normal overlay/factors and original D3D rounding remain open."
+    ],
+    "external_vulkan_layer_loader_error": {
+      "messages": [
+        "2026-10-05T03:28:32.126793Z ERROR wgpu_hal::vulkan::instance: GENERAL [Loader Message (0x0)]",
+        "2026-10-05T03:28:32.127630Z ERROR wgpu_hal::vulkan::instance: \tobjects: (type: INSTANCE, hndl: 0x28ae2bdd330, name: ?)"
+      ],
+      "reason": "Unavailable external TikTok Vulkan layer manifest; current client and GPU readback succeed. Global configuration untouched."
+    },
+    "visual_inspection": {
+      "observed": [
+        "Actual current Vulkan diagnostic framebuffer shows white/black team visibility with smooth gray edges on terrain/environment, Garen/shopkeeper, health bars and readable French HUD."
+      ],
+      "limits": [
+        "Actor models retain their ordinary materials; normal dynamic fog factors remain unimplemented.",
+        "Numerical live triangle/pixel world sampling and original D3D/frame-aligned comparison remain open."
+      ]
+    }
+  },
+  "findings": [
+    "Live R8 visibility feeds native-rate fade and horizontal/vertical Gaussian GPU passes before the camera; final RGBA8 texture bound to terrain/environment materials.",
+    "147client tests pass; actual Vulkan readback observes23558nonzero texels and88red levels, equal RGB and alpha255 across the complete512x512 final texture.",
+    "Original full6B57A0driver execution confirms fade then blur then timestamp commit, strict native gate and both upload branches in14cases; GPU subcalls are tracing adapters."
+  ],
+  "limits": [
+    "Original full driver control flow and original x87 remainder/timestamp commit execute; GPU begin/upload/fade/blur/end calls are explicit tracing adapters.",
+    "Confirms fade then blur then timestamp commit, and both uploaded/direct branches; original texture swap internals and D3D draw/device are not executed.",
+    "Does not prove original GPU result, complete constructor/graphics context or original-frame alignment for live Bevy render loop.",
+    "Original full texture-swap implementation, D3D raster/rounding, full config/override and frame-aligned CPU comparison remain open.",
+    "Live driver uses extracted application clock and snapshot session/team adapters; full native clock/provider semantics unqualified.",
+    "Normal overlay/height/edge/actor/projected material factors and all remaining full-plan domains remain open."
+  ],
+  "next_actions": [
+    "Recover original environment/actor fog-factor application order and bind the recovered overlay to normal materials.",
+    "Enable qualified normal factors using final live GPU visibility; verify actual world coordinates numerically and team/session/movement transitions.",
+    "Complete six-client Map10 match, all champions, launcher/services and remaining full-plan requirements."
+  ],
+  "files_sha256": {
+    "crates/client/src/fow_gpu.rs": "f7ec18a76ebc758a848a955972ab13a4953cca2e56f5c142c8b91bf8b41d61af",
+    "crates/client/src/fow_visibility_texture.rs": "f6180f8dea37f12a766cab2529769d645a2f0df54f48ef4068c90a312e316b55",
+    "crates/client/src/main.rs": "414c2f51fca8fbeed7a993e2a0ffd19771de3c7e95984067626cc147f06ac6cc",
+    "data/4.20/fow_postprocess_driver_contract.json": "62efdd3bd605a7bcbe9d4b2400f55facd948febb9254f2bc7ab579a6e6870e9d",
+    "assets/shaders/fow_postprocess_texture.wgsl": "34af9b27af5959537fb8cd52194d5213bdde9ecc25ff275ff32fe69d312a00ba",
+    "logs/fow-live-gpu-tests.log": "3955c56b73947f8164356e928b328b10c0141b073bea01c3289d95dd1d276cfc",
+    "logs/fow-live-gpu-build.log": "63641288867030b41612ef9148fcc021d0d85d53a0e8380a01864558f7c8cccb",
+    "logs/fow-live-gpu-stages.json": "a557e6fbf152885c0a3c0aa71aa568f1f56199030d8dc3fc7052cf52f7f09ffc",
+    "logs/fow-live-gpu-readback.json": "c988dfe574c47fdf4195f2089295a8e5a83b4bb24d29db89b40c6210e5aa2938",
+    "logs/fow-live-gpu-147.png": "ea88134a81234eddc018e4e11b521b096f804fd7b9a0d2d3678b58b69f68af6a",
+    "target/debug/openleague-client.exe": "b901531a654ac75a09b30942aa0539aa212fc8796c8ec068a126c2688dc10aeb"
+  }
+}

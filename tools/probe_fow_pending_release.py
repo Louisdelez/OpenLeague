@@ -1,0 +1,13 @@
+from pathlib import Path
+r=Path('E:/OpenLeague')
+s=(r/'tools/probe_fow_multi_source_release.py').read_text()
+s=s.replace("cases=[]\ndefinitions", "pending_storage=0x40006000;pair=0x40007000\npriority_sets=[[0x3f800000,0x40000000,0x40400000],[0x3f800000]*3,[0x7fc00000,0,0xbf800000],[0x80000000,0,0x7f800000]]\npatterns=[[0,1,2],[0,1,2,0],[1,2],[]]\ndef capture_pending():\n return [dict(identity=next(i for i,(obj,_) in enumerate(sources) if obj==read32(a)),priority_bits=read32(a+4)) for a in range(read32(view+0x3c),read32(view+0x40),8)]\ncases=[]\ndefinitions")
+s=s.replace("for observers,applied,order in itertools.product(range(3),[False,True],itertools.permutations(range(3))):", "for observers,applied,order,pattern,priorities in itertools.product([1,2],[True],itertools.permutations(range(3)),patterns,priority_sets):")
+s=s.replace(" initial_counts=list", " write32(view+0x3c,pending_storage);write32(view+0x40,pending_storage);write32(view+0x44,pending_storage+64)\n for index,identity in enumerate(pattern):\n  u.mem_write(pair,struct.pack('<2I',sources[identity][0],priorities[identity]));u.reg_write(UC_X86_REG_EDX,index)\n  invoke(0x6bbfb0,pending_storage,struct.pack('<3I',pending_storage,pair,0));write32(view+0x40,pending_storage+8*(index+1))\n initial_pending=capture_pending()\n initial_counts=list")
+s=s.replace("steps.append(dict(removed=identity,", "steps.append(dict(pending=capture_pending(),removed=identity,")
+s=s.replace("cases.append(dict(observers=observers,", "cases.append(dict(pattern=pattern,priorities=priorities,initial_pending=initial_pending,observers=observers,")
+s=s.replace("fow_multi_source_release_contract.json", "fow_pending_release_contract.json")
+s=s.replace("Distinct views, concurrency, pending-source heap and full view registration remain unqualified.", "Pending heap insertion/popping/rebuild executes original6BBFB0/6BD740 with raw source identity and supplied priority bits; priority producers and scheduling remain unknown. Distinct views, concurrency and full view registration remain unqualified.")
+s=s.replace("dict(cases=len(cases),removals=", "dict(cases=len(cases),pending_heap=True,removals=")
+(r/'tools/probe_fow_pending_release_generated.py').write_text(s,encoding='utf-8')
+exec(compile(s,'native pending source heap','exec'))

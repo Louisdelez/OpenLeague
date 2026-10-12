@@ -1,0 +1,79 @@
+{
+  "complete": false,
+  "passed": true,
+  "scenario": "Restart owned fixture while old missile states queued; same graphical process; replay old datagrams after new-session acceptance; cast again",
+  "proof": [
+    {
+      "elapsed": 434378.437,
+      "kind": "old_datagrams_replayed",
+      "value": {
+        "count": 28,
+        "new_session": 1791405434600125500,
+        "old_server_pid": 9164,
+        "new_server_pid": 9800,
+        "client_pid": 6960
+      }
+    },
+    {
+      "elapsed": 434383.437,
+      "kind": "reconnect_verified",
+      "value": {
+        "sessions": [
+          1791405406479333500,
+          1791405434600125500
+        ],
+        "same_client_pid": 6960,
+        "old_packets_replayed": 28
+      }
+    }
+  ],
+  "new_session_lifecycle": [
+    {
+      "context_present": true,
+      "cooldown_ready": 127,
+      "kind": "Appeared",
+      "session": 1791405434600125500,
+      "source": 22,
+      "target": 21,
+      "tick": 17
+    },
+    {
+      "context_present": true,
+      "cooldown_ready": 127,
+      "kind": "Observed",
+      "session": 1791405434600125500,
+      "source": 22,
+      "target": 21,
+      "tick": 21
+    },
+    {
+      "context_present": true,
+      "cooldown_ready": 127,
+      "kind": "Observed",
+      "session": 1791405434600125500,
+      "source": 22,
+      "target": 21,
+      "tick": 24
+    },
+    {
+      "context_present": true,
+      "cooldown_ready": 127,
+      "kind": "Disappeared",
+      "session": 1791405434600125500,
+      "source": 22,
+      "target": 21,
+      "tick": 28
+    }
+  ],
+  "sha256": {
+    "logs\\projected-v64-dx12-wire.json": "dd4dd0bc3e04031c8a9a5620bfa7eb7e660fc0d9b7f44319ed233fe631e51cb7",
+    "logs\\projected-core-cycle-v64-receivers-dx12-client.log": "8fb040b167fb4e3f078eee0410427d29ce157afd69a7a2ac5622461e1f8b835d",
+    "target\\debug\\openleague-client.exe": "811b9e513498aabeeb590ad08671b8d3f1bc82a0300898149690c5fbaaf75816"
+  },
+  "gpu_evidence": "docs/missile_batch_v64_gpu.json",
+  "limits": [
+    "Old missile states were queued before first visual creation, so this does not prove cleanup of an already visible old-session effect.",
+    "Recorded old packet set may not include an old Welcome; handshake replay remains separate.",
+    "Local diagnostic fixture restart, not full account/session service qualification."
+  ]
+}

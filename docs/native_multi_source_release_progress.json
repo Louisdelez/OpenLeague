@@ -1,0 +1,35 @@
+{
+  "updated_utc": "2026-10-04T21:47:38.568614+00:00",
+  "complete": false,
+  "client_tests_passed": 107,
+  "native_sequences": 36,
+  "native_removals": 108,
+  "native_addresses": 1440,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Three original native circular sources removed in all six permutations, with zero, one or two observers of the same view; 36 sequences and108removals. Original creation, mask addition, removal, dispatch, callback, rollback, destruction request and failed weak promotion executed.",
+    "Rust comparison matches exact initial/per-step counts and pixels, manager source order, callback applied-state transitions and surviving ownership. Duplicate callbacks withdraw once; retired weak references cannot notify again.",
+    "Original weak destructor585AA0 reduces retained weak count1 to0, then control deleter5D5B40 requests deallocation in all108removals; allocator boundary adapted, emulator memory retained."
+  ],
+  "limits": [
+    "Allocator/free/mutex boundaries adapted as in single-source probe; event tree and shared receiver controls supplied. Deallocation requests recorded without unmapping memory.",
+    "Subscribers target the same view; source-global applied flag prevents a second decrement. Distinct views, concurrency, pending-source heap and full view registration remain unqualified.",
+    "No live gameplay/GPU binding or full game qualification.",
+    "Pending-source heap, distinct views and complete subscription initialization remain open.",
+    "107client tests are current. Earlier427core tests/10UDPchecks are unchanged-core/server evidence. All24domains remain unfinished."
+  ],
+  "next_actions": [
+    "Qualify pending-source heap removal/reordering and complete view initialization/subscription.",
+    "Qualify real entity source creation and identity/team producers; connect authoritative visibility masks and normal GPU fog rendering; verify current gameplay."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_multi_source_release_contract.json": "91c900c133d763f0a9d562a06600c3aeefd29d0a4c9ae49f233225c6d841999b",
+    "tools/probe_fow_multi_source_release.py": "df2f5e93cd8304d107f03015d3de3b222ae76c00c6ad76b5d6359cbafa601c32",
+    "crates/client/src/fow_source_factory.rs": "bb62f4167692df57b9474b6e519d5635a103d5c8364b25c0dae3a5595d443f21",
+    "logs/native-multi-source-release-tests.log": "ec3bb8b4cd0a34cc76c5c56287ecb9228521b354daf150ad8401848a0b4f0ffd",
+    "logs/native-multi-source-release-final-weak-tests.log": "e7c4627421c9b93da05abf8251c2782f90b927b6ccc767c33704d71d86639ac1"
+  },
+  "final_weak_releases": 108,
+  "final_weak_contract_rust_recheck_passed": true
+}

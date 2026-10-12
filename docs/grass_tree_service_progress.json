@@ -1,0 +1,44 @@
+{
+  "updated_utc": "2026-10-05T11:59:59.454047+00:00",
+  "complete": false,
+  "client_tests_passed": 208,
+  "client_build_passed": true,
+  "native_tree_service_cases": 3,
+  "tree_service_defaults_ported": true,
+  "tree_service_lifetime_ported": true,
+  "actual_game_provider_integrated": false,
+  "native_addresses": 268,
+  "parent_control_ported": true,
+  "parent_vertical_expansion_ported": true,
+  "parent_unlink_ported": true,
+  "parent_pruning_ported": true,
+  "full_parent_reindex_qualified": false,
+  "normal_actor_registry_integrated": false,
+  "live_grass_mask_integrated": false,
+  "findings": [
+    "Original95EA20 allocates16byte service, setsmaxdepth12 androotdepth1,rootbounds[-32768,-32768,32767,32767] from10B0EC4; actual95FC70/95FD10 constructorreuse andsentinelcreation execute.",
+    "Rustservice usesverifieddefaultroot/config andsharedpoolconstructor. Freshroot,onepoolednode andthreepoolednodes comparefullrootstate,queue/count,poolorder.",
+    "Original95EAC0/95EB10/95FDA0 serviceteardown executesfully; Rustclosesroot,clearsresidualqueue andpreservesrecycledrootpoolorder. Nativeheapallocation/freeevents areevidenceoforiginalexecution, notclaimedRustbinaryABI equivalence."
+  ],
+  "limits": [
+    "Threeexplicit validpool successstates, defaultconstructor arguments andpreallocatedcapacity. Allocatorfailure/customhooks/globalcross-service poolsharing remainunqualified.",
+    "Factory/lifetimefunctions compiledbutnotyetinvokedbyactualgameactor/providerregistry ornormalcollector/mask/WALL. Modelbounds/camera/registration andpartialexistingchildren remainopen.",
+    "Noactualmatch/framebufferqualificationinthisturn; all24domainsremainopen."
+  ],
+  "next_actions": [
+    "Qualifyspatialobjectconstructor95F230,registration/unregister95F1D0 andtheirrealcaller/provider link; actor/modelbounds/camera producers.",
+    "Connectnormalspatialactorcallbacks toverifiedservice/tree/registry,collector/mask/WALL andinspectMap10match.",
+    "Continuefull24domainplan,allchampionkits,sixclientvictory/results anddelivery."
+  ],
+  "files_sha256": {
+    "crates/client/src/grass_tree_service.rs": "c263123733443d398658e490abab7c2284ec2d0304fc7c85647b0e413a722444",
+    "crates/client/src/grass_pool.rs": "06a175d354870949f203cbf532888371994fcabc60437f19a0604661d314f852",
+    "crates/client/src/grass_subdivision.rs": "46b28656c626b1dfcc6f6abfefa9fb8bc12c2dc6e12ceaf8fd42c6d83f727dc1",
+    "data/4.20/grass_tree_service_contract.json": "ace7d1f161d8d68b324f9a17927e545756d2d4360fc218ce7d6ea49b1b3b889e",
+    "crates/client/src/grass_parent.rs": "c4071afdb5e7977f8928ea8b88e16339cdbd4acec07bb2102ce4a4e9517c9c97",
+    "crates/client/src/main.rs": "eb0a84fcdc2df520d2e0881cb6876e010a14252ee8ec91a9597ed6f08a12fb45",
+    "logs/grass-tree-service-tests.log": "1adbb46a0bf6191294ac983e994d8f58595aefebc696325a4c4494628c8e3838",
+    "logs/grass-tree-service-build.log": "4f25ffef82581f7e94aaf2b26e15811508bcc579ceb10893fdbfd21939578e95",
+    "target/debug/openleague-client.exe": "06b2c9da427daab59cd5462b066fe589c5016416a11caf66720d399dfb5f3397"
+  }
+}

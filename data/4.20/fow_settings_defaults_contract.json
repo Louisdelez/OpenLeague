@@ -1,0 +1,200 @@
+{
+  "updated_utc": "2026-10-05T01:15:05.434724+00:00",
+  "passed": true,
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "resource_source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\terrain.inibin",
+  "resource_sha256": "1a82e51b6be12e6091fb50859b93e8ac13de86f4e38e162570388d88ede9fba1",
+  "map10_authored": {
+    "fadeStart": null,
+    "fadeFinish": null,
+    "edgeEnhancement": null,
+    "edgeTintPoint": null,
+    "blurKernelSigma": null
+  },
+  "defaults": {
+    "fadeStart": -1000000.0,
+    "fadeFinish": -2000000.0,
+    "blurKernelSigma": -1.0
+  },
+  "cases": [
+    {
+      "name": "map10-original",
+      "authored": {
+        "fadeStart": null,
+        "fadeFinish": null,
+        "edgeEnhancement": null,
+        "edgeTintPoint": null,
+        "blurKernelSigma": null
+      },
+      "previous_tint": 0.0,
+      "requests": [
+        {
+          "key": "fadeStart",
+          "default": -1000000.0,
+          "value": -1000000.0
+        },
+        {
+          "key": "fadeFinish",
+          "default": -2000000.0,
+          "value": -2000000.0
+        },
+        {
+          "key": "edgeEnhancement",
+          "default": 0.0,
+          "value": 0.0
+        },
+        {
+          "key": "edgeTintPoint",
+          "default": 0.0,
+          "value": 0.0
+        },
+        {
+          "key": "blurKernelSigma",
+          "default": -1.0,
+          "value": -1.0
+        }
+      ],
+      "result_bits": [
+        3379831808,
+        3388220416,
+        0,
+        0,
+        3212836864
+      ]
+    },
+    {
+      "name": "diagnostic-positive-tint",
+      "authored": {
+        "fadeStart": 0.25,
+        "fadeFinish": 0.75,
+        "edgeEnhancement": 2.0,
+        "edgeTintPoint": 0.2,
+        "blurKernelSigma": 0.5
+      },
+      "previous_tint": 0.0,
+      "requests": [
+        {
+          "key": "fadeStart",
+          "default": -1000000.0,
+          "value": 0.25
+        },
+        {
+          "key": "fadeFinish",
+          "default": -2000000.0,
+          "value": 0.75
+        },
+        {
+          "key": "edgeEnhancement",
+          "default": 0.0,
+          "value": 2.0
+        },
+        {
+          "key": "edgeTintPoint",
+          "default": 0.0,
+          "value": 0.2
+        },
+        {
+          "key": "blurKernelSigma",
+          "default": -1.0,
+          "value": 0.5
+        }
+      ],
+      "result_bits": [
+        1048576000,
+        1061158912,
+        1073741824,
+        1084227584,
+        1056964608
+      ]
+    },
+    {
+      "name": "diagnostic-zero-retains-tint",
+      "authored": {
+        "edgeTintPoint": 0.0
+      },
+      "previous_tint": 5.0,
+      "requests": [
+        {
+          "key": "fadeStart",
+          "default": -1000000.0,
+          "value": -1000000.0
+        },
+        {
+          "key": "fadeFinish",
+          "default": -2000000.0,
+          "value": -2000000.0
+        },
+        {
+          "key": "edgeEnhancement",
+          "default": 0.0,
+          "value": 0.0
+        },
+        {
+          "key": "edgeTintPoint",
+          "default": 0.0,
+          "value": 0.0
+        },
+        {
+          "key": "blurKernelSigma",
+          "default": -1.0,
+          "value": -1.0
+        }
+      ],
+      "result_bits": [
+        3379831808,
+        3388220416,
+        0,
+        1084227584,
+        3212836864
+      ]
+    },
+    {
+      "name": "diagnostic-negative-retains-tint",
+      "authored": {
+        "edgeTintPoint": -1.0
+      },
+      "previous_tint": 5.0,
+      "requests": [
+        {
+          "key": "fadeStart",
+          "default": -1000000.0,
+          "value": -1000000.0
+        },
+        {
+          "key": "fadeFinish",
+          "default": -2000000.0,
+          "value": -2000000.0
+        },
+        {
+          "key": "edgeEnhancement",
+          "default": 0.0,
+          "value": 0.0
+        },
+        {
+          "key": "edgeTintPoint",
+          "default": 0.0,
+          "value": -1.0
+        },
+        {
+          "key": "blurKernelSigma",
+          "default": -1.0,
+          "value": -1.0
+        }
+      ],
+      "result_bits": [
+        3379831808,
+        3388220416,
+        0,
+        1084227584,
+        3212836864
+      ]
+    }
+  ],
+  "native_addresses": 71,
+  "limits": [
+    "Original native reader call/default propagation, SSE tint reciprocal and x87 sigma store execute.8B1F50 is adapted to parsed native terrain INIBIN values and explicit overrides.",
+    "Resource/path lookup, whole initialization, upscale selection, overlay resolver and GPU shader consumers remain open.",
+    "Zero/negative tint leaves prior global reciprocal unchanged; this is retained, not silently reset. Native global cold-start values used for map case."
+  ]
+}

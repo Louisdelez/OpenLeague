@@ -1,0 +1,45 @@
+from pathlib import Path
+r=Path('E:/OpenLeague')
+s='''//! Original CA91A9/CA9218/CA8980 existing or newly-created CRT thread context.
+//! Heap, Windows TLS and initialized lock-table providers remain explicit services.
+use std::collections::{BTreeMap,BTreeSet};
+use crate::{audio_bus_bank::Error,audio_plugin_factory::Memory,audio_global_float_default_power::Windows};
+use crate::audio_path_source_virtual_cleanup::{get,put,live};
+fn increment(m:&mut BTreeMap<u32,Memory>,d:&BTreeSet<u32>,a:u32)->Result<(),Error>{let v=get(m,d,a,4)?;put(m,d,a,4,v.wrapping_add(1))}
+fn lock(m:&mut BTreeMap<u32,Memory>,d:&mut BTreeSet<u32>,index:u32,enter:bool,s:&mut impl Windows)->Result<(),Error>{let r=get(m,d,0x1223580+index*8,4)?;if r==0{return Err(Error::Backend("original CRT lock startup required"));}s.thread_lock(r,enter,m,d)}
+fn retain_locale(m:&mut BTreeMap<u32,Memory>,d:&BTreeSet<u32>,locale:u32)->Result<(),Error>{increment(m,d,locale)?;for offset in[0x78,0x80,0x7c,0x88]{let r=get(m,d,locale+offset,4)?;if r!=0{increment(m,d,r)?;}}for j in 0..6{let a=locale+0x1c+j*16;if get(m,d,a-8,4)?!=0x12230d4{let r=get(m,d,a,4)?;if r!=0{increment(m,d,r)?;}}if get(m,d,a-12,4)?!=0{let r=get(m,d,a-4,4)?;if r!=0{increment(m,d,r)?;}}}let r=get(m,d,locale+0x9c,4)?.wrapping_add(0xb0);increment(m,d,r)}
+fn initialize(m:&mut BTreeMap<u32,Memory>,d:&mut BTreeSet<u32>,r:u32,s:&mut impl Windows)->Result<(),Error>{
+ for(off,n,v)in[(0x5c,4,0x106b708),(8,4,0),(0x14,4,1),(0x70,4,1),(0xb8,2,0x43),(0x1be,2,0x43),(0x68,4,0x1222bb0),(0x3b8,4,0)]{put(m,d,r+off,n,v)?;}
+ lock(m,d,13,true,s)?;let mb=get(m,d,r+0x68,4)?;increment(m,d,mb)?;lock(m,d,13,false,s)?;
+ lock(m,d,12,true,s)?;put(m,d,r+0x6c,4,0)?;let locale=get(m,d,0x122323c,4)?;put(m,d,r+0x6c,4,locale)?;let locale=get(m,d,r+0x6c,4)?;retain_locale(m,d,locale)?;lock(m,d,12,false,s)
+}
+/// Remaining CA91A9 NULL-TLS branch, before the caller restores saved LastError.
+pub fn create(m:&mut BTreeMap<u32,Memory>,d:&mut BTreeSet<u32>,s:&mut impl Windows)->Result<u32,Error>{let r=s.calloc_thread(1,0x3bc,m,d)?.unwrap_or(0);if r==0{return Ok(0);}live(m,d,r,0x3bc)?;let index=get(m,d,0x12230cc,4)?;if !s.tls_set_value(index,r,m,d)?{s.free_thread(r,m,d)?;d.insert(r);return Ok(0);}initialize(m,d,r,s)?;let id=s.current_thread_id(m,d)?;put(m,d,r+4,4,u32::MAX)?;put(m,d,r,4,id)?;Ok(r)}
+pub fn get_context(m:&mut BTreeMap<u32,Memory>,d:&mut BTreeSet<u32>,s:&mut impl Windows)->Result<u32,Error>{let saved=s.get_last_error(m,d)?;let index=get(m,d,0x12230cc,4)?;let mut r=s.tls_get_value(index,m,d)?;if r==0{r=create(m,d,s)?;}s.set_last_error(saved,m,d)?;Ok(r)}
+#[cfg(test)]mod tests{
+ use super::*;use serde_json::{Value,json};
+ fn bytes(s:&str)->Vec<u8>{(0..s.len()).step_by(2).map(|i|u8::from_str_radix(&s[i..i+2],16).unwrap()).collect()}
+ struct Api{regions:Vec<(String,u32,usize)>,calls:Vec<Value>,last:u32,tls:u32,failure:String}
+ impl Api{fn snapshot(&self,m:&BTreeMap<u32,Memory>)->Value{let mut out=json!({});for(n,r,z)in &self.regions{out[n]=json!((0..*z).map(|j|format!("{:02x}",crate::audio_path_memory::read(m,r+j as u32,1).unwrap()[0])).collect::<String>());}out}fn call(&mut self,mut v:Value,m:&BTreeMap<u32,Memory>){v["at_call"]=self.snapshot(m);self.calls.push(v);}}
+ impl Windows for Api{
+ fn get_last_error(&mut self,m:&mut BTreeMap<u32,Memory>,_:&mut BTreeSet<u32>)->Result<u32,Error>{self.call(json!({"kind":"GetLastError","result":self.last}),m);Ok(self.last)}
+ fn tls_get_value(&mut self,index:u32,m:&mut BTreeMap<u32,Memory>,_:&mut BTreeSet<u32>)->Result<u32,Error>{self.call(json!({"kind":"TlsGetValue","index":index,"result":self.tls,"last_error_before":self.last}),m);self.last=0;Ok(self.tls)}
+ fn set_last_error(&mut self,value:u32,m:&mut BTreeMap<u32,Memory>,_:&mut BTreeSet<u32>)->Result<(),Error>{self.call(json!({"kind":"SetLastError","value":value}),m);self.last=value;Ok(())}
+ fn calloc_thread(&mut self,count:u32,size:u32,m:&mut BTreeMap<u32,Memory>,_:&mut BTreeSet<u32>)->Result<Option<u32>,Error>{let r=if self.failure=="allocation"{0}else{0x40012000};self.call(json!({"kind":"calloc","count":count,"size":size,"result":r}),m);if r!=0{m.get_mut(&r).unwrap().raw.fill(0);}Ok((r!=0).then_some(r))}
+ fn free_thread(&mut self,reference:u32,m:&mut BTreeMap<u32,Memory>,_:&mut BTreeSet<u32>)->Result<(),Error>{self.call(json!({"kind":"free","reference":reference}),m);Ok(())}
+ fn tls_set_value(&mut self,index:u32,value:u32,m:&mut BTreeMap<u32,Memory>,_:&mut BTreeSet<u32>)->Result<bool,Error>{let ok=self.failure!="tls";self.call(json!({"kind":"TlsSetValue","index":index,"value":value,"result":u32::from(ok)}),m);if ok{self.tls=value;}Ok(ok)}
+ fn current_thread_id(&mut self,m:&mut BTreeMap<u32,Memory>,_:&mut BTreeSet<u32>)->Result<u32,Error>{self.call(json!({"kind":"GetCurrentThreadId","result":123}),m);Ok(123)}
+ fn thread_lock(&mut self,reference:u32,enter:bool,m:&mut BTreeMap<u32,Memory>,_:&mut BTreeSet<u32>)->Result<(),Error>{self.call(json!({"kind":if enter{"EnterCriticalSection"}else{"LeaveCriticalSection"},"reference":reference}),m);Ok(())}
+ }
+ #[test]fn audio_crt_thread_context_matches72_original_existing_creation_calloc_tls_failure_error_preservation_complete_global_refcount_wrap_cases(){let p:Value=serde_json::from_str(&crate::audio_test_fixture("data/4.20/audio_crt_thread_context_preparation.json")).unwrap();assert_eq!(p["passed"],true);assert_eq!(p["case_count"],72);
+ for(i,row)in p["cases"].as_array().unwrap().iter().enumerate(){let regions=p["regions"].as_array().unwrap().iter().map(|v|(v["name"].as_str().unwrap().to_owned(),v["reference"].as_u64().unwrap()as u32,v["size"].as_u64().unwrap()as usize)).collect::<Vec<_>>();let mut m=regions.iter().map(|(n,r,_)|(*r,Memory{reference:*r,raw:bytes(row["before"][n].as_str().unwrap())})).collect();let mut d=BTreeSet::new();let mut s=Api{regions,calls:vec![],last:row["last_error_before"].as_u64().unwrap()as u32,tls:if row["existing"].as_bool().unwrap(){0x40012000}else{0},failure:row["failure"].as_str().unwrap().into()};let r=get_context(&mut m,&mut d,&mut s).unwrap();assert_eq!(r as u64,row["result"].as_u64().unwrap(),"returned record {i}");assert_eq!(json!(s.calls),row["calls"],"all original imported/allocator/free entries and banks {i}");assert_eq!(s.snapshot(&m),row["after"],"complete record/global bank {i}");assert_eq!(s.last as u64,row["last_error"].as_u64().unwrap(),"Windows error {i}");assert_eq!(s.tls as u64,row["tls_record"].as_u64().unwrap(),"TLS publication {i}");let expected=if !row["existing"].as_bool().unwrap()&&row["failure"]=="tls"{BTreeSet::from([0x40012000])}else{BTreeSet::new()};assert_eq!(d,expected,"only failed TLS record retired {i}");}}
+}
+'''
+(r/'crates/core/src/audio_crt_thread_context.rs').write_text(s,encoding='utf-8');p=r/'crates/core/src/lib.rs';s=p.read_text(encoding='utf-8');assert 'pub mod audio_crt_thread_context;'not in s;p.write_text(s+'\npub mod audio_crt_thread_context;\n',encoding='utf-8')
+p=r/'crates/core/src/audio_global_float_default_power.rs';s=p.read_text(encoding='utf-8');needle='pub trait Windows{';addition='''
+ fn calloc_thread(&mut self,_count:u32,_size:u32,_m:&mut BTreeMap<u32,Memory>,_dead:&mut BTreeSet<u32>)->Result<Option<u32>,Error>{Err(Error::Backend("original CRT calloc service required"))}
+ fn free_thread(&mut self,_reference:u32,_m:&mut BTreeMap<u32,Memory>,_dead:&mut BTreeSet<u32>)->Result<(),Error>{Err(Error::Backend("original CRT free service required"))}
+ fn tls_set_value(&mut self,_index:u32,_value:u32,_m:&mut BTreeMap<u32,Memory>,_dead:&mut BTreeSet<u32>)->Result<bool,Error>{Err(Error::Backend("Windows TLS setter required"))}
+ fn current_thread_id(&mut self,_m:&mut BTreeMap<u32,Memory>,_dead:&mut BTreeSet<u32>)->Result<u32,Error>{Err(Error::Backend("Windows thread identity required"))}
+ fn thread_lock(&mut self,_reference:u32,_enter:bool,_m:&mut BTreeMap<u32,Memory>,_dead:&mut BTreeSet<u32>)->Result<(),Error>{Err(Error::Backend("Windows CRT lock service required"))}
+''';s=s.replace(needle,needle+addition);old='let record=s.tls_get_value(tls_index,m,d)?;s.set_last_error(saved,m,d)?;if record==0{return Err(Error::Backend("original CRT thread-record construction required"));}';new='let mut record=s.tls_get_value(tls_index,m,d)?;if record==0{record=crate::audio_crt_thread_context::create(m,d,s)?;}s.set_last_error(saved,m,d)?;if record==0{return Err(Error::Backend("original CRT fatal missing-thread-context path required"));}';assert old in s;s=s.replace(old,new);p.write_text(s,encoding='utf-8');(r/'tools/implement_audio_crt_thread_context.py').write_text(Path(__file__).read_text(encoding='utf-8'),encoding='utf-8');print('Implemented original CRT context creation/locale retain and NULL-TLS default audio power composition;72 native replays')

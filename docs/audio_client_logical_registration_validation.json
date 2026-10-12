@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "tests": 6,
+  "filtered": 398,
+  "session": 92818,
+  "exit_code": 0,
+  "command": "cargo test -p openleague-client map_audio_requests --offline -j1",
+  "source_sha256": "a7c3ca3cbcb4cf9ae786c80a6082768ad848202130604de7924656d954e017d3",
+  "scope": "Client producer registers persistent request in real logical Manager and retains returned handle. Subsequent frames do not reacquire; explicit cleanup queues logical release, End alone does not. Recreated emitter receives separate handle.10native two-frame cases confirm retention with return1.",
+  "native_proof": "data/4.20/audio_whole_frame_logical_handle.json",
+  "limits": [
+    "Worker queues are retained, not drained into physical backend.",
+    "Position and boolean updates after logical acquisition remain to connect.",
+    "Physical registration/voice admission, RNG ownership, mix controls and age seek remain open.",
+    "Normal executable not rebuilt/launched; no audible acceptance.",
+    "Previous age test now checks retained initial registration age and effect clock; repeated acquisition age is no longer exercised by that client test.",
+    "Earlier two-frame native fixture stopped after first empty-child frame; use audio_persistent_frame_updates_validation.json for explicit active-frame retention and update evidence."
+  ]
+}

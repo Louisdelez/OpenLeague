@@ -1,0 +1,33 @@
+{
+  "updated_utc": "2026-10-04T00:29:20.797043+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_logical_lifecycle.py": "13a764b5368a7917d17f0039c786e6019bf3641de6f39d6546a3c39389e46933",
+    "data/4.20/audio_logical_lifecycle_contract.json": "287f1a4b758181ad36fac127a210e862f21eec9b528f70fcc0cb79063b2b9df7",
+    "crates/core/src/audio_logical_registration.rs": "7f386ee79a150b3df118c0b7e90acb6d99f1766b13ae9130b482db384aeb78c8",
+    "logs/native-audio-logical-lifecycle-core-tests.log": "d8234b50cb4b6de68894e3df32f1e10856b6de32f02c9e4bfb74b42c9f04eb9c"
+  },
+  "constructor_cases": 8,
+  "release_sequences": 5,
+  "core_tests_passed": 214,
+  "native_counter_seed": 1,
+  "native_functions": [
+    "0x920810",
+    "0x92c8f0",
+    "0x5bd2f0 capacity-available append"
+  ],
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "ported": [
+    "Manager::default with native seed1",
+    "Manager::queue_release raw keys, preserving order and duplicates; no synchronous deletion"
+  ],
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false,
+  "limits": [
+    "Original920810 constructor runs with Win32 critical section initialization and map sentinel allocation stubbed; lock storage bytes not claimed.",
+    "Original92C8F0 release queue and5BD2F0 append run with capacity available, locks stubbed. Worker voice release/removal not executed.",
+    "Release-key queue accepts all raw IDs and duplicates. Particle caller guard and teardown not yet qualified.",
+    "Rust queue preserves logical entries until future worker processing; no backend voice destruction or playing-ID claim.",
+    "Standalone client/server/launcher binaries unchanged. Full24-domain objective remains incomplete."
+  ]
+}

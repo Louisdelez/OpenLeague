@@ -1,0 +1,588 @@
+{
+  "schema": 1,
+  "saved_utc": "2026-10-11T17:16:23.973963+00:00",
+  "scope": "Installed Vilemaw generic attack presentation and HUD/launcher corrections",
+  "previous_publication": {
+    "path": "E:\\mapslol3v3\\reconnect_smite_integration\\publication.json",
+    "sha256": "47fcb305b658e30c6e492d6878beb50de6aaec41633a6fbdeb0c4aa968df1227",
+    "bytes": 746
+  },
+  "previous_receipt": {
+    "path": "E:\\OpenLeague\\docs\\smite_and_authenticated_reconnection.json",
+    "sha256": "a6e2324030eddc8e85412e609e1aab733da470473f322442a8f8ff2279aff5b9",
+    "bytes": 17403
+  },
+  "assembly": {
+    "path": "E:\\mapslol3v3\\vilemaw_hud_launcher_assembly\\manifest.json",
+    "sha256": "2175e3a20060b70e98922092afcaa4aeddb72eb4315f78457a6ddc7694f2daa3",
+    "bytes": 114138
+  },
+  "installed": {
+    "path": "E:\\mapslol3v3\\vilemaw_hud_integration\\installed.json",
+    "sha256": "ca500b4297325c13a574075a71041966a6eb13c2d4972103bc0c1544ab2ef271",
+    "bytes": 61111
+  },
+  "installer": {
+    "path": "E:\\mapslol3v3\\vilemaw_hud_integration\\install.py",
+    "sha256": "2d22c7832f9f17c6454d5976c1c28b7cd07579ec274f4b1cc2ac7bf709833547",
+    "bytes": 5126
+  },
+  "qualifier": {
+    "path": "E:\\mapslol3v3\\vilemaw_hud_integration\\qualify.py",
+    "sha256": "c742c72064f323e760f9ce543ea151a7469f5b2ff12cbe96ab3a5610b85834b1",
+    "bytes": 8221
+  },
+  "qualification_receipt": {
+    "path": "E:\\mapslol3v3\\vilemaw_hud_integration\\qualify-20261011T165601.936653Z\\receipt.json",
+    "sha256": "6a91bd0772810008eb2d48ae1e82a9cda9da7bf02c712533d3ee63cef5098cd9",
+    "bytes": 24140
+  },
+  "qualification": {
+    "jobs": [
+      {
+        "name": "versions_cargo",
+        "exit": 0,
+        "log": {
+          "path": "E:\\mapslol3v3\\vilemaw_hud_integration\\qualify-20261011T165601.936653Z\\versions_cargo.log",
+          "sha256": "e18efb6caebf2254f7da0f021489eb09bf5eed8f325435cee5c3fe128ba9824c",
+          "bytes": 36
+        },
+        "command": [
+          "C:/Users/loicd/.cargo/bin/cargo.exe",
+          "--version"
+        ]
+      },
+      {
+        "name": "versions_rustc",
+        "exit": 0,
+        "log": {
+          "path": "E:\\mapslol3v3\\vilemaw_hud_integration\\qualify-20261011T165601.936653Z\\versions_rustc.log",
+          "sha256": "2d65913be579a9932e833cc5a9ec9da203ac9b56868eee0f01b450c929001c40",
+          "bytes": 36
+        },
+        "command": [
+          "C:/Users/loicd/.cargo/bin/rustc.exe",
+          "--version"
+        ]
+      },
+      {
+        "name": "versions_node",
+        "exit": 0,
+        "log": {
+          "path": "E:\\mapslol3v3\\vilemaw_hud_integration\\qualify-20261011T165601.936653Z\\versions_node.log",
+          "sha256": "e8c756c916132cbfea5b319970c76bb2af626e31f64bc0fb60838619f74dfdcd",
+          "bytes": 10
+        },
+        "command": [
+          "C:/Program Files/nodejs/node.exe",
+          "--version"
+        ]
+      },
+      {
+        "name": "launcher_js",
+        "exit": 0,
+        "log": {
+          "path": "E:\\mapslol3v3\\vilemaw_hud_integration\\qualify-20261011T165601.936653Z\\launcher_js.log",
+          "sha256": "e88ae746782813b7e746ea4462acdeae4306097fae1b080109375b564e8bd800",
+          "bytes": 28
+        },
+        "command": [
+          "C:/Program Files/nodejs/node.exe",
+          "E:\\mapslol3v3\\vilemaw_hud_integration\\qualify-20261011T165601.936653Z\\test_launcher_app.cjs"
+        ]
+      },
+      {
+        "name": "launcher_status_js",
+        "exit": 0,
+        "log": {
+          "path": "E:\\mapslol3v3\\vilemaw_hud_integration\\qualify-20261011T165601.936653Z\\launcher_status_js.log",
+          "sha256": "643b7a6470b3f33eb431a782e748e1c9e9eaac0daea665671b623531055de9d2",
+          "bytes": 28
+        },
+        "command": [
+          "C:/Program Files/nodejs/node.exe",
+          "E:\\mapslol3v3\\vilemaw_hud_integration\\qualify-20261011T165601.936653Z\\test_launcher_status.cjs"
+        ]
+      },
+      {
+        "name": "client_test_build",
+        "exit": 0,
+        "log": {
+          "path": "E:\\mapslol3v3\\vilemaw_hud_integration\\qualify-20261011T165601.936653Z\\client_test_build.log",
+          "sha256": "3dbf408709af29d3a992a7706396e18c6291ad08f382979cbf8e7f584336ac1a",
+          "bytes": 495870
+        },
+        "command": [
+          "C:/Users/loicd/.cargo/bin/cargo.exe",
+          "test",
+          "-p",
+          "openleague-client",
+          "--bin",
+          "openleague-client",
+          "--offline",
+          "--locked",
+          "-j1",
+          "--no-run",
+          "--message-format=json"
+        ]
+      },
+      {
+        "name": "client_test_inventory",
+        "exit": 0,
+        "log": {
+          "path": "E:\\mapslol3v3\\vilemaw_hud_integration\\qualify-20261011T165601.936653Z\\client_test_inventory.log",
+          "sha256": "cef562b879482a1c9dc7687db56ba695e6e184eca828209d37ccb5b7563370a3",
+          "bytes": 59626
+        },
+        "command": [
+          "E:\\OpenLeague\\target\\debug\\deps\\openleague_client-00cb9c61c12ae65f.exe",
+          "--list"
+        ]
+      },
+      {
+        "name": "client_all_tests",
+        "exit": 0,
+        "log": {
+          "path": "E:\\mapslol3v3\\vilemaw_hud_integration\\qualify-20261011T165601.936653Z\\client_all_tests.log",
+          "sha256": "47df93fd2387ef8a6e71a27b48c8bc6443525c760a8079897c97b8f81c4df5cc",
+          "bytes": 63228
+        },
+        "command": [
+          "E:\\OpenLeague\\target\\debug\\deps\\openleague_client-00cb9c61c12ae65f.exe",
+          "--test-threads=1"
+        ]
+      },
+      {
+        "name": "core_all_tests",
+        "exit": 0,
+        "log": {
+          "path": "E:\\mapslol3v3\\vilemaw_hud_integration\\qualify-20261011T165601.936653Z\\core_all_tests.log",
+          "sha256": "b0083530a256256b5ae08d610158173b1659556c6efdc73230627bcd5fc71c64",
+          "bytes": 183764
+        },
+        "command": [
+          "C:/Users/loicd/.cargo/bin/cargo.exe",
+          "test",
+          "-p",
+          "openleague-core",
+          "--all-targets",
+          "--offline",
+          "--locked",
+          "-j1",
+          "--",
+          "--test-threads=1"
+        ]
+      },
+      {
+        "name": "server_all_tests",
+        "exit": 0,
+        "log": {
+          "path": "E:\\mapslol3v3\\vilemaw_hud_integration\\qualify-20261011T165601.936653Z\\server_all_tests.log",
+          "sha256": "8cf3b97aac6e2dd407906e656a228d15980b905b7d77f1d34bd3a40aecbc7a29",
+          "bytes": 14292
+        },
+        "command": [
+          "C:/Users/loicd/.cargo/bin/cargo.exe",
+          "test",
+          "-p",
+          "openleague-server",
+          "--all-targets",
+          "--offline",
+          "--locked",
+          "-j1",
+          "--",
+          "--test-threads=1"
+        ]
+      },
+      {
+        "name": "launcher_all_tests",
+        "exit": 0,
+        "log": {
+          "path": "E:\\mapslol3v3\\vilemaw_hud_integration\\qualify-20261011T165601.936653Z\\launcher_all_tests.log",
+          "sha256": "e74e858a0627e9264a02969b79a0b8dac719abf484f90a9aa0143c8fda23ee53",
+          "bytes": 2604
+        },
+        "command": [
+          "C:/Users/loicd/.cargo/bin/cargo.exe",
+          "test",
+          "--manifest-path",
+          "launcher/src-tauri/Cargo.toml",
+          "--all-targets",
+          "--offline",
+          "--locked",
+          "-j1",
+          "--",
+          "--test-threads=1"
+        ]
+      },
+      {
+        "name": "game_build",
+        "exit": 0,
+        "log": {
+          "path": "E:\\mapslol3v3\\vilemaw_hud_integration\\qualify-20261011T165601.936653Z\\game_build.log",
+          "sha256": "8d432bfbf62d261c5cf6532eabbeaa4053d373b8f7f4f03711fb45ea36797cbb",
+          "bytes": 55148
+        },
+        "command": [
+          "C:/Users/loicd/.cargo/bin/cargo.exe",
+          "build",
+          "-p",
+          "openleague-client",
+          "-p",
+          "openleague-server",
+          "--offline",
+          "--locked",
+          "-j1"
+        ]
+      },
+      {
+        "name": "launcher_build",
+        "exit": 0,
+        "log": {
+          "path": "E:\\mapslol3v3\\vilemaw_hud_integration\\qualify-20261011T165601.936653Z\\launcher_build.log",
+          "sha256": "05a93569e6fec23c94893a1a914c50beaad29b9cff3600968988bb102ffcbb75",
+          "bytes": 148
+        },
+        "command": [
+          "C:/Users/loicd/.cargo/bin/cargo.exe",
+          "build",
+          "--manifest-path",
+          "launcher/src-tauri/Cargo.toml",
+          "--offline",
+          "--locked",
+          "-j1"
+        ]
+      }
+    ],
+    "test_runs": [
+      {
+        "package": "openleague-client",
+        "passed": 585,
+        "ignored": 0
+      },
+      {
+        "package": "openleague-core",
+        "passed": 1476,
+        "ignored": 0
+      },
+      {
+        "package": "openleague-server",
+        "passed": 62,
+        "ignored": 0
+      },
+      {
+        "package": "openleague-launcher",
+        "passed": 21,
+        "ignored": 1
+      }
+    ],
+    "required_tests": 249,
+    "launcher_js": [
+      {
+        "receipt": {
+          "path": "E:\\mapslol3v3\\vilemaw_hud_integration\\qualify-20261011T165601.936653Z\\launcher_app_tests.json",
+          "sha256": "8194a8420c46eebbe240ee93700e49d793c14f76453730b72553a5c48ef15701",
+          "bytes": 987
+        },
+        "script": {
+          "path": "E:\\mapslol3v3\\vilemaw_hud_integration\\qualify-20261011T165601.936653Z\\test_launcher_app.cjs",
+          "sha256": "f9f4d808d2d97fc9096adebeb4c7ba975d6f6d32d3d797ba169bf7b307d54229",
+          "bytes": 4259
+        },
+        "assertions": 12,
+        "source_sha256": "eb73343eabb33c05ca282c593108d051f039c02c0fc9459a0688b65fc03d81c4"
+      },
+      {
+        "receipt": {
+          "path": "E:\\mapslol3v3\\vilemaw_hud_integration\\qualify-20261011T165601.936653Z\\launcher_status_tests.json",
+          "sha256": "588793a64a8824416a8b934aae7a7e00871b2009a2274ea994c3d1e1e2e03863",
+          "bytes": 1166
+        },
+        "script": {
+          "path": "E:\\mapslol3v3\\vilemaw_hud_integration\\qualify-20261011T165601.936653Z\\test_launcher_status.cjs",
+          "sha256": "5454e4f7d34be431a55b5be017b729c1210fff77a0ee07a92eaca54431789133",
+          "bytes": 5284
+        },
+        "assertions": 11,
+        "source_sha256": "eb73343eabb33c05ca282c593108d051f039c02c0fc9459a0688b65fc03d81c4"
+      }
+    ],
+    "client_test_binary": {
+      "path": "E:\\OpenLeague\\target\\debug\\deps\\openleague_client-00cb9c61c12ae65f.exe",
+      "sha256": "c6fb3c4c484b40578bd02687f402db38192caa88a73237d2ec20155974e055b6",
+      "bytes": 294974976
+    },
+    "binaries": {
+      "client": {
+        "path": "E:\\OpenLeague\\target\\debug\\openleague-client.exe",
+        "sha256": "645b550cfa95b3093fe3036b5ecb09cb8a3ba96198787412b6cdf0a56bb99a9f",
+        "bytes": 141812736
+      },
+      "server": {
+        "path": "E:\\OpenLeague\\target\\debug\\openleague-server.exe",
+        "sha256": "0571bc0e489267e3c28bf53d9001dbd0ba70ae3e1af014c495772f6c5341d377",
+        "bytes": 5093376
+      },
+      "launcher": {
+        "path": "E:\\OpenLeague\\launcher\\src-tauri\\target\\debug\\openleague-launcher.exe",
+        "sha256": "67ca45b094b24674fa6b7b263c742d2c89c41dd84f935c35abf421d970d3b42b",
+        "bytes": 12508160
+      }
+    },
+    "qualification_receipt": {
+      "path": "E:\\mapslol3v3\\vilemaw_hud_integration\\qualify-20261011T165601.936653Z\\receipt.json",
+      "sha256": "6a91bd0772810008eb2d48ae1e82a9cda9da7bf02c712533d3ee63cef5098cd9",
+      "bytes": 24140
+    },
+    "sources": {
+      "assets/ui/native420/summoners/SummonerBarrier.dds": "91a0a12204ab695c0e5ded9ad225940221141f2417f0fb24385d97ffc886fd72",
+      "assets/ui/native420/summoners/SummonerDot.dds": "a6221eab174db482ff725e17d13dcd683a71ec0ad2b48d4851174ada693d4c8e",
+      "assets/ui/native420/summoners/SummonerExhaust.dds": "5e3b8668015b8af6d1ab0ac48a2edf9a4a61751dec7da2c88d2ffc9c8a3fa0ca",
+      "assets/ui/native420/summoners/SummonerHeal.dds": "2d00d10d1ae39f1c73c1ff0bca8387cc2e2f0cbca346bc5dde60dec586203fe7",
+      "assets/ui/native420/summoners/SummonerSmite.dds": "902ab9b5e02d111407327c3ae9cd03009fc6fa755da3e4b673b8d5283fffaa19",
+      "assets/ui/native_items/1001.dds": "552d730e45a721b794d8b1ca8dca8046f1afcc390289c4f093f1fe56722ae7ac",
+      "assets/ui/native_items/1004.dds": "4e5b93b2daddf8d4a2c927ea93f2ba130d0ad30bd41bf39e9d2c8a3b0df02a2b",
+      "assets/ui/native_items/1006.dds": "105d88322fba66f9f8c97a42ab1191f495d6ae7017f0683caec222e480b35c15",
+      "assets/ui/native_items/1011.dds": "47eaaeb6e90f7720e8a842bd4a6b6ca861f10f50c17117ade24e5287e5b92b0f",
+      "assets/ui/native_items/1018.dds": "bc1b60e5b8bcab37b44ee83d76355ccdea7558436b168744d67dab3cbb79967b",
+      "assets/ui/native_items/1026.dds": "9820a6ae387275e88bf32d2dcd4269e534d1ac0166a5a1262a36107d75d16a74",
+      "assets/ui/native_items/1027.dds": "16be302c683f5719cc07a8fdd5bc1a029fde684ddeaaabf899c44a3272932d6a",
+      "assets/ui/native_items/1028.dds": "88bc9da90a2d0a0593b0063e0984a2857a1497ef1b3f50c6662daf37be0b92e8",
+      "assets/ui/native_items/1029.dds": "13a6a7c4d48ade26fe2170b22a2ba738a662c977d18dd0d7fa8d2a2515c05c0f",
+      "assets/ui/native_items/1031.dds": "7beec42740e11319f5938a409a95ce2b5cebf79927b60b89fa8f180da9e1ae8f",
+      "assets/ui/native_items/1033.dds": "35f32543fd37d1ad0f71a29ec850dcc917903b612526cf4eae7ff10720563772",
+      "assets/ui/native_items/1036.dds": "f50c43c5b34dbec4634296f80d13065e3cd5309f6addee6e4c51ea2fdb7e5a87",
+      "assets/ui/native_items/1037.dds": "423a0b9fcb0eff357751501f918ddac3d7247d4b4d3c5c1ac8b85a0ec28be897",
+      "assets/ui/native_items/1038.dds": "a29f4898b54be85ef06f24a19e48884907ded98721a172881fdb7928daccf5e0",
+      "assets/ui/native_items/1042.dds": "8957fda7044bf59fdccae881156c6496d3c46339806998ea602f8de90a6c0355",
+      "assets/ui/native_items/1051.dds": "e9707efda256943601aed7420e164760a59e8be2d1fd6dc21cecabb99d972a18",
+      "assets/ui/native_items/1052.dds": "edfcf66cd23801efc3b68194954b7844d0aa42e296b66475279b74921fe5a61c",
+      "assets/ui/native_items/1053.dds": "f70967c4b0e86410f605cca75c6a29e097f710ffe1c7d3297615d053509118bc",
+      "assets/ui/native_items/1058.dds": "d8aa1a84fb40b76d9d08a515a7162053974cb5eb0e1b4b841ab1b3d0954048a2",
+      "assets/ui/native_items/2003.dds": "9fcd481ebab90f0865742fad3371469521eb1fb6d9aedccef786ac6a57ec3eae",
+      "assets/ui/native_items/2004.dds": "75afc5bf051e6ddd9f83abae79a3be7abe7f8bf9386e59bd7e80437b6fddca00",
+      "assets/ui/native_items/3020.dds": "a0a624164eb88f7590abe44694ed2de582116d32939810010da5ee9f6717ea88",
+      "assets/ui/native_items/3024.dds": "04db272b4f64126e63c607498fce76a759eae6faf06d141c5b2ae7af1fcde76d",
+      "assets/ui/native_items/3035.dds": "04138adbb1491b09ff5ae64733045430808d77687d11c5a9d6ec16076f747810",
+      "assets/ui/native_items/3067.dds": "275f4d95601a2e8605b79c1bccb707689a93edebf90ac8a9842a035e59537846",
+      "assets/ui/native_items/3101.dds": "3a2aca7f297462f490a1e7b342686fc073b6d794175f888fe6d51cb292ef24b0",
+      "assets/ui/native_items/3108.dds": "8015f39b85d0471363af3b81f1d5390f2a70252b6214d743ef8216794b456f51",
+      "assets/ui/native_items/3114.dds": "0cecee3a57df34cf5bf030ca098222c3b5bc4e9cdfe279672624ff7c920b9a98",
+      "assets/ui/native_items/3134.dds": "93244e17f350e0911eea2cfe405a9b47a41a25e378cb67438a8c2d1682100921",
+      "assets/ui/native_items/3135.dds": "853efdb403c3f7b93dbc8c6fecfe3da38c9946e487e3d4724dafac2c7ecfbcf4",
+      "assets/ui/native_items/3136.dds": "9abefd2c7cda54dfe0b315b0df9b933fd456a95a5076867c8dd806efa53bc0d1",
+      "assets/ui/native_items/3801.dds": "853155f76eb289054dbdc2a0f75e24c2025fb90d1858bcd21d42d306a56950ef",
+      "crates/client/src/animation.rs": "c8b92a8928a40533d6a5e324e2bad5f1b7ab793a2360c2abf4ea0ca70d15d928",
+      "crates/client/src/annie_q_vfx.rs": "f6731218c244ede991d65657f0120ceaf4bdb113733fc6cfc568aea8ade9d8b4",
+      "crates/client/src/garen_w_live.rs": "a205a1a74b18be569c10a2656fee44d11bbcffaeb9c0fc1ea453864e51527f69",
+      "crates/client/src/garen_w_live_tests.rs": "8a8e2da371c1af92c8e7632cc03abd84149654a42cdbbb7b2d9d7845ed5dd5ff",
+      "crates/client/src/main.rs": "d78b1a2183f4dddba66a59fefb2ff14fa21c9695b3dd31b4fe900007d05a8fee",
+      "crates/client/src/native_hud_inventory.rs": "953e4a84dadfdd58f554b19e1509326b114333c0fa7cf6905f0dd01ac4554313",
+      "crates/client/src/native_hud_inventory_tests.rs": "1fcb4b3f2d257d4920f3eafe595c4bf91a408b9bc96b65bf8242112062390332",
+      "crates/client/src/native_hud_recharge_live.rs": "1ed12063b3836698b3c67b7223f6ffdaf4740f4beba9400f1653ccf7f5612d86",
+      "crates/client/src/native_hud_spells.rs": "c9af91d89a4c014ee3a844378e61579f3b01efbe682c89d8fbf83b40050ede4d",
+      "crates/client/src/native_hud_summoners.rs": "c157514d222c049d3e6e0820b15e3f1b111b5b52588d45c9cae05e002a403129",
+      "crates/client/src/native_hud_widgets.rs": "9616a29dbcfd4c1342b44fb7199936682bfca3dd3bcf0cab12ce6c8a1f9d2736",
+      "crates/client/src/session_connection_tests.rs": "a4b0972f0ed9a3385d97c24815f95e292db6f3d7e2d47ee6b66707a1bebc189d",
+      "crates/client/src/spell_input.rs": "6cd1d260e1674e8e80d8eb7391145f718db438ae4992bfc4dba9201c2b8e9349",
+      "crates/client/src/vilemaw_animation_binding_tests.rs": "c42594a21c692df5117d27db8d95835123d86035e03567ee629d7ec273760a47",
+      "crates/client/src/vilemaw_animation_probe.rs": "605d528ef9f815d044e394a0f491089775f79e4ca721d727ed88e3b8529597bf",
+      "crates/client/src/vilemaw_attack_animation.rs": "78c1336fa1b30a6eb1b54d906444c59e9b857f822caf004846ea2becf1bdd32a",
+      "crates/client/src/vilemaw_attack_animation_tests.rs": "bc70ba7065fe8ce46add27039b8f0b2bb02ed921ff4c38b1d22a510c5931bac6",
+      "crates/core/src/lib.rs": "dc8388f68cb606c66db409f110dc625b3873cef8290d4ddd124b8e715fd4662e",
+      "crates/core/src/match_results.rs": "ac79afe8fa0b8d22c0be3b94260b638add8c2776d25c0b8711c4a5ee586045b0",
+      "crates/core/src/vilemaw_attack_journal_tests.rs": "7b419186e2cb59c2f1e9776f13b7fc03103c856fb1f23fc4a899f205dd78db0b",
+      "crates/core/src/vilemaw_attack_server_tests.rs": "b977d4ab2535e9f54662157c95b03008842a6d3733a563f06f8f5ff5efad47dd",
+      "crates/core/src/vilemaw_attacks.rs": "5765e4c0d75facbec9f13fcf347f9b93d70da25ddbf9dc395971eec7653a0b28",
+      "crates/core/src/vision.rs": "f72706ea9f4efe934fba5bc31e984b911839aa9b396dc3f5ba94563879166815",
+      "crates/core/src/world.rs": "666024f4df1acd861fe068fffada36f29e4437ebc4d4bb16ed3b95581faa33d0",
+      "data/4.20/native_inventory_icons.json": "591b4dd5809c0ca4091935b993aa16f28a5fd3290a1f434825c52fdfd0eb517d",
+      "data/4.20/native_summoner_hud.json": "b119461523bff79f82c84fb6d49c2cc9d4297bb98bb8cb9498454814bc21b77d",
+      "launcher/src-tauri/src/session_recovery_tests.rs": "c5bef55c88488c663ada4268735485ef4b31e11cb828d7a823601bc10c75886f",
+      "launcher/src-tauri/src/session_status_tests.rs": "1a8df55633cfe3f3119f04c009c08d59afe0f717a61ed09c5e4cb63c556c51ae",
+      "launcher/src-tauri/src/sessions.rs": "3447ad2c07eb37ab6d7eea00a89f0044fba5caae241fbbc71d54c3d0ad28f533",
+      "tools/analyze_missile_reconnect.py": "1891e4eceee9045e72da264a7a7c64d2ec2ea8f35690205336f01c937fad799e",
+      "tools/analyze_projected_startup.py": "72c128cb6ab659afb0cebda455f1df3a196ebbed21c2ba43bf0696c93dce3e8e"
+    },
+    "assembly_manifest_sha256": "2175e3a20060b70e98922092afcaa4aeddb72eb4315f78457a6ddc7694f2daa3"
+  },
+  "production_targets": {
+    "assets/ui/native420/summoners/SummonerBarrier.dds": "91a0a12204ab695c0e5ded9ad225940221141f2417f0fb24385d97ffc886fd72",
+    "assets/ui/native420/summoners/SummonerDot.dds": "a6221eab174db482ff725e17d13dcd683a71ec0ad2b48d4851174ada693d4c8e",
+    "assets/ui/native420/summoners/SummonerExhaust.dds": "5e3b8668015b8af6d1ab0ac48a2edf9a4a61751dec7da2c88d2ffc9c8a3fa0ca",
+    "assets/ui/native420/summoners/SummonerHeal.dds": "2d00d10d1ae39f1c73c1ff0bca8387cc2e2f0cbca346bc5dde60dec586203fe7",
+    "assets/ui/native420/summoners/SummonerSmite.dds": "902ab9b5e02d111407327c3ae9cd03009fc6fa755da3e4b673b8d5283fffaa19",
+    "assets/ui/native_items/1001.dds": "552d730e45a721b794d8b1ca8dca8046f1afcc390289c4f093f1fe56722ae7ac",
+    "assets/ui/native_items/1004.dds": "4e5b93b2daddf8d4a2c927ea93f2ba130d0ad30bd41bf39e9d2c8a3b0df02a2b",
+    "assets/ui/native_items/1006.dds": "105d88322fba66f9f8c97a42ab1191f495d6ae7017f0683caec222e480b35c15",
+    "assets/ui/native_items/1011.dds": "47eaaeb6e90f7720e8a842bd4a6b6ca861f10f50c17117ade24e5287e5b92b0f",
+    "assets/ui/native_items/1018.dds": "bc1b60e5b8bcab37b44ee83d76355ccdea7558436b168744d67dab3cbb79967b",
+    "assets/ui/native_items/1026.dds": "9820a6ae387275e88bf32d2dcd4269e534d1ac0166a5a1262a36107d75d16a74",
+    "assets/ui/native_items/1027.dds": "16be302c683f5719cc07a8fdd5bc1a029fde684ddeaaabf899c44a3272932d6a",
+    "assets/ui/native_items/1028.dds": "88bc9da90a2d0a0593b0063e0984a2857a1497ef1b3f50c6662daf37be0b92e8",
+    "assets/ui/native_items/1029.dds": "13a6a7c4d48ade26fe2170b22a2ba738a662c977d18dd0d7fa8d2a2515c05c0f",
+    "assets/ui/native_items/1031.dds": "7beec42740e11319f5938a409a95ce2b5cebf79927b60b89fa8f180da9e1ae8f",
+    "assets/ui/native_items/1033.dds": "35f32543fd37d1ad0f71a29ec850dcc917903b612526cf4eae7ff10720563772",
+    "assets/ui/native_items/1036.dds": "f50c43c5b34dbec4634296f80d13065e3cd5309f6addee6e4c51ea2fdb7e5a87",
+    "assets/ui/native_items/1037.dds": "423a0b9fcb0eff357751501f918ddac3d7247d4b4d3c5c1ac8b85a0ec28be897",
+    "assets/ui/native_items/1038.dds": "a29f4898b54be85ef06f24a19e48884907ded98721a172881fdb7928daccf5e0",
+    "assets/ui/native_items/1042.dds": "8957fda7044bf59fdccae881156c6496d3c46339806998ea602f8de90a6c0355",
+    "assets/ui/native_items/1051.dds": "e9707efda256943601aed7420e164760a59e8be2d1fd6dc21cecabb99d972a18",
+    "assets/ui/native_items/1052.dds": "edfcf66cd23801efc3b68194954b7844d0aa42e296b66475279b74921fe5a61c",
+    "assets/ui/native_items/1053.dds": "f70967c4b0e86410f605cca75c6a29e097f710ffe1c7d3297615d053509118bc",
+    "assets/ui/native_items/1058.dds": "d8aa1a84fb40b76d9d08a515a7162053974cb5eb0e1b4b841ab1b3d0954048a2",
+    "assets/ui/native_items/2003.dds": "9fcd481ebab90f0865742fad3371469521eb1fb6d9aedccef786ac6a57ec3eae",
+    "assets/ui/native_items/2004.dds": "75afc5bf051e6ddd9f83abae79a3be7abe7f8bf9386e59bd7e80437b6fddca00",
+    "assets/ui/native_items/3020.dds": "a0a624164eb88f7590abe44694ed2de582116d32939810010da5ee9f6717ea88",
+    "assets/ui/native_items/3024.dds": "04db272b4f64126e63c607498fce76a759eae6faf06d141c5b2ae7af1fcde76d",
+    "assets/ui/native_items/3035.dds": "04138adbb1491b09ff5ae64733045430808d77687d11c5a9d6ec16076f747810",
+    "assets/ui/native_items/3067.dds": "275f4d95601a2e8605b79c1bccb707689a93edebf90ac8a9842a035e59537846",
+    "assets/ui/native_items/3101.dds": "3a2aca7f297462f490a1e7b342686fc073b6d794175f888fe6d51cb292ef24b0",
+    "assets/ui/native_items/3108.dds": "8015f39b85d0471363af3b81f1d5390f2a70252b6214d743ef8216794b456f51",
+    "assets/ui/native_items/3114.dds": "0cecee3a57df34cf5bf030ca098222c3b5bc4e9cdfe279672624ff7c920b9a98",
+    "assets/ui/native_items/3134.dds": "93244e17f350e0911eea2cfe405a9b47a41a25e378cb67438a8c2d1682100921",
+    "assets/ui/native_items/3135.dds": "853efdb403c3f7b93dbc8c6fecfe3da38c9946e487e3d4724dafac2c7ecfbcf4",
+    "assets/ui/native_items/3136.dds": "9abefd2c7cda54dfe0b315b0df9b933fd456a95a5076867c8dd806efa53bc0d1",
+    "assets/ui/native_items/3801.dds": "853155f76eb289054dbdc2a0f75e24c2025fb90d1858bcd21d42d306a56950ef",
+    "crates/client/src/animation.rs": "c8b92a8928a40533d6a5e324e2bad5f1b7ab793a2360c2abf4ea0ca70d15d928",
+    "crates/client/src/annie_q_vfx.rs": "f6731218c244ede991d65657f0120ceaf4bdb113733fc6cfc568aea8ade9d8b4",
+    "crates/client/src/garen_w_live.rs": "a205a1a74b18be569c10a2656fee44d11bbcffaeb9c0fc1ea453864e51527f69",
+    "crates/client/src/garen_w_live_tests.rs": "8a8e2da371c1af92c8e7632cc03abd84149654a42cdbbb7b2d9d7845ed5dd5ff",
+    "crates/client/src/main.rs": "d78b1a2183f4dddba66a59fefb2ff14fa21c9695b3dd31b4fe900007d05a8fee",
+    "crates/client/src/native_hud_inventory.rs": "953e4a84dadfdd58f554b19e1509326b114333c0fa7cf6905f0dd01ac4554313",
+    "crates/client/src/native_hud_inventory_tests.rs": "1fcb4b3f2d257d4920f3eafe595c4bf91a408b9bc96b65bf8242112062390332",
+    "crates/client/src/native_hud_recharge_live.rs": "1ed12063b3836698b3c67b7223f6ffdaf4740f4beba9400f1653ccf7f5612d86",
+    "crates/client/src/native_hud_spells.rs": "c9af91d89a4c014ee3a844378e61579f3b01efbe682c89d8fbf83b40050ede4d",
+    "crates/client/src/native_hud_summoners.rs": "c157514d222c049d3e6e0820b15e3f1b111b5b52588d45c9cae05e002a403129",
+    "crates/client/src/native_hud_widgets.rs": "9616a29dbcfd4c1342b44fb7199936682bfca3dd3bcf0cab12ce6c8a1f9d2736",
+    "crates/client/src/session_connection_tests.rs": "a4b0972f0ed9a3385d97c24815f95e292db6f3d7e2d47ee6b66707a1bebc189d",
+    "crates/client/src/spell_input.rs": "6cd1d260e1674e8e80d8eb7391145f718db438ae4992bfc4dba9201c2b8e9349",
+    "crates/client/src/vilemaw_animation_binding_tests.rs": "c42594a21c692df5117d27db8d95835123d86035e03567ee629d7ec273760a47",
+    "crates/client/src/vilemaw_animation_probe.rs": "605d528ef9f815d044e394a0f491089775f79e4ca721d727ed88e3b8529597bf",
+    "crates/client/src/vilemaw_attack_animation.rs": "78c1336fa1b30a6eb1b54d906444c59e9b857f822caf004846ea2becf1bdd32a",
+    "crates/client/src/vilemaw_attack_animation_tests.rs": "bc70ba7065fe8ce46add27039b8f0b2bb02ed921ff4c38b1d22a510c5931bac6",
+    "crates/core/src/lib.rs": "dc8388f68cb606c66db409f110dc625b3873cef8290d4ddd124b8e715fd4662e",
+    "crates/core/src/match_results.rs": "ac79afe8fa0b8d22c0be3b94260b638add8c2776d25c0b8711c4a5ee586045b0",
+    "crates/core/src/vilemaw_attack_journal_tests.rs": "7b419186e2cb59c2f1e9776f13b7fc03103c856fb1f23fc4a899f205dd78db0b",
+    "crates/core/src/vilemaw_attack_server_tests.rs": "b977d4ab2535e9f54662157c95b03008842a6d3733a563f06f8f5ff5efad47dd",
+    "crates/core/src/vilemaw_attacks.rs": "5765e4c0d75facbec9f13fcf347f9b93d70da25ddbf9dc395971eec7653a0b28",
+    "crates/core/src/vision.rs": "f72706ea9f4efe934fba5bc31e984b911839aa9b396dc3f5ba94563879166815",
+    "crates/core/src/world.rs": "666024f4df1acd861fe068fffada36f29e4437ebc4d4bb16ed3b95581faa33d0",
+    "data/4.20/native_inventory_icons.json": "591b4dd5809c0ca4091935b993aa16f28a5fd3290a1f434825c52fdfd0eb517d",
+    "data/4.20/native_summoner_hud.json": "b119461523bff79f82c84fb6d49c2cc9d4297bb98bb8cb9498454814bc21b77d",
+    "launcher/src-tauri/src/session_recovery_tests.rs": "c5bef55c88488c663ada4268735485ef4b31e11cb828d7a823601bc10c75886f",
+    "launcher/src-tauri/src/session_status_tests.rs": "1a8df55633cfe3f3119f04c009c08d59afe0f717a61ed09c5e4cb63c556c51ae",
+    "launcher/src-tauri/src/sessions.rs": "3447ad2c07eb37ab6d7eea00a89f0044fba5caae241fbbc71d54c3d0ad28f533",
+    "tools/analyze_missile_reconnect.py": "1891e4eceee9045e72da264a7a7c64d2ec2ea8f35690205336f01c937fad799e",
+    "tools/analyze_projected_startup.py": "72c128cb6ab659afb0cebda455f1df3a196ebbed21c2ba43bf0696c93dce3e8e"
+  },
+  "automated_qualification_passed": true,
+  "runtime": [
+    {
+      "receipt": {
+        "path": "E:\\mapslol3v3\\hud_ordinary_runtime\\run_001\\receipt.json",
+        "sha256": "4a2ea6e2e3fcc125f4245af08c66e05f3a9fee093dfb78bdf3784fe6cd66ed6f",
+        "bytes": 25831826
+      },
+      "contract": "hud_ordinary_v1",
+      "harness_manifest": {
+        "path": "E:\\mapslol3v3\\hud_ordinary_runtime\\manifest.json",
+        "sha256": "0cb808ef9ed3282cd6820ac4027a5586f0f0bcff1f837e3aff174b72ef9e014f",
+        "bytes": 7997
+      },
+      "review_manifest": {
+        "path": "E:\\mapslol3v3\\hud_ordinary_runtime_review\\manifest.json",
+        "sha256": "7616cdd732470454524aed3f50833ebaa2dd8632324aecae79f9c0215da73334",
+        "bytes": 580
+      },
+      "actual_pixels_qualified": false,
+      "vilemaw_runtime_qualified": false,
+      "complete_game": false,
+      "passed": false,
+      "same_build_qualified": false,
+      "failure_phase": "06_gui_arrow_pan_visible_floor_move_stop_near_wraith",
+      "failure_type": "RuntimeError",
+      "cleanup_errors": [],
+      "guardian_complete": true,
+      "available_files": [
+        {
+          "path": "E:\\mapslol3v3\\hud_ordinary_runtime\\run_001\\observations.jsonl",
+          "sha256": "b44461b9d3c324d9a0b9fbc42586d05b7d44b34312f586993508034142c8d407",
+          "bytes": 16485757
+        },
+        {
+          "path": "E:\\mapslol3v3\\hud_ordinary_runtime\\run_001\\status.json",
+          "sha256": "a435bf5731ce9ea3e3848da9f46f39cf4e47ecab23c203b44aab4c0ef926c7e6",
+          "bytes": 508
+        },
+        {
+          "path": "E:\\mapslol3v3\\hud_ordinary_runtime\\run_001\\navigation_guide.json",
+          "sha256": "b449451d5a5a66c5e07a8b1d87c282865e4748e2e2f943dce93830a2a3f15aed",
+          "bytes": 1871
+        },
+        {
+          "path": "E:\\mapslol3v3\\hud_ordinary_runtime\\run_001\\spells.json",
+          "sha256": "c108519089f59bed642870bb461f9a009d57ca157778512ebdb9afd6b5153af6",
+          "bytes": 7269
+        },
+        {
+          "path": "E:\\mapslol3v3\\hud_ordinary_runtime\\run_001\\widgets.json",
+          "sha256": "cabab960263131f08dd3118e6b6039a9317160d745cbebedcad0bb57feea1937",
+          "bytes": 6108
+        },
+        {
+          "path": "E:\\mapslol3v3\\hud_ordinary_runtime\\run_001\\recharge.json",
+          "sha256": "93d43c616d07f5d2bbfed17c3482f4b2bb61a134797a5107143308e520e750c8",
+          "bytes": 3658
+        },
+        {
+          "path": "E:\\mapslol3v3\\hud_ordinary_runtime\\run_001\\inventory.json",
+          "sha256": "cf7ce5065f416eb6d62b7521916b40329648ec15806341f82a63231edc4265f2",
+          "bytes": 786
+        },
+        {
+          "path": "E:\\mapslol3v3\\hud_ordinary_runtime\\run_001\\cpu_probe.json",
+          "sha256": "778c735f176ca52001ab4506547886913fbfb23e712d60a1fc960f6e36ed68eb",
+          "bytes": 104086
+        }
+      ],
+      "limitations": [
+        "Partial/failed attempt retained; no scope promoted to qualified."
+      ]
+    }
+  ],
+  "ordinary_hud_runtime_qualified": false,
+  "vilemaw_runtime_qualified": false,
+  "runtime_contract_pending": false,
+  "runtime_contracts": [
+    "hud_ordinary_v1",
+    "vilemaw_ordinary_v2"
+  ],
+  "actual_gui_pixels_reviewed": false,
+  "root_gui_pixels_review_required": true,
+  "complete_game": false,
+  "native_visual_fidelity": false,
+  "changes": [
+    "Vilemaw existing Basic-only attacks carry identity/lifecycle and use actual clip age without changing 46/30 ticks or 100 AD.",
+    "Annie VFX diagnostics distinguish accepted frames at one tick; diagnostic correction is separate from rendering acceptance.",
+    "Six inventory slots use original item DDS and authoritative stack counts, including sale/swap refresh.",
+    "Ctrl-QWER learning/casting uses modifier state at keydown in event order.",
+    "Native D/F summoner widgets reuse the existing HUD pipelines and original textures.",
+    "Launcher current status no longer presents resolved historical child errors as the current session error."
+  ],
+  "source_guard_scope": {
+    "between_qualification_jobs": "68 production target files only",
+    "qualification_boundaries": "All assembly source_inputs verified at initial and final checks",
+    "publisher": "All pinned inputs re-read before commit; this is not continuous monitoring",
+    "assembly_source_input_count": 87
+  },
+  "limits": [
+    "Only frozen hud_ordinary_v1 and vilemaw_ordinary_v2 contracts are admitted. Old/unknown receipts and passed=true without evidence are rejected.",
+    "HUD CPU traces and accepted actions do not certify pixels or OS key ordering. Actual captures require a separate root review, not supplied by this publisher.",
+    "Unit/CPU/fake-DOM checks and original DDS provenance do not prove visible HUD output or ordinary input behavior.",
+    "Vilemaw special abilities, native selection/cadence and complete boss fidelity are not implemented by the generic presentation tranche.",
+    "D/F cooldown totals mirror current server rules; Smite90 remains provisional, with item variants and camp bonuses pending.",
+    "Compare/replace preserves detected concurrent edits but provides no writer exclusion or multi-file power-failure atomicity."
+  ],
+  "next_action": "Qualify the newly installed native inventory icons/counts, ordered Ctrl-QWER input, D/F HUD and current launcher status in an ordinary graphical session with explicit cleanup evidence. Qualify Vilemaw generic attack presentation at its actual animation age; its native special kit remains pending. Continue the complete LoL4.20 implementation plan and preserve all failed/partial attempts; automated checks do not complete the game or establish native visual fidelity."
+}

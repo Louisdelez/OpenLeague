@@ -1,0 +1,35 @@
+{
+  "updated_utc": "2026-10-06T11:33:25.037650+00:00",
+  "complete": false,
+  "passed": true,
+  "client_source_tests_passed": 356,
+  "native_parameter_cases": 256,
+  "source_effects": 4,
+  "source_shaders": 4,
+  "client_build_matches_current_source": false,
+  "prior_gameplay_capture_progress": "docs/native_hud_learning_progress.json",
+  "findings": [
+    "Original SSE parameter updates 7D7FFC..8054 and 7D7E4F..7EA8 execute with supplied finite remaining/total values. Adapted virtual setters capture vec4 output, matching Rust bit-for-bit across256cases.",
+    "Four SpellCooldownFX source records retain layer3, initialdisabled, original rectangles and effect colors. Four HLSL sources copied byte-for-byte from client4.20.",
+    "Native constructor maps SpellCooldownFX to owner+430+slot*4 (rootEBX=owner+380); controller passes remaining/total*original2PI to virtual+38. Static constructor inspected, not emulated.",
+    "CPU shader port preserves source angle direction and unclamped gradient output; zero-direction/invalid API input explicitly unqualified/rejected. These tests are not original GPU pixel proof."
+  ],
+  "limits": [
+    "Original SSE slices execute unchanged with finite supplied remaining/total values and a captured virtual parameter setter. Visibility, duration producers and timer interpolation are not executed here.",
+    "Values outside remaining<=total are intentionally retained: original division/multiplication does not clamp. Invalid totals are rejected by the Rust API, not claimed as original validation.",
+    "Source HLSL copied byte-for-byte; CPU shader port can be compared with source math. Compiled shader bytecode equivalence, native render states/geometry, GPU transport and full framebuffer identity remain open.",
+    "No gameplay, complete HUD or champion completion claim.",
+    "No live cooldown effect renderer yet; authoritative cooldown total, geometry/render states, source shader bytecode and actual GPU cycle remain unqualified. Prior learning screenshots refer to earlier binaries; current client source has not been rebuilt as ordinary executable."
+  ],
+  "next_action": "Intégrer le rendu GPU Cooldown/CooldownLine avec les états et la géométrie natifs, transporter la durée totale autoritaire des recharges puis vérifier un cycle complet Vulkan/DX12. Poursuivre animations/survol/infobulles du HUD, carte restaurée, partie à six clients et tous les domaines.",
+  "artifacts_sha256": {
+    "crates/client/src/native_hud_recharge.rs": "fa79122e468816e3bf9b0acd4e8eb030e51c53544bc40bf7bb6e99e0fec38416",
+    "crates/client/src/main.rs": "4ec2fd9dbde9ae95580b31807a17ac78f6d83bcd3b134f49d7d03a97041282eb",
+    "data/4.20/native_hud_recharge_contract.json": "b4246ede96ecea511078b19e08a6d07029b9394855288c6cc5b4fa40ea93246f",
+    "logs/native-hud-recharge-client-tests.log": "6bedd824e1611ced14be5a83b82680f06578ad0ed28c1e26ab97839cb5a54188",
+    "data/4.20/shaders/UI/Cooldown.ps_2_0": "431d2f0396998af03fbcdd8a0814e9579e3add71aab2a40397853ed3cfa38816",
+    "data/4.20/shaders/UI/Cooldown.vs_2_0": "3ec1e4e9af1d3a40f7b679f1b5d949795939345bd132ca8e5fe08d6e8edf7270",
+    "data/4.20/shaders/UI/CooldownLine.ps_2_0": "77eb3234f1b2b4f422150752007852a91287995b7408b17585eac3dd219356ac",
+    "data/4.20/shaders/UI/CooldownLine.vs_2_0": "bc44c85b8f562f4391c248d9dd73376c489160161695950b033f2ffa731e39ee"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "passed": true,
+  "check_count": 11,
+  "checks": [
+    "real pseudo thread handle sign translation",
+    "real OS output bytes preserved [0, 8, 16, 24]",
+    "alias topology identical [0, 8, 16, 24]",
+    "FILETIME span guards unchanged [0, 8, 16, 24]",
+    "real OS output bytes preserved [0, 8, 8, 8]",
+    "alias topology identical [0, 8, 8, 8]",
+    "FILETIME span guards unchanged [0, 8, 8, 8]",
+    "real OS output bytes preserved [0, 0, 0, 0]",
+    "alias topology identical [0, 0, 0, 0]",
+    "FILETIME span guards unchanged [0, 0, 0, 0]",
+    "pseudo handle creates no owner"
+  ],
+  "observations": [
+    {
+      "result": 1,
+      "error": 0,
+      "relative": [
+        0,
+        8,
+        16,
+        24
+      ],
+      "bytes": "64db20620959dd01000000000000000068890900000000000e27070000000000"
+    },
+    {
+      "result": 1,
+      "error": 0,
+      "relative": [
+        0,
+        8,
+        8,
+        8
+      ],
+      "bytes": "64db20620959dd010e27070000000000"
+    },
+    {
+      "result": 1,
+      "error": 0,
+      "relative": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes": "0e27070000000000"
+    }
+  ],
+  "native_pe_execution": false,
+  "source_hashes": {
+    "test_thread_queries.py": "f8bf09f44ca1590c4ae4069d618fc061e14ececd46d1110bf311d00c6e30d73d",
+    "crt_os.py": "c0ad1e7cd7bcc84a7abccf30ee46034da410a8d9b39118d39a10d94c09aa0f98"
+  }
+}

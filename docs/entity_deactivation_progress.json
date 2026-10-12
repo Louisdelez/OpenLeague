@@ -1,0 +1,29 @@
+{
+  "updated_utc": "2026-10-04T03:13:46.774991+00:00",
+  "files_sha256": {
+    "tools/qualify_native_entity_deactivation.py": "2797bb5330ef7e3f54fba647a56aa8eae179b7f2b608e1071e262300a85965bc",
+    "data/4.20/entity_deactivation_contract.json": "2ca413276c20375ae5e8811ce46748712ff33b186efa39747b2dc7fe55371044",
+    "crates/core/src/entity_deactivation.rs": "bd3e212629ca82200cd14ddf4cbbdb96966681bd0b9d694dfa59dfffe9482ff0",
+    "crates/core/src/lib.rs": "53757a65b2f79ba3a2dbe45b779073a572e6b9cb3d3985c86bcf6118de96c38f",
+    "logs/native-entity-deactivation-core-tests.log": "c45c84ddc3c975d5e2df0db2186359147ef4a8027973a7b97ac357272f32b14f"
+  },
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_entity_deactivation_cases": 144,
+  "core_tests_passed": 279,
+  "ported": [
+    "Original6C8620 pending command validation: skip zero, sentinel diagnostic then continue, low16 registry index, full ID equality",
+    "Matching object becomes inactive; optional manager notification per command; original7184B0 queue deduplicates identities",
+    "Clear pending commands once after processing; no object disposal or voice release"
+  ],
+  "limits": [
+    "Actual6C8620 and7184B0 sorted inactive queue executed. Logger991E60, pending-vector clear6E3080 and CRTmemmove explicitly adapted; queue insertion with spare capacity.",
+    "Zero command skipped. Low16 index must be below registry length and full object ID equal; stale generations rejected. RawFFFFFFFF logs then continues validation, not unconditional rejection.",
+    "No object destruction/particle/audio release or manager drain timing implied. Object registry construction/generation allocation unqualified.",
+    "Rust module is not yet integrated into runtime entity lifecycle. Object registry construction, identity generation and manager destruction/drain timing remain unqualified.",
+    "Source core279 tests passed. Prior client18 evidence unchanged; standalone binaries unchanged; no audible verification."
+  ],
+  "static_followup_observation": "Inspected717AF0 removal body:717CA0 clears registry low16 slot,717CF1 invokes object virtual48,717CFA invokes deleting virtual8(flags1),717CFD decrements global object count. Link from manager inactive list to this function and particle/audio cleanup remains unproven.",
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false
+}

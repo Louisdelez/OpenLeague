@@ -1,0 +1,53 @@
+{
+  "saved_utc": "2026-10-10T08:42:54.119406+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "audio_tests_passed": 664,
+  "filtered_tests_not_run": 480,
+  "isolated_production_tests_passed": 93,
+  "native_metadata_lifetimes_ported": 96,
+  "native_service_boundary_lifetimes_ported": 24,
+  "native_descriptor_delivery_cases_prepared": 48,
+  "contracts": {
+    "audio_announcer_owner_metadata_lifecycle_contract.json": {
+      "cases": 96,
+      "sha256": "b2006914f82aec379c66598f08ef4afacf7393a43a062c1a24e2c73247592f9d"
+    },
+    "audio_announcer_owner_metadata_service_boundary_contract.json": {
+      "cases": 24,
+      "sha256": "eff7c6d3830efb83c2e175191fc5cac2b12d58c4b632f2e87f1aeb5742f7034e"
+    },
+    "audio_announcer_owner_metadata_descriptor_contract.json": {
+      "cases": 48,
+      "sha256": "2d0b2aaa74cf5aeffcc951120e8be763d4feee9b6408f26879070a7c85c0082b"
+    }
+  },
+  "regression_log_sha256": "51ad0f4c9d94a9e42aaf6e569be9a14e693cc9977fb64588692ccbc87278404c",
+  "isolated_log_sha256": "7bdb0b477060e8794a72486ef2d306d561b745f545df62ef60fd916214eb21fb",
+  "test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_core-5b2a9def275dcedd.exe",
+  "test_executable_sha256": "d10df3bc7da76d469506f544b4b9acb9ae61b3147fd495dc5e6a216a5b06c730",
+  "source_hashes": {
+    "crates/core/src/audio_announcer_owner_metadata.rs": "41dc6dcce4eb6abf551a8b4e6a8497686b9d8503c0086f65f967d7227659bd97",
+    "crates/core/src/lib.rs": "0a2eaf707e3fb2e5b7b76116942ffb347dc51c1ca940950d8283749f2400bf88",
+    "tools/announcer_owner_metadata_production_tests.rs": "b75f9cc124be73b6a4027f75eba58450a14f5ed303ccc3e8e34fdafaf86987c7",
+    "tools/qualify_owner_metadata_lifecycle.py": "a53e8b0d36e40da8534299c6217a20c7730f6ea7ed09ad2d7c2c2f27a2ee0d88",
+    "tools/qualify_metadata_service_boundary.py": "8763ace5822a5fff0995d83f99a7f6b03ae8e42ff552e06393cbf39c13e7e2ae",
+    "tools/qualify_metadata_descriptor_delivery.py": "2cc7b0df58cf6d21a3e0889f5081f5a272d239a2a89de197a54b242970ef2d99"
+  },
+  "behavior": [
+    "Actual6B26F0 metadata construction ported:56-byte layout, four listener bases, clone allocation class, callback owner/method fields, borrowed actor/owner storage and global default. Exact byte/word writes preserve uninitialized padding.96 native lifetimes match allocation/free traces and all live words.",
+    "Actual6B2900 destructor and6B28C0 scalar delete ported: reverse listener destruction, actual578010 callback scalar delete, fresh free route, flag bit0 and no invented pointer clearing. Released callback/metadata allocations become inaccessible.",
+    "Service slot84 registration and slot88 unregistration arguments and order match24 native boundary lifetimes, including service global becoming null during first registration/unregistration. Native service bodies are not substituted or claimed complete; calls remain explicit providers."
+  ],
+  "limits": [
+    "Allocator startup and actual game-service implementation/event delivery remain open.96 native proofs preconfigure allocator startup and provide primitive malloc/free/operator-new.24 service proofs supply virtual service recording/mutation boundaries, not original service bodies.",
+    "Native5CCE30 descriptor delivery through four native methods, real owner getter and adjustor thunks is now qualified in48 cases, not yet ported. Metadata production API has not yet been composed with live actor/shared-control ownership, simulation events or native callback delivery. Full actor destructor, synchronization, queues/priorities/mixing/playback and complete game remain incomplete.",
+    "Native exception unwinding and allocation failure paths of metadata/listeners still require qualification. No post-free object snapshots or human fidelity acceptance claimed."
+  ],
+  "next_action": "Port native callback5CCE30 and the four listener descriptor methods6B9680/6B96C0/6B9700/6B9740 against48 prepared native descriptor cases in audio_announcer_owner_metadata_descriptor_contract.json, including exact packet writes, padding, AL return, metadata owner getter and adjustor thunks. Qualify65EE40 consumer target dispatch and qualify actual service registration/storage/unregistration. Compose metadata destruction with shared control and live actor ownership before simulation events and announcement queues/priorities/mixing/playback. Preserve24domains114tasks37requirements."
+}

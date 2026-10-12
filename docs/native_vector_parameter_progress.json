@@ -1,0 +1,44 @@
+{
+  "updated_utc": "2026-10-06T14:30:29.618059+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "vector_field_cases": 62,
+  "vector_bake_cases": 66,
+  "vector_sample_cases": 151,
+  "baked_vectors": 2836,
+  "full_vector_reader_cases": 65,
+  "full_vector_reader_map_cases": 54,
+  "full_reader_baked_vectors": 2848,
+  "core_tests_passed": 446,
+  "last_client_tests_passed": 364,
+  "product_rust_sources_changed": true,
+  "ordinary_emitter_consumer_bound": false,
+  "ordinary_applications_rebuilt": false,
+  "curve_original_instruction_addresses": 870,
+  "full_reader_original_instruction_addresses": 1309,
+  "artifacts_sha256": {
+    "data/4.20/vector_curve_contract.json": "08318f4718157d4211b9383feb37fce2c88b3083a63e8b749446b612ac005d04",
+    "data/4.20/vector_parameter_contract.json": "32950587b0921e1079bbd4f87dbdd077424f5e82a29a28fc08d5add841a80bce",
+    "tools/probe_native_vector_curve.py": "1abf3e9a15f44f4bdccf4a6969443147192f1cd37e58bc9f9b4809f49f3b6310",
+    "tools/probe_native_vector_parameter.py": "35b732e6b31c0b4901f2cb15e687a04ecfa9bdceac7f420617c38cec731529da",
+    "crates/core/src/native_vector_curve.rs": "3feca3b7c28e844898a88f4f1ca0f877e8fd444f93f69e5afc356ffc5717a958",
+    "crates/core/src/native_vector_parameter.rs": "a0a77ad44f999aaa339522fa78f45ef0784d0a5f6404ed0c5f49abbd18ed13bc",
+    "crates/core/src/lib.rs": "7f23f8e8c3227b8b20aba02bbba2ccc141ffdb7adc41625545d04662f7bc0a99",
+    "logs/native-vector-curve-core-tests.log": "352514b36226a3aced90c56de91037fbfdbfca548a604643fdb263a3d74cec67",
+    "logs/native-vector-parameter-core-tests.log": "5e340ebe24ff9e9916ad6d3bbd3f922798a96da911bdf83f64027b60b8a236b5",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "ffbb9580da36c58603d5c43b9c2e246f453485b30e1acecc043b3e01ba1e8f85"
+  },
+  "findings": [
+    "Original vector interpolation uses SSE f32 at every arithmetic step, with first-duplicate lower_bound selection. Port matches151samples and all2836baked vectors bit for bit.",
+    "Vector fields use three base components and four numbered components(time,X,Y,Z); missing/incomplete numbered keys stop reading and values scale component-wise. A scalar base is not silently expanded to a vector.",
+    "Original full94AA60 nonrotation reader composes vector tables and separate XP/YP/ZP probability objects. Requested vector table count is at least256 except constant curves use one value. Rust matches65whole-reader cases, including54Map10scale/postoffset fixtures and requested16/256/512."
+  ],
+  "limits": [
+    "Sorted finite knots only. Supplied defaults in Map10 field fixtures are not proof of each caller default.",
+    "Rotation bake flag0 only; rotation conversion mode, axis probability readers, native lexical/cache conversion, runtime age normalization and ordinary rendering remain pending.",
+    "Nonrotation only; native lexical/cache/startup/default-call-site parity not proven.",
+    "Axis probability sampling order, vector runtime age normalization and ordinary rendering remain pending.",
+    "445core tests passed for curve port, then446full core tests passed after whole-reader integration. No new ordinary executable builds, client/graphics checks or complete domain."
+  ],
+  "next_action": "Qualifier et porter le mode de conversion des rotations94D6B0 et les consommateurs vectoriels avec leur ordre RNG X/Y/Z. Qualifier le calcul de l’âge, raccorder les paramètres aux émissions/naissances/poses et au rendu des52groupes Map10. Résoudre TT_Mist_circle/fogcircle et poursuivre les24domaines."
+}

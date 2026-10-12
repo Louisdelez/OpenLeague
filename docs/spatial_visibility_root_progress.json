@@ -1,0 +1,43 @@
+{
+  "updated_utc": "2026-10-07T09:22:47.087862+00:00",
+  "passed": true,
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_root_cases": 768,
+  "native_grid_cases": 324,
+  "grid_rust_port_complete": false,
+  "focused_core_tests_passed": 2,
+  "spatial_query_regression_cases": 108,
+  "full_suites_rerun": false,
+  "client_spatial_visibility_integrated": false,
+  "current_runtime_capture": false,
+  "findings": [
+    "Descends only when current node has no records and exactly one child intersects the integer query rectangle.",
+    "Zero or multiple intersecting children return current node; absent root returns null.",
+    "Child overlap is inclusive and signed32-bit; touching borders can prevent descent.",
+    "Minimum x/z use native inline SSE floor, maximum x/z use actual CRT ceil and integer conversion.",
+    "Out-of-range signed32 conversion yields INT_MIN; signed zero converts to zero."
+  ],
+  "adapters": [
+    "Tree topology, integer bounds and per-node record counts supplied. Original95EE00 executes without call adapters.",
+    "Stops on entry95EE00 after all four grid coordinates are produced.",
+    "CPU feature globals2DA52E8/14AE660 enabled, MXCSR1F80 and x87CW37F; no CRT call adapter."
+  ],
+  "limits": [
+    "Root selection port matches768original cases; existing recursive query regression108cases passes.",
+    "Grid conversion has324native finite reference cases, but no Rust consumer yet.",
+    "Camera/root/grid/query/merge composition and tree construction/maintenance remain open.",
+    "Nonfinite grid values, alternate FP modes and legacy CRT paths remain unqualified.",
+    "Previous v22 graphical captures retain their original executable/scope; no new graphical build or full-game acceptance."
+  ],
+  "artifacts_sha256": {
+    "tools/probe_native_spatial_visibility_root.py": "1a447412586452a778c697166730b7351d0d2ac9fc455460f8e27a0f5805f267",
+    "tools/probe_native_spatial_visibility_grid.py": "866ff1687c95271991440a2c627c03aade9725bbef5daeb345f2470728afd3a2",
+    "data/4.20/spatial_visibility_root_contract.json": "d3a0de2b975b5404c8d000ad9fa982d6dab77f864e0e2c5c45e3f4acf70f6a55",
+    "data/4.20/spatial_visibility_grid_contract.json": "0c5a1b18a2e0f425d110a142aa2260b8473d4523abb5468e80b9373d2974b60e",
+    "crates/core/src/spatial_visibility_root.rs": "81ddc47d4021f657ade11bdb6d41679c0fb7eb1c63d192469f8dbfb5af44329f",
+    "crates/core/src/lib.rs": "228d4e4440945d439baefdf3dc5e6fb5729d8e6a6103157be8788b1c6ce5238a",
+    "logs/spatial-visibility-root-tests.log": "56377bf9ddb358ea9173e99f6952ea330bb441786581a92e927ee24b39687891"
+  },
+  "next_action": "Porter la conversion grille95EBA0 vérifiée sur324cas, puis composer caméra9863A0, sélection95EE00, requête9601C0 et tri vers les transitions71A785 ; intégrer au client et poursuivre les24domaines/114tâches."
+}

@@ -1,0 +1,63 @@
+{
+  "updated_utc": "2026-10-03T22:55:48.294231+00:00",
+  "contract": "data/4.20/audio_listener_backend_contract.json",
+  "contract_sha256": "457f87542d4db2d9f05e14b9c2a614e65b9e7d6a16eb8dee25ccc96bc4fa14fd",
+  "module": "crates/core/src/audio_listener_backend.rs",
+  "module_sha256": "2e19c9a206c882e625f5d6244629478be67917487739b21ae7c772e2806e6ed2",
+  "native_transfer_cases": 48,
+  "native_scale_setter_cases_reused": 32,
+  "rust_backend_tests": 2,
+  "core_tests": 192,
+  "native_regions": {
+    "0x705e30": "6b2eed503a3465917033edd930dee6478cc799a416058a7f5feb6b4c2a50668d",
+    "0x586220": "e18aacce29affcdddaa5f641ac1ec12552e0fe9d066e6408941b1792818b8619",
+    "0xaeb0e0": "b2a47a172fd2dcc0a8ae19dd5ac7a456685803f6976b61c1c161802d558d5223",
+    "0xb05340": "95aa7c5cb6d17b0f8db25aecfd923f75d3369fa084693a7e151eae195ec1d240",
+    "0xb053f0": "6836d4f323f5381d6840ed814ebf5b2ba74865fa31df6066b24937e18fe3abdc",
+    "0xb1a0b0": "073f61e73851912f2016bd8cab265ec0fdb9db5938e572eaaec1f20cf76e9e9a",
+    "0xb052b0": "8039818e1fdd70b9b4af328ecc4e681b1bd0dbf3432b07a3d16ea04719846506"
+  },
+  "native_anchors": {
+    "game_vtable_listener": "10af384+74->705e30",
+    "orientation_enabled": "10af384+70->586220",
+    "worker_setter_call": {
+      "address": "0xb07569",
+      "bytes": "e8422b0100"
+    }
+  },
+  "packed_layout": [
+    "forward_x",
+    "forward_y",
+    "forward_z",
+    "up_x",
+    "up_y",
+    "up_z",
+    "position_x",
+    "position_y",
+    "position_z"
+  ],
+  "table_base": "0x14a7e60",
+  "slot_stride_bytes": 144,
+  "position_offset_bytes": 24,
+  "scale_offset_bytes": 36,
+  "basis_offset_bytes": 80,
+  "dirty_offset_bytes": 128,
+  "comparison": "Exact f32bits for queued frame, stored raw frame and right/up/forward basis. Other slots and scale preserved; unavailable backend does not read inputs; invalid table index31 separate from successful API enqueue.",
+  "test_log": "logs/native-audio-listener-backend-core-tests.log",
+  "test_log_sha256": "8d7ab7e33429a84523af4e160865cc9997b9dec3f8e3757b55b5b19131d8e6a5",
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "stubs": [
+    "B08990 tick returns5; B05ED0 captures listener message16 and returns successful enqueue; C975F5 security-cookie check returns. No frame preparation/normalization/table setter stubbed."
+  ],
+  "client_integration_enabled": false,
+  "ambient_playback_enabled": false,
+  "complete": false,
+  "limits": [
+    "Successful queue acceptance followed by isolated setter execution; actual queue worker scheduling not executed.",
+    "Available and unavailable backend gates, finite orientation including degenerate vectors, and indices0/7/8 tested. API success reflects queue acceptance, not table index validation.",
+    "No live client mixer/panning or full-game acceptance.",
+    "Native global listener initialization, dirty flush and actual transport scheduling remain unqualified. Table restoration takes explicit slots rather than assuming native defaults.",
+    "f64 projection matches all tested x87 native intermediates, arbitrary extreme-vector rounding unqualified. Defensive finite/overflow/positive-scale guards differ from invalid native inputs.",
+    "Existing client NativeListener camera resource has not yet been connected to prepared backend frame/table."
+  ]
+}

@@ -1,0 +1,12 @@
+
+column_major float4x4 PROJECTION_MATRIX 		: register(c0);
+
+void 
+	main
+	( 
+		in float4 in_position: X3D_VSIN_POSITION,
+        out float4 out_position: POSITION
+	)
+{
+	out_position = mul( in_position, PROJECTION_MATRIX ); 
+}

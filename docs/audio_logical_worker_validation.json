@@ -1,0 +1,44 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T07:54:31.247245+00:00",
+  "implementation": "Reusable persistent worker composes qualified manager queue ordering, backend ownership, unbound position/refresh, listener routing and release-before-drop. Device adapter is mandatory; runtime client not connected yet.",
+  "tests": {
+    "composition": {
+      "passed": 4,
+      "session": 83546,
+      "log": "logs/audio-logical-worker-tests.log"
+    },
+    "dependencies": {
+      "passed": 21,
+      "module_counts": [
+        10,
+        6,
+        2,
+        3
+      ],
+      "log": "logs/audio-logical-worker-dependencies.log"
+    }
+  },
+  "native_contracts": [
+    "data/4.20/audio_worker_queues_contract.json",
+    "data/4.20/audio_backend_reference_contract.json",
+    "data/4.20/audio_backend_release_contract.json",
+    "data/4.20/audio_emitter_position_contract.json",
+    "data/4.20/audio_routing_contract.json"
+  ],
+  "source_sha256": {
+    "crates/core/src/audio_logical_worker.rs": "030f29335287683834c073d49245d67531eff65dc0524f9e0381f7de54408294",
+    "crates/core/src/audio_logical_registration.rs": "0828974d6355c34ddfe4df98ef7d8d26c7e19f5f499c7ee6d54bd1cf76035bd6",
+    "crates/core/src/audio_backend_references.rs": "c94ee7621e9e86e170efbf022efbe009b1bcba5726927a1e26c69675d681c699",
+    "crates/core/src/audio_emitter_position.rs": "137139875a3492e16fb06516d1fa555190af8c7564df6f55fa78b2004189e506",
+    "crates/core/src/audio_routing.rs": "fd2cfa77ec94b9b4ee38d5e06b6f2aac8a9e25e07cbe49c6e909e6aab59bf2bf"
+  },
+  "test_binary_sha256": "35416dce79fe7b7d4de04b5ec7a55f82dd2b00fe7594cc22bae31b9287c36268",
+  "remaining": [
+    "Implement real Backend adapter through voicewrapper/factory/unbound scratch/registered objects/action dispatch/PCM.",
+    "Client Manager queues still unconsumed until real adapter is attached; do not install a noop adapter.",
+    "PCM transport currently lacks seek; native event seek API AEB080->AEB010 enqueues type0x23, worker tableB07D78[0x23]=B07183. Worker finds registered object (FFFFFFFF global allowed), walks Play0403 actions; remaining dispatch/sample seek needs qualification.",
+    "Physical playback, mixing, admission, callbacks and global RNG ownership remain incomplete.",
+    "No new normal client build or audible/endurance acceptance."
+  ]
+}

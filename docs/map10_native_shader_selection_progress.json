@@ -1,0 +1,53 @@
+{
+  "updated_utc": "2026-10-05T04:53:10.607236+00:00",
+  "complete": false,
+  "native_environment_selection_cases": 1920,
+  "native_environment_selection_addresses": 368,
+  "native_material_records": 87,
+  "native_material_copy_addresses": 149,
+  "gltf_nvr_materials_mapped": 87,
+  "truncated_names_recovered": 6,
+  "native_texture_constructor_cases": 174,
+  "native_texture_constructor_addresses": 195,
+  "materials_with_authored_slot1": 2,
+  "contracts": [
+    "data/4.20/environment_shader_selection_contract.json",
+    "data/4.20/map10_shader_material_fields.json",
+    "data/4.20/map10_texture_handle_fields.json"
+  ],
+  "findings": [
+    "Original2988byte native material copy executes on every actual Map10 NVR material, preserving entire record byte-for-byte.",
+    "NVR type at260 and flags at264 transfer directly to runtime offsets0x104/0x108 consumed by native selector95A730.",
+    "Selector0 material pairs executed for each actual record under both absent/present supplied emissive handle.",
+    "Original constructor copies native material then requests all nonempty eight texture slots in order.",
+    "Slot1 handle is stored at0xbb0, exactly the field selecting emissive/no-emissive variants in95A730.",
+    "Both successful and failed supplied loader returns execute; authored path alone does not imply a successfully loaded texture.",
+    "All87 NVR materials matched to GLB material ownership, including six Blender-truncated names recovered through native mesh material indices.",
+    "Original environment shader selector executes1920cases covering10context selectors,4material types,12flag combinations,emissive handle states and global options.",
+    "The two authored slot1 paths belong to type3 terrain materials and are null_black textures; actual selector0 chooses FOUR_BLEND. No assumption of emissive decoration textures."
+  ],
+  "limits": [
+    "Original dispatch and branch selection execute, but render pass meaning and NVR material field producers are not yet qualified.",
+    "Texture/constant preparation and GPU state/compile/render execution excluded.",
+    "Does not implement original variants or prove native pixel equivalence.",
+    "Emissive runtime handle producer and actual source texture load not qualified; both input states supplied, no assumption which applies in original gameplay.",
+    "Pass-selector0 meaning and complete render frame routing still unqualified.",
+    "Static record match does not implement original lighting/alpha/fog/death/shadow variant pixels.",
+    "Any non-NVR GLB material remains separately sourced; no fabricated binding.",
+    "Actual filesystem/archive loading, successful native texture creation and original search path/exception list population remain unqualified.",
+    "Native slot1 source filename and handle producer qualified in recorded scope; source sampler/UV/lighting/fog macros and full shader pixels still open.",
+    "Map local existence is an observation, not a qualification of original archive lookup or device texture load."
+  ],
+  "next_actions": [
+    "Recover original context pass-selector producer and macro registration, then implement exact native material variant selection and lighting/fog consumers.",
+    "Qualify original texture resolution/creation and optional diffuse-name flag classification; preserve failed loading as unavailable.",
+    "Verify GPU pixels for terrain/decal/lightmap/vertex lighting and skinned reflective/death variants, followed by moving-unit vision, six-client Map10 victory/results and remaining full-plan requirements."
+  ],
+  "files_sha256": {
+    "data/4.20/environment_shader_selection_contract.json": "5921c903140cf70fec95625306a9a2b82529c45d4ebb79f4b68e93eabdf63940",
+    "data/4.20/map10_shader_material_fields.json": "7413e6a643e63945257ab2f4d110816a9d3edccc6f8a68868011e13ac1efd80a",
+    "data/4.20/map10_texture_handle_fields.json": "827083b8462fdecb9549ee3211955c1d3bc9886136fcfe24ff352729357a856a",
+    "assets/maps/twisted_treeline.glb": "909513a80e01ae67ee6b15783177a2891363efc640ca47d727f189bcaa429c1a",
+    "target/debug/openleague-client.exe": "dc36b35eaa4880e0e3afbca0aac8caea172b8b589a7cd4e292a964feb2afcadf"
+  }
+}

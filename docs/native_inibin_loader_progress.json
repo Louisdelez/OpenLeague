@@ -1,0 +1,92 @@
+{
+  "updated_utc": "2026-10-05T03:08:27.893568+00:00",
+  "complete": false,
+  "client_tests_passed": 146,
+  "client_build_passed": true,
+  "native_binary_loader_addresses": 520,
+  "native_query_addresses": 457,
+  "native_fields_compared": 53,
+  "native_typed_queries": 17,
+  "native_fow_float_defaults_verified": 5,
+  "actual_binary_bytes": 366,
+  "runtime": {
+    "checked_utc": "2026-10-05T03:07:58.287305+00:00",
+    "complete": false,
+    "normal_server": true,
+    "client_sha256": "fe0dc70e16cec6a5ae30934e3d45a2f25425ce152c595590cfdc83beeba1b432",
+    "measurement": {
+      "binary_configuration": "Levels/Map10/terrain.inibin",
+      "complete": false,
+      "configuration_profile": "native_map10_inibin_no_launch_override",
+      "error": null,
+      "format": "R8Unorm",
+      "gpu_readback_verified": false,
+      "height": 512,
+      "limits": [
+        "Raw visibility only; native fade/blur and material binding pending.",
+        "Corner allocation and sampler are explicit Bevy adapters; original initialization/device producers remain open."
+      ],
+      "logical_configuration": "Levels/Map10/terrain.ini",
+      "material_bound": false,
+      "native_blur_sigma": -1.0,
+      "native_upscale": true,
+      "nonzero_texels": 20328,
+      "render_asset_registered": true,
+      "uploads": 119,
+      "width": 512
+    },
+    "capture": "E:\\OpenLeague\\logs\\native-inibin-146.png",
+    "capture_sha256": "f382e2e69ac2806688acad189ddfedbeda9dd68c7fb77f6cc1cffff6204f4f9d",
+    "visual_inspection_required": false,
+    "limits": [
+      "Image asset updates observed in live Vulkan client; GPU texture readback and material sampling not verified.",
+      "Raw mask expansion only; full native fade/blur pipeline remains open."
+    ],
+    "visual_inspection": {
+      "observed": [
+        "Actual current Vulkan framebuffer shows textured blue base, Garen/shopkeeper, health bars and readable French HUD."
+      ],
+      "limits": [
+        "Normal dynamic fog, complete match and original runtime fidelity not accepted."
+      ]
+    }
+  },
+  "findings": [
+    "Original8B0380 appends bin to logical terrain.ini, opens original366byte terrain.inibin and consumes entire file through18native read requests.",
+    "All53decoded fields match original native tables; float/vector components compared against raw native f32 memory bits.17actual typed native accessor calls match.",
+    "Rust Map10 settings now decode the embedded original binary bytes rather than pre-extracted proof values. All source truncations are rejected. Actual Vulkan runtime retains qualified native defaults and visibility uploads.",
+    "Original shader parameter binding/arithmetic/stores qualified in4cases for FOG_OF_WAR_PARAMS, FOW_HEIGHT_FADE and FOW_EDGE_CONTROL; new height/edge Rust/GPU consumer integration pending."
+  ],
+  "limits": [
+    "Original binary path construction, header, all type reader calls, native vector allocation and string table load execute against actual original terrain INIBIN bytes.",
+    "File open/read/destructor and thread import are adapters. Key-vector container and config object storage supplied; whole config constructor/cache and text/default overlay remain open.",
+    "Allocator/mutex/cookie boundaries adapted; no normal GPU fog completion or whole original filesystem/archive IO acceptance claimed.",
+    "Rust decoder qualifies only five types present in actual Map10 file; other INIBIN types return explicit errors until qualified.",
+    "Only recovered embedded Map10 configuration used; whole native cache/default/text/launch override resolution remains open.",
+    "Raw visibility texture only; timed fade/blur/overlay/actor/projected consumers remain open. No full-plan domain completed."
+  ],
+  "next_actions": [
+    "Integrate qualified native height/edge shader parameters; qualify remaining configuration constructor/cache and GPU uniform consumers.",
+    "Implement native timed fade/blur and overlay in normal rendering; verify GPU coordinates numerically.",
+    "Finish full six-client Map10 match, all champions, launcher/services and remaining full-plan requirements."
+  ],
+  "files_sha256": {
+    "crates/client/src/map10_native_config.rs": "bb5aee798ddfdbff011154c46201221c73e4a693f45527ab29f0ebdead5b2e0a",
+    "crates/client/src/fow_settings.rs": "eae18d7d273fa005035415151198edc6d5074233c0a913a578f69edbf15e5a48",
+    "crates/client/src/fow_visibility_texture.rs": "08cf827aecc04e1fc19409117723a1d204f5fe067411801f5c1d850ebc8251fe",
+    "data/4.20/map10_terrain.inibin": "1a82e51b6be12e6091fb50859b93e8ac13de86f4e38e162570388d88ede9fba1",
+    "data/4.20/native_map10_inibin_loader_contract.json": "9f7560324564b951d54f78d29ac0ba5d63bfd5fc6b6ce2446da34c2d0558646d",
+    "logs/native-inibin-tests.log": "d05771509fffa150d7b267a35efa34f1b06d32ec34bbd884c34bf4f812c7288b",
+    "logs/native-inibin-build.log": "c5de0f116e78edc17c8c59e789f83503c945f569cfd7c0129c44e31b5430ab6e",
+    "logs/native-inibin-146.json": "ae4bd0240840dc27035d38ec130d7154ed856fd857bde2ace545947b06e9b8ba",
+    "logs/native-inibin-146.png": "f382e2e69ac2806688acad189ddfedbeda9dd68c7fb77f6cc1cffff6204f4f9d",
+    "target/debug/openleague-client.exe": "fe0dc70e16cec6a5ae30934e3d45a2f25425ce152c595590cfdc83beeba1b432",
+    "data/4.20/fow_shader_parameters_contract.json": "220cf49cdd60c18fddac7b041a86d14be5295e7e83a2bc22d0a8159b489a6a5d"
+  },
+  "native_shader_parameter_probe": {
+    "cases": 4,
+    "native_addresses": 69,
+    "rust_integration_complete": false,
+    "proof": "data/4.20/fow_shader_parameters_contract.json"
+  }
+}

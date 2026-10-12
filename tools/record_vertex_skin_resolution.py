@@ -1,0 +1,24 @@
+from pathlib import Path
+import json,datetime,hashlib,struct
+r=Path('E:/OpenLeague');now=datetime.datetime.now(datetime.timezone.utc).isoformat()
+def read(path):return json.loads((r/path).read_text(encoding='utf-8-sig'))
+def write(path,d):(r/path).write_text(json.dumps(d,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+d=read('docs/environment_vertex_render_validation.json');resolved=[]
+for row in d['excluded_samples']:
+ if row['pixel'] not in [[250,380],[350,500]]:continue
+ assert row['static_skinned']
+ error=max(abs(a-b) for a,b in zip(row['predicted_visible_diffuse_rgb'],row['observed_rgb']));assert error<=3
+ resolved.append(dict(row,maximum_visible_surface_rgb_error=error))
+assert len(resolved)==2
+proof={'verified_at':now,'passed':True,'map_sha256':d['map_sha256'],'client_sha256':d['client_sha256'],'frame_sha256':d['frame_sha256'],'static_skinned_nodes_modeled':d['static_skinned_nodes_modeled'],'samples':resolved,'cause':'Reference ray model omitted static skeletal deformation; two visible skinned props occluded the predicted NVR surfaces.','native_nvr_gpu_pixels_passed':44,'maximum_nvr_gpu_rgb_error':d['maximum_rgb_error'],'limits':['Static GLB skeleton pose only; animated actors and full native renderer not qualified.','Scoped source-ray/pixel checks do not establish complete map/game or human fidelity acceptance.']};write('docs/environment_skin_occlusion_validation.json',proof)
+c=read('docs/environment_vertex_channel_diagnostic.json');c['conclusion']=proof['cause'];c['resolved_by']='docs/environment_skin_occlusion_validation.json';write('docs/environment_vertex_channel_diagnostic.json',c)
+p=read('docs/environment_vertex_progress.json');p.update(updated_utc=now,gpu_pixels_within_three_rgb_units=44,unresolved_gpu_pixels=[],former_discrepancies_resolved='docs/environment_skin_occlusion_validation.json',static_skinned_nodes_modeled=19);write('docs/environment_vertex_progress.json',p)
+receipt=read('docs/build_receipt.json');receipt.update(latest_build_log='logs/vertex-channel-client-build.log',latest_build_scope='client only: optional GPU channel/loaded-mesh/environment-isolation probes; default native vertex shader unchanged. CPU reference now models 19 static skeletons.',native_vertex_lighting=p)
+for log in ['logs/vertex-channel-client-build.log','logs/vertex-channel-client-tests.log','docs/environment_vertex_channel_diagnostic.json','docs/environment_loaded_vertex_validation.json','docs/environment_skin_occlusion_validation.json']:
+ if log not in receipt['test_logs']:receipt['test_logs'].append(log)
+write('docs/build_receipt.json',receipt)
+checkpoint=read('docs/resume_checkpoint.json');checkpoint['latest_changes'].append('Resolved both apparent native vertex discrepancies: hanging chain Mesh_0.047 and torch Mesh_0.111 are static skinned foreground props. All 19 static skeletons modeled in reference ray. 44 exposed NVR pixels <=1.08/255, both actual foreground surfaces <=0.71/255, 3 terrain and 17 fog pixels pass. Default gameplay actors/camera/MSAA restored.')
+checkpoint['restart_next'][0]='Continue native shader/lightmap/emissive/shadow and exact world-to-fog/terrain texture transforms; qualify remaining static prop animation/material behavior and full actor/fog-of-war integration. Former two vertex colour discrepancies resolved via static skinning, not renderer repair. Keep every original domain active.';checkpoint['last_verified'].update(native_vertex_gpu_probe_passed=True,native_vertex_gpu_pixels=44,static_skin_occlusion_pixels=2);checkpoint['saved_utc']=now;checkpoint['build']='Client probes rebuilt; six client tests pass. Native vertex/terrain/fog GPU checks and static skin occlusion qualified in their stated scope. Full OpenLeague objective remains incomplete.';write('docs/resume_checkpoint.json',checkpoint)
+coverage=read('docs/coverage.json');coverage['current_evidence']['visual_verification']='Current renderer: 44 exposed NVR vertex-control pixels <=1.08/255, 3 terrain pixels <=0.57/255, 17 fog pixels <=1.09/255. Two apparent mismatches resolved by modeling 19 static skeletons; actual chain/torch foreground pixels <=0.71/255. Optional diagnostic isolation/channels disabled in normal play. Full native variant/spatial/shadow/actor/fog-of-war fidelity remains incomplete.';write('docs/coverage.json',coverage)
+plan=read('docs/completion_plan.json');plan['current_evidence']=coverage['current_evidence'];plan['updated_utc']=now;write('docs/completion_plan.json',plan)
+raw=(r/'assets/maps/twisted_treeline.glb').read_bytes();jl=struct.unpack_from('<I',raw,12)[0];glb=json.loads(raw[20:20+jl]);print(json.dumps({'occlusion_surfaces':[(x['mesh'],x['maximum_visible_surface_rgb_error']) for x in resolved],'environment_skin_count':len(glb.get('skins',[])),'environment_animation_count':len(glb.get('animations',[])),'client_sha256':d['client_sha256']}))

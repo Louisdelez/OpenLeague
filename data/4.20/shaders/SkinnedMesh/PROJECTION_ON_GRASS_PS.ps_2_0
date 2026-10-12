@@ -1,0 +1,29 @@
+#include "../FogOfWar/FogOfWar_PS.hls"
+
+sampler BASE_MAP : register(s0);
+sampler COLOR_MAP : register(s1);
+
+float4 COLOR_UV : register(c2);
+
+struct INTERPOLANTS
+{
+    float4 position : POSITION;
+    float2 texcoord0 : TEXCOORD0;
+    float2 texcoord1 : TEXCOORD1;
+};
+
+float4 main(INTERPOLANTS interpolants) : COLOR0
+{
+    float4 texelDiffuse = tex2D(BASE_MAP, interpolants.texcoord0.xy);
+    float4 texelColor = tex2D(COLOR_MAP, COLOR_UV.xy);
+
+    float4 finalColor = texelDiffuse * texelColor;
+	
+#ifndef DISABLE_FOW
+    // Apply FOW to final result
+    float4 fowFactors = GetFogOfWarFactors(interpolants.texcoord1);
+    finalColor.rgb *= fowFactors.a;
+#endif
+
+    return finalColor;
+}

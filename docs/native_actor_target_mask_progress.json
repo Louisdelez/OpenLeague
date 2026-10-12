@@ -1,0 +1,31 @@
+{
+  "updated_utc": "2026-10-07T06:02:38.743275+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_cases": 3584,
+  "native_instruction_addresses": 69,
+  "focused_core_tests_passed": 2,
+  "full_core_suite_rerun": false,
+  "artifacts_sha256": {
+    "data/4.20/actor_target_mask_contract.json": "516b7c9df76686306243ada7f5f9368881446decd9fae3eed587cacda5511d90",
+    "tools/probe_native_actor_target_mask.py": "54257f695a9f239846d17a17cc74c96c69597e12ce5176a408a1cf00a7dadea0",
+    "crates/core/src/native_actor_target_validity.rs": "da6f453144ec59dfa13fb80bdc1e3447f7e24d84321c0d8e03f91ca811e79626",
+    "crates/core/src/lib.rs": "a044fdb275bfb7f85b3cf80b101dac64ae890d65e27ec1d1525a7acdc44d0eff",
+    "logs/native-actor-target-mask-tests.log": "d150ee323b19a28e56f755e63d854cf24b5a1f412fa751c96c449b6e54f1c8ab"
+  },
+  "findings": [
+    "Native617F10 with original6B2C30 helper matches Rust across3584profiles, including independently supplied outer/nested manager-mode results.",
+    "Raw fields retained: global override, manager mode, actor17C->24/2C and actor5EAbit1. No unsupported death/visibility labels.",
+    "Native6B2C30 selector-1 bypasses mask; selector-2 checks lowtwo bits; other selectors use1<<selector with x86 lowfive shift bits. Rust matches native validity and nested mode call order."
+  ],
+  "adapters": [
+    "Manager virtualB0 supplies two explicit boolean results for outer and nested calls; original6B2C30 executes without substitution."
+  ],
+  "limits": [
+    "Boolean actor fields; selectors-2/-1/0/1/2/31/32 and eight masks. Names/roles of global selector and flags remain unqualified.",
+    "No mapping from live network state to native fields, no client or GPU acceptance.",
+    "Core-only; network-state mapping and live consumer validity incomplete.",
+    "No full-suite/client/runtime qualification; zero domains closed."
+  ],
+  "next_action": "Identifier les producteurs natifs des drapeaux de cible et du mode/sélecteur global, raccorder la pose propriétaire au rendu et vérifier les transitions réelles ; poursuivre les24domaines."
+}

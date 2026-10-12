@@ -1,0 +1,33 @@
+{
+  "updated_utc": "2026-10-04T02:03:45.404771+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_engine_disposal.py": "fc16e70518a08f52a84c52812d284f50f48e7e48daf028147e75925789be5242",
+    "data/4.20/audio_engine_disposal_contract.json": "d17df93ae896daa2172e0aa3373b4aa2fd758f66f3f3e86475b84ffc9bfac5c4",
+    "crates/core/src/audio_engine_objects.rs": "54054e3d560d8404c28e41632c91831170bd871b40732cdae01546f99899d3bb",
+    "crates/core/src/audio_deferred_pool.rs": "f348f7bb299107c58da958e2cbb1b751a43788aa084657105e9b34364455a272",
+    "crates/core/src/audio_object_association.rs": "84188250d99ff9bc6a60c91922953b23bfdf94d9b058afd61c4266872c73ad6c",
+    "crates/core/src/audio_managed_voice.rs": "79eb66b46999982ad8ca5796a26148622b61fe7c16850179146b74af023e6719",
+    "crates/core/src/lib.rs": "7f6e59c7bc5ec68ca737530898c7e8a87a3b0df8472e4b109650284c529d2c6e",
+    "logs/native-audio-engine-disposal-core-tests.log": "e8ec1f4b8e5266b8b82524ee505689396552c85a4e40561f6de678325c4d7cee"
+  },
+  "native_engine_disposal_cases": 1512,
+  "core_tests_passed": 259,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "ported": [
+    "7056A0 null wrapper no-op and unsigned object ID getter",
+    "erase all multimap entries sharing ID including0/FFFFFFFF and duplicates",
+    "destroy only supplied wrapper after erasure even when no matching index entry",
+    "scratch retirement -> engine index removal -> unregister/invalidation/weak storage destruction -> wrapper destruction -> linked destruction -> scratch removal bridge"
+  ],
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false,
+  "limits": [
+    "Actual7056A0/7072F0/6EB130 multimap bounds/5C2CE0 range iteration/707130 deleting wrapper executed on0..5 entries/all multisets including duplicate IDs. Full-tree cleanup5C1370 recursion executed.",
+    "Partial single-node erase5C4420 explicitly adapted to remove/rebuild fixture tree; exact red-black balancing not qualified. Object destructor707170 adapted (separately684 cases); allocator free recorded.",
+    "Null wrapper skips everything. Otherwise all matching IDs removed before destroying only supplied wrapper, including no matching entry. ID0/FFFFFFFF have no special exclusion.",
+    "No actual heap reclamation or client audio. Configured free allocator excluded.",
+    "Rust ObjectIndex stores stable non-owning caller tokens; removed IDs do not imply destruction of other wrappers. Native map node ABI/free order/red-black balancing not ported.",
+    "Original deleting-wrapper flag1 preserved; actual backend allocator, unregister/stop queue and client playback remain separate integration. Standalone binaries unchanged; full24-domain game incomplete."
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "complete": false,
+  "change": "New effects register at zero center/extents through existing native spatial port, then update_aabb; replaces direct final-bounds registration.",
+  "native_evidence": "data/4.20/projectile_registration_contract.json",
+  "native_cases": 24,
+  "native_inputs": "all three95EE90 vector arguments asserted zero",
+  "source_sha256": "bd0d4ceb9dfac6feafd72c651a48f4fa0e5415df3766fd004161dbf5ad8d2cf4",
+  "validation_log": "logs/effect-spatial-zero-registration-tests.log",
+  "validation_status": "passed",
+  "limits": [
+    "Local identities and owner frame scheduling remain adapters.",
+    "Diagnostic fixture seeds readiness/positions; not ordinary progression or full Q acceptance.",
+    "No original LoL framebuffer equivalence established."
+  ],
+  "client_tests_passed": 3,
+  "runtime_validation": {
+    "client_sha256": "0c91db6989e3cff9e8c5820efb524ba07ce65aa6fdb69af6a074a35bec0b5111",
+    "build_log": "logs/effect-spatial-zero-registration-build.log",
+    "captures": [
+      "docs/projected_core_cycle_capture_v44_receivers_dx12.json",
+      "docs/projected_core_cycle_capture_v44_receivers_vulkan.json"
+    ],
+    "pixels": [
+      "docs/projected_receiver_pixels_v44_dx12.json",
+      "docs/projected_receiver_pixels_v44_vulkan.json"
+    ],
+    "cleanup": "docs/receiver_cleanup_v44_raw.json",
+    "casts_per_backend": 2,
+    "cleanup_frames_passed": 4,
+    "images_inspected": [
+      "logs/projected-core-cycle-v44-receivers-dx12-on.owner-1-returned.png",
+      "logs/projected-core-cycle-v44-receivers-vulkan-on.owner-2-returned.png"
+    ],
+    "visual_observation": "Terrain, actors and HUD visible in both; red projection visible in Vulkan selected frame. Selected frames are different effect ages, not a cross-backend equality comparison."
+  }
+}

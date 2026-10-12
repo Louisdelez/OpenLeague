@@ -1,0 +1,114 @@
+{
+  "observer_version": 2,
+  "script": "E:\\mapslol3v3\\client_shutdown_integration\\gui_observer_v2.py",
+  "script_sha256": "999fe14007e60aacfbafc87e9c5c34aa8daf1dd168ab35e39083c62c5fd04206",
+  "v1_manifest_sha256": "fc203af00a4fbe61c61282239091a86091df714c80c9c3b5be3c7704f169c101",
+  "v1_unchanged": true,
+  "ast_parse_passed": true,
+  "pure_helper_checks_passed": 9,
+  "classification_cases": [
+    {
+      "result": 4294967295,
+      "last_error": 1471,
+      "pe_subsystem": 3,
+      "status": "unavailable_console",
+      "api_idle_success": false,
+      "eligible_for_window_stability": true,
+      "qualification_basis": "exact_visible_pid_hwnd_and_stable_wm_null"
+    },
+    {
+      "result": 4294967295,
+      "last_error": 1471,
+      "pe_subsystem": 2,
+      "status": "failed",
+      "api_idle_success": false,
+      "eligible_for_window_stability": false,
+      "qualification_basis": null
+    },
+    {
+      "result": 4294967295,
+      "last_error": 1471,
+      "pe_subsystem": 0,
+      "status": "failed",
+      "api_idle_success": false,
+      "eligible_for_window_stability": false,
+      "qualification_basis": null
+    },
+    {
+      "result": 4294967295,
+      "last_error": 0,
+      "pe_subsystem": 3,
+      "status": "failed",
+      "api_idle_success": false,
+      "eligible_for_window_stability": false,
+      "qualification_basis": null
+    },
+    {
+      "result": 4294967295,
+      "last_error": 5,
+      "pe_subsystem": 3,
+      "status": "failed",
+      "api_idle_success": false,
+      "eligible_for_window_stability": false,
+      "qualification_basis": null
+    },
+    {
+      "result": 258,
+      "last_error": 1471,
+      "pe_subsystem": 3,
+      "status": "timeout",
+      "api_idle_success": false,
+      "eligible_for_window_stability": false,
+      "qualification_basis": null
+    },
+    {
+      "result": 999,
+      "last_error": 1471,
+      "pe_subsystem": 3,
+      "status": "unexpected",
+      "api_idle_success": false,
+      "eligible_for_window_stability": false,
+      "qualification_basis": null
+    },
+    {
+      "result": 0,
+      "last_error": 0,
+      "pe_subsystem": 3,
+      "status": "success",
+      "api_idle_success": true,
+      "eligible_for_window_stability": true,
+      "qualification_basis": "wait_for_input_idle_and_exact_visible_pid_hwnd_and_stable_wm_null"
+    },
+    {
+      "result": 0,
+      "last_error": 0,
+      "pe_subsystem": 2,
+      "status": "success",
+      "api_idle_success": true,
+      "eligible_for_window_stability": true,
+      "qualification_basis": "wait_for_input_idle_and_exact_visible_pid_hwnd_and_stable_wm_null"
+    }
+  ],
+  "actual_client_sha256": "89070fd22d16b57326c4fa12676b2c8bfeead5ca156c96e0d43dcc4ec6b8a413",
+  "actual_pe_read_only": {
+    "machine": 34404,
+    "optional_header_magic": 523,
+    "subsystem": 3,
+    "subsystem_name": "IMAGE_SUBSYSTEM_WINDOWS_CUI"
+  },
+  "client_launched": false,
+  "gui_observer_run": false,
+  "win32_calls_executed": false,
+  "complete": false,
+  "sources": [
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-waitforinputidle",
+      "use": "Console processes have special immediate-return behavior; WAIT_FAILED remains an error, never rewritten as successful idle."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/debug/system-error-codes--1300-1699-",
+      "use": "ERROR_NOT_GUI_PROCESS is error 1471. The source does not promise every console process always returns this error."
+    }
+  ],
+  "decision": "Only PE subsystem3 + WAIT_FAILED + ERROR_NOT_GUI_PROCESS1471 makes idle unavailable, while a unique visible HWND of the exact PID must independently answer WM_NULL throughout the stability interval. No other idle failure is accepted."
+}

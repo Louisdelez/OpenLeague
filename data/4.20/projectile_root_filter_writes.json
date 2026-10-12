@@ -1,0 +1,105 @@
+{
+  "complete": false,
+  "passed": true,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "cases": [
+    {
+      "address": "0x59ce8a",
+      "initial": 0,
+      "value": 0,
+      "instruction": "mov dword ptr [esi + 0xc0], 0"
+    },
+    {
+      "address": "0x59ce8a",
+      "initial": 85,
+      "value": 0,
+      "instruction": "mov dword ptr [esi + 0xc0], 0"
+    },
+    {
+      "address": "0x59ce8a",
+      "initial": 255,
+      "value": 0,
+      "instruction": "mov dword ptr [esi + 0xc0], 0"
+    },
+    {
+      "address": "0x59cfeb",
+      "initial": 0,
+      "value": 1,
+      "instruction": "mov byte ptr [edi + 0xc2], 1"
+    },
+    {
+      "address": "0x59cfeb",
+      "initial": 85,
+      "value": 1,
+      "instruction": "mov byte ptr [edi + 0xc2], 1"
+    },
+    {
+      "address": "0x59cfeb",
+      "initial": 255,
+      "value": 1,
+      "instruction": "mov byte ptr [edi + 0xc2], 1"
+    },
+    {
+      "address": "0x59d134",
+      "initial": 0,
+      "value": 1,
+      "instruction": "mov byte ptr [edi + 0xc2], 1"
+    },
+    {
+      "address": "0x59d134",
+      "initial": 85,
+      "value": 1,
+      "instruction": "mov byte ptr [edi + 0xc2], 1"
+    },
+    {
+      "address": "0x59d134",
+      "initial": 255,
+      "value": 1,
+      "instruction": "mov byte ptr [edi + 0xc2], 1"
+    },
+    {
+      "address": "0x59d29c",
+      "initial": 0,
+      "value": 1,
+      "instruction": "mov byte ptr [edi + 0xc2], 1"
+    },
+    {
+      "address": "0x59d29c",
+      "initial": 85,
+      "value": 1,
+      "instruction": "mov byte ptr [edi + 0xc2], 1"
+    },
+    {
+      "address": "0x59d29c",
+      "initial": 255,
+      "value": 1,
+      "instruction": "mov byte ptr [edi + 0xc2], 1"
+    },
+    {
+      "address": "0x59d4e0",
+      "initial": 0,
+      "value": 1,
+      "instruction": "mov byte ptr [esi + 0xc2], 1"
+    },
+    {
+      "address": "0x59d4e0",
+      "initial": 85,
+      "value": 1,
+      "instruction": "mov byte ptr [esi + 0xc2], 1"
+    },
+    {
+      "address": "0x59d4e0",
+      "initial": 255,
+      "value": 1,
+      "instruction": "mov byte ptr [esi + 0xc2], 1"
+    }
+  ],
+  "findings": [
+    "72A485 passes manager+60 to59CC60. Constructor59CE8A clears dword subobject+C0, including manager122.",
+    "Four located activation writes set subobject+C2 to1."
+  ],
+  "limits": [
+    "Individual original write instructions executed with explicit this alias; complete constructor/caller paths not executed.",
+    "Startup default0 proven by instruction path inspection; normal gameplay activation callers still unqualified."
+  ]
+}

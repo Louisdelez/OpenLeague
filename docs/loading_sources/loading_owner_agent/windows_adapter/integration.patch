@@ -1,0 +1,34 @@
+--- a/crates/core/src/audio_replay_windows_transport.rs
++++ b/crates/core/src/audio_replay_windows_transport.rs
+@@
+ #[path = "audio_replay_windows_recording.rs"]
+ mod recording;
++#[path = "audio_replay_windows_loading.rs"]
++mod loading_owner;
+@@
+     fn dispose(&mut self, p: u32, f: u32) -> Result<(), &'static str> {
++        if f == crate::audio_replay_loading_owner::WRAPPER_DISPOSE {
++            return crate::audio_replay_loading_owner::dispose_wrapper(self, p)
++                .map_err(|e| self.failure(e, "loading wrapper disposal failed"));
++        }
++        if f == crate::audio_replay_loading_owner::RECIPIENT_DISPOSE {
++            return crate::audio_replay_loading_owner::dispose_recipient(self, p)
++                .map_err(|e| self.failure(e, "loading recipient disposal failed"));
++        }
+--- a/crates/core/src/audio_crt_windows_engine_worker.rs
++++ b/crates/core/src/audio_crt_windows_engine_worker.rs
+@@
+ impl Bridge {
++    /// The loading constructor's C9CF31 predicate, read from the live CRT owner.
++    /// This fixed read does not mirror mutable CRT globals into the transport bank.
++    pub(crate) fn loading_c_locale_is_default(&self) -> Result<bool, String> {
++        self.root.context.with(|c| {
++            crate::audio_path_source_virtual_cleanup::get(&c.memory, &c.dead, 0x14ae870, 4)
++                .map(|v| v == 0)
++        }).map_err(|e| format!("loading CRT context: {e:?}"))?
++          .map_err(|e| format!("loading CRT locale flag: {e:?}"))
++    }
+--- a/crates/core/src/lib.rs
++++ b/crates/core/src/lib.rs
+@@
++pub mod audio_replay_loading_owner;

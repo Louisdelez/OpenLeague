@@ -1,0 +1,153 @@
+--- a/crates/core/src/audio_replay_windows_clock_host.rs
++++ b/crates/core/src/audio_replay_windows_clock_host.rs
+@@ -23,6 +23,8 @@
+     qpc: usize,
+     #[cfg(test)]
+     fail_retirement: bool,
++    #[cfg(test)]
++    fail_adoption_write: bool,
+ }
+ #[derive(Clone, Debug, PartialEq, Eq)]
+ pub struct ProcessClockSnapshot {
+@@ -74,6 +76,22 @@
+         }
+     }
+     fn clock_write(&mut self, p: u32, width: u32, value: u32) -> Result<(), &'static str> {
++        #[cfg(test)]
++        {
++            let mut state = self
++                .shared
++                .clock
++                .lock()
++                .map_err(|_| "clock host state poisoned")?;
++            // First CBE86C write after calloc, before the pointer is adopted.
++            if state.fail_adoption_write
++                && width == 4
++                && state.allocations.keys().any(|&base| p == base + 0x1c)
++            {
++                state.fail_adoption_write = false;
++                return Err("injected clock mutex adoption write failure");
++            }
++        }
+         if self.clock_crt_address(p, width)? {
+             self.shared
+                 .bridge
+@@ -137,6 +155,26 @@
+                 .map_err(|_| "clock host state poisoned")?
+                 .callbacks
+                 .pop();
++        }
++        // A constructor rollback can release its physical block before CE2955
++        // was registered. Retire these mirrors independently of native callbacks.
++        // Do this only after callbacks succeed: a failed CE2955 must retain its
++        // pending address so the next close can retry without a second HeapFree.
++        loop {
++            let pending = self
++                .shared
++                .clock
++                .lock()
++                .map_err(|_| "clock host state poisoned")?
++                .pending_mirrors
++                .iter()
++                .next()
++                .copied();
++            let Some(pointer) = pending else {
++                break;
++            };
++            once::Boundary::free(self, pointer)
++                .map_err(|e| format!("clock pending mirror shutdown: {e}"))?;
+         }
+         let state = self
+             .shared
+@@ -653,4 +691,90 @@
+         );
+         assert!(closed.registered_cleanups.is_empty());
+     }
+-}
++
++    #[test]
++    fn audio_process_clock_unadopted_mirror_retries_close_without_double_heap_free_or_lost_primary() {
++        let mut owner = crate::audio_replay_windows_application::Application::new().unwrap();
++        let r = owner.transport().unwrap();
++        let handle = r.clock_handle().unwrap();
++        let initial = owner.diagnostic().unwrap();
++        {
++            let mut state = r.shared.clock.lock().unwrap();
++            state.fail_adoption_write = true;
++            state.fail_retirement = true;
++        }
++        assert!(handle.raw_clock_sample().is_err());
++        let failed = handle.process_clock_snapshot().unwrap();
++        assert_eq!((failed.crt_allocations, failed.pending_mirrors, failed.inner_mutexes), (0, 1, 0));
++        assert_eq!(failed.registered_cleanups, [once::OUTER_CLEANUP]);
++        assert!(!failed.initialized);
++        assert_eq!((failed.qpf_calls, failed.qpc_calls), (0, 0));
++        let primary = failed.failure.as_ref().unwrap();
++        assert!(primary.contains("injected clock mutex adoption write failure"));
++        assert!(primary.contains("injected clock mirror retirement failure"));
++        let rollback = owner.diagnostic().unwrap();
++        assert_eq!(rollback["crt"]["heap_frees"].as_u64().unwrap(), initial["crt"]["heap_frees"].as_u64().unwrap() + 1);
++        assert_eq!(rollback["crt"]["retained_mirrors"], 1);
++        assert!(handle.raw_clock_sample().is_err());
++        assert_eq!(failed, handle.process_clock_snapshot().unwrap());
++        // Exercise another error after callbacks have already been consumed.
++        r.shared.clock.lock().unwrap().fail_retirement = true;
++        let error = r.shutdown().unwrap_err();
++        assert!(error.contains("clock pending mirror shutdown"));
++        assert!(error.contains("injected clock mirror retirement failure"));
++        let partial = handle.process_clock_snapshot().unwrap();
++        assert_eq!((partial.crt_allocations, partial.pending_mirrors, partial.inner_mutexes), (0, 1, 0));
++        assert!(partial.registered_cleanups.is_empty());
++        assert_eq!(partial.failure, failed.failure);
++        let retry_before = owner.diagnostic().unwrap();
++        assert_eq!(retry_before["crt"]["heap_frees"], rollback["crt"]["heap_frees"]);
++        owner.close().unwrap();
++        let closed = handle.process_clock_snapshot().unwrap();
++        assert_eq!((closed.crt_allocations, closed.pending_mirrors, closed.inner_mutexes), (0, 0, 0));
++        assert!(closed.registered_cleanups.is_empty());
++        assert_eq!(closed.failure, failed.failure);
++        let retired = owner.diagnostic().unwrap();
++        assert_eq!(retired["crt"]["retained_mirrors"], 0);
++        // Only the application's initial CRT thread record is freed during close.
++        assert_eq!(retired["crt"]["heap_frees"].as_u64().unwrap(), rollback["crt"]["heap_frees"].as_u64().unwrap() + 1);
++        assert_eq!(retired["crt"]["heap_allocations"], retired["crt"]["heap_frees"]);
++        assert!(handle.raw_clock_sample().is_err());
++        assert_eq!(closed, handle.process_clock_snapshot().unwrap());
++    }
++
++    #[test]
++    fn audio_process_clock_unknown_cleanup_is_preserved_before_unadopted_mirror_retry() {
++        let mut owner = crate::audio_replay_windows_application::Application::new().unwrap();
++        let r = owner.transport().unwrap();
++        let handle = r.clock_handle().unwrap();
++        {
++            let mut state = r.shared.clock.lock().unwrap();
++            state.fail_adoption_write = true;
++            state.fail_retirement = true;
++        }
++        assert!(handle.raw_clock_sample().is_err());
++        let initial_failure = handle.process_clock_snapshot().unwrap().failure;
++        r.shared.clock.lock().unwrap().callbacks.push(0xdeadbeef);
++        let before = owner.diagnostic().unwrap();
++        let error = r.shutdown().unwrap_err();
++        assert!(error.contains("unknown native clock once cleanup callback"));
++        let partial = handle.process_clock_snapshot().unwrap();
++        assert_eq!(partial.registered_cleanups, [once::OUTER_CLEANUP, 0xdeadbeef]);
++        assert_eq!((partial.crt_allocations, partial.pending_mirrors), (0, 1));
++        assert_eq!(partial.failure, initial_failure);
++        let after = owner.diagnostic().unwrap();
++        assert_eq!(after["crt"]["heap_frees"], before["crt"]["heap_frees"]);
++        assert_eq!(after["crt"]["retained_mirrors"], 1);
++        // Explicitly repair only the injected invalid registry entry; close never
++        // discards an unknown native callback or substitutes successful cleanup.
++        assert_eq!(r.shared.clock.lock().unwrap().callbacks.pop(), Some(0xdeadbeef));
++        owner.close().unwrap();
++        let closed = handle.process_clock_snapshot().unwrap();
++        assert_eq!((closed.crt_allocations, closed.pending_mirrors, closed.inner_mutexes), (0, 0, 0));
++        assert!(closed.registered_cleanups.is_empty());
++        assert_eq!(closed.failure, initial_failure);
++        let retired = owner.diagnostic().unwrap();
++        assert_eq!(retired["crt"]["retained_mirrors"], 0);
++        assert_eq!(retired["crt"]["heap_allocations"], retired["crt"]["heap_frees"]);
++    }
++}

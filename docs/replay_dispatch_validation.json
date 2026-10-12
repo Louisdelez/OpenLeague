@@ -1,0 +1,56 @@
+{
+  "saved_utc": "2026-10-10T11:01:26.952855+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "native_dispatch_cases": 445,
+  "native_member_invocations": 36,
+  "native_shared_pair_lifetimes": 288,
+  "native_shared_manager_acquisitions": 72,
+  "native_object_command_probe_steps": 14,
+  "isolated_tests_passed": 130,
+  "core_audio_tests_passed": 686,
+  "core_tests_filtered_not_run": 480,
+  "core_test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_core-5b2a9def275dcedd.exe",
+  "core_test_executable_sha256": "794e674770dfd6066f43b1c2244e851436bee770f2ce2e9f7d347fc37dacac1d",
+  "isolated_test_executable_sha256": "5644ab571c2136c87c86ccae000078e57193fde9fe031d1fe6a084caec1a75c8",
+  "native_source_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "source_hashes": {
+    "crates/core/src/audio_replay_events.rs": "d09fb5dcbe87b2dd18346c976d7e66a25ac0308c8a7a895517dc8386d1fafe1b",
+    "crates/core/src/audio_replay_events_tests.rs": "9ea5e4d2646e169d99416ecbf449a70b148bce2e6b77da76fa167353ccc0506a",
+    "crates/core/src/audio_replay_shared_pair.rs": "c480af8d674ac47683ddbd16d83a507145865aa617223223f584ace23745ec42",
+    "crates/core/src/audio_replay_shared_pair_tests.rs": "e1dead142c021b573bde3b6f1b85e7888e2968fc0c6665017f1a8e11e32ae3ac",
+    "crates/core/src/audio_announcer_owner_control.rs": "316af90c678e3fca74272d97d0451ff10bead7ae78a62be50ed04f1ccc8c2165",
+    "crates/core/src/lib.rs": "eddda7332bd985702433695d5e8522c7e754ffc9aca4d21470334f7632894429",
+    "tools/qualify_replay_dispatch.py": "9f421ddb26faa70d7177605eaebce7763527010df7ee504039ded53c62e39f3b",
+    "tools/qualify_replay_shared_pair.py": "b53f2852d864100c8f2c03ad56e8aded22332f2351efb6a82f5d09ca02f0b60f",
+    "tools/probe_replay_object_commands.py": "43701bd1fabaf35e7b455e70d526ac512bf7e1f3de638bcda60a2037d84a939b",
+    "tools/replay-dispatch-tests.rs": "072fd3fc99c2dca6289bb2f0894048ed47b8b5e2c63ba57a17de04af52801070"
+  },
+  "contract_hashes": {
+    "replay_dispatch_contract.json": "fa5d285ef6c6e9eb1a182e69034aeeaf931cc5e28f30d24504e03b05b4405375",
+    "replay_shared_pair_contract.json": "482924666dcf0fdb9a20004cd464613f1ebb967bf87889bba46d9438cf524a8f",
+    "replay_object_commands_probe.json": "9c2b68af11f5197caf182918f71966ffdff7522bd35fcf140077a495cad73821"
+  },
+  "log_hashes": {
+    "logs\\replay-dispatch-tests.log": "d0abf8524500e672c8058469505e65cf7f661a227066bb87442267e6206069a4",
+    "logs\\core-replay-dispatch-tests.log": "c80b7d04ecb29e491e2ac571ab7e68b6dd1a202b0410cc6cbc38e0fb3ad183c2",
+    "logs\\replay-dispatch-build.log": "175e50e0a30bd7b698fd011fbf99e9eba76175b0aea262fc78344bfc52f3b6a6"
+  },
+  "behavior": [
+    "Core734130 preserves the referenced first argument, wrapping32-bit owner adjustment and full target return. Core729370 routes low-byte selectors, optional versus required callbacks, unaligned packet fields,16-bit values, exact boolean comparison, raw byte strings and metadata updates. Native729D70 getter/setter order, overwrite return byte, callback-mutated loop bounds and both copied arrays match original execution.",
+    "New shared pair5CC070 retains the source control before releasing destination, including self-copy and callback-mutated source storage. Native5BD3C0 destruction leaves pair bytes unchanged;729CF0/738AC0 write fresh output pairs and acquire strong ownership. Atomic increment is now implemented with the same sequential consistency as existing decrements;8-thread balanced acquisition test passes.",
+    "Native14-step object-command probe executes complete72C780 create/remove routing through actual8F8810 trees,8F89D0 insertion,8F8CF0 lookup,8F8B30 removal and8F88A0 destruction. This is new source-behavior evidence for the remaining Rust implementation, not a Rust/runtime completion claim."
+  ],
+  "limits": [
+    "Terminal replay virtual consumers are supplied recording boundaries. Tests compare actual native dispatcher and shared-pair bodies against Rust; they do not prove real world-event handling or live replay streaming. The Rust member-call test boundary only dispatches the qualified72C780 pass-through path, not object commands.",
+    "String argument bytes are owned temporary values at the Rust consumer boundary; native string allocator identity, exception/unwind and invalid native-pointer behavior are not replicated. Storage errors are explicit. Native control-dispose/release callbacks in pair fixtures retain bytes and can mutate source pair; real control-specific destruction remains separately qualified.",
+    "The native object-manager probe uses explicit caller-owned nested/held-control storage and single-thread Win32 lock boundaries; stream creation and real manager ownership are not shown. Native duplicate-value and zero-value quirks remain to be ported with both indices and lifecycle.",
+    "686 core tests are current;480 other core tests were filtered and not rerun.130 isolated tests include existing configuration/service regressions. Normal client executable was not rebuilt or visually retested in this milestone, and new event consumers are not connected to it. No champion, domain or whole game is completed."
+  ],
+  "next_action": "Implement native replay object manager8F8810/8F88A0 and dual-tree8F89D0 insertion,8F8B30 removal,8F8CF0 lookup, then complete72C780 command routing with real owned shared pairs and integrate replay frame producers/consumers. New core734130 invocation,729370 dispatcher,729D70 metadata transfer,5CC070/5BD3C0 pair lifetime and729CF0/738AC0 acquisition match native fixtures; terminal consumer methods remain explicit boundaries and are not yet connected to client simulation. Native14-command probe now runs actual trees and packet-object methods5740D0/8FD680/8FD690: duplicate64-bit values can leave separate ID entries without matching reverse entries; a zero-valued existing ID is retried on add but insertion does not replace it, and72C780 removes only when lookup64!=0. Preserve these observed quirks, real ownership and metadata setter callbacks. Continue stream type/configuration qualification, graceful graphical AppExit, actor listeners, maps/champions/audio and all24domains114tasks37requirements."
+}

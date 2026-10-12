@@ -1,0 +1,52 @@
+{
+  "updated_utc": "2026-10-04T18:45:50.582189+00:00",
+  "complete": false,
+  "native_texture_cases": 4,
+  "native_clear_argument_cases": 1,
+  "gpu_chains": 32,
+  "gpu_stage_comparisons": 96,
+  "pixels_per_stage": 64,
+  "gpu_maximum_byte_error": 1,
+  "byte_tolerance": 1,
+  "adapter": "NVIDIA GeForce RTX 3060",
+  "backend": "Vulkan",
+  "current_client_tests_last_recorded": 80,
+  "gpu_resident_stage_chain": true,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Native format table maps visibility enum20 toD3DFMT_L8(50), target enum1 toD3DFMT_X8R8G8B8(22).",
+    "Render-target fields and zero-color initialization call arguments executed for supplied factory parameters.",
+    "Actual Vulkan diagnostic uses R8Unorm mask input and GPU-resident RGBA8Unorm intermediates for fade/horizontal/vertical blur; all RGB outputs and alpha1 read back.",
+    "Each reference stage quantizes to8bits before next sampling; maximum measured difference1byte across96stage comparisons."
+  ],
+  "sources": [
+    "https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dformat",
+    "docs/native_projection_discovery.json"
+  ],
+  "limits": [
+    "Executed original render-target constructor fields, format lookup and clear argument preparation with valid supplied factory arguments.",
+    "Factory GPU creation, original D3D clear execution and allocation failure paths are not executed.",
+    "Raw texture initialization and fourfold corner bytes require separate qualification.",
+    "GPU input is a diagnostic R8Unorm mask matching native L8 red-channel semantics; live visibility remains unbound.",
+    "Original D3D rasterization/rounding not compared; CPU reference rounds each stage to8bits.",
+    "Extent/config/stencil providers and actual renderer binding remain open.",
+    "Current client binary has no new ordinary graphical capture or live visibility binding. Diagnostic binary is separately hashed.",
+    "RGBA8Unorm preserves native intermediate RGB precision but does not reproduce XRGB memory layout or original D3D rasterization."
+  ],
+  "next_actions": [
+    "Qualify native raw texture initial contents and upload/lock failure behavior.",
+    "Qualify128-cell expansion, visibility source stencil generation, and Map10 extent/config.",
+    "Connect native upload/fade/blur stages and actual team visibility with ordinary client rendering, then verify current gameplay captures."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_texture_contract.json": "1ea41bad9df05941699b3bda12b7fef40665099a89356cf6768b0997d9deda86",
+    "crates/client/examples/fow_texture_probe.rs": "5a57217e1e443c3d6ee76df35b5ec906b38f9b72da8353e98632ce984e345f3e",
+    "assets/shaders/fow_postprocess_texture.wgsl": "34af9b27af5959537fb8cd52194d5213bdde9ecc25ff275ff32fe69d312a00ba",
+    "tools/probe_fow_texture_contract.py": "7fd5480e64a13f833c0ef655463a6af33d32573b76934da30a5179576945cc59",
+    "logs/fow-texture-gpu.log": "b8653e152086a45ab264ee7335e20c06106d148f5d3c192b79f14719966e00b1",
+    "logs/fow-texture-gpu.json": "949b7c44c1d988feecf59b3d31d35cd6cefa0c433334d1ce74709089303a9476",
+    "target/debug/examples/fow_texture_probe.exe": "97f92ddf00bfa63b7541f13e4c2cfba672a2837d034bdbbe98e60207bc95e99e",
+    "target/debug/openleague-client.exe": "d0229ff10753dc900f30d712e9963b16cf01626bd1527b7150eeda7930e245b3"
+  }
+}

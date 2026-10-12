@@ -1,0 +1,17 @@
+from pathlib import Path
+import json,subprocess,hashlib
+r=Path('E:/OpenLeague');out=r/'tools/hardware/actual_com_startup';out.mkdir(parents=True,exist_ok=True)
+s=(r/'tools/hardware/actual_worker_exit/probe.rs').read_text()
+needle='let record=data.root.current().unwrap();if data.com{';a=s.index(needle);b=s.index('let exit=data.root.prepare_worker_exit',a)
+s=s[:a]+'''data.root.context.with(|c|{audio_path_source_virtual_cleanup::put(&mut c.memory,&c.dead,0x122343c,4,if data.com{1}else{u32::MAX}).unwrap();}).unwrap();let record=data.root.initialize_worker_com().unwrap();data.root.context.with(|c|{let flag=audio_path_source_virtual_cleanup::get(&c.memory,&c.dead,record+0x3b4,4).unwrap();assert!(flag<=1);if data.com{assert_eq!(flag,1);}assert_eq!(c.services.inner.inner.pending_ro_initializations(),flag as usize);}).unwrap();'''+s[b:]
+needle='m.insert(0x14ae600,Memory{reference:0x14ae600,raw:vec![0;8]});';assert needle in s
+s=s.replace(needle,'m.insert(0x14ae5f8,Memory{reference:0x14ae5f8,raw:vec![0;16]});m.insert(0x122343c,Memory{reference:0x122343c,raw:u32::MAX.to_le_bytes().to_vec()});')
+s=s.replace('fn main(){use','#[path="E:/OpenLeague/crates/core/src/audio_crt_worker_com_startup.rs"]mod audio_crt_worker_com_startup;\nfn main(){use')
+s=s.replace('explicit worker retirement and one main callback','original package/COM flag producer, explicit worker retirement and one main callback')
+probe=out/'probe.rs';probe.write_text(s,encoding='utf-8');files=[probe]+list((r/'tools/hardware/fresh_native_contexts').glob('case_*.tsv'))
+for target,width in [('x86_64-pc-windows-msvc',64),('i686-pc-windows-msvc',32)]:
+ exe=out/f'probe-{width}.exe';log=out/f'probe-{width}.log';build=subprocess.run(['C:/Users/loicd/.cargo/bin/rustc.exe','--edition=2021','--target',target,'-C','debuginfo=0',str(probe),'-o',str(exe)],capture_output=True,text=True);log.write_text(build.stdout+build.stderr);assert build.returncode==0,build.stderr;run=subprocess.run([str(exe),str(r/'tools/hardware/fresh_native_contexts')],capture_output=True,text=True,timeout=30);log.write_text(log.read_text()+run.stdout+run.stderr);assert run.returncode==0,run.stdout+run.stderr;print(run.stdout.strip());files.extend([exe,log])
+tool=r/'tools/probe_audio_actual_com_startup.py';tool.write_text(Path(__file__).read_text(),encoding='utf-8');files.append(tool)
+for n in ['audio_crt_worker_com_startup','audio_crt_worker_exit','audio_crt_windows_global_services','audio_crt_windows_shared_fls','audio_crt_windows_root_startup','audio_crt_windows_process_heap','audio_crt_windows_critical_sections']:files.append(r/f'crates/core/src/{n}.rs')
+receipt={'passed':True,'complete':False,'cases':12,'architectures':[32,64],'cold_actual_package_queries':6,'positive_cached_package_inputs':6,'restored_thread_records':0,'limits':['Original package/COM flag producer and real named Windows query/initializer/release invoked on real CreateThread workers followed by original exit preparation and physical ExitThread code verification.','Positive package cache value is a supplied source input, not proof this executable has real packaged application identity. Cold six cases query actual current process identity. Full native worker entry/body/TLS fallback remain incomplete.'],'files_sha256':{str(f.relative_to(r)):hashlib.sha256(f.read_bytes()).hexdigest()for f in files}}
+(r/'docs/audio_actual_com_startup_hardware_validation.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')

@@ -1,0 +1,10 @@
+from pathlib import Path
+import sys,json,hashlib
+sys.path.insert(0,'E:/OpenLeague/tools/pythonlibs')
+import pefile
+from capstone import Cs,CS_ARCH_X86,CS_MODE_32
+r=Path('E:/OpenLeague');source=Path('D:/LeagueOfLegendsV2/4.20/Client/League of Legends_UNPACKED/League-of-Legends-4-20/RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/League of Legends.exe');b=source.read_bytes();digest=hashlib.sha256(b).hexdigest();assert digest=='402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862';p=pefile.PE(data=b);base=p.OPTIONAL_HEADER.ImageBase;md=Cs(CS_ARCH_X86,CS_MODE_32);regions=[]
+for start,end in [(0xb260b0,0xb260b9),(0xb260c0,0xb26138),(0xb26140,0xb26268),(0xb262f0,0xb26450)]:
+ raw=p.get_data(start-base,end-start);ins=[{'address':hex(i.address),'bytes':i.bytes.hex(),'mnemonic':i.mnemonic,'operands':i.op_str}for i in md.disasm(raw,start)];regions.append({'start':hex(start),'end':hex(end),'sha256':hashlib.sha256(raw).hexdigest(),'instructions':ins,'calls':[i for i in ins if i['mnemonic']=='call']})
+receipt={'complete':False,'native_sha256':digest,'regions':regions,'next_dependencies':['B260B0 tail-jumps B26140 factory; native kind0/1 allocates108 bytes, kind0/2 allocates68 bytes, kind3 constructs44-byte fallback.','Fallback writes settings+4 from current device+8 or default3 when it is zero; production quota interface must expose owned mutable settings.','B2FE00/B2F360 constructors and actual device init/term/destructor bodies need qualification; kind3 B260C0/B262F0 includes timer/sample-rate dependencies.','B0C270 device switching ownership and remaining frame dependency bodies need qualification.'],'limits':['Exploratory disassembly only, no factory/device runtime qualification. B262F0 region is exploratory and function boundary still requires verification.']}
+(r/'data/4.20/audio_device_factory_discovery.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8');print('Device factory discovery retained',sum(len(q['instructions'])for q in regions),'instructions')

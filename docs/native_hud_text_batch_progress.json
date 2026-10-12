@@ -1,0 +1,57 @@
+{
+  "updated_utc": "2026-10-06T07:24:38.845607+00:00",
+  "passed": true,
+  "complete": false,
+  "client_tests_passed": 324,
+  "font_raster_tests_last_passed": 28,
+  "native_batch_cases": 1210,
+  "native_addresses": 202,
+  "source_text_elements_tested": 154,
+  "source_viewports_tested": [
+    [
+      1280,
+      800
+    ],
+    [
+      1920,
+      1080
+    ]
+  ],
+  "source_batch_builder_ported": true,
+  "source_storage_layout_bridge_ported": true,
+  "ordinary_hud_widgets_drawn": false,
+  "ordinary_application_rebuilt": false,
+  "artifacts": [
+    "data/4.20/native_hud_text_batch_contract.json",
+    "tools/qualify_native_hud_text_batch.py",
+    "crates/client/src/native_hud_text_batch.rs",
+    "crates/client/src/main.rs",
+    "logs/native-hud-text-batch-client-tests.log",
+    "docs/native_hud_text_draw_progress.json"
+  ],
+  "hashes": {
+    "data/4.20/native_hud_text_batch_contract.json": "b9b6fe48157a27425197dfdcfad2f8093ccbdc37c410f45da6ee5e98b89c9a8f",
+    "tools/qualify_native_hud_text_batch.py": "adb89b1658a9a061a95cac31e1c9f8c8bb4f6804e7ce88ceafe872201ced7e10",
+    "crates/client/src/native_hud_text_batch.rs": "8594e5f3daf63dad63b0a1a0079f2e0708310f2ebb1621283af468622c982a65",
+    "crates/client/src/main.rs": "15948fcc4932473ae4e41a68e8af630e6b86c1d4692605a9ad9028d4a26f754b",
+    "logs/native-hud-text-batch-client-tests.log": "66952932a94e4d7d1dbcc04295616437fc1a0b0e176c863b4cd3af9282e43090",
+    "docs/native_hud_text_draw_progress.json": "0eb411a11810b4e18a6487991a70b97e10ffeffb984de087938892c72bfda17e"
+  },
+  "findings": [
+    "Complete original text batch builder executes and active record bytes match supplied independent model.",
+    "All elements transform and update renderer bounds before enabled-bit1 check; disabled elements do not consume an output record.",
+    "Record fields: font0, alignment4, color8, rect12, text28 through native strcpy_s256; overflow writes byte0=NUL after copying256bytes, fixed-scale byte284. Font handles are deduplicated in first active use order, including zero.",
+    "Element+4C receives batch index even when disabled. Native vector is finally resized to enabled count."
+  ],
+  "limits": [
+    "Vector resize with reserved capacity, rectangle transform9A4B30 are adapted boundaries; CRT string length/copy execute natively with adapted errno/returning invalid-parameter handler. Their allocator/failure behavior and full original layout initialization not proven.",
+    "Output backing bytes start zero; padding/stale-capacity initialization remains allocator responsibility.",
+    "Finite supplied rectangles, native flag patterns, lengths0/4/255/256/embeddedNUL and up to4elements tested. Ordinary HUD rendering, widget lifetime, localization and original font flush remain open.",
+    "Rust owns records with zero initialization and engine font IDs; native allocator reuse/padding and native pointer identity are not claimed.",
+    "Text overflow is retained as copy_error34; source input is bounded to Text storage256 bytes. Native returning-invalid-parameter-handler behavior qualified, original process handler initialization remains open.",
+    "Source storage/layout bridge tested on154Text elements at2viewports. Ordinary dynamic GameTime/GoldStat/LevelStat producers, packet dispatch/rendering and interactions are not integrated yet.",
+    "Main application remains preceding319client/20backend visually observed binary. Full324suite qualifies current source and tests, not a new ordinary main binary.",
+    "Native Text+70 getter stores first device-draw argument; its link to packet size/global render context must be resolved before final scale/projection claims."
+  ],
+  "next_action": "Raccorder les lots Text aux polices sources et matériaux GPU, qualifier le contexte de taille et la projection finale ; alimenter GameTime/GoldStat/LevelStat depuis la partie et vérifier le client reconstruit en Vulkan/DX12. Continuer tous les domaines du plan."
+}

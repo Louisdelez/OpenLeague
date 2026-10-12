@@ -1,0 +1,159 @@
+{
+  "passed": true,
+  "error": null,
+  "cleanup_errors": [],
+  "remaining": 0,
+  "checks": [
+    "real unnamed semaphore adopted",
+    "four real unnamed events owned",
+    "five labels distinct",
+    "semaphore independent of native wrapper adoption",
+    "invalid count produces actual OS failure",
+    "failed real create adds no owner",
+    "CloseHandle null preserves real failure",
+    "real close releases just one owner",
+    "double close rejected before OS",
+    "named semaphore rejected before OS",
+    "inherited event rejected before OS",
+    "OS owner survives guest return failure",
+    "OS owner survives fallible logging",
+    "wait remains explicit unsupported boundary",
+    "all actual synchronization handles retired"
+  ],
+  "check_count": 15,
+  "native_execution": false,
+  "events": [
+    {
+      "api": "CreateSemaphoreA",
+      "args": [
+        0,
+        4,
+        2147483647,
+        0
+      ],
+      "result": 1912602624,
+      "last_error": 0
+    },
+    {
+      "api": "CreateEventA",
+      "args": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "result": 1912602628,
+      "last_error": 0
+    },
+    {
+      "api": "CreateEventA",
+      "args": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "result": 1912602632,
+      "last_error": 0
+    },
+    {
+      "api": "CreateEventA",
+      "args": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "result": 1912602636,
+      "last_error": 0
+    },
+    {
+      "api": "CreateEventA",
+      "args": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "result": 1912602640,
+      "last_error": 0
+    },
+    {
+      "api": "CreateSemaphoreA",
+      "args": [
+        0,
+        4,
+        2,
+        0
+      ],
+      "result": 0,
+      "last_error": 87
+    },
+    {
+      "api": "CloseHandle",
+      "handle": 0,
+      "result": 0,
+      "last_error": 6
+    },
+    {
+      "api": "CloseHandle",
+      "handle": 1912602628,
+      "result": 1,
+      "last_error": 6
+    },
+    {
+      "api": "CreateEventA",
+      "args": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "result": 1912602648,
+      "last_error": 0
+    },
+    {
+      "api": "cleanup_CloseHandle",
+      "handle": 1912602624,
+      "result": 1,
+      "last_error": 0
+    },
+    {
+      "api": "cleanup_CloseHandle",
+      "handle": 1912602632,
+      "result": 1,
+      "last_error": 0
+    },
+    {
+      "api": "cleanup_CloseHandle",
+      "handle": 1912602636,
+      "result": 1,
+      "last_error": 0
+    },
+    {
+      "api": "cleanup_CloseHandle",
+      "handle": 1912602640,
+      "result": 1,
+      "last_error": 0
+    },
+    {
+      "api": "cleanup_CloseHandle",
+      "handle": 1912602648,
+      "result": 1,
+      "last_error": 0
+    },
+    {
+      "api": "cleanup_CloseHandle",
+      "handle": 1912602652,
+      "result": 1,
+      "last_error": 0
+    }
+  ],
+  "limits": [
+    "CloseHandle failure for a valid owned handle is not injected. Native wrapper-allocation failure is not executed; independent host ownership is qualified."
+  ],
+  "source_hashes": {
+    "test_sync_os.py": "4b3e478d69bc82f96e25e6e7311766d3692c2e2b7b4903dbc12eee083c6b733f",
+    "sync_os.py": "f800841377fb5e250356034bcf0279eb827364281b5c6f7ac0cf1ba5aff797c7"
+  }
+}

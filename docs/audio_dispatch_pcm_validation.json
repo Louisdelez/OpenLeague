@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "tests": 6,
+  "filtered": 398,
+  "session": 74673,
+  "exit_code": 0,
+  "command": "cargo test -p openleague-client pcm_audio --offline -j1",
+  "source_sha256": {
+    "crates\\client\\src\\pcm_audio.rs": "6f2109ae0682d28135a6e860814924599dc431aea3df48fdf9d2e8bd4fb01a10",
+    "crates\\core\\src\\audio_action_dispatch.rs": "70a2a11711774c0b798b6ad2083f33e7172a1df85e88dcb5efe4cc173e61b62d"
+  },
+  "scope": "Actual registered object -> native bank-order dispatch and selection -> loaded PCM handles for all5 ambient events. Preserves action/event/owner/remainder, retains probabilistic silence, rejects removed assets. Existing31-source decoder/catalog and42-sound resolution tests also pass.",
+  "prior_failure": "Session68079:5PASS/1FAIL; test incorrectly unwrapped silent native probability result. Corrected expectation; product resolution already represented silence.",
+  "limits": [
+    "Connection exercised in client integration test, not scheduled in live game systems.",
+    "No playing IDs allocated and no physical voice accepted.",
+    "RNG ownership, producer object registration, gain/pitch/filter aggregation, lifecycle and age seek remain open.",
+    "Normal executable not rebuilt/launched; no audible validation."
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "passed": true,
+  "error": null,
+  "checks": [
+    "HeapAlloc x86 stdcall12 and owned mirror",
+    "HeapReAlloc x86 stdcall16 and preserved bytes",
+    "HeapSize x86 stdcall12",
+    "HeapFree x86 stdcall12",
+    "stale CRT primitive cannot route to engine",
+    "unreserved CRT primitive cannot route to engine",
+    "engine untouched by stale CRT frees",
+    "separate engine route retained",
+    "GetCPInfo cannot pre-read20 into8byte heap block",
+    "GetThreadTimes cannot span past heap request",
+    "LCMapStringEx destination remains within heap request",
+    "strz cannot search beyond unterminated heap block",
+    "rejected adapter copies preserve heap bytes",
+    "free publication fault stays explicit",
+    "mapping is counted after raw successful release",
+    "interrupted primitive never routes to engine",
+    "terminal cleanup retires remaining mapping",
+    "HeapAlloc event primary kept",
+    "HeapAlloc event raw retained interrupted",
+    "HeapAlloc event terminal cleanup complete",
+    "HeapAlloc finish primary kept",
+    "HeapAlloc finish raw retained interrupted",
+    "HeapAlloc finish terminal cleanup complete",
+    "HeapReAlloc event primary kept",
+    "HeapReAlloc event raw retained interrupted",
+    "HeapReAlloc event terminal cleanup complete",
+    "HeapReAlloc finish primary kept",
+    "HeapReAlloc finish raw retained interrupted",
+    "HeapReAlloc finish terminal cleanup complete"
+  ],
+  "check_count": 29,
+  "remaining": [
+    {
+      "raw_owners": 0,
+      "mapped_regions": 0,
+      "live_owners": 0,
+      "reserved_regions": 4,
+      "allocated_owners": 3,
+      "interrupted": []
+    },
+    {
+      "raw_owners": 0,
+      "mapped_regions": 0,
+      "live_owners": 0,
+      "reserved_regions": 1,
+      "allocated_owners": 1,
+      "interrupted": []
+    },
+    {
+      "raw_owners": 0,
+      "mapped_regions": 0,
+      "live_owners": 0,
+      "reserved_regions": 1,
+      "allocated_owners": 1,
+      "interrupted": []
+    },
+    {
+      "raw_owners": 0,
+      "mapped_regions": 0,
+      "live_owners": 0,
+      "reserved_regions": 2,
+      "allocated_owners": 1,
+      "interrupted": []
+    },
+    {
+      "raw_owners": 0,
+      "mapped_regions": 0,
+      "live_owners": 0,
+      "reserved_regions": 2,
+      "allocated_owners": 1,
+      "interrupted": []
+    }
+  ],
+  "native_EXE_DLL_execution": false,
+  "injected_failures": [
+    "free_after_os",
+    "HeapAlloc event",
+    "HeapAlloc finish",
+    "HeapReAlloc event",
+    "HeapReAlloc finish"
+  ],
+  "source_hashes": {
+    "test_heap_boundary.py": "15da9b1ec9b70fa167bb9e1e45e55d42a1621c43735742363c83e568182c9d54",
+    "heap_mirrors.py": "6be233a6a2e8fc6fd89452be391ab2b9fffd80897d024df89444b3c9aba55a52",
+    "crt_os.py": "4ed057911fcb7e2299e62e12bd96ee040c73972ea843ce36ac0f9d4870f1e578"
+  }
+}

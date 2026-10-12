@@ -1,0 +1,31 @@
+/**************************
+ ** HEIGHT BLENDING *******
+ **************************/
+float4 ApplyHeightBlend(float4 height_scale, float4 texel_color0, float4 texel_color1, float4 texel_color2, float4 texel_color3, float half_blend_area)
+{
+	//Compute the height for each layer at this pixel.
+	float4 height;
+	
+	height.x = texel_color0.a;
+	height.y = texel_color1.a;
+	height.z = texel_color2.a;
+	height.w = texel_color3.a;
+	height *= height_scale;
+	
+	//Compute the maximum height of all the layers at this pixel.
+	float maxHeight = max( height.x, max(height.y, max(height.z, height.w)) );
+
+	//Compute the weights for all the layers. Only layers that have a height > maxHeight-half_blend_area will be visible.
+	float4 weights = saturate( height - maxHeight + half_blend_area ) * saturate(height*32);
+	//Normalize the weights so the sum is 1.0
+	weights /= dot(weights, 1.0f);
+
+	//The final texel color is simply a weighted sum of all the layers with the weights computed above.
+	//There is no layer dependence since the weights rely solely on the layer height data and the scale values from
+	//the blend map.
+	float4 texelColor;
+	texelColor.rgb = texel_color0*weights.x + texel_color1*weights.y + texel_color2*weights.z + texel_color3*weights.w;
+	texelColor.a   = 1.0f;
+	
+	return texelColor;
+}

@@ -1,0 +1,29 @@
+{
+  "updated_utc": "2026-10-07T10:26:19.071019+00:00",
+  "passed": true,
+  "complete": false,
+  "resource_flag_cases": 81,
+  "offscreen_resource_cases": 81,
+  "focused_core_tests_passed": 35,
+  "offscreen_rust_port": true,
+  "client_hidden_frame_corrected": false,
+  "findings": [
+    "SimulateEveryFrame sets config1BC bit40, forcing one temporal substep when the calculated count is zero.",
+    "SimulateWhileOffScreen sets bit1 and controls hidden-frame continuation.",
+    "Annie_Q_mis sets EveryFrame=1 but omits WhileOffScreen. Current client cycle still continues offscreen; pause/reset/resume integration remains a known open mismatch."
+  ],
+  "limits": [
+    "Original native binary readers and bounded callers execute; cache transport and initial flags supplied.",
+    "Both EveryFrame and WhileOffScreen mappings now ported and checked against native reads.",
+    "Current graphical v23 stationary-camera captures do not cover this mismatch."
+  ],
+  "artifacts_sha256": {
+    "tools/probe_native_troy_simulate_every_frame.py": "ee1ecab7b49a086e0c556ee42c34911ffcfdba7c376fc3f12f898393ff2b4628",
+    "tools/probe_native_troy_simulate_offscreen.py": "13f812483ef2e300b61cc7c03d41bd04e3b532467fd37b6cf4914db62f6898fe",
+    "data/4.20/troy_simulate_every_frame_contract.json": "cacd69d6b47a6eaa7fed65ad7609d1834b19a10fd12d7802b9d804f6624a5799",
+    "data/4.20/troy_simulate_offscreen_contract.json": "90aa11e3528aae6e947498907fabc6203f50b3b196dac87574214239b59ffba6",
+    "crates/core/src/native_troy_simulation_flags.rs": "bc3bfd655819fbc09555fd8a62410c54503813838e648659ab42223682998558",
+    "logs/native-troy-offscreen-flags-tests.log": "8e07fec75463981948f1af0da87cfd79f979d62d4f6cc231a11584f7a4a00183"
+  },
+  "next_action": "Raccorder pause/reset/resume au cycle Projected : SimpleChild.flag=D4/emission.emitted, times=D8/previous et DC/tail.last_time, resource=C/frame.particles. Deferrer le Storage puis reutiliser native_simple_storage::acquire lors de emission(resource0), actuellement refusee par emit_from_frame. Integrer gate et tail natifs puis verifier camera mobile DX12/Vulkan ; poursuivre les24domaines/114taches."
+}

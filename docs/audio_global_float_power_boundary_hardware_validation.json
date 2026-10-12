@@ -1,0 +1,24 @@
+{
+  "saved_utc": "2026-10-09T16:31:34.823661+00:00",
+  "passed": true,
+  "complete": false,
+  "case_count": 12298,
+  "native_power_mismatches": 0,
+  "native_final_mismatches": 0,
+  "source": "tools/global_float_power_boundary_hardware_candidate.rs",
+  "executable": "tools/global_float_power_boundary_hardware_candidate.exe",
+  "output": "logs/global-float-power-boundary-hardware-candidate.json",
+  "reference": "data/4.20/audio_global_float_power_boundary_preparation.json",
+  "source_sha256": "bfd3921315ddb848e9d80ed7b26a9219631032bb3b462857585eed0a6657b411",
+  "executable_sha256": "1535eff530e17fe8aec3234632750e9562e9d8ef36671a4d3e8d5acab4eb2782",
+  "output_sha256": "3fce7fd15f763680148b34b697fe2a53acb9911f11fdc955deee0a3a82b7fae1",
+  "reference_sha256": "29c6c4416518df1999a49ed621297867899a9bb2836d3768c68289f9d09c7eb6",
+  "evidence": [
+    "Actual original CRT rounded power captured after native FSTP m32; exponent at actual CA2FA0 entry. Candidate host Rust powf actual hardware outputs match all12298 native rounded powers bit-for-bit. Lifted full numeric outputs threshold/value also match all12298. Dense4097 decibels, deterministic8192 raw-bit subnormals/tiny/finite, endpoints/fast-path boundary and signed quiet/signaling NaNs; deduplicated.",
+    "Hardware helper explicitly uses PC64nearest037F/MXCSR1F80 and16byte-aligned local MOVAPS buffers. No mismatches erased or altered; output retains full mismatch list empty."
+  ],
+  "limits": [
+    "This qualifies sampled numeric behavior, not formal identity over every representable input or complete original CRT. Original native oracle uses imported Windows ABI adapters and supplied thread context; candidate uses current host powf.",
+    "Alternate rounding/CRT dispatch/custom math handlers/locale/signals and full audio startup/game integration remain open."
+  ]
+}

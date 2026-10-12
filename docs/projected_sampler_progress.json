@@ -1,0 +1,35 @@
+{
+  "updated_utc": "2026-10-04T17:18:05.415873+00:00",
+  "complete": false,
+  "client_tests_passed": 65,
+  "native_projected_address_cases": 3,
+  "native_particle_filter_cases": 2,
+  "projected_current_build_gpu_rerun": false,
+  "last_gpu_capture": "docs/projected_normal_capture_v3.json",
+  "findings": [
+    "Original projected virtual70dispatch to9C2270, translation9C1960and external wrapper9C5260executes; stages0/1/2addressU/V receive CLAMP3 and warm cache skips repeated calls.",
+    "Actual production image loader settings already clamp U/V; regression now checks this against native calls, with image settings behavior preserved.",
+    "Original common particle manager93CF80..93D098plus projected sampler prefix confirms stage0/1linear MAG/MIN2and MIPFILTER NONE0.",
+    "Tests65and compilation passed; no new GPU rerun because image-loader behavior is unchanged. Prior GPU captures retain their original executable hashes."
+  ],
+  "limits": [
+    "Native D3D device API boundary and stack cookie are adapted; no native GPU executed in probes.",
+    "Later authored pixelate/filter overrides, variant flags and FOW receiver textures remain unqualified.",
+    "Explicit WGPU mip LOD0 enforcement remains to implement before loading multi-level projected textures; current PNG uses one level.",
+    "Inherited alpha operation, depth comparison, culling, exact owner provider, all skins and full renderer fidelity remain open."
+  ],
+  "files_sha256": {
+    "data/4.20/projected_sampler_contract.json": "6c4f5f1d135d8587115a7638c89e3282796f87a707fc770065d6997d6edfef4e",
+    "data/4.20/particle_filter_contract.json": "ea8ef937b15fc37398f07d3d4bf0c65d82f72dd66b1f2cb0e28c0b9104ca9269",
+    "tools/probe_native_projected_sampler.py": "5a53c2995ce55c11be7167644309a5e0d6a5dc20054d9648375d0427dd909ed3",
+    "tools/probe_native_particle_filter.py": "620a5c61df18d0295e73981b793510331025c5f05f351917d17a65aa57045628",
+    "crates/client/src/terrain_material.rs": "edd90c104d6759a9d72aeb4e93e3e55899745018b70c6783fe4758500b6ed845",
+    "logs/projected-sampler-tests.log": "e3fd07c5728d12ebe53a9c47f1e56892097dbd99fa276ef5ea259fc156c7275d",
+    "logs/projected-sampler-build.log": "b7e28d76e3f8bc47cee2b6333522a4d75ed3f8031b6d21127a6d2888978506d2",
+    "target/debug/openleague-client.exe": "ac7ffe367313bf2981729c3ae808d66e99c3efdb9fb9cbbd6fde00403d588978"
+  },
+  "enum_sources": [
+    "https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dtextureaddress",
+    "https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype"
+  ]
+}

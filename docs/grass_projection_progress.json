@@ -1,0 +1,47 @@
+{
+  "updated_utc": "2026-10-05T07:47:29.431949+00:00",
+  "complete": false,
+  "client_tests_passed": 170,
+  "client_build_passed": true,
+  "projection_consumer_ported": true,
+  "live_grass_mask_integrated": false,
+  "native_projection_cases": 168,
+  "native_compound_projection_cases": 396,
+  "native_target_cases": 64,
+  "native_projection_addresses": 316,
+  "native_target_addresses": 265,
+  "findings": [
+    "Rust projection consumer matches168native world/view/projection/viewport fixtures and396compound target-remapping/visibility fixtures under explicitly supplied x87control037F.",
+    "Original zero-W projection leaves output untouched and wrapper consumes undefined local values; Rust returns explicit unsupported error rather than inventing coordinates.",
+    "Original grass producer qualified in64cases including null/empty input, unsigned target sizes and three independent allocation/resource/texture failures. Success path order and quarter-rectangle input retained.",
+    "Recovered nativePS_COPY_FILTER shader simply samples slot0and copies RGBA. Actual slot0texture producer remains unqualified."
+  ],
+  "repairs": [
+    "First emulation adapter overwroteEAXon security-cookie return, causing false visibility gates; corrected to preserve return register, regenerated allfixtures and reran tests. Failed test log retained.",
+    "Default Unicorn x87precision24roundedFFFFFFFF before quarter scaling; supplied037Fextended precision explicitly, regenerated fixtures and reran tests. Historical FPU initialization remains open."
+  ],
+  "limits": [
+    "Compiled Rust consumers are not yet bound to native live camera/AABB/eligibility or grass-mask GPU pipeline. Current visual grass fidelity remains incomplete.",
+    "x87precision outside qualifiedfixtures, historical control-word initialization, NaN paths, zero remapping spans, matrices/viewport providers and wrapper zero-W output remain unqualified.",
+    "Target type2format/default texture, driver clear interpretation, slot0quadtexture/geometry, stencil/fullpass states and native pixels remain open.",
+    "No new runtime capture of this executable; previous screenshots apply only to their recorded hashes.",
+    "All24domains and the six-client end-to-end match remain unfinished."
+  ],
+  "next_actions": [
+    "Qualify986760/986AD0quad geometry, slot0texture producer and driver target/clear semantics; recover actual grass default texture and stencil state.",
+    "Bind actual camera/actor AABB/eligibility and verified projection/rectangle consumers to GPU grass mask; verify pixels and normal Map10 runtime.",
+    "Continue full native rendering/vision, six-client victory/results and every remaining requirement of the full plan."
+  ],
+  "files_sha256": {
+    "crates/client/src/grass_projection.rs": "0c6a026e66fceabd87fad7a16ce6448c2fb1387bf39a7d41dfd7f0119e926f2e",
+    "crates/client/src/main.rs": "178495dbd2124315e6750ffc8fa04889c8a113d07391d0066136b82c805fafaa",
+    "data/4.20/grass_projection_contract.json": "c856bdad50ba265dfe65af667297c434eea65ca95e352b6e3eb0384a24d7607d",
+    "data/4.20/grass_target_contract.json": "919286c7584261649aff4693f38f88db7acef96c83853d67af0356f52a1c9f72",
+    "data/4.20/shaders/FILTERS/PS_COPY_FILTER.ps_2_0": "a5af6e0ff80321fe3f388399fe4d429acbae67cfe15c6e4d8159da1710b3248c",
+    "logs/grass-projection-tests.log": "c5fb8bbd48e61fcbbc2eb72c9f4b86ba6616076af2b21eee40cfe62fc5bf3cfe",
+    "logs/grass-projection-retry-tests.log": "0eaff3f653fdd8265d72201c1932ee672b0cf39e0a3628038ee6dfd5bad7eaeb",
+    "logs/grass-projection-extended-tests.log": "fe8dc19892b0ed6ee40955d765df6bbcb8bf14b5fa33cb2e53fb000cc04b4138",
+    "logs/grass-projection-build.log": "62b3d35eb59d5317dca96bf17236f93e9bb606333a796878aa4d1d4efa4fdb0a",
+    "target/debug/openleague-client.exe": "f8ed5ffe922072057c4442bbd7b9c7f87c83370a0c5d05c1031fa72b027fbc8a"
+  }
+}

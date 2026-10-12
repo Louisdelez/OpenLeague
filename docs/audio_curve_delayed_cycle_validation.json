@@ -1,0 +1,21 @@
+{
+  "saved_utc": "2026-10-09T16:53:20.091450+00:00",
+  "passed": true,
+  "complete": false,
+  "case_count": 128,
+  "original_terminal_cases_preserved": 118,
+  "exact_original_machine_state_cycles": 10,
+  "remaining_instruction_limited_cases": 0,
+  "original_fixture": "data/4.20/audio_curve_delayed_admission_preparation.json",
+  "original_fixture_sha256": "60eb022731c6626f743886399e94dc15d9d2a6ca42626c88d5da9eff7c244174",
+  "qualified_fixture": "data/4.20/audio_curve_delayed_admission_cycle_qualified_preparation.json",
+  "qualified_fixture_sha256": "51fcdc82e42cbc04fefd4eb1976d00efac30edb1caaa2a59b8e12aa891ba5ce7",
+  "evidence": [
+    "Original machine observed atB105E7 loop entry. Ten cases repeat GPR/EFLAGS registers,64bytes active call frame and entire supplied canonical bank, with identical program counter; original admission body contains integer/list operations and external allocator calls occur only before repeated section. Emulation stops before executing the repeated iteration; no success return fabricated.",
+    "All118 original terminal cases preserve exact initial/final banks, every allocator/free/unlink call and returned status from initial128-case fixture. Original instruction-limited capture kept unchanged."
+  ],
+  "limits": [
+    "Exact repeat qualifies supplied deterministic original-machine cycles. Rust reports CyclicList on equivalent canonical repeated state instead of freezing; this is an explicit defensive deviation from native nontermination, not identical successful return.",
+    "Malformed/other subscriber tables, custom allocator mutations and full normal runtime scheduling remain separate."
+  ]
+}

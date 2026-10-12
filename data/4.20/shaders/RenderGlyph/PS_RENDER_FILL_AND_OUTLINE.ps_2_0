@@ -1,0 +1,48 @@
+////////////////////////////////////////////////////////////////
+///
+/// Samplers
+///
+////////////////////////////////////////////////////////////////
+sampler SAMPLER0 : register (s0);		///< font texture
+sampler SAMPLER1 : register (s1);		///< fill texture
+
+////////////////////////////////////////////////////////////////
+///
+/// Constants
+///
+////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////
+///
+/// main
+///
+////////////////////////////////////////////////////////////////
+void
+	main
+	(
+		float2		in_texcoord0	: TEXCOORD0,		///< Input texture coord 0
+		float2		in_texcoord1	: TEXCOORD1,		///< Input texture coord 1
+		float4		in_color0		: COLOR0,			///< Input color 0
+		float4		in_color1		: COLOR1,			///< Input color 1
+		out float4	out_color0		: COLOR0			///< Output color
+	)
+{
+	float4 swiz_color0 = in_color0;
+	float4 swiz_color1 = in_color1;
+
+	// Read textures
+	float4 texel0 = tex2D(SAMPLER0, in_texcoord0);
+	float4 texel1 = tex2D(SAMPLER1, in_texcoord1);
+
+	// Alpha values	
+	float alpha_fill = swiz_color0.a * texel0.r * texel1.a;
+	float alpha_outline = swiz_color1.a * texel0.b;
+	
+	// Colors
+	float3 color_fill = swiz_color0.rgb * texel1.rgb;
+	float3 color_outline = swiz_color1.rgb;
+
+	// Composite
+	out_color0.rgb = alpha_fill * color_fill + alpha_outline * color_outline;
+	out_color0.a = 1.f - (alpha_fill + alpha_outline);
+} // main

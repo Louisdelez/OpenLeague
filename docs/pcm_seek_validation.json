@@ -1,0 +1,36 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T08:00:21.634874+00:00",
+  "change": [
+    "Finite PCM transport supports absolute frame seek across configured full-clip repetitions, clamping at total end and allowing backward seek.",
+    "Bevy/Rodio decoder try_seek implements duration-to-frame transport, clears readahead and preserves current channel."
+  ],
+  "source_sha256": {
+    "crates/core/src/audio_media.rs": "c3e81a8b9ca3874fd41cbded459db07a43da141212355cfc7891baee92647204",
+    "crates/client/src/pcm_audio.rs": "fa5c9df8341dec624bf3c1f2c57c270cc5df92feca93236b2ddf93142dcd8f6d"
+  },
+  "validation": "Core6 and client8 tests PASS. Actual PCM transport includes31 ambient media; decoder seek preserves channel phase and discards read-ahead.",
+  "limits": [
+    "This is PCM device transport, not qualification of native Wwise event seek policy.",
+    "Native negative milliseconds, nearest markers, partial loops, voice/node dispatch and sample offset conversion remain upstream work.",
+    "No new normal executable or audible runtime acceptance."
+  ],
+  "tests": {
+    "core": {
+      "passed": 6,
+      "session": 84971,
+      "log": "logs/pcm-seek-core-tests.log",
+      "actual_media_files": 31
+    },
+    "client": {
+      "passed": 8,
+      "failed": 0,
+      "session": 22406,
+      "log": "logs/pcm-seek-client-tests.log"
+    }
+  },
+  "test_binary_sha256": {
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "cc0dc2c7f23152ba74c49d829c216e15b5590ed3592b259e4da8a259dff83fbd",
+    "target/debug/deps/openleague_client-5d530a836c9029e8.exe": "697e5e6a681908eee37ac042146d8bf92c4f1d1f35fc7fa4f15b193000c27910"
+  }
+}

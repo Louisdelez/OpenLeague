@@ -1,0 +1,63 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T11:38:06.922745+00:00",
+  "change": [
+    "Port AFF450 pair ancestor flag2E40, static/default property5=50, RTPC8 replacement, conditional property6/default-10 when flag2E20, otherwise zero. Preserve signed-zero raw result bits.",
+    "Port AEF2F0 suppression for equal f32 caches and ordered local0/local1/global dispatch, with scalar cache write only after all group updates.",
+    "Port B014D0 ordered-group consumers for finite sorted caches: descending control value, native ascending/descending unsigned-key tie modes, target-absent no-op and exact remove/insertion ordering equivalent to original neighbor/binary-search paths on qualified unique-key groups.",
+    "Connect PairBackend/TransitionBackend with flag/spatial/actor backends in whole refresh; remove pair and transition result adapters from native composition.",
+    "Record24 preparatory source-pointer lookup cases; this is not yet a Rust source port."
+  ],
+  "validation": {
+    "new_targeted_tests_passed": 5,
+    "audio_regression_tests_passed": 234,
+    "failed": 0,
+    "session": 82699,
+    "terminal_exit_code": 0,
+    "native_pair_cases": 1536,
+    "native_transition_consumer_cases": 3072,
+    "native_whole_refresh_cases": 2048,
+    "additional_native_source_cases_not_ported": 24,
+    "comparison": "Pair raw bits, transition dispatch order, all ordered-group references and final scalar-cache bits. Whole refresh also compares84-byte controls,16-byte spatial,60-byte pose, flags, extras/RNG and logical calls, including pair equality/no-transition and secondary-only pair changes. OS lock/unlock interface calls explicitly excluded.",
+    "log": "logs/audio-pair-transition-tests.log"
+  },
+  "sha256": {
+    "crates/core/src/audio_pair_controls.rs": "6df60f74b4512ead66bccc2726ca5f3e2dc13269a8adb9463d414108dc5c96d8",
+    "crates/core/src/audio_priority_transition.rs": "1dc436d8f87201da69a19e1d553db782fe014d77aa236f4aae74d14fd1acfd9b",
+    "crates/core/src/audio_actor_controls.rs": "68068f673dfcb348164bbda2c0e7e2aa5dff363d97047afc632b9813768804c4",
+    "crates/core/src/audio_control_refresh.rs": "4bebd1f4d4e330cae3c7fe653c5fb76b1edf492b0fe479ae7eb8a541371e9293",
+    "crates/core/src/audio_actor_flag.rs": "9af980175e99b417c1233e5d51e4e5f64804c2acdad917aec12ba36578ee1b42",
+    "crates/core/src/audio_spatial_controls.rs": "2783c027fdb2b966cafc641a5ea646992de9ce5796587ce8a5cedbc3595412ae",
+    "crates/core/src/lib.rs": "56ba526b2eced44234c85f1bbb66c278559df0920f0dc04a20b8e766cffe875e",
+    "tools/probe_native_audio_pair_controls.py": "7a74731838438834d40bf1b8932066515f80c19cc8be766440f82e46619f5423",
+    "tools/probe_native_audio_priority_transition.py": "6c272cfd4bf6ba9f3151ee32cb906695810e3e8048999b98c8feec1d7dbdd596",
+    "tools/probe_native_audio_pair_transition_refresh.py": "c91cf863f03e907731aad7337e7113ee66eee228d3dfb9afda61192114e55d72",
+    "tools/probe_native_audio_source_control.py": "4f330e826f0ae318856f1ac3020766cdff00159df6dc8d5c4a38323e412fb2f5",
+    "data/4.20/audio_pair_controls_contract.json": "68f88e967aa239ead673f7dfe7ac56bcc6bff6d9277c1e95cc4a0e6ee2bc545d",
+    "data/4.20/audio_priority_transition_contract.json": "574c9028d5229ca5a65661a26cda913a8fbebd6faaef326834d0b60d32fe95ca",
+    "data/4.20/audio_pair_transition_refresh_contract.json": "e41d894939723c1a26b67482cb295702460984ff3ffcabc7f586a8ff2636aae6",
+    "data/4.20/audio_source_control_contract.json": "a84260afaa26aa453b02907e141bfc291b77d795383a28669fb6cf6449f15760",
+    "logs/audio-pair-controls-probe.log": "9ffffcdc00daaaabe3ee9fe7eba48205bf968e14dbc64d05ec2ed3e852c13af2",
+    "logs/audio-priority-transition-probe.log": "cd0a11fbf04f1463c36ad702a76c4430ef96ab4b0fbe61c1c8b4eed2faa6e98a",
+    "logs/audio-pair-transition-refresh-probe.log": "4b1923e63084d284122ec4c3dca8788459f09e9874659936e088b10f4c1d8cd1",
+    "logs/audio-source-control-probe.log": "c4dbaeddbdf614eec377a1ddffeb99a3b227312aea551ad1df36b33d5afad21b",
+    "logs/audio-pair-transition-tests.log": "f88c8b814496200fe74c2bdf1faaa07c91237b54ff4ed82dd1a15456d6d288fd",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "321458a83829a293b37a9e5408eeeba0bf5be5d50a6029e6c5e5386bb25697a0"
+  },
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "adapters": [
+    "Original AEF2F0, B014D0, AFD970/AFDB30 and AFD670/AFD740 ordered group lookup/reordering execute unchanged. No transition dispatch or consumer result adapter.",
+    "Constructed native-layout voice caches, distinct local/global groups, valid sorted arrays, both unsigned key tie directions and absent target entries.",
+    "Source-13.125, routing callback are explicit dependency interfaces. Whole AEE790/AEC310/AEE9A0, AF0880, AF3060/AFECA0/AFEE20/AF19E0/AF9530, FF1CD8 E8=AF14D0/AF06F0, AFF450, AEF2F0/B014D0/AFD970/AFDB30 and actual manager/curves execute unchanged.",
+    "OS lock/unlock and resource release callback are explicit adapters; original acquisition increments counter and adapted release decrements it, verified balanced. Release/destruction body remains separate.",
+    "Only CRT random result adapted to explicit seed17 sequence (prior CRT arithmetic qualification). Original AF0880/AFEF40 parent recursion, state/static/range arithmetic and actual RTPC manager/curve code execute unchanged.",
+    "Constructed verified-layout static/global/object/cached tables, raw flags and manager bindings. Extended spatial/bus/effect handlers intentionally absent, not replaced by zero results."
+  ],
+  "limits": [
+    "Transition port accepts finite values, distinct group identities and unique keys in each valid sorted group. Aliased groups, duplicate keys and malformed arrays fail explicitly and remain unqualified.",
+    "Whole refresh still supplies source-13.125 and routing callback as explicit interfaces. Native source lookup is prepared on valid matching pointers only; original missing-match path reads beyond the array, so Rust must reject unresolved sources explicitly.",
+    "Node/source/group runtime initialization and ownership, live state/RTPC updates+smoothing, resource synchronization/release/destruction, bus24/state10/effects4C and full CAkBus consumer remain open.",
+    "Group reorder does not prove physical voice admission/displacement, actual device output or runtime registration/lifecycle.",
+    "No normal client rebuild, audible output, full match or full-project acceptance."
+  ]
+}

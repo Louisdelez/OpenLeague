@@ -1,0 +1,78 @@
+{
+  "updated_utc": "2026-10-06T09:53:27.975998+00:00",
+  "passed": true,
+  "complete": false,
+  "primary_icons": 486,
+  "variant_icons": 143,
+  "required_primary_icons": 488,
+  "unresolved": [
+    {
+      "champion": "amumu",
+      "slot": 1,
+      "spell": "AuraofDespair",
+      "field": "InventoryIcon",
+      "filename": "SadMummy_AuraofDespair.dds",
+      "config": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\AuraofDespair.inibin",
+      "config_sha256": "37119f2b20c8dbbf610b18ace8a0fa9b006ba665255b3159e8eda046fff03c4c",
+      "field_hash": 2059614685,
+      "reason": "different candidate bytes; original lookup precedence unqualified",
+      "candidates": [
+        {
+          "source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Amumu\\Info\\SadMummy_AuraOfDespair.dds",
+          "sha256": "5bd1bfbb92f83357da92793257b302866ca172e54bf16f5cdd18d2bbca7c298c"
+        },
+        {
+          "source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\Icons2D\\SadMummy_AuraOfDespair.dds",
+          "sha256": "6d35800d5b222e7f3d7e5cbc48517de19b9cde06df8495b5c5702fa9fa517126"
+        }
+      ]
+    },
+    {
+      "champion": "heimerdinger",
+      "slot": 2,
+      "spell": "HeimerdingerE",
+      "field": "InventoryIcon2",
+      "filename": "HeimerdingerE_E2.dds",
+      "config": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Heimerdinger\\Spells\\HeimerdingerE.inibin",
+      "config_sha256": "aede0aa3d1c81d7a50b9208ad91711534ccc55f0fbca4ca962833733d7f0a8be",
+      "field_hash": 1877491093,
+      "reason": "source file not found in character or global icon directories"
+    },
+    {
+      "champion": "nunu",
+      "slot": 3,
+      "spell": "AbsoluteZero",
+      "field": "InventoryIcon",
+      "filename": "Yeti_Shatter.dds",
+      "config": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\AbsoluteZero.inibin",
+      "config_sha256": "addefe6c7812e0bc8569500c33920098a8156954dbe80947cfa3dc9e684e3bd7",
+      "field_hash": 2059614685,
+      "reason": "different candidate bytes; original lookup precedence unqualified",
+      "candidates": [
+        {
+          "source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Nunu\\Info\\Yeti_Shatter.dds",
+          "sha256": "462aaee66cdb94f32ff30c3a501191a9f82f347866526c88f9c8129d3cd6637f"
+        },
+        {
+          "source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\Icons2D\\Yeti_Shatter.dds",
+          "sha256": "7f4ead579233a5f1e607abaea51f623ecc8602f9c947e1112915ded538e77c90"
+        }
+      ]
+    }
+  ],
+  "manifest": "data/4.20/native_spell_icons.json",
+  "manifest_sha256": "b01e4be9036ced09958319b1d347e26207d84f547468ccd4f7e7d6cc82fe3f5e",
+  "findings": [
+    "629 native DDS images copied byte-for-byte, decoded and linked to original SpellData inventory-icon fields. No source substitution or generated replacement.",
+    "217 primary icon references absent from per-character folders were searched in the native global DATA/Spells/Icons2D directory. Ambiguous AmumuW/NunuR copies remain unresolved. HeimerdingerE InventoryIcon2 file is missing in supplied4.20tree."
+  ],
+  "limits": [
+    "Native SpellData/InventoryIcon fields verified against supplied original inibin files; DDS bytes copied without alteration and all recovered images decoded. Community parser is used; original client lookup precedence is not emulated.",
+    "Variant fields recovered only where present in the488primary QWER records. Secondary spells, forms, skins, passives and dynamic selection are not covered by this manifest.",
+    "Recovery is resource preparation only. HUD binding, enabled/disabled/rank/cooldown states, interaction and graphical icon rendering remain unqualified. No complete champion kit or domain is closed."
+  ],
+  "next_action": "Qualifier le choix natif des icônes Amumu W/Nunu R et la variante manquante d’Heimerdinger ; raccorder les icônes QWER au HUD, états de rang/coût/délai et interactions, puis poursuivre le plan intégral.",
+  "tools_sha256": {
+    "tools/recover_native_spell_icons.py": "1978aada4c7776871aeae57fdf665622e07167e07eb0b87fd3e7f092ebc4def9"
+  }
+}

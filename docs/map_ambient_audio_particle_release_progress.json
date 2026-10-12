@@ -1,0 +1,29 @@
+{
+  "updated_utc": "2026-10-04T00:32:46.794011+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_particle_release.py": "11fe14faab51a6dc2e2c303fe2dfe06be9782ac5f5f65dbef231d91aaae9e93d",
+    "data/4.20/audio_particle_release_contract.json": "3b31dcc524628b03c515b0f2016cc3d9ebb17a779387552d6342dc4aabff1232",
+    "crates/core/src/audio_requests.rs": "ce4f612041428c5fa432384880aff9736e23610624e43f62a52ac366e8ef27de",
+    "logs/native-audio-particle-release-core-tests.log": "37848ffe7f6c34fe6749455982057f31834bc1f8c324ea630c5a1c7e5aa24723"
+  },
+  "native_cases": 32,
+  "native_fragment_executions": 64,
+  "core_tests_passed": 216,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "ported": [
+    "release_logical_reference except sentinel -1, reset after callback",
+    "Emitter::release_persistent queues native handle only at actual cleanup/reset"
+  ],
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false,
+  "limits": [
+    "Original93E588..93E5C8 cleanup and93E6FB..93E73B reset release fragments executed; surrounding full particle cleanup/reset excluded.",
+    "Virtual+0x20 callback adapted to record keys; its actual native release queue separately qualified.",
+    "Secondary persistent field tested in native fragments; absent from five ambient particle configurations.",
+    "Animation event-end callback5B5440 only marks emitter +124/+12C; full lifecycle timing before destructor remains unqualified.",
+    "Client event-end currently removes dry request producer; full retained-emitter state/lifetime must be implemented before accepting logical handles in client. Do not equate animation end cue with native cleanup.",
+    "Rust release callback queues keys only; logical worker pending creation/release/removal, source shared ownership and real voice backend remain incomplete.",
+    "No standalone binary rebuild or new runtime playback evidence."
+  ]
+}

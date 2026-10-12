@@ -1,0 +1,25 @@
+{
+  "scope": "Review and preflight of the isolated index read-order repair before qualification",
+  "repair_manifest_sha256": "467914aefc209b70c01212083728447cbc8302e0abc167f674d1d1d233e9bec6",
+  "reviewed_files": [
+    "audio_loading_resource_manager_index.rs",
+    "audio_loading_resource_manager_index_read_tests.rs",
+    "probe_index_read.py",
+    "repair_manifest.json",
+    "AUDIT.md"
+  ],
+  "observations": [
+    "The original index delta and insertion instruction listing were inspected: count/head/key ordering and repeated head/parent reads are restored.",
+    "The probe executes the original manager constructors, scopes each actual 5BD9B0 call, and captures canonical allocation/key accesses while excluding stack ABI scaffolding.",
+    "The new tests compare all four fixed-hash insertions per native lifetime and their complete observable access sequences, returned slots, allocation inventory and final bytes.",
+    "The error test stops at each expected native read and checks recoverable partial-constructor inventory, atomic release failure and subsequent cleanup without duplicate frees.",
+    "The read-only recorder preflight accepted the pinned three-file repair and the independent correction of six unchanged filtered tests before installation.",
+    "Frozen initial candidates, initial install receipt and the intentionally interrupted compilation log remain preserved."
+  ],
+  "open_concrete_findings": [],
+  "dynamic_limits": [
+    "Rust qualification is pending in pipeline 13697; this static review does not claim a test pass.",
+    "The four fixed constructor keys do not rotate. Rotation read changes were statically compared and are not dynamically qualified by this native fixture.",
+    "No actual resource provider factory, populated provider disposal or complete loading screen is covered."
+  ]
+}

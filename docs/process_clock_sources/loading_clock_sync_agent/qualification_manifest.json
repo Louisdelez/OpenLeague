@@ -1,0 +1,90 @@
+{
+  "saved_utc": "2026-10-10T19:07:19.221995+00:00",
+  "passed": true,
+  "complete": false,
+  "production_modified": false,
+  "cargo_run": false,
+  "rustc_command": [
+    "C:\\Users\\loicd\\.cargo\\bin\\rustc.exe",
+    "--edition",
+    "2021",
+    "--test",
+    "E:\\mapslol3v3\\loading_clock_sync_agent\\clock_sync_harness.rs",
+    "-L",
+    "dependency=E:\\OpenLeague\\target\\debug\\deps",
+    "--extern",
+    "serde_json=E:\\OpenLeague\\target\\debug\\deps\\libserde_json-06e1b1b57f0ae5f7.rlib",
+    "-o",
+    "E:\\mapslol3v3\\loading_clock_sync_agent\\clock_sync_tests.exe"
+  ],
+  "native_lifetimes": 64,
+  "native_boundary_lifetimes": 64,
+  "native_outer_cases": 34,
+  "native_allocation_cases": 8,
+  "source_regions_independently_verified": 26,
+  "rust_tests": 5,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "files": {
+    "audio_clock_once.rs": {
+      "sha256": "b95043292d69ba2f317cf9ca2aab8fc7b25cf850cb7a8c55e74d49cead54c7d0",
+      "bytes": 9848
+    },
+    "audio_clock_once_tests.rs": {
+      "sha256": "681eade48f5dddea0c19d801f6f83016b630e508d3c34ea402ec367751afef89",
+      "bytes": 9923
+    },
+    "clock_sync_disassembly.txt": {
+      "sha256": "252bafeefcb15b95f3bffef94c4b2ef300d7858a9b499ae76178331c5157be69",
+      "bytes": 37964
+    },
+    "clock_sync_harness.rs": {
+      "sha256": "015f51675ca331a57f8c2852a99c06c1f0c5d0b1416ff8a8e4bd20652c45f260",
+      "bytes": 213
+    },
+    "clock_sync_probe.json": {
+      "sha256": "5fdd8f7613f3880793381ee9c927f1c12b413701eec80a377f51d0d576a4649a",
+      "bytes": 4957619
+    },
+    "clock_sync_tests.exe": {
+      "sha256": "7f41fd1dbceafef332c6aa68b93c7946d473b4b26d72f6ad2203c21cfe1a9b55",
+      "bytes": 1024512
+    },
+    "clock_sync_tests.pdb": {
+      "sha256": "fe0a6c0acc8106cbe29530f8d4739730bf96db00f2952bfef2a9e304dcf018d6",
+      "bytes": 3117056
+    },
+    "compile.log": {
+      "sha256": "81ba62eaa48d28833ac3b53a846d2aa79b4d849021aa55cab7fab3aaf97a1d50",
+      "bytes": 86
+    },
+    "probe_clock_sync.py": {
+      "sha256": "ca3c00e0eb554cd4ee26e5525eb7a2917463d583bbac5a8a6055f6ee68f21062",
+      "bytes": 11101
+    },
+    "qualify.py": {
+      "sha256": "c6a938eb627e51f475e0efce6c1b505d0c26c72129f075b5e8b192558b8a36fa",
+      "bytes": 2640
+    },
+    "tests.log": {
+      "sha256": "388775b465dbeedf67ef053ee783a5e9d032c1a1225a12cb68629150540a5042",
+      "bytes": 693
+    },
+    "CONTRACT.md": {
+      "sha256": "66f7b90447a8247955bb28e7569cc925b187f0837f086bb03b05f6a3d752eae7",
+      "bytes": 7680
+    },
+    "runtime_image_additions.json": {
+      "sha256": "75d997094012f89659a8ddc0c0ca16e2a006a3a11c20d899825b730e6c0a511a",
+      "bytes": 947
+    }
+  },
+  "limits": [
+    "Original CE298A/CE5247/type1 mutex and actual uncontended ConCRT queue bodies execute unchanged in cases. Context acquisition returns explicit fixture pointer; scheduler/TLS is not qualified.",
+    "boundary_cases isolates CBEE12/CBEEED as explicit unchanged-byte fixture callbacks to qualify the outer/type1 port without claiming a ConCRT implementation. Production must supply a working qualified synchronization adapter.",
+    "Win32 CS initialization/enter/leave/delete, thread ID, Sleep, calloc/free and atexit are deterministic boundaries; no real concurrency/OS lock availability is claimed.",
+    "Outer state races are deterministic instruction-level schedules. Inner queue contention, scheduler block/unblock and arbitrary reentrant same-flag callback are not executed.",
+    "Native 5642D0 is RET. Tests destroy only retired/unowned mutexes; native destruction does not prove safety while other users remain.",
+    "Callback errors, host rollback and native exception unwinding need distinct qualification. No QPC/frequency or clock arithmetic is tested here.",
+    "Rust tests compare the explicit inner-boundary oracle; they do not establish host ConCRT/FIFO/Win32 availability. Host Result rollback cases are distinct from native SEH."
+  ]
+}

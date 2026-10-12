@@ -1,0 +1,82 @@
+{
+  "updated_utc": "2026-10-04T07:19:06.170886+00:00",
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "files_sha256": {
+    "tools/qualify_native_entity_yaw.py": "fce7bfbe1d8aeecf04bef9f67e8f3570c73b767203064f5b097458d738d28c68",
+    "data/4.20/entity_yaw_contract.json": "6eaad431adc205b75507df2b47b9dda2b90043ef9a45cc6120a2159ea6bc9a1e",
+    "crates/core/src/entity_yaw.rs": "fcbbfb8be50facf9915ef07687f07e5f0a7994ff80477d874d1ce058556cd5fd",
+    "crates/core/src/camera_rotation.rs": "fe4c47dd8616605f661e659b3b71b14a63124074800208b85c99fce5b4d9a72e",
+    "crates/core/src/lib.rs": "e4aa8af8217f42c65c8ded73ad344a68021f2e96d98b13c7bba0f3991b8d33cd",
+    "crates/client/src/entity_orientation.rs": "07082841f02691c5382c9785368b66e91ac190b3276f134a06d8a8cfb5b93c92",
+    "crates/client/src/main.rs": "3042d215a0a65d74d5eeda87599f9c00517e8196f460f363d33822fd742c5e34",
+    "tools/verify_native_entity_yaw_live.py": "d67bd14016d7faae2e0b77393692f51d26393705dc126f7d7535bd2b9acb5ef9",
+    "tools/probe_entity_yaw_runtime.py": "eeab48e23d64f30e77ce62e0b132c9c57c1715ef76eed0e60c67dfa685278d03",
+    "logs/native-entity-yaw-focused-tests.log": "2bb39938c563e359cae39731841879f8e28f2aadaf2746af054602e0238ccfa4",
+    "logs/native-entity-yaw-tests.log": "24ecb44da204bb258fbf2a56af1dd58cd459ef9438de3f50ceee48c949a83d5e",
+    "logs/native-entity-yaw-client-tests.log": "963baae7029077c7f6ad9bc111165fe71af4e3d196198dbbb5091ed02f6d92d6",
+    "logs/native-entity-yaw-final-build.log": "50526e8c60a5f850e0f993962e39ae7e3647c300176fea560a96b687f61090af",
+    "logs/native-entity-yaw-live-final.json": "00274051e3d9781c9f44875e8b840d52dcafdf9d0150e428c7e6f9de97a16ada",
+    "docs/native_entity_yaw_live_final_validation.json": "f18429e3d925ae0b094439fb0e841896aa11d69b61a86a8068b596fa56e27fbf",
+    "logs/native-entity-yaw-final-map10.png": "409b93bed1e775a53f5d143ed12aa8be04c7522ab192916b46c51331899678ef",
+    "logs/native-entity-yaw-final-runtime.json": "d0f5d122aa2b56ec4e8532595747bbf1ecf4a4117a805d15e2257c5d5e3ea12e",
+    "logs/native-entity-yaw-final-client.out.log": "7bf1fd1763c58439351b455ebc1ae6d8fef4333ad682313eb7ba628d6f72b8a6",
+    "logs/native-entity-yaw-final-client.err.log": "40d4a3b6694dc217e61295a5118294407b0f12c6f7a8d2f9836099ad2ec524ba"
+  },
+  "passed": true,
+  "complete": false,
+  "native_full_yaw_cases": 111,
+  "core_tests_passed": 331,
+  "client_tests_passed": 24,
+  "client_executable_sha256": "28493b623113b1bd9164f45d055a3d12b34ebbe4f5a18d3edcd2c59a2571b1f0",
+  "server_executable_sha256": "b51b2dfc8ea19f735482e8f87e353feafdac242af91c54f0754f851bb202bb16",
+  "source_integration": "Player/unit snapshot displacement in native coordinates feeds6AB380 FPATAN+native degree constant+6BD9F0 quantized sine-table basis. Previous genericworlddelta atan2 replaced; nativezeroXZ keepsoldrotation. Initial placement/facing still uses existingsource mapping. Bevy normalizedquaternion bridge qualified separately.",
+  "live_validation": {
+    "checked_utc": "2026-10-04T07:17:47.182962+00:00",
+    "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+    "trace_sha256": "00274051e3d9781c9f44875e8b840d52dcafdf9d0150e428c7e6f9de97a16ada",
+    "client_sha256": "28493b623113b1bd9164f45d055a3d12b34ebbe4f5a18d3edcd2c59a2571b1f0",
+    "frames": 128,
+    "native_matrices_bit_exact": true,
+    "maximum_render_forward_error": 2.5880118524699796e-07,
+    "passed": true,
+    "complete": false,
+    "limits": [
+      "Actual client motion inputs replayed through full native6AB380/6BD9F0 without math adapters. Quaternion conversion checked independently against original matrixforward.",
+      "Snapshot displacement direction is reconstructed; original movement direction/cadence not yet qualified. Quantized matrix to normalizedBevy quaternion bridge has tinybasis error, not GPU pixel equivalence.",
+      "Actual motion trace validated independently; scripted player-driver acceptance failed and is not claimed. No six-client gameplay acceptance."
+    ]
+  },
+  "runtime": {
+    "port": 5914,
+    "client": 16184,
+    "server": 4280,
+    "client_responding": true,
+    "server_responding": true,
+    "backend": "vulkan",
+    "diagnostic": true,
+    "scripted_driver_accepted": false
+  },
+  "framebuffer": {
+    "path": "logs/native-entity-yaw-final-map10.png",
+    "dimensions": [
+      1280,
+      800
+    ],
+    "inspected": true,
+    "hud_utf8_correct": true,
+    "human_fidelity_acceptance": false
+  },
+  "limits": [
+    "Full6AB380 executes actual FPATAN,6BD9F0 two Y-axis quantized rotations,8DE480 identity and8DE500copy without adapters. Finite direction inputs supplied.",
+    "Native X/Z bothzero skips matrix write, Y ignored. Quantized index uses360-angle and90-(360-angle), preserving f32 rounding before CVTTSS2SI; genericatan2/quaternion not equivalent.",
+    "Native movement update cadence, initial facing producers, other rotation axes and client GPU integration remain unqualified. Position cache aftermatrix preserved.",
+    "Actual client motion inputs replayed through full native6AB380/6BD9F0 without math adapters. Quaternion conversion checked independently against original matrixforward.",
+    "Snapshot displacement direction is reconstructed; original movement direction/cadence not yet qualified. Quantized matrix to normalizedBevy quaternion bridge has tinybasis error, not GPU pixel equivalence.",
+    "Actual motion trace validated independently; scripted player-driver acceptance failed and is not claimed. No six-client gameplay acceptance.",
+    "111finite native matrices and positioncache preservation exact; atan angle allowance0.00004degrees accounts for FPATAN emulator/host differences. Original caller directionproducer/cadence remains unqualified.",
+    "Latest client128actual updates match original matrices bitexact; maximumrenderforward error as in current livevalidation, not GPU/originalpixel equivalence.",
+    "Scripted driver experiment did not pass. First no trace within58seconds; guessed viewer86 filter later allocatedwrong team andfilledlobby. Test helper now capsallocation attempts. No two-player scriptedmovement or six-client acceptance claimed.",
+    "SixHUDlines hadUTF8 mojibake during sourceedit; fixed explicitlyUTF8, rebuilt andchecked newactualcapture. Historicaloldcapture retained, not currentacceptance.",
+    "Vulkan still logs missingTikTokimplicitlayer manifest; actualrender succeeds. No globaldriver/config edits. Full24-domain game remains incomplete."
+  ]
+}

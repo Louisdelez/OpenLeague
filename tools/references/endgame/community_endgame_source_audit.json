@@ -1,0 +1,84 @@
+{
+  "repository": "LeagueSandbox/GameServer",
+  "commit": "b37c75483abf66048af7c914e7fab700efaa5e21",
+  "rows": [
+    {
+      "path": "GameServerLib/API/APIMapFunctionManager.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/GameServer/b37c75483abf66048af7c914e7fab700efaa5e21/GameServerLib/API/APIMapFunctionManager.cs",
+      "sha256": "fe4e01f980880225edfe5fa36fd99e4dd2318b336eefeb34b0c2ad07816e56a7",
+      "hits": [
+        {
+          "line": 335,
+          "context": "        /// Sets the game to exit\n        /// </summary>\n        /// <param name=\"losingTeam\">The team who lost the game</param>\n        /// <param name=\"finalCameraPosition\">The position which the camera has to move to for the end-game screen</param>\n        /// <param name=\"endGameTimer\">Offset for the Endgame screend (victory or defeat) to be actually announced</param>\n        /// <param name=\"moveCamera\">Wether or not the camera should move</param>\n        /// <param name=\"cameraTimer\">The ammount of time the camera has to arrive to it's destination</param>\n        /// <param name=\"disableUI\">Whether or not the UI should get disabled</param>\n        /// <param name=\"deathData\">DeathData of what triggered the End of the Game, such as necus death</param>\n        public static void EndGame(TeamId losingTeam, Vector3 finalCameraPosition, float endGameTimer = 5000.0f, bool moveCamera = true, float cameraTimer = 3.0f, bool disableUI = true, GameServerLib.GameObjects.AttackableUnits.DeathData deathData = null)\n        {\n            //TODO: check if mapScripts should handle this directly\n\n            if (deathData != null)\n            {\n                _game.PacketNotifier.NotifyBuilding_Die(deathData);"
+        },
+        {
+          "line": 340,
+          "context": "        /// <param name=\"moveCamera\">Wether or not the camera should move</param>\n        /// <param name=\"cameraTimer\">The ammount of time the camera has to arrive to it's destination</param>\n        /// <param name=\"disableUI\">Whether or not the UI should get disabled</param>\n        /// <param name=\"deathData\">DeathData of what triggered the End of the Game, such as necus death</param>\n        public static void EndGame(TeamId losingTeam, Vector3 finalCameraPosition, float endGameTimer = 5000.0f, bool moveCamera = true, float cameraTimer = 3.0f, bool disableUI = true, GameServerLib.GameObjects.AttackableUnits.DeathData deathData = null)\n        {\n            //TODO: check if mapScripts should handle this directly\n\n            if (deathData != null)\n            {\n                _game.PacketNotifier.NotifyBuilding_Die(deathData);\n                _game.PacketNotifier.NotifyS2C_SetGreyscaleEnabledWhenDead(false, deathData.Killer);\n            }\n            else\n            {\n                _game.PacketNotifier.NotifyS2C_SetGreyscaleEnabledWhenDead(false);"
+        },
+        {
+          "line": 359,
+          "context": "            foreach (var player in players)\n            {\n                if (disableUI)\n                {\n                    _game.PacketNotifier.NotifyS2C_DisableHUDForEndOfGame(player);\n                }\n                if (moveCamera)\n                {\n                    _game.PacketNotifier.NotifyS2C_MoveCameraToPoint(player, Vector3.Zero, finalCameraPosition, cameraTimer);\n                }\n            }\n\n            //The way we handle the end of a game has to be reworked\n            var timer = new Timer(endGameTimer) { AutoReset = false };\n            timer.Elapsed += (a, b) =>\n            {"
+        },
+        {
+          "line": 368,
+          "context": "                }\n            }\n\n            //The way we handle the end of a game has to be reworked\n            var timer = new Timer(endGameTimer) { AutoReset = false };\n            timer.Elapsed += (a, b) =>\n            {\n                _game.Stop();\n                _game.PacketNotifier.NotifyS2C_EndGame(losingTeam);\n                _game.SetGameToExit();\n            };\n            timer.Start();\n        }\n\n        public static void AddTurretItems(BaseTurret turret, int[] items)\n        {"
+        },
+        {
+          "line": 372,
+          "context": "            var timer = new Timer(endGameTimer) { AutoReset = false };\n            timer.Elapsed += (a, b) =>\n            {\n                _game.Stop();\n                _game.PacketNotifier.NotifyS2C_EndGame(losingTeam);\n                _game.SetGameToExit();\n            };\n            timer.Start();\n        }\n\n        public static void AddTurretItems(BaseTurret turret, int[] items)\n        {\n            foreach (var item in items)\n            {\n                turret.Inventory.AddItem(_game.ItemManager.SafeGetItemType(item), turret);\n            }"
+        }
+      ]
+    },
+    {
+      "path": "GameServerLib/API/ApiFunctionManager.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/GameServer/b37c75483abf66048af7c914e7fab700efaa5e21/GameServerLib/API/ApiFunctionManager.cs",
+      "sha256": "6acbed31444cd1ff56a7b8d72ecd1513fada6ca75ec79d030824d1a89f39ae85",
+      "hits": []
+    },
+    {
+      "path": "GameServerLib/Game.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/GameServer/b37c75483abf66048af7c914e7fab700efaa5e21/GameServerLib/Game.cs",
+      "sha256": "5b1a029c2f4581d4ff29457d844ebf08359161804e0eb67cd47a205e57083bc7",
+      "hits": []
+    },
+    {
+      "path": "GameServerLib/GameObjects/AttackableUnits/Buildings/AnimatedBuildings/Nexus.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/GameServer/b37c75483abf66048af7c914e7fab700efaa5e21/GameServerLib/GameObjects/AttackableUnits/Buildings/AnimatedBuildings/Nexus.cs",
+      "sha256": "ffff1a1ff3951a6ef024e0b14a425ba1d4f1c42f21193c8ba3ca662918ef6f64",
+      "hits": []
+    },
+    {
+      "path": "GameServerLib/Packets/PacketNotifier.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/GameServer/b37c75483abf66048af7c914e7fab700efaa5e21/GameServerLib/Packets/PacketNotifier.cs",
+      "sha256": "7fea38b46e6d4bec6dcbb3ba363a48cdef9108e49732ce0300a77831aac5f10f",
+      "hits": [
+        {
+          "line": 2695,
+          "context": "        /// <summary>\n        /// Disables the U.I when the game ends\n        /// </summary>\n        /// <param name=\"player\"></param>\n        public void NotifyS2C_DisableHUDForEndOfGame(ClientInfo player)\n        {\n            var disableHud = new S2C_DisableHUDForEndOfGame();\n            _packetHandlerManager.SendPacket(player.ClientId, disableHud.GetBytes(), Channel.CHL_S2C);\n        }\n\n        /// <summary>\n        /// Sends packets to all players notifying the result of a match (Victory or defeat)\n        /// </summary>\n        /// <param name=\"losingTeam\">The Team that lost the match</param>\n        /// <param name=\"time\">The offset for the result to actually be displayed</param>\n        public void NotifyS2C_EndGame(TeamId losingTeam)"
+        },
+        {
+          "line": 2697,
+          "context": "        /// </summary>\n        /// <param name=\"player\"></param>\n        public void NotifyS2C_DisableHUDForEndOfGame(ClientInfo player)\n        {\n            var disableHud = new S2C_DisableHUDForEndOfGame();\n            _packetHandlerManager.SendPacket(player.ClientId, disableHud.GetBytes(), Channel.CHL_S2C);\n        }\n\n        /// <summary>\n        /// Sends packets to all players notifying the result of a match (Victory or defeat)\n        /// </summary>\n        /// <param name=\"losingTeam\">The Team that lost the match</param>\n        /// <param name=\"time\">The offset for the result to actually be displayed</param>\n        public void NotifyS2C_EndGame(TeamId losingTeam)\n        {\n            var gameEndPacket = new S2C_EndGame"
+        },
+        {
+          "line": 2706,
+          "context": "        /// Sends packets to all players notifying the result of a match (Victory or defeat)\n        /// </summary>\n        /// <param name=\"losingTeam\">The Team that lost the match</param>\n        /// <param name=\"time\">The offset for the result to actually be displayed</param>\n        public void NotifyS2C_EndGame(TeamId losingTeam)\n        {\n            var gameEndPacket = new S2C_EndGame\n            {\n                IsTeamOrderWin = losingTeam != TeamId.TEAM_BLUE\n            };\n            _packetHandlerManager.BroadcastPacket(gameEndPacket.GetBytes(), Channel.CHL_S2C);\n        }\n\n        public void NotifyS2C_HandleCapturePointUpdate(byte capturePointIndex, uint otherNetId, byte PARType, byte attackTeam, CapturePointUpdateCommand capturePointUpdateCommand)\n        {\n            var packet = new S2C_HandleCapturePointUpdate"
+        },
+        {
+          "line": 2708,
+          "context": "        /// <param name=\"losingTeam\">The Team that lost the match</param>\n        /// <param name=\"time\">The offset for the result to actually be displayed</param>\n        public void NotifyS2C_EndGame(TeamId losingTeam)\n        {\n            var gameEndPacket = new S2C_EndGame\n            {\n                IsTeamOrderWin = losingTeam != TeamId.TEAM_BLUE\n            };\n            _packetHandlerManager.BroadcastPacket(gameEndPacket.GetBytes(), Channel.CHL_S2C);\n        }\n\n        public void NotifyS2C_HandleCapturePointUpdate(byte capturePointIndex, uint otherNetId, byte PARType, byte attackTeam, CapturePointUpdateCommand capturePointUpdateCommand)\n        {\n            var packet = new S2C_HandleCapturePointUpdate\n            {\n                CapturePointIndex = capturePointIndex,"
+        }
+      ]
+    },
+    {
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/GameServer/b37c75483abf66048af7c914e7fab700efaa5e21/LICENSE",
+      "sha256": "9855ac003bebea9fbe4e325098d99cd7803fbe36dd1a9b29559fc5c235798195",
+      "hits": []
+    }
+  ],
+  "complete": false,
+  "limits": [
+    "Community implementation is a reference, not proof of original native 4.20 behavior. No community code integrated."
+  ]
+}

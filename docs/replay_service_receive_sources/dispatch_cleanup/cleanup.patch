@@ -1,0 +1,43 @@
+--- a/crates/core/src/audio_announcer_owner_metadata.rs
++++ b/crates/core/src/audio_announcer_owner_metadata.rs
+@@ -4,7 +4,7 @@
+ use crate::audio_announcer_registry_init::{self as init,Storage};
+ use crate::audio_announcer_registry_remove::{self as remove,Backend as RemovalBackend};
+ #[derive(Debug,PartialEq,Eq)]
+-pub enum Error {Context(lookup::Error),Storage(init::Error),Release(remove::Error),Boundary(&'static str),UnknownCallback(u32),AddressOverflow}
++pub enum Error {Context(lookup::Error),Storage(init::Error),Release(remove::Error),Boundary(&'static str),UnknownCallback(u32),AddressOverflow,Cleanup {primary:Box<Error>,cleanup:Box<Error>}}
+ impl From<lookup::Error> for Error {fn from(e:lookup::Error)->Self {Self::Context(e)}}
+ impl From<init::Error> for Error {fn from(e:init::Error)->Self {Self::Storage(e)}}
+ impl From<remove::Error> for Error {fn from(e:remove::Error)->Self {Self::Release(e)}}
+--- a/crates/core/src/audio_announcer_service_activation.rs
++++ b/crates/core/src/audio_announcer_service_activation.rs
+@@ -42,9 +42,24 @@
+  let id=b.word(descriptor)?;let event=b.word(add(descriptor,8)?)? as u16;let Some(node)=active::descriptor_lookup(b,add(service,24)?,id,event)? else {return Ok(0);};
+  let begin=b.word(add(node,20)?)?;let end=b.word(add(node,24)?)?;let requested=end.wrapping_sub(begin)>>2;let snapshot=if requested==0 {0} else {b.allocate_pointer_array(requested).map_err(Error::Boundary)?};
+  if snapshot==0 {return Ok(0);}
+- // Native6B5CB0 reloads the source vector after allocation, then copies before dispatch.
+- let begin=b.word(add(node,20)?)?;let end=b.word(add(node,24)?)?;let count=end.wrapping_sub(begin)>>2;
+- for i in 0..count {let value=b.word(add(begin,i*4)?)?;Storage::write_word(b,add(snapshot,i*4)?,value)?;}
+- let mut result=0u8;for i in 0..count {let field=b.word(add(snapshot,i*4)?)?;let handler=b.word(field)?;result|=invoke(b,handler,packet)?;}
+- let route=b.deallocator()?;b.free(snapshot,route)?;Ok(result)
++ // The native success path owns this snapshot until all callbacks finish.
++ // A host Boundary error is not native C++ unwinding: retire that ownership
++ // explicitly, including failures while reloading or copying the source vector.
++ let result=(|| {
++  // Native6B5CB0 reloads source vector after allocation, before callback dispatch.
++  let begin=b.word(add(node,20)?)?;let end=b.word(add(node,24)?)?;let count=end.wrapping_sub(begin)>>2;
++  for i in 0..count {let value=b.word(add(begin,i*4)?)?;Storage::write_word(b,add(snapshot,i*4)?,value)?;}
++  let mut result=0u8;for i in 0..count {let field=b.word(add(snapshot,i*4)?)?;let handler=b.word(field)?;result|=invoke(b,handler,packet)?;}
++  Ok(result)
++ })();
++ // Re-read the current deallocator after the consumer: it may have changed.
++ let cleanup=(|| {let route=b.deallocator()?;b.free(snapshot,route)?;Ok(())})();
++ match (result,cleanup) {
++  (Ok(value),Ok(()))=>Ok(value),
++  (Err(error),Ok(()))|(Ok(_),Err(error))=>Err(error),
++  (Err(primary),Err(cleanup))=>Err(Error::Cleanup {primary:Box::new(primary),cleanup:Box::new(cleanup)}),
++ }
+ }
++#[cfg(test)]
++#[path="audio_announcer_service_activation_cleanup_tests.rs"]
++mod cleanup_tests;

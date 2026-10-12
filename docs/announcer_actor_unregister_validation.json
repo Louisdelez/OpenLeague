@@ -1,0 +1,54 @@
+{
+  "saved_utc": "2026-10-10T08:08:37.667774+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "audio_tests_passed": 655,
+  "filtered_tests_not_run": 480,
+  "isolated_production_tests_passed": 84,
+  "native_actor_unregister_segment_calls_ported": 96,
+  "native_actor_unregister_mutation_cases_ported": 8,
+  "native_owner_component_destructor_cases_prepared": 208,
+  "contracts": {
+    "audio_announcer_actor_unregister_segment_contract.json": {
+      "cases": 48,
+      "sha256": "c2f3b38f2d8e1630e260118655660e9c802994fe041467be1894ae115e91aaa3"
+    },
+    "audio_announcer_actor_unregister_mutations_contract.json": {
+      "cases": 8,
+      "sha256": "3884a17f6febf89524ac3dfb416f0b7a5b965690c4bdd4ea6be16ff9abe43d57"
+    },
+    "audio_announcer_owner_component_destructor_contract.json": {
+      "cases": 208,
+      "sha256": "6d03725f2de0c50b52073ecce27997fbf90997bb68f7d58af455b206e956a8b5"
+    }
+  },
+  "regression_log_sha256": "589cea8d99e260355d56949659c1d1d33424632eea36193313b758fc14888135",
+  "isolated_log_sha256": "7f735195a7c727b83976bc1ff96566791440b0eee3a39cede7567e03bea646ed",
+  "test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_core-5b2a9def275dcedd.exe",
+  "test_executable_sha256": "e22c51f177507b74f4968f8a14c5b2e734e8524bf187b043ade88c617d5422e4",
+  "source_hashes": {
+    "crates/core/src/audio_announcer_actor_registry_composition.rs": "90c96a7d1b7985ed71b1d55d7dcf1dcedc9371f978cd1ddc810fa3a39750b90b",
+    "crates/core/src/audio_announcer_secondary_unregister.rs": "fe16febfaa98b8fba6acc114c00fc76823b0de1c5d7a5221dd9d3afbfbd9d9f0",
+    "crates/core/src/lib.rs": "8d5fa577cd4ca3667743b3c48965b6ca289eccda0a5ff4258b4573a6280df9e7",
+    "tools/announcer_secondary_unregister_production_tests.rs": "33898421a26fec3ceecb4f1a4783b58d792d506ea4a50a8e96b116a62a56f236",
+    "tools/qualify_actor_unregister_segment.py": "13cfda1524cd5a296ac69949f4c4800d668d18ca66be08400e6c48ab689ef409",
+    "tools/qualify_actor_unregister_mutations.py": "da57cab8dc1958ce7cd3e7b37691b749e2d72fef26618f8e06605c9a54045ffa",
+    "tools/qualify_owner_component_destructor.py": "f3fd1efec2c85648907b6a7361788711e5d18b1bf5c917d575a3029ee0c414c4"
+  },
+  "behavior": [
+    "Actual actor destructor registry segment629921..62997C ported by composing existing real secondary unregister and primary lazy lookup/removal on the same storage. Fresh actor+8 key read before secondary unregister; actor+FC ID read after its free/lock callbacks; missing-node skip; owner registry preserved at this native segment.",
+    "96 native calls matched across48 complete owned registration/destruction-segment lifetimes, including repeat removal, null/non-null secondary prior values, high unsigned IDs and sentinel owner. Exact live registry words, lock order and free traces matched.",
+    "8 native callback mutation cases matched: changing actor+FC during secondary node free or lock leave redirects primary removal to a present alternate ID or skips a missing alternate; original ID remains. No early ID cache or invented actor/key consistency repair."
+  ],
+  "limits": [
+    "This is the registry-removal segment, not the whole actor destructor. Borrowed actor storage and owner-component release remain separate required work.",
+    "Actual full owner-component6B2B20 destructor newly qualified in208 native cases. Owner lookup/unregister and native strong/weak decrements execute, but virtual disposal/control-release callbacks are supplied and do not free the emulator control bytes. Rust owner-component implementation remains open.",
+    "ID provider, physical metadata fields, allocation/free/lock imports and diagnostics are explicit boundaries. Live game-world ownership, concurrent/throwing callbacks, normal announcement queues, priorities, mixing and audible playback remain incomplete. Full game scope preserved."
+  ],
+  "next_action": "Port full owner-component6B2B20 destructor against208 native cases in audio_announcer_owner_component_destructor_contract.json: sentinel owner skip, fresh metadata/owner reads, nonzero owner query before unregister, control pointer reload after unregister, atomic strong decrement with disposal only on transition1-to0, weak decrement/release after disposal. Preserve wrapping counts and explicit virtual callbacks. Qualify callback mutations and whole actor ownership lifecycle, then connect simulation events and announcement queues/priorities/mixing/playback. Preserve24domains114tasks37requirements."
+}

@@ -1,0 +1,83 @@
+{
+  "updated_utc": "2026-10-05T01:07:53.174774+00:00",
+  "complete": false,
+  "client_tests_passed": 133,
+  "client_build_passed": true,
+  "runtime": {
+    "checked_utc": "2026-10-05T01:06:54.258049+00:00",
+    "complete": false,
+    "normal_server": true,
+    "client_sha256": "b470d7b3aebe6fbd11c295dd87d9719a1a47647c57b05a4408325d1bbeef43f0",
+    "measurement": {
+      "complete": false,
+      "error": null,
+      "format": "R8Unorm",
+      "gpu_readback_verified": false,
+      "height": 512,
+      "limits": [
+        "Raw visibility only; native fade/blur and material binding pending.",
+        "Corner allocation and sampler are explicit Bevy adapters; original initialization/device producers remain open."
+      ],
+      "material_bound": false,
+      "nonzero_texels": 20328,
+      "render_asset_registered": true,
+      "uploads": 119,
+      "width": 512
+    },
+    "capture": "E:\\OpenLeague\\logs\\visibility-material-133.png",
+    "capture_sha256": "7438a7c3aab7e5bfb0f2db07fe75a9816144d503e29245e12e4934b25141115b",
+    "visual_inspection_required": false,
+    "limits": [
+      "Image asset updates observed in live Vulkan client; GPU texture readback and material sampling not verified.",
+      "Raw mask expansion only; full native fade/blur pipeline remains open."
+    ],
+    "diagnostic_only": true,
+    "focus": [
+      280,
+      0,
+      250
+    ],
+    "mask_display_pixel_counts": {
+      "dark": 427723,
+      "white": 260493,
+      "grey": 16505
+    },
+    "diagnostic_material_sampling_observed": true,
+    "normal_dynamic_fog_bound": false,
+    "visual_inspection": {
+      "observed": [
+        "Real framebuffer displays black hidden regions, white visible terrain/decor and graded transition around the allied bottom front turret."
+      ],
+      "limits": [
+        "Explicit grayscale mask diagnostic; not full game fog colors/density/fade/blur.",
+        "Qualifies visible GPU sampling, not a numerical world-to-pixel comparison or GPU texture readback."
+      ]
+    }
+  },
+  "findings": [
+    "Real visibility Image handle attached to existing native terrain/environment material variants. Verified c230 reciprocal/invertedZ coordinate factors bridged from native units to world units.",
+    "Actual Vulkan grayscale diagnostic shows nonuniform visible/hidden regions and graded boundaries; compiled shaders used original expanded masks."
+  ],
+  "limits": [
+    "Normal gameplay dynamic fog factors remain disabled; overlay selection, edge parameters and full fade/blur pipeline remain incomplete.",
+    "No numerical position-to-pixel acceptance or GPU readback. Only existing terrain/environment variants; actors/projected effects remaining.",
+    "Source/clock/config/initialization/sampler adapters remain explicit. HUD accent corruption remains open."
+  ],
+  "next_actions": [
+    "Qualify actual Map10 overlay selection/property reader, texture path resolver and edge-parameter producer.",
+    "Complete native fade/blur and apply native fog factors to ordinary terrain/environment/projected rendering, then compare sampled world positions to GPU pixels.",
+    "Avoid repeatedly marking unchanged materials dirty; verify runtime performance. Fix HUD text encoding. Continue all completion-plan domains."
+  ],
+  "files_sha256": {
+    "crates/client/src/fow_visibility_texture.rs": "edf33d88e58b395c795d00f7b498c5cb0ceee158febc6994c4c02350586b425e",
+    "crates/client/src/map_fog.rs": "3642a8e69fc35427bb505133e2a6fafe31be176d81b44198013e0e24642d858f",
+    "crates/client/src/terrain_material.rs": "943d15fb2e6b28197502f3c9e4395521e71fc1f194f4e97ff19b03d2511e921a",
+    "crates/client/src/main.rs": "b60a6db30eb0887684da5444e1f51579118f14ae9bc43bd350b3488f47bf43a9",
+    "assets/shaders/native_environment_fog.wgsl": "3f23ffe57028c6ae2e4d252bfd273a303416df3033feeb109dc3303680ff9e0f",
+    "assets/shaders/terrain_height_blend.wgsl": "2d46bc63fc638c786321e7da5e12b46b68f9120fe2d18f446f55a1250dbefe81",
+    "logs/visibility-material-tests.log": "31cccc978a4ec9f5b1709fbc76a4d35c5ffc3bc7a4a0b2767d551443ee2f64f0",
+    "logs/visibility-material-build.log": "258bd899a0988e68f980755fee778a5d4a1129e71c563f88467c272ebe6ca714",
+    "logs/visibility-material-133.png": "7438a7c3aab7e5bfb0f2db07fe75a9816144d503e29245e12e4934b25141115b",
+    "target/debug/openleague-client.exe": "b470d7b3aebe6fbd11c295dd87d9719a1a47647c57b05a4408325d1bbeef43f0"
+  }
+}

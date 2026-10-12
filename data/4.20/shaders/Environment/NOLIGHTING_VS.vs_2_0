@@ -1,0 +1,38 @@
+#include "../Fog/Fog.hls"
+
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// Constants
+///
+/////////////////////////////////////////////////////////////////////////////////////
+
+column_major float4x4 WORLD_VIEW_PROJECTION_MATRIX	: register(c0);
+
+struct VERTEX
+{
+	float3 m_Position : X3D_VSIN_POSITION;
+	float2 m_TexCoord : X3D_VSIN_TEXCOORD0;
+};
+
+struct INTERPOLANTS
+{
+	float4 m_Position : POSITION;
+	float3 m_TexCoord : TEXCOORD0;
+};
+
+void main(VERTEX vertex, out INTERPOLANTS interpolants)
+{
+	// Output homogeneous position
+	interpolants.m_Position = mul(float4(vertex.m_Position, 1.0f), WORLD_VIEW_PROJECTION_MATRIX ); 
+	
+	// Texture coordinate
+	interpolants.m_TexCoord.xy = vertex.m_TexCoord;
+	
+	//Vertex fog.
+#ifdef FOG_PIXELSHADER_BLEND
+	//handle opaque layer of the height fog
+	interpolants.m_TexCoord.z = ComputeFogOpaqueLayer(vertex.m_Position.xyz);
+#else
+	interpolants.m_TexCoord.z = 0.0f;
+#endif
+}

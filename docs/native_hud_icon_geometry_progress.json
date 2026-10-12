@@ -1,0 +1,48 @@
+{
+  "updated_utc": "2026-10-06T08:01:42.492891+00:00",
+  "passed": true,
+  "complete": false,
+  "client_tests_passed": 329,
+  "uv_cases": 576,
+  "quad_cases": 720,
+  "native_addresses": 162,
+  "native_geometry_ported": true,
+  "ordinary_icon_panels_integrated": false,
+  "artifacts": [
+    "data/4.20/native_hud_icon_geometry_contract.json",
+    "crates/client/src/native_hud_icon_geometry.rs",
+    "crates/client/src/main.rs",
+    "tools/qualify_native_hud_icon_geometry.py",
+    "logs/native-hud-icon-geometry-client-tests.log"
+  ],
+  "hashes": {
+    "data/4.20/native_hud_icon_geometry_contract.json": "74e919b3aa2574d66e469e0ac2faeab5024b41f50f02087701ddecb0328212d9",
+    "crates/client/src/native_hud_icon_geometry.rs": "084829388e3a09d6623e5a17d2e994513f6001a3b1e423dc00d13fab254650ad",
+    "crates/client/src/main.rs": "2f9a7f35b0d5c8c34f6c40f85af365ad801295f6d94c0632f1a6ab366e0b121b",
+    "tools/qualify_native_hud_icon_geometry.py": "753a85d1e503ccdc1c6d5851580e0fe888ff9b2a2697b97a9ce531c494f6eb3d",
+    "logs/native-hud-icon-geometry-client-tests.log": "ebfabaeaa7b99c3ca92c6d78cb0cea0362b50394fa1c4e43d942f6dfd388834c"
+  },
+  "observations": [
+    "UV lerp uses separate SSE subtraction/multiply/add; flag0x40 clips right UV with element+0x1D0 fraction. Second stack argument unused.",
+    "Quad output is four24-byte vertices ordered TL/TR/BL/BR, z0 and packed ARGB, six16-bit indices0,2,1,1,2,3; base counter adds4 as32-bit, indices use low16-bit.",
+    "Either null output pointer suppresses all writes and base advance."
+  ],
+  "draw_path_discovery": {
+    "entry": "0x99f710",
+    "status": "disassembled only; not emulation-qualified",
+    "textured_vertex_shader": "renderer+0x2C",
+    "textured_pixel_shader_flag1": "renderer+0xAC",
+    "textured_pixel_shader_other": "renderer+0x12C",
+    "untextured_pixel_shader": "renderer+0x1AC",
+    "packet_flag4_pixel_shader": "renderer+0x22C",
+    "vertex_stride": 24,
+    "next_required": "Identify constructor/source shader assets and qualify state setup99F3A0 and actual graphics callbacks before claiming original colors/transparency."
+  },
+  "limits": [
+    "Does not qualify original shader, sampler, blend/gamma, matrix, buffer allocation/lifetime or final framebuffer.",
+    "Static Icon widgets are not yet drawn in normal OpenLeague; full HUD and game remain incomplete.",
+    "Source CPU tests current; ordinary client not rebuilt or recaptured for this geometry-only port. Last ordinary three-text Vulkan/DX12 receipts retain their own binary hashes.",
+    "Original UV owner blend producer, base matrix, sampler, gamma and Icon blend state remain unqualified. No full HUD/game completion."
+  ],
+  "next_action": "Qualifier les shaders et états de rendu du chemin Icon99F710/99F3A0 puis intégrer HUDLeftFrame, HUDLeftPillar et TitanBarFrame depuis les atlas natifs ; comparer les captures Vulkan/DX12. Continuer tous les domaines du plan."
+}

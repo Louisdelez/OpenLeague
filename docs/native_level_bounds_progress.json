@@ -1,0 +1,36 @@
+{
+  "updated_utc": "2026-10-05T00:05:12.351591+00:00",
+  "complete": false,
+  "client_tests_passed": 126,
+  "client_build_passed": true,
+  "native_bounds_cases": 6,
+  "native_addresses": 19,
+  "map10_view_extent": 15398.671875,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Original86FA49 bounds arithmetic matches Rust for six inputs, including non-square bounds, negative coordinates, signed zero and float rounding.",
+    "Original Map10 __LevelSize_.SCB2.2 header supplies X extent15398.671875. Native view center Y is zero; header maxY is zero while vertex Y is negative. Rust reads authored header rather than recomputing vertex extrema.",
+    "Rust view geometry is exercised through registered-view construction. Full126client tests and build passed; ordinary-gameplay caller activation remains open."
+  ],
+  "limits": [
+    "Original SSE bounds arithmetic and ready flag execute; asset bounds field layout is supplied from original SCB header. Resource registration, SCB loader and lookup producers are not executed.",
+    "Constructor caller6B3462 loads global2D6DD48: X span. Caller discovery is static disassembly; complete caller and camera/configuration producers remain unqualified.",
+    "Native center Y is zero; SCB header maxY differs from flat vertex height and must not be recomputed from vertices.",
+    "No ordinary source/view activation, server visibility or GPU fog binding qualified."
+  ],
+  "next_actions": [
+    "Execute full resource registration/lookup and actual view creation caller; qualify extent, camera and configuration producers.",
+    "Activate native source/view lifecycle for ordinary entities, bind masks to authoritative visibility and GPU rendering.",
+    "Verify restored Map10 in a current six-client game and continue all completion-plan domains."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_level_bounds_contract.json": "fcfb163661c9fe833bc3b43ded7a1f9323eeefcbcb6750558a8a85550f8f6f20",
+    "tools/probe_fow_level_bounds.py": "6c931255f9fe98d11cd00f59f1f6bc59cdba19c30a6ce6c8bad5a6134e0433cf",
+    "assets/maps/tt_level_size.scb": "16138f6f4d50fe54eaae63e6ec4f3c3a48d632a874dbd74c93306b44048f00b4",
+    "crates/client/src/fow_level_bounds.rs": "a29228c0463586ab719a55422917600d2ad36d9f9ab2b3b34cb9f3550520ec6e",
+    "logs/native-level-bounds-tests.log": "d6ae4c9594c3efbd6950318bb9a85ec48d74ec02e3469bc9fa86d66c0c09e6b7",
+    "logs/native-level-bounds-build.log": "e2047fc7c4bfba147d457d699925e1bf98fa6addd02af90ae6c5dbaab81d08c3",
+    "target/debug/openleague-client.exe": "b93647cde36869f5194f0a587392bcebea3ede2a8a9d649e5fbdfc4684763f53"
+  }
+}

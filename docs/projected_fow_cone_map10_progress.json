@@ -1,0 +1,71 @@
+{
+  "updated_utc": "2026-10-04T19:49:09.060499+00:00",
+  "complete": false,
+  "client_tests_passed": 92,
+  "client_build_passed": true,
+  "native_map10_occluded_cone_masks": 96,
+  "original_instruction_addresses": 1233,
+  "terrain": {
+    "source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\AIPath.aimesh_ngrid",
+    "sha256": "1430e679b91a582f871ce78185bcda3db5eb7daf82beb7aba26264addcf5d9bd",
+    "archived_copy_identical": true,
+    "version": [
+      3,
+      1,
+      0
+    ],
+    "origin": [
+      59.981903076171875,
+      -114.9697036743164,
+      4009.240234375
+    ],
+    "maximum": [
+      15357.703125,
+      179.12860107421875,
+      10444.849609375
+    ],
+    "width": 306,
+    "height": 129,
+    "cell_size": 50.0,
+    "disk_cells_offset": 39,
+    "disk_cell_stride": 56,
+    "flag_offset": 50,
+    "heights_and_flags_byte_matches": 39474,
+    "flag_counts": {
+      "2": 18171,
+      "0": 21005,
+      "1": 298
+    }
+  },
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Shared original circle/occluded-cone composition with exact native approximate angular predicate, radial fan, clipping and terrain traversal.",
+    "Rust matches96full original cone masks on actual Map10 cells and nonzero origins, including four terrain corners, cardinal/diagonal directions and two angular thresholds.",
+    "Source flags computed through qualified Rust provider; native comparison executes actual query. Counters and flipped texture pixels checked for every output mask.",
+    "Owner scale/bias reader6B17E0 inspected: owner resolution717D10, pointer equality to source+34, generation field owner+18 versus source+30, owner virtual70 followed by returned object virtual120. Those actual providers are not yet qualified."
+  ],
+  "limits": [
+    "Actual original Map10 cell bytes supplied to native runtime layout; original terrain constructor/deserializer itself is not executed.",
+    "Runtime inverse cell size and half-cell center supplied as 1/cell and cell/2; native provider initialization not yet traced.",
+    "World extent15398.671875 is supplied candidate from original map geometry; actual extent provider remains open.",
+    "Unowned source, scale1/bias0 and controlled radius/source metric; actor providers, lifecycle and GPU binding remain open.",
+    "Native source query executes; no query return adapter used. This does not prove complete ordinary gameplay.",
+    "Cone directions and thresholds are supplied prerequisites; actual actor/ability configuration providers remain open.",
+    "All24game domains unfinished; newly compiled graphical client not rerun."
+  ],
+  "next_actions": [
+    "Trace owner resolver717D10 and virtual70/120 providers used by6B17E0; qualify source scale/bias, metric/radius and world extent against actual native actor configurations.",
+    "Trace terrain constructor inverse/half-cell initialization and live source collection/lifecycle before binding source updates.",
+    "Integrate counted visibility and native-timed GPU upload/fade/blur/overlays into ordinary client rendering and verify actual gameplay."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_map10_cone_contract.json": "8be370d29540e5f089c654b59e7de73e4817c207a7f32698f81e7fd1a0fd9da5",
+    "crates/client/src/fow_occluded.rs": "7e22215bf495847be18f3a39de8ec4fa5323087ae49a979629216b60238ab73f",
+    "crates/client/src/fow_shapes.rs": "f32145136db04d7c5a74b7a81fc6a3f02dfe385696a466283e02442d4576ee4c",
+    "tools/probe_fow_map10_cone.py": "cd01ec2bed20133371f7f5fe87e481209f52e12f7c90f188d27b032d16ee9cf0",
+    "logs/fow-cone-map10-tests.log": "c67b4e36a712aa1f7a8b8581b914872fcf8829fd055af4d7ec4e43c58e30ce75",
+    "logs/fow-cone-map10-build.log": "81feaf4fd8224b1c7b0822ece6f1f7ab243fca5e8b2b018b5bd096c67ca737be",
+    "target/debug/openleague-client.exe": "7458d92ac3a568d21474910da342a87c69c2055b80382dd0317076bdd19a8efb"
+  }
+}

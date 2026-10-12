@@ -1,0 +1,70 @@
+{
+  "saved_utc": "2026-10-10T14:12:50.497739+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "native_source_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "core_audio_tests_passed": 732,
+  "core_tests_filtered_not_run": 480,
+  "isolated_tests_passed": 163,
+  "native_address_profiles": 164,
+  "actual_windows_numeric_addresses": 6,
+  "native_null_callback_configurations": 60,
+  "native_owned_callback_configurations": 32,
+  "native_nonempty_queue_profiles": 24,
+  "native_host_flush_boundary_profiles": 8,
+  "core_test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_core-49a622d61db58080.exe",
+  "core_test_executable_sha256": "ff84495d1ff49bf7e01493be7d012a9b3f5e30e46bcdc5a12c0f2a7c77741784",
+  "isolated_test_executable_sha256": "dc9597b6e2016b4bfd7a360b9b286cec70ff8c2df1c65191bced151da17d4b7c",
+  "client_rebuilt_this_milestone": false,
+  "normal_client_configuration_connected": false,
+  "replay_frame_delivery": false,
+  "source_hashes": {
+    "crates/core/src/audio_replay_address.rs": "f5116d81759952202e92df0aa0b77e88ff2ae0be01178038d47388e57c68af4f",
+    "crates/core/src/audio_replay_address_tests.rs": "e84a5934b499733f95ff551afbc27d72ec3574b75f2bcdb0529c1ac6e5c65bd4",
+    "crates/core/src/audio_replay_transport_configuration.rs": "a5184c50d17bef7d1ebd2db92b3e24cced04bba1c5842526f511ea328d627153",
+    "crates/core/src/audio_replay_transport_configuration_tests.rs": "2edec45483d96342fd3270ade7c48bc0110719cb96b200288f7acb7983906dc1",
+    "crates/core/src/audio_replay_logger.rs": "ca641f6d07c19e6630fa3bdbcef6cf194c82c50c0a5dd7a2813576f2f25d405e",
+    "crates/core/src/audio_replay_transport_startup.rs": "a109497803441d8120a41efb0c37494b9b866d00759286ce70272101dbf0ff1a",
+    "crates/core/src/lib.rs": "fa9c95610a562760c97f7790f394ad771269e219ffec9815fc62c388127c4ee7",
+    "tools/probe_replay_address.py": "c4b1262c6f76cbb9385f0eb14e9ccaec032ec86a32c7fc8a64ed7989a792f773",
+    "tools/probe_replay_configuration_ownership.py": "8e8bd26ba52b720d5abb27abc72a17d6cb3bd571511406b7571ac50485f40f99",
+    "tools/probe_replay_transport_cleanup.py": "5e0b9bf752d89199002d9e4e02c8983c27dd46c1fe652e7609c80e699b526eaa",
+    "tools/install_replay_configuration.py": "d13fe9b029bd40b52db7988b3d340c08bb17d144014bbc82bf1599274f305d38",
+    "tools/record_replay_configuration.py": "0c90838175cc318ebc16ad35e93fe967062605051860b3b6c9c2cce7a38b5784",
+    "tools/replay-configuration-tests.rs": "675b4d7b1299b7a3abd66f4ab28b16e403bf04f79cbec3c897eb97771a7b4366"
+  },
+  "contract_hashes": {
+    "data/4.20/replay_address_probe.json": "0bab9484382c9b62553a2896d87157b94a6fb8058ff2489a990ebad56e6df858",
+    "data/4.20/replay_transport_configuration_probe.json": "204d3c1d826de317b7795517580c362275fab9734fa815a2d999835aa0d395c5",
+    "data/4.20/replay_configuration_ownership_probe.json": "35a4f68f183ae688ac6daf2211f39f390788a59bdf70e323ab6c8684a5d4341f",
+    "data/4.20/replay_transport_cleanup_probe.json": "300330ca57b3215ea13aec9e4599e987fe4d59f52c3150e189beb92d1692caa5"
+  },
+  "log_hashes": {
+    "logs\\core-replay-configuration-tests.log": "9c5a348f77293cb78ccdbc0558b540f22e66bef39f6086d5126984e6cd938734",
+    "logs\\replay-configuration-tests.log": "81688264f17d0ad7ccf88da20cd541a8058aec9521e321c1eb44e1c63a4e3d42",
+    "logs\\replay-configuration-compile.log": "fc3cd7c508baf51ff51e58999e9d33314d7275e6de3fe84f610a617a87e6ea03",
+    "logs\\replay-address-probe.log": "1fd74963a0c4dc73af7a2b696b642a0a6068a99607be7baa87f8a60e8c6ed395",
+    "logs\\replay-configuration-ownership-probe.log": "eb1428f97f2762161ec72893957be535a6033bcdb229d09c570fc38b80535fbf",
+    "logs\\replay-transport-cleanup-probe.log": "eb1428f97f2762161ec72893957be535a6033bcdb229d09c570fc38b80535fbf"
+  },
+  "behavior": [
+    "Address resolution preserves original numeric port0 behavior,16-bit requested port validation, localhost and empty-name lookup special cases, socket residue, validation scratch, raw output bytes and capacity. CRC algorithm matches every original table entry and the98.24.0.44 zero-UID collision; that valid address is rejected by the native caller. Actual Windows adapter uses full-width native ABI and owned getaddrinfo lists.",
+    "Configuration takes ownership of its incoming callback, clones and publishes it before deleting the old callback, checks the worker result, resets the existing queue, validates host length, resolves the address, writes IPv4/requested-port/UID/argument fields and emits original diagnostics under logger ownership. The separate UID-error scratch buffer retains its untouched tail. Callback replacement, scalar destruction, startup failures, CRC failure, port truncation and all scoped owned words match original lifetimes.",
+    "Nonempty queue reset follows wrapped deque indices, copies the20-byte event, calls an optional packet callback, rereads flags and deallocator after mutation, and retains the event blocks for reuse. Destruction frees blocks in reverse map order, then map/proxy/object. Packet allocator bodies are still explicit supplied boundaries in these tests.",
+    "Flush applies wrapping elapsed milliseconds and calls9007F0 with host in ECX, event output0 in EDX and check-timeouts0 on the stack. It captures peer count after flushing and rereads the host peer-array for each8FE700 call; mutation profiles verify that order. An initial probe erroneously read these internal fastcall arguments from the stack; disassembly exposed that error, the probe was corrected and all profiles regenerated before qualification.",
+    "An explicit Rust logger-error case verifies both lock unwinding and incoming-callback cleanup. The successfully acquired network reference stays owned and is then released by explicit close."
+  ],
+  "limits": [
+    "Production normal-client integration is still idle. No client rebuild, graphical run, replay stream opening or replay frame delivery occurred in this milestone. The prior client executable and application receipt remain historical evidence for that earlier integration.",
+    "Configuration profile tests execute the Rust startup worker synchronously and omit separately qualified worker/CRT internal allocations. They compare all scoped224-byte object,8-byte proxy and12-byte callbacks, allocation/free ordering, globals and network calls. The new32-profile fixture additionally verifies diagnostics and both static scratch regions. Supplied Windows results/clock/locks are explicitly qualification inputs.",
+    "Packet callback/allocator and active-host flush/reset bodies in cleanup profiles are supplied dynamic mutation boundaries. Actual8FCB90/8FCC80 pools and9007F0/8FE700/8FD8A0 network internals are not implemented by this module. Custom allocator/OOM paths and high-level multi-object lifetime ownership require further qualification.",
+    "The production initial image still contains nine earlier regions and has not acquired the additional configuration vtable/scratch banks. The new generic module is not silently connected using test fixtures or fabricated native state.",
+    "732 selected core audio tests passed;480 other core tests were filtered. These local contracts do not establish map fidelity, champion completion, a complete domain or whole-game completion."
+  ],
+  "next_action": "Connect the newly ported native224-byte transport configuration/cleanup to the actual Windows runtime and normal-client stream path. Address8FD3F0/CRC8FCF20 matches164 original profiles and six real Windows numeric conversions; configuration8FC230/8FC310/8FC610/8FCA30 matches60 null-callback and32 owned-callback lifetimes; queue8FC930/5E26A0 and flush8FC830 match24 nonempty-queue and8 dynamic-host profiles.732 selected core audio tests and163 isolated tests pass. These are generic ports, not a completed replay feature: configuration tests explicitly supply synchronous worker and packet/host boundaries. Add original transport vtable10D5FA4, UID scratch2D8DD58 and validation scratch2D8DDD8 to the production data image, implement Windows configuration Boundary with actual thread::initialize/drain, logger lock, Winsock address APIs and explicit owned224-byte teardown. The existing normal client remains at the prior idle Application integration and has not been rebuilt with these new modules. Preserve uninitialized native sockaddr port/padding explicitly; numeric conversion sets zero sockaddr port despite requested port, CRC0 is a failure, and object+10 is IPv4/+A0 is UID. Port actual packet allocator/free8FCB90/8FCC80 and host methods9007F0/8FE700/8FD8A0 before claiming active-host cleanup. Then continue8F68D0 stream/key,5BD470 assignment, metadata/callback727DE0,728E20/728FD0/728EE0 and actual replay frames. Qualify custom allocator/OOM, worker timeout/overlap, nondefault logger methods, graphical launch/exit and the rebuilt normal client. Continue all remaining24-domain114-task37-requirement work including map fidelity, all champion kits, HUD/audio and six-client gameplay."
+}

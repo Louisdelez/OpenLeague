@@ -1,0 +1,47 @@
+{
+  "saved_utc": "2026-10-09T20:25:16.795822+00:00",
+  "passed": true,
+  "complete": false,
+  "actual_windows_crt_real_lock_shutdown_cases": 24,
+  "actual_windows_critical_section_ownership_cases": 14,
+  "runs": [
+    {
+      "target": "x86_64-pc-windows-msvc",
+      "pointer_width": 64,
+      "shutdown_cases": 12,
+      "lock_cases": 7,
+      "passed": true
+    },
+    {
+      "target": "i686-pc-windows-msvc",
+      "pointer_width": 32,
+      "shutdown_cases": 12,
+      "lock_cases": 7,
+      "passed": true
+    }
+  ],
+  "files_sha256": {
+    "tools\\hardware\\windows_crt_real_lock_shutdown\\case_0.tsv": "2b8289b0a32af900a82adb08fc5c5f423104222fe76e0c9fe030f03759c1b704",
+    "tools\\hardware\\windows_crt_real_lock_shutdown\\case_1.tsv": "a0561298c41c24f4dc60e33e8e709e906254acbb04a211b1b17d8f6f30a58201",
+    "tools\\hardware\\windows_crt_real_lock_shutdown\\case_2.tsv": "399814fa148705fc359e9aaf6db557098b88b234a096db8cd477a7085ace70f2",
+    "tools\\hardware\\windows_crt_real_lock_shutdown\\case_3.tsv": "0f7303dc6cedba2bcf93267f25d4dacb4111d61bf5f4f352b3ea7e5d37690582",
+    "tools\\hardware\\windows_crt_real_lock_shutdown\\case_4.tsv": "77a1f544a81938cf0dbd5e447f7b48aec61671c9099e00ff2569c981daeb452d",
+    "tools\\hardware\\windows_crt_real_lock_shutdown\\case_5.tsv": "e9f3937681765432ce38b922b8c1ca3063d7c6e58119823dd2fb88f49b187713",
+    "tools\\hardware\\windows_crt_real_lock_shutdown\\probe.rs": "3fff6af90d4b6a09218539cab327b854cf17291a539d51b680cb6a4051c2ea31",
+    "tools\\hardware\\windows_crt_real_lock_shutdown\\probe-64.exe": "9987ec15292f8f606d71f60e0464af7dd02a46cb7d1fa377be7898d8d38fd38b",
+    "tools\\hardware\\windows_crt_real_lock_shutdown\\probe-64.log": "d6313f19663a92ca7137eb6b51cb58b7385392f07d741329e9f4b4e2d335ce12",
+    "tools\\hardware\\windows_crt_real_lock_shutdown\\probe-32.exe": "88e251d8a9bb5d330b3f8f558ba6f707c26d89843ec32c4e200d2906260abd08",
+    "tools\\hardware\\windows_crt_real_lock_shutdown\\probe-32.log": "5f75c25d7351868ba8c79d981569f0d8e433fe0ca835ace4c8bfb8dc54004ac1",
+    "crates\\core\\src\\audio_crt_windows_critical_sections.rs": "74d49c37dfd2c0610d9b044f6cdd5d18ce66b12db91078270bd7428dfc900da3",
+    "crates\\core\\src\\audio_crt_windows_shared_fls.rs": "f0cb0371d1d57600f96e66e7b8c955c9107f9e0e6a8aff3f4f02c1e9d6826135",
+    "crates\\core\\src\\audio_crt_thread_system_startup.rs": "be24706a5d3e08e25e614bc8e34e1058570c8f1439a91b4e1f3529ac99378a53",
+    "crates\\core\\src\\audio_crt_thread_destructor.rs": "e83d88136d6ba1ce167fb0bad98231a312108b9e102369372479d6c7aedbd6c4",
+    "data\\4.20\\audio_crt_paired_thread_lifetime_preparation.json": "eeb8dcd1054e4a4170493ab749f612590fd58e8d2edcd6e49becd778f2da044c"
+  },
+  "limits": [
+    "Actual unchanged production critical-section Bank/Provider, shared slot/destructor and original lock-retirement body execute in x86/x64 processes.12shutdown cases per architecture exercise natural exits and owner global close, exact native non-opaque final bytes, retired global index, two records freed once and all OS lock objects deleted after callbacks.",
+    "Opaque24-byte source critical-section banks intentionally excluded: actual host OS objects use pinned storage and native architecture layout. No synthesized/captured opaque DD bytes copied to host objects.",
+    "Production bank initialization, recursive enter/try-enter, real cross-thread blocking,4000 contended increments under real lock, duplicate/busy/missing/wrong-owner and owned-at-drop reporting verified. Deliberate invalid owned-drop retains native storage and reports failure rather than deleting a held object; no blanket leak-free claim.",
+    "Canonical root contexts preinitialized from original native captures; heap free is explicit boundary adapter and normal client/bootstrap/security-cookie remain open. Isolated type facades used only in these standalone probes; full core checks recorded separately."
+  ]
+}

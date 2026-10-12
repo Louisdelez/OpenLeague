@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "complete": false,
+  "cases": 12,
+  "runs": [
+    {
+      "pointer_width": 64,
+      "cases": 6,
+      "passed": true
+    },
+    {
+      "pointer_width": 32,
+      "cases": 6,
+      "passed": true
+    }
+  ],
+  "files_sha256": {
+    "tools\\hardware\\process_heap_contexts\\case_0.tsv": "305c8f55035f057e59df3586f2896d5840d67a39d1947d4d53cab2413db7eb45",
+    "tools\\hardware\\process_heap_contexts\\case_1.tsv": "34b9d6463e917e387b37b98ba77d7e605c99a624f253811c198fea6cdf407cf0",
+    "tools\\hardware\\process_heap_contexts\\case_2.tsv": "585abceda45ba1317a0394932e463fbd1c1070e770870af681760cbc67e470ea",
+    "tools\\hardware\\process_heap_contexts\\case_3.tsv": "bb218e93b83b790b067f47f37d3577fb74db10b4689008712b9cd0d340e8208c",
+    "tools\\hardware\\process_heap_contexts\\case_4.tsv": "90ad648e07c316e866a622e9956a1c08732e7f20a2b88619fbc215a52db98900",
+    "tools\\hardware\\process_heap_contexts\\case_5.tsv": "4f50285a82448188ef5f5bc1fa9420b90bcf2d9f67ad34030085963608791dce",
+    "tools\\hardware\\process_heap_contexts\\probe.rs": "ca941c7b1529045ebb3d18d6b9f428072665c74ee98b8827102b6b7d0c88d15a",
+    "tools\\hardware\\process_heap_contexts\\probe-64.exe": "efff275617d49ca6cf2ce11fa680e7f71301887f0fc6bf665d2f930e0387f005",
+    "tools\\hardware\\process_heap_contexts\\probe-64.log": "fdb084e9bf54f2766ca214b7ac3c1ea0030962cfbf2a35f8a039d4426944d1b4",
+    "tools\\hardware\\process_heap_contexts\\probe-32.exe": "e4198379735ca16d1a9f473e86e4ffaa46fe62d71e3d6e8eaef29e8bab4be8b3",
+    "tools\\hardware\\process_heap_contexts\\probe-32.log": "75864d4fe8c4e0e21e1329b20166fe234f513ab6d76de8bc0acedf507431f0d3",
+    "crates\\core\\src\\audio_crt_heap.rs": "f840cc0df266c31578672df7614a86d8ba9ac478b3e353a028d125d8dc9988e8",
+    "crates\\core\\src\\audio_crt_windows_process_heap.rs": "48cbc39ec97d221c8ec05109bdcafa4445f1c017acdd1cde48ba4bf174163986",
+    "crates\\core\\src\\audio_crt_windows_shared_fls.rs": "f0cb0371d1d57600f96e66e7b8c955c9107f9e0e6a8aff3f4f02c1e9d6826135",
+    "crates\\core\\src\\audio_crt_windows_critical_sections.rs": "74d49c37dfd2c0610d9b044f6cdd5d18ce66b12db91078270bd7428dfc900da3",
+    "data\\4.20\\audio_crt_process_heap_preparation.json": "f4efe1bfb6a2431586fb4106ece69275ad9be9e6c18534f3574d5a00149c4249",
+    "data\\4.20\\audio_crt_paired_thread_lifetime_preparation.json": "eeb8dcd1054e4a4170493ab749f612590fd58e8d2edcd6e49becd778f2da044c"
+  },
+  "limits": [
+    "Unchanged production heap/CRT/FLS/critical-section providers run in x86/x64 programs. One captured original context explicitly restored into real owned block, second created through original CRT allocator/constructor, both physically freed by OS callbacks; physical payload matches relocated native record and nonopaque native final banks.",
+    "Record virtual reference/thread ID explicitly relocated, opaque CS bytes excluded. Canonical mirrors synchronized at native boundary and retained after free for forensic comparisons; normal mirror retirement, full root/global bootstrap, callback errno reentry/new handlers and client audio workers remain open. Isolated type facades only in standalone probes."
+  ]
+}

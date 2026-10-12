@@ -1,0 +1,31 @@
+{
+  "updated_utc": "2026-10-04T00:56:53.685636+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_event_post.py": "0385af1bdaabbae6331358ed90adf1a4829ac5ed06a38d62fc32e045b0e06d04",
+    "data/4.20/audio_event_post_contract.json": "24568d3ec06a6ab3c98b5bfab57f91f4d0de20e4d93234a177a86bd51a228f79",
+    "crates/core/src/audio_event_post.rs": "8948640569efc269c86ef0a5472ae9f6cf19a88518b3e81e7b0d8f0fb81418be",
+    "crates/core/src/lib.rs": "6ac5e75d7d9de2089b7e63f31120cd55abd0aafb2d0fd8356ff62db52bda51ce",
+    "logs/native-audio-event-post-core-tests.log": "23fdfb094b2410791b9f9d57704a60ede4a821cc09d4eedee4754e16b83f3366"
+  },
+  "native_post_seek_cases": 252,
+  "core_tests_passed": 227,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "ported": [
+    "existing object post with native callback flags0/5 and cookie",
+    "empty event returns0 without backend call",
+    "playing ID supplied by callback, zero means no seek",
+    "nonzero age with successful post seeks by native f32 age*1000/cvttss2si including signed negative and overflow bits"
+  ],
+  "physical_voice_factory_implemented": false,
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false,
+  "limits": [
+    "Original706850 and object ID getter7072F0 executed. Wwise PostEvent(AEA950) and Seek(AEB080) adapted to record arguments/return controlled playing ID; no queue packet worker or actual audio.",
+    "Both native SSO and heap event strings tested; allocation/real registry validation excluded.",
+    "Native age*1000 CVTTSS2SI includes negative and positive overflow. NaN/infinite age inputs not qualified. Callback704A40 target recorded but not executed.",
+    "Rust Post/Seek are backend command descriptions. Callback target is represented semantically, not invoked as a native executable address. Actual Wwise packets/DSP/backend output still required.",
+    "Native706850 covers bound/existing object path; unbound object allocation706910/706600, callback704A00/704A40, voice constructor706C70 and shared ownership remain incomplete.",
+    "Standalone binaries unchanged; complete24-domain goal remains unachieved."
+  ]
+}

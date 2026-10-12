@@ -1,0 +1,32 @@
+from pathlib import Path
+import json,hashlib,re,datetime,shutil
+r=Path('E:/OpenLeague')
+def load(p):return json.loads(p.read_text(encoding='utf-8-sig'))
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def write(p,v):
+ t=p.with_suffix(p.suffix+'.tmp');t.write_text(json.dumps(v,indent=2,ensure_ascii=False)+'\n',encoding='utf-8');load(t);t.replace(p)
+log=r/'logs/audio-announcer-secondary-unregister-regression.log';text=log.read_text(encoding='utf-8-sig');assert '653 passed; 0 failed; 0 ignored; 0 measured; 480 filtered out' in text
+small=r/'logs/announcer-secondary-unregister-tests.log';assert '82 passed; 0 failed' in small.read_text(encoding='utf-8-sig')
+exe=r/re.search(r'Running unittests .*?\(([^)]+\.exe)\)',text)[1].replace('\\','/')
+plan=load(r/'docs/completion_plan.json');scope={'domains':len(plan['domains']),'tasks':sum(len(d['tasks']) for d in plan['domains']),'additional_requirements':sum(len(d['additional_requirements']) for d in plan['domains'])};assert scope=={'domains':24,'tasks':114,'additional_requirements':37}
+for ref in load(r/'docs/audio_test_fixture_loading.json')['references']:
+ p=r/ref['fixture'];assert p.stat().st_size==ref['bytes'] and sha(p)==ref['sha256']
+contracts={}
+for name,count in [('audio_announcer_secondary_unregister_contract.json',16),('audio_announcer_secondary_teardown_contract.json',32),('audio_announcer_actor_unregister_segment_contract.json',48)]:
+ p=r/'data/4.20'/name;v=load(p);assert v['passed'] and len(v['cases'])==count;contracts[name]={'cases':count,'sha256':sha(p)}
+assert sum(len(c['steps']) for c in v['cases'])==96
+now=datetime.datetime.now(datetime.timezone.utc)
+sources=['crates/core/src/audio_announcer_secondary_unregister.rs','crates/core/src/audio_announcer_registry_remove.rs','crates/core/src/audio_announcer_registry_shutdown.rs','crates/core/src/lib.rs','tools/announcer_secondary_unregister_production_tests.rs','tools/qualify_secondary_unregister.py','tools/qualify_secondary_teardown.py','tools/qualify_actor_unregister_segment.py']
+receipt={'saved_utc':now.isoformat(),'passed':True,'complete':False,'scope':scope,'audio_tests_passed':653,'filtered_tests_not_run':480,'isolated_production_tests_passed':82,'native_secondary_owner_unregister_calls_ported':332,'native_secondary_owner_teardown_lifetimes_ported':32,'native_secondary_owner_teardown_free_calls_ported':744,'native_actor_unregister_segment_calls_prepared':96,'contracts':contracts,'regression_log_sha256':sha(log),'isolated_log_sha256':sha(small),'test_executable':str(exe),'test_executable_sha256':sha(exe),'source_hashes':{n:sha(r/n) for n in sources},'behavior':['Actual64C330/6B5AB0 normal-return unregister ported with identity-hash64F3E0/6B6400 node deletion, independent key-node and actor-vector checks, first matching actor, stable vector shift and native index-or-FFFFFFFF return.332 native calls matched including grown tables, null/duplicate actors, mismatched pairs and absent keys/actors.','Free failure retains preceding node unlink/count decrement and pending vector entries; native exception unwinding is not claimed. Original primary signed-hash removal API remains unchanged.','Actual64C400/6B5B80 one-shot secondary/owner teardown ported through shared table destructor.32 native lifetimes744 frees matched: critical-section deletion first, vector release/reset, bucket release/reset, node clear, sentinel free. Fixed global table bytes and borrowed actor labels retained; stale post-teardown sentinel cannot be reused.'],'limits':['Lock/critical-section deletion imports, engine owner array allocation and standard/custom free callbacks remain explicit primitive boundaries. Real Windows lock lifetime and native exceptions/concurrency are not qualified.','48 native lifetimes96 actual actor-destructor registry segment calls newly qualified after full composed actor registration. Segment629921 through62997C is prepared, not yet ported. Owner-component and later actor destructor fields/release remain open.','Real game-world metadata/ID integration, normal announcement queues, priorities, mixing and audible playback remain incomplete. Full game scope preserved.'],'next_action':'Port actor destructor registry-removal segment629921 through62997C against48 native lifetimes96 calls in audio_announcer_actor_unregister_segment_contract.json. Preserve fresh actor+8 secondary key before unregister and actor+FC primary ID after callbacks; lazy primary init, missing-node skip and owner registry untouched at this segment. Qualify owner-component destructor and complete actor ownership release. Then integrate with simulation lifecycle and normal announcement queues/priorities/mixing/playback. Preserve24domains114tasks37requirements.'}
+backup=r/'docs/plan_history'/('announcer-secondary-unregister-'+now.strftime('%Y%m%dT%H%M%SZ'));backup.mkdir(parents=True)
+for name in ['coverage.json','resume_checkpoint.json','completion_plan.json','completion_plan.html']:shutil.copy2(r/'docs'/name,backup/name)
+write(r/'docs/announcer_secondary_unregister_validation.json',receipt)
+for name in ['coverage.json','resume_checkpoint.json','completion_plan.json']:
+ p=r/'docs'/name;doc=load(p);doc['announcer_secondary_unregister_validation']=receipt
+ if name!='coverage.json':doc['next_action']=receipt['next_action'];doc['updated_utc']=now.isoformat()
+ write(p,doc);assert load(p)['announcer_secondary_unregister_validation']==receipt
+p=r/'docs/completion_plan.html';html=p.read_text(encoding='utf-8');marker='announcer-secondary-unregister-validation';assert '</body>' in html and 'id="'+marker+'"' not in html
+section='<section id="'+marker+'"><h2>Annonces : retrait des acteurs et fermeture des registres</h2><p>Retrait Rust comparé à 332 appels natifs ; fermeture des registres comparée à 32 séquences et 744 libérations. 82 tests isolés et 653 tests audio réussis. Segment de destruction des acteurs préparé sur 96 appels. Cycle de vie complet dans la simulation et lecture des annonces restent à terminer.</p></section>'
+t=p.with_suffix('.html.tmp');t.write_text(html.replace('</body>',section+'</body>'),encoding='utf-8');t.replace(p)
+shutil.copy2(Path(__file__),r/'tools/record_secondary_unregister.py')
+print(json.dumps({'audio_tests':653,'isolated_tests':82,'native_unregister_calls':332,'native_teardown_lifetimes':32,'native_teardown_free_calls':744,'actor_unregister_segment_calls_prepared':96,'scope':scope,'complete':False}))

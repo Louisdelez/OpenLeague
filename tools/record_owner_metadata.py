@@ -1,0 +1,31 @@
+from pathlib import Path
+import json,hashlib,re,datetime,shutil
+r=Path('E:/OpenLeague')
+def load(p):return json.loads(p.read_text(encoding='utf-8-sig'))
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def write(p,v):
+ t=p.with_suffix(p.suffix+'.tmp');t.write_text(json.dumps(v,indent=2,ensure_ascii=False)+'\n',encoding='utf-8');load(t);t.replace(p)
+log=r/'logs/audio-announcer-owner-metadata-regression.log';text=log.read_text(encoding='utf-8-sig');assert '664 passed; 0 failed; 0 ignored; 0 measured; 480 filtered out' in text
+small=r/'logs/announcer-owner-metadata-tests.log';assert '93 passed; 0 failed' in small.read_text(encoding='utf-8-sig')
+exe=r/re.search(r'Running unittests .*?\(([^)]+\.exe)\)',text)[1].replace('\\','/')
+plan=load(r/'docs/completion_plan.json');scope={'domains':len(plan['domains']),'tasks':sum(len(d['tasks']) for d in plan['domains']),'additional_requirements':sum(len(d['additional_requirements']) for d in plan['domains'])};assert scope=={'domains':24,'tasks':114,'additional_requirements':37}
+for ref in load(r/'docs/audio_test_fixture_loading.json')['references']:
+ p=r/ref['fixture'];assert p.stat().st_size==ref['bytes'] and sha(p)==ref['sha256']
+contracts={}
+for name,count in [('audio_announcer_owner_metadata_lifecycle_contract.json',96),('audio_announcer_owner_metadata_service_boundary_contract.json',24),('audio_announcer_owner_metadata_descriptor_contract.json',48)]:
+ p=r/'data/4.20'/name;v=load(p);assert v['passed'] and len(v['cases'])==count;contracts[name]={'cases':count,'sha256':sha(p)}
+now=datetime.datetime.now(datetime.timezone.utc)
+sources=['crates/core/src/audio_announcer_owner_metadata.rs','crates/core/src/lib.rs','tools/announcer_owner_metadata_production_tests.rs','tools/qualify_owner_metadata_lifecycle.py','tools/qualify_metadata_service_boundary.py','tools/qualify_metadata_descriptor_delivery.py']
+receipt={'saved_utc':now.isoformat(),'passed':True,'complete':False,'scope':scope,'audio_tests_passed':664,'filtered_tests_not_run':480,'isolated_production_tests_passed':93,'native_metadata_lifetimes_ported':96,'native_service_boundary_lifetimes_ported':24,'native_descriptor_delivery_cases_prepared':48,'contracts':contracts,'regression_log_sha256':sha(log),'isolated_log_sha256':sha(small),'test_executable':str(exe),'test_executable_sha256':sha(exe),'source_hashes':{n:sha(r/n) for n in sources},'behavior':['Actual6B26F0 metadata construction ported:56-byte layout, four listener bases, clone allocation class, callback owner/method fields, borrowed actor/owner storage and global default. Exact byte/word writes preserve uninitialized padding.96 native lifetimes match allocation/free traces and all live words.','Actual6B2900 destructor and6B28C0 scalar delete ported: reverse listener destruction, actual578010 callback scalar delete, fresh free route, flag bit0 and no invented pointer clearing. Released callback/metadata allocations become inaccessible.','Service slot84 registration and slot88 unregistration arguments and order match24 native boundary lifetimes, including service global becoming null during first registration/unregistration. Native service bodies are not substituted or claimed complete; calls remain explicit providers.'],'limits':['Allocator startup and actual game-service implementation/event delivery remain open.96 native proofs preconfigure allocator startup and provide primitive malloc/free/operator-new.24 service proofs supply virtual service recording/mutation boundaries, not original service bodies.','Native5CCE30 descriptor delivery through four native methods, real owner getter and adjustor thunks is now qualified in48 cases, not yet ported. Metadata production API has not yet been composed with live actor/shared-control ownership, simulation events or native callback delivery. Full actor destructor, synchronization, queues/priorities/mixing/playback and complete game remain incomplete.','Native exception unwinding and allocation failure paths of metadata/listeners still require qualification. No post-free object snapshots or human fidelity acceptance claimed.'],'next_action':'Port native callback5CCE30 and the four listener descriptor methods6B9680/6B96C0/6B9700/6B9740 against48 prepared native descriptor cases in audio_announcer_owner_metadata_descriptor_contract.json, including exact packet writes, padding, AL return, metadata owner getter and adjustor thunks. Qualify65EE40 consumer target dispatch and qualify actual service registration/storage/unregistration. Compose metadata destruction with shared control and live actor ownership before simulation events and announcement queues/priorities/mixing/playback. Preserve24domains114tasks37requirements.'}
+backup=r/'docs/plan_history'/('announcer-owner-metadata-'+now.strftime('%Y%m%dT%H%M%SZ'));backup.mkdir(parents=True)
+for name in ['coverage.json','resume_checkpoint.json','completion_plan.json','completion_plan.html']:shutil.copy2(r/'docs'/name,backup/name)
+write(r/'docs/announcer_owner_metadata_validation.json',receipt)
+for name in ['coverage.json','resume_checkpoint.json','completion_plan.json']:
+ p=r/'docs'/name;doc=load(p);doc['announcer_owner_metadata_validation']=receipt
+ if name!='coverage.json':doc['next_action']=receipt['next_action'];doc['updated_utc']=now.isoformat()
+ write(p,doc);assert load(p)['announcer_owner_metadata_validation']==receipt
+p=r/'docs/completion_plan.html';html=p.read_text(encoding='utf-8');marker='announcer-owner-metadata-validation';assert '</body>' in html and 'id="'+marker+'"' not in html
+section='<section id="'+marker+'"><h2>Annonces : métadonnées et callbacks</h2><p>Construction et destruction Rust comparées à 96 cycles natifs ; appels au service comparés à 24 cycles avec modifications pendant les callbacks. 93 tests isolés et 664 tests audio réussis. Distribution réelle des événements, propriété des acteurs et restitution sonore restent à intégrer et qualifier.</p></section>'
+t=p.with_suffix('.html.tmp');t.write_text(html.replace('</body>',section+'</body>'),encoding='utf-8');t.replace(p)
+shutil.copy2(Path(__file__),r/'tools/record_owner_metadata.py')
+print(json.dumps({'audio_tests':664,'isolated_tests':93,'native_metadata_lifetimes':96,'native_service_boundary_lifetimes':24,'scope':scope,'complete':False}))

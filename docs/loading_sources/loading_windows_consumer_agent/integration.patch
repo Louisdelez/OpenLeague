@@ -1,0 +1,40 @@
+--- a/crates/core/src/audio_replay_windows_receive.rs
++++ b/crates/core/src/audio_replay_windows_receive.rs
+@@ -72,12 +72,9 @@
+         &mut self,
+         recipient: u32,
+         target: u32,
+-        _payload: u32,
++        payload: u32,
+     ) -> Result<(), &'static str> {
+-        Err(self.failure(
+-            (recipient, target),
+-            "native packet95 recipient is not connected",
+-        ))
++        self.receive_loading_payload(recipient, target, payload)
+     }
+ }
+ 
+@@ -109,7 +106,10 @@
+         if packet.len() < 5 {
+             return Err("truncated service packet owner".into());
+         }
+-        // These are the only connected listener consumers that read payload.
++        if event == 0x95 {
++            self.preflight_loading_packet(packet)?;
++        }
++        // These are the connected owner-listener consumers that read payload.
+         if matches!(event, 0xe0 | 0xe1) && packet.len() < 6 {
+             return Err("truncated owner metadata bit packet".into());
+         }
+--- a/crates/core/src/audio_replay_windows_transport.rs
++++ b/crates/core/src/audio_replay_windows_transport.rs
+@@ -35,6 +35,8 @@
+ mod game_manager;
+ #[path = "audio_replay_windows_opening.rs"]
+ mod opening;
++#[path = "audio_replay_windows_loading.rs"]
++mod loading;
+ #[path = "audio_replay_windows_receive.rs"]
+ mod receive;
+ #[path = "audio_replay_windows_recording.rs"]

@@ -1,0 +1,25 @@
+from pathlib import Path
+import itertools,json,struct,hashlib
+r=Path('E:/OpenLeague');setup=(r/'tools/probe_native_audio_bank_outer_reader.py').read_text(encoding='utf-8').split('\nactual=json.loads')[0];setup=setup.replace('u.hook_add(unicorn.UC_HOOK_CODE,guard_outer)','outer_hook=u.hook_add(unicorn.UC_HOOK_CODE,guard_outer)');exec(compile(setup,'outer_setup','exec'))
+regions.extend([(0xb21ad0,0xb21b34),(0xb21aa0,0xb21acc),(0xb21b40,0xb21bad),(0xaf9d40,0xaf9e0d),(0xafbfd0,0xafc0c1),(0xafcf00,0xafd037),(0xafa370,0xafa3f0),(0xb14630,0xb146e1)])
+cache=manager+0x38c;packet_ref=heap+0x5600;atomic=read(0xfa4130,'I')[0];put(0x14a79c4,'I',manager)
+def guard_caller(uc,a,n,d):
+ if a==atomic:
+  ref=read(u.reg_read(UC_X86_REG_ESP)+4,'I')[0];before=read(ref,'I')[0];after=(before-1)&0xffffffff;put(ref,'I',after);calls.append({'kind':'atomic_decrement','reference':ref,'before':before,'after':after});ret(after,4);return
+ guard_outer(uc,a,n,d)
+u.hook_del(outer_hook);u.hook_add(unicorn.UC_HOOK_CODE,guard_caller)
+actual=json.loads((r/'data/4.20/audio_effect_actual_bank_contract.json').read_text(encoding='utf-8'));source=actual['sources'][0];original=Path(source['bank_path']).read_bytes();assert hashlib.sha256(original).hexdigest()==source['bank_sha256'];bkhd=original[:40];bank_id=int.from_bytes(bkhd[12:16],'little');payloads=[bytes.fromhex(v['payload'])for v in actual['sources']]
+section=lambda records:struct.pack('<I',len(records))+b''.join(bytes([tag])+struct.pack('<I',len(data))+data for tag,data in records)
+chunk=lambda name,data:name+struct.pack('<I',len(data))+data
+packets=[('header_only',bkhd),('one',bkhd+chunk(b'HIRC',section([(19,payloads[0])]))),('both',bkhd+chunk(b'HIRC',section([(19,payloads[0]),(19,payloads[1])]))),('repeat',bkhd+chunk(b'HIRC',section([(19,payloads[0])]*3))),('unknown_chunk',bkhd+chunk(b'XXXX',b'abcdef')+chunk(b'HIRC',section([(19,payloads[0])]))),('short_chunk_header',bkhd+b'HIRC'),('short_unknown_chunk',bkhd+b'XXXX'+struct.pack('<I',10)+b'abcde'),('version87',bkhd[:8]+struct.pack('<I',87)+bkhd[12:])];rows=[]
+for(packet,data),pattern,fail_nth in itertools.product(packets,[0,0xa5],range(6)):
+ calls.clear();allocations.clear();next_pointer=heap+0xc000;count_allocate=0;consumed=0;u.mem_write(manager,bytes(0x500));u.mem_write(manager+0x7c,b'\x01');u.mem_write(registries,bytes(0x2600));u.mem_write(bank,data);put(packet_ref,'9I',0,0,0,1,bank_id,0xffffffff,bank,len(data),0);stages=[]
+ def snapshot(stage,result):return {'stage':stage,'result':result,'manager':bytes(u.mem_read(manager,0x500)).hex(),'custom_count':read(registries+0x1f40+0x31c,'I')[0],'shared_count':read(registries+0x1c20+0x31c,'I')[0],'allocations':[{**v,'raw':bytes(u.mem_read(v['reference'],v['size'])).hex()}for v in allocations],'calls':list(calls)}
+ result=invoke(0xaf9d40,[packet_ref],manager);stages.append(snapshot('load_caller',result));calls.clear()
+ if result==1:result=invoke(0xaf9d40,[packet_ref],manager);stages.append(snapshot('repeat_loaded_caller',result));calls.clear()
+ reference=read(cache+((bank_id+bank)&0xffffffff)%31*4,'I')[0]
+ if reference:invoke(0xb21aa0,[bank_id,bank],cache);invoke(0xafc410,(),reference);invoke(0xafbfd0,[1],reference)
+ stages.append(snapshot('unlink_unload_release',0));assert all(v['freed']for v in allocations)
+ rows.append({'packet':packet,'pattern':pattern,'failure_nth':fail_nth,'bank_payload':data.hex(),'request_words':list(read(packet_ref,'9I')),'stages':stages})
+proof={'passed':True,'complete':False,'case_count':len(rows),'cases':rows,'source':source,'native_sha256':hashlib.sha256(b).hexdigest(),'regions':[{'start':hex(a),'end':hex(e),'sha256':hashlib.sha256(p.get_data(a-base,e-a)).hexdigest()}for a,e in regions],'adapters':['Only physical allocator/free/mutex/memcpy and atomic decrement. Actual AF9D40 caller,cache registration/loaded shortcut,AF9960 reader,HIRC/source lifetime,AFBFD0 destructor/empty-media release and AFA370/B14630 null-callback completion execute.'],'findings':['Successful caller marks holder loaded and registers keys;repeated loaded status69 becomes caller success1 without new allocation.','Failed caller unloads loaded prefix then decrements holder field40 atomically and physically frees holder when field44 is nonpositive.','Null completion callback takes actual no-op B14630 branch;no logical callback stub or fake success boundary used.'],'limits':['Native evidence prepared;Rust caller/destructor/completion port pending. Effect-only controlled banks,empty media,data pointer0,scope suppressed,memory mode,command0,callback0 and fresh cache.','Final fixture explicit unlink/unload/AFBFD0 is not qualification of all external unload command scheduling. Nonzero callbacks/media/ownership counters/file/provider/device/concurrency/audible acceptance remain required.']}
+(r/'data/4.20/audio_bank_caller_contract.json').write_text(json.dumps(proof,indent=2)+'\n',encoding='utf-8');print('PASS',len(rows),'native actual bank caller/cache/repeat/failure/destructor/null-completion cases')

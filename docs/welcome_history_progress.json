@@ -1,0 +1,47 @@
+{
+  "complete": false,
+  "status": "v66 graphical replay verified: retired Welcome rejected and no old session accepted; new cycle and GPU cleanup pass",
+  "accepted_session_transitions_v65": [
+    {
+      "session": 1791405530143363000,
+      "tick": 41
+    },
+    {
+      "session": 1791405557931122000,
+      "tick": 8
+    },
+    {
+      "session": 1791405530143363000,
+      "tick": 823
+    },
+    {
+      "session": 1791405557931122000,
+      "tick": 70
+    }
+  ],
+  "source": "crates/core/src/welcome_history.rs",
+  "client_integration": "crates/client/src/main.rs Welcome handling before any state reset",
+  "tests": {
+    "passed": 2,
+    "failed": 0,
+    "method": "rustc --test actual welcome_history.rs; observed successful execution"
+  },
+  "check_log": "logs/welcome-history-client-check.log",
+  "build_session": 37566,
+  "build_log": "logs/welcome-history-client-build.log",
+  "next_test": "tools/capture_projected_reconnect_v66.py",
+  "limits": [
+    "Unknown session authentication not provided by this local replay guard.",
+    "History retained for process lifetime; sessions must not be reused."
+  ],
+  "build_exit_code": 0,
+  "runtime_evidence": [
+    "docs/missile_reconnect_v66_verified.json",
+    "docs/missile_batch_v66_gpu.json"
+  ],
+  "client_sha256": "5ea3132349fb8ed345ef3887b3c82e10fab2c0ee1436946abf3cb3d0c6b24d53",
+  "visible_effect_teardown_evidence": [
+    "docs/missile_reconnect_v67_verified.json",
+    "docs/missile_visible_reconnect_v67_gpu.json"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "updated_utc": "2026-10-04T01:41:00.340236+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_object_tick.py": "46116780d9be2a3aa6ad83acdeb7b5a3c340c9babf5bed1cc292526f28716a08",
+    "data/4.20/audio_object_tick_contract.json": "e93753eee8016ccc98ce2d539f0ba7c285ed9982b232d0d6b68686cbc97b691c",
+    "crates/core/src/audio_object_association.rs": "497d4bacc0d0dd70a1908e501763a7dbd61a4d64b0e5c249d454084dcd69a3d5",
+    "logs/native-audio-object-tick-core-tests.log": "492badbbba6efd9cb35d52d7b6dc235324f574bfdc7e27ff13bf819327409f80",
+    "tools/qualify_native_audio_object_association.py": "fc4882d1f6585e8a26b8b9fdd6c1fcd6bec603093e6e45b2958f1e38946d85d5"
+  },
+  "native_cases": 682,
+  "core_tests_passed": 245,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "control_flow_ported": true,
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false,
+  "limits": [
+    "Original707300/5BD6F0/5EC2A0/5CCF80/713120 and released getter706EB0 executed on0..4 entries/all expired-active-released-unmanaged combinations twice. Ordered weak entry shifts and tail weak decrement executed.",
+    "Height updater707610 explicitly adapted (separately qualified); voice refresh virtual4 adapted with optional release flag transition; control final free virtual4 recorded. Actual PCM/RTPC work not performed here.",
+    "Released but still-owned voices stay associated and skip refresh; refresh marking released does not immediately remove weak entry. Expiration prunes entry in insertion order, not swap-last.",
+    "Actual clock-driven voice refresh and final voice destructor remain separate integration; no live audio claim.",
+    "Backend operations remain explicit caller-supplied actions; standalone binaries unchanged. Full24-domain game remains incomplete."
+  ],
+  "native_invocations": 1364,
+  "ported": [
+    "707300 object height update before voice scan",
+    "weak locking, released getter gating refresh",
+    "expired weak entries erased with order-preserving shifts",
+    "refresh setting release flag keeps still-owned entry; second tick skips refresh"
+  ]
+}

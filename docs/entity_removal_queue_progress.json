@@ -1,0 +1,30 @@
+{
+  "updated_utc": "2026-10-04T03:17:40.161919+00:00",
+  "files_sha256": {
+    "tools/qualify_native_entity_removal_queue.py": "44b1b674a59bace14ff43853ba326cba87db499267ad61a8ddc4e34a3c3e2386",
+    "data/4.20/entity_removal_queue_contract.json": "85d80c1854605dbca4ddc757b6a4b0bdc8f2432d9795b552d887962581b1285d",
+    "crates/core/src/entity_removal_queue.rs": "b669c29e753bdd39e57a0c4fafc5c235f9d5d3607c2a457f8d04752cbe97cd41",
+    "crates/core/src/lib.rs": "1bf96ff6c09f902e65411d2a80390f3a2de6fffd018db9c629465488cb0960c4",
+    "logs/native-entity-removal-queue-core-tests.log": "71658032b57e32fd4c747db5432537072a10fc5d176a6b70ac9290c8ec2d1da5"
+  },
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_entity_removal_queue_cases": 64,
+  "core_tests_passed": 281,
+  "ported": [
+    "Original7185D0 snapshots pending removal identities into scratch",
+    "Clear pending before ordered removal calls; ignore removal return value",
+    "Newly queued work drained in subsequent batches within same invocation; no deduplication or invented timeout"
+  ],
+  "static_followup_observation": "Object vtable10A4960 offsets8=6C8D10,48=6C9360,5C=6C97B0. Removal717AF0 invokes virtual48 then deleting virtual8.6C9360 locks weak association11C; live target invokes virtualA0, clears weak fields11C/120, releases temporary strong control; also removes188 membership. Actual target virtualA0 and ownership cleanup still require qualification.",
+  "limits": [
+    "Actual7185D0 and64ADA0 copy executed with initialized scratch vector and spare capacity. CRTmemmove and6E3080 vector clear adapted explicitly.",
+    "717AF0 removal adapter records calls and appends finite new identities; real object destruction, registry erasure and particle/audio cleanup excluded.",
+    "Order preserved; pending cleared before callbacks; newly enqueued entries handled in next batch during same drain call; removal return ignored.",
+    "Scratch static initialization/atexit and allocation growth excluded; actual loop has no termination guarantee if removal continually enqueues.",
+    "Rust loop not yet integrated into runtime entity lifecycle. No client ended-emitter storage drain or audio release inferred.",
+    "Core281passed; prior client18test evidence unchanged; standalone executables unchanged."
+  ],
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false
+}

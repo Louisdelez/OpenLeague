@@ -1,0 +1,70 @@
+
+#include "IOParam/IODefine_VS.hls"
+
+/// Bones
+column_major float4x3 BONES[68] 	: register(c24);
+
+/////////////////////////////////////////////////////////////////////////////////////
+///
+///
+///
+/////////////////////////////////////////////////////////////////////////////////////
+void 
+	main
+	(
+		float3		vPos:			X3D_VSIN_POSITION,
+		float3		vNormal:		X3D_VSIN_NORMAL,
+		float2		vUV1:			X3D_VSIN_TEXCOORD0,
+		blendindex4	vBlendIndices: 		X3D_VSIN_BLENDINDICES,
+		float4		vBlendWeight: 		X3D_VSIN_BLENDWEIGHT,
+		out float4	vPosOut:		POSITION,
+		out float2	vTexOut1:		TEXCOORD0
+
+#ifdef REFLECTIVE
+		, out float4	out_reflectRay		  : TEXCOORD5
+		, out float3	out_worldNormal   	  : TEXCOORD6
+		, out float3	vReflTint		  : TEXCOORD7
+#endif
+	)
+{
+	// Compute skinned local position
+	float3 worldPosition = float3(0,0,0);
+#ifdef REFLECTIVE
+	float3 worldNormal = float3(0,0,0);
+#endif
+	for (int i = 0; i < NUM_BLEND_WEIGHTS; ++i)
+	{
+		blendindex boneIndex = ( int )vBlendIndices[i];
+		float weight = vBlendWeight[i];
+		worldPosition += (mul(float4(vPos, 1.f), BONES[boneIndex]) * weight);
+
+#ifdef REFLECTIVE
+		worldNormal += (mul(float4(vNormal, 0.f), BONES[boneIndex]) * weight);
+#endif
+	}
+
+	// Output homogeneous position
+	vPosOut = mul(float4(worldPosition.xyz, 1.0f), mProj ); 
+
+    // Output texture coordinate using texture transform
+	vTexOut1.xy = vUV1 * vUVTransform.xy + vUVTransform.zw;
+
+
+#ifdef REFLECTIVE
+	float fresnelPower = vReflection.x;
+	float3 eyeRay = normalize( worldPosition.xyz - vCamera.xyz );
+	out_worldNormal    = worldNormal.xyz;
+	
+	
+	out_reflectRay.xyz = reflect(eyeRay, out_worldNormal );
+	
+	//store the fresnel factor in the w component of the reflectRay. This is done in the vertex shader, so a proper power can be used.
+	//base fresnel is the 0 to 1 reflection intensity based on the fresnel power.
+	float baseFresnel = 1.0f - pow( saturate( dot(-eyeRay, worldNormal.xyz) ), fresnelPower );
+	//the final scaled result factors in the minimum and maximum reflection intensities supplied by the artists.
+	out_reflectRay.w  = lerp(vReflection.y, vReflection.z, baseFresnel);
+	//the view dependent reflection color is also keyed off the fresnel.
+	vReflTint = lerp(1.0f, vReflectionFColor, out_reflectRay.w);
+#endif
+
+}

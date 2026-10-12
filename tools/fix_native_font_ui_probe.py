@@ -1,0 +1,2 @@
+from pathlib import Path
+r=Path('E:/OpenLeague');p=r/'crates/client/examples/native_font_ui_probe.rs';s=p.read_text(encoding='utf-8');anchor='.disable::<WinitPlugin>()';assert anchor in s;s=s.replace(anchor,anchor+'.disable::<bevy::render::pipelined_rendering::PipelinedRenderingPlugin>()');p.write_text(s,encoding='utf-8');print('headless probe keeps RenderApp for adapter receipt; serial renderer only')

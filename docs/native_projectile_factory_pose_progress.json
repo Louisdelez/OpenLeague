@@ -1,0 +1,41 @@
+{
+  "updated_utc": "2026-10-07T07:25:55.982832+00:00",
+  "complete": false,
+  "passed": true,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_cases": 120,
+  "native_instruction_addresses": 659,
+  "focused_core_tests_passed": 1,
+  "full_core_suite_rerun": false,
+  "live_client_integration": false,
+  "artifacts_sha256": {
+    "data/4.20/projectile_factory_pose_contract.json": "d62954fe4f2f2c23874d5c5826d1ba35a22898ff0511cf90e87ba4ae76390e3e",
+    "tools/probe_native_projectile_factory_pose.py": "7213003906c747a95cde78f2daa1f25511dac655e6cc1d8bd6cc18f1749cc2f6",
+    "crates/core/src/native_projectile_factory_pose.rs": "50d47f132ab91e65303df6032a84ede3c1038bcffcb36f53c1c4525711335099",
+    "crates/core/src/lib.rs": "1d5d87de217130df430486640a28cf21b3f3f0eba247c06e5b1e0faa140c39e8",
+    "logs/native-projectile-factory-pose-tests.log": "f8536b4c8aacafc2c9e76f4028dda36f3ef499050ba8b1ee9bb6c423240f3ab3"
+  },
+  "findings": [
+    "Actual projectile7172B0 flags0 do not set Troy orientation bit10; pending wrapper144 controls mapping1->10,2->2,4->20 through original6C96F0.",
+    "Source flags and matrix are measured after native load and first wrapper update; flags0/pending0 retain constructor identity orientation.",
+    "Source position initially receives MAX_FLOAT sentinel at native load; first wrapper update transmits entity position."
+  ],
+  "adapters": [
+    "718A70 supplies a zero-initialized wrapper with verified10A4960 table and base type212; full wrapper allocator/base constructor unqualified.",
+    "6CEEE0 resource acquisition supplies original93FD60-constructed Troy and live/expired weak control; actual resource manager/parser remains open.",
+    "6C9490 entity-bounds update omitted; its collision bookkeeping is separate from Troy pose setters.",
+    "5FA170 missing-resource logging omitted; resource failure branches otherwise execute.",
+    "564C20 short ASCII string assign and664E50 container initialization adapted; native shared/weak helpers and concrete Troy virtual bodies execute.",
+    "Global registry2D628C0 absent: original717970 returns without registration. Wrapper providers148/150 null; no owner callback tested here."
+  ],
+  "limits": [
+    "Initial construction/load/first wrapper update with supplied resource availability; subsequent projectile provider binding and owner phase need composition.",
+    "Native wrapper allocation, resource parser, registry/collision scheduling, long strings and concurrent ownership remain unqualified.",
+    "No live rendering or complete champion/game acceptance.",
+    "Rust port covers measured initial wrapper/Troy pose fields and request bits; remaining properties, resource construction, references and callbacks remain separate.",
+    "First native update tested with null providers; no claim about later bound-owner flag mutations or complete normal gameplay.",
+    "Current v18 graphical client retains its previously verified stop dispatch; new factory pose core port is not yet consumed there.",
+    "No domain closed; all 24 domains and 114 tasks remain in scope."
+  ],
+  "next_action": "Composer les champs de création native du projectile avec son fournisseur de pose10B0D20, raccorder cette pose à Annie puis vérifier le client graphique ; poursuivre les 24 domaines."
+}

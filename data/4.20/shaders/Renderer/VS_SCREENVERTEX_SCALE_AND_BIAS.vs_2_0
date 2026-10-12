@@ -1,0 +1,55 @@
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// Constants
+///
+/////////////////////////////////////////////////////////////////////////////////////
+
+column_major float4x4 SCREEN_MATRIX	: register(c0);
+float4 position_offset_scale : register(c4);
+float4 texcoord_offset_scale : register(c5);
+float4 vertColor : register(c6);
+
+struct VERTEX
+{
+	float2 m_Position : X3D_VSIN_POSITION;
+	float4 m_Color0: X3D_VSIN_COLOR0;
+	float2 m_TexCoord0 : X3D_VSIN_TEXCOORD0;
+};
+
+struct INTERPOLANTS
+{
+	float4 m_Position : POSITION;
+	float4 m_Color0: COLOR0;
+	float2 m_TexCoord0 : TEXCOORD0;
+};
+
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// Shader
+///
+/////////////////////////////////////////////////////////////////////////////////////
+void 
+	main
+	(
+		VERTEX vertex,
+		out INTERPOLANTS interpolants
+	)
+{
+	// Pass through 
+	const float xOffset = position_offset_scale.x;
+	const float yOffset = position_offset_scale.y;
+	const float posWidth = position_offset_scale.z;
+	const float posHeight = position_offset_scale.w;
+	const float2 inPos = float2(vertex.m_Position.x * posWidth + xOffset, vertex.m_Position.y * posHeight + yOffset);
+		
+	interpolants.m_Position = mul(SCREEN_MATRIX, float4(inPos.x, inPos.y, 0.0f, 1.0f) );
+	
+	// We don't use VCOLORSWIZZLE here, because shader constants get passed in the same way between D3D9 and OGL [Tested on Mac and PC]
+	interpolants.m_Color0 = vertColor;
+	
+	const float txOffset = texcoord_offset_scale.x;
+	const float tyOffset = texcoord_offset_scale.y;
+	const float texCoordWidth = texcoord_offset_scale.z;
+	const float texCoordHeight = texcoord_offset_scale.w;
+	interpolants.m_TexCoord0 = float2(vertex.m_TexCoord0.x * texCoordWidth + txOffset, vertex.m_TexCoord0.y * texCoordHeight + tyOffset);
+}

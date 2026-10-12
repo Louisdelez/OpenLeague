@@ -1,0 +1,32 @@
+{
+  "updated_utc": "2026-10-04T01:33:59.783450+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_object_association.py": "fc4882d1f6585e8a26b8b9fdd6c1fcd6bec603093e6e45b2958f1e38946d85d5",
+    "data/4.20/audio_object_association_contract.json": "af0fa26a4f9f54cad6af006d27d3a02e89824d69c2e1819829455ca59a07e55b",
+    "crates/core/src/audio_object_association.rs": "25a3632f4459ac7e371e661d8abfbebb174cab9151791dfcce1eceb2755e8f7d",
+    "crates/core/src/audio_voice_factory.rs": "084b498fd224da08324c31918356146077873bb59704d696687d76cf99fe4aa9",
+    "crates/core/src/lib.rs": "040ef49163156e46acd49de1674aefccce6a5f0d820ccb39933ad37a5ff2a3b1",
+    "logs/native-audio-object-association-core-tests.log": "a129f45393e09ce8192cab3557014cfcc203a302ebbfc47d96f1a1dba3002055"
+  },
+  "native_association_lock_cases": 48,
+  "native_factory_cases_requalified": 256,
+  "core_tests_passed": 243,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "ported": [
+    "7074E0 association consumes passed strong copy, stores weak ownership only for non-null voice",
+    "5BD6F0 lock only while a strong owner remains; unmanaged/null-control entry cannot lock",
+    "last strong owner drop does not retain or resurrect physical voice",
+    "factory association corrected and256 cases requalified with actual7074E0/weak vector helpers"
+  ],
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false,
+  "limits": [
+    "Actual7074E0 association/707F20 append/5BDE40 weak copy and5BD6F0/5EC2A0 weak lock executed with existing vector capacity.",
+    "Association consumes its passed strong reference and retains a weak entry only for non-null voice. Null control entries cannot lock. Expired references never resurrect.",
+    "Control virtual0/4 destruction/free recorded as adapters; underlying voice stop/disposal not executed. Weak vector growth excluded.",
+    "Replaces earlier705A10 association adapter assumption that object retained a strong owner; actual object association retains weak ownership.",
+    "Rust Arc/Weak implements semantic ownership and expiration, not ABI layout or thread schedule equivalence. Native final voice destructor and object tick pruning still required.",
+    "Standalone binaries unchanged; full24-domain game incomplete."
+  ]
+}

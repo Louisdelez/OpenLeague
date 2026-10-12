@@ -1,0 +1,29 @@
+{
+  "updated_utc": "2026-10-04T03:21:18.106234+00:00",
+  "files_sha256": {
+    "tools/qualify_native_entity_target_removal.py": "9d418608c3b04f614fa9037bde0133c868cec94fef3afcefd62cd4aedd8accaf",
+    "data/4.20/entity_target_removal_contract.json": "23a20b05687e8637ee6e3a887a38de3bcbe54810a2bb67c82e0e433f61d195ee",
+    "crates/core/src/entity_target_removal.rs": "417abbc2e8dea4d8e60a6f3c93b853af05e0f2e9605957e8b2ef2108b8d5dcae",
+    "crates/core/src/lib.rs": "35447253d74cf91454ecca107023dc5925d971f8747094a9cb4b42a24752754f",
+    "logs/native-entity-target-removal-core-tests.log": "eb8e760cf5ed9562aa7bad6b86edee1258052686d795fda05024cec0ebead91b"
+  },
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_entity_target_removal_cases": 18,
+  "core_tests_passed": 282,
+  "ported": [
+    "Original6C9360 alive target virtualA0 callback before weak detachment",
+    "Retain expired weak association until owner destruction",
+    "Keep target strong reference through callback and detachment, then release temporary strong reference"
+  ],
+  "limits": [
+    "Actual6C9360 and atomic counter decrements executed; weak-lock adapter supplies target/control and increments strong as specified; virtualA0 target callback explicitly adapted.",
+    "Membership188=0 only; no global membership removal path. At least one external strong owner when alive, so last-strong destructor path not covered.",
+    "Expired target retains stored weak association; alive target callback precedes weak detachment and temporary strong release.",
+    "Target virtualA0 implementation/particle cleanup and runtime manager wiring remain unqualified.",
+    "Rust TargetLink models only the qualified association branch. Membership188 removal, deleting destructor, runtime integration and actual target callback are incomplete.",
+    "Prior client18test evidence and standalone binaries unchanged; no audible playback verification."
+  ],
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false
+}

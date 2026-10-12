@@ -1,0 +1,53 @@
+{
+  "updated_utc": "2026-10-04T21:09:41.377325+00:00",
+  "complete": false,
+  "client_tests_passed": 102,
+  "client_build_passed": true,
+  "native_retirement_cases": 72,
+  "native_map10_counted_sequences": 6,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Executed original source retirement6B3EF0 and region removal6B2E60 twice per case in72cases without adapters; applied flag clears, repeated retire is inert, overlap counts remain visible and unselected rectangle pixels refresh.",
+    "Fixed Rust remove_from to clear the applied flag; renamed StencilRegion.dirty to applied, distinct from source generation_dirty. Added native retirement guard.",
+    "CountedLayer stores applied masks by source key, replaces old contribution before adding new mask, retires once and preserves overlapping sources. Six Map10 sequences match original add/remove counts and vertically flipped pixels at every step.",
+    "Corrected owner/reference field name generation to owner_tag: native comparison is actor+18 versus source+30. Static source selection at6B4165 and6B43AD compares the latter with local actor+18 and100/200; this suggests a team tag, not an identity-generation counter. Existing720resolver and24Map10owned comparisons still pass. Historical proof mode names generation_mismatch are retained as original labels, not current semantic claims.",
+    "Executed complete native base constructor6B0790 in24cases without adapters, with null weak provider and supplied cached owner. Source starts unapplied with generation invalidation set; radius, metrics, lifetime, tags and owner handle are initialized. Rust constructor port and derived creation paths remain open."
+  ],
+  "limits": [
+    "This qualifies source-wrapper counter rollback with supplied masks/manager arrays, not original removal queue/allocator/destructor.",
+    "Map10 source creation/team/activation, count scheduling and GPU integration remain open.",
+    "Map10 masks are supplied from previously executed original generator contract; this probe executes original add/remove counters and source retirement wrapper, not the generator again.",
+    "Six source replacement/removal sequences qualify count and texture rollback; actual source team/creation/scheduling/removal queue/destructor and live GPU binding remain open.",
+    "CountedLayer is not yet driven by ordinary source creation/team selection/scheduling; raw native tag and flag producers, removal queue and final destruction remain unqualified.",
+    "102client tests and build are current;427core tests and10UDPchecks remain prior unchanged-core/server evidence. Current graphical client and fog GPU binding remain unverified.",
+    "All24domains remain unfinished.",
+    "Complete original base source constructor executes with null weak provider and supplied owner pointer/team-tag argument. Derived circle/cone constructors and actual source creation callers not executed.",
+    "Source+28/+2C inputs55/66 are opaque identifiers; their producers are unqualified. Tags100/200 match values inspected in source filtering; full team mapping/caller provenance remains open.",
+    "Non-null weak provider acquisition and complete actor/provider construction, removal queue/destruction and ordinary fog rendering remain open."
+  ],
+  "next_actions": [
+    "Port base source initialization from the24executed native constructor cases; qualify derived circle/cone constructors, creation callers, non-null weak provider, team tag and actor field producers. Reconcile Rust owner identity/team mapping with actor+18/source+30 rather than treating it as a generation.",
+    "Qualify removal queue and count-update scheduling, then connect actual source lifecycle/position/parameter changes to CountedLayer.",
+    "Qualify world extent and terrain initialization; connect counted native fog to authoritative filtering and ordinary GPU rendering, then verify real gameplay."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_source_retirement_contract.json": "dcd07fd850898d5b104387138e6191e7c65ca24175e3406cf1fb7cbe54c17533",
+    "data/4.20/fow_map10_counted_lifecycle_contract.json": "9321e4de307b8bf34c4674bb0eb83506cc5f7f077db65835f52f07d588c22650",
+    "data/4.20/fow_map10_owned_contract.json": "4842007773829b1f0e5be836e360ebe06626b840d9aa4a5a3d737719e90c34af",
+    "data/4.20/fow_owner_contract.json": "96d231120debc0bb8f937d93d044ffac602e9a24a448231fbef8912a6c33143e",
+    "data/4.20/fow_source_constructor_contract.json": "4ed6e0064b7d748d1abbd1c60df44877952b108583bf5aee19b3c061f7428401",
+    "tools/probe_fow_source_constructor.py": "73b59f0b53f8f61b0c413b58a7f954b0fc12810f9d4a7b1bb88fb5b4bd4bd927",
+    "tools/probe_fow_source_retirement.py": "2964a070b1bcfa7d0a7a527850b5414cf3cb032dc347cb1017c8ce307bd3f6f1",
+    "tools/probe_fow_map10_counted_lifecycle.py": "ddd6cb99612ef20b34f2b37aa600ded7c7a0ae9e05e1f43fe752f0e49720a778",
+    "crates/client/src/fow_regions.rs": "0e44571f819a1079c8a7dc9cb8b939aa85da326d5d8203d6267b8baa422aea14",
+    "crates/client/src/fow_shapes.rs": "c5c8f02851bcc12dd3155ef72106a8ec567c2bcae4bb776e39d8ce171ff9b29c",
+    "crates/client/src/fow_owner.rs": "029e2d8229f921eebf81f1372468120f36046873e9e477c753bb0a65fc975c74",
+    "crates/client/src/fow_occluded.rs": "53a36ed5bba06d9cd9af25c5a0ffa98a2c4346ca9c1e2e25d20afea171715280",
+    "logs/native-retirement-tests.log": "1ff0899ca42f0782213dd1d922b707106cf050bf85acc6bbb35e75f5607c0ee8",
+    "logs/native-retirement-build.log": "c55659d1728e1ca952a02ee9a5f8f28c05e4fdf1fa5682e1b088119c76135895",
+    "target/debug/openleague-client.exe": "1ac7315e88169c56731d259434d8b6884a29db8ce73977c37c665ab5ccbf990d"
+  },
+  "native_base_constructor_cases": 24,
+  "base_constructor_rust_port_complete": false
+}

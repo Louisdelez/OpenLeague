@@ -1,0 +1,35 @@
+from pathlib import Path
+import json,hashlib,re,datetime,shutil
+root=Path('E:/OpenLeague')
+def load(path):return json.loads(path.read_text(encoding='utf-8-sig'))
+def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
+def write(path,data):
+    temporary=path.with_suffix(path.suffix+'.tmp');temporary.write_text(json.dumps(data,indent=2,ensure_ascii=False)+'\n',encoding='utf-8');load(temporary);temporary.replace(path)
+log=root/'logs/audio-announcer-registry-remove-regression.log';text=log.read_text(encoding='utf-8-sig');assert '636 passed; 0 failed; 0 ignored; 0 measured; 480 filtered out' in text
+small=root/'logs/announcer-registry-remove-production-tests.log';assert '65 passed; 0 failed' in small.read_text(encoding='utf-8-sig')
+executable=root/re.search(r'Running unittests .*?\(([^)]+\.exe)\)',text)[1].replace('\\','/')
+plan=load(root/'docs/completion_plan.json');scope={'domains':len(plan['domains']),'tasks':sum(len(d['tasks']) for d in plan['domains']),'additional_requirements':sum(len(d['additional_requirements']) for d in plan['domains'])};assert scope=={'domains':24,'tasks':114,'additional_requirements':37}
+for reference in load(root/'docs/audio_test_fixture_loading.json')['references']:
+    path=root/reference['fixture'];assert path.stat().st_size==reference['bytes'] and sha(path)==reference['sha256']
+removal_path=root/'data/4.20/audio_announcer_registry_removal_contract.json';removal=load(removal_path);assert removal['passed'] and len(removal['cases'])==108
+assert sum(len(c['steps']) for c in removal['cases'])==918
+insertion_path=root/'data/4.20/audio_announcer_registry_insertion_contract.json';insertion=load(insertion_path);assert insertion['passed'] and len(insertion['cases'])==6
+assert sum(len(c['steps']) for c in insertion['cases'])==384 and sum(len(c['removal_steps']) for c in insertion['cases'])==384
+now=datetime.datetime.now(datetime.timezone.utc)
+receipt={'saved_utc':now.isoformat(),'passed':True,'complete':False,'scope':scope,'audio_tests_passed':636,'filtered_tests_not_run':480,'isolated_production_tests_passed':65,'native_registry_removal_sequences_ported':108,'native_registry_removal_cases_ported':918,'native_after_removal_lookup_cases_ported':12852,'native_registry_insertion_sequences_prepared':6,'native_registry_insertion_cases_prepared':384,'native_initialized_grown_registry_removal_cases_prepared':384,'native_growth_maximum_mask_qualified':max(s['mask'] for c in insertion['cases'] for s in c['steps']),'removal_fixture_sha256':sha(removal_path),'insertion_fixture_sha256':sha(insertion_path),'regression_log_sha256':sha(log),'isolated_log_sha256':sha(small),'test_executable':str(executable),'test_executable_sha256':sha(executable),'source_hashes':{name:sha(root/name) for name in ['crates/core/src/audio_announcer_registry_remove.rs','crates/core/src/audio_announcer_registry_init.rs','crates/core/src/lib.rs','tools/announcer_registry_remove_production_tests.rs','tools/qualify_announcer_registry_removal.py','tools/qualify_announcer_registry_insertion.py']},'behavior':['Native64DD60 removal updates bucket first/last bounds and neighbor links before decrementing count and calling the selected free boundary. Returned next-node iterator preserved.','Owned Rust backend releases the exact node allocation and retains valid sentinel/buckets. Freed node reads become explicit missing-storage errors; other actor lookups remain valid.','Standard/custom free boundary observation matched918 original removals and12852 subsequent lookups.'],'limits':['Original valid initialized unique-key layouts supplied in removal fixture. Physical standard/custom native free imports adapted; throwing callbacks and malformed native node behavior remain unqualified.','Insertion/growth proof executes original initialization/insertion/growth/removal through six full64-node lifetimes; allocator/free/atexit boundaries supplied.384 insertions and384 grown-registry removals prepared, not yet ported.','Caller actor destruction/metadata ownership, synchronization, registry shutdown, full callback families and actual announcement queues/mixing/playback remain incomplete. Full game objective remains unachieved.'],'next_action':'Port native65E6F0/6680F0/663710 insertion and actual growth/rehash against six qualified64-node sequences384 insertions, then compose owned initialization/insertion/removal against384 original grown-registry removals. Qualify duplicate admission, allocation/exception paths and shutdown6653B0. Connect actual actor/context ownership, locking, remaining callbacks and normal announcement queue/priorities/mixing/playback. Preserve all24domains114tasks37requirements.'}
+duplicates=[step for case in insertion['cases'] for step in case['duplicate_steps']]
+assert len(duplicates)==36 and all(step['inserted_byte']==0 and len(step['allocations'])==1 and step['freed']==[step['allocations'][0]['pointer']] for step in duplicates)
+receipt['native_direct_duplicate_insertions_prepared']=36
+receipt['limits'][1]+=' Direct duplicate path additionally qualified in36 calls: inserted byte0, retained original node/value/count, newly allocated rejected node freed. Caller admission remains open.'
+receipt['next_action']+=' Preserve the36 qualified direct duplicate-insertion cases, including rejected-node freeing and original value retention.'
+backup=root/'docs/plan_history'/('announcer-registry-removal-'+now.strftime('%Y%m%dT%H%M%SZ'));backup.mkdir(parents=True)
+for name in ['coverage.json','resume_checkpoint.json','completion_plan.json','completion_plan.html']:shutil.copy2(root/'docs'/name,backup/name)
+write(root/'docs/announcer_registry_removal_validation.json',receipt)
+for name in ['coverage.json','resume_checkpoint.json','completion_plan.json']:
+    path=root/'docs'/name;document=load(path);document['announcer_registry_removal_validation']=receipt
+    if name!='coverage.json':document['next_action']=receipt['next_action'];document['updated_utc']=now.isoformat()
+    write(path,document);assert load(path)['announcer_registry_removal_validation']==receipt
+page=root/'docs/completion_plan.html';markup=page.read_text(encoding='utf-8');section='<section id="announcer-registry-removal-validation"><h2>Annonces : suppression des acteurs du registre</h2><p>Suppression et liberation possedee integrees : 108 sequences, 918 suppressions et 12852 recherches apres suppression. 65 tests isoles et 636 tests audio reussis. Insertion et croissance natives preparees : six cycles, 384 insertions et 384 suppressions du registre agrandi. Insertion Rust, gestion des acteurs, verrouillage, arret et lecture des annonces restent a terminer.</p></section>';assert '</body>' in markup and 'id="announcer-registry-removal-validation"' not in markup
+temporary=page.with_suffix('.html.tmp');temporary.write_text(markup.replace('</body>',section+'</body>'),encoding='utf-8');temporary.replace(page)
+shutil.copy2(Path(__file__),root/'tools/record_announcer_registry_removal.py')
+print(json.dumps({'audio_tests':636,'isolated_tests':65,'scope':scope,'complete':False}))

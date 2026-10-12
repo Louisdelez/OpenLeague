@@ -1,0 +1,207 @@
+{
+  "updated_utc": "2026-10-05T13:15:50.531251+00:00",
+  "complete": false,
+  "client_tests_passed": 216,
+  "client_build_passed": true,
+  "live_subdivision_drain_integrated": true,
+  "integration_lifecycle_actors": 96,
+  "native_deep_compound_lifecycle_qualified": false,
+  "live_grass_mask_integrated": false,
+  "runtime": {
+    "checked_utc": "2026-10-05T13:14:27.488068+00:00",
+    "complete": false,
+    "normal_server": true,
+    "diagnostic_fixture": false,
+    "client_sha256": "4da193c0555bb4730f2c2672c0ac8b7c46c6d1cf63630bb05c03516c14b31100",
+    "server_sha256": "6de4a6dce78cac731ad6c2089bfa272c9e76ae870ed60b240d12c7ac40dca26a",
+    "initial": {
+      "collector_mask_bound": false,
+      "error": null,
+      "live_nodes": 1,
+      "maximum_depth": 1,
+      "object_pool_capacity": 0,
+      "objects": [
+        {
+          "center_bits": [
+            1149531070,
+            1133061202,
+            1172573508
+          ],
+          "id": 21,
+          "integer_bounds": [
+            973,
+            7211,
+            1147,
+            7385
+          ],
+          "local_bits": [
+            3266111844,
+            3270714278,
+            3266111840,
+            1118628196,
+            1123230630,
+            1118628192
+          ],
+          "model": "garen",
+          "object": 0,
+          "owner": 21,
+          "parent": 0
+        },
+        {
+          "center_bits": [
+            1149531070,
+            1133061202,
+            1172573508
+          ],
+          "id": 23,
+          "integer_bounds": [
+            973,
+            7211,
+            1147,
+            7385
+          ],
+          "local_bits": [
+            3266111844,
+            3270714278,
+            3266111840,
+            1118628196,
+            1123230630,
+            1118628192
+          ],
+          "model": "garen",
+          "object": 1,
+          "owner": 23,
+          "parent": 0
+        }
+      ],
+      "queued_subdivisions": 0,
+      "recycled_objects": 0,
+      "registered": 2,
+      "root": 0,
+      "root_members": 2,
+      "session": 1791206023087529600,
+      "tick": 1248
+    },
+    "after_movement": {
+      "collector_mask_bound": false,
+      "error": null,
+      "live_nodes": 1,
+      "maximum_depth": 1,
+      "object_pool_capacity": 0,
+      "objects": [
+        {
+          "center_bits": [
+            1149614344,
+            1133064902,
+            1172562496
+          ],
+          "id": 21,
+          "integer_bounds": [
+            983,
+            7205,
+            1157,
+            7379
+          ],
+          "local_bits": [
+            3266111844,
+            3270714278,
+            3266111840,
+            1118628196,
+            1123230630,
+            1118628192
+          ],
+          "model": "garen",
+          "object": 0,
+          "owner": 21,
+          "parent": 0
+        },
+        {
+          "center_bits": [
+            1149531070,
+            1133061202,
+            1172573508
+          ],
+          "id": 23,
+          "integer_bounds": [
+            973,
+            7211,
+            1147,
+            7385
+          ],
+          "local_bits": [
+            3266111844,
+            3270714278,
+            3266111840,
+            1118628196,
+            1123230630,
+            1118628192
+          ],
+          "model": "garen",
+          "object": 1,
+          "owner": 23,
+          "parent": 0
+        }
+      ],
+      "queued_subdivisions": 0,
+      "recycled_objects": 0,
+      "registered": 2,
+      "root": 0,
+      "root_members": 2,
+      "session": 1791206023087529600,
+      "tick": 1251
+    },
+    "movement_target": {
+      "x": 1084.981903,
+      "z": 7284.2402
+    },
+    "control_player_ids": [
+      21,
+      22
+    ],
+    "capture": "E:\\OpenLeague\\logs\\grass-live-216.png",
+    "capture_sha256": "037c4b02c7e1e7dde510832e5271ee3ceb1fcdabc1ec3a7b796cb24c0b13b489",
+    "visual_inspection_required": false,
+    "limits": [
+      "Normal local server, three connected players, loaded base champion models and movement via actual Command packet.",
+      "Snapshot identity/position and base actor scale1 are adapters; forms/skins/NPC registry and dynamic size producers remain open.",
+      "Spatial tree integration only; eligibility/camera/collector/mask/WALL are not bound. Screenshot shows startup rather than guaranteeing a movement-frame capture. No six-client victory/results qualification.",
+      "Server binary reused; hash recorded."
+    ],
+    "visual_inspected": true,
+    "visual_observations": [
+      "Vulkan startup framebuffer inspected: textured blue base terrain, shopkeeper, champion model and health bars visible.",
+      "Development HUD remains visible. Overlapping spawn positions do not prove separate visible models for every registered player.",
+      "Startup image does not prove brush masks, finished map fidelity, deep subdivision or six-client victory/results."
+    ],
+    "external_vulkan_loader_warning_present": true
+  },
+  "world_models_audited": 42,
+  "world_models_unique_probe_sources": 16,
+  "findings": [
+    "Live synchronize now drains queued subdivisions with registry slot identities and writes moved actor parents and parent_present flags back to owned objects. Recycled storage retains index alignment.",
+    "96-actor integration check exercises deep subdivision, opposite-quadrant crossing, half withdrawal, new model/identity slot reuse, complete withdrawal and session reset; checks unique membership, live topology, bounds containment and recycled ownership.",
+    "Current executable launches on a normal local server, emits a Vulkan screenshot, and updates spatial center/integer bounds after a real network Move command. This small runtime capture does not exercise the 96-actor test topology."
+  ],
+  "limits": [
+    "Original standalone queue/subdivision contracts remain compared; compounded live adapter lifecycle and partial existing children have integration coverage but no complete new original-executable comparison.",
+    "42 world models audited, only16 currently have unique source mesh/config association. No NPC spatial registration or full world model bounds claim.",
+    "Dynamic size effects, skin/form selection, native full configuration lookup and brush eligibility/camera/collector/WALL renderer remain unfinished.",
+    "Build emits35 existing warnings; external Vulkan loader warnings remain recorded. No full game or six-client victory/results acceptance."
+  ],
+  "next_actions": [
+    "Qualify bounds and SkinScale for the 16 uniquely associated NPC/summon resources; resolve remaining building/altar sources, and connect actual loaded world actors.",
+    "Qualify compounded deep spatial lifecycle against original methods including partial existing children; dynamic actor scale, eligibility/camera/collector and normal brush mask/WALL remain open.",
+    "Continue all 24 domains, complete champion kits, six-client victory/results and delivered package qualification."
+  ],
+  "files_sha256": {
+    "crates/client/src/grass_live_registry.rs": "d4c8b6dd73c30e7a895b37708ceb482a3bbf0231a6ac3bc4c91a2de5a4646214",
+    "crates/client/src/grass_subdivision.rs": "46b28656c626b1dfcc6f6abfefa9fb8bc12c2dc6e12ceaf8fd42c6d83f727dc1",
+    "crates/client/src/grass_object_registry.rs": "b57e68c61a1d2b43b331438b14baa0d43d37d149f48e3d767f22bf94784df18c",
+    "logs/grass-live-subdivision-tests.log": "ee6d6e486274d55750e8ec5b7f05121a7f32c8b01bad062228197bb65a8816e1",
+    "logs/grass-live-subdivision-build.log": "aceb662fb7996292f125169f94f19d109b50ede2e0a94cc68c7a7c432389bd78",
+    "docs/grass_live_subdivision_runtime.json": "1c23ed8bae0581625f463d8e81db40648caa79f4a37959de43c8373e30ecc235",
+    "docs/world_spatial_source_audit.json": "10c911cad966f0ecc2689f1bf1d100a9f23b8c0ab5176940d0b9a06995c4d6a1",
+    "logs/grass-live-216.png": "037c4b02c7e1e7dde510832e5271ee3ceb1fcdabc1ec3a7b796cb24c0b13b489",
+    "target/debug/openleague-client.exe": "4da193c0555bb4730f2c2672c0ac8b7c46c6d1cf63630bb05c03516c14b31100"
+  }
+}

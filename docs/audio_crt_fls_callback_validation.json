@@ -1,0 +1,51 @@
+{
+  "saved_utc": "2026-10-09T19:26:03.790776+00:00",
+  "passed": true,
+  "complete": false,
+  "audio_tests_passed": 522,
+  "native_crt_fls_slot_lifetime_cases_rust_validated": 36,
+  "actual_windows_fls_rust_destructor_cases": 24,
+  "actual_windows_fls_rust_destructor_x86_cases": 12,
+  "actual_windows_fls_rust_destructor_x64_cases": 12,
+  "rust_installed_targets": [
+    "i686-pc-windows-msvc",
+    "wasm32-unknown-unknown",
+    "x86_64-pc-windows-msvc"
+  ],
+  "rust_compiler": "rustc 1.96.1 (31fca3adb 2026-06-26)\nbinary: rustc\ncommit-hash: 31fca3adb283cc9dfd56b49cdee9a96eb9c96ffd\ncommit-date: 2026-06-26\nhost: x86_64-pc-windows-msvc\nrelease: 1.96.1\nLLVM version: 22.1.2\n",
+  "test_log": "logs/audio-crt-fls-callback-qualified-tests.log",
+  "test_executable": "target\\debug\\deps\\openleague_core-92fab3f20accd79c.exe",
+  "test_executable_sha256": "ddd0339c298bf3a22246aa5852a6087c3d5e887092683df4a7c5c27010042224",
+  "previous_receipt": "docs/audio_crt_time_lifetime_validation.json",
+  "evidence": [
+    "RegisteredCA9026 FLS dispatch implemented and calls actual Rust thread destructor.36 original complete live/cleared/detached TLS/FLS cleanup lifetimes match all33 canonical regions, every import/free entry, callback identity/entry/exit banks and exact physical ownership. FLS-free clears slot before invoking registered destructor; TLS has no callback. Original native callback stack delta8 asserted separately, without pretending logical Rust dispatch proves native ABI.",
+    "First full build failedE0061 because callback provider argument omitted in comparison service. Provider corrected, failed log retained; final522-test suite passes. No expected native outcomes or bank comparisons relaxed.",
+    "Actual WindowsFlsAlloc/FlsSetValue/FlsFree now invoke externsystem Rust callback in isolated probes compiling unchanged production callback/thread destructor/custom locale modules and original foundation functions.24cases total:12actualX64 +12actualX86, each6live contexts and6empty slots. Every native destructor lock/free service-entry bank, order, final canonical storage and freed identities match. Callback observes cleared slot; panic containment present; callback payloadBox physically allocated/dropped byRust; observer retains passive canonical memory for comparison.",
+    "Official Rust i686-pc-windows-msvc standard library installed through rustup. Actual32bit executable prints pointer_width32 and runs successfully against same native data. Isolated probe initial unused-import compilation failure retained in probe-initial-build.log; unnecessary import removed only from extracted probe foundation prefix, original function code unchanged.",
+    "LiveTLS cleanup and merely clearedFLS data retain original record; liveFLS callback or explicitdetach frees it. Distinct native lifetimes preserved, not claimed all leak-free.59 earlier fixture references unchanged; full24/114/37 retained."
+  ],
+  "limits": [
+    "OS callback probes use Memory/Error type facades, canonical native contexts and explicit lock/CRT heap service boundaries. They are actual OS-to-production-algorithm proofs, not full core crate/normal client provider, actual original heap or normal worker startup proofs.",
+    "Callback adapter maps actual boxedOS payload to32bit canonical record identity. Normal thread/fiber termination/reentrancy/concurrency/SEH and actual heap/lock/security-cookie providers remain unqualified.",
+    "Normal locale producers, audio worker startup/dispatch/progression/retirement/physical playback and fullgame remain incomplete. No task/domain closed."
+  ],
+  "next_action": "Promote actual OS FLS callback bridge from isolated probe into normal core/client provider with real slot ownership and error propagation. Qualify real Windows lock/heap services and security-cookie/bootstrap, thread/fiber teardown/concurrency/SEH, then connect normal audio worker startup/dispatch/progression/retirement and physical playback. Normal locale producers remain required. Continue full24-domain114-task37-requirement scope.",
+  "files_sha256": {
+    "logs/audio-crt-fls-callback-qualified-tests.log": "6ef56490f2848e166a4902435dba14f17524aa1888776332247a6d1f9fe1c194",
+    "logs/audio-crt-fls-callback-tests.log": "1e00db006f18e0db2dba5301e9632d7676ee87d61c99504e300a35de5a33f308",
+    "docs/audio_crt_time_lifetime_validation.json": "58b9340e986b35bc87dce890ff125092188dcb534ed0e9184408d093093182f2",
+    "crates/core/src/lib.rs": "52389cb8e4b7450a30104cb2c385d462e6b1ae4e39b351e9570dec2f86d61b9f",
+    "crates/core/src/audio_crt_fls_callback.rs": "a211eaec9e0fd480b75623918eac433e0119c06a4a2524df748302968041a9ab",
+    "crates/core/src/audio_crt_thread_system_startup.rs": "69175bcff420c52a683842a102bb778debfdb082b33c3c8d21c1a8d9a07c367b",
+    "tools/integrate_audio_crt_fls_callback.py": "9f22f80cc86292b182cc7be87d8d48cb8862cc7c52bce016fc8af94fbe170a67",
+    "tools/fix_audio_crt_callback_provider.py": "5282b49687979c715dc72be696d1036a11f5e3bb663f0b440efafb6b7029085d",
+    "tools/record_audio_crt_fls_callback_progress.py": "03069279a62322daed87e28ec730243c5c822ab32642d73ed72182b060159106",
+    "data/4.20/audio_crt_fls_slot_lifetime_preparation.json": "310e5510d0bb0bf284ced385d8adfeda1e63e94d2a814ac4e221af76d983b475",
+    "tools/probe_native_audio_crt_fls_slot_lifetime.py": "a774cffa2fcc941e7b86368cc46924dba51168916626758f47f383497fdad511",
+    "tools/probe_os_fls_rust_destructor.py": "7cfb6289966d8e17a9b5e6b853fe94862d8037014dd9c4fe9804448696f17543",
+    "tools/probe_os_fls_rust_destructor_x86.py": "42a4c8847fd90794316b39ac6284001ebb5115d559362755cce57d43c72026aa",
+    "tools/hardware/fls_rust_destructor/probe-initial-build.log": "56a129a6920b0c11750e873d2fe365847fa970bbf35f8e5e3db1cfcfabf939bd",
+    "docs/audio_windows_fls_rust_destructor_hardware_discovery.json": "f9b9fd929ca4e7e181d7ed2d1e29702172ab1275a47ac469d4e4199887e26b33",
+    "docs/audio_windows_fls_rust_destructor_x86_hardware_discovery.json": "adec301b59e4bcee0046476979673b6310e50e0eddea15326ee3c512fc9382d1"
+  }
+}

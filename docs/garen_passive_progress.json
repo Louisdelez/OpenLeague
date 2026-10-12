@@ -1,0 +1,29 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-03T13:48:33.545422+00:00",
+  "source_policy": "Numeric tiers use Riot-authored 4.17 patch communiqué republished on Nerfplz. Original Riot URL unavailable in this run; copy provenance and missing native server body retained, not claimed original-runtime qualification.",
+  "patch_note_url": "https://www.nerfplz.com/2014/09/official-patch-417-notes-released.html",
+  "native_tooltip_source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_US.txt",
+  "native_tooltip_sha256": "315319cfeb654fe3c404de9551c95e16ee046f5f291de9c10583ad10ab97787d",
+  "native_dynamic_tooltip": "tr \"game_buff_tooltip_GarenPassive\" = \"<titleLeft>Perseverance</titleLeft><mainText>If Garen has not been struck by damage or enemy abilities for the last <font color='#FFFFFF'>@f2@</font> seconds, he regenerates <font color='#CC3300'>@f1@</font> health every 5 seconds (<font color='#FFFFFF'>@f3@%</font> of max Health). Minion damage does not stop Perseverance. <br><br>At level 11 damage from non-epic monsters will no longer stop Perserverance.<br>At level 16 the power of Perserverance is increased significantly.</mainText>\"",
+  "rules": "data/4.20/garen_passive_rules.json",
+  "implemented": [
+    "9/6/4-second interrupt cooldown and 0.4/0.8/2.0 percent max-health regeneration per second at levels 1/11/16.",
+    "Champion/structure/epic incoming damage interrupts; lane minion damage does not; ordinary monster damage exempts level 11 and above.",
+    "Passive healing adds separately to base/item regeneration and clamps at max HP; no dead or ended-match healing.",
+    "Interruption tick replicates in authoritative snapshot.",
+    "Explicit server event for non-damaging enemy ability hit; no client authority granted."
+  ],
+  "core_checks": 4,
+  "limits": [
+    "30Hz linear tick healing and shielded positive mitigated damage interruption reconstructed; original exact native tick/shield policies unqualified.",
+    "Unknown/environmental None-source positive damage conservatively interrupts; native special exceptions incomplete.",
+    "Cooldown uses current level relative to last interruption; exact level transition/death/respawn behavior needs original-runtime qualification.",
+    "Non-damaging ability event API exists but full per-ability event producers remain incomplete.",
+    "Native VFX/audio/HUD and full Garen kit not qualified."
+  ],
+  "network_validation": "docs/garen_passive_network_validation.json",
+  "network_checks": 6,
+  "core_test_log": "logs/garen-passive-core-final.log",
+  "current_server_sha256": "ab6da73137b871ea41bfdb578344d7834edb0dae91cf2b866b5983187a1c3cc6"
+}

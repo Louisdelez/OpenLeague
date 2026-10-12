@@ -1,0 +1,22 @@
+from pathlib import Path
+import json,hashlib,re,datetime
+r=Path('E:/OpenLeague')
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+b=(r/'logs/audio-callback-registry-tests.log').read_bytes();log=b.decode('utf-16')if b.startswith((b'\xff\xfe',b'\xfe\xff'))else b.decode('utf-8-sig')
+assert 'test result: ok. 372 passed; 0 failed;'in log
+proof=json.loads((r/'data/4.20/audio_callback_registry_preparation.json').read_text(encoding='utf-8'));assert proof['passed'] and proof['case_count']==720 and proof['counts']=={'register':480,'unregister':240}
+source=Path(r'D:/LeagueOfLegendsV2/4.20/Client/League of Legends_UNPACKED/League-of-Legends-4-20/RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/League of Legends.exe');assert sha(source)==proof['native_sha256']
+exe=re.search(r'Running unittests .*?\((target[\\/]debug[\\/]deps[\\/]openleague_core-[^\s)]+\.exe)\)',log);assert exe
+prepared=json.loads((r/'data/4.20/audio_bank_meter_registered_callback_unload_preparation.json').read_text(encoding='utf-8'));assert prepared['passed'] and prepared['case_count']==8 and prepared['native_sha256']==proof['native_sha256']
+files=['tools/probe_native_audio_bank_meter_registered_callback_unload.py','data/4.20/audio_bank_meter_registered_callback_unload_preparation.json','logs/audio-bank-meter-registered-callback-unload-probe.log','crates/core/src/audio_callback_registry.rs','crates/core/src/lib.rs','tools/probe_native_audio_callback_registry.py','data/4.20/audio_callback_registry_preparation.json','logs/audio-callback-registry-probe.log','logs/audio-callback-registry-tests.log','tools/record_audio_callback_registry_progress.py',exe.group(1).replace('\\','/')]
+next_action='Integrate the qualified owned callback registry into native Meter initialization/unload compositions, then implement normal audio-frame dispatch and producer construction. Registry storage/removal now matches720 native cases;372 selected audio tests pass. Full audio/DSP/device acceptance and all24domains/114tasks/37requirements remain open.'
+receipt={'saved_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'complete':False,'native_sha256':proof['native_sha256'],'native_registered_meter_callback_compositions_prepared':8,'native_registered_meter_callback_rust_compositions_validated':0,'native_callback_registry_cases':720,'register_cases':480,'unregister_cases':240,'audio_tests_passed':372,'files_sha256':{n:sha(r/n)for n in files},'acceptance':['Actual Rust owned header and full allocation bytes/status/call order match all720 native sequences.','No filtering of duplicate or null callback keys; first-match removal retains capacity and trailing bytes; failed growth preserves old state.'],'limits':['Normal Meter callback registration integration and audio-frame invocation remain unqualified.','Storage acceptance does not prove arbitrary callback invocation, synchronization, DSP/device output or complete game.'],'next_action':next_action}
+(r/'docs/audio_callback_registry_validation.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+summary={k:receipt[k]for k in ['saved_utc','complete','native_registered_meter_callback_compositions_prepared','native_registered_meter_callback_rust_compositions_validated','native_callback_registry_cases','register_cases','unregister_cases','audio_tests_passed']};summary['receipt']='docs/audio_callback_registry_validation.json'
+for n in ['coverage.json','resume_checkpoint.json','completion_plan.json','goal_plan_revision.json']:
+ p=r/'docs'/n;d=json.loads(p.read_text(encoding='utf-8'));d['audio_callback_registry_validation']=summary;d['next_action']=next_action;p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+p=r/'docs/completion_plan.html';h=p.read_text(encoding='utf-8');paragraph='<p>Registre des callbacks audio : stockage Rust comparé à 720 cas natifs (480 inscriptions, 240 retraits), 372 tests audio réussis. Intégration normale avec Meter et appel depuis la frame audio encore requis.</p>\n';assert '</body>'in h
+if paragraph not in h:p.write_text(h.replace('</body>',paragraph+'</body>'),encoding='utf-8')
+plan=json.loads((r/'docs/completion_plan.json').read_text(encoding='utf-8'));assert len(plan['domains'])==24;assert sum(len(d['tasks'])for d in plan['domains'])==114;assert sum(len(d['additional_requirements'])for d in plan['domains'])==37
+for n,h in receipt['files_sha256'].items():assert sha(r/n)==h,n
+print('PASS372; callback registry720; current hashes and four plans verified; full scope retained')

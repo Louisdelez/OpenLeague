@@ -1,0 +1,39 @@
+{
+  "updated_utc": "2026-10-04T23:00:19.915298+00:00",
+  "complete": false,
+  "client_tests_passed": 117,
+  "client_build_passed": true,
+  "native_sequences": 32,
+  "native_frames": 128,
+  "native_addresses": 2298,
+  "native_source_queries": 100,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Original6B3FA0 complete Map10 frames execute two-stage identity/handle lookup, registered actor flags and team getters, original circle generation6B14E0, terrain query8F3390, fan/rays, native counters and heap scheduling. No lookup or mask generation adapters.",
+    "32 sequences/128 frames cover actor-present/absent, radius200/800, force/non-force, applied/unapplied, slow/fast frame budgets; changing flags remove/re-enable actors, change a neutral actor to team100 and exclude a third actor. Sources also move and change radius.100 source queries executed.",
+    "Rust CircleView.enqueue_local_source joins resolution/filter/withdrawal with scheduling in native order. Full frame comparison checks all128x128 counters and pixels,512 mask words per source, bounds, dirty/applied/pending flags, priorities, source query count and generated order. All117client tests and build passed."
+  ],
+  "limits": [
+    "Original complete frame6B3FA0 invokes original generation6B14E0, source query8F3390, fan/rays/circle predicates, counters, dirty clearing and heap processing; no mask-generation adapter.",
+    "Original identity and actor registries execute with supplied nodes/actors. Actor flags and neutral tags change between frames; spectator false, QPC/clock and allocator boundaries adapted. Original terrain constructor, full view initialization, entities and camera/extent producers remain unqualified.",
+    "Source bit buffers supplied preallocated, null owners and tag100 only. No live gameplay/GPU binding.",
+    "Actor/descriptor flag and team producers, registry insertion/resize/lifetime and constructors are supplied rather than executed. Only source tag100 and non-spectator local filtering is qualified.",
+    "The new joined source pass is not yet called by ordinary gameplay entities; native view registration/camera/extent initialization and authoritative/GPU fog integration remain incomplete. Current executable has no graphical rerun."
+  ],
+  "next_actions": [
+    "Qualify other-team/spectator view filtering and actual view initialization/subscriptions.",
+    "Qualify registry/actor field producers and connect native source creation, updates and retirement to ordinary gameplay entities.",
+    "Integrate native fog masks with server visibility and GPU rendering; verify the current restored Map10 and gameplay executable."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_registered_map10_contract.json": "5956b2e33aab176fcec1ae9cc67688419fb97dd641d0a5b3a2be21585d0aa7c9",
+    "tools/probe_fow_registered_map10.py": "57d094b904994294d0aa5b8436ad8470e4e2feaaf332a5db6331aeaced57b819",
+    "tools/probe_fow_registered_map10_generated.py": "19727cd2b0bd315d4b5f51bb1e4f235c8f3a209ae854ce9bf508bab7d5b6581c",
+    "crates/client/src/fow_registered_filter.rs": "04c76e7b126f2015cff62b9377f5a5510fe0d7632c341faacc94328f7e26eb9a",
+    "crates/client/src/fow_source_factory.rs": "9b5053b247c5187f2399b49a61e7a4e2ec526e592a12498567ab2332eb44b61c",
+    "logs/native-registered-map10-tests.log": "000476018622409d030c746e4cddf2088b2b39c98c677c1526f4d0b06dad5b18",
+    "logs/native-registered-map10-build.log": "4e786a777f90ab4213bf59fadbe9f52d0f3bbc733f3318207f5d22f114c7de78",
+    "target/debug/openleague-client.exe": "2856c9a5aa467d69bccdb08d64573ec0568b6dfe4825d29ab763ba3ca9590d2b"
+  }
+}

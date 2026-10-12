@@ -1,0 +1,45 @@
+{
+  "updated_utc": "2026-10-06T19:08:02.344909+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "core_tests_passed": 510,
+  "native_complex_clear_cases": 432,
+  "native_events": 1312,
+  "native_stop_callbacks": 448,
+  "clear_without_death_emitters_ported": true,
+  "death_emitters_supported": false,
+  "ordinary_emitter_consumer_bound": false,
+  "ordinary_applications_rebuilt": false,
+  "artifacts_sha256": {
+    "data/4.20/complex_clear_contract.json": "a34e92f1dc852863eabb0018262d107269621b93ac69e82f14fb074cbe80f770",
+    "tools/probe_native_complex_clear.py": "4640f7ee5d510b65612dbc51d8faa4ae35d0888806054106016aabe0144639d4",
+    "crates/core/src/native_complex_particle_storage.rs": "d0f4aeac72a17f11075801d198766a8187fc4e164f10fa1278a584ad09ca56b0",
+    "data/4.20/troy_scalar_contract.json": "54005518faa9000dc9f0f330e569cb21e66b5d6e916727e469a8e66d24ce6b0d",
+    "crates/core/src/native_troy_scalar.rs": "f782ab31c463cddfda369c52344103c5147d5db616ba2a0eb626d08c13fb74e1",
+    "data/4.20/troy_position_bounds_contract.json": "9191b4d30eb9a3dba97c2eec59a54648a138f5237ce60c20a2427803e7d30a5e",
+    "crates/core/src/native_troy_position_bounds.rs": "8f16435291e0b3551d72fcc28eac8a6e71bf32a31c4549dad63f34cff4bf69ad",
+    "crates/core/src/native_troy_properties.rs": "f906ec120d6681fae9743760184d7f75eb050cdda49d9e2563c12fa7c038e0f2",
+    "crates/core/src/lib.rs": "ab4fc67999ab34d4f69fa8d9c5ae9f620d072820315e35876b279829fbf1dd34",
+    "logs/native-complex-clear-core-tests.log": "b0afaffbd2639a37dbe3090793dabb34ded30ac885705589b2f3d47d63d84f47",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "abd08966521d1b49832d621a87d84abea3f6699195f71997431a8388cc8546fb"
+  },
+  "findings": [
+    "Whole938740 clear executes across432cases with0/1/4particles,0/1/3trail slots, live/expired/null handles and live/expired state. Rust matches all13empty buffers, callback order and every strong/weak count, resource request flag, state owner/dead field.",
+    "Original93A7E0 processes particles and slots in forward order before attribute clearing. Slot weak references drop in forward order afterwards. No survivor reindexing or individual ordered/swap removal.",
+    "Final last-update A8 isFF7FFFFF and live countAC is0, even when storage was initially empty. Rust returns those writes to the owning emitter.",
+    "1312native events and448stop requests compared. Concrete Troy virtual64/A0 execute; stop is deferred request400, not complete graphical/audio destruction.",
+    "Death emitters are explicitly rejected before mutation in Rust until their production is qualified; native fixtures keep those descriptors disabled."
+  ],
+  "adapters": [
+    "Whole938740 clears all13attribute/trailbuffers; original93A7E0 release, weak locks, concrete Troy virtual64/A0 and reference increments/decrements execute.",
+    "Explicit legal null/live/expired resource graph and empty/preallocated storage. Original heap/security adapters.",
+    "Control destroy/free endpoints record calls; no actual Windows deallocation."
+  ],
+  "limits": [
+    "Death emitter descriptors disabled; their emission/acquisition and complete reset200 caller remain incomplete.",
+    "Single threaded reference graph only; concurrent locking and concrete GPU/control destruction not qualified.",
+    "Ordinary renderer and full frame integration incomplete.",
+    "509previous core tests and new clear comparison pass; no domain/champion kit or ordinary graphical integration complete."
+  ],
+  "next_action": "Achever le caller reset200 avec le nettoyage qualifié, les émetteurs à la mort, la carte audio8000, le flag enfant10000 et les mises à jour des émetteurs ; qualifier les corps du gestionnaire et les producteurs natifs, composer le cycle complet puis le raccorder au rendu normal des52groupes/244placements Map10, reconstruire les applications et poursuivre les24domaines."
+}

@@ -1,0 +1,33 @@
+{
+  "updated_utc": "2026-10-04T17:44:51.971482+00:00",
+  "complete": false,
+  "native_coordinate_cases": 6,
+  "client_tests_passed": 69,
+  "live_fow_gpu_bound": false,
+  "current_build_gpu_rerun": false,
+  "findings": [
+    "Native c230 upload calculation6B3849..6B3894 executed without arithmetic adapters: reciprocal extent, negative Z reciprocal, offset0/1.",
+    "Original FogOfWar shader sources recovered: visibility s6 and authored overlay s10; projected RGB uses lerp(overlay alpha,1,visibility red).",
+    "Shader projected path does not consume height fade parameters; hidden regions preserve authored density, not an unconditional black mask.",
+    "Rust coordinate/density module matches original upload cases;69tests and build pass. Production projected shader still uses scalar visibility1 pending live binding."
+  ],
+  "next_actions": [
+    "Qualify extent provenance: constructor6B3BB5 takes argument+0C; call6B3499 receives global2D6DD48, written from world AABB X span at86FA67. Recover actual Map10 AABB rather than choose nav bounds.",
+    "Recover overlay texture path loaded into global2D78A38 and implement authoritative team visibility texture/provider, then bind real per-pixel FOW to projected shader.",
+    "Continue exact owner provider, all particle variants and all24domains."
+  ],
+  "limits": [
+    "Native visibility rasterizer, extent value and texture binding are incomplete.",
+    "No native GPU or live FOW acceptance; historical Vulkan projection captures remain tied to old binary hashes."
+  ],
+  "files_sha256": {
+    "docs/projected_fow_sources.json": "0037b587c7cd2729b7ba48aba71b98ebcc86a044de0fd95cb799cb421b75ea42",
+    "data/4.20/fow_params_contract.json": "3f2da52ba1703cd0c2ace8320fc35344f11cf37f24bb6ee614203da10dc792c6",
+    "crates/client/src/native_fow.rs": "7212e1cae07bfb48dd1bcdab41ff02b5bb05a351cb09a2748ab7c4e3b4000e8d",
+    "data/4.20/shaders/FogOfWar/FogOfWar_VS.hls": "a42f658c4c25d819a6a8af5f311c897288877ef464d326e609be83f6f74b2cbe",
+    "data/4.20/shaders/FogOfWar/FogOfWar_PS.hls": "04d3f73f2b0e82fcad7974ff71f51088728f727837b4c7cde5428a15c9964268",
+    "logs/native-fow-math-tests.log": "61845b03d6dd543ab12abfd007ba98263cc69b0aa87948762d97266f259ab150",
+    "logs/native-fow-math-build.log": "b7e28d76e3f8bc47cee2b6333522a4d75ed3f8031b6d21127a6d2888978506d2",
+    "target/debug/openleague-client.exe": "b4c47e5d75e8794e0d4d3858a9f20d6a9db3501ff8070fb08a26a0b5fcddc45d"
+  }
+}

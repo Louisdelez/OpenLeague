@@ -1,0 +1,56 @@
+{
+  "saved_utc": "2026-10-10T07:37:27.804143+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "audio_tests_passed": 644,
+  "filtered_tests_not_run": 480,
+  "isolated_production_tests_passed": 73,
+  "native_secondary_owner_registrations_ported": 672,
+  "native_count_threshold_queries_ported": 48,
+  "contracts": {
+    "audio_announcer_secondary_owner_registries_contract.json": {
+      "cases": 144,
+      "sha256": "b580e9beb83f9a14951055f64d8f42a983e7a852c5645aac3dae497a033c7b05"
+    },
+    "audio_announcer_secondary_growth_contract.json": {
+      "cases": 8,
+      "sha256": "f6150b58a0aafb0d2ed9c2b1f64a310d74d14758c15822eb01b01ce99f50f1b3"
+    },
+    "audio_announcer_registry_shutdown_contract.json": {
+      "cases": 32,
+      "shutdown_calls_prepared": 64,
+      "sha256": "69d74efa8a9e4bd00ca7085b8169d390003dd67598ba2a5773656c7abf882ad5"
+    }
+  },
+  "regression_log_sha256": "73c38ceb36fc5b1a3c376b4662c3b4425bf80ce767249ed67a2a175696149495",
+  "isolated_log_sha256": "029b5de2a61f7d59a7eac79143cd0c825517ad7463478eca3f86a915117e6201",
+  "test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_core-5b2a9def275dcedd.exe",
+  "test_executable_sha256": "d21b4b3b439efe99746e1a382f7462554f9cdfb24c6e7538405c33a6f6399ab6",
+  "source_hashes": {
+    "crates/core/src/audio_announcer_secondary_registries.rs": "769022d6c68b8e9d796a1e0fe3efac07be87603177b3a1a7433515534cf10c43",
+    "crates/core/src/audio_announcer_object_lookup.rs": "daadeba7969e3d267cf9fd6a2f8446716d5ead6e937b86087968e20d00006062",
+    "crates/core/src/audio_announcer_registry_init.rs": "f40ea1c9e195e2cb6cc5d2a1572d70536a48347dd8826a81d5caff670ac84128",
+    "crates/core/src/audio_announcer_registry_insert.rs": "3e6a38e94fd4cd3dcd214d84359ac6149528aafecf21469ebe16992d5fa281db",
+    "crates/core/src/lib.rs": "05bf5d1c2a18fe98021cd093721d61f4ac18cba2ce185a85cc6a4d3caea8cad4",
+    "tools/announcer_secondary_registries_production_tests.rs": "59fe661d6afc75141feb66ad1cf47e12ec818a392ed009e5f1a2c01644fbf9e1",
+    "tools/qualify_secondary_growth.py": "b2531877532edceaf325c01ddc0356e1cbf5660c0c54da82715720b41add2fa0"
+  },
+  "behavior": [
+    "Actual secondary and owner normal-return helpers ported as core APIs: raw unsigned identity hashing, node lookup distinct from null stored actor, null actor diagnostic before lookup, paired lock callbacks, pointer-vector append/growth, owner-specific allocator boundary and low-byte return.",
+    "Legacy primary hash retained. Identity hash propagated through insertion, sorting and full bucket rehash.664E50 fixed-address constructor reused by existing lazy initialization.",
+    "Compared672 registrations across152 native lifetimes, including zero actor repetitions, existing-zero and existing-nonzero entries, high unsigned collision keys, table8-to64 rehash and48-element pointer vectors.48 native count-threshold queries matched for9999,10000,10001 present/missing keys."
+  ],
+  "limits": [
+    "Lock primitives, returning diagnostics and owner engine allocator5CC6B0 remain explicit supplied boundaries. Tests prove callback order and storage, not live Windows synchronization or engine heap behavior.",
+    "Source-alias pointer-vector append and native exception unwinding not qualified. Early errors retain preceding mutation and do not claim native cleanup.",
+    "Actor-registration provider still requires runtime ownership composition. Live world metadata/actor storage, removal and shutdown, normal announcement queues, priorities, mixing and audible playback remain incomplete. Full game scope remains unchanged.",
+    "Actual primary registry shutdown/destruction qualified in32 lifetimes64 calls, including grown tables, repeat shutdown and custom/standard free callbacks. Rust shutdown implementation remains open."
+  ],
+  "next_action": "Connect complete actor-registration orchestration to the actual secondary/owner registry APIs with owned actor/metadata storage; qualify identity table removal, owner-array allocator and shutdown. Integrate normal announcement event queue, priorities, mixing and playback. Preserve24domains114tasks37requirements.",
+  "native_shutdown_calls_prepared": 64
+}

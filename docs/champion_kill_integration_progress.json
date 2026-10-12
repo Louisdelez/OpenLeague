@@ -1,0 +1,72 @@
+{
+  "updated_utc": "2026-10-04T08:20:40.014216+00:00",
+  "passed": true,
+  "complete": false,
+  "source_receipt": "docs/champion_kill_sources.json",
+  "network_receipt": "docs/champion_kill_network_validation.json",
+  "native_bounty_fields_verified": 29,
+  "native_experience_fields_verified": 22,
+  "core_tests_passed": 350,
+  "client_tests_passed": 28,
+  "champion_kill_unit_tests_passed": 8,
+  "network_checks_passed": 10,
+  "files_sha256": {
+    "crates/core/src/champion_kills.rs": "b76edcb97eaf222e32bda215592a950807bd1923394d7e2aedf62e3ed4c27859",
+    "crates/core/src/lib.rs": "f4415d8b1c401bdb19e7d992acc98ea091536e22f3e5b0aa6ef7eb049e2899ca",
+    "crates/core/src/damage.rs": "e3352d8607e5837dda6748386b4704895cfbe8045bb36af6ca6499f88a662ca9",
+    "crates/core/src/progression.rs": "e989859865a5aa0bc3137c52a0d77a48bb0f1bf45b7bf7c4b25fcf50555c91e1",
+    "crates/core/src/vision.rs": "541b92f3be1135a90f7f6b73fb8ebd87ffe6a12fa9b3770b185d1bf68de96e00",
+    "crates/core/src/summoner_exhaust.rs": "d7d790a218b22053e22d60803e2d5090c119211c05c84147b6f2827e5e9865ed",
+    "crates/client/src/main.rs": "f987acde7dceb7e975b940ba2f6c10cfa9aa9daffe31853c2eb029c898b33c05",
+    "data/4.20/champion_kill_rules.json": "a0f7876db8e7f565dc23f2ff5606b72dc6d5d4ef423be8909625ae639fb8969c",
+    "docs/champion_kill_sources.json": "6bba550ce554883d87904b0670b90025303171958e5268d277b711169ef86205",
+    "docs/champion_kill_network_validation.json": "94164f9c52792b99eb4b60878ae84f8e3be79238934e459b64c798d4821b8138",
+    "tools/recover_champion_kill_rules.py": "a9dab968a418fea0cff2cd849072910a41b7e1561af301d7dd48530aa9264608",
+    "tools/verify_champion_kills_network.py": "56276431139fa7ea8548d0ca46e1a9f8193ad1abd45a0cdb23931fd9ca29f7a5",
+    "logs/champion-kill-tests.log": "ffbed7b0f85df56d2edd41f9ff75584036b1e79021be7e87becd13b1766bc5c8",
+    "logs/champion-kill-build.log": "fd992cea50588e178932c6e0926d1580f4becb123015580e1dd0e367cc4ba415"
+  },
+  "executables": [
+    {
+      "path": "target/debug/openleague-server.exe",
+      "bytes": 4370432,
+      "sha256": "3482c080c60b5fd6a972a516a0d686040c65dc6d46b6d13798021107e6d6e50a"
+    },
+    {
+      "path": "target/debug/openleague-client.exe",
+      "bytes": 118081536,
+      "sha256": "bc13b41796faf0b49e455eb024c81b4819d2395462b95847d6e404ca8e4ac0dc"
+    },
+    {
+      "path": "launcher/src-tauri/target/debug/openleague-launcher.exe",
+      "bytes": 12411904,
+      "sha256": "ac22a8346c0b2af574bdee16311acc510e657c73ca5f85584223f0049c4f57de"
+    }
+  ],
+  "runtime": {
+    "checked_utc": "2026-10-04T08:18:41.109337+00:00",
+    "client": 3128,
+    "server": 16432,
+    "port": 5926,
+    "client_sha256": "bc13b41796faf0b49e455eb024c81b4819d2395462b95847d6e404ca8e4ac0dc",
+    "server_sha256": "3482c080c60b5fd6a972a516a0d686040c65dc6d46b6d13798021107e6d6e50a",
+    "diagnostic": true,
+    "complete": false,
+    "loadout": [
+      "Ignite",
+      "Heal"
+    ]
+  },
+  "limits": [
+    "Numeric bountyGlobal and Map10EXP values checked directly against originalclient INIBIN resources; originalserver algorithm not recovered.",
+    "Baseline300gold and firstblood100 implemented; streak/death/minion-farm bounty modifiers, assiststreak bonuses and temporary bounty recovery remain missing.",
+    "Damage/control15second contribution window, execution credit from mostrecentenemy, assistpool linear time ramp excludingfirstblood and per-assistant split reconstructed from nativefields, not originalserver qualification.",
+    "XP uses55percent of nextlevelincrement; difference modifier12percent perlevel with15percentfloor is inferred from fields. Suppliedcommunity source uses cumulative thresholds and caps difference at15percent; not copied because behavior is suspect. OriginalMap10 XPsharing and detailed levelgap policy still unqualified.",
+    "Healing/shield support assists, pets, disconnect attribution, multikill/announcer/audio/results/services remain incomplete.",
+    "Contribution records retain within-tick hit order; stale/disconnected entries pruned on contributions. Environmental credit and eligibility policies reconstructed; originalserver body absent.",
+    "Three-client network scenario level1/native values verified10checks: firstblood400gold, controlassist75gold, kill165XP, KDA/roster and actualrespawn. Different levels and broader gameplay remain unqualified.",
+    "Public scoreboard data and kill events included in snapshots without hidden positions; full historical scoreboard/killfeed/audio/results not implemented.",
+    "Client standalone rebuilt; KDA HUD/Map10 framebuffer inspected in docs/champion_kill_live_validation.json. Launcher unchanged. Entire24-domain game incomplete."
+  ],
+  "live_framebuffer_receipt": "docs/champion_kill_live_validation.json"
+}

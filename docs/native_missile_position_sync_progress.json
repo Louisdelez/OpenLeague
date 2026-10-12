@@ -1,0 +1,29 @@
+{
+  "updated_utc": "2026-10-07T05:37:30.815320+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_cases": 36,
+  "native_instruction_addresses": 44,
+  "focused_core_tests_passed": 1,
+  "full_core_suite_rerun": false,
+  "artifacts_sha256": {
+    "data/4.20/missile_position_sync_contract.json": "c20366ce44e3e1c2d9fb8552f600a22c49455e2920eed66f1e7fca45fc042b41",
+    "tools/probe_native_missile_position_sync.py": "f0d865be102af010898f745358318db0b8774d88a48b420fd2a7332a4943dbe4",
+    "crates/core/src/native_missile_position_sync.rs": "d52ab286c684b7fada94b358132af3ecc80d4e49d05b91e2ceef88d8da4db39d",
+    "crates/core/src/lib.rs": "fc0838a565c1c1072fe491e9dc269aa36a9e6bf23d0d5e6e5c6304ad77a466b1",
+    "logs/native-missile-position-sync-tests.log": "71d28a8bdcda46b2dd44a8052f00e48a785fdb659bead31bad53c5904cbf3ab8"
+  },
+  "findings": [
+    "Original7631C0/7648C0 execute without adapters: moving544 is copied to owner60 for zero gravity or null target span, including signed zero. Rust matches36cases.",
+    "Valid-target nonzero-gravity interpolation remains unqualified and the Rust API rejects it explicitly."
+  ],
+  "adapters": [],
+  "limits": [
+    "Finite coordinates; zero gravity or null target span. Original routines execute without helper substitutions.",
+    "Nonzero gravity with valid target uses interpolation and remains unqualified.",
+    "No client integration or rendered acceptance.",
+    "Core-only; live motion integration and valid-target gravity interpolation remain open.",
+    "No full-suite or client validation claimed; zero domains closed."
+  ],
+  "next_action": "Raccorder la direction, le déplacement et la pose propriétaire qualifiés au rendu normal d’Annie ; vérifier les valeurs natives de lancement, collisions et arrêt, puis poursuivre les24domaines."
+}

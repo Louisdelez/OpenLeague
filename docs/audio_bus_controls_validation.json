@@ -1,0 +1,50 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T12:35:58.209764+00:00",
+  "change": [
+    "Port actual verified FF1380 A8=B02A70 bus actor: clear mask bits1/8, apply cached/static/RTPC2/3 followed by unmasked global2/3, recurse bus24 with last1. Actor-parent20/object-child40 are not traversed.",
+    "Native bus manager RTPC requests use owner0 even when actor caller owner77; preserve exact rounding/order and untouched84-byte control fields/extras.",
+    "Fail non-unit state10 gain contribution explicitly before mutation until gain consumer is connected.",
+    "Qualify420 original gain-entry AEEBB0/AED0B0 lookup/replace/append cases: match id+flags bit0, replace first matching gain preserving oldflags, append full flags otherwise. Valid vectors have spare capacity. This is not a Rust gain-entry port yet.",
+    "Qualify1536 original actor AF0880 -> actual FF1380 bus compositions, closest selected bus24, local23/24+RTPC22/23 and parent/bus call order. This composition remains to port/connect in Rust."
+  ],
+  "validation": {
+    "new_targeted_tests_passed": 2,
+    "audio_regression_tests_passed": 246,
+    "failed": 0,
+    "session": 88571,
+    "terminal_exit_code": 0,
+    "native_bus_actor_cases": 3072,
+    "preparatory_native_actor_bus_cases": 1536,
+    "preparatory_native_gain_entry_cases": 420,
+    "comparison": "All84 control bytes, unchanged extras and exact bus/RTPC call order with masks/global states/linked cached layers, both caller owners and incoming last0/1.",
+    "log": "logs/audio-bus-controls-tests.log"
+  },
+  "sha256": {
+    "crates/core/src/audio_bus_controls.rs": "19c4db0d2d9ebc9268c85c3490e8f0be9ed19cbafd834be5c324fa68048ee24a",
+    "crates/core/src/lib.rs": "f131ed87365920e5186747d96116fccea68959a419da1742336de871b8628a28",
+    "tools/probe_native_audio_bus_controls.py": "21b02090f0b1b97b279b361f4ee0384d37e567204ca4f3ce31282b579c385750",
+    "tools/probe_native_audio_gain_entries.py": "99988daff203b2fcdf97bb8b378133dfe3cde106d656c2440ad330ba3a58f99c",
+    "tools/probe_native_audio_actor_bus_composition.py": "569d5b82a01dd04cbf1e55118b0cdb3b8acbb554e35f7276b0b4b787c277ec26",
+    "data/4.20/audio_bus_controls_contract.json": "e39d22271a2e3ce4a9394e40585b9476c293b6fbc588486939579e27b8118a78",
+    "data/4.20/audio_gain_entries_contract.json": "d9d070ad3bfdafc0074f094429820371cd2180e16491e0328524568c064af93d",
+    "data/4.20/audio_actor_bus_composition_contract.json": "f02ea8d9e8c566692420943cba3dc70c2fa2c95720a818c47be907140e869c7c",
+    "logs/audio-bus-controls-probe.log": "3f4a1c39057a0eddeef81485860db44359da387f5d51761b2163d5f7d5d2c826",
+    "logs/audio-gain-entries-probe.log": "724cf3696d1f33eac3d23fc92f0bba8c8b632abf6cca4136fc10cd1dcb4f5ac0",
+    "logs/audio-actor-bus-composition-probe.log": "2d20a17124c387d0c66452cc27aaa1ce4efae374d6c5ab8545f4fa6da4dc7a13",
+    "logs/audio-bus-controls-tests.log": "6618790ff3424068be8f69bfb92113f3fe44d1c13a94ccccd072e53877b971a5",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "617b21441f02e289e6c5344791fd0ca4371a39bcc0dbdca87a790d6f15988f32"
+  },
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "adapters": [
+    "Actual bus actor/cached states/manager/curves execute unchanged with constructed stores; no bus result adapters.",
+    "Actor/bus preparatory reference also executes actual AF0880/B02A70 and manager/curves; only CRT draw interface adapted to qualified seed17 stream.",
+    "Gain-entry reference executes original lookup/mutation with fixed valid spare-capacity vector; no mutation result adapter or allocator path."
+  ],
+  "limits": [
+    "Bus port is a qualified callable consumer; ActorBackend still rejects bus24 until explicit actor-to-bus bindings/recursion are connected.",
+    "State10 gain-entry callers/opaque flags, growth/allocation failure/lifetime and whole refresh gain contribution remain to qualify/port; effects4C remain open.",
+    "FF1380 routing base inheritance/getter class differences, B03530 initialization and virtual144 full bank loading/resource registration remain open.",
+    "Normal bank/runtime registration, state/RTPC updates+smoothing, synchronization/ownership and normal physical/device Backend/lifecycle/admission/completion remain open. No normal client rebuild, audible output or full-project acceptance."
+  ]
+}

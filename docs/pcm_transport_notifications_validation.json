@@ -1,0 +1,26 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T08:31:47.072219+00:00",
+  "change": [
+    "PcmAudio.observed returns a monitored asset and receiver; each decoder has a distinct local identity even for cloned assets.",
+    "Decoder emits Created, Exhausted, Seek with clamped frame and Dropped with exhaustion state. Read-ahead does not manufacture early exhaustion; repeated EOF does not duplicate it.",
+    "Notifications survive audio-thread execution; disconnected receiver is harmless."
+  ],
+  "tests": {
+    "passed": 11,
+    "failed": 0,
+    "session": 20949,
+    "log": "logs/pcm-transport-notifications-tests.log",
+    "scope": "Three lifecycle tests plus eight existing PCM/media/dispatch/seek tests."
+  },
+  "sha256": {
+    "crates/client/src/pcm_audio.rs": "92ac4374dbef644be742da044f9c40794733ba1455aff979f4156e718823a0a3",
+    "logs/pcm-transport-notifications-tests.log": "fd7413b73934408b99ab8afd534750bc3e19abae79950b5739e7724ffe7e86fa",
+    "target/debug/deps/openleague_client-5d530a836c9029e8.exe": "7e6e6ac6fbf11f017aef18e1921187f138062948622a6e771c1baedad7e67f3f"
+  },
+  "limits": [
+    "Observed transport is opt-in; actual game voice admission/worker adapter and callback consumer are still to connect.",
+    "Exhausted means source data consumed, not completion of hardware output or native EndOfEvent; Bevy/Rodio buffering and repeat wrappers must be accounted for before scratch retirement.",
+    "No normal client build or audible runtime acceptance this turn."
+  ]
+}

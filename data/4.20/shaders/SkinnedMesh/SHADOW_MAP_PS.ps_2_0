@@ -1,0 +1,8 @@
+#include "../ShadowMap/pcf1.hls"
+
+float4 main(float Depth : TEXCOORD0) : COLOR0
+{
+    // We write our depth as 24 bits and zero to the alpha channel to mark the edge of a shadow region.
+    // This is later modified to get blured shadow edges (unless shadows overlap).
+	return float4(packDepthToVec3(Depth), 0.0f);
+}

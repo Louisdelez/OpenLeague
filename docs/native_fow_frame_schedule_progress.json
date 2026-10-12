@@ -1,0 +1,40 @@
+{
+  "updated_utc": "2026-10-04T22:07:19.864465+00:00",
+  "complete": false,
+  "client_tests_passed": 111,
+  "client_build_passed": true,
+  "native_frames": 576,
+  "native_addresses": 1070,
+  "priority_absolute_tolerance": 1e-06,
+  "exact_priority_bits_qualified": false,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Executed original update6B3FA0 across576frames: native enumeration, source gates, effective-radius getter6B0000, RSQRTSS distance5FA7C0, priority production, heap insertion6B61D0, time smoothing and generation budget. Six frame deltas, three prior smooth deltas, dirty/force/applied gates, clock integer crossing and two radii including negative-distance clamping.",
+    "Priority is floor(float clock)+max(0,distance-(effectiveRadius-1500))/extent. Radius is read via owner modifiers, not blindly from cached scale/bias.",
+    "Rust schedule and CircleView enqueue/process match source ordering, pending flags and per-frame generation requests across576cases; smoothed frame time matches exact bits. Priority floats compared with absolute tolerance1e-6, not asserted bit-exact across emulator/hardware RSQRT estimates."
+  ],
+  "limits": [
+    "Original source enumeration, dirty/applied/pending gates, circle effective-radius getter, distance approximation, priority calculation, heap enqueue/pop and frame budget execute.",
+    "Entity lookup supplied absent, spectator query supplied false, QPC/clock initialization adapted, mask generation boundary records requests without generating/applying masks. All sources belong to local tag100; original view initialization and actual entities are not executed.",
+    "Allocator boundaries adapted; camera/world extent supplied. No live gameplay/GPU integration.",
+    "All source tags100, actor lookup absent and spectator false. Full actor eligibility, other tags/modes, actual clock/camera producers and view registration remain unqualified.",
+    "Generation is a recorded boundary in the native probe and supplied callback in the Rust comparison. This does not qualify complete native generation inside the update or ordinary live gameplay.",
+    "Current client rebuilt but graphical gameplay not verified. Earlier427core tests/10UDPchecks remain historical evidence; all24domains unfinished."
+  ],
+  "next_actions": [
+    "Replace native generation adapter with original Map10 generation and compare full frame masks/counts/pixels through Rust; qualify native dirty-mask cache reuse and generation_dirty clearing at6B17AD.",
+    "Qualify actual actor eligibility and source team/identity producers, view initialization/registration and native camera/world extent.",
+    "Connect source lifecycle/frame scheduling to ordinary entities, authoritative filtering and GPU fog; verify current gameplay."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_frame_schedule_contract.json": "3896582ffa63e69f5eafc925b145719c6075836477e97db3eba7deb25313880b",
+    "tools/probe_fow_frame_schedule.py": "681e2079d9a833bfc60480d7c0829685212f8f55c89b572c469601a56eeda264",
+    "crates/client/src/fow_schedule.rs": "0a5123b86d1a27d11ee0d7337469478c25b7b966dc750c878468cf3a3d91fb52",
+    "crates/client/src/fow_source_factory.rs": "79804ad5e89269af97244c1dae5ffda10e48c4fe3b517a1dfc378c3ae4793ae9",
+    "crates/client/src/main.rs": "8fded0b48073f1b57688a76054e5a6d72be6e81a13a996e5ef1bcf1d47360a57",
+    "logs/native-fow-frame-view-tests.log": "e6ea69ab48d20ac20e65ce9ed1be099c2b1f216644b9c9280c6d49e5062e829e",
+    "logs/native-fow-frame-view-build.log": "2bebf9496ed64542fbde6784a2a4aa9f50457b8d7470b66237d556ea6cc0b586",
+    "target/debug/openleague-client.exe": "0740b5a7c645cc4259fbba7c0cb1981e851bc8e1bfd2ba6d742ea6f357da4687"
+  }
+}

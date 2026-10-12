@@ -1,0 +1,2 @@
+from pathlib import Path
+r=Path('E:/OpenLeague');p=r/'crates/core/src/audio_registry_resource_admission.rs';s=p.read_text(encoding='utf-8');s=s.replace('set(b,16,word(b,16).wrapping_add(1));','let next=word(b,16).wrapping_add(1);set(b,16,next);').replace('set(b,36,word(b,36).wrapping_sub(1));','let next=word(b,36).wrapping_sub(1);set(b,36,next);');p.write_text(s,encoding='utf-8');print('Fixed scratch borrow sequencing.')

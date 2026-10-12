@@ -1,0 +1,37 @@
+{
+  "updated_utc": "2026-10-04T06:55:45.258335+00:00",
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "files_sha256": {
+    "tools/qualify_native_entity_position_cache.py": "d84846e7ff619bfdf62b79185a74e05ca033f34cbed4d83e9b62645b5a54371f",
+    "data/4.20/entity_position_cache_contract.json": "d9a6cb01157554a05abf2cfd671fddedbd6dfe2051380909faf96a6e7e6acf48",
+    "crates/core/src/entity_position_cache.rs": "123b5131944a9fb93c2eb22d7f6e5a357ceac21e008e4e9ac7e133bacf16b6b5",
+    "crates/core/src/lib.rs": "0ef3ef4c94b45d58425df643a45310cba4141fffd2f5db05bc53064f24d21887",
+    "tools/probe_x87_position_copy.rs": "094ee78dadfeb91bc3178c11ce3627dcdd9d3593413c77d9896928fb1f72675c",
+    "tools/probe_x87_position_copy.exe": "79bb869c2d774019fc6bf107be2f2460e5a3fa3b54677c81eed0f4ae32aa3a2c",
+    "data/4.20/x87_position_copy_hardware.json": "2f7bd2c02f8525a66b87e086138006bede0e728363eb971f65a69a6e01e466fb",
+    "logs/native-entity-position-cache-focused-tests.log": "285bf989356e73bb14e3bbc7586692b103c919c0f6dc132e919ae35e50a4e5f7",
+    "logs/native-entity-position-cache-tests.log": "4981edf1fbe4b0f36282a453ef9ff77727026b582e18d193dc85a55e87eff3ad"
+  },
+  "passed": true,
+  "complete": false,
+  "native_cases": 768,
+  "native_writes": 640,
+  "native_diagnostic_calls": 384,
+  "hardware_copy_cases": 8,
+  "signaling_nan_copy_fields_using_hardware_reference": 256,
+  "core_tests_passed": 330,
+  "client_tests_passed": 22,
+  "source_integration": "entity_position_cache::update retains matrix16words unchanged and stores position atwords16..18; inclusive\u00b11e-6 X/Z gate preserves oldcache, X strict\u00b11e9 diagnostic, MOVSS X preserves rawbits and x87 Y/Z quiet signalingNaNs.",
+  "numerical_acceptance": "768native comparisons/write-gates/diagnostic decisions/memory outputs exact except256Y/Z signalingNaN copies; those use independent actual CPU FLD/FSTP measurements. Unicorn output kept unchanged in reference artifact; exception explicitly reconciled rather than overwritten.",
+  "hardware_probe_command": "rustc --edition=2021 tools/probe_x87_position_copy.rs -o tools/probe_x87_position_copy.exe; execute probe directly, no original game executable launched",
+  "limits": [
+    "Full5657E0 executes actual comparisons and stores.991E60 diagnostic logger is an adapter recording all5arguments; actual logger output not qualified.",
+    "Stores at matrix receiver40/44/48 are position cache following64byte matrix, not matrix translation row30/34/38. Matrix64bytes stay bitwise unchanged.",
+    "Strict \u00c2\u00b11e9 X diagnostic bounds; cache update skipped only when X/Z both lie in inclusive\u00c2\u00b11e-6 square; Y ignored for this gate. NaN follows original unordered comparisons.",
+    "X MOVSS preserves rawbits; Y/Z use x87 FLD/FSTP. Unicorn signaling NaN copy differs from host CPU; see separatehardwareprobe. Actual world movement writer and client activation remain incomplete.",
+    "Hardware x87 controlword639 has invalid exception masked. Original startup FPU controlword and status-flag effects not qualified. Native logger output replaced by recording adapter, not actual logs.",
+    "This routine updates cache immediately after matrix64bytes, not affine matrix translation or actual entity world position. No movement/renderer integration claimed.",
+    "Core API/source tests added; standalone binaries unchanged and client activation still incomplete.",
+    "Full24-domain game remains incomplete."
+  ]
+}

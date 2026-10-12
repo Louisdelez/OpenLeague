@@ -1,0 +1,88 @@
+{
+  "updated_utc": "2026-10-07T04:46:47.670181+00:00",
+  "passed": true,
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "entry": "0x7617f8",
+  "cases": [
+    {
+      "raw_type": 0,
+      "reached": "0x76f0d0"
+    },
+    {
+      "raw_type": 1,
+      "reached": "0x760610"
+    },
+    {
+      "raw_type": 2,
+      "reached": "0x760bb0"
+    },
+    {
+      "raw_type": 3,
+      "reached": "0x760f10"
+    },
+    {
+      "raw_type": 4,
+      "reached": "0x7613c0"
+    },
+    {
+      "raw_type": 5,
+      "reached": "0x991e60"
+    },
+    {
+      "raw_type": 255,
+      "reached": "0x991e60"
+    },
+    {
+      "raw_type": 4294967295,
+      "reached": "0x991e60"
+    }
+  ],
+  "native_instruction_addresses": 46,
+  "class_chain": {
+    "registration": "0x529fd0",
+    "name": "SpellMissileClient",
+    "type_descriptor": "0x2d62bc4",
+    "factory": "0x7600e0",
+    "constructor": "0x763010",
+    "object_vtable": "0x10b2b5c",
+    "direction_virtual_slot": "0xe0",
+    "direction_entry": "0x75fb00",
+    "type1_factory_call": "0x76086e"
+  },
+  "corrected_generic_owner_branch": {
+    "type_descriptor": "0x2d6da00",
+    "registration": "0x52d5f0",
+    "name": "obj_BarracksDampener",
+    "note": "Inhibitor, not missile. Generic actor owner comparisons remain valid; earlier synthetic kind label is not class identity."
+  },
+  "annie": {
+    "spell": "Disintegrate",
+    "native_resource": "DATA/Characters/Annie/Spells/Disintegrate.inibin",
+    "source_sha256": "0d66a57a5c6a4f31b93a0efdb4c68871e194abdf93babf25781c92a10cd5488b",
+    "original_inibin": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Annie\\Spells\\Disintegrate.inibin",
+    "original_inibin_sha256": "bc2bd0147dcb54f03f39c5790b3aeeca7c285d2319e2dfe8e169dc12956fc773",
+    "native_fields_checked": [
+      "CastType",
+      "TargettingType",
+      "MissileEffect"
+    ],
+    "fields": {
+      "CastType": 1,
+      "MissileAccel": 0,
+      "MissileEffect": "Annie_Q_mis.troy",
+      "MissileFixedTravelTime": 0,
+      "MissileMaxSpeed": "1400.0000",
+      "MissileMinSpeed": "1400.0000",
+      "MissileSpeed": "1400.0000",
+      "MissileTargetHeightAugment": "100.0000",
+      "TargettingType": 1
+    }
+  },
+  "limits": [
+    "Dispatch runs original instructions; execution stops at selected callee, not full missile creation.",
+    "Native CastType load stores inner+5B4; wrapper prefix34 gives+5E8. Original Annie INIBIN CastType=1 selects760610 and SpellMissileClient, not SpellLineMissileClient. Full ordinary creation and movement remain unexecuted here.",
+    "Class registration/constructor/table chain checked against original bytes; full allocator/Object lifecycle unexecuted here.",
+    "No Rust gameplay integration, client build, GPU/audio acceptance or full-suite rerun."
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "updated_utc": "2026-10-06T16:29:47.398199+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "core_tests_passed": 477,
+  "native_birth_life_probability_cases": 1404,
+  "actual_map_life_profiles": 27,
+  "native_particle_age_cases": 560,
+  "native_particle_age_consumers": 3,
+  "native_particle_age_outputs": 1680,
+  "ordinary_emitter_consumer_bound": false,
+  "ordinary_applications_rebuilt": false,
+  "product_rust_sources_changed": true,
+  "artifacts_sha256": {
+    "data/4.20/complex_particle_age_contract.json": "85e7481a5adadbd05d25d8b8be2dc866c2b76c70830a3d77255c34fa12579362",
+    "data/4.20/complex_birth_life_probability_contract.json": "ea9b8160bc6d19e8e17a8e988a8c8aab8db7857cb43c88083bcee533ecc1aa17",
+    "tools/probe_native_complex_particle_age.py": "9fdda704b7b275ea5ed6da06ea30a4175c5e8df4f4c4f7e1a0386beadce5db77",
+    "tools/probe_native_complex_birth_life_probability.py": "76c1867b3113046c227cdf40a07372ebf79facd96b08f02c68eaae268b946172",
+    "crates/core/src/native_complex_particle_age.rs": "842e2d081cc6b79797ea6732bc2dd8558599d7450d986a0088e896783843ee0e",
+    "crates/core/src/native_complex_birth.rs": "c9cfe9cdfb95e50901d076e9913028b0528875c0b824257fd8028b83db7f9854",
+    "crates/core/src/lib.rs": "230d1f37085bfd2a5b8c571de2bbc70d3dd8dc86b02385c7c6a6c54c3acd6faf",
+    "logs/native-complex-particle-expiry-core-tests.log": "10c3d8882530ff30235813eeab1018dd302c3dc3bea4469b1dbcfabef72a3e90",
+    "logs/native-complex-birth-life-probability-core-tests.log": "4ef0866a065490186c29eed8049aa6e0da05ac3756b105193f7a9afbe000ffee",
+    "logs/native-complex-birth-life-probability-initial-fixture-failure.log": "011e6c62519b9d1dd50f8427a0990487ed93bf58b46f2a333f54261d291dc654",
+    "data/4.20/complex_particle_expiry_contract.json": "46dea615c639cd1ae2932ac8645e0dd1ecc34b7c72856d80ca55a0da55a97754",
+    "tools/probe_native_complex_particle_expiry.py": "830f554b9a926bac0a08a930dc184fdc29853d70851da67b8a65258851867af0",
+    "logs/native-complex-particle-age-core-tests.log": "0322cabaf50c5b2952054752808a077d81e942b011e706b17d432fe4231c6fd1",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "4152b7f445b459409355c3d864d7fd76e1fddc838873fe514acd6c247657acfe"
+  },
+  "findings": [
+    "sample_birth_life connects emitter SSE age, p-life table selection, dedicated native probability draw and final modifiers.1404native calls over27Map10profiles match exact age/base/sampled/final bits and all55RNGwords.",
+    "Individual particle age is separate from emitter age. Positive life computes clamped ordered(time-birth)/life; nonpositive/unordered life yields0. NaN time/birth propagates. All1680movement/surface/color outputs match native elapsed/normalized bits.",
+    "Initial birth-life fixture stopped before the selected life store and failed Rust comparison. Corrected stop934930, recaptured1404cases and475tests passed; initial failure log retained.",
+    "Per-particle probe uses an instruction hook to enforce exact boundaries when Unicorn reuses a compiled block. No arithmetic adapter used.",
+    "Rust remove_expired matches240original93AE90outer loops and178removal callbacks: strict elapsed>life, ordered-equal frame skip, swap-last retry and remaining ID order. Whole record swap in Rust keeps companion fields together."
+  ],
+  "limits": [
+    "Intervening birth fields and their random draws excluded: full birth draw order is not qualified. Attribute p-life4F8 branch disabled.",
+    "Life modifiers supplied explicitly; their raw configuration readers and owner scale sources are not qualified by this probe.",
+    "Actual particle storage/update and ordinary graphical rendering remain incomplete.",
+    "Only age arithmetic and range selection; actual movement, material/color updates, particle expiry/removal and storage ordering remain incomplete.",
+    "Whole per-frame scheduling and ordinary graphical integration not qualified.",
+    "477core source tests passed. Actual movement/color/material update, full birth RNG ordering, expiry/removal, raw owner/configuration sources and ordinary renderer still incomplete.",
+    "No ordinary graphical application rebuild or proof of a completed map, champion kit, domain, six-client match or delivery.",
+    "Only original expiry selection and loop/callback order qualified; destructor, SoA companion buffers and owner release unqualified.",
+    "The function does not update stored time; frame dispatcher and ordinary graphical integration remain incomplete."
+  ],
+  "next_action": "Achever les mises à jour mouvement/surface/couleur, la libération des ressources de particule et la coordination des horloges ; relier naissance et vie individuelle aux52groupes/244placements Map10, reconstruire les applications et poursuivre les24domaines.",
+  "native_particle_expiry_cases": 240,
+  "native_particle_removal_callbacks": 178
+}

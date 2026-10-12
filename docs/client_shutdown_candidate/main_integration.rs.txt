@@ -1,0 +1,26 @@
+// Proposed integration only; do not apply during the current build.
+// 1. Add to module declarations:
+#[cfg(windows)]
+mod native_runtime_shutdown;
+
+// 2. Immediately after normal attach_native_replay_runtime(&mut app):
+#[cfg(windows)]
+app.add_plugins(native_runtime_shutdown::Plugin);
+
+// 3. Preserve the existing setup/plugin chain, but capture its .run() result:
+// Before:
+//     app.insert_resource(zip_resources)
+//         ...
+//         .run();
+// After:
+//     let exit = app.insert_resource(zip_resources)
+//         ...
+//         .run();
+//     assert!(exit.is_success(), "client runner reported an exit failure: {exit:?}");
+//
+// App::run replaces the caller's App with App::empty before invoking Winit.
+// Therefore do not append service/Application close calls after .run(): those
+// resources have already been owned and cleared by the runner.
+// The final assertion makes existing fn main()->() return a failure process
+// status by unwinding after the runner returned, without process::exit bypassing
+// remaining destructors. It does not preserve a specific numeric AppExit code.

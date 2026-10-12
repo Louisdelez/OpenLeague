@@ -1,0 +1,30 @@
+{
+  "updated_utc": "2026-10-04T00:44:19.743484+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_logical_updates.py": "351c2fda8e58e95132e9545585b605ec4303187849a22244d979a50e7a482901",
+    "data/4.20/audio_logical_updates_contract.json": "cfc62ea1e4d8a26c4d5979b55084277da05f71dc77e9321c3db2334fb9293b5f",
+    "crates/core/src/audio_logical_registration.rs": "0828974d6355c34ddfe4df98ef7d8d26c7e19f5f499c7ee6d54bd1cf76035bd6",
+    "logs/native-audio-logical-updates-core-tests.log": "34d1e13b85366f057dd9ed9ee5dad5b89268ce33526884a0c3656de7fa172a75"
+  },
+  "native_update_cases": 180,
+  "native_position_cases": 72,
+  "native_boolean_cases": 108,
+  "core_tests_passed": 221,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "ported": [
+    "update_position sets dirtybit1 and queues every valid position even unchanged",
+    "update_boolean compares raw bytes, sets dirtybit2 and queues only change",
+    "unknown logical IDs ignored; other native entry fields retained"
+  ],
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false,
+  "limits": [
+    "Original921150/921390 including native single-node lookup/missing IDs, copy921320, assignment920EE0 and pending-vector append5BD2F0 executed.",
+    "String descriptor copy, map store lookup, lock/destructor/security adapted; vector has capacity. String heap allocation/lock failures excluded.",
+    "Raw byte boolean comparison qualified including255; audible routing semantics and actual backend integration not claimed.",
+    "Rust finite position guard explicit; invalid values do not alter entry or enqueue. Native finite inputs qualified only.",
+    "Actual client source->accepted logical reference update not integrated; particle retained lifecycle and physical voice backend still incomplete.",
+    "No standalone rebuild or audible playback evidence; full24-domain objective remains incomplete."
+  ]
+}

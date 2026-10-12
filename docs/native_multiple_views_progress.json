@@ -1,0 +1,37 @@
+{
+  "updated_utc": "2026-10-04T23:51:00.306986+00:00",
+  "complete": false,
+  "client_tests_passed": 125,
+  "client_build_passed": true,
+  "native_multiple_view_sequences": 34,
+  "native_addresses": 2606,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Original empty-event insertion,2/3/6view constructors and subscriber vector growth/relocation execute in34cases, with mixed expired views and one-entry/empty pending queues.",
+    "Source dispatch erases expired subscribers while keeping callback registration order. Every live constructed view receives its original6B4860 callback and removes the pending source identity. Destroyed views request pending storage deallocation and retain no pending vector entries. Event count remains1 even when every subscriber expires.",
+    "Rust ViewRegistry event retention, expiration pruning, callback entry order and pending cleanup match native sequences. An optional callback-entry observer supports ordering comparison without retaining extra views.125client tests and build passed."
+  ],
+  "limits": [
+    "Original empty-event creation, view constructors, subscriber vector growth/relocation, view destruction and source dispatch execute for2/3/6views. Expired subscriptions erased during dispatch; original6B4860 purges pending source identity from each live view.",
+    "Allocator/mutex and InitializeCriticalSection boundaries adapted explicitly. Pending queues supplied one-entry preallocated storage populated by original6BBFB0; their actual vector-growth producer is not executed.",
+    "Sources have no applied stencil here: this isolates subscriber ordering and pending lifetime, not cross-view vision count ownership or continuous terrain/GPU output.",
+    "Deallocation requests recorded without unmapping emulator memory. No concurrency, live entity binding or GPU qualification.",
+    "Pending queue storage supplied preallocated; original source heap insertion/removal executes, but queue capacity growth is not qualified here. Empty/pending heap destruction tested; arbitrary multi-source queue destruction and allocation failures remain open.",
+    "No source stencil applied across distinct views in these cases. Cross-view vision count ownership must not be inferred from subscriber-order qualification.",
+    "Only one event type/key, single-thread synchronization adapters and no gameplay activation/server/GPU fog binding or graphical rerun."
+  ],
+  "next_actions": [
+    "Qualify the actual view creation caller and its extent/camera/configuration inputs, and remaining pending queue/lifetime boundaries.",
+    "Qualify entity field/registry producers and activate native source/view lifecycle on ordinary gameplay entities.",
+    "Bind qualified masks to authoritative visibility and GPU rendering and verify current restored Map10 gameplay."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_multiple_views_contract.json": "d93f7fc790c78d5f32e79767418a84f6e4c28b54ff09348aace20798b18b6089",
+    "tools/probe_fow_multiple_views.py": "c1b77864e03fbde77c06887cedbe9c648c9ba44268aaaef3b2f1274d4d26716f",
+    "crates/client/src/fow_view_registry.rs": "6f8c4267bf0c9bbc3af71efb0965b84ceb684c27d35787daa3b91c5490f9b1b4",
+    "logs/native-multiple-views-tests.log": "4c514852a06a0b8a6c84230406a0e7a812e1f13fcf9b18eac0085475536b78f7",
+    "logs/native-multiple-views-build.log": "b24c4481c34c37b78f2805a0f854081f78e3a425d26efaaf99c60b6391782373",
+    "target/debug/openleague-client.exe": "f3b457eb49a45207061827bbbe9a38900c4d6e53efbf972b7488e94e7b1b35df"
+  }
+}

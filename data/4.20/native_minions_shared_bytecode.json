@@ -1,0 +1,904 @@
+{
+  "source": null,
+  "lines": [
+    0,
+    0
+  ],
+  "flags": [
+    0,
+    0,
+    2,
+    20
+  ],
+  "code": [
+    151011338,
+    2160099337,
+    49217,
+    65665,
+    82113,
+    98561,
+    115009,
+    131457,
+    147905,
+    164353,
+    180801,
+    197249,
+    213697,
+    230145,
+    246593,
+    263041,
+    279489,
+    295937,
+    312385,
+    328833,
+    345281,
+    159399970,
+    7,
+    36,
+    360455,
+    16420,
+    376839,
+    32804,
+    393223,
+    49188,
+    409607,
+    65572,
+    425991,
+    81956,
+    442375,
+    98340,
+    458759,
+    114724,
+    475143,
+    131108,
+    491527,
+    147492,
+    507911,
+    163876,
+    524295,
+    180260,
+    540679,
+    196644,
+    557063,
+    213028,
+    573447,
+    229412,
+    589831,
+    245796,
+    606215,
+    262180,
+    622599,
+    8388638
+  ],
+  "constants": [
+    "DEBUG_MINION_STATE_TABLE",
+    0.0,
+    "AI_IDLE",
+    "AI_SOFTATTACK",
+    "AI_HARDATTACK",
+    "AI_ATTACKMOVESTATE",
+    "AI_STANDING",
+    "AI_MOVE",
+    "AI_GUARD",
+    "AI_ATTACK",
+    "AI_RETREAT",
+    "AI_HARDIDLE",
+    "AI_HARDIDLE_ATTACKING",
+    "AI_TAUNTED",
+    "AI_ATTACKMOVE_ATTACKING",
+    "AI_FEARED",
+    "AI_CHARMED",
+    "AI_FLEEING",
+    "AI_ATTACK_GOING_TO_LAST_KNOWN_LOCATION",
+    "AI_HALTED",
+    "AI_SIEGEATTACK",
+    "AI_LAST_NONPET_AI_STATE",
+    "OnInit",
+    "OnTargetLost",
+    "OnPathToTargetBlocked",
+    "OnCallForHelp",
+    "OnFearBegin",
+    "OnFearEnd",
+    "TimerFeared",
+    "OnFleeBegin",
+    "OnFleeEnd",
+    "TimerFlee",
+    "OnCanMove",
+    "OnCanAttack",
+    "TimerAntiKite",
+    "OnCollisionEnemy",
+    "OnCollisionOther",
+    "OnReachedDestinationForGoingToLastLocation",
+    "HaltAI"
+  ],
+  "functions": [
+    {
+      "source": null,
+      "lines": [
+        24,
+        36
+      ],
+      "flags": [
+        0,
+        0,
+        0,
+        4
+      ],
+      "code": [
+        5,
+        16453,
+        16793628,
+        32773,
+        49217,
+        65669,
+        8388802,
+        33570844,
+        32773,
+        81985,
+        98433,
+        8388802,
+        33570844,
+        32773,
+        114753,
+        131201,
+        194,
+        33570844,
+        32773,
+        147521,
+        163969,
+        8388802,
+        33570844,
+        32773,
+        180289,
+        196737,
+        8388802,
+        33570844,
+        212997,
+        114753,
+        16793628,
+        212997,
+        147521,
+        16793628,
+        212997,
+        180289,
+        16793628,
+        2,
+        16777246,
+        8388638
+      ],
+      "constants": [
+        "SetState",
+        "AI_IDLE",
+        "InitTimer",
+        "TimerFindEnemies",
+        "DELAY_FIND_ENEMIES",
+        "TimerMoveForward",
+        0.0,
+        "TimerAntiKite",
+        4.0,
+        "TimerFeared",
+        1.0,
+        "TimerFlee",
+        0.5,
+        "StopTimer"
+      ],
+      "functions": [],
+      "locals": [],
+      "upvalues": []
+    },
+    {
+      "source": null,
+      "lines": [
+        40,
+        52
+      ],
+      "flags": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "code": [
+        5,
+        8421404,
+        16453,
+        16407,
+        2147483670,
+        8388638,
+        32837,
+        16471,
+        2147516438,
+        49221,
+        16407,
+        2147500054,
+        65605,
+        8405084,
+        8388638
+      ],
+      "constants": [
+        "GetState",
+        "AI_HALTED",
+        "AI_ATTACKMOVE_ATTACKING",
+        "AI_TAUNTED",
+        "FindTargetOrMove"
+      ],
+      "functions": [],
+      "locals": [],
+      "upvalues": []
+    },
+    {
+      "source": null,
+      "lines": [
+        56,
+        67
+      ],
+      "flags": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "code": [
+        5,
+        8421404,
+        16453,
+        16407,
+        2147483670,
+        8388638,
+        32837,
+        16407,
+        2147549206,
+        49221,
+        65665,
+        16793692,
+        81989,
+        8405084,
+        8388638
+      ],
+      "constants": [
+        "GetState",
+        "AI_HALTED",
+        "AI_ATTACKMOVE_ATTACKING",
+        "AddToIgnore",
+        0.1,
+        "FindTargetOrMove"
+      ],
+      "functions": [],
+      "locals": [],
+      "upvalues": []
+    },
+    {
+      "source": null,
+      "lines": [
+        71,
+        88
+      ],
+      "flags": [
+        0,
+        2,
+        0,
+        6
+      ],
+      "code": [
+        133,
+        8421532,
+        16581,
+        16826391,
+        2147483670,
+        8388638,
+        90,
+        2147680278,
+        32965,
+        16826455,
+        2147516438,
+        49349,
+        16826391,
+        2147581974,
+        65733,
+        49413,
+        8388928,
+        25182428,
+        82117,
+        98561,
+        16793820,
+        8388638
+      ],
+      "constants": [
+        "GetState",
+        "AI_HALTED",
+        "AI_ATTACKMOVESTATE",
+        "AI_ATTACKMOVE_ATTACKING",
+        "SetStateAndCloseToTarget",
+        "ResetAndStartTimer",
+        "TimerAntiKite"
+      ],
+      "functions": [],
+      "locals": [],
+      "upvalues": []
+    },
+    {
+      "source": null,
+      "lines": [
+        96,
+        109
+      ],
+      "flags": [
+        0,
+        0,
+        0,
+        4
+      ],
+      "code": [
+        5,
+        8421404,
+        16453,
+        16407,
+        2147483670,
+        8388638,
+        49221,
+        65669,
+        8421532,
+        82117,
+        25198684,
+        32839,
+        98373,
+        114821,
+        32965,
+        25182300,
+        131141,
+        147589,
+        16793692,
+        163909,
+        180353,
+        16793692,
+        8388638
+      ],
+      "constants": [
+        "GetState",
+        "AI_HALTED",
+        "wanderPoint",
+        "MakeWanderPoint",
+        "GetFearLeashPoint",
+        "FEAR_WANDER_DISTANCE",
+        "SetStateAndMove",
+        "AI_FEARED",
+        "TurnOffAutoAttack",
+        "STOPREASON_IMMEDIATELY",
+        "ResetAndStartTimer",
+        "TimerFeared"
+      ],
+      "functions": [],
+      "locals": [],
+      "upvalues": []
+    },
+    {
+      "source": null,
+      "lines": [
+        113,
+        124
+      ],
+      "flags": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "code": [
+        5,
+        8421404,
+        16453,
+        16407,
+        2147483670,
+        8388638,
+        32837,
+        49281,
+        16793692,
+        65605,
+        8405084,
+        8388638
+      ],
+      "constants": [
+        "GetState",
+        "AI_HALTED",
+        "StopTimer",
+        "TimerFeared",
+        "FindTargetOrMove"
+      ],
+      "functions": [],
+      "locals": [],
+      "upvalues": []
+    },
+    {
+      "source": null,
+      "lines": [
+        128,
+        138
+      ],
+      "flags": [
+        0,
+        0,
+        0,
+        4
+      ],
+      "code": [
+        5,
+        8421404,
+        16453,
+        16407,
+        2147483670,
+        8388638,
+        49221,
+        65669,
+        8421532,
+        82117,
+        25198684,
+        32839,
+        98373,
+        114821,
+        32965,
+        25182300,
+        8388638
+      ],
+      "constants": [
+        "GetState",
+        "AI_HALTED",
+        "wanderPoint",
+        "MakeWanderPoint",
+        "GetFearLeashPoint",
+        "FEAR_WANDER_DISTANCE",
+        "SetStateAndMove",
+        "AI_FEARED"
+      ],
+      "functions": [],
+      "locals": [],
+      "upvalues": []
+    },
+    {
+      "source": null,
+      "lines": [
+        141,
+        150
+      ],
+      "flags": [
+        0,
+        0,
+        0,
+        4
+      ],
+      "code": [
+        5,
+        8421404,
+        16453,
+        16407,
+        2147483670,
+        8388638,
+        49221,
+        8421468,
+        32839,
+        65605,
+        82053,
+        32965,
+        25182300,
+        98373,
+        114821,
+        16793692,
+        131141,
+        147585,
+        16793692,
+        8388638
+      ],
+      "constants": [
+        "GetState",
+        "AI_HALTED",
+        "fleePoint",
+        "MakeFleePoint",
+        "SetStateAndMove",
+        "AI_FLEEING",
+        "TurnOffAutoAttack",
+        "STOPREASON_IMMEDIATELY",
+        "ResetAndStartTimer",
+        "TimerFlee"
+      ],
+      "functions": [],
+      "locals": [],
+      "upvalues": []
+    },
+    {
+      "source": null,
+      "lines": [
+        153,
+        160
+      ],
+      "flags": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "code": [
+        5,
+        8421404,
+        16453,
+        16407,
+        2147483670,
+        8388638,
+        32837,
+        49281,
+        16793692,
+        65605,
+        8405084,
+        8388638
+      ],
+      "constants": [
+        "GetState",
+        "AI_HALTED",
+        "StopTimer",
+        "TimerFlee",
+        "FindTargetOrMove"
+      ],
+      "functions": [],
+      "locals": [],
+      "upvalues": []
+    },
+    {
+      "source": null,
+      "lines": [
+        163,
+        170
+      ],
+      "flags": [
+        0,
+        0,
+        0,
+        4
+      ],
+      "code": [
+        5,
+        8421404,
+        16453,
+        16407,
+        2147483670,
+        8388638,
+        49221,
+        8421468,
+        32839,
+        65605,
+        82053,
+        32965,
+        25182300,
+        8388638
+      ],
+      "constants": [
+        "GetState",
+        "AI_HALTED",
+        "fleePoint",
+        "MakeFleePoint",
+        "SetStateAndMove",
+        "AI_FLEEING"
+      ],
+      "functions": [],
+      "locals": [],
+      "upvalues": []
+    },
+    {
+      "source": null,
+      "lines": [
+        173,
+        183
+      ],
+      "flags": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "code": [
+        5,
+        8421404,
+        16453,
+        16407,
+        2147483670,
+        8388638,
+        32837,
+        49285,
+        16793692,
+        65605,
+        8405084,
+        8388638
+      ],
+      "constants": [
+        "GetState",
+        "AI_HALTED",
+        "NetSetState",
+        "AI_IDLE",
+        "FindTargetOrMove"
+      ],
+      "functions": [],
+      "locals": [],
+      "upvalues": []
+    },
+    {
+      "source": null,
+      "lines": [
+        187,
+        197
+      ],
+      "flags": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "code": [
+        5,
+        8421404,
+        16453,
+        16407,
+        2147483670,
+        8388638,
+        32837,
+        49285,
+        16793692,
+        65605,
+        8405084,
+        8388638
+      ],
+      "constants": [
+        "GetState",
+        "AI_HALTED",
+        "NetSetState",
+        "AI_IDLE",
+        "FindTargetOrMove"
+      ],
+      "functions": [],
+      "locals": [],
+      "upvalues": []
+    },
+    {
+      "source": null,
+      "lines": [
+        202,
+        213
+      ],
+      "flags": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "code": [
+        5,
+        8421404,
+        16453,
+        16407,
+        2147483670,
+        8388638,
+        69,
+        8421468,
+        32901,
+        8421399,
+        2147614742,
+        49221,
+        8421468,
+        90,
+        2147549206,
+        65605,
+        82049,
+        16793692,
+        98373,
+        8405084,
+        8388638
+      ],
+      "constants": [
+        "GetState",
+        "AI_HALTED",
+        "AI_ATTACKMOVE_ATTACKING",
+        "IsMoving",
+        "AddToIgnore",
+        0.1,
+        "FindTargetOrMove"
+      ],
+      "functions": [],
+      "locals": [],
+      "upvalues": []
+    },
+    {
+      "source": null,
+      "lines": [
+        216,
+        229
+      ],
+      "flags": [
+        0,
+        1,
+        0,
+        5
+      ],
+      "code": [
+        69,
+        8421468,
+        16517,
+        8421399,
+        2147483670,
+        8388638,
+        32901,
+        8421463,
+        2147663894,
+        49285,
+        8421463,
+        2147614742,
+        65669,
+        8421463,
+        2147565590,
+        82053,
+        98501,
+        256,
+        25182364,
+        130,
+        16777374,
+        8388738,
+        16777374,
+        8388638
+      ],
+      "constants": [
+        "GetState",
+        "AI_HALTED",
+        "AI_TAUNTED",
+        "AI_FEARED",
+        "AI_FLEEING",
+        "SetStateAndCloseToTarget",
+        "AI_ATTACKMOVE_ATTACKING"
+      ],
+      "functions": [],
+      "locals": [],
+      "upvalues": []
+    },
+    {
+      "source": null,
+      "lines": [
+        232,
+        248
+      ],
+      "flags": [
+        0,
+        1,
+        0,
+        6
+      ],
+      "code": [
+        69,
+        8421468,
+        16517,
+        8421399,
+        2147483670,
+        8388638,
+        32901,
+        8421463,
+        2147729430,
+        49285,
+        8421463,
+        2147680278,
+        65669,
+        8421463,
+        2147631126,
+        82053,
+        8421532,
+        21069911,
+        2147532822,
+        114885,
+        131333,
+        16777536,
+        25182428,
+        194,
+        16777438,
+        8388738,
+        16777374,
+        8388638
+      ],
+      "constants": [
+        "GetState",
+        "AI_HALTED",
+        "AI_TAUNTED",
+        "AI_FEARED",
+        "AI_FLEEING",
+        "FindTargetInAcR",
+        null,
+        "SetStateAndCloseToTarget",
+        "AI_ATTACKMOVE_ATTACKING"
+      ],
+      "functions": [],
+      "locals": [],
+      "upvalues": []
+    },
+    {
+      "source": null,
+      "lines": [
+        251,
+        260
+      ],
+      "flags": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "code": [
+        5,
+        8421404,
+        16453,
+        16407,
+        2147483670,
+        8388638,
+        32837,
+        49285,
+        16793692,
+        65605,
+        8405084,
+        81989,
+        8405084,
+        8388638
+      ],
+      "constants": [
+        "GetState",
+        "AI_HALTED",
+        "NetSetState",
+        "AI_IDLE",
+        "TimerDistanceScan",
+        "TimerCheckAttack"
+      ],
+      "functions": [],
+      "locals": [],
+      "upvalues": []
+    },
+    {
+      "source": null,
+      "lines": [
+        264,
+        273
+      ],
+      "flags": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "code": [
+        5,
+        16449,
+        16793628,
+        5,
+        32833,
+        16793628,
+        5,
+        49217,
+        16793628,
+        5,
+        65601,
+        16793628,
+        81925,
+        98373,
+        16793628,
+        114693,
+        131141,
+        16793628,
+        8388638
+      ],
+      "constants": [
+        "StopTimer",
+        "TimerFindEnemies",
+        "TimerMoveForward",
+        "TimerAntiKite",
+        "TimerFeared",
+        "TurnOffAutoAttack",
+        "STOPREASON_IMMEDIATELY",
+        "NetSetState",
+        "AI_HALTED"
+      ],
+      "functions": [],
+      "locals": [],
+      "upvalues": []
+    }
+  ],
+  "locals": [],
+  "upvalues": []
+}

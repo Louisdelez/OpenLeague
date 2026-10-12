@@ -1,0 +1,53 @@
+{
+  "saved_utc": "2026-10-10T11:13:30.858424+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "native_object_manager_lifetimes": 8,
+  "native_manager_operations": 608,
+  "native_full_manager_initialization_lifetimes": 2,
+  "isolated_tests_passed": 133,
+  "core_audio_tests_passed": 689,
+  "core_tests_filtered_not_run": 480,
+  "core_test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_core-5b2a9def275dcedd.exe",
+  "core_test_executable_sha256": "714670a2c2e40759acea8a5c02701ec7ecd693eb3884a67d01101bda6ecb288b",
+  "isolated_test_executable_sha256": "846738782e98ab0d4b21a18633e4ff8198f3c59f7b1c1178d3c02a8c8c99ec60",
+  "native_source_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "source_hashes": {
+    "crates/core/src/audio_replay_object_manager.rs": "a02688bf3d7e9ed40c4876cf52f975c7b57617d36725058329bab651873d5196",
+    "crates/core/src/audio_replay_object_manager_tests.rs": "33d477b8c89236178ef8a7e30388e25b8bbe6b2160a5f6e6fbb0b05df6a2bfa6",
+    "crates/core/src/audio_replay_object_commands.rs": "bc175082a04e68fd286d12ca7505b1910b80b820d60f2c1c740598b3b48a20ae",
+    "crates/core/src/audio_replay_events.rs": "d09fb5dcbe87b2dd18346c976d7e66a25ac0308c8a7a895517dc8386d1fafe1b",
+    "crates/core/src/audio_replay_shared_pair.rs": "c480af8d674ac47683ddbd16d83a507145865aa617223223f584ace23745ec42",
+    "crates/core/src/audio_announcer_owner_control.rs": "316af90c678e3fca74272d97d0451ff10bead7ae78a62be50ed04f1ccc8c2165",
+    "crates/core/src/lib.rs": "4004a1e9b04c4a62869f5a32ade1a573295867edc5f52fb8e7254de06b011b43",
+    "tools/qualify_replay_object_manager.py": "f46a0df2e8d03853276a46f6f3f00a8a15efcacc3026dd82d2c6ee5f18ae9abf",
+    "tools/probe_replay_manager_initialization.py": "457e0f631a0e6e9864d98e8039da5b589b81c8160dd99fc7adfde176e7a5ebbf",
+    "tools/replay-object-manager-tests.rs": "cdb929bb6904f1cc3bcce6feae308a279040d7a30d19191220b5e943882cfc10"
+  },
+  "contract_hashes": {
+    "replay_object_manager_contract.json": "d84ab038fafcd75deb7cf0287bd9a376e0836dc89c9eab19159f65c45ae7322b",
+    "replay_manager_initialization_probe.json": "934d5eba78b55f3713350b9e36c8e61865ed9b5d278e1fd678db61ff2c5bdfd8"
+  },
+  "log_hashes": {
+    "logs\\replay-object-manager-tests.log": "9cea78566fdeaba6b334657ae2edcbb2291e3af747719e6c517fd3ef663a0c15",
+    "logs\\core-replay-object-manager-tests.log": "05f76b901afe8a94b22a4691a3880b91ab7a92be4736476138c892e54eacc80d",
+    "logs\\replay-object-manager-build.log": "175e50e0a30bd7b698fd011fbf99e9eba76175b0aea262fc78344bfc52f3b6a6"
+  },
+  "behavior": [
+    "Native8F8810 two-tree construction,8F89D0 consuming shared-pair insertion,8F8CF0 retained lookup,8F8B30 removal and8F88A0 destruction are implemented in Rust with canonical owned byte storage, exact28/32-byte red-black nodes, colors, sentinel extrema, rotations/rebalancing and native right/current/left clear order.",
+    "The ID index orders unsigned32-bit IDs, reverse index signed64-bit values. Failed reverse insertion preserves the accepted ID entry; removing one of duplicate values erases the reverse entry regardless of its stored ID.72C780 retains native zero-value behavior: add retries allocation but does not overwrite existing ID; remove skips zero lookup.",
+    "Full734130 ->72C780 command path uses actual manager acquisition/shared references, packet16-byte construction,1085F4C control lifecycle and native packet scalar/id/value methods5740D0/8FD680/8FD690. Normal-return manager/command results, all live allocated words, allocation/free order, reference counts and boundary-call order match608 native operations across ascending/descending/mixed/duplicate sequences and two allocator fill profiles.",
+    "Rust allocation-failure test verifies temporary/incoming ownership release and mutex exit on failed ID-node allocation. Missing stream startup and unavailable live event consumers return explicit errors. Two separate native initialization probes execute complete manager initialization and destruction with32 live allocations each and all owned allocations released; both show stream object pair still null before stream startup."
+  ],
+  "limits": [
+    "Qualifiers supply existing engine mutex9941B0/994210 boundaries and primitive memory/OS calls. The normal manager operations are qualified with successful allocations, valid live storage and fixed native packet objects. Native exception/unwind, arbitrary reentrant allocator/virtual mutation, OOM behavior and real multithreaded mutex implementation are not claimed. The Rust failure cleanup test is not native OOM equivalence.",
+    "Manager and nested/held-control preconditions are explicit in operation fixtures. The new native complete-initialization probe is source-behavior evidence; its callback bundles, metadata and stream initialization are not yet ported.9019A0 manager-specific shared-control destruction and actual replay-file or network stream setup remain required.",
+    "Normal client executable was not rebuilt or graphically retested in this milestone; no real replay events are wired into its simulation.133 isolated tests and689 selected core tests are current;480 other core tests were filtered. No full champion, domain or whole-game completion is asserted."
+  ],
+  "next_action": "Port and connect native replay manager lifecycle728E20/728FD0/728EE0 and its stream8F6700/8F6800, callback bundle and metadata727DE0 before exposing event delivery. New native initialization probe runs two complete32-allocation lifetimes and proves nested+6C/+70 object-manager pair remains0 after initialization. Actual8F68D0 stream startup must first select/configure stream implementation, construct8F8810 at8F6A2D and publish via9019A0 control(vtable10D6030) and5BD4E0 move-assignment; qualify actual stream data and manager disposal901B40/901B00 before wiring live frames. Core dual-tree manager,734130 ->72C780 object commands and packet virtual methods are now ported and match608 native operations plus8 complete destructions, including signed64-bit reverse ordering, duplicate reverse values, persistent zero-valued IDs, full live storage and release ordering. Terminal event consumers and stream/global startup remain explicit boundaries; client application still owns configured service but does not dispatch real replay frames. Continue configuration overlays/cache, graceful graphical AppExit, actor listener integration, maps/champions/audio and all24domains114tasks37requirements."
+}

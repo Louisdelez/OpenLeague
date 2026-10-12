@@ -1,0 +1,28 @@
+{
+  "complete": false,
+  "passed": true,
+  "implementation": "crates/server/src/clock_delivery.rs",
+  "integration": [
+    "crates/server/src/main.rs",
+    "crates/client/src/main.rs",
+    "crates/client/src/native_effect_clock.rs",
+    "crates/core/src/lib.rs"
+  ],
+  "tests": {
+    "standalone_server_delivery": 3,
+    "all_targets_check": "logs/clock-delivery-ack-check.log"
+  },
+  "behavior": [
+    "Server retransmits pending events every100ms independently of simulation ticks.",
+    "Client acknowledges highest contiguous applied ordinal, including on duplicates.",
+    "Server validates session, known peer, and ordinal not beyond issued; removes cumulatively acknowledged events.",
+    "Per-peer64-slot queue preflights broadcasts atomically; registering existing player preserves pending events, disconnect removes recipient."
+  ],
+  "reference": "docs/community_pause_sources/provenance.json",
+  "limits": [
+    "No transition producer calls broadcast yet; no simulation freeze or end-to-end UDP proof.",
+    "New recipient clock bootstrap while already paused still pending.",
+    "Community handler calls Game.Pause; unpause sends delayed then immediate after5000ms, but official player/mode authorization is not proven by this reference.",
+    "Examples ignore ClockAck because they do not emit clock events."
+  ]
+}

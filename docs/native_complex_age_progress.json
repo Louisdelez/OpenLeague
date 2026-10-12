@@ -1,0 +1,40 @@
+{
+  "updated_utc": "2026-10-06T15:23:14.862654+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "core_tests_passed": 461,
+  "last_client_tests_passed": 364,
+  "emitter_age_cases": 3064,
+  "composed_birth_color_cases": 312,
+  "product_rust_sources_changed": true,
+  "ordinary_emitter_consumer_bound": false,
+  "ordinary_applications_rebuilt": false,
+  "artifacts_sha256": {
+    "data/4.20/complex_emitter_age_contract.json": "da7b89de146ced5a17c221da9dc71892ceec71c92500ca3bde219b182e894c5c",
+    "data/4.20/complex_birth_color_contract.json": "c95541c26db235b309065a4293dfb3d6a0908a87af45e230aad2b01499734c81",
+    "tools/probe_native_complex_age.py": "7531ad2bc71a8e3123637b38c69de72f631372e6b7d6cf88894cde60c213beb3",
+    "tools/probe_native_complex_birth_color.py": "ade0a62bd91af301d72a100015f23e239328a338d32eb57be348c21827c69791",
+    "crates/core/src/native_complex_age.rs": "6b05f98ff1eccee1708bd84100dce1338a28813da23e1ccb0da1f2255f4cc552",
+    "crates/core/src/native_color_consumers.rs": "10bbecd9d997c21b6e845188d47ad5b0189f7ff3007925678706204e6cf47684",
+    "crates/core/src/lib.rs": "09febaededdc423cc9b7a050672a3f406686e0ed3f391f87e8d9ce26a9adab3e",
+    "logs/native-complex-age-core-tests.log": "93158d73e32e254811e92a88f2f914fa80a51e1fda2bbed9be2aef74a587630e",
+    "logs/native-complex-age-initial-failure.log": "f93d2d45bf7ac28fce12b025556bbdf4f2fa55d1a6ee588504d0b949392ab011",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "00e300522cad28f34403cdf7c02ab589246ebfe9fc785682536d32052865c1ac"
+  },
+  "findings": [
+    "Native duration selection uses ordered COMISS/JA followed by COMISS/CMOVBE; signed zeros and unordered comparisons are preserved. Age subtracts owner start then configured offset before division.",
+    "3064original emitter-age outputs match Rust bits, including zero/negative durations, infinity and NaN. Initial NaN payload mismatch was corrected by explicit native SSE operand priority/quieting; failure log retained.",
+    "312composed original fragments qualify age producer → Complex e-rgba table selection → caller arguments/full birth RGBA helper/RNG. Rust matches duration/age, selected color, output color and all55RNG words/indices.",
+    "Original constructor references statically identify config308 as e-period and config30C as e-active; raw field names remain in Rust until getter defaults and field sources are dynamically qualified."
+  ],
+  "limits": [
+    "Qualifies normalized emitter age for this birth/configuration caller, not normalized per-particle age. Field meanings/source updates for config308/30c and instance7c remain to qualify.",
+    "Stops before scalar/vector/color table selection and full birth/lifecycle execution; ordinary renderer remains unbound.",
+    "Fragments composed, not the entire birth function: intervening non-color field evaluation and mutations excluded. Full global RNG call order for other fields remains unqualified.",
+    "e-period/e-active native names statically identified at config308/30C; actual decoded-field defaults and instance lifetime producer remain to qualify.",
+    "No full per-particle age/color update or ordinary graphical renderer integration.",
+    "461full core tests pass. Other fields and global RNG calls between composed fragments remain excluded; no entire birth/update or graphical parity claim.",
+    "No new ordinary client build/render/GPU check. Full per-particle age and rendered lifecycle remain incomplete; no domain/champion/map or six-client match closed."
+  ],
+  "next_action": "Qualifier les sources e-period/e-active/lifetime et l’âge propre de chaque particule, puis les mises à jour couleur/pose ; compléter le cycle Complex et relier les52groupes Map10 et244placements au rendu. Âge émetteur et sa sélection de couleur de naissance sont portés et comparés aux fragments originaux. Reconstruire les exécutables, résoudre TT_Mist_circle/fogcircle, vérifier six clients et poursuivre les24domaines."
+}

@@ -1,0 +1,104 @@
+{
+  "updated_utc": "2026-10-04T12:00:32.926686+00:00",
+  "complete": false,
+  "native_lua": [
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Annie\\Spells\\Pyromania.luaobj",
+      "sha256": "cdd6e5a46f85bbabf9f14cfb4caf4750e400e46af4bc3727b1c3584e0fead154",
+      "initialization": {
+        "globals": {
+          "BuffTextureName": "Annie_Passive2.dds",
+          "BuffName": "Pyromania"
+        },
+        "stopped": null
+      },
+      "constants": [
+        "BuffTextureName",
+        "Annie_Passive2.dds",
+        "BuffName",
+        "Pyromania"
+      ]
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Annie\\Spells\\Pyromania_marker.luaobj",
+      "sha256": "76c18bfae89af8e422636393580c41e59ec595f43633ad275fd69d512ee7e7c3",
+      "initialization": {
+        "globals": {
+          "BuffTextureName": "Annie_Passive.dds",
+          "BuffName": "Pyromania Marker",
+          "PersistsThroughDeath": true,
+          "NonDispellable": true
+        },
+        "stopped": null
+      },
+      "constants": [
+        "BuffTextureName",
+        "Annie_Passive.dds",
+        "BuffName",
+        "Pyromania Marker",
+        "PersistsThroughDeath",
+        "NonDispellable"
+      ]
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Annie\\Spells\\Pyromania_particle.luaobj",
+      "sha256": "5486fbc76effccbe5f0248896740c67d5a580608cb055f448fcaa2be4ba431bd",
+      "initialization": {
+        "globals": {
+          "BuffTextureName": "Annie_Passive.dds",
+          "BuffName": "Energized",
+          "AutoBuffActivateEffect": "StunReady.troy"
+        },
+        "stopped": null
+      },
+      "constants": [
+        "BuffTextureName",
+        "Annie_Passive.dds",
+        "BuffName",
+        "Energized",
+        "AutoBuffActivateEffect",
+        "StunReady.troy"
+      ]
+    }
+  ],
+  "native_text_receipt": "docs/annie_q_refund_native_contract.json",
+  "web_sources": [
+    {
+      "url": "https://www.gamespot.com/articles/chauster-analysis-on-league-of-legends-patch-4-1-n/1100-6436878/",
+      "author": "Steve Chauster Chau",
+      "published": "2014-01-16",
+      "scope": "Contemporaneous reproduction of Riot4.1 patch note, lines53-55. Official old Riot URL inaccessible. Numerical duration is NOT recovered from native game data.",
+      "excerpt": "Stun duration now scales 1.25/1.5/1.75 seconds at levels 1/6/11",
+      "kind": "Quoted primary Riot patch text reproduced by a third party; original-host verification still missing"
+    },
+    {
+      "url": "https://www.leagueoflegends.com/en-us/news/game-updates/patch-13-3-notes/",
+      "author": "Riot Riru",
+      "published": "2023-02-07",
+      "scope": "Official change introduces fully charged game-start/respawn. Excludes applying this later buff to4.20; does not by itself prove every earlier death-state rule.",
+      "kind": "Official Riot primary source"
+    },
+    {
+      "url": "https://www.mobafire.com/league-of-legends/build/annie-mid-fallen3s-guide-to-annie-505449",
+      "author": "FalleN3",
+      "scope": "Author describes their own three-stack Q-flight then E stun technique; listed Q80/115/150/185/220 matches recovered4.20. Guide not a recovered Riot implementation or patch4.20 runtime proof.",
+      "kind": "Primary community player observation supporting reconstructed Q/E ordering"
+    },
+    {
+      "url": "https://github.com/LeagueSandbox/GameServer/tree/b37c75483abf66048af7c914e7fab700efaa5e21/Content/LeagueSandbox-Scripts/Characters/Annie",
+      "scope": "Actual indev API tree checked: E/Q/R/W, no P; R Pyromania TODO remains. Standalone LeagueSandbox-Scripts repository404.",
+      "kind": "Primary community project source"
+    }
+  ],
+  "reconstruction_policy": {
+    "max_charges": 4,
+    "initial": 0,
+    "E": "Accepted nativeMoltenShield adds charge capped4; does not consume prepared stun.",
+    "Q": "Accepted cast/release does not charge; successful damage impact examines live owner charges once, consumes ready or adds one. E during flight can prepare stun. Dead/missing target no charge/consumption.",
+    "W_R": "Once per successful release, consume ready or add one. Same stun token applied to every living enemy hit; empty release consumes ready under current reconstructed policy.",
+    "guide_aura_retaliation": "Do not trigger passive.",
+    "duration": "Level1-5 1.25,6-10 1.5,11-18 1.75sec -> existing ceil30Hz conversion38/45/53ticks; champion tenacity applied once by grant_stun.",
+    "death": "Stored in Effects, currently cleared on death by common Effects reset. Native MarkerPersistsThroughDeath true does NOT prove charge/ready state should persist; current policy remains unqualified.",
+    "unsupported": "Spell shields/general immunity not implemented; Boss grant_stun explicitly policy-not-qualified, so no fabricated Vilemaw immunity."
+  }
+}

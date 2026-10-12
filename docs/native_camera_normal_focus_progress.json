@@ -1,0 +1,48 @@
+{
+  "updated_utc": "2026-10-04T05:04:59.575262+00:00",
+  "files_sha256": {
+    "tools/qualify_native_camera_normal.py": "097e917832c8701bcd63ef20f9e6aa0801456938d422095c0d39ed4e2131d5ea",
+    "tools/qualify_native_camera_focus.py": "e683a496fd16f8363e27690f8ba1719d16531b6683d24aa87188e5a797d48e3b",
+    "data/4.20/camera_normal_contract.json": "de67a3930d105718a55862f9dbe5635f5ac20965aa518366bf8ed59589b2d5d6",
+    "data/4.20/camera_focus_contract.json": "bfd55af02214a8a8dbf9f2ba164eb1906f6b5fd9290741ba086463320309ec74",
+    "crates/core/src/camera_normal.rs": "37d2cd0f06970c1942fab230053769c48d279de73af4984eeb5d3f28da51d3e8",
+    "crates/core/src/camera_focus.rs": "17e87d948f885e10d932cbecb9a28fe834db85fa426081e8451326a18d008d84",
+    "crates/core/src/lib.rs": "e077ebe519217cd5da5320480ae4a14abb9b7365b239cab3dedfc6be0f5f68a4",
+    "logs/native-camera-normal-focus-core-tests.log": "ac7e5df4129c49cb3623fb7da41d626c485124109597c8de9ae094e214f49707"
+  },
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_camera_normal_geometry_cases": 640,
+  "native_camera_focus_cases": 384,
+  "core_tests_passed": 312,
+  "ported": [
+    "Original7CFBF1 normal camera eye/direction assembly after supplied focus update: zoom step, extended distance scaling, pitch rotation, optional native Y-axis yaw/SSEsqrt and normalization, rawmode0/FOV output",
+    "Full7D1A60 focus hold/saved focus transition, ordered rectangle clamps and two-pass XZ-triggered XYZ-radius restriction"
+  ],
+  "acceptance": {
+    "normal": "640cases: native distance and all6zoom words exact; camera mode/FOV/preserved fields exact; eye/direction max1e-5abs/2e-6relative due native SSErsqrt estimate differences.",
+    "focus": "384cases: saved focus and rawhold byte exact; current focus bitexact withoutradius restriction and max1e-5abs/2e-6relative where normalized restriction is enabled."
+  },
+  "static_followup": {
+    "controller_constructor": "Only direct7D2E70zoom constructor caller at7CFAA1 inside7CF910 controller constructor.7CF9C6 initializes focus/pitch/FOV via7D2960 at controller104.",
+    "focus_initializer": "7D2960 writes current focusXYZ=-1000, saved focus copied global2D773B4/B8/BC, auxiliary0,pitch56 at controller120,yaw180 at124,previous yaw180 at128,extra angle56 at12C,FOV50 at130,auxiliary0 at134. These are static decoded values; initializer dynamic fixtures still needed.",
+    "map_override": "7CFB03 checks map ID11or90 then overwrites FOV40 and zoom scale1B0 with native tangent ratio via8E2110; map10 skips branch. Full ctor/getter effects and runtime later overrides remain unqualified."
+  },
+  "limits": [
+    "Actual7CFBF1..7CFE8A normal camera geometry fragment and original zoom, pitch, yaw, reciprocal/square-root helper functions executed without math adapters.",
+    "Focus supplied after7D1A60; earlier7CFB70 focus/target update prelude excluded.",
+    "Actual7D3040 warning function executed with supplied service virtual query returningtrue; remaining warning/network branch unqualified.",
+    "Actual7D2BE0 finalizer executed with shake disabled; active shake path unqualified.",
+    "Outputs include full64byte camera state and24byte zoom state; full controller defaults/input production and visible client integration remain unqualified.",
+    "Full7D1A60 and original66D6E0 normalization executed; only service virtual query adapter returns supplied active byte.",
+    "Required service singleton present/ready; missing singleton assertion/fatal path excluded. Rectangle globals and restriction center/radius supplied.",
+    "Hold trigger combines active service+service flag or special UI flag; saved focus and raw held byte retained exactly.",
+    "Rectangle clamp and radius restriction run twice; XZ distance selects restriction, XYZ normalization applies it. No generic2Dcircle substitute.",
+    "Original source producers for these bounds/context flags and input/follow behavior, camera shake and visible integration remain unqualified.",
+    "camera_normal returns explicit geometry/zoom output after focus update; full producer automatic target-follow prelude and active camera shake remain pending.",
+    "Static controller initializer values not yet applied to visible client. Full constructor/config/input-source qualification and map camera bounds sources still needed.",
+    "Source core312passed; prior client18test evidence and standalone executable hashes unchanged."
+  ],
+  "client_camera_integrated": false,
+  "visible_render_verified": false,
+  "complete": false
+}

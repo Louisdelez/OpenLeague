@@ -1,0 +1,73 @@
+{
+  "updated_utc": "2026-10-04T10:31:38.646127+00:00",
+  "complete": false,
+  "core_tests_passed": 398,
+  "client_tests_passed": 32,
+  "unit_checks": 7,
+  "client_checks": 1,
+  "network_checks": 11,
+  "official_numeric_crosschecks": 21,
+  "executables": [
+    {
+      "path": "target/debug/openleague-server.exe",
+      "bytes": 4559872,
+      "sha256": "c02e86f7069ed01133ef540c6fae75396defca1b0adbcc12070a54ace51af342"
+    },
+    {
+      "path": "target/debug/openleague-client.exe",
+      "bytes": 118154240,
+      "sha256": "623246ded21d5c6cfe5f021c5750c8835cee60287bba5cff7d8c297f4034af74"
+    },
+    {
+      "path": "launcher/src-tauri/target/debug/openleague-launcher.exe",
+      "bytes": 12411904,
+      "sha256": "ac22a8346c0b2af574bdee16311acc510e657c73ca5f85584223f0049c4f57de"
+    }
+  ],
+  "files_sha256": {
+    "crates/core/src/annie_w.rs": "27b2aad29261a09703892c7233458181e305cf83258c8b2c060950180c91226c",
+    "crates/core/src/annie.rs": "15c87e47089aa254c541548bda3810d1910d7bce6d45db7795b6ae798f2d6c72",
+    "crates/core/src/spells.rs": "04b82255fd7315823afc28517a7d44d507b21bd6f53eec517103dbf691d57d7c",
+    "crates/core/src/lib.rs": "bd2690adb3736067cafc8f76e6a07a8f9c732ed48f06e204dba904a7574f0c73",
+    "crates/core/src/combat.rs": "6c5132016922807abc83e3b4ac8f07f8845543c3648cdebc86ad8b3b75f4670f",
+    "crates/core/src/attacks.rs": "38c94c8e5da6c897560a98803f684698f417c32970e10f1885ad3143a782e13f",
+    "crates/client/src/main.rs": "999a2f1ffa8eb2e72502bf9192b3a59c0bddcdeff07aaa926f08f6e9c8bb7011",
+    "crates/client/src/animation.rs": "6bc9d6b129268440e610ecc639a1adc37689dc525a02913a4d25d8c4bc0f0c80",
+    "crates/client/src/spell_input.rs": "90374fa98d06d138f625ad163a48239025adcada9119f9a96f3599a74c7dc43a",
+    "data/4.20/annie_w_rules.json": "ee2c591926b8037858fc9e9a4fc14b85c43304504430b431345930373ef5479b",
+    "docs/annie_w_native_contract.json": "0d67915cb746d42259446e1605579c634bdf2904e2f678541b4f9b9c7c1ada67",
+    "docs/annie_w_sources.json": "57ea51a94d806c159335b882ba36328bb30ccd1dcb597807e36264748c4e4a94",
+    "docs/annie_w_network_validation.json": "30fc87b569e25be2d24b7b4821bab8adabfaff83a626b863a0f36d02d7f55edd",
+    "logs/annie-w-tests.log": "d3fd50888d7df4962daef1079bb425b3fca780323c9139b9bd764aed16ad3e11",
+    "logs/annie-w-build.log": "9e5f1bd991defabec5245ba005b984c9c57824e64775693b2bd20ebf3c3f030a",
+    "logs/annie-w-facing-tests.log": "079707dbb883700306e3d309aae8fe0d06babac6e82ccb6aef4720caa589f3ce",
+    "logs/annie-w-facing-build.log": "1b31dcb1148cb08bb63ea0d3758cb6da5262439535d6369f17957a25273c56a4"
+  },
+  "sources": "docs/annie_w_sources.json",
+  "network": "docs/annie_w_network_validation.json",
+  "limits": [
+    "Native damage70/115/160/205/250+0.85AP,cost70..110,8secondCD,625cone length and24.76angle recovered;21Riot4.20.1 comparisons passed. Community damage/AP errors overridden with native values.",
+    "Community cone filter interprets angle as half angle and uses body bounds. Exact circle-sector contact is reconstructed; native33explicit champion gameplay radii used,89missing use only this cone explicit community ObjAIBase fallback40. Profile nulls unchanged; no selection/pathfinding radius substitution.",
+    "Cast duration/community0.25sec ceiling8ticks, cast-time AP/mana/CD snapshots, fixed cast direction with resolution-time origin/targets, groundaim beyond range, undefinedzero aim rejected, pending Q/W mutual gate, Eallowed and committed control survival reconstructed. Original server sequencing unqualified.",
+    "AoE hits enemy living nonstructures once without per-target visibility filter; NPC body radii use existing native-derived definitions. No wall test, stealth/invulnerability/untargetable/generalAoEmodifier full qualification.",
+    "Native animation clip roles driven by pending Q/W; actual spell playback, Wparticles/audio, Pyromania/Tibbers/R and fullHUD/physical input remain incomplete. Entire24domain game incomplete.",
+    "Seven core checks cover circle-sector geometry32rotatedcontacts, invalid input/atomic cost guards, all5rank values/eight-tick cast, moving targets/allies, movement pause/control/Stop survival, Q/W mutual gates/E allowance/CDR, native worldmonster/structure exclusion/death cleanup.",
+    "Eleven actual3client UDP checks cover ordinary purchase/learn/ground cast, mana/cooldown/pending/rejections, backward miss, forward native70+0.85AP damage, ally immunity and one pulse. No state injection.",
+    "Client32tests include explicit AnnieW-only ground routing and prior nativeyaw108vector bridge. NativeQ/Wroles exist and pending state/facing are wired, but actual pose, clip timing, particles, audio, physicalkeys/cursor and nativegroundmesh correspondence remain unqualified.",
+    "Prior Q/E/network/GPU evidence retains its own executable hashes. Entire122champion/24domain game remains incomplete."
+  ],
+  "visual": "docs/annie_w_live_validation.json",
+  "runtime": {
+    "server_sha256": "c02e86f7069ed01133ef540c6fae75396defca1b0adbcc12070a54ace51af342",
+    "champion": "annie",
+    "complete": false,
+    "client": 9444,
+    "server": 10392,
+    "port": 5956,
+    "client_sha256": "623246ded21d5c6cfe5f021c5750c8835cee60287bba5cff7d8c297f4034af74",
+    "checked_utc": "2026-10-04T10:32:23.7925745Z",
+    "diagnostic": true
+  },
+  "animation_bindings": "docs/annie_qw_animation_bindings.json",
+  "network_damage_reconciliation": "docs/annie_w_network_damage_reconciliation.json"
+}

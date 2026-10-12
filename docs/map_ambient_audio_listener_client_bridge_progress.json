@@ -1,0 +1,64 @@
+{
+  "updated_utc": "2026-10-03T23:02:37.550974+00:00",
+  "contract": "data/4.20/audio_listener_init_contract.json",
+  "contract_sha256": "27a95521afa5e1a56537915ba55f91072c6916a0eaeb259108077d1ba5becb1d",
+  "module": "crates/core/src/audio_listener_backend.rs",
+  "module_sha256": "f4450ecbe3be7b6d1bfcf98c391bc7b22f5d460d428c725e1fef880e2a622725",
+  "client_module": "crates/client/src/map_audio.rs",
+  "client_module_sha256": "c6f1757d38a08e13b4e2923fc3cd3fbd8ffc95a07ee65326610df3319b343cda",
+  "native_initialized_slots": 8,
+  "native_dirty_masks": 256,
+  "native_flush_invocations": 512,
+  "core_tests": 193,
+  "client_tests": 10,
+  "new_core_init_flush_tests": 1,
+  "new_client_bridge_tests": 1,
+  "native_region_hashes": {
+    "0xb19e30": "e2df8bcaab704bd13504c6696dd92b0f6a4b180745de7c18287edb7f5a95779e",
+    "0xb19ec0": "945fc29d397dae4398f0dd4a9197bdae1f92601130cbaa331fb9f31da52b782e",
+    "0xb1a0b0": "073f61e73851912f2016bd8cab265ec0fdb9db5938e572eaaec1f20cf76e9e9a",
+    "0xb052b0": "8039818e1fdd70b9b4af328ecc4e681b1bd0dbf3432b07a3d16ea04719846506"
+  },
+  "native_initial_global_flags": {
+    "audio_enabled_mask": 4294967295,
+    "other_mask_raw": 0
+  },
+  "default_frame_source": {
+    "address": "0x1210294",
+    "bytes": "00000000000000000000803f000000000000803f00000000000000000000000000000000"
+  },
+  "initial_position": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "initial_forward": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "initial_up": [
+    0.0,
+    1.0,
+    0.0
+  ],
+  "initial_scale": 1.0,
+  "initial_dirty_mask": 255,
+  "core_test_log": "logs/native-audio-listener-init-core-tests.log",
+  "core_test_log_sha256": "fbd088f659ccd614f73a0d800d57397a602ba2ff9b9817cd69209647f7b1c6d9",
+  "client_test_log": "logs/native-audio-listener-init-client-tests.log",
+  "client_test_log_sha256": "e9dcb530f856522267e964686a020f4e0349c9cb9d01d0f4a2560bb5ec78d913",
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "client_source_integration_enabled": true,
+  "standalone_client_rebuilt": false,
+  "ambient_playback_enabled": false,
+  "complete": false,
+  "limits": [
+    "B09B60 notification callback stubbed to capture mask; downstream voice invalidation not executed.",
+    "Global initializer executed from zeroed listener storage; separate non-BSS memory fields untouched by initializer are not default-qualified.",
+    "No runtime audio callback scheduling or actual listening acceptance.",
+    "Bevy ECS test proves camera focus native-coordinate conversion -> native prepare -> backend slot0 -> native distance API; camera pitch/distance/full original mode qualification still incomplete.",
+    "No rebuilt standalone client or new framebuffer/audio capture. Existing running client/server processes were inspected only, not stopped or changed.",
+    "Dirty-mask API returns original notification mask, but audio-worker/voice invalidation consumer is not integrated. Native slot channel gains and other routing fields are separate from Table abstraction."
+  ]
+}

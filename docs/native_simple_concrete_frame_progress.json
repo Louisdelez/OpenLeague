@@ -1,0 +1,44 @@
+{
+  "updated_utc": "2026-10-06T23:07:28.217639+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "core_tests_passed": 564,
+  "simple_pose_cpu_cases": 112,
+  "simple_frame_particles_native_cases": 384,
+  "simple_frame_particles_rust_qualified": true,
+  "normal_emission_qualified": false,
+  "pose_modifier_qualified": false,
+  "ordinary_emitter_consumer_bound": false,
+  "ordinary_applications_rebuilt": false,
+  "artifacts_sha256": {
+    "crates/core/src/native_simple_pose.rs": "2600b8261fcfacef01e99f4e4fd5ff43c825cb7592cd83e3077a136682992732",
+    "crates/core/src/native_simple_concrete_frame.rs": "ecdfc7502995a2bbaf6ef5538bd9753bdd44805bef0c4d87d5027afa4f42aeff",
+    "crates/core/src/native_simple_frame.rs": "7d709037d41d2721ec85c721deeb3ea8a0d62ae4e30a8b813395666d2c292ea9",
+    "crates/core/src/native_simple_control.rs": "6eff226ed70466372548475280b191ffd34ba29db4b7f10284c7fc4613b1ce6a",
+    "crates/core/src/native_simple_auxiliary.rs": "c27beb131d8979f99175f7f828b32f11e5e9a436a7a169a25977a9683f0667de",
+    "crates/core/src/native_simple_animation_policy.rs": "b2a84e42e46689128e8c5c85482afc257ad314f1f119a716ebdc67a02d56903d",
+    "crates/core/src/native_simple_finish.rs": "d9b6ad92ec9fe3ccd3dee25d075bf78f796ae0c46a1bba925296fdeb93afd606",
+    "crates/core/src/native_simple_particle_update.rs": "afbe2f1cf544cfdbc20e368e38c98454513a14b7b1709bce5873e47f1582430c",
+    "crates/core/src/matrix_inverse.rs": "52a066486bb9913bde555087157666b6feba0ff100e6143fb3dcba22b07a4a68",
+    "crates/core/src/lib.rs": "1e31f106f015bee180855624b1ec762e3775d16e6c201344ec99520d048ae1e6",
+    "data/4.20/simple_frame_particles_contract.json": "4963eed048dcd5bab04a5bf6ff2af51cd117a61bb3a4aa1e8a228739e3938c8d",
+    "data/4.20/simple_attachment_cpu_contract.json": "501651c3497ae4bce9fdc5436ea40a3b4f45dbd80c366b16481502f97ebb09d0",
+    "tools/probe_native_simple_frame_particles.py": "24b8275233a01b2b47d7e1dc97d8908de1574b8c7c92fc43f241488792b52b5c",
+    "tools/probe_native_simple_attachment_cpu.py": "a5c4dd7a063d175c237440f965f70b6909c158252c4a1f42ce982207767628c6",
+    "logs/native-simple-concrete-frame-core-tests.log": "3c39b53b175bbba316dca14ea11e4b0e02be67215e99eef8b03a5bf3e06f49e1",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "563a9ad45bbdfc110223591440896b0c1c127a5c09c02c4a291e9bd4dc142cf6"
+  },
+  "findings": [
+    "Rust943300 cold and warm owner matrices match112 native CPU cases, including previous matrix and inverse retention. Optional93BBD0 source remains an explicit callback with error propagation.",
+    "Rust9437E0 now composes actual owner pose and entire944E20 consumers, auxiliary/animation policy and final pose inverse/end state.384 warm-owner end-of-life cases match all captured particle/emitter arrays and outer call order bit for bit.",
+    "Owner previous matrix and inverse are synchronized to final owner writes for subsequent updates. State and RNG commit together after success; external source/observer effects cannot be rolled back.",
+    "Native384 fixture executes actual bodies with80672 hardware scalar SSE operations and960 conversions, no endpoint adapters and zero VM/CPU differences."
+  ],
+  "limits": [
+    "Whole9437E0 executes actual943300 pose producer and whole944E20 particle update plus native final pose inverse and finish. Selected warm emitter, owner-end flag10 and strict expired threshold0 skip emission; animation/helper resources null. Particle attachment, linear movement, scalar/probability/attribute, bounds and tail bodies execute. Explicit preallocated arrays, poses and resources. Selected null force resource, linear motion, constant/no probability, terrain disabled profiles; generalized composition remains incomplete.",
+    "No resource producers or ordinary rendered gameplay acceptance. Finite selected matrices; actual hardware scalar SSE/conversions, default FP mode.",
+    "Selected end-of-life profiles suppress emission; no non-null helper, modifier or animation source qualification in these384 cases.",
+    "Normal emission, actual allocation/birth production, system bone pose, terrain provider, rendered/audio acceptance and ordinary executable integration remain incomplete.",
+    "No complete champion, task or domain is claimed."
+  ]
+}

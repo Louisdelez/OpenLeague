@@ -1,0 +1,253 @@
+{
+  "updated_utc": "2026-10-04T14:13:38.690626+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "fields": {
+    "p-scalebias": {
+      "native_string_address": "0x10d83d4",
+      "reader_call": "0x91ebf6",
+      "default": [
+        1.0,
+        1.0
+      ],
+      "destination_offsets": [
+        "0x1d4",
+        "0x1d8"
+      ],
+      "type7_use": "Each bias component multiplied by current particle scale*emitter scale factor before92E130 projection preparation."
+    },
+    "p-simpleorient": {
+      "native_string_address": "0x10d83c4",
+      "reader_call": "0x91ec17",
+      "default": 0,
+      "destination_offset": "0x1dc"
+    }
+  },
+  "code": [
+    {
+      "name": "constructor_scale_bias_one",
+      "start": "0x91c366",
+      "end_exclusive": "0x91c39d",
+      "sha256": "1d18d675314f05a216520247a3541ccd28a6b5414bf2b77102f7c9143943c085",
+      "instructions": [
+        {
+          "address": "0x91c366",
+          "mnemonic": "mov",
+          "operands": "dword ptr [ebp - 8], 0x3f800000"
+        },
+        {
+          "address": "0x91c36d",
+          "mnemonic": "mov",
+          "operands": "dword ptr [ebp - 4], 0x3f800000"
+        },
+        {
+          "address": "0x91c374",
+          "mnemonic": "mov",
+          "operands": "dword ptr [ebp - 0x10], 0x3f800000"
+        },
+        {
+          "address": "0x91c37b",
+          "mnemonic": "mov",
+          "operands": "dword ptr [eax], 0"
+        },
+        {
+          "address": "0x91c381",
+          "mnemonic": "mov",
+          "operands": "eax, dword ptr [ebp - 8]"
+        },
+        {
+          "address": "0x91c384",
+          "mnemonic": "mov",
+          "operands": "dword ptr [edi + 0x1c4], 0"
+        },
+        {
+          "address": "0x91c38e",
+          "mnemonic": "mov",
+          "operands": "dword ptr [edi + 0x1d4], eax"
+        },
+        {
+          "address": "0x91c394",
+          "mnemonic": "mov",
+          "operands": "eax, dword ptr [ebp - 4]"
+        },
+        {
+          "address": "0x91c397",
+          "mnemonic": "mov",
+          "operands": "dword ptr [edi + 0x1d8], eax"
+        }
+      ]
+    },
+    {
+      "name": "reader_scale_bias_and_simpleorient",
+      "start": "0x91ebd5",
+      "end_exclusive": "0x91ec25",
+      "sha256": "7bfab837afe02fa0497c50403cad4ca4d394fedb41fbb478eeb2d64a70bd3ef6",
+      "instructions": [
+        {
+          "address": "0x91ebd5",
+          "mnemonic": "lea",
+          "operands": "eax, [esp + 0x28]"
+        },
+        {
+          "address": "0x91ebd9",
+          "mnemonic": "mov",
+          "operands": "dword ptr [esp + 0x28], 0x3f800000"
+        },
+        {
+          "address": "0x91ebe1",
+          "mnemonic": "mov",
+          "operands": "edx, edi"
+        },
+        {
+          "address": "0x91ebe3",
+          "mnemonic": "mov",
+          "operands": "dword ptr [esp + 0x2c], 0x3f800000"
+        },
+        {
+          "address": "0x91ebeb",
+          "mnemonic": "lea",
+          "operands": "ecx, [esp + 0x1c]"
+        },
+        {
+          "address": "0x91ebef",
+          "mnemonic": "push",
+          "operands": "eax"
+        },
+        {
+          "address": "0x91ebf0",
+          "mnemonic": "push",
+          "operands": "0x10d83d4"
+        },
+        {
+          "address": "0x91ebf5",
+          "mnemonic": "push",
+          "operands": "esi"
+        },
+        {
+          "address": "0x91ebf6",
+          "mnemonic": "call",
+          "operands": "0x8b24d0"
+        },
+        {
+          "address": "0x91ebfb",
+          "mnemonic": "push",
+          "operands": "0"
+        },
+        {
+          "address": "0x91ebfd",
+          "mnemonic": "push",
+          "operands": "0"
+        },
+        {
+          "address": "0x91ebff",
+          "mnemonic": "push",
+          "operands": "0x10d83c4"
+        },
+        {
+          "address": "0x91ec04",
+          "mnemonic": "mov",
+          "operands": "ecx, dword ptr [eax]"
+        },
+        {
+          "address": "0x91ec06",
+          "mnemonic": "mov",
+          "operands": "dword ptr [ebx + 0x1d4], ecx"
+        },
+        {
+          "address": "0x91ec0c",
+          "mnemonic": "mov",
+          "operands": "eax, dword ptr [eax + 4]"
+        },
+        {
+          "address": "0x91ec0f",
+          "mnemonic": "push",
+          "operands": "esi"
+        },
+        {
+          "address": "0x91ec10",
+          "mnemonic": "push",
+          "operands": "edi"
+        },
+        {
+          "address": "0x91ec11",
+          "mnemonic": "mov",
+          "operands": "dword ptr [ebx + 0x1d8], eax"
+        },
+        {
+          "address": "0x91ec17",
+          "mnemonic": "call",
+          "operands": "0x8b1a80"
+        },
+        {
+          "address": "0x91ec1c",
+          "mnemonic": "add",
+          "operands": "esp, 0x24"
+        },
+        {
+          "address": "0x91ec1f",
+          "mnemonic": "mov",
+          "operands": "dword ptr [ebx + 0x1dc], eax"
+        }
+      ]
+    },
+    {
+      "name": "type7_scale_bias_applied",
+      "start": "0x931354",
+      "end_exclusive": "0x931389",
+      "sha256": "dfcf6f8eab2edb9bbe2aba56c1fc615b5781e67b4281bbf58014b5c90aef2496",
+      "instructions": [
+        {
+          "address": "0x931354",
+          "mnemonic": "mov",
+          "operands": "eax, dword ptr [ebp - 0x18]"
+        },
+        {
+          "address": "0x931357",
+          "mnemonic": "lea",
+          "operands": "ecx, [ebp - 0xc0]"
+        },
+        {
+          "address": "0x93135d",
+          "mnemonic": "movss",
+          "operands": "xmm1, dword ptr [ebp - 0x34]"
+        },
+        {
+          "address": "0x931362",
+          "mnemonic": "mulss",
+          "operands": "xmm1, dword ptr [ebp - 0x54]"
+        },
+        {
+          "address": "0x931367",
+          "mnemonic": "movss",
+          "operands": "xmm0, dword ptr [eax + 0x1d4]"
+        },
+        {
+          "address": "0x93136f",
+          "mnemonic": "mulss",
+          "operands": "xmm0, xmm1"
+        },
+        {
+          "address": "0x931373",
+          "mnemonic": "movss",
+          "operands": "dword ptr [ebp - 0x64], xmm0"
+        },
+        {
+          "address": "0x931378",
+          "mnemonic": "movss",
+          "operands": "xmm0, dword ptr [eax + 0x1d8]"
+        },
+        {
+          "address": "0x931380",
+          "mnemonic": "mulss",
+          "operands": "xmm0, xmm1"
+        },
+        {
+          "address": "0x931384",
+          "mnemonic": "movss",
+          "operands": "dword ptr [ebp - 0x60], xmm0"
+        }
+      ]
+    }
+  ],
+  "qualification": "Static original instructions/constants recovered. Full reader, emission scale producer and local-orient/angle/attachment behavior not executed or qualified."
+}

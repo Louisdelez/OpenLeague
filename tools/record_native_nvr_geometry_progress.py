@@ -1,0 +1,24 @@
+from pathlib import Path
+import json,datetime,shutil,hashlib
+r=Path('E:/OpenLeague');stage=Path('E:/mapslol3v3');now=datetime.datetime.now(datetime.timezone.utc).isoformat()
+load=lambda p:json.loads((r/p).read_text(encoding='utf-8-sig'))
+def save(p,d):(r/p).write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+audit=load('docs/native_nvr_triangle_audit.json');assert audit['baseline_positions_exact'] and audit['baseline_indices_exact'];assert audit['native_vertices_checked']==933004 and audit['native_meshes']==2351 and audit['degenerate_missing_triangles']==8
+assert all(t['area']==0 and t['area_uses_unrounded_native_coordinates'] for mesh in audit['count_mismatch_meshes'] for t in mesh['missing_geometry'])
+capture=load('docs/chaos_base_scene_capture.json');assert not capture['diagnostic_winner_injection'] and capture['normal_server'];capture['visual_inspected']=True;capture['visual_findings']=['Same upper-right and mid-right exposed cyan background as prior endgame capture; victory splash absent.','Camera held at prior stationary endgame focus; normal server running, Garen level1 ordinary state.','Capture confirms defect exists before victory; it does not qualify native framebuffer equivalence or an ordinary completed match.'];save('docs/chaos_base_scene_capture.json',capture)
+binary=hashlib.sha256((r/'target/debug/openleague-client.exe').read_bytes()).hexdigest();assert binary==capture['client_sha256']==load('docs/native_nexus_skin_progress.json')['files_sha256']['target/debug/openleague-client.exe']
+action='Qualifier la composition native du fond et du brouillard après le rendu géométrique : les8triangles perdus sont exactement dégénérés et les2351maillages/933004sommets de l’export initial correspondent au NVR. Les zones cyan sont reproduites sur une nouvelle capture avec serveur normal, sans écran de victoire. Vérifier chargement réel des paramètres de brouillard, passes de post-traitement et projection avant une correction du moteur.'
+receipt=dict(updated_utc=now,complete=False,product_changed=False,native_nvr_meshes=2351,native_vertices_verified=933004,native_triangles_verified=929456,original_export_positions_and_indices_exact=True,current_count_difference=8,current_missing_triangles_exactly_degenerate=True,normal_server_capture='docs/chaos_base_scene_capture.json',capture_visual_inspected=True,defect_present_before_victory=True,application_binary_unchanged=True,artifacts=['docs/native_nvr_triangle_audit.json','docs/chaos_base_scene_capture.json'],next_action=action,limits=audit['limits']+capture['limits'])
+save('docs/native_nvr_geometry_progress.json',receipt)
+archive=r/'docs/plan_history'/('native-nvr-geometry-'+datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ'));archive.mkdir(parents=True)
+for name in ['coverage.json','completion_plan.json','resume_checkpoint.json']:
+ p='docs/'+name;shutil.copy2(r/p,archive/name);d=load(p);d.update(updated_utc=now,complete=False,native_nvr_geometry_progress=receipt)
+ if name=='resume_checkpoint.json':d.update(saved_utc=now,pending_native_jobs=[],next_projected_action=action);d['last_verified'].update(native_nvr_vertices_verified=933004,native_nvr_triangles_verified=929456,chaos_base_normal_server_capture_inspected=True)
+ else:d['current_evidence'].update(native_nvr_vertices_verified=933004,native_nvr_triangles_verified=929456,missing_triangle_difference_degenerate=True,chaos_base_normal_server_capture_inspected=True,chaos_base_visual_defect_fixed=False)
+ if name=='completion_plan.json':d['next_execution_steps']=[action]+d.get('next_execution_steps',[])[1:]
+ save(p,d)
+# Resolve the previously unknown eight-triangle difference, without calling the visual defect fixed.
+p='docs/chaos_geometry_progress.json';d=load(p);d.update(triangle_difference_unqualified=0,triangle_difference_exactly_degenerate=8,triangle_audit='docs/native_nvr_triangle_audit.json',next_action=action);save(p,d)
+for name in ['inspect_nvr_geometry_layout.py','audit_native_nvr_triangles.py','capture_chaos_base_scene.py','record_native_nvr_geometry_progress.py']:shutil.copy2(stage/name,r/'tools'/name)
+p=r/'docs/completion_plan.html';s=p.read_text(encoding='utf-8');p.write_text(s.replace('</body>','<section><h2>NVR natif et nouvelle capture</h2><p>933004sommets et929456triangles vérifiés directement dans le NVR face à l’export initial. Les8triangles absents de la version restaurée ont exactement une surface nulle. Nouvelle capture avec serveur normal, caméra fixe, sans victoire : zones cyan reproduites. Composition native du fond/brouillard à qualifier ; défaut encore ouvert.</p><a href="native_nvr_geometry_progress.json">Preuves et limites</a></section></body>'),encoding='utf-8')
+print(json.dumps(dict(native_vertices_verified=933004,missing_triangles_degenerate=8,capture_inspected=True,complete=False)))

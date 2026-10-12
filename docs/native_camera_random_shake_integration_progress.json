@@ -1,0 +1,100 @@
+{
+  "updated_utc": "2026-10-04T06:15:17.618266+00:00",
+  "files_sha256": {
+    "tools/qualify_native_camera_random_shake.py": "138dfa97f82912ebc6648cd4aa842c2bd8e2030f39d8fb989e6d3de054efa45f",
+    "tools/verify_native_camera_shake_live.py": "53881b02429ccad507300359f7cea6d7491c3b993996a6e2389c0b7dc773dd00",
+    "data/4.20/camera_random_shake_contract.json": "7c60d59dc51c4d0a2e9ed6010450c30abae110e582209df170b9ff73cf511c31",
+    "crates/core/src/native_random.rs": "bd463b6a148760569a33a8f783e801fd767c051f434411731a275cedab13f09f",
+    "crates/core/src/camera_shake.rs": "1350c89ab5117842039f71fc6deec5bf5023ab7990f2a583aae89f65bd3c6efa",
+    "crates/core/src/lib.rs": "c63d0a071df8fa0275f8f6f35890386f163d17646ce33e9456c79111ff1b0d49",
+    "crates/client/src/camera_native.rs": "7ebdc9ec07d3230d70d12cf3dfb7846c730d5dbf7d4a21c83775cc6e00760c4a",
+    "crates/client/src/main.rs": "7268e7fefcf04723db4a68c133c16f6a721d64df220649e05f1eb22696f2c06d",
+    "logs/native-camera-random-shake-tests.log": "8da9109327d3c9a040ca2eb0c84ebe004ad48ee0062877ecc69ab578eb59e8d3",
+    "logs/native-camera-random-shake-build.log": "ced8c9dec8ffcb5872e4ff01e8210df2e7a6fe52fb70d0639fced7239f1d8105",
+    "logs/native-camera-shake-client.out.log": "26ffee3ba792793be8b768e9ce96c0fec9c3c3a141423449e6ee4fba5feee55e",
+    "logs/native-camera-shake-client.err.log": "639a9f99855d7e2d14e25ee00452fff349154a5dd500868ddd81f101bd4cfc98",
+    "logs/native-camera-shake-live.json": "e27ea748bd1cc5dabe41f418316b89da5ebb7939ef1b3283aec427311a8bd0c3",
+    "docs/native_camera_shake_live_validation.json": "a261932bc57c8e31c0ada75647a763e529af3c8a59a00ef820f6738ecc05e1d1",
+    "logs/native-camera-shake-map10.png": "ce019b0d559baf9dba55876dd4b67267b3feb55dd8725cb8b32e958303657530",
+    "logs/native-camera-shake-runtime.json": "717537d62c9846bfa44d948e06573211899a41b733cfc923f93f686b3e3c096d"
+  },
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_cases": {
+    "rng_seeds": 9,
+    "rng_updates": 864,
+    "shake_sequences": 480,
+    "shake_updates": 2880
+  },
+  "core_tests_passed": 322,
+  "client_tests_passed": 22,
+  "client_executable_sha256": "508d1509f96535d9e84589907e5ca0e4df75644cb6e8665be85a7c2263771fcc",
+  "server_executable_sha256": "b51b2dfc8ea19f735482e8f87e353feafdac242af91c54f0754f851bb202bb16",
+  "runtime": {
+    "backend": "vulkan",
+    "diagnostic": true,
+    "shake_parameters": "{\"seed\":42,\"duration\":40,\"amplitude\":10,\"frequency\":10}",
+    "client": 8228,
+    "started_utc": "2026-10-04T06:10:45.6850465Z",
+    "port": 5896,
+    "server": 10600,
+    "checked_utc": "2026-10-04T06:15:17.3682634Z",
+    "client_alive": true,
+    "client_responding": true,
+    "server_alive": true
+  },
+  "live_validation": {
+    "checked_utc": "2026-10-04T06:12:08.821947+00:00",
+    "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+    "trace_sha256": "e27ea748bd1cc5dabe41f418316b89da5ebb7939ef1b3283aec427311a8bd0c3",
+    "client_sha256": "508d1509f96535d9e84589907e5ca0e4df75644cb6e8665be85a7c2263771fcc",
+    "frames": 3120,
+    "rng_draws": 21,
+    "moved_frames": 3118,
+    "max_absolute_eye_error_native_units": 0.0,
+    "passed": true,
+    "native_triggers_complete": false,
+    "complete": false,
+    "limits": [
+      "Actual Vulkan client diagnostic inputs replayed through full original7D2BE0 and actual RNG8E26A0 seeded by original8E2630. No shake/RNG math adapters.",
+      "Every captured shake state, raw active byte, RNG55word state/index and draw count matches native exactly; only camera-eye normalization permits1e-5abs/2e-7relative.",
+      "Explicit diagnostic event/seed; original spell/effect trigger routing, shared RNG seed/call ordering across other systems and full camera fidelity remain incomplete."
+    ]
+  },
+  "camera_shake_math_integrated": true,
+  "native_effect_shake_triggers_complete": false,
+  "full_native_camera_complete": false,
+  "framebuffer": {
+    "path": "logs/native-camera-shake-map10.png",
+    "dimensions": [
+      1280,
+      800
+    ],
+    "inspected": true,
+    "human_fidelity_acceptance": false,
+    "context": "Explicit camera-shake diagnostic on existing local match; not six-client/new-match gameplay acceptance."
+  },
+  "ported": [
+    "Full8E2630 seed initialization from native55word table, index0/31; bounded8E25C0 maximum0 returns0 without consuming a draw.",
+    "Full8E26A0 unsigned55word XOR generator: wrapping indices+1/+3, native mixer/moduloFFFFFFFF and exact extended fraction preserved for interpolation.",
+    "Full7D2BE0 shake: inactive/expiry, strict next-change renewal, decay, two symmetric offsets and interval sampling, original camera-direction basis and position-only displacement.",
+    "Client diagnostic binds native shake after the normal camera pipeline, preserves direction and exports live inputs/state/RNG for independent native replay. Ordinary startup has no fabricated shake trigger or seed."
+  ],
+  "acceptance": {
+    "rng": "9seed initializations/864mixed bounded/fraction steps:55word/index/output exact; native x87 return exact in f64 and rounded f32.",
+    "shake": "480sequences/2880steps: state words exact exceptNaNpayloads, rawactive/draw counts/RNG states exact; position tolerated1e-5abs/2e-7relative with preserved othercamera words exact.",
+    "live": "3120Vulkan client frames replayed in original7D2BE0/RNG;21draws exact; camera-eye maxabsolute error0.0native units."
+  },
+  "limits": [
+    "Full8E2630 seed initializer,8E25C0 bounded generator and8E26A0 fractional generator execute without math/state adapters. Fraction capture writes the native x87 return to f64 andf32.",
+    "Full7D2BE0 active/inactive/expiry/renewal/basis/camera-position update executes with real RNG and reciprocal square root; clock and initial states supplied. No shake math adapters.",
+    "Original RNG table/index initialization callers and shared draw ordering across game systems still unqualified; explicit seeds are fixture inputs.",
+    "8E2720 is an allocator wrapper, not RNG seed initialization. Previous static followup inference corrected by decoding8E2630.",
+    "Shake triggering/native effect bindings and visible game integration remain incomplete. Camera near/far/default/input qualifications retain their existing limits.",
+    "Diagnostic configuration is opt-in and requires screenshot mode. Source spell/effect activation messages/values are not replaced with invented triggers.",
+    "Original shared RNG initialization callers and cross-system draw ordering must still be reconstructed for normal gameplay.",
+    "Native camera input/context/service bindings, selection refresh, mode dispatch, near-plane bootstrap and original GPU depth equivalence remain incomplete.",
+    "Server executable unchanged from prior b51b2d build; source core322/client22 tests and current client build do not prove server/full-game completion.",
+    "Vulkan missing third-party TikTok layer warning persists without driver mutation."
+  ],
+  "complete": false
+}

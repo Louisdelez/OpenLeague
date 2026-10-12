@@ -1,0 +1,119 @@
+{
+  "passed": true,
+  "check_count": 23,
+  "checks": [
+    "source Config really exists independently",
+    "Config private missing attributes before mkdir",
+    "Logs private missing attributes before mkdir",
+    "Logs resolves strictly inside owned scratch root",
+    "actual Logs mkdir",
+    "actual Logs CREATE_NEW",
+    "actual Logs WriteFile",
+    "actual Logs close after write",
+    "actual Logs reopen",
+    "Logs shadow read returns exact written bytes",
+    "actual Logs final close",
+    "Logs dotdot escape rejected",
+    "D absolute write rejected",
+    "production absolute write rejected",
+    "Logs ADS rejected",
+    "Logs prefix sibling rejected",
+    "unlisted scratch top folder rejected",
+    "every write target resolves under exact Logs root",
+    "all real file handles closed",
+    "pipe helper rejects wildcard without calling OS",
+    "pipe helper rejects remote path without calling OS",
+    "pipe helper rejects changed flags without calling OS",
+    "negative pipe tests perform no open"
+  ],
+  "error": null,
+  "events": [
+    {
+      "api": "GetFileAttributesA",
+      "query": "E:\\mapslol3v3\\loading_rads_heap_probe\\logs_test_106023a7ef\\Config",
+      "physical_path": "E:\\mapslol3v3\\loading_rads_heap_probe\\logs_test_106023a7ef\\Config",
+      "result": 4294967295,
+      "last_error": 2,
+      "shadow": true
+    },
+    {
+      "api": "GetFileAttributesA",
+      "query": "E:\\mapslol3v3\\loading_rads_heap_probe\\logs_test_106023a7ef\\Logs",
+      "physical_path": "E:\\mapslol3v3\\loading_rads_heap_probe\\logs_test_106023a7ef\\Logs",
+      "result": 4294967295,
+      "last_error": 2,
+      "shadow": true
+    },
+    {
+      "api": "CreateDirectoryA",
+      "query": "E:\\mapslol3v3\\loading_rads_heap_probe\\logs_test_106023a7ef\\Logs",
+      "physical_path": "E:\\mapslol3v3\\loading_rads_heap_probe\\logs_test_106023a7ef\\Logs",
+      "result": 1,
+      "last_error": 0
+    },
+    {
+      "api": "CreateFileA",
+      "query": "E:\\mapslol3v3\\loading_rads_heap_probe\\logs_test_106023a7ef\\Logs\\bridge-test.bin",
+      "physical_path": "E:\\mapslol3v3\\loading_rads_heap_probe\\logs_test_106023a7ef\\Logs\\bridge-test.bin",
+      "result": 1627389952,
+      "last_error": 0,
+      "access": 3221225472,
+      "creation": 1,
+      "shadow": true
+    },
+    {
+      "api": "WriteFile",
+      "query": null,
+      "physical_path": "E:\\mapslol3v3\\loading_rads_heap_probe\\logs_test_106023a7ef\\Logs\\bridge-test.bin",
+      "result": 1,
+      "last_error": 0,
+      "requested": 155,
+      "written": 155
+    },
+    {
+      "api": "CloseHandle",
+      "query": null,
+      "physical_path": "E:\\mapslol3v3\\loading_rads_heap_probe\\logs_test_106023a7ef\\Logs\\bridge-test.bin",
+      "result": 1,
+      "last_error": 0
+    },
+    {
+      "api": "CreateFileA",
+      "query": "e:\\MAPSLOL3V3\\LOADING_RADS_HEAP_PROBE\\LOGS_TEST_106023A7EF\\lOGS\\BRIDGE-TEST.BIN",
+      "physical_path": "E:\\mapslol3v3\\loading_rads_heap_probe\\logs_test_106023a7ef\\lOGS\\BRIDGE-TEST.BIN",
+      "result": 1627389956,
+      "last_error": 0,
+      "access": 2147483648,
+      "creation": 3,
+      "shadow": true
+    },
+    {
+      "api": "ReadFile",
+      "query": null,
+      "physical_path": "E:\\mapslol3v3\\loading_rads_heap_probe\\logs_test_106023a7ef\\lOGS\\BRIDGE-TEST.BIN",
+      "result": 1,
+      "last_error": 0,
+      "requested": 4096,
+      "read": 155,
+      "returned_sha256": "3744e5543f6f97020e1120b616457f2b92a95e30896a17d0483e19ecb1da9f11"
+    },
+    {
+      "api": "CloseHandle",
+      "query": null,
+      "physical_path": "E:\\mapslol3v3\\loading_rads_heap_probe\\logs_test_106023a7ef\\lOGS\\BRIDGE-TEST.BIN",
+      "result": 1,
+      "last_error": 0
+    }
+  ],
+  "root": "E:\\mapslol3v3\\loading_rads_heap_probe\\logs_test_106023a7ef",
+  "open_handles": 0,
+  "limits": [
+    "No concurrent external filesystem mutation assumed. No successful truncation is exercised.",
+    "Pipe negative tests reject before OS; actual native exact open is a separate probe."
+  ],
+  "source_hashes": {
+    "test_logs_bridge.py": "6cc073aa85eae38dace5e854e1c76658ade3a9694986c3bdfdbd8653cb738664",
+    "isolated_io.py": "f127283ca56d8859d09b8ba57f918f58b7f0a11174c3e269c3d6d85f27baa3d6",
+    "diagnostic_pipe_open.py": "942a6d1581e7e7857bf1d3f5e352bbdbb584d933c2a3e944c5fae4043e7d33e8"
+  }
+}

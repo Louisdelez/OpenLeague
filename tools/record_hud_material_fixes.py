@@ -1,0 +1,24 @@
+from pathlib import Path
+import json,hashlib,datetime,shutil
+r=Path('E:/OpenLeague');now=datetime.datetime.now(datetime.timezone.utc).isoformat()
+load=lambda p:json.loads((r/p).read_text(encoding='utf-8-sig'))
+save=lambda p,d:(r/p).write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+sha=lambda p:hashlib.sha256((r/p).read_bytes()).hexdigest()
+assert '133 passed; 0 failed' in (r/'logs/hud-material-tests.log').read_text(encoding='utf-8-sig')
+assert 'Finished `dev`' in (r/'logs/hud-material-build.log').read_text(encoding='utf-8-sig')
+s=(r/'crates/client/src/main.rs').read_text(encoding='utf-8');assert all(x not in s for x in ['Ã','â€','Â'])
+runtime=load('docs/hud_material_runtime_capture.json');assert runtime['client_sha256']==sha('target/debug/openleague-client.exe')
+runtime.update(visual_inspection_required=False,visual_inspection={'observed':['Real Vulkan framebuffer shows normal restored base rendering and readable French HUD: unités, Contrôle, déplacement, flèches, caméra, arrêt, verrouillé.'],'limits':['This is the current development HUD; historical 4.20 HUD fidelity and full localization are unfinished.','Image does not measure material event traffic or frame performance; no performance claim.','Fog diagnostic was disabled; full dynamic fog remains open.']})
+save('docs/hud_material_runtime_capture.json',runtime)
+receipt={'updated_utc':now,'complete':False,'client_tests_passed':133,'client_build_passed':True,'runtime':runtime,'findings':['Fixed corrupted UTF8/French sequences in existing HUD literals, including control/death/victory and player instructions.','Visibility binder now inspects Assets immutably and mutates only new/different bindings. Avoids Assets::iter_mut emitting modification events for every unchanged material. New materials and native parameter changes still get bound.'],'limits':['No FPS/CPU/GPU performance benchmark or material event trace; optimization validated by source and successful runtime only.','Historical HUD design, complete text catalog/localization and all game functions remain incomplete.','Normal dynamic fog overlay, fade/blur, projected and actor material integration remain open; mask screenshot is from previous binary and explicitly historical.'],'next_actions':['Qualify native terrain.ini/property path and Map10 FoW defaults; bind native fade/blur and overlay to normal gameplay.','Numerically compare current GPU visibility sampling with native positions and finish projected/actor fog consumers.','Finish Garen/Map10 interactions and six-client match, then all remaining champions, launcher/services and plan domains.'],'files_sha256':{p:sha(p) for p in ['crates/client/src/main.rs','crates/client/src/fow_visibility_texture.rs','logs/hud-material-tests.log','logs/hud-material-build.log','logs/hud-material-133.png','target/debug/openleague-client.exe']}}
+save('docs/hud_material_fixes_progress.json',receipt)
+b=r/'docs/plan_history'/datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ');b.mkdir(parents=True,exist_ok=True)
+for name in ['coverage.json','completion_plan.json','resume_checkpoint.json']:
+ p='docs/'+name;shutil.copy2(r/p,b/name);d=load(p);d['updated_utc']=now;d['complete']=False;d['hud_material_fixes_progress']=receipt
+ if name=='resume_checkpoint.json':d['saved_utc']=now;d['last_verified']['client_tests']=133;d['next_projected_action']=' '.join(receipt['next_actions'])
+ else:d['current_evidence'].update(client_tests_passed=133,current_test_receipt='docs/hud_material_fixes_progress.json',current_build_receipt='docs/hud_material_fixes_progress.json',current_client_sha256=sha('target/debug/openleague-client.exe'),hud_french_accent_defect_fixed_and_visually_verified=True,current_binary_visibility_diagnostic_verified=False,live_fow_material_bound=False)
+ if name=='completion_plan.json':d['next_execution_steps']=receipt['next_actions']
+ save(p,d)
+p=r/'docs/completion_plan.html';s=p.read_text(encoding='utf-8').replace('</body>','<section><h2>HUD français et matériaux</h2><p>Accents du HUD corrigés et relus dans une capture Vulkan actuelle. Matériaux inchangés consultés sans les marquer modifiés ; mesure de performances encore à faire.133 tests passent et compilation réussie. Interface historique et jeu complet restent ouverts.</p><a href="hud_material_fixes_progress.json">Preuves et limites</a></section></body>');p.write_text(s,encoding='utf-8')
+for name in ['fix_hud_and_material_updates.py','capture_hud_material.py','record_hud_material_fixes.py','inspect_fow_overlay_callers.py','inspect_fow_initialization_config.py','inspect_fow_setting_names.py','read_native_fow_settings.py']:shutil.copy2('E:/mapslol3v3/'+name,r/'tools'/name)
+print(json.dumps({'client_tests':133,'hud_accent_defect_fixed':True,'material_unnecessary_mutations_removed':True,'complete':False}))

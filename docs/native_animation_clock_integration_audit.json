@@ -1,0 +1,25 @@
+{
+  "complete": false,
+  "native_contract": "data/4.20/levelprop_animation_node_delta_contract.json",
+  "native_chain": [
+    "GameClock virtual8",
+    "878e73",
+    "886760",
+    "88e770",
+    "891930",
+    "889180"
+  ],
+  "native_cases": 48,
+  "scope": "One active layer, simple-node initialtime.25 speed.5 duration100, no pending transitions/events. Full chain executes; optional secondary boundary captured.",
+  "bevy_version": "0.19.0",
+  "bevy_findings": {
+    "advance_animations": "Uses Res<Time>.delta_secs; skips ActiveAnimation.update when paused.",
+    "advance_transitions": "Uses Res<Time>.delta_secs independently of ActiveAnimation.paused.",
+    "integration_constraint": "Pausing clips alone leaves transition weights advancing. Do not globally replace Time resource because camera, network, UI and probes consume it too."
+  },
+  "source_hashes": {
+    "C:\\Users\\loicd\\.cargo\\registry\\src\\index.crates.io-1949cf8c6b5b557f\\bevy_animation-0.19.0\\src\\lib.rs": "6cbaef4cceadf46cf839245143f43753346a4e79750d62891a4a9b72dbb55b98",
+    "C:\\Users\\loicd\\.cargo\\registry\\src\\index.crates.io-1949cf8c6b5b557f\\bevy_animation-0.19.0\\src\\transition.rs": "ec6b2af49f41d8ed42971896c3c18541c8a877fd97737f3027d059fa36064c84"
+  },
+  "next": "Qualify native transition branches; choose scoped animation clock integration that advances clips/transitions/events consistently while retaining zero-delta update calls."
+}

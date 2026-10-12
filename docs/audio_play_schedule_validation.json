@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "native_schedule_cases": 63,
+  "native_queue_sequences": 5,
+  "rust_tests": 2,
+  "exit_code": 0,
+  "command": "rustc --edition 2024 --test crates/core/src/audio_schedule.rs; target/audio_schedule_tests.exe",
+  "source_sha256": "d7da9cc2ab308d9cfc33a99f008b439998904375a278d716a1ea059a15367db2",
+  "limits": [
+    "Play0403 scheduling only; native property14 input, not transition15 or milliseconds.",
+    "Queue implementation excludes native allocator capacity/failures and reference lifecycle.",
+    "Unsigned pop_due follows inspected B07E50 comparison and earlier single-item drain evidence; full multiple-action playback not executed.",
+    "Not yet connected to NativeSelector/client; standalone module tests, normal executable not rebuilt."
+  ]
+}

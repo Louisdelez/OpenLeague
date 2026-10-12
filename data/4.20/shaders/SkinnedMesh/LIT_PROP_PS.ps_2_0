@@ -1,0 +1,201 @@
+#include "../DeathScreen.hls"
+#include "../MipLevels.hls"
+#include "../FogOfWar/FogOfWar_PS.hls"
+
+// Diffuse map
+sampler	DIFFUSE_MAP :			register (s0);
+
+#ifdef REFLECTIVE
+samplerCUBE REFLECTION_MAP : register (s2);
+float3 FRESNEL_COLOR :			register(c30);
+#endif
+
+// Shadow map
+sampler	SHADOW_MAP	:			register (s5);
+
+// Clouds
+sampler CLOUDS_MAP	: register (s7);
+
+#ifdef MOD2X_COLORMAP
+sampler COLORMAP    : register (s8);
+#endif
+#ifdef FOG_PIXELSHADER_BLEND
+sampler FOGLIGHTING : register(s9);
+#endif
+
+// Ambient color
+float4	AMBIENT_COLOR  :		register(c21);
+
+// Highlight and alpha
+float4 kGrassFade : register(c23);
+
+// Self illumination value
+float3 SELF_ILLUMINATION : register(c24);
+
+// Fog Color.
+#ifdef FOG_PIXELSHADER_BLEND
+	float4 FOG_COLOR : register(c28);    // R3D_SHADER_PS_CONSTANT_FOG_COLOR
+#endif
+
+#ifdef TINTING
+float3 TINT_COLOR : register(c29);
+#endif
+
+#include "../ShadowMap/pcf1.hls"
+
+struct FRAGMENT
+{
+	float4	m_Color0 : COLOR0;	
+};
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+///
+///
+///
+///////////////////////////////////////////////////////////////////////////////////////
+FRAGMENT
+	main
+	(
+	#if defined(FOG_PIXELSHADER_BLEND)
+		float4	uv1 :			TEXCOORD0, 
+	#else
+		float2	uv1 :			TEXCOORD0, 
+	#endif
+		float4	in_texcoord4 :	TEXCOORD1,
+		float4	uvSM :			TEXCOORD2, 
+#ifdef REFLECTIVE
+		float4	reflectRay  : TEXCOORD3,
+		float3  normal  : TEXCOORD4,
+	    float4	reflTint: TEXCOORD5,
+#endif
+		float4	sunColor :		COLOR0,
+		float4	envColor :		COLOR1
+	)
+{
+#ifndef USE_LIGHT_GRID
+	// Incident sun light
+	float4 incidentSunLight = sunColor;
+
+	#ifndef DISABLE_CLOUDS
+		// Mask incident sun light by clouds texture
+		float4 texelClouds = tex2D(CLOUDS_MAP, in_texcoord4.zw);
+		incidentSunLight *= texelClouds;
+	#endif
+
+	// Modulate the incident sun light by the shadow
+	#ifndef DISABLE_SHADOWS
+		float shadowMask = saturate(SampleShadowMap(SHADOW_MAP, uvSM.xyz)+0.4f);
+		incidentSunLight *= shadowMask;
+	#endif
+
+	// Sum the incident sun light with contributions from environmental and ambient
+	float4 incidentLight = incidentSunLight + envColor * 4 + AMBIENT_COLOR;
+#else
+	float4 incidentLight = envColor;
+#endif
+	
+#if defined(FULLBRIGHT)	//handle the fullbright debug visualization.
+	float4 lighting = 1.0f;
+#elif defined(USE_LIGHT_GRID)
+	//lighting
+    const float  textureScale    = sunColor.b;
+    const float  fullBrightScale = sunColor.a;
+
+	#if defined(SHOW_LIGHTING)
+		const float lightScale = 1.0f;
+	#else
+		const float lightScale = 4.0f * textureScale;
+	#endif
+	float4 lighting = saturate(incidentLight*lightScale + fullBrightScale*float4(SELF_ILLUMINATION, 0.f));
+#else
+	float4 lighting = saturate(incidentLight + float4(SELF_ILLUMINATION, 0.f));
+#endif
+
+	// Read the diffuse texture
+	float4 texelDiffuse = tex2D(DIFFUSE_MAP, uv1.xy);
+
+	// Compute albedo color using a combination of diffuse and emissive values
+	float4 finalColor;
+	finalColor.rgb = texelDiffuse.rgb * lighting.rgb;
+#ifdef TINTING
+    finalColor.rgb *= TINT_COLOR;
+#endif
+
+#ifdef REFLECTIVE
+	
+	//This reflection vector is used to look up the Reflection color in the cube map.
+	//This color is scaled by the diffuse alpha (masking) and opacity stored in eyeRay.w (computed in the vertex shader).
+	float3 reflectionColor = texCUBE(REFLECTION_MAP, reflectRay.xyz).rgb * reflectRay.w * texelDiffuse.a;
+	
+	//Finally the reflection color is modified by the RGB Reflection Tint (computed in the vertex shader)
+	//and added to the pixel color (finalColor).
+	finalColor.rgb        += reflectionColor*reflTint.rgb;				// Contribute reflection
+	const float fresnelFactor = reflTint.w;
+	finalColor.rgb += fresnelFactor * FRESNEL_COLOR * texelDiffuse.a;	// Contribute additive Fresnel
+#endif
+
+#ifndef DISABLE_FOW
+    float4 fowFactors = GetFogOfWarFactors(in_texcoord4.xy);
+	finalColor.rgb = lerp(fowFactors.rgb, finalColor.rgb, fowFactors.a);
+#endif
+
+//Handle the high-end per-pixel fogging.
+#ifdef FOG_PIXELSHADER_BLEND
+	//modify the fog color based on the fog of war...
+	#ifndef FOG_QUALITY_LOW	//High quality dual layer colored height fog.
+		float4 fogColor = tex2D(FOGLIGHTING, in_texcoord4.xy);
+		#ifndef DISABLE_FOW
+			float4 fogColorTop = lerp(fowFactors, fogColor, fowFactors.a);
+		#endif
+		float fogOpacity = envColor.a;
+		
+		#ifdef MOD2X_COLORMAP
+			float colorMapOpacity = tex2D(COLORMAP, uv1.zw).a;
+			fogOpacity = saturate( fogOpacity*colorMapOpacity*2.0f );
+		#endif
+		#ifdef FOG_TEXTURED_OPACITY
+			float texelCloudsOp = tex2D(CLOUDS_MAP, in_texcoord4.zw).r;
+			fogOpacity = fogOpacity * texelCloudsOp;
+		#endif
+		
+		//lerp towards the pure fog color and fully opaque towards the second layer of the volumetric fog.
+		float fogFarLerp = saturate( uvSM.w );
+		
+		fogOpacity = lerp( fogOpacity, 1.0f, fogFarLerp );
+		fogColor   = lerp( fogColorTop, fogColor, fogFarLerp );
+		
+		//final fog blend.
+		finalColor.rgb = lerp( finalColor.rgb, fogColor, fogOpacity );
+	#else			//Lower quality single layer singe-color height fog.
+		//lerp towards the pure fog color and fully opaque towards the second layer of the volumetric fog.
+		float fogOpacity = saturate( uvSM.w );
+
+		//final fog blend.
+		finalColor.rgb = lerp( finalColor.rgb, FOG_COLOR, fogOpacity );
+	#endif
+#endif
+
+	// Alpha
+	finalColor.a = texelDiffuse.a * kGrassFade.a;	
+
+	// Return fragment
+	FRAGMENT fragment;
+	fragment.m_Color0 = finalColor;
+	
+	//Editor / Debugging features.
+	#if defined(SHOW_LIGHTING)
+		#if defined(USE_LIGHT_GRID)
+			fragment.m_Color0.rgb = lighting;
+		#else
+			fragment.m_Color0.rgb = lighting*0.25f;
+		#endif
+	#elif defined(GRAYSCALE)
+		float3 LUMINANCE_CONVERSION = float3(0.299f, 0.587f, 0.114f);
+		fragment.m_Color0.rgb = dot( fragment.m_Color0.rgb, LUMINANCE_CONVERSION );
+	#endif
+
+    fragment.m_Color0.rgb = GetEnvironmentDeathColor(fragment.m_Color0.rgb);
+    fragment.m_Color0.rgb = ApplyMipColorsVisualization(fragment.m_Color0.rgb, uv1.xy);
+	return fragment;
+}

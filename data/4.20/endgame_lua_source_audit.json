@@ -1,0 +1,490 @@
+{
+  "source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Scripts\\EndOfGame.luaobj",
+  "sha256": "5548ca1ce30a6bc2740d787b2bc224c5d11f06d89ca9b2dcd8659e1e4a263379",
+  "initialization": {
+    "globals": {
+      "TEAM_UNKNOWN": 0.0,
+      "EOG_SCOREBOARD_PHASE_DELAY_TIME": 2.0,
+      "EOG_NEXUS_REVIVE_TIME": 10.0,
+      "EOG_MAIN_SFX_FADE_DELAY_TIME": 1.0,
+      "EOG_MAIN_SFX_FADE_DURATION": 2.0,
+      "EOG_ALIVE_NEXUS_SKIN": 0.0,
+      "EOG_DESTROYED_NEXUS_SKIN": 1.0,
+      "EOG_MINION_FADE_AMOUNT": 0.0,
+      "EOG_MINION_FADE_TIME": 2.0,
+      "EndOfGameCeremony": {
+        "function_lines": [
+          18,
+          60
+        ]
+      },
+      "ChampionEoGCeremony": {
+        "function_lines": [
+          63,
+          68
+        ]
+      },
+      "FadeOutMainSFXPhase": {
+        "function_lines": [
+          70,
+          72
+        ]
+      },
+      "DestroyNexusPhase": {
+        "function_lines": [
+          74,
+          87
+        ]
+      },
+      "StopRenderingMinionsPhase": {
+        "function_lines": [
+          89,
+          91
+        ]
+      },
+      "ScoreboardPhase": {
+        "function_lines": [
+          93,
+          96
+        ]
+      },
+      "TestReviveNexus": {
+        "function_lines": [
+          98,
+          101
+        ]
+      }
+    },
+    "stopped": null
+  },
+  "prototype": {
+    "source": null,
+    "lines": [
+      0,
+      0
+    ],
+    "flags": [
+      0,
+      0,
+      2,
+      2
+    ],
+    "code": [
+      16385,
+      7,
+      49153,
+      32775,
+      81921,
+      65543,
+      114689,
+      98311,
+      49153,
+      131079,
+      16385,
+      147463,
+      114689,
+      163847,
+      16385,
+      180231,
+      49153,
+      196615,
+      36,
+      212999,
+      16420,
+      229383,
+      32804,
+      245767,
+      49188,
+      262151,
+      65572,
+      278535,
+      81956,
+      294919,
+      98340,
+      311303,
+      8388638
+    ],
+    "constants": [
+      "TEAM_UNKNOWN",
+      0.0,
+      "EOG_SCOREBOARD_PHASE_DELAY_TIME",
+      2.0,
+      "EOG_NEXUS_REVIVE_TIME",
+      10.0,
+      "EOG_MAIN_SFX_FADE_DELAY_TIME",
+      1.0,
+      "EOG_MAIN_SFX_FADE_DURATION",
+      "EOG_ALIVE_NEXUS_SKIN",
+      "EOG_DESTROYED_NEXUS_SKIN",
+      "EOG_MINION_FADE_AMOUNT",
+      "EOG_MINION_FADE_TIME",
+      "EndOfGameCeremony",
+      "ChampionEoGCeremony",
+      "FadeOutMainSFXPhase",
+      "DestroyNexusPhase",
+      "StopRenderingMinionsPhase",
+      "ScoreboardPhase",
+      "TestReviveNexus"
+    ],
+    "functions": [
+      {
+        "source": null,
+        "lines": [
+          18,
+          60
+        ],
+        "flags": [
+          0,
+          2,
+          0,
+          6
+        ],
+        "code": [
+          7,
+          133,
+          16581,
+          16826391,
+          2147516438,
+          49285,
+          32903,
+          2147500054,
+          16517,
+          32903,
+          82053,
+          8388800,
+          16810140,
+          65671,
+          114821,
+          16581,
+          16810140,
+          98439,
+          131205,
+          98501,
+          8388866,
+          25182364,
+          147589,
+          98501,
+          258,
+          25182364,
+          163973,
+          98501,
+          258,
+          25182364,
+          114821,
+          49349,
+          16810140,
+          180359,
+          131205,
+          180421,
+          8388866,
+          25182364,
+          147589,
+          180421,
+          258,
+          25182364,
+          163973,
+          180421,
+          258,
+          25182364,
+          196741,
+          213189,
+          8388866,
+          25182364,
+          196741,
+          229573,
+          8388866,
+          25182364,
+          196741,
+          245957,
+          8388866,
+          25182364,
+          196741,
+          262341,
+          8388866,
+          25182364,
+          196741,
+          278725,
+          8388866,
+          25182364,
+          196741,
+          295109,
+          8388866,
+          25182364,
+          196741,
+          311493,
+          8388866,
+          25182364,
+          327813,
+          8405148,
+          344197,
+          194,
+          16793756,
+          360581,
+          8405148,
+          376965,
+          8405148,
+          393349,
+          409797,
+          426241,
+          25182364,
+          442501,
+          458945,
+          475397,
+          322,
+          33570972,
+          442501,
+          491713,
+          508165,
+          8421660,
+          322,
+          33570972,
+          8388638
+        ],
+        "constants": [
+          "winningTeam",
+          "TEAM_ORDER",
+          "losingTeam",
+          "TEAM_CHAOS",
+          "losingHQPosition",
+          "GetPosition",
+          "orderHQ",
+          "GetHQ",
+          "SetInvulnerable",
+          "SetTargetable",
+          "SetBuildingHealthRegenEnabled",
+          "chaosHQ",
+          "SetInputLockFlag",
+          "INPUT_LOCK_CAMERALOCKING",
+          "INPUT_LOCK_CAMERAMOVEMENT",
+          "INPUT_LOCK_ABILITIES",
+          "INPUT_LOCK_SUMMONERSPELLS",
+          "INPUT_LOCK_MOVEMENT",
+          "INPUT_LOCK_SHOP",
+          "INPUT_LOCK_MINIMAPMOVEMENT",
+          "DisableHUDForEndOfGame",
+          "SetBarracksSpawnEnabled",
+          "CloseShop",
+          "HaltAllAI",
+          "LuaForEachChampion",
+          "TEAM_UNKNOWN",
+          "ChampionEoGCeremony",
+          "InitTimer",
+          "FadeOutMainSFXPhase",
+          "EOG_MAIN_SFX_FADE_DELAY_TIME",
+          "DestroyNexusPhase",
+          "GetEoGNexusChangeSkinTime"
+        ],
+        "functions": [],
+        "locals": [],
+        "upvalues": []
+      },
+      {
+        "source": null,
+        "lines": [
+          63,
+          68
+        ],
+        "flags": [
+          0,
+          1,
+          0,
+          6
+        ],
+        "code": [
+          69,
+          128,
+          16581,
+          33029,
+          8421660,
+          8388930,
+          41959516,
+          49221,
+          128,
+          194,
+          25182300,
+          8388638
+        ],
+        "constants": [
+          "MoveCameraFromCurrentPositionToPoint",
+          "losingHQPosition",
+          "GetEoGPanToHQTime",
+          "SetGreyscaleEnabledWhenDead"
+        ],
+        "functions": [],
+        "locals": [],
+        "upvalues": []
+      },
+      {
+        "source": null,
+        "lines": [
+          70,
+          72
+        ],
+        "flags": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "code": [
+          5,
+          16453,
+          16793628,
+          8388638
+        ],
+        "constants": [
+          "FadeOutMainSFX",
+          "EOG_MAIN_SFX_FADE_DURATION"
+        ],
+        "functions": [],
+        "locals": [],
+        "upvalues": []
+      },
+      {
+        "source": null,
+        "lines": [
+          74,
+          87
+        ],
+        "flags": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "code": [
+          5,
+          8421404,
+          4210711,
+          2147532822,
+          32773,
+          49221,
+          65669,
+          25182236,
+          81925,
+          49221,
+          98437,
+          114885,
+          33570844,
+          131077,
+          147521,
+          114821,
+          194,
+          33570844,
+          131077,
+          163905,
+          180357,
+          194,
+          33570844,
+          8388638
+        ],
+        "constants": [
+          "GetEoGUseNexusDeathAnimation",
+          false,
+          "SetHQCurrentSkin",
+          "losingTeam",
+          "EOG_DESTROYED_NEXUS_SKIN",
+          "FadeMinions",
+          "EOG_MINION_FADE_AMOUNT",
+          "EOG_MINION_FADE_TIME",
+          "InitTimer",
+          "StopRenderingMinionsPhase",
+          "ScoreboardPhase",
+          "EOG_SCOREBOARD_PHASE_DELAY_TIME"
+        ],
+        "functions": [],
+        "locals": [],
+        "upvalues": []
+      },
+      {
+        "source": null,
+        "lines": [
+          89,
+          91
+        ],
+        "flags": [
+          0,
+          0,
+          0,
+          3
+        ],
+        "code": [
+          5,
+          16453,
+          8388738,
+          25182236,
+          8388638
+        ],
+        "constants": [
+          "SetMinionsNoRender",
+          "losingTeam"
+        ],
+        "functions": [],
+        "locals": [],
+        "upvalues": []
+      },
+      {
+        "source": null,
+        "lines": [
+          93,
+          96
+        ],
+        "flags": [
+          0,
+          0,
+          0,
+          3
+        ],
+        "code": [
+          5,
+          16453,
+          8388738,
+          25182236,
+          32773,
+          49221,
+          16793628,
+          8388638
+        ],
+        "constants": [
+          "SetInputLockFlag",
+          "INPUT_LOCK_CHAT",
+          "EndGame",
+          "winningTeam"
+        ],
+        "functions": [],
+        "locals": [],
+        "upvalues": []
+      },
+      {
+        "source": null,
+        "lines": [
+          98,
+          101
+        ],
+        "flags": [
+          0,
+          0,
+          0,
+          3
+        ],
+        "code": [
+          5,
+          16453,
+          32901,
+          25182236,
+          8388638
+        ],
+        "constants": [
+          "SetHQCurrentSkin",
+          "losingTeam",
+          "EOG_ALIVE_NEXUS_SKIN"
+        ],
+        "functions": [],
+        "locals": [],
+        "upvalues": []
+      }
+    ],
+    "locals": [],
+    "upvalues": []
+  }
+}

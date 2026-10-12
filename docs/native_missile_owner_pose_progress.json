@@ -1,0 +1,38 @@
+{
+  "updated_utc": "2026-10-07T04:26:23.192196+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_pipeline_cases": 72,
+  "native_full_binding_cases": 16,
+  "actual_cpu_rsqrt_operations": 9,
+  "focused_core_tests_passed": 2,
+  "filtered_core_tests": 592,
+  "full_core_suite_rerun": false,
+  "ordinary_projected_binding": false,
+  "client_rebuilt": false,
+  "artifacts_sha256": {
+    "crates/core/src/native_missile_owner_pose.rs": "caa202f5c8a66a159ee6fd6fee117237741816a0284a5e47edcfa2b57ffde322",
+    "crates/core/src/native_actor_effect_owner.rs": "b8f194a4cf98d049c2f38e3f23401d6d702e43cedd6fa7d2d7d5a742f157db96",
+    "crates/core/src/native_troy_owner_pose.rs": "0452a7da3a06b1eb3cefc949b73c8cefb9c485e1b13bd72a0a513ff9a4c22cf3",
+    "crates/core/src/native_missile_effect_owner.rs": "c9efafb553cfb94cfc884a77841185f37a5cd5577aec393b9ee8f6876c4d5dcc",
+    "crates/core/src/lib.rs": "a5aada5b715ad08e071dad173709243975634e34ec85c38da18a2fda759cf5ff",
+    "data/4.20/missile_effect_owner_pose_pipeline_contract.json": "84c8f42c2853ad703565bff485ce1a27d6dc4b5cfbeb2bccadb18d75ef6ecf3f",
+    "data/4.20/missile_effect_owner_full_binding_contract.json": "b6ac00b5fe7b9b661772bba048836c5d28e03eda46bffe0a9268137a95ace922",
+    "tools/probe_native_missile_pose_pipeline.py": "2a8b35a854df443593ac010e2d6f96994bdeb7e160db155f6b3765d67901be0a",
+    "tools/probe_native_missile_full_binding.py": "bd078fffa3940d63f03e2648245760968cf1c3c95c1cf04944ebf59672f16cb0",
+    "logs/native-missile-owner-pose-tests.log": "f59b2517598c49712739ade8bc6cc65077c53ccd317bef3d662fd833e036a05c"
+  },
+  "findings": [
+    "Original6C9BD0 and actual Troy vtable68/9286C0 retain the provider at effect+C8/+CC;16combinations execute without virtual receiver adaptation.",
+    "72combinations execute binding then full94099A..940AEE owner pose phase with concrete10B0D20 virtual bodies, original Simple setters, direction/matrix copies, status93F1A0 and empty callback queue.",
+    "Core native_missile_owner_pose connects common actor position/direction/status ports and projectile orientation to the Troy transfer. Rust matches source/emitter raw words and flags in72native cases.",
+    "Direction matrices queried only for source flag10 without20. Missing linkage, expired effect or expired weak owner preserve prior emitter state."
+  ],
+  "limits": [
+    "Single-threaded mutex adapter; callback queue empty. Complete callback concurrency/destruction not covered here.",
+    "RSQRTSS references use the physical CPU; ordinary finite data and default arithmetic modes only.",
+    "Projectile creation, live direction producers, complete particle update and ordinary rendering remain incomplete.",
+    "Two focused tests run,592filtered; no new full core suite, client rebuild, GPU/audio or champion completion."
+  ],
+  "next_action": "Qualifier le producteur natif de direction du projectile et sa création complète, raccorder la pose10B0D20 au rendu d’Annie, puis contrôler scale/alpha/récepteurs terrain et poursuivre les24domaines."
+}

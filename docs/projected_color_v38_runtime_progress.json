@@ -1,0 +1,19 @@
+{
+  "updated_utc": "2026-10-07T14:15:57.956559+00:00",
+  "complete": false,
+  "client_sha256": "384868bff65c4a25a592c509de40a1d81eb546924d0a2fa150ea4f5c1a980f4a",
+  "build": "logs/projected-capture-atomic-build.log",
+  "dx12_pixels": "docs/projected_receiver_pixels_v38_dx12.json",
+  "vulkan_pixels": "docs/projected_receiver_pixels_v38_vulkan.json",
+  "cleanup": "docs/receiver_cleanup_v38.json",
+  "findings": [
+    "Both casts contribute GPU pixels on each backend.",
+    "All four final cleanup atlases have complete payloads, matching frame headers, zero active draws and exact same-frame RGB equality with projection-excluded view.",
+    "Color LUT source pixels match native DDS; texture preloaded and production warmup uses same binding."
+  ],
+  "limits": [
+    "Reconstructed renderer diagnostic fixture; not original game framebuffer equivalence.",
+    "Per-vertex height fade, native stage1 sampler/upload and clip behavior remain to finish.",
+    "Full Annie kit and full project remain incomplete."
+  ]
+}

@@ -1,0 +1,10 @@
+from pathlib import Path
+import json
+r=Path('E:/OpenLeague');p=json.loads((r/'data/4.20/audio_global_float_power_boundary_preparation.json').read_text(encoding='utf-8'));body=(r/'tools/global_float_numeric_hardware_candidate_aligned.rs').read_text(encoding='utf-8');body=body[:body.index('fn main(){')]
+fields=['bits','exponent_bits','power_bits','threshold_bits','value_bits'];cases=','.join('['+','.join(hex(x[k])+'u32'for k in fields)+']'for x in p['cases'])
+main=r'''static CASES:[[u32;5];COUNT]=[CASES];
+fn main(){unsafe{SetErrorMode(3);}let mut control=[0x037f0000u32,0u32,0x1f80];unsafe{std::arch::asm!("fnstcw word ptr [{c}]","fldcw word ptr [{c}+2]","stmxcsr dword ptr [{c}+4]","ldmxcsr dword ptr [{c}+8]",c=in(reg)control.as_mut_ptr(),options(nostack));}
+let mut power_failed=0;let mut final_failed=0;let mut diffs=Vec::new();for(i,c)in CASES.iter().enumerate(){let actual_power=(10f64.powf(f32::from_bits(c[1])as f64)as f32).to_bits();let mut cache=[0u32;2];let actual=numeric(c[0],&mut cache);let bad_power=actual_power!=c[2];let bad_final=actual!=[c[3],c[4]];power_failed+=u32::from(bad_power);final_failed+=u32::from(bad_final);if bad_power||bad_final{diffs.push(format!("{{\"index\":{},\"bits\":{},\"native_power\":{},\"candidate_power\":{},\"native_threshold\":{},\"candidate_threshold\":{},\"native_value\":{},\"candidate_value\":{}}}",i,c[0],c[2],actual_power,c[3],actual[0],c[4],actual[1]));}}
+unsafe{std::arch::asm!("fldcw word ptr [{c}]","ldmxcsr dword ptr [{c}+4]",c=in(reg)control.as_ptr(),options(nostack));}println!("{{\"case_count\":{},\"power_mismatches\":{},\"final_mismatches\":{},\"mismatches\":[{}]}}",CASES.len(),power_failed,final_failed,diffs.join(","));}
+'''.replace('COUNT',str(p['case_count'])).replace('CASES];',cases+'];')
+(r/'tools/global_float_power_boundary_hardware_candidate.rs').write_text(body+main,encoding='utf-8');(r/'tools/prepare_global_float_power_boundary_hardware_candidate.py').write_text(Path(__file__).read_text(encoding='utf-8'),encoding='utf-8');print('Prepared',p['case_count'],'native-vs-hardware power and full numeric comparisons.')

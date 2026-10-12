@@ -1,0 +1,37 @@
+{
+  "updated_utc": "2026-10-04T20:47:55.687405+00:00",
+  "complete": false,
+  "client_tests_passed": 97,
+  "client_build_passed": true,
+  "native_position_cases": 48,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Executed original6B1860 with original owner resolver, virtual self/shared-reference getters and circle no-op refresh;48cases and160native addresses without adapters.",
+    "Ported primary X/Z position refresh with nativeepsilon, shared parameter dirty flag and invalid-owner clearing/lifetime34000000.",
+    "Generation mismatch alone does not invalidate this position method, unlike previously qualified modifier resolution."
+  ],
+  "limits": [
+    "Complete original owner-position update executes with original resolver and null secondary shared-position provider. Non-null secondary position object remains unqualified.",
+    "This method does not compare the cached generation; invalid handle/slot clears cached owner and sets lifetime bits34000000. Cached-pointer mismatch assertion is not exercised.",
+    "Actor construction, position producer, source creation/team/activation/destruction and full lifetime consumption remain open.",
+    "Primary refresh is qualified only when the secondary shared-position provider is absent; non-null provider and its position getter remain open.",
+    "Registry/source state is supplied in comparisons; ordinary gameplay source lifecycle and GPU fog binding remain unimplemented.",
+    "97client tests and build are current;427core tests and10UDPchecks remain prior unchanged-core/server evidence.",
+    "All24domains remain unfinished."
+  ],
+  "next_actions": [
+    "Qualify the non-null secondary position object and native pose getter, source team/creation/activation and lifetime consumption/destruction.",
+    "Connect qualified position and parameter updates to actual Rust source identities, with native field producers and buff aggregation.",
+    "Qualify world extent and terrain initialization; reconcile fog masks with authoritative visibility and bind GPU fog to ordinary rendering."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_position_contract.json": "4c74c18fe97d3490638b6285c165555521e478f7b5c2b8dd26db020ac6ec65db",
+    "tools/probe_fow_position.py": "bcb2dd6cd9b38d418f2897e629b920540bfeb23b5919eac71946f5ab4117b026",
+    "crates/client/src/fow_position.rs": "05d7db0b6eacaae63739da1be9df78e5f7ca6c9259917a75412b8947d6c9818d",
+    "crates/client/src/main.rs": "a3ec5d4c83631689d9755604838783a2c223cc51978caba0670991848c362a85",
+    "logs/native-position-tests.log": "df7d48fd9d6e48a190ceddc3187102deafb15b8032eb3139fdeabe96ae687f2e",
+    "logs/native-position-build.log": "3a4e1545581264a5e01d84c28fede0d8be927bdbdf51a53295e1c0f468ca9cd8",
+    "target/debug/openleague-client.exe": "04d1f01ae9774f4047c017e45b3968c948fa6ba8fcfed85200bc5d711c8ea35e"
+  }
+}

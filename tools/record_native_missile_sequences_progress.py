@@ -1,0 +1,33 @@
+from pathlib import Path
+import json,hashlib,datetime,shutil,re
+r=Path('E:/OpenLeague');now=datetime.datetime.now(datetime.timezone.utc).isoformat();receipt='docs/native_missile_motion_sequences_progress.json'
+def load(p):return json.loads((r/p).read_text(encoding='utf-8-sig'))
+def sha(p):return hashlib.sha256((r/p).read_bytes()).hexdigest()
+a=load('data/4.20/missile_motion_contract.json');assert a['passed'] and len(a['cases'])==72
+b=load('data/4.20/missile_motion_sequences_contract.json');c=load('data/4.20/missile_end_crossing_contract.json');assert b['passed'] and c['passed'] and len(b['sequences'])==48 and len(c['cases'])==144
+log='logs/native-missile-motion-sequences-tests.log';assert 'test result: ok. 3 passed; 0 failed;' in (r/log).read_text(encoding='utf-8-sig')
+next_action='Qualifier le rappel natif de fin de course et ses effets d’impact, puis la copie de position vers le propriétaire10B0D20 et le rendu normal ; poursuivre les collisions, scale/alpha/récepteurs terrain et les24domaines.'
+files=['data/4.20/missile_motion_sequences_contract.json','data/4.20/missile_end_crossing_contract.json','tools/probe_native_missile_motion_sequences.py','tools/probe_native_missile_end_crossing.py','data/4.20/missile_motion_contract.json','tools/probe_native_missile_motion.py','crates/core/src/native_missile_motion.rs','crates/core/src/lib.rs',log]
+proof=dict(updated_utc=now,complete=False,native_sha256=a['native_sha256'],motion_cases=72,moving_target_sequences=48,moving_target_frames=384,crossing_cases=144,sequence_cpu_rsqrt_operations=b['actual_cpu_rsqrt_operations'],crossing_cpu_rsqrt_operations=c['actual_cpu_rsqrt_operations'],focused_core_tests_passed=3,filtered_core_tests=595,full_core_suite_rerun=False,artifacts_sha256={p:sha(p) for p in files},findings=['48native75F130 sequences,8frames each: moving target and valid-invalid transitions preserve the last known target. Rust matches all384direction/moving-position/target raw outputs.','Whole75F840 crossing predicate executes on144horizontal direction/plane/radius cases, including zeroXZ. Rust predicate matches all booleans.','Rust crossing function computes normalized horizontal projection and inclusive radius crossing. This is geometry; impact callbacks/lifecycle are separate.','All three focused module tests pass:72single-motion cases,384moving frames,144crossings.595other tests filtered; no new full-suite claim.'],adapters=b['adapters'],limits=['Zero gravity/acceleration/travel-time1400 profile; terrain query supplies unobstructed result.','Crossing lifecycle callback, impact resources/audio, real collision geometry and current-position copy remain unqualified.','No client rebuild, live binding, GPU/audio or full-suite qualification.','24domains114tasks retained; zero domains closed.'],next_action=next_action)
+
+(r/receipt).write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+h=r/'docs/plan_history'/('missile-motion-sequences-'+datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ'));h.mkdir(parents=True,exist_ok=True)
+for name in ['coverage.json','resume_checkpoint.json','completion_plan.json','goal_plan_revision.json']:
+ p=r/'docs'/name;shutil.copy2(p,h/name);d=load('docs/'+name);d.update(updated_utc=now,native_missile_motion_sequences_progress=receipt)
+ if name=='goal_plan_revision.json':d.update(latest_native_execution_progress=receipt,next_steps=[next_action])
+ else:
+  e=d.setdefault('last_verified' if name=='resume_checkpoint.json' else 'current_evidence',{});e.update(latest_native_execution_progress=receipt,native_missile_motion_cases=72,native_missile_moving_sequences=48,native_missile_moving_frames=384,native_missile_crossing_cases=144,native_missile_motion_focused_tests=3,native_missile_owner_live_bound=False)
+  if name=='resume_checkpoint.json':d.update(saved_utc=now,next_projected_action=next_action)
+  if name=='completion_plan.json':
+   d['next_execution_steps']=[next_action]+d.get('next_execution_steps',[])[1:];assert len(d['domains'])==24 and sum(len(x['tasks']) for x in d['domains'])==114
+   for dom in d['domains']:
+    if str(dom['id']).zfill(2) in ['03','15'] and receipt not in dom.setdefault('progress_evidence',[]):dom['progress_evidence'].append(receipt)
+ p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+for p in [r/'docs/GOAL-OPENLEAGUE-NOUVEAU.txt',r/'docs/GOAL-OPENLEAGUE-ACTUALISE.txt',Path('E:/mapslol3v3/GOAL-OPENLEAGUE-NOUVEAU.txt'),Path('E:/mapslol3v3/GOAL-OPENLEAGUE-MIS-A-JOUR.txt')]:
+ if p.exists():
+  s=p.read_text(encoding='utf-8');s=re.sub(r'PROCHAINE ÉTAPE :.*?(?=\n\nCLÔTURE)',f'PROCHAINE ÉTAPE : {next_action}',s,flags=re.S);p.write_text(s,encoding='utf-8')
+p=r/'docs/goal_plan_revision.json';d=load('docs/goal_plan_revision.json');d['objective_sha256']=sha('docs/GOAL-OPENLEAGUE-NOUVEAU.txt');p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+p=r/'docs/completion_plan.html';shutil.copy2(p,h/p.name);s=p.read_text(encoding='utf-8');s=s.replace('</body>','<section><h2>Projectile ciblé d’Annie</h2><p>Cibles mobiles :48séquences384images comparées bit à bit. Fin de course :144prédicats natifs75F840 conformes. Trois tests ciblés passent,595filtrés. Impact, collision et rendu normal restent ouverts.</p><a href="native_missile_motion_sequences_progress.json">Preuves et limites</a></section></body>');p.write_text(s,encoding='utf-8')
+if Path(__file__).resolve()!=(r/'tools'/Path(__file__).name).resolve():shutil.copy2(Path(__file__),r/'tools'/Path(__file__).name)
+print(json.dumps(dict(receipt=receipt,moving_target_frames=384,crossing_cases=144,complete=False)))
+

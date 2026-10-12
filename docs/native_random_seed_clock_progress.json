@@ -1,0 +1,31 @@
+{
+  "updated_utc": "2026-10-04T06:28:08.066571+00:00",
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "passed": true,
+  "complete": false,
+  "files_sha256": {
+    "tools/qualify_native_random_seed_clock.py": "eab2529cec06317d8db47689edd5bf20c4ed5da77d3a360eccd6af0a5d4b70a0",
+    "data/4.20/random_seed_clock_contract.json": "169d3a7502f713cc98f7a5ba5b77cc70f34fc42705aaf265dd293d1e5695a4d3",
+    "crates/core/src/native_random.rs": "3937914287799461892e1afba53a5f9e49cdca4da2d7180a59a074cbe7bbba58",
+    "logs/native-random-seed-clock-tests.log": "314e15cb60065bcf17ede34fe20bf7b1e2ef2618c8e1373532453cedfb1a9bcc"
+  },
+  "conversion_cases": 114,
+  "startup_fragments": 6,
+  "core_tests_passed": 323,
+  "client_tests_passed": 22,
+  "source_implementation": "Rng55::seed_from_filetime / from_filetime matches unsigned wrapping subtraction of UTC Unix FILETIME epoch, division by10000, then low32bits passed to original8E2630.",
+  "native_entrypoints": [
+    "993DA0",
+    "CA2910",
+    "58D985..58D9AB",
+    "8E2630"
+  ],
+  "limits": [
+    "Original993DA0 and unsigned64 divisionCA2910 executed, with security-cookie adapter preserving EAX. OS SystemTimeToFileTime returns supplied UTC conversions; original Windows API is not executed.",
+    "Original startup fragment58D985..58D9AB executes GetSystemTime, conversion993DA0 and RNG seed8E2630. Remaining startup function not qualified.",
+    "Explicit UTC FILETIME inputs; no live startup clock or cross-system RNG draw ordering integration claimed. Camera shake activation/effect bindings still incomplete.",
+    "Source API and tests integrated in core; existing running client/executable unchanged, no new live startup integration claimed.",
+    "Native activation setters not established: byte+20 candidates examined included565E00 camera path interpolation, not the shake state. No guessed event binding added.",
+    "Full24-domain game remains incomplete."
+  ]
+}

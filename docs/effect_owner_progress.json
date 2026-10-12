@@ -1,0 +1,32 @@
+{
+  "updated_utc": "2026-10-04T16:15:57.676688+00:00",
+  "complete": false,
+  "client_tests_passed": 57,
+  "native_effect_owner_masks": 256,
+  "native_instruction_addresses": 113,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "runtime_annie_projected_emitter_bound": false,
+  "current_build_gpu_rerun": false,
+  "findings": [
+    "Original7558C0 locks8weak references, sets owner stopping38, dispatches9289B0via vtable offsetA0only to live references. All256live masks execute native weak lock/refcount and setter without adapters.",
+    "Rust equivalent uses weak references, preserves other request bits and leaves expired references untouched. Native masks and ownership preservation pass.",
+    "Actual effect constructor93FD9A installs vtable10D6DB4; setter is at offsetA0. Adjacent table10D6D60is a different object and is excluded.",
+    "Static caller755C0E invokes owner stop when887110returnsfalse. Exact missile-owner identity and full manager processing remain open."
+  ],
+  "limits": [
+    "Eight explicit weak effect handles with preallocated control blocks, strong count1live/0expired; native lock/refcount and virtual request setter execute.",
+    "Owner already active supplied to avoid unrelated diagnostic assertion branch.",
+    "This qualifies effect-holder stop dispatch; identifying exact missile owner entry and full manager/audio processing remains open.",
+    "Full game, normal Annie Projected consumer, original manager/audio processing and visual qualification remain incomplete."
+  ],
+  "files_sha256": {
+    "data/4.20/effect_owner_stop_contract.json": "9a72d6d1ad942268b9004cf4b2c669b23294c571c3691c4553403edbfb4b2639",
+    "data/4.20/effect_owner_callers_discovery.json": "8083df7a1bad91d4c116c5c22fba55460b78e8b374f9c90295c5f4591168fdb8",
+    "data/4.20/particle_stop_virtual_calls.json": "085319047a521aebc2a429fd6a5b8798c2ad8843b441d2b5da2e94425a0d2827",
+    "crates/client/src/effect_owner.rs": "0d65930c1df8ce7f3c3c8a0c21d15f4ffcf6669baccf783d865826a30562057a",
+    "crates/client/src/main.rs": "22694af680c6ee623c6ae8f1d03222c8e0dca9d10d788fa1aeccff210468e98e",
+    "logs/effect-owner-tests.log": "32176c7697de693e53aba026a682bc8b3f9d79c0f950c340662a2effce755d53",
+    "logs/effect-owner-build.log": "c451b801f4e6a6f5b241f4ed676d69d027975b2bb72ab36a116bbd2eba653033",
+    "target/debug/openleague-client.exe": "2e4dde22a093cc3d06a504ca8375570ada2e4b396e3230d6cc12fe7a5f948d0a"
+  }
+}

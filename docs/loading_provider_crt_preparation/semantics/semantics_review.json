@@ -1,0 +1,177 @@
+{
+  "schema": 1,
+  "kind": "static_provider_semantics_review",
+  "complete": false,
+  "production_modified": false,
+  "native_executed": false,
+  "compiler_executed": false,
+  "probes_with_io_executed": false,
+  "source_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "verification": {
+    "existing_regions_compared_to_pe": 76,
+    "supplemental_function_regions": 15,
+    "supplemental_outside_edges": 0,
+    "method": "Direct PE-byte verification plus control-flow disassembly; no callbacks or native execution results substituted."
+  },
+  "preparation_corrections": [
+    {
+      "severity": "semantic",
+      "claim": "90B270 registers a persistent callback24",
+      "locations": [
+        "E:/OpenLeague/docs/loading_standard_resource_preparation/AUDIT.md:40",
+        "E:/mapslol3v3/loading_resource_provider_next/README.md:39"
+      ],
+      "correction": "90B270 synchronously visits active entries in manager+9C..+A0, then destroys its by-value callable. It contains no storage/publication of this callable.",
+      "evidence": [
+        "90B29D..90B2CC",
+        "90B2D5..90B2EA",
+        "90F280",
+        "5E21B0",
+        "5C3FE0"
+      ]
+    },
+    {
+      "severity": "io_boundary",
+      "claim": "Do not infer read-only effects from the INI lookup role",
+      "correction": "8ACEF0 calls imported RemoveDirectoryA at8AD057/8AD284 if its GetFileAttributesA result denotes a directory. The frozen preparation does not explicitly claim this path completed, but subsequent probes must not expose these calls to the source deployment.",
+      "evidence": [
+        "8AD03B..8AD057",
+        "8AD268..8AD284",
+        "PE IATFA41A4=GetFileAttributesA,FA41AC=RemoveDirectoryA"
+      ]
+    }
+  ],
+  "contracts": [
+    {
+      "routine": "90B520",
+      "facts": [
+        "Repeats normalized String24+skin lookup before construction; existing hit returns node+2C and destroys only its normalized temporary.",
+        "Allocates56 after allocator initialization flag2D77B20/5B47E0; directory32 is looked up using the caller manager, while9034D0 receives the then-current global2D78F1C.",
+        "Stores constructed provider into cache slot at90B651 before INI existence, path resolution, fallback selection, parent store, hash-index store, and visitor dispatch.",
+        "Allocator null flows through provider=0, cache publication, then dereference at90B699. This is not a source-supported successful null provider.",
+        "Creates original-name+'.ini'; VT+28 existence gates VT+1C resolution and8B0630. Empty fallback uses address(manager+80), not word(manager+80). Nonempty fallback calls90AD00 with fallback name, original skin, and third argument0.",
+        "After parent VT+2C, VT+24 supplies a hash, written to manager+1C index at90B750. Callback visitation follows at90B76A. Temporary strings retire only afterwards on the normal path."
+      ],
+      "sites": [
+        "90B557..90B5BC",
+        "90B5C2..90B651",
+        "90B695..90B728",
+        "90B72D..90B78A"
+      ]
+    },
+    {
+      "routine": "9034D0",
+      "facts": [
+        "Field+4 stores supplied manager; +8/+C form owned provider tree; +10 starts null parent; +14 stores borrowed directory32; +18 is copied owned original-name String24; +30 stores original skin; +34 starts0 and903590 computes it.",
+        "Final vtable10D64A8 is published before name copy and903590. The constructor is not complete just because this vtable is visible.",
+        "903590 formats skin via993860 with destination size3 and '%02d', before hashing the marker, original name and resulting bytes. It conditionally populates skin-specific context data only for nonzero skin with a nonnull context list."
+      ],
+      "sites": [
+        "9034F9..903573",
+        "9035C0..903619"
+      ]
+    },
+    {
+      "routine": "8B0630 /8AD4D0",
+      "facts": [
+        "Section is ECX='Package', key is EDX='FallbackPackage'; arguments at90B6BB..90B6D7 supply default empty, output2D86D98, count13A0, actual resolved path, flag0. Caller uses output bytes, not a returned Boolean.",
+        "8B0630 lazily constructs global result String24 at2D88138 and INI manager2D84098, registers real atexit callbacksFA0490/FA0480, resets result length but retains heap capacity.",
+        "8AD4D0 gets a file pair via8ACEF0. If pair+4 is nonnull it queries that first with8B01C0; if missing/false it queries pair+0. It hashes section/key via8E51A0. Preserve this precedence and default behavior.",
+        "Copy count is min(requested_count, global_string_length), then terminator at output+copy_count. It is not count-1 and requires the extra terminator byte. Shared global result/output state is not a thread-local host string.",
+        "8ACEF0 maintains last-file and tree caches, can retire/rebuild the old pair, constructs384-byte file objects, and publishes the new pair at8AD456 then last-cache pointer at8AD49F. Inner helpers and full failure rollback remain unexecuted."
+      ],
+      "sites": [
+        "8B065C..8B06F9",
+        "8B06FE..8B0735",
+        "8AD4D0..8AD535",
+        "8ACFBD..8AD088",
+        "8AD456..8AD49F"
+      ]
+    },
+    {
+      "routine": "8B0380",
+      "facts": [
+        "Copies the actual path and appends the exact literal 'bin'; .ini becomes .inibin. Opens through8B4EF0 with mode'rb'.",
+        "Reads three header bytes and checks first byte equals2. On mismatch it emits diagnostics and virtual-deletes the actual file object; on accepted header it reads flags/type tables/string storage via native helpers and then deletes the file object.",
+        "8AD5B0 first invokes8B0380 on one actual path, and on failure invokes it on its alternate path, retaining status bytes+148/+149. Separate text/overlay paths remain possible through+14A and8B01C0.",
+        "Community-decoded FallbackPackage absence for16 inventoried files does not prove native fallback, decoder coverage, or source-file selection. Those fixture inventories are not substituted for8B0630."
+      ],
+      "sites": [
+        "8B03C9..8B043C",
+        "8B0493..8B04A4",
+        "8B04A4..8B0628",
+        "8AD8F6..8AD922",
+        "8B020D..8B02D6"
+      ]
+    },
+    {
+      "routine": "905000 / parent cycles",
+      "facts": [
+        "905000 only stores argument into provider+10, with no retain, release, cycle detection, or recursive construction.",
+        "Because cache publication precedes recursive fallback, A->A and A->B->A can hit the published but not fully finalized provider. Static control flow permits cyclic borrowed parent pointers.",
+        "904110 misses in local/directory maps and calls parent virtual+20 recursively at904190; no visited set is present in this function. A cyclic parent graph with unresolved resource can recurse without a source guard. This is an inference from the byte-verified path, not a dynamically exercised cycle.",
+        "The provider destructor never releases parent+10 or borrowed directory+14."
+      ],
+      "sites": [
+        "905000..90500A",
+        "90B651",
+        "90B71B..90B732",
+        "904185..904190",
+        "901CD0..901D31"
+      ]
+    },
+    {
+      "routine": "90B270 / active-entry visitor",
+      "facts": [
+        "Snapshots begin from manager+9C, walks entries by32, tests byte(entry+18), reloads manager+A0 after each visit.",
+        "Active entry causes callable virtual+8; a null callable takesCE0BD0. The factory callable has vtable10D6458 and borrowed provider at+4, with inline-self marker+10.",
+        "90F280 passes provider+8 and entry to905E70. For one context it performs direct traversal905DF0; for multiple contexts it uses native duplicate filtering and invokes entry callable+8. It dereferences global2D78F20 before checking null, so null-context plus active-entry is not a valid success profile.",
+        "At return, virtual+10 receives whether callable pointer differs from inline argument storage. 5E21B0 invokes virtual+14 with0; 5C3FE0 updates the callback vtable and does not release captured provider. Only heap-backed callback storage is freed by the outer delete flag."
+      ],
+      "sites": [
+        "90B29D..90B2EA",
+        "90B754..90B76A",
+        "90F280..90F292",
+        "905EB3..905EBC",
+        "906069..906082",
+        "5E21B0..5E21E8",
+        "5C3FE0..5C401B"
+      ]
+    },
+    {
+      "routine": "Destruction and ownership",
+      "facts": [
+        "Provider901D40 calls901CD0, then frees provider allocation only when scalar-delete flags&1.901CD0 destroys owned name String24 and provider map entries/sentinel; it does not delete parent, manager or directory pointers.",
+        "90AAB0 deletes nonnull values from manager+14 first, then provider values node+2C in cache+0C; destroys their container nodes; only then destroys directory32 entries from manager+4. Directory must outlive all borrowing providers.",
+        "90A800 invokes90AAB0 before destroying active-entry vector+9C and embedded providers/remaining index containers. Do not infer that callback storage or hash aliases independently own provider objects.",
+        "Outer shutdown clears global2D78F1C after virtual manager destruction; the global remains visible during that destruction. Keep custom allocator route/context rereads visible rather than caching all deallocator state."
+      ],
+      "sites": [
+        "901CD0..901D31",
+        "901D40..901D7A",
+        "90AABE..90AB3B",
+        "90AB42..90ABCC",
+        "90ABD3..90ACFB",
+        "90A839..90A896",
+        "591038..591058"
+      ]
+    }
+  ],
+  "oracle_checkpoints": [
+    "Capture state before/after90B651, after8B0630, after905000, after90B750, and after90B270; distinguish partially published object from returned success.",
+    "Keep original name, normalized cache name, .ini path, INI shared result, fallback temporary and parent pointers separately identifiable across callbacks and recursive requests.",
+    "Require actual source-selected file bytes/import results; stop before unsupported RemoveDirectoryA, file mutation, CRT, type-decoder or callback behavior.",
+    "Observe real short/long names, base/nonzero skins and formatting boundaries without replacing CRT formatting or INI values.",
+    "Track exact allocations and lifetimes for provider map/name, borrowed directory, cache keys, manager index aliases, active-entry callable storage and INI-manager file pairs.",
+    "For recursion or callback-mutated state, preserve native rereads and record an explicit boundary/fault; never treat a cycle, null allocation or unsupported callback as success.",
+    "Capture destruction order plus each physical free; distinguish normal source return, abandoned probe storage and unimplemented SEH/OOM recovery.",
+    "Run future probes in a fresh machine state with actual CRT initialization and declared confined filesystem profile; no requalification of the earlier null-context/failed exploratory fixtures."
+  ],
+  "limits": [
+    "Static source review only.76 existing regions compared with the pinned PE and15 supplemental functions extracted without outside control-flow edges; call targets are not thereby fully qualified.",
+    "No native instructions, filesystem APIs, runtime probes, Rust compiler or client executed by this review. No production/frozen preparation modified.",
+    "Allocation failure, SEH unwind, custom allocator callbacks, concurrency, populated-provider teardown, full typed INIBIN decoding and normal UI remain unexecuted.",
+    "Some helper contracts are still open:8AD540 file-pair destruction,8AE6A0/8AE0E0 value access,905DF0 callback traversal, nested container constructors/deletes and active-entry mutation/reentrancy.",
+    "Detected publication/cycle/IO facts must guide the complete oracle; this note is not a reduced provider implementation or proof of a complete provider."
+  ]
+}

@@ -1,0 +1,21 @@
+from pathlib import Path
+import json,hashlib,datetime
+r=Path(r'E:/OpenLeague');now=datetime.datetime.now(datetime.timezone.utc).isoformat();load=lambda name:json.loads((r/name).read_text(encoding='utf-8'));save=lambda name,value:(r/name).write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+contract=load('data/4.20/camera_wheel_contract.json');runtime=load('logs/native-camera-wheel-runtime.json')
+paths=['tools/qualify_native_camera_wheel.py','data/4.20/camera_wheel_contract.json','crates/core/src/camera_wheel.rs','crates/core/src/lib.rs','crates/client/src/camera_native.rs','crates/client/src/main.rs','logs/native-camera-wheel-tests.log','logs/native-camera-wheel-build.log']
+proof={'updated_utc':now,'native_executable_sha256':contract['native_sha256'],'files_sha256':{p:hashlib.sha256((r/p).read_bytes()).hexdigest() for p in paths},'passed':True,'complete':False,'native_wheel_cases':len(contract['cases']),'windows_wheel_values_roundtripped':65536,'core_tests_passed':333,'client_tests_passed':27,'source_integration':'Native 7D01C0 target transition integrated in main camera MouseWheel MessageReader; Windows line units reconstructed to signed raw120-unit deltas; normal Replay setting default0. Native Zoom smoother/view geometry consume new target. HUD shows wheel shortcut.','client_runtime':runtime,'limits':contract['limits']+['ECS camera system consumes real Bevy message type exactly once and updates Transform/Projection; events in acceptance test supplied by test, not physical desktop wheel input.','Pixel wheel units and nonfinite/out-of-range input return explicit errors. Other platforms, UI capture, focused windows and hardware input remain unqualified.','Latest standalone client rebuilt; GPU screenshot acceptance pending at receipt creation. Existing server binary unchanged; gameplay tests cover source, not a rebuilt server.','Entire24-domain game remains incomplete; champions/skins/spells/audio/network/services need further work.']}
+save('docs/native_camera_wheel_integration_progress.json',proof)
+for name in ['docs/coverage.json','docs/completion_plan.json']:
+ d=load(name);d['updated_utc']=now;d['complete']=False;d['current_evidence']['core_tests_passed']=333;d['current_evidence']['client_tests_passed']=27;d['current_evidence']['native_camera_wheel']={'receipt':'docs/native_camera_wheel_integration_progress.json','native_cases':2592,'windows_raw_values':65536,'ecs_input_test_passed':True,'physical_input_verified':False,'complete':False}
+ if name.endswith('coverage.json'):
+  for p in ['docs/native_camera_wheel_integration_progress.json','logs/native-camera-wheel-tests.log','logs/native-camera-wheel-build.log']:
+   if p not in d['evidence']:d['evidence'].append(p)
+ save(name,d)
+d=load('docs/resume_checkpoint.json');d['saved_utc']=now;d['state']='active';d['complete']=False;d['last_verified'].update(core_tests=333,client_tests=27,native_wheel_cases=2592,windows_wheel_values=65536,wheel_ecs_input_test=True);d['latest_changes'].append('Native7D01C0 wheel handler qualified2592cases including cached Replay setting and ordered clamps; Windows winit line units mapped to raw120 deltas, all65536signed16 values recovered. Core wheel module/main ECS MessageReader/native Zoom/view integrated; HUD shortcut added.333core/27clientpassed; standalone client rebuilt acca6c2b09b3f0cb22494dcf267c367883142b9760f9d3780a64e3517c636933, live3140/server4280port5914. Physical mouse/UI eligibility remain unqualified; no gamecomplete claim.')
+d['build']='Client standalone rebuilt with native wheel/zoom/pose integration; server and launcher unchanged. Actual GPU receipt pending.'
+for item in d['executables']:
+ p=r/item['path']
+ if item['path']=='target/debug/openleague-client.exe':item.update(bytes=p.stat().st_size,sha256=hashlib.sha256(p.read_bytes()).hexdigest())
+d['restart_next'].insert(0,'Confirm latest wheel client3140/server4280port5914 and capture; retain physicalwheel/UIproducer gap. Then advance fullsharedgameplay rather than treating camera debug foundations as gamecompletion. 484QWER unimplemented,0completekits; original24domains persist.')
+save('docs/resume_checkpoint.json',d)
+print('Wheel integration receipts and full-scope coverage updated')

@@ -1,0 +1,26 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T08:24:05.007120+00:00",
+  "implementation": "Pool.deliver_callback resolves stable scratch tokens, runs native unbound callback routing, preserves deferred disposal and reports missing cookies.",
+  "validation": {
+    "tests_passed": 7,
+    "failed": 0,
+    "native_callback_cases": 40,
+    "existing_native_cleanup_cases": 378,
+    "existing_native_allocation_cases": 16,
+    "session": 73018,
+    "log": "logs/audio-scratch-callback-tests.log"
+  },
+  "regression": "End, repeated End, marker, swap-last cleanup, stale cookie after cleanup; surviving source remains untouched.",
+  "sha256": {
+    "crates/core/src/audio_deferred_pool.rs": "a174ff5b8a47cb4395d69b8df6df92d09910f8f2210aba5fc3addef00ff7bc84",
+    "data/4.20/audio_object_callbacks_contract.json": "1e3438d706d80d04c93da9c4c56000e8fca1695bc87db6fe13d2afa3c6c9332b",
+    "logs/audio-scratch-callback-tests.log": "58de83fcbf8283ab5e60f357f274afbeba220b8ec1b0f8560815b05cd39114a0",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "660c96a8ff956d0309bb0adda6910351f1c339357632dd9022585131e6fa5bfb"
+  },
+  "limits": [
+    "Core callback routing only; physical device callback producer still to connect.",
+    "No normal client rebuilt or audible runtime validation.",
+    "Caller must provide a stable unique cookie for each live scratch allocation."
+  ]
+}

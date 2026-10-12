@@ -1,0 +1,14 @@
+// http://aras-p.info/blog/2011/05/03/a-way-to-visualize-mip-levels/
+
+sampler MIP_COLORS_TEX : register (s15);
+float2 MAIN_TEX_SIZE : register (c19);
+
+float3 ApplyMipColorsVisualization(float3 color, float2 uv)
+{
+#ifdef MIP_COLORS_VISUALIZATION
+    float4 mip = tex2D(MIP_COLORS_TEX, uv * MAIN_TEX_SIZE / 8.0);
+    return lerp(color, mip.rgb, mip.a);
+#else
+    return color;
+#endif
+}

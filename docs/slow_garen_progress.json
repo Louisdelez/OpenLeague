@@ -1,0 +1,28 @@
+{
+  "complete": false,
+  "native_menu_source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Menu\\fontconfig_fr_FR.txt",
+  "native_menu_sha256": "47429564a76830c2cb5a05f7cdad0c62e987532a71789347dccef8322f4d4562",
+  "native_text": {
+    "game_spell_description_GarenQ": "Garen reçoit un bonus en vitesse de déplacement, il purge tous les ralentissements qui l'affectent et sa prochaine attaque frappe un point vital de son adversaire, infligeant des dégâts supplémentaires et le réduisant au silence.",
+    "game_spell_tooltip_GarenQ": "<titleLeft>Coup décisif (@Level@)</titleLeft><titleRight>[@Hotkey@]</titleRight><subtitleLeft>Pas de coût</subtitleLeft><subtitleRight>@Cooldown@ sec de récupération</subtitleRight><mainText>Garen purge tous les ralentissements qui l'affectent et augmente sa vitesse de déplacement de @Effect2Amount@% pendant @Effect5Amount@ sec.<br><br>Sa prochaine attaque de base dans les @Effect6Amount@ sec inflige @Effect1Amount@ <font color='#FF8C00'>(+@CharTotalPhysical@)</font> pts de dégâts physiques et réduit la cible au silence pendant @Effect3Amount@ sec.</mainText>",
+    "game_spell_tooltip_GarenW": "<titleLeft>Courage (@Level@)</titleLeft><titleRight>[@Hotkey@]</titleRight><subtitleLeft>Pas de coût</subtitleLeft><subtitleRight>@Cooldown@ sec de récupération</subtitleRight><mainText><font color='#FF9900'>Passive :</font> l'armure et la résistance magique supplémentaires de Garen sont augmentées de 20%.<br><br><font color='#FF9900'>Active : </font>Garen bénéficie d'un bouclier pendant @Effect4Amount@ sec, réduisant les dégâts subis de @Effect2Amount@% et réduisant la durée des effets de contrôle de foule de 30%.</mainText>"
+  },
+  "implemented": [
+    "Timed champion slow registry with tag refresh and expiry",
+    "Strongest positive slow fraction used before current movement soft cap",
+    "Successful Garen Q purges all registered slows; rejected cast preserves them",
+    "Garen W native 20 percent bonus item armor/MR modifier applies when learned",
+    "Garen W 30 percent control-duration reduction shared by silence and slow application"
+  ],
+  "limits": [
+    "Slow magnitudes/stacking/order and tag refresh are reconstructed; full per-ability slow semantics remain unqualified.",
+    "No implemented champion/summoner spell currently produces this generic slow registry; tested by authoritative simulation fixtures, not complete native network slow gameplay.",
+    "Root/stun/airborne/charm/fear/taunt/blind/suppression and full tenacity interactions remain incomplete.",
+    "Garen Q/W visuals, audio and full historical runtime fidelity remain incomplete."
+  ],
+  "exhaust_audit": {
+    "status": "not implemented",
+    "native_text": "Épuise le champion ennemi ciblé, réduisant ses vitesses de déplacement et d'attaque de 30%, son armure et sa résistance magique de 10 et les dégâts qu'il inflige de 40% pendant 2,5 sec.",
+    "community_gap": "Supplied Exhaust debuff applies movement/attack-speed reduction and flat resist changes but lacks described 40 percent outgoing damage reduction; do not treat source presence as complete gameplay."
+  }
+}

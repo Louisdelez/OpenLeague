@@ -1,0 +1,27 @@
+{
+  "complete": false,
+  "source_validation": "docs/heal_source_validation.json",
+  "rules": "data/4.20/heal_rules.json",
+  "implemented": [
+    "Discrete authoritative heal API with source/target validation, dead/end-match guards and max-health clamp.",
+    "Heal restores self and one explicit living ally within range, or lowest-percent injured ally automatically.",
+    "90+15*(recipient level-1) restores 90 to 345; prior Heal within 35 seconds halves and refreshes.",
+    "One-second 30 percent speed boost joins shared movement calculation; historical 240-second cooldown override.",
+    "Launcher Heal loadout, client D/F allied cursor targeting, new server SummonerTarget action and localized Soin HUD labels."
+  ],
+  "core_checks": 4,
+  "client_ally_target_checks": 1,
+  "limits": [
+    "General healing modifiers/Grievous Wounds, all recipient-level/native targeting/refund interactions and exact native stacking remain incomplete.",
+    "Four reconstruction policies and native cooldown conflict explicitly retained in source validation.",
+    "Native particles/audio, human cursor/launcher interaction and full summoner catalog unqualified; current actual framebuffer HUD inspected."
+  ],
+  "network_validation": "docs/heal_network_validation.json",
+  "network_checks": 8,
+  "current_server_sha256": "f361ae447d2de884c1c5706fbfb24703b4cf9d24bcab3b29e215918ca96ffd5a",
+  "ally_network_validation": "docs/heal_ally_network_validation.json",
+  "ally_network_checks": 10,
+  "render_validation": "docs/heal_render_validation.json",
+  "updated_utc": "2026-10-03T14:26:07.455614+00:00",
+  "source_verifier": "tools/verify_heal_sources.py"
+}

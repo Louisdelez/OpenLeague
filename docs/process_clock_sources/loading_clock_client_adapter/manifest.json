@@ -1,0 +1,134 @@
+{
+  "schema": 1,
+  "status": "Stage analysé ; Rust non compilé",
+  "rust_compilation_attempted": false,
+  "rust_tests_run": false,
+  "production_integrated": false,
+  "public_api": [
+    "Runtime::clock_handle",
+    "Runtime::raw_clock_sample",
+    "ClockHandle::raw_clock_sample",
+    "ClockHandle::wall_clock_f32_bits"
+  ],
+  "backend_api": [
+    "Backend::raw_clock_sample",
+    "Backend::native_clock_f32_bits"
+  ],
+  "client_api": [
+    "EffectClock::with_process_clock"
+  ],
+  "new_planned_integration_tests": 3,
+  "dependencies": [
+    "Root RawSample/sample_raw API",
+    "Root clock::Boundary for Backend<N>",
+    "Qualified native once/ConCRT lifecycle",
+    "Canonical clock/once PE regions and teardown"
+  ],
+  "limits": [
+    "No successful Windows producer claimed; the normal client must not switch until synchronization is qualified.",
+    "First/Bevy native frame scheduling remains an existing host adaptation, not qualified here.",
+    "No compiler used. No tests in this stage have passed yet."
+  ],
+  "files": [
+    {
+      "path": "annie_ready_test.patch",
+      "bytes": 783,
+      "sha256": "887db656b04e795b17a6145cf0daba6a4ee5e26da6aab45f8b806202b149b4d4"
+    },
+    {
+      "path": "audio_replay_windows_clock.rs",
+      "bytes": 3075,
+      "sha256": "6cc89981239216c563feb7d31663fae56f7b92799fcf4caf33312ebc9770ba95"
+    },
+    {
+      "path": "audio_replay_windows_clock_tests.rs",
+      "bytes": 2113,
+      "sha256": "0fa5880801bf09b3d55d6a09615c813fa1726577969ab9ed8c85c3502279d7e1"
+    },
+    {
+      "path": "build_client_stage.py",
+      "bytes": 10615,
+      "sha256": "1e7fa7785d8938f057e9de971ddc0a069835db3f2bc28603785351c95e53edd2"
+    },
+    {
+      "path": "client_attach_excerpt.rs",
+      "bytes": 430,
+      "sha256": "8720f2851beaa838fe230d1e5a8cc3f8b940aabb3a49e5609e117b622d54a495"
+    },
+    {
+      "path": "client_stage_provenance.json",
+      "bytes": 337,
+      "sha256": "9013caff92b7b23fe7201eed29cd1377ca4b274253d65eb6494fea06abff528f"
+    },
+    {
+      "path": "input_sources.json",
+      "bytes": 2076,
+      "sha256": "861cb91756dc538e4adf90d703f3326afe79a8e3d9069a829223c703e5b266f3"
+    },
+    {
+      "path": "INTEGRATION.md",
+      "bytes": 6876,
+      "sha256": "309ced3410fb92369de9a9117c888e53a67f37d3f8c6a4a13c537f9b78c2f9ff"
+    },
+    {
+      "path": "native_effect_clock.rs",
+      "bytes": 14953,
+      "sha256": "1d04d14365b36f98709e3e2db08c01f62da1cb838d80ff9f51d4edc76a95a1d7"
+    },
+    {
+      "path": "record_adapter.py",
+      "bytes": 3826,
+      "sha256": "2025a2d0d516e896faa143a32c9422d0bf04927306310eedc33e6a4711d6012d"
+    },
+    {
+      "path": "source_snapshots/annie_ready.rs",
+      "bytes": 11823,
+      "sha256": "a3020b9f23fca17748d5ea3dcdcfa69c029c83401d6f8e86490e1d5c7a7ed367"
+    },
+    {
+      "path": "source_snapshots/audio_crt_windows_shared_fls.rs",
+      "bytes": 25451,
+      "sha256": "8c00192c2f752aeffd96f6353821a4e3899ccb4d5e96c5d4d2c3de7836fd2325"
+    },
+    {
+      "path": "source_snapshots/audio_replay_windows_application.rs",
+      "bytes": 10302,
+      "sha256": "01adbebf1fc1c56a0e814e0c24353f887513aadef7acfe2fd99df02d10e55fc3"
+    },
+    {
+      "path": "source_snapshots/audio_replay_windows_events.rs",
+      "bytes": 18204,
+      "sha256": "0c9da334b3080af20c955ee957255b1e8e1b4ade0fc3f06f2e12b8a0de00ae69"
+    },
+    {
+      "path": "source_snapshots/audio_replay_windows_loading_metadata.rs",
+      "bytes": 2728,
+      "sha256": "5b072c7f8089ac62400628c2de4250a9d2e2599227825e4916499611e531f55c"
+    },
+    {
+      "path": "source_snapshots/audio_replay_windows_transport.rs",
+      "bytes": 39041,
+      "sha256": "185d0428c964abe41d7eceeb341ed4a79eb865d7dbce1290c314164126c154a8"
+    },
+    {
+      "path": "source_snapshots/main.rs",
+      "bytes": 92710,
+      "sha256": "ddc6118a3e8c902331ca3ccbb7ce72ad54508cdaac1f8c6c329583062f73b9bc"
+    },
+    {
+      "path": "source_snapshots/native_effect_clock.rs",
+      "bytes": 11020,
+      "sha256": "f133429fb0a274329ddeddd49afda5164931acfde91d1edbfb4b50700cccf829"
+    },
+    {
+      "path": "source_snapshots/native_game_clock.rs",
+      "bytes": 12947,
+      "sha256": "ec11f8f246ab34d74205c208c7ab8cffe70e7b4163e02fa7afd56a7cfa4a065a"
+    },
+    {
+      "path": "transport_module_excerpt.rs",
+      "bytes": 384,
+      "sha256": "bfa9b0490186a5fcebae71ced2c74000622b6c472ccf204b68a96c79648aa2f8"
+    }
+  ]
+}

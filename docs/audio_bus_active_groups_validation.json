@@ -1,0 +1,55 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T14:26:44.492793+00:00",
+  "change": [
+    "Port Bus active-cache B009B0/B00C20 updates: unchanged mode suppresses lookup, ordering toggles each present group raw byteE, property writes byteF, root first then child entry order; null children skipped.",
+    "Port finite priority rebuild over the same array prefix using descending f32 value and unsigned key tie direction; preserve raw group descriptor and unrelated bytes. Explicitly reject unqualified malformed arrays, duplicate voice keys, nonfinite priorities and ordering group aliases.",
+    "Bind active-cache consumer through PropertiesBackend into existing qualified property prefix; allocator and cache/voice population stay mandatory caller inputs."
+  ],
+  "validation": {
+    "audio_regression_tests_passed": 269,
+    "failed": 0,
+    "new_targeted_tests_passed": 3,
+    "native_active_group_cases": 1536,
+    "native_properties_active_groups_cases": 3072,
+    "comparison": "Exact200-byte Bus,16-byte active cache and each group, priority reference arrays, rebuild callback order; composed property reader also matches table bytes/padding, allocation/copy/rebuild order, result, pointer consumption and remaining counter, including allocation failure52.",
+    "session": 46600,
+    "terminal_exit_code": 0,
+    "log": "logs/audio-bus-active-groups-tests.log",
+    "preparatory_parameter_notification_cases": 10368
+  },
+  "sha256": {
+    "crates/core/src/audio_bus_active_groups.rs": "1af1831e3b52a0b4169705429af1a8555ce042c4a53ec92339259f6977284af1",
+    "crates/core/src/audio_bus_bank.rs": "cd0b6004713a213d43a5f8346861efdca52864f27db8fad4d56c8912081df01c",
+    "crates/core/src/lib.rs": "4011143e2bb337a2b0860750bec46d447e6760074cc49ec5d12a9345025d143b",
+    "tools/probe_native_audio_bus_active_groups.py": "def0041ebc1c6e69b6905badb12a8de9eee746c877ae543a2926439b52c1ac26",
+    "tools/probe_native_audio_bus_properties_active_groups.py": "bf9481f985d27387fd0157659dbb954e67ce049601cb4bd591cded8c604961ba",
+    "tools/probe_native_audio_bus_parameter_notification.py": "f9e439116ce8721fa459cc6b058fc9b1081cbd1695db0f6549b2b63a3e04c230",
+    "data/4.20/audio_bus_active_groups_contract.json": "829eee8412ef9d65bea15169417ca665338dbb72e11375d3a4fb8d7d41130b80",
+    "data/4.20/audio_bus_properties_active_groups_contract.json": "8920e85673e477d572246a5aa9176a7faf078d811ffac050463f18beeb73f5c2",
+    "data/4.20/audio_bus_parameter_notification_contract.json": "8c27c8796bba01e84196dbcd54a1bca7476db6c16ddab762f59520a68bec8814",
+    "logs/audio-bus-active-groups-probe.log": "7275dda2a8c2fa9571d2c709d68e5af6ba2a16783e111dc5f8bc7d258015e85e",
+    "logs/audio-bus-properties-active-groups-probe.log": "d8ca089be038d9f887a7688d7ba76736b6c6ca341e466fad2d93a2752601f509",
+    "logs/audio-bus-parameter-notification-probe.log": "07303e80fd8e70198df094a70fe770eb6909dfca832e64fb02773f6e7df9e405",
+    "logs/audio-bus-active-groups-tests.log": "1e9349b6f61de66f3d68a6c799008634b66b1caa8726cdab95aa52df0c56ccf7",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "844ce4d771ad6bce09c45fd4d4ddf24905191b20415a577b229901c0cf8726fa"
+  },
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "interfaces": [
+    "Active group probe executes actual B009B0/B00C20, AFD810/AFD8C0, binary search AFD670/AFD740 and AFFB10 insertion without callback adapters; finite unique voice keys, distinct sorted arrays and sufficient capacity are explicit inputs.",
+    "Composed property probe adds actual B043F0/B225A0 with only allocator and memcpy interfaces adapted.",
+    "Notification preparation executes actual B04A00,B02F20/B02EC0 and virtual6C B03740. Root/identified-bus control application B0D1A0/B0D140 interfaces recorded, not executed. RTPC mask absent."
+  ],
+  "findings": [
+    "B04A00 applies only parameter24..28 and transmits a result mask with the corresponding selector mask; others cause no control dispatch.",
+    "Virtual6C B03740 selects root only with parent24 absent and C4bit7 present; otherwise transmits native Bus ID.",
+    "For24..27 B02F20 returnsfalse immediately without cache18; with cache, source14 flags override cached bits when live RTPC evaluation is not enabled. Parameter28 has the separate B02EC0 gate."
+  ],
+  "limits": [
+    "Normal factory/resource creation, shared cache storage with active priority/admission runtime and lifecycle remain incomplete.",
+    "Group growth/allocation failure and aliases/duplicate keys/nonfinite inputs remain unqualified; explicit errors do not prove faithful support.",
+    "Parameter notification Rust consumer and enabled live RTPC manager branch pending; physical control application bodies unqualified.",
+    "Other effects/RTPC/state/position bank readers, refcount/destruction and full bank payload still pending.",
+    "No new normal-client/audible-output or full-game acceptance."
+  ]
+}

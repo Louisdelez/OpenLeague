@@ -1,0 +1,105 @@
+{
+  "updated_utc": "2026-10-07T08:33:12.067886+00:00",
+  "complete": false,
+  "passed": true,
+  "client_sha256": "cfe8111c179ce4d524208d727fbe2953c1a4d4e7c206e6b69ae3ce70ee69fe68",
+  "graphical_client_rebuilt": true,
+  "current_runtime_capture": true,
+  "backends": {
+    "dx12": {
+      "casts": 2,
+      "cleaned": 2,
+      "active_effects_final": 0,
+      "active_draws_final": 0,
+      "baseline": {
+        "frames": 32,
+        "nonzero_frames": 0,
+        "changed_pixels_min": 0,
+        "changed_pixels_max": 0,
+        "max_rgb_difference": 0
+      },
+      "instances": [
+        {
+          "entity": 4294959526,
+          "frames": 4,
+          "changed_pixels_max": 71959
+        },
+        {
+          "entity": 8589926762,
+          "frames": 4,
+          "changed_pixels_max": 69781
+        }
+      ],
+      "pipeline_frames": 10,
+      "visual_inspection": {
+        "inspected": true,
+        "human_fidelity_acceptance": false,
+        "observed": "Terrain and actors visible; two cast images and final cleanup inspected. Projected ground contribution appears in paired on image and is absent in same-frame off image. Other projectile particles are not a projection-cleanup failure."
+      }
+    },
+    "vulkan": {
+      "casts": 2,
+      "cleaned": 2,
+      "active_effects_final": 0,
+      "active_draws_final": 0,
+      "baseline": {
+        "frames": 63,
+        "nonzero_frames": 0,
+        "changed_pixels_min": 0,
+        "changed_pixels_max": 0,
+        "max_rgb_difference": 0
+      },
+      "instances": [
+        {
+          "entity": 4294959526,
+          "frames": 7,
+          "changed_pixels_max": 69631
+        },
+        {
+          "entity": 8589926774,
+          "frames": 9,
+          "changed_pixels_max": 71819
+        }
+      ],
+      "pipeline_frames": 18,
+      "visual_inspection": {
+        "inspected": true,
+        "human_fidelity_acceptance": false,
+        "observed": "Terrain and actors visible; two cast images and final cleanup inspected. Projected ground contribution appears in paired on image and is absent in same-frame off image. Other projectile particles are not a projection-cleanup failure."
+      }
+    }
+  },
+  "native_owner_scale_gate_runtime_executed": true,
+  "synthetic_owner_loss_graphically_exercised": false,
+  "native_client_owner_acquisition_frames": 15,
+  "native_position_roundtrip": false,
+  "native_reference_profiles": 10,
+  "native_live_pose_reference_profiles": 45,
+  "focused_client_tests_passed": 6,
+  "full_suites_rerun": false,
+  "artifacts_sha256": {
+    "target/debug/openleague-client.exe": "cfe8111c179ce4d524208d727fbe2953c1a4d4e7c206e6b69ae3ce70ee69fe68",
+    "logs/annie-owner-scale-client-build.log": "546cda564e1721cd9cf0a62e5458404789f93ce044336ec984522f29dce2c600",
+    "logs/annie-owner-scale-client-tests.log": "f7961f3282e4f0086a9272c9c773d684442d0f0b5cde66e686c90b36eea0ec44",
+    "data/4.20/annie_projected_owner_scale_contract.json": "4f1a90c50853ebc3d7b0f04304aab7912094454181741e02f9f831b66701221d",
+    "crates/client/src/projected_live.rs": "ddb63b4c3ebb65a72493dd8bb582a018d4a8ebfeac1ebf487818bb2d37778cdc",
+    "crates/client/src/annie_q_vfx.rs": "067012cbfba40a04e3c1b63f6342a4661e2a3dd3e486d7e7dde7ad8ddcb87442",
+    "crates/core/src/native_troy_scalar.rs": "f782ab31c463cddfda369c52344103c5147d5db616ba2a0eb626d08c13fb74e1",
+    "crates/client/src/simple_projected_config.rs": "b7083c556f1abde9664c8ea5710b53271579481e5b6473da65161c4886cc7ea1",
+    "tools/probe_annie_projected_owner_scale.py": "172061cd241922616a38eaf3f5fe55e29dda4b2eb2a46e603f7e7ded6d7fa6d4",
+    "docs/projected_core_cycle_capture_v21_owner_scale_dx12.json": "729cacd5b56bcb4c78946d9a54c730daed63af7090cfe991b06f5f461380628c",
+    "docs/projected_pair_control_v21_owner_scale_dx12.json": "d8acda6d640c1f682b6d90d6eb65ff17c0ed022c44dee3fed85c8e7198eee085",
+    "logs/projected-core-cycle-v21-owner-scale-dx12-pipeline.json": "9a8f9b70fe2c839cb55b0e987d2ea634caaeb14e67fc3897dfe5768d4d0fec08",
+    "docs/projected_core_cycle_capture_v21_owner_scale_vulkan.json": "d3d2c3e575fb2bbd4fc5f45917fc4571f9da5fd5f6428544c03e7556d190a4bd",
+    "docs/projected_pair_control_v21_owner_scale_vulkan.json": "356114137b49ec78732022b353f9483854c8b86eed5d8ce96385973de1c892c2",
+    "logs/projected-core-cycle-v21-owner-scale-vulkan-pipeline.json": "0d07de3d31835db353f1b53c693c7c8bb49a26fae101ffa730acbdce3ae8c2ee"
+  },
+  "limits": [
+    "Two seeded diagnostic casts per backend; not ordinary progression, complete champion or whole-game acceptance.",
+    "Native factory flags, initial orientation and exact position/direction bridge execute in live client. Local Shot presence supplies owner acquisition; native loss marker retains last pose and delays cleanup until next rejected update. Normal captures do not inject owner loss:15 synthetic frames were tested in client. Original weak lifetime producer and registry scheduling remain open; network disappearance supplies controller-end trigger.",
+    "Annie zero coefficient scale gate qualified and rendered: initial child factor1 is retained. System scale mutations, nonzero owner coefficients, visibility/FOW, subsequent flag/status producers, blend/depth/sampler, receiver fidelity and full Q effects remain incomplete.",
+    "Clock uses local Bevy source with native default wrapper; original time source and pause/speed transitions remain open.",
+    "Technical checks are not human acceptance of original-game fidelity; zero domains closed."
+  ],
+  "next_action": "Qualifier la visibilité et ses consommateurs natifs pour Annie ; poursuivre les statuts/drapeaux, durée de vie propriétaire, ordonnancement et les 24 domaines/114 tâches."
+}

@@ -1,0 +1,384 @@
+#include "../ShadowMap/pcf1.hls"
+
+#ifdef USE_HEIGHT_BLEND
+	#include "../HeightBlending/HeightBlending.hls"
+#endif
+
+#include "../DeathScreen.hls"
+#include "../MipLevels.hls"
+#include "../FogOfWar/FogOfWar_PS.hls"
+
+
+sampler DIFFUSE_MAP 		    : register(s0);
+sampler SAMPLER_1			    : register(s1);
+sampler EMISSIVE_MAP		    : register(s2);
+sampler WALL_OF_GRASS_MAP	    : register(s3);
+sampler SAMPLER_4			    : register(s4);
+sampler SHADOW_MAP			    : register(s5);
+sampler CLOUDS_MAP			    : register(s7);
+#ifdef MOD2X_COLORMAP
+    sampler COLORMAP			: register(s8);
+#endif
+#ifdef FOG_PIXELSHADER_BLEND
+    sampler FOGLIGHTING         : register(s9);
+#endif
+
+#ifdef QUALITY_LOW
+#endif
+
+#ifndef VS_LIGHT_INTERPOLATE
+    float3   AMBIENT_COLOR  	: register(c0);
+#endif // VS_LIGHT_INTERPOLATE
+
+// Fog Color.
+#ifdef FOG_PIXELSHADER_BLEND
+	float4 FOG_COLOR		    : register(c28);    // R3D_SHADER_PS_CONSTANT_FOG_COLOR
+#endif
+#ifdef USE_HEIGHT_BLEND
+    float4 HEIGHTBLEND_LAYER_SCALE : register(c23);
+#endif
+float4 HEIGHTBLEND_DATA         : register(c25);
+float4 BRUSH_DATA			    : register(c26);	//u,v,r2,1/lineWidth
+
+
+#if !defined(QUALITY_LOW) || !defined(MOD2X_COLORMAP)
+//////////////////////////////////////////////////////////////
+// NORMAL version of the shader.
+//////////////////////////////////////////////////////////////
+
+#ifdef MOD2X_COLORMAP
+	#if defined(FOUR_BLEND) || defined(DECAL) || !defined(FOG_QUALITY_LOW)
+		#define READ_COLORMAP 1
+	#endif
+#endif
+
+struct FRAGMENT
+{
+	float4 m_Color0 : COLOR0;
+};
+
+struct INTERPOLANTS
+{
+	float4 m_Position : POSITION;
+	float4 m_TexCoord0 : TEXCOORD0;
+#ifndef DISABLE_SHADOWS
+	float4 m_TexCoord3 : TEXCOORD1;
+#endif
+	float4 m_TexCoord4 : TEXCOORD2;
+#if defined(WALL_OF_GRASS)
+	float4 m_TexCoord1 : TEXCOORD3;
+#elif defined(FOUR_BLEND) || defined(READ_COLORMAP) || defined(TERRAIN_EDITOR)
+    float2 m_TexCoord1 : TEXCOORD3;
+#endif
+
+#if !defined(MOD2X_COLORMAP) || defined(VERTEX_ALPHA)
+	float4 m_Color0 : COLOR0;
+#endif
+	float4 m_Color1 : COLOR1;
+};
+
+FRAGMENT main( INTERPOLANTS interpolants )
+{
+	FRAGMENT fragment;
+
+	// Compute color
+	
+	// Dynamic incident light
+#ifndef MOD2X_COLORMAP
+	float3 dynamicIncidentLight = interpolants.m_Color0.rgb;
+#else
+	float3 dynamicIncidentLight = 1.0f;
+#endif
+
+#ifndef DISABLE_SHADOWS
+	// Mask dynamic light by shadow texture
+	#ifdef NOLIGHTING	//disable shadow fading when using "no lighting" since that produces a more visually pleasing result.
+		float shadowMask = saturate(SampleShadowMap(SHADOW_MAP, interpolants.m_TexCoord3.xyz)+0.4f);
+	#else
+		float shadowMask = saturate(SampleShadowMap(SHADOW_MAP, interpolants.m_TexCoord3.xyz)*interpolants.m_TexCoord3.w+0.4f);
+	#endif
+	dynamicIncidentLight *= shadowMask;
+#else
+	float shadowMask = 1.0f;
+#endif
+
+#ifndef DISABLE_CLOUDS
+	// Mask dynamic light by clouds texture
+	float4 texelClouds = tex2D(CLOUDS_MAP, interpolants.m_TexCoord4.zw);
+	dynamicIncidentLight *= texelClouds.xyz;
+#endif
+
+	// Add together baked and dynamic incident light
+	float3 lighting = 1.0f;
+#ifdef MOD2X_COLORMAP
+	#ifdef WALL_OF_GRASS	//Temporary... need to move fog opacity into fog color map so this map isn't loaded when rendering "wall of grass"
+		float4 colorMap = tex2D(COLORMAP, interpolants.m_TexCoord4.xy*float2(1,-1)+float2(0,1));
+	#elif defined(READ_COLORMAP)
+		float4 colorMap = tex2D(COLORMAP, interpolants.m_TexCoord1.xy);
+	#endif
+	//Lighting comes from the lightmap/colormap or the vertex colors, 
+	//depending on shader defines.
+	#if defined(FOUR_BLEND) || defined(DECAL)
+		lighting = colorMap.rgb;
+	#else
+		lighting = interpolants.m_Color1.rgb;
+	#endif
+	//Mod4X lighting and shadowMask.
+	lighting *= ( 4.0f*(shadowMask*0.5f+0.5f) );
+#else //!defined(MOD2X_COLORMAP)
+	#if defined(VS_LIGHT_INTERPOLATE)
+		lighting = dynamicIncidentLight + interpolants.m_Color1.rgb;
+	#else
+		lighting = dynamicIncidentLight + interpolants.m_Color1.rgb * 4 + AMBIENT_COLOR;
+	#endif // VS_LIGHT_INTERPOLATE
+#endif //MOD2X_COLORMAP
+
+	// Compute final color
+	float3 finalColor;
+	
+	float4 texelColor;
+	{
+#ifdef FOUR_BLEND
+    #ifdef USE_HEIGHT_BLEND
+		    float4 height_scale = tex2D(SAMPLER_4, interpolants.m_TexCoord1.xy) * HEIGHTBLEND_LAYER_SCALE;
+		    float4 texel_color0 = tex2D(DIFFUSE_MAP,       interpolants.m_TexCoord0.xy);
+		    float4 texel_color1 = tex2D(SAMPLER_1,         interpolants.m_TexCoord0.xy);
+		    float4 texel_color2 = tex2D(EMISSIVE_MAP,	   interpolants.m_TexCoord0.xy);
+		    float4 texel_color3 = tex2D(WALL_OF_GRASS_MAP, interpolants.m_TexCoord0.xy);
+		
+		    texelColor = ApplyHeightBlend(height_scale, texel_color0, texel_color1, texel_color2, texel_color3, HEIGHTBLEND_DATA.a);
+	#else //USE_HEIGHT_BLEND
+			float4 texel_blend = tex2D(SAMPLER_4, interpolants.m_TexCoord1.xy);    	
+			float4 texel_color0 = tex2D(DIFFUSE_MAP, interpolants.m_TexCoord0.xy);
+			texelColor.xyz = texel_color0.xyz;
+
+			float4 texel_color1 = tex2D(SAMPLER_1, interpolants.m_TexCoord0.xy);
+			texelColor.xyz = lerp(texelColor.xyz, texel_color1.xyz, texel_blend.r);
+
+			float4 texel_color2 = tex2D(EMISSIVE_MAP, interpolants.m_TexCoord0.xy);
+			texelColor.xyz = lerp(texelColor.xyz, texel_color2.xyz, texel_blend.g);
+
+			float4 texel_color3 = tex2D(WALL_OF_GRASS_MAP, interpolants.m_TexCoord0.xy);
+			texelColor.xyz = lerp(texelColor.xyz, texel_color3.xyz, texel_blend.b);
+
+			texelColor.a = 1.f;
+	#endif  //USE_HEIGHT_BLEND
+#else // FOUR_BLEND
+	    // UV for the color look-up
+	    float2 uvColor = interpolants.m_TexCoord0.xy;
+
+	    // Read the color texture	
+	    texelColor = tex2D(DIFFUSE_MAP, uvColor);
+#endif // FOUR_BLEND
+	}
+	
+#ifndef DISABLE_EMISSIVE
+	// Apply strange emissive texture
+	float4 texelEmissive = tex2D(EMISSIVE_MAP, interpolants.m_TexCoord0.xy);	
+	finalColor = lighting*texelColor.xyz * (1 - texelEmissive.g) + texelEmissive.g * texelColor.xyz;
+#else
+	// No emissive, so just simple modulate
+	finalColor = lighting*texelColor.xyz;
+#endif
+
+#ifdef NOLIGHTING
+	finalColor.rgb = texelColor.rgb *  shadowMask;
+#elif defined(FULLBRIGHT)
+	finalColor.rgb = texelColor.rgb;
+#endif
+
+	finalColor = saturate(finalColor);
+	
+#if !defined(DISABLE_FOW)
+	float fowFadeInFactorByHeight = interpolants.m_TexCoord0.w;
+    float4 fowFactors = GetFogOfWarFactorsWithFadeTowardFogged(interpolants.m_TexCoord4.xy, fowFadeInFactorByHeight);
+	finalColor.rgb = lerp(fowFactors.rgb, finalColor.rgb, fowFactors.a);
+#endif
+
+	// Output
+	fragment.m_Color0.rgb = finalColor;
+#ifdef VERTEX_ALPHA
+	fragment.m_Color0.a = texelColor.a * interpolants.m_Color0.a;
+#else
+	fragment.m_Color0.a = texelColor.a;
+#endif
+	
+#ifdef WALL_OF_GRASS
+	float2 uvWallOfGrass = interpolants.m_TexCoord1.xy / interpolants.m_TexCoord1.w;
+	uvWallOfGrass.x = (uvWallOfGrass.x + 1.f) / 2.f;
+	uvWallOfGrass.y = (1.f - uvWallOfGrass.y) / 2.f;
+	float4 wallOfGrassTexel = tex2D(WALL_OF_GRASS_MAP, uvWallOfGrass);
+	fragment.m_Color0 *= wallOfGrassTexel;
+#endif
+
+//Handle the high-end per-pixel fogging.
+#if defined(FOG_PIXELSHADER_BLEND) && !defined(FULLBRIGHT) && !defined(NOLIGHTING)
+	//modify the fog color based on the fog of war...
+	#ifndef FOG_QUALITY_LOW	//High quality dual layer colored height fog.
+		float4 fogColor = tex2D(FOGLIGHTING, interpolants.m_TexCoord4.xy);
+		#ifndef DISABLE_FOW
+			float4 fogColorTop = lerp(fowFactors, fogColor, fowFactors.a);
+		#endif
+		float fogOpacity = interpolants.m_Color1.a;
+		
+		#ifdef MOD2X_COLORMAP
+			fogOpacity = saturate( fogOpacity*colorMap.a*2.0f );
+		#endif
+		#ifdef FOG_TEXTURED_OPACITY
+			float texelCloudsOp = tex2D(CLOUDS_MAP, interpolants.m_TexCoord4.zw).r;
+			fogOpacity = fogOpacity * texelCloudsOp;
+		#endif
+		
+		//lerp towards the pure fog color and fully opaque towards the second layer of the volumetric fog.
+		float fogFarLerp = saturate( interpolants.m_TexCoord0.z );
+		
+		fogOpacity = lerp( fogOpacity, 1.0f, fogFarLerp );
+		fogColor   = lerp( fogColorTop, fogColor, fogFarLerp );
+		
+		//final fog blend.
+		fragment.m_Color0.rgb = lerp( fragment.m_Color0, fogColor, fogOpacity );
+	#else			//Lower quality single layer singe-color height fog.
+		//lerp towards the pure fog color and fully opaque towards the second layer of the volumetric fog.
+		float fogOpacity = saturate( interpolants.m_TexCoord0.z );
+
+		//final fog blend.
+		fragment.m_Color0.rgb = lerp( fragment.m_Color0, FOG_COLOR, fogOpacity );
+	#endif
+#endif
+
+	//Editor / Debugging features.
+	#if defined(SHOW_LIGHTING) && defined(MOD2X_COLORMAP)
+		fragment.m_Color0.rgb = lighting;
+	#elif defined(GRAYSCALE)
+		float3 LUMINANCE_CONVERSION = float3(0.299f, 0.587f, 0.114f);
+		fragment.m_Color0.rgb = dot( fragment.m_Color0.rgb, LUMINANCE_CONVERSION );
+	#endif
+	
+	#if defined(TERRAIN_EDITOR) && defined(USE_HEIGHT_BLEND)
+		//EDITOR ONLY:
+		//draw the brush
+		float2 offset = BRUSH_DATA.xy - interpolants.m_TexCoord1.xy;
+		float  distSq = dot(offset, offset);
+		float r2_diff = min( abs( distSq*BRUSH_DATA.z + BRUSH_DATA.w ), 1.0f );
+		fragment.m_Color0.rgb = lerp(float3(1.00f,1.00f,0.75f), fragment.m_Color0.rgb, r2_diff);
+		
+		r2_diff = min( abs( distSq*HEIGHTBLEND_DATA.y + HEIGHTBLEND_DATA.z ), 1.0f );
+		fragment.m_Color0.rgb = lerp(float3(0.75f,0.75f,0.50f), fragment.m_Color0.rgb, r2_diff);
+	#endif
+
+	fragment.m_Color0.rgb = GetEnvironmentDeathColor(fragment.m_Color0.rgb);
+    fragment.m_Color0.rgb = ApplyMipColorsVisualization(fragment.m_Color0.rgb, interpolants.m_TexCoord0.xy);
+
+	return fragment;
+}
+
+#else
+
+//////////////////////////////////////////////////////////////
+// LOW QUALITY version of the shader, using the Mod2X Colormap.
+//////////////////////////////////////////////////////////////
+
+#ifdef MOD2X_COLORMAP
+	#if defined(FOUR_BLEND) || defined(DECAL)
+		#define READ_COLORMAP 1
+	#endif
+#endif
+
+struct FRAGMENT
+{
+	float4 m_Color0 : COLOR0;
+};
+
+struct INTERPOLANTS
+{
+	float4 m_Position  : POSITION;
+	float4 m_TexCoord0 : TEXCOORD0;
+#if defined(WALL_OF_GRASS)
+	float4 m_TexCoord1 : TEXCOORD1;
+#elif defined(READ_COLORMAP)
+    float2 m_TexCoord1 : TEXCOORD1;
+#endif
+	float4 m_Color0    : COLOR0;
+};
+
+FRAGMENT main( INTERPOLANTS interpolants )
+{
+	FRAGMENT fragment;
+
+	// Add together baked and dynamic incident light
+	#ifdef WALL_OF_GRASS
+		float4 colorMap = tex2D(COLORMAP, interpolants.m_TexCoord0.zw*float2(1,-1)+float2(0,1));
+	#elif defined(READ_COLORMAP)
+		float4 colorMap = tex2D(COLORMAP, interpolants.m_TexCoord1.xy);
+	#endif
+	//Lighting comes from the lightmap/colormap or the vertex colors, 
+	//depending on shader defines.
+	#if defined(FOUR_BLEND) || defined(DECAL)
+		float3 lighting = colorMap.rgb;
+	#else
+		float3 lighting = interpolants.m_Color0.rgb;
+	#endif
+	//Mod4X lighting.
+	lighting *= 4.0f;
+
+	// Compute final color
+	float3 finalColor;
+	
+#ifdef FOUR_BLEND
+	#ifdef USE_HEIGHT_BLEND
+	float4 height_scale = tex2D(SAMPLER_4, interpolants.m_TexCoord1.xy) * HEIGHTBLEND_LAYER_SCALE;
+	float4 texel_color0 = tex2D(DIFFUSE_MAP,       interpolants.m_TexCoord0.xy);
+	float4 texel_color1 = tex2D(SAMPLER_1,         interpolants.m_TexCoord0.xy);
+	float4 texel_color2 = tex2D(EMISSIVE_MAP,	     interpolants.m_TexCoord0.xy);
+	float4 texel_color3 = tex2D(WALL_OF_GRASS_MAP, interpolants.m_TexCoord0.xy);
+		
+	float4 texelColor = ApplyHeightBlend(height_scale, texel_color0, texel_color1, texel_color2, texel_color3, HEIGHTBLEND_DATA.a);
+	#else
+	//this should never be hit, filling in for the Cooker.
+	float4 texelColor = tex2D(DIFFUSE_MAP, interpolants.m_TexCoord0.xy);
+	#endif
+#else  // FOUR_BLEND
+	// Read the color texture	
+	float4 texelColor = tex2D(DIFFUSE_MAP, interpolants.m_TexCoord0.xy);
+#endif // FOUR_BLEND
+	
+#if defined(NOLIGHTING) || defined(FULLBRIGHT)	//normally we'd multiply in the shadow value here but with the lowest detail settings, shadows are disabled.
+	finalColor.rgb = texelColor.rgb;
+#else
+	// No emissive, so just simple modulate
+	finalColor = saturate( lighting*texelColor.xyz );
+#endif
+
+#if !defined(DISABLE_FOW)
+    float4 fowFactors = GetFogOfWarFactors(interpolants.m_TexCoord0.zw);
+	finalColor.rgb = lerp(fowFactors.rgb, finalColor.rgb, fowFactors.a);
+#endif
+
+	// Output
+	fragment.m_Color0.rgb = finalColor;
+	fragment.m_Color0.a   = texelColor.a;
+	
+#ifdef WALL_OF_GRASS
+	float2 uvWallOfGrass = interpolants.m_TexCoord1.xy / interpolants.m_TexCoord1.w;
+	uvWallOfGrass.x = (uvWallOfGrass.x + 1.f) / 2.f;
+	uvWallOfGrass.y = (1.f - uvWallOfGrass.y) / 2.f;
+	float4 wallOfGrassTexel = tex2D(WALL_OF_GRASS_MAP, uvWallOfGrass);
+	fragment.m_Color0 *= wallOfGrassTexel;
+#endif
+
+//Handle the high-end per-pixel fogging.
+#if defined(FOG_PIXELSHADER_BLEND) && !defined(FULLBRIGHT) && !defined(NOLIGHTING)
+	//lerp towards the pure fog color and fully opaque towards the second layer of the volumetric fog.
+	float fogOpacity = saturate( interpolants.m_Color0.a );
+	//final fog blend.
+	fragment.m_Color0.rgb = lerp( fragment.m_Color0, FOG_COLOR, fogOpacity );
+#endif
+
+    fragment.m_Color0.rgb = GetEnvironmentDeathColor(fragment.m_Color0.rgb);
+    fragment.m_Color0.rgb = ApplyMipColorsVisualization(fragment.m_Color0.rgb, interpolants.m_TexCoord0.xy);
+
+	return fragment;
+}
+
+//LOW QUALITY
+#endif

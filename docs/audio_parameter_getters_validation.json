@@ -1,0 +1,42 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T09:11:42.558956+00:00",
+  "change": [
+    "Local property8/9 getters ported with actual static/RTPC rules, conditional CRT draw and original f64 scaling/f32 rounding.",
+    "Inheritance evaluate_with resolves local getters at actual native call sites, preserving owner context, repeated visits and shared draw ordering.",
+    "Actual original static getters composed with inheritance, removing the prior two getter-value adapters for this static composition proof."
+  ],
+  "validation": {
+    "passed": 5,
+    "failed": 0,
+    "session": 46360,
+    "log": "logs/audio-parameter-getters-tests.log",
+    "native_getter_cases": 1440,
+    "native_actual_getter_inheritance_cases": 384,
+    "prior_inheritance_cases": 384,
+    "comparison": "Getter outputs and side-effect calls exact; composition parameters and calls match; shared NativeRandom ordering tested."
+  },
+  "sha256": {
+    "crates/core/src/audio_parameter_getters.rs": "2c447f8973b4adfa7b9ab8fe9425783d4a1c44d576a8be7777c843998c973788",
+    "crates/core/src/audio_parameter_inheritance.rs": "aa802878d09e2730c094b0c4bd187bb01bf07b565e077f06bbe3a43d59181ee1",
+    "crates/core/src/lib.rs": "18c61f3745c9acb35b017d5948ea68b5da8a56f9298fc087a1e4d2c181194e7b",
+    "tools/probe_native_audio_parameter_getters.py": "364b1238021ba219c6c97478d372b2c8f7ed0f1c943de0dc97d4948930ac0b9b",
+    "tools/probe_native_audio_parameter_inheritance_getters.py": "7d166f869baa190d3fb1c1d5a5c006e8bfbbaa29cf9cdf76c42f13f7aba7bf97",
+    "data/4.20/audio_parameter_getters_contract.json": "19bde3daedcbfe89e7d2d2aa09662aeade452466af51bd1816159e4ea4b51602",
+    "data/4.20/audio_parameter_inheritance_getters_contract.json": "5c3d52099bedeebedc0e76b1e307976d294f6a75b97d814d62cf57d4ed342ef1",
+    "logs/audio-parameter-getters-tests.log": "2ca87f120f6374abceb408d2f93706620d0b8aa2b4391f98d284528b610fafdd",
+    "logs/audio-parameter-getters-probe.log": "ce00b768a66af0b0b04342e7d2d4a62518fcb5e16c302feafdd398e3f4bc9f53",
+    "logs/audio-parameter-inheritance-getters-probe.log": "e3a17c553abb20785eb04a419ceb1507427fb134b0badcd4a678084e54eea83d",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "3ef9ebf18c1d624a4ac36a1e70250e414eb913b354b55acc2bae6bbc6f719c31"
+  },
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "limits": [
+    "B11040 RTPC result supplied as explicit float; captures original parameter29/30 and owner123. Actual manager/RTPC graph evaluation not executed.",
+    "CRT rand returns each supplied15-bit value; native range arithmetic and conditional draw executed unchanged. Seed and shared runtime ownership remain separate qualification.",
+    "Other native classes, actual manager RTPC evaluation and runtime shared RNG ownership remain unqualified.",
+    "No physical voice admission or audible output acceptance.",
+    "Original getter composition covers static/no-range/no-RTPC branches; range and RTPC getter branches have separate original execution qualification.",
+    "RTPC manager evaluation, full actor gain/pitch/LPF aggregation and runtime shared RNG ownership still open.",
+    "No normal client rebuilt or audible/device runtime acceptance."
+  ]
+}

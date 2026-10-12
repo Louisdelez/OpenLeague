@@ -1,0 +1,83 @@
+{
+  "updated_utc": "2026-10-05T08:07:19.920475+00:00",
+  "complete": false,
+  "client_tests_passed": 171,
+  "normal_client_changed": false,
+  "normal_client_verification_receipt": "docs/grass_quad_progress.json",
+  "shader_port_written": true,
+  "gpu_mask_raster_verified": true,
+  "live_grass_mask_integrated": false,
+  "gpu": {
+    "adapter": "NVIDIA GeForce RTX 3060",
+    "backend": "Vulkan",
+    "channels_checked": 2097152,
+    "complete": false,
+    "covered_pixels": 196608,
+    "height": 512,
+    "limits": [
+      "Actual Vulkan raster uses recovered decoded original brush, native quad parameter helper and ported native vertex/pixel shader expressions.",
+      "Nearest/clamp sampling, Rgba8Unorm target, screen matrix and vertex topology are explicit qualification adapters; original driver target/clear/filter/buffers remain open.",
+      "CPU expected pixels cover copied alpha, preserved outside clear and overlapping last-write order; no original D3D framebuffer comparison or full historical filtered precision acceptance.",
+      "Not connected to live actors/camera or normal grass pass; all game domains remain unfinished."
+    ],
+    "overwritten_pixels": 16384,
+    "passed": true,
+    "pixels_checked": 524288,
+    "production_parameters": "crates/client/src/grass_quad.rs",
+    "production_shader": "assets/shaders/native_grass_mask.wgsl",
+    "quad_draws": 4,
+    "width": 1024
+  },
+  "visual_inspection": {
+    "observed": [
+      "Actual GPU alpha readback inspected as grayscale: three separate native brush samples, white outside quads and fourth draw overwriting the first brush in a smaller square."
+    ],
+    "limits": [
+      "Diagnostic target only; this is not a normal match screenshot or an original D3D framebuffer comparison."
+    ]
+  },
+  "native_vertex_shader_link": {
+    "handle_field": "renderer+2035C",
+    "native_initializer": "9814FB..98151B",
+    "name": "Renderer_VS_SCREENVERTEX_SCALE_AND_BIAS",
+    "name_address": "10DC73C",
+    "source": "Renderer/VS_SCREENVERTEX_SCALE_AND_BIAS.vs_2_0",
+    "source_address": "10DC764",
+    "evidence_kind": "static inspected native instructions plus recovered HLSL source"
+  },
+  "repairs": [
+    "Initial example used obsolete borrowed texture-layout argument; corrected for installedwgpu29, initial failed compile log retained."
+  ],
+  "findings": [
+    "Ported actual native vertexSCREEN_MATRIX/positionoffsetscale/UVoffsetscale expressions and PS_COPY_FILTER RGBA sampling to WGSL.",
+    "Actual Vulkan raster shares production grass_quad OffsetCache parameters and recovered decoded nativebrush; checks524288pixels/2097152channels including clear areas, APIparameter variations and16384overlap pixels.",
+    "No normalclient production code changed in this step; previous171test/build executable hash preserved."
+  ],
+  "limits": [
+    "Original targettype2format, driver clear interpretation, sampler filtering, screen-matrix producer, native indexed-buffer topology and compressed DDS precision remain open.",
+    "Qualification raster explicitly usesRGBA8, nearest/clamp, pixel-to-clip matrix adapter and six procedural vertices. It does not qualify those as original historical driver settings.",
+    "GPUproducer is not yet connected to live actorAABB/eligibility, camera or normalgrasspass.",
+    "All24domains, six-client victory/results and completegame remain unfinished."
+  ],
+  "next_actions": [
+    "Qualify native target/clear/sampler/matrix/buffers and grass stencil/pass state; replace qualification adapters with verified production consumers.",
+    "Resolve actual camera/actorAABB/eligibility, bind GPUmask and WALL_OF_GRASS texture multiplication to normalMap10render; inspect actual runtime.",
+    "Continue fullnativevision/rendering, six-client victory/results and every remaining full-plan requirement."
+  ],
+  "files_sha256": {
+    "assets/shaders/native_grass_mask.wgsl": "06ba484717114d1287bba16b33c1a56396206c90956d79db4d3005ee79a725e7",
+    "data/4.20/shaders/Renderer/VS_SCREENVERTEX_SCALE_AND_BIAS.vs_2_0": "f2d1606dd3b5ff2e6fb75b3428e777c2030e91b182bde0ba6f852e9550d7cef3",
+    "data/4.20/shaders/FILTERS/PS_COPY_FILTER.ps_2_0": "a5af6e0ff80321fe3f388399fe4d429acbae67cfe15c6e4d8159da1710b3248c",
+    "assets/maps/grass_native/wall_of_grass_mask.rgba": "c28b7637f8aa19086e26d2034eca6e6fea9d0271d8db367b75eaacfa46b1cf26",
+    "crates/client/examples/grass_mask_gpu_probe.rs": "9d0507f9c27b24d52fb855b122b6fc98e05d2f193c973a281264296edc8ee077",
+    "crates/client/src/grass_quad.rs": "d435cba324f6953739e20fddc5e7f10efa3cf4219bc4373aa8d76ac9251dab2e",
+    "target/debug/examples/grass_mask_gpu_probe.exe": "f787b9408fd46485848c4d80196ccf8915b07cd25c33c4c3ae34c9061e8eab46",
+    "logs/grass-mask-gpu.log": "d97ccab7143af544840cc1685ef591417b8835bb007a8c5ed206b0c6c1984bc1",
+    "logs/grass-mask-gpu-retry.log": "35475233850c7b817131e7dcf5752cc0672bc854ce1f5bb670cb9697d337cd30",
+    "logs/grass-mask-gpu.json": "629f62bde42f02e979981dc7521ac9b040d2d6f8d294bf337b713f1474268abc",
+    "logs/grass-mask-gpu.rgba": "5f9426d1740801a05f8749f50c0e8a6326f0c3d2a084d5830e86011a85800005",
+    "logs/grass-mask-gpu.png": "eb152ec5387f48d0d3faa77da9340a6cbeaf0a4665b1692400febbed59bb3ce9",
+    "logs/grass-mask-gpu-alpha.png": "a05a91709a41da49f4d4d6e526a2170ec8d6fed76dbf01b890a053197a94d15e",
+    "target/debug/openleague-client.exe": "4bc48797f0aab2292beab6b4ef9d57818de0e564aa27bb06659fa2bc3e943fae"
+  }
+}

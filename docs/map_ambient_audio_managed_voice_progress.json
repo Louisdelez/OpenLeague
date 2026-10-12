@@ -1,0 +1,39 @@
+{
+  "updated_utc": "2026-10-04T01:47:29.875827+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_managed_voice.py": "35fafb55612657c076f33fc7278bbd2e074088a523ffdeba340431bada452a09",
+    "data/4.20/audio_managed_voice_contract.json": "883af32a556f4f18156588b7429837b3efaa48e5cdc120e6c3c2eb5f9274fe5e",
+    "crates/core/src/audio_managed_voice.rs": "f66d7bc8fe2a3072ea04a844f4d284537ff634056044928918f6231b03407772",
+    "crates/core/src/audio_voice_factory.rs": "fd8e776d5d32edd09474a4242bb7f109f076dc39674155a1f97a9e87b65f86cf",
+    "crates/core/src/audio_voice_constructor.rs": "3f5e2373dc143b8cdb7b1101c99d244d842bf73507af8a02feea7a69b6fc1b37",
+    "crates/core/src/lib.rs": "d03e4d71907af395cbefbdfbe4e435a9ecddca3a4c44a9b2faca9d872f1756fb",
+    "logs/native-audio-managed-voice-core-tests.log": "5b5bd93f524a630838b81852f830c0968d90b6e1ba0c75cc3b99e489ef610c54",
+    "tools/qualify_native_audio_voice_destruction.py": "96203a125b9603a42fd859020d2524cf1c7c652c3743657f4213966e7b278606",
+    "tools/qualify_native_audio_release.py": "9b8f238ba28998404fa777dd0fa03d9fc90ab0c6888fcf84526766e88f9c3f91"
+  },
+  "native_final_owner_cases": 144,
+  "native_factory_cases_rechecked_in_rust": 256,
+  "core_tests_passed": 250,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "ported": [
+    "5BD3C0 ->5A3220 ->706BC0 final strong owner destroys voice once",
+    "weak ownership preserves control but cannot preserve or resurrect voice",
+    "ManagedVoice mutex-backed mutable state, explicit poison error, teardown preserved after poison",
+    "factory creates managed owner with mandatory caller-supplied finalizer; no automatic teardown on unmanaged allocation outcome",
+    "actual seconds refresh through weak tick mutates shared state; final owner invokes original stop/string/storage sequence"
+  ],
+  "shared_mutable_voice_integrated": true,
+  "automatic_managed_finalization_integrated": true,
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false,
+  "limits": [
+    "Original5BD3C0 shared decrement ->5A3220 voice destroy ->706BC0/706F90 release ->5D5B40/5D6840 control free executed; native7073A9 weak decrement fragment drains remaining weak references.",
+    "Actual stop PostEvent/queue/free/string operations retain explicit adapters from destructor qualification; configured allocator/free branches excluded.",
+    "Last strong owner destroys voice once even while weak owners remain; final weak owner frees control later. Null voice controls free without voice destruction.",
+    "No real backend PCM, thread scheduling or client playback measured.",
+    "Rust Arc/Weak ownership equivalent at semantic level; native memory ABI and thread scheduling not reproduced. Finalizer callbacks supplied explicitly by actual backend; tests use recording adapters.",
+    "PhysicalVoice snapshot is a state copy, not a new playing voice. NoControl outcome still requires explicit caller treatment. Mutex errors exposed; final drop recovers data to avoid silently skipping teardown.",
+    "Client output and actual mixing/fades/queue consumption remain required. Standalone binaries unchanged; full24-domain game incomplete."
+  ]
+}

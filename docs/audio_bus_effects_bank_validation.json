@@ -1,0 +1,57 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T15:40:01.161743+00:00",
+  "change": [
+    "Port B04350 effect reader with count/bypass/seven-byte records, zero-ID suppression, boolean normalization, skipped reserved byte and original error short-circuit followed by mask update. Mask setter native status is deliberately not the reader status.",
+    "Port B00770 slot bound31, allocation failure52, exact AFDDE0 cache initialization preserving reserved padding, unchanged slot suppression and ordered required callbacks. Port AFFBD0 low8 mask/cache flags and mandatory target application.",
+    "Connect BankBackend to bank Effects stage and TargetBackend to actual qualified root/identified target flag consumer. Expose raw cache to notification inputs; rename notification Cache.counts to effect_ids."
+  ],
+  "validation": {
+    "audio_regression_tests_passed": 278,
+    "failed": 0,
+    "new_targeted_tests_passed": 3,
+    "native_effect_reader_cases": 720,
+    "native_bank_effect_composition_cases": 1536,
+    "comparison": "Exact200-byte Bus,36-byte cache/padding, reader result, consumed pointer/remaining and allocate/change/slot/mask order. Whole bank also checks roots, control-list entries/raw words and loader-stage order including allocation and later stage errors. Converted notification IDs/flags checked against native cache bytes.",
+    "session": 28704,
+    "terminal_exit_code": 0,
+    "log": "logs/audio-bus-effects-bank-tests.log",
+    "preparatory_source_mask_callback_cases": 576
+  },
+  "sha256": {
+    "crates/core/src/audio_bus_effects_bank.rs": "e10bf5ab8cfd96abc3995a70a214cfeeecf1b9bcf8a5c61aa722284fe1134af0",
+    "crates/core/src/audio_bus_bank.rs": "7b96a5ad7dc42bb490e68c0824cd348c9d55f2aed4df9a16be2c80c9927071c8",
+    "crates/core/src/audio_bus_parameter_notification.rs": "f755130d199054b30d2427dd02384fe070ea6c764fa208b53a0fe669bb4e2a1b",
+    "crates/core/src/audio_bus_control_application.rs": "e9cdc6fd61fded026b0010c0d7b31970196fc29077c8496ecbd0dbeb9d2e5261",
+    "crates/core/src/lib.rs": "8253dead7c0b791ad470a6cb16cd9209073ced2e72d7291b823f15d7da6522c5",
+    "tools/probe_native_audio_bus_effects_bank.py": "bbe70af5e1eecbda4755e9fa5a24ee402c7cb151a81f58764be4f37485b78e90",
+    "tools/probe_native_audio_bus_bank_effects_composition.py": "89fdf784cf2b9cc3439e1ae70f66557f25671b6f1c207f4a20332961e051b5e7",
+    "tools/probe_native_audio_bus_source_mask.py": "a773643eb795d0619afcc82a8ef2484b792d8ac4728cac7e619731834731c856",
+    "data/4.20/audio_bus_effects_bank_contract.json": "43902b9cd52c73bfccdfb9189a7124083f8ced11eb1312fe69ef51475089d91d",
+    "data/4.20/audio_bus_bank_effects_composition_contract.json": "b0610c2eead82bd017c9587ef01d5a0b90f6c4557132c22d5b1697c73308ba91",
+    "data/4.20/audio_bus_source_mask_contract.json": "82732977549d4033806d273397e414d04aba47964794503ab4a97937d0647d0b",
+    "logs/audio-bus-effects-bank-tests.log": "29dbfc143e4fb04c314925c540206e9674a8a2912ba609d9b7a4e22de1241249",
+    "logs/audio-bus-effects-bank-probe.log": "da737231c1f21f0c13f555f6367436ee4d76698c0797d50c08b7c1945e52bf61",
+    "logs/audio-bus-bank-effects-composition-probe.log": "c66cc8bce557941aec77ebf2e8c59411d3d0054e413753de9c63aaeb0a5795e7",
+    "logs/audio-bus-source-mask-probe.log": "093c394ede1afe5aeec3b9b457d48662cd5c02874125d6e082fa1811f3035b7e",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "fad5b8b53ad51ef69aa70d8193d3cfefb94f32df86a86bc394c6aeee401d4165"
+  },
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "interfaces": [
+    "Effects reference executes actual B04350/B00770/AFFBD0/AFDDE0, Bus class virtual38 and B03740/B0D140/B0D1A0. Allocation and virtualCC/84/DC callbacks are explicit adapters; target registries are empty.",
+    "Whole bank adds actual B044E0/B02430 with property/RTPC/state/position interfaces consuming zero bytes; constructed payload is not a complete native bank.",
+    "Source mask preparation executes actual virtualDC B041B0 without result adapter, comparing whole200-byte Bus and20-byte source."
+  ],
+  "findings": [
+    "Cache constructor initializes each slot first two bytes and resource ID, plus byte32, while preserving reserved padding bytes.",
+    "Mask value0 with absent cache does not allocate or notify; existing cache still updates/calls callbacks even when flags are unchanged.",
+    "B041B0 source flag formula is (old & ~low8(mask)) | low8(value), so value bits outside mask survive. Cache AFFBD0 additionally masks value."
+  ],
+  "limits": [
+    "Actual virtualCC B03D40, virtual84 B04B80 and virtualDC B041B0 bodies remain to port/connect; runtime changes they cause are not simulated by success-default production implementations. Snapshot callbacks exist only in test modules.",
+    "Bank composition does not consume actual property/RTPC/state/position formats and does not prove a complete normal bank load.",
+    "Target application with populated voices already qualified separately; effect-prefix references currently use empty native target registries.",
+    "Cache notification conversion is a snapshot bridge, not normal shared resource ownership. Factory, binding/smoothing, admission, refcounts and DSP/device output remain open.",
+    "No new normal-client/audible-output or full-game acceptance."
+  ]
+}

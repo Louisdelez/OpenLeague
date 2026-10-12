@@ -1,0 +1,270 @@
+{
+  "passed": true,
+  "case_count": 8,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "cases": [
+    {
+      "delay": 0.125,
+      "has_context": false,
+      "allocations": [
+        [
+          16,
+          1073844224
+        ],
+        [
+          16,
+          1073844480
+        ],
+        [
+          176,
+          1073823744
+        ],
+        [
+          64,
+          1073844992
+        ],
+        [
+          8,
+          1073845248
+        ]
+      ],
+      "freed": [
+        1073844224,
+        1073844480,
+        1073845248,
+        1073823744,
+        1073844992
+      ],
+      "reference_count": 2
+    },
+    {
+      "delay": 0.125,
+      "has_context": true,
+      "allocations": [
+        [
+          16,
+          1073844224
+        ],
+        [
+          176,
+          1073823744
+        ],
+        [
+          64,
+          1073844736
+        ],
+        [
+          8,
+          1073844992
+        ]
+      ],
+      "freed": [
+        1073844224,
+        1073844992,
+        1073823744,
+        1073844736
+      ],
+      "reference_count": 2
+    },
+    {
+      "delay": 0.5,
+      "has_context": false,
+      "allocations": [
+        [
+          16,
+          1073844224
+        ],
+        [
+          16,
+          1073844480
+        ],
+        [
+          176,
+          1073823744
+        ],
+        [
+          64,
+          1073844992
+        ],
+        [
+          8,
+          1073845248
+        ]
+      ],
+      "freed": [
+        1073844224,
+        1073844480,
+        1073845248,
+        1073823744,
+        1073844992
+      ],
+      "reference_count": 2
+    },
+    {
+      "delay": 0.5,
+      "has_context": true,
+      "allocations": [
+        [
+          16,
+          1073844224
+        ],
+        [
+          176,
+          1073823744
+        ],
+        [
+          64,
+          1073844736
+        ],
+        [
+          8,
+          1073844992
+        ]
+      ],
+      "freed": [
+        1073844224,
+        1073844992,
+        1073823744,
+        1073844736
+      ],
+      "reference_count": 2
+    },
+    {
+      "delay": 1.0,
+      "has_context": false,
+      "allocations": [
+        [
+          16,
+          1073844224
+        ],
+        [
+          16,
+          1073844480
+        ],
+        [
+          176,
+          1073823744
+        ],
+        [
+          64,
+          1073844992
+        ],
+        [
+          8,
+          1073845248
+        ]
+      ],
+      "freed": [
+        1073844224,
+        1073844480,
+        1073845248,
+        1073823744,
+        1073844992
+      ],
+      "reference_count": 2
+    },
+    {
+      "delay": 1.0,
+      "has_context": true,
+      "allocations": [
+        [
+          16,
+          1073844224
+        ],
+        [
+          176,
+          1073823744
+        ],
+        [
+          64,
+          1073844736
+        ],
+        [
+          8,
+          1073844992
+        ]
+      ],
+      "freed": [
+        1073844224,
+        1073844992,
+        1073823744,
+        1073844736
+      ],
+      "reference_count": 2
+    },
+    {
+      "delay": 2.0,
+      "has_context": false,
+      "allocations": [
+        [
+          16,
+          1073844224
+        ],
+        [
+          16,
+          1073844480
+        ],
+        [
+          176,
+          1073823744
+        ],
+        [
+          64,
+          1073844992
+        ],
+        [
+          8,
+          1073845248
+        ]
+      ],
+      "freed": [
+        1073844224,
+        1073844480,
+        1073845248,
+        1073823744,
+        1073844992
+      ],
+      "reference_count": 2
+    },
+    {
+      "delay": 2.0,
+      "has_context": true,
+      "allocations": [
+        [
+          16,
+          1073844224
+        ],
+        [
+          176,
+          1073823744
+        ],
+        [
+          64,
+          1073844736
+        ],
+        [
+          8,
+          1073844992
+        ]
+      ],
+      "freed": [
+        1073844224,
+        1073844992,
+        1073823744,
+        1073844736
+      ],
+      "reference_count": 2
+    }
+  ],
+  "findings": [
+    "After complete AF0500 scheduling, actual B06B10 invokes B1F9B0 with absent target, releases action via B22070 and native destructors, destroys pending and frees it.",
+    "All allocated source/property/action/pending buffers freed exactly once; retained external object returns to original reference count2."
+  ],
+  "adapters": [
+    "Mapped allocator/free and lock imports only. Empty target registry intentionally exercises missing-target path.",
+    "Queue entry manually detached before direct B06B10 call; native due-time traversal/removal not verified."
+  ],
+  "limits": [
+    "Missing-target cleanup only; actual audible target execution, nonzero owner/associations and native queue drain remain open."
+  ]
+}

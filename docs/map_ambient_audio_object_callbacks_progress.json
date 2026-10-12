@@ -1,0 +1,31 @@
+{
+  "updated_utc": "2026-10-04T01:00:47.296197+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_object_callbacks.py": "ee776dff9dd2737196e4c16e08bb1067c03bfaf32d24600a616fa529b62d46ee",
+    "data/4.20/audio_object_callbacks_contract.json": "1e3438d706d80d04c93da9c4c56000e8fca1695bc87db6fe13d2afa3c6c9332b",
+    "crates/core/src/audio_object_callbacks.rs": "1396c32dce6626c47eb7d60ea556ea7ae8865ec3bac7b2f50e57abfb574fdbb3",
+    "crates/core/src/lib.rs": "365d1e627a2ac733b7978bae12160cfa7b1558fbaf44d6c7d8d115091d115feb",
+    "logs/native-audio-object-callbacks-core-tests.log": "df310431f462e965bfca859c8234f4cf53264e146fdffc01e1402125b359b90d"
+  },
+  "native_callback_cases": 80,
+  "core_tests_passed": 229,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "ported": [
+    "exact event types1/4 dispatch, combined type5 ignored",
+    "unbound type1 marks retired then optional linked virtual4; no immediate source unregister",
+    "bound type1 virtual4 then virtual0(arg1), type4 virtual8",
+    "missing cookie no-op and repeated end retains native repeat-call behavior"
+  ],
+  "physical_voice_factory_implemented": false,
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false,
+  "limits": [
+    "Original704A00/unbound and704A40/bound callbacks executed; target interface virtual0/4/8 calls recorded with explicit adapters.",
+    "Callback-info pointer valid; missing cookie and missing linked target covered. Interface meanings/destruction side effects and Wwise callback delivery not qualified by this step.",
+    "Unbound End(type1) marks scratch retired for deferred cleanup; does not directly unregister audio source. Bound End invokes slot4 then slot0(arg1). Other event bits ignored unless exact1/4.",
+    "Rust callback output describes native interface calls; actual interface implementations/destructors and deferred pool cleanup still need integration.",
+    "Wwise callback delivery/end-of-playback timing not verified. Full unbound launch706910/object scratch706600/pool706720 still incomplete.",
+    "Standalone binaries unchanged; all24-domain game remains incomplete."
+  ]
+}

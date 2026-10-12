@@ -1,0 +1,115 @@
+{
+  "native_items_audited": 849,
+  "activated_component_ids": [
+    1001,
+    1004,
+    1006,
+    1011,
+    1027,
+    1028,
+    1029,
+    1031,
+    1033,
+    1036,
+    1037,
+    1038,
+    1042,
+    3801
+  ],
+  "constants_source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\Constants.var",
+  "constants_sha256": "178d86117826819d02af09477083eae625d418ee4b0b8bff4763a1a56c7b2be2",
+  "starting_gold": 825.0,
+  "shops": [
+    {
+      "point": {
+        "x": 1340.8141,
+        "z": 7996.8691
+      },
+      "source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\OrderShop01.sco",
+      "sha256": "36a9b0d2b7b615d2c2b561df9d1cdc826b481ee8a399ffac534d733bc8085fd9"
+    },
+    {
+      "point": {
+        "x": 14152.8262,
+        "z": 7996.8691
+      },
+      "source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\chaosShop01.sco",
+      "sha256": "8a6db75a78036d0a9376938b939c648e10e324ce11174efec763ccb01ce369e3"
+    }
+  ],
+  "limits": [
+    "Numeric native item fields and shop centers verified; released catalog, map exclusions and all passive/active behaviors remain incomplete.",
+    "Shop radius 1000 is reconstructed, not recovered.",
+    "Sell multiplier 0.7 defaults to supplied community ItemData.cs where absent in native data; native timing and rounding unqualified.",
+    "Garen W bonus defenses, item groups, undo, death purchase rules and historical shop UI remain incomplete.",
+    "Map10 ambient gold amount absent in supplied Constants.var; no guessed income enabled.",
+    "Purchase pool-adjustment uses supplied community absolute-pool semantics with clamping; native historical behavior remains unqualified.",
+    "Movement soft caps, attack wind-up, unique group interactions beyond boots and all full item effects remain incomplete.",
+    "Recommendations, all map restrictions, full catalog, complete historical UI and keyboard/click desktop inspection remain incomplete.",
+    "Actual original item texts qualified for 14 active items; two active regeneration calculator expressions supported, general tooltip expression engine still incomplete."
+  ],
+  "complete": false,
+  "updated_utc": "2026-10-03T11:22:05.400172+00:00",
+  "core_tests_passed": 74,
+  "new_shop_tests_passed": 15,
+  "network_checks_passed": 18,
+  "server_sha256": "886b43c331c17b6f9c5362ec6d232c2d19e981bb1edef85e3299eb3969bf8c39",
+  "client_sha256": "584c3258970b9d6fab7eb435037867a0d599bf6c3b4b0ee1c9fb1e0477ac6489",
+  "client_ui": "14 active items with original French names/descriptions, text search insensitive to accents/case, stat categories, current remaining price, hover description/recipe panel and six sale slots. Search focus suppresses skill commands.",
+  "render": {
+    "path": "E:\\OpenLeague\\logs\\render-shop-localized.png",
+    "sha256": "9731ac23ac3bac3d657f72f9a02a7fdc21a29f3c026ff33d2f40d0d066198c78",
+    "dimensions": [
+      1280,
+      800
+    ],
+    "observed": "Actual Vulkan framebuffer inspected: French native names with accents; 14-item menu and icons; Bracelet cristallin tooltip +200HP/+50% base regeneration, calculated +4 HP per 5s at Garen level 1, total/current price 600, two named recipe components.",
+    "limits": "Full historical layout and direct desktop interactions unqualified."
+  },
+  "item_regeneration_network_checks_passed": 8,
+  "implemented_stat_effects": [
+    "AD, armor, magic resistance",
+    "flat maximum health and Mana-only maximum mana",
+    "percent base health/mana regeneration, additive across components",
+    "flat movement speed and additive attack speed feeding actual movement and attack cadence",
+    "native minimum attack delay 0.4 seconds",
+    "boots limited to one confirmed by original 4.20 tooltip"
+  ],
+  "boots_source": {
+    "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Menu\\fontconfig_en_US.txt",
+    "sha256": "315319cfeb654fe3c404de9551c95e16ee046f5f291de9c10583ad10ab97787d",
+    "native_description": "tr \"game_item_description_1001\" = \"<groupLimit>Limited to 1.</groupLimit><br><br><unique>UNIQUE Passive - Enhanced Movement:</unique> +25 Movement Speed<br><br><i>(Unique Passives with the same name don't stack.)</i>\"",
+    "implemented": "limited to one BootsNormal component"
+  },
+  "previous_renders": [
+    {
+      "path": "E:\\OpenLeague\\logs\\render-shop-foundation.png",
+      "sha256": "c259afa952db6f74d35b5dbd324dcc3b0ef86bce1c5ae5d4a2ecb71ef3d252d0",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "observed": "Real Vulkan framebuffer inspected: restored map near blue fountain, six native-priced purchase buttons, six sale buttons, six empty slots, authoritative 825 starting gold.",
+      "limits": "Screenshot proves rendering only; native desktop foreground and mouse click interaction not qualified. Full shop historical layout/icons, map fidelity and complete contents remain open."
+    },
+    {
+      "path": "E:\\OpenLeague\\logs\\render-shop-modifiers.png",
+      "sha256": "a8c46e826d45d8f2818f79d6180e5fc79facd92328b3f5d788045b47c140a036",
+      "dimensions": [
+        1280,
+        800
+      ],
+      "observed": "Actual Vulkan framebuffer inspected: 13 two-column item buttons and icons, 6 sell slots and 825 gold. No missing item image visible.",
+      "limits": "Render evidence only; click operation/desktop foreground and complete historical fidelity unqualified."
+    }
+  ],
+  "client_tests_passed": 2,
+  "recipe_planning": "Recursive graph validation and component credit; owned completed child preferred; inventory slots consumed at most once; transaction atomic; cycles/unknown graph rejected. Generic nested-graph unit scenarios are algorithm tests, not proof that native full recipes/catalog are complete.",
+  "filtered_render": {
+    "path": "E:\\OpenLeague\\logs\\render-shop-filtered.png",
+    "sha256": "a3e1cdbf7c697efcbffb4e844c450e4372f760323eb47e19b98e25fe3488bd81",
+    "query": "RAFRAICHISSANT",
+    "observed": "Actual Vulkan framebuffer inspected: only Collier rafraichissant with native accent rendered; other 13 item buttons filtered out; selected native item description and calculated +4 HP/5sec remain readable.",
+    "limits": "Filter pipeline/render proof; direct human keyboard and mouse interaction still not qualified."
+  }
+}

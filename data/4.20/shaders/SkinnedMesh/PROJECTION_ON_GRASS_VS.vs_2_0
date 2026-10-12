@@ -1,0 +1,53 @@
+#include "../FogOfWar/FogOfWar_VS.hls"
+
+
+column_major float4x4 PROJ_XFORM : register(c0);
+column_major float4x4 WORLD_TO_UV_XFORM : register(c233);
+column_major float4x3 JOINT_XFORM[68] : register(c24);
+
+#if IS_OPENGL
+    #define blendindex float
+    #define blendindex4 float4
+#else // #if IS_OPENGL
+    #define blendindex int
+    #define blendindex4 int4
+#endif // #if IS_OPENGL
+
+struct VERTEX
+{
+    float3 position : X3D_VSIN_POSITION;
+    blendindex4 blendIndices : X3D_VSIN_BLENDINDICES;
+    float4 blendWeight : X3D_VSIN_BLENDWEIGHT;
+};
+
+struct INTERPOLANTS
+{
+    float4 position : POSITION;
+    float2 texcoord0 : TEXCOORD0;
+    float2 texcoord1 : TEXCOORD1;
+};
+
+void main(VERTEX vertex, out INTERPOLANTS interpolants)
+{
+    // Compute skinned position
+#ifdef NO_SKINNING
+    float3 worldPosition = mul(float4(vertex.position, 1.f), JOINT_XFORM[0]);
+#else
+    float3 worldPosition = float3(0,0,0);
+    for (int i=0; i<NUM_BLEND_WEIGHTS; ++i)
+    {
+        blendindex jointIndex = vertex.blendIndices[i];
+        float weight = vertex.blendWeight[i];
+        worldPosition += (mul(float4(vertex.position, 1.f), JOINT_XFORM[jointIndex]) * weight);
+    }	
+#endif // NO_SKINNING
+
+    // Output homogeneous position
+    interpolants.position = mul(float4(worldPosition.xyz, 1.0f), PROJ_XFORM); 
+ 
+    interpolants.texcoord0 = mul(float4(worldPosition.xyz, 1.0f), WORLD_TO_UV_XFORM).xz; 
+    interpolants.texcoord0.y = 1.f - interpolants.texcoord0.y;
+
+	// Fog of war
+	interpolants.texcoord1 =  FogOfWarTextureCoordinates( worldPosition.xyz ).xy;
+}

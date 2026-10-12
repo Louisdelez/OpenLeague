@@ -1,0 +1,55 @@
+{
+  "updated_utc": "2026-10-04T11:35:46.941834+00:00",
+  "complete": false,
+  "core_tests_passed": 416,
+  "client_tests_passed": 32,
+  "new_core_checks": 6,
+  "diagnostic_network_checks": 6,
+  "network": "docs/unit_stuns_network_validation.json",
+  "executables": [
+    {
+      "path": "target/debug/openleague-server.exe",
+      "bytes": 4609024,
+      "sha256": "bbbefe8a78a7b9a1a5fc6a00064a04ca79c8bab364876e10ebad29061f3802e4"
+    },
+    {
+      "path": "target/debug/openleague-client.exe",
+      "bytes": 118180352,
+      "sha256": "c8433e06b1fca45671636ce41e731b1ac2ea6deb380e77295c258c46a48a6689"
+    },
+    {
+      "path": "launcher/src-tauri/target/debug/openleague-launcher.exe",
+      "bytes": 12411904,
+      "sha256": "ac22a8346c0b2af574bdee16311acc510e657c73ca5f85584223f0049c4f57de"
+    }
+  ],
+  "community_sources": [
+    {
+      "path": "D:/LeagueOfLegendsV2/4.20/GameServer/GameServerLib/GameObjects/AttackableUnits/AI/ObjAIBase.cs",
+      "sha256": "b380ac2b2609f1946ee48d1ab779eda57db477774a2cd7cca5081e4ccb449459",
+      "scope": "CanMove and CanAttack Stunned status checks"
+    }
+  ],
+  "files_sha256": {
+    "crates/core/src/stuns.rs": "7c3edec12323f0a4618357028702b356e6103e7847394cd8ab6351870c20426c",
+    "crates/core/src/unit_stun_tests.rs": "09f3a3684fa7985cd772724c461e36b895d6b37d3ece08388ca437ff7ea44523",
+    "crates/core/src/world.rs": "8c7676cd367712af27571522f93d004890c35de5a3e4fb84939a8a1e08838b4c",
+    "crates/core/src/annie_r.rs": "99055ee432b0789587ccf822d15f19a777b4f8c40e05f7fd50cffacd2c58bebc",
+    "crates/client/src/animation.rs": "5d577e33e6214bb369dc82df5631c00ea8e5666510489c079920e2f8292613af",
+    "crates/server/examples/unit_stun_fixture.rs": "d2731c3c51e4fafaf7e5a1e6a733430cf2742778f5c627d74a6533fd3d63bfa4",
+    "docs/unit_stuns_network_validation.json": "d732d63238a1725148ba0a823576ffdd226d433226023650f6cd6bc103f16f15",
+    "logs/unit-stuns-tests.log": "f68bd9b9b2c342e2ce67377aadbf88a2a9d74c0f4780bad1f9f7117573636813",
+    "logs/unit-stuns-build.log": "d5cf317e1ae6b7ed45890d7dda1c05db12e62825b5d6ce41af8a0611d56cb083"
+  },
+  "limits": [
+    "Supplied community ObjAIBase.CanMove/CanAttack gates Stunned status. Generic NPC control event/state/lifecycle and projectile/order sequencing reconstructed; not recovered original Riot server control logic.",
+    "Server grant_stun supports ordinary lane/minion/monster/pet units. No arbitrary ClientPacket grants stuns; actual UDP attempt rejected. Structures unsupported and Boss returns explicit policy-not-qualified error instead of inventing Vilemaw immunity.",
+    "NPC stun duration unscaled pending native tenacity/resistance/immunity qualification. Same-tag replacement and separate-tag expiry use current champion reconstructed policy. Active checks health/time, cleanup death/natural pet expiry, preserved orders/path/cadence, autoAI resumes after expiry.",
+    "NPC attacks now separate committed windup from explicit launched ranged phase: stun/death interrupts unlaunched attacks, released ranged shots survive while source corpse remains. Full targetability/projectile lifetime/source removal beyond3sec and original timing remain incomplete.",
+    "Pet regen/aura/lifetime run through stun; follow teleport/new AI/movement/attacks paused. Owner can queue guide while pet stunned; native GuideCanCastWhileDisabled governs owner stun separately. Original pet aura/control status interactions and full monster camp/leash acceptance unqualified.",
+    "Native animation graphs fall back to idle during NPC stun and suppress run/attack/spawn binding; actual animation pose, rendered stuns, VFX/audio/nativefullHUD/physicalinput not validated this turn.",
+    "Six core behavior tests cover lane motion/route resume, cancelled melee recovery, ranged stun/death before/after launch, tag/snapshot/invalid/death/Boss/structure guards, pet aura/regen/queued guide/life and pet-origin champion credit. No complete monster-specific AI acceptance claimed.",
+    "Six actual2clientUDP checks use a separate level6/centre-position fixture that injects60tick pet stun internally. This is not an ordinary native champion stun producer or production match progression proof.",
+    "Annie passive duration/event ordering still unqualified and gameplay absent. All122completekits/all24domains incomplete; earlier GPU/network receipts retain their original executable hashes."
+  ]
+}

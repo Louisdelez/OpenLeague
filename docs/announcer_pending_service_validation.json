@@ -1,0 +1,57 @@
+{
+  "saved_utc": "2026-10-10T08:59:36.148809+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "audio_tests_passed": 668,
+  "filtered_tests_not_run": 480,
+  "isolated_production_tests_passed": 97,
+  "native_real_pending_metadata_lifetimes_ported": 16,
+  "native_pending_sequences_ported": 10,
+  "native_pending_registrations_ported": 52,
+  "native_pending_removals_ported": 52,
+  "native_active_registry_initializations_prepared": 4,
+  "native_missing_active_removals_prepared": 16,
+  "contracts": {
+    "audio_announcer_owner_metadata_real_pending_service_contract.json": {
+      "cases": 16,
+      "sha256": "8cfab74205558d86f4c60220b2c2e4148c6791f1892373ff0dba661e9c0c47ee"
+    },
+    "audio_announcer_pending_service_sequences_contract.json": {
+      "cases": 10,
+      "sha256": "14918e2f64e3d499cf1e5e5348ba4d6a1e6e2d3bddbab68414e675e345ee8fde"
+    },
+    "audio_announcer_active_service_initialization_contract.json": {
+      "cases": 4,
+      "sha256": "db8554dca53e4723a6233901c0e56b385f27d76d3a9870e37125982b5808560d"
+    }
+  },
+  "regression_log_sha256": "3d567715c336b93e20c617e886f24e6a582ce74734316f8af8ab45191087bfed",
+  "isolated_log_sha256": "fb3601cc48613401a86e1468f61f96e49b830789fc7b06e97588d51d203f5693",
+  "test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_core-5b2a9def275dcedd.exe",
+  "test_executable_sha256": "dee6a0d37a9855034f4ba092e5593b1a4e2de89760a0e065c42db3038710e100",
+  "source_hashes": {
+    "crates/core/src/audio_announcer_pending_service.rs": "2f50a833fc50c07029524655b4884dc7c80297d5dda57c2a563eee91013c1a48",
+    "crates/core/src/audio_announcer_owner_metadata.rs": "ddb1fcdc2708c10c0af00bdfb9a05d1b755ebc5448ef253fcb45e9575a020712",
+    "crates/core/src/lib.rs": "e5a5ec1c7caf25b655ad53173d55c9e8bda1f2b3b5d9e69d5b3bd702c393616d",
+    "tools/announcer_pending_service_production_tests.rs": "433da79af5cc32264bff53a493dfcd76bdcd37dc63530dba0a0f2b31b9390c17",
+    "tools/qualify_metadata_real_pending_service.py": "b71e43dc6489e93c3d987968298e16d732313e129fa9ddcaff66a8f746a3df39",
+    "tools/qualify_pending_service_sequences.py": "babef0ac5c46ed3ba0f43117a2ff4076ea5fda2083c1db371fef1dc3e6025663",
+    "tools/qualify_active_service_initialization.py": "d40994e71bde7d7abba8edc51ce974e474c297d604197449f7e67b5b68e9a04b"
+  },
+  "behavior": [
+    "Native72C610/72C620 service slots and72D420/72D510 pending registration/removal ported with owned8-byte descriptor/storage pairs, two native callback clones, intermediate scalar deletion and exact allocation classes. Metadata construction and destruction compose actual Rust pending service operations against16 original lifetimes with real pair/descriptor/handler frees.",
+    "Ten native sequences match52 registrations and52 removals, including null descriptors, repeated storage identities, pointer vector capacities1/2/3/4/6/9/13, stable first-match removal and no invented handler storage clearing. Native5C30E0 copy/free/publication ordering preserved for nonaliasing registration append.",
+    "Virtual dispatch validates actual service slot targets and rejects unknown methods. Freed allocations become inaccessible in Rust; only live pending entries/metadata compared."
+  ],
+  "limits": [
+    "Actual active registry constructors7306C0/7307F0 and missing removal72EE20 newly qualified in4 initializations and16 absent-callback removals, not yet ported. Service pending vector is explicitly caller-initialized empty in native proofs; whole72A3B0 service constructor and its active descriptor/owner registries remain required. Pending vector allocation failures, exceptions, full service teardown and live engine storage synchronization remain open.",
+    "No pending match correctly reaches explicit72EE20 active-removal boundary; original active lookup/storage/removal/queue processing/event dispatch remain to port. Metadata/shared-control disposal and actor/world lifecycle integration remain open.",
+    "Callback consumers/gate/actor method internals, normal announcement queues/priorities/mixing/audible playback, human fidelity acceptance and full game remain incomplete."
+  ],
+  "next_action": "Port active service registry construction7306C0 at service+24 and7307F0 at service+56 against4 prepared initializations in audio_announcer_active_service_initialization_contract.json and qualify matching removal beyond16 prepared missing cases, pending processing/activation and72EE20 active listener removal. Preserve compound owner/event descriptor keys, handler-storage identity, native lookup/erase and callback dispatch. Then compose actual shared-control metadata disposal and actor lifecycle, simulation events and normal announcement queues/priorities/mixing/playback. Preserve24domains114tasks37requirements."
+}

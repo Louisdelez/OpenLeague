@@ -1,0 +1,31 @@
+from pathlib import Path
+import json,ast,struct,hashlib,datetime,math
+r=Path('E:/OpenLeague');native=Path('D:/LeagueOfLegendsV2/4.20/Client/League of Legends_UNPACKED/League-of-Legends-4-20/RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy')
+t=ast.parse(Path('E:/mapslol3v3/tools/import_all_champions.py').read_text(encoding='utf-8'));ns={'struct':struct};exec(compile(ast.Module(body=[x for x in t.body if isinstance(x,ast.FunctionDef) and x.name in ['ini','hashkey']],type_ignores=[]),'native-parser','exec'),ns)
+sources=[]
+def read(p,section,keys):
+ data=ns['ini'](p);values={k:data.get(ns['hashkey'](section,k)) for k in keys};sources.append({'path':str(p),'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'section':section,'values':values});return values
+v=read(native/'DATA/Characters/Annie/Spells/InfernalGuardian.inibin','SpellData',['CastRange','CastRadius','Coefficient','Coefficient2','DelayCastOffsetPercent','CantCancelWhileWindingUp','CanCastWhileDisabled']+[f'{p}{i}' for p in ['ManaCost','Cooldown'] for i in range(1,4)]+[f'Effect{e}Level{i}Amount' for e in range(1,7) for i in range(1,4)])
+c=read(native/'DATA/Characters/AnnieTibbers/AnnieTibbers.inibin','Data',['BaseHP','BaseDamage','Armor','SpellBlock','MoveSpeed','AttackRange','GameplayCollisionRadius','SelectionRadius','PathfindingCollisionRadius','GoldGivenOnDeath','ExpGivenOnDeath','BaseStaticHPRegen','AttackTotalTime','AttackCastTime','AttackDelayOffsetPercent','AttackDelayCastOffsetPercent'])
+a=read(native/'DATA/Characters/AnnieTibbers/Spells/AnnieTibbersBasicAttack.inibin','SpellData',['CantCancelWhileWindingUp','MissileSpeed','AnimationName'])
+skin=read(native/'DATA/Characters/AnnieTibbers/Skins/Base/Base.inibin','MeshSkin',['SkinScale'])
+official=json.loads((r/'data/4.20/native_ddragon_annie_420.json').read_text(encoding='utf-8'))['data']['Annie']['spells'][3]
+checks=0
+for i in range(1,4):
+ for key,expected in [(f'ManaCost{i}',official['cost'][i-1]),(f'Cooldown{i}',official['cooldown'][i-1])]+[(f'Effect{e}Level{i}Amount',official['effect'][e][i-1]) for e in range(1,7)]:assert float(v[key])==expected,(key,v[key],expected);checks+=1
+ assert float(v['CastRange'])==official['range'][i-1];checks+=1
+for k,coeff in [('Coefficient',.8),('Coefficient2',.2)]:assert abs(float(v[k])-coeff)<1e-6;checks+=1
+period=float(c['AttackTotalTime']) if c['AttackTotalTime'] is not None else 1.6*(1+float(c['AttackDelayOffsetPercent'] or 0))
+windup=float(c['AttackCastTime']) if c['AttackCastTime'] is not None else period*(.3+float(c['AttackDelayCastOffsetPercent'] or 0))
+scale=float(skin['SkinScale']) if skin['SkinScale'] is not None else json.loads((r/'data/4.20/model_catalog.json').read_text(encoding='utf-8'))['models']['annietibbers']['scale']
+rules={'range':float(v['CastRange']),'radius':float(v['CastRadius']),'coefficient':float(v['Coefficient']),'aura_coefficient':float(v['Coefficient2']),'cast_seconds':.25,'aura_radius':350.,'aura_seconds':1.,'return_radius':200.,'teleport_distance':2000.,'guide_range':20000.,'guide_pick_radius':100.,'pet_regeneration':float(c['BaseStaticHPRegen']),'pet_scale':scale,'pet_cant_cancel':str(a['CantCancelWhileWindingUp']).lower() in ('true','yes','1')}
+for i in range(1,4):
+ for k,src in [('cost','ManaCost'),('cooldown','Cooldown')]:rules[f'{k}{i}']=float(v[f'{src}{i}'])
+ for k,e in [('damage',1),('health',2),('attack_damage',3),('aura_damage',4),('defense',5),('lifetime',6)]:rules[f'{k}{i}']=float(v[f'Effect{e}Level{i}Amount'])
+definition={'id':'annietibbers','kind':'Pet','asset':'forms/annietibbers.glb','scale':scale,'health':float(c['BaseHP']),'damage':float(c['BaseDamage']),'armor':float(c['Armor']),'magic_resist':float(c['SpellBlock']),'move_speed':float(c['MoveSpeed']),'attack_range':float(c['AttackRange']),'attack_cooldown':math.ceil(period*30),'attack_windup':math.ceil(windup*30),'acquisition':float(c['AttackRange']),'radius':float(c['GameplayCollisionRadius']),'experience':float(c['ExpGivenOnDeath']),'gold':float(c['GoldGivenOnDeath']),'global_experience':0.,'global_gold':0.,'hp_upgrade':0.,'damage_upgrade':0.,'armor_upgrade':0.,'mr_upgrade':0.,'gold_upgrade':0.,'gold_max_bonus':0.,'projectile_speed':0.}
+for p,d in [('data/4.20/annie_r_rules.json',rules),('data/4.20/tibbers_definition.json',definition)]: (r/p).write_text(json.dumps(d,indent=2)+'\n',encoding='utf-8')
+b=(r/'assets/forms/annietibbers.glb').read_bytes();length=struct.unpack_from('<I',b,12)[0];g=json.loads(b[20:20+length]);clips=[x['name'] for x in g['animations']];roles={'idle':3,'run':5,'attack':0,'death':2,'spawn':6}
+assert clips==['annietibbers_attack1','annietibbers_attack2','annietibbers_death','AnnieTibbers_Idle1','annietibbers_idle_enter','annietibbers_run','annietibbers_spawn']
+manifest=json.loads((r/'data/4.20/world_animation_manifest.json').read_text(encoding='utf-8'));manifest['annietibbers']={'asset':definition['asset'],'scale':scale,'clips':clips,'roles':roles};(r/'data/4.20/world_animation_manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
+proof={'updated_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'complete':False,'sources':sources,'official_url':'https://ddragon.leagueoflegends.com/cdn/4.20.1/data/en_US/champion/Annie.json','official_numeric_crosschecks':checks,'pet_attack_period_seconds':period,'pet_attack_windup_seconds':windup,'model_sha256':hashlib.sha256(b).hexdigest(),'animation_roles':roles,'clips':clips,'skin_scale_native':skin['SkinScale'],'limits':['Native numeric fields recovered and crosschecked; server sequencing, geometry, pet AI/control/aura first pulse reconstructed from supplied community code.','Native GuideEffect6=60 differs from summon45; pet uses summon45 exclusively. Guide does not spend mana or reset original summon cooldown.','Attack defaults1.6 and0.3 formula inherited from existing qualified champion contracts; original server timing still unqualified.','No actual pet runtime, skin variants, spawn pose, particles, audible audio or full Annie passive/kit qualification established by this audit.']};(r/'docs/annie_r_native_contract.json').write_text(json.dumps(proof,indent=2)+'\n',encoding='utf-8')
+print(json.dumps({'crosschecks':checks,'period':period,'windup':windup,'scale':scale,'cant_cancel':a['CantCancelWhileWindingUp']}))

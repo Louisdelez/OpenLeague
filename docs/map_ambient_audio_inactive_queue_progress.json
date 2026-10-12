@@ -1,0 +1,30 @@
+{
+  "updated_utc": "2026-10-04T03:03:33.226777+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_inactive_queue.py": "e4dd3c2a7a24311092cbaf85f2e836e6a7eb926dcf41b6efdde3e1e81226a21c",
+    "data/4.20/audio_inactive_queue_contract.json": "e4563c53f3c61273dc9862610c0902868de21d0968f8fbbcdaa3a8f819cfac66",
+    "crates/core/src/audio_inactive_queue.rs": "77800016c0a280400d597bd2333963b383955b8e55efe642c8362196b65b7842",
+    "crates/core/src/lib.rs": "980bbf92bbd04c36cb5bc40c92031a75c1d04e968541b73f57ba469ff13b4f1b",
+    "logs/native-audio-inactive-queue-core-tests.log": "d7bd1d5963622f72c792200829c2ec55252af50f369b2e004f331d43f183d8b3"
+  },
+  "native_inactive_queue_cases": 105,
+  "core_tests_passed": 277,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "ported": [
+    "Original7184B0 inactive queue unsigned sorted identities",
+    "Inactive inserts at sorted position only when no match exists",
+    "Active removes first matching occurrence only; duplicates otherwise preserved",
+    "Non-owning Rust queue never implicitly destroys emitter or audio voice"
+  ],
+  "observed_native_call_path": "717FF7 clock getter8 ->71800C object virtual5C -> false sets objectAD=0 -> optional managerE4->7184B0; no direct audio release here",
+  "limits": [
+    "Actual7184B0,735880 equal-range helpers and6B6530 insertion with spare capacity executed; CRT memmove explicitly adapted. Allocation/growth path excluded.",
+    "Inactive queues identity only if absent; active removes one matching entry per invocation, preserving order and other duplicates.",
+    "This queue tracks manager activity. It does not destroy objects or release voices. Actual manager drain/particle cleanup timing remains unqualified.",
+    "Caller717F.. was statically inspected; clock and full object tick/manager drain not emulated in this receipt. No automatic cleanup timing inferred.",
+    "Source core277 tests; client prior18test evidence unchanged and not rerun this turn. Actual audio consumer/output and standalone binaries unchanged."
+  ],
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false
+}

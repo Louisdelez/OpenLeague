@@ -1,0 +1,63 @@
+--- crates/core/src/audio_replay_windows_loading_retirement_tests.rs
++++ crates/core/src/audio_replay_windows_loading_retirement_tests.rs
+@@ -219,12 +219,31 @@
+         let binding=DiagnosticServiceGlobal::bind(&mut b,service_pointer);
+         let recipient=Recipient::create(&mut b,Kind::Standard);write(&mut b,recipient.p+0x1a0,13);
+         let record=recipient.record(&mut b,42);let local=b.word(crate::audio_replay_service_receive::LOCAL_OWNER).unwrap();
+-        let packet_bytes=packet(local,42,1,false);let before=r.snapshot().unwrap().engine_allocations;
++        let packet_bytes=packet(local,42,1,false);
++        // Keep the first query cold:728410 may grow its persistent metadata
++        // String24, independently of the two loading stack temporaries.
++        let cached=parent.metadata[0]+0x1b0;
++        assert_eq!([b.word(cached+16).unwrap(),b.word(cached+20).unwrap()],[0,15]);
++        let before_owned=r.shared.bank.lock().unwrap().owned.clone();
+         let frees=r.shared.bank.lock().unwrap().memory.released_labels.len();
+         assert_eq!(b.word(standard_prefix::PACKAGE_GLOBAL).unwrap(),manager);
+         assert!(r.receive_game_event(0,3,2,1,&packet_bytes).is_err());
+         assert!(r.errors().iter().any(|e|e.contains("loading resource factory90B520 is unavailable")));
+-        assert_eq!(r.snapshot().unwrap().engine_allocations,before);
++        let capacity=b.word(cached+20).unwrap();
++        assert_eq!(b.word(cached+16).unwrap(),name.len() as u32);
++        let cached_heap=if name.len()>=16 {
++            assert_eq!(capacity,(name.len() as u32)|15);
++            let raw=b.word(cached).unwrap();assert!(!before_owned.contains(&raw));Some(raw)
++        }else{assert_eq!(capacity,15);None};
++        let cached_data=cached_heap.unwrap_or(cached);
++        assert_eq!(read_bytes(&mut b,cached_data,name.len() as u32),name);
++        assert_eq!(metadata::Boundary::read_byte(&mut b,cached_data+name.len() as u32).unwrap(),0);
++        let mut expected_owned=before_owned.clone();
++        if let Some(raw)=cached_heap {assert!(expected_owned.insert(raw));}
++        // Exactly the cache buffer may persist. No missing old owner, unnamed
++        // new allocation or leaked name/key is hidden by an aggregate count.
++        assert_eq!(r.shared.bank.lock().unwrap().owned,expected_owned);
++        assert_eq!(r.snapshot().unwrap().engine_allocations,expected_owned.len());
+         assert_eq!(r.shared.bank.lock().unwrap().memory.released_labels.len(),frees+if name.len()>=16{2}else{0});
+         assert_eq!(b.word(record+0x40).unwrap(),0);assert_eq!(r.loading_retirement_snapshot()["pending"],0);
+         query_name(&mut b,42,name);
+@@ -248,9 +267,24 @@
+             });
+             assert!(result.is_err());Ok(())
+         }).unwrap();
+-        assert_eq!(r.snapshot().unwrap().engine_allocations,before);assert_eq!(r.loading_retirement_snapshot()["pending"],0);
++        assert_eq!(r.shared.bank.lock().unwrap().owned,expected_owned);
++        assert_eq!(r.snapshot().unwrap().engine_allocations,expected_owned.len());
++        assert_eq!(r.loading_retirement_snapshot()["pending"],0);
+         assert_eq!(r.process_clock_snapshot().unwrap().qpc_calls,0);query_name(&mut b,42,name);
+-        recipient.destroy(&mut b);binding.restore(&mut b);r.close_game_manager().unwrap();service.close().unwrap();
++        if let Some(raw)=cached_heap {
++            let bank=r.shared.bank.lock().unwrap();
++            assert!(bank.owned.contains(&raw));
++            assert_eq!(bank.memory.released_labels.iter().filter(|&&p|p==raw).count(),0);
++        }
++        recipient.destroy(&mut b);binding.restore(&mut b);r.close_game_manager().unwrap();
++        // Metadata destruction owns this cached buffer; verify retirement
++        // without reading the already destroyed metadata descriptor.
++        if let Some(raw)=cached_heap {
++            let bank=r.shared.bank.lock().unwrap();
++            assert!(!bank.owned.contains(&raw));assert!(bank.memory.word(raw).is_err());
++            assert_eq!(bank.memory.released_labels.iter().filter(|&&p|p==raw).count(),1);
++        }
++        service.close().unwrap();
+         drop(b);app.close().unwrap();assert_eq!(app.diagnostic().unwrap()["closed"],true);
+     }
+ }

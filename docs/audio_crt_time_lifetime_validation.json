@@ -1,0 +1,44 @@
+{
+  "saved_utc": "2026-10-09T19:13:44.896836+00:00",
+  "passed": true,
+  "complete": false,
+  "audio_tests_passed": 521,
+  "native_crt_time_locale_lifecycle_cases_rust_validated": 8,
+  "native_crt_fls_slot_lifetime_cases_prepared": 36,
+  "native_crt_fls_slot_lifetime_cases_rust_validated": 0,
+  "actual_windows_fls_callback_state_cases": 12,
+  "actual_windows_fls_callback_state_x86_cases": 6,
+  "actual_windows_fls_callback_state_x64_cases": 6,
+  "test_log": "logs/audio-crt-time-lifetime-tests.log",
+  "test_executable": "target\\debug\\deps\\openleague_core-92fab3f20accd79c.exe",
+  "test_executable_sha256": "dbe14e139888c7d0d75069eb2ba3fedef61f7602f737b273536be0025b2b2770",
+  "previous_receipt": "docs/audio_crt_locale_lifecycle_validation.json",
+  "evidence": [
+    "8 original complete custom thread lifetimes with all/alternating distinct time payloads now match all68 canonical regions, every original allocator/Windows entry bank, four intermediate banks and exact allocations/free identities. Actual87-field destructor composition proven for count1 final release and count2 external-owner shared retention, TLS/FLS. Same comparison retained for prior16 custom lifetimes; no expected-value relaxation.",
+    "Actual current Windows FLSFree callback state measured in12cases:6actualX64 plus6actualX86 process cases.32bit probe asserts IntPtr.Size==4 before running native APIs. NonNULL0x1234 invokes callback once with original argument; NULL invokes none. Callback sees its slot empty with LastError0 fromFlsGetValue, restores its entry error and successfulFlsFree retains caller error0/97/MAX. Slots always freed and callback rooted. No original/Rust destructor executed by these host callbacks.",
+    "36 full original CA92CB startup/CA9341 cleanup slot lifetimes captured with live/cleared/detached slot states, encodedTLS/FLS dispatch, cookies0/11223344/MAX and zero/A5 initial storage. FLS API boundary dispatches actualCA9026 original code through correctstdcall callback frame; actual callback ret4 results delta8, complete callback entry/exit banks retained before original caller resumes. TLS fallback invokes no destructor callback. Every33 canonical region and actual physical free identity recorded.",
+    "Native live FLS cleanup frees context; explicit detach frees context before slot cleanup; merely clearing slot or live TLS cleanup retains record and native references. These distinct native lifetimes preserved without claiming those paths leak-free. Rust callback-lifetime replay pending.",
+    "Full521-test audio suite passes;59 earlier fixture reference hashes unchanged."
+  ],
+  "limits": [
+    "OS native callbacks measured on current32/64bit Windows with opaque values; native original destructor executed only through explicit emulated API callback adapter. Actual OS callback invoking Rust/original context destruction and actual heap/security-cookie/provider integration not yet proved.",
+    "36 native slot lifetimes prepared but Rust replay pending. Normal locale/time producers, actual concurrency/SEH and normal client audio worker startup/dispatch/progression/retirement/physical playback remain open.",
+    "Full24domains114tasks37requirements preserved without closing tasks or domains; game not complete."
+  ],
+  "next_action": "Implement/replay36 original full TLS/FLS slot cleanup lifetimes with actual destructor callback, matching callback-entry/exit banks and live/cleared/detached physical ownership. Bind actual OS callbacks to Rust context destruction using measuredX86/X64 slot-clearing behavior; complete heap/OS/security-cookie providers and normal audio worker startup/dispatch/progression/retirement and physical playback. Normal locale producers and concurrency/SEH remain required. Continue full24-domain114-task37-requirement scope.",
+  "files_sha256": {
+    "logs/audio-crt-time-lifetime-tests.log": "712cef2abd94fc958fd8eb8bcd30c4487f68bb1ad907606cb2250a3f60435013",
+    "docs/audio_crt_locale_lifecycle_validation.json": "f1c23900fccc5ee03790dd02742777266ccc42938d464df3d8cea45e3f4c6a00",
+    "crates/core/src/audio_crt_thread_system_startup.rs": "e3fe8fbf27b32de0e6bd42ddc1fef8bdce0e2c153d835b84f876a4cc1ffdc321",
+    "tools/qualify_audio_crt_time_lifetime.py": "c5487608347f6eb49401d2058571e2c325ed1a9ad7217cb52a4a89cd679cdc2f",
+    "tools/record_audio_crt_time_lifetime_progress.py": "691f7f674453978b5aa237c8fc85f03785938e0ddea5166386e9e8ab06317cc2",
+    "data/4.20/audio_crt_time_locale_lifecycle_preparation.json": "a8357ed78221de08e0f5db172cf219bf3ae4e129d58717741f89f2debc597ad0",
+    "tools/probe_native_audio_crt_time_locale_lifecycle.py": "0efa5ee8945766b7f713b1f3f7aa41870b2ef54ff70321c17c662042e78c7a07",
+    "data/4.20/audio_crt_fls_slot_lifetime_preparation.json": "310e5510d0bb0bf284ced385d8adfeda1e63e94d2a814ac4e221af76d983b475",
+    "tools/probe_native_audio_crt_fls_slot_lifetime.py": "a774cffa2fcc941e7b86368cc46924dba51168916626758f47f383497fdad511",
+    "docs/audio_windows_fls_callback_state_hardware_discovery.json": "6f2f5f68224aa7adca11320c1a68ceeb5c8a1e4dab0dbc02a545b6f7f8b86fa5",
+    "tools/probe_windows_fls_callback_state.ps1": "0ddaa6e6fc058f4975637991211d2af4d38c900f0f4b13b8b6d7324e7e8e8278",
+    "docs/audio_windows_fls_callback_state_x86_hardware_discovery.json": "34a0f77f00df7ee3d3120a04e381ad3667e1f87eddee52923f8d190ba9e21fe0",
+    "tools/probe_windows_fls_callback_state_x86.ps1": "1b7db906adfd396af5ae0654176c0460805f9401a4bd526e46c735c3382c0fc4"
+  }
+}

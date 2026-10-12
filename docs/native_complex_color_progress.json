@@ -1,0 +1,48 @@
+{
+  "updated_utc": "2026-10-06T15:09:48.364957+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "core_tests_passed": 457,
+  "last_client_tests_passed": 364,
+  "field_reader_cases": 35,
+  "bake_cases": 66,
+  "baked_rgba_values": 2836,
+  "direct_samples": 151,
+  "full_color_caller_cases": 66,
+  "native_map_caller_cases": 54,
+  "actual_map_complex_colors_verified": 27,
+  "ordinary_emitter_consumer_bound": false,
+  "ordinary_applications_rebuilt": false,
+  "artifacts_sha256": {
+    "data/4.20/color_curve_contract.json": "8b9a3833de3252cd6ff1e3a24a40c08c8656b32debd010082e2385aafa06a1b8",
+    "data/4.20/complex_color_contract.json": "12934ef489a60bb684ff0e25209b0d347e04294a8c2ed87db383b16979330018",
+    "tools/probe_native_color_curve.py": "9eadb1e7653e3a477bfc4264a9d306c321dc3dbf0a486276cbc907eeae4ae15f",
+    "tools/probe_native_complex_color.py": "a50cfcaaf4dd9045dcd3807211b14b7b019fef70f44b0c75760894f94871580d",
+    "crates/core/src/native_color_curve.rs": "45f83b7ced99834f644b074ff533ddb40df206518f4665f310532e3efec6d67f",
+    "crates/core/src/native_complex_color.rs": "9c919b1bca699077db96931eb453595d55ba12db0747407ff0357274cc28b969",
+    "crates/core/src/lib.rs": "a52e3fbd3afb86e51fac3f99f75e798a8598b9e477fdaaaa346585e5d93d70c9",
+    "logs/native-complex-color-core-tests.log": "2ef9e06937515e08890754c1283d9679ac6353d22407f9f57483af462ddc18ae",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "765e1f19d15583d68e1bf1cb0e0c5da2c1a714356d2921609bd06bc0d437fb04",
+    "data/4.20/map10_particles/definitions/Chaos_Spawn.json": "ed4523a7e82b68be76489ae9c76aa258d72314ba26774854d7cf5319c585b130",
+    "data/4.20/map10_particles/definitions/Order_Spawn.json": "63a412b19e9f9d46d8ce09530aa844192a032faffd695a3e9c7aa238be788de2",
+    "data/4.20/map10_particles/definitions/TT_Fire_01_Blue.json": "45c17b9bf7abaa8f792612c9ec087f117a59d176d66dff66599e8009a16ccebc",
+    "data/4.20/map10_particles/definitions/TT_Fire_02_Yellow.json": "86562731d277d4cae941b1c7926516512a23d660650951902a3d192c3d14632b",
+    "data/4.20/map10_particles/definitions/TT_Fire_03_Orange.json": "b8ff4198dc668eff3e3ea0c3cb16e21428569e7a677d80199eeb3f8fd9c18ff0",
+    "data/4.20/map10_particles/definitions/TT_Fire_04_Purple.json": "9686d548428dcf7c3520ce8c031ad033aae5e2794c2cf46241859b8ec4905d4c",
+    "data/4.20/map10_particles/definitions/TT_Ghosts_01.json": "5ccbad3361dc2e1d0780abffa771a4f0e62a5a5adac0fd446a5cffdc6455c496",
+    "data/4.20/map10_particles/definitions/TT_Mist_01.json": "e196f83f27d89e01fc42dc19c18048dc74b564e2809e97bb50ce8156cd623be2",
+    "data/4.20/map10_particles/definitions/TT_Mist_02.json": "9504c6e9accd2bb2f3c82c40a6a918c5ee741b734a13817bcbfbbe0880873258"
+  },
+  "findings": [
+    "Rust RGBA reader/interpolation/baking match original field values and all captured f32 output bits. Authored e-rgba base normalizes by1/255; absent base defaults remain unnormalized.",
+    "Original Complex caller supplies opaque-white default and fallback; missing/short base leaves channel probability pointers null.",
+    "Full reader visits RGBA probability keys independently; Rust configuration matches66caller outcomes. Actual27Map10Complex color sections independently compared to original outputs."
+  ],
+  "limits": [
+    "Raw lexical/cache parity, whole constructor and malformed prior state not covered. Runtime RGBA probability application/order, normalized age producer and ordinary rendering remain pending.",
+    "Only sorted finite nonempty curve knots supported.",
+    "No RGBA probability draw/update consumer port yet; the scalar/vector draw order cannot be assumed for RGBA.",
+    "Latest457full core tests pass. Ordinary client was not rebuilt or visually verified. No complete map/champion/domain or six-client match claim."
+  ],
+  "next_action": "Qualifier la consommation native RGBA des probabilités et la normalisation de l’âge ; compléter les paramètres scalaires/lifetime Complex, puis intégrer émission/naissance/pose/couleurs/vecteurs au rendu des52groupes Map10 et244placements. Reconstruire les exécutables, résoudre TT_Mist_circle/fogcircle et vérifier six clients ; poursuivre les24domaines."
+}

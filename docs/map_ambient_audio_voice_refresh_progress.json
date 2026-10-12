@@ -1,0 +1,41 @@
+{
+  "updated_utc": "2026-10-03T23:39:09.785386+00:00",
+  "native_refresh_cases": 1440,
+  "core_tests": 199,
+  "new_core_tests": 2,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "files": {
+    "tools/qualify_native_audio_voice_refresh.py": "8ef17a85d143ee1776837a90070531af57c5e96d4e1cb05f72bb3f34bbe80179",
+    "data/4.20/audio_voice_refresh_contract.json": "8d75a790d8f975e64622b096a4f3d17d08c9bda42616f34a1e7f3d4affc9361d",
+    "crates/core/src/audio_voice_refresh.rs": "e7908661ac55f7d10ac459505658e295766987b6eafc1a3996922f42d6f43427",
+    "logs/native-audio-voice-refresh-core-tests.log": "bf137ede79caec655369c1101d294719b4f25cc75b4166a35e1e7ed289858061"
+  },
+  "native_regions": {
+    "0x706d70": "f45289d46392e1f9e28c88b0afcd8c58951dd137d793bf460387069ce0f22a15",
+    "0x706f00": "a77df317d36acea2d0acdecb4b99c10bd7a0729309529115a7318e19285e9330",
+    "0xaeb2b0": "1c1a5d0505c8c27e17e576d864c3cbacef66e7b111152f9c28ba1878a2c26b9b",
+    "0xaeb240": "67e9cb8a029fcb30093b852a0cdf803e175179a590faf2a7363255ee3943e68d",
+    "0xaebca0": "8fe443f4f527750d9ae4356bc3dc71c0e32540653236dd3208c6f3942870d7ea",
+    "0xaf48c0": "c77467616c4515c4d6eac7606026c165d2403386b6967857f6e8930bcef01f2b"
+  },
+  "parameter_name": "seconds",
+  "parameter_id": 745018932,
+  "rtpc_packet_type": 2,
+  "native_refresh_behavior": "Original706D70 reads f32 time, subtracts creation timestamp+44, invokes706F00(seconds,value), queries playing ID throughAEBCA0/AF48C0, compares raw returned+8 with voice+C; mismatch sets+48=1. Matching does not clear prior flag. Setter unavailable/error does not change comparison.",
+  "bridge": "Refresh updates existing audio_release::Voice released flag; release respects it. Raw record meaning not inferred.",
+  "native_stubs": [
+    "Time manager ready/getter supply explicit f32 timestamps; AEA6B0 availability; AEA430 seconds name hash uses separately qualified FNV1;5BFEE0 size56;B05ED0 captures packet/return; mutex enter/leave no-op; logging format/output captured."
+  ],
+  "client_integration_enabled": false,
+  "ambient_playback_enabled": false,
+  "complete": false,
+  "limits": [
+    "Playing-record +8 raw value interpretation is not inferred; native comparison and collision lookup qualified, record creation/destruction not executed.",
+    "Time manager not-ready fatal assertion branch excluded. Original clock source units/precision beyond f32 getter inputs unqualified.",
+    "RTPC queue consumption/curve bindings and downstream PCM not executed; name seconds does not prove all sounds use this parameter.",
+    "Voice constructor capture at +44 and expected field initialization not fully emulated; states supplied explicitly.",
+    "No live audible acceptance or registration pipeline.",
+    "Rust rejects nonfinite/overflowing clocks before mutations; native fatal/assertion and nonfinite inputs not part of1440 qualified cases.",
+    "No new standalone executable or live audio capture; prior client13 tests remain historical."
+  ]
+}

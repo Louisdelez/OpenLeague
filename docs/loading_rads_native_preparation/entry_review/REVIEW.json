@@ -1,0 +1,94 @@
+{
+  "schema": 1,
+  "kind": "bounded_static_rads_entry_review",
+  "native_execution": false,
+  "host_dll_load": false,
+  "probe_executed": false,
+  "production_modified": false,
+  "source_sha256": "60833cd552d93b93304d4937912951e144e38db5d70793eb60a0c5f5d579e521",
+  "scope": "PE metadata, entry/CRT init, all immediate initializer-table callbacks and selected effect-bearing descendants, RadsInitialize/SetLogger/Shutdown. Not a transitive whole-DLL audit.",
+  "findings": [
+    {
+      "id": "ENTRY_ORDER",
+      "evidence": ["100F2C22", "100FF70C", "100F2C45", "100F2AB0", "100FF7A8"],
+      "facts": [
+        "PE TLS and delay import directories are absent; this does not remove CRT FLS/TLS state or C++ static initializers.",
+        "For process_attach reason1, entry first initializes its own security cookie100FF70C with time, thread/process ID and QueryPerformanceCounter, then invokes wrapper100F2C45.",
+        "Wrapper optionally invokes raw DllMain pointer10166BB0 (initially0), invokes CRT100F2AB0 for process/thread attach, then user DllMain100FF7A8. User DllMain alone is xor eax,eax; inc eax; ret12.",
+        "On process attach failure after user DllMain, wrapper invokes user detach, CRT detach, then optional raw detach. For process/thread detach it invokes user first, CRT second, raw last when prior calls succeed.",
+        "100F2AB0 initializes heap100FAA03, thread/FLS100F60B5, command line/environment and lowIO100FB602, then100F40E1. It increments attach counter101950A8 only after successful CRT initialization.",
+        "The native thread buffer has size0x3BC, FLS callback100F5E10 and slot global101902F0. These DLL globals are distinct from the EXE CRT.",
+        "GetCommandLineA/GetEnvironmentStringsW results are host pointer-bearing APIs: any bridge must copy/translate them into the DLL's x86 memory and retain proper lifetime, not expose host64 addresses."
+      ],
+      "action": "Execute the actual entry/CRT paths in one qualified emulated process; successful user DllMain is insufficient to claim DLL initialization. Preserve native failure/partial-init and detach behavior."
+    },
+    {
+      "id": "INITIALIZER_TABLES",
+      "evidence": ["100F40E1", "100F41E7", "100F41B1", "1013147C..10131494", "10131364..10131478"],
+      "facts": [
+        "100F40E1 first tests initial function pointer10166BE0=100F3A50 through native pointer validation.",
+        "C initializers are5 non-null entries in [1013147C,10131494).100F41E7 iterates in order and stops on first nonzero result.",
+        "C++ initializers are68 non-null entries in [10131364,10131478).100F41B1 invokes each non-null callback in table order.",
+        "Initializer10086DC0 reads OPENSSL_ia32cap and invokes CPU capability helper10001000; imported Winsock/LDAP presence alone does not prove a network call from this initializer.",
+        "The table includes container/string construction, InitializeSListHead, critical sections, dynamic function lookup, allocation and many native atexit registrations."
+      ],
+      "action": "Preserve the table order and exact callback bytes; do not replace initialization with fabricated flags or skip atexit registrations."
+    },
+    {
+      "id": "ENTRY_EVENT_SEMAPHORE",
+      "evidence": ["10131448->1003CD60", "1005BEE0", "1003F750", "1003F7A0", "1012FD60->1005C050"],
+      "facts": [
+        "During C++ initialization,1003CD60 calls1005BEE0. It initializes CS10198EEC, invokes1003F750 for semaphore state10198F04, and creates4 unnamed events.",
+        "1003F76B invokes CreateSemaphoreA(NULL,4,0x7FFFFFFF,NULL).1003F7A0 allocates a4-byte owner wrapper after success; failure does not turn into a valid semaphore owner.",
+        "1005C018 loops CreateEventA(NULL,TRUE,FALSE,NULL) four times, storing results10198ED0,10198ED4,10198ED8,10198EDC.",
+        "1003CD60 registers atexit1012FD60. Its target1005C050 calls CloseHandle on all4event fields, then the owned semaphore handle if wrapper present, frees that wrapper, and deletes CS10198EEC.",
+        "The reviewed constructor creates synchronization objects; no CreateThread was found in this specific constructor. Its later users and all descendants are not fully qualified."
+      ],
+      "action": "Add real labelled event/semaphore semantics and teardown or stop at these imports. No dummy handle, forced success or successful no-op wait/signal is justified. Keep partially constructed handles tracked if the native frame stops."
+    },
+    {
+      "id": "ENTRY_ETW",
+      "evidence": ["10131458->1003CFA0", "1005D4C0", "1005D3C0", "1005D270", "1005D430", "1012FE50", "1005D3F0"],
+      "facts": [
+        "1005D4C0 reads QueryPerformanceFrequency then LoadLibraryW(L\"Advapi32.dll\") at1005D4D8. The UTF16 literal is10179954. A real failed load takes the native branch; this does not authorize injecting failure.",
+        "GetProcAddress resolves EventRegister/EventWrite/EventUnregister into globals10199718/1C/20. The calls occur during process_attach, before RadsInitialize.",
+        "Four registrations via1005D3C0 pass x86 callback1005D270, context pointer and output REGHANDLE64. GUID/context/out pairs:101799E0/10191058/10199808;10179A30/101910C8/10199888;10179A00/10191090/10199848;101799C0/10191020/101997F8.",
+        "1005D270 returns stdcall ret0x24. It reads callback context at stack+0x28, updates enabled state/level/keyword masks and bitfields. It is not a callback that can be ignored while preserving native state.",
+        "When bit0 at101998C0 is enabled after registration,1005D430 invokes EventWrite through1019971C for a Main thread event. Therefore registering a callback can influence the subsequent native path.",
+        "atexit1012FE50 calls1005D3F0 on handles101997F8,10199848,10199888,10199808 in that order.1005D3F0 calls EventUnregister if pointer and handle are nonzero, then clears the64-bit handle. This bounded destructor contains no FreeLibrary call."
+      ],
+      "action": "Keep LoadLibrary/GetProcAddress/EventRegister/EventWrite as explicit boundaries until their OS contract and callback translation are qualified. Never pass1005D270 as a host64 executable callback; retain a host wrapper and dispatch genuine x86 callback in the same emulator with correct lifecycle/ordering, or stop before the call. Do not set enable state artificially."
+    },
+    {
+      "id": "LOGGER_NOT_INERT",
+      "evidence": ["1003E210", "1003E1E0", "1005F8C0", "1005F5D0", "1005F0D0", "1005F850"],
+      "facts": [
+        "RadsSetLogger1003E210 stores supplied pointer101998E0 before unconditionally calling logger-table+0x44 with address10198420 and category string RAD. No null check precedes the dereference.",
+        "RadsInitialize logging calls1003E1E0->1005F8C0. If external logger present, it invokes table+0x64 then continues through its own internal logger. External logging is not an early-return replacement for internal targets.",
+        "Internal lazy logger1005F5D0 allocates0x658 and invokes1005F0D0, which initializes its CS and StdErr, StdOut and DebuggerConsole target objects via1005E610/1005E7E0/1005E9E0.1005F5D0 registers the targets at+0x44C and+0x5A4.",
+        "1005F850 dispatches target function pointers at+8/+14/+10/+2C; their complete output paths were not audited here. They may reach real console/debugger IO even when an external EXE logger exists."
+      ],
+      "action": "Map EXE and DLL code/callback tables in one emulator and preserve callback publication/reentrancy. Logging requires its actual dependencies or an explicit stop; do not replace logger with an inert success provider."
+    },
+    {
+      "id": "RADS_INITIALIZE_RESOURCE_PATH",
+      "evidence": ["1003E3D0", "1003E250", "10056510", "10056C60", "10056E40", "10055D00", "10055BA0", "1003E440", "1003E3F0"],
+      "facts": [
+        "RadsInitialize takes its fourth stack argument as working directory and calls1003E250(this1019846C,path). This inspected wrapper does not read the first3arguments.",
+        "1003E250 rejects an already non-null global with80004005. Null path uses GetCurrentDirectoryA(0x104,stackbuf); supplied path is used directly.",
+        "10056510 normalizes separators into stack storage without a visible length guard, derives RADS root/project/solution type/name/version via10056C60, then collects projects via10056E40. Keep actual virtual CWD within the native buffer contract.",
+        "Solutions path calls10055D00, building solutionmanifest and configurationmanifest and invoking their genuine loaders10059440/10049C10. Each project listing uses10055BA0 and releasemanifest loader1004CCD0. These are real file-backed prerequisites, not an INIBIN-provider fallback to invent.",
+        "Successful runtime construction is0x5C via10056980.1003E440 creates its control wrapper;1003E250 publishes control at global+4 then object at global+0, retires any previous control, and returns0 only when published object is non-null.",
+        "RadsShutdown1003E3F0 clears global control and object before reference-count callbacks. The virtual destruction and full runtime/manifest ownership path remain to qualify."
+      ],
+      "action": "Preserve original RADS relative paths under the declared read-only mapping and execute actual manifest loaders. Do not declare INI/provider success because the module handle or RadsInitialize address became available."
+    }
+  ],
+  "unresolved_effect_boundaries": [
+    "The DLL imports CreateThread, waits/timer queues, filesystem mutation, Winsock, LDAP and cryptographic APIs. This inventory is not proof that each occurs during attach or this RadsInitialize case, and the partial callgraph is not proof they cannot occur.",
+    "Indirect vtables, dynamically resolved exports, exception/SEH handlers, callback reentrancy and all initializer descendants are not exhaustively resolved.",
+    "No network, filesystem, event, semaphore, ETW or DLL action was invoked by this review. Future unknown imports must stop before host effects instead of receiving synthetic results.",
+    "Opcode extraction follows local direct branches with a fixed window; out-of-window/indirect branches are explicitly retained as boundaries. Ordered-instruction byte hashes are hashes of selected instruction bytes, not claims that disjoint ranges form one contiguous function body.",
+    "Native detach, allocation failure, real threading and asynchronous callback scheduling remain execution qualification work, not conclusions of this static preparation."
+  ]
+}

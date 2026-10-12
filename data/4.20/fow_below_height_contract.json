@@ -1,0 +1,132 @@
+{
+  "checked_utc": "2026-10-05T03:52:17.960332+00:00",
+  "complete": false,
+  "passed": true,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "entry": "0x6b399f..0x6b3a3e",
+  "native_addresses": 30,
+  "cases": [
+    {
+      "name": "map10",
+      "fade_start": -1000000.0,
+      "fade_finish": -2000000.0,
+      "uploads": [
+        {
+          "register": 250,
+          "count": 1,
+          "bits": [
+            0,
+            3296329728,
+            1008981770,
+            1092616192
+          ],
+          "values": [
+            0.0,
+            -1000.0,
+            0.009999999776482582,
+            10.0
+          ]
+        },
+        {
+          "register": 251,
+          "count": 1,
+          "bits": [
+            3045472189,
+            3212836864,
+            0,
+            0
+          ],
+          "values": [
+            -9.999999974752427e-07,
+            -1.0,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "diagnostic-positive",
+      "fade_start": 10.0,
+      "fade_finish": 20.0,
+      "uploads": [
+        {
+          "register": 250,
+          "count": 1,
+          "bits": [
+            0,
+            3296329728,
+            1008981770,
+            1092616192
+          ],
+          "values": [
+            0.0,
+            -1000.0,
+            0.009999999776482582,
+            10.0
+          ]
+        },
+        {
+          "register": 251,
+          "count": 1,
+          "bits": [
+            1036831949,
+            3212836864,
+            0,
+            0
+          ],
+          "values": [
+            0.10000000149011612,
+            -1.0,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "diagnostic-fractional",
+      "fade_start": 0.25,
+      "fade_finish": 0.75,
+      "uploads": [
+        {
+          "register": 250,
+          "count": 1,
+          "bits": [
+            0,
+            3296329728,
+            1008981770,
+            1092616192
+          ],
+          "values": [
+            0.0,
+            -1000.0,
+            0.009999999776482582,
+            10.0
+          ]
+        },
+        {
+          "register": 251,
+          "count": 1,
+          "bits": [
+            1073741824,
+            3204448256,
+            0,
+            0
+          ],
+          "values": [
+            2.0,
+            -0.5,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    }
+  ],
+  "finding": "c250 unconditionally uploads [0,-1000,0.01,10], followed by configured c251. Native below-height factor saturate(worldY*0.01+10) is1 at worldY>=-900.",
+  "limits": [
+    "Original coefficient stores and c251 SSE computation executed; supplied renderer/vtable captures uploads, actual D3D not executed.",
+    "Earlier renderer backend selection, full initialization and material variant routing remain separate open contracts."
+  ]
+}

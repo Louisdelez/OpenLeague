@@ -1,0 +1,116 @@
+// Append to audio_replay_windows_loading_packets_tests.rs after integrating
+// loading_empty_integration. Reuses its real index/metadata/recipient helpers.
+// Requires root's actual clock connection and ClockHandle diagnostic API.
+#[test]
+fn audio_replay_windows_loading_tutorial_first_names_use_real_clock_once_and_retire_with_owner() {
+    let mut owner = Application::new().unwrap();
+    let clock_handle = {
+        let runtime = owner.transport().unwrap();
+        let clock_handle = runtime.clock_handle().unwrap().clone();
+        let service = runtime.configure_service(Defaults).unwrap();
+        runtime.initialize_game_manager().unwrap();
+        let parent = runtime.game_manager_snapshot().unwrap().unwrap();
+        let mut b = Backend::new(runtime.shared.clone());
+        let index = initialize_index(&mut b, parent.pointer);
+        let name = b"Real tutorial loading name longer than fifteen";
+        prepare_name(&mut b, parent.metadata[0], Some(73), 0xdeadbeef, 0x80000000, Some(name));
+        let recipient = Recipient::create(&mut b, Kind::Tutorial);
+        let record = recipient.record(&mut b, 73);
+        assert_eq!(b.word(record + 0x38).unwrap(), 0);
+
+        // Neither creating handles nor the metadata/index producers samples
+        // the process clock. The first consumer below must initialize it.
+        let initial_clock = runtime.process_clock_snapshot().unwrap();
+        assert!(!initial_clock.initialized);
+        assert_eq!((initial_clock.qpf_calls, initial_clock.qpc_calls), (0, 0));
+        assert_eq!((initial_clock.crt_allocations, initial_clock.inner_mutexes), (0, 0));
+        assert_eq!(clock_handle.process_clock_snapshot().unwrap(), initial_clock);
+        let local = b.word(crate::audio_replay_service_receive::LOCAL_OWNER).unwrap();
+        let initial_allocations = runtime.snapshot().unwrap().engine_allocations;
+        let initial_frees = runtime.shared.bank.lock().unwrap().memory.released_labels.len();
+        let mut epoch = None;
+        let mut cache_buffer = None;
+        for (step, (flags, float12)) in [
+            (0u8, 0x80000000u32),
+            (1, 0x3f800000),
+            (128, 0xc0000000),
+            (255, 0x80000001),
+        ].into_iter().enumerate() {
+            let mut payload = packet(local, 73, flags, false);
+            payload[17..21].copy_from_slice(&float12.to_le_bytes());
+            payload[21..25].copy_from_slice(&0x40200000u32.to_le_bytes());
+            let mut expected = read_bytes(&mut b, record, 76);
+            expected[..25].copy_from_slice(&payload[5..30]);
+            if flags & 1 != 0 { expected[16..20].fill(0); }
+            expected[0x40..0x44].copy_from_slice(&float12.to_le_bytes());
+            let copied16 = if flags & 1 != 0 { 0u32 } else { 0x40200000u32 };
+            expected[0x44..0x48].copy_from_slice(&copied16.to_le_bytes());
+            assert_eq!(runtime.receive_game_event(0, 3, 2, step as u32 + 1, &payload).unwrap(), 1);
+            let stamp = b.word(record + 0x48).unwrap();
+            assert!(f32::from_bits(stamp).is_finite());
+            assert!(f32::from_bits(stamp) >= 0.0);
+            expected[0x48..0x4c].copy_from_slice(&stamp.to_le_bytes());
+            assert_eq!(read_bytes(&mut b, record, 76), expected);
+            // Source5B3230 does not copy the returned name into this record's
+            // name field, so each packet takes the real first-name branch.
+            assert_eq!(b.word(record + 0x38).unwrap(), 0);
+
+            let clock = runtime.process_clock_snapshot().unwrap();
+            assert!(clock.initialized);
+            assert!(clock.origin > 0 && clock.frequency > 0);
+            assert_eq!(clock.qpf_calls, 1);
+            // One QPC sets the source origin; each of the four calls adds one.
+            assert_eq!(clock.qpc_calls, step + 2);
+            assert_eq!((clock.crt_allocations, clock.inner_mutexes), (1, 1));
+            assert!(clock.failure.is_none());
+            let current_epoch = (clock.origin, clock.frequency);
+            if let Some(first) = epoch { assert_eq!(current_epoch, first); }
+            else { epoch = Some(current_epoch); }
+            // This read-only handle snapshot must not sample another QPC.
+            assert_eq!(clock_handle.process_clock_snapshot().unwrap(), clock);
+
+            let cached = parent.metadata[0] + 0x1b0;
+            assert_eq!(b.word(cached + 16).unwrap(), name.len() as u32);
+            assert!(b.word(cached + 20).unwrap() >= name.len() as u32);
+            let raw = b.word(cached).unwrap();
+            assert_eq!(read_bytes(&mut b, raw, name.len() as u32), name.as_slice());
+            if let Some(first) = cache_buffer { assert_eq!(raw, first); }
+            else { cache_buffer = Some(raw); }
+            assert_eq!([b.word(parent.metadata[1] + 4).unwrap(), b.word(index[1] + 4).unwrap()], [1, 1]);
+            // Only the first retained metadata cache grows. Each output heap
+            // string is released by the real tutorial564900 cleanup.
+            assert_eq!(runtime.snapshot().unwrap().engine_allocations, initial_allocations + 1);
+            assert_eq!(runtime.shared.bank.lock().unwrap().memory.released_labels.len(), initial_frees + step + 1);
+            assert!(runtime.errors().is_empty());
+        }
+        recipient.destroy(&mut b);
+        runtime.close_game_manager().unwrap();
+        service.close().unwrap();
+        assert_eq!(runtime.snapshot().unwrap().engine_allocations, 0);
+        let still_live = runtime.process_clock_snapshot().unwrap();
+        assert_eq!((still_live.qpf_calls, still_live.qpc_calls), (1, 5));
+        assert_eq!((still_live.crt_allocations, still_live.inner_mutexes), (1, 1));
+        drop(b);
+        clock_handle
+    };
+    // The actual application owner retires the process clock. The cloned
+    // diagnostic handle keeps storage observable without owning a second clock.
+    owner.close().unwrap();
+    let retired = clock_handle.process_clock_snapshot().unwrap();
+    assert_eq!((retired.qpf_calls, retired.qpc_calls), (1, 5));
+    assert_eq!((retired.crt_allocations, retired.inner_mutexes), (0, 0));
+    assert!(retired.registered_cleanups.is_empty());
+    assert_eq!(retired.events_created, retired.events_closed);
+    assert_eq!(retired.event_close_failures, 0);
+    assert!(retired.failure.is_none());
+    assert_eq!(clock_handle.raw_clock_sample().unwrap_err(), "process clock runtime is shut down");
+    assert_eq!(clock_handle.process_clock_snapshot().unwrap(), retired);
+    let after = owner.diagnostic().unwrap();
+    assert_eq!(after["closed"], true);
+    assert_eq!(after["crt"]["heap_blocks"], 0);
+    assert_eq!(after["crt"]["retained_mirrors"], 0);
+    assert_eq!(after["crt"]["critical_sections"], 0);
+    assert_eq!(after["crt"]["heap_allocations"], after["crt"]["heap_frees"]);
+    assert_eq!(after["crt"]["heap_failures"], 0);
+    assert_eq!(after["crt"]["lock_failures"], 0);
+}

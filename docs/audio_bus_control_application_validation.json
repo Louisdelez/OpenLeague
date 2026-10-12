@@ -1,0 +1,53 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T15:27:46.218911+00:00",
+  "change": [
+    "Port B0D1A0 first root descriptor with zero64-bit key, B0D140 ordered registered target matching and B27CD0 Bus ID/null resolution. Apply to every matching target, including duplicate IDs.",
+    "Port B27280 conditional bit0 writes at480/494/4A8/4BC/4C0 from selector/value bits0..4; preserve all unrelated target bytes and flag bits.",
+    "Connect target Backend through notification ManagerBackend: actual qualified notification/static/cache/RTPC resolution drives real target flag updates; no application success adapter. Invalid references return explicit errors."
+  ],
+  "validation": {
+    "audio_regression_tests_passed": 275,
+    "failed": 0,
+    "new_targeted_tests_passed": 3,
+    "native_target_application_cases": 1728,
+    "native_whole_notification_rtpc_target_cases": 5760,
+    "comparison": "Standalone exact1280-byte targets and update dispatch order; composed exact Bus and whole target state, RTPC subscriber/owner, curve calls, root/identified dispatch and update order. Native composed probe separately asserts unrelated target bytes unchanged.",
+    "session": 6422,
+    "terminal_exit_code": 0,
+    "log": "logs/audio-bus-control-application-tests.log",
+    "preparatory_effects_bank_cases": 720
+  },
+  "sha256": {
+    "crates/core/src/audio_bus_control_application.rs": "5ce4285752723d744117b73669eb23a02b3aebcb9edd2066a33364dd09fa2a70",
+    "crates/core/src/audio_bus_parameter_notification.rs": "8303fbb7aa26bae3717a21bca1acb3195cd149397c13958717b4bef5eb30596a",
+    "crates/core/src/lib.rs": "12ca4a4a074b21dd1a9552ac8a71d19d27c28fd3af79deff6d104c64ecd54ae5",
+    "tools/probe_native_audio_bus_control_application.py": "23efd50cf9af51ebe251da294e37885f1e93ccb03e1e3cd800602b7dca5c63fb",
+    "tools/probe_native_audio_bus_notification_application.py": "f377a5ef6be34c68b56dabe09d00798eeefc42d9c3c07a48966e0d6b0b2860f1",
+    "tools/probe_native_audio_bus_effects_bank.py": "bbe70af5e1eecbda4755e9fa5a24ee402c7cb151a81f58764be4f37485b78e90",
+    "data/4.20/audio_bus_control_application_contract.json": "5aaa96091e696864aa24f4fd5c841e742bfcf413d837793c59056658279f7c41",
+    "data/4.20/audio_bus_notification_application_contract.json": "b9258859e1c8dd369ca302d8282d4f8b81eb59b6f7f898d0057c23926eefcb9d",
+    "data/4.20/audio_bus_effects_bank_contract.json": "43902b9cd52c73bfccdfb9189a7124083f8ced11eb1312fe69ef51475089d91d",
+    "logs/audio-bus-control-application-tests.log": "82cd3fb4f925fcb3dcb48a3fcc7d85c8a5582c93e6eed60ee6bc2df54223ced0",
+    "logs/audio-bus-control-application-probe.log": "e68ff15f0ed8bfde90fe4cb84e87f464802b5d710ed1fcf095d2aacba5a4ce9c",
+    "logs/audio-bus-notification-application-probe.log": "4753797c86fb8c25c7e085347618c8688a7c6ba4191ccbf1f15bf8792c3476ea",
+    "logs/audio-bus-effects-bank-probe.log": "da737231c1f21f0c13f555f6367436ee4d76698c0797d50c08b7c1945e52bf61",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "249d92ff3949cd22feec1fda16a8baa6d2c8fbae35eb6a750c972dc63cfaaf81"
+  },
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "interfaces": [
+    "Native standalone and whole notification-to-target references execute actual target selection/ID lookup/flag writes with no callback result adapters.",
+    "Effects preparation executes actual B04350/B00770/AFFBD0/AFDDE0 parsing, cache allocation/slot updates, mask setter and result handling; allocator and virtualCC/84/DC callbacks supplied; target registries empty."
+  ],
+  "findings": [
+    "Bus cache18 words4/C/14/1C are effect slot IDs: B00770 stores resource ID at these offsets and a boolean at slot+1. Nonzero test in B02F20 is a present-effect gate, not a count test. Current notification API fieldcounts preserves the predicate but should become effect_ids while connecting the effect reader.",
+    "B04350 reads count, then bypassbyte only for nonzero count, then seven-byte records: slotu8,IDu32,normalized boolean byte,skipped byte. ID0 skips insertion. Slot error halts records but still calls AFFBD0 mask setter; mask return is not used as the reader result."
+  ],
+  "limits": [
+    "Normal target registration/admission, shared live resource storage/refcounts and factory integration remain open.",
+    "Cached control flag updates are verified; physical effect DSP, mixing/device output and audible acceptance remain unproven.",
+    "Effects preparation is not yet a Rust bank reader, and callback bodies remain to connect.",
+    "Other RTPC/state/position bank readers, source binding/smoothing and lifecycle remain incomplete.",
+    "No new normal-client execution or complete game acceptance."
+  ]
+}

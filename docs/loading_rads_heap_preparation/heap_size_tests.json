@@ -1,0 +1,640 @@
+{
+  "passed": true,
+  "error": null,
+  "cleanup_error": null,
+  "checks": [
+    "wrong heap allocation rejected before Win32",
+    "actual HeapSize equals bridge result and fits requested mirror 1",
+    "fresh mirror contains actual zeroed bytes 1",
+    "HeapSize leaves guest payload unchanged 1",
+    "HeapSize wrong heap rejected before Win32 1",
+    "HeapSize nonzero flags rejected before Win32 1",
+    "HeapSize interior pointer rejected before Win32 1",
+    "HeapFree wrong heap rejected before Win32 1",
+    "HeapFree nonzero flags rejected before Win32 1",
+    "HeapFree interior pointer rejected before Win32 1",
+    "HeapReAlloc wrong heap rejected before Win32 1",
+    "read beyond requested mirror rejected even inside mapped page 1",
+    "guard rejections leave payload and raw ownership unchanged 1",
+    "actual HeapFree retires owned block 1",
+    "HeapSize stale pointer rejected before Win32 1",
+    "HeapFree stale pointer rejected before Win32 1",
+    "stale guest read rejected after free 1",
+    "actual HeapSize equals bridge result and fits requested mirror 4",
+    "fresh mirror contains actual zeroed bytes 4",
+    "HeapSize leaves guest payload unchanged 4",
+    "HeapSize wrong heap rejected before Win32 4",
+    "HeapSize nonzero flags rejected before Win32 4",
+    "HeapSize interior pointer rejected before Win32 4",
+    "HeapFree wrong heap rejected before Win32 4",
+    "HeapFree nonzero flags rejected before Win32 4",
+    "HeapFree interior pointer rejected before Win32 4",
+    "HeapReAlloc wrong heap rejected before Win32 4",
+    "read beyond requested mirror rejected even inside mapped page 4",
+    "guard rejections leave payload and raw ownership unchanged 4",
+    "actual HeapFree retires owned block 4",
+    "HeapSize stale pointer rejected before Win32 4",
+    "HeapFree stale pointer rejected before Win32 4",
+    "stale guest read rejected after free 4",
+    "actual HeapSize equals bridge result and fits requested mirror 128",
+    "fresh mirror contains actual zeroed bytes 128",
+    "HeapSize leaves guest payload unchanged 128",
+    "HeapSize wrong heap rejected before Win32 128",
+    "HeapSize nonzero flags rejected before Win32 128",
+    "HeapSize interior pointer rejected before Win32 128",
+    "HeapFree wrong heap rejected before Win32 128",
+    "HeapFree nonzero flags rejected before Win32 128",
+    "HeapFree interior pointer rejected before Win32 128",
+    "HeapReAlloc wrong heap rejected before Win32 128",
+    "read beyond requested mirror rejected even inside mapped page 128",
+    "guard rejections leave payload and raw ownership unchanged 128",
+    "actual HeapFree retires owned block 128",
+    "HeapSize stale pointer rejected before Win32 128",
+    "HeapFree stale pointer rejected before Win32 128",
+    "stale guest read rejected after free 128",
+    "actual HeapSize equals bridge result and fits requested mirror 544",
+    "fresh mirror contains actual zeroed bytes 544",
+    "HeapSize leaves guest payload unchanged 544",
+    "HeapSize wrong heap rejected before Win32 544",
+    "HeapSize nonzero flags rejected before Win32 544",
+    "HeapSize interior pointer rejected before Win32 544",
+    "HeapFree wrong heap rejected before Win32 544",
+    "HeapFree nonzero flags rejected before Win32 544",
+    "HeapFree interior pointer rejected before Win32 544",
+    "HeapReAlloc wrong heap rejected before Win32 544",
+    "read beyond requested mirror rejected even inside mapped page 544",
+    "guard rejections leave payload and raw ownership unchanged 544",
+    "actual HeapFree retires owned block 544",
+    "HeapSize stale pointer rejected before Win32 544",
+    "HeapFree stale pointer rejected before Win32 544",
+    "stale guest read rejected after free 544",
+    "actual HeapSize equals bridge result and fits requested mirror 2048",
+    "fresh mirror contains actual zeroed bytes 2048",
+    "HeapSize leaves guest payload unchanged 2048",
+    "HeapSize wrong heap rejected before Win32 2048",
+    "HeapSize nonzero flags rejected before Win32 2048",
+    "HeapSize interior pointer rejected before Win32 2048",
+    "HeapFree wrong heap rejected before Win32 2048",
+    "HeapFree nonzero flags rejected before Win32 2048",
+    "HeapFree interior pointer rejected before Win32 2048",
+    "HeapReAlloc wrong heap rejected before Win32 2048",
+    "read beyond requested mirror rejected even inside mapped page 2048",
+    "guard rejections leave payload and raw ownership unchanged 2048",
+    "actual HeapFree retires owned block 2048",
+    "HeapSize stale pointer rejected before Win32 2048",
+    "HeapFree stale pointer rejected before Win32 2048",
+    "stale guest read rejected after free 2048",
+    "all five real blocks and mirrors retired exactly once",
+    "heap mirrors do not use legacy allocator callbacks"
+  ],
+  "check_count": 83,
+  "events": [
+    {
+      "api": "HeapAlloc",
+      "result": 1342177280,
+      "last_error": 0,
+      "size": 1,
+      "flags": 8
+    },
+    {
+      "api": "HeapSize",
+      "result": 1,
+      "last_error": 0,
+      "pointer": 1342177280,
+      "mirror_capacity": 1
+    },
+    {
+      "api": "HeapSize",
+      "result": 1,
+      "last_error": 0,
+      "pointer": 1342177280,
+      "mirror_capacity": 1
+    },
+    {
+      "api": "HeapFree",
+      "result": 1,
+      "last_error": 0,
+      "pointer": 1342177280
+    },
+    {
+      "api": "HeapAlloc",
+      "result": 1343225856,
+      "last_error": 0,
+      "size": 4,
+      "flags": 8
+    },
+    {
+      "api": "HeapSize",
+      "result": 4,
+      "last_error": 0,
+      "pointer": 1343225856,
+      "mirror_capacity": 4
+    },
+    {
+      "api": "HeapSize",
+      "result": 4,
+      "last_error": 0,
+      "pointer": 1343225856,
+      "mirror_capacity": 4
+    },
+    {
+      "api": "HeapFree",
+      "result": 1,
+      "last_error": 0,
+      "pointer": 1343225856
+    },
+    {
+      "api": "HeapAlloc",
+      "result": 1344274432,
+      "last_error": 0,
+      "size": 128,
+      "flags": 8
+    },
+    {
+      "api": "HeapSize",
+      "result": 128,
+      "last_error": 0,
+      "pointer": 1344274432,
+      "mirror_capacity": 128
+    },
+    {
+      "api": "HeapSize",
+      "result": 128,
+      "last_error": 0,
+      "pointer": 1344274432,
+      "mirror_capacity": 128
+    },
+    {
+      "api": "HeapFree",
+      "result": 1,
+      "last_error": 0,
+      "pointer": 1344274432
+    },
+    {
+      "api": "HeapAlloc",
+      "result": 1345323008,
+      "last_error": 0,
+      "size": 544,
+      "flags": 8
+    },
+    {
+      "api": "HeapSize",
+      "result": 544,
+      "last_error": 0,
+      "pointer": 1345323008,
+      "mirror_capacity": 544
+    },
+    {
+      "api": "HeapSize",
+      "result": 544,
+      "last_error": 0,
+      "pointer": 1345323008,
+      "mirror_capacity": 544
+    },
+    {
+      "api": "HeapFree",
+      "result": 1,
+      "last_error": 0,
+      "pointer": 1345323008
+    },
+    {
+      "api": "HeapAlloc",
+      "result": 1346371584,
+      "last_error": 0,
+      "size": 2048,
+      "flags": 8
+    },
+    {
+      "api": "HeapSize",
+      "result": 2048,
+      "last_error": 0,
+      "pointer": 1346371584,
+      "mirror_capacity": 2048
+    },
+    {
+      "api": "HeapSize",
+      "result": 2048,
+      "last_error": 0,
+      "pointer": 1346371584,
+      "mirror_capacity": 2048
+    },
+    {
+      "api": "HeapFree",
+      "result": 1,
+      "last_error": 0,
+      "pointer": 1346371584
+    },
+    {
+      "api": "host_cleanup_heap_mirrors",
+      "errors": [],
+      "remaining": {
+        "raw_owners": 0,
+        "mapped_regions": 0,
+        "live_owners": 0,
+        "reserved_regions": 5,
+        "allocated_owners": 5,
+        "interrupted": []
+      }
+    }
+  ],
+  "mirror_events": [
+    {
+      "operation": "HeapAlloc",
+      "owner": 0,
+      "phase": "live",
+      "pointer": 1342177280,
+      "result": 1342177280,
+      "size": 1,
+      "flags": 8
+    },
+    {
+      "operation": "HeapSize",
+      "owner": 0,
+      "phase": "live",
+      "pointer": 1342177280,
+      "result": 1,
+      "mirror_capacity": 1
+    },
+    {
+      "operation": "HeapSize",
+      "owner": 0,
+      "phase": "live",
+      "pointer": 1342177280,
+      "result": 1,
+      "mirror_capacity": 1
+    },
+    {
+      "operation": "HeapFree",
+      "owner": 0,
+      "phase": "retired",
+      "pointer": 1342177280,
+      "result": 1,
+      "last_error": 0
+    },
+    {
+      "operation": "HeapAlloc",
+      "owner": 1,
+      "phase": "live",
+      "pointer": 1343225856,
+      "result": 1343225856,
+      "size": 4,
+      "flags": 8
+    },
+    {
+      "operation": "HeapSize",
+      "owner": 1,
+      "phase": "live",
+      "pointer": 1343225856,
+      "result": 4,
+      "mirror_capacity": 4
+    },
+    {
+      "operation": "HeapSize",
+      "owner": 1,
+      "phase": "live",
+      "pointer": 1343225856,
+      "result": 4,
+      "mirror_capacity": 4
+    },
+    {
+      "operation": "HeapFree",
+      "owner": 1,
+      "phase": "retired",
+      "pointer": 1343225856,
+      "result": 1,
+      "last_error": 0
+    },
+    {
+      "operation": "HeapAlloc",
+      "owner": 2,
+      "phase": "live",
+      "pointer": 1344274432,
+      "result": 1344274432,
+      "size": 128,
+      "flags": 8
+    },
+    {
+      "operation": "HeapSize",
+      "owner": 2,
+      "phase": "live",
+      "pointer": 1344274432,
+      "result": 128,
+      "mirror_capacity": 128
+    },
+    {
+      "operation": "HeapSize",
+      "owner": 2,
+      "phase": "live",
+      "pointer": 1344274432,
+      "result": 128,
+      "mirror_capacity": 128
+    },
+    {
+      "operation": "HeapFree",
+      "owner": 2,
+      "phase": "retired",
+      "pointer": 1344274432,
+      "result": 1,
+      "last_error": 0
+    },
+    {
+      "operation": "HeapAlloc",
+      "owner": 3,
+      "phase": "live",
+      "pointer": 1345323008,
+      "result": 1345323008,
+      "size": 544,
+      "flags": 8
+    },
+    {
+      "operation": "HeapSize",
+      "owner": 3,
+      "phase": "live",
+      "pointer": 1345323008,
+      "result": 544,
+      "mirror_capacity": 544
+    },
+    {
+      "operation": "HeapSize",
+      "owner": 3,
+      "phase": "live",
+      "pointer": 1345323008,
+      "result": 544,
+      "mirror_capacity": 544
+    },
+    {
+      "operation": "HeapFree",
+      "owner": 3,
+      "phase": "retired",
+      "pointer": 1345323008,
+      "result": 1,
+      "last_error": 0
+    },
+    {
+      "operation": "HeapAlloc",
+      "owner": 4,
+      "phase": "live",
+      "pointer": 1346371584,
+      "result": 1346371584,
+      "size": 2048,
+      "flags": 8
+    },
+    {
+      "operation": "HeapSize",
+      "owner": 4,
+      "phase": "live",
+      "pointer": 1346371584,
+      "result": 2048,
+      "mirror_capacity": 2048
+    },
+    {
+      "operation": "HeapSize",
+      "owner": 4,
+      "phase": "live",
+      "pointer": 1346371584,
+      "result": 2048,
+      "mirror_capacity": 2048
+    },
+    {
+      "operation": "HeapFree",
+      "owner": 4,
+      "phase": "retired",
+      "pointer": 1346371584,
+      "result": 1,
+      "last_error": 0
+    }
+  ],
+  "os_calls": [
+    {
+      "api": "HeapAlloc",
+      "args": [
+        2372825907200,
+        8,
+        1
+      ],
+      "result": 2372835095360,
+      "last_error": 0,
+      "injected": false
+    },
+    {
+      "api": "HeapSize",
+      "args": [
+        2372825907200,
+        0,
+        2372835095360
+      ],
+      "result": 1,
+      "last_error": 0,
+      "injected": false
+    },
+    {
+      "api": "HeapSize",
+      "args": [
+        2372825907200,
+        0,
+        2372835095360
+      ],
+      "result": 1,
+      "last_error": 0,
+      "injected": false
+    },
+    {
+      "api": "HeapFree",
+      "args": [
+        2372825907200,
+        0,
+        2372835095360
+      ],
+      "result": 1,
+      "last_error": 0,
+      "injected": false
+    },
+    {
+      "api": "HeapAlloc",
+      "args": [
+        2372825907200,
+        8,
+        4
+      ],
+      "result": 2372835095360,
+      "last_error": 0,
+      "injected": false
+    },
+    {
+      "api": "HeapSize",
+      "args": [
+        2372825907200,
+        0,
+        2372835095360
+      ],
+      "result": 4,
+      "last_error": 0,
+      "injected": false
+    },
+    {
+      "api": "HeapSize",
+      "args": [
+        2372825907200,
+        0,
+        2372835095360
+      ],
+      "result": 4,
+      "last_error": 0,
+      "injected": false
+    },
+    {
+      "api": "HeapFree",
+      "args": [
+        2372825907200,
+        0,
+        2372835095360
+      ],
+      "result": 1,
+      "last_error": 0,
+      "injected": false
+    },
+    {
+      "api": "HeapAlloc",
+      "args": [
+        2372825907200,
+        8,
+        128
+      ],
+      "result": 2372835414320,
+      "last_error": 0,
+      "injected": false
+    },
+    {
+      "api": "HeapSize",
+      "args": [
+        2372825907200,
+        0,
+        2372835414320
+      ],
+      "result": 128,
+      "last_error": 0,
+      "injected": false
+    },
+    {
+      "api": "HeapSize",
+      "args": [
+        2372825907200,
+        0,
+        2372835414320
+      ],
+      "result": 128,
+      "last_error": 0,
+      "injected": false
+    },
+    {
+      "api": "HeapFree",
+      "args": [
+        2372825907200,
+        0,
+        2372835414320
+      ],
+      "result": 1,
+      "last_error": 0,
+      "injected": false
+    },
+    {
+      "api": "HeapAlloc",
+      "args": [
+        2372825907200,
+        8,
+        544
+      ],
+      "result": 2372836478672,
+      "last_error": 0,
+      "injected": false
+    },
+    {
+      "api": "HeapSize",
+      "args": [
+        2372825907200,
+        0,
+        2372836478672
+      ],
+      "result": 544,
+      "last_error": 0,
+      "injected": false
+    },
+    {
+      "api": "HeapSize",
+      "args": [
+        2372825907200,
+        0,
+        2372836478672
+      ],
+      "result": 544,
+      "last_error": 0,
+      "injected": false
+    },
+    {
+      "api": "HeapFree",
+      "args": [
+        2372825907200,
+        0,
+        2372836478672
+      ],
+      "result": 1,
+      "last_error": 0,
+      "injected": false
+    },
+    {
+      "api": "HeapAlloc",
+      "args": [
+        2372825907200,
+        8,
+        2048
+      ],
+      "result": 2372864448496,
+      "last_error": 0,
+      "injected": false
+    },
+    {
+      "api": "HeapSize",
+      "args": [
+        2372825907200,
+        0,
+        2372864448496
+      ],
+      "result": 2048,
+      "last_error": 0,
+      "injected": false
+    },
+    {
+      "api": "HeapSize",
+      "args": [
+        2372825907200,
+        0,
+        2372864448496
+      ],
+      "result": 2048,
+      "last_error": 0,
+      "injected": false
+    },
+    {
+      "api": "HeapFree",
+      "args": [
+        2372825907200,
+        0,
+        2372864448496
+      ],
+      "result": 1,
+      "last_error": 0,
+      "injected": false
+    }
+  ],
+  "native_pe_execution": false,
+  "injected_os_returns": false,
+  "remaining": 0,
+  "remaining_mapped_regions": 0,
+  "scope": "CrtOs boundary checks using real Windows HeapAlloc/HeapSize/HeapFree and real Unicorn memory. No PE consumer or fake OS result.",
+  "source_hashes": {
+    "test_heap_size.py": "a5425f35a22283d470d7627f5284159025d4d665858da90f7ad9b475b7624642",
+    "crt_os.py": "4ed057911fcb7e2299e62e12bd96ee040c73972ea843ce36ac0f9d4870f1e578",
+    "heap_mirrors.py": "6be233a6a2e8fc6fd89452be391ab2b9fffd80897d024df89444b3c9aba55a52",
+    "isolated_io.py": "f127283ca56d8859d09b8ba57f918f58b7f0a11174c3e269c3d6d85f27baa3d6"
+  }
+}

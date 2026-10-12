@@ -1,0 +1,70 @@
+{
+  "passed": true,
+  "complete": false,
+  "production_modified": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_lifetimes": 20,
+  "native_operation_count": 252,
+  "native_operation_counts": {
+    "0x64d040": 78,
+    "0x728a40": 76,
+    "0x728a60": 76,
+    "0x663240": 22
+  },
+  "native_iterator_calls": 456,
+  "native_exception_boundaries": {
+    "length_error": 4,
+    "bad_alloc": 2
+  },
+  "all_parent_owned_allocations_released": true,
+  "source_region_count": 12,
+  "source_bytes": 1878,
+  "tests": {
+    "passed": 5,
+    "failed": 0,
+    "filtered": 8,
+    "seconds": 0.19,
+    "new_state_tests": 3,
+    "existing_metadata_regressions": 2
+  },
+  "compile_command": [
+    "C:/Users/loicd/.cargo/bin/rustc.exe",
+    "--edition=2024",
+    "--test",
+    "E:\\mapslol3v3\\replay_metadata_tree_agent\\metadata_state_harness.rs",
+    "--extern",
+    "serde_json=E:/OpenLeague/target/debug/deps/libserde_json-06e1b1b57f0ae5f7.rlib",
+    "-L",
+    "dependency=E:/OpenLeague/target/debug/deps",
+    "-o",
+    "E:\\mapslol3v3\\replay_metadata_tree_agent\\metadata_state_harness.exe"
+  ],
+  "test_command": [
+    "E:\\mapslol3v3\\replay_metadata_tree_agent\\metadata_state_harness.exe",
+    "audio_replay_metadata",
+    "--nocapture"
+  ],
+  "hashes": {
+    "audio_replay_metadata_state.rs": "5cfc411487d85b65232a2efad6ea1aa7966c0b7ed806febae4f167042c04af41",
+    "audio_replay_metadata_state_tests.rs": "6dc0b4f337231bdd5f54b9d89151684fd1c19343b5adec66da90f35f24289bb0",
+    "metadata_state_harness.rs": "529bc919d6b4ca9ded995d403bfd8e41448bd5ee8da6b6fea2c835a29f115555",
+    "metadata_state_harness.exe": "71fa3f437f37fbc580fc92b711c7fca5008cb13f97c070a1cfbd58963e8ad22d",
+    "metadata_state_build.log": "e3a8b0494a604eea9e17cb9ae913e5a492a723499b98ba174074db9f44a46977",
+    "metadata_state_tests.log": "41bd4b7efb19ea5369b86d4cb73d231805338d27dd52851c3895a59515e407ac",
+    "probe_metadata_state.py": "af57c7fc8286899f1a2349a4b13649e223153f88ed498bae969b90aa6341c459",
+    "replay_metadata_state_probe.json": "397e7ee02a5716c44d88a3829789dc88ed6470daeab8068d72c8e5c204d2a017",
+    "metadata_state_native.log": "69256915683b572a29afe9fa6dff3ed359997e261b3457b71c944911479b992e",
+    "metadata_state_sources.json": "c2ab5e7c5d0c430c9b7a5159f9e8cefec319689f87cc02236bca681bc8a9f3ea",
+    "tree24_disassembly.txt": "5adb7080634c718d40d0504de79d0c426a6dbbf0661907277b16542444109914",
+    "tree24_dependencies_disassembly.txt": "4f66e154a18168a5d02f7584ea76f6e5a9c70d56618321f32e851a2a4437f1bf",
+    "tree24_successor_disassembly.txt": "67d867636790e0c6b70972fcbf9ea2dc3fb6b8b9ba72ee4e4436b50b67f68d53",
+    "metadata_state.patch": "aede0814c2baf169008b413aa3bb6dcd6801379ac28e5978108a66c737739fa7"
+  },
+  "limits": [
+    "Native64D040/728A40/728A60, allocation construction, hinted insertion, rotations and metadata teardown execute unchanged.",
+    "Only allocation/free and single-thread OS primitives are supplied. Native exceptions stop at CE0B9F/CE0C22; MSVC exception unwinding is not simulated or qualified.",
+    "Capacity tests seed the count near max_size without allocating that many nodes. Concurrent mutation or custom allocator mutation of the tree/key is not covered. No Windows/service/frame delivery is claimed.",
+    "Rust tests compare exact owned block bytes, allocation and free order, custom free callback/context, returned slot/value, and absence of locks. They do not compare every individual memory read/write instruction.",
+    "Search and iterator traversal detect repeated nodes; corrupt parent links during rebalancing and allocator-induced tree/key mutation are not qualified. This isolated harness is not the integrated core suite."
+  ]
+}

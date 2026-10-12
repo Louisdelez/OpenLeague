@@ -1,0 +1,12 @@
+from pathlib import Path
+import json,sys,hashlib
+r=Path('E:/OpenLeague');sys.path.insert(0,str(r/'tools/pythonlibs'))
+import pefile,capstone
+p=json.loads((r/'docs/audio_security_cookie_entry_discovery.json').read_text());source=Path(p['native_file']);assert hashlib.sha256(source.read_bytes()).hexdigest()==p['native_sha256'];pe=pefile.PE(str(source));im=pe.get_memory_mapped_image();base=pe.OPTIONAL_HEADER.ImageBase;md=capstone.Cs(capstone.CS_ARCH_X86,capstone.CS_MODE_32)
+def decode(a,b):return [{'address':v.address,'bytes':v.bytes.hex(),'mnemonic':v.mnemonic,'operands':v.op_str}for v in md.disasm(im[a-base:b-base],a)]
+init=decode(0xc9c384,0xc9c3dc);package=decode(0xcabda8,0xcabde8);worker=decode(0xc9c439,0xc9c459)
+assert im[0x1065740-base:0x1065740-base+13]==b'RoInitialize\0'
+by={v['address']:v for v in init};assert (by[0xc9c3d6]['mnemonic'],by[0xc9c3d8]['mnemonic'],by[0xc9c3da]['mnemonic'])==('neg','sbb','inc')
+assert by[0xc9c3c6]['operands']=='1'
+receipt={'passed':True,'complete':False,'native_file':str(source),'native_sha256':p['native_sha256'],'package_helper':0xcabda8,'initialize_helper':0xc9c384,'worker_com_stage':0xc9c439,'package_instructions':package,'initialize_instructions':init,'worker_instructions':worker,'evidence':['CABDA8 caches package state at122343C: on initial negative value, decodes GetCurrentPackageId dispatch entry2DA5374 and compares API result to122; returns whether cached signed value is positive.','Worker stores package result at record+3B4; only nonzero package state calls C9C384. COM helper lazily loads combase.dll with flags800, resolves RoInitialize, encodes/caches it at14AE5F8/14AE5FC, invokes decoded function with argument1.','NEG/SBB/INC maps exact HRESULT zero to1 and every nonzero result, including S_FALSE, to0. Worker overwrites record+3B4 with this result before calling its start body. Do not substitute generic SUCCEEDED(hr).'],'limits':['Static contiguous code and source literal verification. Package/cache/COM startup helper execution, actual Windows ABI/lifetime/COM apartment producer integration remain unqualified; original worker body C9C315 still needs qualification.']}
+(r/'tools/discover_audio_crt_worker_com_startup.py').write_text(Path(__file__).read_text(),encoding='utf-8');(r/'docs/audio_crt_worker_com_initialization_discovery.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8');print('PASS source package/COM worker preparation discovered; strict zero HRESULT gate, not generic success; static evidence only')

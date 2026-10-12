@@ -1,0 +1,62 @@
+{
+  "saved_utc": "2026-10-10T08:51:03.048938+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "audio_tests_passed": 666,
+  "filtered_tests_not_run": 480,
+  "isolated_production_tests_passed": 95,
+  "native_descriptor_delivery_cases_ported": 48,
+  "native_consumer_delivery_cases_ported": 432,
+  "native_real_pending_service_lifetimes_prepared": 16,
+  "contracts": {
+    "audio_announcer_owner_metadata_descriptor_contract.json": {
+      "cases": 48,
+      "sha256": "2d0b2aaa74cf5aeffcc951120e8be763d4feee9b6408f26879070a7c85c0082b"
+    },
+    "audio_announcer_owner_metadata_consumer_contract.json": {
+      "cases": 432,
+      "sha256": "a5157a601eaa474326f192e6ccc86be5944c0b0079cb37f6517787e348962133"
+    },
+    "audio_announcer_owner_metadata_lifecycle_contract.json": {
+      "cases": 96,
+      "sha256": "b2006914f82aec379c66598f08ef4afacf7393a43a062c1a24e2c73247592f9d"
+    },
+    "audio_announcer_owner_metadata_service_boundary_contract.json": {
+      "cases": 24,
+      "sha256": "eff7c6d3830efb83c2e175191fc5cac2b12d58c4b632f2e87f1aeb5742f7034e"
+    },
+    "audio_announcer_owner_metadata_real_pending_service_contract.json": {
+      "cases": 16,
+      "sha256": "8cfab74205558d86f4c60220b2c2e4148c6791f1892373ff0dba661e9c0c47ee"
+    }
+  },
+  "regression_log_sha256": "9a643e70cbedff269154673bcf6dbf25f9975beb0306d99101f2bb4fc3e700e2",
+  "isolated_log_sha256": "b6b1862baaa6cf773c6f71bc43e317211294f02de43c079ce341b43168b168e0",
+  "test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_core-5b2a9def275dcedd.exe",
+  "test_executable_sha256": "e1307be805feacd4c3306c2a1bc438f9677e25e13e9d6613a886cfc27347dc05",
+  "source_hashes": {
+    "crates/core/src/audio_announcer_metadata_callbacks.rs": "b5f01da676aed165c8e8a9b0a7879e3a467d9ca7fbd135bcec194cfe60efd88a",
+    "crates/core/src/audio_announcer_owner_metadata.rs": "c7e54a68b98e3f5726b2190d39fe9f97b19d1214c7fd47c5c49f5b175064b086",
+    "crates/core/src/audio_announcer_registry_init.rs": "adc0044cd068c10683783022e2ca8d85608f8e6a9dac43c8d79380373185545d",
+    "crates/core/src/lib.rs": "08311d48700e45b6b22c0f260bc63c4f8959f869223e1aaae57f26bdda4e1af8",
+    "tools/announcer_metadata_callbacks_production_tests.rs": "89da306daf3808d58c0cfba90c7bca5c2a43ba9310d49c7775247e19e36b1595",
+    "tools/qualify_metadata_descriptor_delivery.py": "2cc7b0df58cf6d21a3e0889f5081f5a272d239a2a89de197a54b242970ef2d99",
+    "tools/qualify_metadata_consumer_delivery.py": "903700f575910a0efaa21951eb501cdd20aabb05d5fd95751962384acf5d85d2",
+    "tools/qualify_metadata_real_pending_service.py": "b71e43dc6489e93c3d987968298e16d732313e129fa9ddcaff66a8f746a3df39"
+  },
+  "behavior": [
+    "Actual5CCE30 callback dispatch and descriptor methods6B9680/6B96C0/6B9700/6B9740 ported against48 native calls, with real6B28A0 borrowed-owner read, three adjusting thunks, fresh sentinel check, exact u32/u16 packet writes and preserved padding.",
+    "Actual65EE40 current slot8 dispatch and all four native metadata consumers ported against432 native calls on constructor-created handlers. Spectator gate uses AL, two distinct flag bytes cleared before actor callbacks; event-mask set/clear preserves native x86 shift behavior and returning diagnostic for index>=4. Packet index reload after diagnostics retained.",
+    "Owned storage now exposes exact byte reads; packet processing does not widen native byte accesses. Production metadata construction and event dispatch share owned physical bytes in tests. Existing96 metadata and24 service boundary lifetimes still pass."
+  ],
+  "limits": [
+    "Real native service pending registration/removal newly qualified in16 metadata lifetimes, including two descriptor clones per pending pair and real vector append/erase, not yet ported. Service pending storage starts explicitly empty; whole service constructor and active storage/dispatch remain open. Gate and actor virtual method bodies, service storage/event queue and diagnostics remain explicit primitive boundaries; original event routing and live simulation integration are not proved by these callback tests. Actual actor/shared-control/metadata lifetime composition and synchronized live ownership remain required.",
+    "Native exception unwinding and metadata allocation failure paths remain open. Whole announcement queue, priorities, mixing, audible playback, human fidelity acceptance and all game requirements remain incomplete."
+  ],
+  "next_action": "Port actual pending service registration/storage/unregistration behind slots84/88 against16 prepared native lifetimes in audio_announcer_owner_metadata_real_pending_service_contract.json. Native game-service allocation is0x188 bytes, constructor72A3B0, published at58FE54 to2D787B8; real vtable10AFE8C slots84/88 are72C610/72C620 forwarding to service+12 registries72D420/72D510. Registration allocates8-byte descriptor/handler-storage pairs and clones descriptors twice before6B5E10 vector append; unregistration scans pending entries then falls back to72EE20 active storage. Spectator getter718AD0 reads byte service+122. Qualify these native service bodies and compare original service lifecycle with constructor-created metadata callbacks and descriptors. Compose actual shared-control metadata disposal and actor lifecycle, connect simulation events and normal announcement queues/priorities/mixing/playback. Preserve24domains114tasks37requirements."
+}

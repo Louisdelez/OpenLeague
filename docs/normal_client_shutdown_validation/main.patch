@@ -1,0 +1,53 @@
+--- a/crates/client/src/main.rs
++++ b/crates/client/src/main.rs
+@@ -1,4 +1,6 @@
+ mod native_effect_clock;
++#[cfg(windows)]
++mod native_runtime_shutdown;
+ mod native_hud_recharge_live;
+ mod native_hud_recharge_line;
+ mod native_hud_recharge_line_gpu_probe;
+@@ -273,7 +275,13 @@
+ struct CameraFocus(Vec3);
+ #[derive(Component)]
+ struct PlayerLabel;
+-fn main() {
++fn main() -> bevy::app::AppExit {
++    let mut exit = bevy::app::AppExit::Success;
++    run_client(&mut exit);
++    exit
++}
++
++fn run_client(exit: &mut bevy::app::AppExit) {
+     if std::env::args().any(|a|a=="--native-hud-recharge-line-gpu-probe") {native_hud_recharge_line_gpu_probe::run();return}
+     if std::env::args().any(|a|a=="--native-hud-recharge-gpu-probe") {native_hud_recharge_gpu_probe::run();return}
+     if std::env::args().any(|a|a=="--native-hud-text-gpu-probe") {native_hud_text_gpu_probe::run();return}
+@@ -382,8 +390,17 @@
+     socket.set_nonblocking(true).unwrap();
+     let mut app=App::new();
+     app.insert_resource(NativeReplayService(replay));
+-    #[cfg(windows)] attach_native_replay_runtime(&mut app).expect("create native replay Windows lifetime");
+-    app.insert_resource(zip_resources)
++    #[cfg(windows)]
++    let shutdown = match attach_native_replay_runtime(&mut app)
++        .and_then(|_| native_runtime_shutdown::install(&mut app)) {
++        Ok(shutdown) => shutdown,
++        Err(error) => {
++            eprintln!("Native replay initialization failed: {error}");
++            *exit = bevy::app::AppExit::error();
++            return; // The owned App and partial native resources still Drop.
++        }
++    };
++    *exit = app.insert_resource(zip_resources)
+         .insert_resource(native_hud)
+         .add_plugins(
+             DefaultPlugins
+@@ -554,6 +571,8 @@
+             ),
+         )
+         .run();
++    #[cfg(windows)]
++    { *exit = shutdown.finish(exit.clone()); }
+ }
+ fn setup(mut commands: Commands, assets: Res<AssetServer>, focus: Res<CameraFocus>, settings: Res<native_user_settings::Loaded>, mut native_camera: ResMut<camera_native::NativeCamera>) {
+     // Native Map10 fog RGB replaces the engine's unrelated gray background.

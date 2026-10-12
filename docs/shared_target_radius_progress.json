@@ -1,0 +1,56 @@
+{
+  "updated_utc": "2026-10-04T11:47:09.241040+00:00",
+  "complete": false,
+  "passed": true,
+  "core_tests_passed": 417,
+  "client_tests_passed": 32,
+  "new_core_tests": 1,
+  "ordinary_network_checks": 4,
+  "network": "docs/shared_target_radius_network.json",
+  "executables": [
+    {
+      "path": "target/debug/openleague-server.exe",
+      "bytes": 4603904,
+      "sha256": "91fb570265c2746785c42458feb5d60929ef284be06a2a960f7fe245b4db96dc"
+    },
+    {
+      "path": "target/debug/openleague-client.exe",
+      "bytes": 118180352,
+      "sha256": "89acbf24f74115988cceaad36106e2abd8512b86f4effb5dcebcae513a395fd2"
+    },
+    {
+      "path": "launcher/src-tauri/target/debug/openleague-launcher.exe",
+      "bytes": 12411904,
+      "sha256": "ac22a8346c0b2af574bdee16311acc510e657c73ca5f85584223f0049c4f57de"
+    }
+  ],
+  "files_sha256": {
+    "crates/core/src/collision.rs": "eee822a631957e5a43105a9393a3dd8a7abc0cee8e8bd4b58d58d123aa68c167",
+    "crates/core/src/annie_w.rs": "ec81d52d9e2c37f1c978350072a30f37b85bf4fc8d0b71576dd68e8f20ea1807",
+    "crates/core/src/world.rs": "314f42af5682bf20ecccf9c8a08ee9105ed44f3d5d344c3961a66152e382f9f7",
+    "crates/core/src/annie_r_tests.rs": "51576855584e45b71138025dfec631d4a04c658a633290ad3cee73375ca8f91c",
+    "crates/core/src/spell_tests.rs": "bf53dab31d3f9b94b886817a9f8463860ecdfdac3bde89bc99176fe67a6bebeb",
+    "logs/shared-target-radius-tests.log": "cd9627579f7844faaff63dc4f1b50b20feb1c28561917ff731a92767334307dc",
+    "logs/shared-target-radius-build.log": "69abc3f39faa30595354a56cc194b2e89c84800e7b721c84be19a2e56b38884c",
+    "docs/shared_target_radius_network.json": "e7c4f469fbbad498bab71836355620c87b464776ff2b9b5686e0935628c17ac6",
+    "tools/verify_shared_target_radius_network.py": "7bb6f0c1fc5510cb8d067fbc1b18a4db7bb14c9d6f418ebc59bc34e366f6d060"
+  },
+  "community_source": {
+    "path": "D:\\LeagueOfLegendsV2\\4.20\\GameServer\\GameServerLib\\GameObjects\\AttackableUnits\\AI\\ObjAIBase.cs",
+    "sha256": "b380ac2b2609f1946ee48d1ab779eda57db477774a2cd7cca5081e4ccb449459",
+    "scope": "ObjAIBase attack range/pursuit = Stats.Range.Total + TargetUnit.CollisionRadius (lines1191/1231/1270); defaults from earlier radius receipt."
+  },
+  "native_policy_receipt": "docs/annie_radius_correction.json",
+  "changes": [
+    "Shared champion target_info no longer returns zero gameplay radius. Explicit native values retained, missing defaults65 and explicit nonpositive40 from recovered community loader.",
+    "Canonical radius helper moved into collision, reused by Incinerate and shared NPC/pet/champion attacks/pursuit. Native nullable profiles unchanged.",
+    "Tibbers Garen target distance189/190 at range,191 requires pursuit; Annie explicit55 makes181 outside125+55. A pursuer may move into range and attack during the same world tick.",
+    "Updated old champion-pursuit test to include target body radius; all previous tests pass.",
+    "Ordinary production-server two-client UDP native-grid movement then Garen pursuit/attack: gap170, destinationNone, target health decreases. No arbitrary state injection."
+  ],
+  "limits": [
+    "Community server reconstruction supports arithmetic; original Riot server geometry/targetability/windup effects remain unqualified.",
+    "No new GPU/audio/human input acceptance. Previous visual receipts stay bound to prior executable hashes.",
+    "All24domains and122champion complete kits still incomplete."
+  ]
+}

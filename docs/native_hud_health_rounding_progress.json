@@ -1,0 +1,81 @@
+{
+  "updated_utc": "2026-10-06T08:49:06.772868+00:00",
+  "passed": true,
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "entries": [
+    "0xca5f30",
+    "0xca1e40"
+  ],
+  "source_health_calls": [
+    "0x7d6df5",
+    "0x7d6dfd",
+    "0x7d6e16",
+    "0x7d6e1e"
+  ],
+  "health_text_submission": "0x7d756d",
+  "format_address": "0x10bc19c",
+  "format": "%d / %d",
+  "case_count": 13,
+  "cases": [
+    {
+      "input_f32": 0.0,
+      "health_integer": 0
+    },
+    {
+      "input_f32": 0.0010000000474974513,
+      "health_integer": 1
+    },
+    {
+      "input_f32": 0.25,
+      "health_integer": 1
+    },
+    {
+      "input_f32": 0.5,
+      "health_integer": 1
+    },
+    {
+      "input_f32": 0.9990000128746033,
+      "health_integer": 1
+    },
+    {
+      "input_f32": 1.0,
+      "health_integer": 1
+    },
+    {
+      "input_f32": 1.0010000467300415,
+      "health_integer": 2
+    },
+    {
+      "input_f32": 12.5,
+      "health_integer": 13
+    },
+    {
+      "input_f32": 123.75,
+      "health_integer": 124
+    },
+    {
+      "input_f32": 456.5,
+      "health_integer": 457
+    },
+    {
+      "input_f32": 514.4000244140625,
+      "health_integer": 515
+    },
+    {
+      "input_f32": 616.5999755859375,
+      "health_integer": 617
+    },
+    {
+      "input_f32": 1000000.25,
+      "health_integer": 1000001
+    }
+  ],
+  "native_addresses": 54,
+  "limits": [
+    "Only the positive finite health integer conversion helpers executed; caller input retrieval and Text submission observed by disassembly, not emulated here.",
+    "Synthetic caller trampoline only; original CRT fast paths execute. Fallback CRT path, negative, nonfinite and overflow inputs not qualified.",
+    "Mana conversion uses a different SSE floor path and remains to qualify. Full original formatting, localization and framebuffer equivalence remain open.",
+    "Current client still floors health values; correction requires integration and validation."
+  ]
+}

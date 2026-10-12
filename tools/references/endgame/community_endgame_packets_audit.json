@@ -1,0 +1,142 @@
+{
+  "repository": "LeagueSandbox/LeaguePackets",
+  "commit": "207baab80dc4cd203dd2d41ce9d98f1aae7a1544",
+  "rows": [
+    {
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/LeaguePackets/207baab80dc4cd203dd2d41ce9d98f1aae7a1544/LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "body": null
+    },
+    {
+      "path": "LeaguePackets/Game/050_SetFadeOut_Pop.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/LeaguePackets/207baab80dc4cd203dd2d41ce9d98f1aae7a1544/LeaguePackets/Game/050_SetFadeOut_Pop.cs",
+      "sha256": "10eb5e54ee4497fff80cc8e09074c498dc35db4c2f52a0e6159cf957d80be673",
+      "body": "\nusing System;\nusing System.Collections.Generic;\nusing System.Linq;\nusing System.IO;\nusing System.Text;\nusing System.Threading.Tasks;\n\nnamespace LeaguePackets.Game\n{\n    public class SetFadeOut_Pop : GamePacket // 0x32\n    {\n        public override GamePacketID ID => GamePacketID.SetFadeOut_Pop;\n        public short StackID { get; set; }\n\n        protected override void ReadBody(ByteReader reader)\n        {\n\n            this.StackID = reader.ReadInt16();\n        }\n        protected override void WriteBody(ByteWriter writer)\n        {\n            writer.WriteInt16(StackID);\n        }\n    }\n}\n"
+    },
+    {
+      "path": "LeaguePackets/Game/053_OnLeaveLocalVisibilityClient.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/LeaguePackets/207baab80dc4cd203dd2d41ce9d98f1aae7a1544/LeaguePackets/Game/053_OnLeaveLocalVisibilityClient.cs",
+      "sha256": "3527e4e929550f711160df8605db257dca8d662b206639fb311235d0b82344fa",
+      "body": null
+    },
+    {
+      "path": "LeaguePackets/Game/081_OnLeaveVisibilityClient.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/LeaguePackets/207baab80dc4cd203dd2d41ce9d98f1aae7a1544/LeaguePackets/Game/081_OnLeaveVisibilityClient.cs",
+      "sha256": "cdde4a7d1c73a09dc6c4a5b42ece06686f1fb2fd72eb50d9261048bfb5f7fd76",
+      "body": null
+    },
+    {
+      "path": "LeaguePackets/Game/095_S2C_FadeOutMainSFX.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/LeaguePackets/207baab80dc4cd203dd2d41ce9d98f1aae7a1544/LeaguePackets/Game/095_S2C_FadeOutMainSFX.cs",
+      "sha256": "2b2a92d223e1ff13eb3f44ec1ae309cfa8aa23d684644ed3f7139701bbcb3d31",
+      "body": "\nusing System;\nusing System.Collections.Generic;\nusing System.Linq;\nusing System.IO;\nusing System.Text;\nusing System.Threading.Tasks;\n\nnamespace LeaguePackets.Game\n{\n    public class S2C_FadeOutMainSFX : GamePacket // 0x5F\n    {\n        public override GamePacketID ID => GamePacketID.S2C_FadeOutMainSFX;\n        public float FadeTime { get; set; }\n\n        protected override void ReadBody(ByteReader reader)\n        {\n\n            this.FadeTime = reader.ReadFloat();\n        }\n        protected override void WriteBody(ByteWriter writer)\n        {\n            writer.WriteFloat(FadeTime);\n        }\n    }\n}\n"
+    },
+    {
+      "path": "LeaguePackets/Game/124_SpawnMinionS2C.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/LeaguePackets/207baab80dc4cd203dd2d41ce9d98f1aae7a1544/LeaguePackets/Game/124_SpawnMinionS2C.cs",
+      "sha256": "45097a3cb997c08104f66bfd36057b9276865b9d6e97edf78bfb80919282af2f",
+      "body": null
+    },
+    {
+      "path": "LeaguePackets/Game/146_World_SendGameNumber.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/LeaguePackets/207baab80dc4cd203dd2d41ce9d98f1aae7a1544/LeaguePackets/Game/146_World_SendGameNumber.cs",
+      "sha256": "e9393d15e298a4461fdf51ea746be4016f9bdbc539884ff85362f410f34c0a53",
+      "body": null
+    },
+    {
+      "path": "LeaguePackets/Game/174_OnEnterLocalVisibilityClient.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/LeaguePackets/207baab80dc4cd203dd2d41ce9d98f1aae7a1544/LeaguePackets/Game/174_OnEnterLocalVisibilityClient.cs",
+      "sha256": "bcbaaac23006b54a7463ad9cff7147ea8fc0c610d336d81ddfa2d7de8543c1f3",
+      "body": null
+    },
+    {
+      "path": "LeaguePackets/Game/178_SetFadeOut_Push.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/LeaguePackets/207baab80dc4cd203dd2d41ce9d98f1aae7a1544/LeaguePackets/Game/178_SetFadeOut_Push.cs",
+      "sha256": "7e6383a54ae9be9252f05bfae2ae6fc948df93ce3e1749d73edc5dd0f14c5f34",
+      "body": "\nusing System;\nusing System.Collections.Generic;\nusing System.Linq;\nusing System.IO;\nusing System.Text;\nusing System.Threading.Tasks;\n\nnamespace LeaguePackets.Game\n{\n    public class SetFadeOut_Push : GamePacket // 0xB2\n    {\n        public override GamePacketID ID => GamePacketID.SetFadeOut_Push;\n        public short FadeId { get; set; }\n        public float FadeTime { get; set; }\n        public float FadeTargetValue { get; set; }\n\n        protected override void ReadBody(ByteReader reader)\n        {\n\n            this.FadeId = reader.ReadInt16();\n            this.FadeTime = reader.ReadFloat();\n            this.FadeTargetValue = reader.ReadFloat();\n        }\n        protected override void WriteBody(ByteWriter writer)\n        {\n            writer.WriteInt16(FadeId);\n            writer.WriteFloat(FadeTime);\n            writer.WriteFloat(FadeTargetValue);\n        }\n    }\n}\n"
+    },
+    {
+      "path": "LeaguePackets/Game/186_OnEnterVisibilityClient.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/LeaguePackets/207baab80dc4cd203dd2d41ce9d98f1aae7a1544/LeaguePackets/Game/186_OnEnterVisibilityClient.cs",
+      "sha256": "86cb7b5a4c01ec4275a5c6cf2c1a8deb021c06fa2567cf5824995974b75ea1cd",
+      "body": null
+    },
+    {
+      "path": "LeaguePackets/Game/198_S2C_EndGame.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/LeaguePackets/207baab80dc4cd203dd2d41ce9d98f1aae7a1544/LeaguePackets/Game/198_S2C_EndGame.cs",
+      "sha256": "55bfffb88d705a6e3a58e4134cf340b0da2f9d7d8e7ade9bd2dff3faf843f14e",
+      "body": null
+    },
+    {
+      "path": "LeaguePackets/Game/203_S2C_FadeMinions.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/LeaguePackets/207baab80dc4cd203dd2d41ce9d98f1aae7a1544/LeaguePackets/Game/203_S2C_FadeMinions.cs",
+      "sha256": "53c0b11efc66b15ef6f56ecbcb92a685fb6c65c8323b3d0b6db8a3f2fece5f75",
+      "body": "\nusing System;\nusing System.Collections.Generic;\nusing System.Linq;\nusing System.IO;\nusing System.Text;\nusing System.Threading.Tasks;\n\nnamespace LeaguePackets.Game\n{\n    public class S2C_FadeMinions : GamePacket // 0xCB\n    {\n        public override GamePacketID ID => GamePacketID.S2C_FadeMinions;\n        public byte TeamID { get; set; }\n        public float FadeAmount { get; set; }\n        public float FadeTime { get; set; }\n\n        protected override void ReadBody(ByteReader reader)\n        {\n\n            this.TeamID = reader.ReadByte();\n            this.FadeAmount = reader.ReadFloat();\n            this.FadeTime = reader.ReadFloat();\n        }\n        protected override void WriteBody(ByteWriter writer)\n        {\n            writer.WriteByte(TeamID);\n            writer.WriteFloat(FadeAmount);\n            writer.WriteFloat(FadeTime);\n        }\n    }\n}\n"
+    },
+    {
+      "path": "LeaguePackets/Game/224_S2C_OnEnterTeamVisibility.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/LeaguePackets/207baab80dc4cd203dd2d41ce9d98f1aae7a1544/LeaguePackets/Game/224_S2C_OnEnterTeamVisibility.cs",
+      "sha256": "cd48930b74c3ded14730629c11f7ee7bcba25b3c7ab20e6f9e241401e9fc2323",
+      "body": null
+    },
+    {
+      "path": "LeaguePackets/Game/225_S2C_OnLeaveTeamVisibility.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/LeaguePackets/207baab80dc4cd203dd2d41ce9d98f1aae7a1544/LeaguePackets/Game/225_S2C_OnLeaveTeamVisibility.cs",
+      "sha256": "3346b60c7887024b7daa4deb3329d7060a88f8d74467a5bb5896b72eeb3ee413",
+      "body": null
+    },
+    {
+      "path": "LeaguePackets/Game/226_S2C_FX_OnEnterTeamVisibility.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/LeaguePackets/207baab80dc4cd203dd2d41ce9d98f1aae7a1544/LeaguePackets/Game/226_S2C_FX_OnEnterTeamVisibility.cs",
+      "sha256": "3948e1f851270184ac15306ffc3e3928dc61ec6e6dd3783d7d3a52e6895962f2",
+      "body": null
+    },
+    {
+      "path": "LeaguePackets/Game/227_S2C_FX_OnLeaveTeamVisibility.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/LeaguePackets/207baab80dc4cd203dd2d41ce9d98f1aae7a1544/LeaguePackets/Game/227_S2C_FX_OnLeaveTeamVisibility.cs",
+      "sha256": "062600000467daf285ea603dcd454ea167f314ea63ae41e4ff637f578931029b",
+      "body": null
+    },
+    {
+      "path": "LeaguePackets/Game/233_S2C_ActivateMinionCamp.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/LeaguePackets/207baab80dc4cd203dd2d41ce9d98f1aae7a1544/LeaguePackets/Game/233_S2C_ActivateMinionCamp.cs",
+      "sha256": "7dd18e892d472b1cd63fd5479f69fba76cc9ce33de740a9e7656b04aa0d2641f",
+      "body": null
+    },
+    {
+      "path": "LeaguePackets/Game/278_S2C_NeutralMinionTimerUpdate.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/LeaguePackets/207baab80dc4cd203dd2d41ce9d98f1aae7a1544/LeaguePackets/Game/278_S2C_NeutralMinionTimerUpdate.cs",
+      "sha256": "0eccc76eaccaf4b15446d4ae1313f681fbcbdd2e45a8182bc020e7e8bfbc35ec",
+      "body": null
+    },
+    {
+      "path": "LeaguePackets/Game/287_S2C_IncrementMinionKills.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/LeaguePackets/207baab80dc4cd203dd2d41ce9d98f1aae7a1544/LeaguePackets/Game/287_S2C_IncrementMinionKills.cs",
+      "sha256": "a19ba5fae6c659abb390b686ffd0754523d64b3cd75344eb2edee79a15ed5f56",
+      "body": null
+    },
+    {
+      "path": "LeaguePackets/Game/290_S2C_CreateMinionCamp.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/LeaguePackets/207baab80dc4cd203dd2d41ce9d98f1aae7a1544/LeaguePackets/Game/290_S2C_CreateMinionCamp.cs",
+      "sha256": "2c2989eef635d8d4cae39d6f307d319da010dd780c21e91b516839e72033b1f8",
+      "body": null
+    },
+    {
+      "path": "LeaguePackets/Game/301_S2C_SetFadeOut.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/LeaguePackets/207baab80dc4cd203dd2d41ce9d98f1aae7a1544/LeaguePackets/Game/301_S2C_SetFadeOut.cs",
+      "sha256": "1108c966a3709bd547bfd3c4053ed2e7f1629b8f8cc253e39f103a7e83b0f994",
+      "body": "\nusing System;\nusing System.Collections.Generic;\nusing System.Linq;\nusing System.IO;\nusing System.Text;\nusing System.Threading.Tasks;\n\nnamespace LeaguePackets.Game\n{\n    public class S2C_SetFadeOut : GamePacket, IUnusedPacket // 0x12D\n    {\n        public override GamePacketID ID => GamePacketID.S2C_SetFadeOut;\n        public float FadeTime { get; set; }\n        public float FadeTargetValue { get; set; }\n\n        protected override void ReadBody(ByteReader reader)\n        {\n\n            this.FadeTime = reader.ReadFloat();\n            this.FadeTargetValue = reader.ReadFloat();\n        }\n        protected override void WriteBody(ByteWriter writer)\n        {\n            writer.WriteFloat(FadeTime);\n            writer.WriteFloat(FadeTargetValue);\n        }\n    }\n}\n"
+    },
+    {
+      "path": "LeaguePackets/Game/Events/ArgsMinionKill.cs",
+      "url": "https://raw.githubusercontent.com/LeagueSandbox/LeaguePackets/207baab80dc4cd203dd2d41ce9d98f1aae7a1544/LeaguePackets/Game/Events/ArgsMinionKill.cs",
+      "sha256": "7318d2f911aa603ebf8f6628f97503d5467e94a8ef6ae7576ebc6b4d2cfd95c8",
+      "body": null
+    }
+  ],
+  "complete": false,
+  "limits": [
+    "Reference packet formats only; original client handlers not yet executed. No community code integrated."
+  ]
+}

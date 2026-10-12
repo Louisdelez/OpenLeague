@@ -1,0 +1,65 @@
+#include "../ColorPalette.hls"
+#include "../FogOfWar/FogOfWar_PS.hls"
+
+sampler DIFFUSE_MAP 	: register (s0);
+sampler PARTICLE_COLOR_TEXTURE : register (s1);
+
+float4	COLOR_UV : register(c2);
+
+#if defined(COLORPALETTE_COLORBLIND) || defined(COLORPALETTE_SPECTATOR)
+	float4 APPLY_TEAM_COLOR_CORRECTION : register(c11);
+#endif
+
+struct FRAGMENT
+{
+	float4 m_Color0 : COLOR0;
+};
+
+
+struct INTERPOLANTS
+{
+	float4 m_Position : POSITION;
+	float4 m_TexCoord0 : TEXCOORD0;
+	float2 m_TexCoord1 : TEXCOORD1;
+	float2 m_TexCoord2 : TEXCOORD2;	
+};
+
+FRAGMENT 
+	main
+	(
+		INTERPOLANTS interpolants
+	)
+{
+	FRAGMENT fragment;
+
+	// Read the diffuse texture
+	float4 texelDiffuse = tex2D(DIFFUSE_MAP, interpolants.m_TexCoord0.xz);
+
+	// Read the color texture
+	float4 texelColor = tex2D(PARTICLE_COLOR_TEXTURE, COLOR_UV.xy);
+
+	float4 finalColor = texelDiffuse * texelColor;
+	finalColor.a *= max(interpolants.m_TexCoord1.x, 0.0f);
+	
+#ifndef DISABLE_FOW
+    float4 fowFactors = GetFogOfWarFactors(interpolants.m_TexCoord2.xy);
+	finalColor.rgb *= fowFactors.a;
+#endif
+
+#ifdef COLORPALETTE_COLORBLIND
+	if (APPLY_TEAM_COLOR_CORRECTION.r != 0.0f)
+	{
+		ApplyColorCorrectionColorblind(finalColor);
+	}	
+#endif
+#ifdef COLORPALETTE_SPECTATOR
+	if (APPLY_TEAM_COLOR_CORRECTION.r != 0.0f)
+	{
+		ApplyColorCorrectionSpectator(finalColor);
+	}
+#endif 
+
+	// Output
+	fragment.m_Color0 = finalColor;
+	return fragment;
+}

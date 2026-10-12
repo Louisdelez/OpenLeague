@@ -1,0 +1,2 @@
+from pathlib import Path
+p=Path('E:/OpenLeague/crates/client/src/main.rs');s=p.read_text(encoding='utf-8');needle='.add_systems(Update, actor_fow::probe.after(fow_visibility_texture::bind_materials).before(render_probe::capture))';assert s.count(needle)==1;s=s.replace(needle,needle+'\n        .add_systems(Update, map_fog::probe_lifecycle.after(fow_visibility_texture::bind_materials).before(render_probe::capture))');p.write_text(s,encoding='utf-8')

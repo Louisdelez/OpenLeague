@@ -1,0 +1,15 @@
+from pathlib import Path
+import itertools,json,hashlib
+r=Path('E:/OpenLeague');setup=(r/'tools/probe_native_audio_bank_outer_reader.py').read_text(encoding='utf-8').split('\nactual=json.loads')[0];exec(compile(setup,'outer_setup','exec'))
+regions.extend([(0xb21ad0,0xb21b34),(0xb21aa0,0xb21acc),(0xb21b40,0xb21bad)]);cache=manager+0x38c;nodes=[heap+0x6000,heap+0x6100,heap+0x6200];rows=[]
+for id,memory,count,pattern in itertools.product([0,276786588,0xffffffff],[0,heap+0x8000,0xffffffff],[0,0xffffffff],[0,0xa5]):
+ calls.clear();u.mem_write(manager,bytes(0x500));put(cache+0x7c,'I',count);initial=[]
+ for index,ref in enumerate(nodes):
+  u.mem_write(ref,bytes([pattern])*80);invoke(0xaf8a20,[id if index<2 else (id+31)&0xffffffff,0xffffffff,0,0,0],ref);initial.append({'reference':ref,'raw':bytes(u.mem_read(ref,80)).hex()})
+ stages=[]
+ def snapshot(stage,result):stages.append({'stage':stage,'result':result,'table':bytes(u.mem_read(cache,128)).hex(),'nodes':[{'reference':ref,'raw':bytes(u.mem_read(ref,80)).hex()}for ref in nodes],'calls':list(calls)})
+ for name,args in [('lookup_empty',(id,memory)),('register_first',(id,memory,nodes[0])),('register_duplicate',(id,memory,nodes[1])),('lookup_first',(id,memory)),('register_collision',((id+31)&0xffffffff,memory,nodes[2])),('lookup_collision',((id+31)&0xffffffff,memory)),('unlink_first',(id,memory)),('lookup_removed',(id,memory)),('unlink_absent',(id,memory)),('unlink_collision',((id+31)&0xffffffff,memory))]:
+  calls.clear();result=invoke(0xb21a30 if name.startswith('lookup')else 0xb21ad0 if name.startswith('register')else 0xb21aa0,args,cache);snapshot(name,result if name.startswith('lookup')else 0)
+ rows.append({'id':id,'memory':memory,'initial_count':count,'pattern':pattern,'initial_nodes':initial,'stages':stages})
+proof={'passed':True,'complete':False,'case_count':len(rows),'cases':rows,'native_sha256':hashlib.sha256(b).hexdigest(),'regions':[{'start':hex(a),'end':hex(e),'sha256':hashlib.sha256(p.get_data(a-base,e-a)).hexdigest()}for a,e in regions],'adapters':['Mutex boundary only. Actual80-byte holder constructor and B21A30/B21AD0/B21AA0/B21B40 lookup/prepend/duplicate-reject/key-unlink bodies execute. No pool allocation during cache operations.'],'findings':['31 buckets use wrapping32-bit key sum then modulus31. Registration writes leading key0/key4/next8 only when exact pair absent;duplicate second holder remains untouched.','Unlink removes first matching pair,fixes previous next or bucket head,wraps count decrement and leaves removed holder next unchanged. Empty/absent unlink leaves storage unchanged.'],'limits':['Native evidence prepared;Rust register/unlink and cache replay pending. Preconstructed explicitly owned80-byte nodes and raw count baseline0/MAX supplied;not normal callback/refcount/caller destruction acceptance.','Full original banks,scope/device/concurrency and audible fidelity remain required.']}
+(r/'data/4.20/audio_bank_cache_contract.json').write_text(json.dumps(proof,indent=2)+'\n',encoding='utf-8');print('PASS',len(rows),'native bank cache10-stage register/lookup/duplicate/collision/unlink cases')

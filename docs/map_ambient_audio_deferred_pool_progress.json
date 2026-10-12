@@ -1,0 +1,33 @@
+{
+  "updated_utc": "2026-10-04T01:06:52.138549+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_deferred_pool.py": "59d4f79d229479eceb096c5dbf1453338621c6dc4087ec1b7562c80a50fcca43",
+    "data/4.20/audio_deferred_pool_contract.json": "86d0bb24db179a585a0133b585b266e41b720ed86f76b2cf01334dcefb719a05",
+    "crates/core/src/audio_deferred_pool.rs": "ed697ef0f2f0fc48d27c473c3c99b0e945cd7f723580f10bf2912b174731c771",
+    "crates/core/src/lib.rs": "5d95bf2fe8799366149515dbab8bca7e3dada79d42abc9333f257ca24d654ccc",
+    "logs/native-audio-deferred-pool-core-tests.log": "9e2da56ed505f16f079461406e7e15c9e8b70ba1d8f9adb294dacc9fa0b040ce"
+  },
+  "native_cleanup_cases": 378,
+  "native_retired_cleanup_cases": 189,
+  "native_shutdown_cleanup_cases": 189,
+  "core_tests_passed": 232,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "ported": [
+    "706720 nonzero retired source disposal/optional linked destruction/storage removal",
+    "swap-last compaction revisits moved slot; active sources retained",
+    "7066A0 shutdown disposes all entries in insertion order",
+    "callback type1 retired marker->deferred cleanup bridge; repeated cleanup/shutdown no replay"
+  ],
+  "physical_voice_factory_implemented": false,
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false,
+  "limits": [
+    "Whole706720 deferred pool cleanup and7066A0 shutdown cleanup executed on0..5 scratch entries/all retired subsets, retired raw1/255, absent/present/alternating linked targets; each repeated twice.",
+    "Engine virtual2C object disposal, linked virtual0(arg1) destruction and heap free explicitly recorded/adapted. Their underlying resource side effects remain separate qualification.",
+    "Native swap-last array compaction and iteration control executed; no actual playback completion timing, thread safety or callback delivery claim.",
+    "Rust generic Pool stores caller-owned references and routes cleanup actions to caller; actual native engine virtual2C/linked destruction side effects remain separately required.",
+    "No actual audio playback completion or client callback delivery measured. Full scratch allocation706600/unbound launch706910/voice constructor remain incomplete.",
+    "Standalone binaries unchanged; full24-domain game remains incomplete."
+  ]
+}

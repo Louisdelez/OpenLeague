@@ -1,0 +1,33 @@
+{
+  "saved_utc": "2026-10-09T19:40:24.210920+00:00",
+  "passed": true,
+  "complete": false,
+  "runs": [
+    {
+      "pointer_width": 64,
+      "workers_per_case": 2,
+      "thread_exit_callbacks": 2,
+      "owner_free_callbacks": 2,
+      "passed": true
+    },
+    {
+      "pointer_width": 32,
+      "workers_per_case": 2,
+      "thread_exit_callbacks": 2,
+      "owner_free_callbacks": 2,
+      "passed": true
+    }
+  ],
+  "actual_callbacks": 8,
+  "limits": [
+    "Actual shared global FLS index observed onX86/X64 currentWindows. Two live worker threads store isolated values; natural worker exit invokes each callback on its owner thread. FlsFree with workers still alive invokes both callbacks synchronously on freeing caller; later worker exit does not duplicate callbacks.",
+    "Callback only records opaque data/thread identity. Core destructor, global native CRT bootstrap, shared provider/error handling/concurrency and normal game worker integration remain to qualify."
+  ],
+  "files_sha256": {
+    "tools\\hardware\\shared_fls\\probe.rs": "20e9d8713f49585605a3bb6c6e9bf2121619431e7186456a1950ac6328662962",
+    "tools\\hardware\\shared_fls\\probe-64.exe": "c0205db94ed05588fc4a16d7c487607937939931a2bf580d98d6bef4f806269d",
+    "tools\\hardware\\shared_fls\\probe-64.log": "ea8da2ce51c8bd6e1ba4654c329578e348026517b55fc93727f4325d8fe36d0b",
+    "tools\\hardware\\shared_fls\\probe-32.exe": "80c9862bdfcea645d70e0b5e275bab85752aa7c69dad9244ad0cce264ae38e40",
+    "tools\\hardware\\shared_fls\\probe-32.log": "e30254875b243e619d43efda74cbe4f21232d4b0bb4ecafd90ca57b515d26e40"
+  }
+}

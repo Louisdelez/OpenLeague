@@ -1,0 +1,3 @@
+from pathlib import Path
+r=Path('E:/OpenLeague');p=r/'tools/verify_terrain_render.py';s=p.read_text();s=s.replace("frame=r/'logs/terrain-native-center-render.png'", "frame=r/('logs/environment-only-native-render.png' if os.environ.get('OPENLEAGUE_PROBE_ENV_ONLY')=='1' else 'logs/terrain-native-center-render.png')");s=s.replace("'map_sha256':hashlib.sha256(raw).hexdigest()", "'map_sha256':hashlib.sha256(raw).hexdigest(),'client_sha256':hashlib.sha256((r/'target/debug/openleague-client.exe').read_bytes()).hexdigest(),'diagnostic_actors_hidden':os.environ.get('OPENLEAGUE_PROBE_ENV_ONLY')=='1'");p.write_text(s)
+p=r/'docs/environment_vertex_progress.json';(r/'docs/environment_vertex_before_skin_progress.json').write_bytes(p.read_bytes())

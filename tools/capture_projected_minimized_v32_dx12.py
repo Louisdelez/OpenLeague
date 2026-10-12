@@ -1,0 +1,87 @@
+from pathlib import Path
+import os,subprocess,socket,json,time,sys,hashlib,datetime
+r=Path('E:/OpenLeague');sys.path.insert(0,str(r/'tools'));import wire
+addr=('127.0.0.1',10501);server=None;client=None;c=None;seq=0;heartbeat=0
+def send(p):c.sendto(json.dumps(p).encode(),addr)
+def receive(kind='State',timeout=5):
+ global heartbeat
+ deadline=time.monotonic()+timeout
+ while time.monotonic()<deadline:
+  assert server.poll() is None,'fixture stopped'
+  if time.monotonic()>=heartbeat:send({'Join':{'champion':'annie'}});heartbeat=time.monotonic()+2
+  try:p=wire.packet(c)
+  except (socket.timeout,ConnectionResetError):continue
+  if p and kind in p:return p[kind]
+ raise AssertionError('Missing '+kind)
+def command(action):
+ global seq
+ seq+=1;send({'Command':{'sequence':seq,'action':action}})
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def measurement():
+ try:return json.loads(probe.read_text())
+ except (FileNotFoundError,json.JSONDecodeError):return {}
+try:
+ baseline=r/'logs/projected-core-cycle-v32-minimized-dx12-baseline.png';probe=r/'logs/projected-core-cycle-v32-minimized-dx12-on.json';on=probe.with_suffix('.png');off=probe.with_suffix('.off.png')
+ for p in [baseline,probe,on,off]:assert not p.exists(),str(p)
+ with (r/'logs/projected-core-cycle-v32-minimized-dx12-server.log').open('w',encoding='utf-8') as sl,(r/'logs/projected-core-cycle-v32-minimized-dx12-client.log').open('w',encoding='utf-8') as cl:
+  server=subprocess.Popen([str(r/'target/debug/examples/annie_ready_fixture.exe')],cwd=r,env=dict(os.environ,OPENLEAGUE_SERVER='127.0.0.1:10501'),stdout=sl,stderr=sl,creationflags=0x08000000)
+  c=socket.socket(socket.AF_INET,socket.SOCK_DGRAM);c.bind(('127.0.0.1',0));c.settimeout(.1);deadline=time.monotonic()+15
+  while True:
+   send({'Join':{'champion':'annie'}})
+   try:owner=receive('Welcome',.5)['player'];break
+   except AssertionError:assert time.monotonic()<deadline
+  command({'Learn':{'slot':0}})
+  while True:
+   state=receive();actor=next(p for p in state['players'] if p['id']==owner)
+   if actor['ranks'][0]==1:break
+  point=actor['position'];height=actor['height']
+  env=dict(os.environ,OPENLEAGUE_SERVER='127.0.0.1:10501',OPENLEAGUE_CHAMPION='garen',WGPU_BACKEND='dx12',OPENLEAGUE_RENDER_LIFECYCLE='1',OPENLEAGUE_RENDER_MINIMIZE='1',OPENLEAGUE_SCREENSHOT=str(baseline),OPENLEAGUE_PROJECTED_LIVE_PROBE=probe.as_posix(),OPENLEAGUE_RENDER_FOCUS=f"{point['x']/20},{height/20},{point['z']/20}")
+  client=subprocess.Popen([str(r/'target/debug/openleague-client.exe')],cwd=r,env=env,stdout=cl,stderr=cl,creationflags=0x08000000)
+  deadline=time.monotonic()+85
+  while not (baseline.exists() and baseline.stat().st_size>10000):
+   assert time.monotonic()<deadline,'startup capture timeout';assert client.poll() is None,'client stopped';state=receive()
+  target=next(p['id'] for p in state['players'] if p['champion']=='garen')
+  states=[]
+  for shot in [1,2]:
+   if shot==2:
+    deadline=time.monotonic()+120
+    while measurement().get('viewport',[1,1]) != [0,0]:
+     assert client.poll() is None,'client stopped before minimize';state=receive();assert time.monotonic()<deadline,'minimize timeout'
+    deadline=time.monotonic()+12
+    while True:
+     state=receive();actor=next(p for p in state['players'] if p['id']==owner)
+     if state['tick']>=actor['cooldowns'][0]:break
+     assert time.monotonic()<deadline,'cooldown timeout'
+   command({'Cast':{'slot':0,'target':target}})
+   deadline=time.monotonic()+25
+   while True:
+    assert client.poll() is None,'client stopped';state=receive();m=measurement()
+    if m.get('created_effects')==shot and m.get('retired_effects')==shot and m.get('active_effects')==0:break
+    assert time.monotonic()<deadline,('normal projection cleanup timeout',m)
+   assert m['native_parent_frame_binding']
+   assert m['native_spatial_selection_binding']
+   assert m['native_visibility_activation_binding'] and m['native_visibility_suppression_binding']
+   assert m['native_owner_scale_gate_binding']
+   assert m['native_owner_acquisition_gate_binding']
+   assert m['native_pose_binding'] and not m['native_position_coordinate_roundtrip']
+   assert m['native_stop_dispatch_binding'] and m['native_clock_binding']
+   assert m['max_visible_draws']>0
+   assert m['active_draws']==0 and m['visible_frames']>0 and m['max_vertices']>0
+   states.append(m);print(json.dumps({'shot':shot,'measurement':m}),flush=True)
+  assert states[1]['viewport']==[0,0],states[1]['viewport']
+  assert states[1]['spawned']==states[0]['spawned'] and states[1]['cleaned']==states[0]['cleaned'], 'hidden cast must not create a draw'
+  restored=baseline.with_name(baseline.stem+'-unminimized.png');deadline=time.monotonic()+45
+  while not (restored.exists() and restored.stat().st_size>10000):
+   assert client.poll() is None;state=receive();assert time.monotonic()<deadline
+  receipt=dict(complete=False,passed=True,client_sha256=sha(r/'target/debug/openleague-client.exe'),states=states,restored_image=str(restored),limits=['Seeded fixture; first cast visible, second cast completes while minimized. Visual inspection pending.'])
+  (r/'docs/projected_minimized_v32_dx12.json').write_text(json.dumps(receipt,indent=2)+'\n')
+  print('Two casts cleaned; second cleanup verified at zero viewport; window restored',flush=True)
+finally:
+ if c:c.close()
+ for p in [client,server]:
+  if p and p.poll() is None:
+   p.terminate()
+   try:p.wait(timeout=10)
+   except subprocess.TimeoutExpired:p.kill();p.wait(timeout=5)
+
+

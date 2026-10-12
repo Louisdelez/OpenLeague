@@ -1,0 +1,29 @@
+{
+  "complete": false,
+  "passed": true,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "cases": [
+    {
+      "owner_state": "absent",
+      "visible": false
+    },
+    {
+      "owner_state": "expired",
+      "visible": false
+    },
+    {
+      "owner_state": "live",
+      "visible": true
+    }
+  ],
+  "findings": [
+    "Provider table10B0D20 slot20 ->718ED0 acquires weak owner and calls body virtual98.",
+    "Concrete projectile body table10B2B5C slot98 ->586220 is mov al,1; ret.",
+    "Absent or expired owner returns false; live projectile body returns true independently of FOW."
+  ],
+  "limits": [
+    "Concrete projectile provider only; other actor bodies and root team filter/mask producers remain open.",
+    "Material GPU FOW attenuation is separate and is already bound in fow_visibility_texture::bind_materials.",
+    "No full match visibility acceptance."
+  ]
+}

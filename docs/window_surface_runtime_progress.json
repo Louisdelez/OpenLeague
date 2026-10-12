@@ -1,0 +1,32 @@
+{
+  "updated_utc": "2026-10-07T12:04:11.798012+00:00",
+  "complete": false,
+  "minimize_crash_scenario_fixed": true,
+  "runs": {
+    "dx12": {
+      "receipt": "docs/window-lifecycle-v31-dx12.json",
+      "visually_inspected": "unminimized",
+      "observation": "Terrain, Garen, health bar and HUD visible after restore."
+    },
+    "vulkan": {
+      "receipt": "docs/window-lifecycle-v31-vulkan.json",
+      "visually_inspected": "unminimized",
+      "observation": "Terrain, Garen, health bar and HUD visible after restore."
+    }
+  },
+  "next_action": "DX12 minimize crash v30 reproduced then fixed with orphan ViewTarget cleanup; v31 DX12/Vulkan five stages pass and restored images inspected. Next: projected_live returns early on zero viewport, skipping effect lifetime/cleanup; qualify stop and cleanup while minimized, preserve native hidden frame semantics. Revisit ordinary Annie projection and full plan. Endurance and concurrent capture/resize still unqualified.",
+  "limits": [
+    "One lifecycle per backend, seeded fixture; no endurance or full game acceptance.",
+    "Zero viewport still rejects projected effect update; minimized lifecycle cleanup requires qualification.",
+    "No human reference fidelity approval."
+  ],
+  "hashes": {
+    "crates/client/src/window_surface_lifecycle.rs": "118d67f37c024d312bbfa50c158ca721b9b93430fece8d8fae6276cc7419d29f",
+    "crates/client/src/main.rs": "33dce849dd105a15c2743d6c42091540011cddcef532d266e4073e5c73d29be9",
+    "logs/window-surface-fix-build.log": "ceaa76bd8b151907328229d7c9852b96e89c27114ebd1d8010f0766e7f734d5e",
+    "target/debug/openleague-client.exe": "afc046b00d50774d11255f25330837a13f06a14a10184f8295d23254f5994e34",
+    "docs/window-lifecycle-v30-dx12.json": "e2fb26c4f2597524a60156bb2e789ae090e4961a837ab1dde0bfa8e3f87fd43b",
+    "docs/window-lifecycle-v31-dx12.json": "b235bb920977784c3dfa9d04e276bc97fab4a558faa9f79ac62aa590579a3402",
+    "docs/window-lifecycle-v31-vulkan.json": "a1bf69f6fa192291a0d4a2859ee0e67afa52dce7bff2372baca09cd3126857eb"
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "checked_utc": "2026-10-05T04:09:44.125830+00:00",
+  "complete": false,
+  "map_sha256": "909513a80e01ae67ee6b15783177a2891363efc640ca47d727f189bcaa429c1a",
+  "native_shader_sha256": "a42f658c4c25d819a6a8af5f311c897288877ef464d326e609be83f6f74b2cbe",
+  "checked_triangles": 929448,
+  "centroid_difference_triangles": 2214,
+  "maximum_centroid_factor_difference": 0.6666666666666667,
+  "examples": [
+    {
+      "mesh": "MapGeo_Instance_62",
+      "material": "NVRMaterial_VertDirt",
+      "triangle": 16,
+      "native_vertex_y": [
+        -1148.3018798828125,
+        -856.4739379882812,
+        -1142.226318359375
+      ],
+      "centroid_original_vertex_fade": 0.3333333333333333,
+      "centroid_current_fragment_fade": 0.0,
+      "difference": 0.3333333333333333
+    },
+    {
+      "mesh": "MapGeo_Instance_62",
+      "material": "NVRMaterial_VertDirt",
+      "triangle": 17,
+      "native_vertex_y": [
+        -856.4739379882812,
+        -834.21826171875,
+        -1142.226318359375
+      ],
+      "centroid_original_vertex_fade": 0.6666666666666666,
+      "centroid_current_fragment_fade": 0.556938484180856,
+      "difference": 0.10972818248581062
+    },
+    {
+      "mesh": "MapGeo_Instance_62",
+      "material": "NVRMaterial_VertDirt",
+      "triangle": 18,
+      "native_vertex_y": [
+        -1142.226318359375,
+        -834.21826171875,
+        -859.7570190429688
+      ],
+      "centroid_original_vertex_fade": 0.6666666666666666,
+      "centroid_current_fragment_fade": 0.5459948809098396,
+      "difference": 0.12067178575682702
+    },
+    {
+      "mesh": "MapGeo_Instance_62",
+      "material": "NVRMaterial_VertDirt",
+      "triangle": 19,
+      "native_vertex_y": [
+        -1142.226318359375,
+        -859.7570190429688,
+        -1162.7003173828125
+      ],
+      "centroid_original_vertex_fade": 0.3333333333333333,
+      "centroid_current_fragment_fade": 0.0,
+      "difference": 0.3333333333333333
+    },
+    {
+      "mesh": "MapGeo_Instance_62",
+      "material": "NVRMaterial_VertDirt",
+      "triangle": 20,
+      "native_vertex_y": [
+        -1162.7003173828125,
+        -859.7570190429688,
+        -816.6127319335938
+      ],
+      "centroid_original_vertex_fade": 0.6666666666666666,
+      "centroid_current_fragment_fade": 0.5364333169959536,
+      "difference": 0.13023334967071298
+    },
+    {
+      "mesh": "MapGeo_Instance_62",
+      "material": "NVRMaterial_VertDirt",
+      "triangle": 21,
+      "native_vertex_y": [
+        -714.0220336914062,
+        -856.4739379882812,
+        -1148.3018798828125
+      ],
+      "centroid_original_vertex_fade": 0.6666666666666666,
+      "centroid_current_fragment_fade": 0.9373406973578913,
+      "difference": 0.27067403069122464
+    },
+    {
+      "mesh": "MapGeo_Instance_62",
+      "material": "NVRMaterial_VertDirt",
+      "triangle": 26,
+      "native_vertex_y": [
+        -704.5052490234375,
+        -714.0220336914062,
+        -1148.3018798828125
+      ],
+      "centroid_original_vertex_fade": 0.6666666666666666,
+      "centroid_current_fragment_fade": 1.0,
+      "difference": 0.33333333333333337
+    },
+    {
+      "mesh": "MapGeo_Instance_62",
+      "material": "NVRMaterial_VertDirt",
+      "triangle": 32,
+      "native_vertex_y": [
+        -1148.3018798828125,
+        -1108.569580078125,
+        -704.5052490234375
+      ],
+      "centroid_original_vertex_fade": 0.3333333333333333,
+      "centroid_current_fragment_fade": 0.12874452402517456,
+      "difference": 0.20458880930815876
+    }
+  ],
+  "finding": "Original vertex shader clamps height factor before interpolation; current fragment reconstruction clamps interpolated world height. Straddling triangles differ.",
+  "next_action": "Transmit native clamped height factors through vertex outputs rather than recomputing clamp in fragment shaders. Actor base factors do not consume height.",
+  "limits": [
+    "Analytical barycentric centroid audit of actual routed position/index buffers; no framebuffer attribution or original D3D execution."
+  ],
+  "resolution": {
+    "updated_utc": "2026-10-05T04:25:15.859686+00:00",
+    "status": "vertex_interpolation_order_fixed_and_raster_verified_in_recorded_scope",
+    "receipt": "docs/native_fow_vertex_height_progress.json",
+    "baseline_difference_triangles": 2214,
+    "gpu_cases": 4452,
+    "maximum_error": 5.364418029785156e-07,
+    "limits": [
+      "Actual vertex/fragment raster interpolation with identical production native height helper; orthographic centroid fixtures from actual map triangles and explicit reciprocal-W perspective fixtures.",
+      "Original D3D, whole live geometry/morph/pose equivalence, full live perspective camera attribution and final color framebuffer attribution remain open."
+    ]
+  }
+}

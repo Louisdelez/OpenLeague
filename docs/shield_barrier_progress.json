@@ -1,0 +1,40 @@
+{
+  "updated_utc": "2026-10-03T02:38:59.760891+00:00",
+  "complete": false,
+  "server_sha256": "696911a3bd24d3230be2efd0dbcb28e1b5e47a0a79a081e2cd572339cf204b09",
+  "implemented": [
+    "General timed champion shields consumed after damage mitigation, with overflow to health",
+    "Shield expiry and clearing at death",
+    "Server-selected immutable two-slot summoner loadout",
+    "Barrier selectable in launcher; D/F commands and cooldown/shield HUD",
+    "Barrier 115 at level 1, 455 at level 18, two-second duration and verified native 210-second cooldown"
+  ],
+  "evidence": [
+    "barrier_network_validation.json",
+    "../data/4.20/barrier_rules.json",
+    "../logs/core-tests.log"
+  ],
+  "tests": {
+    "core": 59,
+    "protocol": 16,
+    "actual_barrier_combat": 10
+  },
+  "actual_q_absorbed": 87.059341,
+  "remaining": [
+    "Linear intermediate level scaling reconstructed from native endpoints, not recovered server script",
+    "Native historical account/map availability and cooldown modifiers",
+    "Typed/spell shields, per-ability stacking priority and refresh behavior",
+    "Shield use on non-champion units",
+    "Native particles/audio, icons and complete historical HUD",
+    "Visual and full end-to-end launcher interaction qualification",
+    "Other summoner spells remain unsupported rather than generic substitutes"
+  ],
+  "client_framebuffer": {
+    "path": "logs/render-barrier-final.png",
+    "sha256": "05d2a17c1fa025ad0b141202c580d5b6e9773400b669ee6d8369c69612d0091b",
+    "client_sha256": "1478aa744a1d72aef12d2fd0ee17d758c93a4638d1efa8542beb89368d0076e2",
+    "width": 1280,
+    "height": 800,
+    "observed": "D Barrier selected, F empty, zero shield amount readable, native map rendered; not a full VFX or launcher visual acceptance."
+  }
+}

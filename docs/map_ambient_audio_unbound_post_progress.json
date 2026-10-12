@@ -1,0 +1,32 @@
+{
+  "updated_utc": "2026-10-04T01:19:11.560061+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_unbound_post.py": "21954bfc8a3a658eb673c17fc410e4cf872031a48f4a709546b17d98ee30e484",
+    "data/4.20/audio_unbound_post_contract.json": "6913a995f5fd3ccdf554792c53e8de071ceffaf0221eeefb98f4309632c0740c",
+    "crates/core/src/audio_unbound_post.rs": "e442197ecb2246b28805a888b3de89ec5b1ddf369f3f2c4f677886a2b3c04818",
+    "crates/core/src/audio_event_post.rs": "1edfae2e505074b3f512c0c506d68dcb6f926ff41e734c732619a8305550e475",
+    "crates/core/src/lib.rs": "65fe80ba97e5131def141e0abc1bce64b2c00fddf5745b14773ad40834a75bdd",
+    "logs/native-audio-unbound-post-core-tests.log": "8b52af208fae770c60d598f02a654b3b33375a2be53cab346513fb8363a54fdb"
+  },
+  "native_unbound_launch_cases": 504,
+  "core_tests_passed": 236,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "ported": [
+    "706910 unbound scratch allocation/position/post/seek sequencing",
+    "explicit callback identities: bound704A40 versus unbound704A00",
+    "all-MAX position sentinel skips setter; partial sentinel does not",
+    "empty event preserves output, allocation failure clears output, post failure preserves object output",
+    "failed post marks scratch retired before optional linked End; allocated pool entry deferred cleanup bridge"
+  ],
+  "physical_voice_factory_implemented": false,
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false,
+  "limits": [
+    "Original706910 and ID getter7072F0 executed. Scratch creation706600, object position virtualC, linked End virtual4 and Wwise post/seek are explicit adapters.",
+    "All-MAX sentinel skips position; partial sentinel does not. Empty event preserves caller output; failed allocation clears it. Failed post preserves object output and marks scratch retired before linked End.",
+    "No actual audio queue, source registration, linked side effects, thread safety or audible playback measured. NaN/infinite age excluded.",
+    "Rust uses actual caller-supplied scratch/object identities and explicit backend commands. No host pointers or fabricated playing IDs.",
+    "Native factory705A10/constructor706C70/shared voice ownership, queue execution and audible mixing remain required. Standalone binaries unchanged."
+  ]
+}

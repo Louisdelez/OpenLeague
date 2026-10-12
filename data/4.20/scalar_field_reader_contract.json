@@ -1,0 +1,1816 @@
+{
+  "updated_utc": "2026-10-06T14:04:12.833780+00:00",
+  "complete": false,
+  "passed": true,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "reader_entry": "0x94cb60",
+  "cases": [
+    {
+      "name": "absent",
+      "fields": {},
+      "key": "e-rate",
+      "default": 100.0,
+      "returned": false,
+      "times": [],
+      "values": [],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "constant",
+      "fields": {
+        "e-rate": "5"
+      },
+      "key": "e-rate",
+      "default": 100.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        5.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "5",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "linear",
+      "fields": {
+        "e-rate": "5",
+        "e-rate1": "0 0",
+        "e-rate2": "1 1"
+      },
+      "key": "e-rate",
+      "default": 100.0,
+      "returned": true,
+      "times": [
+        0.0,
+        1.0
+      ],
+      "values": [
+        0.0,
+        5.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "5",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "0 0",
+          "hash": "0x3a8d009c"
+        },
+        {
+          "key": "e-rate2",
+          "value": "1 1",
+          "hash": "0x3a8d009d"
+        },
+        {
+          "key": "e-rate3",
+          "value": "",
+          "hash": "0x3a8d009e"
+        }
+      ]
+    },
+    {
+      "name": "no-base",
+      "fields": {
+        "e-rate1": "0 2",
+        "e-rate2": "1 4"
+      },
+      "key": "e-rate",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0,
+        1.0
+      ],
+      "values": [
+        6.0,
+        12.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "0 2",
+          "hash": "0x3a8d009c"
+        },
+        {
+          "key": "e-rate2",
+          "value": "1 4",
+          "hash": "0x3a8d009d"
+        },
+        {
+          "key": "e-rate3",
+          "value": "",
+          "hash": "0x3a8d009e"
+        }
+      ]
+    },
+    {
+      "name": "gap",
+      "fields": {
+        "e-rate": "5",
+        "e-rate1": "0 0",
+        "e-rate3": "1 1"
+      },
+      "key": "e-rate",
+      "default": 100.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        0.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "5",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "0 0",
+          "hash": "0x3a8d009c"
+        },
+        {
+          "key": "e-rate2",
+          "value": "",
+          "hash": "0x3a8d009d"
+        }
+      ]
+    },
+    {
+      "name": "incomplete-pair",
+      "fields": {
+        "e-rate": "5",
+        "e-rate1": "0"
+      },
+      "key": "e-rate",
+      "default": 100.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        5.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "5",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "0",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "duplicate",
+      "fields": {
+        "e-rate": "2",
+        "e-rate1": "0.5 1",
+        "e-rate2": "0.5 3"
+      },
+      "key": "e-rate",
+      "default": 100.0,
+      "returned": true,
+      "times": [
+        0.5,
+        0.5
+      ],
+      "values": [
+        2.0,
+        6.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "2",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "0.5 1",
+          "hash": "0x3a8d009c"
+        },
+        {
+          "key": "e-rate2",
+          "value": "0.5 3",
+          "hash": "0x3a8d009d"
+        },
+        {
+          "key": "e-rate3",
+          "value": "",
+          "hash": "0x3a8d009e"
+        }
+      ]
+    },
+    {
+      "name": "rgba-scale",
+      "fields": {
+        "e-rgba": "255",
+        "e-rgba1": "0 0",
+        "e-rgba2": "1 1"
+      },
+      "key": "e-rgba",
+      "default": 1.0,
+      "returned": true,
+      "times": [
+        0.0,
+        1.0
+      ],
+      "values": [
+        0.0,
+        1.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rgba",
+          "value": "255",
+          "hash": "0xe2778d69"
+        },
+        {
+          "key": "e-rgba1",
+          "value": "0 0",
+          "hash": "0x48d4cd08"
+        },
+        {
+          "key": "e-rgba2",
+          "value": "1 1",
+          "hash": "0x48d4cd09"
+        },
+        {
+          "key": "e-rgba3",
+          "value": "",
+          "hash": "0x48d4cd0a"
+        }
+      ]
+    },
+    {
+      "name": "rgba-absent-base",
+      "fields": {
+        "e-rgba1": "0 2",
+        "e-rgba2": "1 4"
+      },
+      "key": "e-rgba",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0,
+        1.0
+      ],
+      "values": [
+        6.0,
+        12.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rgba",
+          "value": "",
+          "hash": "0xe2778d69"
+        },
+        {
+          "key": "e-rgba1",
+          "value": "0 2",
+          "hash": "0x48d4cd08"
+        },
+        {
+          "key": "e-rgba2",
+          "value": "1 4",
+          "hash": "0x48d4cd09"
+        },
+        {
+          "key": "e-rgba3",
+          "value": "",
+          "hash": "0x48d4cd0a"
+        }
+      ]
+    },
+    {
+      "name": "rgba-case-sensitive",
+      "fields": {
+        "E-rgba": "255"
+      },
+      "key": "E-rgba",
+      "default": 1.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        255.0
+      ],
+      "lookups": [
+        {
+          "key": "E-rgba",
+          "value": "255",
+          "hash": "0xe2778d69"
+        },
+        {
+          "key": "E-rgba1",
+          "value": "",
+          "hash": "0x48d4cd08"
+        }
+      ]
+    },
+    {
+      "name": "map:Chaos_Spawn.troy:mist:e-rate",
+      "fields": {
+        "e-rate": "1"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        1.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "1",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:Chaos_Spawn.troy:mist:p-life",
+      "fields": {
+        "p-life": "4"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        4.0
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "4",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:Order_Spawn.troy:mist:e-rate",
+      "fields": {
+        "e-rate": "1"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        1.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "1",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:Order_Spawn.troy:mist:p-life",
+      "fields": {
+        "p-life": "4"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        4.0
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "4",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_01_Blue.troy:TT_Fire_Glow:e-rate",
+      "fields": {
+        "e-rate": "20"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        20.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "20",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_01_Blue.troy:TT_Fire_Glow:p-life",
+      "fields": {
+        "p-life": "0.5"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        0.5
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "0.5",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_01_Blue.troy:TT_Embers:e-rate",
+      "fields": {
+        "e-rate": "25"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        25.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "25",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_01_Blue.troy:TT_Embers:p-life",
+      "fields": {
+        "p-life": "0.5"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        0.5
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "0.5",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_01_Blue.troy:TT_Fire_01:e-rate",
+      "fields": {
+        "e-rate": "100"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        100.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "100",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_01_Blue.troy:TT_Fire_01:p-life",
+      "fields": {
+        "p-life": "0.75"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        0.75
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "0.75",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_01_Blue.troy:TT_Fire_02:e-rate",
+      "fields": {
+        "e-rate": "25"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        25.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "25",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_01_Blue.troy:TT_Fire_02:p-life",
+      "fields": {
+        "p-life": "1"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        1.0
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "1",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_01_Blue.troy:TT_Fire_Sub2:e-rate",
+      "fields": {
+        "e-rate": "50"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        50.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "50",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_01_Blue.troy:TT_Fire_Sub2:p-life",
+      "fields": {
+        "p-life": "1.5"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        1.5
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "1.5",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_02_Yellow.troy:TT_Fire_Glow:e-rate",
+      "fields": {
+        "e-rate": "20"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        20.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "20",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_02_Yellow.troy:TT_Fire_Glow:p-life",
+      "fields": {
+        "p-life": "0.5"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        0.5
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "0.5",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_02_Yellow.troy:TT_Embers:e-rate",
+      "fields": {
+        "e-rate": "25"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        25.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "25",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_02_Yellow.troy:TT_Embers:p-life",
+      "fields": {
+        "p-life": "0.5"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        0.5
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "0.5",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_02_Yellow.troy:TT_Fire_01:e-rate",
+      "fields": {
+        "e-rate": "100"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        100.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "100",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_02_Yellow.troy:TT_Fire_01:p-life",
+      "fields": {
+        "p-life": "0.75"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        0.75
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "0.75",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_02_Yellow.troy:TT_Fire_02:e-rate",
+      "fields": {
+        "e-rate": "25"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        25.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "25",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_02_Yellow.troy:TT_Fire_02:p-life",
+      "fields": {
+        "p-life": "1"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        1.0
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "1",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_02_Yellow.troy:TT_Fire_Sub2:e-rate",
+      "fields": {
+        "e-rate": "50"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        50.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "50",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_02_Yellow.troy:TT_Fire_Sub2:p-life",
+      "fields": {
+        "p-life": "1.5"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        1.5
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "1.5",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_03_Orange.troy:TT_Fire_Glow:e-rate",
+      "fields": {
+        "e-rate": "20"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        20.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "20",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_03_Orange.troy:TT_Fire_Glow:p-life",
+      "fields": {
+        "p-life": "0.5"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        0.5
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "0.5",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_03_Orange.troy:TT_Embers:e-rate",
+      "fields": {
+        "e-rate": "25"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        25.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "25",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_03_Orange.troy:TT_Embers:p-life",
+      "fields": {
+        "p-life": "0.5"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        0.5
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "0.5",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_03_Orange.troy:TT_Fire_01:e-rate",
+      "fields": {
+        "e-rate": "100"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        100.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "100",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_03_Orange.troy:TT_Fire_01:p-life",
+      "fields": {
+        "p-life": "0.75"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        0.75
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "0.75",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_03_Orange.troy:TT_Fire_02:e-rate",
+      "fields": {
+        "e-rate": "25"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        25.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "25",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_03_Orange.troy:TT_Fire_02:p-life",
+      "fields": {
+        "p-life": "1"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        1.0
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "1",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_03_Orange.troy:TT_Fire_Sub2:e-rate",
+      "fields": {
+        "e-rate": "50"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        50.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "50",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_03_Orange.troy:TT_Fire_Sub2:p-life",
+      "fields": {
+        "p-life": "1.5"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        1.5
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "1.5",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_04_Purple.troy:TT_Fire_Glow:e-rate",
+      "fields": {
+        "e-rate": "20"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        20.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "20",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_04_Purple.troy:TT_Fire_Glow:p-life",
+      "fields": {
+        "p-life": "0.5"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        0.5
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "0.5",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_04_Purple.troy:TT_Embers:e-rate",
+      "fields": {
+        "e-rate": "25"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        25.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "25",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_04_Purple.troy:TT_Embers:p-life",
+      "fields": {
+        "p-life": "0.5"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        0.5
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "0.5",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_04_Purple.troy:TT_Fire_01:e-rate",
+      "fields": {
+        "e-rate": "100"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        100.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "100",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_04_Purple.troy:TT_Fire_01:p-life",
+      "fields": {
+        "p-life": "0.75"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        0.75
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "0.75",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_04_Purple.troy:TT_Fire_02:e-rate",
+      "fields": {
+        "e-rate": "25"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        25.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "25",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_04_Purple.troy:TT_Fire_02:p-life",
+      "fields": {
+        "p-life": "1"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        1.0
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "1",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_04_Purple.troy:TT_Fire_Sub2:e-rate",
+      "fields": {
+        "e-rate": "50"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        50.0
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "50",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Fire_04_Purple.troy:TT_Fire_Sub2:p-life",
+      "fields": {
+        "p-life": "1.5"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        1.5
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "1.5",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Ghosts_01.troy:TT_Firefly_01:e-rate",
+      "fields": {
+        "e-rate": "0.5"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        0.5
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "0.5",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Ghosts_01.troy:TT_Firefly_01:p-life",
+      "fields": {
+        "p-life": "5"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        5.0
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "5",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Ghosts_01.troy:TT_Ghost:e-rate",
+      "fields": {
+        "e-rate": "0.2"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        0.20000000298023224
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "0.2",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Ghosts_01.troy:TT_Ghost:p-life",
+      "fields": {
+        "p-life": "10"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        10.0
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "10",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Ghosts_01.troy:TT_Ghost2:e-rate",
+      "fields": {
+        "e-rate": "0.05"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        0.05000000074505806
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "0.05",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Ghosts_01.troy:TT_Ghost2:p-life",
+      "fields": {
+        "p-life": "10"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        10.0
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "10",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Mist_01.troy:TT_Mist_01:e-rate",
+      "fields": {
+        "e-rate": "0.2"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        0.20000000298023224
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "0.2",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Mist_01.troy:TT_Mist_01:p-life",
+      "fields": {
+        "p-life": "10"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        10.0
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "10",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Mist_02.troy:TT_Mist_01:e-rate",
+      "fields": {
+        "e-rate": "0.1"
+      },
+      "key": "e-rate",
+      "default": 0.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        0.10000000149011612
+      ],
+      "lookups": [
+        {
+          "key": "e-rate",
+          "value": "0.1",
+          "hash": "0xdf9534d5"
+        },
+        {
+          "key": "e-rate1",
+          "value": "",
+          "hash": "0x3a8d009c"
+        }
+      ]
+    },
+    {
+      "name": "map:TT_Mist_02.troy:TT_Mist_01:p-life",
+      "fields": {
+        "p-life": "20"
+      },
+      "key": "p-life",
+      "default": 3.0,
+      "returned": true,
+      "times": [
+        0.0
+      ],
+      "values": [
+        20.0
+      ],
+      "lookups": [
+        {
+          "key": "p-life",
+          "value": "20",
+          "hash": "0xc036f6a6"
+        },
+        {
+          "key": "p-life1",
+          "value": "",
+          "hash": "0x442cb30b"
+        }
+      ]
+    }
+  ],
+  "original_instruction_addresses": 458,
+  "adapters": [
+    "Supplied field lookup 8B0750, string storage 564C20, numbered-key formatting 5D74C0, CRT sscanf 993BA0 for explicitly supplied whitespace-separated finite numbers, allocation/free/cookie. Native hashing, reader branches, scaling and vector appends execute."
+  ],
+  "limits": [
+    "Original INIBIN lookup/cache and CRT lexical parsing not executed. Malformed lexical input, float extremes and lookup flags unqualified.",
+    "Numbered key formatter output supplied; original formatting implementation not qualified.",
+    "Native execution of reader is not ordinary emitter integration."
+  ]
+}

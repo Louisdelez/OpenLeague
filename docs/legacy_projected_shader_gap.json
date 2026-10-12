@@ -1,0 +1,21 @@
+{
+  "hashes": {
+    "data/4.20/shaders/Environment/UNLIT_DECAL_VS.vs_2_0": "E3E2306793D831B8B3D496A08B36155B506F77E0C739761B81B680B7B45DE260",
+    "logs/receiver_95bff0.txt": "72DF761921AFF7DD6F76C6B121A582AD9C01A21784ECC72286B8A04233731D93",
+    "assets/shaders/projected_terrain.wgsl": "2DD06E49057D1EEB7C66E9247A161B0A2C9958136790DD7E9832CCCE7B368D46",
+    "data/4.20/shaders/Environment/UNLIT_DECAL_PS.ps_2_0": "63F3CE7D0B4C5E3EADB1F5BE303F553455AEA47A74D3F2C9ECEE041CECE59273"
+  },
+  "complete": false,
+  "next_action": "Recover native c227 upload and color sampler1 binding/producer; port actual legacy shader inputs before whole-geometry change.",
+  "findings": [
+    "Legacy selector5 shader table names Environment_UNLIT_DECAL_VS/PS; table selection at95C311/95C34D.",
+    "UNLIT_DECAL VS uses c233 world-to-decal UV, flips resulting Z with1-Z, computes vertex height fade fromc227.",
+    "UNLIT_DECAL PS samples diffuse s0 and color s1 atc2.xy, multiplies both then height fade on alpha and FOW on RGB; no clip/discard in these source files.",
+    "Type5 branch95C5ED..95C744 uploads matrixc233 and pixel constants0..2; c2.xy copies matrix object offsets40/44.",
+    "Current Rust projected_terrain shader samples diffuse alone and documents SIMPLE_PROJECTED; full legacy material behavior remains mismatched."
+  ],
+  "kind": "static_shader_and_dispatch_discovery",
+  "limits": [
+    "Static shader sources/dispatch only; runtime overrides, color texture producer, c227 and clipping render states not yet qualified."
+  ]
+}

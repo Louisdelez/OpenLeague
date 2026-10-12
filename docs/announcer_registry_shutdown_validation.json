@@ -1,0 +1,53 @@
+{
+  "saved_utc": "2026-10-10T07:45:28.880410+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "audio_tests_passed": 647,
+  "filtered_tests_not_run": 480,
+  "isolated_production_tests_passed": 76,
+  "native_shutdown_calls_ported": 64,
+  "native_dynamic_free_events_ported": 252,
+  "native_actor_registry_composition_calls_prepared": 576,
+  "contracts": {
+    "audio_announcer_registry_shutdown_contract.json": {
+      "cases": 32,
+      "sha256": "69d74efa8a9e4bd00ca7085b8169d390003dd67598ba2a5773656c7abf882ad5"
+    },
+    "audio_announcer_shutdown_routes_contract.json": {
+      "cases": 12,
+      "sha256": "a85d737b52c9906ce9cb5771ab0b5096cedd30cf6e8f265946dffceb68e53ed6"
+    },
+    "audio_announcer_actor_registry_composition_contract.json": {
+      "cases": 288,
+      "sha256": "bd6c00a60549728bf2db704e54a087adae718d924893132b8ea487f283503046"
+    }
+  },
+  "regression_log_sha256": "c83fcdc3b8db531e96e0a346be1be994785f72a53d8d00d5e5909ebd3a9ecb42",
+  "isolated_log_sha256": "1a2575b4e93b4d8e36435dbba2ff4235b692e4a76105f4cc3363c681e4aa4450",
+  "test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_core-5b2a9def275dcedd.exe",
+  "test_executable_sha256": "38fb4a125f012a8d1f846fa70e31467795e8c824284445bb3f649f203b614520",
+  "source_hashes": {
+    "crates/core/src/audio_announcer_registry_shutdown.rs": "c34c73f620e6464274b24390ff1bf26a79201ba763ef1a7852a2dc1bcfad2aba",
+    "crates/core/src/lib.rs": "53dd07e395b1e147a9854e2e07f2e7cc61ecce926c4c1469468ecc04a3bea6c3",
+    "tools/announcer_registry_shutdown_production_tests.rs": "1345b907222f1cf8a9909fe06c09e63ff053d00a3e7fb6cedb1fea532955be5c",
+    "tools/qualify_registry_shutdown.py": "cfe08ef76f62f1a85b9f2c50e18a53f4dc9fabc6976330ad89018a2d0abae9a0",
+    "tools/qualify_shutdown_routes.py": "9e5487098ca1904cb62587de6c25076379cd67c3693cc4a4606a9c2a0606966a",
+    "tools/qualify_actor_registry_composition.py": "5787fe24b776dc9a6e67b6b27f0406a2f2ae02a4c02322bd8b3c82932c1926f2"
+  },
+  "behavior": [
+    "Original6653B0/5DE550/5DEAD0 normal-return shutdown ported: buckets freed first, whole list reset before node frees, sentinel and manager freed last, null manager and initialization flag1 published even on repeated shutdown.",
+    "64 native shutdown calls matched using actual owned Rust allocations and32 lifetimes, including empty/grown tables and standard/custom free routes. Released memory is inaccessible in Rust; final manager bytes compared from pre-release capture, never use-after-free reads.",
+    "252 actual native free events matched across12 lifetimes with callbacks changing route/context. Standard node route remains cached; custom node route refreshes after callback; sentinel and manager deallocator selection remains fresh. Failed node free retains preceding bucket/list reset and published manager."
+  ],
+  "limits": [
+    "Normal-return free callbacks remain primitive boundaries. Native throwing unwinding, live engine allocator and actor ownership teardown are not yet qualified.",
+    "576 complete native actor registration calls newly qualified with actual primary, secondary and owner helper bodies composed, not helper-result adapters. Their unified Rust ownership composition is the next implementation.",
+    "Native virtual ID getter, physical metadata fixture fields, allocation/lock imports and returning diagnostics are supplied. Live world actor/metadata ownership, queue priorities, mixing and audible playback remain incomplete. Full game scope preserved."
+  ],
+  "next_action": "Implement unified actor registration sharing owned storage and actual primary/secondary/owner helpers against288 native lifetimes576 calls in audio_announcer_actor_registry_composition_contract.json. Preserve two fresh ID getters, metadata access after callbacks, prior null vs nonnull nodes, sentinel-owner skip and repeated owner-failure diagnostics. Then connect live world ownership, identity unregister/teardown, normal announcement queue, priorities, mixing and playback. Preserve24domains114tasks37requirements."
+}

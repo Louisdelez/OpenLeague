@@ -1,0 +1,98 @@
+{
+  "updated_utc": "2026-10-05T09:15:58.454589+00:00",
+  "complete": false,
+  "client_tests_passed": 180,
+  "client_build_passed": true,
+  "live_grass_mask_integrated": false,
+  "gpu": {
+    "adapter": "NVIDIA GeForce RTX 3060",
+    "backend": "Vulkan",
+    "channels_checked": 2097152,
+    "complete": false,
+    "covered_pixels": 196608,
+    "height": 512,
+    "limits": [
+      "Actual Vulkan raster uses recovered decoded original brush, native quad parameter helper and ported native vertex/pixel shader expressions.",
+      "Reset point/no-mip filters, quad clamp addressing, BGRA8 target and clear color have native API evidence. Native API0 screen-matrix arithmetic shared. Native2D viewport helper and recovered24byte vertices/4index triangle strip shared. Native constant register encoding c0..c6 shared. Later scene filter inheritance, API selection/clip bridge and declaration API creation remain qualification adapters.",
+      "CPU expected pixels cover copied alpha, preserved outside clear and overlapping last-write order; no original D3D framebuffer comparison or full historical filtered precision acceptance.",
+      "Not connected to live actors/camera or normal grass pass; all game domains remain unfinished."
+    ],
+    "native_constant_bytes": 112,
+    "native_d3d_format": 21,
+    "native_quad_indices": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "native_reset_d3d_filters": [
+      1,
+      1,
+      0
+    ],
+    "native_screen_matrix_api": 0,
+    "native_vertex_stride": 24,
+    "native_viewport_applied": true,
+    "overwritten_pixels": 16384,
+    "passed": true,
+    "pixels_checked": 524288,
+    "production_parameters": "crates/client/src/grass_quad.rs",
+    "production_shader": "assets/shaders/native_grass_mask.wgsl",
+    "quad_draws": 4,
+    "target_format": "Bgra8Unorm",
+    "width": 1024
+  },
+  "native_constant_cases": 288,
+  "native_constant_api_submissions": 1152,
+  "native_sampler_api_submissions": 1152,
+  "native_constant_addresses": 427,
+  "native_declaration_api_cases": 3,
+  "native_declaration_api_addresses": 166,
+  "native_constant_encoder_shared": true,
+  "visual_inspection_required": false,
+  "findings": [
+    "Originalquadtexturebinding983CB0andfallbackshaderselector9844C0execute1728cases withactualdriver9C3050/9C30A0/9C3110andD3DSetTextureboundary. Shaderoverride true/false, missing/valid shader registry andsourcecontext/default paths preserve inheritedfilters.",
+    "Nativefiltertranslation36cases: abstract0/1/2mapsD3D0/1/2; abstract3maps4, notanisotropic3. RustacceptsMAG/MINpoint/linear andmipNONE/POINT/LINEAR; unsupportedvalues expliciterror.",
+    "Existing nativequadconstant/viewport/buffers retained; GPU rerun remains resetpoint/no-mip profile, so linearGPUfidelity notclaimed."
+  ],
+  "limits": [
+    "OpaqueCOMrefcount/GetInterface boundaries supplyhandles; ownershipandactualGPUtexturevalidity notqualified.",
+    "Upstreammaskpass shadername producer/compiledprogramflush and fullscene inheritedfilterstate remainopen.",
+    "Linear/mipdescriptor translation checked againstnativevalues, but actualfilteredGPU pixels notyetqualified; currentGPUprobe usesresetpointfilters.",
+    "ActualactorAABB/eligibility/camera and WALL_OF_GRASSnormalintegration remainopen. No currentnormalmatchcapture or sixclientvictory/results; all24domains unfinished."
+  ],
+  "next_actions": [
+    "Qualify upstreammaskshader/setup and compiledprogramflush; establish actual inheritedfilters atmaskdraw and validate linearGPU sampling whenused.",
+    "Resolve actualactorAABB/eligibility and camera/viewportproviders; connectmaskandWALL_OF_GRASS into normalMap10 andinspectactualmatchpixels.",
+    "Continue all24domains and sixclientvictory/results, remainingkits/services/delivery."
+  ],
+  "native_bind_filter_cases": 1728,
+  "native_filter_translation_cases": 36,
+  "inherited_point_linear_ported": true,
+  "linear_gpu_qualified": false,
+  "files_sha256": {
+    "crates/client/src/grass_pass_state.rs": "5f0540e45c3dcac2b246028b75f762894bfffa6e63965590c88ee70042ed16ed",
+    "data/4.20/grass_bind_filter_contract.json": "25a2cbc3df6a9a7202183376513b21fa954d5d6232e34356fe2aa9cc2ef0d3e2",
+    "data/4.20/grass_filter_translation_contract.json": "89ed8aa4e3f0a3d550b6e4a0965264960c0dd5cae74626bf0e06d908b05a1c6a",
+    "crates/client/src/grass_constants.rs": "1a565621ce0785b005493ba0bba76ba143888b2409244658e04d60b24580c594",
+    "crates/client/src/main.rs": "247bd374ab2bfdea2def91c8b4870f93ca78383b8304929f1a9c0a48c1c253d7",
+    "crates/client/examples/grass_mask_gpu_probe.rs": "c68fed98c434d1b102bd12be71bfa0eacb5cde71a74490a2abaa6eba87dcf726",
+    "assets/shaders/native_grass_mask.wgsl": "96982bf61ce03b6d499bfd5cbfc5e8ed254ea0134da93a5d61031fd16352bece",
+    "data/4.20/grass_constant_upload_contract.json": "92b504241a1b6872222a9a23afa56fa82bd032c9566b52a916196c85a0a2359e",
+    "data/4.20/grass_declaration_api_contract.json": "77133767d30f5dd8fa53ce39c8675f51a2fcbdf549fc5230019c03a178d6f27c",
+    "logs/grass-inherited-filter-tests.log": "4fc63b4e0d366d62d9c329bbfa5b62b20be439de062248be17fd0048d9eb617f",
+    "logs/grass-inherited-filter-build.log": "1b44d9f27c11e555e61a848672f37b861f80b16eb7c63cbb114bd14528bf2abf",
+    "logs/grass-mask-native-inherited-gpu.log": "f3e8470beb5b05cf180b2145886b98b5734791289bf640850ab4fefed76adfd5",
+    "logs/grass-mask-gpu.json": "ba4de12f0105704e5033cecf75e074d626280017923df75eedd7fbf7534dae9f",
+    "logs/grass-mask-gpu.rgba": "5f9426d1740801a05f8749f50c0e8a6326f0c3d2a084d5830e86011a85800005",
+    "logs/grass-mask-native-inherited.png": "eb152ec5387f48d0d3faa77da9340a6cbeaf0a4665b1692400febbed59bb3ce9",
+    "logs/grass-mask-native-inherited-alpha.png": "a05a91709a41da49f4d4d6e526a2170ec8d6fed76dbf01b890a053197a94d15e",
+    "target/debug/openleague-client.exe": "d7c267381c9baf4f06c69821aa21a1ac3688a45d2de14e92c930bb0390a80186",
+    "target/debug/examples/grass_mask_gpu_probe.exe": "6a9ba652af913b9279a560acd99629e53dfa0e26aa3284458fa1b3343f2133e2"
+  },
+  "visual_inspection": {
+    "inspected_utc": "2026-10-05T09:16:10.629811+00:00",
+    "path": "logs/grass-mask-native-inherited-alpha.png",
+    "observation": "Viewed actual diagnostic alpha image: three circular gradients; smaller rectangular brush overwrites first; exterior white. Diagnostic target only, no normalmatch acceptance."
+  }
+}

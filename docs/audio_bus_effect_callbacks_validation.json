@@ -1,0 +1,57 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T16:04:51.712922+00:00",
+  "change": [
+    "Port B04B80/B0F960/B0F9C0 target selection, ordered duplicates, root descriptor binding versus per-voice Bus binding and identified mode2 exclusion. B270B0 refresh remains mandatory and receives mutable target state.",
+    "Port B03D40/B04BC0 processing predicate, gain dispatch/cacheBC/C0/C4 updates and recursion gated by child group words30/32. Graph/resource/gain operations remain mandatory; reject unresolved/cyclic active hierarchy.",
+    "Connect gain/cache and slot callbacks to effects reader with actual source and target application. Supply the live updated effect Cache to changed callback so refresh sees current IDs, then copy actual Bus changes back from graph."
+  ],
+  "validation": {
+    "audio_regression_tests_passed": 284,
+    "failed": 0,
+    "new_targeted_tests_passed": 3,
+    "native_slot_dispatch_cases": 960,
+    "native_changed_hierarchy_cases": 3456,
+    "native_reader_all_callbacks_cases": 1440,
+    "comparison": "Standalone callback dispatch and exact200-byte descendant buses with gain/callback order; whole reader exact200-byte Bus,36-byte effect cache,20-byte source and1280-byte targets, result/cursor/remaining and allocation/change/gain/slot/refresh/mask order.",
+    "session": 95681,
+    "terminal_exit_code": 0,
+    "log": "logs/audio-bus-effects-callbacks-composition-tests.log",
+    "preparatory_native_gain_aggregation_cases": 3456
+  },
+  "sha256": {
+    "crates/core/src/audio_bus_effect_slot_dispatch.rs": "ea285f1094b9347c2e5500e39176c1dcee623a5b8d76f74c9caedeb32054e4ad",
+    "crates/core/src/audio_bus_effects_changed.rs": "5bb5ae1f507e004f6126ae9b91550d28266c5ed46b94f3505fcbc63a12a8bb84",
+    "crates/core/src/audio_bus_effect_callbacks_composition_test.rs": "67310cf341db61ad39e7718793f02e5d2bdd138390d89673d6783f7496c83d1d",
+    "crates/core/src/audio_bus_effects_bank.rs": "57efc06ca04ff9e4ea57c94f43b199f5d58ecf72fc34b40138d2a9dcb4f57a41",
+    "crates/core/src/audio_bus_source_mask.rs": "d40664d34770fcf6af0c98db5c4a1e6ac210e537c63720743e0aa91aa89f3e13",
+    "crates/core/src/lib.rs": "619394083822c4ae893f82853aa9d6f11c8aec284d79ae9273c13d9210336f5f",
+    "tools/probe_native_audio_bus_effects_callbacks_composition.py": "a1353279564de8c06353779d1102d8923952f3b0670b1f9c698d5f982e830acc",
+    "tools/probe_native_audio_bus_gain_aggregation.py": "b1987a7413a4d17fcc314161bb36343fd59623773d292028db576d60888671c3",
+    "data/4.20/audio_bus_effect_slot_dispatch_contract.json": "ac40d3fbb44fc50c3d943aff9b0e099dc7ca8ca28f30add96f925729efd688a7",
+    "data/4.20/audio_bus_effects_changed_contract.json": "dd87fb1357dba56ff96193e9afe357206b8bd6a71dd9288460444e0e5a396b43",
+    "data/4.20/audio_bus_effects_callbacks_composition_contract.json": "6005af5ad8117b7939e9ad5dbcdd754ed692082e63700b69851df172282e5d60",
+    "data/4.20/audio_bus_gain_aggregation_contract.json": "9ca9bd26af0f85b4e36ae44822e1d97c8ad1c042011a9111350dd8f702912875",
+    "logs/audio-bus-effect-callbacks-tests.log": "72e661a366674cc5b4554806b2c43a0b1ac4cc33a13a144cc6981f1a94177a86",
+    "logs/audio-bus-effects-callbacks-composition-tests.log": "a4de343cc10c4f9477e69adc043a5b465de3355d2e7357a1c8692b42d737a77f",
+    "logs/audio-bus-effects-callbacks-composition-probe.log": "7fcd831976d7d7582605f93df343f52aa81c53bd87d92b5052a765fe93c35f11",
+    "logs/audio-bus-gain-aggregation-probe.log": "810f514beb20fb2fbe16495ca8f3513595a2d619da4f0a74c0f4abb203f6d773",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "e197db47d7993b8ace4435bcb694de6c2a051ca04b0b8c757976a6fb7e7627c9"
+  },
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "interfaces": [
+    "Actual reader and three callbacks CC/84/DC plus target mask application execute in reference. Gain evaluation B02CE0, gain application B0EC10/B0EBB0 and effect resource refresh B270B0 remain supplied interfaces.",
+    "Gain aggregation preparation executes actual B02CE0/B03610 static/source range-minimum/list sum/baseline/parent recursion. State AFEF40 and RTPC B11040 are mandatory explicit input interfaces, not executed here."
+  ],
+  "findings": [
+    "Root slot binding passes the primary Bus variable by indirection; per-voice binding passes voice+4D0. Mode2 exclusion applies only to identified dispatch.",
+    "Gain cache processing depends on effects/channel mask/flags/parent; after clearing C4bit0 refresh writesBC/C0 and restores bit0 before active-child propagation.",
+    "B02CE0 combines state/static/RTPC/source-range first value, linked-list values with baseline comparison and gated parent recursion; traverse1 bypasses the parent processing stop. Mixed SSE/f32 and x87 parent accumulation require preserving native rounding in next port."
+  ],
+  "limits": [
+    "Actual B02CE0 gain evaluator, B0EC10/B0EBB0 gain application and B270B0 resource replacement remain incomplete; successful test providers do not prove DSP.",
+    "Slot/gain callback composition uses constructed single-root reader resource graphs; normal shared factory/cache/voice ownership, binding/smoothing and lifecycle remain open.",
+    "State and RTPC full consumer composition must replace interfaces in gain aggregation preparation.",
+    "Remaining bank readers and audible/mixing/device acceptance stay incomplete; no normal client or full-game qualification claimed."
+  ]
+}

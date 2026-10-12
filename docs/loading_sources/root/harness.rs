@@ -1,0 +1,30 @@
+#![allow(dead_code)]
+#[path="E:/OpenLeague/crates/core/src/audio_announcer_active_service.rs"] mod audio_announcer_active_service;
+#[path="E:/OpenLeague/crates/core/src/audio_announcer_descriptor_insert.rs"] mod audio_announcer_descriptor_insert;
+#[path="E:/OpenLeague/crates/core/src/audio_announcer_metadata_callbacks.rs"] mod audio_announcer_metadata_callbacks;
+#[path="E:/OpenLeague/crates/core/src/audio_announcer_object_lookup.rs"] mod audio_announcer_object_lookup;
+#[path="E:/OpenLeague/crates/core/src/audio_announcer_owner_component_destructor.rs"] mod audio_announcer_owner_component_destructor;
+#[path="E:/OpenLeague/crates/core/src/audio_announcer_owner_control.rs"] mod audio_announcer_owner_control;
+#[path="E:/OpenLeague/crates/core/src/audio_announcer_owner_metadata.rs"] mod audio_announcer_owner_metadata;
+#[path="E:/OpenLeague/crates/core/src/audio_announcer_pending_service.rs"] mod audio_announcer_pending_service;
+#[path="E:/OpenLeague/crates/core/src/audio_announcer_registry_init.rs"] mod audio_announcer_registry_init;
+#[path="E:/OpenLeague/crates/core/src/audio_announcer_registry_insert.rs"] mod audio_announcer_registry_insert;
+#[path="E:/OpenLeague/crates/core/src/audio_announcer_registry_remove.rs"] mod audio_announcer_registry_remove;
+#[path="E:/OpenLeague/crates/core/src/audio_announcer_registry_shutdown.rs"] mod audio_announcer_registry_shutdown;
+#[path="E:/OpenLeague/crates/core/src/audio_announcer_secondary_registries.rs"] mod audio_announcer_secondary_registries;
+#[path="E:/OpenLeague/crates/core/src/audio_announcer_secondary_unregister.rs"] mod audio_announcer_secondary_unregister;
+#[path="E:/OpenLeague/crates/core/src/audio_announcer_service_activation.rs"] mod audio_announcer_service_activation;
+#[path="E:/OpenLeague/crates/core/src/audio_announcer_service_teardown.rs"] mod audio_announcer_service_teardown;
+#[path="E:/OpenLeague/crates/core/src/audio_replay_events.rs"] mod audio_replay_events;
+#[path="E:/OpenLeague/crates/core/src/audio_replay_manager_control.rs"] mod audio_replay_manager_control;
+#[path="E:/OpenLeague/crates/core/src/audio_replay_object_commands.rs"] mod audio_replay_object_commands;
+#[path="E:/OpenLeague/crates/core/src/audio_replay_object_manager.rs"] mod audio_replay_object_manager;
+#[path="E:/OpenLeague/crates/core/src/audio_replay_packet95.rs"] mod audio_replay_packet95;
+#[path="E:/OpenLeague/crates/core/src/audio_replay_shared_pair.rs"] mod audio_replay_shared_pair;
+#[path="E:/OpenLeague/crates/core/src/audio_replay_stream.rs"] mod audio_replay_stream;
+#[path="E:/OpenLeague/crates/core/src/audio_replay_stream_running.rs"] mod audio_replay_stream_running;
+#[path="E:/OpenLeague/crates/core/src/audio_replay_transport_startup.rs"] mod audio_replay_transport_startup;
+#[path="E:/OpenLeague/crates/core/src/audio_replay_transport_thread.rs"] mod audio_replay_transport_thread;
+#[path="E:/OpenLeague/crates/core/src/audio_replay_metadata.rs"] mod audio_replay_metadata;
+#[path="audio_loading_metadata.rs"] mod audio_loading_metadata;
+fn audio_test_fixture(path:&str)->String {let n=std::path::Path::new(path).file_name().unwrap();let root=if n=="loading_metadata_probe.json"{"E:/mapslol3v3/loading_metadata_stage"}else{"E:/OpenLeague/data/4.20"};std::fs::read_to_string(std::path::Path::new(root).join(n)).unwrap()}

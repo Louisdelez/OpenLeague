@@ -1,0 +1,11 @@
+from pathlib import Path
+r=Path('E:/OpenLeague')
+s=(r/'tools/probe_fow_team_filter_generated.py').read_text(encoding='utf-8')
+s=s.replace('for source_tag,presence,actor_tag,flag_ad,flag_118,flag_24,flag_2c,applied in itertools.product(', 'for restricted,descriptor_matches,source_tag,presence,actor_tag,flag_ad,flag_118,flag_24,flag_2c,applied in itertools.product([False,True],[False,True],')
+s=s.replace('(actor+0x17c,descriptor)', '(actor+0x17c,descriptor),(descriptor+0x34,66 if descriptor_matches else 67)')
+s=s.replace(' write32(context,0x71007000)', ' write32(context,0x71007000);write32(player+0x5e8,0x800 if restricted else 0);write32(player+0x17c,0x71007800);write32(0x71007834,66);u.mem_write(0x2d7c070,bytes([restricted]))')
+s=s.replace('cases.append(dict(source_tag=source_tag,', 'cases.append(dict(restricted=restricted,descriptor_matches=descriptor_matches,source_tag=source_tag,')
+s=s.replace('fow_team_filter_contract.json','fow_restricted_filter_contract.json')
+s=s.replace('actor/descriptor flag producers and constructors remain unqualified.', 'player+5E8 bit11 supplied; actor/descriptor flags and descriptor34 identifiers supplied. Original restricted-view comparison executes; field producers and constructors remain unqualified.')
+(r/'tools/probe_fow_restricted_filter_generated.py').write_text(s,encoding='utf-8')
+exec(compile(s,'native restricted player view','exec'))

@@ -1,0 +1,42 @@
+{
+  "updated_utc": "2026-10-04T21:55:08.332577+00:00",
+  "complete": false,
+  "client_tests_passed": 109,
+  "native_sequences": 192,
+  "native_removals": 576,
+  "native_addresses": 1716,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Original pending heap insertion6BBFB0, pop adjustment6BD740 and full view callback6B4860 execute across192sequences/576removals, including duplicates, absent identities, equal priorities, NaN, signed zeros and infinity.",
+    "Pending entries are raw source identities plus opaque32bit float priorities. Native removal drains the heap, drops every matching identity, then reinserts retained entries; repeated observer callbacks can reorder tied priorities.",
+    "Rust PendingSources and CircleView integration match initial and per-removal heap identities/priority bits, visibility counts/pixels, manager compaction, callback applied flags and reference expiration.",
+    "Final native weak-control release requests deallocation after all576removals; allocator/free/mutex boundaries explicitly adapted."
+  ],
+  "limits": [
+    "Allocator/free/mutex boundaries adapted as in single-source probe; event tree and shared receiver controls supplied. Deallocation requests recorded without unmapping memory.",
+    "Subscribers target the same view; source-global applied flag prevents a second decrement. Pending heap insertion/popping/rebuild executes original6BBFB0/6BD740 with raw source identity and supplied priority bits; priority producers and scheduling remain unknown. Distinct views, concurrency and full view registration remain unqualified.",
+    "No live gameplay/GPU binding or full game qualification.",
+    "Source priority producers, enqueue scheduling, complete view initialization/registration, multiple distinct views and concurrency remain unknown.",
+    "CircleView callback is ported and qualified against fixtures; it is not yet driven by ordinary gameplay or bound to GPU fog.",
+    "109client tests are current. Earlier427core tests/10UDPchecks are unchanged-core/server evidence. Current executable rebuilt but not graphically checked for this change. All24domains remain unfinished."
+  ],
+  "next_actions": [
+    "Qualify complete native view initialization/subscription and source priority/enqueue producers.",
+    "Connect native source creation/update/removal to ordinary entities, authoritative mask filtering and GPU fog; verify the rebuilt gameplay executable."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_pending_release_contract.json": "9de57ef1e6c18c6bdb1c3431c84c98f82eecbcd07d4b0c13faa5b94b6e7965dd",
+    "tools/probe_fow_pending_release.py": "de2805684289d1efb947a0bdeb09d1783a1472b0551640809ccb477f8853c0d5",
+    "tools/probe_fow_pending_release_generated.py": "1689f23467a78153966133e011f930aeeab31089480e39723d7704199fe955d2",
+    "tools/probe_fow_multi_source_release.py": "df2f5e93cd8304d107f03015d3de3b222ae76c00c6ad76b5d6359cbafa601c32",
+    "crates/client/src/fow_pending.rs": "d33cf09dcbd76e152c3d46629f3d024510e7a7f83bce3bda12d0116d6adc6e5a",
+    "crates/client/src/fow_source_factory.rs": "96a1bbc80580178e42099426ecc169eb54675d44a5f1b3aad2ea67e232e20229",
+    "crates/client/src/main.rs": "06e6961306053acf88e21435bca7a245931e977554c082a006bdfc183fc247ae",
+    "logs/native-pending-source-tests.log": "e171a25cae00703e2e6dd3d89e22a09cc5b7c91f1546c4e8eab16c4e772fe878",
+    "logs/native-pending-view-tests.log": "84a774c17d9077f03e03ecef67a232108fb2b0a621ec44852d2bcb46cb4c1603",
+    "logs/native-pending-view-build.log": "7370e4d3a25b936bf922c3963a037797944cf2a2aa8106fbb4a04fab83c5879d",
+    "target/debug/openleague-client.exe": "e41a2c5558b1c633e3f2b490893dc50650fc3c660dc20b7e695b70ac1b57b092"
+  },
+  "client_build_passed": true
+}

@@ -1,0 +1,5380 @@
+
+FUNCTION 0x100f2c22
+0x100f2c22 push ebp
+0x100f2c23 mov ebp, esp
+0x100f2c25 cmp dword ptr [ebp + 0xc], 1
+0x100f2c29 jne 0x100f2c30
+0x100f2c2b call 0x100ff70c
+0x100f2c30 push dword ptr [ebp + 0x10]
+0x100f2c33 push dword ptr [ebp + 0xc]
+0x100f2c36 push dword ptr [ebp + 8]
+0x100f2c39 call 0x100f2c45
+0x100f2c3e add esp, 0xc
+0x100f2c41 pop ebp
+0x100f2c42 ret 0xc
+CALLS [{"pc": "0x100f2c2b", "target": "0x100ff70c", "import": null, "text": "0x100ff70c"}, {"pc": "0x100f2c39", "target": "0x100f2c45", "import": null, "text": "0x100f2c45"}]
+STRINGS {}
+
+FUNCTION 0x1003e3d0
+0x1003e3d0 push ebp
+0x1003e3d1 mov ebp, esp
+0x1003e3d3 push dword ptr [ebp + 0x14]
+0x1003e3d6 mov ecx, 0x1019846c
+0x1003e3db call 0x1003e250
+0x1003e3e0 pop ebp
+0x1003e3e1 ret 
+CALLS [{"pc": "0x1003e3db", "target": "0x1003e250", "import": null, "text": "0x1003e250"}]
+STRINGS {}
+
+FUNCTION 0x1003e210
+0x1003e210 push ebp
+0x1003e211 mov ebp, esp
+0x1003e213 mov eax, dword ptr [ebp + 8]
+0x1003e216 mov dword ptr [0x101998e0], eax
+0x1003e21b push 0x10176818
+0x1003e220 push 0x10198420
+0x1003e225 mov eax, dword ptr [eax + 0x44]
+0x1003e228 call eax
+0x1003e22a add esp, 8
+0x1003e22d pop ebp
+0x1003e22e ret 
+CALLS [{"pc": "0x1003e228", "target": null, "import": null, "text": "eax"}]
+STRINGS {"0x10176818": "RAD"}
+
+FUNCTION 0x1003e3f0
+0x1003e3f0 push esi
+0x1003e3f1 mov esi, dword ptr [0x10198470]
+0x1003e3f7 mov dword ptr [0x10198470], 0
+0x1003e401 mov dword ptr [0x1019846c], 0
+0x1003e40b test esi, esi
+0x1003e40d je 0x1003e438
+0x1003e40f push edi
+0x1003e410 or edi, 0xffffffff
+0x1003e413 lea ecx, [esi + 4]
+0x1003e416 mov eax, edi
+0x1003e418 lock xadd dword ptr [ecx], eax
+0x1003e41c jne 0x1003e437
+0x1003e41e mov eax, dword ptr [esi]
+0x1003e420 mov ecx, esi
+0x1003e422 call dword ptr [eax]
+0x1003e424 lea eax, [esi + 8]
+0x1003e427 lock xadd dword ptr [eax], edi
+0x1003e42b dec edi
+0x1003e42c jne 0x1003e437
+0x1003e42e mov eax, dword ptr [esi]
+0x1003e430 mov ecx, esi
+0x1003e432 pop edi
+0x1003e433 pop esi
+0x1003e434 jmp dword ptr [eax + 4]
+0x1003e437 pop edi
+0x1003e438 pop esi
+0x1003e439 ret 
+CALLS [{"pc": "0x1003e422", "target": null, "import": null, "text": "dword ptr [eax]"}]
+STRINGS {}
+
+FUNCTION 0x100ff70c
+0x100ff70c push ebp
+0x100ff70d mov ebp, esp
+0x100ff70f sub esp, 0x14
+0x100ff712 and dword ptr [ebp - 0xc], 0
+0x100ff716 and dword ptr [ebp - 8], 0
+0x100ff71a mov eax, dword ptr [0x101902c0]
+0x100ff71f push esi
+0x100ff720 push edi
+0x100ff721 mov edi, 0xbb40e64e
+0x100ff726 mov esi, 0xffff0000
+0x100ff72b cmp eax, edi
+0x100ff72d je 0x100ff73c
+0x100ff72f test esi, eax
+0x100ff731 je 0x100ff73c
+0x100ff733 not eax
+0x100ff735 mov dword ptr [0x101902c4], eax
+0x100ff73a jmp 0x100ff7a2
+0x100ff73c lea eax, [ebp - 0xc]
+0x100ff73f push eax
+0x100ff740 call dword ptr [0x101311d4]
+0x100ff746 mov eax, dword ptr [ebp - 8]
+0x100ff749 xor eax, dword ptr [ebp - 0xc]
+0x100ff74c mov dword ptr [ebp - 4], eax
+0x100ff74f call dword ptr [0x10131020]
+0x100ff755 xor dword ptr [ebp - 4], eax
+0x100ff758 call dword ptr [0x101311b0]
+0x100ff75e xor dword ptr [ebp - 4], eax
+0x100ff761 lea eax, [ebp - 0x14]
+0x100ff764 push eax
+0x100ff765 call dword ptr [0x10131070]
+0x100ff76b mov ecx, dword ptr [ebp - 0x10]
+0x100ff76e lea eax, [ebp - 4]
+0x100ff771 xor ecx, dword ptr [ebp - 0x14]
+0x100ff774 xor ecx, dword ptr [ebp - 4]
+0x100ff777 xor ecx, eax
+0x100ff779 cmp ecx, edi
+0x100ff77b jne 0x100ff784
+0x100ff77d mov ecx, 0xbb40e64f
+0x100ff782 jmp 0x100ff794
+0x100ff784 test esi, ecx
+0x100ff786 jne 0x100ff794
+0x100ff788 mov eax, ecx
+0x100ff78a or eax, 0x4711
+0x100ff78f shl eax, 0x10
+0x100ff792 or ecx, eax
+0x100ff794 mov dword ptr [0x101902c0], ecx
+0x100ff79a not ecx
+0x100ff79c mov dword ptr [0x101902c4], ecx
+0x100ff7a2 pop edi
+0x100ff7a3 pop esi
+0x100ff7a4 mov esp, ebp
+0x100ff7a6 pop ebp
+0x100ff7a7 ret 
+CALLS [{"pc": "0x100ff740", "target": null, "import": "KERNEL32.dll!GetSystemTimeAsFileTime", "text": "dword ptr [0x101311d4]"}, {"pc": "0x100ff74f", "target": null, "import": "KERNEL32.dll!GetCurrentThreadId", "text": "dword ptr [0x10131020]"}, {"pc": "0x100ff758", "target": null, "import": "KERNEL32.dll!GetCurrentProcessId", "text": "dword ptr [0x101311b0]"}, {"pc": "0x100ff765", "target": null, "import": "KERNEL32.dll!QueryPerformanceCounter", "text": "dword ptr [0x10131070]"}]
+STRINGS {}
+
+FUNCTION 0x100f2c45
+0x100f2c45 push 0xc
+0x100f2c47 push 0x101833d8
+0x100f2c4c call 0x100f5390
+0x100f2c51 xor eax, eax
+0x100f2c53 inc eax
+0x100f2c54 mov esi, dword ptr [ebp + 0xc]
+0x100f2c57 test esi, esi
+0x100f2c59 jne 0x100f2c67
+0x100f2c5b cmp dword ptr [0x101950a8], esi
+0x100f2c61 je 0x100f2d4b
+0x100f2c67 and dword ptr [ebp - 4], 0
+0x100f2c6b cmp esi, 1
+0x100f2c6e je 0x100f2c75
+0x100f2c70 cmp esi, 2
+0x100f2c73 jne 0x100f2caa
+0x100f2c75 mov ecx, dword ptr [0x10166bb0]
+0x100f2c7b test ecx, ecx
+0x100f2c7d je 0x100f2c8b
+0x100f2c7f push dword ptr [ebp + 0x10]
+0x100f2c82 push esi
+0x100f2c83 push dword ptr [ebp + 8]
+0x100f2c86 call ecx
+0x100f2c88 mov dword ptr [ebp - 0x1c], eax
+0x100f2c8b test eax, eax
+0x100f2c8d je 0x100f2d44
+0x100f2c93 push dword ptr [ebp + 0x10]
+0x100f2c96 push esi
+0x100f2c97 push dword ptr [ebp + 8]
+0x100f2c9a call 0x100f2ab0
+0x100f2c9f mov dword ptr [ebp - 0x1c], eax
+0x100f2ca2 test eax, eax
+0x100f2ca4 je 0x100f2d44
+0x100f2caa mov ebx, dword ptr [ebp + 0x10]
+0x100f2cad push ebx
+0x100f2cae push esi
+0x100f2caf push dword ptr [ebp + 8]
+0x100f2cb2 call 0x100ff7a8
+0x100f2cb7 mov edi, eax
+0x100f2cb9 mov dword ptr [ebp - 0x1c], edi
+0x100f2cbc cmp esi, 1
+0x100f2cbf jne 0x100f2ce9
+0x100f2cc1 test edi, edi
+0x100f2cc3 jne 0x100f2ce9
+0x100f2cc5 push ebx
+0x100f2cc6 push eax
+0x100f2cc7 push dword ptr [ebp + 8]
+0x100f2cca call 0x100ff7a8
+0x100f2ccf push ebx
+0x100f2cd0 push edi
+0x100f2cd1 push dword ptr [ebp + 8]
+0x100f2cd4 call 0x100f2ab0
+0x100f2cd9 mov eax, dword ptr [0x10166bb0]
+0x100f2cde test eax, eax
+0x100f2ce0 je 0x100f2ce9
+0x100f2ce2 push ebx
+0x100f2ce3 push edi
+0x100f2ce4 push dword ptr [ebp + 8]
+0x100f2ce7 call eax
+0x100f2ce9 test esi, esi
+0x100f2ceb je 0x100f2cf2
+0x100f2ced cmp esi, 3
+0x100f2cf0 jne 0x100f2d1c
+0x100f2cf2 push ebx
+0x100f2cf3 push esi
+0x100f2cf4 push dword ptr [ebp + 8]
+0x100f2cf7 call 0x100f2ab0
+0x100f2cfc neg eax
+0x100f2cfe sbb eax, eax
+0x100f2d00 and edi, eax
+0x100f2d02 mov dword ptr [ebp - 0x1c], edi
+0x100f2d05 je 0x100f2d1c
+0x100f2d07 mov eax, dword ptr [0x10166bb0]
+0x100f2d0c test eax, eax
+0x100f2d0e je 0x100f2d1c
+0x100f2d10 push ebx
+0x100f2d11 push esi
+0x100f2d12 push dword ptr [ebp + 8]
+0x100f2d15 call eax
+0x100f2d17 mov edi, eax
+0x100f2d19 mov dword ptr [ebp - 0x1c], edi
+0x100f2d1c mov dword ptr [ebp - 4], 0xfffffffe
+0x100f2d23 mov eax, edi
+0x100f2d25 jmp 0x100f2d4d
+0x100f2d44 mov dword ptr [ebp - 4], 0xfffffffe
+0x100f2d4b xor eax, eax
+0x100f2d4d call 0x100f53d5
+0x100f2d52 ret 
+CALLS [{"pc": "0x100f2c4c", "target": "0x100f5390", "import": null, "text": "0x100f5390"}, {"pc": "0x100f2c86", "target": null, "import": null, "text": "ecx"}, {"pc": "0x100f2c9a", "target": "0x100f2ab0", "import": null, "text": "0x100f2ab0"}, {"pc": "0x100f2cb2", "target": "0x100ff7a8", "import": null, "text": "0x100ff7a8"}, {"pc": "0x100f2cca", "target": "0x100ff7a8", "import": null, "text": "0x100ff7a8"}, {"pc": "0x100f2cd4", "target": "0x100f2ab0", "import": null, "text": "0x100f2ab0"}, {"pc": "0x100f2ce7", "target": null, "import": null, "text": "eax"}, {"pc": "0x100f2cf7", "target": "0x100f2ab0", "import": null, "text": "0x100f2ab0"}, {"pc": "0x100f2d15", "target": null, "import": null, "text": "eax"}, {"pc": "0x100f2d4d", "target": "0x100f53d5", "import": null, "text": "0x100f53d5"}]
+STRINGS {}
+
+FUNCTION 0x1003e250
+0x1003e250 push ebp
+0x1003e251 mov ebp, esp
+0x1003e253 and esp, 0xfffffff8
+0x1003e256 sub esp, 0x11c
+0x1003e25c mov eax, dword ptr [0x101902c0]
+0x1003e261 xor eax, esp
+0x1003e263 mov dword ptr [esp + 0x118], eax
+0x1003e26a push ebx
+0x1003e26b push esi
+0x1003e26c mov esi, dword ptr [ebp + 8]
+0x1003e26f push edi
+0x1003e270 mov edi, ecx
+0x1003e272 cmp dword ptr [edi], 0
+0x1003e275 jne 0x1003e38c
+0x1003e27b test esi, esi
+0x1003e27d je 0x1003e2b5
+0x1003e27f push esi
+0x1003e280 push 0x1017681c
+0x1003e285 push 0x10176850
+0x1003e28a call 0x1003d4d0
+0x1003e28f mov eax, dword ptr [0x10198420]
+0x1003e294 add esp, 0xc
+0x1003e297 or eax, 2
+0x1003e29a push esi
+0x1003e29b push 0x1017681c
+0x1003e2a0 push 0x10176850
+0x1003e2a5 push dword ptr [0x10198424]
+0x1003e2ab push eax
+0x1003e2ac push 0
+0x1003e2ae call 0x1003e1e0
+0x1003e2b3 jmp 0x1003e305
+0x1003e2b5 lea eax, [esp + 0x18]
+0x1003e2b9 push eax
+0x1003e2ba push 0x104
+0x1003e2bf call dword ptr [0x10131098]
+0x1003e2c5 lea eax, [esp + 0x18]
+0x1003e2c9 push eax
+0x1003e2ca push 0x1017681c
+0x1003e2cf push 0x10176898
+0x1003e2d4 call 0x1003d4d0
+0x1003e2d9 add esp, 0xc
+0x1003e2dc lea eax, [esp + 0x18]
+0x1003e2e0 push eax
+0x1003e2e1 mov eax, dword ptr [0x10198420]
+0x1003e2e6 push 0x1017681c
+0x1003e2eb push 0x10176898
+0x1003e2f0 push dword ptr [0x10198424]
+0x1003e2f6 or eax, 2
+0x1003e2f9 push eax
+0x1003e2fa push 0
+0x1003e2fc call 0x1003e1e0
+0x1003e301 lea esi, [esp + 0x30]
+0x1003e305 add esp, 0x18
+0x1003e308 mov ecx, esi
+0x1003e30a call 0x10056510
+0x1003e30f push eax
+0x1003e310 lea ecx, [esp + 0x14]
+0x1003e314 mov dword ptr [esp + 0x14], 0
+0x1003e31c mov dword ptr [esp + 0x18], 0
+0x1003e324 call 0x1003e440
+0x1003e329 mov esi, dword ptr [edi + 4]
+0x1003e32c mov eax, dword ptr [esp + 0x14]
+0x1003e330 mov dword ptr [edi + 4], eax
+0x1003e333 mov eax, dword ptr [esp + 0x10]
+0x1003e337 mov dword ptr [edi], eax
+0x1003e339 test esi, esi
+0x1003e33b je 0x1003e362
+0x1003e33d or ebx, 0xffffffff
+0x1003e340 lea ecx, [esi + 4]
+0x1003e343 mov eax, ebx
+0x1003e345 lock xadd dword ptr [ecx], eax
+0x1003e349 jne 0x1003e362
+0x1003e34b mov eax, dword ptr [esi]
+0x1003e34d mov ecx, esi
+0x1003e34f call dword ptr [eax]
+0x1003e351 lea eax, [esi + 8]
+0x1003e354 lock xadd dword ptr [eax], ebx
+0x1003e358 dec ebx
+0x1003e359 jne 0x1003e362
+0x1003e35b mov eax, dword ptr [esi]
+0x1003e35d mov ecx, esi
+0x1003e35f call dword ptr [eax + 4]
+0x1003e362 cmp dword ptr [edi], 0
+0x1003e365 jne 0x1003e373
+0x1003e367 push 0x1017681c
+0x1003e36c push 0x101768e0
+0x1003e371 jmp 0x1003e396
+0x1003e373 xor eax, eax
+0x1003e375 pop edi
+0x1003e376 pop esi
+0x1003e377 pop ebx
+0x1003e378 mov ecx, dword ptr [esp + 0x118]
+0x1003e37f xor ecx, esp
+0x1003e381 call 0x100ec285
+0x1003e386 mov esp, ebp
+0x1003e388 pop ebp
+0x1003e389 ret 4
+0x1003e38c push 0x1017681c
+0x1003e391 push 0x10176930
+0x1003e396 mov eax, dword ptr [0x10198420]
+0x1003e39b push dword ptr [0x10198424]
+0x1003e3a1 or eax, 1
+0x1003e3a4 push eax
+0x1003e3a5 push 2
+0x1003e3a7 call 0x1003e1e0
+0x1003e3ac mov ecx, dword ptr [esp + 0x138]
+0x1003e3b3 add esp, 0x14
+0x1003e3b6 mov eax, 0x80004005
+0x1003e3bb pop edi
+0x1003e3bc pop esi
+0x1003e3bd pop ebx
+0x1003e3be xor ecx, esp
+0x1003e3c0 call 0x100ec285
+0x1003e3c5 mov esp, ebp
+0x1003e3c7 pop ebp
+0x1003e3c8 ret 4
+CALLS [{"pc": "0x1003e28a", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x1003e2ae", "target": "0x1003e1e0", "import": null, "text": "0x1003e1e0"}, {"pc": "0x1003e30a", "target": "0x10056510", "import": null, "text": "0x10056510"}, {"pc": "0x1003e324", "target": "0x1003e440", "import": null, "text": "0x1003e440"}, {"pc": "0x1003e34f", "target": null, "import": null, "text": "dword ptr [eax]"}, {"pc": "0x1003e35f", "target": null, "import": null, "text": "dword ptr [eax + 4]"}, {"pc": "0x1003e3a7", "target": "0x1003e1e0", "import": null, "text": "0x1003e1e0"}, {"pc": "0x1003e3c0", "target": "0x100ec285", "import": null, "text": "0x100ec285"}, {"pc": "0x1003e381", "target": "0x100ec285", "import": null, "text": "0x100ec285"}, {"pc": "0x1003e2bf", "target": null, "import": "KERNEL32.dll!GetCurrentDirectoryA", "text": "dword ptr [0x10131098]"}, {"pc": "0x1003e2d4", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x1003e2fc", "target": "0x1003e1e0", "import": null, "text": "0x1003e1e0"}]
+STRINGS {"0x1017681c": "Riot::RADS::Reader::RadsExportsMain::Initialize", "0x10176850": "%s: RADS library initializing with specified working directory \"%s\".", "0x101768e0": "%s: RADS library initialization failed to create the runtime environment.", "0x10176898": "%s: RADS library initializing with current working directory \"%s\".", "0x10176930": "%s: RADS library initialization failed because it was already initialized and must only be initialized once."}
+
+FUNCTION 0x100f2ab0
+0x100f2ab0 push 8
+0x100f2ab2 push 0x101833b8
+0x100f2ab7 call 0x100f5390
+0x100f2abc mov eax, dword ptr [ebp + 0xc]
+0x100f2abf cmp eax, 1
+0x100f2ac2 jne 0x100f2b3e
+0x100f2ac4 call 0x100faa03
+0x100f2ac9 test eax, eax
+0x100f2acb jne 0x100f2ad4
+0x100f2acd xor eax, eax
+0x100f2acf jmp 0x100f2c1a
+0x100f2ad4 call 0x100f60b5
+0x100f2ad9 test eax, eax
+0x100f2adb jne 0x100f2ae4
+0x100f2add call 0x100faa18
+0x100f2ae2 jmp 0x100f2acd
+0x100f2ae4 call 0x100ff83b
+0x100f2ae9 call dword ptr [0x10131230]
+0x100f2aef mov dword ptr [0x10199ab8], eax
+0x100f2af4 call 0x100ff7ae
+0x100f2af9 mov dword ptr [0x101950ac], eax
+0x100f2afe call 0x100fb602
+0x100f2b03 test eax, eax
+0x100f2b05 jns 0x100f2b0e
+0x100f2b07 call 0x100f612b
+0x100f2b0c jmp 0x100f2add
+0x100f2b0e call 0x100ff3fc
+0x100f2b13 test eax, eax
+0x100f2b15 js 0x100f2b37
+0x100f2b17 call 0x100ff62b
+0x100f2b1c test eax, eax
+0x100f2b1e js 0x100f2b37
+0x100f2b20 push 0
+0x100f2b22 call 0x100f40e1
+0x100f2b27 pop ecx
+0x100f2b28 test eax, eax
+0x100f2b2a jne 0x100f2b37
+0x100f2b2c inc dword ptr [0x101950a8]
+0x100f2b32 jmp 0x100f2c17
+0x100f2b37 call 0x100fb8b6
+0x100f2b3c jmp 0x100f2b07
+0x100f2b3e test eax, eax
+0x100f2b40 jne 0x100f2ba7
+0x100f2b42 mov eax, dword ptr [0x101950a8]
+0x100f2b47 test eax, eax
+0x100f2b49 jle 0x100f2acd
+0x100f2b4b dec eax
+0x100f2b4c mov dword ptr [0x101950a8], eax
+0x100f2b51 and dword ptr [ebp - 4], 0
+0x100f2b55 cmp dword ptr [0x101950f0], 0
+0x100f2b5c jne 0x100f2b63
+0x100f2b5e call 0x100f40d2
+0x100f2b63 call 0x100f3fa9
+0x100f2b68 mov esi, dword ptr [ebp + 0x10]
+0x100f2b6b test esi, esi
+0x100f2b6d jne 0x100f2b7e
+0x100f2b6f call 0x100fb8b6
+0x100f2b74 call 0x100f612b
+0x100f2b79 call 0x100faa18
+0x100f2b7e mov dword ptr [ebp - 4], 0xfffffffe
+0x100f2b85 call 0x100f2b92
+0x100f2b8a jmp 0x100f2c17
+0x100f2ba7 cmp eax, 2
+0x100f2baa jne 0x100f2c0a
+0x100f2bac push dword ptr [0x101902f0]
+0x100f2bb2 call 0x100f7afc
+0x100f2bb7 pop ecx
+0x100f2bb8 test eax, eax
+0x100f2bba jne 0x100f2c17
+0x100f2bbc push 0x3bc
+0x100f2bc1 push 1
+0x100f2bc3 call 0x100f5262
+0x100f2bc8 pop ecx
+0x100f2bc9 pop ecx
+0x100f2bca mov esi, eax
+0x100f2bcc test esi, esi
+0x100f2bce je 0x100f2acd
+0x100f2bd4 push esi
+0x100f2bd5 push dword ptr [0x101902f0]
+0x100f2bdb call 0x100f7b1b
+0x100f2be0 pop ecx
+0x100f2be1 pop ecx
+0x100f2be2 test eax, eax
+0x100f2be4 je 0x100f2bfe
+0x100f2be6 push 0
+0x100f2be8 push esi
+0x100f2be9 call 0x100f6002
+0x100f2bee pop ecx
+0x100f2bef pop ecx
+0x100f2bf0 call dword ptr [0x10131020]
+0x100f2bf6 mov dword ptr [esi], eax
+0x100f2bf8 or dword ptr [esi + 4], 0xffffffff
+0x100f2bfc jmp 0x100f2c17
+0x100f2bfe push esi
+0x100f2bff call 0x100ed4fa
+0x100f2c04 pop ecx
+0x100f2c05 jmp 0x100f2acd
+0x100f2c0a cmp eax, 3
+0x100f2c0d jne 0x100f2c17
+0x100f2c0f push 0
+0x100f2c11 call 0x100f5f45
+0x100f2c16 pop ecx
+0x100f2c17 xor eax, eax
+0x100f2c19 inc eax
+0x100f2c1a call 0x100f53d5
+0x100f2c1f ret 0xc
+CALLS [{"pc": "0x100f2ab7", "target": "0x100f5390", "import": null, "text": "0x100f5390"}, {"pc": "0x100f2ac4", "target": "0x100faa03", "import": null, "text": "0x100faa03"}, {"pc": "0x100f2c1a", "target": "0x100f53d5", "import": null, "text": "0x100f53d5"}, {"pc": "0x100f2ad4", "target": "0x100f60b5", "import": null, "text": "0x100f60b5"}, {"pc": "0x100f2add", "target": "0x100faa18", "import": null, "text": "0x100faa18"}, {"pc": "0x100f2ae4", "target": "0x100ff83b", "import": null, "text": "0x100ff83b"}, {"pc": "0x100f2ae9", "target": null, "import": "KERNEL32.dll!GetCommandLineA", "text": "dword ptr [0x10131230]"}, {"pc": "0x100f2af4", "target": "0x100ff7ae", "import": null, "text": "0x100ff7ae"}, {"pc": "0x100f2afe", "target": "0x100fb602", "import": null, "text": "0x100fb602"}, {"pc": "0x100f2b07", "target": "0x100f612b", "import": null, "text": "0x100f612b"}, {"pc": "0x100f2b0e", "target": "0x100ff3fc", "import": null, "text": "0x100ff3fc"}, {"pc": "0x100f2b17", "target": "0x100ff62b", "import": null, "text": "0x100ff62b"}, {"pc": "0x100f2b22", "target": "0x100f40e1", "import": null, "text": "0x100f40e1"}, {"pc": "0x100f2b37", "target": "0x100fb8b6", "import": null, "text": "0x100fb8b6"}, {"pc": "0x100f2b5e", "target": "0x100f40d2", "import": null, "text": "0x100f40d2"}, {"pc": "0x100f2b63", "target": "0x100f3fa9", "import": null, "text": "0x100f3fa9"}, {"pc": "0x100f2b6f", "target": "0x100fb8b6", "import": null, "text": "0x100fb8b6"}, {"pc": "0x100f2b74", "target": "0x100f612b", "import": null, "text": "0x100f612b"}, {"pc": "0x100f2b79", "target": "0x100faa18", "import": null, "text": "0x100faa18"}, {"pc": "0x100f2b85", "target": "0x100f2b92", "import": null, "text": "0x100f2b92"}, {"pc": "0x100f2bb2", "target": "0x100f7afc", "import": null, "text": "0x100f7afc"}, {"pc": "0x100f2bc3", "target": "0x100f5262", "import": null, "text": "0x100f5262"}, {"pc": "0x100f2bdb", "target": "0x100f7b1b", "import": null, "text": "0x100f7b1b"}, {"pc": "0x100f2be9", "target": "0x100f6002", "import": null, "text": "0x100f6002"}, {"pc": "0x100f2bf0", "target": null, "import": "KERNEL32.dll!GetCurrentThreadId", "text": "dword ptr [0x10131020]"}, {"pc": "0x100f2bff", "target": "0x100ed4fa", "import": null, "text": "0x100ed4fa"}, {"pc": "0x100f2c11", "target": "0x100f5f45", "import": null, "text": "0x100f5f45"}]
+STRINGS {}
+
+FUNCTION 0x100ff7a8
+0x100ff7a8 xor eax, eax
+0x100ff7aa inc eax
+0x100ff7ab ret 0xc
+CALLS []
+STRINGS {}
+
+FUNCTION 0x1003e440
+0x1003e440 push ebp
+0x1003e441 mov ebp, esp
+0x1003e443 push -1
+0x1003e445 push 0x1012ba60
+0x1003e44a mov eax, dword ptr fs:[0]
+0x1003e450 push eax
+0x1003e451 sub esp, 8
+0x1003e454 push ebx
+0x1003e455 push esi
+0x1003e456 push edi
+0x1003e457 mov eax, dword ptr [0x101902c0]
+0x1003e45c xor eax, ebp
+0x1003e45e push eax
+0x1003e45f lea eax, [ebp - 0xc]
+0x1003e462 mov dword ptr fs:[0], eax
+0x1003e468 mov dword ptr [ebp - 0x10], esp
+0x1003e46b mov edi, ecx
+0x1003e46d mov dword ptr [ebp - 0x14], edi
+0x1003e470 mov dword ptr [ebp - 4], 0
+0x1003e477 cmp byte ptr [0x10199737], 0
+0x1003e47e jne 0x1003e48c
+0x1003e480 mov byte ptr [0x10199737], 1
+0x1003e487 call 0x1003d4d0
+0x1003e48c mov eax, dword ptr [0x10198450]
+0x1003e491 test eax, eax
+0x1003e493 jne 0x1003e4a1
+0x1003e495 push 0x10
+0x1003e497 call 0x100f0695
+0x1003e49c add esp, 4
+0x1003e49f jmp 0x1003e4ae
+0x1003e4a1 push dword ptr [0x10198448]
+0x1003e4a7 push 0x10
+0x1003e4a9 call eax
+0x1003e4ab add esp, 8
+0x1003e4ae mov ebx, dword ptr [ebp + 8]
+0x1003e4b1 mov esi, eax
+0x1003e4b3 test esi, esi
+0x1003e4b5 je 0x1003e4d0
+0x1003e4b7 mov dword ptr [esi + 4], 1
+0x1003e4be mov dword ptr [esi + 8], 1
+0x1003e4c5 mov dword ptr [esi], 0x101769a0
+0x1003e4cb mov dword ptr [esi + 0xc], ebx
+0x1003e4ce jmp 0x1003e4d2
+0x1003e4d0 xor esi, esi
+0x1003e4d2 mov edi, dword ptr [edi + 4]
+0x1003e4d5 test edi, edi
+0x1003e4d7 je 0x1003e4fe
+0x1003e4d9 lea ecx, [edi + 4]
+0x1003e4dc or eax, 0xffffffff
+0x1003e4df lock xadd dword ptr [ecx], eax
+0x1003e4e3 jne 0x1003e4fe
+0x1003e4e5 mov eax, dword ptr [edi]
+0x1003e4e7 mov ecx, edi
+0x1003e4e9 call dword ptr [eax]
+0x1003e4eb lea eax, [edi + 8]
+0x1003e4ee or ecx, 0xffffffff
+0x1003e4f1 lock xadd dword ptr [eax], ecx
+0x1003e4f5 jne 0x1003e4fe
+0x1003e4f7 mov eax, dword ptr [edi]
+0x1003e4f9 mov ecx, edi
+0x1003e4fb call dword ptr [eax + 4]
+0x1003e4fe mov eax, dword ptr [ebp - 0x14]
+0x1003e501 mov dword ptr [eax + 4], esi
+0x1003e504 mov dword ptr [eax], ebx
+0x1003e506 mov ecx, dword ptr [ebp - 0xc]
+0x1003e509 mov dword ptr fs:[0], ecx
+0x1003e510 pop ecx
+0x1003e511 pop edi
+0x1003e512 pop esi
+0x1003e513 pop ebx
+0x1003e514 mov esp, ebp
+0x1003e516 pop ebp
+0x1003e517 ret 4
+CALLS [{"pc": "0x1003e487", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x1003e497", "target": "0x100f0695", "import": null, "text": "0x100f0695"}, {"pc": "0x1003e4e9", "target": null, "import": null, "text": "dword ptr [eax]"}, {"pc": "0x1003e4fb", "target": null, "import": null, "text": "dword ptr [eax + 4]"}, {"pc": "0x1003e4a9", "target": null, "import": null, "text": "eax"}]
+STRINGS {}
+
+FUNCTION 0x10056510
+0x10056510 push ebp
+0x10056511 mov ebp, esp
+0x10056513 push -1
+0x10056515 push 0x1012c955
+0x1005651a mov eax, dword ptr fs:[0]
+0x10056520 push eax
+0x10056521 sub esp, 0x184
+0x10056527 mov eax, dword ptr [0x101902c0]
+0x1005652c xor eax, ebp
+0x1005652e mov dword ptr [ebp - 0x10], eax
+0x10056531 push ebx
+0x10056532 push esi
+0x10056533 push edi
+0x10056534 push eax
+0x10056535 lea eax, [ebp - 0xc]
+0x10056538 mov dword ptr fs:[0], eax
+0x1005653e mov esi, ecx
+0x10056540 mov eax, dword ptr [0x10198420]
+0x10056545 push 0x10178c30
+0x1005654a push 0x10177074
+0x1005654f push dword ptr [0x10198424]
+0x10056555 or eax, 5
+0x10056558 push eax
+0x10056559 push 0
+0x1005655b call 0x1003e1e0
+0x10056560 add esp, 0x14
+0x10056563 test esi, esi
+0x10056565 je 0x100565a8
+0x10056567 cmp byte ptr [esi], 0
+0x1005656a lea eax, [ebp - 0x118]
+0x10056570 je 0x100565a5
+0x10056572 mov cl, byte ptr [esi]
+0x10056574 cmp cl, 0x5c
+0x10056577 jne 0x1005657d
+0x10056579 mov cl, 0x2f
+0x1005657b jmp 0x10056582
+0x1005657d cmp cl, 0x2f
+0x10056580 jne 0x1005659c
+0x10056582 lea edx, [ebp - 0x118]
+0x10056588 cmp eax, edx
+0x1005658a je 0x1005659c
+0x1005658c lea edx, [ebp - 0x117]
+0x10056592 cmp eax, edx
+0x10056594 je 0x1005659c
+0x10056596 cmp byte ptr [eax - 1], 0x2f
+0x1005659a je 0x1005659f
+0x1005659c mov byte ptr [eax], cl
+0x1005659e inc eax
+0x1005659f inc esi
+0x100565a0 cmp byte ptr [esi], 0
+0x100565a3 jne 0x10056572
+0x100565a5 mov byte ptr [eax], 0
+0x100565a8 lea edx, [ebp - 0x118]
+0x100565ae lea ecx, [ebp - 0x148]
+0x100565b4 call 0x100575b0
+0x100565b9 mov dword ptr [ebp - 4], 0
+0x100565c0 mov dword ptr [ebp - 0x11c], 0xf
+0x100565ca mov dword ptr [ebp - 0x120], 0
+0x100565d4 mov byte ptr [ebp - 0x130], 0
+0x100565db mov dword ptr [ebp - 0x164], 0xf
+0x100565e5 mov dword ptr [ebp - 0x168], 0
+0x100565ef mov byte ptr [ebp - 0x178], 0
+0x100565f6 xor ebx, ebx
+0x100565f8 mov dword ptr [ebp - 0x18c], ebx
+0x100565fe mov dword ptr [ebp - 0x188], ebx
+0x10056604 mov dword ptr [ebp - 0x184], ebx
+0x1005660a mov byte ptr [ebp - 4], 3
+0x1005660e lea eax, [ebp - 0x148]
+0x10056614 cmp dword ptr [ebp - 0x134], 0x10
+0x1005661b cmovae eax, dword ptr [ebp - 0x148]
+0x10056622 push eax
+0x10056623 push 0x10178c30
+0x10056628 push 0x10178c60
+0x1005662d call 0x1003d4d0
+0x10056632 add esp, 0xc
+0x10056635 lea eax, [ebp - 0x148]
+0x1005663b cmp dword ptr [ebp - 0x134], 0x10
+0x10056642 cmovae eax, dword ptr [ebp - 0x148]
+0x10056649 push eax
+0x1005664a mov eax, dword ptr [0x10198420]
+0x1005664f push 0x10178c30
+0x10056654 push 0x10178c60
+0x10056659 push dword ptr [0x10198424]
+0x1005665f or eax, 2
+0x10056662 push eax
+0x10056663 push ebx
+0x10056664 call 0x1003e1e0
+0x10056669 lea eax, [ebp - 0x180]
+0x1005666f push eax
+0x10056670 lea eax, [ebp - 0x130]
+0x10056676 push eax
+0x10056677 lea edx, [ebp - 0x17c]
+0x1005667d lea ecx, [ebp - 0x118]
+0x10056683 call 0x10056c60
+0x10056688 add esp, 0x20
+0x1005668b test al, al
+0x1005668d jne 0x100566bf
+0x1005668f mov eax, dword ptr [0x10198420]
+0x10056694 push 0x10178c30
+0x10056699 push 0x10178ca8
+0x1005669e push dword ptr [0x10198424]
+0x100566a4 or eax, 1
+0x100566a7 push eax
+0x100566a8 push 2
+0x100566aa call 0x1003e1e0
+0x100566af mov esi, dword ptr [0x1019844c]
+0x100566b5 add esp, 0x14
+0x100566b8 xor edi, edi
+0x100566ba jmp 0x10056851
+0x100566bf mov dword ptr [ebp - 0x14c], 0xf
+0x100566c9 mov dword ptr [ebp - 0x150], 0
+0x100566d3 mov byte ptr [ebp - 0x160], 0
+0x100566da mov byte ptr [ebp - 4], 4
+0x100566de lea edx, [ebp - 0x160]
+0x100566e4 mov esi, dword ptr [ebp - 0x180]
+0x100566ea mov ecx, esi
+0x100566ec call 0x1005c980
+0x100566f1 cmp dword ptr [ebp - 0x14c], 0x10
+0x100566f8 lea ecx, [ebp - 0x160]
+0x100566fe lea edi, [ebp - 0x18c]
+0x10056704 cmovae ecx, dword ptr [ebp - 0x160]
+0x1005670b lea eax, [ebp - 0x130]
+0x10056711 cmp dword ptr [ebp - 0x11c], 0x10
+0x10056718 lea edx, [ebp - 0x148]
+0x1005671e push edi
+0x1005671f cmovae eax, dword ptr [ebp - 0x130]
+0x10056726 lea edi, [ebp - 0x178]
+0x1005672c cmp dword ptr [ebp - 0x134], 0x10
+0x10056733 push edi
+0x10056734 mov edi, dword ptr [ebp - 0x17c]
+0x1005673a cmovae edx, dword ptr [ebp - 0x148]
+0x10056741 push ecx
+0x10056742 push eax
+0x10056743 mov ecx, edi
+0x10056745 call 0x10056e40
+0x1005674a add esp, 0x10
+0x1005674d test al, al
+0x1005674f jne 0x100567a8
+0x10056751 mov eax, dword ptr [0x10198420]
+0x10056756 push 0x10178c30
+0x1005675b push 0x10178d10
+0x10056760 push dword ptr [0x10198424]
+0x10056766 or eax, 1
+0x10056769 push eax
+0x1005676a push 2
+0x1005676c call 0x1003e1e0
+0x10056771 add esp, 0x14
+0x10056774 xor edi, edi
+0x10056776 mov byte ptr [ebp - 4], 3
+0x1005677a cmp dword ptr [ebp - 0x14c], 0x10
+0x10056781 mov esi, dword ptr [0x1019844c]
+0x10056787 jb 0x10056830
+0x1005678d test esi, esi
+0x1005678f jne 0x10056819
+0x10056795 push dword ptr [ebp - 0x160]
+0x1005679b call 0x100ed4fa
+0x100567a0 add esp, 4
+0x100567a3 jmp 0x10056830
+0x100567a8 cmp byte ptr [0x10199737], 0
+0x100567af jne 0x100567bd
+0x100567b1 mov byte ptr [0x10199737], 1
+0x100567b8 call 0x1003d4d0
+0x100567bd mov eax, dword ptr [0x10198450]
+0x100567c2 test eax, eax
+0x100567c4 jne 0x100567d2
+0x100567c6 push 0x5c
+0x100567c8 call 0x100f0695
+0x100567cd add esp, 4
+0x100567d0 jmp 0x100567df
+0x100567d2 push dword ptr [0x10198448]
+0x100567d8 push 0x5c
+0x100567da call eax
+0x100567dc add esp, 8
+0x100567df mov dword ptr [ebp - 0x17c], eax
+0x100567e5 mov byte ptr [ebp - 4], 5
+0x100567e9 test eax, eax
+0x100567eb je 0x10056774
+0x100567ed push esi
+0x100567ee lea ecx, [ebp - 0x130]
+0x100567f4 push ecx
+0x100567f5 push edi
+0x100567f6 lea ecx, [ebp - 0x18c]
+0x100567fc push ecx
+0x100567fd lea ecx, [ebp - 0x178]
+0x10056803 push ecx
+0x10056804 lea ecx, [ebp - 0x148]
+0x1005680a push ecx
+0x1005680b mov ecx, eax
+0x1005680d call 0x10056980
+0x10056812 mov edi, eax
+0x10056814 jmp 0x10056776
+0x10056819 push dword ptr [0x10198448]
+0x1005681f push dword ptr [ebp - 0x160]
+0x10056825 call esi
+0x10056827 mov esi, dword ptr [0x1019844c]
+0x1005682d add esp, 8
+0x10056830 mov ebx, dword ptr [ebp - 0x18c]
+0x10056836 mov dword ptr [ebp - 0x14c], 0xf
+0x10056840 mov dword ptr [ebp - 0x150], 0
+0x1005684a mov byte ptr [ebp - 0x160], 0
+0x10056851 mov byte ptr [ebp - 4], 2
+0x10056855 test ebx, ebx
+0x10056857 je 0x1005687a
+0x10056859 test esi, esi
+0x1005685b jne 0x10056868
+0x1005685d push ebx
+0x1005685e call 0x100ed4fa
+0x10056863 add esp, 4
+0x10056866 jmp 0x1005687a
+0x10056868 push dword ptr [0x10198448]
+0x1005686e push ebx
+0x1005686f call esi
+0x10056871 mov esi, dword ptr [0x1019844c]
+0x10056877 add esp, 8
+0x1005687a mov byte ptr [ebp - 4], 1
+0x1005687e cmp dword ptr [ebp - 0x164], 0x10
+0x10056885 jb 0x100568b2
+0x10056887 test esi, esi
+0x10056889 jne 0x1005689b
+0x1005688b push dword ptr [ebp - 0x178]
+0x10056891 call 0x100ed4fa
+0x10056896 add esp, 4
+0x10056899 jmp 0x100568b2
+0x1005689b push dword ptr [0x10198448]
+0x100568a1 push dword ptr [ebp - 0x178]
+0x100568a7 call esi
+0x100568a9 mov esi, dword ptr [0x1019844c]
+0x100568af add esp, 8
+0x100568b2 mov byte ptr [ebp - 4], 0
+0x100568b6 cmp dword ptr [ebp - 0x11c], 0x10
+0x100568bd mov dword ptr [ebp - 0x164], 0xf
+0x100568c7 mov dword ptr [ebp - 0x168], 0
+0x100568d1 mov byte ptr [ebp - 0x178], 0
+0x100568d8 jb 0x10056905
+0x100568da test esi, esi
+0x100568dc jne 0x100568ee
+0x100568de push dword ptr [ebp - 0x130]
+0x100568e4 call 0x100ed4fa
+0x100568e9 add esp, 4
+0x100568ec jmp 0x10056905
+0x100568ee push dword ptr [0x10198448]
+0x100568f4 push dword ptr [ebp - 0x130]
+0x100568fa call esi
+0x100568fc mov esi, dword ptr [0x1019844c]
+0x10056902 add esp, 8
+0x10056905 mov dword ptr [ebp - 4], 0xffffffff
+0x1005690c cmp dword ptr [ebp - 0x134], 0x10
+0x10056913 mov dword ptr [ebp - 0x11c], 0xf
+0x1005691d mov dword ptr [ebp - 0x120], 0
+0x10056927 mov byte ptr [ebp - 0x130], 0
+0x1005692e jb 0x10056955
+0x10056930 test esi, esi
+0x10056932 jne 0x10056944
+0x10056934 push dword ptr [ebp - 0x148]
+0x1005693a call 0x100ed4fa
+0x1005693f add esp, 4
+0x10056942 jmp 0x10056955
+0x10056944 push dword ptr [0x10198448]
+0x1005694a push dword ptr [ebp - 0x148]
+0x10056950 call esi
+0x10056952 add esp, 8
+0x10056955 mov eax, edi
+0x10056957 mov ecx, dword ptr [ebp - 0xc]
+0x1005695a mov dword ptr fs:[0], ecx
+0x10056961 pop ecx
+0x10056962 pop edi
+0x10056963 pop esi
+0x10056964 pop ebx
+0x10056965 mov ecx, dword ptr [ebp - 0x10]
+0x10056968 xor ecx, ebp
+0x1005696a call 0x100ec285
+0x1005696f mov esp, ebp
+0x10056971 pop ebp
+0x10056972 ret 
+CALLS [{"pc": "0x1005655b", "target": "0x1003e1e0", "import": null, "text": "0x1003e1e0"}, {"pc": "0x100565b4", "target": "0x100575b0", "import": null, "text": "0x100575b0"}, {"pc": "0x1005662d", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10056664", "target": "0x1003e1e0", "import": null, "text": "0x1003e1e0"}, {"pc": "0x10056683", "target": "0x10056c60", "import": null, "text": "0x10056c60"}, {"pc": "0x100566aa", "target": "0x1003e1e0", "import": null, "text": "0x1003e1e0"}, {"pc": "0x1005685e", "target": "0x100ed4fa", "import": null, "text": "0x100ed4fa"}, {"pc": "0x10056891", "target": "0x100ed4fa", "import": null, "text": "0x100ed4fa"}, {"pc": "0x100568e4", "target": "0x100ed4fa", "import": null, "text": "0x100ed4fa"}, {"pc": "0x1005693a", "target": "0x100ed4fa", "import": null, "text": "0x100ed4fa"}, {"pc": "0x1005696a", "target": "0x100ec285", "import": null, "text": "0x100ec285"}, {"pc": "0x10056950", "target": null, "import": null, "text": "esi"}, {"pc": "0x100568fa", "target": null, "import": null, "text": "esi"}, {"pc": "0x100568a7", "target": null, "import": null, "text": "esi"}, {"pc": "0x1005686f", "target": null, "import": null, "text": "esi"}, {"pc": "0x100566ec", "target": "0x1005c980", "import": null, "text": "0x1005c980"}, {"pc": "0x10056745", "target": "0x10056e40", "import": null, "text": "0x10056e40"}, {"pc": "0x1005676c", "target": "0x1003e1e0", "import": null, "text": "0x1003e1e0"}, {"pc": "0x1005679b", "target": "0x100ed4fa", "import": null, "text": "0x100ed4fa"}, {"pc": "0x10056825", "target": null, "import": null, "text": "esi"}, {"pc": "0x100567b8", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x100567c8", "target": "0x100f0695", "import": null, "text": "0x100f0695"}, {"pc": "0x1005680d", "target": "0x10056980", "import": null, "text": "0x10056980"}, {"pc": "0x100567da", "target": null, "import": null, "text": "eax"}]
+STRINGS {"0x10178c30": "Riot::RADS::Reader::RuntimeEnvironment::Create", "0x10177074": "%s: ", "0x10178c60": "%s: Creating RADS runtime environment: RADS root directory = \"%s\"", "0x10178ca8": "%s: RADS runtime environment creation failed because it was unable to get the project information.", "0x10178d10": "%s: RADS runtime environment creation failed because it was unable to collect the projects."}
+
+FUNCTION 0x1003e1e0
+0x1003e1e0 push ebp
+0x1003e1e1 mov ebp, esp
+0x1003e1e3 and esp, 0xfffffff8
+0x1003e1e6 mov edx, dword ptr [ebp + 0x14]
+0x1003e1e9 lea eax, [ebp + 0x18]
+0x1003e1ec mov ecx, dword ptr [ebp + 8]
+0x1003e1ef push eax
+0x1003e1f0 push dword ptr [ebp + 0x10]
+0x1003e1f3 push dword ptr [ebp + 0xc]
+0x1003e1f6 call 0x1005f8c0
+0x1003e1fb add esp, 0xc
+0x1003e1fe mov esp, ebp
+0x1003e200 pop ebp
+0x1003e201 ret 
+CALLS [{"pc": "0x1003e1f6", "target": "0x1005f8c0", "import": null, "text": "0x1005f8c0"}]
+STRINGS {}
+
+FUNCTION 0x100f40e1
+0x100f40e1 push ebp
+0x100f40e2 mov ebp, esp
+0x100f40e4 cmp dword ptr [0x10166be0], 0
+0x100f40eb je 0x100f4106
+0x100f40ed push 0x10166be0
+0x100f40f2 call 0x1010a610
+0x100f40f7 pop ecx
+0x100f40f8 test eax, eax
+0x100f40fa je 0x100f4106
+0x100f40fc push dword ptr [ebp + 8]
+0x100f40ff call dword ptr [0x10166be0]
+0x100f4105 pop ecx
+0x100f4106 call 0x1010a543
+0x100f410b push 0x10131494
+0x100f4110 push 0x1013147c
+0x100f4115 call 0x100f41e7
+0x100f411a pop ecx
+0x100f411b pop ecx
+0x100f411c test eax, eax
+0x100f411e jne 0x100f4163
+0x100f4120 push 0x100ff85b
+0x100f4125 call 0x100eca0f
+0x100f412a mov dword ptr [esp], 0x10131478
+0x100f4131 push 0x10131364
+0x100f4136 call 0x100f41b1
+0x100f413b cmp dword ptr [0x10199aa4], 0
+0x100f4142 pop ecx
+0x100f4143 pop ecx
+0x100f4144 je 0x100f4161
+0x100f4146 push 0x10199aa4
+0x100f414b call 0x1010a610
+0x100f4150 pop ecx
+0x100f4151 test eax, eax
+0x100f4153 je 0x100f4161
+0x100f4155 push 0
+0x100f4157 push 2
+0x100f4159 push 0
+0x100f415b call dword ptr [0x10199aa4]
+0x100f4161 xor eax, eax
+0x100f4163 pop ebp
+0x100f4164 ret 
+CALLS [{"pc": "0x100f40f2", "target": "0x1010a610", "import": null, "text": "0x1010a610"}, {"pc": "0x100f40ff", "target": null, "import": null, "text": "dword ptr [0x10166be0]"}, {"pc": "0x100f4106", "target": "0x1010a543", "import": null, "text": "0x1010a543"}, {"pc": "0x100f4115", "target": "0x100f41e7", "import": null, "text": "0x100f41e7"}, {"pc": "0x100f4125", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}, {"pc": "0x100f4136", "target": "0x100f41b1", "import": null, "text": "0x100f41b1"}, {"pc": "0x100f414b", "target": "0x1010a610", "import": null, "text": "0x1010a610"}, {"pc": "0x100f415b", "target": null, "import": null, "text": "dword ptr [0x10199aa4]"}]
+STRINGS {}
+
+FUNCTION 0x100faa03
+0x100faa03 call dword ptr [0x10131264]
+0x100faa09 xor ecx, ecx
+0x100faa0b mov dword ptr [0x10195118], eax
+0x100faa10 test eax, eax
+0x100faa12 setne cl
+0x100faa15 mov eax, ecx
+0x100faa17 ret 
+CALLS [{"pc": "0x100faa03", "target": null, "import": "KERNEL32.dll!GetProcessHeap", "text": "dword ptr [0x10131264]"}]
+STRINGS {}
+
+FUNCTION 0x100f60b5
+0x100f60b5 call 0x100f4179
+0x100f60ba call 0x100fcb13
+0x100f60bf test eax, eax
+0x100f60c1 jne 0x100f60cb
+0x100f60c3 call 0x100f612b
+0x100f60c8 xor eax, eax
+0x100f60ca ret 
+0x100f60cb push 0x100f5e10
+0x100f60d0 call 0x100f7abf
+0x100f60d5 mov dword ptr [0x101902f0], eax
+0x100f60da pop ecx
+0x100f60db cmp eax, -1
+0x100f60de je 0x100f60c3
+0x100f60e0 push esi
+0x100f60e1 push 0x3bc
+0x100f60e6 push 1
+0x100f60e8 call 0x100f5262
+0x100f60ed mov esi, eax
+0x100f60ef pop ecx
+0x100f60f0 pop ecx
+0x100f60f1 test esi, esi
+0x100f60f3 je 0x100f6122
+0x100f60f5 push esi
+0x100f60f6 push dword ptr [0x101902f0]
+0x100f60fc call 0x100f7b1b
+0x100f6101 pop ecx
+0x100f6102 pop ecx
+0x100f6103 test eax, eax
+0x100f6105 je 0x100f6122
+0x100f6107 push 0
+0x100f6109 push esi
+0x100f610a call 0x100f6002
+0x100f610f pop ecx
+0x100f6110 pop ecx
+0x100f6111 call dword ptr [0x10131020]
+0x100f6117 or dword ptr [esi + 4], 0xffffffff
+0x100f611b mov dword ptr [esi], eax
+0x100f611d xor eax, eax
+0x100f611f inc eax
+0x100f6120 pop esi
+0x100f6121 ret 
+0x100f6122 call 0x100f612b
+0x100f6127 xor eax, eax
+0x100f6129 pop esi
+0x100f612a ret 
+CALLS [{"pc": "0x100f60b5", "target": "0x100f4179", "import": null, "text": "0x100f4179"}, {"pc": "0x100f60ba", "target": "0x100fcb13", "import": null, "text": "0x100fcb13"}, {"pc": "0x100f60c3", "target": "0x100f612b", "import": null, "text": "0x100f612b"}, {"pc": "0x100f60d0", "target": "0x100f7abf", "import": null, "text": "0x100f7abf"}, {"pc": "0x100f60e8", "target": "0x100f5262", "import": null, "text": "0x100f5262"}, {"pc": "0x100f60fc", "target": "0x100f7b1b", "import": null, "text": "0x100f7b1b"}, {"pc": "0x100f610a", "target": "0x100f6002", "import": null, "text": "0x100f6002"}, {"pc": "0x100f6111", "target": null, "import": "KERNEL32.dll!GetCurrentThreadId", "text": "dword ptr [0x10131020]"}, {"pc": "0x100f6122", "target": "0x100f612b", "import": null, "text": "0x100f612b"}]
+STRINGS {}
+
+FUNCTION 0x100fb602
+0x100fb602 push 0x64
+0x100fb604 push 0x10183620
+0x100fb609 call 0x100f5390
+0x100fb60e push 0xb
+0x100fb610 call 0x100fc9e2
+0x100fb615 pop ecx
+0x100fb616 xor ebx, ebx
+0x100fb618 mov dword ptr [ebp - 4], ebx
+0x100fb61b push 0x40
+0x100fb61d push 0x20
+0x100fb61f pop edi
+0x100fb620 push edi
+0x100fb621 call 0x100f5262
+0x100fb626 pop ecx
+0x100fb627 pop ecx
+0x100fb628 mov ecx, eax
+0x100fb62a mov dword ptr [ebp - 0x24], ecx
+0x100fb62d test ecx, ecx
+0x100fb62f jne 0x100fb64c
+0x100fb631 push -2
+0x100fb633 lea eax, [ebp - 0x10]
+0x100fb636 push eax
+0x100fb637 push 0x101902c0
+0x100fb63c call 0x100fc890
+0x100fb641 add esp, 0xc
+0x100fb644 or eax, 0xffffffff
+0x100fb647 jmp 0x100fb8a7
+0x100fb64c mov dword ptr [0x10195120], eax
+0x100fb651 mov dword ptr [0x10199a18], edi
+0x100fb657 add eax, 0x800
+0x100fb65c cmp ecx, eax
+0x100fb65e jae 0x100fb691
+0x100fb660 mov word ptr [ecx + 4], 0xa00
+0x100fb666 or dword ptr [ecx], 0xffffffff
+0x100fb669 mov dword ptr [ecx + 8], ebx
+0x100fb66c and byte ptr [ecx + 0x24], 0x80
+0x100fb670 mov al, byte ptr [ecx + 0x24]
+0x100fb673 and al, 0x7f
+0x100fb675 mov byte ptr [ecx + 0x24], al
+0x100fb678 mov word ptr [ecx + 0x25], 0xa0a
+0x100fb67e mov dword ptr [ecx + 0x38], ebx
+0x100fb681 mov byte ptr [ecx + 0x34], bl
+0x100fb684 add ecx, 0x40
+0x100fb687 mov dword ptr [ebp - 0x24], ecx
+0x100fb68a mov eax, dword ptr [0x10195120]
+0x100fb68f jmp 0x100fb657
+0x100fb691 lea eax, [ebp - 0x74]
+0x100fb694 push eax
+0x100fb695 call dword ptr [0x10131258]
+0x100fb69b cmp word ptr [ebp - 0x42], 0
+0x100fb6a0 je 0x100fb7d5
+0x100fb6a6 mov eax, dword ptr [ebp - 0x40]
+0x100fb6a9 test eax, eax
+0x100fb6ab je 0x100fb7d5
+0x100fb6b1 mov ecx, dword ptr [eax]
+0x100fb6b3 mov dword ptr [ebp - 0x1c], ecx
+0x100fb6b6 add eax, 4
+0x100fb6b9 mov dword ptr [ebp - 0x28], eax
+0x100fb6bc add eax, ecx
+0x100fb6be mov dword ptr [ebp - 0x20], eax
+0x100fb6c1 mov eax, 0x800
+0x100fb6c6 cmp ecx, eax
+0x100fb6c8 jl 0x100fb6cf
+0x100fb6ca mov ecx, eax
+0x100fb6cc mov dword ptr [ebp - 0x1c], ecx
+0x100fb6cf xor esi, esi
+0x100fb6d1 inc esi
+0x100fb6d2 mov dword ptr [ebp - 0x30], esi
+0x100fb6d5 cmp dword ptr [0x10199a18], ecx
+0x100fb6db jge 0x100fb6fd
+0x100fb6dd push 0x40
+0x100fb6df push edi
+0x100fb6e0 call 0x100f5262
+0x100fb6e5 pop ecx
+0x100fb6e6 pop ecx
+0x100fb6e7 mov ecx, eax
+0x100fb6e9 mov dword ptr [ebp - 0x24], ecx
+0x100fb6ec test ecx, ecx
+0x100fb6ee jne 0x100fb788
+0x100fb6f4 mov ecx, dword ptr [0x10199a18]
+0x100fb6fa mov dword ptr [ebp - 0x1c], ecx
+0x100fb6fd mov edi, ebx
+0x100fb6ff mov dword ptr [ebp - 0x2c], edi
+0x100fb702 push -2
+0x100fb704 pop ebx
+0x100fb705 mov eax, dword ptr [ebp - 0x28]
+0x100fb708 mov edx, dword ptr [ebp - 0x20]
+0x100fb70b cmp edi, ecx
+0x100fb70d jge 0x100fb7d8
+0x100fb713 mov esi, dword ptr [edx]
+0x100fb715 cmp esi, -1
+0x100fb718 je 0x100fb775
+0x100fb71a cmp esi, ebx
+0x100fb71c je 0x100fb775
+0x100fb71e mov al, byte ptr [eax]
+0x100fb720 test al, 1
+0x100fb722 je 0x100fb775
+0x100fb724 test al, 8
+0x100fb726 jne 0x100fb736
+0x100fb728 push esi
+0x100fb729 call dword ptr [0x101311ec]
+0x100fb72f mov edx, dword ptr [ebp - 0x20]
+0x100fb732 test eax, eax
+0x100fb734 je 0x100fb772
+0x100fb736 mov eax, edi
+0x100fb738 sar eax, 5
+0x100fb73b mov esi, edi
+0x100fb73d and esi, 0x1f
+0x100fb740 shl esi, 6
+0x100fb743 add esi, dword ptr [eax*4 + 0x10195120]
+0x100fb74a mov dword ptr [ebp - 0x24], esi
+0x100fb74d mov eax, dword ptr [edx]
+0x100fb74f mov dword ptr [esi], eax
+0x100fb751 mov eax, dword ptr [ebp - 0x28]
+0x100fb754 mov al, byte ptr [eax]
+0x100fb756 mov byte ptr [esi + 4], al
+0x100fb759 push 0
+0x100fb75b push 0xfa0
+0x100fb760 lea eax, [esi + 0xc]
+0x100fb763 push eax
+0x100fb764 call 0x100f7b91
+0x100fb769 add esp, 0xc
+0x100fb76c inc dword ptr [esi + 8]
+0x100fb76f mov edx, dword ptr [ebp - 0x20]
+0x100fb772 mov ecx, dword ptr [ebp - 0x1c]
+0x100fb775 inc edi
+0x100fb776 mov dword ptr [ebp - 0x2c], edi
+0x100fb779 mov eax, dword ptr [ebp - 0x28]
+0x100fb77c inc eax
+0x100fb77d mov dword ptr [ebp - 0x28], eax
+0x100fb780 add edx, 4
+0x100fb783 mov dword ptr [ebp - 0x20], edx
+0x100fb786 jmp 0x100fb70b
+0x100fb788 mov dword ptr [esi*4 + 0x10195120], ecx
+0x100fb78f add dword ptr [0x10199a18], edi
+0x100fb795 mov eax, dword ptr [esi*4 + 0x10195120]
+0x100fb79c add eax, 0x800
+0x100fb7a1 cmp ecx, eax
+0x100fb7a3 jae 0x100fb7c9
+0x100fb7a5 mov word ptr [ecx + 4], 0xa00
+0x100fb7ab or dword ptr [ecx], 0xffffffff
+0x100fb7ae mov dword ptr [ecx + 8], ebx
+0x100fb7b1 and byte ptr [ecx + 0x24], 0x80
+0x100fb7b5 mov word ptr [ecx + 0x25], 0xa0a
+0x100fb7bb mov dword ptr [ecx + 0x38], ebx
+0x100fb7be mov byte ptr [ecx + 0x34], bl
+0x100fb7c1 add ecx, 0x40
+0x100fb7c4 mov dword ptr [ebp - 0x24], ecx
+0x100fb7c7 jmp 0x100fb795
+0x100fb7c9 inc esi
+0x100fb7ca mov dword ptr [ebp - 0x30], esi
+0x100fb7cd mov ecx, dword ptr [ebp - 0x1c]
+0x100fb7d0 jmp 0x100fb6d5
+0x100fb7d5 push -2
+0x100fb7d7 pop ebx
+0x100fb7d8 xor edi, edi
+0x100fb7da mov dword ptr [ebp - 0x2c], edi
+0x100fb7dd cmp edi, 3
+0x100fb7e0 jge 0x100fb89d
+0x100fb7e6 mov esi, edi
+0x100fb7e8 shl esi, 6
+0x100fb7eb add esi, dword ptr [0x10195120]
+0x100fb7f1 mov dword ptr [ebp - 0x24], esi
+0x100fb7f4 cmp dword ptr [esi], -1
+0x100fb7f7 je 0x100fb80b
+0x100fb7f9 cmp dword ptr [esi], ebx
+0x100fb7fb je 0x100fb80b
+0x100fb7fd movsx eax, byte ptr [esi + 4]
+0x100fb801 or al, 0x80
+0x100fb803 mov byte ptr [esi + 4], al
+0x100fb806 jmp 0x100fb897
+0x100fb80b mov byte ptr [esi + 4], 0x81
+0x100fb80f test edi, edi
+0x100fb811 jne 0x100fb818
+0x100fb813 push -0xa
+0x100fb815 pop eax
+0x100fb816 jmp 0x100fb822
+0x100fb818 lea eax, [edi - 1]
+0x100fb81b neg eax
+0x100fb81d sbb eax, eax
+0x100fb81f add eax, -0xb
+0x100fb822 push eax
+0x100fb823 call dword ptr [0x101311e8]
+0x100fb829 mov dword ptr [ebp - 0x1c], eax
+0x100fb82c cmp eax, -1
+0x100fb82f je 0x100fb87d
+0x100fb831 test eax, eax
+0x100fb833 je 0x100fb87d
+0x100fb835 push eax
+0x100fb836 call dword ptr [0x101311ec]
+0x100fb83c test eax, eax
+0x100fb83e je 0x100fb87d
+0x100fb840 mov ecx, dword ptr [ebp - 0x1c]
+0x100fb843 mov dword ptr [esi], ecx
+0x100fb845 and eax, 0xff
+0x100fb84a cmp eax, 2
+0x100fb84d jne 0x100fb857
+0x100fb84f movsx eax, byte ptr [esi + 4]
+0x100fb853 or al, 0x40
+0x100fb855 jmp 0x100fb862
+0x100fb857 cmp eax, 3
+0x100fb85a jne 0x100fb865
+0x100fb85c movsx eax, byte ptr [esi + 4]
+0x100fb860 or al, 8
+0x100fb862 mov byte ptr [esi + 4], al
+0x100fb865 push 0
+0x100fb867 push 0xfa0
+0x100fb86c lea eax, [esi + 0xc]
+0x100fb86f push eax
+0x100fb870 call 0x100f7b91
+0x100fb875 add esp, 0xc
+0x100fb878 inc dword ptr [esi + 8]
+0x100fb87b jmp 0x100fb897
+0x100fb87d movsx eax, byte ptr [esi + 4]
+0x100fb881 or al, 0x40
+0x100fb883 mov byte ptr [esi + 4], al
+0x100fb886 mov dword ptr [esi], ebx
+0x100fb888 mov eax, dword ptr [0x1019aac0]
+0x100fb88d test eax, eax
+0x100fb88f je 0x100fb897
+0x100fb891 mov eax, dword ptr [eax + edi*4]
+0x100fb894 mov dword ptr [eax + 0x10], ebx
+0x100fb897 inc edi
+0x100fb898 jmp 0x100fb7da
+0x100fb89d mov dword ptr [ebp - 4], ebx
+0x100fb8a0 call 0x100fb8ad
+0x100fb8a5 xor eax, eax
+0x100fb8a7 call 0x100f53d5
+0x100fb8ac ret 
+CALLS [{"pc": "0x100fb609", "target": "0x100f5390", "import": null, "text": "0x100f5390"}, {"pc": "0x100fb610", "target": "0x100fc9e2", "import": null, "text": "0x100fc9e2"}, {"pc": "0x100fb621", "target": "0x100f5262", "import": null, "text": "0x100f5262"}, {"pc": "0x100fb63c", "target": "0x100fc890", "import": null, "text": "0x100fc890"}, {"pc": "0x100fb8a7", "target": "0x100f53d5", "import": null, "text": "0x100f53d5"}, {"pc": "0x100fb695", "target": null, "import": "KERNEL32.dll!GetStartupInfoW", "text": "dword ptr [0x10131258]"}, {"pc": "0x100fb6e0", "target": "0x100f5262", "import": null, "text": "0x100f5262"}, {"pc": "0x100fb729", "target": null, "import": "KERNEL32.dll!GetFileType", "text": "dword ptr [0x101311ec]"}, {"pc": "0x100fb764", "target": "0x100f7b91", "import": null, "text": "0x100f7b91"}, {"pc": "0x100fb823", "target": null, "import": "KERNEL32.dll!GetStdHandle", "text": "dword ptr [0x101311e8]"}, {"pc": "0x100fb836", "target": null, "import": "KERNEL32.dll!GetFileType", "text": "dword ptr [0x101311ec]"}, {"pc": "0x100fb870", "target": "0x100f7b91", "import": null, "text": "0x100f7b91"}, {"pc": "0x100fb8a0", "target": "0x100fb8ad", "import": null, "text": "0x100fb8ad"}]
+STRINGS {}
+
+FUNCTION 0x100ff3fc
+0x100ff3fc push ebp
+0x100ff3fd mov ebp, esp
+0x100ff3ff push ecx
+0x100ff400 push ecx
+0x100ff401 cmp dword ptr [0x10199ab0], 0
+0x100ff408 jne 0x100ff40f
+0x100ff40a call 0x100f23c0
+0x100ff40f push ebx
+0x100ff410 push esi
+0x100ff411 push edi
+0x100ff412 push 0x104
+0x100ff417 mov edi, 0x10195a70
+0x100ff41c xor ebx, ebx
+0x100ff41e push edi
+0x100ff41f push ebx
+0x100ff420 mov byte ptr [0x10195b74], bl
+0x100ff426 call dword ptr [0x10131094]
+0x100ff42c mov esi, dword ptr [0x10199ab8]
+0x100ff432 mov dword ptr [0x101950e0], edi
+0x100ff438 test esi, esi
+0x100ff43a je 0x100ff440
+0x100ff43c cmp byte ptr [esi], bl
+0x100ff43e jne 0x100ff442
+0x100ff440 mov esi, edi
+0x100ff442 lea eax, [ebp - 8]
+0x100ff445 push eax
+0x100ff446 lea eax, [ebp - 4]
+0x100ff449 push eax
+0x100ff44a push ebx
+0x100ff44b push ebx
+0x100ff44c push esi
+0x100ff44d call 0x100ff4af
+0x100ff452 mov ebx, dword ptr [ebp - 4]
+0x100ff455 add esp, 0x14
+0x100ff458 cmp ebx, 0x3fffffff
+0x100ff45e jae 0x100ff4a5
+0x100ff460 mov ecx, dword ptr [ebp - 8]
+0x100ff463 cmp ecx, -1
+0x100ff466 jae 0x100ff4a5
+0x100ff468 lea edx, [ecx + ebx*4]
+0x100ff46b cmp edx, ecx
+0x100ff46d jb 0x100ff4a5
+0x100ff46f push edx
+0x100ff470 call 0x100f52aa
+0x100ff475 mov edi, eax
+0x100ff477 pop ecx
+0x100ff478 test edi, edi
+0x100ff47a je 0x100ff4a5
+0x100ff47c lea eax, [ebp - 8]
+0x100ff47f push eax
+0x100ff480 lea eax, [ebp - 4]
+0x100ff483 push eax
+0x100ff484 lea eax, [edi + ebx*4]
+0x100ff487 push eax
+0x100ff488 push edi
+0x100ff489 push esi
+0x100ff48a call 0x100ff4af
+0x100ff48f mov eax, dword ptr [ebp - 4]
+0x100ff492 add esp, 0x14
+0x100ff495 dec eax
+0x100ff496 mov dword ptr [0x101950d0], edi
+0x100ff49c mov dword ptr [0x101950cc], eax
+0x100ff4a1 xor eax, eax
+0x100ff4a3 jmp 0x100ff4a8
+0x100ff4a5 or eax, 0xffffffff
+0x100ff4a8 pop edi
+0x100ff4a9 pop esi
+0x100ff4aa pop ebx
+0x100ff4ab mov esp, ebp
+0x100ff4ad pop ebp
+0x100ff4ae ret 
+CALLS [{"pc": "0x100ff40a", "target": "0x100f23c0", "import": null, "text": "0x100f23c0"}, {"pc": "0x100ff426", "target": null, "import": "KERNEL32.dll!GetModuleFileNameA", "text": "dword ptr [0x10131094]"}, {"pc": "0x100ff44d", "target": "0x100ff4af", "import": null, "text": "0x100ff4af"}, {"pc": "0x100ff470", "target": "0x100f52aa", "import": null, "text": "0x100f52aa"}, {"pc": "0x100ff48a", "target": "0x100ff4af", "import": null, "text": "0x100ff4af"}]
+STRINGS {}
+
+FUNCTION 0x100ff62b
+0x100ff62b cmp dword ptr [0x10199ab0], 0
+0x100ff632 jne 0x100ff639
+0x100ff634 call 0x100f23c0
+0x100ff639 push esi
+0x100ff63a mov esi, dword ptr [0x101950ac]
+0x100ff640 push edi
+0x100ff641 xor edi, edi
+0x100ff643 test esi, esi
+0x100ff645 jne 0x100ff65e
+0x100ff647 or eax, 0xffffffff
+0x100ff64a jmp 0x100ff6e5
+0x100ff64f cmp al, 0x3d
+0x100ff651 je 0x100ff654
+0x100ff653 inc edi
+0x100ff654 push esi
+0x100ff655 call 0x100f86d0
+0x100ff65a inc esi
+0x100ff65b pop ecx
+0x100ff65c add esi, eax
+0x100ff65e mov al, byte ptr [esi]
+0x100ff660 test al, al
+0x100ff662 jne 0x100ff64f
+0x100ff664 lea eax, [edi + 1]
+0x100ff667 push 4
+0x100ff669 push eax
+0x100ff66a call 0x100f5262
+0x100ff66f mov edi, eax
+0x100ff671 mov dword ptr [0x101950d8], edi
+0x100ff677 pop ecx
+0x100ff678 pop ecx
+0x100ff679 test edi, edi
+0x100ff67b je 0x100ff647
+0x100ff67d mov esi, dword ptr [0x101950ac]
+0x100ff683 push ebx
+0x100ff684 cmp byte ptr [esi], 0
+0x100ff687 je 0x100ff6c7
+0x100ff689 push esi
+0x100ff68a call 0x100f86d0
+0x100ff68f cmp byte ptr [esi], 0x3d
+0x100ff692 pop ecx
+0x100ff693 lea ebx, [eax + 1]
+0x100ff696 je 0x100ff6ba
+0x100ff698 push 1
+0x100ff69a push ebx
+0x100ff69b call 0x100f5262
+0x100ff6a0 mov dword ptr [edi], eax
+0x100ff6a2 pop ecx
+0x100ff6a3 pop ecx
+0x100ff6a4 test eax, eax
+0x100ff6a6 je 0x100ff6e8
+0x100ff6a8 push esi
+0x100ff6a9 push ebx
+0x100ff6aa push eax
+0x100ff6ab call 0x100f081e
+0x100ff6b0 add esp, 0xc
+0x100ff6b3 test eax, eax
+0x100ff6b5 jne 0x100ff6ff
+0x100ff6b7 add edi, 4
+0x100ff6ba add esi, ebx
+0x100ff6bc cmp byte ptr [esi], 0
+0x100ff6bf jne 0x100ff689
+0x100ff6c1 mov esi, dword ptr [0x101950ac]
+0x100ff6c7 push esi
+0x100ff6c8 call 0x100ed4fa
+0x100ff6cd and dword ptr [0x101950ac], 0
+0x100ff6d4 and dword ptr [edi], 0
+0x100ff6d7 xor eax, eax
+0x100ff6d9 mov dword ptr [0x10199ab4], 1
+0x100ff6e3 pop ecx
+0x100ff6e4 pop ebx
+0x100ff6e5 pop edi
+0x100ff6e6 pop esi
+0x100ff6e7 ret 
+0x100ff6e8 push dword ptr [0x101950d8]
+0x100ff6ee call 0x100ed4fa
+0x100ff6f3 and dword ptr [0x101950d8], 0
+0x100ff6fa or eax, 0xffffffff
+0x100ff6fd jmp 0x100ff6e3
+0x100ff6ff xor eax, eax
+0x100ff701 push eax
+0x100ff702 push eax
+0x100ff703 push eax
+0x100ff704 push eax
+0x100ff705 push eax
+0x100ff706 call 0x100eec43
+0x100ff70b int3 
+CALLS [{"pc": "0x100ff634", "target": "0x100f23c0", "import": null, "text": "0x100f23c0"}, {"pc": "0x100ff66a", "target": "0x100f5262", "import": null, "text": "0x100f5262"}, {"pc": "0x100ff68a", "target": "0x100f86d0", "import": null, "text": "0x100f86d0"}, {"pc": "0x100ff69b", "target": "0x100f5262", "import": null, "text": "0x100f5262"}, {"pc": "0x100ff6ab", "target": "0x100f081e", "import": null, "text": "0x100f081e"}, {"pc": "0x100ff6c8", "target": "0x100ed4fa", "import": null, "text": "0x100ed4fa"}, {"pc": "0x100ff706", "target": "0x100eec43", "import": null, "text": "0x100eec43"}, {"pc": "0x100ff6ee", "target": "0x100ed4fa", "import": null, "text": "0x100ed4fa"}, {"pc": "0x100ff655", "target": "0x100f86d0", "import": null, "text": "0x100f86d0"}]
+STRINGS {}
+
+FUNCTION 0x100ff83b
+0x100ff83b push esi
+0x100ff83c push edi
+0x100ff83d mov esi, 0x101800ec
+0x100ff842 mov edi, 0x101800ec
+0x100ff847 jmp 0x100ff854
+0x100ff849 mov eax, dword ptr [esi]
+0x100ff84b test eax, eax
+0x100ff84d je 0x100ff851
+0x100ff84f call eax
+0x100ff851 add esi, 4
+0x100ff854 cmp esi, edi
+0x100ff856 jb 0x100ff849
+0x100ff858 pop edi
+0x100ff859 pop esi
+0x100ff85a ret 
+CALLS [{"pc": "0x100ff84f", "target": null, "import": null, "text": "eax"}]
+STRINGS {}
+
+FUNCTION 0x100ff7ae
+0x100ff7ae push ebp
+0x100ff7af mov ebp, esp
+0x100ff7b1 push ecx
+0x100ff7b2 push edi
+0x100ff7b3 call dword ptr [0x101311ac]
+0x100ff7b9 mov edi, eax
+0x100ff7bb xor eax, eax
+0x100ff7bd test edi, edi
+0x100ff7bf je 0x100ff836
+0x100ff7c1 push esi
+0x100ff7c2 mov esi, edi
+0x100ff7c4 cmp word ptr [edi], ax
+0x100ff7c7 je 0x100ff7d9
+0x100ff7c9 add esi, 2
+0x100ff7cc cmp word ptr [esi], ax
+0x100ff7cf jne 0x100ff7c9
+0x100ff7d1 add esi, 2
+0x100ff7d4 cmp word ptr [esi], ax
+0x100ff7d7 jne 0x100ff7c9
+0x100ff7d9 push ebx
+0x100ff7da push eax
+0x100ff7db push eax
+0x100ff7dc push eax
+0x100ff7dd sub esi, edi
+0x100ff7df push eax
+0x100ff7e0 sar esi, 1
+0x100ff7e2 inc esi
+0x100ff7e3 push esi
+0x100ff7e4 push edi
+0x100ff7e5 push eax
+0x100ff7e6 push eax
+0x100ff7e7 call dword ptr [0x10131100]
+0x100ff7ed mov dword ptr [ebp - 4], eax
+0x100ff7f0 test eax, eax
+0x100ff7f2 je 0x100ff82b
+0x100ff7f4 push eax
+0x100ff7f5 call 0x100f52aa
+0x100ff7fa mov ebx, eax
+0x100ff7fc pop ecx
+0x100ff7fd test ebx, ebx
+0x100ff7ff je 0x100ff82b
+0x100ff801 xor eax, eax
+0x100ff803 push eax
+0x100ff804 push eax
+0x100ff805 push dword ptr [ebp - 4]
+0x100ff808 push ebx
+0x100ff809 push esi
+0x100ff80a push edi
+0x100ff80b push eax
+0x100ff80c push eax
+0x100ff80d call dword ptr [0x10131100]
+0x100ff813 test eax, eax
+0x100ff815 jne 0x100ff820
+0x100ff817 push ebx
+0x100ff818 call 0x100ed4fa
+0x100ff81d pop ecx
+0x100ff81e xor ebx, ebx
+0x100ff820 push edi
+0x100ff821 call dword ptr [0x101311a8]
+0x100ff827 mov eax, ebx
+0x100ff829 jmp 0x100ff834
+0x100ff82b push edi
+0x100ff82c call dword ptr [0x101311a8]
+0x100ff832 xor eax, eax
+0x100ff834 pop ebx
+0x100ff835 pop esi
+0x100ff836 pop edi
+0x100ff837 mov esp, ebp
+0x100ff839 pop ebp
+0x100ff83a ret 
+CALLS [{"pc": "0x100ff7b3", "target": null, "import": "KERNEL32.dll!GetEnvironmentStringsW", "text": "dword ptr [0x101311ac]"}, {"pc": "0x100ff7e7", "target": null, "import": "KERNEL32.dll!WideCharToMultiByte", "text": "dword ptr [0x10131100]"}, {"pc": "0x100ff7f5", "target": "0x100f52aa", "import": null, "text": "0x100f52aa"}, {"pc": "0x100ff80d", "target": null, "import": "KERNEL32.dll!WideCharToMultiByte", "text": "dword ptr [0x10131100]"}, {"pc": "0x100ff818", "target": "0x100ed4fa", "import": null, "text": "0x100ed4fa"}, {"pc": "0x100ff821", "target": null, "import": "KERNEL32.dll!FreeEnvironmentStringsW", "text": "dword ptr [0x101311a8]"}, {"pc": "0x100ff82c", "target": null, "import": "KERNEL32.dll!FreeEnvironmentStringsW", "text": "dword ptr [0x101311a8]"}]
+STRINGS {}
+
+FUNCTION 0x10056c60
+0x10056c60 push ebp
+0x10056c61 mov ebp, esp
+0x10056c63 sub esp, 0x2c
+0x10056c66 mov eax, dword ptr [0x101902c0]
+0x10056c6b xor eax, ebp
+0x10056c6d mov dword ptr [ebp - 4], eax
+0x10056c70 mov eax, dword ptr [ebp + 8]
+0x10056c73 push ebx
+0x10056c74 push esi
+0x10056c75 mov esi, ecx
+0x10056c77 mov dword ptr [ebp - 0x24], eax
+0x10056c7a mov eax, dword ptr [ebp + 0xc]
+0x10056c7d mov ebx, edx
+0x10056c7f push edi
+0x10056c80 mov edi, esi
+0x10056c82 mov dword ptr [ebp - 0x28], eax
+0x10056c85 lea ecx, [edi + 1]
+0x10056c88 mov al, byte ptr [edi]
+0x10056c8a inc edi
+0x10056c8b test al, al
+0x10056c8d jne 0x10056c88
+0x10056c8f mov eax, dword ptr [0x10178d6c]
+0x10056c94 lea edx, [ebp - 0x20]
+0x10056c97 mov dword ptr [ebp - 0x20], eax
+0x10056c9a sub edi, ecx
+0x10056c9c mov eax, dword ptr [0x10178d70]
+0x10056ca1 mov ecx, esi
+0x10056ca3 mov dword ptr [ebp - 0x1c], eax
+0x10056ca6 mov eax, dword ptr [0x10178d74]
+0x10056cab mov dword ptr [ebp - 0x18], eax
+0x10056cae mov ax, word ptr [0x10178d78]
+0x10056cb4 mov word ptr [ebp - 0x14], ax
+0x10056cb8 mov al, byte ptr [0x10178d7a]
+0x10056cbd mov byte ptr [ebp - 0x12], al
+0x10056cc0 call 0x1005dc90
+0x10056cc5 test eax, eax
+0x10056cc7 je 0x10056cd4
+0x10056cc9 mov dword ptr [ebx], 0
+0x10056ccf lea edx, [eax + 0xe]
+0x10056cd2 jmp 0x10056d11
+0x10056cd4 mov eax, dword ptr [0x10178d7c]
+0x10056cd9 lea edx, [ebp - 0x10]
+0x10056cdc mov dword ptr [ebp - 0x10], eax
+0x10056cdf mov ecx, esi
+0x10056ce1 mov eax, dword ptr [0x10178d80]
+0x10056ce6 mov dword ptr [ebp - 0xc], eax
+0x10056ce9 mov ax, word ptr [0x10178d84]
+0x10056cef mov word ptr [ebp - 8], ax
+0x10056cf3 mov al, byte ptr [0x10178d86]
+0x10056cf8 mov byte ptr [ebp - 6], al
+0x10056cfb call 0x1005dc90
+0x10056d00 test eax, eax
+0x10056d02 je 0x10056db7
+0x10056d08 mov dword ptr [ebx], 1
+0x10056d0e lea edx, [eax + 0xa]
+0x10056d11 lea eax, [esi + edi]
+0x10056d14 cmp edx, eax
+0x10056d16 jb 0x10056d5f
+0x10056d18 push esi
+0x10056d19 push 0x10178d88
+0x10056d1e push 0x10178e10
+0x10056d23 call 0x1003d4d0
+0x10056d28 add esp, 0xc
+0x10056d2b push esi
+0x10056d2c push 0x10178d88
+0x10056d31 push 0x10178e10
+0x10056d36 call 0x1003d4d0
+0x10056d3b add esp, 0xc
+0x10056d3e push esi
+0x10056d3f push 0x10178d88
+0x10056d44 push 0x10178e10
+0x10056d49 mov eax, dword ptr [0x10198420]
+0x10056d4e push dword ptr [0x10198424]
+0x10056d54 or eax, 1
+0x10056d57 push eax
+0x10056d58 push 2
+0x10056d5a jmp 0x10056df9
+0x10056d5f push dword ptr [ebp - 0x28]
+0x10056d62 push dword ptr [ebp - 0x24]
+0x10056d65 call 0x100559a0
+0x10056d6a add esp, 8
+0x10056d6d test al, al
+0x10056d6f jne 0x10056da4
+0x10056d71 push esi
+0x10056d72 push 0x10178d88
+0x10056d77 push 0x10178e28
+0x10056d7c call 0x1003d4d0
+0x10056d81 add esp, 0xc
+0x10056d84 push esi
+0x10056d85 push 0x10178d88
+0x10056d8a push 0x10178e28
+0x10056d8f call 0x1003d4d0
+0x10056d94 add esp, 0xc
+0x10056d97 push esi
+0x10056d98 push 0x10178d88
+0x10056d9d push 0x10178e28
+0x10056da2 jmp 0x10056d49
+0x10056da4 mov al, 1
+0x10056da6 pop edi
+0x10056da7 pop esi
+0x10056da8 pop ebx
+0x10056da9 mov ecx, dword ptr [ebp - 4]
+0x10056dac xor ecx, ebp
+0x10056dae call 0x100ec285
+0x10056db3 mov esp, ebp
+0x10056db5 pop ebp
+0x10056db6 ret 
+0x10056db7 push esi
+0x10056db8 push 0x10178d88
+0x10056dbd push 0x10178dd0
+0x10056dc2 call 0x1003d4d0
+0x10056dc7 add esp, 0xc
+0x10056dca push esi
+0x10056dcb push 0x10178d88
+0x10056dd0 push 0x10178dd0
+0x10056dd5 call 0x1003d4d0
+0x10056dda mov eax, dword ptr [0x10198420]
+0x10056ddf add esp, 0xc
+0x10056de2 or eax, 1
+0x10056de5 push esi
+0x10056de6 push 0x10178d88
+0x10056deb push 0x10178dd0
+0x10056df0 push dword ptr [0x10198424]
+0x10056df6 push eax
+0x10056df7 push 1
+0x10056df9 call 0x1003e1e0
+0x10056dfe mov ecx, dword ptr [ebp - 4]
+0x10056e01 add esp, 0x18
+0x10056e04 xor ecx, ebp
+0x10056e06 xor al, al
+0x10056e08 pop edi
+0x10056e09 pop esi
+0x10056e0a pop ebx
+0x10056e0b call 0x100ec285
+0x10056e10 mov esp, ebp
+0x10056e12 pop ebp
+0x10056e13 ret 
+CALLS [{"pc": "0x10056cc0", "target": "0x1005dc90", "import": null, "text": "0x1005dc90"}, {"pc": "0x10056d23", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10056d36", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10056df9", "target": "0x1003e1e0", "import": null, "text": "0x1003e1e0"}, {"pc": "0x10056e0b", "target": "0x100ec285", "import": null, "text": "0x100ec285"}, {"pc": "0x10056d65", "target": "0x100559a0", "import": null, "text": "0x100559a0"}, {"pc": "0x10056d7c", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10056d8f", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10056dae", "target": "0x100ec285", "import": null, "text": "0x100ec285"}, {"pc": "0x10056cfb", "target": "0x1005dc90", "import": null, "text": "0x1005dc90"}, {"pc": "0x10056dc2", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10056dd5", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}]
+STRINGS {"0x10178d6c": "RADS/projects/", "0x10178d70": "/projects/", "0x10178d74": "jects/", "0x10178d88": "Riot::RADS::Reader::RuntimeEnvironment::GetProjectTypeNameAndVersion", "0x10178e10": "%s: Incomplete path: %s", "0x10178e28": "%s: Failed to determine name and version from the path %s", "0x10178d7c": "solutions/", "0x10178d80": "tions/", "0x10178dd0": "%s: Did not find keywords \"projects\" or \"solutions\" in path %s"}
+
+FUNCTION 0x10056e40
+0x10056e40 push ebp
+0x10056e41 mov ebp, esp
+0x10056e43 push -1
+0x10056e45 push 0x1012c9db
+0x10056e4a mov eax, dword ptr fs:[0]
+0x10056e50 push eax
+0x10056e51 sub esp, 0x16c
+0x10056e57 mov eax, dword ptr [0x101902c0]
+0x10056e5c xor eax, ebp
+0x10056e5e mov dword ptr [ebp - 0x10], eax
+0x10056e61 push ebx
+0x10056e62 push esi
+0x10056e63 push edi
+0x10056e64 push eax
+0x10056e65 lea eax, [ebp - 0xc]
+0x10056e68 mov dword ptr fs:[0], eax
+0x10056e6e mov esi, edx
+0x10056e70 mov eax, dword ptr [ebp + 0x10]
+0x10056e73 test ecx, ecx
+0x10056e75 mov edi, dword ptr [ebp + 8]
+0x10056e78 mov ebx, dword ptr [ebp + 0xc]
+0x10056e7b mov dword ptr [ebp - 0x174], eax
+0x10056e81 mov eax, dword ptr [ebp + 0x14]
+0x10056e84 mov dword ptr [ebp - 0x16c], eax
+0x10056e8a lea eax, [ebp - 0x138]
+0x10056e90 push eax
+0x10056e91 push ecx
+0x10056e92 mov dword ptr [ebp - 0x138], esi
+0x10056e98 lea ecx, [ebp - 0x118]
+0x10056e9e mov dword ptr [ebp - 0x130], edi
+0x10056ea4 mov dword ptr [ebp - 0x12c], 0x10177a04
+0x10056eae mov dword ptr [ebp - 0x128], ebx
+0x10056eb4 mov dword ptr [ebp - 0x124], 0x101769b0
+0x10056ebe mov dword ptr [ebp - 0x120], 0x101769b0
+0x10056ec8 mov dword ptr [ebp - 0x11c], 0x101769b0
+0x10056ed2 jne 0x10056f9d
+0x10056ed8 mov dword ptr [ebp - 0x134], 0x10177bf8
+0x10056ee2 call 0x1005d940
+0x10056ee7 add esp, 8
+0x10056eea test al, al
+0x10056eec jne 0x10056f45
+0x10056eee push ebx
+0x10056eef push edi
+0x10056ef0 push esi
+0x10056ef1 push 0x10178e64
+0x10056ef6 push 0x10178ea0
+0x10056efb call 0x1003d4d0
+0x10056f00 add esp, 0x14
+0x10056f03 push ebx
+0x10056f04 push edi
+0x10056f05 push esi
+0x10056f06 push 0x10178e64
+0x10056f0b push 0x10178ea0
+0x10056f10 call 0x1003d4d0
+0x10056f15 add esp, 0x14
+0x10056f18 push ebx
+0x10056f19 push edi
+0x10056f1a push esi
+0x10056f1b push 0x10178e64
+0x10056f20 push 0x10178ea0
+0x10056f25 mov eax, dword ptr [0x10198420]
+0x10056f2a push dword ptr [0x10198424]
+0x10056f30 or eax, 1
+0x10056f33 push eax
+0x10056f34 push 2
+0x10056f36 call 0x1003e1e0
+0x10056f3b add esp, 0x20
+0x10056f3e xor al, al
+0x10056f40 jmp 0x10057114
+0x10056f45 lea edx, [ebp - 0x118]
+0x10056f4b mov ecx, esi
+0x10056f4d call 0x10055ba0
+0x10056f52 mov dword ptr [ebp - 0x170], eax
+0x10056f58 test eax, eax
+0x10056f5a je 0x10056f6e
+0x10056f5c mov ecx, dword ptr [ebp - 0x16c]
+0x10056f62 lea eax, [ebp - 0x170]
+0x10056f68 push eax
+0x10056f69 call 0x10042580
+0x10056f6e cmp byte ptr [ebp - 0x118], 0
+0x10056f75 mov dword ptr [ebp - 0x13c], 0xf
+0x10056f7f mov dword ptr [ebp - 0x140], 0
+0x10056f89 mov byte ptr [ebp - 0x150], 0
+0x10056f90 jne 0x10057037
+0x10056f96 xor ecx, ecx
+0x10056f98 jmp 0x10057049
+0x10056f9d mov dword ptr [ebp - 0x134], 0x10176aa4
+0x10056fa7 call 0x1005d940
+0x10056fac add esp, 8
+0x10056faf test al, al
+0x10056fb1 jne 0x10056fef
+0x10056fb3 push ebx
+0x10056fb4 push edi
+0x10056fb5 push esi
+0x10056fb6 push 0x10178e64
+0x10056fbb push 0x10178f28
+0x10056fc0 call 0x1003d4d0
+0x10056fc5 add esp, 0x14
+0x10056fc8 push ebx
+0x10056fc9 push edi
+0x10056fca push esi
+0x10056fcb push 0x10178e64
+0x10056fd0 push 0x10178f28
+0x10056fd5 call 0x1003d4d0
+0x10056fda add esp, 0x14
+0x10056fdd push ebx
+0x10056fde push edi
+0x10056fdf push esi
+0x10056fe0 push 0x10178e64
+0x10056fe5 push 0x10178f28
+0x10056fea jmp 0x10056f25
+0x10056fef push dword ptr [ebp - 0x16c]
+0x10056ff5 lea edx, [ebp - 0x118]
+0x10056ffb mov ecx, esi
+0x10056ffd call 0x10055d00
+0x10057002 add esp, 4
+0x10057005 test al, al
+0x10057007 jne 0x10056f6e
+0x1005700d mov eax, dword ptr [0x10198420]
+0x10057012 push 0x10178e64
+0x10057017 push 0x10178fb0
+0x1005701c push dword ptr [0x10198424]
+0x10057022 or eax, 1
+0x10057025 push eax
+0x10057026 push 2
+0x10057028 call 0x1003e1e0
+0x1005702d add esp, 0x14
+0x10057030 xor al, al
+0x10057032 jmp 0x10057114
+0x10057037 lea ecx, [ebp - 0x118]
+0x1005703d lea edx, [ecx + 1]
+0x10057040 mov al, byte ptr [ecx]
+0x10057042 inc ecx
+0x10057043 test al, al
+0x10057045 jne 0x10057040
+0x10057047 sub ecx, edx
+0x10057049 push ecx
+0x1005704a lea eax, [ebp - 0x118]
+0x10057050 push eax
+0x10057051 lea ecx, [ebp - 0x150]
+0x10057057 call 0x1003d920
+0x1005705c push 0x10179004
+0x10057061 lea edx, [ebp - 0x150]
+0x10057067 mov dword ptr [ebp - 4], 0
+0x1005706e lea ecx, [ebp - 0x168]
+0x10057074 call 0x1003ed50
+0x10057079 mov ecx, dword ptr [ebp - 0x174]
+0x1005707f add esp, 4
+0x10057082 push eax
+0x10057083 call 0x1003f0f0
+0x10057088 cmp dword ptr [ebp - 0x154], 0x10
+0x1005708f mov esi, dword ptr [0x1019844c]
+0x10057095 jb 0x100570c2
+0x10057097 test esi, esi
+0x10057099 jne 0x100570ab
+0x1005709b push dword ptr [ebp - 0x168]
+0x100570a1 call 0x100ed4fa
+0x100570a6 add esp, 4
+0x100570a9 jmp 0x100570c2
+0x100570ab push dword ptr [0x10198448]
+0x100570b1 push dword ptr [ebp - 0x168]
+0x100570b7 call esi
+0x100570b9 mov esi, dword ptr [0x1019844c]
+0x100570bf add esp, 8
+0x100570c2 mov dword ptr [ebp - 4], 0xffffffff
+0x100570c9 cmp dword ptr [ebp - 0x13c], 0x10
+0x100570d0 mov dword ptr [ebp - 0x154], 0xf
+0x100570da mov dword ptr [ebp - 0x158], 0
+0x100570e4 mov byte ptr [ebp - 0x168], 0
+0x100570eb jb 0x10057112
+0x100570ed test esi, esi
+0x100570ef jne 0x10057101
+0x100570f1 push dword ptr [ebp - 0x150]
+0x100570f7 call 0x100ed4fa
+0x100570fc add esp, 4
+0x100570ff jmp 0x10057112
+0x10057101 push dword ptr [0x10198448]
+0x10057107 push dword ptr [ebp - 0x150]
+0x1005710d call esi
+0x1005710f add esp, 8
+0x10057112 mov al, 1
+0x10057114 mov ecx, dword ptr [ebp - 0xc]
+0x10057117 mov dword ptr fs:[0], ecx
+0x1005711e pop ecx
+0x1005711f pop edi
+0x10057120 pop esi
+0x10057121 pop ebx
+0x10057122 mov ecx, dword ptr [ebp - 0x10]
+0x10057125 xor ecx, ebp
+0x10057127 call 0x100ec285
+0x1005712c mov esp, ebp
+0x1005712e pop ebp
+0x1005712f ret 
+CALLS [{"pc": "0x10056ee2", "target": "0x1005d940", "import": null, "text": "0x1005d940"}, {"pc": "0x10056efb", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10056f10", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10056f36", "target": "0x1003e1e0", "import": null, "text": "0x1003e1e0"}, {"pc": "0x10057127", "target": "0x100ec285", "import": null, "text": "0x100ec285"}, {"pc": "0x10056f4d", "target": "0x10055ba0", "import": null, "text": "0x10055ba0"}, {"pc": "0x10056f69", "target": "0x10042580", "import": null, "text": "0x10042580"}, {"pc": "0x10057057", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x10057074", "target": "0x1003ed50", "import": null, "text": "0x1003ed50"}, {"pc": "0x10057083", "target": "0x1003f0f0", "import": null, "text": "0x1003f0f0"}, {"pc": "0x100570a1", "target": "0x100ed4fa", "import": null, "text": "0x100ed4fa"}, {"pc": "0x100570f7", "target": "0x100ed4fa", "import": null, "text": "0x100ed4fa"}, {"pc": "0x1005710d", "target": null, "import": null, "text": "esi"}, {"pc": "0x100570b7", "target": null, "import": null, "text": "esi"}, {"pc": "0x10056fa7", "target": "0x1005d940", "import": null, "text": "0x1005d940"}, {"pc": "0x10056fc0", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10056fd5", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10056ffd", "target": "0x10055d00", "import": null, "text": "0x10055d00"}, {"pc": "0x10057028", "target": "0x1003e1e0", "import": null, "text": "0x1003e1e0"}]
+STRINGS {"0x10177a04": "releases", "0x10177bf8": "projects", "0x10178e64": "Riot::RADS::Reader::RuntimeEnvironment::CollectProjects", "0x10178ea0": "%s: RADS project runtime environment project collection failed to build the root folder path: radsRoot=\"%s\", name=\"%s\", version=\"%s\".", "0x10179004": "/deploy", "0x10176aa4": "solutions", "0x10178f28": "%s: RADS solution runtime environment project collection failed to build the root folder path: radsRoot=\"%s\", name=\"%s\", version=\"%s\".", "0x10178fb0": "%s: RADS solution runtime environment project collection failed to load solution."}
+
+FUNCTION 0x10056980
+0x10056980 push ebp
+0x10056981 mov ebp, esp
+0x10056983 push -1
+0x10056985 push 0x1012c9a9
+0x1005698a mov eax, dword ptr fs:[0]
+0x10056990 push eax
+0x10056991 sub esp, 0x14
+0x10056994 push ebx
+0x10056995 push esi
+0x10056996 push edi
+0x10056997 mov eax, dword ptr [0x101902c0]
+0x1005699c xor eax, ebp
+0x1005699e push eax
+0x1005699f lea eax, [ebp - 0xc]
+0x100569a2 mov dword ptr fs:[0], eax
+0x100569a8 mov esi, ecx
+0x100569aa mov eax, dword ptr [ebp + 8]
+0x100569ad mov edx, dword ptr [ebp + 0xc]
+0x100569b0 mov dword ptr [ebp - 0x14], eax
+0x100569b3 mov eax, dword ptr [ebp + 0x10]
+0x100569b6 mov dword ptr [ebp - 0x18], eax
+0x100569b9 mov eax, dword ptr [ebp + 0x18]
+0x100569bc mov dword ptr [esi + 0x14], 0xf
+0x100569c3 mov dword ptr [esi + 0x10], 0
+0x100569ca mov dword ptr [ebp - 0x10], edx
+0x100569cd mov dword ptr [ebp - 0x1c], eax
+0x100569d0 mov byte ptr [esi], 0
+0x100569d3 lea ecx, [esi + 0x18]
+0x100569d6 mov dword ptr [ecx + 0x14], 0xf
+0x100569dd mov dword ptr [ecx + 0x10], 0
+0x100569e4 mov byte ptr [ecx], 0
+0x100569e7 lea ebx, [esi + 0x30]
+0x100569ea mov dword ptr [ebx], 0
+0x100569f0 mov dword ptr [ebx + 4], 0
+0x100569f7 mov dword ptr [ebx + 8], 0
+0x100569fe mov eax, dword ptr [ebp + 0x14]
+0x10056a01 lea edi, [esi + 0x40]
+0x10056a04 mov dword ptr [esi + 0x3c], eax
+0x10056a07 mov dword ptr [edi + 0x14], 0xf
+0x10056a0e mov dword ptr [edi + 0x10], 0
+0x10056a15 mov byte ptr [edi], 0
+0x10056a18 mov eax, dword ptr [ebp + 0x1c]
+0x10056a1b mov dword ptr [esi + 0x58], eax
+0x10056a1e mov eax, dword ptr [ebp - 0x14]
+0x10056a21 cmp esi, eax
+0x10056a23 je 0x10056a4e
+0x10056a25 push eax
+0x10056a26 mov ecx, esi
+0x10056a28 call 0x10057b80
+0x10056a2d mov edx, dword ptr [ebp - 0x14]
+0x10056a30 mov ecx, dword ptr [esi + 0x10]
+0x10056a33 mov eax, dword ptr [edx + 0x10]
+0x10056a36 mov dword ptr [esi + 0x10], eax
+0x10056a39 mov dword ptr [edx + 0x10], ecx
+0x10056a3c mov ecx, dword ptr [esi + 0x14]
+0x10056a3f mov eax, dword ptr [edx + 0x14]
+0x10056a42 mov dword ptr [esi + 0x14], eax
+0x10056a45 mov dword ptr [edx + 0x14], ecx
+0x10056a48 lea ecx, [esi + 0x18]
+0x10056a4b mov edx, dword ptr [ebp - 0x10]
+0x10056a4e cmp ecx, edx
+0x10056a50 je 0x10056a73
+0x10056a52 push edx
+0x10056a53 call 0x10057b80
+0x10056a58 mov edx, dword ptr [ebp - 0x10]
+0x10056a5b mov ecx, dword ptr [esi + 0x28]
+0x10056a5e mov eax, dword ptr [edx + 0x10]
+0x10056a61 mov dword ptr [esi + 0x28], eax
+0x10056a64 mov dword ptr [edx + 0x10], ecx
+0x10056a67 mov ecx, dword ptr [esi + 0x2c]
+0x10056a6a mov eax, dword ptr [edx + 0x14]
+0x10056a6d mov dword ptr [esi + 0x2c], eax
+0x10056a70 mov dword ptr [edx + 0x14], ecx
+0x10056a73 mov edx, dword ptr [ebp - 0x18]
+0x10056a76 cmp ebx, edx
+0x10056a78 je 0x10056a9a
+0x10056a7a mov ecx, dword ptr [ebx]
+0x10056a7c mov eax, dword ptr [edx]
+0x10056a7e mov dword ptr [ebx], eax
+0x10056a80 mov dword ptr [edx], ecx
+0x10056a82 mov ecx, dword ptr [ebx + 4]
+0x10056a85 mov eax, dword ptr [edx + 4]
+0x10056a88 mov dword ptr [ebx + 4], eax
+0x10056a8b mov dword ptr [edx + 4], ecx
+0x10056a8e mov ecx, dword ptr [ebx + 8]
+0x10056a91 mov eax, dword ptr [edx + 8]
+0x10056a94 mov dword ptr [ebx + 8], eax
+0x10056a97 mov dword ptr [edx + 8], ecx
+0x10056a9a mov ebx, dword ptr [ebp - 0x1c]
+0x10056a9d cmp edi, ebx
+0x10056a9f je 0x10056ac1
+0x10056aa1 push ebx
+0x10056aa2 mov ecx, edi
+0x10056aa4 call 0x10057b80
+0x10056aa9 mov ecx, dword ptr [edi + 0x10]
+0x10056aac mov eax, dword ptr [ebx + 0x10]
+0x10056aaf mov dword ptr [edi + 0x10], eax
+0x10056ab2 mov dword ptr [ebx + 0x10], ecx
+0x10056ab5 mov edx, dword ptr [edi + 0x14]
+0x10056ab8 mov ecx, dword ptr [ebx + 0x14]
+0x10056abb mov dword ptr [edi + 0x14], ecx
+0x10056abe mov dword ptr [ebx + 0x14], edx
+0x10056ac1 mov eax, esi
+0x10056ac3 mov ecx, dword ptr [ebp - 0xc]
+0x10056ac6 mov dword ptr fs:[0], ecx
+0x10056acd pop ecx
+0x10056ace pop edi
+0x10056acf pop esi
+0x10056ad0 pop ebx
+0x10056ad1 mov esp, ebp
+0x10056ad3 pop ebp
+0x10056ad4 ret 0x18
+CALLS [{"pc": "0x10056a28", "target": "0x10057b80", "import": null, "text": "0x10057b80"}, {"pc": "0x10056a53", "target": "0x10057b80", "import": null, "text": "0x10057b80"}, {"pc": "0x10056aa4", "target": "0x10057b80", "import": null, "text": "0x10057b80"}]
+STRINGS {}
+
+FUNCTION 0x1005f8c0
+0x1005f8c0 push ebp
+0x1005f8c1 mov ebp, esp
+0x1005f8c3 mov eax, 0x2048
+0x1005f8c8 call 0x100f3c00
+0x1005f8cd mov eax, dword ptr [0x101902c0]
+0x1005f8d2 xor eax, ebp
+0x1005f8d4 mov dword ptr [ebp - 8], eax
+0x1005f8d7 mov eax, dword ptr [0x101998e0]
+0x1005f8dc mov dword ptr [ebp - 0x2044], edx
+0x1005f8e2 push ebx
+0x1005f8e3 mov ebx, dword ptr [ebp + 8]
+0x1005f8e6 push esi
+0x1005f8e7 mov esi, ecx
+0x1005f8e9 mov ecx, dword ptr [ebp + 0x10]
+0x1005f8ec mov dword ptr [ebp - 0x2048], ecx
+0x1005f8f2 push edi
+0x1005f8f3 mov edi, dword ptr [ebp + 0xc]
+0x1005f8f6 test eax, eax
+0x1005f8f8 je 0x1005f907
+0x1005f8fa mov eax, dword ptr [eax + 0x64]
+0x1005f8fd push ecx
+0x1005f8fe push edx
+0x1005f8ff push edi
+0x1005f900 push ebx
+0x1005f901 push esi
+0x1005f902 call eax
+0x1005f904 add esp, 0x14
+0x1005f907 cmp dword ptr [0x101998e4], 0
+0x1005f90e jne 0x1005f915
+0x1005f910 call 0x1005f5d0
+0x1005f915 mov eax, dword ptr [0x101998e4]
+0x1005f91a cmp byte ptr [eax + 0x2d], 0
+0x1005f91e jne 0x1005fa78
+0x1005f924 mov eax, dword ptr [0x101998e4]
+0x1005f929 cmp esi, dword ptr [eax + 0x30]
+0x1005f92c jl 0x1005fa78
+0x1005f932 mov eax, dword ptr [0x101998e4]
+0x1005f937 mov ecx, dword ptr [eax + 0x38]
+0x1005f93a mov eax, dword ptr [eax + 0x3c]
+0x1005f93d and ecx, ebx
+0x1005f93f and eax, edi
+0x1005f941 or ecx, eax
+0x1005f943 jne 0x1005fa78
+0x1005f949 push dword ptr [ebp - 0x2048]
+0x1005f94f lea eax, [ebp - 0x200c]
+0x1005f955 push dword ptr [ebp - 0x2044]
+0x1005f95b push -1
+0x1005f95d push 0x2000
+0x1005f962 push eax
+0x1005f963 call 0x100f9b93
+0x1005f968 add esp, 0x14
+0x1005f96b cmp eax, -1
+0x1005f96e jne 0x1005f97a
+0x1005f970 call 0x100ed8fc
+0x1005f975 call 0x100ed8fc
+0x1005f97a lea eax, [ebp - 0x203c]
+0x1005f980 push eax
+0x1005f981 call 0x1005f530
+0x1005f986 add esp, 4
+0x1005f989 mov dword ptr [ebp - 0x2020], esi
+0x1005f98f lea eax, [ebp - 0x200c]
+0x1005f995 mov dword ptr [ebp - 0x201c], ebx
+0x1005f99b mov dword ptr [ebp - 0x2014], eax
+0x1005f9a1 lea ecx, [ebp - 0x2040]
+0x1005f9a7 mov eax, dword ptr [0x101998e4]
+0x1005f9ac push eax
+0x1005f9ad mov dword ptr [ebp - 0x2018], edi
+0x1005f9b3 call 0x1003ec80
+0x1005f9b8 dec esi
+0x1005f9b9 je 0x1005f9d2
+0x1005f9bb dec esi
+0x1005f9bc jne 0x1005f9e5
+0x1005f9be mov eax, dword ptr [0x101998e4]
+0x1005f9c3 add dword ptr [eax + 0x650], 1
+0x1005f9ca adc dword ptr [eax + 0x654], esi
+0x1005f9d0 jmp 0x1005f9e5
+0x1005f9d2 mov eax, dword ptr [0x101998e4]
+0x1005f9d7 add dword ptr [eax + 0x648], 1
+0x1005f9de adc dword ptr [eax + 0x64c], 0
+0x1005f9e5 mov eax, dword ptr [0x101998e4]
+0x1005f9ea xor ecx, ecx
+0x1005f9ec mov esi, dword ptr [0x101998e4]
+0x1005f9f2 xor edi, edi
+0x1005f9f4 mov eax, dword ptr [eax + 0x24]
+0x1005f9f7 mov ebx, eax
+0x1005f9f9 mov esi, dword ptr [esi + 0x20]
+0x1005f9fc sub ebx, esi
+0x1005f9fe add ebx, 3
+0x1005fa01 shr ebx, 2
+0x1005fa04 cmp esi, eax
+0x1005fa06 cmova ebx, ecx
+0x1005fa09 test ebx, ebx
+0x1005fa0b je 0x1005fa25
+0x1005fa0d lea ecx, [ecx]
+0x1005fa10 mov ecx, dword ptr [esi]
+0x1005fa12 lea edx, [ebp - 0x203c]
+0x1005fa18 call 0x1005f850
+0x1005fa1d inc edi
+0x1005fa1e lea esi, [esi + 4]
+0x1005fa21 cmp edi, ebx
+0x1005fa23 jne 0x1005fa10
+0x1005fa25 mov eax, dword ptr [0x101998e4]
+0x1005fa2a mov esi, dword ptr [ebp - 0x2040]
+0x1005fa30 cmp byte ptr [esi], 0
+0x1005fa33 jne 0x1005fa6e
+0x1005fa35 call dword ptr [0x10131020]
+0x1005fa3b cmp dword ptr [esi + 4], eax
+0x1005fa3e lea ecx, [esi + 4]
+0x1005fa41 jne 0x1005fa4e
+0x1005fa43 push 0
+0x1005fa45 push ecx
+0x1005fa46 call dword ptr [0x101310e4]
+0x1005fa4c jmp 0x1005fa6e
+0x1005fa4e sub esp, 0xc
+0x1005fa51 mov edx, 0x10179ad0
+0x1005fa56 mov ecx, 0x10176a74
+0x1005fa5b call 0x1005d170
+0x1005fa60 add esp, 0xc
+0x1005fa63 call dword ptr [0x10131108]
+0x1005fa69 mov dword ptr [0], eax
+0x1005fa6e add esi, 8
+0x1005fa71 push esi
+0x1005fa72 call dword ptr [0x101310f4]
+0x1005fa78 mov ecx, dword ptr [ebp - 8]
+0x1005fa7b pop edi
+0x1005fa7c pop esi
+0x1005fa7d xor ecx, ebp
+0x1005fa7f pop ebx
+0x1005fa80 call 0x100ec285
+0x1005fa85 mov esp, ebp
+0x1005fa87 pop ebp
+0x1005fa88 ret 
+CALLS [{"pc": "0x1005f8c8", "target": "0x100f3c00", "import": null, "text": "0x100f3c00"}, {"pc": "0x1005f902", "target": null, "import": null, "text": "eax"}, {"pc": "0x1005f910", "target": "0x1005f5d0", "import": null, "text": "0x1005f5d0"}, {"pc": "0x1005f963", "target": "0x100f9b93", "import": null, "text": "0x100f9b93"}, {"pc": "0x1005f970", "target": "0x100ed8fc", "import": null, "text": "0x100ed8fc"}, {"pc": "0x1005f975", "target": "0x100ed8fc", "import": null, "text": "0x100ed8fc"}, {"pc": "0x1005f981", "target": "0x1005f530", "import": null, "text": "0x1005f530"}, {"pc": "0x1005f9b3", "target": "0x1003ec80", "import": null, "text": "0x1003ec80"}, {"pc": "0x1005fa18", "target": "0x1005f850", "import": null, "text": "0x1005f850"}, {"pc": "0x1005fa35", "target": null, "import": "KERNEL32.dll!GetCurrentThreadId", "text": "dword ptr [0x10131020]"}, {"pc": "0x1005fa46", "target": null, "import": "KERNEL32.dll!InterlockedExchange", "text": "dword ptr [0x101310e4]"}, {"pc": "0x1005fa72", "target": null, "import": "KERNEL32.dll!LeaveCriticalSection", "text": "dword ptr [0x101310f4]"}, {"pc": "0x1005fa80", "target": "0x100ec285", "import": null, "text": "0x100ec285"}, {"pc": "0x1005fa5b", "target": "0x1005d170", "import": null, "text": "0x1005d170"}, {"pc": "0x1005fa63", "target": null, "import": "KERNEL32.dll!GetLastError", "text": "dword ptr [0x10131108]"}]
+STRINGS {"0x10179ad0": "mOwner != tid", "0x10176a74": "false"}
+
+FUNCTION 0x100f3a50
+0x100f3a50 push ebp
+0x100f3a51 mov ebp, esp
+0x100f3a53 call 0x100f3a67
+0x100f3a58 cmp dword ptr [ebp + 8], 0
+0x100f3a5c je 0x100f3a63
+0x100f3a5e call 0x1010a51c
+0x100f3a63 fnclex 
+0x100f3a65 pop ebp
+0x100f3a66 ret 
+CALLS [{"pc": "0x100f3a53", "target": "0x100f3a67", "import": null, "text": "0x100f3a67"}, {"pc": "0x100f3a5e", "target": "0x1010a51c", "import": null, "text": "0x1010a51c"}]
+STRINGS {}
+
+FUNCTION 0x100f41b1
+0x100f41b1 push ebp
+0x100f41b2 mov ebp, esp
+0x100f41b4 mov eax, dword ptr [ebp + 0xc]
+0x100f41b7 push ebx
+0x100f41b8 push esi
+0x100f41b9 mov esi, dword ptr [ebp + 8]
+0x100f41bc xor ebx, ebx
+0x100f41be sub eax, esi
+0x100f41c0 add eax, 3
+0x100f41c3 shr eax, 2
+0x100f41c6 cmp dword ptr [ebp + 0xc], esi
+0x100f41c9 push edi
+0x100f41ca sbb edi, edi
+0x100f41cc not edi
+0x100f41ce and edi, eax
+0x100f41d0 jbe 0x100f41e2
+0x100f41d2 mov eax, dword ptr [esi]
+0x100f41d4 test eax, eax
+0x100f41d6 je 0x100f41da
+0x100f41d8 call eax
+0x100f41da add esi, 4
+0x100f41dd inc ebx
+0x100f41de cmp ebx, edi
+0x100f41e0 jb 0x100f41d2
+0x100f41e2 pop edi
+0x100f41e3 pop esi
+0x100f41e4 pop ebx
+0x100f41e5 pop ebp
+0x100f41e6 ret 
+CALLS [{"pc": "0x100f41d8", "target": null, "import": null, "text": "eax"}]
+STRINGS {}
+
+FUNCTION 0x100f41e7
+0x100f41e7 push ebp
+0x100f41e8 mov ebp, esp
+0x100f41ea push esi
+0x100f41eb mov esi, dword ptr [ebp + 8]
+0x100f41ee xor eax, eax
+0x100f41f0 jmp 0x100f4201
+0x100f41f2 test eax, eax
+0x100f41f4 jne 0x100f4206
+0x100f41f6 mov ecx, dword ptr [esi]
+0x100f41f8 test ecx, ecx
+0x100f41fa je 0x100f41fe
+0x100f41fc call ecx
+0x100f41fe add esi, 4
+0x100f4201 cmp esi, dword ptr [ebp + 0xc]
+0x100f4204 jb 0x100f41f2
+0x100f4206 pop esi
+0x100f4207 pop ebp
+0x100f4208 ret 
+CALLS [{"pc": "0x100f41fc", "target": null, "import": null, "text": "ecx"}]
+STRINGS {}
+
+FUNCTION 0x1005f5d0
+0x1005f5d0 push ecx
+0x1005f5d1 cmp dword ptr [0x101998e4], 0
+0x1005f5d8 jne 0x1005f67a
+0x1005f5de cmp byte ptr [0x10199737], 0
+0x1005f5e5 jne 0x1005f5f3
+0x1005f5e7 mov byte ptr [0x10199737], 1
+0x1005f5ee call 0x1003d4d0
+0x1005f5f3 mov eax, dword ptr [0x10198450]
+0x1005f5f8 test eax, eax
+0x1005f5fa jne 0x1005f60b
+0x1005f5fc push 0x658
+0x1005f601 call 0x100f0695
+0x1005f606 add esp, 4
+0x1005f609 jmp 0x1005f61b
+0x1005f60b push dword ptr [0x10198448]
+0x1005f611 push 0x658
+0x1005f616 call eax
+0x1005f618 add esp, 8
+0x1005f61b test eax, eax
+0x1005f61d je 0x1005f628
+0x1005f61f mov ecx, eax
+0x1005f621 call 0x1005f0d0
+0x1005f626 jmp 0x1005f62a
+0x1005f628 xor eax, eax
+0x1005f62a mov dword ptr [0x101998e4], eax
+0x1005f62f mov eax, dword ptr [0x101998e4]
+0x1005f634 cmp byte ptr [eax + 0x47c], 0
+0x1005f63b jne 0x1005f652
+0x1005f63d mov byte ptr [eax + 0x47c], 1
+0x1005f644 add eax, 0x44c
+0x1005f649 push eax
+0x1005f64a call 0x1005f680
+0x1005f64f add esp, 4
+0x1005f652 mov eax, dword ptr [0x101998e4]
+0x1005f657 cmp byte ptr [eax + 0x5d4], 0
+0x1005f65e jne 0x1005f675
+0x1005f660 mov byte ptr [eax + 0x5d4], 1
+0x1005f667 add eax, 0x5a4
+0x1005f66c push eax
+0x1005f66d call 0x1005f680
+0x1005f672 add esp, 4
+0x1005f675 call 0x1003d4d0
+0x1005f67a pop ecx
+0x1005f67b ret 
+CALLS [{"pc": "0x1005f5ee", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x1005f601", "target": "0x100f0695", "import": null, "text": "0x100f0695"}, {"pc": "0x1005f621", "target": "0x1005f0d0", "import": null, "text": "0x1005f0d0"}, {"pc": "0x1005f64a", "target": "0x1005f680", "import": null, "text": "0x1005f680"}, {"pc": "0x1005f66d", "target": "0x1005f680", "import": null, "text": "0x1005f680"}, {"pc": "0x1005f675", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x1005f616", "target": null, "import": null, "text": "eax"}]
+STRINGS {}
+
+FUNCTION 0x10076c80
+0x10076c80 push -1
+0x10076c82 push 0x1012e54e
+0x10076c87 mov eax, dword ptr fs:[0]
+0x10076c8d push eax
+0x10076c8e mov eax, dword ptr [0x101902c0]
+0x10076c93 xor eax, esp
+0x10076c95 push eax
+0x10076c96 lea eax, [esp + 4]
+0x10076c9a mov dword ptr fs:[0], eax
+0x10076ca0 mov eax, dword ptr [0x10192e30]
+0x10076ca5 test al, 1
+0x10076ca7 jne 0x10076cd0
+0x10076ca9 or eax, 1
+0x10076cac mov dword ptr [0x10192e30], eax
+0x10076cb1 push 0x101303c0
+0x10076cb6 mov dword ptr [esp + 0x10], 0
+0x10076cbe mov dword ptr [0x10192e2c], 0x10132ec0
+0x10076cc8 call 0x100eca0f
+0x10076ccd add esp, 4
+0x10076cd0 mov eax, 0x10192e2c
+0x10076cd5 mov ecx, dword ptr [esp + 4]
+0x10076cd9 mov dword ptr fs:[0], ecx
+0x10076ce0 pop ecx
+0x10076ce1 add esp, 0xc
+0x10076ce4 ret 
+CALLS [{"pc": "0x10076cc8", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x10077140
+0x10077140 push -1
+0x10077142 push 0x1012e57e
+0x10077147 mov eax, dword ptr fs:[0]
+0x1007714d push eax
+0x1007714e mov eax, dword ptr [0x101902c0]
+0x10077153 xor eax, esp
+0x10077155 push eax
+0x10077156 lea eax, [esp + 4]
+0x1007715a mov dword ptr fs:[0], eax
+0x10077160 mov eax, dword ptr [0x10192e28]
+0x10077165 test al, 1
+0x10077167 jne 0x10077190
+0x10077169 or eax, 1
+0x1007716c mov dword ptr [0x10192e28], eax
+0x10077171 push 0x101303d0
+0x10077176 mov dword ptr [esp + 0x10], 0
+0x1007717e mov dword ptr [0x10192e24], 0x10132edc
+0x10077188 call 0x100eca0f
+0x1007718d add esp, 4
+0x10077190 mov eax, 0x10192e24
+0x10077195 mov ecx, dword ptr [esp + 4]
+0x10077199 mov dword ptr fs:[0], ecx
+0x100771a0 pop ecx
+0x100771a1 add esp, 0xc
+0x100771a4 ret 
+CALLS [{"pc": "0x10077188", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x10045790
+0x10045790 push ecx
+0x10045791 mov ecx, 0x10198ae8
+0x10045796 mov dword ptr [0x1019873c], 0
+0x100457a0 mov dword ptr [0x10198748], 0
+0x100457aa mov dword ptr [0x1019874c], 0
+0x100457b4 mov dword ptr [0x10198750], 0
+0x100457be mov dword ptr [0x10198ae0], 0
+0x100457c8 mov dword ptr [0x10198ae4], 0
+0x100457d2 mov dword ptr [0x10198ae8], 0
+0x100457dc call 0x10044760
+0x100457e1 mov ecx, 0x10198af4
+0x100457e6 mov word ptr [0x10198af0], 1
+0x100457ef call 0x10044a70
+0x100457f4 push 0x10198b64
+0x100457f9 mov word ptr [0x10198b58], 0
+0x10045802 mov byte ptr [0x10198b5c], 0
+0x10045809 mov dword ptr [0x10198b60], 0
+0x10045813 call dword ptr [0x101310e8]
+0x10045819 mov dword ptr [0x10198b80], 0
+0x10045823 mov eax, 0x101984a0
+0x10045828 mov dword ptr [0x10198b84], 0
+0x10045832 mov dword ptr [0x10198b88], 0
+0x1004583c mov byte ptr [0x10198b8c], 0
+0x10045843 mov byte ptr [0x101984a0], 0
+0x1004584a mov byte ptr [0x10198760], 0
+0x10045851 ret 
+CALLS [{"pc": "0x100457dc", "target": "0x10044760", "import": null, "text": "0x10044760"}, {"pc": "0x100457ef", "target": "0x10044a70", "import": null, "text": "0x10044a70"}, {"pc": "0x10045813", "target": null, "import": "KERNEL32.dll!InitializeCriticalSection", "text": "dword ptr [0x101310e8]"}]
+STRINGS {}
+
+FUNCTION 0x10045960
+0x10045960 push ebp
+0x10045961 mov ebp, esp
+0x10045963 movss xmm0, dword ptr [ebp + 8]
+0x10045968 mov eax, ecx
+0x1004596a movss dword ptr [ecx], xmm0
+0x1004596e movss xmm0, dword ptr [ebp + 0xc]
+0x10045973 movss dword ptr [ecx + 4], xmm0
+0x10045978 movss xmm0, dword ptr [ebp + 0x10]
+0x1004597d movss dword ptr [ecx + 8], xmm0
+0x10045982 mov dword ptr [ecx + 0xc], 0
+0x10045989 pop ebp
+0x1004598a ret 
+CALLS []
+STRINGS {}
+
+FUNCTION 0x1005bee0
+0x1005bee0 push ebp
+0x1005bee1 mov ebp, esp
+0x1005bee3 push -1
+0x1005bee5 push 0x1012cf0e
+0x1005beea mov eax, dword ptr fs:[0]
+0x1005bef0 push eax
+0x1005bef1 push ecx
+0x1005bef2 push ebx
+0x1005bef3 push esi
+0x1005bef4 push edi
+0x1005bef5 mov eax, dword ptr [0x101902c0]
+0x1005befa xor eax, ebp
+0x1005befc push eax
+0x1005befd lea eax, [ebp - 0xc]
+0x1005bf00 mov dword ptr fs:[0], eax
+0x1005bf06 push 0x10198eec
+0x1005bf0b mov dword ptr [ebp - 0x10], 0x10198cb0
+0x1005bf12 mov dword ptr [0x10198cb0], 0
+0x1005bf1c mov dword ptr [0x10198cb4], 0
+0x1005bf26 mov dword ptr [0x10198cb8], 0
+0x1005bf30 mov dword ptr [0x10198cbc], 0
+0x1005bf3a mov byte ptr [0x10198cc0], 0
+0x1005bf41 mov dword ptr [0x10198d24], 0
+0x1005bf4b mov dword ptr [0x10198d28], 0
+0x1005bf55 mov dword ptr [0x10198d2c], 0
+0x1005bf5f mov dword ptr [0x10198d30], 0
+0x1005bf69 mov byte ptr [0x10198d34], 0
+0x1005bf70 mov dword ptr [0x10198d98], 0
+0x1005bf7a mov dword ptr [0x10198d9c], 0
+0x1005bf84 mov dword ptr [0x10198da0], 0
+0x1005bf8e mov dword ptr [0x10198da4], 0
+0x1005bf98 mov byte ptr [0x10198da8], 0
+0x1005bf9f mov dword ptr [0x10198e0c], 0
+0x1005bfa9 mov dword ptr [0x10198e10], 0
+0x1005bfb3 mov dword ptr [0x10198e14], 0
+0x1005bfbd mov dword ptr [0x10198e18], 0
+0x1005bfc7 mov byte ptr [0x10198e1c], 0
+0x1005bfce mov byte ptr [0x10198ee4], 0
+0x1005bfd5 mov dword ptr [0x10198ee8], 0
+0x1005bfdf call dword ptr [0x101310e8]
+0x1005bfe5 mov ecx, 0x10198f04
+0x1005bfea mov dword ptr [ebp - 4], 0
+0x1005bff1 call 0x1003f750
+0x1005bff6 mov dword ptr [0x10198ee0], 0
+0x1005c000 mov edi, 0x10198cb4
+0x1005c005 mov ebx, 0x10198ed0
+0x1005c00a mov esi, 0x10198e80
+0x1005c00f nop 
+0x1005c010 push 0
+0x1005c012 push 0
+0x1005c014 push 1
+0x1005c016 push 0
+0x1005c018 call dword ptr [0x10131084]
+0x1005c01e mov dword ptr [ebx], eax
+0x1005c020 lea ebx, [ebx + 4]
+0x1005c023 mov dword ptr [edi], esi
+0x1005c025 lea edi, [edi + 0x74]
+0x1005c028 add esi, 0x14
+0x1005c02b cmp esi, 0x10198ed0
+0x1005c031 jb 0x1005c010
+0x1005c033 mov eax, 0x10198cb0
+0x1005c038 mov ecx, dword ptr [ebp - 0xc]
+0x1005c03b mov dword ptr fs:[0], ecx
+0x1005c042 pop ecx
+0x1005c043 pop edi
+0x1005c044 pop esi
+0x1005c045 pop ebx
+0x1005c046 mov esp, ebp
+0x1005c048 pop ebp
+0x1005c049 ret 
+CALLS [{"pc": "0x1005bfdf", "target": null, "import": "KERNEL32.dll!InitializeCriticalSection", "text": "dword ptr [0x101310e8]"}, {"pc": "0x1005bff1", "target": "0x1003f750", "import": null, "text": "0x1003f750"}, {"pc": "0x1005c018", "target": null, "import": "KERNEL32.dll!CreateEventA", "text": "dword ptr [0x10131084]"}]
+STRINGS {}
+
+FUNCTION 0x1005d4c0
+0x1005d4c0 push ebp
+0x1005d4c1 mov ebp, esp
+0x1005d4c3 and esp, 0xfffffff8
+0x1005d4c6 push esi
+0x1005d4c7 push edi
+0x1005d4c8 push 0x10199728
+0x1005d4cd call dword ptr [0x10131060]
+0x1005d4d3 push 0x10179954
+0x1005d4d8 call dword ptr [0x101310b0]
+0x1005d4de mov edi, eax
+0x1005d4e0 test edi, edi
+0x1005d4e2 je 0x1005d582
+0x1005d4e8 mov esi, dword ptr [0x10131148]
+0x1005d4ee push 0x10179970
+0x1005d4f3 push edi
+0x1005d4f4 call esi
+0x1005d4f6 push 0x10179980
+0x1005d4fb push edi
+0x1005d4fc mov dword ptr [0x10199718], eax
+0x1005d501 call esi
+0x1005d503 push 0x1017998c
+0x1005d508 push edi
+0x1005d509 mov dword ptr [0x1019971c], eax
+0x1005d50e call esi
+0x1005d510 push 0x10199808
+0x1005d515 push 0x10191058
+0x1005d51a mov ecx, 0x101799e0
+0x1005d51f mov dword ptr [0x10199720], eax
+0x1005d524 call 0x1005d3c0
+0x1005d529 push 0x10199888
+0x1005d52e push 0x101910c8
+0x1005d533 mov ecx, 0x10179a30
+0x1005d538 call 0x1005d3c0
+0x1005d53d push 0x10199848
+0x1005d542 push 0x10191090
+0x1005d547 mov ecx, 0x10179a00
+0x1005d54c call 0x1005d3c0
+0x1005d551 push 0x101997f8
+0x1005d556 push 0x10191020
+0x1005d55b mov ecx, 0x101799c0
+0x1005d560 call 0x1005d3c0
+0x1005d565 test byte ptr [0x101998c0], 1
+0x1005d56c je 0x1005d582
+0x1005d56e push ecx
+0x1005d56f call dword ptr [0x10131020]
+0x1005d575 sub esp, 8
+0x1005d578 mov edx, eax
+0x1005d57a call 0x1005d430
+0x1005d57f add esp, 0xc
+0x1005d582 pop edi
+0x1005d583 mov eax, 0x10199718
+0x1005d588 pop esi
+0x1005d589 mov esp, ebp
+0x1005d58b pop ebp
+0x1005d58c ret 
+CALLS [{"pc": "0x1005d4cd", "target": null, "import": "KERNEL32.dll!QueryPerformanceFrequency", "text": "dword ptr [0x10131060]"}, {"pc": "0x1005d4d8", "target": null, "import": "KERNEL32.dll!LoadLibraryW", "text": "dword ptr [0x101310b0]"}, {"pc": "0x1005d4f4", "target": null, "import": null, "text": "esi"}, {"pc": "0x1005d501", "target": null, "import": null, "text": "esi"}, {"pc": "0x1005d50e", "target": null, "import": null, "text": "esi"}, {"pc": "0x1005d524", "target": "0x1005d3c0", "import": null, "text": "0x1005d3c0"}, {"pc": "0x1005d538", "target": "0x1005d3c0", "import": null, "text": "0x1005d3c0"}, {"pc": "0x1005d54c", "target": "0x1005d3c0", "import": null, "text": "0x1005d3c0"}, {"pc": "0x1005d560", "target": "0x1005d3c0", "import": null, "text": "0x1005d3c0"}, {"pc": "0x1005d56f", "target": null, "import": "KERNEL32.dll!GetCurrentThreadId", "text": "dword ptr [0x10131020]"}, {"pc": "0x1005d57a", "target": "0x1005d430", "import": null, "text": "0x1005d430"}]
+STRINGS {"0x10179970": "EventRegister", "0x10179980": "EventWrite", "0x1017998c": "EventUnregister"}
+
+FUNCTION 0x1005e180
+0x1005e180 push ebp
+0x1005e181 mov ebp, esp
+0x1005e183 sub esp, 0xc
+0x1005e186 push ebx
+0x1005e187 push esi
+0x1005e188 mov dword ptr [ebp - 0xc], 0
+0x1005e18f mov dword ptr [ebp - 8], 0
+0x1005e196 mov dword ptr [ebp - 4], 0x10199738
+0x1005e19d mov esi, dword ptr [ebp - 4]
+0x1005e1a0 mov ecx, dword ptr [ebp - 8]
+0x1005e1a3 mov ebx, dword ptr [ebp - 0xc]
+0x1005e1a6 lock cmpxchg8b qword ptr [esi]
+0x1005e1aa jne 0x1005e1a6
+0x1005e1ac mov dword ptr [ebp - 8], edx
+0x1005e1af mov dword ptr [ebp - 0xc], eax
+0x1005e1b2 mov eax, dword ptr [ebp - 0xc]
+0x1005e1b5 mov edx, dword ptr [ebp - 8]
+0x1005e1b8 pop esi
+0x1005e1b9 pop ebx
+0x1005e1ba mov esp, ebp
+0x1005e1bc pop ebp
+0x1005e1bd ret 
+CALLS []
+STRINGS {}
+
+FUNCTION 0x1011ca40
+0x1011ca40 push 0x14
+0x1011ca42 mov eax, 0x1012f1b3
+0x1011ca47 call 0x1010539c
+0x1011ca4c and dword ptr [ebp - 0x14], 0
+0x1011ca50 lea eax, [ebp - 0x10]
+0x1011ca53 push 1
+0x1011ca55 push eax
+0x1011ca56 lea ecx, [ebp - 0x20]
+0x1011ca59 mov dword ptr [ebp - 0x10], 0x10176e30
+0x1011ca60 call 0x100ed396
+0x1011ca65 mov edi, 0x10166bb8
+0x1011ca6a mov dword ptr [ebp - 0x20], edi
+0x1011ca6d and dword ptr [ebp - 4], 0
+0x1011ca71 lea eax, [ebp - 0x20]
+0x1011ca74 push 0
+0x1011ca76 push 0x101850e0
+0x1011ca7b push eax
+0x1011ca7c push dword ptr [ebp + 8]
+0x1011ca7f call 0x1011c79b
+0x1011ca84 add esp, 0x10
+0x1011ca87 mov dword ptr [ebp - 0x20], edi
+0x1011ca8a lea ecx, [ebp - 0x20]
+0x1011ca8d call 0x100ed3e5
+0x1011ca92 mov eax, dword ptr [ebp + 8]
+0x1011ca95 call 0x10105379
+0x1011ca9a ret 
+CALLS [{"pc": "0x1011ca47", "target": "0x1010539c", "import": null, "text": "0x1010539c"}, {"pc": "0x1011ca60", "target": "0x100ed396", "import": null, "text": "0x100ed396"}, {"pc": "0x1011ca7f", "target": "0x1011c79b", "import": null, "text": "0x1011c79b"}, {"pc": "0x1011ca8d", "target": "0x100ed3e5", "import": null, "text": "0x100ed3e5"}, {"pc": "0x1011ca95", "target": "0x10105379", "import": null, "text": "0x10105379"}]
+STRINGS {"0x10176e30": "bad allocation"}
+
+FUNCTION 0x1005f0d0
+0x1005f0d0 push ebp
+0x1005f0d1 mov ebp, esp
+0x1005f0d3 push -1
+0x1005f0d5 push 0x1012d30d
+0x1005f0da mov eax, dword ptr fs:[0]
+0x1005f0e0 push eax
+0x1005f0e1 sub esp, 0xc
+0x1005f0e4 push ebx
+0x1005f0e5 push esi
+0x1005f0e6 push edi
+0x1005f0e7 mov eax, dword ptr [0x101902c0]
+0x1005f0ec xor eax, ebp
+0x1005f0ee push eax
+0x1005f0ef lea eax, [ebp - 0xc]
+0x1005f0f2 mov dword ptr fs:[0], eax
+0x1005f0f8 mov esi, ecx
+0x1005f0fa mov dword ptr [ebp - 0x14], esi
+0x1005f0fd lea ebx, [esi + 8]
+0x1005f100 mov byte ptr [esi], 1
+0x1005f103 lea edi, [esi + 4]
+0x1005f106 mov dword ptr [edi], 0
+0x1005f10c push ebx
+0x1005f10d call dword ptr [0x101310e8]
+0x1005f113 mov dword ptr [ebp - 4], 0
+0x1005f11a mov dword ptr [esi + 0x20], 0
+0x1005f121 mov dword ptr [esi + 0x24], 0
+0x1005f128 mov dword ptr [esi + 0x28], 0
+0x1005f12f mov byte ptr [ebp - 4], 1
+0x1005f133 lea ecx, [esi + 0x448]
+0x1005f139 mov word ptr [esi + 0x2c], 0
+0x1005f13f mov dword ptr [esi + 0x30], 1
+0x1005f146 mov dword ptr [esi + 0x38], 4
+0x1005f14d mov dword ptr [esi + 0x3c], 0
+0x1005f154 mov dword ptr [esi + 0x440], 0x10179c78
+0x1005f15e call 0x1005e610
+0x1005f163 lea ecx, [esi + 0x4f0]
+0x1005f169 mov byte ptr [ebp - 4], 2
+0x1005f16d call 0x1005e7e0
+0x1005f172 lea ecx, [esi + 0x5a0]
+0x1005f178 mov byte ptr [ebp - 4], 3
+0x1005f17c call 0x1005e9e0
+0x1005f181 xor eax, eax
+0x1005f183 mov byte ptr [ebp - 4], 4
+0x1005f187 mov dword ptr [esi + 0x648], eax
+0x1005f18d mov dword ptr [esi + 0x64c], eax
+0x1005f193 mov dword ptr [esi + 0x650], eax
+0x1005f199 mov dword ptr [esi + 0x654], eax
+0x1005f19f cmp byte ptr [esi], al
+0x1005f1a1 jne 0x1005f1de
+0x1005f1a3 call dword ptr [0x10131020]
+0x1005f1a9 mov dword ptr [ebp - 0x10], eax
+0x1005f1ac cmp dword ptr [edi], eax
+0x1005f1ae jne 0x1005f1d0
+0x1005f1b0 sub esp, 0xc
+0x1005f1b3 mov edx, 0x10179ac0
+0x1005f1b8 mov ecx, 0x10179ad0
+0x1005f1bd call 0x1005d170
+0x1005f1c2 add esp, 0xc
+0x1005f1c5 call dword ptr [0x10131108]
+0x1005f1cb mov dword ptr [0], eax
+0x1005f1d0 push ebx
+0x1005f1d1 call dword ptr [0x101310f0]
+0x1005f1d7 mov eax, dword ptr [ebp - 0x10]
+0x1005f1da mov dword ptr [edi], eax
+0x1005f1dc jmp 0x1005f1e5
+0x1005f1de push ebx
+0x1005f1df call dword ptr [0x101310f0]
+0x1005f1e5 push 0x400
+0x1005f1ea lea ebx, [esi + 0x40]
+0x1005f1ed push ebx
+0x1005f1ee push 0
+0x1005f1f0 call dword ptr [0x10131094]
+0x1005f1f6 push 0x5c
+0x1005f1f8 push ebx
+0x1005f1f9 call 0x100ed950
+0x1005f1fe add esp, 8
+0x1005f201 mov dword ptr [esi + 0x440], eax
+0x1005f207 test eax, eax
+0x1005f209 jne 0x1005f213
+0x1005f20b mov dword ptr [esi + 0x440], ebx
+0x1005f211 jmp 0x1005f21a
+0x1005f213 inc eax
+0x1005f214 mov dword ptr [esi + 0x440], eax
+0x1005f21a cmp byte ptr [esi], 0
+0x1005f21d jne 0x1005f254
+0x1005f21f call dword ptr [0x10131020]
+0x1005f225 cmp dword ptr [edi], eax
+0x1005f227 jne 0x1005f234
+0x1005f229 push 0
+0x1005f22b push edi
+0x1005f22c call dword ptr [0x101310e4]
+0x1005f232 jmp 0x1005f254
+0x1005f234 sub esp, 0xc
+0x1005f237 mov edx, 0x10179ad0
+0x1005f23c mov ecx, 0x10176a74
+0x1005f241 call 0x1005d170
+0x1005f246 add esp, 0xc
+0x1005f249 call dword ptr [0x10131108]
+0x1005f24f mov dword ptr [0], eax
+0x1005f254 lea eax, [esi + 8]
+0x1005f257 push eax
+0x1005f258 call dword ptr [0x101310f4]
+0x1005f25e mov eax, esi
+0x1005f260 mov ecx, dword ptr [ebp - 0xc]
+0x1005f263 mov dword ptr fs:[0], ecx
+0x1005f26a pop ecx
+0x1005f26b pop edi
+0x1005f26c pop esi
+0x1005f26d pop ebx
+0x1005f26e mov esp, ebp
+0x1005f270 pop ebp
+0x1005f271 ret 
+CALLS [{"pc": "0x1005f10d", "target": null, "import": "KERNEL32.dll!InitializeCriticalSection", "text": "dword ptr [0x101310e8]"}, {"pc": "0x1005f15e", "target": "0x1005e610", "import": null, "text": "0x1005e610"}, {"pc": "0x1005f16d", "target": "0x1005e7e0", "import": null, "text": "0x1005e7e0"}, {"pc": "0x1005f17c", "target": "0x1005e9e0", "import": null, "text": "0x1005e9e0"}, {"pc": "0x1005f1a3", "target": null, "import": "KERNEL32.dll!GetCurrentThreadId", "text": "dword ptr [0x10131020]"}, {"pc": "0x1005f1bd", "target": "0x1005d170", "import": null, "text": "0x1005d170"}, {"pc": "0x1005f1c5", "target": null, "import": "KERNEL32.dll!GetLastError", "text": "dword ptr [0x10131108]"}, {"pc": "0x1005f1d1", "target": null, "import": "KERNEL32.dll!EnterCriticalSection", "text": "dword ptr [0x101310f0]"}, {"pc": "0x1005f1f0", "target": null, "import": "KERNEL32.dll!GetModuleFileNameA", "text": "dword ptr [0x10131094]"}, {"pc": "0x1005f1f9", "target": "0x100ed950", "import": null, "text": "0x100ed950"}, {"pc": "0x1005f21f", "target": null, "import": "KERNEL32.dll!GetCurrentThreadId", "text": "dword ptr [0x10131020]"}, {"pc": "0x1005f22c", "target": null, "import": "KERNEL32.dll!InterlockedExchange", "text": "dword ptr [0x101310e4]"}, {"pc": "0x1005f258", "target": null, "import": "KERNEL32.dll!LeaveCriticalSection", "text": "dword ptr [0x101310f4]"}, {"pc": "0x1005f241", "target": "0x1005d170", "import": null, "text": "0x1005d170"}, {"pc": "0x1005f249", "target": null, "import": "KERNEL32.dll!GetLastError", "text": "dword ptr [0x10131108]"}, {"pc": "0x1005f1df", "target": null, "import": "KERNEL32.dll!EnterCriticalSection", "text": "dword ptr [0x101310f0]"}]
+STRINGS {"0x10179c78": "<unknown>", "0x10179ac0": "mOwner == tid", "0x10179ad0": "mOwner != tid", "0x10176a74": "false"}
+
+FUNCTION 0x1005f680
+0x1005f680 push ebp
+0x1005f681 mov ebp, esp
+0x1005f683 mov eax, dword ptr [0x101998e4]
+0x1005f688 sub esp, 8
+0x1005f68b push ebx
+0x1005f68c push esi
+0x1005f68d mov esi, dword ptr [0x101998e4]
+0x1005f693 push edi
+0x1005f694 cmp byte ptr [esi], 0
+0x1005f697 jne 0x1005f6d5
+0x1005f699 call dword ptr [0x10131020]
+0x1005f69f mov edi, eax
+0x1005f6a1 cmp dword ptr [esi + 4], edi
+0x1005f6a4 jne 0x1005f6c6
+0x1005f6a6 sub esp, 0xc
+0x1005f6a9 mov edx, 0x10179ac0
+0x1005f6ae mov ecx, 0x10179ad0
+0x1005f6b3 call 0x1005d170
+0x1005f6b8 add esp, 0xc
+0x1005f6bb call dword ptr [0x10131108]
+0x1005f6c1 mov dword ptr [0], eax
+0x1005f6c6 lea ebx, [esi + 8]
+0x1005f6c9 push ebx
+0x1005f6ca call dword ptr [0x101310f0]
+0x1005f6d0 mov dword ptr [esi + 4], edi
+0x1005f6d3 jmp 0x1005f6df
+0x1005f6d5 lea ebx, [esi + 8]
+0x1005f6d8 push ebx
+0x1005f6d9 call dword ptr [0x101310f0]
+0x1005f6df mov edi, dword ptr [0x101998e4]
+0x1005f6e5 lea ecx, [ebp + 8]
+0x1005f6e8 mov eax, dword ptr [edi + 0x24]
+0x1005f6eb cmp ecx, eax
+0x1005f6ed jae 0x1005f720
+0x1005f6ef mov edx, dword ptr [edi + 0x20]
+0x1005f6f2 cmp edx, ecx
+0x1005f6f4 ja 0x1005f720
+0x1005f6f6 sub ecx, edx
+0x1005f6f8 sar ecx, 2
+0x1005f6fb mov dword ptr [ebp - 4], ecx
+0x1005f6fe cmp eax, dword ptr [edi + 0x28]
+0x1005f701 jne 0x1005f70f
+0x1005f703 push ecx
+0x1005f704 lea ecx, [edi + 0x20]
+0x1005f707 call 0x100425f0
+0x1005f70c mov ecx, dword ptr [ebp - 4]
+0x1005f70f mov edx, dword ptr [edi + 0x24]
+0x1005f712 test edx, edx
+0x1005f714 je 0x1005f73a
+0x1005f716 mov eax, dword ptr [edi + 0x20]
+0x1005f719 mov eax, dword ptr [eax + ecx*4]
+0x1005f71c mov dword ptr [edx], eax
+0x1005f71e jmp 0x1005f73a
+0x1005f720 cmp eax, dword ptr [edi + 0x28]
+0x1005f723 jne 0x1005f72e
+0x1005f725 push ecx
+0x1005f726 lea ecx, [edi + 0x20]
+0x1005f729 call 0x100425f0
+0x1005f72e mov ecx, dword ptr [edi + 0x24]
+0x1005f731 test ecx, ecx
+0x1005f733 je 0x1005f73a
+0x1005f735 mov eax, dword ptr [ebp + 8]
+0x1005f738 mov dword ptr [ecx], eax
+0x1005f73a add dword ptr [edi + 0x24], 4
+0x1005f73e cmp byte ptr [esi], 0
+0x1005f741 jne 0x1005f787
+0x1005f743 call dword ptr [0x10131020]
+0x1005f749 add esi, 4
+0x1005f74c cmp dword ptr [esi], eax
+0x1005f74e jne 0x1005f767
+0x1005f750 push 0
+0x1005f752 push esi
+0x1005f753 call dword ptr [0x101310e4]
+0x1005f759 push ebx
+0x1005f75a call dword ptr [0x101310f4]
+0x1005f760 pop edi
+0x1005f761 pop esi
+0x1005f762 pop ebx
+0x1005f763 mov esp, ebp
+0x1005f765 pop ebp
+0x1005f766 ret 
+0x1005f767 sub esp, 0xc
+0x1005f76a mov edx, 0x10179ad0
+0x1005f76f mov ecx, 0x10176a74
+0x1005f774 call 0x1005d170
+0x1005f779 add esp, 0xc
+0x1005f77c call dword ptr [0x10131108]
+0x1005f782 mov dword ptr [0], eax
+0x1005f787 push ebx
+0x1005f788 call dword ptr [0x101310f4]
+0x1005f78e pop edi
+0x1005f78f pop esi
+0x1005f790 pop ebx
+0x1005f791 mov esp, ebp
+0x1005f793 pop ebp
+0x1005f794 ret 
+CALLS [{"pc": "0x1005f699", "target": null, "import": "KERNEL32.dll!GetCurrentThreadId", "text": "dword ptr [0x10131020]"}, {"pc": "0x1005f6b3", "target": "0x1005d170", "import": null, "text": "0x1005d170"}, {"pc": "0x1005f6bb", "target": null, "import": "KERNEL32.dll!GetLastError", "text": "dword ptr [0x10131108]"}, {"pc": "0x1005f6ca", "target": null, "import": "KERNEL32.dll!EnterCriticalSection", "text": "dword ptr [0x101310f0]"}, {"pc": "0x1005f707", "target": "0x100425f0", "import": null, "text": "0x100425f0"}, {"pc": "0x1005f743", "target": null, "import": "KERNEL32.dll!GetCurrentThreadId", "text": "dword ptr [0x10131020]"}, {"pc": "0x1005f753", "target": null, "import": "KERNEL32.dll!InterlockedExchange", "text": "dword ptr [0x101310e4]"}, {"pc": "0x1005f75a", "target": null, "import": "KERNEL32.dll!LeaveCriticalSection", "text": "dword ptr [0x101310f4]"}, {"pc": "0x1005f774", "target": "0x1005d170", "import": null, "text": "0x1005d170"}, {"pc": "0x1005f77c", "target": null, "import": "KERNEL32.dll!GetLastError", "text": "dword ptr [0x10131108]"}, {"pc": "0x1005f788", "target": null, "import": "KERNEL32.dll!LeaveCriticalSection", "text": "dword ptr [0x101310f4]"}, {"pc": "0x1005f729", "target": "0x100425f0", "import": null, "text": "0x100425f0"}, {"pc": "0x1005f6d9", "target": null, "import": "KERNEL32.dll!EnterCriticalSection", "text": "dword ptr [0x101310f0]"}]
+STRINGS {"0x10179ac0": "mOwner == tid", "0x10179ad0": "mOwner != tid", "0x10176a74": "false"}
+
+FUNCTION 0x10121836
+0x10121836 push edi
+0x10121837 xor eax, eax
+0x10121839 mov edi, ecx
+0x1012183b mov ecx, 0x10190e24
+0x10121840 inc eax
+0x10121841 lock xadd dword ptr [ecx], eax
+0x10121845 jne 0x10121860
+0x10121847 push esi
+0x10121848 mov esi, 0x10195e10
+0x1012184d push esi
+0x1012184e call 0x10122a26
+0x10121853 add esi, 0x18
+0x10121856 pop ecx
+0x10121857 cmp esi, 0x10195e70
+0x1012185d jl 0x1012184d
+0x1012185f pop esi
+0x10121860 mov eax, edi
+0x10121862 pop edi
+0x10121863 ret 
+CALLS [{"pc": "0x1012184e", "target": "0x10122a26", "import": null, "text": "0x10122a26"}]
+STRINGS {}
+
+FUNCTION 0x101050c9
+0x101050c9 push ebp
+0x101050ca mov ebp, esp
+0x101050cc sub esp, 0x10
+0x101050cf mov dword ptr [0x10195ca0], 1
+0x101050d9 push esi
+0x101050da push 0x10195cc0
+0x101050df call dword ptr [0x101311f4]
+0x101050e5 mov esi, eax
+0x101050e7 lea eax, [ebp - 8]
+0x101050ea xor esi, dword ptr [0x101902c0]
+0x101050f0 push eax
+0x101050f1 push eax
+0x101050f2 push eax
+0x101050f3 lea eax, [ebp - 0x10]
+0x101050f6 push eax
+0x101050f7 call dword ptr [0x10131064]
+0x101050fd push eax
+0x101050fe call dword ptr [0x10131170]
+0x10105104 test eax, eax
+0x10105106 je 0x10105110
+0x10105108 mov eax, dword ptr [ebp - 0xc]
+0x1010510b xor eax, dword ptr [ebp - 0x10]
+0x1010510e xor esi, eax
+0x10105110 mov eax, esi
+0x10105112 pop esi
+0x10105113 mov esp, ebp
+0x10105115 pop ebp
+0x10105116 ret 
+CALLS [{"pc": "0x101050df", "target": null, "import": "KERNEL32.dll!EncodePointer", "text": "dword ptr [0x101311f4]"}, {"pc": "0x101050f7", "target": null, "import": "KERNEL32.dll!GetCurrentThread", "text": "dword ptr [0x10131064]"}, {"pc": "0x101050fe", "target": null, "import": "KERNEL32.dll!GetThreadTimes", "text": "dword ptr [0x10131170]"}]
+STRINGS {}
+
+FUNCTION 0x1003ecf0
+0x1003ecf0 mov eax, ecx
+0x1003ecf2 ret 4
+CALLS []
+STRINGS {}
+
+FUNCTION 0x1003ed00
+0x1003ed00 push ebp
+0x1003ed01 mov ebp, esp
+0x1003ed03 mov eax, dword ptr [ebp + 8]
+0x1003ed06 pop ebp
+0x1003ed07 ret 4
+CALLS []
+STRINGS {}
+
+FUNCTION 0x1005d3c0
+0x1005d3c0 push ebp
+0x1005d3c1 mov ebp, esp
+0x1005d3c3 mov edx, dword ptr [ebp + 0xc]
+0x1005d3c6 mov eax, dword ptr [edx]
+0x1005d3c8 or eax, dword ptr [edx + 4]
+0x1005d3cb jne 0x1005d3e6
+0x1005d3cd mov eax, dword ptr [0x10199718]
+0x1005d3d2 test eax, eax
+0x1005d3d4 je 0x1005d3e6
+0x1005d3d6 push edx
+0x1005d3d7 push dword ptr [ebp + 8]
+0x1005d3da push 0x1005d270
+0x1005d3df push ecx
+0x1005d3e0 call eax
+0x1005d3e2 pop ebp
+0x1005d3e3 ret 8
+0x1005d3e6 xor eax, eax
+0x1005d3e8 pop ebp
+0x1005d3e9 ret 8
+CALLS [{"pc": "0x1005d3e0", "target": null, "import": null, "text": "eax"}]
+STRINGS {}
+
+FUNCTION 0x1005d430
+0x1005d430 push ebp
+0x1005d431 mov ebp, esp
+0x1005d433 sub esp, 0x34
+0x1005d436 mov eax, dword ptr [0x101902c0]
+0x1005d43b xor eax, ebp
+0x1005d43d mov dword ptr [ebp - 8], eax
+0x1005d440 lea eax, [ebp - 0x30]
+0x1005d443 mov dword ptr [ebp - 0x30], edx
+0x1005d446 mov dword ptr [ebp - 0x2c], eax
+0x1005d449 mov eax, dword ptr [0x1019971c]
+0x1005d44e mov dword ptr [ebp - 0x28], 0
+0x1005d455 mov dword ptr [ebp - 0x24], 4
+0x1005d45c mov dword ptr [ebp - 0x20], 0
+0x1005d463 mov dword ptr [ebp - 0x1c], 0x1017999c
+0x1005d46a mov dword ptr [ebp - 0x18], 0
+0x1005d471 mov dword ptr [ebp - 0x14], 0xc
+0x1005d478 mov dword ptr [ebp - 0x10], 0
+0x1005d47f test eax, eax
+0x1005d481 je 0x1005d4aa
+0x1005d483 lea ecx, [ebp - 0x2c]
+0x1005d486 push ecx
+0x1005d487 push 2
+0x1005d489 push 0x10179a20
+0x1005d48e push dword ptr [0x1019988c]
+0x1005d494 push dword ptr [0x10199888]
+0x1005d49a call eax
+0x1005d49c mov ecx, dword ptr [ebp - 8]
+0x1005d49f xor ecx, ebp
+0x1005d4a1 call 0x100ec285
+0x1005d4a6 mov esp, ebp
+0x1005d4a8 pop ebp
+0x1005d4a9 ret 
+0x1005d4aa mov ecx, dword ptr [ebp - 8]
+0x1005d4ad xor eax, eax
+0x1005d4af xor ecx, ebp
+0x1005d4b1 call 0x100ec285
+0x1005d4b6 mov esp, ebp
+0x1005d4b8 pop ebp
+0x1005d4b9 ret 
+CALLS [{"pc": "0x1005d49a", "target": null, "import": null, "text": "eax"}, {"pc": "0x1005d4a1", "target": "0x100ec285", "import": null, "text": "0x100ec285"}, {"pc": "0x1005d4b1", "target": "0x100ec285", "import": null, "text": "0x100ec285"}]
+STRINGS {"0x1017999c": "Main thread"}
+
+FUNCTION 0x1003f750
+0x1003f750 push ebp
+0x1003f751 mov ebp, esp
+0x1003f753 sub esp, 8
+0x1003f756 push esi
+0x1003f757 push 0
+0x1003f759 push 0x7fffffff
+0x1003f75e push 4
+0x1003f760 push 0
+0x1003f762 mov esi, ecx
+0x1003f764 mov dword ptr [ebp - 8], 0
+0x1003f76b call dword ptr [0x10131028]
+0x1003f771 mov dword ptr [ebp - 4], eax
+0x1003f774 test eax, eax
+0x1003f776 je 0x1003f789
+0x1003f778 lea edx, [ebp - 4]
+0x1003f77b mov ecx, esi
+0x1003f77d call 0x1003f7a0
+0x1003f782 mov eax, esi
+0x1003f784 pop esi
+0x1003f785 mov esp, ebp
+0x1003f787 pop ebp
+0x1003f788 ret 
+0x1003f789 mov dword ptr [esi], 0
+0x1003f78f mov eax, esi
+0x1003f791 pop esi
+0x1003f792 mov esp, ebp
+0x1003f794 pop ebp
+0x1003f795 ret 
+CALLS [{"pc": "0x1003f76b", "target": null, "import": "KERNEL32.dll!CreateSemaphoreA", "text": "dword ptr [0x10131028]"}, {"pc": "0x1003f77d", "target": "0x1003f7a0", "import": null, "text": "0x1003f7a0"}]
+STRINGS {}
+
+FUNCTION 0x1005e610
+0x1005e610 push ebp
+0x1005e611 mov ebp, esp
+0x1005e613 push -1
+0x1005e615 push 0x1012d1fb
+0x1005e61a mov eax, dword ptr fs:[0]
+0x1005e620 push eax
+0x1005e621 push ecx
+0x1005e622 push esi
+0x1005e623 push edi
+0x1005e624 mov eax, dword ptr [0x101902c0]
+0x1005e629 xor eax, ebp
+0x1005e62b push eax
+0x1005e62c lea eax, [ebp - 0xc]
+0x1005e62f mov dword ptr fs:[0], eax
+0x1005e635 mov edi, ecx
+0x1005e637 mov dword ptr [ebp - 0x10], edi
+0x1005e63a lea esi, [edi + 0x60]
+0x1005e63d push esi
+0x1005e63e call 0x1005fcc0
+0x1005e643 mov dword ptr [ebp - 4], 0
+0x1005e64a mov ecx, esi
+0x1005e64c mov dword ptr [edi], 0x10179b64
+0x1005e652 call 0x1005e380
+0x1005e657 push 0x14
+0x1005e659 push 0x10179afc
+0x1005e65e mov ecx, esi
+0x1005e660 mov byte ptr [ebp - 4], 1
+0x1005e664 call 0x1003d920
+0x1005e669 push 0xf
+0x1005e66b mov dword ptr [ebp - 4], 2
+0x1005e672 mov ecx, esi
+0x1005e674 push 0x10179b14
+0x1005e679 mov dword ptr [edi], 0x10179ba0
+0x1005e67f call 0x1003d920
+0x1005e684 push 0xe
+0x1005e686 push 0x10179b24
+0x1005e68b lea ecx, [edi + 0x90]
+0x1005e691 mov dword ptr [edi + 0x88], 2
+0x1005e69b mov dword ptr [edi + 0x8c], 0
+0x1005e6a5 mov dword ptr [edi + 0x80], 1
+0x1005e6af mov dword ptr [edi + 0x84], 0
+0x1005e6b9 call 0x1003d920
+0x1005e6be mov dword ptr [edi + 0x30], 0x1005e5e0
+0x1005e6c5 mov eax, edi
+0x1005e6c7 mov ecx, dword ptr [ebp - 0xc]
+0x1005e6ca mov dword ptr fs:[0], ecx
+0x1005e6d1 pop ecx
+0x1005e6d2 pop edi
+0x1005e6d3 pop esi
+0x1005e6d4 mov esp, ebp
+0x1005e6d6 pop ebp
+0x1005e6d7 ret 
+CALLS [{"pc": "0x1005e63e", "target": "0x1005fcc0", "import": null, "text": "0x1005fcc0"}, {"pc": "0x1005e652", "target": "0x1005e380", "import": null, "text": "0x1005e380"}, {"pc": "0x1005e664", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1005e67f", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1005e6b9", "target": "0x1003d920", "import": null, "text": "0x1003d920"}]
+STRINGS {"0x10179afc": "BaseConsoleLogTarget", "0x10179b14": "StdErrLogTarget", "0x10179b24": "#E(#T): #L| #M"}
+
+FUNCTION 0x1005e7e0
+0x1005e7e0 push ebp
+0x1005e7e1 mov ebp, esp
+0x1005e7e3 push -1
+0x1005e7e5 push 0x1012d1fb
+0x1005e7ea mov eax, dword ptr fs:[0]
+0x1005e7f0 push eax
+0x1005e7f1 push ecx
+0x1005e7f2 push esi
+0x1005e7f3 push edi
+0x1005e7f4 mov eax, dword ptr [0x101902c0]
+0x1005e7f9 xor eax, ebp
+0x1005e7fb push eax
+0x1005e7fc lea eax, [ebp - 0xc]
+0x1005e7ff mov dword ptr fs:[0], eax
+0x1005e805 mov edi, ecx
+0x1005e807 mov dword ptr [ebp - 0x10], edi
+0x1005e80a lea esi, [edi + 0x60]
+0x1005e80d push esi
+0x1005e80e call 0x1005fcc0
+0x1005e813 mov dword ptr [ebp - 4], 0
+0x1005e81a mov ecx, esi
+0x1005e81c mov dword ptr [edi], 0x10179b64
+0x1005e822 call 0x1005e380
+0x1005e827 push 0x14
+0x1005e829 push 0x10179afc
+0x1005e82e mov ecx, esi
+0x1005e830 mov byte ptr [ebp - 4], 1
+0x1005e834 call 0x1003d920
+0x1005e839 push 0xf
+0x1005e83b mov dword ptr [ebp - 4], 2
+0x1005e842 mov ecx, esi
+0x1005e844 push 0x10179b34
+0x1005e849 mov dword ptr [edi], 0x10179b8c
+0x1005e84f mov dword ptr [edi + 0xa8], 0
+0x1005e859 call 0x1003d920
+0x1005e85e push 2
+0x1005e860 push 0x10179b44
+0x1005e865 lea ecx, [edi + 0x90]
+0x1005e86b mov dword ptr [edi + 0x88], 1
+0x1005e875 mov dword ptr [edi + 0x8c], 0
+0x1005e87f mov dword ptr [edi + 0x80], 2
+0x1005e889 mov dword ptr [edi + 0x84], 0
+0x1005e893 call 0x1003d920
+0x1005e898 mov dword ptr [edi + 0x30], 0x1005e5e0
+0x1005e89f mov eax, edi
+0x1005e8a1 mov ecx, dword ptr [ebp - 0xc]
+0x1005e8a4 mov dword ptr fs:[0], ecx
+0x1005e8ab pop ecx
+0x1005e8ac pop edi
+0x1005e8ad pop esi
+0x1005e8ae mov esp, ebp
+0x1005e8b0 pop ebp
+0x1005e8b1 ret 
+CALLS [{"pc": "0x1005e80e", "target": "0x1005fcc0", "import": null, "text": "0x1005fcc0"}, {"pc": "0x1005e822", "target": "0x1005e380", "import": null, "text": "0x1005e380"}, {"pc": "0x1005e834", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1005e859", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1005e893", "target": "0x1003d920", "import": null, "text": "0x1003d920"}]
+STRINGS {"0x10179afc": "BaseConsoleLogTarget", "0x10179b34": "StdOutLogTarget"}
+
+FUNCTION 0x1005e9e0
+0x1005e9e0 push ebp
+0x1005e9e1 mov ebp, esp
+0x1005e9e3 push -1
+0x1005e9e5 push 0x1012d1fb
+0x1005e9ea mov eax, dword ptr fs:[0]
+0x1005e9f0 push eax
+0x1005e9f1 push ecx
+0x1005e9f2 push esi
+0x1005e9f3 push edi
+0x1005e9f4 mov eax, dword ptr [0x101902c0]
+0x1005e9f9 xor eax, ebp
+0x1005e9fb push eax
+0x1005e9fc lea eax, [ebp - 0xc]
+0x1005e9ff mov dword ptr fs:[0], eax
+0x1005ea05 mov edi, ecx
+0x1005ea07 mov dword ptr [ebp - 0x10], edi
+0x1005ea0a lea esi, [edi + 0x60]
+0x1005ea0d push esi
+0x1005ea0e call 0x1005fcc0
+0x1005ea13 mov dword ptr [ebp - 4], 0
+0x1005ea1a mov ecx, esi
+0x1005ea1c mov dword ptr [edi], 0x10179b64
+0x1005ea22 call 0x1005e380
+0x1005ea27 push 0x14
+0x1005ea29 push 0x10179afc
+0x1005ea2e mov ecx, esi
+0x1005ea30 mov byte ptr [ebp - 4], 1
+0x1005ea34 call 0x1003d920
+0x1005ea39 push 0x18
+0x1005ea3b mov dword ptr [ebp - 4], 2
+0x1005ea42 mov ecx, esi
+0x1005ea44 push 0x10179b48
+0x1005ea49 mov dword ptr [edi], 0x10179b78
+0x1005ea4f call 0x1003d920
+0x1005ea54 push 0xe
+0x1005ea56 push 0x10179b24
+0x1005ea5b lea ecx, [edi + 0x90]
+0x1005ea61 mov dword ptr [edi + 0x88], 0
+0x1005ea6b mov dword ptr [edi + 0x8c], 0
+0x1005ea75 mov dword ptr [edi + 0x80], 1
+0x1005ea7f mov dword ptr [edi + 0x84], 0
+0x1005ea89 call 0x1003d920
+0x1005ea8e mov dword ptr [edi + 0x30], 0x1005e5e0
+0x1005ea95 mov eax, edi
+0x1005ea97 mov ecx, dword ptr [ebp - 0xc]
+0x1005ea9a mov dword ptr fs:[0], ecx
+0x1005eaa1 pop ecx
+0x1005eaa2 pop edi
+0x1005eaa3 pop esi
+0x1005eaa4 mov esp, ebp
+0x1005eaa6 pop ebp
+0x1005eaa7 ret 
+CALLS [{"pc": "0x1005ea0e", "target": "0x1005fcc0", "import": null, "text": "0x1005fcc0"}, {"pc": "0x1005ea22", "target": "0x1005e380", "import": null, "text": "0x1005e380"}, {"pc": "0x1005ea34", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1005ea4f", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1005ea89", "target": "0x1003d920", "import": null, "text": "0x1003d920"}]
+STRINGS {"0x10179afc": "BaseConsoleLogTarget", "0x10179b48": "DebuggerConsoleLogTarget", "0x10179b24": "#E(#T): #L| #M"}
+
+FUNCTION 0x1005f850
+0x1005f850 push ebp
+0x1005f851 mov ebp, esp
+0x1005f853 push ecx
+0x1005f854 push ebx
+0x1005f855 push esi
+0x1005f856 mov esi, ecx
+0x1005f858 push edi
+0x1005f859 push esi
+0x1005f85a mov edi, edx
+0x1005f85c mov eax, dword ptr [esi + 8]
+0x1005f85f call eax
+0x1005f861 add esp, 4
+0x1005f864 cmp dword ptr [edi + 0x1c], eax
+0x1005f867 jge 0x1005f872
+0x1005f869 xor al, al
+0x1005f86b pop edi
+0x1005f86c pop esi
+0x1005f86d pop ebx
+0x1005f86e mov esp, ebp
+0x1005f870 pop ebp
+0x1005f871 ret 
+0x1005f872 mov ebx, dword ptr [edi + 0x20]
+0x1005f875 mov eax, ebx
+0x1005f877 mov ecx, dword ptr [edi + 0x24]
+0x1005f87a or eax, ecx
+0x1005f87c mov dword ptr [ebp - 4], ecx
+0x1005f87f je 0x1005f8ab
+0x1005f881 mov eax, dword ptr [esi + 0x14]
+0x1005f884 push esi
+0x1005f885 call eax
+0x1005f887 and edx, dword ptr [ebp - 4]
+0x1005f88a and eax, ebx
+0x1005f88c add esp, 4
+0x1005f88f or eax, edx
+0x1005f891 jne 0x1005f869
+0x1005f893 mov eax, dword ptr [esi + 0x10]
+0x1005f896 push esi
+0x1005f897 call eax
+0x1005f899 mov ecx, eax
+0x1005f89b add esp, 4
+0x1005f89e or ecx, edx
+0x1005f8a0 je 0x1005f8ab
+0x1005f8a2 and edx, dword ptr [ebp - 4]
+0x1005f8a5 and eax, ebx
+0x1005f8a7 or eax, edx
+0x1005f8a9 je 0x1005f869
+0x1005f8ab mov eax, dword ptr [esi + 0x2c]
+0x1005f8ae push edi
+0x1005f8af push esi
+0x1005f8b0 call eax
+0x1005f8b2 add esp, 8
+0x1005f8b5 pop edi
+0x1005f8b6 pop esi
+0x1005f8b7 pop ebx
+0x1005f8b8 mov esp, ebp
+0x1005f8ba pop ebp
+0x1005f8bb ret 
+CALLS [{"pc": "0x1005f85f", "target": null, "import": null, "text": "eax"}, {"pc": "0x1005f885", "target": null, "import": null, "text": "eax"}, {"pc": "0x1005f897", "target": null, "import": null, "text": "eax"}, {"pc": "0x1005f8b0", "target": null, "import": null, "text": "eax"}]
+STRINGS {}
+
+FUNCTION 0x1003fbb0
+0x1003fbb0 cmp byte ptr [0x10199737], 0
+0x1003fbb7 push esi
+0x1003fbb8 mov esi, ecx
+0x1003fbba push edi
+0x1003fbbb mov dword ptr [esi], 0x101316ac
+0x1003fbc1 jne 0x1003fbcf
+0x1003fbc3 mov byte ptr [0x10199737], 1
+0x1003fbca call 0x1003d4d0
+0x1003fbcf mov eax, dword ptr [0x10198450]
+0x1003fbd4 test eax, eax
+0x1003fbd6 jne 0x1003fbe4
+0x1003fbd8 push 4
+0x1003fbda call 0x100f0695
+0x1003fbdf add esp, 4
+0x1003fbe2 jmp 0x1003fbf1
+0x1003fbe4 push dword ptr [0x10198448]
+0x1003fbea push 4
+0x1003fbec call eax
+0x1003fbee add esp, 8
+0x1003fbf1 mov edi, eax
+0x1003fbf3 test edi, edi
+0x1003fbf5 je 0x1003fc05
+0x1003fbf7 push 1
+0x1003fbf9 call 0x10121662
+0x1003fbfe add esp, 4
+0x1003fc01 mov dword ptr [edi], eax
+0x1003fc03 jmp 0x1003fc07
+0x1003fc05 xor edi, edi
+0x1003fc07 lea eax, [esi + 4]
+0x1003fc0a mov dword ptr [esi + 0x34], edi
+0x1003fc0d mov dword ptr [esi + 0xc], eax
+0x1003fc10 lea ecx, [esi + 8]
+0x1003fc13 lea eax, [esi + 0x14]
+0x1003fc16 mov dword ptr [esi + 0x10], ecx
+0x1003fc19 mov dword ptr [esi + 0x1c], eax
+0x1003fc1c lea eax, [esi + 0x18]
+0x1003fc1f mov dword ptr [esi + 0x20], eax
+0x1003fc22 lea eax, [esi + 0x24]
+0x1003fc25 mov dword ptr [esi + 0x2c], eax
+0x1003fc28 lea eax, [esi + 0x28]
+0x1003fc2b mov dword ptr [esi + 0x30], eax
+0x1003fc2e mov dword ptr [ecx], 0
+0x1003fc34 mov eax, dword ptr [esi + 0x20]
+0x1003fc37 pop edi
+0x1003fc38 mov dword ptr [eax], 0
+0x1003fc3e mov eax, dword ptr [esi + 0x30]
+0x1003fc41 mov dword ptr [eax], 0
+0x1003fc47 mov eax, dword ptr [esi + 0xc]
+0x1003fc4a mov dword ptr [eax], 0
+0x1003fc50 mov eax, dword ptr [esi + 0x1c]
+0x1003fc53 mov dword ptr [eax], 0
+0x1003fc59 mov eax, dword ptr [esi + 0x2c]
+0x1003fc5c mov dword ptr [eax], 0
+0x1003fc62 mov eax, esi
+0x1003fc64 pop esi
+0x1003fc65 ret 
+CALLS [{"pc": "0x1003fbca", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x1003fbda", "target": "0x100f0695", "import": null, "text": "0x100f0695"}, {"pc": "0x1003fbf9", "target": "0x10121662", "import": null, "text": "0x10121662"}, {"pc": "0x1003fbec", "target": null, "import": null, "text": "eax"}]
+STRINGS {}
+
+FUNCTION 0x10040dd0
+0x10040dd0 push ebp
+0x10040dd1 mov ebp, esp
+0x10040dd3 push -1
+0x10040dd5 push 0x1012bb9c
+0x10040dda mov eax, dword ptr fs:[0]
+0x10040de0 push eax
+0x10040de1 sub esp, 8
+0x10040de4 push esi
+0x10040de5 mov eax, dword ptr [0x101902c0]
+0x10040dea xor eax, ebp
+0x10040dec push eax
+0x10040ded lea eax, [ebp - 0xc]
+0x10040df0 mov dword ptr fs:[0], eax
+0x10040df6 mov esi, ecx
+0x10040df8 mov dword ptr [ebp - 0x14], esi
+0x10040dfb cmp dword ptr [ebp + 0x10], 0
+0x10040dff mov dword ptr [ebp - 0x10], 0
+0x10040e06 je 0x10040e23
+0x10040e08 mov dword ptr [esi], 0x10176a04
+0x10040e0e mov dword ptr [esi + 8], 0x101316a4
+0x10040e15 mov dword ptr [ebp - 4], 0
+0x10040e1c mov dword ptr [ebp - 0x10], 1
+0x10040e23 mov eax, dword ptr [esi]
+0x10040e25 push dword ptr [ebp + 0xc]
+0x10040e28 push dword ptr [ebp + 8]
+0x10040e2b mov eax, dword ptr [eax + 4]
+0x10040e2e mov dword ptr [esi + eax], 0x101316ec
+0x10040e35 mov eax, dword ptr [esi]
+0x10040e37 mov ecx, dword ptr [eax + 4]
+0x10040e3a lea eax, [ecx - 8]
+0x10040e3d mov dword ptr [ecx + esi - 4], eax
+0x10040e41 mov eax, dword ptr [esi]
+0x10040e43 mov ecx, dword ptr [eax + 4]
+0x10040e46 add ecx, esi
+0x10040e48 call 0x10040d10
+0x10040e4d mov eax, esi
+0x10040e4f mov ecx, dword ptr [ebp - 0xc]
+0x10040e52 mov dword ptr fs:[0], ecx
+0x10040e59 pop ecx
+0x10040e5a pop esi
+0x10040e5b mov esp, ebp
+0x10040e5d pop ebp
+0x10040e5e ret 0xc
+CALLS [{"pc": "0x10040e48", "target": "0x10040d10", "import": null, "text": "0x10040d10"}]
+STRINGS {}
+
+FUNCTION 0x10122298
+0x10122298 push ebp
+0x10122299 mov ebp, esp
+0x1012229b cmp dword ptr [ebp + 0xc], 1
+0x1012229f push esi
+0x101222a0 mov esi, ecx
+0x101222a2 sete al
+0x101222a5 mov byte ptr [esi + 0x4c], al
+0x101222a8 mov byte ptr [esi + 0x45], 0
+0x101222ac call 0x1003fd30
+0x101222b1 mov ecx, dword ptr [ebp + 8]
+0x101222b4 test ecx, ecx
+0x101222b6 je 0x101222d0
+0x101222b8 lea eax, [ecx + 8]
+0x101222bb mov dword ptr [esi + 0x1c], ecx
+0x101222be mov dword ptr [esi + 0xc], eax
+0x101222c1 mov dword ptr [esi + 0x10], eax
+0x101222c4 lea eax, [ecx + 4]
+0x101222c7 mov dword ptr [esi + 0x20], ecx
+0x101222ca mov dword ptr [esi + 0x2c], eax
+0x101222cd mov dword ptr [esi + 0x30], eax
+0x101222d0 mov dword ptr [esi + 0x50], ecx
+0x101222d3 mov eax, dword ptr [0x10195f50]
+0x101222d8 and dword ptr [esi + 0x40], 0
+0x101222dc mov dword ptr [esi + 0x48], eax
+0x101222df pop esi
+0x101222e0 pop ebp
+0x101222e1 ret 8
+CALLS [{"pc": "0x101222ac", "target": "0x1003fd30", "import": null, "text": "0x1003fd30"}]
+STRINGS {}
+
+FUNCTION 0x1003f7a0
+0x1003f7a0 push ebp
+0x1003f7a1 mov ebp, esp
+0x1003f7a3 push ecx
+0x1003f7a4 cmp byte ptr [0x10199737], 0
+0x1003f7ab push esi
+0x1003f7ac push edi
+0x1003f7ad mov edi, edx
+0x1003f7af mov dword ptr [ebp - 4], 0
+0x1003f7b6 mov esi, ecx
+0x1003f7b8 jne 0x1003f7c6
+0x1003f7ba mov byte ptr [0x10199737], 1
+0x1003f7c1 call 0x1003d4d0
+0x1003f7c6 mov eax, dword ptr [0x10198450]
+0x1003f7cb test eax, eax
+0x1003f7cd jne 0x1003f7db
+0x1003f7cf push 4
+0x1003f7d1 call 0x100f0695
+0x1003f7d6 add esp, 4
+0x1003f7d9 jmp 0x1003f7e8
+0x1003f7db push dword ptr [0x10198448]
+0x1003f7e1 push 4
+0x1003f7e3 call eax
+0x1003f7e5 add esp, 8
+0x1003f7e8 mov ecx, eax
+0x1003f7ea test ecx, ecx
+0x1003f7ec je 0x1003f7fc
+0x1003f7ee mov eax, dword ptr [edi]
+0x1003f7f0 mov dword ptr [ecx], eax
+0x1003f7f2 mov eax, esi
+0x1003f7f4 pop edi
+0x1003f7f5 mov dword ptr [esi], ecx
+0x1003f7f7 pop esi
+0x1003f7f8 mov esp, ebp
+0x1003f7fa pop ebp
+0x1003f7fb ret 
+0x1003f7fc pop edi
+0x1003f7fd mov dword ptr [esi], 0
+0x1003f803 mov eax, esi
+0x1003f805 pop esi
+0x1003f806 mov esp, ebp
+0x1003f808 pop ebp
+0x1003f809 ret 
+CALLS [{"pc": "0x1003f7c1", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x1003f7d1", "target": "0x100f0695", "import": null, "text": "0x100f0695"}, {"pc": "0x1003f7e3", "target": null, "import": null, "text": "eax"}]
+STRINGS {}
+
+FUNCTION 0x1005d270
+0x1005d270 push ebp
+0x1005d271 mov ebp, esp
+0x1005d273 and esp, 0xfffffff8
+0x1005d276 push ecx
+0x1005d277 push ebx
+0x1005d278 push esi
+0x1005d279 mov esi, dword ptr [ebp + 0x28]
+0x1005d27c push edi
+0x1005d27d test esi, esi
+0x1005d27f je 0x1005d3a8
+0x1005d285 mov eax, dword ptr [ebp + 0xc]
+0x1005d288 sub eax, 0
+0x1005d28b je 0x1005d359
+0x1005d291 dec eax
+0x1005d292 jne 0x1005d3a8
+0x1005d298 mov al, byte ptr [ebp + 0x10]
+0x1005d29b xor edi, edi
+0x1005d29d mov byte ptr [esi + 0x28], al
+0x1005d2a0 mov eax, dword ptr [ebp + 0x14]
+0x1005d2a3 mov dword ptr [esi + 0x10], eax
+0x1005d2a6 mov eax, dword ptr [ebp + 0x18]
+0x1005d2a9 mov dword ptr [esi + 0x14], eax
+0x1005d2ac mov eax, dword ptr [ebp + 0x1c]
+0x1005d2af mov dword ptr [esi + 0x18], eax
+0x1005d2b2 mov eax, dword ptr [ebp + 0x20]
+0x1005d2b5 mov dword ptr [esi + 0x1c], eax
+0x1005d2b8 xor eax, eax
+0x1005d2ba mov dword ptr [esi + 0x24], 1
+0x1005d2c1 cmp ax, word ptr [esi + 0x2a]
+0x1005d2c5 jae 0x1005d3a8
+0x1005d2cb jmp 0x1005d2d0
+0x1005d2d0 mov eax, dword ptr [esi + 0x30]
+0x1005d2d3 mov cl, byte ptr [esi + 0x28]
+0x1005d2d6 mov edx, dword ptr [eax + edi*8]
+0x1005d2d9 mov ebx, dword ptr [eax + edi*8 + 4]
+0x1005d2dd mov eax, dword ptr [esi + 0x34]
+0x1005d2e0 cmp byte ptr [edi + eax], cl
+0x1005d2e3 jbe 0x1005d2e9
+0x1005d2e5 test cl, cl
+0x1005d2e7 jne 0x1005d311
+0x1005d2e9 mov eax, edx
+0x1005d2eb or eax, ebx
+0x1005d2ed je 0x1005d32e
+0x1005d2ef mov ecx, edx
+0x1005d2f1 mov eax, ebx
+0x1005d2f3 and ecx, dword ptr [esi + 0x10]
+0x1005d2f6 and eax, dword ptr [esi + 0x14]
+0x1005d2f9 or ecx, eax
+0x1005d2fb je 0x1005d311
+0x1005d2fd mov eax, dword ptr [esi + 0x18]
+0x1005d300 and eax, edx
+0x1005d302 mov edx, dword ptr [esi + 0x1c]
+0x1005d305 and edx, ebx
+0x1005d307 cmp eax, dword ptr [esi + 0x18]
+0x1005d30a jne 0x1005d311
+0x1005d30c cmp edx, dword ptr [esi + 0x1c]
+0x1005d30f je 0x1005d32e
+0x1005d311 mov eax, dword ptr [esi + 0x2c]
+0x1005d314 mov ecx, edi
+0x1005d316 shr ecx, 5
+0x1005d319 lea edx, [eax + ecx*4]
+0x1005d31c mov ecx, edi
+0x1005d31e and ecx, 0x1f
+0x1005d321 mov eax, 1
+0x1005d326 shl eax, cl
+0x1005d328 not eax
+0x1005d32a and dword ptr [edx], eax
+0x1005d32c jmp 0x1005d347
+0x1005d32e mov eax, dword ptr [esi + 0x2c]
+0x1005d331 mov ecx, edi
+0x1005d333 shr ecx, 5
+0x1005d336 lea edx, [eax + ecx*4]
+0x1005d339 mov ecx, edi
+0x1005d33b and ecx, 0x1f
+0x1005d33e mov eax, 1
+0x1005d343 shl eax, cl
+0x1005d345 or dword ptr [edx], eax
+0x1005d347 movzx eax, word ptr [esi + 0x2a]
+0x1005d34b inc edi
+0x1005d34c cmp edi, eax
+0x1005d34e jb 0x1005d2d0
+0x1005d350 pop edi
+0x1005d351 pop esi
+0x1005d352 pop ebx
+0x1005d353 mov esp, ebp
+0x1005d355 pop ebp
+0x1005d356 ret 0x24
+0x1005d359 movzx eax, word ptr [esi + 0x2a]
+0x1005d35d mov dword ptr [esi + 0x24], 0
+0x1005d364 mov byte ptr [esi + 0x28], 0
+0x1005d368 mov dword ptr [esi + 0x10], 0
+0x1005d36f mov dword ptr [esi + 0x14], 0
+0x1005d376 mov dword ptr [esi + 0x18], 0
+0x1005d37d mov dword ptr [esi + 0x1c], 0
+0x1005d384 test ax, ax
+0x1005d387 je 0x1005d3a8
+0x1005d389 dec eax
+0x1005d38a cdq 
+0x1005d38b and edx, 0x1f
+0x1005d38e add eax, edx
+0x1005d390 sar eax, 5
+0x1005d393 lea eax, [eax*4 + 4]
+0x1005d39a push eax
+0x1005d39b push 0
+0x1005d39d push dword ptr [esi + 0x2c]
+0x1005d3a0 call 0x100f39c0
+0x1005d3a5 add esp, 0xc
+0x1005d3a8 pop edi
+0x1005d3a9 pop esi
+0x1005d3aa pop ebx
+0x1005d3ab mov esp, ebp
+0x1005d3ad pop ebp
+0x1005d3ae ret 0x24
+CALLS [{"pc": "0x1005d3a0", "target": "0x100f39c0", "import": null, "text": "0x100f39c0"}]
+STRINGS {}
+
+FUNCTION 0x1003d4d0
+0x1003d4d0 ret 
+CALLS []
+STRINGS {}
+
+FUNCTION 0x1003fd30
+0x1003fd30 lea eax, [ecx + 4]
+0x1003fd33 mov dword ptr [ecx + 0xc], eax
+0x1003fd36 lea edx, [ecx + 8]
+0x1003fd39 lea eax, [ecx + 0x14]
+0x1003fd3c mov dword ptr [ecx + 0x10], edx
+0x1003fd3f mov dword ptr [ecx + 0x1c], eax
+0x1003fd42 lea eax, [ecx + 0x18]
+0x1003fd45 mov dword ptr [ecx + 0x20], eax
+0x1003fd48 lea eax, [ecx + 0x24]
+0x1003fd4b mov dword ptr [ecx + 0x2c], eax
+0x1003fd4e lea eax, [ecx + 0x28]
+0x1003fd51 mov dword ptr [ecx + 0x30], eax
+0x1003fd54 mov dword ptr [edx], 0
+0x1003fd5a mov eax, dword ptr [ecx + 0x20]
+0x1003fd5d mov dword ptr [eax], 0
+0x1003fd63 mov eax, dword ptr [ecx + 0x30]
+0x1003fd66 mov dword ptr [eax], 0
+0x1003fd6c mov eax, dword ptr [ecx + 0xc]
+0x1003fd6f mov dword ptr [eax], 0
+0x1003fd75 mov eax, dword ptr [ecx + 0x1c]
+0x1003fd78 mov dword ptr [eax], 0
+0x1003fd7e mov eax, dword ptr [ecx + 0x2c]
+0x1003fd81 mov dword ptr [eax], 0
+0x1003fd87 ret 
+CALLS []
+STRINGS {}
+
+FUNCTION 0x10040d10
+0x10040d10 push ebp
+0x10040d11 mov ebp, esp
+0x10040d13 push -1
+0x10040d15 push 0x1012bb58
+0x10040d1a mov eax, dword ptr fs:[0]
+0x10040d20 push eax
+0x10040d21 push esi
+0x10040d22 push edi
+0x10040d23 mov eax, dword ptr [0x101902c0]
+0x10040d28 xor eax, ebp
+0x10040d2a push eax
+0x10040d2b lea eax, [ebp - 0xc]
+0x10040d2e mov dword ptr fs:[0], eax
+0x10040d34 mov esi, ecx
+0x10040d36 call 0x10040620
+0x10040d3b mov eax, dword ptr [ebp + 8]
+0x10040d3e mov ecx, esi
+0x10040d40 mov dword ptr [esi + 0x38], eax
+0x10040d43 lea eax, [ebp + 8]
+0x10040d46 push eax
+0x10040d47 mov dword ptr [esi + 0x3c], 0
+0x10040d4e call 0x10040f00
+0x10040d53 push eax
+0x10040d54 mov dword ptr [ebp - 4], 0
+0x10040d5b call 0x10040be0
+0x10040d60 mov dword ptr [ebp - 4], 0xffffffff
+0x10040d67 add esp, 4
+0x10040d6a mov ecx, dword ptr [ebp + 8]
+0x10040d6d mov edi, eax
+0x10040d6f test ecx, ecx
+0x10040d71 je 0x10040d84
+0x10040d73 mov edx, dword ptr [ecx]
+0x10040d75 call dword ptr [edx + 8]
+0x10040d78 test eax, eax
+0x10040d7a je 0x10040d84
+0x10040d7c mov edx, dword ptr [eax]
+0x10040d7e mov ecx, eax
+0x10040d80 push 1
+0x10040d82 call dword ptr [edx]
+0x10040d84 mov eax, dword ptr [edi]
+0x10040d86 mov ecx, edi
+0x10040d88 push 0x20
+0x10040d8a mov eax, dword ptr [eax + 0x20]
+0x10040d8d call eax
+0x10040d8f cmp dword ptr [esi + 0x38], 0
+0x10040d93 mov byte ptr [esi + 0x40], al
+0x10040d96 jne 0x10040da8
+0x10040d98 mov eax, dword ptr [esi + 0xc]
+0x10040d9b mov ecx, esi
+0x10040d9d or eax, 4
+0x10040da0 push 0
+0x10040da2 push eax
+0x10040da3 call 0x10041350
+0x10040da8 cmp byte ptr [ebp + 0xc], 0
+0x10040dac je 0x10040db7
+0x10040dae push esi
+0x10040daf call 0x101214a4
+0x10040db4 add esp, 4
+0x10040db7 mov ecx, dword ptr [ebp - 0xc]
+0x10040dba mov dword ptr fs:[0], ecx
+0x10040dc1 pop ecx
+0x10040dc2 pop edi
+0x10040dc3 pop esi
+0x10040dc4 mov esp, ebp
+0x10040dc6 pop ebp
+0x10040dc7 ret 8
+CALLS [{"pc": "0x10040d36", "target": "0x10040620", "import": null, "text": "0x10040620"}, {"pc": "0x10040d4e", "target": "0x10040f00", "import": null, "text": "0x10040f00"}, {"pc": "0x10040d5b", "target": "0x10040be0", "import": null, "text": "0x10040be0"}, {"pc": "0x10040d75", "target": null, "import": null, "text": "dword ptr [edx + 8]"}, {"pc": "0x10040d82", "target": null, "import": null, "text": "dword ptr [edx]"}, {"pc": "0x10040d8d", "target": null, "import": null, "text": "eax"}, {"pc": "0x10040da3", "target": "0x10041350", "import": null, "text": "0x10041350"}, {"pc": "0x10040daf", "target": "0x101214a4", "import": null, "text": "0x101214a4"}]
+STRINGS {}
+
+FUNCTION 0x1005dc90
+0x1005dc90 push ebx
+0x1005dc91 push edi
+0x1005dc92 mov edi, ecx
+0x1005dc94 mov ebx, edx
+0x1005dc96 test edi, edi
+0x1005dc98 je 0x1005dce6
+0x1005dc9a test ebx, ebx
+0x1005dc9c je 0x1005dce6
+0x1005dc9e push esi
+0x1005dc9f mov esi, edi
+0x1005dca1 lea ecx, [esi + 1]
+0x1005dca4 mov al, byte ptr [esi]
+0x1005dca6 inc esi
+0x1005dca7 test al, al
+0x1005dca9 jne 0x1005dca4
+0x1005dcab sub esi, ecx
+0x1005dcad mov ecx, ebx
+0x1005dcaf lea edx, [ecx + 1]
+0x1005dcb2 mov al, byte ptr [ecx]
+0x1005dcb4 inc ecx
+0x1005dcb5 test al, al
+0x1005dcb7 jne 0x1005dcb2
+0x1005dcb9 sub ecx, edx
+0x1005dcbb cmp esi, ecx
+0x1005dcbd jb 0x1005dcda
+0x1005dcbf sub esi, ecx
+0x1005dcc1 add esi, edi
+0x1005dcc3 cmp esi, edi
+0x1005dcc5 jb 0x1005dcda
+0x1005dcc7 push ebx
+0x1005dcc8 push esi
+0x1005dcc9 call 0x100ecd00
+0x1005dcce add esp, 8
+0x1005dcd1 test eax, eax
+0x1005dcd3 jne 0x1005dce0
+0x1005dcd5 dec esi
+0x1005dcd6 cmp esi, edi
+0x1005dcd8 jae 0x1005dcc7
+0x1005dcda pop esi
+0x1005dcdb pop edi
+0x1005dcdc xor eax, eax
+0x1005dcde pop ebx
+0x1005dcdf ret 
+0x1005dce0 mov eax, esi
+0x1005dce2 pop esi
+0x1005dce3 pop edi
+0x1005dce4 pop ebx
+0x1005dce5 ret 
+0x1005dce6 pop edi
+0x1005dce7 xor eax, eax
+0x1005dce9 pop ebx
+0x1005dcea ret 
+CALLS [{"pc": "0x1005dcc9", "target": "0x100ecd00", "import": null, "text": "0x100ecd00"}]
+STRINGS {}
+
+FUNCTION 0x10055ba0
+0x10055ba0 push ebp
+0x10055ba1 mov ebp, esp
+0x10055ba3 sub esp, 0x134
+0x10055ba9 mov eax, dword ptr [0x101902c0]
+0x10055bae xor eax, ebp
+0x10055bb0 mov dword ptr [ebp - 4], eax
+0x10055bb3 push ebx
+0x10055bb4 push esi
+0x10055bb5 push edi
+0x10055bb6 lea eax, [ebp - 0x130]
+0x10055bbc mov dword ptr [ebp - 0x12c], 0x101788bc
+0x10055bc6 push eax
+0x10055bc7 mov esi, edx
+0x10055bc9 mov dword ptr [ebp - 0x128], 0x101769b0
+0x10055bd3 mov ebx, ecx
+0x10055bd5 mov dword ptr [ebp - 0x130], esi
+0x10055bdb push ecx
+0x10055bdc lea ecx, [ebp - 0x110]
+0x10055be2 mov dword ptr [ebp - 0x124], 0x101769b0
+0x10055bec mov dword ptr [ebp - 0x120], 0x101769b0
+0x10055bf6 mov dword ptr [ebp - 0x11c], 0x101769b0
+0x10055c00 mov dword ptr [ebp - 0x118], 0x101769b0
+0x10055c0a mov dword ptr [ebp - 0x114], 0x101769b0
+0x10055c14 call 0x1005d940
+0x10055c19 add esp, 8
+0x10055c1c test al, al
+0x10055c1e jne 0x10055c7d
+0x10055c20 push esi
+0x10055c21 push 0x101788cc
+0x10055c26 push 0x10178908
+0x10055c2b call 0x1003d4d0
+0x10055c30 add esp, 0xc
+0x10055c33 push esi
+0x10055c34 push 0x101788cc
+0x10055c39 push 0x10178908
+0x10055c3e call 0x1003d4d0
+0x10055c43 add esp, 0xc
+0x10055c46 push esi
+0x10055c47 push 0x101788cc
+0x10055c4c push 0x10178908
+0x10055c51 mov eax, dword ptr [0x10198420]
+0x10055c56 push dword ptr [0x10198424]
+0x10055c5c or eax, 1
+0x10055c5f push eax
+0x10055c60 push 2
+0x10055c62 call 0x1003e1e0
+0x10055c67 add esp, 0x18
+0x10055c6a xor eax, eax
+0x10055c6c pop edi
+0x10055c6d pop esi
+0x10055c6e pop ebx
+0x10055c6f mov ecx, dword ptr [ebp - 4]
+0x10055c72 xor ecx, ebp
+0x10055c74 call 0x100ec285
+0x10055c79 mov esp, ebp
+0x10055c7b pop ebp
+0x10055c7c ret 
+0x10055c7d lea ecx, [ebp - 0x110]
+0x10055c83 call 0x1004ccd0
+0x10055c88 mov edi, eax
+0x10055c8a test edi, edi
+0x10055c8c jne 0x10055cd6
+0x10055c8e lea eax, [ebp - 0x110]
+0x10055c94 push eax
+0x10055c95 push 0x101788cc
+0x10055c9a push 0x10178964
+0x10055c9f call 0x1003d4d0
+0x10055ca4 add esp, 0xc
+0x10055ca7 lea eax, [ebp - 0x110]
+0x10055cad push eax
+0x10055cae push 0x101788cc
+0x10055cb3 push 0x10178964
+0x10055cb8 call 0x1003d4d0
+0x10055cbd add esp, 0xc
+0x10055cc0 lea eax, [ebp - 0x110]
+0x10055cc6 push eax
+0x10055cc7 push 0x101788cc
+0x10055ccc push 0x10178964
+0x10055cd1 jmp 0x10055c51
+0x10055cd6 mov eax, dword ptr [edi]
+0x10055cd8 mov ecx, edi
+0x10055cda push ebx
+0x10055cdb call dword ptr [eax + 8]
+0x10055cde mov edx, dword ptr [edi]
+0x10055ce0 mov ecx, edi
+0x10055ce2 push 1
+0x10055ce4 mov esi, eax
+0x10055ce6 call dword ptr [edx]
+0x10055ce8 mov ecx, dword ptr [ebp - 4]
+0x10055ceb mov eax, esi
+0x10055ced pop edi
+0x10055cee pop esi
+0x10055cef xor ecx, ebp
+0x10055cf1 pop ebx
+0x10055cf2 call 0x100ec285
+0x10055cf7 mov esp, ebp
+0x10055cf9 pop ebp
+0x10055cfa ret 
+CALLS [{"pc": "0x10055c14", "target": "0x1005d940", "import": null, "text": "0x1005d940"}, {"pc": "0x10055c2b", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10055c3e", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10055c62", "target": "0x1003e1e0", "import": null, "text": "0x1003e1e0"}, {"pc": "0x10055c74", "target": "0x100ec285", "import": null, "text": "0x100ec285"}, {"pc": "0x10055c83", "target": "0x1004ccd0", "import": null, "text": "0x1004ccd0"}, {"pc": "0x10055c9f", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10055cb8", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10055cdb", "target": null, "import": null, "text": "dword ptr [eax + 8]"}, {"pc": "0x10055ce6", "target": null, "import": null, "text": "dword ptr [edx]"}, {"pc": "0x10055cf2", "target": "0x100ec285", "import": null, "text": "0x100ec285"}]
+STRINGS {"0x101788bc": "releasemanifest", "0x101788cc": "Riot::RADS::Reader::`anonymous-namespace'::CreateListing", "0x10178908": "%s: RADS runtime environment listing creation failed to join the path: projectPath=\"%s\".", "0x10178964": "%s: Failure to load project manifest \"%s\"."}
+
+FUNCTION 0x10055d00
+0x10055d00 push ebp
+0x10055d01 mov ebp, esp
+0x10055d03 push -1
+0x10055d05 push 0x1012c8e2
+0x10055d0a mov eax, dword ptr fs:[0]
+0x10055d10 push eax
+0x10055d11 sub esp, 0x3b0
+0x10055d17 mov eax, dword ptr [0x101902c0]
+0x10055d1c xor eax, ebp
+0x10055d1e mov dword ptr [ebp - 0x14], eax
+0x10055d21 push ebx
+0x10055d22 push esi
+0x10055d23 push edi
+0x10055d24 push eax
+0x10055d25 lea eax, [ebp - 0xc]
+0x10055d28 mov dword ptr fs:[0], eax
+0x10055d2e mov edi, edx
+0x10055d30 mov dword ptr [ebp - 0x3ac], ecx
+0x10055d36 mov ebx, dword ptr [ebp + 8]
+0x10055d39 lea eax, [ebp - 0x34c]
+0x10055d3f push eax
+0x10055d40 push ecx
+0x10055d41 lea ecx, [ebp - 0x11c]
+0x10055d47 mov dword ptr [ebp - 0x34c], edi
+0x10055d4d mov dword ptr [ebp - 0x348], 0x10178990
+0x10055d57 mov dword ptr [ebp - 0x344], 0x101769b0
+0x10055d61 mov dword ptr [ebp - 0x340], 0x101769b0
+0x10055d6b mov dword ptr [ebp - 0x33c], 0x101769b0
+0x10055d75 mov dword ptr [ebp - 0x338], 0x101769b0
+0x10055d7f mov dword ptr [ebp - 0x334], 0x101769b0
+0x10055d89 mov dword ptr [ebp - 0x330], 0x101769b0
+0x10055d93 call 0x1005d940
+0x10055d98 add esp, 8
+0x10055d9b test al, al
+0x10055d9d jne 0x10055df0
+0x10055d9f push edi
+0x10055da0 push 0x101789a4
+0x10055da5 push 0x101789e0
+0x10055daa call 0x1003d4d0
+0x10055daf add esp, 0xc
+0x10055db2 push edi
+0x10055db3 push 0x101789a4
+0x10055db8 push 0x101789e0
+0x10055dbd call 0x1003d4d0
+0x10055dc2 add esp, 0xc
+0x10055dc5 push edi
+0x10055dc6 push 0x101789a4
+0x10055dcb push 0x101789e0
+0x10055dd0 mov eax, dword ptr [0x10198420]
+0x10055dd5 push dword ptr [0x10198424]
+0x10055ddb or eax, 1
+0x10055dde push eax
+0x10055ddf push 2
+0x10055de1 call 0x1003e1e0
+0x10055de6 add esp, 0x18
+0x10055de9 xor al, al
+0x10055deb jmp 0x1005643c
+0x10055df0 lea eax, [ebp - 0x34c]
+0x10055df6 mov dword ptr [ebp - 0x34c], edi
+0x10055dfc push eax
+0x10055dfd push ecx
+0x10055dfe lea ecx, [ebp - 0x32c]
+0x10055e04 mov dword ptr [ebp - 0x348], 0x10178a44
+0x10055e0e mov dword ptr [ebp - 0x344], 0x101769b0
+0x10055e18 mov dword ptr [ebp - 0x340], 0x101769b0
+0x10055e22 mov dword ptr [ebp - 0x33c], 0x101769b0
+0x10055e2c mov dword ptr [ebp - 0x338], 0x101769b0
+0x10055e36 mov dword ptr [ebp - 0x334], 0x101769b0
+0x10055e40 mov dword ptr [ebp - 0x330], 0x101769b0
+0x10055e4a call 0x1005d940
+0x10055e4f add esp, 8
+0x10055e52 test al, al
+0x10055e54 jne 0x10055e8c
+0x10055e56 push edi
+0x10055e57 push 0x101789a4
+0x10055e5c push 0x10178a60
+0x10055e61 call 0x1003d4d0
+0x10055e66 add esp, 0xc
+0x10055e69 push edi
+0x10055e6a push 0x101789a4
+0x10055e6f push 0x10178a60
+0x10055e74 call 0x1003d4d0
+0x10055e79 add esp, 0xc
+0x10055e7c push edi
+0x10055e7d push 0x101789a4
+0x10055e82 push 0x10178a60
+0x10055e87 jmp 0x10055dd0
+0x10055e8c mov dword ptr [ebp - 0x390], 0xf
+0x10055e96 mov dword ptr [ebp - 0x394], 0
+0x10055ea0 mov byte ptr [ebp - 0x3a4], 0
+0x10055ea7 mov dword ptr [ebp - 0x38c], 0xffffffff
+0x10055eb1 mov dword ptr [ebp - 0x388], 0
+0x10055ebb mov dword ptr [ebp - 0x384], 0
+0x10055ec5 mov dword ptr [ebp - 0x380], 0
+0x10055ecf mov dword ptr [ebp - 0x37c], 0
+0x10055ed9 mov dword ptr [ebp - 0x378], 0
+0x10055ee3 mov dword ptr [ebp - 0x374], 0
+0x10055eed mov dword ptr [ebp - 4], 0
+0x10055ef4 cmp byte ptr [ebp - 0x11c], 0
+0x10055efb mov dword ptr [ebp - 0x330], 0xf
+0x10055f05 mov dword ptr [ebp - 0x334], 0
+0x10055f0f mov byte ptr [ebp - 0x344], 0
+0x10055f16 jne 0x10055f1c
+0x10055f18 xor ecx, ecx
+0x10055f1a jmp 0x10055f2e
+0x10055f1c lea ecx, [ebp - 0x11c]
+0x10055f22 lea edx, [ecx + 1]
+0x10055f25 mov al, byte ptr [ecx]
+0x10055f27 inc ecx
+0x10055f28 test al, al
+0x10055f2a jne 0x10055f25
+0x10055f2c sub ecx, edx
+0x10055f2e push ecx
+0x10055f2f lea eax, [ebp - 0x11c]
+0x10055f35 push eax
+0x10055f36 lea ecx, [ebp - 0x344]
+0x10055f3c call 0x1003d920
+0x10055f41 lea eax, [ebp - 0x344]
+0x10055f47 mov byte ptr [ebp - 4], 1
+0x10055f4b push eax
+0x10055f4c lea ecx, [ebp - 0x3a4]
+0x10055f52 call 0x10059440
+0x10055f57 lea ecx, [ebp - 0x344]
+0x10055f5d mov byte ptr [ebp - 4], 0
+0x10055f61 mov esi, eax
+0x10055f63 call 0x1003d7a0
+0x10055f68 test esi, esi
+0x10055f6a jns 0x10055fd6
+0x10055f6c lea eax, [ebp - 0x11c]
+0x10055f72 push eax
+0x10055f73 push 0x101789a4
+0x10055f78 push 0x10178ac8
+0x10055f7d call 0x1003d4d0
+0x10055f82 add esp, 0xc
+0x10055f85 lea eax, [ebp - 0x11c]
+0x10055f8b push eax
+0x10055f8c push 0x101789a4
+0x10055f91 push 0x10178ac8
+0x10055f96 call 0x1003d4d0
+0x10055f9b add esp, 0xc
+0x10055f9e lea eax, [ebp - 0x11c]
+0x10055fa4 push eax
+0x10055fa5 mov eax, dword ptr [0x10198420]
+0x10055faa push 0x101789a4
+0x10055faf push 0x10178ac8
+0x10055fb4 push dword ptr [0x10198424]
+0x10055fba or eax, 1
+0x10055fbd push eax
+0x10055fbe push 2
+0x10055fc0 call 0x1003e1e0
+0x10055fc5 add esp, 0x18
+0x10055fc8 mov ecx, edi
+0x10055fca call 0x100589a0
+0x10055fcf xor bl, bl
+0x10055fd1 jmp 0x1005642f
+0x10055fd6 mov dword ptr [ebp - 0x35c], 0xf
+0x10055fe0 mov dword ptr [ebp - 0x360], 0
+0x10055fea mov byte ptr [ebp - 0x370], 0
+0x10055ff1 mov dword ptr [ebp - 0x358], 0
+0x10055ffb mov dword ptr [ebp - 0x354], 0
+0x10056005 mov dword ptr [ebp - 0x350], 0
+0x1005600f lea eax, [ebp - 0x32c]
+0x10056015 mov byte ptr [ebp - 4], 2
+0x10056019 push eax
+0x1005601a lea ecx, [ebp - 0x344]
+0x10056020 call 0x1003d740
+0x10056025 lea eax, [ebp - 0x344]
+0x1005602b mov byte ptr [ebp - 4], 3
+0x1005602f push eax
+0x10056030 lea ecx, [ebp - 0x370]
+0x10056036 call 0x10049c10
+0x1005603b lea ecx, [ebp - 0x344]
+0x10056041 mov byte ptr [ebp - 4], 2
+0x10056045 mov esi, eax
+0x10056047 call 0x1003d7a0
+0x1005604c test esi, esi
+0x1005604e jns 0x100560b3
+0x10056050 lea eax, [ebp - 0x32c]
+0x10056056 push eax
+0x10056057 push 0x101789a4
+0x1005605c push 0x10178af4
+0x10056061 call 0x1003d4d0
+0x10056066 add esp, 0xc
+0x10056069 lea eax, [ebp - 0x32c]
+0x1005606f push eax
+0x10056070 push 0x101789a4
+0x10056075 push 0x10178af4
+0x1005607a call 0x1003d4d0
+0x1005607f add esp, 0xc
+0x10056082 lea eax, [ebp - 0x32c]
+0x10056088 push eax
+0x10056089 mov eax, dword ptr [0x10198420]
+0x1005608e push 0x101789a4
+0x10056093 push 0x10178af4
+0x10056098 push dword ptr [0x10198424]
+0x1005609e or eax, 1
+0x100560a1 push eax
+0x100560a2 push 2
+0x100560a4 call 0x1003e1e0
+0x100560a9 add esp, 0x18
+0x100560ac xor bl, bl
+0x100560ae jmp 0x10056424
+0x100560b3 mov dword ptr [ebp - 0x3b8], 0
+0x100560bd mov dword ptr [ebp - 0x3b4], 0
+0x100560c7 mov dword ptr [ebp - 0x3b0], 0
+0x100560d1 lea eax, [ebp - 0x3b8]
+0x100560d7 mov byte ptr [ebp - 4], 4
+0x100560db push eax
+0x100560dc lea edx, [ebp - 0x3a4]
+0x100560e2 lea ecx, [ebp - 0x370]
+0x100560e8 call 0x1005b0f0
+0x100560ed mov esi, dword ptr [ebp - 0x3b4]
+0x100560f3 add esp, 4
+0x100560f6 mov edi, dword ptr [ebp - 0x3b8]
+0x100560fc test eax, eax
+0x100560fe jns 0x10056163
+0x10056100 lea eax, [ebp - 0x11c]
+0x10056106 push eax
+0x10056107 push 0x101789a4
+0x1005610c push 0x10178b28
+0x10056111 call 0x1003d4d0
+0x10056116 add esp, 0xc
+0x10056119 lea eax, [ebp - 0x11c]
+0x1005611f push eax
+0x10056120 push 0x101789a4
+0x10056125 push 0x10178b28
+0x1005612a call 0x1003d4d0
+0x1005612f add esp, 0xc
+0x10056132 lea eax, [ebp - 0x11c]
+0x10056138 push eax
+0x10056139 mov eax, dword ptr [0x10198420]
+0x1005613e push 0x101789a4
+0x10056143 push 0x10178b28
+0x10056148 push dword ptr [0x10198424]
+0x1005614e or eax, 1
+0x10056151 push eax
+0x10056152 push 2
+0x10056154 call 0x1003e1e0
+0x10056159 add esp, 0x18
+0x1005615c xor bl, bl
+0x1005615e jmp 0x100563e9
+0x10056163 mov ecx, esi
+0x10056165 mov eax, 0x38e38e39
+0x1005616a sub ecx, edi
+0x1005616c imul ecx
+0x1005616e push 0x10059660
+0x10056173 sar edx, 3
+0x10056176 mov ecx, edi
+0x10056178 mov eax, edx
+0x1005617a shr eax, 0x1f
+0x1005617d add eax, edx
+0x1005617f mov edx, esi
+0x10056181 push eax
+0x10056182 call 0x10057cd0
+0x10056187 xor al, al
+0x10056189 add esp, 8
+0x1005618c mov esi, edi
+0x1005618e mov byte ptr [ebp - 0x3a5], al
+0x10056194 cmp edi, dword ptr [ebp - 0x3b4]
+0x1005619a je 0x100563de
+0x100561a0 mov edi, dword ptr [ebp - 0x3ac]
+0x100561a6 mov dword ptr [ebp - 0x330], 0xf
+0x100561b0 mov dword ptr [ebp - 0x334], 0
+0x100561ba mov byte ptr [ebp - 0x344], 0
+0x100561c1 mov byte ptr [ebp - 4], 5
+0x100561c5 lea edx, [ebp - 0x344]
+0x100561cb mov ecx, dword ptr [esi + 0x18]
+0x100561ce call 0x1005c980
+0x100561d3 cmp dword ptr [ebp - 0x330], 0x10
+0x100561da lea ecx, [ebp - 0x344]
+0x100561e0 cmovae ecx, dword ptr [ebp - 0x344]
+0x100561e7 cmp dword ptr [esi + 0x14], 0x10
+0x100561eb jb 0x100561f1
+0x100561ed mov eax, dword ptr [esi]
+0x100561ef jmp 0x100561f3
+0x100561f1 mov eax, esi
+0x100561f3 sub esp, 0xc
+0x100561f6 push ecx
+0x100561f7 push 0x10177a04
+0x100561fc push eax
+0x100561fd push 0x10177bf8
+0x10056202 push edi
+0x10056203 lea ecx, [ebp - 0x224]
+0x10056209 call 0x10042770
+0x1005620e add esp, 0x20
+0x10056211 test al, al
+0x10056213 je 0x100562be
+0x10056219 lea edx, [ebp - 0x224]
+0x1005621f mov ecx, edi
+0x10056221 call 0x10055ba0
+0x10056226 mov dword ptr [ebp - 0x3ac], eax
+0x1005622c test eax, eax
+0x1005622e je 0x1005625d
+0x10056230 lea eax, [ebp - 0x3ac]
+0x10056236 mov ecx, ebx
+0x10056238 push eax
+0x10056239 call 0x10042580
+0x1005623e lea ecx, [ebp - 0x344]
+0x10056244 call 0x1003d7a0
+0x10056249 add esi, 0x24
+0x1005624c cmp esi, dword ptr [ebp - 0x3b4]
+0x10056252 jne 0x100561a6
+0x10056258 jmp 0x100563d2
+0x1005625d lea eax, [ebp - 0x224]
+0x10056263 push eax
+0x10056264 push 0x101789a4
+0x10056269 push 0x10178bd0
+0x1005626e call 0x1003d4d0
+0x10056273 add esp, 0xc
+0x10056276 lea eax, [ebp - 0x224]
+0x1005627c push eax
+0x1005627d push 0x101789a4
+0x10056282 push 0x10178bd0
+0x10056287 call 0x1003d4d0
+0x1005628c add esp, 0xc
+0x1005628f lea eax, [ebp - 0x224]
+0x10056295 push eax
+0x10056296 mov eax, dword ptr [0x10198420]
+0x1005629b push 0x101789a4
+0x100562a0 push 0x10178bd0
+0x100562a5 push dword ptr [0x10198424]
+0x100562ab or eax, 1
+0x100562ae push eax
+0x100562af push 2
+0x100562b1 call 0x1003e1e0
+0x100562b6 add esp, 0x18
+0x100562b9 jmp 0x1005636a
+0x100562be cmp dword ptr [ebp - 0x330], 0x10
+0x100562c5 lea eax, [ebp - 0x344]
+0x100562cb cmovae eax, dword ptr [ebp - 0x344]
+0x100562d2 cmp dword ptr [esi + 0x14], 0x10
+0x100562d6 jb 0x100562dc
+0x100562d8 mov ecx, dword ptr [esi]
+0x100562da jmp 0x100562de
+0x100562dc mov ecx, esi
+0x100562de push eax
+0x100562df push ecx
+0x100562e0 push edi
+0x100562e1 push 0x101789a4
+0x100562e6 push 0x10178b50
+0x100562eb call 0x1003d4d0
+0x100562f0 add esp, 0x14
+0x100562f3 lea eax, [ebp - 0x344]
+0x100562f9 cmp dword ptr [ebp - 0x330], 0x10
+0x10056300 cmovae eax, dword ptr [ebp - 0x344]
+0x10056307 cmp dword ptr [esi + 0x14], 0x10
+0x1005630b jb 0x10056311
+0x1005630d mov ecx, dword ptr [esi]
+0x1005630f jmp 0x10056313
+0x10056311 mov ecx, esi
+0x10056313 push eax
+0x10056314 push ecx
+0x10056315 push edi
+0x10056316 push 0x101789a4
+0x1005631b push 0x10178b50
+0x10056320 call 0x1003d4d0
+0x10056325 add esp, 0x14
+0x10056328 lea eax, [ebp - 0x344]
+0x1005632e cmp dword ptr [ebp - 0x330], 0x10
+0x10056335 cmovae eax, dword ptr [ebp - 0x344]
+0x1005633c cmp dword ptr [esi + 0x14], 0x10
+0x10056340 jb 0x10056344
+0x10056342 mov esi, dword ptr [esi]
+0x10056344 push eax
+0x10056345 mov eax, dword ptr [0x10198420]
+0x1005634a push esi
+0x1005634b push edi
+0x1005634c push 0x101789a4
+0x10056351 push 0x10178b50
+0x10056356 push dword ptr [0x10198424]
+0x1005635c or eax, 1
+0x1005635f push eax
+0x10056360 push 2
+0x10056362 call 0x1003e1e0
+0x10056367 add esp, 0x20
+0x1005636a lea ecx, [ebp - 0x344]
+0x10056370 mov byte ptr [ebp - 0x3a5], 1
+0x10056377 mov byte ptr [ebp - 4], 4
+0x1005637b call 0x1003d7a0
+0x10056380 mov eax, dword ptr [ebx + 4]
+0x10056383 xor edi, edi
+0x10056385 sub eax, dword ptr [ebx]
+0x10056387 sar eax, 2
+0x1005638a test eax, eax
+0x1005638c je 0x100563cd
+0x1005638e mov edi, edi
+0x10056390 mov eax, dword ptr [ebx]
+0x10056392 mov esi, dword ptr [eax + edi*4]
+0x10056395 test esi, esi
+0x10056397 je 0x100563c0
+0x10056399 mov ecx, esi
+0x1005639b call 0x1004ad70
+0x100563a0 mov eax, dword ptr [0x1019844c]
+0x100563a5 test eax, eax
+0x100563a7 jne 0x100563b4
+0x100563a9 push esi
+0x100563aa call 0x100ed4fa
+0x100563af add esp, 4
+0x100563b2 jmp 0x100563c0
+0x100563b4 push dword ptr [0x10198448]
+0x100563ba push esi
+0x100563bb call eax
+0x100563bd add esp, 8
+0x100563c0 mov eax, dword ptr [ebx + 4]
+0x100563c3 inc edi
+0x100563c4 sub eax, dword ptr [ebx]
+0x100563c6 sar eax, 2
+0x100563c9 cmp edi, eax
+0x100563cb jb 0x10056390
+0x100563cd mov eax, dword ptr [ebx]
+0x100563cf mov dword ptr [ebx + 4], eax
+0x100563d2 mov al, byte ptr [ebp - 0x3a5]
+0x100563d8 mov edi, dword ptr [ebp - 0x3b8]
+0x100563de mov esi, dword ptr [ebp - 0x3b4]
+0x100563e4 test al, al
+0x100563e6 sete bl
+0x100563e9 mov byte ptr [ebp - 4], 2
+0x100563ed test edi, edi
+0x100563ef je 0x10056424
+0x100563f1 push dword ptr [ebp - 0x3ac]
+0x100563f7 mov edx, esi
+0x100563f9 push ecx
+0x100563fa mov ecx, edi
+0x100563fc call 0x10057e10
+0x10056401 mov eax, dword ptr [0x1019844c]
+0x10056406 add esp, 8
+0x10056409 test eax, eax
+0x1005640b jne 0x10056418
+0x1005640d push edi
+0x1005640e call 0x100ed4fa
+0x10056413 add esp, 4
+0x10056416 jmp 0x10056424
+0x10056418 push dword ptr [0x10198448]
+0x1005641e push edi
+0x1005641f call eax
+0x10056421 add esp, 8
+0x10056424 lea ecx, [ebp - 0x370]
+0x1005642a call 0x10049b70
+0x1005642f lea ecx, [ebp - 0x3a4]
+0x10056435 call 0x10056460
+0x1005643a mov al, bl
+0x1005643c mov ecx, dword ptr [ebp - 0xc]
+0x1005643f mov dword ptr fs:[0], ecx
+0x10056446 pop ecx
+0x10056447 pop edi
+0x10056448 pop esi
+0x10056449 pop ebx
+0x1005644a mov ecx, dword ptr [ebp - 0x14]
+0x1005644d xor ecx, ebp
+0x1005644f call 0x100ec285
+0x10056454 mov esp, ebp
+0x10056456 pop ebp
+0x10056457 ret 
+CALLS [{"pc": "0x10055d93", "target": "0x1005d940", "import": null, "text": "0x1005d940"}, {"pc": "0x10055daa", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10055dbd", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10055de1", "target": "0x1003e1e0", "import": null, "text": "0x1003e1e0"}, {"pc": "0x1005644f", "target": "0x100ec285", "import": null, "text": "0x100ec285"}, {"pc": "0x10055e4a", "target": "0x1005d940", "import": null, "text": "0x1005d940"}, {"pc": "0x10055e61", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10055e74", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10055f3c", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x10055f52", "target": "0x10059440", "import": null, "text": "0x10059440"}, {"pc": "0x10055f63", "target": "0x1003d7a0", "import": null, "text": "0x1003d7a0"}, {"pc": "0x10055f7d", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10055f96", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10055fc0", "target": "0x1003e1e0", "import": null, "text": "0x1003e1e0"}, {"pc": "0x10055fca", "target": "0x100589a0", "import": null, "text": "0x100589a0"}, {"pc": "0x10056435", "target": "0x10056460", "import": null, "text": "0x10056460"}, {"pc": "0x10056020", "target": "0x1003d740", "import": null, "text": "0x1003d740"}, {"pc": "0x10056036", "target": "0x10049c10", "import": null, "text": "0x10049c10"}, {"pc": "0x10056047", "target": "0x1003d7a0", "import": null, "text": "0x1003d7a0"}, {"pc": "0x10056061", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x1005607a", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x100560a4", "target": "0x1003e1e0", "import": null, "text": "0x1003e1e0"}, {"pc": "0x1005642a", "target": "0x10049b70", "import": null, "text": "0x10049b70"}, {"pc": "0x100560e8", "target": "0x1005b0f0", "import": null, "text": "0x1005b0f0"}, {"pc": "0x10056111", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x1005612a", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10056154", "target": "0x1003e1e0", "import": null, "text": "0x1003e1e0"}, {"pc": "0x100563fc", "target": "0x10057e10", "import": null, "text": "0x10057e10"}, {"pc": "0x1005640e", "target": "0x100ed4fa", "import": null, "text": "0x100ed4fa"}, {"pc": "0x1005641f", "target": null, "import": null, "text": "eax"}, {"pc": "0x10056182", "target": "0x10057cd0", "import": null, "text": "0x10057cd0"}, {"pc": "0x100561ce", "target": "0x1005c980", "import": null, "text": "0x1005c980"}, {"pc": "0x10056209", "target": "0x10042770", "import": null, "text": "0x10042770"}, {"pc": "0x10056221", "target": "0x10055ba0", "import": null, "text": "0x10055ba0"}, {"pc": "0x10056239", "target": "0x10042580", "import": null, "text": "0x10042580"}, {"pc": "0x10056244", "target": "0x1003d7a0", "import": null, "text": "0x1003d7a0"}, {"pc": "0x1005626e", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10056287", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x100562b1", "target": "0x1003e1e0", "import": null, "text": "0x1003e1e0"}, {"pc": "0x1005637b", "target": "0x1003d7a0", "import": null, "text": "0x1003d7a0"}, {"pc": "0x1005639b", "target": "0x1004ad70", "import": null, "text": "0x1004ad70"}, {"pc": "0x100563aa", "target": "0x100ed4fa", "import": null, "text": "0x100ed4fa"}, {"pc": "0x100563bb", "target": null, "import": null, "text": "eax"}, {"pc": "0x100562eb", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10056320", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x10056362", "target": "0x1003e1e0", "import": null, "text": "0x1003e1e0"}]
+STRINGS {"0x10178990": "solutionmanifest", "0x101789a4": "Riot::RADS::Reader::`anonymous-namespace'::LoadSolution", "0x101789e0": "%s: RADS runtime environment load solution failed to build solution manifest path: localRoot=\"%s\".", "0x10178a44": "configurationmanifest", "0x10178a60": "%s: RADS runtime environment load solution failed to build configuration manifest path: localRoot=\"%s\".", "0x10178ac8": "%s: Failure to load solution manifest \"%s\".", "0x10178af4": "%s: Failure to load configuration manifest \"%s\".", "0x10178b28": "%s: Failed to gather projects for %s", "0x10177a04": "releases", "0x10177bf8": "projects", "0x10178bd0": "%s: RADS runtime environment load solution failed to create project listing: projectPath=\"%s\".", "0x10178b50": "%s: RADS runtime environment load solution failed to build project path: radsRoot=\"%s\", project=\"%s\", project-version=\"%s\"."}
+
+FUNCTION 0x1012fe50
+0x1012fe50 push ebp
+0x1012fe51 mov ebp, esp
+0x1012fe53 and esp, 0xfffffff8
+0x1012fe56 mov ecx, 0x101997f8
+0x1012fe5b call 0x1005d3f0
+0x1012fe60 mov ecx, 0x10199848
+0x1012fe65 call 0x1005d3f0
+0x1012fe6a mov ecx, 0x10199888
+0x1012fe6f call 0x1005d3f0
+0x1012fe74 mov ecx, 0x10199808
+0x1012fe79 call 0x1005d3f0
+0x1012fe7e mov esp, ebp
+0x1012fe80 pop ebp
+0x1012fe81 ret 
+CALLS [{"pc": "0x1012fe5b", "target": "0x1005d3f0", "import": null, "text": "0x1005d3f0"}, {"pc": "0x1012fe65", "target": "0x1005d3f0", "import": null, "text": "0x1005d3f0"}, {"pc": "0x1012fe6f", "target": "0x1005d3f0", "import": null, "text": "0x1005d3f0"}, {"pc": "0x1012fe79", "target": "0x1005d3f0", "import": null, "text": "0x1005d3f0"}]
+STRINGS {}
+
+FUNCTION 0x1012fd60
+0x1012fd60 jmp 0x1005c050
+CALLS []
+STRINGS {}
+
+FUNCTION 0x1005d3f0
+0x1005d3f0 push esi
+0x1005d3f1 mov esi, ecx
+0x1005d3f3 mov ecx, dword ptr [esi]
+0x1005d3f5 mov eax, ecx
+0x1005d3f7 mov edx, dword ptr [esi + 4]
+0x1005d3fa or eax, edx
+0x1005d3fc jne 0x1005d400
+0x1005d3fe pop esi
+0x1005d3ff ret 
+0x1005d400 mov eax, dword ptr [0x10199720]
+0x1005d405 test eax, eax
+0x1005d407 je 0x1005d41c
+0x1005d409 push edx
+0x1005d40a push ecx
+0x1005d40b call eax
+0x1005d40d mov dword ptr [esi], 0
+0x1005d413 mov dword ptr [esi + 4], 0
+0x1005d41a pop esi
+0x1005d41b ret 
+0x1005d41c xor eax, eax
+0x1005d41e mov dword ptr [esi], eax
+0x1005d420 mov dword ptr [esi + 4], eax
+0x1005d423 pop esi
+0x1005d424 ret 
+CALLS [{"pc": "0x1005d40b", "target": null, "import": null, "text": "eax"}]
+STRINGS {}
+
+FUNCTION 0x1005c050
+0x1005c050 push esi
+0x1005c051 push edi
+0x1005c052 mov edi, dword ptr [0x10131144]
+0x1005c058 xor esi, esi
+0x1005c05a lea ebx, [ebx]
+0x1005c060 push dword ptr [esi + 0x10198ed0]
+0x1005c066 call edi
+0x1005c068 add esi, 4
+0x1005c06b cmp esi, 0x10
+0x1005c06e jb 0x1005c060
+0x1005c070 mov esi, dword ptr [0x10198f04]
+0x1005c076 test esi, esi
+0x1005c078 je 0x1005c0aa
+0x1005c07a push dword ptr [esi]
+0x1005c07c call edi
+0x1005c07e mov eax, dword ptr [0x1019844c]
+0x1005c083 test eax, eax
+0x1005c085 jne 0x1005c09e
+0x1005c087 push esi
+0x1005c088 call 0x100ed4fa
+0x1005c08d add esp, 4
+0x1005c090 push 0x10198eec
+0x1005c095 call dword ptr [0x101310ec]
+0x1005c09b pop edi
+0x1005c09c pop esi
+0x1005c09d ret 
+0x1005c09e push dword ptr [0x10198448]
+0x1005c0a4 push esi
+0x1005c0a5 call eax
+0x1005c0a7 add esp, 8
+0x1005c0aa push 0x10198eec
+0x1005c0af call dword ptr [0x101310ec]
+0x1005c0b5 pop edi
+0x1005c0b6 pop esi
+0x1005c0b7 ret 
+CALLS [{"pc": "0x1005c066", "target": null, "import": null, "text": "edi"}, {"pc": "0x1005c07c", "target": null, "import": null, "text": "edi"}, {"pc": "0x1005c088", "target": "0x100ed4fa", "import": null, "text": "0x100ed4fa"}, {"pc": "0x1005c095", "target": null, "import": "KERNEL32.dll!DeleteCriticalSection", "text": "dword ptr [0x101310ec]"}, {"pc": "0x1005c0a5", "target": null, "import": null, "text": "eax"}, {"pc": "0x1005c0af", "target": null, "import": "KERNEL32.dll!DeleteCriticalSection", "text": "dword ptr [0x101310ec]"}]
+STRINGS {}
+
+FUNCTION 0x100ec8e4
+0x100ec8e4 push esi
+0x100ec8e5 push 4
+0x100ec8e7 push 0x20
+0x100ec8e9 call 0x100f5262
+0x100ec8ee pop ecx
+0x100ec8ef pop ecx
+0x100ec8f0 mov esi, eax
+0x100ec8f2 push esi
+0x100ec8f3 call dword ptr [0x101311f4]
+0x100ec8f9 mov dword ptr [0x10199aac], eax
+0x100ec8fe mov dword ptr [0x10199aa8], eax
+0x100ec903 test esi, esi
+0x100ec905 jne 0x100ec90c
+0x100ec907 push 0x18
+0x100ec909 pop eax
+0x100ec90a pop esi
+0x100ec90b ret 
+0x100ec90c and dword ptr [esi], 0
+0x100ec90f xor eax, eax
+0x100ec911 pop esi
+0x100ec912 ret 
+CALLS [{"pc": "0x100ec8e9", "target": "0x100f5262", "import": null, "text": "0x100f5262"}, {"pc": "0x100ec8f3", "target": null, "import": "KERNEL32.dll!EncodePointer", "text": "dword ptr [0x101311f4]"}]
+STRINGS {}
+
+FUNCTION 0x100f17a5
+0x100f17a5 mov eax, dword ptr [0x1019aac4]
+0x100f17aa push esi
+0x100f17ab push 0x14
+0x100f17ad pop esi
+0x100f17ae test eax, eax
+0x100f17b0 jne 0x100f17b9
+0x100f17b2 mov eax, 0x200
+0x100f17b7 jmp 0x100f17bf
+0x100f17b9 cmp eax, esi
+0x100f17bb jge 0x100f17c4
+0x100f17bd mov eax, esi
+0x100f17bf mov dword ptr [0x1019aac4], eax
+0x100f17c4 push 4
+0x100f17c6 push eax
+0x100f17c7 call 0x100f5262
+0x100f17cc mov dword ptr [0x1019aac0], eax
+0x100f17d1 pop ecx
+0x100f17d2 pop ecx
+0x100f17d3 test eax, eax
+0x100f17d5 jne 0x100f17f5
+0x100f17d7 push 4
+0x100f17d9 push esi
+0x100f17da mov dword ptr [0x1019aac4], esi
+0x100f17e0 call 0x100f5262
+0x100f17e5 mov dword ptr [0x1019aac0], eax
+0x100f17ea pop ecx
+0x100f17eb pop ecx
+0x100f17ec test eax, eax
+0x100f17ee jne 0x100f17f5
+0x100f17f0 push 0x1a
+0x100f17f2 pop eax
+0x100f17f3 pop esi
+0x100f17f4 ret 
+0x100f17f5 xor edx, edx
+0x100f17f7 mov ecx, 0x1018fb20
+0x100f17fc mov dword ptr [edx + eax], ecx
+0x100f17ff add ecx, 0x20
+0x100f1802 lea edx, [edx + 4]
+0x100f1805 cmp ecx, 0x1018fda0
+0x100f180b jge 0x100f1814
+0x100f180d mov eax, dword ptr [0x1019aac0]
+0x100f1812 jmp 0x100f17fc
+0x100f1814 xor eax, eax
+0x100f1816 pop esi
+0x100f1817 ret 
+CALLS [{"pc": "0x100f17c7", "target": "0x100f5262", "import": null, "text": "0x100f5262"}, {"pc": "0x100f17e0", "target": "0x100f5262", "import": null, "text": "0x100f5262"}]
+STRINGS {}
+
+FUNCTION 0x100f23c0
+0x100f23c0 cmp dword ptr [0x10199ab0], 0
+0x100f23c7 jne 0x100f23db
+0x100f23c9 push -3
+0x100f23cb call 0x100f271d
+0x100f23d0 pop ecx
+0x100f23d1 mov dword ptr [0x10199ab0], 1
+0x100f23db xor eax, eax
+0x100f23dd ret 
+CALLS [{"pc": "0x100f23cb", "target": "0x100f271d", "import": null, "text": "0x100f271d"}]
+STRINGS {}
+
+FUNCTION 0x100f50e9
+0x100f50e9 push ebp
+0x100f50ea mov ebp, esp
+0x100f50ec and dword ptr [0x101950fc], 0
+0x100f50f3 sub esp, 0x1c
+0x100f50f6 push ebx
+0x100f50f7 xor ebx, ebx
+0x100f50f9 inc ebx
+0x100f50fa or dword ptr [0x101902e4], ebx
+0x100f5100 push 0xa
+0x100f5102 call 0x10122bc0
+0x100f5107 test eax, eax
+0x100f5109 je 0x100f525b
+0x100f510f xor ecx, ecx
+0x100f5111 mov dword ptr [0x101950fc], ebx
+0x100f5117 xor eax, eax
+0x100f5119 cpuid 
+0x100f511b push esi
+0x100f511c mov esi, dword ptr [0x101902e4]
+0x100f5122 push edi
+0x100f5123 lea edi, [ebp - 0x1c]
+0x100f5126 or esi, 2
+0x100f5129 mov dword ptr [edi], eax
+0x100f512b mov dword ptr [edi + 4], ebx
+0x100f512e mov dword ptr [edi + 8], ecx
+0x100f5131 mov dword ptr [edi + 0xc], edx
+0x100f5134 mov eax, dword ptr [ebp - 0x1c]
+0x100f5137 mov ecx, dword ptr [ebp - 0x10]
+0x100f513a mov dword ptr [ebp - 0xc], eax
+0x100f513d xor ecx, 0x49656e69
+0x100f5143 mov eax, dword ptr [ebp - 0x14]
+0x100f5146 xor eax, 0x6c65746e
+0x100f514b mov dword ptr [0x101902e4], esi
+0x100f5151 or ecx, eax
+0x100f5153 mov eax, dword ptr [ebp - 0x18]
+0x100f5156 xor eax, 0x756e6547
+0x100f515b or ecx, eax
+0x100f515d neg ecx
+0x100f515f push 1
+0x100f5161 sbb cl, cl
+0x100f5163 pop eax
+0x100f5164 inc cl
+0x100f5166 push 0
+0x100f5168 pop ecx
+0x100f5169 cpuid 
+0x100f516b mov dword ptr [edi], eax
+0x100f516d mov dword ptr [edi + 4], ebx
+0x100f5170 mov dword ptr [edi + 8], ecx
+0x100f5173 mov dword ptr [edi + 0xc], edx
+0x100f5176 mov ecx, dword ptr [ebp - 0x14]
+0x100f5179 mov dword ptr [ebp - 8], ecx
+0x100f517c je 0x100f51c1
+0x100f517e mov eax, dword ptr [ebp - 0x1c]
+0x100f5181 and eax, 0xfff3ff0
+0x100f5186 cmp eax, 0x106c0
+0x100f518b je 0x100f51b0
+0x100f518d cmp eax, 0x20660
+0x100f5192 je 0x100f51b0
+0x100f5194 cmp eax, 0x20670
+0x100f5199 je 0x100f51b0
+0x100f519b cmp eax, 0x30650
+0x100f51a0 je 0x100f51b0
+0x100f51a2 cmp eax, 0x30660
+0x100f51a7 je 0x100f51b0
+0x100f51a9 cmp eax, 0x30670
+0x100f51ae jne 0x100f51c1
+0x100f51b0 mov edi, dword ptr [0x10195100]
+0x100f51b6 or edi, 1
+0x100f51b9 mov dword ptr [0x10195100], edi
+0x100f51bf jmp 0x100f51c7
+0x100f51c1 mov edi, dword ptr [0x10195100]
+0x100f51c7 cmp dword ptr [ebp - 0xc], 7
+0x100f51cb jl 0x100f5202
+0x100f51cd push 7
+0x100f51cf xor ecx, ecx
+0x100f51d1 lea esi, [ebp - 0x1c]
+0x100f51d4 pop eax
+0x100f51d5 cpuid 
+0x100f51d7 mov dword ptr [esi], eax
+0x100f51d9 mov eax, esi
+0x100f51db mov esi, dword ptr [0x101902e4]
+0x100f51e1 mov dword ptr [eax + 4], ebx
+0x100f51e4 mov dword ptr [eax + 8], ecx
+0x100f51e7 mov ecx, dword ptr [ebp - 8]
+0x100f51ea mov dword ptr [eax + 0xc], edx
+0x100f51ed mov eax, dword ptr [ebp - 0x18]
+0x100f51f0 test eax, 0x200
+0x100f51f5 je 0x100f5204
+0x100f51f7 or edi, 2
+0x100f51fa mov dword ptr [0x10195100], edi
+0x100f5200 jmp 0x100f5204
+0x100f5202 xor eax, eax
+0x100f5204 test ecx, 0x100000
+0x100f520a je 0x100f5259
+0x100f520c or esi, 4
+0x100f520f mov dword ptr [0x101950fc], 2
+0x100f5219 mov dword ptr [0x101902e4], esi
+0x100f521f test ecx, 0x8000000
+0x100f5225 je 0x100f5259
+0x100f5227 test ecx, 0x10000000
+0x100f522d je 0x100f5259
+0x100f522f or esi, 8
+0x100f5232 mov dword ptr [0x101950fc], 3
+0x100f523c mov dword ptr [0x101902e4], esi
+0x100f5242 test al, 0x20
+0x100f5244 je 0x100f5259
+0x100f5246 or esi, 0x20
+0x100f5249 mov dword ptr [0x101950fc], 5
+0x100f5253 mov dword ptr [0x101902e4], esi
+0x100f5259 pop edi
+0x100f525a pop esi
+0x100f525b xor eax, eax
+0x100f525d pop ebx
+0x100f525e mov esp, ebp
+0x100f5260 pop ebp
+0x100f5261 ret 
+CALLS [{"pc": "0x100f5102", "target": "0x10122bc0", "import": null, "text": "0x10122bc0"}]
+STRINGS {}
+
+FUNCTION 0x101207d5
+0x101207d5 push 0xa
+0x101207d7 call 0x10122bc0
+0x101207dc mov dword ptr [0x10199a14], eax
+0x101207e1 xor eax, eax
+0x101207e3 ret 
+CALLS [{"pc": "0x101207d7", "target": "0x10122bc0", "import": null, "text": "0x10122bc0"}]
+STRINGS {}
+
+FUNCTION 0x1003d394
+0x1003d394 call 0x101050c9
+0x1003d399 mov dword ptr [0x10195cc0], eax
+0x1003d39e ret 
+CALLS [{"pc": "0x1003d394", "target": "0x101050c9", "import": null, "text": "0x101050c9"}]
+STRINGS {}
+
+FUNCTION 0x1003d3c0
+0x1003d3c0 mov dword ptr [0x10195cb4], 0
+0x1003d3ca ret 
+CALLS []
+STRINGS {}
+
+FUNCTION 0x1003d39f
+0x1003d39f mov dword ptr [0x10195cb8], 0
+0x1003d3a9 ret 
+CALLS []
+STRINGS {}
+
+FUNCTION 0x1003d3cb
+0x1003d3cb push 0x10195ca8
+0x1003d3d0 call dword ptr [0x10131164]
+0x1003d3d6 ret 
+CALLS [{"pc": "0x1003d3d0", "target": null, "import": "KERNEL32.dll!InitializeSListHead", "text": "dword ptr [0x10131164]"}]
+STRINGS {}
+
+FUNCTION 0x1003d3b5
+0x1003d3b5 mov dword ptr [0x10195cbc], 0
+0x1003d3bf ret 
+CALLS []
+STRINGS {}
+
+FUNCTION 0x1003d3aa
+0x1003d3aa mov dword ptr [0x10195cb0], 0
+0x1003d3b4 ret 
+CALLS []
+STRINGS {}
+
+FUNCTION 0x1003d407
+0x1003d407 mov ecx, 0x10195e08
+0x1003d40c call 0x10121836
+0x1003d411 push 0x10130465
+0x1003d416 call 0x100eca0f
+0x1003d41b pop ecx
+0x1003d41c ret 
+CALLS [{"pc": "0x1003d40c", "target": "0x10121836", "import": null, "text": "0x10121836"}, {"pc": "0x1003d416", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003d47e
+0x1003d47e mov ecx, 0x10195ea3
+0x1003d483 call 0x10121836
+0x1003d488 push 0x10130483
+0x1003d48d call 0x100eca0f
+0x1003d492 pop ecx
+0x1003d493 ret 
+CALLS [{"pc": "0x1003d483", "target": "0x10121836", "import": null, "text": "0x10121836"}, {"pc": "0x1003d48d", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003d43c
+0x1003d43c push esi
+0x1003d43d push edi
+0x1003d43e call 0x100f183f
+0x1003d443 mov edi, 0x10195ea8
+0x1003d448 mov ecx, edi
+0x1003d44a lea esi, [eax + 0x20]
+0x1003d44d call 0x1003fbb0
+0x1003d452 push 0
+0x1003d454 push esi
+0x1003d455 mov ecx, edi
+0x1003d457 mov dword ptr [0x10195ea8], 0x1016e7c8
+0x1003d461 call 0x10122298
+0x1003d466 push 0x10130479
+0x1003d46b call 0x100eca0f
+0x1003d470 pop ecx
+0x1003d471 pop edi
+0x1003d472 pop esi
+0x1003d473 ret 
+CALLS [{"pc": "0x1003d43e", "target": "0x100f183f", "import": null, "text": "0x100f183f"}, {"pc": "0x1003d44d", "target": "0x1003fbb0", "import": null, "text": "0x1003fbb0"}, {"pc": "0x1003d461", "target": "0x10122298", "import": null, "text": "0x10122298"}, {"pc": "0x1003d46b", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003d41d
+0x1003d41d push 1
+0x1003d41f push 0
+0x1003d421 push 0x10195ea8
+0x1003d426 mov ecx, 0x10195f00
+0x1003d42b call 0x10040dd0
+0x1003d430 push 0x1013046f
+0x1003d435 call 0x100eca0f
+0x1003d43a pop ecx
+0x1003d43b ret 
+CALLS [{"pc": "0x1003d42b", "target": "0x10040dd0", "import": null, "text": "0x10040dd0"}, {"pc": "0x1003d435", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003d474
+0x1003d474 mov ecx, 0x10195ea0
+0x1003d479 jmp 0x101220fe
+CALLS []
+STRINGS {}
+
+FUNCTION 0x1003d4a0
+0x1003d4a0 mov ecx, 0x10195f9c
+0x1003d4a5 call 0x10121836
+0x1003d4aa push 0x10130497
+0x1003d4af call 0x100eca0f
+0x1003d4b4 pop ecx
+0x1003d4b5 ret 
+CALLS [{"pc": "0x1003d4a5", "target": "0x10121836", "import": null, "text": "0x10121836"}, {"pc": "0x1003d4af", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003d494
+0x1003d494 push 0x1013048d
+0x1003d499 call 0x100eca0f
+0x1003d49e pop ecx
+0x1003d49f ret 
+CALLS [{"pc": "0x1003d499", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003d3ef
+0x1003d3ef push 0x10130451
+0x1003d3f4 call 0x100eca0f
+0x1003d3f9 pop ecx
+0x1003d3fa ret 
+CALLS [{"pc": "0x1003d3f4", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003d3fb
+0x1003d3fb push 0x1013045b
+0x1003d400 call 0x100eca0f
+0x1003d405 pop ecx
+0x1003d406 ret 
+CALLS [{"pc": "0x1003d400", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003d190
+0x1003d190 call 0x10076c80
+0x1003d195 mov dword ptr [0x10192d50], eax
+0x1003d19a ret 
+CALLS [{"pc": "0x1003d190", "target": "0x10076c80", "import": null, "text": "0x10076c80"}]
+STRINGS {}
+
+FUNCTION 0x1003d170
+0x1003d170 call 0x10076c80
+0x1003d175 mov dword ptr [0x10192d48], eax
+0x1003d17a ret 
+CALLS [{"pc": "0x1003d170", "target": "0x10076c80", "import": null, "text": "0x10076c80"}]
+STRINGS {}
+
+FUNCTION 0x1003d180
+0x1003d180 call 0x10077140
+0x1003d185 mov dword ptr [0x10192d4c], eax
+0x1003d18a ret 
+CALLS [{"pc": "0x1003d180", "target": "0x10077140", "import": null, "text": "0x10077140"}]
+STRINGS {}
+
+FUNCTION 0x1003d1a0
+0x1003d1a0 push 0x101301c0
+0x1003d1a5 call 0x100eca0f
+0x1003d1aa pop ecx
+0x1003d1ab ret 
+CALLS [{"pc": "0x1003d1a5", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003d1b0
+0x1003d1b0 push 0x10130390
+0x1003d1b5 call 0x100eca0f
+0x1003d1ba pop ecx
+0x1003d1bb ret 
+CALLS [{"pc": "0x1003d1b5", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003d2a0
+0x1003d2a0 push -1
+0x1003d2a2 push 0x1012e54e
+0x1003d2a7 mov eax, dword ptr fs:[0]
+0x1003d2ad push eax
+0x1003d2ae mov eax, dword ptr [0x101902c0]
+0x1003d2b3 xor eax, esp
+0x1003d2b5 push eax
+0x1003d2b6 lea eax, [esp + 4]
+0x1003d2ba mov dword ptr fs:[0], eax
+0x1003d2c0 mov eax, dword ptr [0x10192e30]
+0x1003d2c5 test al, 1
+0x1003d2c7 jne 0x1003d2f0
+0x1003d2c9 or eax, 1
+0x1003d2cc mov dword ptr [0x10192e30], eax
+0x1003d2d1 push 0x101303c0
+0x1003d2d6 mov dword ptr [esp + 0x10], 0
+0x1003d2de mov dword ptr [0x10192e2c], 0x10132ec0
+0x1003d2e8 call 0x100eca0f
+0x1003d2ed add esp, 4
+0x1003d2f0 mov dword ptr [0x10192e04], 0x10192e2c
+0x1003d2fa mov ecx, dword ptr [esp + 4]
+0x1003d2fe mov dword ptr fs:[0], ecx
+0x1003d305 pop ecx
+0x1003d306 add esp, 0xc
+0x1003d309 ret 
+CALLS [{"pc": "0x1003d2e8", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003d1c0
+0x1003d1c0 push -1
+0x1003d1c2 push 0x1012e54e
+0x1003d1c7 mov eax, dword ptr fs:[0]
+0x1003d1cd push eax
+0x1003d1ce mov eax, dword ptr [0x101902c0]
+0x1003d1d3 xor eax, esp
+0x1003d1d5 push eax
+0x1003d1d6 lea eax, [esp + 4]
+0x1003d1da mov dword ptr fs:[0], eax
+0x1003d1e0 mov eax, dword ptr [0x10192e30]
+0x1003d1e5 test al, 1
+0x1003d1e7 jne 0x1003d210
+0x1003d1e9 or eax, 1
+0x1003d1ec mov dword ptr [0x10192e30], eax
+0x1003d1f1 push 0x101303c0
+0x1003d1f6 mov dword ptr [esp + 0x10], 0
+0x1003d1fe mov dword ptr [0x10192e2c], 0x10132ec0
+0x1003d208 call 0x100eca0f
+0x1003d20d add esp, 4
+0x1003d210 mov dword ptr [0x10192df4], 0x10192e2c
+0x1003d21a mov ecx, dword ptr [esp + 4]
+0x1003d21e mov dword ptr fs:[0], ecx
+0x1003d225 pop ecx
+0x1003d226 add esp, 0xc
+0x1003d229 ret 
+CALLS [{"pc": "0x1003d208", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003d230
+0x1003d230 push -1
+0x1003d232 push 0x1012e57e
+0x1003d237 mov eax, dword ptr fs:[0]
+0x1003d23d push eax
+0x1003d23e mov eax, dword ptr [0x101902c0]
+0x1003d243 xor eax, esp
+0x1003d245 push eax
+0x1003d246 lea eax, [esp + 4]
+0x1003d24a mov dword ptr fs:[0], eax
+0x1003d250 mov eax, dword ptr [0x10192e28]
+0x1003d255 test al, 1
+0x1003d257 jne 0x1003d280
+0x1003d259 or eax, 1
+0x1003d25c mov dword ptr [0x10192e28], eax
+0x1003d261 push 0x101303d0
+0x1003d266 mov dword ptr [esp + 0x10], 0
+0x1003d26e mov dword ptr [0x10192e24], 0x10132edc
+0x1003d278 call 0x100eca0f
+0x1003d27d add esp, 4
+0x1003d280 mov dword ptr [0x10192e00], 0x10192e24
+0x1003d28a mov ecx, dword ptr [esp + 4]
+0x1003d28e mov dword ptr fs:[0], ecx
+0x1003d295 pop ecx
+0x1003d296 add esp, 0xc
+0x1003d299 ret 
+CALLS [{"pc": "0x1003d278", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003d310
+0x1003d310 push -1
+0x1003d312 push 0x1012e57e
+0x1003d317 mov eax, dword ptr fs:[0]
+0x1003d31d push eax
+0x1003d31e mov eax, dword ptr [0x101902c0]
+0x1003d323 xor eax, esp
+0x1003d325 push eax
+0x1003d326 lea eax, [esp + 4]
+0x1003d32a mov dword ptr fs:[0], eax
+0x1003d330 mov eax, dword ptr [0x10192e28]
+0x1003d335 test al, 1
+0x1003d337 jne 0x1003d360
+0x1003d339 or eax, 1
+0x1003d33c mov dword ptr [0x10192e28], eax
+0x1003d341 push 0x101303d0
+0x1003d346 mov dword ptr [esp + 0x10], 0
+0x1003d34e mov dword ptr [0x10192e24], 0x10132edc
+0x1003d358 call 0x100eca0f
+0x1003d35d add esp, 4
+0x1003d360 mov dword ptr [0x10192dfc], 0x10192e24
+0x1003d36a mov ecx, dword ptr [esp + 4]
+0x1003d36e mov dword ptr fs:[0], ecx
+0x1003d375 pop ecx
+0x1003d376 add esp, 0xc
+0x1003d379 ret 
+CALLS [{"pc": "0x1003d358", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x10086dc0
+0x10086dc0 mov eax, 8
+0x10086dc5 call 0x100f3c00
+0x10086dca cmp dword ptr [0x10192ee4], 0
+0x10086dd1 jne 0x10086e6f
+0x10086dd7 push esi
+0x10086dd8 push 0x10138570
+0x10086ddd mov dword ptr [0x10192ee4], 1
+0x10086de7 call 0x100f43ce
+0x10086dec add esp, 4
+0x10086def test eax, eax
+0x10086df1 je 0x10086e55
+0x10086df3 push ebx
+0x10086df4 xor ebx, ebx
+0x10086df6 cmp byte ptr [eax], 0x7e
+0x10086df9 sete bl
+0x10086dfc lea esi, [ebx + eax]
+0x10086dff lea eax, [esp + 8]
+0x10086e03 push eax
+0x10086e04 push 0x10138580
+0x10086e09 push esi
+0x10086e0a call 0x100ecf63
+0x10086e0f add esp, 0xc
+0x10086e12 test eax, eax
+0x10086e14 jne 0x10086e2f
+0x10086e16 push eax
+0x10086e17 push eax
+0x10086e18 push esi
+0x10086e19 call 0x100efd4a
+0x10086e1e add esp, 0xc
+0x10086e21 mov esi, eax
+0x10086e23 xor edx, edx
+0x10086e25 mov dword ptr [esp + 8], esi
+0x10086e29 mov dword ptr [esp + 0xc], edx
+0x10086e2d jmp 0x10086e37
+0x10086e2f mov edx, dword ptr [esp + 0xc]
+0x10086e33 mov esi, dword ptr [esp + 8]
+0x10086e37 test ebx, ebx
+0x10086e39 pop ebx
+0x10086e3a je 0x10086e5c
+0x10086e3c call 0x10001000
+0x10086e41 mov ecx, dword ptr [esp + 4]
+0x10086e45 mov esi, eax
+0x10086e47 mov eax, dword ptr [esp + 8]
+0x10086e4b not ecx
+0x10086e4d not eax
+0x10086e4f and esi, ecx
+0x10086e51 and edx, eax
+0x10086e53 jmp 0x10086e5c
+0x10086e55 call 0x10001000
+0x10086e5a mov esi, eax
+0x10086e5c or esi, 0x400
+0x10086e62 mov dword ptr [0x10199a0c], edx
+0x10086e68 mov dword ptr [0x10199a08], esi
+0x10086e6e pop esi
+0x10086e6f add esp, 8
+0x10086e72 ret 
+CALLS [{"pc": "0x10086dc5", "target": "0x100f3c00", "import": null, "text": "0x100f3c00"}, {"pc": "0x10086de7", "target": "0x100f43ce", "import": null, "text": "0x100f43ce"}, {"pc": "0x10086e0a", "target": "0x100ecf63", "import": null, "text": "0x100ecf63"}, {"pc": "0x10086e19", "target": "0x100efd4a", "import": null, "text": "0x100efd4a"}, {"pc": "0x10086e3c", "target": "0x10001000", "import": null, "text": "0x10001000"}, {"pc": "0x10086e55", "target": "0x10001000", "import": null, "text": "0x10001000"}]
+STRINGS {"0x10138570": "OPENSSL_ia32cap", "0x10138580": "%I64i"}
+
+FUNCTION 0x1003d37a
+0x1003d37a push 0x10130438
+0x1003d37f call 0x100eca0f
+0x1003d384 pop ecx
+0x1003d385 ret 
+CALLS [{"pc": "0x1003d37f", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003d386
+0x1003d386 call 0x100f183f
+0x1003d38b add eax, 0x40
+0x1003d38e mov dword ptr [0x10195bec], eax
+0x1003d393 ret 
+CALLS [{"pc": "0x1003d386", "target": "0x100f183f", "import": null, "text": "0x100f183f"}]
+STRINGS {}
+
+FUNCTION 0x1003d3d7
+0x1003d3d7 push 0x10195d0c
+0x1003d3dc call 0x1011ca40
+0x1003d3e1 mov dword ptr [esp], 0x10130442
+0x1003d3e8 call 0x100eca0f
+0x1003d3ed pop ecx
+0x1003d3ee ret 
+CALLS [{"pc": "0x1003d3dc", "target": "0x1011ca40", "import": null, "text": "0x1011ca40"}, {"pc": "0x1003d3e8", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003d4c0
+0x1003d4c0 push 0x101304b0
+0x1003d4c5 call 0x100eca0f
+0x1003d4ca pop ecx
+0x1003d4cb ret 
+CALLS [{"pc": "0x1003d4c5", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003ca00
+0x1003ca00 push 0x1012f430
+0x1003ca05 call 0x100eca0f
+0x1003ca0a pop ecx
+0x1003ca0b ret 
+CALLS [{"pc": "0x1003ca05", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003ca10
+0x1003ca10 push 0x1012f420
+0x1003ca15 call 0x100eca0f
+0x1003ca1a pop ecx
+0x1003ca1b ret 
+CALLS [{"pc": "0x1003ca15", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003ca20
+0x1003ca20 push 0x1012f410
+0x1003ca25 call 0x100eca0f
+0x1003ca2a pop ecx
+0x1003ca2b ret 
+CALLS [{"pc": "0x1003ca25", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003ca30
+0x1003ca30 push 0x40
+0x1003ca32 push 0x10176610
+0x1003ca37 mov ecx, 0x10191240
+0x1003ca3c call 0x1003d920
+0x1003ca41 push 0x1012f440
+0x1003ca46 call 0x100eca0f
+0x1003ca4b pop ecx
+0x1003ca4c ret 
+CALLS [{"pc": "0x1003ca3c", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1003ca46", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {"0x10176610": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"}
+
+FUNCTION 0x1003ca50
+0x1003ca50 push 0x40
+0x1003ca52 push 0x10176610
+0x1003ca57 mov ecx, 0x10191258
+0x1003ca5c call 0x1003d920
+0x1003ca61 push 0x1012f4c0
+0x1003ca66 call 0x100eca0f
+0x1003ca6b pop ecx
+0x1003ca6c ret 
+CALLS [{"pc": "0x1003ca5c", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1003ca66", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {"0x10176610": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"}
+
+FUNCTION 0x1003ca70
+0x1003ca70 push 0x1012f540
+0x1003ca75 call 0x100eca0f
+0x1003ca7a pop ecx
+0x1003ca7b ret 
+CALLS [{"pc": "0x1003ca75", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003ca80
+0x1003ca80 push 0x40
+0x1003ca82 push 0x10176610
+0x1003ca87 mov ecx, 0x10191270
+0x1003ca8c call 0x1003d920
+0x1003ca91 push 0x1012f580
+0x1003ca96 call 0x100eca0f
+0x1003ca9b pop ecx
+0x1003ca9c ret 
+CALLS [{"pc": "0x1003ca8c", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1003ca96", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {"0x10176610": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"}
+
+FUNCTION 0x1003caa0
+0x1003caa0 push 0x40
+0x1003caa2 push 0x10176610
+0x1003caa7 mov ecx, 0x10191288
+0x1003caac call 0x1003d920
+0x1003cab1 push 0x1012f600
+0x1003cab6 call 0x100eca0f
+0x1003cabb pop ecx
+0x1003cabc ret 
+CALLS [{"pc": "0x1003caac", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1003cab6", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {"0x10176610": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"}
+
+FUNCTION 0x1003cac0
+0x1003cac0 push 0x40
+0x1003cac2 push 0x10176610
+0x1003cac7 mov ecx, 0x101912a0
+0x1003cacc call 0x1003d920
+0x1003cad1 push 0x1012f680
+0x1003cad6 call 0x100eca0f
+0x1003cadb pop ecx
+0x1003cadc ret 
+CALLS [{"pc": "0x1003cacc", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1003cad6", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {"0x10176610": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"}
+
+FUNCTION 0x1003cae0
+0x1003cae0 push 0x40
+0x1003cae2 push 0x10176610
+0x1003cae7 mov ecx, 0x101912b8
+0x1003caec call 0x1003d920
+0x1003caf1 push 0x1012f700
+0x1003caf6 call 0x100eca0f
+0x1003cafb pop ecx
+0x1003cafc ret 
+CALLS [{"pc": "0x1003caec", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1003caf6", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {"0x10176610": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"}
+
+FUNCTION 0x1003cb00
+0x1003cb00 push 0x40
+0x1003cb02 push 0x10176610
+0x1003cb07 mov ecx, 0x101912d0
+0x1003cb0c call 0x1003d920
+0x1003cb11 push 0x1012f780
+0x1003cb16 call 0x100eca0f
+0x1003cb1b pop ecx
+0x1003cb1c ret 
+CALLS [{"pc": "0x1003cb0c", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1003cb16", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {"0x10176610": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"}
+
+FUNCTION 0x1003cb20
+0x1003cb20 push 0x40
+0x1003cb22 push 0x10176610
+0x1003cb27 mov ecx, 0x101912e8
+0x1003cb2c call 0x1003d920
+0x1003cb31 push 0x1012f800
+0x1003cb36 call 0x100eca0f
+0x1003cb3b pop ecx
+0x1003cb3c ret 
+CALLS [{"pc": "0x1003cb2c", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1003cb36", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {"0x10176610": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"}
+
+FUNCTION 0x1003cb40
+0x1003cb40 push 0x40
+0x1003cb42 push 0x10176610
+0x1003cb47 mov ecx, 0x10191300
+0x1003cb4c call 0x1003d920
+0x1003cb51 push 0x1012f880
+0x1003cb56 call 0x100eca0f
+0x1003cb5b pop ecx
+0x1003cb5c ret 
+CALLS [{"pc": "0x1003cb4c", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1003cb56", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {"0x10176610": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"}
+
+FUNCTION 0x1003cb60
+0x1003cb60 push 0x1012f900
+0x1003cb65 call 0x100eca0f
+0x1003cb6a pop ecx
+0x1003cb6b ret 
+CALLS [{"pc": "0x1003cb65", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003cb70
+0x1003cb70 push 0x40
+0x1003cb72 push 0x10176610
+0x1003cb77 mov ecx, 0x10191318
+0x1003cb7c call 0x1003d920
+0x1003cb81 push 0x1012f920
+0x1003cb86 call 0x100eca0f
+0x1003cb8b pop ecx
+0x1003cb8c ret 
+CALLS [{"pc": "0x1003cb7c", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1003cb86", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {"0x10176610": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"}
+
+FUNCTION 0x1003cb90
+0x1003cb90 push 0x40
+0x1003cb92 push 0x10176610
+0x1003cb97 mov ecx, 0x10191330
+0x1003cb9c call 0x1003d920
+0x1003cba1 push 0x1012f9a0
+0x1003cba6 call 0x100eca0f
+0x1003cbab pop ecx
+0x1003cbac ret 
+CALLS [{"pc": "0x1003cb9c", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1003cba6", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {"0x10176610": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"}
+
+FUNCTION 0x1003cbb0
+0x1003cbb0 push 0x40
+0x1003cbb2 push 0x10176610
+0x1003cbb7 mov ecx, 0x10191348
+0x1003cbbc call 0x1003d920
+0x1003cbc1 push 0x1012fa20
+0x1003cbc6 call 0x100eca0f
+0x1003cbcb pop ecx
+0x1003cbcc ret 
+CALLS [{"pc": "0x1003cbbc", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1003cbc6", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {"0x10176610": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"}
+
+FUNCTION 0x1003cbd0
+0x1003cbd0 push 0x40
+0x1003cbd2 push 0x10176610
+0x1003cbd7 mov ecx, 0x10191360
+0x1003cbdc call 0x1003d920
+0x1003cbe1 push 0x1012faa0
+0x1003cbe6 call 0x100eca0f
+0x1003cbeb pop ecx
+0x1003cbec ret 
+CALLS [{"pc": "0x1003cbdc", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1003cbe6", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {"0x10176610": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"}
+
+FUNCTION 0x1003cbf0
+0x1003cbf0 push 0x40
+0x1003cbf2 push 0x10176610
+0x1003cbf7 mov ecx, 0x10191378
+0x1003cbfc call 0x1003d920
+0x1003cc01 push 0x1012fb20
+0x1003cc06 call 0x100eca0f
+0x1003cc0b pop ecx
+0x1003cc0c ret 
+CALLS [{"pc": "0x1003cbfc", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1003cc06", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {"0x10176610": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"}
+
+FUNCTION 0x1003cc10
+0x1003cc10 push 0x40
+0x1003cc12 push 0x10176610
+0x1003cc17 mov ecx, 0x10191390
+0x1003cc1c call 0x1003d920
+0x1003cc21 push 0x1012fba0
+0x1003cc26 call 0x100eca0f
+0x1003cc2b pop ecx
+0x1003cc2c ret 
+CALLS [{"pc": "0x1003cc1c", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1003cc26", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {"0x10176610": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"}
+
+FUNCTION 0x1003cc30
+0x1003cc30 push 0x40
+0x1003cc32 push 0x10176610
+0x1003cc37 mov ecx, 0x101913a8
+0x1003cc3c call 0x1003d920
+0x1003cc41 push 0x1012fc20
+0x1003cc46 call 0x100eca0f
+0x1003cc4b pop ecx
+0x1003cc4c ret 
+CALLS [{"pc": "0x1003cc3c", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1003cc46", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {"0x10176610": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"}
+
+FUNCTION 0x1003cc50
+0x1003cc50 call 0x10045790
+0x1003cc55 push 0x1012fca0
+0x1003cc5a call 0x100eca0f
+0x1003cc5f pop ecx
+0x1003cc60 ret 
+CALLS [{"pc": "0x1003cc50", "target": "0x10045790", "import": null, "text": "0x10045790"}, {"pc": "0x1003cc5a", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003cc70
+0x1003cc70 push esi
+0x1003cc71 xor ecx, ecx
+0x1003cc73 mov esi, 0x37
+0x1003cc78 lea eax, [ecx + 0x35]
+0x1003cc7b cdq 
+0x1003cc7c idiv esi
+0x1003cc7e mov eax, dword ptr [edx*4 + 0x10176d40]
+0x1003cc85 xor eax, 0x9a4ec86
+0x1003cc8a mov dword ptr [ecx*4 + 0x10198b90], eax
+0x1003cc91 inc ecx
+0x1003cc92 cmp ecx, esi
+0x1003cc94 jl 0x1003cc78
+0x1003cc96 mov dword ptr [0x10198c6c], 0
+0x1003cca0 mov dword ptr [0x10198c70], 0x1f
+0x1003ccaa pop esi
+0x1003ccab ret 
+CALLS []
+STRINGS {}
+
+FUNCTION 0x1003ccb0
+0x1003ccb0 fld1 
+0x1003ccb2 sub esp, 0x10
+0x1003ccb5 mov ecx, 0x10198c74
+0x1003ccba fstp dword ptr [esp + 8]
+0x1003ccbe fldz 
+0x1003ccc0 fst dword ptr [esp + 4]
+0x1003ccc4 fstp dword ptr [esp]
+0x1003ccc7 call 0x10045960
+0x1003cccc push 0x1012fcb0
+0x1003ccd1 call 0x100eca0f
+0x1003ccd6 add esp, 0x14
+0x1003ccd9 ret 
+CALLS [{"pc": "0x1003ccc7", "target": "0x10045960", "import": null, "text": "0x10045960"}, {"pc": "0x1003ccd1", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003cce0
+0x1003cce0 fldz 
+0x1003cce2 sub esp, 0x10
+0x1003cce5 mov ecx, 0x10198c84
+0x1003ccea fst dword ptr [esp + 8]
+0x1003ccee fstp dword ptr [esp + 4]
+0x1003ccf2 fld1 
+0x1003ccf4 fstp dword ptr [esp]
+0x1003ccf7 call 0x10045960
+0x1003ccfc push 0x1012fcc0
+0x1003cd01 call 0x100eca0f
+0x1003cd06 add esp, 0x14
+0x1003cd09 ret 
+CALLS [{"pc": "0x1003ccf7", "target": "0x10045960", "import": null, "text": "0x10045960"}, {"pc": "0x1003cd01", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003cd10
+0x1003cd10 fldz 
+0x1003cd12 sub esp, 0x10
+0x1003cd15 mov ecx, 0x10198c94
+0x1003cd1a fst dword ptr [esp + 8]
+0x1003cd1e fld1 
+0x1003cd20 fstp dword ptr [esp + 4]
+0x1003cd24 fstp dword ptr [esp]
+0x1003cd27 call 0x10045960
+0x1003cd2c push 0x1012fcd0
+0x1003cd31 call 0x100eca0f
+0x1003cd36 add esp, 0x14
+0x1003cd39 ret 
+CALLS [{"pc": "0x1003cd27", "target": "0x10045960", "import": null, "text": "0x10045960"}, {"pc": "0x1003cd31", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003cd40
+0x1003cd40 push 0x40
+0x1003cd42 push 0x10176610
+0x1003cd47 mov ecx, 0x10191410
+0x1003cd4c call 0x1003d920
+0x1003cd51 push 0x1012fce0
+0x1003cd56 call 0x100eca0f
+0x1003cd5b pop ecx
+0x1003cd5c ret 
+CALLS [{"pc": "0x1003cd4c", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1003cd56", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {"0x10176610": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"}
+
+FUNCTION 0x1003cd60
+0x1003cd60 call 0x1005bee0
+0x1003cd65 push 0x1012fd60
+0x1003cd6a call 0x100eca0f
+0x1003cd6f pop ecx
+0x1003cd70 ret 
+CALLS [{"pc": "0x1003cd60", "target": "0x1005bee0", "import": null, "text": "0x1005bee0"}, {"pc": "0x1003cd6a", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003cd80
+0x1003cd80 push 0x1005e370
+0x1003cd85 push 0x1005c550
+0x1003cd8a push 0x40
+0x1003cd8c push 0x20
+0x1003cd8e push 0x10198f10
+0x1003cd93 call 0x100ee956
+0x1003cd98 push 0x1012fd70
+0x1003cd9d call 0x100eca0f
+0x1003cda2 pop ecx
+0x1003cda3 ret 
+CALLS [{"pc": "0x1003cd93", "target": "0x100ee956", "import": null, "text": "0x100ee956"}, {"pc": "0x1003cd9d", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003cdb0
+0x1003cdb0 push 0
+0x1003cdb2 push 0x101769b0
+0x1003cdb7 mov ecx, 0x10191428
+0x1003cdbc call 0x1003d920
+0x1003cdc1 push 0x1012fd90
+0x1003cdc6 call 0x100eca0f
+0x1003cdcb pop ecx
+0x1003cdcc ret 
+CALLS [{"pc": "0x1003cdbc", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1003cdc6", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003cdd0
+0x1003cdd0 push ebp
+0x1003cdd1 mov ebp, esp
+0x1003cdd3 and esp, 0xfffffff8
+0x1003cdd6 push -1
+0x1003cdd8 push 0x1012cfb4
+0x1003cddd mov eax, dword ptr fs:[0]
+0x1003cde3 push eax
+0x1003cde4 sub esp, 0x30
+0x1003cde7 mov eax, dword ptr [0x101902c0]
+0x1003cdec xor eax, esp
+0x1003cdee mov dword ptr [esp + 0x28], eax
+0x1003cdf2 push ebx
+0x1003cdf3 push esi
+0x1003cdf4 push edi
+0x1003cdf5 mov eax, dword ptr [0x101902c0]
+0x1003cdfa xor eax, esp
+0x1003cdfc push eax
+0x1003cdfd lea eax, [esp + 0x40]
+0x1003ce01 mov dword ptr fs:[0], eax
+0x1003ce07 xor ebx, ebx
+0x1003ce09 mov dword ptr [esp + 0x18], ebx
+0x1003ce0d cmp byte ptr [0x10199737], bl
+0x1003ce13 jne 0x1003ce21
+0x1003ce15 mov byte ptr [0x10199737], 1
+0x1003ce1c call 0x1003d4d0
+0x1003ce21 mov eax, dword ptr [0x10198450]
+0x1003ce26 test eax, eax
+0x1003ce28 jne 0x1003ce36
+0x1003ce2a push 0x24
+0x1003ce2c call 0x100f0695
+0x1003ce31 add esp, 4
+0x1003ce34 jmp 0x1003ce43
+0x1003ce36 push dword ptr [0x10198448]
+0x1003ce3c push 0x24
+0x1003ce3e call eax
+0x1003ce40 add esp, 8
+0x1003ce43 mov edi, eax
+0x1003ce45 mov dword ptr [esp + 0x1c], edi
+0x1003ce49 mov dword ptr [esp + 0x48], 0
+0x1003ce51 test edi, edi
+0x1003ce53 je 0x1003ceea
+0x1003ce59 push 0xd
+0x1003ce5b push 0x10179848
+0x1003ce60 lea ecx, [esp + 0x28]
+0x1003ce64 mov dword ptr [esp + 0x3c], 0xf
+0x1003ce6c mov dword ptr [esp + 0x38], 0
+0x1003ce74 mov byte ptr [esp + 0x28], 0
+0x1003ce79 call 0x1003d920
+0x1003ce7e mov byte ptr [esp + 0x48], 1
+0x1003ce83 lea ecx, [esp + 0x17]
+0x1003ce87 mov ebx, 3
+0x1003ce8c mov dword ptr [edi], 0x101798ec
+0x1003ce92 mov dword ptr [esp + 0x18], ebx
+0x1003ce96 call 0x1003dc10
+0x1003ce9b lea eax, [esp + 0x15]
+0x1003ce9f push eax
+0x1003cea0 lea ecx, [esp + 0x1b]
+0x1003cea4 call 0x1003ed00
+0x1003cea9 lea eax, [esp + 0x15]
+0x1003cead push eax
+0x1003ceae lea ecx, [esp + 0x1a]
+0x1003ceb2 call 0x1003ecf0
+0x1003ceb7 push -1
+0x1003ceb9 push 0
+0x1003cebb lea eax, [esp + 0x28]
+0x1003cebf mov dword ptr [edi + 0x18], 0xf
+0x1003cec6 mov dword ptr [edi + 0x14], 0
+0x1003cecd lea ecx, [edi + 4]
+0x1003ced0 push eax
+0x1003ced1 mov byte ptr [edi + 4], 0
+0x1003ced5 call 0x1003d7f0
+0x1003ceda mov dword ptr [edi + 0x1c], 0
+0x1003cee1 mov dword ptr [edi + 0x20], 0
+0x1003cee8 jmp 0x1003ceec
+0x1003ceea xor edi, edi
+0x1003ceec mov dword ptr [esp + 0x48], 2
+0x1003cef4 push edi
+0x1003cef5 mov dword ptr [0x10199710], 0
+0x1003ceff mov dword ptr [0x10199714], 0
+0x1003cf09 call 0x1005c570
+0x1003cf0e mov dword ptr [esp + 0x48], 0xffffffff
+0x1003cf16 test bl, 1
+0x1003cf19 je 0x1003cf66
+0x1003cf1b cmp dword ptr [esp + 0x34], 0x10
+0x1003cf20 jb 0x1003cf66
+0x1003cf22 mov esi, dword ptr [esp + 0x20]
+0x1003cf26 lea ecx, [esp + 0x15]
+0x1003cf2a call 0x1003dc10
+0x1003cf2f lea eax, [esp + 0x20]
+0x1003cf33 push eax
+0x1003cf34 lea ecx, [esp + 0x19]
+0x1003cf38 call 0x1003de40
+0x1003cf3d lea ecx, [esp + 0x16]
+0x1003cf41 call 0x1003dc10
+0x1003cf46 mov eax, dword ptr [0x1019844c]
+0x1003cf4b test eax, eax
+0x1003cf4d jne 0x1003cf5a
+0x1003cf4f push esi
+0x1003cf50 call 0x100ed4fa
+0x1003cf55 add esp, 4
+0x1003cf58 jmp 0x1003cf66
+0x1003cf5a push dword ptr [0x10198448]
+0x1003cf60 push esi
+0x1003cf61 call eax
+0x1003cf63 add esp, 8
+0x1003cf66 push 0x1012fe10
+0x1003cf6b call 0x100eca0f
+0x1003cf70 add esp, 4
+0x1003cf73 mov ecx, dword ptr [esp + 0x40]
+0x1003cf77 mov dword ptr fs:[0], ecx
+0x1003cf7e pop ecx
+0x1003cf7f pop edi
+0x1003cf80 pop esi
+0x1003cf81 pop ebx
+0x1003cf82 mov ecx, dword ptr [esp + 0x28]
+0x1003cf86 xor ecx, esp
+0x1003cf88 call 0x100ec285
+0x1003cf8d mov esp, ebp
+0x1003cf8f pop ebp
+0x1003cf90 ret 
+CALLS [{"pc": "0x1003ce1c", "target": "0x1003d4d0", "import": null, "text": "0x1003d4d0"}, {"pc": "0x1003ce2c", "target": "0x100f0695", "import": null, "text": "0x100f0695"}, {"pc": "0x1003ce79", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1003ce96", "target": "0x1003dc10", "import": null, "text": "0x1003dc10"}, {"pc": "0x1003cea4", "target": "0x1003ed00", "import": null, "text": "0x1003ed00"}, {"pc": "0x1003ceb2", "target": "0x1003ecf0", "import": null, "text": "0x1003ecf0"}, {"pc": "0x1003ced5", "target": "0x1003d7f0", "import": null, "text": "0x1003d7f0"}, {"pc": "0x1003cf09", "target": "0x1005c570", "import": null, "text": "0x1005c570"}, {"pc": "0x1003cf2a", "target": "0x1003dc10", "import": null, "text": "0x1003dc10"}, {"pc": "0x1003cf38", "target": "0x1003de40", "import": null, "text": "0x1003de40"}, {"pc": "0x1003cf41", "target": "0x1003dc10", "import": null, "text": "0x1003dc10"}, {"pc": "0x1003cf50", "target": "0x100ed4fa", "import": null, "text": "0x100ed4fa"}, {"pc": "0x1003cf6b", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}, {"pc": "0x1003cf88", "target": "0x100ec285", "import": null, "text": "0x100ec285"}, {"pc": "0x1003cf61", "target": null, "import": null, "text": "eax"}, {"pc": "0x1003ce3e", "target": null, "import": null, "text": "eax"}]
+STRINGS {"0x10179848": "BaseEventType"}
+
+FUNCTION 0x1003cfa0
+0x1003cfa0 call 0x1005d4c0
+0x1003cfa5 push 0x1012fe50
+0x1003cfaa call 0x100eca0f
+0x1003cfaf pop ecx
+0x1003cfb0 ret 
+CALLS [{"pc": "0x1003cfa0", "target": "0x1005d4c0", "import": null, "text": "0x1005d4c0"}, {"pc": "0x1003cfaa", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {}
+
+FUNCTION 0x1003cfc0
+0x1003cfc0 push ebp
+0x1003cfc1 mov ebp, esp
+0x1003cfc3 and esp, 0xfffffff8
+0x1003cfc6 sub esp, 8
+0x1003cfc9 call 0x1005e180
+0x1003cfce add esp, 8
+0x1003cfd1 mov esp, ebp
+0x1003cfd3 pop ebp
+0x1003cfd4 ret 
+CALLS [{"pc": "0x1003cfc9", "target": "0x1005e180", "import": null, "text": "0x1005e180"}]
+STRINGS {}
+
+FUNCTION 0x1003cfe0
+0x1003cfe0 push 0x40
+0x1003cfe2 push 0x10176610
+0x1003cfe7 mov ecx, 0x10191440
+0x1003cfec call 0x1003d920
+0x1003cff1 push 0x1012ff80
+0x1003cff6 call 0x100eca0f
+0x1003cffb pop ecx
+0x1003cffc ret 
+CALLS [{"pc": "0x1003cfec", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1003cff6", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {"0x10176610": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"}
+
+FUNCTION 0x1003d000
+0x1003d000 push 0x40
+0x1003d002 push 0x10176610
+0x1003d007 mov ecx, 0x10191458
+0x1003d00c call 0x1003d920
+0x1003d011 push 0x10130000
+0x1003d016 call 0x100eca0f
+0x1003d01b pop ecx
+0x1003d01c ret 
+CALLS [{"pc": "0x1003d00c", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1003d016", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {"0x10176610": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"}
+
+FUNCTION 0x1003d020
+0x1003d020 push 0xc
+0x1003d022 push 0x10179d34
+0x1003d027 mov ecx, 0x10191470
+0x1003d02c call 0x1003d920
+0x1003d031 push 0x10130080
+0x1003d036 call 0x100eca0f
+0x1003d03b pop ecx
+0x1003d03c ret 
+CALLS [{"pc": "0x1003d02c", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1003d036", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {"0x10179d34": "__NullName__"}
+
+FUNCTION 0x1003d040
+0x1003d040 push ebp
+0x1003d041 mov ebp, esp
+0x1003d043 and esp, 0xfffffff8
+0x1003d046 push ecx
+0x1003d047 xor cl, cl
+0x1003d049 cmp dword ptr [0x10191200], 0
+0x1003d050 push esi
+0x1003d051 jl 0x1003d0a0
+0x1003d053 xor eax, eax
+0x1003d055 cmp byte ptr [eax*4 + 0x10191100], 0x4c
+0x1003d05d jne 0x1003d073
+0x1003d05f cmp byte ptr [eax*4 + 0x10191101], 0x4f
+0x1003d067 jne 0x1003d073
+0x1003d069 cmp byte ptr [eax*4 + 0x10191102], 0x43
+0x1003d071 je 0x1003d082
+0x1003d073 inc cl
+0x1003d075 movzx eax, cl
+0x1003d078 cmp eax, dword ptr [0x10191200]
+0x1003d07e jle 0x1003d055
+0x1003d080 jmp 0x1003d0a0
+0x1003d082 xor edx, edx
+0x1003d084 movzx eax, cl
+0x1003d087 bts edx, eax
+0x1003d08a xor esi, esi
+0x1003d08c cmp eax, 0x20
+0x1003d08f cmovae esi, edx
+0x1003d092 xor edx, esi
+0x1003d094 cmp eax, 0x40
+0x1003d097 mov eax, edx
+0x1003d099 cmovae esi, edx
+0x1003d09c or eax, esi
+0x1003d09e jne 0x1003d0d4
+0x1003d0a0 mov ecx, 0x10191200
+0x1003d0a5 mov eax, 1
+0x1003d0aa lock xadd dword ptr [ecx], eax
+0x1003d0ae inc eax
+0x1003d0af movzx ecx, al
+0x1003d0b2 xor edx, edx
+0x1003d0b4 mov eax, ecx
+0x1003d0b6 xor esi, esi
+0x1003d0b8 bts edx, eax
+0x1003d0bb cmp eax, 0x20
+0x1003d0be cmovae esi, edx
+0x1003d0c1 mov dword ptr [ecx*4 + 0x10191100], 0x434f4c
+0x1003d0cc xor edx, esi
+0x1003d0ce cmp eax, 0x40
+0x1003d0d1 cmovae esi, edx
+0x1003d0d4 mov dword ptr [0x10199744], esi
+0x1003d0da mov dword ptr [0x10199740], edx
+0x1003d0e0 pop esi
+0x1003d0e1 mov esp, ebp
+0x1003d0e3 pop ebp
+0x1003d0e4 ret 
+CALLS []
+STRINGS {}
+
+FUNCTION 0x1003d0f0
+0x1003d0f0 push 0x40
+0x1003d0f2 push 0x10176610
+0x1003d0f7 mov ecx, 0x10191488
+0x1003d0fc call 0x1003d920
+0x1003d101 push 0x10130100
+0x1003d106 call 0x100eca0f
+0x1003d10b pop ecx
+0x1003d10c ret 
+CALLS [{"pc": "0x1003d0fc", "target": "0x1003d920", "import": null, "text": "0x1003d920"}, {"pc": "0x1003d106", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {"0x10176610": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"}
+
+FUNCTION 0x1003d110
+0x1003d110 push ebp
+0x1003d111 mov ebp, esp
+0x1003d113 push -1
+0x1003d115 push 0x1012d43a
+0x1003d11a mov eax, dword ptr fs:[0]
+0x1003d120 push eax
+0x1003d121 mov eax, dword ptr [0x101902c0]
+0x1003d126 xor eax, ebp
+0x1003d128 push eax
+0x1003d129 lea eax, [ebp - 0xc]
+0x1003d12c mov dword ptr fs:[0], eax
+0x1003d132 push 0
+0x1003d134 push 0x10179dda
+0x1003d139 push 0x10179da4
+0x1003d13e mov ecx, 0x10199748
+0x1003d143 mov dword ptr [ebp - 4], 0
+0x1003d14a call 0x1006dc90
+0x1003d14f push 0x10130180
+0x1003d154 call 0x100eca0f
+0x1003d159 add esp, 4
+0x1003d15c mov ecx, dword ptr [ebp - 0xc]
+0x1003d15f mov dword ptr fs:[0], ecx
+0x1003d166 pop ecx
+0x1003d167 mov esp, ebp
+0x1003d169 pop ebp
+0x1003d16a ret 
+CALLS [{"pc": "0x1003d14a", "target": "0x1006dc90", "import": null, "text": "0x1006dc90"}, {"pc": "0x1003d154", "target": "0x100eca0f", "import": null, "text": "0x100eca0f"}]
+STRINGS {"0x10179da4": "^[ \\t]*tr[ \\t]*\\\"([^\"]+)\\\"[ \\t]*=[ \\t]*\\\"(.*)\\\"[ \\t]*$"}

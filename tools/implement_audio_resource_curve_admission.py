@@ -1,0 +1,65 @@
+from pathlib import Path
+r=Path('E:/OpenLeague');src=r/'crates/core/src'
+code=r'''//! Actual B10450/AE4550 curve admission and B11F20/B12870 failed-entry cleanup.
+use std::collections::{BTreeMap,BTreeSet};
+use crate::{audio_bus_bank::Error,audio_plugin_factory::Memory};
+use crate::audio_path_source_virtual_cleanup::{get,put,live};
+#[derive(Clone,Copy)]pub enum Allocation{Node,Points,Temporary}
+#[derive(Clone,Debug)]pub enum Event{Points{header:u32,source:u32,count:u32,scaling:u32},Copy{destination:u32,source:u32,size:u32},Remove(u32)}
+pub trait Services:crate::audio_action_registry_key_publication::Services{
+ fn observe_curve(&mut self,_event:Event,_m:&BTreeMap<u32,Memory>){}
+ fn allocate_curve(&mut self,_kind:Allocation,pool:u32,size:u32,m:&mut BTreeMap<u32,Memory>,dead:&mut BTreeSet<u32>)->Result<Option<u32>,Error>{self.allocate(pool,size,m,dead)}
+}
+fn free(m:&mut BTreeMap<u32,Memory>,d:&mut BTreeSet<u32>,pool:u32,r:u32,s:&mut impl Services)->Result<(),Error>{live(m,d,r,1)?;s.free(pool,r,m)?;d.insert(r);Ok(())}
+pub fn points(m:&mut BTreeMap<u32,Memory>,d:&mut BTreeSet<u32>,header:u32,source:u32,count:u32,scaling:u32,pool:u32,s:&mut impl Services)->Result<u32,Error>{
+ s.observe_curve(Event::Points{header,source,count,scaling},m);let old=get(m,d,header,4)?;if old!=0{free(m,d,pool,old,s)?;put(m,d,header,4,0)?;}put(m,d,header+4,4,0)?;put(m,d,header+8,4,0)?;if source==0||count==0{return Ok(31);}
+ let size=count.wrapping_mul(12);let r=s.allocate_curve(Allocation::Points,pool,size,m,d)?.unwrap_or(0);put(m,d,header,4,r)?;if r==0{return Ok(52);}live(m,d,r,size as usize)?;live(m,d,source,size as usize)?;s.observe_curve(Event::Copy{destination:r,source,size},m);
+ for j in 0..size{let value=get(m,d,source.wrapping_add(j),1)?;put(m,d,r.wrapping_add(j),1,value)?;}put(m,d,header+4,4,count)?;put(m,d,header+8,4,scaling)?;Ok(1)
+}
+fn clear_list(m:&mut BTreeMap<u32,Memory>,d:&mut BTreeSet<u32>,h:u32,pool:u32,s:&mut impl Services)->Result<(),Error>{
+ if get(m,d,h+16,4)?==0{return Ok(());}let mut seen=BTreeSet::new();loop{let at=get(m,d,h,4)?;if at==0{break;}if !seen.insert(at){return Err(Error::CyclicList);}let next=get(m,d,at,4)?;put(m,d,h,4,next)?;if at==get(m,d,h+4,4)?{put(m,d,h+4,4,0)?;}put(m,d,at,4,get(m,d,h+8,4)?)?;put(m,d,h+20,4,get(m,d,h+20,4)?.wrapping_sub(1))?;put(m,d,h+8,4,at)?;}
+ let mut at=get(m,d,h+8,4)?;seen.clear();while at!=0{if !seen.insert(at){return Err(Error::CyclicList);}let next=get(m,d,at,4)?;let embedded=get(m,d,h+24,4)?;let end=embedded.wrapping_add(get(m,d,h+12,4)?.wrapping_mul(8));if at<embedded||at>=end{free(m,d,pool,at,s)?;}at=next;}
+ let embedded=get(m,d,h+24,4)?;if embedded!=0{free(m,d,pool,embedded,s)?;}for off in[12,16,0,4]{put(m,d,h+off,4,0)?;}Ok(())
+}
+pub fn remove(m:&mut BTreeMap<u32,Memory>,d:&mut BTreeSet<u32>,manager:u32,key:u32,pool:u32,s:&mut impl Services)->Result<(),Error>{
+ s.observe_curve(Event::Remove(key),m);let mut at=get(m,d,manager+0x938,4)?;let mut previous=0;let mut seen=BTreeSet::new();while at!=0{if !seen.insert(at){return Err(Error::CyclicList);}if get(m,d,at+4,4)?==key{break;}previous=at;at=get(m,d,at,4)?;}if at==0{return Ok(());}
+ let old=get(m,d,at+12,4)?;if old!=0{free(m,d,pool,old,s)?;put(m,d,at+12,4,0)?;}put(m,d,at+16,4,0)?;put(m,d,at+20,4,0)?;
+ if get(m,d,at+24,4)?!=0{return Err(Error::Backend("curve removal subscriber requeue producer requires native qualification"));}clear_list(m,d,at+24,pool,s)?;
+ let next=get(m,d,at,4)?;if at==get(m,d,manager+0x938,4)?{put(m,d,manager+0x938,4,next)?;}else{put(m,d,previous,4,next)?;}if at==get(m,d,manager+0x93c,4)?{put(m,d,manager+0x93c,4,previous)?;}
+ put(m,d,at,4,get(m,d,manager+0x940,4)?)?;put(m,d,manager+0x94c,4,get(m,d,manager+0x94c,4)?.wrapping_sub(1))?;put(m,d,manager+0x940,4,at)?;Ok(())
+}
+pub fn register(m:&mut BTreeMap<u32,Memory>,d:&mut BTreeSet<u32>,manager:u32,key:u32,parameter:u32,source:u32,count:u32,pool:u32,s:&mut impl Services)->Result<u32,Error>{
+ let mut at=get(m,d,manager+0x938,4)?;let mut seen=BTreeSet::new();while at!=0{if !seen.insert(at){return Err(Error::CyclicList);}if get(m,d,at+4,4)?==key{put(m,d,at+8,4,parameter)?;let h=at+12;let old=get(m,d,h,4)?;if old!=0{free(m,d,pool,old,s)?;put(m,d,h,4,0)?;}put(m,d,h+4,4,0)?;put(m,d,h+8,4,0)?;return points(m,d,h,source,count,0,pool,s);}at=get(m,d,at,4)?;}
+ let mut status=2;let mut ready=true;if get(m,d,manager+0x940,4)?==0{if get(m,d,manager+0x94c,4)? >=get(m,d,manager+0x948,4)?{ready=false;}else{let r=s.allocate_curve(Allocation::Node,pool,52,m,d)?.unwrap_or(0);if r==0{ready=false;}else{live(m,d,r,52)?;let object=r.wrapping_add(4);if object!=0{for off in[8,12,16,32,36,40]{put(m,d,object+off,4,0)?;}}put(m,d,r,4,get(m,d,manager+0x940,4)?)?;put(m,d,manager+0x940,4,r)?;}}}
+ if ready{let tail=get(m,d,manager+0x93c,4)?;let node=get(m,d,manager+0x940,4)?;if tail==0{put(m,d,manager+0x938,4,node)?;}else{put(m,d,tail,4,node)?;}let node=get(m,d,manager+0x940,4)?;put(m,d,manager+0x93c,4,node)?;let next=get(m,d,node,4)?;put(m,d,manager+0x940,4,next)?;put(m,d,node,4,0)?;let object=get(m,d,manager+0x93c,4)?.wrapping_add(4);put(m,d,manager+0x94c,4,get(m,d,manager+0x94c,4)?.wrapping_add(1))?;
+ if object!=0{put(m,d,object,4,key)?;put(m,d,object+4,4,parameter)?;status=points(m,d,object+8,source,count,0,pool,s)?;if status==1{for(off,v)in[(40,0),(36,u32::MAX),(28,0),(44,0),(20,0),(24,0)]{put(m,d,object+off,4,v)?;}}else{remove(m,d,manager,key,pool,s)?;}}}
+ if get(m,d,manager+0x91c,4)?!=0{return Err(Error::Backend("curve admission delayed subscriber callback producer requires native qualification"));}Ok(status)
+}
+#[cfg(test)]mod tests{
+ use super::*;use serde_json::{Value,json};
+ fn bytes(s:&str)->Vec<u8>{(0..s.len()).step_by(2).map(|i|u8::from_str_radix(&s[i..i+2],16).unwrap()).collect()}
+ fn hex(b:&[u8])->String{b.iter().map(|v|format!("{v:02x}")).collect()}
+ struct Backend{regions:Vec<(String,u32,usize)>,calls:Vec<Value>,allocations:Vec<Value>,failure:String}
+ impl Backend{fn snapshot(&self,m:&BTreeMap<u32,Memory>)->Value{let mut v=json!({});for(n,r,z)in &self.regions{v[n]=json!(hex(&(0..*z).map(|j|crate::audio_path_memory::read(m,r+j as u32,1).unwrap()[0]).collect::<Vec<_>>()));}v}}
+ impl crate::audio_path_voice_empty_source_release::Services for Backend{fn free(&mut self,p:u32,r:u32,m:&mut BTreeMap<u32,Memory>)->Result<(),Error>{self.calls.push(json!({"kind":"free","pool":p,"reference":r,"at_call":self.snapshot(m)}));Ok(())}}
+ impl crate::audio_action_registry_key_publication::Services for Backend{fn allocate(&mut self,_:u32,_:u32,_:&mut BTreeMap<u32,Memory>,_:&mut BTreeSet<u32>)->Result<Option<u32>,Error>{Err(Error::Backend("explicit curve allocation required"))}}
+ impl Services for Backend{
+ fn observe_curve(&mut self,e:Event,m:&BTreeMap<u32,Memory>){let mut v=match e{Event::Points{header,source,count,scaling}=>json!({"kind":"construct_points","this":header,"source":source,"count":count,"scaling":scaling}),Event::Copy{destination,source,size}=>json!({"kind":"copy","destination":destination,"source":source,"size":size}),Event::Remove(key)=>json!({"kind":"remove_curve","key":key})};v["at_call"]=self.snapshot(m);self.calls.push(v);}
+ fn allocate_curve(&mut self,kind:Allocation,p:u32,z:u32,m:&mut BTreeMap<u32,Memory>,_:&mut BTreeSet<u32>)->Result<Option<u32>,Error>{let(name,r)=match kind{Allocation::Node=>("node",0x40004000),Allocation::Points=>("points",0x40007000),Allocation::Temporary=>unreachable!()};let result=if self.failure==name{0}else{r};self.calls.push(json!({"kind":"allocate","pool":p,"size":z,"result":result,"at_call":self.snapshot(m)}));if result!=0{self.allocations.push(json!({"reference":r,"size":z}));let full=m.remove(&r).unwrap();if full.raw.len()>z as usize{m.insert(r+z,Memory{reference:r+z,raw:full.raw[z as usize..].to_vec()});}m.insert(r,Memory{reference:r,raw:full.raw[..z as usize].to_vec()});}Ok((result!=0).then_some(result))}}
+ #[test]fn audio_resource_curve_admission_matches576_original_creation_replace_recycled_append_capacity_zero_null_oom_storage_removal_and_complete_physical_cases(){
+ let p:Value=serde_json::from_str(&crate::audio_test_fixture("data/4.20/audio_resource_curve_admission_preparation.json")).unwrap();assert_eq!(p["passed"],true);assert_eq!(p["case_count"],576);
+ for(i,row)in p["cases"].as_array().unwrap().iter().enumerate(){let regions=p["regions"].as_array().unwrap().iter().map(|v|(v["name"].as_str().unwrap().into(),v["reference"].as_u64().unwrap()as u32,v["size"].as_u64().unwrap()as usize)).collect::<Vec<(String,u32,usize)>>();let mut m=regions.iter().map(|(n,r,_)|(*r,Memory{reference:*r,raw:bytes(row["before"][n].as_str().unwrap())})).collect();let mut d=BTreeSet::new();let mut s=Backend{regions,calls:vec![],allocations:vec![],failure:row["failure"].as_str().unwrap().into()};let source=if row["null_source"].as_bool().unwrap(){0}else{0x40005000};let result=register(&mut m,&mut d,0x40001000,7,0xabcdef01,source,row["point_count"].as_u64().unwrap()as u32,19,&mut s).unwrap();assert_eq!(result as u64,row["result"].as_u64().unwrap(),"status {i}");assert_eq!(json!(s.calls),row["calls"],"all native constructor/copy/cleanup/allocator/free entries {i}");assert_eq!(s.snapshot(&m),row["after"],"all physical banks {i}");assert_eq!(json!(s.allocations),row["allocations"],"sizes {i}");let freed:BTreeSet<u32>=row["freed"].as_array().unwrap().iter().map(|v|v.as_u64().unwrap()as u32).collect();assert_eq!(d,freed,"retired references {i}");}
+ }
+}
+'''
+(src/'audio_resource_curve_admission.rs').write_text(code,encoding='utf-8');p=src/'lib.rs';p.write_text(p.read_text(encoding='utf-8')+'\npub mod audio_resource_curve_admission;\n',encoding='utf-8')
+p=src/'audio_registry_resource_admission.rs';t=p.read_text(encoding='utf-8');t=t.replace('pub trait Services:crate::audio_action_registry_key_publication::Services{','pub trait Services:crate::audio_resource_curve_admission::Services{')
+old='if word(b,48)!=0{return Err(Error::Backend("nonempty B10450 curve resource admission not qualified"));}'
+new='''if word(b,48)!=0{let count=word(b,48);let size=count.wrapping_mul(12);let buffer=s.allocate_curve(crate::audio_resource_curve_admission::Allocation::Temporary,pool,size,m,d)?.unwrap_or(0);if buffer==0{status=52;break;}live(m,d,buffer,size as usize)?;let mut destination=(0..size).map(|j|get(m,d,buffer.wrapping_add(j),1).map(|v|v as u8)).collect::<Result<Vec<_>,_>>()?;status=read(m,d,stream,&mut destination,0,size as usize,0xafb567,s)?;for(j,v)in destination.iter().enumerate(){put(m,d,buffer.wrapping_add(j as u32),1,*v as u32)?;}if status==1{status=crate::audio_resource_curve_admission::register(m,d,rtpc,word(b,4),word(b,0),buffer,count,pool,s)?;}s.free(pool,buffer,m)?;d.insert(buffer);if status!=1{break;}}'''
+assert old in t;t=t.replace(old,new)
+needle=' impl Services for Backend{'
+implcode=''' impl crate::audio_resource_curve_admission::Services for Backend{fn allocate_curve(&mut self,kind:crate::audio_resource_curve_admission::Allocation,p:u32,z:u32,m:&mut BTreeMap<u32,Memory>,_:&mut BTreeSet<u32>)->Result<Option<u32>,Error>{let(name,r)=match kind{crate::audio_resource_curve_admission::Allocation::Temporary=>("curve_temp",0x40012000),crate::audio_resource_curve_admission::Allocation::Node=>("curve_node",0x40013000),crate::audio_resource_curve_admission::Allocation::Points=>("curve_points",0x40014000)};let result=if self.failure==name{0}else{r};self.calls.push(json!({"kind":"allocate","pool":p,"size":z,"result":result,"at_call":self.snapshot(m)}));if result!=0{self.allocations.push(json!({"reference":r,"size":z}));let full=m.remove(&r).unwrap();if full.raw.len()>z as usize{m.insert(r+z,Memory{reference:r+z,raw:full.raw[z as usize..].to_vec()});}m.insert(r,Memory{reference:r,raw:full.raw[..z as usize].to_vec()});}Ok((result!=0).then_some(result))}}
+'''
+assert needle in t;t=t.replace(needle,implcode+needle)
+t=t.replace('fn replay(path:&str,native:bool){','#[test]fn audio_registry_resource_admission_matches864_original_nonempty_curve_storage_partial_point_reads_temporary_cleanup_global_voice_limit_and_complete_physical_cases(){replay("data/4.20/audio_registry_resource_curves_preparation.json",true);}\n fn replay(path:&str,native:bool){').replace('assert_eq!(p["case_count"],480);','assert_eq!(p["case_count"],if path.contains("resource_curves"){864}else{480});')
+p.write_text(t,encoding='utf-8');(r/'tools/implement_audio_resource_curve_admission.py').write_text(Path(__file__).read_text(encoding='utf-8'),encoding='utf-8');print('Actual curve storage/admission/cleanup and nonempty full-reader integration implemented;576+864 replay added.')

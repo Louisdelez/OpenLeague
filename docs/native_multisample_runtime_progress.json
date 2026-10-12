@@ -1,0 +1,89 @@
+{
+  "updated_utc": "2026-10-07T04:00:38.657727+00:00",
+  "complete": false,
+  "passed": true,
+  "client_sha256": "2c7d51460290b55e3ac3afad6fcc60fc49f7e06992a64b64578e16353092c1da",
+  "build_log": "logs/native-multisample-client-build.log",
+  "build_log_sha256": "2194c42c8c122b458c0b4bde134d115d987977536090d80ae402111b5dbb14b0",
+  "native_selection_progress": "docs/native_multisample_selection_progress.json",
+  "native_default_selection_runtime_observed": true,
+  "diagnostic_sampling_override": false,
+  "gamma_override": false,
+  "reconstructed_projection_consumer_attribution_passed_both_backends": true,
+  "original_gpu_fidelity_qualified": false,
+  "runs": [
+    {
+      "version": "v14_native_dx12",
+      "baseline": {
+        "frames": 32,
+        "nonzero_frames": 0,
+        "changed_pixels_min": 0,
+        "changed_pixels_max": 0,
+        "max_rgb_difference": 0
+      },
+      "instances": [
+        {
+          "entity": 4294959507,
+          "frames": 3,
+          "changed_pixels_max": 70522
+        },
+        {
+          "entity": 8589926776,
+          "frames": 4,
+          "changed_pixels_max": 67936
+        }
+      ],
+      "pair_receipt": "docs/projected_pair_control_v14_native_dx12.json",
+      "capture_receipt": "docs/projected_core_cycle_capture_v14_native_dx12.json",
+      "pipeline_frames": 9,
+      "nonready_pipeline_frames": 0,
+      "client_log_sha256": "67c67ff2a953854ef0969c0448ced5256b4e96933089f7f041c574bc8dd6f67b",
+      "pipeline_sha256": "26b3d824e81b909695297aa5a0509f8cbf83c708cf97898c61466bc159aa2fcc",
+      "client_sha256": "2c7d51460290b55e3ac3afad6fcc60fc49f7e06992a64b64578e16353092c1da"
+    },
+    {
+      "version": "v15_native_vulkan",
+      "baseline": {
+        "frames": 61,
+        "nonzero_frames": 0,
+        "changed_pixels_min": 0,
+        "changed_pixels_max": 0,
+        "max_rgb_difference": 0
+      },
+      "instances": [
+        {
+          "entity": 4294959545,
+          "frames": 7,
+          "changed_pixels_max": 70505
+        },
+        {
+          "entity": 12884894132,
+          "frames": 8,
+          "changed_pixels_max": 67949
+        }
+      ],
+      "pair_receipt": "docs/projected_pair_control_v15_native_vulkan.json",
+      "capture_receipt": "docs/projected_core_cycle_capture_v15_native_vulkan.json",
+      "pipeline_frames": 17,
+      "nonready_pipeline_frames": 0,
+      "client_log_sha256": "76c8e97cc20a5c153d7b735e96b2c3be96c888dc4f65db1767e609520afb5140",
+      "pipeline_sha256": "6564b74b42d0b47b6404c25062226ad48ac629c349a8a46d593fb48b8422e321",
+      "client_sha256": "2c7d51460290b55e3ac3afad6fcc60fc49f7e06992a64b64578e16353092c1da"
+    }
+  ],
+  "visual_inspection": {
+    "inspected": true,
+    "versions": [
+      "v14_native_dx12",
+      "v15_native_vulkan"
+    ],
+    "observed": "On/off paired images visually inspected: warm ground glow appears with projection, absent in off image; actor silhouettes remain visible.",
+    "human_fidelity_acceptance": false
+  },
+  "limits": [
+    "Paired offscreen cameras clone the ordinary camera configuration; difference attribution is scoped to reconstructed projection consumer and diagnostic seeded fixture.",
+    "Default Antialiasing0 applied to ordinary camera; user2x/4x selection tested as source but not graphically rerun here.",
+    "Core native particle cycle is implemented; native missile owner pose/scale/factors and complete original GPU blend/sampler/receiver fidelity remain open.",
+    "Optional native FXAA shader source recovered but GPU implementation still missing; full Annie kit, audio, 24 domains and complete game remain incomplete."
+  ]
+}

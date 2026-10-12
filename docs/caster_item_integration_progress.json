@@ -1,0 +1,69 @@
+{
+  "updated_utc": "2026-10-04T08:51:16.647605+00:00",
+  "passed": true,
+  "complete": false,
+  "core_tests_passed": 361,
+  "client_tests_passed": 29,
+  "unit_checks": 6,
+  "client_category_checks": 1,
+  "network_checks": 7,
+  "active_items": 25,
+  "native_item_catalog_checked": 849,
+  "files_sha256": {
+    "crates/core/src/cooldown.rs": "ba5c0952edad0d024a8e8a3342aa5edd2e92710668d4c4dab742dd25562224c1",
+    "crates/core/src/shop.rs": "055ca7a8bcce86975ca72f68bfea95e0399afd5312e8308c6de5ca1df62721e4",
+    "crates/core/src/progression.rs": "f30af3157903b2aef149136a02a82cdc57247e0ac0db31536bc61ae7c446e9e2",
+    "crates/core/src/spells.rs": "b1ffcab5f5b4ab0ddf27c7889cbfa83703780d4bd587fab3ea07fe8166e094d9",
+    "crates/core/src/lib.rs": "2d60534a0e8f2a23f1519eb68a6939d8f3b853e248079fc0d11779c9349c265d",
+    "crates/client/src/shop_ui.rs": "298aa8388527d9cdf16d5a34fd1b5da10cabcdf4795c8cb65c50e7bfbe18a7b2",
+    "data/4.20/shop_foundation.json": "148156462a7d9e30c7d765e0ad0a4f4855f768ff5eb2c5fcf47e251ae7eaff92",
+    "data/4.20/cooldown_rules.json": "f35a4ce2aee181900555993d6824fd17c61c22a2d0e63b0ebb6d613f42e68805",
+    "docs/caster_item_sources.json": "86f20ebc3fa5e442ed089d40e40d98e3a222f624114440828ef80f56d0d5b6bc",
+    "docs/caster_item_network_validation.json": "26c8581f8bc5cc1e0881468eaac205f9bb7dfb4bb5146faa0eef0eb14779b3bf",
+    "tools/recover_caster_items.py": "7aa62e09fed952448d9e9d70421d54004adc7ba280b857e071b5478f5012c0b7",
+    "tools/integrate_caster_items.py": "8ec00d1a9a8ced32043cd5d9ac70ac49aff6a3c06f21ac39a7946ee36c3cf650",
+    "tools/verify_caster_items_network.py": "e69cde6d74adcf6009ef1d86facffe33de1dbf443a45463dfabbe2a550220f30",
+    "tools/verify_native_items.py": "4d2c07050c3dcfedbd97f87363a6bdcfdb38ae09e28fac8f72a137248fe96a44",
+    "logs/caster-item-tests.log": "6ca448fe045826dafad1253dfa2dfeb41d0587a35e7483aa018d426d3d0d0e6e",
+    "logs/caster-item-build.log": "00f880e4bae203aa799f0d90a80fc096aa5bbd6824253e63ef01a5c7df67ab15",
+    "logs/caster-item-map10.png": "3e39a6934df5003a8fb24a1ca567d35b906c8599c9e2243ed944b39a7ba672f8"
+  },
+  "executables": [
+    {
+      "path": "target/debug/openleague-server.exe",
+      "bytes": 4401152,
+      "sha256": "ede6272fc632a58ecd4b9debe271325614d5f572cbf9d18865dedf503b341007"
+    },
+    {
+      "path": "target/debug/openleague-client.exe",
+      "bytes": 118090240,
+      "sha256": "3f4f3496d141bb86e331bdafff02c1a2a42b7b73033457df5c375d75b3ac5647"
+    },
+    {
+      "path": "launcher/src-tauri/target/debug/openleague-launcher.exe",
+      "bytes": 12411904,
+      "sha256": "ac22a8346c0b2af574bdee16311acc510e657c73ca5f85584223f0049c4f57de"
+    }
+  ],
+  "sources": "docs/caster_item_sources.json",
+  "network": "docs/caster_item_network_validation.json",
+  "limits": [
+    "Map10 cap directly recovered. Item10percent modifiers from native localized unique-passive descriptions; absent native flat CDR fields. Deduplication peritem and cast-time cooldown snapshot reconstructed; original server item script bodies not recovered. Summoner/item active/rune/mastery cooldown rules separate and not changed.",
+    "Eight items present/purchasable in official4.20.1 catalog; this version has no per-map flags. Map-specific release/shop restrictions require separate qualification. Remainingitems/championAP ratios/native lifecycle interactions incomplete.",
+    "AP is item-derived plus current two-altar multiplier; champion AP interactions/ratios/passives/runes/masteries incomplete. Six corechecks validate uniqueperitem/cap/recipes/cast snapshot/sale/recast/summoners/altars; clientfilter verified.",
+    "Native item numeric validation849catalog/25activeitems passed. ActualUDP verifies purchase435/recipe385/finalgold5/refund574, reduced216tickQ then240tickQ aftersale. Fresh1280x800Vulkan framebuffer inspected; no originalrenderer/audio acceptance. Full24domain game incomplete."
+  ],
+  "runtime": {
+    "checked_utc": "2026-10-04T08:49:41.400497+00:00",
+    "client": 4868,
+    "server": 17264,
+    "port": 5932,
+    "client_sha256": "3f4f3496d141bb86e331bdafff02c1a2a42b7b73033457df5c375d75b3ac5647",
+    "server_sha256": "ede6272fc632a58ecd4b9debe271325614d5f572cbf9d18865dedf503b341007",
+    "diagnostic": true,
+    "complete": false,
+    "shop_query": "codex",
+    "shop_preview_item": 3108
+  },
+  "live_receipt": "docs/caster_item_live_validation.json"
+}

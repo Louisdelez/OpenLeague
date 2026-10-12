@@ -1,0 +1,63 @@
+{
+  "updated_utc": "2026-10-06T23:16:59.297746+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "core_tests_passed": 566,
+  "simple_pose_cpu_cases": 112,
+  "simple_frame_particles_native_cases": 384,
+  "simple_frame_particles_rust_qualified": true,
+  "simple_birth_cpu_cases": 48,
+  "simple_birth_insertion_append_qualified": true,
+  "simple_birth_insertion_policy_qualified": true,
+  "simple_birth_insertion_native_cases": 80,
+  "insertion_adapters": [
+    "Virtual height provider58 captures X/Z/Y and returns supplied height2 through actual FLD/RET12 stub. Real height provider unqualified."
+  ],
+  "real_terrain_height_provider_qualified": false,
+  "normal_emission_qualified": false,
+  "pose_modifier_qualified": false,
+  "ordinary_emitter_consumer_bound": false,
+  "ordinary_applications_rebuilt": false,
+  "artifacts_sha256": {
+    "crates/core/src/native_simple_pose.rs": "2600b8261fcfacef01e99f4e4fd5ff43c825cb7592cd83e3077a136682992732",
+    "crates/core/src/native_simple_concrete_frame.rs": "ecdfc7502995a2bbaf6ef5538bd9753bdd44805bef0c4d87d5027afa4f42aeff",
+    "crates/core/src/native_simple_frame.rs": "7d709037d41d2721ec85c721deeb3ea8a0d62ae4e30a8b813395666d2c292ea9",
+    "crates/core/src/native_simple_control.rs": "6eff226ed70466372548475280b191ffd34ba29db4b7f10284c7fc4613b1ce6a",
+    "crates/core/src/native_simple_auxiliary.rs": "c27beb131d8979f99175f7f828b32f11e5e9a436a7a169a25977a9683f0667de",
+    "crates/core/src/native_simple_animation_policy.rs": "b2a84e42e46689128e8c5c85482afc257ad314f1f119a716ebdc67a02d56903d",
+    "crates/core/src/native_simple_finish.rs": "d9b6ad92ec9fe3ccd3dee25d075bf78f796ae0c46a1bba925296fdeb93afd606",
+    "crates/core/src/native_simple_particle_update.rs": "afbe2f1cf544cfdbc20e368e38c98454513a14b7b1709bce5873e47f1582430c",
+    "crates/core/src/matrix_inverse.rs": "52a066486bb9913bde555087157666b6feba0ff100e6143fb3dcba22b07a4a68",
+    "crates/core/src/lib.rs": "5a9c3f5567760cf96bab599c7650f241ac37c263d4d01d64c329ea003962fea3",
+    "crates/core/src/native_scalar_parameter.rs": "66cf15389c1c49ca0474dc6a3ac6890a1ceed7c50fba67284b470465673447f1",
+    "crates/core/src/native_probability_curve.rs": "e6d275b5d10ee0253214c2a631c863567f4f061c456296fba1f6aa8e0b8dfd6e",
+    "data/4.20/simple_birth_insert_contract.json": "d0440d114d4a3d71585476ec952ee6fbb209dad28ad2aa450bf78140e8680319",
+    "tools/probe_native_simple_birth_insert.py": "4da002647150127765af6d33d3f93d157ee80e670370612019a0f25999c73dad",
+    "crates/core/src/native_simple_birth_insert.rs": "24cd21a68f7bb60366772002160d43f1dc7768d1e77f8fa4c792a972102ad68d",
+    "crates/core/src/native_simple_scalar_phase.rs": "134b5e68ec333645ef3efb39ddfa0d6fbe18a925bbc607f9c0366b0bfaa06ada",
+    "crates/core/src/native_random.rs": "3937914287799461892e1afba53a5f9e49cdca4da2d7180a59a074cbe7bbba58",
+    "data/4.20/simple_birth_cpu_contract.json": "bfbd335b19a8ef1a6896b7295ca25701b5ecdc19d333f0e14d7e02088f4f46e5",
+    "tools/probe_native_simple_birth_cpu.py": "9991aee93d534413989697dc66641419288c464777c47ececdf73590bd0a75a2",
+    "docs/native_simple_concrete_frame_progress.json": "5e23e706743a3670fdbc08fca57f9b4d8b3a3df2e42e52d18b4e84fcef549075",
+    "data/4.20/simple_frame_particles_contract.json": "4963eed048dcd5bab04a5bf6ff2af51cd117a61bb3a4aa1e8a228739e3938c8d",
+    "data/4.20/simple_attachment_cpu_contract.json": "501651c3497ae4bce9fdc5436ea40a3b4f45dbd80c366b16481502f97ebb09d0",
+    "tools/probe_native_simple_frame_particles.py": "24b8275233a01b2b47d7e1dc97d8908de1574b8c7c92fc43f241488792b52b5c",
+    "tools/probe_native_simple_attachment_cpu.py": "a5c4dd7a063d175c237440f965f70b6909c158252c4a1f42ce982207767628c6",
+    "logs/native-simple-birth-insert-core-tests.log": "459b04e8d37faf23e395ac9e1f313149324687bf81dfd9b87809276f744af25f",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "738ec92afd88120e29fbbaa23cfa1baeba78d865349c04f2ad69e05077b18a66"
+  },
+  "findings": [
+    "Original whole941F00 emitted48 selected burst cases with all13 arrays and RNG captured:4296 actual CPU SSE operations and zero VM/CPU differences. Native943CD0 Rust append insertion matches all arrays and caller birth draws/RNG. Rust943CD0 additionally matches80 direct native cases with first expired slot reuse, NaN age skip, null/constant/fast/generic scale probabilities and height provider X/Z/Y arguments.380 CPU SSE operations, no VM/CPU differences. Height provider controlled; real terrain source remains incomplete.",
+    "Rust943300 cold and warm owner matrices match112 native CPU cases, including previous matrix and inverse retention. Optional93BBD0 source remains an explicit callback with error propagation.",
+    "Rust9437E0 now composes actual owner pose and entire944E20 consumers, auxiliary/animation policy and final pose inverse/end state.384 warm-owner end-of-life cases match all captured particle/emitter arrays and outer call order bit for bit.",
+    "Owner previous matrix and inverse are synchronized to final owner writes for subsequent updates. State and RNG commit together after success; external source/observer effects cannot be rolled back.",
+    "Native384 fixture executes actual bodies with80672 hardware scalar SSE operations and960 conversions, no endpoint adapters and zero VM/CPU differences."
+  ],
+  "limits": [
+    "Whole9437E0 executes actual943300 pose producer and whole944E20 particle update plus native final pose inverse and finish. Selected warm emitter, owner-end flag10 and strict expired threshold0 skip emission; animation/helper resources null. Particle attachment, linear movement, scalar/probability/attribute, bounds and tail bodies execute. Explicit preallocated arrays, poses and resources. Selected null force resource, linear motion, constant/no probability, terrain disabled profiles; generalized composition remains incomplete.",
+    "No resource producers or ordinary rendered gameplay acceptance. Finite selected matrices; actual hardware scalar SSE/conversions, default FP mode.",
+    "Selected end-of-life profiles suppress emission; no non-null helper, modifier or animation source qualification in these384 cases.",
+    "Normal emission, actual allocation/birth production, system bone pose, terrain provider, rendered/audio acceptance and ordinary executable integration remain incomplete.",
+    "No complete champion, task or domain is claimed."
+  ]
+}

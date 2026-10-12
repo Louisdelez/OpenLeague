@@ -1,0 +1,39 @@
+{
+  "updated_utc": "2026-10-07T07:52:39.755264+00:00",
+  "complete": false,
+  "passed": true,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_cases": 40,
+  "native_frames": 120,
+  "native_instruction_addresses": 1265,
+  "focused_core_tests_passed": 2,
+  "prior_stop_dispatch_profiles": 120,
+  "full_suites_rerun": false,
+  "client_owner_acquisition_integrated": false,
+  "current_runtime_capture": false,
+  "artifacts_sha256": {
+    "data/4.20/projectile_owner_acquisition_contract.json": "ab5c0e038f13603167b322594f1b00b0b532fe2b9040293a486eddb75897f43e",
+    "tools/probe_native_projectile_owner_acquisition.py": "9e4184d2ff7abbe085f56d0813ad568c1ab129608d31e6a5aabbe9cebf6a346b",
+    "crates/core/src/native_projectile_stop_dispatch.rs": "d91a040e63804ee9f0d03a94bd97a6f2bcdbe3827e40ce5b6e034b7135194b5c",
+    "logs/native-projectile-owner-acquisition-tests.log": "c991f041c1ac5f812ba75f0516de033125175e6b01dac1c2bab6a6af50dde74f"
+  },
+  "findings": [
+    "Failed concrete owner acquisition sets wrapper124=1 but returns true for that update; subsequent update returns false even if supplied owner becomes live again.",
+    "An absent provider does not terminate the wrapper and preserves its position.",
+    "Expired resource rejects update before owner eligibility and does not mark wrapper ended.",
+    "Rust wrapper gate matches the original initial gate, termination marker, returned result and guarded position-update conditions over120frames."
+  ],
+  "adapters": [
+    "Inherited factory allocation/resource/container/collision adapters from projectile_factory_pose_contract.",
+    "Original concrete weak-reference lock and provider callbacks execute. Supplied control-block strong counts exercise acquired/expired states; lifetime producer and concurrent ownership remain open.",
+    "Three frames per sequence; registry scheduling and destruction are not executed."
+  ],
+  "limits": [
+    "No full resource-manager, owner lifetime producer, registry scheduler, or client rendering acceptance.",
+    "Client still supplies network disappearance as a controller-end trigger. Concrete weak-owner acquisition/loss is not yet connected to the graphical consumer.",
+    "Other bound-wrapper pose/property callbacks are not covered by this gate port.",
+    "Prior v19 graphics retain their original hashes; no new graphical build or current runtime qualification claimed.",
+    "Zero accepted domains; complete24domain114task objective preserved."
+  ],
+  "next_action": "Raccorder les transitions natives du propriétaire et qualifier les drapeaux/statuts et l’ordonnancement de la projection d’Annie ; poursuivre les 24 domaines et 114 tâches du plan complet."
+}

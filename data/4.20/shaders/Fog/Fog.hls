@@ -1,0 +1,39 @@
+// This module is intended for use by VERTEX SHADERS 
+// TODO:  Rename the file to clearly convey that fact?
+
+
+// NOTE:  The fog computed here should probably be rolled in with the "fog of war" system which is also implemented in most of 
+//        our shaders and already provides for artist control and placement of tinting and opacity variations.
+//        SCR 5/19/2014
+
+
+//Data = heightFog_Scale {1 / (maxHeight-minHeight)}, -minHeight*scale, radiusScale {1 / (radiusMax-radiusMin), -radiusMin*scale
+//	   = opacity, -1 / (maxOpaqueHeight-minOpaqueHeight), 1 + minOpaqueHeight/(maxOpaqueHeight-minOpaqueHeight), ?
+float4 c_fogData[2] : register(c236);   // R3D_SHADER_VS_CONSTANT_FOG_PARAM
+
+//Make sure the Cooker can see these values.
+#ifdef VERTEX_FOG
+#endif
+
+#ifdef FOG_PIXELSHADER_BLEND
+#endif
+
+//Adds approximately 10 vertex shader ALU instructions.
+float ComputeFogValue(float4 projPosition, float3 worldPos)
+{
+	//density based on the "horizontal" distance from the center.
+	//position in screen-space:
+	float2 scrSpacePos = projPosition.xy / projPosition.w;
+	//1 - d^2 should be good enough (hopefully).
+	float scrSpaceDist = saturate( 1.0f - dot(scrSpacePos, scrSpacePos) )*c_fogData[0].z + c_fogData[0].w;
+	
+	//density also based on the height from the "ground" plane.
+	float heightFogOpacity = saturate( worldPos.y*c_fogData[0].x + c_fogData[0].y );
+	float FogOpacity = max( heightFogOpacity, scrSpaceDist );
+	return lerp(c_fogData[1].x, 1.0f, FogOpacity);
+}
+
+float ComputeFogOpaqueLayer(float3 worldPos)
+{
+	return worldPos.y*c_fogData[1].y + c_fogData[1].z;
+}

@@ -1,0 +1,25 @@
+{
+  "verified_utc": "2026-10-08T05:49:04.391929+00:00",
+  "complete": false,
+  "native_cases": 360,
+  "entry": "5B56B4..5B56C6 -> 6C96F0 -> original928440/928460",
+  "change": "animation_start ORs wrapper bit1 before transfer. Wrapper updates regardless of weak target; absent target leaves target flags and requests unchanged. Existing flags preserved; alive setter marks request800.",
+  "tests": {
+    "command": "cargo test -p openleague-core audio_emitter_flags --offline -j1",
+    "session": 77357,
+    "passed": 2,
+    "failed": 0,
+    "filtered": 661,
+    "exit_code": 0
+  },
+  "files": {
+    "tools/probe_native_audio_emitter_start_flags.py": "c8f46a4e67b29d52e8c456e8345c8d8c29af3263969127ac5ac82a187eac0d62",
+    "data/4.20/audio_emitter_start_flags_contract.json": "4302c7e313b3e3c291a16fcbcf723b07328d545647651dfdbe0f305787e9f5d8",
+    "crates/core/src/audio_emitter_flags.rs": "eec874153919e60cefab3e291e1028cee99cb79e470170963e9387bb6d44b2c2"
+  },
+  "limits": [
+    "Factory return wrapper supplied, initial wrapper values varied rather than qualified from construction.",
+    "Weak lock adapted; no ownership counter supplied.",
+    "Full animation callback, normal Bevy consumer and physical audio remain unintegrated."
+  ]
+}

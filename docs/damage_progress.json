@@ -1,0 +1,41 @@
+{
+  "updated_utc": "2026-10-03T02:24:20.288345+00:00",
+  "complete": false,
+  "current_server_sha256": "d9ac236f5b922a167e5c35ea4f8dd34b62a4e3c5a745dc0d8861712d3200f7e4",
+  "implemented": [
+    "Explicit physical, magical and true damage kinds",
+    "Shared physical/magical resistance math for champion and world targets",
+    "True damage bypasses armor, magic resistance and ordinary reduction in the server event API",
+    "Actual health removed and lethal result returned; overkill is clamped",
+    "Invalid source/raw damage rejection; zero damage does not provoke neutral aggro",
+    "Existing champion death, NPC rewards and structure protections preserved"
+  ],
+  "evidence": [
+    "../logs/core-tests.log",
+    "network_validation.json",
+    "regeneration_network_validation.json"
+  ],
+  "tests": {
+    "core": 54,
+    "protocol": 16,
+    "real_combat_and_recovery": 7
+  },
+  "reference_sources": [
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\GameServer\\GameServerLib\\GameObjects\\Stats\\Stats.cs",
+      "sha256": "dcdb36eb5c2d1fd67fd41cd06d14c390afb5269d97e1f8c49a40c8cf90122c2e",
+      "classification": "Supplied community engine reference; not native original server script"
+    }
+  ],
+  "source_discrepancies": [
+    "Community negative-resistance implementation differs from the existing corrected formula; native runtime qualification remains necessary.",
+    "Fountain turret reference applies 1000 true damage while native definition contains 999 damage; current fountain special attack behavior remains unqualified and has not been silently changed."
+  ],
+  "remaining": [
+    "Penetration and armor/magic-resistance reduction order",
+    "Shields, invulnerability and special per-ability modifiers",
+    "Lifesteal, spell-vamp, item effects and champion-specific true-damage spells",
+    "Native runtime fidelity of mitigation and reduction rules",
+    "Complete damage event replication and visual/audio feedback"
+  ]
+}

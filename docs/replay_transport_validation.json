@@ -1,0 +1,55 @@
+{
+  "saved_utc": "2026-10-10T12:05:51.634349+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "native_worker_cases": 40,
+  "native_release_cases": 32,
+  "native_network_profiles": 5,
+  "native_enabled_stream_open_close_cycles": 1,
+  "real_windows_crt_transport_workers": 6,
+  "isolated_tests_passed": 148,
+  "core_audio_tests_passed": 705,
+  "core_tests_filtered_not_run": 480,
+  "native_source_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "core_test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_core-5b2a9def275dcedd.exe",
+  "core_test_executable_sha256": "a6449db37d66a5792b8e9e7e5836518d357644ab9df8058cd9b3107d09bd76d9",
+  "isolated_test_executable_sha256": "d9043896c201ce0a389a1cc151ac8e62e85109aa2d38d3d7e28d38021e3e1504",
+  "source_hashes": {
+    "crates/core/src/audio_replay_transport_startup.rs": "a109497803441d8120a41efb0c37494b9b866d00759286ce70272101dbf0ff1a",
+    "crates/core/src/audio_replay_transport_startup_tests.rs": "b76a680a01c30ea5636c30111ac6756b7d03326546615e31a82dc275bfd2b1bc",
+    "crates/core/src/audio_replay_transport_thread_tests.rs": "776ec1945a3599dd63309a355f95fa5d4b51ff671f49d16bf6ea041a34873452",
+    "crates/core/src/audio_crt_windows_root_startup.rs": "55be6a8f93ce61fb8719f07710f3cec0e850299274a3c76a99f6604990a774d2",
+    "crates/core/src/audio_crt_windows_worker_thread.rs": "9189dbf723d85bcd85768e194982be3c4f0744c567724e68fab0c6ebc933a9bb",
+    "crates/core/src/audio_crt_worker_packet.rs": "1f78edbda03d4c6689d5f751cac8922afdb29aa0b3f85da141dc99ea337006f9",
+    "crates/core/src/lib.rs": "035dd4d1543428c780f4b3ce76a81efa0ba8701dbcd9ed24319addd2fd877ee3",
+    "tools/probe_replay_transport_threads.py": "8bdfc52db124cbc2291a522b76d0b10ad1004f16d3f20aaec456ba2d9e20c5c9",
+    "tools/qualify_replay_transport_startup.py": "9f33c952b26028c4b008a062f9f3b3edba3eee3b31e53134b12c97420982adcc",
+    "tools/replay-transport-tests.rs": "17359acd3c0a4b00873d1ab09577613e9ba4d031a11c4a6bd77a4e7ebc70f19a"
+  },
+  "contract_hashes": {
+    "replay_transport_startup_contract.json": "8d0a06f5c75ba440e8ecc242287c1d8327911a6af814948469f99177c3f75ba1",
+    "replay_transport_thread_probe.json": "e1fca4157b0e96698bc15a8b7736bb76b51e34099991c5c01417c8c9a471e0f1"
+  },
+  "log_hashes": {
+    "logs\\replay-transport-tests.log": "5592c0f0345c83d98e096e2b1aa5cc483d92052c2700cbb6be007b7e3ac52f28",
+    "logs\\core-replay-transport-tests.log": "cb5933052598e4b372488d345a4fe7c73677b2088b832d95f99449472090223b",
+    "logs\\replay-transport-build.log": "175e50e0a30bd7b698fd011fbf99e9eba76175b0aea262fc78344bfc52f3b6a6"
+  },
+  "behavior": [
+    "Native enabled stream opening now returns0/state3 after real PE32 worker body, logical parent/child scheduling, per-thread TLS, validated naming exception scope and execution of its original filter/handler, full CRT cleanup, parent wait and owned handle closure. Numeric IPv4 parsing executes natively; WSAAddressToStringA formatting is measured on the real host. No transport success global is forced.",
+    "After stream destruction the native global transport reference and logger remain live. Explicit8FC500 release followed by registered901C00 logger cleanup restores all allocations beyond the original CRT baseline. A stream lifetime is not the lifetime of global Winsock initialization.",
+    "Rust8FC100/900E00/8FC500 preserve cleared counters, installed allocation callbacks, atomic status publication, existing-reference shortcut, wrapping32-bit counters, signed diagnostics, mutex/logger order and Win32 error/version handling. Native timer and cleanup return codes are intentionally ignored where the original ignores them. Boundary failures remain explicit and release already-acquired logical mutex scopes.",
+    "The owned WindowsNetwork adapter calls actual WSAStartup/WSACleanup/timeBeginPeriod/timeEndPeriod using the correct host WSADATA layout and tracks its owned resources. Integration tests reuse existing root/packet/FLS/CreateThread adapters:6 fresh CRT roots execute the ported worker through the registered native-body callback, retire worker TLS/COM/storage, wait twice, close each physical handle exactly once and release global network/timer resources."
+  ],
+  "limits": [
+    "The native full-opening proof covers one supplied numericIPv4/no-resource-file configuration. CreateThread/Wait/Exit, low-level mutexes and Winsock outcomes are explicit emulation boundaries; the actual native bodies execute. The naming exception boundary is limited to its validated EH4 scope and is not a general Windows unwinder. No socket traffic, replay recording playback or live simulation events were exercised.",
+    "Rust generic global worker/release routines and real Windows networking are implemented. Engine launch/join wrapper8FC380/8FC480, stream configuration8F68D0, concrete client global lock/logger ownership, callback bundle and metadata remain to integrate. Test global storage is exclusively owned and captures logical locks; this is not a shared-global concurrency qualification.",
+    "The normal client executable was not rebuilt or graphically retested and still does not deliver replay frames.148 isolated tests and705 selected core tests passed;480 core tests were filtered. No full domain, champion or game completion is claimed."
+  ],
+  "next_action": "Port and integrate enabled stream8F68D0 configuration and engine launch/join wrapper8FC380/8FC480 using the existing real CRT worker packet/root/Windows thread adapters. The native opening probe now executes actual C9C3DC/C9C439/C9C315/8A8F90/8FC100/C9C356 on a separate emulated worker stack, validates thread naming EH4 scope/filter/handler, joins and closes the worker, configures supplied numeric IPv4 and reaches state3/return0. Stream destruction leaves global transport reference1 and logger alive; explicit8FC500 global release and901C00 logger shutdown restore baseline allocations. Rust8FC100/900E00/8FC500 now match40 worker banks,32 releases and5 negotiation profiles;6 real Windows CRT worker lifetimes execute the new Rust worker through the actual registered callback and balance TLS, COM, process heap, handles, Winsock and timer resources. This does not yet wire replay frames into the normal client. Implement8FC230/8FC610/8FCA30 and actual configuration/key setup,5BD470 copy assignment, callback bundle and metadata727DE0 to complete manager728E20/728FD0/728EE0. Preserve native status2 after final global release, separate global lifetime ownership, signed diagnostics and ignored timer/cleanup return codes; do not infer reference ownership from status alone. Engine lock/logger runtime adapters, real resource/network I/O and frame/event delivery remain explicit integration work. Continue graceful graphical AppExit, configuration overlays/cache, actor listeners, maps/champions/audio and all24domains114tasks37requirements."
+}

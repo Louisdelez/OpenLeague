@@ -1,0 +1,59 @@
+{
+  "complete": false,
+  "passed": true,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "cases": [
+    {
+      "queued": false,
+      "resource_live": false,
+      "events": [
+        "cleanup_after_registry_removal",
+        "destructor"
+      ],
+      "stop_requests": 0,
+      "wrapper_link": 1073774592
+    },
+    {
+      "queued": false,
+      "resource_live": true,
+      "events": [
+        "cleanup_after_registry_removal",
+        "destructor"
+      ],
+      "stop_requests": 1024,
+      "wrapper_link": 0
+    },
+    {
+      "queued": true,
+      "resource_live": false,
+      "events": [
+        "cleanup_after_registry_removal",
+        "destructor"
+      ],
+      "stop_requests": 0,
+      "wrapper_link": 1073774592
+    },
+    {
+      "queued": true,
+      "resource_live": true,
+      "events": [
+        "cleanup_after_registry_removal",
+        "destructor"
+      ],
+      "stop_requests": 1024,
+      "wrapper_link": 0
+    }
+  ],
+  "findings": [
+    "Whole717AF0 removes queue/init/active memberships and slot before original6C9360 cleanup.",
+    "Live resource receives400 stop request, expired resource does not; destructor invoked afterward and count decremented."
+  ],
+  "adapters": [
+    "Final virtual8 destructor intercepted; wrapper heap/free and spatial teardown excluded.",
+    "Empty name index and visibility list; preallocated vectors, supplied registry and resource weak counts."
+  ],
+  "limits": [
+    "Frame-phase ordering relative to particle simulation remains open.",
+    "No general destructor, memory lifetime or graphical acceptance claim."
+  ]
+}

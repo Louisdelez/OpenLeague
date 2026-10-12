@@ -1,0 +1,86 @@
+{
+  "updated_utc": "2026-10-05T21:14:54.150543+00:00",
+  "complete": false,
+  "native_atoi_cases": 1962,
+  "native_atoi_addresses": 202,
+  "native_value_reader_cases": 1440,
+  "native_value_reader_addresses": 475,
+  "integer_numeric_and_reader_ported_to_rust": true,
+  "configuration_text_parser_qualified": false,
+  "actual_user_file_loaded": false,
+  "live_user_options_bound": false,
+  "native_game_config_recovery": {
+    "updated_utc": "2026-10-05T21:13:34.677426+00:00",
+    "complete": false,
+    "source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\CFG\\defaults\\Game.cfg",
+    "source_sha256": "02c41cb9a5068f8bc993435557fd7b159bddbcda1f022605d284d9ea51d72b0e",
+    "bytes": 14789,
+    "destination": "E:\\OpenLeague\\data\\4.20\\configuration\\defaults\\Game.cfg",
+    "destination_sha256": "02c41cb9a5068f8bc993435557fd7b159bddbcda1f022605d284d9ea51d72b0e",
+    "byte_exact": true,
+    "performance_raw_lines": [
+      "[Performance]",
+      "GraphicsSlider=3",
+      "CharacterQuality = 3",
+      "EffectsQuality = 3",
+      "EnvironmentQuality = 3",
+      "ShadowsEnabled = 1",
+      "ShadowQuality = 1",
+      "AutoPerformanceSettings=1",
+      "FrameCapType = 2",
+      "skUpdateIAtoBFPS = 0.16667",
+      ""
+    ],
+    "parser_qualified": false,
+    "loaded_by_runtime": false,
+    "limits": [
+      "Default source file recovered byte-exactly. Performance lines recorded as raw source, not parsed/qualified values.",
+      "No user configuration in checked deploy paths; original user path initialization and text parser remain open."
+    ]
+  },
+  "client_source_tests_passed": 247,
+  "client_tests_current_binary": false,
+  "application_binary_unchanged": true,
+  "application_binary_sha256": "df190492f0160a982ac7cdfab28560f1e05a6c6a3fe4b83dbd603c769a559d5c",
+  "test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_client-d0f5517b0dbcd254.exe",
+  "test_executable_sha256": "50774a6636a4b97fe3b29051e292c7e637b4516d8189296aab9a9ed76699ce56",
+  "artifacts": [
+    "data/4.20/native_config_atoi_contract.json",
+    "data/4.20/native_integer_value_reader_contract.json",
+    "data/4.20/configuration/defaults/Game.cfg",
+    "docs/native_game_config_recovery.json",
+    "crates/client/src/native_graphics_options.rs",
+    "logs/native-config-atoi-tests.log",
+    "logs/native-integer-value-reader-tests.log"
+  ],
+  "hashes": {
+    "data/4.20/native_config_atoi_contract.json": "1750798b96aec7762d18d0886c166172b34fbf42af082b5cc8767e02a561edba",
+    "data/4.20/native_integer_value_reader_contract.json": "9f2b011a9571641f6b7b620118f30f7ac68a7ad9f18b495a7f5d8e732c231b11",
+    "data/4.20/configuration/defaults/Game.cfg": "02c41cb9a5068f8bc993435557fd7b159bddbcda1f022605d284d9ea51d72b0e",
+    "docs/native_game_config_recovery.json": "a840255a9d92c12694ed1255319af2d630e6252475cf2f9b5946c78f05f61c66",
+    "crates/client/src/native_graphics_options.rs": "d57eb0e1f28c09be8607f64169e0ba32d00db65b732027c32854ab44036c9569",
+    "logs/native-config-atoi-tests.log": "94d98492432586fe3ed8b881c6cc7b04b6e9baa231d8578d1a229fd09966f4d2",
+    "logs/native-integer-value-reader-tests.log": "c83c92ddcb02700276ae1174153702810ee1ee87fad6d15649ad53857b5ab2a3"
+  },
+  "findings": [
+    "Actual native CRT atoi/strtol wrapper and C-locale character classification execute unchanged from original PE default locale.",
+    "Base10 parses optional sign/ASCII whitespace and digit prefix, stops at nondigit/NUL, returns0 without digits. Overflow saturates signed32 and sets ERANGE34; success preserves supplied errno.",
+    "All256 possible leading byte values included, plus signed boundaries, long overflows, suffixes and embedded NUL.",
+    "Original integer reader enabled/typed/text branches, found-flag composition and C-locale numeric conversion execute.",
+    "Text true (case-insensitive ASCII exact literal) produces1; whitespace around true is not removed by this reader. Numeric prefixes and overflow follow native CRT rules.",
+    "Existing typed result is formatted as text fallback; found success is OR of typed and text reads. Without text, only binary-enabled path attempts typed lookup."
+  ],
+  "limits": [
+    "Native CRT numeric conversion scope; original8AF830 true-string fallback and typed/text configuration reader/cache remain open.",
+    "Static original C locale; alternate locales, file parsing/encoding, user options and complete game acceptance unqualified.",
+    "Value-reader composition scope; file/cache/typed lookup and entire configuration pipeline still open.",
+    "Static C locale only; no actual user configuration/menu/persistence or original framebuffer/game completion proof."
+  ],
+  "adapters": [
+    "CRT errno accessorC9B780 returns supplied thread errno cell; thread allocation/access not executed.",
+    "Typed8AE340 and text8AE0E0 lookup boundaries supply fixtures; original storage/parser lookup not executed.",
+    "CRT%d formatting, cookie validation and errno accessor adapted; actual atoi/strtol, lower-case transform and string comparison execute unchanged.",
+    "Configuration flags and short/long string storage supplied; original population/encoding not qualified."
+  ],
+  "next_action": "Qualifier le parseur texte et le cache de configuration8ACEF0, initialisation du chemin utilisateur et lookup8AE0E0/8AE340. Game.cfg original récupéré byte-exact :14789octets, Performance/EnvironmentQuality=3 en source brute ; pas encore chargé au runtime. Conversion CRT1962cas et lecteur entier1440cas portés en Rust ;247tests des sources passent, exécutable df1904 antérieur. Relier ensuite fichiers réels, menu/persistance, variantes/LOD/matériaux ; reconstruire et vérifier profils bas/haut en frame. Puis passe Wall_of_Grass/options globales, référence/rendu Chaos, cérémonie/audio/sbires, reconnexion, résultats/launcher, partie ordinaire à six clients graphiques et les24domaines."
+}

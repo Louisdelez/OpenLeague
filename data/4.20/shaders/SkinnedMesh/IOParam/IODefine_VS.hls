@@ -1,0 +1,48 @@
+
+// Set for each tree
+column_major float4x4 mProj         : register(c0);
+column_major float4x4 mWorld        : register(c4);
+column_major float4x4 mShadowProj   : register(c8);
+
+// general parameters
+float4   vCamera  	    : register(c12);
+
+// Specific for light 
+float4   vLightColor  	: register(c14);
+float4   vLightVec1  	: register(c15);
+
+float4   vCloudsParam  	: register(c231);   // R3D_SHADER_VS_CONSTANT_CLOUDS_PARAM
+float4   vUVTransform	: register(c232);
+
+// Reflection Parameters
+float4  vReflection       : register(c238);
+float4  vReflectionFColor : register(c239);
+
+/// Light positions with attenuation factor in W component of position
+// Set from R3D_SHADER_VS_CONSTANT_POINT_LIGHTS_POSITION in C++ code
+float4 	POINT_LIGHTS_POSITION[4] : register(c240);  // NOTE:  Overlapped with LIGHTGRID_COLORS
+
+/// Light colors
+// Set from R3D_SHADER_VS_CONSTANT_POINT_LIGHTS_COLOR in C++ code
+float4 	POINT_LIGHTS_COLOR[4] : register(c244);     // NOTE:  Overlapped with LIGHTGRID_COLORS
+
+//Light grid, alternative to the point lights above...
+// Set from R3D_SHADER_VS_CONSTANT_LIGHT_GRID_CUBE_COLORS in C++ code
+float4  LIGHTGRID_COLORS[6]   : register(c240);     // NOTE:  Overlapped with POINT_LIGHTS_POSITION and POINT_LIGHTS_COLOR
+
+// Fresnel Parameters
+// set from R3D_SHADER_VS_CONSTANT_FRESNEL in C++ code
+float4  vFresnel       : register(c248);    // FresnelRed, FresnelGreen, FresnelBlue, FresnelPower
+
+
+#if IS_OPENGL
+	#define blendindex float
+	#define blendindex2 float2
+	#define blendindex3 float3
+	#define blendindex4 float4
+#else // #if IS_OPENGL
+	#define blendindex int
+	#define blendindex2 int2
+	#define blendindex3 int3
+	#define blendindex4 int4
+#endif // #if IS_OPENGL

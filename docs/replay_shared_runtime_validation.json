@@ -1,0 +1,70 @@
+{
+  "saved_utc": "2026-10-10T13:12:41.727822+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "real_shared_runtime_workers": 9,
+  "concurrent_status_gate_calls": 48,
+  "real_debugger_exception_name_threads": 8,
+  "native_input_regions": 7,
+  "core_audio_tests_passed": 716,
+  "core_tests_filtered_not_run": 480,
+  "native_source_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "core_test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_core-49a622d61db58080.exe",
+  "core_test_executable_sha256": "c75e35c7c0a334b5526dddbad385cf096f639fe6fd3a65ac57772aba734fc0cb",
+  "seh_library": "E:\\OpenLeague\\target\\debug\\build\\openleague-core-942e0bc84a34c5f9\\out\\openleague_thread_name_seh.lib",
+  "seh_library_sha256": "f3da111f5dd7c28ce09bf1924bec3c722a7d54229c2a16bfa6c49e0997e4d99f",
+  "source_hashes": {
+    "crates/core/src/audio_replay_windows_transport.rs": "daf6a968f746f7623c07a220d54dea1ff11d05181448a8dc19e7452aa0bf3edc",
+    "crates/core/src/audio_replay_windows_transport_tests.rs": "cf88de5d4f89fdf1ec0f3df5834d76ac09c47c96a39006c686f8bb5f614b97d5",
+    "crates/core/src/audio_windows_engine_thread_name.rs": "bf1ea74eb69e1dd9d7b929039b029e96ca87097fb10e18aae43b5f18ca83ad9c",
+    "crates/core/native/thread_name_seh.c": "0aaf9bd468ccf4082f9c503a392a548d109e86b701909ccf52cc10a848f8181b",
+    "crates/core/build.rs": "eb3b1155ffd2a99c32a16b3ac13f4fdaad0e064c13164b145df1e0a962443597",
+    "crates/core/Cargo.toml": "bee91c89a524a387984a5f1e395d620c7d51df6c2eb42b801e1ee24c6dd5e62c",
+    "Cargo.lock": "73ed40f1b04eb1accc68a37a9bbc821766478f989a6181cd3f2d6f5969f572b0",
+    "crates/core/src/audio_crt_windows_root_startup.rs": "7f599d2b8b367384482801b18495ed25240bc787428a5039d73b9c74bec2f1c4",
+    "crates/core/src/audio_crt_windows_engine_worker.rs": "8494b76eeb6be93347393f4f979ae08cfc4e15b44f2bc814ceb7b7fc956e1998",
+    "crates/core/src/audio_replay_engine_thread.rs": "abaf2b4975ebe9fde1e336d9c939e6ceebba74a46211ded649bda73f7f5fa40d",
+    "crates/core/src/audio_replay_transport_thread.rs": "0660c3aa2951295ded87bd711db3a89fb20cd5a7ba64de3d33c2bd4e84eb4713",
+    "crates/core/src/audio_replay_transport_startup.rs": "a109497803441d8120a41efb0c37494b9b866d00759286ce70272101dbf0ff1a",
+    "crates/core/src/lib.rs": "e2b3a222fc51740f466a47309632351f1fc77ffa02802e1bb6ac77f21b574421",
+    "tools/qualify_replay_runtime_globals.py": "9fcfd8db5e0fc26b800b37f3da333de87c4fb1d022efe20166a82e6e72d8b06e",
+    "tools/install_replay_shared_runtime.py": "acd91849d2fb074954a5861d965d2e9ef5f56f6f26f744a2bda5ec388d785faa",
+    "tools/record_replay_shared_runtime.py": "6c3eac19910979744ac34f228cc9252158ab919e93ef87e72521a88037206d39",
+    "tools/probe_replay_logger_lifetime.py": "a059ce0b377f39b14015a8409255f0d7e3df415d7f2088d6fd8de9f9278d305e"
+  },
+  "contract_hashes": {
+    "replay_runtime_globals.json": "4067611235481afb500a6baee81a7fa1fd5ce6dd38b382b7f4f63240fef8651c",
+    "replay_logger_lifetime_probe.json": "e1756faed235a7345d9a08fd887a2cf27e678c55db75225746e97d29fe1bd79b"
+  },
+  "log_hashes": {
+    "logs\\core-replay-shared-runtime-tests.log": "8612f026a879070e431182b6cdd6aa9114cd9ba9ef793f6624c4a2ebba819d41",
+    "logs/replay-logger-probe.log": "69751cd49e29fdccbbaff90b4e39ae62885b507d17b83f8de0d10674f14544c2"
+  },
+  "reference": {
+    "thread_naming_protocol": "https://learn.microsoft.com/en-us/visualstudio/debugger/tips-for-debugging-threads?tabs=csharp&view=vs-2022"
+  },
+  "behavior": [
+    "A production shared runtime composes existing native launch/drain, factory/capsule, CRT worker/root, Windows wait/close, shared-control disposal and global transport initialization/release. Memory operations and atomic exchanges are serialized in a canonical bank; physical critical-section guard stacks remain local to their owning thread and blocking entry never holds the bank/map mutex.",
+    "Native nonrecursive global/logger mutexes maintain the owner word; engine thread mutexes allow recursive double entry. The runtime owns actual Windows handles under separate canonical labels, removes them only after successful close, and retains errors without converting them to readiness. Control deletion reuses the verified source virtual release/scalar-delete ports.",
+    "Thread naming uses the original406D1388 debugger exception and local SEH recovery. Rust owns the C string; a small Windows/MSVC C shim provides the SEH boundary. Payload layout follows host pointer width:3 pointer-sized words on x64,4 on x86. An observing vectored handler returns CONTINUE_SEARCH;8 real threads verify that the local SEH handler recovers, with exact type/name/current-thread/flags fields. No modern thread-description substitute is called.",
+    "Six fresh CRT roots qualify complete runtime initialization, worker execution, global state publication, recursive close and thread/control/name retirement.48 concurrent API calls observe the native status2 gate and do not create extra workers or references. Explicit final release balances Winsock/timer ownership while preserving status2; repeated release is rejected by lifetime ownership, and initialize after release retains the native no-new-worker behavior.",
+    "A supplied first-call WSAStartup10093 profile is followed by actual successful Windows startup on retry. Both real workers and their controls are retired; statuses3 then2 and reference counts0 then1 match the native ports. A logger-output error leaves status1 with an explicit worker error, still returning native initialization byte1; the real CRT worker exits with a failure code and frees its resources.",
+    "Seven input banks were captured after actual531A00 and901A70/901B80/8F9000 initialization in the PE32 client. The runtime requires those native global/logger state preconditions; the qualification input describes an externally owned logger and does not fabricate a new logger callback implementation.",
+    "Sixteen complete native logger lifetimes now qualify repeated initialization, both lifecycle flags, optional callback replacement, shutdown/reinitialization, fill0/A5 and complete allocation restoration. Default573FA0 is byte-verified b001c20400: mov al,1;ret4, without output. Rust timestamp formatting and configured callbacks remain to port; do not manufacture default logging effects.",
+    "Windows adds EXCEPTION_SOFTWARE_ORIGINATE0x80 to the observed naming exception record on this host, as declared by its installed winnt.h. The observer checks continuability and payload fields, not equality between input flags and internal dispatch flags; the host padding beside the32-bit type field is not semantic data."
+  ],
+  "limits": [
+    "The shared production runtime is exercised by Windows integration tests; it is not yet attached to the normal game client. Tests build fresh CRT roots from existing native-qualified fixtures. A production initial CRT/global-image provider and application lifecycle owner remain required; the fixture JSON must not become game source data.",
+    "Logger lifetime, timestamp formatting and573FA0 terminal output are explicitly supplied dependencies. Tests capture messages or return an explicit sink error. Native logger construction and byte resources are evidenced but are not a completed Rust logging path.",
+    "Successful Windows networking and naming are real. The WSAStartup failure is an injected profile, not an observed host outage. Shared API gating is concurrent; overlapping active workers, pending-timeout shutdown and allocation/custom-allocator failures remain unqualified. Original native return/status quirks are preserved rather than used as completion criteria.",
+    "716 selected core tests passed;480 were filtered. The normal client executable was not rebuilt or graphically retested. Stream configuration, full manager/metadata/event delivery and remaining game domains are unfinished. No domain or complete-game acceptance is claimed.",
+    "The Windows/MSVC host build and exception payload were executed on x64. The x86 layout follows the source/protocol but was not built or executed in this milestone."
+  ],
+  "next_action": "Integrate audio_replay_windows_transport::Runtime into normal replay service using a production CRT-root/global-image owner and actual logger lifetime, then port configuration8FC230/8FC310/8FC610/8FC930/8FCA30 against the prepared60 native profiles. The shared runtime now composes native8FC380/8FC480, engine factory/capsule, real CRT producer/worker, physical recursive/nonrecursive mutexes, atomic canonical updates, thread-control disposal and actual Winsock/timer ownership.9 real Windows runtime workers and48 concurrent status-gate calls qualify success, supplied WSA failure/retry and explicit logger-output failure. Original naming now raises406D1388 through a small MSVC SEH shim;8 actual threads verify payload fields and recovery, using full-width host pointer layout (3 ULONG_PTR on x64,4 on x86). No SetThreadDescription replacement. Runtime input requires initialized native logger/global banks; replay_runtime_globals.json is a native qualification artifact only, not a production fixture to load. Complete901A70/901B80/8F9000/901C00 logger ownership, timestamp/static-buffer formatting and configured output callbacks;16 prepared replay_logger_lifetime_probe.json lifetimes qualify logger ownership and prove the default573FA0 callback is mov al,1;ret4 with no output and fresh CRT/global-image construction. Keep logger output explicit and do not invent success. Runtime.initialize returns native byte1 even when worker failed: inspect status/references/errors; status2 persists after final release and does not acquire a new reference. Qualify overlapping/pending-timeout shutdown and OOM/custom allocation paths before claiming full lifetime coverage. Finish enabled8F68D0 stream/key setup,5BD470 copy assignment, manager callback bundle/metadata727DE0,728E20/728FD0/728EE0 and actual replay frame delivery. Continue graceful graphical AppExit, configuration overlays/cache, actor listeners, maps/champions/audio and all24domains114tasks37requirements.",
+  "prepared_native_logger_lifetimes": 16
+}

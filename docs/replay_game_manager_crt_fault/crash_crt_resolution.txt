@@ -1,0 +1,152 @@
+C:/Windows/System32/ucrtbase.dll 0x7c49 export [('0x7b50', '_invalid_parameter_noinfo'), ('0x7b70', '_read')] function 0x7b70
+  0x7c27 call 0x7a60
+  0x7c2c mov dword ptr [rax], 9
+  0x7c32 call 0x1e650
+  0x7c37 mov dword ptr [rax], 0
+  0x7c3d mov rcx, qword ptr [r14]
+  0x7c40 add rcx, r15
+  0x7c43 call qword ptr [rip + 0xf5ea7]
+  0x7c49 mov eax, edi
+  0x7c4b mov rbx, qword ptr [rsp + 0x48]
+  0x7c50 mov rsi, qword ptr [rsp + 0x50]
+  0x7c55 mov rdi, qword ptr [rsp + 0x58]
+C:/Windows/System32/ucrtbase.dll 0x82f0 export [('0x7d40', '_fileno'), ('0x8010', 'fgetc')] function 0x82ac
+  0x82ce mov rcx, rbx
+  0x82d1 call 0x7d40
+  0x82d6 movsxd rcx, eax
+  0x82d9 lea rax, [rip + 0x131ba0]
+  0x82e0 sar rcx, 6
+  0x82e4 lea rdi, [rax + rcx*8]
+  0x82e8 mov rcx, rbx
+  0x82eb call 0x7d40
+  0x82f0 and eax, 0x3f
+  0x82f3 lea rcx, [rax + rax*8]
+  0x82f7 mov rax, qword ptr [rdi]
+  0x82fa shl rcx, 3
+  0x82fe add rax, rcx
+C:/Windows/System32/msvcrt.dll 0x1d60c export [('0x1d5a0', 'calloc'), ('0x1d5f0', 'free')] function 0x1d5f0
+  0x1d5f0 test rcx, rcx
+  0x1d5f3 je 0x1d62c
+  0x1d5f5 push rbx
+  0x1d5f6 sub rsp, 0x20
+  0x1d5fa mov r8, rcx
+  0x1d5fd xor edx, edx
+  0x1d5ff mov rcx, qword ptr [rip + 0x81c32]
+  0x1d606 call qword ptr [rip + 0x62d54]
+  0x1d60c test eax, eax
+  0x1d60e jne 0x1d627
+  0x1d610 call 0x7f10
+  0x1d615 mov rbx, rax
+  0x1d618 call qword ptr [rip + 0x62baa]
+C:/Windows/System32/msvcrt.dll 0x5f034 export [('0x53a60', 'tmpnam_s'), ('0x53cc0', 'ungetwc')] function 0x5f010
+  0x5f012 sub rsp, 0x20
+  0x5f016 test byte ptr [rcx + 0x18], 0x83
+  0x5f01a mov rbx, rcx
+  0x5f01d setne dl
+  0x5f020 test byte ptr [rcx + 0x18], 8
+  0x5f024 setne al
+  0x5f027 test al, dl
+  0x5f029 je 0x5f047
+  0x5f02b mov rcx, qword ptr [rcx + 0x10]
+  0x5f02f call 0x1d5f0
+  0x5f034 and dword ptr [rbx + 0x18], 0xfffffbf7
+  0x5f03b xor eax, eax
+  0x5f03d mov qword ptr [rbx], rax
+  0x5f040 mov qword ptr [rbx + 0x10], rax
+C:/Windows/System32/msvcrt.dll 0x514c5 export [('0x513a0', 'clearerr'), ('0x513b0', 'clearerr_s')] function 0x51478
+  0x514a7 call 0x2fa00
+  0x514ac or eax, edi
+  0x514ae jmp 0x514f6
+  0x514b0 test byte ptr [rcx + 0x18], 0x83
+  0x514b4 je 0x514f0
+  0x514b6 call 0x4b8ec
+  0x514bb mov rcx, rbx
+  0x514be mov edi, eax
+  0x514c0 call 0x5f010
+  0x514c5 mov rcx, rbx
+  0x514c8 call 0x4b6c0
+  0x514cd mov ecx, eax
+  0x514cf call 0x1e590
+  0x514d4 test eax, eax
+C:/Windows/System32/msvcrt.dll 0x51570 export [('0x513b0', 'clearerr_s'), ('0x51510', 'fclose')] function 0x51510
+  0x51550 add rsp, 0x30
+  0x51554 pop rdi
+  0x51555 ret 
+  0x51556 test byte ptr [rcx + 0x18], 0x40
+  0x5155a je 0x51562
+  0x5155c and dword ptr [rcx + 0x18], 0
+  0x51560 jmp 0x51549
+  0x51562 call 0x410f0
+  0x51567 nop 
+  0x51568 mov rcx, rbx
+  0x5156b call 0x51478
+  0x51570 mov edi, eax
+  0x51572 mov rcx, rbx
+  0x51575 call 0x41194
+  0x5157a jmp 0x51549
+CLIENT_IMPORT b'msvcrt.dll' b'fclose' 0x50b1920
+CLIENT_IMPORT b'msvcrt.dll' b'fprintf' 0x50b1928
+CLIENT_IMPORT b'msvcrt.dll' b'fopen' 0x50b1930
+CLIENT_IMPORT b'api-ms-win-crt-stdio-l1-1-0.dll' b'fopen_s' 0x50b14d0
+CLIENT_IMPORT b'api-ms-win-crt-heap-l1-1-0.dll' b'malloc' 0x50b1220
+CLIENT_IMPORT b'api-ms-win-crt-heap-l1-1-0.dll' b'free' 0x50b1238
+CLIENT_CODE 0x8501e3 nop 
+CLIENT_CODE 0x8501e4 test rax, rax
+CLIENT_CODE 0x8501e7 je 0x8501ff
+CLIENT_CODE 0x8501e9 mov qword ptr [rsi + 8], rax
+CLIENT_CODE 0x8501ed mov qword ptr [rsi], r13
+CLIENT_CODE 0x8501f0 mov rcx, rbp
+CLIENT_CODE 0x8501f3 call 0x90aa10
+CLIENT_CODE 0x8501f8 nop 
+CLIENT_CODE 0x8501f9 mov rcx, qword ptr [rbp - 8]
+CLIENT_CODE 0x8501fd jmp 0x850247
+CLIENT_CODE 0x8501ff mov rcx, rbp
+CLIENT_CODE 0x850202 mov rdx, r14
+CLIENT_CODE 0x850205 xor r8d, r8d
+CLIENT_CODE 0x850208 call 0x942110
+CLIENT_CODE 0x85020d nop 
+CLIENT_CODE 0x85020e mov r14, qword ptr [rbp - 8]
+CLIENT_CODE 0x850212 mov rcx, r14
+CLIENT_CODE 0x850215 xor edx, edx
+CLIENT_CODE 0x850217 xor r8d, r8d
+CLIENT_CODE 0x85021a call 0x4e82950
+CLIENT_CODE 0x85021f mov rcx, qword ptr [rbp + 8]
+CLIENT_CODE 0x850223 mov rdx, qword ptr [rbp + 0x10]
+CLIENT_CODE 0x850227 mov r8d, 1
+CLIENT_CODE 0x85022d mov r9, r14
+CLIENT_CODE 0x850230 call 0x4e8295c
+CLIENT_CODE 0x850235 movups xmm0, xmmword ptr [rbp]
+CLIENT_CODE 0x850239 movups xmmword ptr [rsi], xmm0
+CLIENT_CODE 0x85023c mov rax, qword ptr [rbp + 0x10]
+CLIENT_CODE 0x850240 mov qword ptr [rsi + 0x10], rax
+CLIENT_CODE 0x850244 mov rcx, r14
+CLIENT_CODE 0x850247 call 0x4e75d6e
+CLIENT_CODE 0x85024c mov byte ptr [rbx], 0
+CLIENT_CODE 0x85024f test rdi, rdi
+CLIENT_CODE 0x850252 js 0x850291
+CLIENT_CODE 0x850254 mov r8d, 1
+CLIENT_CODE 0x85025a mov rcx, rbx
+CLIENT_CODE 0x85025d mov rdx, rdi
+CLIENT_CODE 0x850260 call 0x90a660
+CLIENT_CODE 0x850265 mov rax, rsi
+CLIENT_CODE 0x850268 add rsp, 0xa8
+CLIENT_CODE 0x85026f pop rbx
+CLIENT_CODE 0x850270 pop rdi
+CLIENT_CODE 0x850271 pop rsi
+CLIENT_CODE 0x850272 pop r12
+CLIENT_CODE 0x850274 pop r13
+CLIENT_CODE 0x850276 pop r14
+CLIENT_CODE 0x850278 pop r15
+CLIENT_CODE 0x85027a pop rbp
+CLIENT_CODE 0x85027b ret 
+CLIENT_CODE 0x85027c lea rcx, [rip + 0x52d20f0]
+CLIENT_CODE 0x850283 lea r9, [rip + 0x52d1b06]
+CLIENT_CODE 0x85028a mov edx, 0x1ad
+CLIENT_CODE 0x85028f jmp 0x8502a4
+CLIENT_CODE 0x850291 lea rcx, [rip + 0x52d1be2]
+CLIENT_CODE 0x850298 lea r9, [rip + 0x52d2641]
+CLIENT_CODE 0x85029f mov edx, 0x207
+CLIENT_CODE 0x8502a4 xor r8d, r8d
+CLIENT_CODE 0x8502a7 call 0x50b0370
+CLIENT_CODE 0x8502ac ud2 
+CLIENT_FCLOSE_THUNK 0x4e75d6e jmp qword ptr [rip + 0x23bbac]

@@ -1,0 +1,33 @@
+{
+  "complete": false,
+  "change": "Particle frame consumes prior stop requests; rejected wrapper cleanup runs afterward, including hidden/error result paths. Rejected owner no longer updates pose.",
+  "native_order_evidence": "docs/projectile_removal_order_audit.json",
+  "native_cleanup_evidence": "data/4.20/projectile_deregistration_contract.json",
+  "tests_passed": 9,
+  "test_log": "logs/projected-deferred-cleanup-tests.log",
+  "source_sha256": "e7e781d58d5565916f18eab2eb65e9c8a9d2da11033d81fb24e2f2c2943db017",
+  "limits": [
+    "Normal state2 local ordering; alternate state3 not integrated.",
+    "Spatial deregistration timing and global multi-effect phase ordering remain adapters.",
+    "Diagnostic seeded scenario, not full Annie kit or original framebuffer equivalence."
+  ],
+  "runtime_validation": {
+    "client_sha256": "3962cd672f1ce1954ede4dda4fd8ef14761e140f40e95f3eac143b00cf919d9f",
+    "build_log": "logs/projected-deferred-cleanup-build.log",
+    "captures": [
+      "docs/projected_core_cycle_capture_v46_receivers_dx12.json",
+      "docs/projected_core_cycle_capture_v46_receivers_vulkan.json"
+    ],
+    "pixels": [
+      "docs/projected_receiver_pixels_v46_dx12.json",
+      "docs/projected_receiver_pixels_v46_vulkan.json"
+    ],
+    "cleanup": "docs/receiver_cleanup_v46_raw.json",
+    "passed_casts": 4,
+    "inspected_images": [
+      "logs/projected-core-cycle-v46-receivers-dx12-on.owner-2-returned.png",
+      "logs/projected-core-cycle-v46-receivers-vulkan-on.owner-2-returned.png"
+    ],
+    "capture_limit": "DX12 owner1 returned image absent; owner2 inspected."
+  }
+}

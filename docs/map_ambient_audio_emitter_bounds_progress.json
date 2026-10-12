@@ -1,0 +1,35 @@
+{
+  "updated_utc": "2026-10-04T03:41:00.417843+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_emitter_bounds.py": "62b97c1d747743cbd3385640e9887920bdbfc88cf429041e1190c161acbd9490",
+    "data/4.20/audio_emitter_bounds_contract.json": "4a04fe93763a26f07a63175beaac4c8a9b68647b25e6ce86293c49f57e35a23c",
+    "crates/core/src/audio_emitter_bounds.rs": "60e22f8d3f7edd8374c2ffd4158c09703d7732bfe8cea1f51919a9a473baa8d5",
+    "crates/core/src/lib.rs": "2a9af2edd7bec722888f1d16a702eea8b9f6a11e8ad05207dc190980f9bb6061",
+    "logs/native-audio-emitter-bounds-core-tests.log": "598510779d58ba148c2021c2009d620893926de9d73e2a6895b01724e6537873"
+  },
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_emitter_bounds_cases": 399,
+  "native_emitter_bounds_joined_finish_cases": 1596,
+  "core_tests_passed": 290,
+  "ported": [
+    "Original8E36B0 six indexed planes with scalar f32 product/add order; zero/unordered NaN do not reject",
+    "Raw six bounds130..144 passed without normalization; invalid Rust selection indices explicit errors",
+    "Joined Rust bounds->lifetime_gate matches actual93F314 caller plus native8E36B0/93F353"
+  ],
+  "verified_native_layout": {
+    "planes": "context6C..CB, six4float coefficients",
+    "selection_indices": "contextCC..113, six3u32 indices",
+    "emitter_bounds": "emitter130..144, six rawf32"
+  },
+  "limits": [
+    "Actual8E36B0 executes six indexed plane tests, scalar SSE f32 product/add ordering; zero boundary and unordered NaN do not reject. No bounds normalization.",
+    "Actual93F314..3BE caller copies bounds130..144, calls8E36B0 and uses result in lifetime gate. Explicit synthetic six-plane context, flags, clock2, birth0/lifetime1 supplied.",
+    "Original camera plane generation/index selection and runtime bounds production not qualified; test planes are controlled inputs, not recovered game camera.",
+    "Full particle tick/child simulation and client lifecycle/audio integration remain incomplete.",
+    "Source core290passed. No runtime planes source exists yet in current Rust client/core other than this explicit input API; do not substitute synthetic cube test planes for real camera.",
+    "Prior client18test evidence and standalone executables unchanged; actual audio consumer/output incomplete."
+  ],
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false
+}

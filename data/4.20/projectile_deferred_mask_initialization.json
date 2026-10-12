@@ -1,0 +1,100 @@
+{
+  "complete": false,
+  "passed": true,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "cases": [
+    {
+      "pending": false,
+      "initial_mask": 0,
+      "final_mask": 0,
+      "callbacks": []
+    },
+    {
+      "pending": false,
+      "initial_mask": 1,
+      "final_mask": 1,
+      "callbacks": []
+    },
+    {
+      "pending": false,
+      "initial_mask": 2,
+      "final_mask": 2,
+      "callbacks": []
+    },
+    {
+      "pending": false,
+      "initial_mask": 3,
+      "final_mask": 3,
+      "callbacks": []
+    },
+    {
+      "pending": false,
+      "initial_mask": 4294967295,
+      "final_mask": 4294967295,
+      "callbacks": []
+    },
+    {
+      "pending": true,
+      "initial_mask": 0,
+      "final_mask": 4294967295,
+      "callbacks": [
+        "0x6c9210",
+        "0x6153d0",
+        "0x5eb4b0"
+      ]
+    },
+    {
+      "pending": true,
+      "initial_mask": 1,
+      "final_mask": 4294967295,
+      "callbacks": [
+        "0x6c9210",
+        "0x6153d0",
+        "0x5eb4b0"
+      ]
+    },
+    {
+      "pending": true,
+      "initial_mask": 2,
+      "final_mask": 4294967295,
+      "callbacks": [
+        "0x6c9210",
+        "0x6153d0",
+        "0x5eb4b0"
+      ]
+    },
+    {
+      "pending": true,
+      "initial_mask": 3,
+      "final_mask": 4294967295,
+      "callbacks": [
+        "0x6c9210",
+        "0x6153d0",
+        "0x5eb4b0"
+      ]
+    },
+    {
+      "pending": true,
+      "initial_mask": 4294967295,
+      "final_mask": 4294967295,
+      "callbacks": [
+        "0x6c9210",
+        "0x6153d0",
+        "0x5eb4b0"
+      ]
+    }
+  ],
+  "findings": [
+    "Factory7173D6 sets100000 after successful load.",
+    "Original registry block717EC0 tests/clears100000 then invokes44,50,54 in order.",
+    "Callback44 resets maskFFFFFFFF before subsequent callbacks. Without pending flag no reset occurs."
+  ],
+  "adapters": [
+    "One supplied list entry; execution stops at717F0A before loop advancement.",
+    "Absent Troy resource; inherited bounds34 callback adapted. Registry membership and full frame loop not executed."
+  ],
+  "limits": [
+    "Normal initialization mask now explained by deferred dispatch, not constructor.",
+    "Live-resource initialization, ownership and complete registry scheduling remain separate qualifications."
+  ]
+}

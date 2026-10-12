@@ -1,0 +1,31 @@
+from pathlib import Path
+import json,hashlib,re,datetime,shutil
+r=Path('E:/OpenLeague')
+def load(p):return json.loads(p.read_text(encoding='utf-8-sig'))
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def write(p,v):
+ t=p.with_suffix(p.suffix+'.tmp');t.write_text(json.dumps(v,indent=2,ensure_ascii=False)+'\n',encoding='utf-8');load(t);t.replace(p)
+log=r/'logs/audio-announcer-actor-unregister-regression.log';text=log.read_text(encoding='utf-8-sig');assert '655 passed; 0 failed; 0 ignored; 0 measured; 480 filtered out' in text
+small=r/'logs/announcer-actor-unregister-tests.log';assert '84 passed; 0 failed' in small.read_text(encoding='utf-8-sig')
+exe=r/re.search(r'Running unittests .*?\(([^)]+\.exe)\)',text)[1].replace('\\','/')
+plan=load(r/'docs/completion_plan.json');scope={'domains':len(plan['domains']),'tasks':sum(len(d['tasks']) for d in plan['domains']),'additional_requirements':sum(len(d['additional_requirements']) for d in plan['domains'])};assert scope=={'domains':24,'tasks':114,'additional_requirements':37}
+for ref in load(r/'docs/audio_test_fixture_loading.json')['references']:
+ p=r/ref['fixture'];assert p.stat().st_size==ref['bytes'] and sha(p)==ref['sha256']
+contracts={}
+for name,count in [('audio_announcer_actor_unregister_segment_contract.json',48),('audio_announcer_actor_unregister_mutations_contract.json',8),('audio_announcer_owner_component_destructor_contract.json',208)]:
+ p=r/'data/4.20'/name;v=load(p);assert v['passed'] and len(v['cases'])==count;contracts[name]={'cases':count,'sha256':sha(p)}
+now=datetime.datetime.now(datetime.timezone.utc)
+sources=['crates/core/src/audio_announcer_actor_registry_composition.rs','crates/core/src/audio_announcer_secondary_unregister.rs','crates/core/src/lib.rs','tools/announcer_secondary_unregister_production_tests.rs','tools/qualify_actor_unregister_segment.py','tools/qualify_actor_unregister_mutations.py','tools/qualify_owner_component_destructor.py']
+receipt={'saved_utc':now.isoformat(),'passed':True,'complete':False,'scope':scope,'audio_tests_passed':655,'filtered_tests_not_run':480,'isolated_production_tests_passed':84,'native_actor_unregister_segment_calls_ported':96,'native_actor_unregister_mutation_cases_ported':8,'native_owner_component_destructor_cases_prepared':208,'contracts':contracts,'regression_log_sha256':sha(log),'isolated_log_sha256':sha(small),'test_executable':str(exe),'test_executable_sha256':sha(exe),'source_hashes':{n:sha(r/n) for n in sources},'behavior':['Actual actor destructor registry segment629921..62997C ported by composing existing real secondary unregister and primary lazy lookup/removal on the same storage. Fresh actor+8 key read before secondary unregister; actor+FC ID read after its free/lock callbacks; missing-node skip; owner registry preserved at this native segment.','96 native calls matched across48 complete owned registration/destruction-segment lifetimes, including repeat removal, null/non-null secondary prior values, high unsigned IDs and sentinel owner. Exact live registry words, lock order and free traces matched.','8 native callback mutation cases matched: changing actor+FC during secondary node free or lock leave redirects primary removal to a present alternate ID or skips a missing alternate; original ID remains. No early ID cache or invented actor/key consistency repair.'],'limits':['This is the registry-removal segment, not the whole actor destructor. Borrowed actor storage and owner-component release remain separate required work.','Actual full owner-component6B2B20 destructor newly qualified in208 native cases. Owner lookup/unregister and native strong/weak decrements execute, but virtual disposal/control-release callbacks are supplied and do not free the emulator control bytes. Rust owner-component implementation remains open.','ID provider, physical metadata fields, allocation/free/lock imports and diagnostics are explicit boundaries. Live game-world ownership, concurrent/throwing callbacks, normal announcement queues, priorities, mixing and audible playback remain incomplete. Full game scope preserved.'],'next_action':'Port full owner-component6B2B20 destructor against208 native cases in audio_announcer_owner_component_destructor_contract.json: sentinel owner skip, fresh metadata/owner reads, nonzero owner query before unregister, control pointer reload after unregister, atomic strong decrement with disposal only on transition1-to0, weak decrement/release after disposal. Preserve wrapping counts and explicit virtual callbacks. Qualify callback mutations and whole actor ownership lifecycle, then connect simulation events and announcement queues/priorities/mixing/playback. Preserve24domains114tasks37requirements.'}
+backup=r/'docs/plan_history'/('announcer-actor-unregister-'+now.strftime('%Y%m%dT%H%M%SZ'));backup.mkdir(parents=True)
+for name in ['coverage.json','resume_checkpoint.json','completion_plan.json','completion_plan.html']:shutil.copy2(r/'docs'/name,backup/name)
+write(r/'docs/announcer_actor_unregister_validation.json',receipt)
+for name in ['coverage.json','resume_checkpoint.json','completion_plan.json']:
+ p=r/'docs'/name;doc=load(p);doc['announcer_actor_unregister_validation']=receipt
+ if name!='coverage.json':doc['next_action']=receipt['next_action'];doc['updated_utc']=now.isoformat()
+ write(p,doc);assert load(p)['announcer_actor_unregister_validation']==receipt
+p=r/'docs/completion_plan.html';html=p.read_text(encoding='utf-8');marker='announcer-actor-unregister-validation';assert '</body>' in html and 'id="'+marker+'"' not in html
+section='<section id="'+marker+'"><h2>Annonces : retrait combiné des acteurs</h2><p>Segment de destruction Rust comparé à 96 appels natifs et 8 cas de mutation par callback. 84 tests isolés et 655 tests audio réussis. Destructeur du composant propriétaire préparé sur 208 cas. Cycle de vie complet dans la simulation et lecture des annonces restent à terminer.</p></section>'
+t=p.with_suffix('.html.tmp');t.write_text(html.replace('</body>',section+'</body>'),encoding='utf-8');t.replace(p)
+shutil.copy2(Path(__file__),r/'tools/record_actor_unregister.py')
+print(json.dumps({'audio_tests':655,'isolated_tests':84,'native_actor_unregister_calls':96,'native_mutation_cases':8,'owner_component_destructor_cases_prepared':208,'scope':scope,'complete':False}))

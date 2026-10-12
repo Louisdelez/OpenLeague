@@ -1,0 +1,28 @@
+{
+  "updated_utc": "2026-10-03T21:15:43.335687+00:00",
+  "contract": "data/4.20/audio_release_contract.json",
+  "contract_sha256": "4ef691971857b7b659a4daeb5f8cad3659ccf91103e3068a24bc20957ce2bb78",
+  "module": "crates/core/src/audio_release.rs",
+  "module_sha256": "e812d0d2aff780e9087387427a59527cc921b72214bc8759ee336374564138de",
+  "native_release_cases": 64,
+  "native_release_invocations": 128,
+  "native_event_hash_samples": 10,
+  "source_stop_events": 4,
+  "source_stop_actions": 6,
+  "source_fields_byte_checked": 94,
+  "native_instruction_anchors": 16,
+  "rust_release_tests": 5,
+  "core_tests": 159,
+  "test_log": "logs/native-audio-release-tests.log",
+  "test_log_sha256": "9fdee82774aa7ae127cd80c692f5dea782d39c1eeae443603b14feb923353103",
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "runtime_audio_enabled": false,
+  "client_integration_enabled": false,
+  "complete": false,
+  "limits": [
+    "Release and ASCII event hash routines executed in bounded emulator; readiness/PostEvent/audio queue/logging/memcpy stubbed. No audible output, DSP or full-game acceptance.",
+    "Stop name replacement and availability checks are instruction-qualified; recovered four stop events/six stop actions byte checked against two relevant banks. Brazier stop missing from these banks is not claimed absent from every bank.",
+    "Stop action scope=259 and fade=4 retained; full bank action execution and fades not yet mixed.",
+    "Fallback API identification as StopPlayingID supported by native message30 parameters and official SDK signature; matching native symbols absent."
+  ]
+}

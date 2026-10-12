@@ -1,0 +1,48 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T07:25:24.941701+00:00",
+  "native_probe": {
+    "passed": true,
+    "cases": 6,
+    "contract": "data/4.20/ambient_ended_initialization_contract.json"
+  },
+  "source_sha256": {
+    "crates/client/src/map_audio_requests.rs": "b8c33cba2ae3b57881dc4169988ab8ada0dd7455e4e7a784beb2121530f5d3b1",
+    "tools/probe_native_ambient_ended_initialization.py": "e5363d6088c90dc9429a072a8b286c2d3ca3ffc5f1fc9563f9187954e7e50ddc",
+    "data/4.20/ambient_ended_initialization_contract.json": "efcff71aeb7eed90d659731dcba7c5b2e83e3f04147d69a05a06935481d2fa53"
+  },
+  "change": "Retain resolved start pose from event attachment even when ambient_cues removed same-frame source track. Deferred native initialization forwards initial position even after End. Ended parent now initializes and follows qualified stop/finished cleanup. Missing pose stays explicit.",
+  "validation": "Native6cases PASS; client13tests PASS; normal build PASS; thirty-second DX12 runtime gate PASS.",
+  "limits": [
+    "Native full resource loader and start callback not executed; supplied End stores and inherited factory adapters documented.",
+    "Logical worker/physical voices remain unintegrated; no endurance or complete audio claim."
+  ],
+  "tests": {
+    "passed": 13,
+    "failed": 0,
+    "session": 84402,
+    "log": "logs/ambient-initialization-tests.log"
+  },
+  "build": {
+    "session": 66474,
+    "exit_code": 0,
+    "sha256": "6298954384ab43c530e6781422dc3cfe000c17bd9a1c57e9af85a06f3897a981",
+    "log": "logs/ambient-initialization-build.log"
+  },
+  "runtime": {
+    "session": 1451,
+    "passed": true,
+    "report": "docs/ambient_initialization_runtime_validation.json",
+    "metrics": {
+      "samples": 141,
+      "cleaned": 226,
+      "max_ended": 9,
+      "last_ended": 0,
+      "max_uninitialized": 0,
+      "unresolved_samples": 0,
+      "rejected_samples": 0
+    },
+    "owned_processes_stopped": true
+  },
+  "preserved_failure": "docs/ambient_retirement_runtime_first_failure.json"
+}

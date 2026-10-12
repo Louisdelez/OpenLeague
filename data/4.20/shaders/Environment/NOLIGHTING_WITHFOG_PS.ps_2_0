@@ -1,0 +1,52 @@
+sampler DIFFUSE_MAP 		: register(s0);
+#include "../DeathScreen.hls"
+#include "../MipLevels.hls"
+
+#ifdef FOG_PIXELSHADER_BLEND
+sampler FOGLIGHTING         : register(s9);
+#endif
+
+// Fog Color.
+#ifdef FOG_PIXELSHADER_BLEND
+	float4 FOG_COLOR		: register(c28);    // R3D_SHADER_PS_CONSTANT_FOG_COLOR
+#endif
+
+struct INTERPOLANTS
+{
+	float4 m_Position : POSITION;
+	float3 m_TexCoord : TEXCOORD0;
+};
+
+struct FRAGMENT
+{
+	float4 m_Color0 : COLOR0;
+};
+
+FRAGMENT main( in INTERPOLANTS interpolants )
+{
+	FRAGMENT fragment;
+
+	// Read the color texture	
+	float4 outColor = tex2D(DIFFUSE_MAP, interpolants.m_TexCoord.xy);
+	
+	#if defined(GRAYSCALE)
+		float3 LUMINANCE_CONVERSION = float3(0.299f, 0.587f, 0.114f);
+		outColor.rgb = dot( outColor.rgb, LUMINANCE_CONVERSION );
+	#endif
+	
+	//Handle the high-end per-pixel fogging.
+#if defined(FOG_PIXELSHADER_BLEND) && !defined(FULLBRIGHT)
+	//modify the fog color based on the fog of war...
+	//lerp towards the pure fog color and fully opaque towards the second layer of the volumetric fog.
+	float fogOpacity = saturate( interpolants.m_TexCoord.z );
+
+	//final fog blend.
+	outColor.rgb = lerp( outColor, FOG_COLOR, fogOpacity );
+#endif
+
+	outColor.rgb = GetEnvironmentDeathColor(outColor.rgb);
+    outColor.rgb = ApplyMipColorsVisualization(outColor.rgb, interpolants.m_TexCoord.xy);
+	fragment.m_Color0 = outColor;
+		
+	return fragment;
+}

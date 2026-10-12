@@ -1,0 +1,48 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T10:19:02.067560+00:00",
+  "change": [
+    "Port whole AEE790 orchestration with native AEC310 raw block reset, AEE9A0 swap-last pruning, request mask/first bit, ordered sums/products and positive clamp.",
+    "Preserve native pair equality including signed zero, transition callback condition, raw flag updates and final cache-valid bit20.",
+    "Connect refresh_cached to active voice cache gate with mandatory backend methods; failed refresh cannot mark Store voice valid."
+  ],
+  "validation": {
+    "targeted_passed": 2,
+    "regression_passed": 216,
+    "failed": 0,
+    "session": 55692,
+    "terminal_exit_code": 0,
+    "logs": [
+      "logs/audio-control-refresh-tests.log",
+      "logs/audio-control-refresh-regression-tests.log"
+    ],
+    "native_whole_refresh_cases": 2592,
+    "comparison": "Exact84-byte control block, flags, cached raw slots, pair bits, spatial fields, range limit101, retained entry ordering and dependency call order. Tests of cache gate/error behavior included in216 audio core regression tests."
+  },
+  "sha256": {
+    "crates/core/src/audio_control_refresh.rs": "7502dd7195407967eb1c9568b3e88b5d6a72fbcc4413f4e3ca3190654d31494f",
+    "crates/core/src/audio_active_voice_cache.rs": "d7a5a8051e0623d7ae2813a692b901fb85956b0bd235bf3ecfae55b2f8a062c1",
+    "crates/core/src/lib.rs": "b6a3332048c2313ba717c8ce269748e558022fa5a46506ccb458fc5043ada86e",
+    "tools/probe_native_audio_control_refresh.py": "0787dce8c82676bb19249681ca3f791d7990f13e704f0f2218c671ceb03b7d07",
+    "tools/qualify_native_audio_object_registration.py": "d4c43f7fe9cbc92d6205def89587d0253b0e899913fa0d7591f9e6d4ff3e166c",
+    "data/4.20/audio_control_refresh_contract.json": "40f7ebc08d8a09ed89e35caeccdce5204bf40291953be39da94b6e3bc7c2c9aa",
+    "logs/audio-control-refresh-tests.log": "7aa499f4e411aea4369e460cb9764b749866825e6372836fec405f7ac50dc209",
+    "logs/audio-control-refresh-regression-tests.log": "0096755d30925796f7901d439b0622b88340462b9a4cf50be3f4722f2f725679",
+    "logs/audio-control-refresh-probe.log": "b4ed885289c71566c3b8848e3b43bac5d6ebbdcb0a36e2ff406f6ecec9d4bfc8",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "d78f54c2de625e30da0b36fac5af598f5f7da4822a80a149b8141f493960ea33"
+  },
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "adapters": [
+    "AF3060 spatial pair1.25/2.5, optional callback, node flag getter, B1CAF0 source float, AEF360 routing callback, virtualA8 parameter contributions and AFF450 pair are explicit dependency interfaces.",
+    "Whole original AEE790/AEC310/AEE9A0 reset/prune/ordered arithmetic/product/clamp/pair comparisons/final flags execute native instructions. AEF2F0 transition command captured."
+  ],
+  "limits": [
+    "Actual dependency getter/actor aggregation/spatial/routing/pair/transition producer bodies remain to qualify/connect; this does not prove their supplied fixture values are game-derived.",
+    "Only finite arithmetic inputs; class-specific callback failures and device output unqualified.",
+    "No normal audio runtime acceptance.",
+    "Backend trait requires actual dependency results; fixture spatial/actor controls/source/context/pair are explicit inputs, not reconstructed game values.",
+    "Raw slot meanings are not silently assigned to final gain/pitch/filter. Full native AF0880 actor hierarchy and its RTPC/state/range paths, AF3060 spatial aggregation, source/routing getters and AFF450 pair still to connect.",
+    "AEF2F0 transition command consumer is captured, not executed; command scheduling/admission/device output remain separate.",
+    "No normal client rebuild or normal audio/device/full-game acceptance."
+  ]
+}

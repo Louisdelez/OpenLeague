@@ -1,0 +1,46 @@
+{
+  "created_utc": "2026-10-10T19:30:11.629308+00:00",
+  "scope": "Tests-only diagnostic service publication; no production modification by this agent",
+  "production_file": "E:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_loading_packets_tests.rs",
+  "base_sha256": "1f88e8187e635631134b1c0220d5c535a2dd142db8a8655d74a4077859dcca1c",
+  "candidate_file": "E:\\mapslol3v3\\loading_clock_integration\\loading_repair\\audio_replay_windows_loading_packets_tests.rs",
+  "candidate_sha256": "20b02e9777567e25127b854ebcf47afe77d4f367263fa0d2474e9104d47e4f04",
+  "image_file": "E:\\OpenLeague\\data\\4.20\\runtime\\replay_runtime_image.bin",
+  "image_sha256": "96d9e661b0f71d7c7c23975f02ac267151a936395f9ff04aa2a743d4c060739b",
+  "source_native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "verified_image_words": [
+    {
+      "address": "0x10afed4",
+      "value": "0x72ad90",
+      "region": "game_service_vtable"
+    },
+    {
+      "address": "0x10afed8",
+      "value": "0x72ae40",
+      "region": "game_service_vtable"
+    },
+    {
+      "address": "0x2d787b8",
+      "value": "0x0",
+      "region": "service_owner_metadata_global"
+    }
+  ],
+  "test_changes": [
+    "Publish the actual configured service pointer before the three first-name consumers",
+    "Check pointer identity and native vtable slots +48/+4C without replacing either",
+    "Restore SERVICE_GLOBAL after recipient destruction and before manager/service closure",
+    "Include runtime error details when delivery or missing-UI expectation fails"
+  ],
+  "verification_executed": [
+    "Candidate hash",
+    "Image words",
+    "Static binding and teardown ordering review"
+  ],
+  "rust_compilation_executed": false,
+  "tests_executed": false,
+  "limits": [
+    "Normal source producer/lifecycle for SERVICE_GLOBAL remains unported",
+    "These are explicit diagnostic bindings, not qualification of normal publication",
+    "Root must compile and run the integrated tests"
+  ]
+}

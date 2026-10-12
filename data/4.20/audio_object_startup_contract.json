@@ -1,0 +1,110 @@
+{
+  "passed": true,
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "counter_address": "0x1224d20",
+  "counter_image_bytes": "02000000",
+  "counter_initial": 2,
+  "cached_vector_address": "0x2d773b4",
+  "cached_vector_initial_words": [
+    0,
+    0,
+    0
+  ],
+  "cases": [
+    {
+      "counter_before": 2,
+      "allocation_failed": false,
+      "engine_available": true,
+      "result_present": true,
+      "next_counter": 3,
+      "packets": [
+        {
+          "type": 11,
+          "object_id": 2,
+          "listener_mask": 1,
+          "extra_raw": 0
+        }
+      ],
+      "object_id": 2,
+      "cached_vector_words": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "counter_before": 3,
+      "allocation_failed": true,
+      "engine_available": true,
+      "result_present": false,
+      "next_counter": 4,
+      "packets": []
+    },
+    {
+      "counter_before": 4,
+      "allocation_failed": false,
+      "engine_available": true,
+      "result_present": true,
+      "next_counter": 5,
+      "packets": [
+        {
+          "type": 11,
+          "object_id": 4,
+          "listener_mask": 1,
+          "extra_raw": 0
+        }
+      ],
+      "object_id": 4,
+      "cached_vector_words": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "counter_before": 5,
+      "allocation_failed": false,
+      "engine_available": false,
+      "result_present": true,
+      "next_counter": 6,
+      "packets": [],
+      "object_id": 5,
+      "cached_vector_words": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "counter_before": 6,
+      "allocation_failed": false,
+      "engine_available": true,
+      "result_present": true,
+      "next_counter": 7,
+      "packets": [
+        {
+          "type": 11,
+          "object_id": 6,
+          "listener_mask": 1,
+          "extra_raw": 0
+        }
+      ],
+      "object_id": 6,
+      "cached_vector_words": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "adapters": [
+    "Factory heap, engine availability, map insertion and registration queue adapters inherited from qualified factory probe.",
+    "No writes to counter or cached-vector globals before calls."
+  ],
+  "limits": [
+    "Image startup state, not a claim that every game/audio subsystem has made zero allocations before ambient events.",
+    "Cached vector startup is zero-filled data; later runtime writes are not qualified by this test.",
+    "No physical playback or voice admission."
+  ]
+}

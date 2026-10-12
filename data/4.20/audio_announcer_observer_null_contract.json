@@ -1,0 +1,46 @@
+{
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "passed": true,
+  "complete": false,
+  "cases": [
+    {
+      "entry": "0x6d3d30",
+      "actor": null,
+      "fs_base": 805367808,
+      "faults": [
+        {
+          "address": 292,
+          "size": 4,
+          "access": 19
+        }
+      ],
+      "cache_changes": [
+        "unknown"
+      ],
+      "cache_after_fault": "unknown",
+      "error": "Invalid memory read (UC_ERR_READ_UNMAPPED)"
+    },
+    {
+      "entry": "0x6d4470",
+      "actor": null,
+      "fs_base": 805367808,
+      "faults": [
+        {
+          "address": 292,
+          "size": 4,
+          "access": 19
+        }
+      ],
+      "cache_changes": [
+        "unknown"
+      ],
+      "cache_after_fault": "unknown",
+      "error": "Invalid memory read (UC_ERR_READ_UNMAPPED)"
+    }
+  ],
+  "limits": [
+    "Original plain/localized observercolorhex callbacks execute with real x86 FS segment base using GDT; page zero unmapped while SEH head remains valid at FS:0.",
+    "Native actor-null case resets cache to unknown then faults reading actor+124. Rust reports explicit missing actor instead of host-process crash; no success fallback invented.",
+    "Native exception dispatch/unwinding after the fault is not executed. Live caller validity and playback remain incomplete."
+  ]
+}

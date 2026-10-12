@@ -1,0 +1,419 @@
+{
+  "saved_utc": "2026-10-11T09:43:20.250422+00:00",
+  "scope": "Local Rust/Tauri session ownership, results return and deliberate UDP departure",
+  "source_integrated": true,
+  "complete_game": false,
+  "full_session_acceptance": false,
+  "implemented": [
+    "Results have a return button gated by authoritative result, local identity and armed release.",
+    "Results and return button share a column panel above the current native HUD, preventing the observed overlap.",
+    "Ordinary AppExit sends a best-effort identity/session/sequence validated local Leave; existing timeout remains the crash/loss fallback.",
+    "Departed peer tombstones reject reordered Join, with bounded admission reserving future departure slots.",
+    "Launcher owns the two spawned children; try_wait errors retain owners and remain visible. No process is killed by the production supervisor.",
+    "Only the owned server stdin pipe is closed after client exit or failed client spawn.",
+    "Server draining rejects new peers, preserves existing participants and pending result persistence; ownership-read errors drain before a final nonzero exit.",
+    "Play is re-enabled only when both owned child exits are observed."
+  ],
+  "tests": {
+    "server": {
+      "passed": 11,
+      "ignored_fixture": 0,
+      "evidence": {
+        "path": "E:\\mapslol3v3\\session_lifecycle_game\\server_final_tests.log",
+        "bytes": 4387,
+        "sha256": "bd3ba817f4f4b4d24a39c3640336ffe4b6edb900b0bf8501b6b73b2aa16a0ca3"
+      }
+    },
+    "client_departure": {
+      "passed": 2,
+      "ignored_fixture": 0,
+      "evidence": {
+        "path": "E:\\mapslol3v3\\session_lifecycle_game\\..\\session_lifecycle_layout_install\\departure_tests.log",
+        "bytes": 30539,
+        "sha256": "bd3029ca9b2551d7be6c74778c49c1c4ab73218360dc3729600d2881c894806e"
+      }
+    },
+    "native_endgame": {
+      "passed": 3,
+      "ignored_fixture": 0,
+      "evidence": {
+        "path": "E:\\mapslol3v3\\session_lifecycle_game\\..\\session_lifecycle_layout_install\\native_endgame_tests.log",
+        "bytes": 30666,
+        "sha256": "036b20057fe1f20d8a06918b313fe41e812f500a7a6f08bef385ac951c6da2cc"
+      }
+    },
+    "results": {
+      "passed": 2,
+      "ignored_fixture": 0,
+      "evidence": {
+        "path": "E:\\mapslol3v3\\session_lifecycle_game\\..\\session_lifecycle_layout_install\\results_tests.log",
+        "bytes": 30605,
+        "sha256": "eb708a8c480099373aff96acadc1b26b0e59ef0301972aa01aab75dd3e5b59ca"
+      }
+    },
+    "launcher": {
+      "passed": 6,
+      "ignored_fixture": 1,
+      "evidence": {
+        "path": "E:\\mapslol3v3\\session_lifecycle_game\\launcher_tests.log",
+        "bytes": 939,
+        "sha256": "bdf9abb05e1b674860bd173c408f66b10eeafe5291950415993093d5b77c7d96"
+      }
+    }
+  },
+  "javascript": {
+    "checks": 22,
+    "dom_and_backend_injected": true,
+    "evidence": {
+      "path": "E:\\mapslol3v3\\session_lifecycle_launcher\\app_tests.json",
+      "bytes": 1497,
+      "sha256": "eac0357eea6d6a091dace92a2fc3ec2626bd09b00e7bff0b63d7f00fa8ca36d6"
+    }
+  },
+  "real_server_lifecycle": {
+    "server_sha256": "2ec3fa52b2337de1aca1ccdef5d1454b49546f652a4246d6bc41f01cf5279040",
+    "checks": [
+      "cycle 1: six distinct authoritative players",
+      "cycle 1: shared authoritative session",
+      "cycle 1: wrong identity/session/replayed sequence do not remove player",
+      "cycle 1: delayed Join cannot resurrect departed player before owner EOF",
+      "cycle 1: owner EOF preserves five connected participants",
+      "cycle 1: closing session rejects new participant",
+      "cycle 1: last departure retires server with success",
+      "cycle 1: server port released",
+      "cycle 1: six departures logged by real server",
+      "cycle 1: graceful owned exit confirmed",
+      "cycle 2: six distinct authoritative players",
+      "cycle 2: shared authoritative session",
+      "cycle 2: wrong identity/session/replayed sequence do not remove player",
+      "cycle 2: delayed Join cannot resurrect departed player before owner EOF",
+      "cycle 2: owner EOF preserves five connected participants",
+      "cycle 2: closing session rejects new participant",
+      "cycle 2: last departure retires server with success",
+      "cycle 2: server port released",
+      "cycle 2: six departures logged by real server",
+      "cycle 2: graceful owned exit confirmed",
+      "successive sessions have distinct identities",
+      "failed-client-start path: owned server exits on EOF before any join",
+      "standalone server accepts join after its stdin is closed",
+      "standalone server survives last departure without launcher ownership"
+    ],
+    "rendered_clients": 0,
+    "victory_exercised": false,
+    "cycles": [
+      {
+        "session": 1791689728519352900,
+        "pid": 16904,
+        "exit": 0,
+        "log": "E:\\mapslol3v3\\session_lifecycle_game\\runtime_cycle_1.log"
+      },
+      {
+        "session": 1791689729492827900,
+        "pid": 17784,
+        "exit": 0,
+        "log": "E:\\mapslol3v3\\session_lifecycle_game\\runtime_cycle_2.log"
+      }
+    ],
+    "address": [
+      "127.0.0.1",
+      52797
+    ],
+    "startup_and_standalone": {
+      "owned_startup_exit": 0,
+      "standalone_test_pid": 12632,
+      "standalone_cleanup": "explicit termination of this test-owned standalone child after assertions"
+    },
+    "passed": true
+  },
+  "normal_gui_session": {
+    "recorded_utc": "2026-10-11T09:28:42.972846+00:00",
+    "scope": "Normal launcher, one idle player, ordinary authoritative Nexus defeat, results, return, second game, native close",
+    "winner_injected": false,
+    "six_rendered_clients": false,
+    "layout_issue": "Return button partially covered by HUD; correction pending",
+    "executables": {
+      "client": {
+        "path": "E:\\OpenLeague\\target\\debug\\openleague-client.exe",
+        "bytes": 139693056,
+        "sha256": "50279e5289a9920539dc47033eaa75b305312566281b9d695add2daf908d7a6d"
+      },
+      "server": {
+        "path": "E:\\OpenLeague\\target\\debug\\openleague-server.exe",
+        "bytes": 4837888,
+        "sha256": "2ec3fa52b2337de1aca1ccdef5d1454b49546f652a4246d6bc41f01cf5279040"
+      },
+      "launcher": {
+        "path": "E:\\OpenLeague\\launcher\\src-tauri\\target\\debug\\openleague-launcher.exe",
+        "bytes": 12461056,
+        "sha256": "cee4f019b5a0815dbb694a9d55e9bddd020c2c5715a5195ce8e7d17fe9ad9945"
+      }
+    },
+    "evidence": {
+      "gui_observations.json": {
+        "path": "E:\\mapslol3v3\\session_lifecycle_game\\gui_observations.json",
+        "bytes": 26212,
+        "sha256": "f3065aa851b0c1b4a51439ed59b647ccf8eaf4e559270cac752762836645236a"
+      },
+      "gui_final_processes.json": {
+        "path": "E:\\mapslol3v3\\session_lifecycle_game\\gui_final_processes.json",
+        "bytes": 91,
+        "sha256": "621afdad274a4a66699b1ce07a1baa48d59b05d1698a46dc702cda7578389a34"
+      },
+      "gui_second_processes.json": {
+        "path": "E:\\mapslol3v3\\session_lifecycle_game\\gui_second_processes.json",
+        "bytes": 459,
+        "sha256": "1500e7915420c424f72953374a4868cb6237cb0815aa0d0e40484814525b7451"
+      },
+      "results_before_layout_fix.png": {
+        "path": "E:\\mapslol3v3\\session_lifecycle_game\\results_before_layout_fix.png",
+        "bytes": 148326,
+        "sha256": "7418c0ed7eb715dbdb172c4f52129e17e21c216bc9a52e608f59e53430e91177"
+      },
+      "second_normal_game.png": {
+        "path": "E:\\mapslol3v3\\session_lifecycle_game\\second_normal_game.png",
+        "bytes": 167280,
+        "sha256": "f645f60f322f050e0d77820af73f068f7664f76f11513f4b8fa3ad141adba8df"
+      },
+      "launcher_after_second_session.png": {
+        "path": "E:\\mapslol3v3\\session_lifecycle_game\\launcher_after_second_session.png",
+        "bytes": 56318,
+        "sha256": "4e93d076e6a5a69aa1ca15cc87eb605187a4e00951882d975b09ed06b38a27c6"
+      }
+    },
+    "ordinary_result": {
+      "path": "E:\\OpenLeague\\runtime\\matches\\1791689836930284700.json",
+      "bytes": 752,
+      "sha256": "d6cd303945e997dfe8a51814cbf5f75778b0be0d5d29adb879f8cd3349b1ce5a"
+    },
+    "processes": {
+      "launcher": 9644,
+      "first_server": 19272,
+      "first_client": 20392,
+      "second_server": 18316,
+      "second_client": 16568
+    },
+    "natural_exit_observed": true,
+    "final_process_count": 0,
+    "limits": [
+      "One idle Garen; no six-client gameplay acceptance.",
+      "Pre-layout client executable; layout correction will have separate evidence."
+    ]
+  },
+  "six_row_diagnostic_gui": {
+    "recorded_utc": "2026-10-11T09:42:46.966533+00:00",
+    "scope": "Rendered Windows client, diagnostic results layout and return action only",
+    "winner_and_tick_injected": true,
+    "snapshot_players": 6,
+    "rendered_clients": 1,
+    "six_rows_visible": true,
+    "return_button_unobstructed": true,
+    "client_closed_after_return": true,
+    "visual_observation": "Three Garen rows in each team; results panel and return button above HUD with no overlap at the captured window size.",
+    "actions": [
+      "Launched final client through Computer Use",
+      "Clicked native Continue",
+      "Observed six-row results and unobstructed return",
+      "Clicked return",
+      "Confirmed absent client process and window"
+    ],
+    "client": {
+      "path": "E:\\OpenLeague\\target\\debug\\openleague-client.exe",
+      "bytes": 139697664,
+      "sha256": "1c96a66e35bbf6ed37a81a7a39e9ae4511c94f83ce1874dcaa379041d5a1084d"
+    },
+    "fixture": {
+      "started_utc": "2026-10-11T09:40:44.802569+00:00",
+      "scope": "Diagnostic UI layout only; winner and tick injected, six snapshot players, one rendered client",
+      "address": "127.0.0.1:5896",
+      "server": {
+        "path": "E:\\OpenLeague\\target\\debug\\examples\\match_results_fixture.exe",
+        "bytes": 4611584,
+        "sha256": "2a385c3aab6ab32a35e142288c711bc0dcedd38811aad70e26e47cfc7a7a577b"
+      },
+      "client": {
+        "path": "E:\\OpenLeague\\target\\debug\\openleague-client.exe",
+        "bytes": 139697664,
+        "sha256": "1c96a66e35bbf6ed37a81a7a39e9ae4511c94f83ce1874dcaa379041d5a1084d"
+      },
+      "fixture_source": {
+        "path": "E:\\OpenLeague\\crates\\server\\examples\\match_results_fixture.rs",
+        "bytes": 1934,
+        "sha256": "16cbd6f67d1c209c6353cc72f29602094100933bf6c74c2a6480eec5f2ca2227"
+      },
+      "pid": 18088,
+      "stop_requested": true,
+      "cleanup_terminated_owned_diagnostic_only": true,
+      "exit": 1,
+      "ended_utc": "2026-10-11T09:42:04.299833+00:00",
+      "log": {
+        "path": "E:\\mapslol3v3\\session_lifecycle_layout_install\\layout_fixture.log",
+        "bytes": 87,
+        "sha256": "845b200368fa780b428cd8cb61e5bd7cee420504644c20b8c214761d1e09d573"
+      }
+    },
+    "evidence": {
+      "results_six_rows_after_fix.png": {
+        "path": "E:\\mapslol3v3\\session_lifecycle_layout_install\\results_six_rows_after_fix.png",
+        "bytes": 109769,
+        "sha256": "06d9ba8ddb257ecdf84b3c929eef668efe91eb01114adb57e8324ba6e25738f4"
+      },
+      "gui_observations.json": {
+        "path": "E:\\mapslol3v3\\session_lifecycle_layout_install\\gui_observations.json",
+        "bytes": 2415,
+        "sha256": "a2d943044326f3d3955607f0930dd73e1b2a505b98f699b4dc5418a658fce5e6"
+      },
+      "after_return_processes.json": {
+        "path": "E:\\mapslol3v3\\session_lifecycle_layout_install\\after_return_processes.json",
+        "bytes": 306,
+        "sha256": "1789a83336a80117675db1808193a53d82809c99fc22ec49a7877e2143ff0f79"
+      },
+      "final_processes.json": {
+        "path": "E:\\mapslol3v3\\session_lifecycle_layout_install\\final_processes.json",
+        "bytes": 91,
+        "sha256": "c1472db203614f5f4eb793d369033e232c4b353e70324733175ca0b3ba9b02aa"
+      },
+      "fixture_started.json": {
+        "path": "E:\\mapslol3v3\\session_lifecycle_layout_install\\fixture_started.json",
+        "bytes": 838,
+        "sha256": "b382d5facea32089ea8cbad463676b88894213fc7ae930277478547314e5ed01"
+      },
+      "fixture_finished.json": {
+        "path": "E:\\mapslol3v3\\session_lifecycle_layout_install\\fixture_finished.json",
+        "bytes": 1187,
+        "sha256": "339330357db720faa1edd6f173e2e45d0bbf2903fd91426066cced64b66e2e89"
+      },
+      "checks.json": {
+        "path": "E:\\mapslol3v3\\session_lifecycle_layout_install\\checks.json",
+        "bytes": 2533,
+        "sha256": "7fef6a0cda63ae0eee917706f2d77127bbffa1ff600496eeb124f34227027372"
+      }
+    },
+    "final_openleague_process_count": 0,
+    "limits": [
+      "Injected terminal snapshot is not an ordinary victory or six-client match.",
+      "No historical interface fidelity acceptance or arbitrary-resolution qualification.",
+      "Diagnostic server was terminated through its owned test process handle after the client had closed; normal session supervisor is tested separately."
+    ]
+  },
+  "real_supervisor_children": {
+    "tested": true,
+    "server_and_client_are_test_helpers": true,
+    "unrelated_witness_preserved": true,
+    "evidence": {
+      "path": "E:\\mapslol3v3\\session_lifecycle_game\\launcher_tests.log",
+      "bytes": 939,
+      "sha256": "bdf9abb05e1b674860bd173c408f66b10eeafe5291950415993093d5b77c7d96"
+    }
+  },
+  "executables": {
+    "server": {
+      "path": "E:\\OpenLeague\\target\\debug\\openleague-server.exe",
+      "bytes": 4837888,
+      "sha256": "2ec3fa52b2337de1aca1ccdef5d1454b49546f652a4246d6bc41f01cf5279040"
+    },
+    "client": {
+      "path": "E:\\OpenLeague\\target\\debug\\openleague-client.exe",
+      "bytes": 139697664,
+      "sha256": "1c96a66e35bbf6ed37a81a7a39e9ae4511c94f83ce1874dcaa379041d5a1084d"
+    },
+    "launcher": {
+      "path": "E:\\OpenLeague\\launcher\\src-tauri\\target\\debug\\openleague-launcher.exe",
+      "bytes": 12461056,
+      "sha256": "cee4f019b5a0815dbb694a9d55e9bddd020c2c5715a5195ce8e7d17fe9ad9945"
+    }
+  },
+  "sources": {
+    "crates/core/src/lib.rs": "227ab3f2184e9b1a0af16d1b360c17761d46683605a9079cc32a99e11835d561",
+    "crates/server/src/owned_session.rs": "f8166aac8cd04e02fd35d981f859883e18e462f00a066e683efb12ed29304415",
+    "crates/server/src/main.rs": "0d5cc2a3ed79f26ed82c3d3f6be43e429c26a5b5cf655d89bbfb423efef9dba3",
+    "crates/client/src/session_departure.rs": "652dddd41b563ab55ed60284034d8b892a8a39e9c474fb112da127cf107cd131",
+    "crates/client/src/main.rs": "b0fe832be96c9cb3fa6ca871287bd84418a55ee9a9904c496c50d07fbb59e255",
+    "crates/server/examples/annie_paused_fixture.rs": "e865d2f708853a492ab7cd9b2f11bd9a81f2fffa4b3dfec4c74cb0214b4ea7d7",
+    "crates/server/examples/annie_ready_fixture.rs": "e7f3c00f1688ed3ceec0ff49a170880a2e5c658abfe178ec5c51e7e603f4d44d",
+    "crates/server/examples/destroyed_animation_fixture.rs": "c8304677eb59d96f837410a7db8cea16507898864bdd9fc0e95ad8a372535580",
+    "crates/server/examples/intact_structure_animation_fixture.rs": "3820dd0bfa7ef7f4b5c160bc7a283e550c040e2f17801f34c8153e35d0be39e4",
+    "crates/server/examples/tibbers_fixture.rs": "5ecfabdd7cd7ae7449758447e5ca99d61c082e3df9c73f2ad0fe18c8422a081c",
+    "crates/server/examples/unit_stun_fixture.rs": "0865a1fcab0cd748d59c8efefb8b2f851f3b901b5f26084508efcbf7d9d48f29",
+    "launcher/src-tauri/src/main.rs": "c6f2ed456cedcd101fe4926c45ce44b1339cf2259f74d44a220218916401cf06",
+    "launcher/web/app.js": "3804eaf90c967c614a6dbc35c292b35427451b1245a51d51ef5a3a0ed9871ccb",
+    "launcher/src-tauri/src/sessions.rs": "889ab81334026c5798e199371da26c017e8dacc3b8e286fece3731f9e5cccba4",
+    "crates/client/src/match_results_ui.rs": "3a94bc2531a3dbbe54227fd5a148de3eb8103c4999835bb036a610bc347f7960"
+  },
+  "garen_attack_identity_next": {
+    "plan": {
+      "path": "E:\\mapslol3v3\\garen_qw_animation_review\\identity_proposal\\PLAN.md",
+      "bytes": 10423,
+      "sha256": "fab71e73f9ac23d915543500e1455a8b1f20743e1870f8aea1485e2900e977db"
+    },
+    "provenance": {
+      "path": "E:\\mapslol3v3\\garen_qw_animation_review\\identity_proposal\\provenance.json",
+      "bytes": 2916,
+      "sha256": "a1ac7d21429148e620ca592403a87e500570b85d0b4fafff2514e65335684b2b"
+    },
+    "integrated": false,
+    "qualified": false
+  },
+  "evidence": {
+    "E:\\mapslol3v3\\session_lifecycle_game\\checks.json": {
+      "path": "E:\\mapslol3v3\\session_lifecycle_game\\checks.json",
+      "bytes": 3782,
+      "sha256": "70cd470230fba7dedb759f2921bfb8c11de562d4fba72f6706f2bfc5766afa2d"
+    },
+    "E:\\mapslol3v3\\session_lifecycle_game\\runtime_check.py": {
+      "path": "E:\\mapslol3v3\\session_lifecycle_game\\runtime_check.py",
+      "bytes": 7144,
+      "sha256": "8a551d363b62895899625939f9befa909181120625258f60d7016344f7e9daed"
+    },
+    "E:\\mapslol3v3\\session_lifecycle_game\\runtime_check.json": {
+      "path": "E:\\mapslol3v3\\session_lifecycle_game\\runtime_check.json",
+      "bytes": 2230,
+      "sha256": "1f1ff183676258244fa8d796873298a77d355f23eed7af866fc537c05d54d7bc"
+    },
+    "E:\\mapslol3v3\\session_lifecycle_game\\gui_normal_session_receipt.json": {
+      "path": "E:\\mapslol3v3\\session_lifecycle_game\\gui_normal_session_receipt.json",
+      "bytes": 3031,
+      "sha256": "be305fdadc74ab97ae51781fbef8b851ce55ae01d60cc88fc999c06b90458d6b"
+    },
+    "E:\\mapslol3v3\\session_lifecycle_layout_install\\checks.json": {
+      "path": "E:\\mapslol3v3\\session_lifecycle_layout_install\\checks.json",
+      "bytes": 2533,
+      "sha256": "7fef6a0cda63ae0eee917706f2d77127bbffa1ff600496eeb124f34227027372"
+    },
+    "E:\\mapslol3v3\\session_lifecycle_layout_install\\gui_receipt.json": {
+      "path": "E:\\mapslol3v3\\session_lifecycle_layout_install\\gui_receipt.json",
+      "bytes": 4250,
+      "sha256": "160db0dfe1f38001dc4c3d2cfe2f296886c2c24aedcba9df7d7d3e20f7f70376"
+    },
+    "E:\\mapslol3v3\\session_lifecycle_layout_fix\\manifest.json": {
+      "path": "E:\\mapslol3v3\\session_lifecycle_layout_fix\\manifest.json",
+      "bytes": 3778,
+      "sha256": "690362f2a9e8c0afffd527658f29c93f3c11fb407fa44e3840543432a97e1929"
+    },
+    "E:\\mapslol3v3\\session_lifecycle_review\\manifest.json": {
+      "path": "E:\\mapslol3v3\\session_lifecycle_review\\manifest.json",
+      "bytes": 685,
+      "sha256": "632ff0f20091d1f9328559e54219fa5d7e3027ee5c06bd81e03c8439f01777f1"
+    },
+    "E:\\mapslol3v3\\session_lifecycle_launcher\\stage_manifest.json": {
+      "path": "E:\\mapslol3v3\\session_lifecycle_launcher\\stage_manifest.json",
+      "bytes": 2781,
+      "sha256": "66c6c43fb6eefbfd49c97166e50bcf0b4bcb247d3fe5aad66e090e367225eab9"
+    },
+    "E:\\mapslol3v3\\garen_qw_animation_review\\manifest.json": {
+      "path": "E:\\mapslol3v3\\garen_qw_animation_review\\manifest.json",
+      "bytes": 1052,
+      "sha256": "0b0c889bf4b84957f849182c765cc23e6ea6ee0249b80a4c034f87111f303d28"
+    }
+  },
+  "limits": [
+    "Two real local server cycles with six UDP participants; no six-window rendered match.",
+    "Normal GUI: one idle Garen reached ordinary Nexus defeat, returned through results, then the same launcher opened a second match closed through Windows. This is not six-client combat acceptance.",
+    "Six-row layout uses the explicitly diagnostic terminal snapshot with injected winner and tick; it qualifies the results layout and return action only.",
+    "Normal launcher sequence was observed before the layout-only correction. Both client executable identities are preserved. No human acceptance of historical interface fidelity.",
+    "Results-save failure and ownership-read failure are injected unit scenarios; no disk failure was induced in a running match.",
+    "Launcher port precheck and server bind are not atomic and readiness has no dedicated handshake; startup failure is observed explicitly.",
+    "Local transport departure is not claimed as original LoL wire fidelity; stable reconnect identity remains incomplete.",
+    "The restored Map10 GLB is unchanged; full Garen kit, six-client gameplay, audio, assets and the rest of the overall goal remain open."
+  ],
+  "next_action": "Implement and qualify authoritative Garen Q attack identity and native animation binding from the pinned Garen review; W has native effects but no verified Spell2 clip. Continue six rendered clients on restored Map10 through ordinary combat, Nexus victory, authoritative result, exit and a second match. Preserve all remaining LoL4.20 domains."
+}

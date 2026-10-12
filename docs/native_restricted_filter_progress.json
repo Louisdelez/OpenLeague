@@ -1,0 +1,37 @@
+{
+  "updated_utc": "2026-10-04T23:15:40.556255+00:00",
+  "complete": false,
+  "client_tests_passed": 120,
+  "client_build_passed": true,
+  "native_restricted_filter_frames": 3456,
+  "native_addresses": 1359,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Original6B3FA0 executes3456frames crossing player+5E8 bit11, matching/nonmatching descriptor+34 identifiers, three source/actor teams, missing registration/missing actor/present actor, flagsAD/118/24/2C and applied/unapplied masks.",
+    "With the player restriction enabled, local sources without a registered actor or whose descriptor+34 differs from player descriptor+34 withdraw their applied masks and skip scheduling. Existing actor eligibility still applies. Unmatched source teams preserve their masks through the earlier non-spectator skip.",
+    "Rust PlayerViewActor/CircleView.select_player_source keeps descriptor identity separate from first source identity and native owner handles. Comparisons verify pending queue/priorities, generation order, counts and applied/pending states before/after processing;120client tests and build passed."
+  ],
+  "limits": [
+    "Original source enumeration, dirty/applied/pending gates, circle effective-radius getter, distance approximation, priority calculation, heap enqueue/pop and frame budget execute.",
+    "Both original identity and handle lookups execute on supplied registries; actor virtual getters600830 and617360 execute. Source tags100/200/300 with local tag100 and spectator false supplied at five virtual call sites; player+5E8 bit11 supplied; actor/descriptor flags and descriptor34 identifiers supplied. Original restricted-view comparison executes; field producers and constructors remain unqualified. QPC/clock and mask generation boundaries adapted; no generated mask is applied.",
+    "Allocator boundaries adapted; camera/world extent supplied. No live gameplay/GPU integration.",
+    "Player bit11, descriptor identities and cache flag2D7C070 supplied with matching initial state; mode/cache transitions and native refresh counter initialization/decrement are not qualified here.",
+    "Only non-spectator local player with tag100 is covered. Spectator/player-present combination, tag/descriptor mutation producers and complete view construction remain unqualified.",
+    "Mask generation adapted in these3456frames. Prior full Map10 generator qualification remains separate. No ordinary source activation, server/GPU fog binding or current graphical rerun."
+  ],
+  "next_actions": [
+    "Qualify native selection/restriction transitions and refresh counter reset20/decrement per view update; complete view initialization/subscriptions.",
+    "Qualify actor/registry/descriptor producers and connect native source lifecycle to ordinary entities.",
+    "Integrate qualified masks into authoritative visibility and GPU rendering; verify current restored Map10 gameplay."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_restricted_filter_contract.json": "d30c390e7df6591f67cd3c62123a93d7ae24c4d9be6d0ced5acf3fa6419931a1",
+    "tools/probe_fow_restricted_filter.py": "69cd38f8f1babc3979ac5df0adf20a12c0df9cc8b36557dcd93ddcd5757c6ab9",
+    "tools/probe_fow_restricted_filter_generated.py": "e54a2909468fb0cbb6413bc68f7f6f5038da220f50040311e16cedb2a02a6a4c",
+    "crates/client/src/fow_player_filter.rs": "f20fb59aba1d3ecfeb3eef9ec2ad36b4afd3b69f67f05fcc83c77b4e085a7b75",
+    "logs/native-restricted-filter-tests.log": "32111da50a15183fb782bfd55dbb6890707b2b76cf43b56430742a71da394b32",
+    "logs/native-restricted-filter-build.log": "f6a5cb257604c18f59285474644340a11431ce7cf40d279a0abf5ab9b48f0dba",
+    "target/debug/openleague-client.exe": "6657584ecf788a1c7cbb83e6631e175d2dec75f41c8a956e6a0d27a5d9d08fe5"
+  }
+}

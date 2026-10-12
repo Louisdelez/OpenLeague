@@ -1,0 +1,49 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T14:14:47.965927+00:00",
+  "change": [
+    "Port actual parent attachment and unsigned sorted insertion, native status precedence, selector namespace, parent field24 and recursive C4 kind propagation. Reject malformed/cyclic graphs explicitly.",
+    "Connect the parent implementation to bank loading with a mutable child Bus, preserving partial child mutations on error. Keep graph contents/reservation/lifetime callbacks mandatory; no automatic runtime resource ownership inferred."
+  ],
+  "validation": {
+    "audio_regression_tests_passed": 266,
+    "failed": 0,
+    "session": 39491,
+    "terminal_exit_code": 0,
+    "native_parent_cases": 5120,
+    "native_composed_bank_parent_properties_cases": 2048,
+    "comparison": "Standalone exact200-byte parent/child, descendants, vectors, result and trace. Composed bank exact live200-byte child, parent, descendants, vectors, properties, controls, roots, status and whole call order plus lifetime interface dispatch.",
+    "preparatory_active_group_cases": 1536,
+    "log": "logs/audio-bus-parent-bank-tests.log"
+  },
+  "reference_correction": "First composed comparison failed because reference extracted A5 allocator memory even when parent refusal stopped loading before allocation. Re-ran native probe; property_table now present only after actual allocator dispatch and success. Failed log retained.",
+  "sha256": {
+    "crates/core/src/audio_bus_parent.rs": "87c12377895bccbb94bc8e42846b9b8a1054f5a3f12e8e6ac5fc141e639ac8a9",
+    "crates/core/src/audio_bus_bank.rs": "e6e153fdc0f62005436ecc74fc158352c12e96a60d255f0cb7da8b9fb06aa095",
+    "crates/core/src/audio_bus_properties_bank.rs": "4a6eaf45b514c87e9b6c14de090dd98a866b7aa84f12ed7ac07e24273b200b72",
+    "crates/core/src/lib.rs": "71762b599b91fcb9862f370c9ecbe2bd2d92fb8b82ca5dc811368d35436813b4",
+    "tools/probe_native_audio_bus_parent_attachment.py": "83bf96ba34ec753a2a593a5e418365afc90207f62505e354f717022f164c90c1",
+    "tools/probe_native_audio_bus_bank_parent_properties.py": "5d22da950391af025e7ab720d5a822d92a4770c1eae906b4feb1dbc34f27c19c",
+    "tools/probe_native_audio_bus_active_groups.py": "cab1d79a7388351dc5f1b6b3f47de3cc052bbc842e02369514d87f4f00dd9ed0",
+    "data/4.20/audio_bus_parent_attachment_contract.json": "d3f583388590d14ff043d36536bf0022f6b2dca88dbe6e1e021d8099ecbd8d21",
+    "data/4.20/audio_bus_bank_parent_properties_contract.json": "5f937db101ae0a03fc0d33984898436c473bf8b6381bee22c4073f60df4f987c",
+    "data/4.20/audio_bus_active_groups_contract.json": "a196686a65ff031189e15b9f62392f8cb0200cf56c99034439f7e7558414bb64",
+    "logs/audio-bus-parent-tests.log": "68cbd5af021b05afa9ec1893a51103ba5df52edc76c3ecc00ad976ce2191b955",
+    "logs/audio-bus-parent-bank-tests.log": "4a80417edbee5f55b2aa260f832e17242005da7e1fba7a16d3ca81e38da2d1a5",
+    "logs/audio-bus-parent-bank-reference-failure.log": "760a86740f582ff6dba2972d2341326147dc3decce17fcf425cbf5946841905b",
+    "logs/audio-bus-bank-parent-properties-probe.log": "e4a0360d1f21c36621570ce35fa53bcb53b137317046297b0b249273de27ebb3",
+    "logs/audio-bus-active-groups-probe.log": "7275dda2a8c2fa9571d2c709d68e5af6ba2a16783e111dc5f8bc7d258015e85e",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "178e80a86677c25cbc08d1bbb2c19e634cd3b9b141235ebd1b8b8699074c7123"
+  },
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "interfaces": [
+    "Combined probe executes actual bank/parent/search/insertion/link/kind/property/control-list bodies. Lookup/retain/release/reserve/heap/memcpy and later loader interfaces explicitly supplied.",
+    "Active groups probe executes original mode and rebuild/search/insertion routines without result adapters; finite sorted unique voice keys, distinct groups and sufficient capacity are constructed inputs."
+  ],
+  "limits": [
+    "Active groups remain preparatory; Rust consumer and property-prefix integration still pending.",
+    "Normal HIRC8 factory creation, graph resource ownership/refcount/destruction and allocator lifetime remain unqualified. Graph is an attachment snapshot; later bank property/control mutations live in the caller Bus until resource-store integration.",
+    "Effects/RTPC/state/position bank readers and Bus B04A00 remain incomplete.",
+    "No new normal-client execution, audible output, complete bank or full-game acceptance."
+  ]
+}

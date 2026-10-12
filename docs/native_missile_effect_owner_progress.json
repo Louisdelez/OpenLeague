@@ -1,0 +1,38 @@
+{
+  "updated_utc": "2026-10-07T04:20:28.264960+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_orientation_cases": 24,
+  "native_binding_cases": 8,
+  "actual_cpu_rsqrt_operations": 37,
+  "focused_core_tests_passed": 1,
+  "filtered_core_tests": 592,
+  "full_core_suite_rerun": false,
+  "ordinary_projected_binding": false,
+  "client_rebuilt": false,
+  "artifacts_sha256": {
+    "crates/core/src/native_missile_effect_owner.rs": "c9efafb553cfb94cfc884a77841185f37a5cd5577aec393b9ee8f6876c4d5dcc",
+    "crates/core/src/lib.rs": "9fb65c5b57d85cf5763034722f17cc28d5583e3787adb30814cc45d37377db07",
+    "data/4.20/missile_effect_owner_orientation_contract.json": "48fcce1636fa639f3601de82b02b3a075537ba80ddbc29d2d44c57a6701b1c60",
+    "data/4.20/missile_effect_owner_binding_contract.json": "37e17fcc4fed381610bc75d1c8526a628470990b1c69f66d528eb4977b1be2b7",
+    "tools/probe_native_missile_effect_orientation.py": "63bb1165fe4d1018d048dde90e911effb97c535a715fee7984b244146e24b195",
+    "tools/probe_native_missile_owner_binding.py": "9a86b4ac987a42149d471df8d71d98d38fcaebc50c988bfa9da1cd80199dad4b",
+    "logs/native-missile-effect-owner-tests.log": "4e8e7cb0c3a8769ffeb36f7a1e7c35f893d3df6c7475d1992c1b9e96e727bba8"
+  },
+  "findings": [
+    "MissileEffect loader768499 stores string at SpellData+5E0; MissileEffectPlayer+5F8 and Enemy+610 selected by763536..7635B2 depending local viewer/context. Selection path remains static evidence.",
+    "Creator763950 constructs provider vtable10B0D20 at763BDC with owner from projectile wrapper+4; distinct from spell caster provider10B0E1C.",
+    "Provider10B0D20 shares position/direction/status methods with10B0E1C but orientation slotC is719D20, building a basis from direction+6C instead of object matrix+18C0.",
+    "24 original orientation cases include alive/expired, cardinal/diagonal/zero/small/near-vertical directions. 37 RSQRTSS operations supplied by physical CPU; Rust bitwise outputs match.",
+    "Native6C9BD0 stores shared owner at wrapper+148/+14C, obtains live effect from weak handle+11C/+120 and forwards owner to effect virtual68. Eight executions verify live/expired/absent/new/old owner combinations; virtual body is adapted."
+  ],
+  "limits": [
+    "Exceptional/nonfinite/denormal inputs not qualified; expired owner returns identity with success=false.",
+    "Static creation763BDC identifies missile provider10B0D20; whole creator/binding and native skin selection remain unqualified; no new GPU qualification.",
+    "Virtual68 implementation and full projectile creation/update not executed here.",
+    "Provider construction763BDC=10B0D20 established statically, not whole live gameplay.",
+    "No live client changes, GPU/audio rerun or champion/domain completion.",
+    "Historical590 full core suite retained; only one focused test run now,592 filtered."
+  ],
+  "next_action": "Qualifier la création complète de l’effet missile763410/763950 et le producteur de direction, raccorder le fournisseur10B0D20 à AnnieProjected, puis contrôler scale/alpha/récepteurs terrain et poursuivre les24domaines."
+}

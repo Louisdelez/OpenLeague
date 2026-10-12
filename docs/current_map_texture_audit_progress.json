@@ -1,0 +1,33 @@
+{
+  "updated_utc": "2026-10-06T12:43:32.379650+00:00",
+  "complete": false,
+  "product_assets_changed": false,
+  "images_decoded": 235,
+  "materials_classified": 115,
+  "native_diffuse_materials_pixel_equal": 104,
+  "nvr_materials_pixel_equal": 85,
+  "auxiliary_materials_pixel_equal": 19,
+  "verified_native_terrain_shader_textures": 6,
+  "derived_terrain_materials": 3,
+  "reconstructed_sprite_materials": 8,
+  "missing_diffuse_binding_count": 0,
+  "image_decode_error_count": 0,
+  "artifacts_sha256": {
+    "docs/current_map_texture_audit.json": "6a72d7a06a73883f93f828908544a774f028e7c13581b429e6fe2a96422471cb",
+    "docs/current_map_auxiliary_texture_audit.json": "9d2a2f0ce5883759cd180d2d1adba1c85a36e23e24977ea00f781928db09bffc",
+    "docs/current_map_sprite_derivatives.json": "0ddc43017f7329f771919593d1ba240014699c4178fa40f04519b42a72c84d31",
+    "assets/maps/twisted_treeline.glb": "909513a80e01ae67ee6b15783177a2891363efc640ca47d727f189bcaa429c1a"
+  },
+  "findings": [
+    "Runtime main.rs loads assets/maps/twisted_treeline.glb; current asset SHA matches the documented OpenLeague derivative of the Blender restoration. This audit does not include a fresh runtime asset-request capture.",
+    "All235embedded PNG images decode and every primitive has a valid material.104active material diffuse images match original DDS pixels.",
+    "Six truncated Blender material names resolve through original NVR mesh ownership, not name guessing. Two original terrain materials use4096-square compositions in the GLB; actual Rust height-blend shader uses six original PNG/DDS sources whose decoded pixels match.",
+    "One reconstructed navigation surface deliberately retains its separate terrain fallback material; not original NVR geometry. Eight Native_-named sprite textures are fixed-tint luminance/alpha derivatives reproduced byte-for-byte from their source PNGs. Their color/opacity settings are reconstruction, not native-qualified instance behavior."
+  ],
+  "limits": [
+    "Texture content audit does not prove whole-map raster fidelity, original material ownership for auxiliary hash candidates, lighting, fog, gamma, native geometry, collisions, gameplay or human acceptance.",
+    "Do not replace derived terrain with one tiled DDS or alter verified original textures to hide renderer defects. Actual shader and particle inputs need qualification.",
+    "Eight reconstructed sprite materials and navigation fallback remain tracked reconstruction; full map and all24domains remain incomplete."
+  ],
+  "next_action": "Remplacer les huit effets ambiants à teintes/opacités fixes par leurs paramètres, durées et rendu natifs ; qualifier shaders/gamma/fog et défaut cyan Chaos ; poursuivre interactions/carte et partie à six clients, puis les 24 domaines."
+}

@@ -1,0 +1,186 @@
+#include "IOParam/IODefine_VS.hls"
+#include "../Fog/Fog.hls"
+#include "../FogOfWar/FogOfWar_VS.hls"
+
+
+//selfillumination in W
+float4 	SKIN_PARAMETERS : register(c17);
+
+/// Bones
+column_major float4x3 BONES[68] 	: register(c24);
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// Calculate the attenuated contribution from a single point light
+///
+/////////////////////////////////////////////////////////////////////////////////////
+float4 
+	CalculatePointLight
+	(
+		float3 position,				/// Vertex position
+		float3 normal,				/// Vertex normal
+		float4 lightPosition,				/// Light position
+		float4 lightColor					/// Light color
+	)
+{
+	// Vertex to light
+	float3 vertexToLight = lightPosition.xyz - position.xyz;
+
+	// Attenuate with distance to light based on attentuation factor in W component of light position
+	float attenuation = 1.0f - saturate(length(vertexToLight) / lightPosition.w);
+
+	// N dot L
+	float NdotL = dot(normalize(vertexToLight), normal);
+
+	// Compute final attenuated color
+	float4 finalColor = saturate(max(NdotL,0)*lightColor*attenuation); 
+
+	// Return
+	return finalColor;
+}
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+///
+///
+///
+/////////////////////////////////////////////////////////////////////////////////////
+void 
+	main
+	(
+		float3		vPos :		X3D_VSIN_POSITION,
+		float3		vNormal:	X3D_VSIN_NORMAL,
+		float2		vUV1:		X3D_VSIN_TEXCOORD0,
+		blendindex4	vBlendIndices : X3D_VSIN_BLENDINDICES,
+		float4		vBlendWeight : 	X3D_VSIN_BLENDWEIGHT,
+		out float4	vPosOut:	POSITION,
+		out float4	vColorOut:	COLOR0,		// sunColor in PixelShader (TODO:  Name these the same?)
+		out float4	vColorOut1:	COLOR1,		// envColor in PixelShader (TODO:  Name these the same?)    
+	#if defined(FOG_PIXELSHADER_BLEND)
+		out float4	vTexOut1:	TEXCOORD0,
+	#else
+		out float2	vTexOut1:	TEXCOORD0,
+	#endif
+		out float4  out_texcoord4:	TEXCOORD1,
+		out float4	vTexSM:		TEXCOORD2
+#ifdef REFLECTIVE
+		, out float4	out_reflectRay		  : TEXCOORD3
+		, out float3	out_worldNormal   : TEXCOORD4
+		, out float4	vReflTint		  : TEXCOORD5
+#endif
+	#if defined(VERTEX_FOG)
+		, out float out_Fog : FOG
+	#endif
+	)
+{
+	// Compute skinned local position
+	float3 worldPosition = float3(0,0,0);
+	for (int i = 0; i < NUM_BLEND_WEIGHTS; ++i)
+	{
+		blendindex boneIndex = vBlendIndices[i];
+		float weight = vBlendWeight[i];
+		worldPosition += (mul(float4(vPos, 1.f), BONES[boneIndex]) * weight);
+	}	
+	
+	// Output homogeneous position
+	vPosOut = mul(float4(worldPosition.xyz, 1.0f), mProj ); 
+
+	// Output texture coordinate using texture transform
+	vTexOut1.xy = vUV1 * vUVTransform.xy + vUVTransform.zw;
+	
+	// Output shadow position
+	vTexSM.xyz = mul(float4(worldPosition.xyz, 1.0f), mShadowProj).xyz;
+
+	// Compute world normal
+	float3 worldNormal = float3(0,0,0);
+	for (int j = 0; j < NUM_BLEND_WEIGHTS; ++j)
+	{
+		blendindex boneIndex = vBlendIndices[j];
+		float weight = vBlendWeight[j];
+		worldNormal += (mul(float4(vNormal, 0.f), BONES[boneIndex]) * weight);
+	}
+	worldNormal = normalize(worldNormal.xyz);  
+
+	/////////////////////////////////////////////////
+	//Lighting.
+#ifndef USE_LIGHT_GRID	//The "old" system - a single directional and up to 4 pointlights.
+	// N dot L saturated
+	float NdotL = saturate(dot(-vLightVec1.xyz, worldNormal.xyz));
+
+	// Incident sun light
+	float3 incidentSunLight = NdotL * vLightColor.xyz;
+
+	// Output sun light is incident sun light
+	vColorOut.xyz = saturate(incidentSunLight);
+	vColorOut.a=1;
+
+	float4 DColor = float4(0,0,0,0);
+#ifndef DISABLE_POINT_LIGHTS
+	// Compute contribution from environmental point lights
+	for (int k=0;k<4;k++)
+	{
+		DColor += CalculatePointLight(worldPosition, worldNormal.xyz, POINT_LIGHTS_POSITION[k], POINT_LIGHTS_COLOR[k]);
+	}
+	DColor = saturate(DColor);
+#endif
+	vColorOut1 = DColor;
+#else				//The LightGrid system - all dynamic lighting is replaced with LightGrid lookups.
+	const int3   isNeg  = (worldNormal.xyz < 0);   // Determine array indices based on normal sign: essentially the same as Index(x,y,z) = N(x,y,z) < 0 ? 0 : 1.
+	const float3 NN     = worldNormal*worldNormal; // Use (N^2).xyz as weights
+
+    const float  textureScale    = LIGHTGRID_COLORS[0].a;   // packed by r3dLightGrid::GetCellColor
+    const float  fullBrightScale = LIGHTGRID_COLORS[1].a;   // packed by r3dLightGrid::GetCellColor
+	
+	//vColorOut.b = "Texture Scale", scales lighting value when normal textures/materials are applied. This is authored in a [0,4] range, which is 
+	//compressed to [0,1] for interpolation. *[Color interpolation is clamped to [0,1] by some drivers when using Shader Model 2]
+	//vColorOut.a = "Fullbright Scale", this scales the fullbright value. Ideally this will be 0, but this gives the artists and designers control of how dark
+	//a character or building can get.
+	vColorOut  = float4(0, 0, textureScale, fullBrightScale);
+	
+	//Compute the final lighting color given the light grid colors and the world space normal.
+	//This handles all lighting in the scene with shadows, including sunlight, multi-color skylight, arbitrary numbers of pointlights and indirect/bounced lighting.
+	//The quality is somewhere between 2nd and 3rd order SH with less memory and cost then 3rd order but with quality that is pretty close 
+	//(i.e. much closer to 3rd order then 2nd in quality).
+	//The advantages include simplicity, easy to understand code, fast/easy to directly generate on the GPU, smooth reconstruction.
+	vColorOut1.rgb = LIGHTGRID_COLORS[isNeg.x].rgb*NN.x + LIGHTGRID_COLORS[isNeg.y+2].rgb*NN.y + LIGHTGRID_COLORS[isNeg.z+4].rgb*NN.z;
+#endif
+	/////////////////////////////////////////////////
+	
+	// Fog of war and clouds
+	out_texcoord4.xy = FogOfWarTextureCoordinates(worldPosition.xyz).xy;
+	out_texcoord4.zw = worldPosition.xz*vCloudsParam.xx + vCloudsParam.yz;
+
+#ifdef REFLECTIVE
+	//- Additive Fresnel
+	float fresnelPower = vFresnel.w;
+	float3 eyeRay = normalize( worldPosition.xyz - vCamera.xyz );
+	vReflTint.w = 1.0f - pow( saturate( dot(-eyeRay, worldNormal.xyz) ), fresnelPower );
+	
+	//- Reflection
+	float reflectFresnelPower = vReflection.x;
+	out_worldNormal    = worldNormal.xyz;
+	out_reflectRay.xyz = reflect(eyeRay, out_worldNormal.xyz );
+	
+	//store the fresnel factor in the w component of the reflectRay. This is done in the vertex shader, so a proper power can be used.
+	//base fresnel is the 0 to 1 reflection intensity based on the fresnel power.
+	float baseReflectFresnel = 1.0f - pow( saturate( dot(-eyeRay, worldNormal.xyz) ), reflectFresnelPower );
+	//the final scaled result factors in the minimum and maximum reflection intensities supplied by the artists.
+	out_reflectRay.w  = lerp(vReflection.y, vReflection.z, baseReflectFresnel);
+	//the view dependent reflection color is also keyed off the fresnel.
+	vReflTint.rgb = lerp(1.0f, vReflectionFColor, out_reflectRay.w);
+#endif
+	
+	#if defined(VERTEX_FOG)					//Vertex fog.
+		out_Fog = ComputeFogValue( vPosOut, worldPosition.xyz );
+	#elif defined(FOG_PIXELSHADER_BLEND)	//Per-pixel fog.
+		vTexOut1.zw = out_texcoord4.xy;
+		vTexOut1.w  = 1.0f - vTexOut1.w;
+		#ifndef FOG_QUALITY_LOW
+			vColorOut1.a = 1.0f-ComputeFogValue(vPosOut, worldPosition.xyz);
+		#endif
+		//handle opaque layer of the height fog
+		vTexSM.w = ComputeFogOpaqueLayer(worldPosition.xyz);
+	#endif
+}

@@ -1,0 +1,34 @@
+{
+  "updated_utc": "2026-10-07T06:08:49.090408+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_cases": 192,
+  "native_instruction_addresses": 78,
+  "focused_core_tests_passed": 1,
+  "full_core_suite_rerun": false,
+  "artifacts_sha256": {
+    "data/4.20/missile_resource_selection_contract.json": "9412f47e4303bf4ccfe100d121e62bb3ad3db804a130b2925428517c7df421ba",
+    "tools/probe_native_missile_resource_selection.py": "c3e068cd2c97bcaee7ca04c301d2d921812e5cf93b192a424ae1cc18d4a2cfdd",
+    "crates/core/src/native_missile_resource_selection.rs": "976ac57a9745e9b9a6095631fa009078160b7111a5f9b711fac38e27aa2a4be2",
+    "crates/core/src/lib.rs": "c811351f15d35fc2a85d93b06b937833e9991f92eb8f188ab499480e1fe64b83",
+    "logs/native-missile-resource-selection-tests.log": "5bd8f4507a5ac9b987c8727611bf82b0d738ed40f66d9dd2f39f183be095c620"
+  },
+  "findings": [
+    "Native763536 resource selection matches Rust across192profiles: default/own/enemy name precedes skin alias resolution.",
+    "Count-positive/local-player-ID route selects own variant; otherwise differing teams select enemy variant when available; default name is fallback.",
+    "Native7172B0 constructor request receives flags0 on projectile route. Generic751BE0 flags8 assumptions cannot be applied to this creation path without qualification."
+  ],
+  "adapters": [
+    "Actor team virtualC returns supplied team IDs. Package90AF50 returns supplied pointer; group6CCED0 returns zero.",
+    "Alias7522B0 is an explicit identity string adapter: this probe qualifies pre-alias resource selection only.",
+    "Stops at real7172B0 constructor request, before allocation/load."
+  ],
+  "limits": [
+    "Original selection prefix763536..763678 executes, not whole763410 creation.",
+    "Caller7172B0 flags0 are different from generic751BE0 flags8 profile; resulting Troy orientation flags remain unqualified.",
+    "Native skin alias algorithm qualified separately; actual package/variant existence and live client selection remain open.",
+    "Core-only; actual variant/package/skin loading and owner orientation flags remain incomplete.",
+    "No full-suite/client/runtime qualification; zero domains closed."
+  ],
+  "next_action": "Qualifier les drapeaux Troy issus de la création7172B0 du projectile (flags0), raccorder la pose propriétaire et les variantes/skins au rendu ; poursuivre les24domaines."
+}

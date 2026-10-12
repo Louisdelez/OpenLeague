@@ -1,0 +1,111 @@
+{
+  "updated_utc": "2026-10-07T09:03:08.730276+00:00",
+  "complete": false,
+  "passed": true,
+  "client_sha256": "bc1bd200e9a6011693790c94d5f359b264e10350ac942512a778fe07eef2d395",
+  "graphical_client_rebuilt": true,
+  "current_runtime_capture": true,
+  "backends": {
+    "dx12": {
+      "casts": 2,
+      "cleaned": 2,
+      "active_effects_final": 0,
+      "active_draws_final": 0,
+      "baseline": {
+        "frames": 33,
+        "nonzero_frames": 0,
+        "changed_pixels_min": 0,
+        "changed_pixels_max": 0,
+        "max_rgb_difference": 0
+      },
+      "instances": [
+        {
+          "entity": 4294959526,
+          "frames": 4,
+          "changed_pixels_max": 70542
+        },
+        {
+          "entity": 12884894085,
+          "frames": 4,
+          "changed_pixels_max": 68123
+        }
+      ],
+      "pipeline_frames": 10,
+      "visual_inspection_required": false,
+      "visual_inspection": {
+        "inspected": true,
+        "images_per_backend": 5,
+        "observed": "Two cast images, cleanup and same-frame on/off pair inspected. Warm ground contribution present only in paired on image; other red projectile particles persist separately in cleanup image."
+      },
+      "human_fidelity_acceptance": false
+    },
+    "vulkan": {
+      "casts": 2,
+      "cleaned": 2,
+      "active_effects_final": 0,
+      "active_draws_final": 0,
+      "baseline": {
+        "frames": 60,
+        "nonzero_frames": 0,
+        "changed_pixels_min": 0,
+        "changed_pixels_max": 0,
+        "max_rgb_difference": 0
+      },
+      "instances": [
+        {
+          "entity": 4294959526,
+          "frames": 10,
+          "changed_pixels_max": 72681
+        },
+        {
+          "entity": 12884894092,
+          "frames": 7,
+          "changed_pixels_max": 70163
+        }
+      ],
+      "pipeline_frames": 19,
+      "visual_inspection_required": false,
+      "visual_inspection": {
+        "inspected": true,
+        "images_per_backend": 5,
+        "observed": "Two cast images, cleanup and same-frame on/off pair inspected. Warm ground contribution present only in paired on image; other red projectile particles persist separately in cleanup image."
+      },
+      "human_fidelity_acceptance": false
+    }
+  },
+  "native_visibility_activation_runtime_executed": true,
+  "native_visibility_suppression_draw_gate_integrated": true,
+  "hidden_visibility_transition_graphically_exercised": false,
+  "native_activation_reference_sequences": 48,
+  "native_team_reference_cases": 192,
+  "focused_client_tests_passed": 7,
+  "focused_core_tests_passed": 1,
+  "native_frame_gate_reference_cases": 1280,
+  "full_suites_rerun": false,
+  "artifacts_sha256": {
+    "target/debug/openleague-client.exe": "bc1bd200e9a6011693790c94d5f359b264e10350ac942512a778fe07eef2d395",
+    "logs/annie-visibility-client-build.log": "658ade14748e400642cfb6b91e9a41ca892b12b2024a205ab90b9ed617e1b761",
+    "logs/annie-visibility-client-tests.log": "322f0bf32cb53669935a8d441d77ed42b9cd4268489b1b70a6d34e6f17b87ac2",
+    "logs/native-troy-visibility-predicate-tests.log": "685830076f0f7d9588f3e5f5505ec70f54b37f409a2e8742d451ab3abd745838",
+    "data/4.20/projectile_visibility_activation_contract.json": "b61e9e2697334555eaf73f811843719bf98455f5bcd19c0c09f07ae47ef96292",
+    "data/4.20/projectile_team_visibility_contract.json": "dc4c76265f3ed4de985a47d3430d2ad7f54a00eab3df2b5d16ee0d44bf4895fa",
+    "crates/client/src/projected_live.rs": "b86791025e7850011fad2c8efcc57785b79f535df8e782644b086b928bbc4d54",
+    "crates/core/src/native_projectile_owner_properties.rs": "f27bd5d250931c45a8235260f0357eaeb6bd9b17ec44e9e8ee1ce0b906384b77",
+    "crates/core/src/native_troy_frame_gate.rs": "e585e7784cd0508c184359377fd7c8908b83539da7bd9e49c98d9bc1818c9dc2",
+    "docs/projected_core_cycle_capture_v22_visibility_dx12.json": "5ef9292288fbed80de30a73d3180af9faa61b60ad90fa3820a941c79ec69036c",
+    "docs/projected_pair_control_v22_visibility_dx12.json": "850944b36eae56743a528b62e4808949ff5a4711398f9ac8b1fe442ddc3b640b",
+    "logs/projected-core-cycle-v22-visibility-dx12-pipeline.json": "ee3043fb210ffc22c72a81e156e6889f7e238c50a4d273e951dc10cccfb2871a",
+    "docs/projected_core_cycle_capture_v22_visibility_vulkan.json": "e6067d4c3b179ec60f2f2a34e2ea15338e923961607df8c2dbccc212f76dc68e",
+    "docs/projected_pair_control_v22_visibility_vulkan.json": "61d288c0b22fadfec71aa6e20c5279d4176a9e9b9010f267ea9fe3274e59deae",
+    "logs/projected-core-cycle-v22-visibility-vulkan-pipeline.json": "2139f1a1f5a4d08ee7eb8dbfdea6e4dcc81fe1fd39a302434bd23127fa4eb189"
+  },
+  "limits": [
+    "Two seeded diagnostic casts per backend; not ordinary progression, complete champion or whole-game acceptance.",
+    "Local effect creation invokes the native activation port. Original registry activation callers, weak lifetime source and full frame ordering remain open.",
+    "Supplied local root filter disabled yields an unsuppressed projection.48native reference sequences test activation/deactivation, but no hidden team transition was injected into these graphical captures.",
+    "Native suppression predicate controls the footprint; Bevy camera culling remains an explicit adapter. Native frustum/hidden-frame skip/pause/resume simulation, native team/FOW producers and rasterization remain open.",
+    "Other lifecycle/pose/scale/cleanup tests remain targeted; native status/flags, receiver fidelity and full Q effects remain incomplete.",
+    "Technical checks are not human acceptance of original-game fidelity; zero domains closed."
+  ],
+  "next_action": "Qualifier les appelants natifs d’activation, l’ordonnancement masqué et les producteurs équipe/FOW ; poursuivre les statuts/drapeaux du propriétaire puis les24domaines/114tâches."
+}

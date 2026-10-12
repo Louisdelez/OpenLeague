@@ -1,0 +1,29 @@
+{
+  "updated_utc": "2026-10-04T00:40:37.743733+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_worker_queues.py": "941492fd59e8d3526f02d4220d8a852ddddf12ebd887cc78a3bcc1ed25073f82",
+    "data/4.20/audio_worker_queues_contract.json": "b7a4901b4170282dfc4c6bb73c7c8ff94c2b8d40bcc073df980af064c2367512",
+    "crates/core/src/audio_logical_registration.rs": "19c7949c459abc9623e07abbc88d150aed56ae0501bc8c82b0b514ac5701eba4",
+    "logs/native-audio-worker-queues-core-tests.log": "1539d38942e5cad72bf63f3f98ce65b0382824fe1f50cc68668a895b9ecd5b6d"
+  },
+  "native_full_worker_queue_cases": 192,
+  "core_tests_passed": 219,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "ported": [
+    "persistent create/update/release pending queue order",
+    "position dirty bit1 / boolean dirty bit2 forwarded in order",
+    "duplicate creates/updates preserved, duplicate releases skip erased entries",
+    "queue clearing prevents replay next worker call"
+  ],
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false,
+  "limits": [
+    "Whole original9214F0 executed for persistent creation/update/release queues, native single-node lookup including missing IDs, native queue resets and transient-empty destruction.",
+    "Backend virtual callbacks, string copy, map store/erase and extra-empty destruction adapters; actual map erase updates fixture sentinel. No Wwise playing voices or audible output.",
+    "Lock fast-path initialized as acquired fixture, lock/security/LeaveCriticalSection callbacks adapted. Other-thread lock branches excluded.",
+    "Transient and secondary request vectors empty; their full non-empty handling remains unqualified.",
+    "Rust persistent worker callback routing implemented. Native physical backend factory/playback, retained emitter timing, producer dirty setters and transient/secondary non-empty queues remain incomplete.",
+    "Worker callbacks in qualification controlled; no Wwise audible playback or current standalone executable rebuild."
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "updated_utc": "2026-10-07T03:03:04.960344+00:00",
+  "complete": false,
+  "current_client_sha256": "16ad6fe7c0df2454eac5b65264f486cde18315edec3bffb0320092fcb4507ec0",
+  "annie_projection_core_frame_current_runtime_executed": true,
+  "annie_projection_core_frame_repeat_cleanup_checks": 2,
+  "annie_projection_per_cast_captures": 2,
+  "annie_projection_current_graphical_binary_qualified": false,
+  "annie_projection_pixel_attribution_qualified": false,
+  "latest_projected_runtime_progress": "docs/native_projected_core_runtime_v8_dx12_progress.json",
+  "artifacts_sha256": {
+    "target/debug/openleague-client.exe": "16ad6fe7c0df2454eac5b65264f486cde18315edec3bffb0320092fcb4507ec0",
+    "target/debug/examples/annie_ready_fixture.exe": "da95bfe08f5647a22141edd4282090311da70d69344bd4ab36d038295501b790",
+    "crates/client/src/main.rs": "3ef7e7533fb269aad422ab135c37a1989984bc6b4f4517f7f275b4ec98849bd4",
+    "crates/client/src/projected_live.rs": "f2a72224062076ab1414574447b101dbb93c70b735486a7857c9e2e2cce94d49",
+    "crates/client/src/simple_projected_config.rs": "fcb7ee2afe1c0a50e1896a82e2ca87b481a008a569025199c3db2efaf83f145a",
+    "logs/projected-warmup-build.log": "15c84db7833a540f7ad9639fa59b0d805cd38e42a540eae14a280c25fd4e9c92",
+    "docs/projected_core_cycle_capture_v8_dx12.json": "db5c075230585336580d958ce4412185f1fd1ec1f5e789e1bd4b6dbe20f0db10",
+    "tools/capture_projected_core_cycle_v3.py": "ac2c43b2534ff842dd963e49509693bec0909e3141af99fe8e11c6a28a9da3ee",
+    "logs\\projected-core-cycle-v8-dx12-baseline.png": "a4b1c5c3ac7510727c924aab7ec8a116d159103c1ac07204d1dc345e48bf9ad1",
+    "logs\\projected-core-cycle-v8-dx12-on.png": "d543845bd2e80c0cf4bccda551aa20fbf78d468a357281a019ed431b9853a4e8",
+    "logs\\projected-core-cycle-v8-dx12-on.off.png": "cecbcf3c514bd755cd76fb185d0a6f7aa93d90bc12ca5e03def9b8af33122a97",
+    "logs\\projected-core-cycle-v8-dx12-on.shot-1.png": "d543845bd2e80c0cf4bccda551aa20fbf78d468a357281a019ed431b9853a4e8",
+    "logs\\projected-core-cycle-v8-dx12-on.shot-2.png": "b2196cb9393c5839b2321ac02e744aeab87b54d5f4cf8bb8dd8056c0152abe2f"
+  },
+  "visual_inspection": {
+    "inspected": true,
+    "findings": "Baseline, both cast images and off inspected. Second DX12 cast shows a ground glow; first DX12 capture does not clearly show its projection despite ready pipeline. Render latency/fragment attribution require separate measurement. Off still contains separate red Fire/Fire_Head effects. Different simulation times and coexisting particles prevent strict pixel attribution; no original-framebuffer fidelity acceptance."
+  },
+  "capture_frames": [
+    {
+      "active_count": 1,
+      "angle": 0.0,
+      "effect_age": 0.1377373999999989,
+      "particle_age": 0.06886869668960571,
+      "path": "E:/OpenLeague/logs/projected-core-cycle-v8-dx12-on.shot-1.png",
+      "position_native": [
+        7964.98095703125,
+        5.277469635009766,
+        6934.240234375
+      ],
+      "requested_at": 25.736057,
+      "scale": 500.0,
+      "shot": 1,
+      "vertices": 144
+    },
+    {
+      "active_count": 1,
+      "angle": 0.0,
+      "effect_age": 0.1928744000000009,
+      "particle_age": 0.09643720090389252,
+      "path": "E:/OpenLeague/logs/projected-core-cycle-v8-dx12-on.shot-2.png",
+      "position_native": [
+        8011.6474609375,
+        10.3019380569458,
+        6934.240234375
+      ],
+      "requested_at": 29.843713,
+      "scale": 500.0,
+      "shot": 2,
+      "vertices": 135
+    }
+  ],
+  "limits": [
+    "Current DX12 framebuffer with normal projectile-driven projection, fixture seeds level6/position/readiness; not ordinary progression acceptance.",
+    "Two server casts; normal consumer creates and cleans its own mesh/material/entity. Geometry counters are CPU observations, not pixel attribution.",
+    "Exact native owner orientation, scale setters, receiver selection, FOW, blend/depth/sampler and full Q fidelity remain unqualified."
+  ]
+}

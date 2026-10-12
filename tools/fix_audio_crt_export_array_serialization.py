@@ -1,0 +1,2 @@
+from pathlib import Path
+r=Path('E:/OpenLeague');p=r/'crates/core/src/audio_crt_windows_dispatch_resolver.rs';s=p.read_text(encoding='utf-8');assert 'json!(EXPORTS)'in s;p.write_text(s.replace('json!(EXPORTS)','json!(&EXPORTS[..])'),encoding='utf-8');(r/'tools/fix_audio_crt_export_array_serialization.py').write_text(Path(__file__).read_text(encoding='utf-8'),encoding='utf-8');print('Serialize33 export names as slice; production resolver unchanged')

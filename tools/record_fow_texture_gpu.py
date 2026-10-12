@@ -1,0 +1,21 @@
+from pathlib import Path
+import json,hashlib,datetime,shutil
+r=Path('E:/OpenLeague');now=datetime.datetime.now(datetime.timezone.utc).isoformat()
+load=lambda p:json.loads((r/p).read_text(encoding='utf-8'))
+save=lambda p,d:(r/p).write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+sha=lambda p:hashlib.sha256((r/p).read_bytes()).hexdigest()
+gpu=load('logs/fow-texture-gpu.json');assert len(gpu['cases'])==96 and gpu['maximum_byte_error']<=1 and gpu['byte_tolerance']==1
+assert gpu['gpu_resident_stage_chain'] and not gpu['live_visibility_bound']
+native=load('data/4.20/fow_texture_contract.json');assert native['passed'] and len(native['cases'])==4
+files=['data/4.20/fow_texture_contract.json','crates/client/examples/fow_texture_probe.rs','assets/shaders/fow_postprocess_texture.wgsl','tools/probe_fow_texture_contract.py','logs/fow-texture-gpu.log','logs/fow-texture-gpu.json','target/debug/examples/fow_texture_probe.exe','target/debug/openleague-client.exe']
+receipt={'updated_utc':now,'complete':False,'native_texture_cases':4,'native_clear_argument_cases':1,'gpu_chains':32,'gpu_stage_comparisons':96,'pixels_per_stage':64,'gpu_maximum_byte_error':gpu['maximum_byte_error'],'byte_tolerance':1,'adapter':gpu['adapter'],'backend':gpu['backend'],'current_client_tests_last_recorded':80,'gpu_resident_stage_chain':True,'live_fow_gpu_bound':False,'current_client_graphical_rerun':False,'findings':['Native format table maps visibility enum20 toD3DFMT_L8(50), target enum1 toD3DFMT_X8R8G8B8(22).','Render-target fields and zero-color initialization call arguments executed for supplied factory parameters.','Actual Vulkan diagnostic uses R8Unorm mask input and GPU-resident RGBA8Unorm intermediates for fade/horizontal/vertical blur; all RGB outputs and alpha1 read back.','Each reference stage quantizes to8bits before next sampling; maximum measured difference1byte across96stage comparisons.'],'sources':['https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dformat','docs/native_projection_discovery.json'],'limits':native['limits']+gpu['limits']+['Current client binary has no new ordinary graphical capture or live visibility binding. Diagnostic binary is separately hashed.','RGBA8Unorm preserves native intermediate RGB precision but does not reproduce XRGB memory layout or original D3D rasterization.'],'next_actions':['Qualify native raw texture initial contents and upload/lock failure behavior.','Qualify128-cell expansion, visibility source stencil generation, and Map10 extent/config.','Connect native upload/fade/blur stages and actual team visibility with ordinary client rendering, then verify current gameplay captures.'],'files_sha256':{p:sha(p) for p in files}}
+save('docs/projected_fow_texture_gpu_progress.json',receipt)
+b=r/'docs/plan_history'/datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ');b.mkdir(parents=True,exist_ok=True)
+for name in ['coverage.json','completion_plan.json','resume_checkpoint.json']:
+ p='docs/'+name;shutil.copy2(r/p,b/name);d=load(p);d['updated_utc']=now;d['complete']=False;d['projected_fow_texture_gpu_progress']=receipt
+ if name=='resume_checkpoint.json':d['saved_utc']=now;d['next_projected_action']=' '.join(receipt['next_actions'])
+ else:d['current_evidence']['fow_quantized_gpu']={'receipt':'docs/projected_fow_texture_gpu_progress.json','stage_comparisons':96,'diagnostic_only':True,'live_fow_bound':False}
+ save(p,d)
+p=r/'docs/completion_plan.html';s=p.read_text(encoding='utf-8');s=s.replace('</body>','<section><h2>Brouillard — textures GPU quantifiées</h2><p>Formats et arguments de remise à zéro retrouvés dans le code natif. Diagnostic Vulkan : 32 chaînes de trois étapes, soit 96 comparaisons de pixels, avec au plus un niveau sur 255 d’écart. Entrée R8, intermédiaires RGB 8 bits. Le fournisseur de visibilité réelle et le rendu ordinaire restent à intégrer.</p><a href="projected_fow_texture_gpu_progress.json">Preuves et limites</a></section></body>');p.write_text(s,encoding='utf-8')
+shutil.copy2(Path('E:/mapslol3v3/record_fow_texture_gpu.py'),r/'tools/record_fow_texture_gpu.py')
+print(json.dumps({'gpu_chains':32,'gpu_stage_comparisons':96,'maximum_byte_error':gpu['maximum_byte_error'],'live_fow_bound':False,'complete':False}))

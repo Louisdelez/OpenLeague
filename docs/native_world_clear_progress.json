@@ -1,0 +1,33 @@
+{
+  "updated_utc": "2026-10-05T18:33:11.146937+00:00",
+  "complete": false,
+  "contract": "data/4.20/native_world_clear_contract.json",
+  "native_clear_cases": 128,
+  "native_addresses": 135,
+  "map10_clear_rgb": [
+    34,
+    62,
+    84
+  ],
+  "application_binary_unchanged": true,
+  "product_rendering_changed": false,
+  "prior_frame": "E:\\OpenLeague\\logs\\native-nexus-skin.png",
+  "prior_frame_sha256": "35693b168f526d50bd7c102e54af339b1402f3b8b4621b80b0ee6051ec19b162",
+  "prior_frame_crop": [
+    900,
+    80,
+    1220,
+    480
+  ],
+  "prior_frame_exact_clear_pixels": 7434,
+  "findings": [
+    "World clear computes fog RGB multiplied by trunc(f32(opacity*256)), then integer arithmetic shift8; disabled fog produces black.",
+    "Map10 config opacity1 gives exactly RGB34,62,84. Existing client clear RGB agrees with this isolated native world-clear path.",
+    "Therefore merely replacing cyan clear with black is not a source-qualified fix for the exposed base-Chaos background. Investigate missing/hidden background geometry, projection and render-pass composition."
+  ],
+  "limits": [
+    "Actual map fog loader/color setter linkage and full frame composition remain unqualified.",
+    "No new graphical client screenshot or ordinary match qualification. Cyan holes remain open; this contract qualifies clear submission arguments only.",
+    "Screenshot is prior current-binary diagnostic winner evidence, not a new capture or ordinary six-client match."
+  ]
+}

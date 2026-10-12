@@ -1,0 +1,57 @@
+{
+  "updated_utc": "2026-10-08T16:49:57.013741+00:00",
+  "complete": false,
+  "audio_tests_passed": 295,
+  "test_session": 5078,
+  "test_exit_code": 0,
+  "change": [
+    "Port actual B0EC10/B0EBB0 target selection, B088B0 gain conversion and B27310/B26FB0 spatial/default writes using live Bus/property/manager resources. Identified gain includes mode2; root selection checks low byte and chooses first zero key or all nonzero keys.",
+    "Pass live Graph into gain application as well as evaluation; spatial fields read actual Bus flags/static table/RTPC manager. Preserve all unrelated Voice bytes.",
+    "Connect complete effects reader to actual gain evaluation/state/RTPC, gain application/spatial writes, source mask, slot dispatch and target flags through one shared target registry/source store. Synchronize live Bus/effect Cache before/after partial reader results.",
+    "Prepare real B270B0/B268E0 replacement/status/cleanup reference with actual resource lookup/retain and context/format constructors, keeping plugin/lifetime operations explicit mandatory interfaces."
+  ],
+  "native_cases": {
+    "application": 1344,
+    "effects_composition": 648,
+    "instance_preparation": 1280
+  },
+  "files_sha256": {
+    "crates/core/src/audio_bus_gain_application.rs": "acc877f7804e7e4759346c1061e8afe21b2034e77e8d35760659ba6868e28169",
+    "crates/core/src/audio_bus_effect_consumers.rs": "c85d5c0c9e393d3626b5c52502fcca53593dfe7d24f5baa6491431ef35be0a45",
+    "crates/core/src/audio_bus_gain_aggregation.rs": "bdf9a3e46d7942f991786a0c8df1618dc77de17829726278998232bbdcd6682f",
+    "crates/core/src/audio_bus_effects_changed.rs": "f3fc5789b018cd79946d0c7a72af566eb002981f78921b91dc588195cf25463e",
+    "crates/core/src/audio_bus_effect_callbacks_composition_test.rs": "cce594309dbc71c6c19470b185b5733661c8596ce2d18799144c0ba3152b81c2",
+    "crates/core/src/lib.rs": "20c89e352795ec16fc615598a200bdc5f88b26e5f74e65e32b75a8f286b0d85c",
+    "tools/probe_native_audio_bus_gain_application.py": "648510995549025641a5d0e05b8ae38b417afc9935fa5ae4a3b36513a78dc60e",
+    "tools/probe_native_audio_bus_effect_gain_consumers.py": "d62efdfaa7a4785b3f824ecad4916ae705a807b445cc6bf9098c647a7fc8089c",
+    "tools/probe_native_audio_bus_effect_instance.py": "c94b3b145e24f886d0a8022e3479dc41a710199945cf1353f938c203d0a1340b",
+    "data/4.20/audio_bus_gain_application_contract.json": "0d1ec731fa96fe6880ac2149f23d3449a34ef948f95e4fb261c83d719234604d",
+    "data/4.20/audio_bus_effect_gain_consumers_contract.json": "7adbd0f0d2428454f9a39d731fb90ac48406776b9dfbf63a226654576464cb32",
+    "data/4.20/audio_bus_effect_instance_contract.json": "917758fcf29e9d8e713f2c3337a698da77a0e5d17148a47f7437ca790f2aa898",
+    "logs/audio-bus-gain-application-tests.log": "3de1b348b7c6e884cdbd91da25321bd85baa006aa9b82c832a79e465631bfdea",
+    "logs/audio-bus-gain-application-probe.log": "3c080ebe46936d4c369009387a21cbebdd83d7ef34f040e05c32cf3a9795b970",
+    "logs/audio-bus-effect-gain-consumers-probe.log": "2fbc7c2c9b9c46479c3d3640c19f842a350c2392ef28e2cd2a677c5ecba7f670",
+    "logs/audio-bus-effect-instance-probe.log": "f4c21b1d27e7229cfddd7d78fe81e18815eabfb7f74e5433e9540656a414845d",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "167704c92da52e3e0b1d2177168722397a31ddb75d5b7850da16988fb83f40b2"
+  },
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "acceptance": "1344 gain application cases compare exact full1280-byte target arrays and call order.648 complete effects reader cases compare exact Bus/source/cache/target byte arrays, cursor/status and complete interleaved native callback order.295 audio tests passed.",
+  "findings": [
+    "Gain mode2 filtering differs from effect slot filtering; secondary root gain updates all nonzero-key root descriptors, while primary selects first zero-key descriptor.",
+    "Root gain always resets spatial defaults with null Bus; identified gain uses its actual bound Bus spatial flag/getter.",
+    "Reader gains and target flags use the same live registry, and final cache synchronization includes bypass changes and partial/error statuses.",
+    "B270B0 tears down old instance before lookup; factory and in-place failures retain plugin ID while later failures run full cleanup. Pointer teardown and return statuses differ by failure stage."
+  ],
+  "interfaces": [
+    "648 native complete-reader cases execute gain/state/RTPC/spatial/application/target flag bodies. Allocator supplies controlled memory; B270B0 resource replacement remains supplied interface.",
+    "1280 native instance cases execute replacement state machine, actual Bus lookup/bypass/refcount acquisition and context/format constructors. Mutex, plugin factory/virtual methods, clone/destroy, resource release, context destructor, unsubscribe and allocator/free remain supplied mandatory interfaces. No plugin DSP/body equivalence claimed."
+  ],
+  "limits": [
+    "Finite gain through48dB, controlled acyclic registered resources. Actual plugin resources and normal shared factory/voice/cache lifetimes remain incomplete.",
+    "Spatial getter reused qualified module and manager; full reader fixtures use static spatial fields and scaling0 gain RTPC. Existing spatial RTPC qualification remains separate.",
+    "Extended logarithmic scaling2 still explicitly unsupported in new gain evaluator until retained x87 result is ported.",
+    "Native lazy gain constant bookkeeping is not recreated; bounded conversion constants/target outputs are qualified by bit comparison.",
+    "No current normal client/mixer/device/audible acceptance, all champion kits, six-client victory/results or final delivered package claim. All original24domains remain open."
+  ],
+  "next_action": "Port B270B0/B268E0 effect-instance replacement using1280 native state-machine cases: teardown plugin/context/cloned parameter in exact order, actual Bus E0 B030B0/B02F20 and AF9530 resource lookup/retain, factory/in-place/clone/allocation/query/init/reset failures with distinct statuses and cleanup, B29100 context and B27020 format packing. Qualify and implement actual resource release/clone/destroy, plugin factory/methods/DSP, RTPC parameter binding/unsubscribe and context lifetime rather than replacing mandatory interfaces with success. Connect real instance consumer to648 full-effects reader cases. Retained logarithmic RTPC scaling2, actual bank RTPC/state/position readers, HIRC8 factory/shared storage, normal bindings/smoothing/admission/refcounts and audio/device integration remain required. Gain application1344 and complete reader/state/RTPC/gain/spatial/target648 match Rust;295 audio tests pass. Preserve24domains/114tasks/37requirements; full game incomplete."
+}

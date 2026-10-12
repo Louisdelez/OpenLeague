@@ -1,0 +1,28 @@
+{
+  "updated_utc": "2026-10-04T00:36:15.179789+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_logical_worker.py": "0568b013e97bb44f80a6402241815b39e16d4f2a61c03045d548fbfefaf42006",
+    "data/4.20/audio_logical_worker_contract.json": "65b73ec4620a7a7aec1cb5e48dd56b40e9731f5d810eba7df9aeaefe510dfe0a",
+    "crates/core/src/audio_logical_registration.rs": "3b400d4602a932e453b62bb95dc261f1605c2563d1c72ca553ef5657b6acf42e",
+    "logs/native-audio-logical-worker-core-tests.log": "c06835eb9cf74423f9407ba67cdba2da30df00ef10c8094a4ce5ad4f3e23d65d"
+  },
+  "native_sequences": 72,
+  "native_fragment_executions": 144,
+  "core_tests_passed": 218,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "ported": [
+    "Manager::create_pending stores raw backend return including zero/-1",
+    "Manager::release_pending forwards stored raw backend reference then erases logical entry"
+  ],
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false,
+  "limits": [
+    "Bounded921600..9217B9 create/store and921C31..921CEA release/erase fragments only. Surrounding lookup loops, queue clearing, boolean/position update and full lock ownership not executed.",
+    "String descriptor copy, map store lookup and erase adapted. Backend virtual+18/+24 callbacks return/record controlled raw references; no actual voice creation or audibility.",
+    "SSO string fixture event used; original long-string destruction excluded.",
+    "Rust per-entry worker functions implemented; whole native pending vector processing and clearing, all commands/order/ownership still need qualification and integration.",
+    "Backend callbacks remain supplied by caller. A stored raw reference is not a fabricated playing ID or evidence of real voice creation.",
+    "Standalone client/server/launcher binaries unchanged; full24-domain game remains incomplete."
+  ]
+}

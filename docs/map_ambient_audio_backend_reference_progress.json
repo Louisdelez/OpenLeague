@@ -1,0 +1,32 @@
+{
+  "updated_utc": "2026-10-04T00:49:37.669098+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_backend_reference.py": "046a5398357778d0b89505cbc13646c3dadd6554363333aeef1c60d44cef9576",
+    "data/4.20/audio_backend_reference_contract.json": "ba742897cb79d871c7b41b38476b06dd0df3c6a00db3ab7aff51f7740db15bb6",
+    "crates/core/src/audio_backend_references.rs": "7f9361fcd6c9b3d658b160d4d82b4d04ec781d466a66705591716f2419fca73e",
+    "crates/core/src/lib.rs": "323590f83f1eb577019fb72e5d3240ae4f25457a1f0be045ce2a197371ea9d85",
+    "logs/native-audio-backend-reference-core-tests.log": "d44260bbf7f6536fbd4aa983037389aa5dbd386e4f5ac74a9bc59ecaf0d51cbd"
+  },
+  "native_backend_reference_cases": 48,
+  "core_tests_passed": 223,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_interface": "10A48E4+18->6CE0E0; factory6F79D0->10AF384+40->705A10",
+  "ported": [
+    "external caller-owned voice retained in backend reference registry",
+    "failed creation returns -1 without advancing backend counter",
+    "resolved actor retained, unresolved actor field zero",
+    "logical manager reference ID remains separate from backend reference/playing IDs"
+  ],
+  "physical_voice_factory_implemented": false,
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false,
+  "limits": [
+    "Original6CE0E0 wrapper runs; actor lookup, actual shared voice creation6F79D0, map insertion, shared assignment and logging explicitly adapted.",
+    "Shared assignment adapter increments strong reference; original wrapper atomic decrement executed. Full shared-control destructor/map overwrite lifetime excluded.",
+    "Actual physical voice factory and Wwise playback still unqualified here. Counter initial constructor seed not qualified; explicit restore state only.",
+    "Rust generic Registry<V> receives existing owned voice from caller; no synthesized playing ID. Rust Rc test ownership is separate from full native shared-control lifetime qualification.",
+    "Physical factory6F79D0 -> engine virtual40/705A10 now located; actual playback/post-event/seek/voice ownership still needs implementation.",
+    "Standalone binaries unchanged and all24-domain full game remains incomplete."
+  ]
+}

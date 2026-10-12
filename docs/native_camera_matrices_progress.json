@@ -1,0 +1,59 @@
+{
+  "updated_utc": "2026-10-04T04:23:22.887316+00:00",
+  "files_sha256": {
+    "tools/qualify_native_camera_view.py": "a72a81da9a9ef8123d31651db8debd7802634621a4c52ff4ac8f39447a81a8f2",
+    "tools/qualify_native_camera_projection.py": "69e9eea1c5fe6aed6516cc6de019c5d481d756874fea9e99014e8142bcdbe7b8",
+    "data/4.20/camera_view_contract.json": "1609fef033e47ec7ef105cb3e31cf7d8ef3aaa5386bb0a2d9ec1c8cb3cc55f23",
+    "data/4.20/camera_projection_contract.json": "81865b06f432e6b088c347d2411993c1e212f3e58046fe9c0b686cd9a54664ec",
+    "crates/core/src/camera_view.rs": "ad8c89f76458f5d4deb76856923214cce65c7e296a08f2a73f93ceff5e12e556",
+    "crates/core/src/camera_projection.rs": "4b92cd121df1e27678ba1ac10bda0df2b7e7240ab5380b6c3ca4da4c797ea653",
+    "crates/core/src/audio_emitter_planes.rs": "cfdddd387740da5f50944ce4789edb9182d0edecd43ade26cc070b8c2ca837b4",
+    "crates/core/src/lib.rs": "bf186937307ceef6436850e2ae12acba0ef2eaa98290d95bb631c0659f9991db",
+    "logs/native-camera-matrices-core-tests.log": "93d9a78be7c16204a14c455a888f4e34da4b9469c624dffe12420d3cf743ca51"
+  },
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_camera_view_cases": 800,
+  "native_camera_mode2_exact_cases": 160,
+  "native_camera_projection_cases": 336,
+  "core_tests_passed": 302,
+  "ported": [
+    "Full986250 native view builder: rawmode2 translation/shear/negative-pi2 rotation and matrix multiplication; other modes target=position+direction and8DFFA0 look-at",
+    "8DFFA0 native forward/right normalization66D6E0, original threshold and ordered cross/dot products; degenerate vectors retained",
+    "Full9861D0 projection dispatch, orthographic8E0260 and perspective8E0320 with extended x87 reciprocal tangent/aspect; original depth conventions"
+  ],
+  "acceptance": {
+    "view": "800native fixtures: normalized entries max1e-5abs/1e-6relative; translation absolute tolerance scales by max eye coordinate times1e-6.160mode2matrices bitexact exceptNaNpayloads.",
+    "projection": "336native fixtures: allnon-tangent entries bitexact exceptNaNpayloads; perspective x/y max1e-5abs/1e-6relative tolerance for x87 tangent implementation."
+  },
+  "static_followup": {
+    "view_direct_callers": [
+      "0x73EC20",
+      "0x73FA3C",
+      "0x982131",
+      "0x9863CF"
+    ],
+    "projection_direct_callers": [
+      "0x73FA20",
+      "0x98213F"
+    ],
+    "renderer_prepare": "9820F0 stores camera far at renderer22C and position at9C/A0/A4, computes viewA8 and projectionE8, multiplies them8DF790 then inverts8DEC10. Full preparation/inversion unqualified.",
+    "camera_globals": "1239600 and123E088 PE initial64bytes equal generic986150 defaults. Referenced in rendering passes; roles and final runtime settings not established.73C517 passes123E088 to9820F0 after73EBD0, which writes projection modes1/2 and positions/direction. Do not infer these are the final player camera."
+  },
+  "limits": [
+    "Full986250 and original8DFFA0/66D6E0/8DE500/8DE480/716810/8DF600/8DF790 executed without math adapters.",
+    "Supplied camera fields cover raw projection modes and degenerate direction/up; final in-game setters remain unqualified.",
+    "RSQRTSS estimate varies across emulator/CPU; matrix normalization comparisons require explicit tolerance.",
+    "Rawmode2 is special shear/rotation view; other modes use position+direction look-at. Real client camera binding remains unqualified.",
+    "Full9861D0 dispatcher and original8E0260/8E0320/8DE500 executed without constructor or math adapters.",
+    "Perspective x87 FPTAN and reciprocal aspect; orthographic native width/height and non-reversed depth preserved.",
+    "Zero width/height/aspect/angle and equal depths retained as native exceptional arithmetic, no arbitrary clamp.",
+    "These are native projection matrices, not yet translated into Bevy reversed depth/GPU clip conventions; visible client integration remains unqualified.",
+    "Projection API rejects nonfinite and out-of-FPTAN-range angle explicitly; native exceptional angle handling beyond tested finite cases unqualified.",
+    "Native matrices retained in original storage/depth conventions; no implicit conversion to Bevy or application to visible client.",
+    "Full renderer camera preparation, inverse8DEC10, full9863A0 culling camera, camera setters/roles and GPU runtime comparison remain to qualify.",
+    "Source core302passed; prior client18test evidence and standalone executable hashes unchanged."
+  ],
+  "client_camera_integrated": false,
+  "visible_render_verified": false,
+  "complete": false
+}

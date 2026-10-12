@@ -1,0 +1,32 @@
+{
+  "updated_utc": "2026-10-07T06:18:40.246783+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_cases": 36,
+  "native_instruction_addresses": 160,
+  "focused_core_tests_passed": 2,
+  "full_core_suite_rerun": false,
+  "artifacts_sha256": {
+    "data/4.20/troy_constructor_contract.json": "774384bb5f5763228838649dab887e8e08f973f2d05a62a6f674638155714bdd",
+    "tools/probe_native_troy_constructor.py": "c15fa0f2afb7e253b883bd3a1cec2cb824fb0e7d72d350ac5e626f515f09893a",
+    "crates/core/src/native_effect_live_creation.rs": "5f6c2aff70ef2eef479f4cedc5121bae2172485327dbdceca9f82688c2996cb8",
+    "logs/native-troy-constructor-tests.log": "173f2e94a73fa121957de6768be23928a1c05484435f1522b23bbfd3f248961d"
+  },
+  "findings": [
+    "Whole93FD60 returns native Troy pointer; original8DE480 and716810 matrix constructors both execute.",
+    "Flags24=0; dirty144=0x2000; scalar3C/58/5C=1; scalar148=0; position40..48=0; matrix88 identity independently of prefilled memory.",
+    "Previous factory tests used supplied flags80 and zero scalars; those are explicit test inputs, not original constructor defaults.",
+    "Rust Troy::default now uses verified constructor values. Existing192 factory cases explicitly preserve their supplied synthetic initial state; both regressions pass."
+  ],
+  "adapters": [
+    "564C20 short ASCII string assignment only; names limited to15bytes.",
+    "664E50 internal container initialization omitted; container120..143 not qualified or consumed."
+  ],
+  "limits": [
+    "Constructor alone: resource manager/loading can subsequently change flags; actual projectile after-load flags remain unqualified.",
+    "No live rendering, lifecycle, container, long-string allocation or full-game qualification.",
+    "No client consumer currently instantiates this Troy model; graphical behavior unchanged by this core correction.",
+    "Full objective remains incomplete, zero domains accepted."
+  ],
+  "next_action": "Qualifier les changements de drapeaux Troy pendant le chargement des ressources du projectile, puis raccorder sa pose et son cycle de vie au rendu ; poursuivre les 24 domaines."
+}

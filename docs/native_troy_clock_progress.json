@@ -1,0 +1,32 @@
+{
+  "updated_utc": "2026-10-07T06:40:10.793782+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_cases": 760,
+  "native_instruction_addresses": 16,
+  "focused_core_tests_passed": 1,
+  "full_core_suite_rerun": false,
+  "artifacts_sha256": {
+    "data/4.20/troy_clock_contract.json": "cc63051d2f4b916c6eb0726e16385120adf41dcb7e71a226cbde5552e4cf858f",
+    "tools/probe_native_troy_clock.py": "0747af8ed47eaca35a9d5630d0613d10f306b343b006fec8a038b4587ee0c906",
+    "crates/core/src/native_troy_clock.rs": "59a58921531debf4cbc42e6a06bbae55583ce2767ab08b9332aadc0153fcbe85",
+    "crates/core/src/lib.rs": "e97bb3f2b482091142e892397dd659520ec85944f37d2db7bbf8b4478a552ad7",
+    "logs/native-troy-clock-tests.log": "802d794df1ce8e375d4f7e6ccbf0ad7090c82a9749980a1be326821d591fa913"
+  },
+  "findings": [
+    "Original clock wrapper928360 computes (source-origin)*scale+offset in x87 extended intermediates; absent source loads offset only.",
+    "Result converted to f32 at caller storage. CPU executes original arithmetic instruction sequence with saved/restored x87 control037F.",
+    "760 cases include cancellation and nontrivial f64 scales; f64 intermediate rounding is not substituted for x87."
+  ],
+  "adapters": [
+    "Underlying source virtual4 reads supplied f64; time source and scale/offset mutators remain unqualified.",
+    "Host CPU64 thunk preserves same x87 arithmetic sequence and final f32 store; calling convention adjusted."
+  ],
+  "limits": [
+    "Finite supplied profiles and default037F only; nonfinite input, overflow and other control words unqualified.",
+    "No live client clock provider, pause/scale transition continuity or full lifecycle qualification.",
+    "Clock ported in core native_troy_clock with original x87 operation order and saved/restored control; live client provider not integrated.",
+    "Full objective remains incomplete, zero domains accepted."
+  ],
+  "next_action": "Raccorder horloge et démarrage natifs au cycle de vie d’Annie, qualifier la fin de vie et la pose sur les exécutables graphiques ; poursuivre les 24 domaines."
+}

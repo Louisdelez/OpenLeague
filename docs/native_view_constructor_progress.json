@@ -1,0 +1,36 @@
+{
+  "updated_utc": "2026-10-04T23:32:20.983836+00:00",
+  "complete": false,
+  "client_tests_passed": 122,
+  "client_build_passed": true,
+  "native_view_constructions_and_callbacks": 2,
+  "native_addresses": 1732,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Original6B3B80 constructs a128x128 view for two supplied extents.6B7D70 allocates a shared self-wrapper pointing to the view; constructor zeroes16384-byte count/pixel buffers, initializes auxiliary stencil capacity512 and registers its subscriber via68CF70/66D460 into an existing event.",
+    "Original source factory/removal executes after view construction. The newly registered native subscriber invokes6B4860, retires the applied128x128 stencil and returns counts/pixels to zero. Self-wrapper control strong1/weak2 matches the registered reference ownership.",
+    "Rust ViewRegistry.construct creates the native-sized view and retains a weak subscription. ViewRegistry.retire_source automatically dispatches retirement while manager ownership is retained. Rust buffer/extent/stencil state, reference counts and retirement match qualified cases.122client tests and build passed."
+  ],
+  "limits": [
+    "Original view constructor including6B7D70 self-wrapper shared initialization, zero buffers,68CF70 subscriber creation,66D460 existing-event registration and6B2D10 stencil allocation executes. Original source creation/removal and registered view callback retire the applied stencil.",
+    "Allocator/mutex boundaries adapted. Event tree/event list/control and subscriber capacity supplied rather than initialized from empty dispatcher.",
+    "View destruction/unsubscription, first argument semantics and full texture/GPU activation remain unqualified. Fields1C and48 retain preexistingCC bytes; not assigned fabricated defaults.",
+    "Native scratch allocation has uninitialized contents; Rust tracks scratch capacity/uninitialized state without fabricating a filled mask. Constructor leaves bytes1C/48 uninitialized; caller must supply qualified force/heap mode.",
+    "Original event tree/list/control storage and capacity supplied. Creating an absent event, capacity growth, multiple fully constructed views and view destruction/unsubscription remain unqualified.",
+    "Rust weak subscription lifetime behavior after dropping views is not yet native-qualified. Current registered view path is not activated for ordinary gameplay; no server/GPU fog integration or graphical rerun."
+  ],
+  "next_actions": [
+    "Qualify view destruction/unsubscription and self-wrapper expiration, then dispatcher creation and multiple constructed views.",
+    "Qualify camera/extent, configuration and entity producers; activate source lifecycle/view updates on ordinary gameplay entities.",
+    "Bind qualified masks to authoritative visibility and GPU rendering and verify current restored Map10 gameplay."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_view_constructor_contract.json": "9a51bf148b1f7b9c4f72960cae13348d7adb109c52761cc6454bb032018bfc2a",
+    "tools/probe_fow_view_constructor.py": "bb513de1518f9599f6577473541e13568b326a94dbe30e68f52bbf83eac3f0b0",
+    "crates/client/src/fow_view_registry.rs": "89478071c19b6b4f936935f5cd7366c35a4330ec4a2642fe09c3509e4f276c93",
+    "logs/native-view-constructor-tests.log": "a8c7db7894806b8b1e2de22e7ee8e15b294b07313bc7d725bc20968f23deb80c",
+    "logs/native-view-constructor-build.log": "0ac6db16157ecf3b165c4c502d243961fcce7a3b63e483c318a84a7d5334c8fd",
+    "target/debug/openleague-client.exe": "c9f84deedfee2389ce4a9a4387ac7327e1b9aa86cdf28fbc2a5ff02c4e800959"
+  }
+}

@@ -1,0 +1,3 @@
+//! Shared interior-reference reads into owned path allocations.
+use crate::{audio_bus_bank::Error,audio_plugin_factory::Memory};use std::collections::BTreeMap;
+pub fn read(map:&BTreeMap<u32,Memory>,reference:u32,size:usize)->Result<&[u8],Error>{if reference==0{return Err(Error::InvalidAllocation);}let(base,m)=map.range(..=reference).next_back().ok_or(Error::UnresolvedReference)?;if *base==0||m.reference!=*base{return Err(Error::InvalidAllocation);}let offset=reference.checked_sub(*base).ok_or(Error::InvalidAllocation)?as usize;let end=offset.checked_add(size).ok_or(Error::InvalidAllocation)?;m.raw.get(offset..end).ok_or(Error::InvalidAllocation)}

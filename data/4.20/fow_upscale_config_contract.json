@@ -1,0 +1,204 @@
+{
+  "updated_utc": "2026-10-05T02:52:59.137783+00:00",
+  "passed": true,
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "entry": "0x8afc30",
+  "binary_boolean_reader": "0x8ae530",
+  "initializer_default_address": "0x6b3241",
+  "initializer_key_address": "0x10a28cc",
+  "key": "FoW/upscale",
+  "initializer_default": true,
+  "resource_source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\terrain.inibin",
+  "resource_sha256": "1a82e51b6be12e6091fb50859b93e8ac13de86f4e38e162570388d88ede9fba1",
+  "map10_authored": null,
+  "cases": [
+    {
+      "name": "map10-original",
+      "binary_loaded": true,
+      "authored": null,
+      "default": true,
+      "result": true,
+      "found": false,
+      "queries": [
+        {
+          "kind": "typed_binary_lookup",
+          "found": false
+        },
+        {
+          "kind": "binary_string_lookup",
+          "found": false
+        }
+      ]
+    },
+    {
+      "name": "missing-default-false",
+      "binary_loaded": true,
+      "authored": null,
+      "default": false,
+      "result": false,
+      "found": false,
+      "queries": [
+        {
+          "kind": "typed_binary_lookup",
+          "found": false
+        },
+        {
+          "kind": "binary_string_lookup",
+          "found": false
+        }
+      ]
+    },
+    {
+      "name": "binary-disabled",
+      "binary_loaded": false,
+      "authored": true,
+      "default": true,
+      "result": true,
+      "found": false,
+      "queries": []
+    },
+    {
+      "name": "explicit-false",
+      "binary_loaded": true,
+      "authored": false,
+      "default": true,
+      "result": false,
+      "found": true,
+      "queries": [
+        {
+          "kind": "typed_binary_lookup",
+          "found": true
+        }
+      ]
+    },
+    {
+      "name": "explicit-true",
+      "binary_loaded": true,
+      "authored": true,
+      "default": false,
+      "result": true,
+      "found": true,
+      "queries": [
+        {
+          "kind": "typed_binary_lookup",
+          "found": true
+        }
+      ]
+    }
+  ],
+  "native_addresses": 95,
+  "limits": [
+    "Original boolean query and binary fallback/conversion control flow execute. Typed binary table and missing binary string query are explicit adapters; whole file parser not executed.",
+    "GetCurrentThreadId import at8AFC3E returns synthetic thread1; security-cookie call at8AE5CD skipped preserving AL. Other allocator/cookie boundaries inherited from native probe prerequisites.",
+    "Original initializer supplies default true and key upscale; configuration cache/IO and full initializer execution remain open.",
+    "Map10 value is parsed from actual terrain.inibin; absence is distinct from explicit false. No normal GPU fog acceptance claimed.",
+    "Original two-layer initializer branch and native section/key hashing execute; prebuilt configuration objects and layer pair supplied. Whole cache/path/IO resolution remains open."
+  ],
+  "layer_cases": [
+    {
+      "name": "map10-no-override",
+      "primary": null,
+      "secondary": null,
+      "secondary_present": false,
+      "result": true,
+      "queries": [
+        {
+          "kind": "typed_binary_lookup",
+          "found": false
+        },
+        {
+          "kind": "binary_string_lookup",
+          "found": false
+        }
+      ]
+    },
+    {
+      "name": "secondary-false-wins",
+      "primary": true,
+      "secondary": false,
+      "secondary_present": true,
+      "result": false,
+      "queries": [
+        {
+          "kind": "typed_binary_lookup",
+          "found": true
+        }
+      ]
+    },
+    {
+      "name": "secondary-true-wins",
+      "primary": false,
+      "secondary": true,
+      "secondary_present": true,
+      "result": true,
+      "queries": [
+        {
+          "kind": "typed_binary_lookup",
+          "found": true
+        }
+      ]
+    },
+    {
+      "name": "secondary-missing-primary-false",
+      "primary": false,
+      "secondary": null,
+      "secondary_present": true,
+      "result": false,
+      "queries": [
+        {
+          "kind": "typed_binary_lookup",
+          "found": false
+        },
+        {
+          "kind": "binary_string_lookup",
+          "found": false
+        },
+        {
+          "kind": "typed_binary_lookup",
+          "found": true
+        }
+      ]
+    },
+    {
+      "name": "both-missing-native-default",
+      "primary": null,
+      "secondary": null,
+      "secondary_present": true,
+      "result": true,
+      "queries": [
+        {
+          "kind": "typed_binary_lookup",
+          "found": false
+        },
+        {
+          "kind": "binary_string_lookup",
+          "found": false
+        },
+        {
+          "kind": "typed_binary_lookup",
+          "found": false
+        },
+        {
+          "kind": "binary_string_lookup",
+          "found": false
+        }
+      ]
+    },
+    {
+      "name": "primary-false-no-secondary",
+      "primary": false,
+      "secondary": null,
+      "secondary_present": false,
+      "result": false,
+      "queries": [
+        {
+          "kind": "typed_binary_lookup",
+          "found": true
+        }
+      ]
+    }
+  ],
+  "native_initializer_branch": "0x6b3280..0x6b32d1",
+  "native_initializer_addresses": 26
+}

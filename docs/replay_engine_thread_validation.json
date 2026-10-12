@@ -1,0 +1,69 @@
+{
+  "saved_utc": "2026-10-10T12:49:47.189200+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "native_engine_thread_lifetimes": 32,
+  "real_windows_engine_workers": 48,
+  "real_windows_error_workers": 1,
+  "prestart_collision_rejections": 1,
+  "prepared_native_configuration_cases": 60,
+  "prepared_configuration_return_codes": {
+    "2": 12,
+    "1": 30,
+    "3": 6,
+    "0": 12
+  },
+  "isolated_tests_passed": 153,
+  "core_audio_tests_passed": 712,
+  "core_tests_filtered_not_run": 480,
+  "native_source_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "core_test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_core-5b2a9def275dcedd.exe",
+  "core_test_executable_sha256": "554805d2154de06ff6350f3ff65916704360cb57776107b37e3f52fcdef4bf4e",
+  "isolated_test_executable_sha256": "29891dd35ba55af38f26cddd2b1b11f6d8bb6b900987b1c3ebb36f63e09cebc8",
+  "source_hashes": {
+    "crates/core/src/audio_replay_engine_thread.rs": "abaf2b4975ebe9fde1e336d9c939e6ceebba74a46211ded649bda73f7f5fa40d",
+    "crates/core/src/audio_replay_engine_thread_tests.rs": "43e5de53bbc600c8c7dc8a135d7e3dad98382c9e43523e7caa5cd8e66834bc58",
+    "crates/core/src/audio_crt_windows_engine_worker.rs": "8494b76eeb6be93347393f4f979ae08cfc4e15b44f2bc814ceb7b7fc956e1998",
+    "crates/core/src/audio_replay_engine_thread_windows_tests.rs": "ec61d3f27d928955048607e97af69173804d6cd956a405d8742c27b54c3bd0c8",
+    "crates/core/src/audio_crt_windows_root_startup.rs": "93f46c78de0bb8cbe800c3b593c223180d35f850e9a79467258f3838251b02a6",
+    "crates/core/src/audio_replay_transport_thread.rs": "0660c3aa2951295ded87bd711db3a89fb20cd5a7ba64de3d33c2bd4e84eb4713",
+    "crates/core/src/audio_replay_transport_startup.rs": "a109497803441d8120a41efb0c37494b9b866d00759286ce70272101dbf0ff1a",
+    "crates/core/src/audio_crt_windows_worker_thread.rs": "4e210d9b17ee1b1b041a7dc3230d2a6fb47ffc25a31c05910221d83f07cbbb09",
+    "crates/core/src/lib.rs": "69a8722a6d685a29fb07c2c918d8aa8d946f2e8cf1c74855d14347a2daab3899",
+    "tools/replay-engine-tests.rs": "473ad320e532a252bec21229ee2a231b11b52713f65515e7c1484f655ba5b40f",
+    "tools/install_replay_engine_thread.py": "6d72d8a2301b018afe2d00ee4a89937573e5563ec470b8e66c2bf323ed72ddd6",
+    "tools/probe_replay_engine_thread.py": "46c640a0ca3177d23da28cc306c7644dab4019c9cad004421f7d131ba33270e7",
+    "tools/probe_replay_transport_configuration.py": "89f86f7e690398f20346e403767e15025487d0c788ec0fb78cdaa8da706d60da",
+    "tools/record_replay_engine_thread.py": "6742c8fa99cd118cd5b28f9c832bf964eaa8e3e47ec588a86978bffa62e24bf6"
+  },
+  "contract_hashes": {
+    "replay_engine_thread_probe.json": "3791be9dd6d7027015d5088c00166aabf6731f28008c99f9e7b775a5f8284b79",
+    "replay_transport_configuration_probe.json": "204d3c1d826de317b7795517580c362275fab9734fa815a2d999835aa0d395c5"
+  },
+  "log_hashes": {
+    "logs\\replay-engine-tests.log": "6f37626fae41b31042d72bd92fbad16e22ca73b8542bdeeeb33d69c159240405",
+    "logs\\core-replay-engine-tests.log": "3a86979bf268385e7dd1378c39f36dd8e1407f8f118e2f5d008b483104f3fef1",
+    "logs\\replay-engine-build.log": "175e50e0a30bd7b698fd011fbf99e9eba76175b0aea262fc78344bfc52f3b6a6",
+    "logs\\replay-configuration-probe.log": "eb1428f97f2762161ec72893957be535a6033bcdb229d09c570fc38b80535fbf"
+  },
+  "behavior": [
+    "Rust8A8B80/8A9040/8A8D40 create the48-byte capsule, copy the16-byte tag and fresh24-byte MSVC string, call the CRT producer, then create the80-byte thread. Capacity rounds length|15 for heap names, allocator routes remain distinct, and byte writes preserve padding.32 native cases compare allocations, full live engine words and frees at creation/worker/destruction, including Windows error8, fill0/A5 and lengths0/1/15/16/22/31/32/63.",
+    "Rust8A8F90 selects tag when name length0, otherwise inline or allocated name, invokes the supplied function/argument and retires capsule/name. Missing CRT adapter releases a capsule and its heap name. Post-start constructor errors preserve the started handle/id in an explicit Started error; generalized native exception/allocator failure behavior is not claimed.",
+    "The reusable production Windows Bridge registers a host callback token in the existing native CRT root, creates actual956-byte packets through the existing producer, synchronizes owned process-heap storage and starts real Windows threads. Workers adopt their packet, run the engine job through the existing native-body port and retire TLS/COM/storage before ExitThread. Canonical labels are never cast into physical handles. Callback errors and panics are contained and reported; actual error completion is tested.",
+    "A borrowed eight-byte call-frame bank is preflighted against existing CRT storage and serialised per bridge. On successful creation it is retired inside the producer syscall boundary before the worker can acquire the shared CRT context; this avoids requiring the spawning caller to wait for a callback that itself waits for that caller. Pre-start overlap rejection starts no worker and does not consume a packet.",
+    "48 actual Windows worker lifetimes across6 fresh native-qualified CRT roots execute the new engine factory/capsule, invoke the Rust global transport worker with actual Winsock/timer APIs, join via ported8A8C50/8A8DF0, close each physical handle once and destroy all engine allocations/real recursive critical sections. Each root balances9 heap allocations/frees; global network references are released explicitly. One additional worker returns an intentional callback error and still retires CRT storage/handle.",
+    "The next native configuration probe executes60 original constructor/configuration/destruction lifetimes and restores allocation baseline in every case. It executes actual531A00 initialization and9941B0/994210 owner-word updates for the global transport mutex, resolving the inlined8FC830 unlock precondition; no status success is forced. OS networking/clock/empty-name DNS-error profiles are explicit."
+  ],
+  "limits": [
+    "Production CRT bridge is integrated with the generic engine factory in real Windows qualification; the normal client service has not yet been wired to this full path. Global transport state in these Windows tests is worker-owned; shared engine global concurrency/logger/control dispatch remains to implement and qualify.",
+    "Name selection/copy/lifetime is native-byte qualified, but Windows engine tests capture naming bytes rather than raising the original debugger exception. The native emulation already verifies its filter/handler; a production naming binding remains required. General string assignment, engine OOM/custom allocation failures and arbitrary shutdown races remain unqualified.",
+    "60 configuration cases prepare later Rust ports; they are not implementation completion. Null callback only. Empty-name getaddrinfo11001 and WSAStartup10093 are supplied failure profiles; numericIPv4 formatting is measured on the host. No real DNS success, IPv6, packet traffic or replay content is claimed.",
+    "153 isolated tests and712 selected core tests passed;480 core tests were filtered. The normal client executable was not rebuilt or graphically retested. Full stream configuration/manager/metadata/frame delivery, other game domains and human fidelity acceptance remain unfinished."
+  ],
+  "next_action": "Compose the ported8A8B80/8A9040/8A8D40 engine factory and8A8F90 capsule with8FC380/8FC480 in a concrete shared engine runtime using the new production audio_crt_windows_engine_worker::Bridge.32 native engine lifetimes and48 real Windows engine workers now qualify named object/capsule storage, actual CRT packets/callback/retirement, recursive physical thread locks, join and destruction. The bridge also qualifies pre-start storage-overlap rejection and a worker waiting for its spawning caller then returning an explicit callback error without blocking parent creation. Thread naming bytes are verified but the original debugger exception is still a supplied boundary in Rust integration; do not substitute a modern naming API silently. Engine global storage/locks/logger, shared-control ownership and normal client CRT-root construction remain to wire; test transport globals are exclusively worker-owned. Port8FC230/8FC310/8FC610/8FC930/8FCA30 configuration against new60-case replay_transport_configuration_probe.json: callbacks null, numericIPv4 and supplied resolver-failure profiles; codes0/1/2/3 occur12/30/12/6 times. Native531A00 initializes2D6ED58; native9941B0/994210 must update2D6ED54 owner for the inlined8FC830 unlock. Then complete enabled8F68D0 stream/key setup,5BD470 copy assignment, manager callback bundle and metadata727DE0,728E20/728FD0/728EE0 and actual replay frame delivery. Keep global transport reference ownership separate from stream destruction and status2. Continue graceful graphical AppExit, configuration overlays/cache, actor listeners, maps/champions/audio and all24domains114tasks37requirements."
+}

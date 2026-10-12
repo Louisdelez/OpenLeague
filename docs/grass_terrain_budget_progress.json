@@ -1,0 +1,36 @@
+{
+  "updated_utc": "2026-10-05T09:46:57.759265+00:00",
+  "complete": false,
+  "client_tests_passed": 185,
+  "client_build_passed": true,
+  "native_terrain_cases": 420,
+  "native_terrain_addresses": 263,
+  "native_exhausted_budget_cases": 75,
+  "native_map10_actor_cache_cases": 12,
+  "native_terrain_query_port_corrected": true,
+  "live_grass_mask_integrated": false,
+  "findings": [
+    "Original8F3390 executes420cases across5flags patterns,3cell sizes,4positions and7radius inputs. Includes35boundary,500cap,NaN/infinity and75exhausted-budgetcases.",
+    "PreviousRustqueryrejectedboundingboxes>1000cells; correctedtooriginal1000counter decrement per examined column or skipped row, retaining partial-scan count-based result. Shared normal CPU fog uses this query.",
+    "Rustsource_flagmatches420originalresults; actualMap10cache/provider/query compound12scenarios x2frames compares result, argumentbits, cachefields and no-call repeat."
+  ],
+  "limits": [
+    "Supplied8x8 flag grids, threecell sizes, finite positions and radius boundary/NaN/infinity. Original terrain predicate executes; original disk loader and actor producer not executed here.",
+    "No renderer integration or full-game acceptance.",
+    "Actor field producers, eligibility90/AABB/camera and grass mask/WALL normal renderer integration remain open. No new normal-match/GPU capture. All24domains unfinished."
+  ],
+  "next_actions": [
+    "Qualify remaining actual actor eligibility gates/AABB and camera providers; feed recovered collector and mask into normal renderer.",
+    "Verify actual grass mask/WALL output on normal Map10 match and original inherited filters.",
+    "Continue all24domains, champion kits, fullsixclientvictory/results and delivery."
+  ],
+  "files_sha256": {
+    "data/4.20/grass_terrain_budget_contract.json": "3756b5ed9605d4fd718edc876c056014908b55f72d803c7325817ba2558e3c0e",
+    "data/4.20/grass_actor_map10_contract.json": "8f8d3c6989a0ddec28e575d4ad515a621191517715d3c0c60a8efabe4d58880c",
+    "crates/client/src/fow_terrain_ray.rs": "545ed76b64eb59553eeb800fb675f876070a526138b6ab272632712434a9551b",
+    "crates/client/src/grass_actor_cache.rs": "57165b2583bfd0aa9714d786d82c263bb78705c7ded6ed88793c98e71218ae58",
+    "logs/grass-terrain-budget-tests.log": "f0980fc5e14e287f0403dc32803c6cef0583325b56aa57790285aab9055ae330",
+    "logs/grass-terrain-budget-build.log": "4612a8dc4a6913412b3ffafa5c7d65b38867682481c7ab1bfcec5b4bd6a9d72a",
+    "target/debug/openleague-client.exe": "52b56dd6f0f34e65090542bff1b00b1dd12d7b83b2e79add6ff369c2a7ea5029"
+  }
+}

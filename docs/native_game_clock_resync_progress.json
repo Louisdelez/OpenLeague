@@ -1,0 +1,28 @@
+{
+  "complete": false,
+  "status": "480 original resync cases match Rust; client cargo check passed",
+  "contract": "data/4.20/game_clock_resync_contract.json",
+  "native_entry": "0x99c5e0",
+  "native_cases": 480,
+  "corrected_cases": 155,
+  "drift_reset_cases": 325,
+  "source": "crates/core/src/native_game_clock.rs",
+  "verifier": "tools/verify_native_game_clock_resync.rs",
+  "check_log": "logs/native-game-clock-resync-check.log",
+  "wall_provider": {
+    "entry": "0x993ce0",
+    "import": "KERNEL32.dll!QueryPerformanceCounter",
+    "iat": "0xfa4134",
+    "counter_origin": "0x14bef48",
+    "frequency": "0x14bef50",
+    "conversion": "unsigned64 counter difference / unsigned64 frequency in x87; return retains x87 precision"
+  },
+  "limits": [
+    "Wall input supplied as f64 in these tests; original provider returns x87 extended result, combined conversion/subtraction still requires qualification.",
+    "Callback absent; underlying delta scheduler, original pause controller and live integration pending."
+  ],
+  "sha256": {
+    "crates\\core\\src\\native_game_clock.rs": "89fe8f562f969034f26a4e29d8a527175352b05ae05a57517553ac69f7be95a2",
+    "data\\4.20\\game_clock_resync_contract.json": "e4fff4bfa5871b88624a0ea45ed88ad078017aa2d544dd761fa307f8b0e4666e"
+  }
+}

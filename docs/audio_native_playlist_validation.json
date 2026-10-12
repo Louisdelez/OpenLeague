@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "native_sequences": 56,
+  "native_selections": 1856,
+  "rust_tests": 5,
+  "command": "rustc --edition 2024 --test tools/test_audio_playlist.rs; target/audio_playlist_tests.exe",
+  "exit_code": 0,
+  "source_sha256": "a34a6c559e28d293f286ebb0458555b816e692a9ac961159281792f58e7767f2",
+  "scope": "Standard and shuffle, weighted/unweighted, counts2/3/7, avoid0/1/count-1/count/count+3. Every selected index and RNG state match native across repeated resets. Native positive-weight fixture accessors; native history and RNG execute unchanged.",
+  "limits": [
+    "Positive weights only, count2..65535, sum<=u32MAX accepted. Zero weights and single-entry fast path explicitly unsupported.",
+    "Runtime seeding, flag mapping, owner/global state and action probability not integrated. Existing Selector still used separately; new Playlist is not audible playback.",
+    "Standalone module tests only; full normal client not rebuilt."
+  ]
+}

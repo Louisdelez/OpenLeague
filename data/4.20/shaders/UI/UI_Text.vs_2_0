@@ -1,0 +1,15 @@
+float4x4 pMtx : register(c4);
+
+void main(	float3 pos: X3D_VSIN_POSITION,
+			float4 col0: X3D_VSIN_COLOR0,
+			float4 col1: X3D_VSIN_COLOR1,		
+			float2 tex0: X3D_VSIN_TEXCOORD0,
+			float2 tex1: X3D_VSIN_TEXCOORD1,
+			out float4 posOut: POSITION,
+			out float4 col0Out: COLOR0,
+			out float2 tex0Out: TEXCOORD0 )
+{
+	posOut = mul(pMtx, float4(pos.xy,0,1));
+	col0Out = col0.VCOLORSWIZZLE;
+	tex0Out = tex0;
+}

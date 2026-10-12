@@ -1,0 +1,59 @@
+{
+  "saved_utc": "2026-10-10T12:23:16.097123+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "native_wait_close_cases": 420,
+  "native_launch_cases": 16,
+  "native_retry_sequences": 3,
+  "native_sequential_launch_calls": 9,
+  "prepared_native_engine_thread_lifetimes": 32,
+  "real_windows_crt_transport_workers": 6,
+  "isolated_tests_passed": 151,
+  "core_audio_tests_passed": 708,
+  "core_tests_filtered_not_run": 480,
+  "native_source_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "core_test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_core-5b2a9def275dcedd.exe",
+  "core_test_executable_sha256": "0f7fcbf50d1b16fb9df28ed2bd324dd5ca5809c6e1aa014e91052d253590797b",
+  "isolated_test_executable_sha256": "a0cc80876a8e7b61434550e626dafe83f3a3b13e0e7f9bc16715daf8d273100e",
+  "source_hashes": {
+    "crates/core/src/audio_replay_transport_thread.rs": "0660c3aa2951295ded87bd711db3a89fb20cd5a7ba64de3d33c2bd4e84eb4713",
+    "crates/core/src/audio_replay_transport_thread_tests_native.rs": "22b334d4bc05d73358843dc053228ea34b977538cf9f2eed571ec2830c97ffd1",
+    "crates/core/src/audio_replay_transport_thread_tests.rs": "3c6282cb07a7af04d4f04c9e065c0e994e00cbcf2b610271dbcd1af4bf87cee9",
+    "crates/core/src/audio_replay_transport_startup.rs": "a109497803441d8120a41efb0c37494b9b866d00759286ce70272101dbf0ff1a",
+    "crates/core/src/audio_replay_shared_pair.rs": "e76b5e377b07681ad225dde2db5fc04af3db8842f74054686379a4ccac52b147",
+    "crates/core/src/audio_crt_windows_worker_thread.rs": "4e210d9b17ee1b1b041a7dc3230d2a6fb47ffc25a31c05910221d83f07cbbb09",
+    "crates/core/src/audio_crt_windows_root_startup.rs": "55be6a8f93ce61fb8719f07710f3cec0e850299274a3c76a99f6604990a774d2",
+    "crates/core/src/lib.rs": "fbde8ab60a966c0459303ef17fe4e5ab659f57f18b1617dc6d575cb8da145078",
+    "tools/qualify_replay_thread_waits.py": "2d529f0db78e0dd7a95c2794ef1dc16289a6a1aed1ec030bec18da396cccf3de",
+    "tools/qualify_replay_transport_launch.py": "2d3313c24d45b1e7fa9a9771c40fae1f609eb2398ef28d19b4a5ee2684cbf701",
+    "tools/probe_replay_engine_thread.py": "46c640a0ca3177d23da28cc306c7644dab4019c9cad004421f7d131ba33270e7",
+    "tools/replay-launch-tests.rs": "e6747dd7d36657367bf7fa38ba14fe519eb6d07d25e620b2595f13e1fe2fd4a8"
+  },
+  "contract_hashes": {
+    "replay_thread_waits_contract.json": "89945db3ee91d2ebc531efc6193c155296ad303586e677c14503710963913b0c",
+    "replay_transport_launch_contract.json": "d53828d9be44e05de4e2fa852700af401170c8b9a3aac23a3c727af9e6785aad",
+    "replay_engine_thread_probe.json": "3791be9dd6d7027015d5088c00166aabf6731f28008c99f9e7b775a5f8284b79"
+  },
+  "log_hashes": {
+    "logs\\replay-launch-tests.log": "f159572eeeec33032d78f433d8270db10b54cb41dc5be76cf3ddedc13a50c8f7",
+    "logs\\core-replay-launch-tests.log": "0f97f24e9e31702196c83579d6cad6c8fb2c819ed91772db5a4286ee7f3d04e6",
+    "logs\\replay-launch-build.log": "175e50e0a30bd7b698fd011fbf99e9eba76175b0aea262fc78344bfc52f3b6a6"
+  },
+  "behavior": [
+    "Rust native engine wait/join/close routines preserve self-thread return3, timeout1, invalid-handle2, other-error4, last-error reads only on API failure, second infinite wait after initial successful wait, recursive double mutex acquisition, unlock-before-handle/id clearing, and retaining fields on close failure.420 native cases compare ordered events, complete live thread/control words and frees.",
+    "Rust global8FC380 launch uses the recovered tag/name and callback, status gate and atomic exchange; new16-byte control publication precedes old-control release.8FC480 skips everything for null raw, otherwise waits unless self-thread, clears the global pair and then releases the captured control. Native16 launch profiles and3 retry sequences establish that byte1 alone does not prove readiness and that failed creation retains a null-object control until replacement or explicit lifetime cleanup.",
+    "Rust5D6740/5D51C0 handle shared-thread disposal, close-only cleanup, string destruction, critical-section deletion and unconditional raw-object free. Existing shared-pair control release is reused. Current full-byte disposal comparisons use native empty inline names; the new32-case engine-construction probe is preparation for complete named-thread qualification.",
+    "The actual Windows thread adapter now exposes wait_only without querying the exit code and explicit close that retires handle ownership only on success. Drop skips an already-closed handle and preserves caller last-error. Six existing actual CRT packet/worker tests now run the new join port against physical handles, verify cleared canonical handle/id, invalid-handle wait after close, exactly one physical close, worker TLS/COM/heap retirement and balanced global Winsock/timer resources."
+  ],
+  "limits": [
+    "The generic create_worker boundary still requires8A8B80-equivalent engine object/capsule construction and a concrete runtime bridge. Launch unit tests supply that subordinate boundary from native creation observations and execute the already-qualified Rust global worker when joining; they do not claim the entire factory is ported. Actual native launch fixtures execute the original factory and logical thread scheduler.",
+    "Windows wait/close outcomes in420 fixtures are supplied boundary profiles. Six real Windows worker lifetimes verify successful joining and invalid-handle wait; global engine locks are modeled under exclusive borrowed storage, not qualified under concurrent access. Host creation failure and naming exception behavior remain separately covered by existing native/CRT fixtures.",
+    "The normal client executable was not rebuilt or graphically retested. Stream configuration, full manager/metadata and real frame/event delivery remain unfinished.151 isolated and708 selected core tests passed;480 core tests were filtered. No full domain or game completion is claimed."
+  ],
+  "next_action": "Implement actual engine thread creation8A8B80/8A9040/8A8D40 and capsule callback8A8F90 beneath the now-ported8FC380 launch boundary. New replay_engine_thread_probe.json captures32 complete native lifetimes with48-byte capsule,80-byte thread, original CRT packet, fill0/A5, eight string names at0/1/15/16/22/31/32/63 bytes and CreateThread error8; all restore allocation baseline. Port fresh MSVC string copy/lifetime including capacity-rounding and engine allocator classes, then bridge the real existing CRT packet/root/Windows thread adapters and global storage/locks/logger to the normal replay service. Empty thread name uses the tag EnetSysInit in the native naming exception; preserve the observed source selection. Rust8FC380/8FC480,8A9240/8A8C50/8A8DF0/8A9190/8A9210 and5D6740/5D51C0 are now ported, matching420 wait/close/control cases,16 launch profiles and9 calls in3 retry sequences. Their generic create_worker boundary remains required, and its failure must not fabricate readiness: native8FC380 returns byte1 even on CreateThread failure, leaves status1 and a null-object control; status2 suppresses creation; replacement releases the previous control. Real Windows wait_only/explicit close now back the join port in6 CRT worker lifetimes and avoid a second Drop close. Named-thread destruction and full engine creation still need Rust qualification against the new32-case probe; current420 destruction cases use empty inline names. Then implement8F68D0/8FC230/8FC610/8FCA30 configuration/key setup,5BD470 copy assignment, callback bundle and metadata727DE0, complete728E20/728FD0/728EE0, and connect actual replay frames. Preserve global transport lifetime separately from stream destruction. Continue graceful graphical AppExit, configuration overlays/cache, actor listeners, maps/champions/audio and all24domains114tasks37requirements."
+}

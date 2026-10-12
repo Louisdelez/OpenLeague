@@ -1,0 +1,30 @@
+{
+  "updated_utc": "2026-10-04T17:35:15.029201+00:00",
+  "complete": false,
+  "client_tests_passed": 67,
+  "native_instruction_addresses": 492,
+  "current_build_gpu_rerun": false,
+  "last_gpu_capture": "docs/projected_normal_capture_v4.json",
+  "findings": [
+    "Original reset loop and manager/material helpers confirm baseline depth LESS_EQUAL with depth write disabled, cull NONE and inherited alpha ADD.",
+    "Production material now uses verified baseline helpers; reverse-Z compare GreaterEqual preserves the existing Bevy depth behavior.",
+    "Original alpha test is GREATEREQUAL at reference0, not GREATER: no transparent-texel discard introduced.",
+    "67 client tests and compilation passed; baseline refactor preserves pipeline values, so previous Vulkan evidence retains its original executable hash."
+  ],
+  "limits": [
+    "Only baseline state sequence executed, not full interleaved world renderer or later material/skin mutations.",
+    "Native GPU API and stack cookie are adapted in the native instruction probe.",
+    "Exact owner provider, FOW texture/coordinates, receiver coverage, other alpha references and visual fidelity remain incomplete."
+  ],
+  "enum_source": "https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dcmpfunc",
+  "files_sha256": {
+    "data/4.20/projected_baseline_contract.json": "a6f2ca21a8bcd592ecbfcd955bcca07d77e8df1d7f168bf568fea2869a0665de",
+    "tools/probe_native_projected_baseline.py": "3cf3d103c1a3749d8202c2e2abec45c02e4188552fbf98b12c26d27c8b8847c7",
+    "crates/client/src/particle_render_state.rs": "4371f6ab73293544822035731815a79fee00e72e0dbd46d4358f76c24b1ee469",
+    "crates/client/src/projected_render.rs": "d1f84ff94f438b25604f75efddf768f0ed6970556cac816e44e84b5f78371d3c",
+    "assets/shaders/projected_terrain.wgsl": "959786c030b5ae032bbed7cd15a2c007fb27a49645f7b106a35bebb16a638dcb",
+    "logs/projected-baseline-tests.log": "2d20d19c8ae8965853ac5f8db74ba756e7eac69384d3185ffbd836e71662651d",
+    "logs/projected-baseline-build.log": "70c63940d104a16024ecae3048bb1f723094e2930f43ad36f70bb629cfe9556a",
+    "target/debug/openleague-client.exe": "0bd63dd9fbe1dbc221fdaf4403cba44216f8ab8247e5a6c8403da9c6bf0a9a16"
+  }
+}

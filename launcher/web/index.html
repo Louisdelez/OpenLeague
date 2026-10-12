@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>OpenLeague — Préparer la partie</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#preparation">Aller à la préparation</a>
+  <header class="client-chrome">
+    <div class="chrome-inner">
+      <img class="brand-mark" src="assets/air420/chrome/61.png" width="161" height="52" alt="League of Legends">
+      <div class="client-name"><strong>OpenLeague</strong><span>Reconstruction locale · 4.20</span></div>
+      <span class="chrome-section">Préparation de partie</span>
+    </div>
+  </header>
+
+  <main id="preparation" tabindex="-1">
+    <div class="page-heading">
+      <p class="eyebrow">Partie locale</p>
+      <h1>Préparer la partie</h1>
+    </div>
+
+    <div class="preparation-layout">
+      <section class="map-panel" aria-labelledby="map-title">
+        <img class="map-art" src="assets/air420/main_module/197.png" width="815" height="435" alt="Illustration de la Forêt torturée, ses ruines et ses deux voies">
+        <div class="map-copy">
+          <p class="eyebrow">Champ de bataille</p>
+          <h2 id="map-title">La Forêt torturée</h2>
+          <p class="map-format">3 contre 3</p>
+          <p>Ouvrez la partie sur cet ordinateur, ou rejoignez celle qui est déjà ouverte.</p>
+          <p class="map-caption">Choisissez votre champion et vos sorts avant d’entrer en jeu.</p>
+        </div>
+      </section>
+
+      <section class="preparation-panel" aria-labelledby="selection-title">
+        <h2 id="selection-title">Votre préparation</h2>
+        <div class="selection-fields">
+          <div class="field champion-field">
+            <label for="champion">Champion</label>
+            <select id="champion"></select>
+          </div>
+          <div class="field">
+            <label for="summoner-d">Sort D</label>
+            <select id="summoner-d"><option value="">Aucun</option><option value="Barrier">Barri&#232;re</option><option value="Heal">Soin</option><option value="Exhaust">Fatigue</option><option value="Ignite">Embrasement</option><option value="Smite">Ch&#226;timent (base, recharge provisoire 90 s)</option></select>
+          </div>
+          <div class="field">
+            <label for="summoner-f">Sort F</label>
+            <select id="summoner-f"><option value="">Aucun</option><option value="Barrier">Barri&#232;re</option><option value="Heal">Soin</option><option value="Exhaust">Fatigue</option><option value="Ignite">Embrasement</option><option value="Smite">Ch&#226;timent (base, recharge provisoire 90 s)</option></select>
+          </div>
+        </div>
+
+        <div class="entry-actions" aria-label="Entrer en partie">
+          <button id="play" class="play-action" type="button">Ouvrir la partie locale</button>
+          <button id="join" type="button" disabled>Rejoindre la partie locale</button>
+        </div>
+
+        <section class="session-panel" aria-labelledby="session-title">
+          <h2 id="session-title">Session locale</h2>
+          <p id="status" role="status" aria-live="polite" aria-atomic="true">Chargement du catalogue…</p>
+          <div class="session-actions" aria-label="Gérer la session">
+            <button id="resume" type="button" disabled>Reprendre la partie</button>
+            <button id="abandon" type="button" disabled>Abandonner la partie conservée</button>
+          </div>
+        </section>
+      </section>
+    </div>
+
+    <p class="note">Version de construction. Le jeu complet et l’interface historique restent à terminer.</p>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

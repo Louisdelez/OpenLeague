@@ -1,0 +1,31 @@
+{
+  "complete": false,
+  "ecs_pause_verified": true,
+  "gpu_effect_pixels_qualified": true,
+  "checks": {
+    "dx12": {
+      "receipt": "docs/annie_ready_pause_v73.json",
+      "samples": 20,
+      "visible_quads": 10,
+      "client_sha256": "d56b5087b7b2d5857668ed381226ad853c96af18e41b18fa6e8fb29b260b4460"
+    },
+    "vulkan": {
+      "receipt": "docs/annie_ready_pause_v74.json",
+      "samples": 20,
+      "visible_quads": 10,
+      "client_sha256": "d56b5087b7b2d5857668ed381226ad853c96af18e41b18fa6e8fb29b260b4460"
+    }
+  },
+  "unit_tests": {
+    "passed": 3,
+    "log": "logs/ready-pause-clock-tests.log"
+  },
+  "visual_review": "Isolated difference images inspected on both backends: small ring around Annie. DX12 raw frames542/537 affected pixels; Vulkan540/539. Actual contribution established; no arbitrary placement change made.",
+  "next": "Qualify actor/ambient animation clock producers and integrate pause consistently; native ready appearance and attachment fidelity remain partial.",
+  "original_pixel_fidelity_qualified": false,
+  "gpu_scope": "Nonzero ready-only same-frame contribution and frozen native effect time; not original LoL equivalence.",
+  "gpu_checks": {
+    "dx12": "docs/annie_ready_pause_v76_raw.json",
+    "vulkan": "docs/annie_ready_pause_v77_raw.json"
+  }
+}

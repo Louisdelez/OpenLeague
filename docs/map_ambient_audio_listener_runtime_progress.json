@@ -1,0 +1,44 @@
+{
+  "updated_utc": "2026-10-03T23:11:42.457689+00:00",
+  "validation": "docs/map_ambient_audio_listener_runtime_validation.json",
+  "validation_sha256": "8a9947a218b3331de8f3de8fdc35fe32b59078d66cbf3e5d5704a505f29902ce",
+  "client_binary": "target/debug/openleague-client.exe",
+  "client_binary_sha256": "3ceee567f35b9f903b41092e899b96c4077d3c71054507d91e4d4c7149a408a8",
+  "client_binary_bytes": 109184000,
+  "client_pid": 1624,
+  "server_pid": 13040,
+  "port": 5896,
+  "source_hashes": {
+    "crates/client/src/map_audio.rs": "2393abb0649faa9790aea2f38ea686f7e316c40e0a8efa656a240509deca92e7",
+    "crates/client/src/main.rs": "46ceb300caf2cd680a05bd4300722aab190d2e543b0e1acffb639ffab86d056b",
+    "tools/verify_audio_listener_runtime.py": "68a87972d0f83e8e8495276627bf918305827a0b058905df58aa07c50a64451c"
+  },
+  "test_build_log_hashes": {
+    "logs/native-audio-listener-runtime-client-tests.log": "2ae2a103b02ee9a8db5fbf6ecda38992789c1b71917cf6cd9a3a64f532c01050",
+    "logs/native-audio-listener-runtime-client-build.log": "57df2bbcd4760c92037dcc674b20d5dff11b06af3632f9124b565775a2617fef"
+  },
+  "trace": "logs/audio_listener_runtime_trace.json",
+  "trace_sha256": "f14542d9309b2195f32450d0aa3c08ad591b23109f092aec2de3b2f4dff00d4f",
+  "runtime_samples": 16,
+  "distinct_camera_focus_positions": 1,
+  "snapshot_tick_range": [
+    30473,
+    30473
+  ],
+  "core_tests": 193,
+  "client_tests": 10,
+  "native_frame_and_basis_comparison": "Exact f32bits against original backend routines with live captured inputs",
+  "world_focus_mapping_tolerance_native_units": 0.002,
+  "client_integration_enabled": true,
+  "standalone_client_rebuilt": true,
+  "ambient_playback_enabled": false,
+  "complete": false,
+  "limits": [
+    "Native queue/tick/security callbacks are stubbed as in prior48-case contract; actual live PCM, panning, fades and voice aggregation not accepted.",
+    "Runtime samples validate current camera bridge, not full historical camera framing or human visual/audio fidelity.",
+    "No new framebuffer/pixel verification implied by listener state trace. Samples may represent a static camera/finished match; no simulated gameplay progression claimed.",
+    "New client PID1624 verified; former client15096 stopped only after exact path validation. Existing local server13040 retained.",
+    "Initial launch11724 failed because summoner variants were passed in lowercase; corrected launch usesExhaust/Heal. Failure logs preserved aslistener-runtime-invalid-loadout-client.*.log.",
+    "Native numerical renderer/shader/pixel proof remains tied to earlier executable hashes. Missing TikTok Vulkan layer warning persists; no global software/driver change."
+  ]
+}

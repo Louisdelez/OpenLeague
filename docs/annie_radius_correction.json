@@ -1,0 +1,59 @@
+{
+  "updated_utc": "2026-10-04T10:52:33.202265+00:00",
+  "complete": false,
+  "passed": true,
+  "core_tests_passed": 399,
+  "client_tests_passed": 32,
+  "network_checks": 11,
+  "executables": [
+    {
+      "path": "target/debug/openleague-server.exe",
+      "bytes": 4559872,
+      "sha256": "ad0f00c5ad53682b32af9c9fa69a95a56232c56bc0f934ed168eef4f6e6f1b11"
+    },
+    {
+      "path": "target/debug/openleague-client.exe",
+      "bytes": 118154240,
+      "sha256": "f1b0a96304ca0bd31f82cdef6d3d1d7ece42ef16294db53fb3a72aff3073edbf"
+    },
+    {
+      "path": "launcher/src-tauri/target/debug/openleague-launcher.exe",
+      "bytes": 12411904,
+      "sha256": "ac22a8346c0b2af574bdee16311acc510e657c73ca5f85584223f0049c4f57de"
+    }
+  ],
+  "community_sources": [
+    {
+      "path": "D:/LeagueOfLegendsV2/4.20/GameServer/GameServerLib/Content/CharData.cs",
+      "sha256": "a03b5bd93f437c28139402f2deaf0ed154433c92d3667ab3b2d142f838ca8121"
+    },
+    {
+      "path": "D:/LeagueOfLegendsV2/4.20/GameServer/GameServerLib/GameObjects/AttackableUnits/AI/ObjAIBase.cs",
+      "sha256": "b380ac2b2609f1946ee48d1ab779eda57db477774a2cd7cca5081e4ccb449459"
+    }
+  ],
+  "policy": {
+    "absent_native_radius": 65,
+    "explicit_nonpositive_radius": 40,
+    "explicit_positive_radius": "retain native"
+  },
+  "native_profiles_modified": false,
+  "regression": "At distance500 and halfangle+7degrees Garen absent radius65 intersects, explicit Annie55 does not; radius40 would miss. Missing profile remains null. Tests cover explicit zero/negative/positive policy too.",
+  "network": "docs/annie_radius_network_validation.json",
+  "files_sha256": {
+    "crates/core/src/annie_w.rs": "0119060aa2f5ebd54d2e135a797d66fb00e50a4d3a9e1f74154a8695c7c3c852",
+    "logs/annie-radius-tests.log": "e90630c1971ea4ce831e047314c3f628d07a0f6069842e595026b98b47687c1a",
+    "logs/annie-radius-build.log": "eedcafa20d8fbf96ebd9c93ec35fd8f7eb8611cbb037ebcdd7078eee13629f61",
+    "docs/annie_radius_network_validation.json": "03d71a98d45484ee20a460afdcaeebdf388418727171349916c8f507d65c5676"
+  },
+  "supersedes_policy_in": [
+    "docs/annie_w_sources.json",
+    "docs/annie_w_integration_progress.json"
+  ],
+  "limits": [
+    "Community fallback policy reconstructed; original Riot server collision default and exact cone algorithm remain unqualified.",
+    "Prior network/visual receipts retain their own original hashes and are not evidence for this build. Current GUI still runs prior build; this turn does not establish new visual acceptance.",
+    "11UDP checks re-run ordinary purchase/learn/Move/CastAt/damage/miss/ally/cooldown behavior; the new boundary-contact case is verified in core, not replicated over UDP.",
+    "Tibbers source audit recovered native values and seven GLB clips but R/pet gameplay remains unimplemented. Full24domain objective incomplete."
+  ]
+}

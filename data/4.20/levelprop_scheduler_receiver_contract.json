@@ -1,0 +1,87 @@
+{
+  "complete": false,
+  "static_checks_passed": true,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "chain": [
+    "network registration5891d5: object+138 passed to LevelProp manager",
+    "883610 binds wrapper+8 to object+120",
+    "constructor8770b0 sets wrapper vtable1091770 and object+120 vtable109361c",
+    "wrapper virtual0=6469e0 forwards f32 argument to object+120 virtual0",
+    "object+120 virtual0=565170 returns with ret4 and no work"
+  ],
+  "regions": [
+    {
+      "start": "0x5891d5",
+      "end": "0x5891f1",
+      "sha256": "53773f53dca2be65167b469a43fea83943d7ffd7322c02a20eb0c2af33cf63c0",
+      "instructions": [
+        "5891d5 lea esi, [edi + 0x138]",
+        "5891db mov ecx, esi",
+        "5891dd push edi",
+        "5891de call 0x883610",
+        "5891e3 push dword ptr [edi + 8]",
+        "5891e6 mov ecx, 0x2d6dfb4",
+        "5891eb push esi",
+        "5891ec call 0x650c70"
+      ]
+    },
+    {
+      "start": "0x883618",
+      "end": "0x88362d",
+      "sha256": "ef203f7d27c8393c16e1cc2412ce6f4548720dff738e69aef841dc8dea651c75",
+      "instructions": [
+        "883618 mov esi, dword ptr [ebp + 8]",
+        "88361b mov dword ptr [ecx + 4], esi",
+        "88361e push edi",
+        "88361f test esi, esi",
+        "883621 je 0x88362b",
+        "883623 lea eax, [esi + 0x120]",
+        "883629 jmp 0x88362d",
+        "88362b xor eax, eax"
+      ]
+    },
+    {
+      "start": "0x877106",
+      "end": "0x87712a",
+      "sha256": "b5289ea8bb4b1ea7b85af315865ba3f29f96d4dd3efcdd3136a9614ff9f4707b",
+      "instructions": [
+        "877106 mov dword ptr [esi], 0x10c66fc",
+        "87710c mov dword ptr [esi + 0x11c], 0x10c66e0",
+        "877116 mov dword ptr [esi + 0x120], 0x109361c",
+        "877120 mov dword ptr [esi + 0x124], 0x10c67b0"
+      ]
+    },
+    {
+      "start": "0x877170",
+      "end": "0x87718e",
+      "sha256": "09098784849bbd5c4f9e273180656c605f14fe7364c81be0c7a5446562a05a68",
+      "instructions": [
+        "877170 mov dword ptr [esi + 0x138], 0x1091770",
+        "87717a mov dword ptr [esi + 0x13c], 0",
+        "877184 mov dword ptr [esi + 0x140], 0"
+      ]
+    },
+    {
+      "start": "0x6469e0",
+      "end": "0x6469f5",
+      "sha256": "8e3dcc32b683d15c5a3ee7d388567ca4d0290bff10a8dc7b4154deaaf91d08da",
+      "instructions": [
+        "6469e0 push ebp",
+        "6469e1 mov ebp, esp",
+        "6469e3 mov ecx, dword ptr [ecx + 8]",
+        "6469e6 fld dword ptr [ebp + 8]",
+        "6469e9 push ecx",
+        "6469ea fstp dword ptr [esp]",
+        "6469ed mov eax, dword ptr [ecx]",
+        "6469ef call dword ptr [eax]",
+        "6469f1 pop ebp",
+        "6469f2 ret 4"
+      ]
+    }
+  ],
+  "conclusion": "This concrete constructor configuration has no animation update through the LevelProp scheduler. Do not use scheduler dispatch evidence alone to choose animation clock.",
+  "limits": [
+    "Constructor instructions checked statically; factory-derived overrides and other registered object classes remain unqualified.",
+    "Animation/render update path not yet traced."
+  ]
+}

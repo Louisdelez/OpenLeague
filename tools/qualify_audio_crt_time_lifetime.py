@@ -1,0 +1,7 @@
+from pathlib import Path
+r=Path('E:/OpenLeague');p=r/'crates/core/src/audio_crt_thread_system_startup.rs';s=p.read_text(encoding='utf-8')
+name='audio_crt_custom_locale_lifecycle_matches16_original_full_startup_old_locale_release_custom_installation_nested_destruction_shared_retention_and_system_cleanup'
+old=' #[test]fn '+name+'(){let p:Value=serde_json::from_str(&crate::audio_test_fixture("data/4.20/audio_crt_custom_locale_lifecycle_preparation.json")).unwrap();assert_eq!(p["passed"],true);assert_eq!(p["case_count"],16);'
+new=' #[test]fn '+name+'(){let p:Value=serde_json::from_str(&crate::audio_test_fixture("data/4.20/audio_crt_custom_locale_lifecycle_preparation.json")).unwrap();assert_eq!(p["case_count"],16);check_custom_lifetime(p);}\n #[test]fn audio_crt_time_locale_lifecycle_matches8_original_full_custom_thread_lifetimes_actual87_distinct_temporal_payload_destruction_or_shared_retention(){let p:Value=serde_json::from_str(&crate::audio_test_fixture("data/4.20/audio_crt_time_locale_lifecycle_preparation.json")).unwrap();assert_eq!(p["case_count"],8);check_custom_lifetime(p);}\n fn check_custom_lifetime(p:Value){assert_eq!(p["passed"],true);'
+assert old in s;s=s.replace(old,new).replace('all67 final canonical regions','all final canonical regions');p.write_text(s,encoding='utf-8')
+print('Qualified8 complete nonNULL time payload lifetimes via same full comparison retained for original16')

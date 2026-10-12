@@ -1,0 +1,19 @@
+{
+  "complete": false,
+  "source_fixture": "data/4.20/audio_global_float_configuration_preparation.json",
+  "source_fixture_sha256": "12837ea75fad850146249f0acac7882502feac74ecbecd16ed8c0f334825241a",
+  "fault_count": 48,
+  "bits": 2143363909,
+  "fault_pc": 14640328,
+  "original_import_call_pc": 13275563,
+  "import_iat": 16401340,
+  "dll": "KERNEL32.dll",
+  "function": "GetLastError",
+  "evidence": [
+    "Single failing quiet-NaN case traced through original math error CRT helpers CD3BDF->CAAAF3->CAAB13->C9B780->CA91A9. Original instruction CA91AB CALL [FA43BC] transfers to DF64C8 invalid target.",
+    "PE import metadata independently identifies IAT FA43BC as KERNEL32.dll/GetLastError. Original unpacked IAT is unresolved in emulator. No import boundary adapter supplied in original744/48 capture."
+  ],
+  "limits": [
+    "Static PE metadata and one failing trace identify the first missing import only. GetLastError ABI boundary and subsequent CRT TLS dependencies must be represented explicitly and qualified before claiming NaN math results. Entire runtime or hardware fidelity not proved."
+  ]
+}

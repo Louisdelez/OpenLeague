@@ -1,0 +1,49 @@
+{
+  "verified_utc": "2026-10-08T05:30:48.444658+00:00",
+  "complete": false,
+  "native_executions": 96,
+  "unique_native_sources": 27,
+  "scope": "Contiguous 919720..919C9D configuration flags reset and eight typed boolean reads, with actual binary resources;32 resource entries include5 duplicated animated-source aliases;3 initial flags each.",
+  "defaults": {
+    "flags": 132,
+    "enabled": [
+      "PersistThruRevive",
+      "KeepOrientationAfterSpellCast"
+    ]
+  },
+  "animated_ambient_flags": 132,
+  "animated_ambient_radius": {
+    "value": 250,
+    "source": "data/4.20/troy_group_vis_contract.json",
+    "matched_by": "source_sha256 for all5 audio emitter resources"
+  },
+  "tests": [
+    {
+      "command": "cargo test -p openleague-core native_troy_simulation_flags --offline -j1",
+      "session": 46554,
+      "passed": 5,
+      "failed": 0,
+      "exit_code": 0
+    },
+    {
+      "command": "cargo test -p openleague-client native_ambient_parent --offline -j1",
+      "session": 49830,
+      "passed": 2,
+      "failed": 0,
+      "exit_code": 0
+    }
+  ],
+  "files": {
+    "tools/probe_native_troy_system_flags.py": "315a63b1f786cda0caf5a295fb8c8614131e272b1510ad5dc8a80c1040742cde",
+    "data/4.20/troy_system_flags_contract.json": "cef527831ce8033cf413dba2b042832c8df003f8a5978b4ae4f5b3820b213e21",
+    "crates/core/src/native_troy_simulation_flags.rs": "e441b0b2a182a1971baff828a8be7c8685fb7a98900611dedc1e5ac086f15997",
+    "crates/client/src/native_ambient_parent.rs": "26c10daa82ea4bbf4376f01690244d7d50f9830a2fcd628c37c58811dbbca292"
+  },
+  "limits": [
+    "Resource constructor flags exposed on AmbientParent; normal Bevy producer not yet switched to it.",
+    "Source flags at instance70 and caller instance flags1DC are distinct; subsequent producers still require qualification.",
+    "Native test inputs have no overlays; cache transport adapted and initialized cache bit supplied.",
+    "Not all authored true/false combinations of eight booleans occur in these27source files.",
+    "No normal client rebuild, live playback or full domain completion."
+  ]
+}

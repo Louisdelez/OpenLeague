@@ -1,0 +1,37 @@
+{
+  "updated_utc": "2026-10-04T20:32:13.639367+02:00",
+  "complete": false,
+  "client_tests_passed": 76,
+  "client_build_passed": true,
+  "native_complete_expansion_cases": 24,
+  "native_instruction_addresses": 276,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Native lookup tiles, four row copies and left/right boundary replication execute without runtime adapters for supplied cases.",
+    "Rust expansion matches all native bytes including strict >128 threshold, preserved 2x2 corners and padded pitch bytes.",
+    "Buffer/dimension errors are rejected before mutation."
+  ],
+  "limits": [
+    "Native cases use dimensions 2,3,8; production dimension128 and texture lock/upload/timing are not yet qualified.",
+    "Port preserves native corner history; initial destination allocation contents and first-frame native initialization require qualification.",
+    "44 previous isolated GPU fade/blur cases remain separate evidence; live rendering integration and original render-target quantization remain open.",
+    "No current graphical client rerun; full game remains incomplete."
+  ],
+  "next_actions": [
+    "Qualify dimension128 expansion and destination initialization/texture uploads.",
+    "Port verified native fade parameters: first frame instant threshold0, subsequent threshold1.1, fade-in2*elapsed and fade-out0.5*elapsed. Qualify caller scheduling (interval0.0333), upload interval0.2 and render-target formats.",
+    "Resolve Map10 extent/config and stencil providers; bind real visibility textures and postprocessing to normal rendering."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_upscale_complete_contract.json": "f88d8912c2b673c55b477d42685594b53586c7bb62d83dccaec13a9c10b309bd",
+    "crates/client/src/fow_upscale.rs": "a3fc2444d0e82bfb0937a8506bda708f16b5a6bbd234a54f941c88ae2abf134c",
+    "crates/client/src/fow_upscale_table.rs": "32c1a8570edbe81f8c982bd81e9e560c7a812e0d82a6fdf6f8f0a91a2831a1f3",
+    "tools/probe_fow_upscale_complete.py": "4f6e0948fe0d9c74302d475b39ae84bf8ef4537f5448777a431aec2de7581021",
+    "logs/fow-upscale-tests.log": "2229649942239ef8e39aaa1c4e290f4e4e5a38b3bc68ea93dd862d2cb25b1dfd",
+    "logs/fow-upscale-build.log": "d5f14b92fbd10658da55708dab829d35ce2fb56a5b23c1d61fa520efe9881619",
+    "target/debug/openleague-client.exe": "ee8a242a8b91edd9f170243c83e78282df9f116b7ec1cd8854b77a3bd1a0e247"
+  },
+  "native_fade_parameter_cases": 10,
+  "native_fade_parameter_contract": "data/4.20/fow_fade_parameters_contract.json"
+}

@@ -1,0 +1,116 @@
+{
+  "updated_utc": "2026-10-07T15:31:22.903773+00:00",
+  "complete": false,
+  "tests_passed": 32,
+  "test_log": "logs/projected-geometry-cache-tests.log",
+  "cargo_check_passed": true,
+  "build_session": null,
+  "build_log": "logs/projected-geometry-cache-build.log",
+  "gpu_verified": true,
+  "implementation": [
+    "Reuse full receiver mesh while terrain revision and ordered selected entities remain unchanged.",
+    "Evaluate projection UV and native per-vertex height fade in GPU vertex shader via current uniforms.",
+    "Invalidate geometry cache on terrain removal, transform or mesh changes."
+  ],
+  "limits": [
+    "No measured cache hit/rebuild or frame-time acceptance yet.",
+    "GPU runtime proves visible contribution and cleanup, not numerical equivalence of all vertex uniforms with native D3D.",
+    "Atomic raw/metadata publication remains open despite zero lag in this run.",
+    "Full game and original framebuffer equivalence remain unqualified."
+  ],
+  "build_passed": true,
+  "runtime_series": "v41",
+  "client_sha256": "63e18d5bb3d266f4e03a5f4a9b9450d242c042304786b3d3a11b74965b6323c2",
+  "pixel_attribution": {
+    "dx12": true,
+    "vulkan": true
+  },
+  "cleanup_receipt": "docs/receiver_cleanup_v41_raw.json",
+  "visual_inspection": [
+    "DX12 owner1 initial",
+    "Vulkan owner2 initial"
+  ],
+  "files_sha256": {
+    "assets/shaders/projected_vertex.wgsl": "6efaefd015d8d1a9dab92b5a4743224c209be354f589c4ee5eb5836a211a1684",
+    "crates/client/src/projected_live.rs": "d082f2a5d6486892e0f0d861e6668640506dc8d29bf0801e9fa39e8bfd23307e",
+    "crates/client/src/projected_terrain.rs": "5d037fa8650569b1cb1676a16908552de8c30eccbdd884bb66de8bb3626c014c",
+    "crates/client/src/projected_render.rs": "5571d9b76178428461294c1b2d17308b51a3a0d8c280fd1310df74327a400cdb",
+    "crates/client/examples/projected_gpu_height_raster_probe.rs": "977bd16b7f3d8092f3de70139866d609f606b80ccf7b29974652d200bcbbabed",
+    "crates/client/examples/projected_gpu_uv_probe.rs": "063825602c4b2a659cf9142680d88f8b4d266edf06ed891705c55407060fa578"
+  },
+  "gpu_height_numeric": {
+    "Vulkan": {
+      "adapter": "NVIDIA GeForce RTX 3060",
+      "backend": "Vulkan",
+      "cases": 24,
+      "complete": false,
+      "limits": [
+        "Exact production vertex height expression extracted from projected_vertex.wgsl, GPU perspective interpolation and fragment clamp; analytic oracle, not original D3D.",
+        "Full production shader/material binding and native clipping remain separate checks."
+      ],
+      "maximum_error": 3.8743019104003906e-07,
+      "passed": true
+    },
+    "Dx12": {
+      "adapter": "NVIDIA GeForce RTX 3060",
+      "backend": "Dx12",
+      "cases": 24,
+      "complete": false,
+      "limits": [
+        "Exact production vertex height expression extracted from projected_vertex.wgsl, GPU perspective interpolation and fragment clamp; analytic oracle, not original D3D.",
+        "Full production shader/material binding and native clipping remain separate checks."
+      ],
+      "maximum_error": 3.8743019104003906e-07,
+      "passed": true
+    },
+    "scope": "24 raster cases per backend,12 unique height/perspective cases repeated with legacy units labels. Exact production height expression extracted; no original D3D execution and no UV matrix qualification."
+  },
+  "gpu_uv_numeric": {
+    "Vulkan": {
+      "acceptance_bound": "native-to-production matrix delta plus8*f32_epsilon*sum(abs(native matrix terms))+f32_epsilon; cancellation-aware numerical bound",
+      "adapter": "NVIDIA GeForce RTX 3060",
+      "backend": "Vulkan",
+      "cases": 432,
+      "complete": false,
+      "limits": [
+        "Exact production UV expression in compute stage using production matrices versus native recorded matrices multiplied on CPU in f64.",
+        "Does not validate vertex-stage bindings, perspective interpolation, original D3D rasterization or full game."
+      ],
+      "maximum_absolute_error": 0.00028440356254577637,
+      "passed": true
+    },
+    "Dx12": {
+      "acceptance_bound": "native-to-production matrix delta plus8*f32_epsilon*sum(abs(native matrix terms))+f32_epsilon; cancellation-aware numerical bound",
+      "adapter": "NVIDIA GeForce RTX 3060",
+      "backend": "Dx12",
+      "cases": 432,
+      "complete": false,
+      "limits": [
+        "Exact production UV expression in compute stage using production matrices versus native recorded matrices multiplied on CPU in f64.",
+        "Does not validate vertex-stage bindings, perspective interpolation, original D3D rasterization or full game."
+      ],
+      "maximum_absolute_error": 0.00028440356254577637,
+      "passed": true
+    },
+    "initial_failure": "Fixed absolute tolerance1e-4 failed at tiny halfsize1 center5100/8700 angle-90 due cancellation; replaced with explicit floating point error bound, not a fidelity acceptance claim."
+  },
+  "metrics_instrumentation": {
+    "cargo_check_passed": true,
+    "build_session": null,
+    "build_log": "logs/projected-cache-metrics-build.log",
+    "runtime_verified": true,
+    "build_passed": true,
+    "receipt": "docs/projected_cache_metrics_v42.json"
+  },
+  "v42_cleanup": "docs/receiver_cleanup_v42_raw.json",
+  "capture_publication_fix": {
+    "cargo_check_passed": true,
+    "build_session": null,
+    "gpu_verified": true,
+    "semantics": "Save first zero-draw atlas per previously active entity without overwriting; atomically replace JSON journal. Hidden camera does not remove draw entity. Strict analyzer requires header equal journal and later than all active frames.",
+    "build_passed": true,
+    "strict_cleanup_receipt": "docs/receiver_cleanup_v43_raw.json",
+    "client_sha256": "8809131343a96573ae553f75de98590ea9136cad2e9db73eb06a7a6cc7538828",
+    "scope": "Two casts per backend,4 immutable cleanup atlases: exact header/journal equality, no RGB contribution, frame after last active draw. Crash interruption stress not tested."
+  }
+}

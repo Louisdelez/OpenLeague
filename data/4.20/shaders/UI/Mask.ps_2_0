@@ -1,0 +1,16 @@
+sampler maskTexture : register (s0);
+sampler diffuseTexture : register (s1);
+
+////////////////////////////////////////////////////////////////
+///
+/// main
+///
+////////////////////////////////////////////////////////////////
+void main(in float2 in_texcoord0 : TEXCOORD0,
+          in float2 in_texcoord1 : TEXCOORD1,
+		  out float4 out_color0 : COLOR0)
+{
+    float4 mask = tex2D(maskTexture, in_texcoord0);
+    float4 diffuse = tex2D(diffuseTexture, in_texcoord1);
+    out_color0 = diffuse * mask;
+}

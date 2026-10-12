@@ -1,0 +1,31 @@
+{
+  "verified_utc": "2026-10-08T06:11:24.298078+00:00",
+  "complete": false,
+  "native_pass_cases": 18,
+  "entry": "92B293..92B3AB",
+  "implemented": "AmbientRequests.pass_stamp defaults0, wraps +1 once at each actual update before instance work, including empty passes; diagnostic exposes it.",
+  "ordering": "Native resource callbacks see old stamp, then single increment, then all instance callbacks see new stamp.",
+  "tests": {
+    "command": "cargo test -p openleague-client map_audio_requests --offline -j1",
+    "session": 6121,
+    "passed": 7,
+    "failed": 0,
+    "exit_code": 0
+  },
+  "files": {
+    "tools/probe_native_troy_root_stamp_pass.py": "55806e21552d14709683f05487801495f9bc3955d9e3d19307be19d1777145b7",
+    "data/4.20/troy_root_stamp_pass_contract.json": "b70011062416d4ea34e6e425d69d5f358dd73f629146658fce4c58355f601533",
+    "crates/client/src/map_audio_requests.rs": "a4d3ddf972b49a694d56858f42caac7c15ba072d12f023e234f1171bd93ee68b"
+  },
+  "limits": [
+    "Native starts after camera preparation; resource maintenance, snapshot, instance callbacks adapted; remaining pass and external scheduler separate.",
+    "One Bevy ambient update maps to one native effect pass; full original scheduler fidelity still open.",
+    "Native parent not yet substituted for simplified requests; no normal executable rebuild/live audio."
+  ],
+  "next_integration_notes": [
+    "Rng55::from_filetime already qualified in core native_random.rs (114conversion+6startup cases); no Windows FILETIME startup producer found in client.",
+    "NativeProjectedCycle currently owns RNG; must preserve shared draw ordering across actual creation/update order when bridging.",
+    "Current AmbientPositions stores position but not orientation; resolve source pose from actual attachment before parent update, preserve unknown attachments.",
+    "Native animation End only marks wrapper; do not release directly on event End."
+  ]
+}

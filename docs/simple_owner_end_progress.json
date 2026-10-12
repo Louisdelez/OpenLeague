@@ -1,0 +1,35 @@
+{
+  "updated_utc": "2026-10-04T15:58:47.132108+00:00",
+  "complete": false,
+  "client_tests_passed": 54,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_owner_end_cases": 5,
+  "native_owner_end_frames": 50,
+  "native_linger_reader_cases": 6,
+  "runtime_annie_projected_emitter_bound": false,
+  "current_build_gpu_rerun": false,
+  "findings": [
+    "Original full frame update makes zero-cap particles inactive and finished immediately when emitter-end condition holds; +Infinity age stays internal, position update skipped.",
+    "Lifetime cap mutates the stored particle lifetime; cap is measured from particle birth, not a new countdown from owner-end flag change.",
+    "Native reader call-site defaults p-linger10/e-linger0; values outside[0,10] replaced by10. Authored Annie Projected p-linger0, missing e-linger gives0.",
+    "Rust matches all50frame states bit-for-bit for age/life and matches position, count, finished and time;6reader configurations match."
+  ],
+  "limits": [
+    "Owner-end flag supplied explicitly at age0.5; upstream flag and system-start-time producer unqualified.",
+    "Explicit p-linger/e-linger values, preallocated storage and constant native curves supplied.",
+    "No normal gameplay binding or GPU validation claimed.",
+    "Original reader parsing internals not executed; native call-site defaults, field assignment and clamping executed.",
+    "Upstream owner-end flag and time producer remain unqualified.",
+    "Normal Projected binding and final visual fidelity remain incomplete."
+  ],
+  "files_sha256": {
+    "data/4.20/simple_owner_end_contract.json": "cfe165fa8fdc2fc16c5150c1e11ef0de07f6a684ff76731255abdc66f8d8694f",
+    "data/4.20/simple_linger_defaults_contract.json": "f970ee9e051963d706e8f38ede6224153411a80dda6d83b2335a610883fb8fa1",
+    "data/4.20/simple_linger_reader_contract.json": "8c3c6950d05b6234325fe83483627d1e95c116fdaeedd2f0235a10b309c93bb9",
+    "crates/client/src/simple_cycle.rs": "ef0d104332507c13094523ada1cc93032be161a9373d259a829c60abef0af7ff",
+    "crates/client/src/simple_projected_config.rs": "f0343fe21abd304afbcc90403347b919b7153308e07309850d131f866627c2fd",
+    "logs/simple-owner-end-tests.log": "56432d64cf6af9fb7edb0a6ea931fd7630b717828656a7f0448a0bc75fd452ad",
+    "logs/simple-owner-end-build.log": "ce31d8f0b3dacdaf7b07cffd555d212c3c01752fb91460007a95fdd26c6e7c20",
+    "target/debug/openleague-client.exe": "63d88b0471f35f7329ca97f0c7f57f6f1a93995a185b49881c58434b504153ca"
+  }
+}

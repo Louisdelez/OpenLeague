@@ -1,0 +1,60 @@
+from pathlib import Path
+import collections,datetime,hashlib,json,re,shutil
+r=Path('E:/OpenLeague');s=Path('E:/mapslol3v3')
+def load(p):return json.loads(p.read_text(encoding='utf-8-sig'))
+def sha(p):
+ h=hashlib.sha256()
+ with p.open('rb') as f:
+  for b in iter(lambda:f.read(1024*1024),b''):h.update(b)
+ return h.hexdigest()
+def write(p,v):
+ t=p.with_suffix(p.suffix+'.tmp');t.write_text(json.dumps(v,indent=2,ensure_ascii=False)+'\n',encoding='utf-8');load(t);t.replace(p)
+isolated=r/'logs/replay-engine-tests.log';core=r/'logs/core-replay-engine-tests.log'
+assert '153 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out' in isolated.read_text(encoding='utf-8-sig')
+log=core.read_text(encoding='utf-8-sig');assert '712 passed; 0 failed; 0 ignored; 0 measured; 480 filtered out' in log
+for test in ['audio_replay_engine_48_actual_crt_workers_copy_names_execute_transport_join_and_retire_capsules_thread_objects_and_real_locks','audio_replay_engine_crt_bridge_prestart_overlap_failure_and_worker_callback_error_preserve_ownership_without_parent_worker_deadlock','audio_replay_engine_thread_factory_matches32_native_capsule_names_allocators_thread_fields_creation_failures_and_full_cleanup']:
+ assert test+' ... ok' in log
+exe=r/re.search(r'Running unittests .*?\(([^)]+\.exe)\)',log)[1].replace('\\','/')
+native=load(r/'data/4.20/replay_engine_thread_probe.json');config=load(s/'replay_transport_configuration_probe.json')
+assert native['passed'] and len(native['cases'])==32
+assert config['passed'] and len(config['cases'])==60
+assert native['native_sha256']==config['native_sha256']=='402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862'
+counts=dict(collections.Counter(c['return_code'] for c in config['cases']));assert counts=={0:12,1:30,2:12,3:6},counts
+counts={str(k):v for k,v in counts.items()}
+for c in config['cases']:
+ assert c['global_state_after_configuration']['0x2d78f10'] in [0,1]
+source=Path('D:/LeagueOfLegendsV2/4.20/Client/League of Legends_UNPACKED/League-of-Legends-4-20/RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/League of Legends.exe')
+assert sha(source)==native['native_sha256']
+for name in ['probe_replay_transport_configuration.py','record_replay_engine_thread.py']:
+ shutil.copy2(s/name,r/'tools'/name)
+shutil.copy2(s/'replay_transport_configuration_probe.json',r/'data/4.20/replay_transport_configuration_probe.json')
+shutil.copy2(s/'replay-configuration-probe.log',r/'logs/replay-configuration-probe.log')
+plan=load(r/'docs/completion_plan.json');scope={'domains':len(plan['domains']),'tasks':sum(len(d['tasks']) for d in plan['domains']),'additional_requirements':sum(len(d['additional_requirements']) for d in plan['domains'])};assert scope=={'domains':24,'tasks':114,'additional_requirements':37}
+now=datetime.datetime.now(datetime.timezone.utc)
+next_action='Compose the ported8A8B80/8A9040/8A8D40 engine factory and8A8F90 capsule with8FC380/8FC480 in a concrete shared engine runtime using the new production audio_crt_windows_engine_worker::Bridge.32 native engine lifetimes and48 real Windows engine workers now qualify named object/capsule storage, actual CRT packets/callback/retirement, recursive physical thread locks, join and destruction. The bridge also qualifies pre-start storage-overlap rejection and a worker waiting for its spawning caller then returning an explicit callback error without blocking parent creation. Thread naming bytes are verified but the original debugger exception is still a supplied boundary in Rust integration; do not substitute a modern naming API silently. Engine global storage/locks/logger, shared-control ownership and normal client CRT-root construction remain to wire; test transport globals are exclusively worker-owned. Port8FC230/8FC310/8FC610/8FC930/8FCA30 configuration against new60-case replay_transport_configuration_probe.json: callbacks null, numericIPv4 and supplied resolver-failure profiles; codes0/1/2/3 occur12/30/12/6 times. Native531A00 initializes2D6ED58; native9941B0/994210 must update2D6ED54 owner for the inlined8FC830 unlock. Then complete enabled8F68D0 stream/key setup,5BD470 copy assignment, manager callback bundle and metadata727DE0,728E20/728FD0/728EE0 and actual replay frame delivery. Keep global transport reference ownership separate from stream destruction and status2. Continue graceful graphical AppExit, configuration overlays/cache, actor listeners, maps/champions/audio and all24domains114tasks37requirements.'
+sources=['crates/core/src/audio_replay_engine_thread.rs','crates/core/src/audio_replay_engine_thread_tests.rs','crates/core/src/audio_crt_windows_engine_worker.rs','crates/core/src/audio_replay_engine_thread_windows_tests.rs','crates/core/src/audio_crt_windows_root_startup.rs','crates/core/src/audio_replay_transport_thread.rs','crates/core/src/audio_replay_transport_startup.rs','crates/core/src/audio_crt_windows_worker_thread.rs','crates/core/src/lib.rs','tools/replay-engine-tests.rs','tools/install_replay_engine_thread.py','tools/probe_replay_engine_thread.py','tools/probe_replay_transport_configuration.py','tools/record_replay_engine_thread.py']
+receipt={'saved_utc':now.isoformat(),'passed':True,'complete':False,'scope':scope,'native_engine_thread_lifetimes':32,'real_windows_engine_workers':48,'real_windows_error_workers':1,'prestart_collision_rejections':1,'prepared_native_configuration_cases':60,'prepared_configuration_return_codes':counts,'isolated_tests_passed':153,'core_audio_tests_passed':712,'core_tests_filtered_not_run':480,'native_source_sha256':native['native_sha256'],'core_test_executable':str(exe),'core_test_executable_sha256':sha(exe),'isolated_test_executable_sha256':sha(r/'tools/replay-engine-tests.exe'),'source_hashes':{n:sha(r/n) for n in sources},'contract_hashes':{n:sha(r/'data/4.20'/n) for n in ['replay_engine_thread_probe.json','replay_transport_configuration_probe.json']},'log_hashes':{str(p.relative_to(r)):sha(p) for p in [isolated,core,r/'logs/replay-engine-build.log',r/'logs/replay-configuration-probe.log']},'behavior':[
+ 'Rust8A8B80/8A9040/8A8D40 create the48-byte capsule, copy the16-byte tag and fresh24-byte MSVC string, call the CRT producer, then create the80-byte thread. Capacity rounds length|15 for heap names, allocator routes remain distinct, and byte writes preserve padding.32 native cases compare allocations, full live engine words and frees at creation/worker/destruction, including Windows error8, fill0/A5 and lengths0/1/15/16/22/31/32/63.',
+ 'Rust8A8F90 selects tag when name length0, otherwise inline or allocated name, invokes the supplied function/argument and retires capsule/name. Missing CRT adapter releases a capsule and its heap name. Post-start constructor errors preserve the started handle/id in an explicit Started error; generalized native exception/allocator failure behavior is not claimed.',
+ 'The reusable production Windows Bridge registers a host callback token in the existing native CRT root, creates actual956-byte packets through the existing producer, synchronizes owned process-heap storage and starts real Windows threads. Workers adopt their packet, run the engine job through the existing native-body port and retire TLS/COM/storage before ExitThread. Canonical labels are never cast into physical handles. Callback errors and panics are contained and reported; actual error completion is tested.',
+ 'A borrowed eight-byte call-frame bank is preflighted against existing CRT storage and serialised per bridge. On successful creation it is retired inside the producer syscall boundary before the worker can acquire the shared CRT context; this avoids requiring the spawning caller to wait for a callback that itself waits for that caller. Pre-start overlap rejection starts no worker and does not consume a packet.',
+ '48 actual Windows worker lifetimes across6 fresh native-qualified CRT roots execute the new engine factory/capsule, invoke the Rust global transport worker with actual Winsock/timer APIs, join via ported8A8C50/8A8DF0, close each physical handle once and destroy all engine allocations/real recursive critical sections. Each root balances9 heap allocations/frees; global network references are released explicitly. One additional worker returns an intentional callback error and still retires CRT storage/handle.',
+ 'The next native configuration probe executes60 original constructor/configuration/destruction lifetimes and restores allocation baseline in every case. It executes actual531A00 initialization and9941B0/994210 owner-word updates for the global transport mutex, resolving the inlined8FC830 unlock precondition; no status success is forced. OS networking/clock/empty-name DNS-error profiles are explicit.'
+ ],'limits':[
+ 'Production CRT bridge is integrated with the generic engine factory in real Windows qualification; the normal client service has not yet been wired to this full path. Global transport state in these Windows tests is worker-owned; shared engine global concurrency/logger/control dispatch remains to implement and qualify.',
+ 'Name selection/copy/lifetime is native-byte qualified, but Windows engine tests capture naming bytes rather than raising the original debugger exception. The native emulation already verifies its filter/handler; a production naming binding remains required. General string assignment, engine OOM/custom allocation failures and arbitrary shutdown races remain unqualified.',
+ '60 configuration cases prepare later Rust ports; they are not implementation completion. Null callback only. Empty-name getaddrinfo11001 and WSAStartup10093 are supplied failure profiles; numericIPv4 formatting is measured on the host. No real DNS success, IPv6, packet traffic or replay content is claimed.',
+ '153 isolated tests and712 selected core tests passed;480 core tests were filtered. The normal client executable was not rebuilt or graphically retested. Full stream configuration/manager/metadata/frame delivery, other game domains and human fidelity acceptance remain unfinished.'
+ ],'next_action':next_action}
+backup=r/'docs/plan_history'/('replay-engine-'+now.strftime('%Y%m%dT%H%M%SZ'));backup.mkdir(parents=True)
+for name in ['coverage.json','resume_checkpoint.json','completion_plan.json','completion_plan.html']:shutil.copy2(r/'docs'/name,backup/name)
+write(r/'docs/replay_engine_thread_validation.json',receipt)
+for name in ['coverage.json','resume_checkpoint.json','completion_plan.json']:
+ p=r/'docs'/name;d=load(p);d['replay_engine_thread_validation']=receipt;d['updated_utc']=now.isoformat();d['next_action']=next_action;write(p,d);assert load(p)['replay_engine_thread_validation']==receipt
+p=r/'docs/completion_plan.html';html=p.read_text(encoding='utf-8');marker='replay-engine-thread-validation';assert '</body>' in html and 'id="'+marker+'"' not in html
+section='<section id="'+marker+'"><h2>Replay : constructeur du thread et raccord CRT</h2><p>Le constructeur Rust et ses noms correspondent aux 32 cycles natifs. 48 threads Windows utilisent le nouveau constructeur, son callback et le nettoyage CRT, puis libèrent noms, objets, verrous et handles. Un échec du callback vérifie également le nettoyage. 153 tests ciblés et 712 tests moteur réussis. Les 60 profils natifs de configuration préparent le prochain raccordement ; les événements de partie ne sont pas encore distribués.</p></section>'
+t=p.with_suffix('.html.tmp');t.write_text(html.replace('</body>',section+'</body>'),encoding='utf-8');t.replace(p)
+for name,digest in receipt['source_hashes'].items():assert sha(r/name)==digest,name
+for name,digest in receipt['contract_hashes'].items():assert sha(r/'data/4.20'/name)==digest,name
+for name,digest in receipt['log_hashes'].items():assert sha(r/name)==digest,name
+print(json.dumps({'passed':True,'isolated_tests':153,'core_tests':712,'real_engine_workers':48,'error_workers':1,'native_configuration_cases':60,'native_configuration_statuses':counts,'scope':scope,'receipt':str(r/'docs/replay_engine_thread_validation.json')}))

@@ -1,0 +1,73 @@
+{
+  "updated_utc": "2026-10-07T13:43:43.459947+00:00",
+  "complete": false,
+  "evidence": "docs/projected_color_storage_disassembly.json",
+  "findings": [
+    "Native945490 writes storage80 using definition1E4 mode,1EC multiplier,1F4 offset;9454BA writes storage8C using1E8,1F0,1F8.",
+    "Constructor91C3B7..91C405 sets modes1/0,multipliers1/1,offsets0/0: age and constant1 before resource reader overrides.",
+    "Existing native_simple_attribute_policy.rs implements all four policies against504 original CPU cases.",
+    "Client native_projected_cycle.rs currently supplies modes0/0; this differs from constructor defaults.",
+    "Actual Annie Projected section specifies p-rgba=color-hold.tga. Effective resource reader overrides and texture upload remain to qualify."
+  ],
+  "limits": [
+    "Static disassembly verified against native source hash; no new native execution or GPU validation.",
+    "Do not change profile solely from constructor until resource reader overrides are verified."
+  ],
+  "reader_contract": "data/4.20/projected_color_reader_contract.json",
+  "reader_cases_passed": 4,
+  "implementation": "SimpleProjectedConfig now reads native color modes/scale/offset; NativeProjectedCycle uses those policies and exports color_uv from storage80/8C.",
+  "test_session": null,
+  "test_log": "logs/projected-color-cycle-tests.log",
+  "gpu_integration": false,
+  "cycle_tests_passed": 3,
+  "color_texture_pixels": "docs/projected_color_texture_pixels.json",
+  "material_color_binding": true,
+  "gpu_verified": false,
+  "check_passed": true,
+  "check_log": "logs/projected-color-binding-check.log",
+  "build_session": null,
+  "build_log": "logs/projected-color-binding-build.log",
+  "build_passed": true,
+  "dx12_capture": "docs/projected_core_cycle_capture_v36_receivers_dx12.json",
+  "vulkan_capture": "docs/projected_core_cycle_capture_v36_receivers_vulkan.json",
+  "cleanup": "docs/receiver_cleanup_v36.json",
+  "vulkan_pixel_attribution_passed": true,
+  "dx12_pixel_attribution_passed": false,
+  "dx12_issue": "First cast has two GPU draw frames with zero changed pixels; second cast contributes90747 pixels. Cause unqualified.",
+  "texture_note": "All64 texels are opaque white; restoring LUT multiplication is neutral for this Annie resource.",
+  "preload_correction": {
+    "files": [
+      "crates/client/src/projected_render.rs",
+      "crates/client/src/projected_warmup.rs"
+    ],
+    "reason": "New color texture was first requested during the short cast; preload and warmup now hold the same color texture as production.",
+    "evidence": "logs/projected-core-cycle-v36-receivers-dx12-pipeline.json",
+    "observed": "First visible draw has empty pipeline_states; next frame is hidden and final return already has active0. This supports preparation delay but does not uniquely prove texture loading as cause.",
+    "build_session": null,
+    "build_log": "logs/projected-color-preload-build.log",
+    "verified_runtime": true,
+    "build_passed": true
+  },
+  "v37": {
+    "dx12_pixel_attribution_passed": true,
+    "vulkan_pixel_attribution_passed": true,
+    "dx12_peak_pixels": [
+      87201,
+      92402
+    ],
+    "vulkan_peak_pixels": [
+      93959,
+      87996
+    ],
+    "visual_inspection": "Initial captures inspected both backends; map/champions/HUD render without obvious new corruption. Native visual equivalence not proven.",
+    "cleanup_passed": false,
+    "cleanup_issue": "Second DX12 cleanup atlas has zero bytes; other3 atlases full size. Process termination can interrupt overwriting an existing atlas. Atomic temporary-file publication added to diagnostics, not yet rebuilt/tested.",
+    "proofs": [
+      "docs/projected_receiver_pixels_v37_dx12.json",
+      "docs/projected_receiver_pixels_v37_vulkan.json",
+      "logs/receiver-cleanup-v37.log"
+    ]
+  },
+  "v38_runtime": "docs/projected_color_v38_runtime_progress.json",
+  "atomic_cleanup_verified": true
+}

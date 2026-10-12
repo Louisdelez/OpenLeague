@@ -1,0 +1,65 @@
+{
+  "updated_utc": "2026-10-04T09:53:33.439393+00:00",
+  "complete": false,
+  "core_tests_passed": 386,
+  "client_tests_passed": 31,
+  "unit_checks": 4,
+  "network_checks": 9,
+  "QWER_core_partially_implemented": 5,
+  "QWER_fully_complete": 0,
+  "executables": [
+    {
+      "path": "target/debug/openleague-server.exe",
+      "bytes": 4471808,
+      "sha256": "8532ad92da5ca4cbe75baf270f6be97bccd6c78046059992f5fdca902862aede"
+    },
+    {
+      "path": "target/debug/openleague-client.exe",
+      "bytes": 118146560,
+      "sha256": "0f988eaf7fcd8be73238ea7d06efb0718a864f3696ff1fb4b672d77dc9ecccf5"
+    },
+    {
+      "path": "launcher/src-tauri/target/debug/openleague-launcher.exe",
+      "bytes": 12411904,
+      "sha256": "ac22a8346c0b2af574bdee16311acc510e657c73ca5f85584223f0049c4f57de"
+    }
+  ],
+  "files_sha256": {
+    "crates/core/src/annie.rs": "7954314c89e77e5b8f5fc00658830a65888e560393a315de4646676e83b83dab",
+    "crates/core/src/spells.rs": "26666d0f6c20f65afce4140b8f6b3e8084aaad510ad47bfff3b516582249778b",
+    "crates/core/src/lib.rs": "c534768e7e268d571aaa23f1f555a0f32c91dabd02e2081e88de4881daec22f7",
+    "crates/core/src/progression.rs": "40705a63880116f1700d5546ad1f4de63701bb80b6997983dd24ec3bab59f56f",
+    "crates/core/src/attacks.rs": "bd79c0333c44bbaf79792bbd68db57120b8ef320b3c619f07ef9828334b35b59",
+    "crates/core/src/vision.rs": "525bbc69e8a2e28a9fa09d8c9477b2fa97a21c0ad83ae40c9fdc373cc4a2b140",
+    "crates/client/src/main.rs": "fffa05e9ddb463cc97ba6329855aac5d27a067e324d5001cd8dae728f4c12473",
+    "data/4.20/annie_q_rules.json": "c0b782dfe9327ba60a686e3defaf8fe3138ff5d66a4e5e312e05ac823c77a100",
+    "docs/annie_native_sources.json": "d5ac9f14e0e772829e6028fbf9785bcd6780dfbd764ebde7ee61d7f6de4af81f",
+    "docs/annie_network_validation.json": "0aaf2b9987e5f3f2db0742cfe61e60d4ff022c82ef317b7b2d1ea390939ce58b",
+    "logs/annie-tests.log": "17ba7c4d760073c6b16f8616f1e35895663d10514cd506716145d505c4cf924b",
+    "logs/annie-build.log": "01a3772e313c1e21ecabf8be44343e012e53468b77452c02e62a8c742db6c7dc"
+  },
+  "community_cast_formula_source": "D:\\LeagueOfLegendsV2\\4.20\\GameServer\\GameServerLib\\Content\\SpellData.cs",
+  "community_source_sha256": "e62b46a86ed0f267433cce15d9c5cb742b8f2a0a2810f7cfb3af797742478946",
+  "sources": "docs/annie_native_sources.json",
+  "network": "docs/annie_network_validation.json",
+  "limits": [
+    "Only Disintegrate core logic added. Annie passive, W/E/R, secondary abilities, Tibbers and interactions remain unimplemented; no full champion kit complete.",
+    "Original Lua objects contain small client metadata rather than recovered server gameplay. Cast duration uses community GetCastTime=(1+offset)*0.5; eight-tick rounding, cast-time mana/cooldown/AP snapshots, center-tracking missile movement, target loss/refund and structure exclusion policies are reconstructed and require original runtime qualification.",
+    "Native values directly decoded and compared with Riot 4.20.1 Data Dragon: 625 range,1400 missile speed,80/115/150/185/220+0.8AP damage,60/65/70/75/80 mana,4second cooldown. No modern cooldown refund added.",
+    "Four core checks cover cost/atomic guards/travel/damage/lethal-only mana refund/unchanged cooldown/control survival/dead caster/dead target. Nine ordinary two-client UDP checks include real Q cost/cooldown/damage and mana potion restoration; no state injection.",
+    "Fresh Vulkan framebuffer inspected with Annie and restored map visible; Q animation/projectile rendering/particles/audio/full HUD/physical input/native policy fidelity remain unqualified. All24domains incomplete."
+  ],
+  "official_numeric_crosschecks": 21,
+  "runtime": {
+    "port": 5948,
+    "server_sha256": "8532ad92da5ca4cbe75baf270f6be97bccd6c78046059992f5fdca902862aede",
+    "champion": "annie",
+    "checked_utc": "2026-10-04T09:54:21.6320328Z",
+    "diagnostic": true,
+    "client": 7416,
+    "complete": false,
+    "server": 6376,
+    "client_sha256": "0f988eaf7fcd8be73238ea7d06efb0718a864f3696ff1fb4b672d77dc9ecccf5"
+  },
+  "visual": "docs/annie_live_validation.json"
+}

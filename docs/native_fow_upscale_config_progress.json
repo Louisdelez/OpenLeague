@@ -1,0 +1,76 @@
+{
+  "updated_utc": "2026-10-05T02:55:43.759250+00:00",
+  "complete": false,
+  "client_tests_passed": 144,
+  "client_build_passed": true,
+  "native_boolean_query_cases": 5,
+  "native_initializer_layer_cases": 6,
+  "native_boolean_addresses": 95,
+  "native_initializer_addresses": 26,
+  "runtime": {
+    "checked_utc": "2026-10-05T02:55:19.420972+00:00",
+    "complete": false,
+    "normal_server": true,
+    "client_sha256": "c044993f8e65937588a417552c2fe4de0d98ae4b224f325900cf8293ca4a0e72",
+    "measurement": {
+      "complete": false,
+      "configuration_profile": "recovered_map10_no_launch_override",
+      "error": null,
+      "format": "R8Unorm",
+      "gpu_readback_verified": false,
+      "height": 512,
+      "limits": [
+        "Raw visibility only; native fade/blur and material binding pending.",
+        "Corner allocation and sampler are explicit Bevy adapters; original initialization/device producers remain open."
+      ],
+      "material_bound": false,
+      "native_blur_sigma": -1.0,
+      "native_upscale": true,
+      "nonzero_texels": 20328,
+      "render_asset_registered": true,
+      "uploads": 120,
+      "width": 512
+    },
+    "capture": "E:\\OpenLeague\\logs\\fow-upscale-config-144.png",
+    "capture_sha256": "5f33babedf59ea3dea6485cfc26c8f6da2032733613eb63c8a0bfe31825b52c3",
+    "visual_inspection_required": false,
+    "limits": [
+      "Image asset updates observed in live Vulkan client; GPU texture readback and material sampling not verified.",
+      "Raw mask expansion only; full native fade/blur pipeline remains open."
+    ],
+    "visual_inspection": {
+      "observed": [
+        "Actual current Vulkan framebuffer shows textured blue base, shopkeeper, Garen, health bars and readable accented French HUD."
+      ],
+      "limits": [
+        "Screenshot does not verify native normal dynamic fog; fade/blur/material consumers are still open."
+      ]
+    }
+  },
+  "findings": [
+    "Actual Map10 terrain INIBIN has no FoW/upscale value; original boolean query returns default true.",
+    "Original two-layer initializer and native hash execute; explicit secondary false wins, missing secondary falls through, both missing use true.",
+    "Rust Map10 settings read recovered source values; texture setup uses the qualified upscale choice. Full IO/override resolution remains open."
+  ],
+  "limits": [
+    "Original boolean query and binary fallback/conversion control flow execute. Typed binary table and missing binary string query are explicit adapters; whole file parser not executed.",
+    "GetCurrentThreadId import at8AFC3E returns synthetic thread1; security-cookie call at8AE5CD skipped preserving AL. Other allocator/cookie boundaries inherited from native probe prerequisites.",
+    "Original initializer supplies default true and key upscale; configuration cache/IO and full initializer execution remain open.",
+    "Map10 value is parsed from actual terrain.inibin; absence is distinct from explicit false. No normal GPU fog acceptance claimed.",
+    "Original two-layer initializer branch and native section/key hashing execute; prebuilt configuration objects and layer pair supplied. Whole cache/path/IO resolution remains open.",
+    "Normal timed fade/blur, overlay and material visibility consumers remain open. Current runtime validates settings/texture uploads, not whole match or complete game."
+  ],
+  "next_actions": [
+    "Qualify physical INIBIN/configuration cache resolution and full Map10 fog initialization.",
+    "Connect native timed fade/blur and overlay to normal rendering; numerically verify GPU world coordinates and visibility.",
+    "Complete six-client Map10 match, remaining champion kits, launcher/services and all full-plan domains."
+  ],
+  "files_sha256": {
+    "crates/client/src/fow_settings.rs": "a44079df30dc3ab7182b96f8bd2b92001e8062871130272b9e5f4625d5be531f",
+    "crates/client/src/fow_visibility_texture.rs": "09a0e16df93a8775acd1e4dd2f22b6f50363e3a1211035bbac9c89d936edad15",
+    "data/4.20/fow_upscale_config_contract.json": "91ac3bbeec3b1d45dd3cb0875f86cef966f5fb6bae60271801f5a6ee2c396190",
+    "logs/fow-upscale-config-tests.log": "5a3f8b0ff549db37e7d882bbb6229640435c5144213e724512031b9f2a1a83e8",
+    "logs/fow-upscale-config-build.log": "4005b6316df05ad4a8eab86785776b3acc130be33d40a4eb22caf8de71075158",
+    "target/debug/openleague-client.exe": "c044993f8e65937588a417552c2fe4de0d98ae4b224f325900cf8293ca4a0e72"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "saved_utc": "2026-10-09T02:07:02.310612+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_registered_meter_callback_compositions_prepared": 8,
+  "native_registered_meter_callback_rust_compositions_validated": 0,
+  "native_callback_registry_cases": 720,
+  "register_cases": 480,
+  "unregister_cases": 240,
+  "audio_tests_passed": 372,
+  "files_sha256": {
+    "tools/probe_native_audio_bank_meter_registered_callback_unload.py": "fd2178d69850d864656b6451e40ec1599d23efa06aa8f24af19ef513e667dda4",
+    "data/4.20/audio_bank_meter_registered_callback_unload_preparation.json": "6c0410a793cf15e8d10a1598c9b34abec603b7f4d5fb8b3536d580f24935f54c",
+    "logs/audio-bank-meter-registered-callback-unload-probe.log": "1c076a8cddc0912727c89a9a77cf0682c1d8e7ea789d85b0a6222a0e6b56730f",
+    "crates/core/src/audio_callback_registry.rs": "934def7d9411f64e6cc6f0e06700f456a312a33e43053f79dc812007031abbb1",
+    "crates/core/src/lib.rs": "b2c5d00a72e90e3ec230d66706e6b364756b6468892916b4630b693ec6edab20",
+    "tools/probe_native_audio_callback_registry.py": "429fa852e1aa08992070b14ce0eb71d4b220a7257bdefb98de96e28b63d05457",
+    "data/4.20/audio_callback_registry_preparation.json": "2b263f99fc8f72bf72d14c18dfa672cbb753fb400acd51199094bee599872f49",
+    "logs/audio-callback-registry-probe.log": "69ae8374e81892280b3131d3e56e15a299f18eff07fa2e6588d52149094f15ca",
+    "logs/audio-callback-registry-tests.log": "a085f4a6685d523e8805d23d0cf7bd60f34193221e4a1062ee9209ae7c976062",
+    "tools/record_audio_callback_registry_progress.py": "78e79711f435ddf0db843344f46e33e01bb5b305a0be34c8163ec457770f0676",
+    "target/debug/deps/openleague_core-92fab3f20accd79c.exe": "f410265bb4fc12e523f9a316ec0aeef37eeecc5558880ae84bb14fd0b1b99e51"
+  },
+  "acceptance": [
+    "Actual Rust owned header and full allocation bytes/status/call order match all720 native sequences.",
+    "No filtering of duplicate or null callback keys; first-match removal retains capacity and trailing bytes; failed growth preserves old state."
+  ],
+  "limits": [
+    "Normal Meter callback registration integration and audio-frame invocation remain unqualified.",
+    "Storage acceptance does not prove arbitrary callback invocation, synchronization, DSP/device output or complete game."
+  ],
+  "next_action": "Integrate the qualified owned callback registry into native Meter initialization/unload compositions, then implement normal audio-frame dispatch and producer construction. Registry storage/removal now matches720 native cases;372 selected audio tests pass. Full audio/DSP/device acceptance and all24domains/114tasks/37requirements remain open."
+}

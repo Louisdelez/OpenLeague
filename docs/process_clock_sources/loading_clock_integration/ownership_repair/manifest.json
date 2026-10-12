@@ -1,0 +1,26 @@
+{
+  "production_modified": false,
+  "compiled": false,
+  "tests_run": false,
+  "source": "E:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_clock_host.rs",
+  "base_sha256": "e4ca3ffaba8c330d061d55bd5aa6a3ea885a182f03fe56cdc7bdf991e1ca4fd6",
+  "files": {
+    "audio_replay_windows_clock_host.rs": {
+      "sha256": "6946fcc5806250510496735518b807cdf89b984e3e6e1d2f7cc015d00d019dc8",
+      "bytes": 31642
+    },
+    "ownership_repair.patch": {
+      "sha256": "c4904e72fb1cacc7eae47e9b001c1f8a9dcc1a7ebc9df81650de08b565512576",
+      "bytes": 7668
+    }
+  },
+  "test_functions_added": [
+    "audio_process_clock_unadopted_mirror_retries_close_without_double_heap_free_or_lost_primary",
+    "audio_process_clock_unknown_cleanup_is_preserved_before_unadopted_mirror_retry"
+  ],
+  "limits": [
+    "Prepared only; compilation/testing deferred while root cargo is active.",
+    "Unknown/failed native callbacks remain registered and block later independent cleanup, preserving LIFO order and the retry identity required by CE2955.",
+    "No recovery of an allocation whose physical HeapFree itself failed is added by this narrowly scoped pending-mirror repair."
+  ]
+}

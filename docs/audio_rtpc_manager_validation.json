@@ -1,0 +1,43 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T09:25:25.558301+00:00",
+  "change": [
+    "Port B11040/B110A0 exact binding lookup, ordered duplicate curves and f32 accumulation.",
+    "Port B11320 owner-specific -> owner0 -> record default -> missing record zero.",
+    "Connect actual manager evaluation to property8/9 getters with caller-owned CRT random stream."
+  ],
+  "validation": {
+    "native_manager_cases": 3456,
+    "manager_tests_passed": 3,
+    "regression_tests_passed": 5,
+    "failed": 0,
+    "session": 77043,
+    "terminal_exit_code": 0,
+    "comparison": "Exact output bits and ordered curve/input calls for all3456 original manager cases; getter integration and random-state/error behavior checked.",
+    "logs": [
+      "logs/audio-rtpc-manager-tests.log",
+      "logs/audio-rtpc-parameter-regression-tests.log"
+    ]
+  },
+  "sha256": {
+    "crates/core/src/audio_rtpc_manager.rs": "37ba1cb8daad2924cedfcf0c33c8dad03bcd16be9395170029d0f74a9354cf04",
+    "crates/core/src/lib.rs": "18ae248f69f1f3404c3441a60675e825e330a9447bcba956b1d7ba2894b68b71",
+    "crates/core/src/audio_parameter_getters.rs": "2c447f8973b4adfa7b9ab8fe9425783d4a1c44d576a8be7777c843998c973788",
+    "crates/core/src/audio_curves.rs": "5d23dcea4c208757106a0d66ef2ad4c114844a9d4172b54f546e5823073e3519",
+    "tools/probe_native_audio_rtpc_manager.py": "78772381d4a0b27c7c835a0a11fd6d67b7a9391e1c4c0660c2b544c4c598ec9b",
+    "data/4.20/audio_rtpc_manager_contract.json": "8b23cfbb7ab89f1b0ef1570b480e2d6f6c5770ad9b1dee6f52d4606c4e42ad56",
+    "logs/audio-rtpc-manager-probe.log": "f96772effbf76379dd4f381029cc35490d1acff0729dc934ba92c9f14aedae03",
+    "logs/audio-rtpc-manager-tests.log": "ee15ae2b40261df874450161074a819c85acbbfda64fc0254b2baf47e41988b9",
+    "logs/audio-rtpc-parameter-regression-tests.log": "afd5dc7f9ba55b1fcdacb136c87faa3ff9d010a8d3a7838a0ab979da570eb811",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "25a07d9b983569d7574a54ad4b5281edae1dc5d4aa0093862b806fd2a55d484d"
+  },
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "limits": [
+    "Binding creation/update/smoothing, bank ParamID mapping and real runtime ownership remain to connect.",
+    "Curve fixtures use qualified scaling0/linear4; broader curves have separate audio_curve_contract qualification.",
+    "No physical audio admission or audible runtime proof.",
+    "Manager bindings and records remain explicit inputs; actual bank subscription creation/update/smoothing and ParamID mapping not integrated.",
+    "No normal client rebuilt; no physical audio admission, audible output or full-game acceptance.",
+    "Runtime allocation/cadence and real shared random ownership remain to qualify."
+  ]
+}

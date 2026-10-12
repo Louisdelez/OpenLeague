@@ -1,0 +1,170 @@
+{
+  "passed": true,
+  "case_count": 8,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "cases": [
+    {
+      "delay": 0.125,
+      "has_context": false,
+      "allocations": [
+        [
+          16,
+          1073827840
+        ],
+        [
+          16,
+          1073827872
+        ],
+        [
+          176,
+          1073823744
+        ]
+      ],
+      "freed": [
+        1073827840
+      ],
+      "converted_delay": 6000
+    },
+    {
+      "delay": 0.125,
+      "has_context": true,
+      "allocations": [
+        [
+          16,
+          1073827840
+        ],
+        [
+          176,
+          1073823744
+        ]
+      ],
+      "freed": [],
+      "converted_delay": 6000
+    },
+    {
+      "delay": 0.5,
+      "has_context": false,
+      "allocations": [
+        [
+          16,
+          1073827840
+        ],
+        [
+          16,
+          1073827872
+        ],
+        [
+          176,
+          1073823744
+        ]
+      ],
+      "freed": [
+        1073827840
+      ],
+      "converted_delay": 24000
+    },
+    {
+      "delay": 0.5,
+      "has_context": true,
+      "allocations": [
+        [
+          16,
+          1073827840
+        ],
+        [
+          176,
+          1073823744
+        ]
+      ],
+      "freed": [],
+      "converted_delay": 24000
+    },
+    {
+      "delay": 1.0,
+      "has_context": false,
+      "allocations": [
+        [
+          16,
+          1073827840
+        ],
+        [
+          16,
+          1073827872
+        ],
+        [
+          176,
+          1073823744
+        ]
+      ],
+      "freed": [
+        1073827840
+      ],
+      "converted_delay": 48000
+    },
+    {
+      "delay": 1.0,
+      "has_context": true,
+      "allocations": [
+        [
+          16,
+          1073827840
+        ],
+        [
+          176,
+          1073823744
+        ]
+      ],
+      "freed": [],
+      "converted_delay": 48000
+    },
+    {
+      "delay": 2.0,
+      "has_context": false,
+      "allocations": [
+        [
+          16,
+          1073827840
+        ],
+        [
+          16,
+          1073827872
+        ],
+        [
+          176,
+          1073823744
+        ]
+      ],
+      "freed": [
+        1073827840
+      ],
+      "converted_delay": 96000
+    },
+    {
+      "delay": 2.0,
+      "has_context": true,
+      "allocations": [
+        [
+          16,
+          1073827840
+        ],
+        [
+          176,
+          1073823744
+        ]
+      ],
+      "freed": [],
+      "converted_delay": 96000
+    }
+  ],
+  "findings": [
+    "Actual AF0500 allocates source context, AF01E0/B1F960 construct action503 and copy parameters; AF2500 converts delay.",
+    "B1FC80 actual retained reference; no-context path releases first temporary source before replacement."
+  ],
+  "adapters": [
+    "Allocator/free mapped buffers; lock imports ret4. Supplied reference object uses action vtable for retain.",
+    "Stop before AF0270 scheduling; optional context supplied empty."
+  ],
+  "limits": [
+    "Allocation failures and subsequent scheduling/cleanup not covered; no output audio proof."
+  ]
+}

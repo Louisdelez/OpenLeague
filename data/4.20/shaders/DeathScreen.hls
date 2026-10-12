@@ -1,0 +1,45 @@
+float GetLuminance(float3 inputColor)
+{
+	float3 LUMINANCE_CONVERSION = float3(0.299f, 0.587f, 0.114f);
+	return dot(LUMINANCE_CONVERSION, inputColor.rgb);
+}
+
+float3 GetSaturatedColor(float3 inputColor, float saturation)
+{
+	// Luminance conversion
+ 	float luminance = GetLuminance(inputColor);
+	return (1.0f - saturation) * pow(luminance, 1.25)+ (inputColor.xyz * saturation);
+}
+
+float3 GetDeathScreenColor(float3 inputColor)
+{
+	float luminance = GetLuminance(inputColor);
+    return float3(luminance, luminance, luminance);
+}
+
+float3 GetDeathScreenPartialDesaturation(float3 inputColor)
+{
+ 	return GetSaturatedColor(inputColor, 0.2f);
+}
+
+float3 GetDeathScreenPartialDesaturationHealthBars(float3 inputColor)
+{
+	return GetSaturatedColor(inputColor, 0.5f);
+}
+
+float3 GetEnvironmentDeathColor(float3 inputColor)
+{
+#ifdef DEATH_SCREEN
+	return GetDeathScreenColor(inputColor);
+#else
+	#ifdef DEATH_SCREEN_PARTIAL_DESATURATION
+		return GetDeathScreenPartialDesaturation(inputColor);
+	#else
+		#ifdef DEATH_SCREEN_PARTIAL_DESATURATION_HEALTH_BARS
+		return GetDeathScreenPartialDesaturationHealthBars(inputColor);
+		#else
+		return inputColor;
+		#endif
+	#endif
+#endif
+}

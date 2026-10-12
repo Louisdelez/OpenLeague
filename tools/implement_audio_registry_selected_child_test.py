@@ -1,0 +1,9 @@
+from pathlib import Path
+p=Path('E:/OpenLeague/crates/core/src/audio_action_registry_value_update.rs');s=p.read_text(encoding='utf-8');test=s[s.index(' #[test]fn audio_registry_native_callbacks_matches288'):];assert test.endswith('}\n');test=test[:-2]
+old='audio_registry_native_callbacks_matches288_original_transition_creation_acquisition_progression_recursive_release_active_voice_flags_oom_and_complete_physical_lifetimes';new='audio_registry_selected_child_callbacks_matches288_original_first_duplicate_later_match_zero_count_padding_targets_transition_lifetimes_and_active_voice_physical_cases'
+test=test.replace(old,new).replace('audio_registry_native_transition_callbacks_preparation.json','audio_registry_selected_child_callbacks_preparation.json')
+a=test.index(' let regions=vec![');b=test.index(';\n let mut m=',a)
+test=test[:a]+''' let regions:Vec<(&str,u32,usize)>=p["regions"].as_array().unwrap().iter().map(|v|(v["name"].as_str().unwrap(),v["reference"].as_u64().unwrap()as u32,v["size"].as_u64().unwrap()as usize)).collect()'''+test[b:]
+# These names are JSON-owned; the existing backend borrows static names. Resolve known region names.
+test=test.replace('v["name"].as_str().unwrap()', '''match v["name"].as_str().unwrap(){"registry"=>"registry","key_table"=>"key_table","state"=>"state","action"=>"action","properties"=>"properties","source"=>"source","input_owner"=>"input_owner","manager"=>"manager","queues"=>"queues","clock"=>"clock","voices"=>"voices","property_owners"=>"property_owners","bindings"=>"bindings","conversion_cache"=>"conversion_cache","selected_child"=>"selected_child","selected_children"=>"selected_children","selected_properties"=>"selected_properties",_=>panic!("unexpected fixture region")}''')
+assert new not in s;s=s[:-2]+test+'}\n';p.write_text(s,encoding='utf-8');print('Added288 native selected-child lifetime replays')

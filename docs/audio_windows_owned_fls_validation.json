@@ -1,0 +1,45 @@
+{
+  "saved_utc": "2026-10-09T19:42:00.560653+00:00",
+  "passed": true,
+  "complete": false,
+  "audio_tests_passed": 525,
+  "actual_windows_owned_fls_core_cases": 12,
+  "actual_windows_owned_fls_component_cases": 24,
+  "actual_windows_owned_fls_failure_checks": 2,
+  "actual_windows_owned_fls_ownership_checks": 1,
+  "actual_windows_shared_fls_callbacks": 8,
+  "actual_windows_shared_fls_architectures": [
+    32,
+    64
+  ],
+  "test_log": "logs/audio-windows-owned-fls-tests.log",
+  "test_executable": "target\\debug\\deps\\openleague_core-92fab3f20accd79c.exe",
+  "test_executable_sha256": "c5e9e1812c95d3ac442a59cc729035404e0544a97bf6447c5c232d0e5d56254b",
+  "previous_receipt": "docs/audio_crt_fls_callback_validation.json",
+  "evidence": [
+    "Production core Windows OwnedSlot component now allocates/binds/gets/frees actualFLS slot and dispatches registered Rust CRT destructor. Slot is thread-affine and its OS callback owns transferredBox. Explicit close is idempotent, Drop frees slot, callback attempts/completions/failures remain observable, and native ABI contains panics. Preinitialized canonical context is shared throughArcMutex; callback try_lock reports busy/poison without deadlocking.",
+    "Full core Windows tests exercise12 original live/cleared native contexts through actualOS callbacks, comparing every original destructor lock/free service-entry bank, final canonical storage and exact freed identities. Separate core tests qualify Drop single-release, held-context busy failure, backend failure and panic containment with slot closure/no false completion. No source-native SEH equivalence claimed.",
+    "Unchanged production OwnedSlot module also compiled in actualX86/X64 isolated executables and verifies12 cases each:24actual component cases. Same original native banks/order/final bytes/free identities matched. Isolated type/service facades retained only in standalone probes; full core checks use actual crate types.",
+    "Actual shared global FLS index measured inX86/X64 processes with2 worker threads percase. Natural thread exit invokes each callback on that worker. Freeing one global slot while both workers live invokes both callbacks synchronously on freeing caller, and later worker exit does not duplicate callbacks.8total actualcallbacks. This changes normal-provider integration requirement: share the original single CRT slot across workers and synchronize contexts for callbacks potentially running on a different thread.",
+    "Full525-test audio suite passes;59 earlier runtime fixture hashes unchanged;24domains114tasks37requirements preserved."
+  ],
+  "limits": [
+    "OwnedSlot is a core ownership component, not yet the original shared global CRT-slot provider or connected normal client audio worker. Canonical contexts preinitialized from native captures; actual normal startup/heap/lock/security-cookie providers remain unfinished.",
+    "Shared-slot thread-affinity measurements only record opaque values/identity; source destructor with shared worker contexts and teardown must be integrated/qualified next. Arbitrary fiber rebinding, normal locale producers and full concurrency/SEH still open.",
+    "Core OS callbacks still use explicit lock/CRT heap boundary services in these tests. Normal audio dispatch/progression/retirement/physical playback and fullgame not complete; no domains/tasks closed."
+  ],
+  "next_action": "Implement the original shared global CRT FLS slot provider across workers using measured callback affinity, preserving one global index and per-thread record ownership. Qualify worker teardown and owner-close callbacks executing actual Rust destructor with synchronization/error propagation. Complete real lock/heap/security-cookie/startup services and connect normal audio worker dispatch/progression/retirement/physical playback. Normal locale producers and concurrency/SEH remain required. Continue full24-domain114-task37-requirement scope.",
+  "files_sha256": {
+    "logs/audio-windows-owned-fls-tests.log": "7529039f79adf0789b6a576dc93eaa65b519f921d4c9835460eadcac9841507e",
+    "docs/audio_crt_fls_callback_validation.json": "cceae1d58050052170ae98982444883289c6bdcdb36e78324193a64d098b58e6",
+    "crates/core/src/lib.rs": "0eec23b9cba6e5ab6850b7c5fb9269789dc192a71fa173bce584ac94e9c97512",
+    "crates/core/src/audio_crt_windows_fls_slot.rs": "cf1fbb57e66d56b6c39f3ba6eb4f829d76160f4e199158635a727c6378992f4d",
+    "crates/core/src/audio_crt_thread_system_startup.rs": "bf036fd9e777103e94a31f42e8ebc368b88e1df5c8289f9b88a560d9f7fb4e02",
+    "tools/implement_audio_windows_owned_fls.py": "dbda87543a2cd5af5efa09ba9c5868b4da0419363859514895e157c21ce0989a",
+    "tools/probe_windows_owned_fls_component.py": "296e3f83766ad71e5132830418a664798184dc5734104663e1af83062e141236",
+    "tools/probe_windows_shared_fls.py": "0dcce2ade758949951ca473b810b625acec0aace0c4e73194f1d79940a4af422",
+    "docs/audio_windows_owned_fls_component_hardware_discovery.json": "bd6e53e1ed11bb711a678c7b8ea686477167ce85cbf41c5ed5abbf15a23b7964",
+    "docs/audio_windows_shared_fls_hardware_discovery.json": "4d284ca00a915c80975a2277234d0b222641c073e4f5cf40587aa8c07ced44b6",
+    "tools/record_audio_windows_owned_fls_progress.py": "46bd7d0078b1da7c1dca2c078f3aaf468c7d09e2a9c62a5847d1017fd47d5c63"
+  }
+}

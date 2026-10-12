@@ -1,0 +1,46 @@
+{
+  "updated_utc": "2026-10-04T04:53:00.779172+00:00",
+  "files_sha256": {
+    "tools/qualify_native_camera_zoom.py": "40376a7d1800ebf78c1dac1629aaf28d440f493ce8ecf37c8c0635de8874efd6",
+    "tools/qualify_native_camera_rotation.py": "86bd3b08476ad9fc57641b481a5b01b59a26ce28fbdb7d9c914e95e99983c61d",
+    "data/4.20/camera_zoom_contract.json": "b470dbccc954cc5e1e0b6cc59ebb8a808e19f97dabf8c0f57dc82baa59f2457b",
+    "data/4.20/camera_rotation_contract.json": "0a8fa2c3b07006c9d438198f9acf15bae75d078dcc6e0c6fd77f4e15bd8c15c6",
+    "crates/core/src/camera_zoom.rs": "16f5b81b87889808c3026a378be418eb62d7b9f6ff70f7f715f50a829ea57334",
+    "crates/core/src/camera_rotation.rs": "2668b83b7c5e71afb2bbedd8c3bb730922fee98c8de450ebb4adc52324691d71",
+    "crates/core/src/lib.rs": "019f7591163c90e9a023b29e6be5b1357f0ee3868071acf94c83302be828700b",
+    "logs/native-camera-zoom-rotation-core-tests.log": "12f5e2618579bccf3746f23a1f77488218a944f5912bf994fdd6f59704f4bb2a"
+  },
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_camera_zoom_sequences": 132,
+  "native_camera_zoom_state_updates": 822,
+  "native_camera_zoom_initializers": 12,
+  "native_camera_rotation_cases": 168,
+  "native_camera_trig_lookup_pairs": 14,
+  "native_camera_sine_table_words": 3600,
+  "core_tests_passed": 310,
+  "ported": [
+    "Full7D2ED0 camera zoom scalar state transition: fifth-power source denominator, delta/time cap, velocity, snap/minimum-step decisions and ordered1000..2250clamp",
+    "Full7D2E70 zoom initialization: CameraSmoothing/CameraZoomEaseTime default0.2,CameraZoomMinSpeed default3,scale1,velocity0,current/target2250, explicit supplied overrides retained",
+    "Full866E00 pitch rotation with original executable3600word sine table, original8E24F0/8E2550 f32 indexed lookups and x87 extended products/stores"
+  ],
+  "acceptance": "All6zoomstate words across822updates and12initializers compared bitexact exceptNaNpayloads. All168rotatedvector words and14sin/cos lookup pairs bitexact, including0/-0 and native CVTTSS2SI indefinite-integer cases.",
+  "static_followup": "Normal7CFB70camera builder calls7D2ED0 on controller1A8: scale field1B0 used in x87 distance=2*current1B8*source0.00066666666*scale1B0. Pitch120 rotates[0,0,1] via866E00; offsets use source600. Full camera focus update7D1A60, zoom input setters, FOV130 defaults/overrides and7D2BE0 camera shake/finalization not yet qualified.7D3040 warning dispatch uses local-context virtual callbacks; native dependencies not bypassed as complete behavior.",
+  "limits": [
+    "Full7D2ED0 executed without math/state adapters; frame delta global123EEB8 supplied. Full7D2E70 initializer executed with config getter adapter returning defaults/explicit overrides via native x87 return stub.",
+    "Raw smoothing state duration0,epsilon4,scale8,velocityC,current10,target14 tracked word-by-word across sequences.",
+    "Original denominator includes coefficient product and fifth power, not a substituted generic damping formula.",
+    "Original current clamps to1000..2250 after ordered snap/minimum-step logic; target and velocity are not arbitrarily clamped.",
+    "Zoom initializer defaults and supplied overrides qualified; config file parser, controller focus/pitch/FOV, zoom input and live renderer integration remain unqualified.",
+    "Full866E00 and original8E24F0/8E2550 executed without math adapters; explicit test stub stores x87 return value for standalone lookup fixtures.",
+    "Original3600float sine table read from executable address10CFAB0; indices use f32 multiplication/truncation and signed wrap.",
+    "Zero angle or both relativeYZzero leaves point unchanged; x coordinate always retained.",
+    "Nonfinite/out-of-i32-range angle lookup retains native CVTTSS2SI indefinite integer behavior; CPU exception status flags not compared.",
+    "This is the rotation helper, not complete normal camera producer or live rendering integration.",
+    "Config getter adapter qualifies defaults and supplied overrides, not actual config file parser or current user configuration.",
+    "Standalone camera_zoom/camera_rotation math APIs not yet bound to visible client. No claim of completed camera controls, shake, renderer or game.",
+    "Source core310passed; prior client18test evidence and standalone executable hashes unchanged."
+  ],
+  "client_camera_integrated": false,
+  "visible_render_verified": false,
+  "complete": false
+}

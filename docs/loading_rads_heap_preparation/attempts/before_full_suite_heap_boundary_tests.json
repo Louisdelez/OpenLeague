@@ -1,0 +1,51 @@
+{
+  "passed": true,
+  "error": null,
+  "checks": [
+    "HeapAlloc x86 stdcall12 and owned mirror",
+    "HeapReAlloc x86 stdcall16 and preserved bytes",
+    "HeapSize x86 stdcall12",
+    "HeapFree x86 stdcall12",
+    "stale CRT primitive cannot route to engine",
+    "unreserved CRT primitive cannot route to engine",
+    "engine untouched by stale CRT frees",
+    "separate engine route retained",
+    "GetCPInfo cannot pre-read20 into8byte heap block",
+    "GetThreadTimes cannot span past heap request",
+    "LCMapStringEx destination remains within heap request",
+    "strz cannot search beyond unterminated heap block",
+    "rejected adapter copies preserve heap bytes",
+    "free publication fault stays explicit",
+    "mapping is counted after raw successful release",
+    "interrupted primitive never routes to engine",
+    "terminal cleanup retires remaining mapping",
+    "HeapAlloc event primary kept",
+    "HeapAlloc event raw retained interrupted",
+    "HeapAlloc event terminal cleanup complete",
+    "HeapAlloc finish primary kept",
+    "HeapAlloc finish raw retained interrupted",
+    "HeapAlloc finish terminal cleanup complete",
+    "HeapReAlloc event primary kept",
+    "HeapReAlloc event raw retained interrupted",
+    "HeapReAlloc event terminal cleanup complete",
+    "HeapReAlloc finish primary kept",
+    "HeapReAlloc finish raw retained interrupted",
+    "HeapReAlloc finish terminal cleanup complete"
+  ],
+  "check_count": 29,
+  "remaining": {
+    "raw_owners": 0,
+    "mapped_regions": 0,
+    "live_owners": 0,
+    "reserved_regions": 10,
+    "allocated_owners": 7,
+    "interrupted": []
+  },
+  "native_EXE_DLL_execution": false,
+  "injected_failure": "free_after_os only",
+  "source_hashes": {
+    "test_heap_boundary.py": "c0d907a1c77cf867ad93e92bdb3a50ba7e777227e0a12de4d1725bd7b11e6647",
+    "heap_mirrors.py": "61a07da5e7a5d5a6fccd9f22c6ad89f804688b32373de79805406afff3d65697",
+    "crt_os.py": "4ed057911fcb7e2299e62e12bd96ee040c73972ea843ce36ac0f9d4870f1e578"
+  }
+}

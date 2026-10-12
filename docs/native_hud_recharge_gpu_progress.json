@@ -1,0 +1,47 @@
+{
+  "updated_utc": "2026-10-06T12:10:12.001477+00:00",
+  "complete": false,
+  "client_tests_passed": 361,
+  "core_tests_passed": 434,
+  "native_packet_creation_cases": 32,
+  "native_visibility_cases": 10,
+  "native_alpha_transition_cases": 20,
+  "gpu_reports": [
+    {
+      "backend": "vulkan",
+      "path": "logs/native-hud-recharge-vulkan-gpu.json",
+      "sha256": "4bd0e905a0048c35b92de01f37a5dbb86281cace0c83cd3502eeba5a56ee24c2",
+      "pixels": 61440
+    },
+    {
+      "backend": "dx12",
+      "path": "logs/native-hud-recharge-dx12-gpu.json",
+      "sha256": "d83b63bdc03b9aedc8afdc160e982a28c8b816ee0c1ceefad22943807917b8f7",
+      "pixels": 61440
+    }
+  ],
+  "ordinary_hud_recharge_integrated": false,
+  "client_rebuilt": true,
+  "server_rebuilt": false,
+  "artifacts_sha256": {
+    "crates/client/src/native_hud_effect_packets.rs": "c9b643578f666fdad3e428bcffd2ed123977d4af0589d4390da866d3cbe1e676",
+    "crates/client/src/native_hud_recharge_material.rs": "ac9828dd124583827b99ee2cc9e35003803628c11d20b3c34a03daaab3bf95bd",
+    "crates/client/src/native_hud_recharge_gpu_probe.rs": "8a316b254c3f23632d30407a509b41a6d7ef959c6c821a844c82166cbbe6f82d",
+    "assets/shaders/native_hud_recharge.wgsl": "ec3046f4c75f8dd6ed1b4349ae449e70e43ef55f42e8cb32d8a7e3bf35b452b2",
+    "data/4.20/native_hud_effect_packets_contract.json": "59f056706609512068274a1ef3d78d0a192d1434c0cd3bac82bb7890b402bae6",
+    "data/4.20/native_hud_effect_state_contract.json": "b5ed222b7890b53526fa0362173b3f68605be37fa2088fa9e7ad28e1208c2521",
+    "logs/native-hud-effect-packets-client-tests.log": "9b716155f10859c4abcca1f7a2fe98303ee57d7f4b0cf985bb807a682c2e0e6f",
+    "logs/native-hud-recharge-gpu-build.log": "9512ecdda0d69e11493fd0ad13671e7d8365ced7ec17d485442c69aeb4ac015e",
+    "target/debug/openleague-client.exe": "438f34cc0e485a661a70fe550d27e632559d09d9d34daf628a9f8664b9b66d58"
+  },
+  "findings": [
+    "Original Effect packet producer9A88F0 requests alpha mode1; original visibility updater preserves other packet flags; source texture/owner/instance fields match the Rust port.",
+    "Original renderer99F3A0 alpha transition tail and helper execute20 supplied cached-state cases. Other matrix/declaration/color branches remain unqualified.",
+    "Cooldown shader port preserves original atan2 direction, strict angle boundary, unclamped gradient and unpremultiplied source color; native reset ONE/INVSRCALPHA blending retained."
+  ],
+  "limits": [
+    "Offscreen shader qualification is distinct from ordinary HUD integration and original framebuffer identity. LineStrip transport, native projection and live authority transport still pending.",
+    "361 client tests predate the new isolated GPU probe code; probe is verified by successful compilation and any attached actual GPU reports. Core434 evidence is from the prior cooldown metadata qualification, not a new core run.",
+    "No complete champion kit or domain; six-client match, map acceptance, launcher/services and package remain open."
+  ]
+}

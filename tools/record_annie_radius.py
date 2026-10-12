@@ -1,0 +1,22 @@
+from pathlib import Path
+import json,hashlib,datetime,shutil
+r=Path('E:/OpenLeague');now=datetime.datetime.now(datetime.timezone.utc).isoformat()
+def load(p):return json.loads((r/p).read_text(encoding='utf-8-sig'))
+def save(p,v):(r/p).write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+log=(r/'logs/annie-radius-tests.log').read_text(encoding='utf-8-sig');assert '399 passed; 0 failed' in log and '32 passed; 0 failed' in log
+network=load('docs/annie_radius_network_validation.json');assert network['passed'] and network['checks']==11
+ex=[{'path':p,'bytes':(r/p).stat().st_size,'sha256':sha(r/p)} for p in ['target/debug/openleague-server.exe','target/debug/openleague-client.exe','launcher/src-tauri/target/debug/openleague-launcher.exe']]
+assert network['server_sha256']==ex[0]['sha256']
+sources=['D:/LeagueOfLegendsV2/4.20/GameServer/GameServerLib/Content/CharData.cs','D:/LeagueOfLegendsV2/4.20/GameServer/GameServerLib/GameObjects/AttackableUnits/AI/ObjAIBase.cs']
+receipt={'updated_utc':now,'complete':False,'passed':True,'core_tests_passed':399,'client_tests_passed':32,'network_checks':11,'executables':ex,'community_sources':[{'path':p,'sha256':sha(p)} for p in sources],'policy':{'absent_native_radius':65,'explicit_nonpositive_radius':40,'explicit_positive_radius':'retain native'},'native_profiles_modified':False,'regression':'At distance500 and halfangle+7degrees Garen absent radius65 intersects, explicit Annie55 does not; radius40 would miss. Missing profile remains null. Tests cover explicit zero/negative/positive policy too.','network':'docs/annie_radius_network_validation.json','files_sha256':{p:sha(r/p) for p in ['crates/core/src/annie_w.rs','logs/annie-radius-tests.log','logs/annie-radius-build.log','docs/annie_radius_network_validation.json']},'supersedes_policy_in':['docs/annie_w_sources.json','docs/annie_w_integration_progress.json'],'limits':['Community fallback policy reconstructed; original Riot server collision default and exact cone algorithm remain unqualified.','Prior network/visual receipts retain their own original hashes and are not evidence for this build. Current GUI still runs prior build; this turn does not establish new visual acceptance.','11UDP checks re-run ordinary purchase/learn/Move/CastAt/damage/miss/ally/cooldown behavior; the new boundary-contact case is verified in core, not replicated over UDP.','Tibbers source audit recovered native values and seven GLB clips but R/pet gameplay remains unimplemented. Full24domain objective incomplete.']}
+save('docs/annie_radius_correction.json',receipt)
+for p in ['docs/coverage.json','docs/completion_plan.json']:
+ d=load(p);d['updated_utc']=now;d['complete']=False;d['current_evidence'].update(core_tests_passed=399,client_tests_passed=32,current_executables=ex,annie_radius_correction={'receipt':'docs/annie_radius_correction.json','complete':False,'core_regression_checks':1,'network_checks':11})
+ if p.endswith('coverage.json'):
+  for e in ['docs/annie_radius_correction.json','docs/annie_radius_network_validation.json','logs/annie-radius-tests.log','docs/tibbers_native_sources.json']:
+   if e not in d['evidence']:d['evidence'].append(e)
+ save(p,d)
+d=load('docs/resume_checkpoint.json');d['saved_utc']=now;d['state']='active';d['complete']=False;d['executables']=ex;d['last_verified'].update(core_tests=399,client_tests=32,annie_radius_regression_checks=1,annie_radius_network_checks=11);d['latest_changes'].append('Corrected W community absent gameplay radius65 vs nonpositive40. Native null profiles retained. One boundary regression plus399core32client11actualUDP pass; rebuilt executables. GUI prior build remains unqualified for correction. Tibbers native values/seven GLBclips audited, gameplay not implemented.');d['restart_next'].insert(0,'Implement native Annie R/Tibbers owner-controlled pet, native rank stats/45sec lifetime/summon AoE, community-scoped aura/follow/control policies, owner credit and E forwarding. Inspect docs/tibbers_native_sources.json and actual pet GLB. Preserve null collision profiles and corrected W65/40policy.');save('docs/resume_checkpoint.json',d)
+for p in ['fix_annie_radius.py','verify_annie_radius_network.py','record_annie_radius.py']:shutil.copyfile('E:/mapslol3v3/'+p,r/'tools'/p)
+print('Recorded399core32client11UDP; full goal active, incomplete.')

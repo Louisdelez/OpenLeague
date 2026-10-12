@@ -1,0 +1,45 @@
+{
+  "updated_utc": "2026-10-06T08:06:26.358287+00:00",
+  "passed": true,
+  "complete": false,
+  "client_tests_passed": 330,
+  "native_icon_draw_cases": 128,
+  "native_icon_state_cases": 12,
+  "archived_shader_files": 40,
+  "ordinary_icon_panels_integrated": false,
+  "artifacts": [
+    "data/4.20/native_hud_icon_draw_contract.json",
+    "data/4.20/native_hud_icon_state_contract.json",
+    "crates/client/src/native_hud_icon_draw.rs",
+    "crates/client/src/main.rs",
+    "tools/qualify_native_hud_icon_draw.py",
+    "tools/qualify_native_hud_icon_state.py",
+    "logs/native-hud-icon-draw-client-tests.log"
+  ],
+  "hashes": {
+    "data/4.20/native_hud_icon_draw_contract.json": "5b386d0000b3c97c30067de4f6e8622aa1153ee46241452fb23b0334dcb04569",
+    "data/4.20/native_hud_icon_state_contract.json": "93dbf29067115b8dd39782334c13693c20a018fc44866c74ae99cd98e04d07ef",
+    "crates/client/src/native_hud_icon_draw.rs": "762e34b0a8a7697b1a2b4fc386c60b9b570ec4f45c7dc7712e44f1635d29bdf2",
+    "crates/client/src/main.rs": "6f8506e0513d7c69ce8f22b9b79550438b7349535a1f6fe39e48b9869d982333",
+    "tools/qualify_native_hud_icon_draw.py": "0a0260741762f0cd914a96769d2041d513754b255c83a068dca2f5c941217e76",
+    "tools/qualify_native_hud_icon_state.py": "595d2384a65127059e07c66c142871a5e15311c965b5189ac8a8e6c53a08a5d8",
+    "logs/native-hud-icon-draw-client-tests.log": "16f456fe08f225a5f245d74ae6ee523bd3a04a7d2631a5488162d32fd6a7c3ea"
+  },
+  "findings": [
+    "D3D9 reset enables alpha blending, sets both RGB/alpha factors ONE and INVSRCALPHA, additive operation, separate alpha enabled; culling disabled.",
+    "Native cache hit/miss paths verified; seven engine sampler-state assignments captured with their raw enum arguments.",
+    "Combined with archived UI_Alpha HLSL this establishes premultiplied RGB composition, before packet-specific changes."
+  ],
+  "shader_contract": "data/4.20/native_hud_icon_draw_contract.json",
+  "state_contract": "data/4.20/native_hud_icon_state_contract.json",
+  "limits": [
+    "Native packet guards, shader branch selection and ordered graphics calls qualified only.",
+    "Constructor linkage is static discovery; native shader creation/compiler macros, blend/sampler/gamma and projection remain unqualified.",
+    "Does not prove final framebuffer or integrated ordinary Icon HUD.",
+    "Packet-specific99F3A0 state/projection and sampler enum-to-backend mapping remain open.",
+    "Does not establish sRGB/gamma, original framebuffer equivalence or ordinary Icon panel rendering.",
+    "Rust draw guard/shader selection tested; original reset-state receipt not yet ported to a GPU material.",
+    "Ordinary client remains previous three-text build. No new graphical capture in this step."
+  ],
+  "next_action": "Créer le matériau GPU Icon depuis UI_Alpha/UI_Opaque/UI_Blit et les facteurs natifs ONE/INVSRCALPHA ; qualifier état99F3A0, matrice et sampler ; raccorder HUDLeftFrame/HUDLeftPillar/TitanBarFrame, capturer et inspecter Vulkan/DX12. Continuer tous les domaines du plan complet."
+}

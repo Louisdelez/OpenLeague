@@ -1,0 +1,69 @@
+{
+  "updated_utc": "2026-10-04T09:20:50.600570+00:00",
+  "passed": true,
+  "complete": false,
+  "core_tests_passed": 375,
+  "client_tests_passed": 31,
+  "unit_checks": 7,
+  "client_hotkey_checks": 1,
+  "network_checks": 8,
+  "active_items": 32,
+  "native_item_catalog_checked": 849,
+  "executables": [
+    {
+      "path": "target/debug/openleague-server.exe",
+      "bytes": 4436992,
+      "sha256": "593d1d0dd39b965c8d1226f5baf931eb1c44032c7a11f839bc0453d8fdbbca9e"
+    },
+    {
+      "path": "target/debug/openleague-client.exe",
+      "bytes": 118120448,
+      "sha256": "1a74d2838e4386fec94fe891b4ee3c4cb58094301b4a7169c79263d5fad8afd9"
+    },
+    {
+      "path": "launcher/src-tauri/target/debug/openleague-launcher.exe",
+      "bytes": 12411904,
+      "sha256": "ac22a8346c0b2af574bdee16311acc510e657c73ca5f85584223f0049c4f57de"
+    }
+  ],
+  "runtime": {
+    "checked_utc": "2026-10-04T09:18:47.981073+00:00",
+    "client": 14436,
+    "server": 13612,
+    "port": 5940,
+    "client_sha256": "1a74d2838e4386fec94fe891b4ee3c4cb58094301b4a7169c79263d5fad8afd9",
+    "server_sha256": "593d1d0dd39b965c8d1226f5baf931eb1c44032c7a11f839bc0453d8fdbbca9e",
+    "diagnostic": true,
+    "complete": false,
+    "shop_query": "potion",
+    "shop_preview_item": 2003
+  },
+  "files_sha256": {
+    "crates/core/src/consumables.rs": "f5e885eae8e43b686c0c77a4714e830292d85542dfe1ba029ec37d17a34d4cdc",
+    "crates/core/src/shop.rs": "3c440d37b559f6d9a36d05e72229d6c12f210a6ab805bafa044255c40b448a9b",
+    "crates/core/src/spells.rs": "53e459fe31d3da568012abd5e984ff0c30ee48e37d45e5729f4421584c0085aa",
+    "crates/core/src/lib.rs": "35db74c62bb6bbd2c81b29be21bd08a89b3af74502a461757c9573367eec7637",
+    "crates/client/src/main.rs": "8ba35d5b9b0df93e919cd2b86995067186b067765f6ea0732d8a437aafdd1a58",
+    "crates/client/src/shop_ui.rs": "77cb50e699bce436de13bc7553ade5af8d0cfb6b73e9a5afbc7ce041f85dd5dc",
+    "data/4.20/shop_foundation.json": "9629b96e7f4ce6d8d55d7294163b2b23bc2fe8af91b237bc12270365a36c0d32",
+    "docs/potion_sources.json": "960bd4c8f9c4946f7b278efffbed9e0ad6a2acade530f827bbab4c4d836dde7a",
+    "docs/potion_network_validation.json": "77b749e08c97da7a8e50ad333cf53c949cd00853d0d1f1608592135262f30f9c",
+    "tools/recover_potions.py": "2d479d38dd214795825eb04a107eebb2d5d4eb58b1443a849f436ce967fe7c57",
+    "tools/integrate_potions.py": "8eb508b68f5e94de397ec0e1ab130d1cfc6c67b0a5fc8a609ea5191475b9362f",
+    "tools/verify_potions_network.py": "03c0f178bbdb6a2e5e60a91c46feafb632b550bef3a3e1fd44df04ede9e6f93b",
+    "logs/potion-tests.log": "b42be3519adad16d2bbb7ca3f60b3dbad77d8a8a5e80becab03c8ec5197fed74",
+    "logs/potion-build.log": "8f3e1b0b76d211c86b880d57cdab83d05f9445a2d2c63306a2d64974be44bf08",
+    "logs/potion-map10.png": "1757e6cf85b6fec1b05e2044c9acf5ff56d5fd55a460ead60abffa5a63153f7e"
+  },
+  "sources": "docs/potion_sources.json",
+  "network": "docs/potion_network_validation.json",
+  "limits": [
+    "Native item/official4.20.1descriptions verify150health or100mana over15seconds,35gold,max5carried,14goldsell. Health communitybuff matches10health/sec,MaxStacks5,STACKS_AND_CONTINUE. Originalserver bodies not recovered.",
+    "Sequential queued duration(max5), one-unit sale, fullpool/nonmana rejection, 30Hzcontinuous restoration, update ordering reconstructed. Full buff timing/cooldowns/recast/cast-disable conditions require native qualification.",
+    "Health restoration uses shared receivedhealing modifier; mana unaffected by Ignite. Champion-specific resource/consumable rules and VFX/audio/originalHUD remain incomplete.",
+    "Core7tests covercarry5/atomiclimits/fullinventory/recipes/countswap/sale/use/450ticktotals/queuedduration/nonstackrate/full/dead/nonmana/finished/ignitemodifier/deathclear. Nativehotkeys1,2,3,5,6,7 tested inclient; clickable UseItembuttons implemented.",
+    "Actual2-clientUDP8checks verify5stack/nativeprice/fullhealth/nonmana errors, consumesone,450ticktimer and actualhealthtrajectoryunder/afterIgnite(maxerror0.00146). Fullmana-restoration/15secondexpiry/queue only coretested; unimplementedmana-spendingchampionkits prevent ordinary networkmana scenario.",
+    "Native849file/32activeitem validation passed. Fresh1280x800Vulkan framebuffer visually inspected; physicalkeys/clicks/VFX/audio/originalHUD unqualified. Entire24domain game incomplete."
+  ],
+  "live_receipt": "docs/potion_live_validation.json"
+}

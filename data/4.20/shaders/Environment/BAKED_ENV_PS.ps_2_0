@@ -1,0 +1,64 @@
+#include "../FogOfWar/FogOfWar_PS.hls"
+#include "../ShadowMap/pcf1.hls"
+#include "../DeathScreen.hls"
+#include "../MipLevels.hls"
+
+
+// Basic color map for the terrain
+sampler BASE_MAP        : register(s0);
+
+// Texture for dynamic shadows
+sampler SHADOW_MAP      : register(s5);
+
+// TODO, remove this once we have all the materials 
+// exported and can control this as required based on the
+// needs of the specific material.
+#define PREMULTIPLIED_ALPHA 1
+
+/////////////////////////////////////////////////////////////////////////////////////
+// Constants & Structures
+/////////////////////////////////////////////////////////////////////////////////////
+struct INTERPOLANTS
+{
+	float4 m_Position : POSITION;
+	float2 m_Texcoord : TEXCOORD0; //texture coordinates for the virtual texture.
+	float3 m_ShadowTC : TEXCOORD1; //dynamic shadow texture coordinates.
+	float3 m_FoW_TC   : TEXCOORD2; //fog of war texture coordinates in XY, distance fade factor in Z
+};
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+// Shader
+/////////////////////////////////////////////////////////////////////////////////////
+float4 main(INTERPOLANTS interpolants) : COLOR0
+{
+    float4 color = tex2D(BASE_MAP, interpolants.m_Texcoord.xy);
+
+    // Dynamic shadow
+#ifndef DISABLE_SHADOWS
+    //shadows do not need to "fade out" since only dynamic objects are casting shadows when using 
+    //virtual textures. This saves a little bit of GPU time but also alleviates unwanted dark areas.
+    float3 shadowMask = SampleShadowMap(SHADOW_MAP, interpolants.m_ShadowTC)*SHADOW_COLOR_COMPLEMENT + SHADOW_COLOR; // i.e. lerp(SHADOW_COLOR, white, sampledValue)
+    color.rgb *= shadowMask;
+#endif
+	
+    // Fog of war
+#ifndef DISABLE_FOW
+    float4 fowFactors = GetFogOfWarFactorsWithFadeTowardClear(interpolants.m_FoW_TC.xy, interpolants.m_FoW_TC.z);
+
+#ifdef PREMULTIPLIED_ALPHA
+    // to deal with cases where we are using premultiplied alpha
+    // we need to also multiply the fowFactors by alpha so we don't get 
+    // strange brightening on the edges
+    fowFactors.rgb *= color.a;
+#endif
+
+    // Blend between the computed color of this point on the map and the fog color.
+	color.rgb = lerp(fowFactors.rgb, color.rgb, fowFactors.a);
+#endif
+
+    color.rgb = GetEnvironmentDeathColor(color.rgb);
+    color.rgb = ApplyMipColorsVisualization(color.rgb, interpolants.m_Texcoord.xy);
+
+    return color;
+}

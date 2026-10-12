@@ -1,0 +1,421 @@
+--- E:\OpenLeague\crates\core\src\audio_loading_screen_packet.rs
++++ E:\mapslol3v3\loading_standard_integration\generic\audio_loading_screen_packet.rs
+@@ -3,13 +3,36 @@
+ //! standard-screen UI continuation have explicit boundaries, never fake success.
+ use crate::audio_announcer_registry_init::Storage;
+ use crate::audio_loading_record_tree::{self as tree, Kind};
++use crate::audio_loading_owned_string as owned;
+ pub use crate::audio_replay_metadata::Error;
+ pub const SERVICE_GLOBAL: u32 = 0x2d787b8;
+ pub const PAYLOAD_BYTES: u32 = 25;
+ pub const NAME_SCRATCH_BYTES: u32 = 24;
+ pub const TUTORIAL_SCRATCH_BYTES: u32 = NAME_SCRATCH_BYTES;
+ 
+-pub trait Boundary: tree::Boundary {
++/// An owned failure can retain live allocations and descriptor storage. The
++/// host must retain its scratch lease with `remaining` before reporting it.
++#[derive(Debug, PartialEq, Eq)]
++#[must_use = "A loading failure may retain temporary ownership and its scratch lease"]
++pub enum ReceiveFailure {
++    Operation(Error),
++    Owned(owned::Failure),
++}
++impl From<Error> for ReceiveFailure {
++    fn from(error: Error) -> Self { Self::Operation(error) }
++}
++impl From<crate::audio_announcer_object_lookup::Error> for ReceiveFailure {
++    fn from(error: crate::audio_announcer_object_lookup::Error) -> Self {
++        Self::Operation(Error::Read(error))
++    }
++}
++impl From<crate::audio_announcer_registry_init::Error> for ReceiveFailure {
++    fn from(error: crate::audio_announcer_registry_init::Error) -> Self {
++        Self::Operation(Error::Write(error))
++    }
++}
++
++pub trait Boundary: tree::Boundary + owned::Boundary {
+     /// Service virtual+48, source72AD90: constructs a fresh String24 at out.
+     /// The key is passed by value. On error the boundary owns its rollback;
+     /// on success this consumer owns and destroys the returned string.
+@@ -23,17 +46,20 @@
+     /// Source993CE0 ST0 rounded by the caller's FSTP f32; exact stored bits.
+     fn clock_f32_bits(&mut self) -> Result<u32, &'static str>;
+     /// Remaining native57D6FE..57DCAE UI initialization for a nonempty name.
+-    /// The25-byte record update has happened, and scratch contains the owned
+-    /// String24 returned by service_name. This consumer destroys it afterward,
+-    /// including on an error. No success is supplied by default.
++    /// The25-byte record update has happened. `name` exclusively owns the
++    /// String24 returned by service_name, including any replacement allocated
++    /// by the prefix. The consumer finishes its guard on every result. Keep
++    /// errors typed; formatting one here must not discard ownership. The service
++    /// is the actual value retained before the first name-provider call.
+     fn initialize_standard_record(
+         &mut self,
+         _recipient: u32,
+         _record: u32,
+         _payload: u32,
+-        _scratch: u32,
+-    ) -> Result<(), &'static str> {
+-        Err("native loading-screen UI continuation57D6FE is not connected")
++        _retained_service: u32,
++        _name: &mut owned::Temporary,
++    ) -> Result<(), Error> {
++        Err(Error::Boundary("native loading-screen UI continuation57D6FE is not connected"))
+     }
+ }
+ fn add(a: u32, n: u32) -> Result<u32, Error> {
+@@ -94,7 +120,7 @@
+     recipient: u32,
+     payload: u32,
+     scratch: u32,
+-) -> Result<(), Error> {
++) -> Result<(), ReceiveFailure> {
+     let tree_offset = match kind {
+         Kind::Standard => 0x1c,
+         Kind::Tutorial => 4,
+@@ -126,15 +152,14 @@
+         let target = word(b, table, 0x48)?;
+         b.service_name(service, target, scratch, key)
+             .map_err(Error::Boundary)?;
++        let mut name = owned::Temporary::new(scratch);
+         let primary = (|| -> Result<(), Error> {
+             if word(b, scratch, 16)? != 0 {
+-                b.initialize_standard_record(recipient, record, payload, scratch)
+-                    .map_err(Error::Boundary)?;
++                b.initialize_standard_record(recipient, record, payload, service, &mut name)?;
+             }
+             Ok(())
+         })();
+-        let cleanup = drop_string(b, scratch);
+-        return finish(primary, cleanup);
++        return owned::finish(b, name, primary).map_err(ReceiveFailure::Owned);
+     }
+     let key = b.word(payload)?;
+     let service = b.word(SERVICE_GLOBAL)?;
+@@ -154,7 +179,7 @@
+         Ok(())
+     })();
+     let cleanup = destroy_string(b, scratch);
+-    finish(primary, cleanup)
++    finish(primary, cleanup).map_err(ReceiveFailure::Operation)
+ }
+ 
+ #[cfg(test)]
+--- E:\OpenLeague\crates\core\src\audio_loading_screen_packet_tests.rs
++++ E:\mapslol3v3\loading_standard_integration\generic\audio_loading_screen_packet_tests.rs
+@@ -26,6 +26,11 @@
+ fn fixture(name: &str) -> Value {
+     serde_json::from_str(&crate::audio_test_fixture(name)).unwrap()
+ }
++fn standard_failure(message: &'static str) -> ReceiveFailure {
++    ReceiveFailure::Owned(owned::Failure {
++        primary: Some(Error::Boundary(message)), cleanup: None, remaining: None,
++    })
++}
+ struct Host {
+     memory: OwnedMemory,
+     target: u32,
+@@ -143,6 +148,11 @@
+         Err("unexpected lock")
+     }
+ }
++impl owned::Boundary for Host {
++    fn release_owned(&mut self,p:u32,route:Deallocator)->Result<(),remove::Error> {
++        Backend::free(self,p,route)
++    }
++}
+ impl Boundary for Host {
+     fn service_name(
+         &mut self,
+@@ -195,15 +205,16 @@
+         recipient: u32,
+         record: u32,
+         payload: u32,
+-        scratch: u32,
+-    ) -> Result<(), &'static str> {
+-        assert_eq!(
+-            (recipient, record, payload, scratch),
+-            (RECIP, self.target, PAYLOAD, SCR)
++        retained_service: u32,
++        name: &mut owned::Temporary,
++    ) -> Result<(), Error> {
++        assert_eq!(
++            (recipient, record, payload, retained_service, name.address()),
++            (RECIP, self.target, PAYLOAD, SERVICE, SCR)
+         );
+         assert_ne!(self.raw(SCR + 16), 0);
+         self.standard_calls += 1;
+-        Err("native loading-screen UI continuation57D6FE is not connected")
++        Err(Error::Boundary("native loading-screen UI continuation57D6FE is not connected"))
+     }
+ }
+ fn node(i: usize) -> u32 {
+@@ -378,7 +389,7 @@
+     b.name = b"nonempty".to_vec();
+     assert_eq!(
+         receive(&mut b, Kind::Standard, RECIP, PAYLOAD, SCR),
+-        Err(Error::Boundary(
++        Err(standard_failure(
+             "native loading-screen UI continuation57D6FE is not connected"
+         ))
+     );
+@@ -394,9 +405,9 @@
+         b.fail_free = fail_free;
+         let result = receive(&mut b, Kind::Tutorial, RECIP, PAYLOAD, SCR);
+         if fail_free {
+-            assert!(matches!(result, Err(Error::Cleanup { .. })));
++            assert!(matches!(result, Err(ReceiveFailure::Operation(Error::Cleanup { .. }))));
+         } else {
+-            assert_eq!(result, Err(Error::Boundary("clock unavailable")));
++            assert_eq!(result, Err(ReceiveFailure::Operation(Error::Boundary("clock unavailable"))));
+             assert_eq!(b.freed, [DATA]);
+             assert_eq!(b.raw(SCR + 16), 0);
+             assert_eq!(b.raw(SCR + 20), 15);
+@@ -531,14 +542,18 @@
+         b.name = name.to_vec();
+         b.fail_free = fail_free;
+         let result = receive(&mut b, Kind::Standard, RECIP, PAYLOAD, SCR);
++        let mut remaining = None;
+         if fail_free {
+-            assert!(matches!(result, Err(Error::Cleanup { primary, cleanup })
+-                if *primary == Error::Boundary("native loading-screen UI continuation57D6FE is not connected")
+-                && matches!(*cleanup, Error::Free(_))));
++            let Err(ReceiveFailure::Owned(mut failure)) = result else { panic!("expected typed owned failure") };
++            assert_eq!(failure.primary,Some(Error::Boundary("native loading-screen UI continuation57D6FE is not connected")));
++            assert!(matches!(failure.cleanup,Some(Error::Free(_))));
++            remaining = failure.remaining.take();
++            assert_eq!(remaining.as_ref().unwrap().authority(),owned::Authority::Descriptor);
++            assert_eq!(remaining.as_ref().unwrap().address(),SCR);
+         } else {
+             assert_eq!(
+                 result,
+-                Err(Error::Boundary(
++                Err(standard_failure(
+                     "native loading-screen UI continuation57D6FE is not connected"
+                 ))
+             );
+@@ -555,6 +570,13 @@
+                 vec![]
+             }
+         );
++        if let Some(mut guard)=remaining {
++            // The caller retained scratch until this explicit atomic retry.
++            b.fail_free=false;
++            guard.retire(&mut b).unwrap();
++            assert!(guard.is_retired());
++            assert_eq!(b.freed,[DATA]);
++        }
+     }
+     // A provider error owns its rollback. The uninitialized output must not
+     // be inspected or destroyed by this caller.
+@@ -566,7 +588,7 @@
+     b.detailed = true;
+     assert_eq!(
+         receive(&mut b, Kind::Standard, RECIP, PAYLOAD, SCR),
+-        Err(Error::Boundary("service unavailable"))
++        Err(ReceiveFailure::Operation(Error::Boundary("service unavailable")))
+     );
+     assert!(!b.events.iter().any(|e| e["op"] == "destroy_string"));
+     assert_eq!(b.standard_calls, 0);
+--- E:\mapslol3v3\loading_standard_prefix_port\audio_loading_standard_prefix.rs
++++ E:\mapslol3v3\loading_standard_integration\generic\audio_loading_standard_prefix.rs
+@@ -2,7 +2,10 @@
+ //! Returning Stop describes an unexecuted call boundary, never successful UI.
+ //! The caller continues to own its String24 and must retire it on every result.
+ use crate::audio_loading_metadata as names;
++use crate::audio_loading_owned_string as owned;
+ pub use crate::audio_replay_metadata::Error;
++pub trait Boundary: names::Boundary + owned::Boundary {}
++impl<T: names::Boundary + owned::Boundary> Boundary for T {}
+ 
+ pub const PACKAGE_GLOBAL: u32 = 0x2d78f1c;
+ pub const NEGATIVE_DIAGNOSTIC: u32 = 0x991e60;
+@@ -38,17 +41,18 @@
+ /// explicit same-address skip below, the override and destination strings must
+ /// not alias, including their heap buffers. No fresh-string copy is substituted.
+ pub fn prepare(
+-    b: &mut impl names::Boundary,
++    b: &mut impl Boundary,
+     recipient: u32,
+     retained_service: u32,
+     payload: u32,
+-    name24: u32,
++    name: &mut owned::Temporary,
+     scratch8: u32,
+ ) -> Result<Stop, Error> {
++    let name24 = name.address();
+     if b.word(add(recipient, 0x1b8)?)? != 0 {
+         let source = add(recipient, 0x1a8)?;
+         if name24 != source {
+-            names::assign_owned_non_alias(b, name24, source)?;
++            owned::assign_owned_non_alias(b, name, source)?;
+         }
+     }
+     //57D722 reads payload key, then the retained service's table and slot+4C.
+--- E:\mapslol3v3\loading_standard_prefix_port\audio_loading_standard_prefix_tests.rs
++++ E:\mapslol3v3\loading_standard_integration\generic\audio_loading_standard_prefix_tests.rs
+@@ -26,6 +26,8 @@
+ fn fixture() -> Value {
+     serde_json::from_str(&crate::audio_test_fixture("data/4.20/loading_standard_prefix_probe.json")).unwrap()
+ }
++#[derive(Clone,Copy)]
++struct WriteFault { address:u32,width:u32,occurrence:u32,old:u32 }
+ struct Host {
+     memory: OwnedMemory,
+     queue: VecDeque<Value>,
+@@ -43,8 +45,24 @@
+     resolver_calls: u32,
+     object_value_calls: u32,
+     prefix_reads: Vec<u32>,
++    write_fault: Option<WriteFault>,
++    fault_seen: u32,
++    fail_release: Option<u32>,
++    release_failed: bool,
+ }
+ impl Host {
++    fn before_write(&mut self,p:u32,width:u32)->Result<(),init::Error> {
++        if let Some(f)=self.write_fault {
++            if p==f.address && width==f.width && self.freed.contains(&f.old) {
++                self.fault_seen+=1;
++                if self.fault_seen==f.occurrence {
++                    self.write_fault=None;
++                    return Err(init::Error::Backend("injected prefix publication failure"));
++                }
++            }
++        }
++        Ok(())
++    }
+     fn raw_word(&mut self, p: u32) -> u32 { self.memory.word(p).unwrap() }
+     fn put(&mut self, p: u32, value: u32) { Storage::write_word(&mut self.memory, p, value).unwrap(); }
+     fn set(&mut self, p: u32, data: &[u8]) {
+@@ -87,8 +105,12 @@
+         assert!(self.live.insert(p,size).is_none());
+         self.allocated.push(json!({"pointer":p,"bytes":size})); Ok(p)
+     }
+-    fn write_word(&mut self,p:u32,value:u32)->Result<(),init::Error> { Storage::write_word(&mut self.memory,p,value) }
+-    fn write_byte(&mut self,p:u32,value:u8)->Result<(),init::Error> { self.memory.write_byte(p,value) }
++    fn write_word(&mut self,p:u32,value:u32)->Result<(),init::Error> {
++        self.before_write(p,4)?;Storage::write_word(&mut self.memory,p,value)
++    }
++    fn write_byte(&mut self,p:u32,value:u8)->Result<(),init::Error> {
++        self.before_write(p,1)?;self.memory.write_byte(p,value)
++    }
+     fn register_shutdown(&mut self,_:u32)->Result<(),init::Error> { Err(init::Error::Backend("unexpected registration")) }
+ }
+ impl Free for Host {
+@@ -97,8 +119,18 @@
+     }
+     fn deallocator(&mut self)->Result<Deallocator,removal::Error> { Ok(Deallocator::Standard) }
+     fn free(&mut self,p:u32,_:Deallocator)->Result<(),removal::Error> {
+-        self.live.remove(&p).expect("release requires live native allocation");
+-        self.freed.push(p); self.memory.release(p).map_err(removal::Error::Owned)
++        if self.fail_release==Some(p) && !self.release_failed {
++            self.release_failed=true;
++            return Err(removal::Error::Backend("injected prefix cleanup failure"));
++        }
++        assert!(self.live.contains_key(&p),"release requires live native allocation");
++        self.memory.release(p).map_err(removal::Error::Owned)?;
++        self.live.remove(&p);self.freed.push(p);Ok(())
++    }
++}
++impl owned::Boundary for Host {
++    fn release_owned(&mut self,p:u32,route:Deallocator)->Result<(),removal::Error> {
++        Free::free(self,p,route)
+     }
+ }
+ impl metadata::Boundary for Host {
+@@ -162,16 +194,15 @@
+         Ok(())
+     }
+     fn clock_f32_bits(&mut self)->Result<u32,&'static str> { Err("prefix must never request a clock") }
+-    fn initialize_standard_record(&mut self,recipient:u32,retained_service:u32,_record:u32,payload:u32,name:u32)->Result<(),&'static str> {
++    fn initialize_standard_record(&mut self,recipient:u32,_record:u32,payload:u32,retained_service:u32,name:&mut owned::Temporary)->Result<(),Error> {
+         assert_eq!(retained_service,SERVICE);
+         let start=self.reads.len();
+-        let stop=prepare(self,recipient,retained_service,payload,name,PAIR_SCRATCH)
+-            .map_err(|e|self.failure(e,"prefix preparation failed"))?;
++        let stop=prepare(self,recipient,retained_service,payload,name,PAIR_SCRATCH)?;
+         self.prefix_reads=self.reads[start..].to_vec();
+         self.check_blocks(&self.expected_boundary);
+-        assert_eq!(self.bytes(name,24),decode(self.expected_output["hex"].as_str().unwrap()));
++        assert_eq!(self.bytes(name.address(),24),decode(self.expected_output["hex"].as_str().unwrap()));
+         self.stop=Some(stop);
+-        Err(stop.unavailable())
++        Err(Error::Boundary(stop.unavailable()))
+     }
+ }
+ fn initial(proof:&Value,c:&Value,mutate_service_global:bool)->Host {
+@@ -181,6 +212,7 @@
+         live:BTreeMap::new(),allocated:vec![],freed:vec![],held:BTreeSet::new(),reads:vec![],stop:None,errors:vec![],
+         expected_boundary:c["state_at_boundary"].clone(),expected_output:c["prefix_stop"]["string"].clone(),
+         mutate_service_global,provider_calls:0,resolver_calls:0,object_value_calls:0,prefix_reads:vec![],
++        write_fault:None,fault_seen:0,fail_release:None,release_failed:false,
+     };
+     for block in c["prepared"]["blocks"].as_array().unwrap() {
+         let p=n(&block["pointer"]);let size=n(&block["bytes"]);
+@@ -225,7 +257,9 @@
+     let result=loading::receive(&mut b,Kind::Standard,RECIPIENT,PAYLOAD,name);
+     assert!(b.errors.is_empty(),"unexpected boundary failures: {:?}",b.errors);
+     let stop=b.stop.expect("must reach measured native stop");
+-    assert_eq!(result,Err(Error::Boundary(stop.unavailable())));
++    assert_eq!(result,Err(loading::ReceiveFailure::Owned(owned::Failure {
++        primary:Some(Error::Boundary(stop.unavailable())),cleanup:None,remaining:None,
++    })));
+     let skin=n(&c["skin"]);
+     let expected=if (skin as i32)<0 {
+         assert_eq!(n(&c["prefix_stop"]["before_call"]),NEGATIVE_DIAGNOSTIC);
+@@ -267,3 +301,53 @@
+     let proof=fixture();let cases=proof["cases"].as_array().unwrap();
+     for index in [0,1,2,4,56,127] {run(&proof,&cases[index],true);}
+ }
++
++#[test]
++fn audio_loading_standard_prefix_consumer_retires16_partial_publications_without_second_old_free() {
++    let proof=fixture();
++    for fill in [0,165] {
++        let c=proof["cases"].as_array().unwrap().iter().find(|c|c["profile"]=="heap_growth" && c["fill"]==fill).unwrap();
++        let entry=&c["events"].as_array().unwrap().iter().find(|e|e["op"]=="prefix_entry").unwrap()["string"];
++        let name=n(&entry["address"]);let old=n(&entry["data"]);let old_len=n(&entry["length"]);
++        let raw=n(&c["prefix_stop"]["string"]["data"]);
++        let length=decode(c["override_hex"].as_str().unwrap()).len() as u32;
++        for (address,width,occurrence) in [(name,1,1),(name,4,1),(name+20,4,1),(name+16,4,1),
++                (raw+old_len,1,1),(raw,1,1),(name+16,4,2),(raw+length,1,1)] {
++            let mut b=initial(&proof,c,false);
++            b.write_fault=Some(WriteFault{address,width,occurrence,old});
++            let result=loading::receive(&mut b,Kind::Standard,RECIPIENT,PAYLOAD,name);
++            assert_eq!(result,Err(loading::ReceiveFailure::Owned(owned::Failure {
++                primary:Some(Error::Write(init::Error::Backend("injected prefix publication failure"))),
++                cleanup:None,remaining:None,
++            })));
++            assert!(b.write_fault.is_none());assert!(b.errors.is_empty());assert_eq!(b.stop,None);
++            assert_eq!(b.provider_calls,1);assert_eq!(b.resolver_calls,1);
++            assert_eq!(b.freed,vec![old,raw]);assert!(b.queue.is_empty());
++            b.check_blocks(&c["cleanup"]);
++        }
++    }
++}
++
++#[test]
++fn audio_loading_standard_prefix_consumer_returns_owned_failure_until_explicit_retry() {
++    let proof=fixture();
++    let c=proof["cases"].as_array().unwrap().iter().find(|c|c["profile"]=="heap_growth" && c["fill"]==165).unwrap();
++    let entry=&c["events"].as_array().unwrap().iter().find(|e|e["op"]=="prefix_entry").unwrap()["string"];
++    let name=n(&entry["address"]);let old=n(&entry["data"]);
++    let raw=n(&c["prefix_stop"]["string"]["data"]);
++    let mut b=initial(&proof,c,false);
++    b.write_fault=Some(WriteFault{address:name+20,width:4,occurrence:1,old});
++    b.fail_release=Some(raw);
++    let result=loading::receive(&mut b,Kind::Standard,RECIPIENT,PAYLOAD,name);
++    let Err(loading::ReceiveFailure::Owned(mut failure))=result else {panic!("expected owned cleanup failure")};
++    assert_eq!(failure.primary,Some(Error::Write(init::Error::Backend("injected prefix publication failure"))));
++    assert_eq!(failure.cleanup,Some(Error::Free(removal::Error::Backend("injected prefix cleanup failure"))));
++    let mut remaining=failure.remaining.take().expect("new allocation remains owned");
++    assert_eq!(remaining.authority(),owned::Authority::Detached(raw));
++    assert_eq!(remaining.address(),name);assert_eq!(b.freed,vec![old]);
++    assert!(b.live.contains_key(&raw));assert!(!b.live.contains_key(&old));
++    let partial=b.bytes(name,24);
++    remaining.retire(&mut b).unwrap();assert!(remaining.is_retired());
++    assert_eq!(b.bytes(name,24),partial);assert_eq!(b.freed,vec![old,raw]);
++    b.check_blocks(&c["cleanup"]);
++}

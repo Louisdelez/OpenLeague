@@ -1,0 +1,39 @@
+from pathlib import Path
+import json,hashlib,datetime,re,shutil
+r=Path('E:/OpenLeague')
+def load(f):return json.loads((r/f).read_text(encoding='utf-8-sig'))
+def sha(f):return hashlib.sha256((r/f).read_bytes()).hexdigest()
+def save(f,data):
+ p=r/f;temp=p.with_name(p.name+'.tmp');temp.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8');json.loads(temp.read_text(encoding='utf-8'));temp.replace(p)
+logname='logs/audio-worker-body-tests.log';b=(r/logname).read_bytes();log=b.decode('utf-16')if b.startswith((b'\xff\xfe',b'\xfe\xff'))else b.decode('utf-8-sig');match=re.search(r'test result: ok\. (\d+) passed; 0 failed;',log);assert match and int(match[1])>=565
+names=['audio_crt_worker_body_matches54_original_required_context_stdcall_callback_argument_raw_return_exit_service_order_and_complete_banks','audio_windows_normal_worker_body_integrates_actual_callback_raw_result_com_balance_and_explicit_retirement_in12_fresh_contexts','audio_windows_worker_callback_registry_preserves_full_width_system_abi_u32_results_last_error_and_rejects_unregistered_export_encoded_or_module_refs']
+for n in names:assert n+' ... ok'in log,n
+proofs=['docs/audio_worker_body_component_validation.json','docs/audio_actual_worker_body_hardware_validation.json']
+for f in proofs:
+ p=load(f);assert p['passed']
+ for name,h in p['files_sha256'].items():assert sha(name)==h,(f,name)
+assert load(proofs[0])['cases']==108 and load(proofs[1])['cases']==12
+refs=load('docs/audio_test_fixture_loading.json')['references'];assert len(refs)==59
+for v in refs:assert sha(v['fixture'])==v['sha256'],v['fixture']
+plan=load('docs/completion_plan.json');assert len(plan['domains'])==24 and sum(len(d['tasks'])for d in plan['domains'])==114 and sum(len(d['additional_requirements'])for d in plan['domains'])==37
+now=datetime.datetime.now(datetime.timezone.utc);history=r/'docs/plan_history'/('audio-worker-body-'+now.strftime('%Y%m%dT%H%M%SZ'));history.mkdir(parents=True,exist_ok=False)
+for f in ['coverage.json','resume_checkpoint.json','completion_plan.json','goal_plan_revision.json','completion_plan.html']:shutil.copy2(r/'docs'/f,history/f)
+packet=load('data/4.20/audio_crt_worker_packet_preparation.json');assert packet['passed']and packet['case_count']==128
+next_action='Port original C9C27C beginthreadex packet producer from128 native captures (parent locale capture, original constructor, handle sentinel, callback/argument writes, CreateThread and error/free path), then integrate actual owned incoming packets through C9C3DC entry/adoption/transfer, package/COM stage and qualified normal C9C315 body/exit. Qualify native exception filter/SEH/fatal context and original S_FALSE terminal COM obligations; complete real legacy TLS fallback, errno/new-handler/reentry and full executable startup. Connect normal client audio dispatch/progression and physical playback. Preserve24 domains114 tasks37 requirements; whole game incomplete.'
+name='audio_worker_body_validation';exe=load('docs/audio_worker_entry_validation.json')['test_executable'];receipt={'saved_utc':now.isoformat(),'passed':True,'complete':False,'audio_tests_passed':int(match[1]),'original_worker_body_cases':54,'worker_body_component_x86_x64_cases':108,'actual_worker_body_core_cases':12,'actual_worker_body_hardware_cases':12,'actual_hardware_callback_calls':12,'existing_fixture_hashes_preserved':59,'proofs':proofs,'test_executable':exe,'test_log':logname,'next_action':next_action,'evidence':['Normal C9C315 body port invokes required current-context getter, reads argument and callback in source order, forwards raw callback result into complete original worker exit preparation.54 native cases compared on32/64-bit architecture with all service/final banks (108 comparisons).','Full-width typed Windows system ABI callback registry integrated through process-heap/critical-section/current-FLS providers. NULL/unknown/module/export/encoded labels rejected rather than cast to callable host addresses. Registered callbacks preserve raw scalar return values and callback LastError.','Twelve actual CreateThread workers across x86/x64 run package/COM stage, callback exactly once, explicit source detach and physical ExitThread codes0/97/MAX; no double FLS destruction. Twelve core normal workers verify fresh records, COM balances, record retirement, parent root shutdown and owned module release.'],'limits':['Normal body only: Rust result errors do not reproduce original native exception filter/SEH or fatal context16. Native SEH registration in captures is not physical Windows exception qualification.','Original C9C3DC entry exists as qualified separate port but is not yet wired to source beginthreadex packet production. Real tests use getter-created records with explicit callback field assignment.','Callback arguments are canonical u32 scalars; host pointer payload adapters and normal audio task dispatch remain incomplete. Positive package cache is supplied, source S_FALSE terminal ownership path remains unqualified.','Full game24/114/37 remains incomplete.'],'plan_backup':str(history.relative_to(r))}
+receipt['original_worker_packet_captures']=128
+receipt['evidence'].append('128 additional complete original C9C27C beginthreadex packet producer captures execute source parent locale acquisition, constructor, sentinel/callback/argument writes and CreateThread boundary, including allocation failure and original Windows-error mapping. Producer not yet ported.')
+(r/'tools/integrate_audio_crt_worker_body.py').write_text(Path('E:/mapslol3v3/integrate_worker_body.py').read_text(encoding='utf-8'),encoding='utf-8')
+tool='tools/record_audio_worker_body.py';(r/tool).write_text(Path(__file__).read_text(encoding='utf-8'),encoding='utf-8')
+files=[exe,logname,*proofs,'crates/core/src/lib.rs','data/4.20/audio_crt_worker_body_preparation.json','tools/probe_native_audio_crt_worker_body.py','tools/implement_audio_crt_worker_body.py','tools/integrate_audio_crt_worker_body.py','tools/probe_audio_worker_body.py','tools/test_probe_audio_worker_body.py',tool]+[f'crates/core/src/{n}.rs'for n in ['audio_crt_worker_body','audio_crt_worker_exit','audio_crt_windows_global_services','audio_crt_windows_shared_fls','audio_crt_windows_root_startup','audio_crt_windows_process_heap','audio_crt_windows_critical_sections']]
+files+=['data/4.20/audio_crt_worker_packet_preparation.json','tools/probe_native_audio_crt_worker_packet.py']
+receipt['files_sha256']={f:sha(f)for f in files};save(f'docs/{name}.json',receipt)
+summary={k:v for k,v in receipt.items()if k not in ['files_sha256','evidence','limits','next_action']};summary['receipt']=f'docs/{name}.json'
+for f in ['coverage.json','resume_checkpoint.json','completion_plan.json','goal_plan_revision.json']:
+ d=load('docs/'+f);d[name]=summary;d['next_action']=next_action
+ if f=='resume_checkpoint.json':d['saved_utc']=receipt['saved_utc']
+ for k in ['last_verified','current_evidence']:
+  if isinstance(d.get(k),dict):d[k].update({v:receipt[v]for v in ['audio_tests_passed','original_worker_body_cases','worker_body_component_x86_x64_cases','actual_worker_body_core_cases','actual_worker_body_hardware_cases']})
+ save('docs/'+f,d)
+html=r/'docs/completion_plan.html';s=html.read_text(encoding='utf-8');text='<p>Audio : corps normal du worker intégré, callback réel et sortie Windows qualifiés en32/64 bits. 54 captures,108 comparaisons,12 workers réels ; '+str(receipt['audio_tests_passed'])+' tests audio réussis. Création du paquet natif, exceptions et audio du client encore à terminer.</p>\n';assert '</body>'in s;temp=html.with_name(html.name+'.tmp');temp.write_text(s.replace('</body>',text+'</body>'),encoding='utf-8');temp.replace(html)
+print('Recorded normal worker body,108 component comparisons,12 actual workers; audio tests',receipt['audio_tests_passed'])

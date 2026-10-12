@@ -1,0 +1,52 @@
+{
+  "saved_utc": "2026-10-10T07:52:59.857690+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "audio_tests_passed": 650,
+  "filtered_tests_not_run": 480,
+  "isolated_production_tests_passed": 79,
+  "native_actor_registry_composition_calls_ported": 576,
+  "native_unregister_calls_prepared": 332,
+  "contracts": {
+    "audio_announcer_actor_registry_composition_contract.json": {
+      "cases": 288,
+      "calls": 576,
+      "sha256": "bd6c00a60549728bf2db704e54a087adae718d924893132b8ea487f283503046"
+    },
+    "audio_announcer_secondary_unregister_contract.json": {
+      "cases": 16,
+      "calls": 332,
+      "sha256": "dcf16bfd38ea4978fb10a015cfbecbe8ea3915cb74d99892bf2cb4b44a53ad5e"
+    }
+  },
+  "regression_log_sha256": "6dcdac054a9993736df4e8c713fa65cf3a42288e6a9f4d411c10b9d1e27f2fd1",
+  "isolated_log_sha256": "f06f272d8a355c3beaf1d17ce86ab07a8887e51eb365c9cd0c7d15cff73ef2dc",
+  "test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_core-5b2a9def275dcedd.exe",
+  "test_executable_sha256": "e1e8a78bf91e11f9735081d8fb3ca156240ff4cc82ba8ff770942a868c2082be",
+  "source_hashes": {
+    "crates/core/src/audio_announcer_actor_registry_composition.rs": "80e8227932eed8e92eb823b7bec73a579bec3552fb51ce8a58493d33373bbceb",
+    "crates/core/src/audio_announcer_actor_admission.rs": "bf4ca22cc122aac5134368ea3e77f282ecbbeeb90936c36e4364cc511e40f3a3",
+    "crates/core/src/audio_announcer_registry_init.rs": "933d027b9afef17422423c13c2ba566cb24b2d7440a19bb4d3cf3334842b21f1",
+    "crates/core/src/audio_announcer_secondary_registries.rs": "769022d6c68b8e9d796a1e0fe3efac07be87603177b3a1a7433515534cf10c43",
+    "crates/core/src/lib.rs": "52de5343e0be57d795cbdc2ac53179189a392db39afef2a8f8d624e13550ce48",
+    "tools/announcer_actor_registry_composition_production_tests.rs": "f3cb6045282c21ff606714d34b70e4ad783d8cea0395d7166f86ed9da5cedbf6",
+    "tools/qualify_actor_registry_composition.py": "5787fe24b776dc9a6e67b6b27f0406a2f2ae02a4c02322bd8b3c82932c1926f2",
+    "tools/qualify_secondary_unregister.py": "33ccc2ae0eaf9d6cfc8f34d12e9df63625649c58b1054acec6cd04971eac1e36"
+  },
+  "behavior": [
+    "Complete62A140 registration now composes actual primary, secondary and owner Rust helpers on one backend, with two fresh IDs, fresh secondary key, metadata after callbacks, invalid owner skip and owner low-byte failure diagnostic. No supplied registry-helper result in this API.",
+    "576 complete native registration calls matched across288 lifetimes with physical owned actor/metadata/global table byte storage, exact allocation labels/sizes, free traces, lock order, ID/owner diagnostics and all live table/node/vector words.",
+    "Shared admission reuses original primary publication implementation. Explicit caller-owned storage reservation rejects overlaps and allocator collisions without erasing bytes. Primary table shutdown preserves borrowed actor and metadata storage. Missing metadata returns an explicit error after prior primary/secondary publication."
+  ],
+  "limits": [
+    "The unified core API still requires game-world ID/metadata integration and real lock/engine allocator boundaries. Fixture actor fields and virtual ID/diagnostic/lock callbacks remain explicit supplied inputs; this is not yet live match actor registration.",
+    "Actual secondary/owner unregister bodies newly qualified in16 lifetimes332 calls including grown tables, repeated null entries, duplicate actor labels, mismatched supplied actor/key, missing cases and vector shift. Rust unregister and actor teardown remain open.",
+    "Normal announcement queue, priorities, mixing, actual audible playback and full game coverage remain incomplete. Native exception unwinding and concurrent mutation not qualified."
+  ],
+  "next_action": "Port actual secondary64C330/owner6B5AB0 unregister against16 lifetimes332 calls in audio_announcer_secondary_unregister_contract.json; add identity-hash64F3E0/6B6400 deletion, independent node/key and actor-vector checks, first matching vector erase/shift and native index-or-FFFFFFFF return. Then integrate unified registration/teardown with game-world actor metadata and announcement queues, priorities, mixing/playback. Preserve24domains114tasks37requirements."
+}

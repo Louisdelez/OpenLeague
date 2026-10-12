@@ -1,0 +1,42 @@
+{
+  "updated_utc": "2026-10-07T05:00:34.646573+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "motion_cases": 72,
+  "moving_target_sequences": 48,
+  "moving_target_frames": 384,
+  "crossing_cases": 144,
+  "sequence_cpu_rsqrt_operations": 1152,
+  "crossing_cpu_rsqrt_operations": 120,
+  "focused_core_tests_passed": 3,
+  "filtered_core_tests": 595,
+  "full_core_suite_rerun": false,
+  "artifacts_sha256": {
+    "data/4.20/missile_motion_sequences_contract.json": "9ed3df7fde55dff5354f90ea40d4c6c98d23e1cf252013f7f22f7c9c3a40ce68",
+    "data/4.20/missile_end_crossing_contract.json": "9886c12c5cf7c773a75966b4d7992d7b1114743f448153820dc05240d6afa036",
+    "tools/probe_native_missile_motion_sequences.py": "de51b84eb9e7a5eb289992b767263ceadb7459968062c18c1ebff455b4a1c8d3",
+    "tools/probe_native_missile_end_crossing.py": "84ad38345271eb4bab9b87910a1a7abb09e0c5013b1747b2ed3665260ef5f79a",
+    "data/4.20/missile_motion_contract.json": "a38467f0f331a9d613e860dd4086838886da67fb7262e8a5570e4893c6c42575",
+    "tools/probe_native_missile_motion.py": "eede48a181e29d79f8742275b37c8451009a8764442fc97f0854753e1bc088a8",
+    "crates/core/src/native_missile_motion.rs": "39d6464e67aa7de0ecc56aa578eedf0a0fa2c37fef39fb3641a97544e23314a1",
+    "crates/core/src/lib.rs": "639ac5567f9547fcc04186c5ab6525d0e3d48e6c08d752ce080dedc7d7ba8a6d",
+    "logs/native-missile-motion-sequences-tests.log": "84d2992da349e02ece80d3cc5f12dade7ca2c74572993d3bd5b4416c266aa29b"
+  },
+  "findings": [
+    "48native75F130 sequences,8frames each: moving target and valid-invalid transitions preserve the last known target. Rust matches all384direction/moving-position/target raw outputs.",
+    "Whole75F840 crossing predicate executes on144horizontal direction/plane/radius cases, including zeroXZ. Rust predicate matches all booleans.",
+    "Rust crossing function computes normalized horizontal projection and inclusive radius crossing. This is geometry; impact callbacks/lifecycle are separate.",
+    "All three focused module tests pass:72single-motion cases,384moving frames,144crossings.595other tests filtered; no new full-suite claim."
+  ],
+  "adapters": [
+    "Same explicit clock/target validity/radius and unobstructed terrain providers as72case motion contract.",
+    "Finite classification provider; native motion/basis/scaling/end predicate and clock wrapper execute."
+  ],
+  "limits": [
+    "Zero gravity/acceleration/travel-time1400 profile; terrain query supplies unobstructed result.",
+    "Crossing lifecycle callback, impact resources/audio, real collision geometry and current-position copy remain unqualified.",
+    "No client rebuild, live binding, GPU/audio or full-suite qualification.",
+    "24domains114tasks retained; zero domains closed."
+  ],
+  "next_action": "Qualifier le rappel natif de fin de course et ses effets d’impact, puis la copie de position vers le propriétaire10B0D20 et le rendu normal ; poursuivre les collisions, scale/alpha/récepteurs terrain et les24domaines."
+}

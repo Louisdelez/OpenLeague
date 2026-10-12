@@ -1,0 +1,25 @@
+{
+  "complete": false,
+  "passed": true,
+  "native_contract": "data/4.20/game_clock_pause_contract.json",
+  "implementation": "crates/core/src/native_game_clock.rs::PauseControl",
+  "verifier": "tools/verify_native_game_clock_pause.rs",
+  "native_sequences": 24,
+  "frozen_native_frames": 72,
+  "physical_rust_matches": true,
+  "existing_frame_cases_rechecked": 40,
+  "client_check": "logs/native-game-clock-pause-check.log",
+  "config_section": "TournamentPause",
+  "constructor_defaults": {
+    "ResumeDelay": 5.0,
+    "HeartbeatDelay": 0.10000000149011612,
+    "TotalLimitSecs": 1800.0
+  },
+  "config_provenance": "99C810 constructor passes defaults to8B20F0; actual config overrides not yet recovered.",
+  "limits": [
+    "Pause core not wired into live EffectClock/network/UI.",
+    "Request authorization/budget99C990, callback notifications, heartbeat and overrides remain unqualified.",
+    "Normal effects v69 binary remains last live-tested binary; this core addition only checked/standalone-verified.",
+    "Provided .25s countdown in native probes is explicit test input, not historical default."
+  ]
+}

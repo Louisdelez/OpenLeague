@@ -1,0 +1,77 @@
+{
+  "complete": false,
+  "passed": true,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "cases": [
+    {
+      "accepted": false,
+      "registered": false,
+      "repeat_snapshots": [
+        {
+          "active": 0,
+          "pending_count": 0
+        },
+        {
+          "active": 0,
+          "pending_count": 0
+        }
+      ],
+      "reactivation_cancels_pending": true
+    },
+    {
+      "accepted": false,
+      "registered": true,
+      "repeat_snapshots": [
+        {
+          "active": 0,
+          "pending_count": 1
+        },
+        {
+          "active": 0,
+          "pending_count": 1
+        }
+      ],
+      "reactivation_cancels_pending": true
+    },
+    {
+      "accepted": true,
+      "registered": false,
+      "repeat_snapshots": [
+        {
+          "active": 1,
+          "pending_count": 0
+        },
+        {
+          "active": 1,
+          "pending_count": 0
+        }
+      ],
+      "reactivation_cancels_pending": true
+    },
+    {
+      "accepted": true,
+      "registered": true,
+      "repeat_snapshots": [
+        {
+          "active": 1,
+          "pending_count": 0
+        },
+        {
+          "active": 1,
+          "pending_count": 0
+        }
+      ],
+      "reactivation_cancels_pending": true
+    }
+  ],
+  "findings": [
+    "Native post-update rejection clearsAD and inserts into manager+48 pending removal vector through7184B0; no cleanup callback invoked in this branch.",
+    "Repeated rejection is deduplicated; marking active and calling7184B0 cancels pending removal."
+  ],
+  "adapters": [
+    "Update return supplied at71800F; original rejection branch/search/insert/erase execute; spare vector capacity."
+  ],
+  "limits": [
+    "Timing of7185D0 drain relative to particle frame and actual717AF0 cleanup remain unqualified."
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "complete": false,
+  "texture_binding_contract": "data/4.20/projected_color_texture_binding_contract.json",
+  "cases_passed": 9,
+  "prior_state_contract": "data/4.20/projected_baseline_contract.json",
+  "findings": [
+    "983CB0 and native driver texture binding preserve supplied filters for stages0/1/2 across9 cases.",
+    "932A60 was already executed in projected_baseline_contract; it selects blend/render state, not a newly missing binding implementation.",
+    "Selected reset/draw sequence remains insufficient to infer all interleaved stage1 filter states. Current Annie color-hold is uniform white so sampled colors do not distinguish filter modes."
+  ],
+  "next": "Inspect95BFF0 legacy selector5 geometry dispatch clip/scissor render state. Retain upstream stage1 filter/upload as explicit open requirement for general color LUT profiles."
+}

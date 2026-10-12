@@ -1,0 +1,575 @@
+{
+  "schema": "garen_w_material_progress_v1",
+  "saved_utc": "2026-10-11T11:41:01.872197+00:00",
+  "scope": "One normal visible base-skin Garen W cast: local sustained private texture override and exact restoration.",
+  "source_integrated": true,
+  "qualified_local_sustained_material": true,
+  "complete_game": false,
+  "complete_garen_kit": false,
+  "six_w_effects_completed": false,
+  "native_activation_caller_qualified": false,
+  "native_shader_equivalence": false,
+  "skinned_vertex_equivalence_qualified": false,
+  "human_fidelity_acceptance": false,
+  "implemented": [
+    "Original base W DDS bytes bound through an actor-private FogMaterial; no shared neighbor material mutation.",
+    "Exact prior handles restored after authoritative buff expiry; baseline lease preserves fog source and lifetime.",
+    "W state is transactionally observed before snapshot coalescence with the existing EffectClock.",
+    "Local activation identity derives from committed cooldown total and courage_until, without a Spell2 clip or burst.",
+    "Visibility/session/teardown resource handling is covered by the named prepared tests that passed in this build."
+  ],
+  "installation": {
+    "path": "E:\\mapslol3v3\\garen_w_installation_candidate\\installed.json",
+    "bytes": 4768,
+    "sha256": "dae090399e027a58df4bca4729f9e8a36119c716e5128b233318fcd03e4de6be"
+  },
+  "source_adjustments": {
+    "receipt": {
+      "path": "E:\\mapslol3v3\\garen_w_checks\\source_adjustments.json",
+      "bytes": 633,
+      "sha256": "5e0a048b6a6e072280c1ed4699205471a82c848b6f9091644e8ca47abb02a05f"
+    },
+    "chain": [
+      {
+        "relative": "crates/client/src/garen_w_material_host_tests.rs",
+        "before_sha256": "d3c12993a0c4e2ff951c3d30f3c716c3cc5873b000b5e1f89a298b7c1a8ef691",
+        "after_sha256": "89b4b22a3971a29ca9d0d20b2fcc6810f293e2a84b2b28de5e4ee42a89678b73",
+        "backup": "E:\\OpenLeague\\backups\\garen-w-test-setup-20261011T112904.381045Z\\garen_w_material_host_tests.rs",
+        "reason": "The second external-rebind fixture scenario must start a session after Requests.clear; the host behavior and assertions are unchanged.",
+        "failed_attempt": "E:\\mapslol3v3\\garen_w_checks\\run-20261011T112325.631671Z\\checks.json"
+      }
+    ]
+  },
+  "superseded_failed_attempt_diagnostic_only": {
+    "checks": {
+      "path": "E:\\mapslol3v3\\garen_w_checks\\run-20261011T112325.631671Z\\checks.json",
+      "bytes": 2765,
+      "sha256": "904d4107d879492f467be011ff725143ce0a5091fc53b3055e6394870b78e71f"
+    },
+    "log": {
+      "path": "E:\\mapslol3v3\\garen_w_checks\\run-20261011T112325.631671Z\\w_state_host_live.log",
+      "bytes": 35114,
+      "sha256": "4c3ce4b31958827eeccc42d6ef3de4ece4f8a9a2c1a0dce1feeb4f6d0451d819"
+    },
+    "meaning": "Preserved initial 26 passed/1 failed fixture setup attempt, not successful qualification."
+  },
+  "assembly": {
+    "path": "E:\\mapslol3v3\\garen_w_installation_candidate\\assembly.json",
+    "bytes": 25455,
+    "sha256": "606837d97089abb900a74421c08c419a707c39ccb4e7723ee71629add42f3969"
+  },
+  "checks": {
+    "path": "E:\\mapslol3v3\\garen_w_checks\\run-20261011T112917.398673Z\\checks.json",
+    "bytes": 9904,
+    "sha256": "60cd37b91a7fb69bc0f7cc11f04651cc1a643828b2ab1d9ed76c6103c896889b"
+  },
+  "tests": {
+    "w_state_host_live": {
+      "passed": 27,
+      "names": [
+        "garen_w_live::tests::w_owner_is_stable_per_identity_and_changes_after_cast_root_or_session",
+        "garen_w_live::tests::w_bad_owner_request_and_exhaustion_clear_only_w_requests_until_reset",
+        "garen_w_live::tests::w_invalid_state_rejects_before_missile_commit_and_valid_same_tick_can_follow",
+        "garen_w_state::tests::w_duplicate_unknown_sources_and_capacity_overflow_are_rejected_before_commit",
+        "garen_w_state::tests::w_delayed_first_sight_is_sustained_at_network_age_not_a_new_burst",
+        "garen_w_live::tests::w_missile_failure_does_not_commit_either_visual_consumer",
+        "garen_w_state::tests::w_hidden_intermediate_snapshot_removes_output_and_keeps_only_age",
+        "garen_w_state::tests::w_fog_return_does_not_revive_expired_age_but_next_cast_has_its_own_anchor",
+        "garen_w_state::tests::w_two_actors_have_independent_identities_and_visibility",
+        "garen_w_live::tests::w_each_intermediate_hidden_packet_and_session_reset_retires_context",
+        "garen_w_state::tests::w_departure_completion_and_session_reset_retire_local_contexts",
+        "garen_w_state::tests::w_same_cast_snapshots_rank_change_and_clock_pause_never_restart_age",
+        "garen_w_state::tests::w_no_spell_clip_movement_spin_or_attack_state_is_changed_by_observation",
+        "garen_w_state::tests::w_explicit_clear_death_and_respawn_do_not_resume_the_same_identity",
+        "garen_w_state::tests::w_bad_committed_state_is_transactional_and_inactive_legacy_is_unknown",
+        "garen_w_state::tests::w_real_casts_commit_identity_for_all_ranks_cdr_and_during_judgment",
+        "garen_w_live::tests::w_requests_follow_real_deferred_root_and_hide_when_snapshot_is_absent",
+        "garen_w_live::tests::w_setup_requests_the_verified_base_assets_without_claiming_gpu_load",
+        "map_fog::garen_w_material_host_tests::w_removed_binding_contract_retires_only_its_guard_without_guessing_source",
+        "map_fog::garen_w_material_host_tests::w_equal_priority_refresh_keeps_order_and_removal_reveals_previous_owner",
+        "map_fog::garen_w_material_host_tests::w_null_or_unloaded_baseline_and_unloaded_dds_preserve_baseline",
+        "map_fog::garen_w_material_host_tests::w_private_materials_preserve_neighbors_skin_components_and_exact_baseline",
+        "map_fog::garen_w_material_host_tests::w_requires_exact_base_asset_and_rejects_foreign_source_without_mutation",
+        "map_fog::garen_w_material_host_tests::w_all_overridden_baselines_stay_cached_and_reload_without_losing_live_fog",
+        "map_fog::garen_w_material_host_tests::w_external_rebinding_is_never_clobbered_on_retirement",
+        "map_fog::garen_w_material_host_tests::w_late_children_hidden_roots_sessions_and_despawn_retire_leases",
+        "map_fog::garen_w_material_host_tests::w_probe_reports_actual_fixture_handles_before_during_and_after_override"
+      ],
+      "log": {
+        "path": "E:\\mapslol3v3\\garen_w_checks\\run-20261011T112917.398673Z\\w_state_host_live.log",
+        "bytes": 34448,
+        "sha256": "ee1b6287272a82654ab8ac3fcca9ccba6e63b5aa2435cf709e3405ef67dba371"
+      }
+    },
+    "native_material_selection": {
+      "passed": 2,
+      "names": [
+        "material_selection::tests::explicit_host_boundary_errors_do_not_claim_native_exception_parity",
+        "material_selection::tests::matches_all_original_x86_operations"
+      ],
+      "log": {
+        "path": "E:\\mapslol3v3\\garen_w_checks\\run-20261011T112917.398673Z\\native_material_selection.log",
+        "bytes": 31660,
+        "sha256": "eea15fc40cd16eeb07f87b4ddb579e17d89d6ab2d54d97274cbc19686033612e"
+      }
+    },
+    "attack_presentation": {
+      "passed": 15,
+      "names": [
+        "attack_animation::tests::delayed_q_uses_original_age_and_requires_real_finite_duration",
+        "attack_animation::tests::fog_return_cannot_rewind_an_expired_identity_on_a_delayed_tick",
+        "attack_animation::tests::late_newer_snapshot_and_resolution_do_not_rewind_an_expired_attack",
+        "attack_animation::tests::new_identity_after_long_delay_starts_at_its_own_network_age",
+        "attack_animation::tests::missing_windup_without_terminal_interrupts_and_cannot_restart_same_identity",
+        "attack_animation::tests::explicit_effect_clock_pause_and_scale_do_not_use_wall_time",
+        "attack_animation::tests::cancellation_and_server_error_disable_presentation_while_valid_game_state_is_accepted",
+        "attack_animation::tests::resolution_kind_change_does_not_restart_age_or_change_identity",
+        "attack_animation::tests::movement_interrupts_only_recovery_and_buff_alone_never_starts_an_attack",
+        "attack_animation::tests::completed_match_never_resumes_before_reset",
+        "attack_animation::tests::invalid_journal_clock_or_session_is_transactional_and_stale_is_ignored",
+        "attack_animation::tests::visibility_gap_during_one_receive_batch_drops_old_terminal_but_resumes_active_age",
+        "attack_animation::tests::death_stun_spin_and_ultimate_interrupt_without_resumption_after_clear",
+        "attack_animation::tests::q_resolution_preserves_start_then_next_basic_replaces_it",
+        "attack_animation::tests::critical_uses_crit_and_only_live_windup_extends_the_local_window"
+      ],
+      "log": {
+        "path": "E:\\mapslol3v3\\garen_w_checks\\run-20261011T112917.398673Z\\attack_presentation.log",
+        "bytes": 33032,
+        "sha256": "d18d8a06bc74a1aef7801d19dd6e317365bd6a0796e419cd55a425ffec07cbf7"
+      }
+    },
+    "attack_binding": {
+      "passed": 3,
+      "names": [
+        "animation::attack_binding_tests::host_time_does_not_expire_an_attack_while_presentation_clock_is_held",
+        "animation::attack_binding_tests::actual_player_does_not_restart_at_resolution_and_new_same_role_attack_restarts_at_age",
+        "animation::attack_binding_tests::catalog_garen_roles_reference_the_audited_native_clips"
+      ],
+      "log": {
+        "path": "E:\\mapslol3v3\\garen_w_checks\\run-20261011T112917.398673Z\\attack_binding.log",
+        "bytes": 31824,
+        "sha256": "fd05f65243130b1f231eb2231f1043bf26e13f6b97912c67fe4a71a18d85bf4a"
+      }
+    },
+    "orientation": {
+      "passed": 6,
+      "names": [
+        "entity_orientation::tests::stopped_snapshot_preserves_rotation_and_nonfinite_delta_is_explicitly_unsupported",
+        "entity_orientation::facing_tests::stationary_backwards_root_and_first_seen_post_hit_use_heading_without_changing_position_scale",
+        "entity_orientation::tests::render_forward_matches_108_native_nonzero_yaw_bases",
+        "entity_orientation::facing_tests::authoritative_yaw_renders_same_forward_as_all_native_nonzero_cases_after_wire_roundtrip",
+        "entity_orientation::facing_tests::legacy_displacement_respawn_and_new_root_keep_explicit_unknown_policy",
+        "entity_orientation::facing_tests::annie_w_priority_survives_end_of_cast_and_movement_resumes_without_garen_heading"
+      ],
+      "log": {
+        "path": "E:\\mapslol3v3\\garen_w_checks\\run-20261011T112917.398673Z\\orientation.log",
+        "bytes": 32208,
+        "sha256": "9d65408a462bf329decf6e0389f65c8bbae76fd2c08e5c3471f7b970f910f97b"
+      }
+    },
+    "effect_clock": {
+      "passed": 7,
+      "names": [
+        "native_effect_clock::animation_delta_tests::publishes_native_delta_and_stops_on_clock_failure",
+        "native_effect_clock::shared_clock_tests::effect_first_frame_does_not_reset_an_origin_previously_used_by_loading",
+        "native_effect_clock::tests::malformed_gaps_and_session_reset_do_not_leave_old_pause",
+        "native_effect_clock::tests::reordered_and_duplicate_messages_preserve_pause_then_resume",
+        "native_effect_clock::animation_delta_tests::scoped_animation_delta_freezes_clips_and_fades_then_expires_without_freezing_wall_time",
+        "native_effect_clock::shared_clock_tests::effects_pause_and_scale_do_not_modify_canonical_loading_time_and_closed_handles_fail",
+        "native_effect_clock::tests::received_pause_freezes_effect_time_across_real_frame_updates"
+      ],
+      "log": {
+        "path": "E:\\mapslol3v3\\garen_w_checks\\run-20261011T112917.398673Z\\effect_clock.log",
+        "bytes": 32287,
+        "sha256": "1893218168475f431c6adb18a60189b2fefab2f56c976801501bd66d393e1bc0"
+      }
+    },
+    "session_departure": {
+      "passed": 2,
+      "names": [
+        "session_departure::tests::return_requires_visible_results_and_armed_release_inside_button",
+        "session_departure::tests::exit_sends_current_identity_once_and_checks_overflow"
+      ],
+      "log": {
+        "path": "E:\\mapslol3v3\\garen_w_checks\\run-20261011T112917.398673Z\\session_departure.log",
+        "bytes": 31672,
+        "sha256": "a7dc99e30c0cf76ede05f201a655bea0b69a88fdca44ceb5869d8b8d8148f08a"
+      }
+    },
+    "match_results": {
+      "passed": 2,
+      "names": [
+        "match_results_ui::tests::results_setup_keeps_return_inside_panel_above_hud",
+        "match_results_ui::tests::scoreboard_uses_frozen_roster_when_live_players_have_disconnected"
+      ],
+      "log": {
+        "path": "E:\\mapslol3v3\\garen_w_checks\\run-20261011T112917.398673Z\\match_results.log",
+        "bytes": 31669,
+        "sha256": "2ab100b3fc872d53b2aeec55601774083b09666f8ae2f755b464c2756e25ffc3"
+      }
+    }
+  },
+  "test_series": 8,
+  "build_jobs": 9,
+  "new_w_test_count": 27,
+  "selection_tests_reexecuted": 2,
+  "previous_isolated_native_selection": {
+    "manifest": {
+      "path": "E:\\mapslol3v3\\garen_w_material_oracle\\manifest.json",
+      "bytes": 3478,
+      "sha256": "e64b151c8c1e0ed6b75e0f3a5951b603e45ea2dcff20d5c5ee8eb02edbfc82b6"
+    },
+    "qualification": {
+      "path": "E:\\mapslol3v3\\garen_w_material_oracle\\qualification.json",
+      "bytes": 2667,
+      "sha256": "eb74e6ae43864babdc4326761a6d22564ad471e917a6e81313110e93a834c75d"
+    }
+  },
+  "native_bind_fragment": {
+    "manifest": {
+      "path": "E:\\mapslol3v3\\garen_w_material_bind_oracle\\manifest.json",
+      "bytes": 2601,
+      "sha256": "9999988e1c9057d804c3b912c527470bc11c3bf4131b03b88c3a7fb175704d5a"
+    },
+    "qualification": {
+      "path": "E:\\mapslol3v3\\garen_w_material_bind_oracle\\trace_check.json",
+      "bytes": 838,
+      "sha256": "b7ad3e5be6889ff4b5e75095e740c97da12f2720c0c99d58cec602460e1bac86"
+    }
+  },
+  "sources": {
+    "crates/client/src/main.rs": "97f8a4d190a1c8a06bab2ed9b8ee8bba420d4c73f02803b8e4324a95485c7384",
+    "crates/client/src/actor_fow.rs": "91e99b362a7ab44a6a727c93b1e3fe43e815892c427952e6e54b1765c3e1c797",
+    "crates/client/src/animation.rs": "4478970966b13e444937e1aed0fe18ceb0c69bc40413aaf740b13c989b5b1040",
+    "crates/client/src/map_fog.rs": "342e956dfece3634127003776fb5c6724de1958c010824d35e10c077af4d4eba",
+    "crates/client/src/garen_w_state.rs": "6428cd51a1a4c8793332ee3074118aaf974642c4e67fb11874fc5bb0c898e0d6",
+    "crates/client/src/garen_w_state_tests.rs": "7255e9b6e1421b07799273b3cf1cbc68f6cfd76f620383696fd3dedaecbfef03",
+    "crates/client/src/garen_w_profile.rs": "f4f6ba3148ad6079f60c8806148a42377b4a99492125597030359da0dd7293a2",
+    "crates/client/src/garen_w_live.rs": "c7e94246fdd4f1377cd16875199e673eef46c51c6d5aebe7c28658b05b812cc5",
+    "crates/client/src/garen_w_live_tests.rs": "21944a96b44b6c9ba89601d3647bb0d7876f020deb62f7d58ef307e4c9312e86",
+    "crates/client/src/garen_w_probe.rs": "d3094dddd69b4ba0d6d114b1bc9f7a0a8a5c8df88aa751a3c95008d7eeec3fde",
+    "crates/client/src/garen_w_material_host.rs": "bd02bcb50a8a613bf63995d2a0895cf2384c1e298706cfe261c405d4cbcc174c",
+    "crates/client/src/garen_w_material_host_tests.rs": "89b4b22a3971a29ca9d0d20b2fcc6810f293e2a84b2b28de5e4ee42a89678b73",
+    "crates/client/src/material_selection.rs": "bd8dd55adca10240db618cf86462d637c162e5f5502fa3b8b3d237876651cec2",
+    "crates/client/src/material_selection_tests.rs": "62ec188e6067b1809e1a85500ab52578eb1d30c2cfa6d136e5ac7e0ae5649d26",
+    "crates/client/src/native_cases.rs": "13d9a5c700b69d826e43802c6ad0a275194d4612d74dba1879c5ff138756af05",
+    "assets/champions/garen/effects/Garen_Base_W_Metal_Gold.dds": "f09d42ff8a4a373c53e5acd7c0023f5bd33fa3a986c8cb2bc5b7560b0825808a",
+    "data/4.20/garen_w_base_profile.json": "0dde0219b5c6a3808b7d016b70257dcb473594f4df401e6385d48c8cdc68dbd8",
+    "data/4.20/garen_w_preparation_sources.json": "235870b197f96af0ebbba8fdc8365e83970312c4f4ff4edb4e03a2b72e9f4b9b"
+  },
+  "original_texture_sha256": "f09d42ff8a4a373c53e5acd7c0023f5bd33fa3a986c8cb2bc5b7560b0825808a",
+  "packages": {
+    "state": {
+      "path": "E:\\mapslol3v3\\garen_w_state_candidate\\manifest.json",
+      "bytes": 7136,
+      "sha256": "327c28d6a4955fa0e42613e08b7d281e4b260c358bd358e91997be8433171527"
+    },
+    "host": {
+      "path": "E:\\mapslol3v3\\garen_w_material_host_candidate\\manifest.json",
+      "bytes": 7557,
+      "sha256": "c3b8e23141a518e1298145285a4bf71a2f4b78b09e92032c734c73493e21ac31"
+    },
+    "integration": {
+      "path": "E:\\mapslol3v3\\garen_w_integration_candidate\\manifest.json",
+      "bytes": 5823,
+      "sha256": "eb9aa1cf3d30e2f44fd2244d20b49a95b68fe6d0082a49be174629b8ffcd360d"
+    },
+    "selection": {
+      "path": "E:\\mapslol3v3\\garen_w_material_oracle\\manifest.json",
+      "bytes": 3478,
+      "sha256": "e64b151c8c1e0ed6b75e0f3a5951b603e45ea2dcff20d5c5ee8eb02edbfc82b6"
+    },
+    "texture": {
+      "path": "E:\\mapslol3v3\\garen_w_texture_candidate\\receipt.json",
+      "bytes": 2291,
+      "sha256": "51d09e269f28bd32e50df738b15f284ea056407c805d301feff263a07b8e5d17"
+    },
+    "native_bind": {
+      "path": "E:\\mapslol3v3\\garen_w_material_bind_oracle\\manifest.json",
+      "bytes": 2601,
+      "sha256": "9999988e1c9057d804c3b912c527470bc11c3bf4131b03b88c3a7fb175704d5a"
+    },
+    "order_review": {
+      "path": "E:\\mapslol3v3\\garen_w_material_order_review\\manifest.json",
+      "bytes": 292,
+      "sha256": "763a90f2b45fbabde3a36c85bf80b30a464e6b8f61d153e397d1215998d6a799"
+    }
+  },
+  "previous_facing_receipt": {
+    "path": "E:\\OpenLeague\\docs\\garen_attack_facing_progress.json",
+    "bytes": 11758,
+    "sha256": "ed0d3a86bb482d40ab3fe15a9492d204eb15e43fc3bff6ef795364dbdaccba16"
+  },
+  "normal_runtime": {
+    "receipt": {
+      "path": "E:\\mapslol3v3\\garen_w_runtime\\run-20261011T113822.695793Z\\receipt.json",
+      "bytes": 400974,
+      "sha256": "3ea1367c934fabe4f2c64203a47867e582fb530d909d63b709be90f1f3dd9cca"
+    },
+    "graphical_clients": 1,
+    "ordinary_udp_controllers": 5,
+    "identity": {
+      "session": 1791718703195436200,
+      "source": 22,
+      "started": 2412,
+      "end": 2472
+    },
+    "material_source": 22,
+    "control_source": 21,
+    "active_samples": 44,
+    "exact_baseline_restored": true,
+    "control_binding_unchanged": true,
+    "mesh_identity_and_joint_count_preserved": true,
+    "before_active_restored_recomputed_from_trace": true,
+    "cleanup": {
+      "processes": {
+        "server": {
+          "pid": 18292,
+          "exit_code": 0,
+          "alive": false
+        },
+        "client": {
+          "pid": 19996,
+          "exit_code": 0,
+          "alive": false
+        }
+      },
+      "errors": [],
+      "forced_termination": false,
+      "passed": true
+    },
+    "native_shutdown_reports": {
+      "NATIVE_RUNTIME_SHUTDOWN": {
+        "application": {
+          "closed": true,
+          "crt": {
+            "cookie": 2013488940,
+            "cookie_complement": 2281478355,
+            "critical_sections": 0,
+            "heap_allocations": 2,
+            "heap_blocks": 0,
+            "heap_failures": 0,
+            "heap_frees": 2,
+            "locale_references": 1,
+            "lock_failures": 0,
+            "mb_references": 0,
+            "retained_mirrors": 0,
+            "slot_index": 4294967295
+          },
+          "handle_failures": 0,
+          "native_source_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+          "transport": null,
+          "worker_completions": 0,
+          "worker_failures": [],
+          "workers_closed": 0,
+          "workers_created": 0
+        },
+        "checkpoint": "native-runtime-app-exit",
+        "clock": {
+          "crt_allocations": 0,
+          "event_close_failures": 0,
+          "events_closed": 0,
+          "events_created": 0,
+          "failure": null,
+          "frequency": 10000000,
+          "initialized": true,
+          "inner_mutexes": 0,
+          "origin": 1366888095433,
+          "pending_mirrors": 0,
+          "qpc_calls": 12752,
+          "qpf_calls": 1,
+          "registered_cleanups": []
+        },
+        "complete": false,
+        "errors": [],
+        "passed": true,
+        "phase_order": [
+          "service",
+          "runtime",
+          "application"
+        ],
+        "producer_sample_requested_during_shutdown": false,
+        "runtime": {
+          "active_workers": 0,
+          "critical_section_failures": [],
+          "critical_sections": 1,
+          "engine_allocations": 0,
+          "errors": [],
+          "handles": 0,
+          "scope_critical_section_reference": 47639896
+        }
+      },
+      "NATIVE_RUNTIME_AFTER_RUN": {
+        "checkpoint": {
+          "application": {
+            "closed": true,
+            "crt": {
+              "cookie": 2013488940,
+              "cookie_complement": 2281478355,
+              "critical_sections": 0,
+              "heap_allocations": 2,
+              "heap_blocks": 0,
+              "heap_failures": 0,
+              "heap_frees": 2,
+              "locale_references": 1,
+              "lock_failures": 0,
+              "mb_references": 0,
+              "retained_mirrors": 0,
+              "slot_index": 4294967295
+            },
+            "handle_failures": 0,
+            "native_source_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+            "transport": null,
+            "worker_completions": 0,
+            "worker_failures": [],
+            "workers_closed": 0,
+            "workers_created": 0
+          },
+          "checkpoint": "native-runtime-app-exit",
+          "clock": {
+            "crt_allocations": 0,
+            "event_close_failures": 0,
+            "events_closed": 0,
+            "events_created": 0,
+            "failure": null,
+            "frequency": 10000000,
+            "initialized": true,
+            "inner_mutexes": 0,
+            "origin": 1366888095433,
+            "pending_mirrors": 0,
+            "qpc_calls": 12752,
+            "qpf_calls": 1,
+            "registered_cleanups": []
+          },
+          "complete": false,
+          "errors": [],
+          "passed": true,
+          "phase_order": [
+            "service",
+            "runtime",
+            "application"
+          ],
+          "producer_sample_requested_during_shutdown": false,
+          "runtime": {
+            "active_workers": 0,
+            "critical_section_failures": [],
+            "critical_sections": 1,
+            "engine_allocations": 0,
+            "errors": [],
+            "handles": 0,
+            "scope_critical_section_reference": 47639896
+          }
+        },
+        "checkpoint_observed": true,
+        "cleanup_failed": false,
+        "complete": false,
+        "critical_section_failures": [],
+        "critical_section_report_owners": 1,
+        "direct_os_deletion_count_observed": false,
+        "report_error": null
+      }
+    }
+  },
+  "visual_observation": {
+    "receipt": {
+      "path": "E:\\mapslol3v3\\garen_w_runtime\\run-20261011T113822.695793Z\\visual_receipt.json",
+      "bytes": 3989,
+      "sha256": "881e516ca73c8470083520b3ccca79082ab42c22650c1c85cd6261d386092ca3"
+    },
+    "report": {
+      "passed": true,
+      "saved_utc": "2026-10-11T11:40:30.405855+00:00",
+      "runtime_receipt": "E:\\mapslol3v3\\garen_w_runtime\\run-20261011T113822.695793Z\\receipt.json",
+      "client_closed_normally": true,
+      "all_client_windows_absent_after_close": true,
+      "method": "Fresh owned-window selection and foreground @oai/sky captures, with raw ECS observations saved immediately before and after each capture.",
+      "captures": [
+        {
+          "path": "E:\\mapslol3v3\\garen_w_runtime\\run-20261011T113822.695793Z\\before.jpg",
+          "bytes": 144277,
+          "sha256": "fecd825c098e58544af0a5e0ec325454e7f1c25f69f98055845e093b61075566",
+          "phase": "before",
+          "capture_metadata": {
+            "path": "E:\\mapslol3v3\\garen_w_runtime\\run-20261011T113822.695793Z\\before_capture.json",
+            "bytes": 8663,
+            "sha256": "93bc4e2331d199973f1843ebff9eba134a0836ebb44fda692e8f89cf1f90d5b0"
+          },
+          "phase_bracketed_by_real_ecs_samples": true,
+          "probe_times": [
+            66.9519094,
+            67.0292033
+          ]
+        },
+        {
+          "path": "E:\\mapslol3v3\\garen_w_runtime\\run-20261011T113822.695793Z\\active.jpg",
+          "bytes": 144661,
+          "sha256": "99e829800686e672f5aa5fee6dd9041945bd0e9dc15fb61b74291f11270f8704",
+          "phase": "active",
+          "capture_metadata": {
+            "path": "E:\\mapslol3v3\\garen_w_runtime\\run-20261011T113822.695793Z\\active_capture.json",
+            "bytes": 12025,
+            "sha256": "568f42314db71f6192615ef0c9cb9ad2896de3dca587f97dbe96a639b219adc3"
+          },
+          "phase_bracketed_by_real_ecs_samples": true,
+          "probe_times": [
+            75.8796155,
+            75.9325574
+          ]
+        },
+        {
+          "path": "E:\\mapslol3v3\\garen_w_runtime\\run-20261011T113822.695793Z\\restored.jpg",
+          "bytes": 144208,
+          "sha256": "87952125df9e4553668559921b00c4f527d8c04f1de0d3a4504779ef282c2912",
+          "phase": "restored",
+          "capture_metadata": {
+            "path": "E:\\mapslol3v3\\garen_w_runtime\\run-20261011T113822.695793Z\\restored_capture.json",
+            "bytes": 8676,
+            "sha256": "c2d5c57d995e0b559a90b0f6f5c8f4649cee5a76a85f5da217b8b1e9f718e4a7"
+          },
+          "phase_bracketed_by_real_ecs_samples": true,
+          "probe_times": [
+            87.8533892,
+            87.9274615
+          ]
+        }
+      ],
+      "observations": [
+        "La fenêtre réelle du client affiche la Forêt torturée texturée et deux Garen au point de rencontre atteint par des déplacements normaux.",
+        "Avant le W, les deux modèles portent leur texture habituelle. Pendant le W, l’armure du Garen protégé devient nettement plus claire, avec des parties blanches/argentées visibles ; le personnage voisin conserve son apparence habituelle.",
+        "Après expiration, les parties éclaircies retrouvent leur texture initiale. Les trois captures avant/actif/restauré ont été inspectées dans les réponses de @oai/sky.",
+        "Les personnages sont proches et se chevauchent partiellement à cette distance de caméra. La preuve que le matériau du voisin reste inchangé provient aussi des handles réellement observés dans le rendu, pas seulement de ces images.",
+        "Le client a été fermé normalement par Alt+F4. Le client et le serveur ont quitté avec le code zéro ; une nouvelle liste des fenêtres ne contient plus de client OpenLeague.",
+        "Cet essai montre la substitution temporaire de texture. Il ne démontre ni halos, ni particules, ni scintillement, ni équivalence du shader d’origine."
+      ],
+      "limits": [
+        "Passed means three captures were made, phase-checked and inspected by the assistant; it is not human fidelity acceptance.",
+        "Bracketing render-world samples and visible texture change do not qualify original shader sampling, particle families, native activation caller or every rendered vertex.",
+        "This is one ordinary visible W activation and expiry on one graphical client; visibility interruption and other lifecycles are separate CPU test evidence."
+      ]
+    },
+    "meaning_of_passed": "Captures taken and inspected; no native shader/pixel equivalence or human fidelity acceptance."
+  },
+  "executables": {
+    "client": {
+      "path": "E:\\OpenLeague\\target\\debug\\openleague-client.exe",
+      "bytes": 140219904,
+      "sha256": "534f8f7009ccdbeed1820bdbfccd6bf2a9391c9762a4339b8e6d8df747fde8dc"
+    },
+    "server": {
+      "path": "E:\\OpenLeague\\target\\debug\\openleague-server.exe",
+      "bytes": 4889600,
+      "sha256": "e7b9ee49f77e46c434920f21960387966652e72475f0e0bdab1b83ffec3d71fd"
+    }
+  },
+  "limits": [
+    "Sustained texture-only local adaptation. The native six-effect activation caller, shader, bursts, Fade, particles and other skins remain unqualified.",
+    "Owner tokens are stable only during a retained visible binding. Fog retires the binding; reappearance uses a new token while State preserves effect age.",
+    "The normal runtime observes one visible ordinary cast and expiry, not fog/error/session retirement; those are separate CPU test evidence.",
+    "One graphical client plus five ordinary UDP controllers is not six rendered clients or a complete match.",
+    "Native selection is supported by the bounded original oracle and semantic Rust tests. Native bind/restore uses controlled device callbacks, not a GPU fidelity oracle.",
+    "The runtime probe measures mesh AssetId and joint count, not joint entity IDs. Exact joint IDs are a separate CPU host fixture assertion.",
+    "Actual handle/mesh identity and joint-count observations plus inspected screenshots do not establish all skinned vertices, native shader sampling, audio, timing or human fidelity acceptance.",
+    "Source/build/runtime hashes connect these observed inputs; no claim of bit-reproducible compiler output."
+  ],
+  "next_action": "Continue the verified Garen W effect groups and native activation/attachment/shader contracts beyond the locally reconstructed base sustained texture. Qualify visibility/session/error retirement separately from this normal visible cast. Continue Garen Q timing/cancellation, restored Twisted Treeline gameplay, buildings/minions/camps, victory/results and six rendered clients, then the remaining LoL 4.20 plan without replacing missing native behavior."
+}

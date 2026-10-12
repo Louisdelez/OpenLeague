@@ -1,0 +1,14 @@
+from pathlib import Path
+import json,itertools,hashlib
+r=Path('E:/OpenLeague');exec(compile((r/'tools/probe_native_environment_macros.py').read_text().split('\nu.hook_add(')[0],'setup','exec'))
+regions=[('dispatch',0x2da5308,8),('cookie',0x1222ed0,4)];calls=[];api_result=0;snapshot=lambda:{n:bytes(u.mem_read(a,z)).hex()for n,a,z in regions};w(0xfa43fc,vector+0x28000);w(0xfa43f4,vector+0x28010)
+def hook(uc,a,z,user):
+ if a in [vector+0x28000,vector+0x28010,vector+0x28020,vector+0x28030]:
+  sp=u.reg_read(UC_X86_REG_ESP);kind={vector+0x28000:'TlsGetValue',vector+0x28010:'TlsSetValue',vector+0x28020:'FlsGetValue',vector+0x28030:'FlsSetValue'}[a];args=[read(sp+4)]+([read(sp+8)]if 'Set' in kind else[]);calls.append({'kind':kind,'arguments':args,'result':api_result,'at_call':snapshot()});finish(api_result,len(args)*4);return
+ assert 0xcabcc2<=a<0xcabd03,hex(a)
+u.hook_add(unicorn.UC_HOOK_CODE,hook);rows=[]
+for action,extended,cookie,api_result,index,value in itertools.product(['get','set'],[False,True],[0,0x11223344,0xffffffff],[0,5,0xffffffff],[5,0xffffffff],[0,vector+0x12000]):
+ w(0x1222ed0,cookie);w(0x2da5308,cookie^(vector+0x28020 if extended else 0));w(0x2da530c,cookie^(vector+0x28030 if extended else 0));calls.clear();before=snapshot();w(stack,end);w(stack+4,index);w(stack+8,value);u.reg_write(UC_X86_REG_ESP,stack);u.emu_start(0xcabcc2 if action=='get'else 0xcabce1,end,count=500);assert u.reg_read(UC_X86_REG_EIP)==end
+ rows.append({'action':action,'extended':extended,'cookie':cookie,'api_result':api_result,'index':index,'value':value,'before':before,'after':snapshot(),'calls':list(calls),'result':u.reg_read(UC_X86_REG_EAX),'stack_delta':u.reg_read(UC_X86_REG_ESP)-stack,'terminal':True})
+p={'passed':True,'complete':False,'case_count':len(rows),'terminal_case_count':len(rows),'native_sha256':hashlib.sha256(raw).hexdigest(),'regions':[{'name':n,'reference':a,'size':z}for n,a,z in regions],'cases':rows,'limits':['Actual CABCC2/CABCE1 get/set wrappers execute with encoded dispatch and original calling conventions. Supplied imported TLS/FLS outcomes, unsigned index5/MAX, NULL/nonNULL value and return0/5/MAX. Canonical before/after/entry banks and caller argument retention captured.','Imported return values are controlled, not host API availability, validity, LastError effects or physical slot state. Caller errno/LastError preservation, original TLS/FLS callback lifetime and thread-subsystem startup remain separate. Rust replay pending.']}
+(r/'data/4.20/audio_crt_tls_value_wrappers_preparation.json').write_text(json.dumps(p,indent=2)+'\n',encoding='utf-8');(r/'tools/probe_native_audio_crt_tls_value_wrappers.py').write_text(Path(__file__).read_text(encoding='utf-8'),encoding='utf-8');print('Captured',len(rows),'original TLS/FLS get/set wrapper cases')

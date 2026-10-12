@@ -1,0 +1,40 @@
+{
+  "updated_utc": "2026-10-04T23:24:15.335652+00:00",
+  "complete": false,
+  "client_tests_passed": 121,
+  "client_build_passed": true,
+  "native_refresh_sequences": 144,
+  "native_view_updates": 3600,
+  "native_selector_steps": 64,
+  "native_addresses": 1343,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Original6B3FA0 shared cache initialization bits1/2/4, player flagbit11, restriction changes and positive-only refresh decrement execute across144sequences/3600updates. Initial counter-1/0/1/20, cached flag true/false, initbits0/1/2/3/4/7 and off/on/pulse transitions are crossed.",
+    "Changed restriction resets shared counter to20 before source selection; clean/applied sources are forced through queue while counter positive. Original6B4526 decrements once per view update before processing. The counter is global/shared, not independently owned by each view.",
+    "Original6B2C80 selection command executes64steps: -1->0->1->-2->0; unsupported signed values remain unchanged. It does not reset the refresh counter.",
+    "Rust SharedViewState.begin_update/after_source_selection and cycle_native_selection preserve qualified cache/counter/selector state. Source selection, priority/order, counts, applied/pending flags and generation request order match native updates.121client tests and build passed."
+  ],
+  "limits": [
+    "Original6B3FA0 cache initialization bits1/2/4, player bit11 comparison, counter reset20, clean/applied source enqueue gates and positive-only decrement execute. Original6B2C80 selector cycle executes64steps without touching refresh counter.",
+    "Actor registries, descriptors and matching identifiers supplied. Spectator false, QPC/clock, allocator and configuration reader(enabled=true) boundaries adapted.",
+    "Each tick supplies/reapplies the same clean stencil via original6B2D80; generation boundary records requests only. This isolates state transitions; no continuous actual terrain/GPU generation.",
+    "One view called per tick here. Shared global counter advances per view call; complete multi-view initialization/lifetime and live gameplay binding remain open.",
+    "Enabled configuration reader result is supplied true; disabled configuration early-return/spectator interaction remains unqualified. Cache inputs and constructors are supplied; full view allocation/subscriptions and destruction remain open.",
+    "Selector command tested independently from spectator frames; subsequent spectator frames/whole-world mode switching and multi-view orchestration still require integration qualification.",
+    "Actual terrain generation is adapted in these state-isolation sequences. No ordinary source activation, live server/GPU fog binding or graphical rerun."
+  ],
+  "next_actions": [
+    "Qualify full native view initialization, registration/subscriptions and destruction, retaining shared cache state across views.",
+    "Qualify remaining configuration/mode interactions and actor/registry producers; connect source lifecycle and selection to ordinary gameplay entities.",
+    "Bind qualified masks to server visibility and GPU rendering, then verify restored Map10 gameplay on the current executable."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_view_refresh_contract.json": "d14b0788d9d7207fff4b5701db97a25299cb833445240b1798db610657e665ba",
+    "tools/probe_fow_view_refresh.py": "cfee5d60b39f2da11ebf21969db90fcefc000f79fdcb9afc7776f37bf1cf8562",
+    "crates/client/src/fow_view_state.rs": "e40e7d1831a47ed72798900d9375c17e063a96d36b864e0062f646184a1a79f9",
+    "logs/native-view-refresh-tests.log": "18d4bf96ab3f2286a25effb98e7ca3a1601c1eb53b0018dc316f3a75dc6300b1",
+    "logs/native-view-refresh-build.log": "f542dfa3adc0d1016db6ad0e7c41a0d2800e56143f3469073bcbbb17fafdf5e6",
+    "target/debug/openleague-client.exe": "20bd3cde13b10aa0ab195f5f19e12129f0e0bb3388deb9b96234dae41d2634b0"
+  }
+}

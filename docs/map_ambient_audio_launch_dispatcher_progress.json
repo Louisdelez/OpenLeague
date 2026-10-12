@@ -1,0 +1,35 @@
+{
+  "updated_utc": "2026-10-04T02:10:54.926889+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_launch_dispatcher.py": "da2c42ca875835a4a7c9118a1c2446e98c51249190fdb8f5439a470e96f49156",
+    "data/4.20/audio_launch_dispatcher_contract.json": "895a2a22de6c15ad6543de1a818b5f79cb0605d9df44cb3846ad53b87d133b18",
+    "crates/core/src/audio_launch_dispatcher.rs": "63ef2c9ee177a0314c944ad2f7dd810de63559e5e0a11d7de40e9dda4ff80b1c",
+    "crates/core/src/audio_event_post.rs": "1edfae2e505074b3f512c0c506d68dcb6f926ff41e734c732619a8305550e475",
+    "crates/core/src/audio_unbound_post.rs": "e442197ecb2246b28805a888b3de89ec5b1ddf369f3f2c4f677886a2b3c04818",
+    "crates/core/src/audio_requests.rs": "ce4f612041428c5fa432384880aff9736e23610624e43f62a52ac366e8ef27de",
+    "crates/core/src/lib.rs": "2aeaf02db0a538497fb8904c54c0929216c9e0519fcbaf5d380c27579d9e6d2e",
+    "logs/native-audio-launch-dispatcher-core-tests.log": "5ef8d945af2688a73cadfdc1cc9af5b3628d96e8e8be18c961f64931d718b2fd",
+    "tools/qualify_native_audio_unbound_post.py": "21954bfc8a3a658eb673c17fc410e4cf872031a48f4a709546b17d98ee30e484"
+  },
+  "native_launch_dispatcher_cases": 1008,
+  "core_tests_passed": 262,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "ported": [
+    "7067B0 empty event clears output without allocation or failure diagnostic",
+    "registered actor route706850 ignores position/scratch and uses separately supplied callback cookie",
+    "unbound706910 allocation receives linked callback identity; scratch callback always704A00",
+    "playingID0 emits diagnostic after route-specific retirement/link handling",
+    "emitter creation age flows through dispatcher into seek; creation gate still consumed once"
+  ],
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false,
+  "limits": [
+    "Original7067B0 dispatcher and actual706850/706910/7072F0 executed. Dependencies reuse explicit scratch/position/Post/Seek/linked adapters; failure formatter/logger captured.",
+    "Empty event clears output and emits no failure diagnostic, unlike direct706910 empty-event preservation. Bound actor ignores supplied position/scratch creation and uses supplied linked/callback parameter as bound callback cookie, not actor pointer.",
+    "Nonempty playingID0 emits failure diagnostic after route-specific retirement/linked callback. Age seek and failure state preserved. Linked/callback parameter null or present forwarded to scratch allocation/unbound link or bound cookie; actual factory wrapper/path rewrite remains separate qualification.",
+    "No actual audio queue/mixer or client output measured.",
+    "Rust separates diagnostic emission from native format helper and exact logging sink; actual backend must consume typed commands. Input validation errors explicitly guard unqualified strings/clocks.",
+    "Native6F79D0 parameter wrapper/global debug path7042C0 remains unqualified. Standalone binaries unchanged; full24-domain game incomplete."
+  ]
+}

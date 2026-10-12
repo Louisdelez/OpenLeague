@@ -1,0 +1,34 @@
+{
+  "updated_utc": "2026-10-05T01:29:00.135534+00:00",
+  "complete": false,
+  "client_tests_passed": 135,
+  "client_build_passed": true,
+  "native_lookup_cases": 30,
+  "native_addresses": 297,
+  "findings": [
+    "Original virtual1C/28 methods of per-map provider vtable10D6380 execute their tree lookup, native string comparison and recursive parent fallback.",
+    "Lookup is case-insensitive for tested ASCII names. Local entry wins over parent even if path is empty; key presence is distinct from nonempty resolved path.",
+    "Rust Provider reproduces all30native observations. Native caller58DBE7 obtains per-map provider via90AEF0, passes it through58DFFAto6B3180; constructor90A240uses Levels/Map%1 prefix and parent reference."
+  ],
+  "limits": [
+    "Original provider virtual methods, tree lookup, string comparison and parent recursion execute on explicitly constructed resource tables. No lookup/string comparison adapters.",
+    "Actual filesystem/archive enumeration, table insertion and Map10 inherited table contents are not proved. Fixture paths are diagnostic values, not inferred production selections.",
+    "Lazy empty-string initialization bypassed with initialized native layout; allocation/IO/constructors are separate contracts.",
+    "Production resource table/archive enumeration905620and recursive imports are not ported or proven; no arbitrary Map10 overlay/terrain path selected.",
+    "Rust rejects unqualified nonASCII/locales and duplicate case-folded insertion; those production insertion semantics remain open.",
+    "Provider consumer is not connected to actual config resolution/GPU fog yet. No new runtime capture for current binary."
+  ],
+  "next_actions": [
+    "Qualify resource table population905620, native archive enumeration/extension mapping and parent contents for actual Map10.",
+    "Connect actual qualified terrain/config/upscale/overlay selections to native fade/blur and normal GPU fog factors.",
+    "Numerically verify current GPU mask coordinates and finish full Map10 match, all champion kits and remaining completion-plan domains."
+  ],
+  "files_sha256": {
+    "crates/client/src/map_resource_provider.rs": "3d3791dcb62c0cf903339ff983e707e9201659dc0cdab05fca1daa664d42b0c0",
+    "crates/client/src/main.rs": "bfde738c5bc3df2cb6cab90b078ec31c494092e5467ce8b847b4d3aa417c8942",
+    "data/4.20/map_resource_lookup_contract.json": "7be4bec9b63c64b82beb30d974006ef170018ad427b872f5e8f23a4b8af61be5",
+    "logs/map-resource-tests.log": "be04e65daa6bacd38d51e6b2899810db363f8e86f68eecd0b0559284e1a2f497",
+    "logs/map-resource-build.log": "7d190a3c276bba53a15f644d8423de2434e177c0102c4214c8088d550b12015b",
+    "target/debug/openleague-client.exe": "c21eead62053124a1dc2a2830e407bac8daea6e17b03fa55848b600a3eb21afa"
+  }
+}

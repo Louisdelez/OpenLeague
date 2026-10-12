@@ -1,0 +1,17 @@
+{
+  "updated_utc": "2026-10-07T02:38:22.215562+00:00",
+  "complete": false,
+  "status": "build_and_two_cast_runtime_passed",
+  "finding": "FoW material binding lacked an ordering dependency on projected material producers; a newly created material could remain visibility_ready=0 until the next frame.",
+  "change": "Bind after both normal projected_live::update and diagnostic projected_render::probe, before render extraction and general captures.",
+  "source_sha256": "df4338eeb063d2dc80664cf38b7434b2f9b97fcd359e975f3bad53a3ac739d11",
+  "limits": [
+    "Ordering corrected and actual application schedule ran successfully on two casts; first-frame FoW texel values not separately measured.",
+    "First cast does not clearly display ground glow; second does. Pipeline warmup is a hypothesis requiring measurement, not a proven cause.",
+    "Native receiver/owner/factor and exact framebuffer fidelity remain unqualified."
+  ],
+  "build_log": "logs/projected-binding-order-build.log",
+  "capture_script": "E:/mapslol3v3/capture_projected_core_cycle_v4.py",
+  "runtime_progress": "docs/native_projected_core_runtime_v4_progress.json",
+  "pixel_attribution_qualified": false
+}

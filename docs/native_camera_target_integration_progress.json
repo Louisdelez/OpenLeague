@@ -1,0 +1,78 @@
+{
+  "updated_utc": "2026-10-04T05:52:45.145121+00:00",
+  "files_sha256": {
+    "tools/qualify_native_camera_target.py": "2b8461c617d4a3d144a80005c71aeb5703aff8283988eeea79fc629ddef34232",
+    "data/4.20/camera_target_contract.json": "5554bc07edd1eba947402742844a11c8034e2ec93207f6af0fa82a948eb02f14",
+    "crates/core/src/camera_target.rs": "14e8b783f0556720d17b94422254a76d6d76ad8d7932a84c2a70952701497a4a",
+    "crates/core/src/lib.rs": "85e1887259146b98f98415f2880d19096b04255a994bd946b31d85eeff951232",
+    "crates/client/src/camera_native.rs": "399e01b02c24a0153cf50b598ae6035e478615452e0f86b79c57556bc1480e59",
+    "crates/client/src/main.rs": "ef884bf1373c8f22c5b072e850b21f1d6c47bfb261b1a34aa869af9fcae59265",
+    "logs/native-camera-target-client-tests.log": "c7418d14cd286540c215109c3df4e0f411f7c60981527c6b8e68b570d08ad24b",
+    "logs/native-camera-target-client-build.log": "b334d3c0b1233b18153698c32e88c701d8ccb55ce584db1f615966e2e43d8970",
+    "logs/native-camera-target-client.out.log": "95909b7a79b684eae94f6dcc93562be9c379d98c802e85948fde3cf2cc0a11d5",
+    "logs/native-camera-target-client.err.log": "b885653b25413b259e8b3987d55a6f8ad1249b1974d250191821b0bdb40e148e",
+    "logs/native-camera-target-map10.png": "a017ece7c913ec2762f494c8e6f0958a1702b3801571a3487f7008673baa84fe",
+    "logs/native-camera-target-runtime.json": "062af946e753cf0fcfe6cf9b3588c8662047a523119150d4485ab9784c8d5f7b"
+  },
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_cases": {
+    "gates": 512,
+    "getters": 48,
+    "resolvers": 54,
+    "preludes": 576
+  },
+  "core_tests_passed": 320,
+  "client_tests_passed": 20,
+  "client_executable_sha256": "71eef06894bdfca475e83849aa7350d00663d92a745937009fea1d56b0435409",
+  "server_executable_sha256": "b51b2dfc8ea19f735482e8f87e353feafdac242af91c54f0754f851bb202bb16",
+  "runtime": {
+    "client": 2432,
+    "port": 5896,
+    "server": 10600,
+    "backend": "vulkan",
+    "started_utc": "2026-10-04T05:49:51.3235287Z",
+    "checked_utc": "2026-10-04T05:52:45.0314668Z",
+    "client_alive": true,
+    "client_responding": true,
+    "server_alive": true
+  },
+  "client_initial_target_binding_integrated": true,
+  "full_native_camera_complete": false,
+  "framebuffer": {
+    "path": "logs/native-camera-target-map10.png",
+    "dimensions": [
+      1280,
+      800
+    ],
+    "inspected": true,
+    "human_fidelity_acceptance": false,
+    "match_context": "Existing local match already reached victory; no new-match/six-client gameplay acceptance claimed."
+  },
+  "ported": [
+    "Full5AEB40 selection eligibility: raw flags/timing/input/UI/mode checks, preserving unordered comparison behavior.",
+    "5A54E0 target selection chooses index0 when gate false, supplied cached index after refresh when gate true; invalid/negative indices return0.",
+    "5BDD20/5C3160 unsigned ID registry lookup semantics checked against real native linear-hash layouts and colliding chains. Rust uses BTreeMap for unique network IDs rather than emulating native pointer layout.",
+    "Full7CFB70..7CFBE0 missing-focus prelude: sentinelY<-999, block/service/UI/provider guards, target0 skips lookup, missing registry entity preserves focus, valid entity7D0E80 copies native position.",
+    "First local-player snapshot now initializes camera through native target prelude using network ID and unscaled native position, then the existing native bounds/Y0/geometry pipeline."
+  ],
+  "acceptance": "512gate low-byte results/48getter IDs and update counts/54registry presence decisions/576prelude full focus words and dispatch counts match original execution. Client20/core320 passed; current Vulkan framebuffer inspected.",
+  "limits": [
+    "Full5AEB40 gate and5A54E0 target getter execute;5AE9F0 selection-index refresh supplied by explicit adapter, not claimed qualified.",
+    "Full5BDD20 and5C3160 execute on supplied native linear-hash buckets/chains including unsigned high-bit IDs. Registry construction/removal and limit-warning path>=10000 excluded.",
+    "Full7CFB70..7CFBE0 automatic target prelude executes with real gate/getter/registry lookup/7D0E80 position setter; service virtual query and index refresh are the only adapters.",
+    "UI flags/timing/globalmode/input producers, selection hit testing59B830 and camera lock/spectator binding remain incomplete.",
+    "These IDs are entity network IDs in a hash registry; no generation-checked weak-reference mechanism inferred.",
+    "Client network snapshot/player provider and explicit ready/inactive-selection flags are reconstructed bindings; original UI/input producers and full selection behavior not completed.",
+    "Full5AE9F0 refresh and59B830 target hit testing remain unqualified; tests supply post-refresh cached index explicitly.",
+    "Raw native pointer corruption, map construction/removal and>=10000 assertion/warning path excluded. Finite supplied entity positions used; no claim for signaling-NaN setter behavior.",
+    "Native renderer near bootstrap, mode dispatch and Bevy GPU projection equivalence remain incomplete. Active shake7D2BE0 remains inactive in live client.",
+    "Vulkan missing third-party TikTok layer warning persists; no global driver changes.",
+    "Current server executable remains prior b51b2d build, no new server completion claim.",
+    "Temporary Rust comparison lexical error (<-) fixed before final successful tests/build."
+  ],
+  "static_next": {
+    "shake": "Full7D2BE0 active shake reads state durationC/start10/amplitude14/next18/frequency1C/active20; time2D78DFC. Calls8E26A0 three times on renewal; updates offsets0/8, next18 and camera position, direction preserved.",
+    "random": "8E26A0 uses55u32 words at2D6EC08, two index globals2D6ECE4/2D6ECE8 stepping+1/+3 mod55, XOR mixing and unsigned output moduloFFFFFFFF scaled by source113898C via x87. Seed initialization8E2720 remains to inspect."
+  },
+  "complete": false
+}

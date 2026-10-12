@@ -1,0 +1,98 @@
+{
+  "passed": true,
+  "error": null,
+  "cleanup_error": null,
+  "check_count": 23,
+  "checks": [
+    "guest call reaches import stub with four stack arguments",
+    "real Win32 realloc returned nonnull 256",
+    "x86 return EIP and ESP after stdcall 256",
+    "dispatch returns four-argument pop16 256",
+    "EAX is the live guest result 256",
+    "guest pointer identity follows actual Win32 identity 256",
+    "new guest bytes preserve prior writes 256",
+    "actual Win32 request matches x86 call frame 256",
+    "guest call reaches import stub with four stack arguments",
+    "real Win32 realloc returned nonnull 64",
+    "x86 return EIP and ESP after stdcall 64",
+    "dispatch returns four-argument pop16 64",
+    "EAX is the live guest result 64",
+    "guest pointer identity follows actual Win32 identity 64",
+    "new guest bytes preserve prior writes 64",
+    "actual Win32 request matches x86 call frame 64",
+    "guest call reaches import stub with four stack arguments",
+    "foreign heap rejected before OS and return",
+    "guest call reaches import stub with four stack arguments",
+    "interior base rejected before OS and return",
+    "guest call reaches import stub with four stack arguments",
+    "unsupported flags rejected before OS and return",
+    "rejected requests preserve live allocation"
+  ],
+  "source_hashes": {
+    "test_heap_realloc_x86.py": "f153893cb2bc89107598b1d6a514ceaeaa7890753d5311e0b5df2311ee711cf8",
+    "crt_os.py": "4ed057911fcb7e2299e62e12bd96ee040c73972ea843ce36ac0f9d4870f1e578",
+    "heap_mirrors.py": "61a07da5e7a5d5a6fccd9f22c6ad89f804688b32373de79805406afff3d65697",
+    "isolated_io.py": "f127283ca56d8859d09b8ba57f918f58b7f0a11174c3e269c3d6d85f27baa3d6"
+  },
+  "source_hashes_after": {
+    "test_heap_realloc_x86.py": "f153893cb2bc89107598b1d6a514ceaeaa7890753d5311e0b5df2311ee711cf8",
+    "crt_os.py": "4ed057911fcb7e2299e62e12bd96ee040c73972ea843ce36ac0f9d4870f1e578",
+    "heap_mirrors.py": "61a07da5e7a5d5a6fccd9f22c6ad89f804688b32373de79805406afff3d65697",
+    "isolated_io.py": "f127283ca56d8859d09b8ba57f918f58b7f0a11174c3e269c3d6d85f27baa3d6"
+  },
+  "sources_unchanged": true,
+  "observations": [
+    {
+      "old_guest": 1342177280,
+      "new_guest": 1343225856,
+      "old_size": 128,
+      "new_size": 256,
+      "actual": {
+        "old_raw": 1421053851776,
+        "new_raw": 1421046488496,
+        "size": 256,
+        "flags": 0,
+        "last_error": 0,
+        "injected": false
+      },
+      "finish": {
+        "value": 1343225856,
+        "pop": 16,
+        "stack_before": 822085612,
+        "return_pc": 805306393
+      }
+    },
+    {
+      "old_guest": 1343225856,
+      "new_guest": 1344274432,
+      "old_size": 256,
+      "new_size": 64,
+      "actual": {
+        "old_raw": 1421046488496,
+        "new_raw": 1421053507408,
+        "size": 64,
+        "flags": 0,
+        "last_error": 0,
+        "injected": false
+      },
+      "finish": {
+        "value": 1344274432,
+        "pop": 16,
+        "stack_before": 822085612,
+        "return_pc": 805306393
+      }
+    }
+  ],
+  "remaining": {
+    "raw_owners": 0,
+    "mapped_regions": 0,
+    "live_owners": 0,
+    "reserved_regions": 3,
+    "allocated_owners": 1,
+    "interrupted": []
+  },
+  "original_game_code_executed": false,
+  "synthetic_x86_call_frames": true,
+  "actual_heap_calls": true,
+  "simulated_heap_results": false
+}

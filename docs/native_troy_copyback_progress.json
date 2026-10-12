@@ -1,0 +1,43 @@
+{
+  "updated_utc": "2026-10-06T18:56:16.116131+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "core_tests_passed": 508,
+  "native_troy_copyback_cases": 512,
+  "actual_cpu_sse_operations": 512,
+  "actual_cpu_x87_copies": 11776,
+  "emulator_cpu_case_disagreements": 480,
+  "copyback_phase_ported": true,
+  "ordinary_emitter_consumer_bound": false,
+  "ordinary_applications_rebuilt": false,
+  "artifacts_sha256": {
+    "data/4.20/troy_copyback_contract.json": "763f08b8f6897c90452430fe621f68318e1907991258ae1bcb5f41f765955b15",
+    "tools/probe_native_troy_copyback.py": "8397e2b6a788580fe606449272c473e61bdd3f91d1ac218ceecad942ec304490",
+    "crates/core/src/native_troy_copyback.rs": "d74d2d5e78e9f32a88f486e98930e792826d8378467bda7838aebf4b61c36ff8",
+    "data/4.20/troy_scalar_contract.json": "54005518faa9000dc9f0f330e569cb21e66b5d6e916727e469a8e66d24ce6b0d",
+    "crates/core/src/native_troy_scalar.rs": "f782ab31c463cddfda369c52344103c5147d5db616ba2a0eb626d08c13fb74e1",
+    "data/4.20/troy_position_bounds_contract.json": "9191b4d30eb9a3dba97c2eec59a54648a138f5237ce60c20a2427803e7d30a5e",
+    "crates/core/src/native_troy_position_bounds.rs": "8f16435291e0b3551d72fcc28eac8a6e71bf32a31c4549dad63f34cff4bf69ad",
+    "crates/core/src/native_troy_properties.rs": "f906ec120d6681fae9743760184d7f75eb050cdda49d9e2563c12fa7c038e0f2",
+    "crates/core/src/lib.rs": "629569825fd5688e01d84521a6efe7b6d220767204252d1b86c6389e31953684",
+    "logs/native-troy-copyback-core-tests.log": "58050ecbf7674d223b269de64aca3205440a35c494b9f3472c22d67ff67cae04",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "164aa88b7cc64952e7b40b65f244d141c693b5797e6878629b1cd52145125291"
+  },
+  "findings": [
+    "Whole940D19..940E83 captured in512cases; Rust matches all copied values, output flag bytes/config flags and complete request reset.",
+    "Source flags copy emitter70; channels, field80, position, colors and min/max bounds pass through x87 FLD/FSTP with signalingNaN quieting. Source58 is emitterC0 multiplied byBC using scalarSSE; source5C/60 copyC0/C4 through x87.",
+    "Native visibility is flags bit3, output bytes2D/2E/110 are bits1/4/2 respectively. Config flags copy raw1BC. Requests cleared only after all output copies.",
+    "512actualCPU SSE operations and11776actualCPU x87 copies;480VM case differences retained separately. Rust matches CPU reference, not emulator signalingNaN behavior."
+  ],
+  "adapters": [
+    "Whole original state copyback and final request reset execute; explicit emitter/config input words, wrapper sentinels.",
+    "Separate actualCPU SSE multiplication and x87 float copies; original VM captures retained independently.",
+    "Stack balance checked at fragment exit."
+  ],
+  "limits": [
+    "Copyback is final phase, not qualification of earlier reset/audio/resource/frame update phases or graphical integration.",
+    "Default masked arithmetic control only; supplied emitter fields require native producers and runtime integration.",
+    "507previous core tests and the new property comparison pass; this does not qualify complete game/champion kits or graphical rendering."
+  ],
+  "next_action": "Achever le reste du cycle Troy : reset200, carte audio8000, flag enfant10000, activation et mises à jour des émetteurs ; qualifier les producteurs virtuels et les paramètres natifs, composer toutes les phases avec la copie finale et raccorder le cycle complet au rendu normal des52groupes/244placements Map10, reconstruire les applications puis poursuivre les24domaines."
+}

@@ -1,0 +1,28 @@
+{
+  "passed": false,
+  "native_pe_execution": "Only the19-byte Windows x86 SList leaf. Heap mirror/ABI suites additionally execute synthetic x86 guard/call snippets; no original game or RADS instructions.",
+  "checks": 21,
+  "runs": [
+    {
+      "script": "test_loader_structure.py",
+      "report": "loader_structure_tests.json",
+      "exit_code": 0,
+      "stdout": "{\"passed\": true, \"checks\": 21, \"error\": null}\n",
+      "stderr": "",
+      "seconds": 0.30170416831970215,
+      "report_sha256": "fa2111a547ed182e78a3c00f3e65c7390bf7d8b78cb2fe651cfa3e84738b9437",
+      "passed": true,
+      "checks": 21
+    },
+    {
+      "script": "test_isolated_io.py",
+      "report": "io_isolation_tests.json",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"E:\\mapslol3v3\\loading_rads_heap_probe\\test_isolated_io.py\", line 8, in <module>\n    b=Bridge(OUT/('test_root_'+tag))\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\mapslol3v3\\loading_rads_heap_probe\\isolated_io.py\", line 91, in __init__\n    if not within(self.root,WORKSPACE) or folded(self.root)==folded(WORKSPACE):raise Rejected('root outside owned package')\n                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nisolated_io.Rejected: root outside owned package\n",
+      "seconds": 0.08422279357910156,
+      "passed": false
+    }
+  ],
+  "generator_sha256": "245d3faa4513373fbbc00a7c277facadd5055c4bd67d237037304dffe6abdc30"
+}

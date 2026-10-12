@@ -1,0 +1,79 @@
+{
+  "updated_utc": "2026-10-03T23:27:15.757719+00:00",
+  "native_route_cases": 72,
+  "native_queued_position_messages": 3,
+  "core_tests": 195,
+  "client_tests": 13,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "files": {
+    "data/4.20/audio_emitter_position_contract.json": "90a2e6d757c69a1fd80c392cd667881f2467c7df13233c9ea0a0cc9a10621b20",
+    "crates/core/src/audio_emitter_position.rs": "137139875a3492e16fb06516d1fa555190af8c7564df6f55fa78b2004189e506",
+    "crates/client/src/map_audio.rs": "53d9509cbe3560dc0cabae04cfd96b91d8b5c2f0172ef2a88375aa3e91d4d80c",
+    "crates/client/src/main.rs": "d66a62baf9a1636abd4adc9954c36cb5519fbfb3071711cdf5f80078b5a76fe2",
+    "tools/qualify_native_audio_emitter_positions.py": "02ec14f5075814420ac41e9137722771db82fe1197d4eaacb84d04266956d28c",
+    "logs/native-audio-emitter-position-core-tests.log": "03450d68a145d59167c60029be469a202815a12b0c7811ef3f6f8bbcf3beb954",
+    "logs/native-audio-emitter-position-client-tests.log": "a32ca6d39ea8394924c9add4be8ac60fd61114fe480d215e09a26885b36cb1e9"
+  },
+  "native_position_layout": "Queued message13: object u32 offset8, positionXYZ offset12..23, three opaque stack words offset24..35.",
+  "native_stubs": [
+    "AEA6B0 availability;706D70 voice refresh captures invocation;87CD10 returns message size56;C975F5 security check;B05ED0 queue captures and returns1. Native route lookup, position copier and packet formatter executed."
+  ],
+  "native_orientation": "uninitialized local stack tail; no authored orientation inferred",
+  "attenuation_cones_disabled_fields": [
+    {
+      "offset": "53",
+      "type": "u8",
+      "name": "bIsConeEnabled",
+      "value": "0",
+      "valuefmt": "0x00",
+      "scope": "CAkAttenuation/AttenuationInitialValues",
+      "raw_bytes": "00",
+      "byte_verified": true
+    },
+    {
+      "offset": "230",
+      "type": "u8",
+      "name": "bIsConeEnabled",
+      "value": "0",
+      "valuefmt": "0x00",
+      "scope": "CAkAttenuation/AttenuationInitialValues",
+      "raw_bytes": "00",
+      "byte_verified": true
+    },
+    {
+      "offset": "287",
+      "type": "u8",
+      "name": "bIsConeEnabled",
+      "value": "0",
+      "valuefmt": "0x00",
+      "scope": "CAkAttenuation/AttenuationInitialValues",
+      "raw_bytes": "00",
+      "byte_verified": true
+    },
+    {
+      "offset": "326",
+      "type": "u8",
+      "name": "bIsConeEnabled",
+      "value": "0",
+      "valuefmt": "0x00",
+      "scope": "CAkAttenuation/AttenuationInitialValues",
+      "raw_bytes": "00",
+      "byte_verified": true
+    }
+  ],
+  "client_source_integration_enabled": true,
+  "client_integration": "Active event-instance/record-offset source table; start/end consumed after timeline dispatch; GlobalTransform bone positions converted to native coordinates after TransformSystems::Propagate.",
+  "standalone_client_rebuilt": false,
+  "ambient_playback_enabled": false,
+  "complete": false,
+  "limits": [
+    "Native game routine706DF0 copies only XYZ into a six-word source structure; three following words are uninitialized local stack and vary with injected seed. No default orientation inferred.",
+    "Voice-refresh/RTPC side effects and downstream queue/object registration not executed.",
+    "No claim of emitter orientation, cone/panning behavior or audible PCM integration.",
+    "New ECS tests verify lifecycle, two independent event offsets, moving source coordinates, missing/deleted/nonfinite bones and hierarchical transform scheduling. No actual scene/runtime capture for this new module.",
+    "Source-coordinate table represents active emitters, not voice lifetimes. SoundOnCreate voices may outlive emitters; Persistent teardown needs separate request/release integration.",
+    "No invented audio object IDs; the native position producer is exercised with an explicit test route only. Live object registration and queue worker remain missing.",
+    "Four source attenuation cone flags are byte-verified zero; downstream cone/panning DSP not executed.",
+    "Running standalone executable remains the prior listener build; no new framebuffer or audible evidence."
+  ]
+}

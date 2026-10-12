@@ -1,0 +1,42 @@
+{
+  "updated_utc": "2026-10-04T19:08:11.483754+00:00",
+  "complete": false,
+  "client_tests_passed": 87,
+  "client_build_passed": true,
+  "native_ray_clip_cases": 40,
+  "native_terrain_ray_cases": 48,
+  "native_clip_addresses": 223,
+  "native_terrain_addresses": 316,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Original6B0DB0 ray clipping ported preserving sequential branch arithmetic, min1/maxN-1 boundaries and epsilon0.01; all recorded origin/delta bits match.",
+    "Original6B09E0 terrain traversal and actual circle predicate executed without adapters over48diagnostic flag-column configurations; output mask words archived.",
+    "Native terrain traversal uses packed56byte cells, flag word at+0x32 and oversampling2.5; these observations are not yet a qualified Map10 loader or a Rust traversal port."
+  ],
+  "limits": [
+    "Original full clipping math executed; downstream terrain tracing deliberately skipped and not qualified.",
+    "Terrain flags, height source and complete occluded mask generation remain open.",
+    "Original complete ray traversal and real circle predicate executed with supplied grid/flags/brush prerequisites.",
+    "Terrain data is a synthetic flag column, not Map10. Flag meanings, Map10 packed cell loader and source-height/brush providers remain unqualified.",
+    "Full radial fan, clipped-ray composition, owner modifiers and normal client integration remain open.",
+    "Ray clipping proof explicitly intercepts terrain boundary6B09E0; separate traversal proof executes that routine without interception.",
+    "Current graphical client not rerun; real FOW remains unbound.",
+    "Source-flag brush interpretation and terrain height/origin providers still require qualification."
+  ],
+  "next_actions": [
+    "Port native terrain traversal6B09E0 against48recorded masks, preserving opaque flags and arithmetic order.",
+    "Qualify radial fan6B1140 and original Map10 packed56byte terrain loader; recover source-flag/height providers.",
+    "Connect actual source collection and lifecycle to raw visibility, upload/fade/blur/overlay and qualify normal gameplay rendering."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_ray_clip_contract.json": "eb2a327c08ab22a78282e726bd781628e5444506797b64d8ff0ad0c362ee2495",
+    "data/4.20/fow_terrain_ray_contract.json": "8b12be9b81062783c55c367d95a882b09068ac477732819eca17e6b4fd952b3e",
+    "crates/client/src/fow_ray_clip.rs": "97e8c16d0f67242f21d0bd795166970832dd371ab4403c280722e866b6aefcf5",
+    "tools/probe_fow_ray_clip.py": "0e347c5942e85d45b0b5b4f21f5f0b3c49e76319efacd43289a3c2cf499dbb46",
+    "tools/probe_fow_terrain_ray.py": "6f16b87a2c209e606d0e9be50541f3ad16bb0ad0a19abf7a27afc2ba22d5fcd9",
+    "logs/fow-ray-clip-tests.log": "19f6ce249885f79c28e6c76272e51f3853cbe98861dd63776e1beec0d14cfddc",
+    "logs/fow-ray-clip-build.log": "c6bb2199d723ba0613a9f2c24d502e9499ba1ad4670fb45346b6caec9f23422d",
+    "target/debug/openleague-client.exe": "d0bcf746322b16ff0bd2ca3af21359425d76b5a1128cb32f9127be59184204b5"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "complete": false,
+  "passed": true,
+  "contract": "data/4.20/game_clock_pause_incoming_contract.json",
+  "rust_verifier": "tools/verify_native_pause_incoming.rs",
+  "native_sequences": 16,
+  "physical_rust_matches": true,
+  "client_check": "logs/native-pause-incoming-check.log",
+  "dispatch": {
+    "entry": "0x5882c6",
+    "remap": "0x58c39c",
+    "jump_table": "0x58c1ac",
+    "pause_opcode": "0xa1",
+    "resume_opcode": "0x0a",
+    "executed_six_instructions": true
+  },
+  "pause_payload": {
+    "remaining_seconds": "signed i32 at+9, cvtsi2ss to f32",
+    "marker": "byte+13 &1",
+    "actor": "dword+5 only downstream UI path, not emulated"
+  },
+  "resume_payload": {
+    "delayed": "byte+9 &1",
+    "actor": "dword+5 only downstream UI path"
+  },
+  "findings": [
+    "Pause handler calls99CB70 with received remaining seconds before99C990 budget request.",
+    "Resume handler calls controller virtual+C with received low flag bit.",
+    "Local wrappers6A79F0/6A7A30 check initialized controller then request marker0/immediate resume; not evidence of player authorization."
+  ],
+  "limits": [
+    "Transport envelope/server authorization still unqualified.",
+    "828BE0/828E20 actor notification UI paths not emulated.",
+    "Live network pause not wired; current normal v69 binary remains qualified only for normal time."
+  ]
+}

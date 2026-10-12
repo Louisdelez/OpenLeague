@@ -1,0 +1,57 @@
+{
+  "saved_utc": "2026-10-10T03:13:49.606740+00:00",
+  "passed": true,
+  "complete": false,
+  "native_initialized_registry_cases": 378,
+  "native_registry_layouts": 27,
+  "full_native_hash_values_compared_to_rust": 378,
+  "native_composed_actor_wrappers": 720,
+  "native_missing_id_wrapper_cases": 360,
+  "name_fallback_cases_prepared_not_ported": 324,
+  "isolated_production_module_tests": 7,
+  "audio_regression_tests_passed": 580,
+  "contracts": {
+    "audio_announcer_object_lookup_contract.json": {
+      "cases": 378,
+      "sha256": "53b767ed54b4f55c6dd34cb95cacd32edb5ae0fb9de399803811da0061e6908f"
+    },
+    "audio_announcer_object_hash_contract.json": {
+      "cases": 378,
+      "sha256": "eb5e047cfe622e6c7206c9321e734d24513fb177633ea4057b483401c24099ab"
+    },
+    "audio_announcer_actor_wrappers_contract.json": {
+      "cases": 720,
+      "sha256": "7bb0074c218515749331b146efcad2c513b6a20d219c7cd7b1e038475abad117"
+    },
+    "audio_announcer_actor_name_fallback_contract.json": {
+      "cases": 324,
+      "sha256": "724963b81bd27ee71da2318a63e43916b8cf42e3ba9f71cc0eb3b76d4ee5b516"
+    }
+  },
+  "historical_fixture_references_hash_verified": 59,
+  "log": "logs\\audio-announcer-object-wrapper-regression.log",
+  "log_sha256": "635f75cfb2f2d1ce510da076331a7c946ce3e2c83ec626627b282ee671df0073",
+  "isolated_module_test_log_sha256": "c80d46883e828ee2f557bb7c1337ccd19cd6fa33736131b9c1163033e26824fc",
+  "full_hash_comparison_log_sha256": "9261b00c48db07c9e7a9ca9f255fd0a47ad3d52aed539f5bec47f4859018e0f5",
+  "test_executable_sha256": "220ae951ad986d20d3e41aee01084bbdb2f0490bf98d33806241e9a595da2e08",
+  "sources": {
+    "crates/core/src/audio_announcer_actor_tokens.rs": "58070ebd07dcc24fdc4ba24e28e46b26ca5024f11883beb0502a6cd18a32a055",
+    "crates/core/src/audio_announcer_object_lookup.rs": "25681a682d7492f85f216504d1f773e8d26a21f3b86f3289575bb88f89f58518",
+    "crates/core/src/audio_announcer_actor_wrapper.rs": "ef55188984bffb3da9282f26aa5d0cea03e814c93abce6ea1a8302ef9556db93",
+    "crates/core/src/lib.rs": "704bda26a08c54deab59a1f0db2148d5cdc532edd24eb4305b997615ee2c9533"
+  },
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "limits": [
+    "Initialized snapshot registry lookup and signed hash ported; original661410 lazy registry initialization, synchronization, live mutation and object lifetime remain work.",
+    "Actor wrappers reproduce lookup, selector-prefix scan, supplied plain/localized dispatch and original Unknown on absent ID. Lookup/storage errors remain explicit and are not converted to Unknown.",
+    "Canonical plain/localized API names clarify function bodies; old source/destination aliases retained for compatibility, not outer semantic assignment.",
+    "720 composed cases use native lookup without result adapter; team getter/localization/output storage boundaries supplied as documented.",
+    "324 native named-token/unknown-token fallback cases are preparatory;716CE0 name provider internals and name provenance/lifetime unqualified.",
+    "Outer callback registration and full event template scan, queue priorities, actual normal client playback and audible acceptance remain incomplete."
+  ],
+  "next_action": "Port native6D3030/6D3090 named-token/unknown-token fallback using324 prepared cases, preserve borrowed name SSO/long-storage semantics through explicit provider. Qualify716CE0 name-provider internals/lifetime, other token dispatch families and complete outer formatter registration/selection. Complete registry661410 initialization and live actor/ID ownership, then normal announcement event dispatch/queue priorities/admission/mixing and in-game audio. Preserve remaining CRT/COM/TLS/custom-locale and full24domains114tasks37requirements."
+}

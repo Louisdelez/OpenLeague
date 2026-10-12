@@ -1,0 +1,35 @@
+--- a/crates/core/src/audio_replay_callbacks.rs
++++ b/crates/core/src/audio_replay_callbacks.rs
+@@ -1,5 +1,5 @@
+ //! Replay parent callback families and bundle ownership recovered from the4.20 PE.
+-//! Member dispatch remains unavailable until each actual target is connected.
++//! Members remain explicit boundaries; invoke12 ports only source5CCEB0.
+ use crate::{
+     audio_announcer_object_lookup as read, audio_announcer_owner_metadata as callback,
+     audio_announcer_registry_init::{self as init, Storage},
+@@ -231,6 +231,25 @@
+         member: w(b, p, 8)?,
+     })
+ }
++/// Native5CCEB0, selected explicitly by a caller that knows the callback family.
++/// The first argument is a referenced32-bit word; the four remaining arguments
++/// are forwarded as values. This12-byte family has no this-pointer adjustment.
++/// Reads and member return preserve native order and all32 result bits. The
++/// member boundary must reject an unconnected target; no consumer is invented.
++pub fn invoke12(
++    b: &mut impl crate::audio_replay_events::Boundary,
++    p: u32,
++    args: [u32; 5],
++) -> Result<u32, Error> {
++    if p == 0 {
++        return Err(Error::NullCallback);
++    }
++    let first = b.word(args[0])?;
++    let owner = b.word(add(p, 4)?)?;
++    let member = b.word(add(p, 8)?)?;
++    b.member_call(owner, member, [first, args[1], args[2], args[3], args[4]])
++        .map_err(Error::Boundary)
++}
+ #[cfg(test)]
+ #[path = "audio_replay_callbacks_tests.rs"]
+ mod tests;

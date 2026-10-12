@@ -1,0 +1,71 @@
+{
+  "complete": false,
+  "passed": true,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "cases": [
+    {
+      "reset_clock_bits": [
+        1065353216,
+        1065353216,
+        1065353216
+      ],
+      "load_time": 1.0,
+      "initialization_time": 1.0,
+      "activation_time": 1.0,
+      "after_load_start_bits": 4286578687,
+      "after_activation_start_bits": 1065353216,
+      "requests": 14996
+    },
+    {
+      "reset_clock_bits": [
+        1073741824,
+        1073741824,
+        1073741824
+      ],
+      "load_time": 1.0,
+      "initialization_time": 2.0,
+      "activation_time": 3.0,
+      "after_load_start_bits": 4286578687,
+      "after_activation_start_bits": 1073741824,
+      "requests": 14996
+    },
+    {
+      "reset_clock_bits": [
+        1088946176,
+        1088946176,
+        1088946176
+      ],
+      "load_time": 7.0,
+      "initialization_time": 7.25,
+      "activation_time": 8.0,
+      "after_load_start_bits": 4286578687,
+      "after_activation_start_bits": 1088946176,
+      "requests": 14996
+    },
+    {
+      "reset_clock_bits": [
+        1120534528,
+        1120534528,
+        1120534528
+      ],
+      "load_time": 100.0,
+      "initialization_time": 101.0,
+      "activation_time": 110.0,
+      "after_load_start_bits": 4286578687,
+      "after_activation_start_bits": 1120534528,
+      "requests": 14996
+    }
+  ],
+  "findings": [
+    "Deferred44 calls Troy9C=928990, storing initialization clock in118 and requesting200.",
+    "Subsequent activation updates visibility/pose without replacing stored start clock.",
+    "Original9408E8 caller and whole93E6F0 empty-instance reset copy initialization clock into all three simulation clocks."
+  ],
+  "adapters": [
+    "Inherited clock ready and supplied float clock; original native reset and activation execute.",
+    "Registry single-item dispatch; allocation/resource supplied."
+  ],
+  "limits": [
+    "Empty resource instance only; populated reset covered separately. Live frame timing remains a local adapter."
+  ]
+}

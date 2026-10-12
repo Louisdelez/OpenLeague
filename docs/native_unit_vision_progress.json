@@ -1,0 +1,51 @@
+{
+  "updated_utc": "2026-10-04T20:29:21.084541+00:00",
+  "complete": false,
+  "core_tests_passed": 427,
+  "client_tests_passed": 94,
+  "client_and_server_build_passed": true,
+  "current_network_checks": 10,
+  "native_resource_profiles": 150,
+  "explicit_resource_radii": 6,
+  "native_radius_selection_cases": 8,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Read native Data.PerceptionBubbleRadius for122champions,27Map10NPC definitions andTibbers;150resource hashes retained. Native builtin/default config radius1350 and6explicit lane-unit values1200 replace community champion1200/lane1100/turret800 values for existing sight emitters.",
+    "Executed original86A9B0..86A9E1 selection in8cases; positive resource overrides retained and nonpositive candidates use supplied native1350fallback. External resource and global config lookup boundaries explicitly adapted.",
+    "Unit radius modifier state added with native-zero defaults and backward-compatible snapshot decoding. Existing allied minion/pet/turret/fountain sight uses per-definition resource radius and shared native modifiers.",
+    "Real Map10 simulation test verifies spawned allied lane minion reveals enemy, radius reduction hides enemy from peer snapshot and reset restores sight. Non-sight inhibitor eligibility preserved even with positive flat modifier.",
+    "Ordinary server UDP verification passes10checks with2peers, covering default modifiers for champions/units and hidden-opponent snapshot/attack behavior."
+  ],
+  "limits": [
+    "Actual source activation/team/lifecycle remain unqualified; resolving a resource radius does not prove that every object emits sight.",
+    "Native resource query fallback branch is traced at86A9B0; file/cache loader itself is not executed. Actor character-data override/cache population and native full source update remain open.",
+    "Qualifies original positive-character-value versus global-fallback selection only. Actual resource/cache loaders and explicit global overrides not executed.",
+    "This source path is traced in native constructors but complete source activation/lifecycle and all actor types remain open.",
+    "Existing native source activation, building source eligibility, full terrain LOS and buff lifecycle remain incomplete. Radius resolution and modifier state do not prove those systems.",
+    "Original character-data caches, full actor constructor/source update, explicit global config overrides, fog GPU binding and current graphical client verification remain open.",
+    "All24domains remain unfinished."
+  ],
+  "next_actions": [
+    "Qualify complete native source update6198xx, actor character-data radius fields and source metric/lifecycle, including eligibility of structures and neutral units.",
+    "Implement native stat aggregation and ability/buff application/removal, map actual Rust owner/source identities and reconcile visibility masks with authoritative server filtering.",
+    "Qualify world extent/terrain initialization, bind actual counted fog masks and native-timed GPU processing into ordinary rendering, then verify current network and graphical gameplay."
+  ],
+  "files_sha256": {
+    "data/4.20/native_vision_radii.json": "fa5cf5b1f326d314c48eaf885b04dd333ad4a8341264db8aa623be01677f9d70",
+    "data/4.20/fow_radius_selection_contract.json": "cb58f07a63472e89eb1cf1c3ce959512f292b1b2d1b077505198cf5eb43e22b9",
+    "data/4.20/vision_rules.json": "75328a35d4c502418b39a5cb8b4454928766138e0957082c3c6ded77a79d947f",
+    "crates/core/src/vision.rs": "817cc74bb7f8d01a9c625cfafa0040d02f691b4073e702aac3891e9da3edcec3",
+    "crates/core/src/vision/tests.rs": "8b0b5b5d01ad3975129d4d96ecb3822c515109cb31495cdba93de27d0def79e3",
+    "crates/core/src/world.rs": "45933289db2f2c4cb0aa0b9fa9bc07ac816d03cb5886426e532011299a51207d",
+    "tools/recover_native_vision_radii.py": "c74f58ba4d1c4e6fbe271fc3e7e727ce1775cee86faa365ae9d05d92b3376b25",
+    "tools/probe_fow_radius_selection.py": "087c56df3e94813a7abd58f187cbc419fad413071fcca5f61d5d62b32f6bc908",
+    "tools/verify_native_unit_vision_network.py": "d56715a15f4ab40d55bf8698235c3854165e694e774691af71a71c2a42f7652c",
+    "docs/native_unit_vision_network_validation.json": "63b1b07df1d4b6a1668cafb1c06cb8ec1948b50b84a04636faa528bbfc329f4b",
+    "logs/native-unit-vision-network-server.log": "498fbd298fb00a5887ecbc11c7e3c114a5f0b63a9108876cf4788fa05d93b9f8",
+    "logs/native-unit-vision-tests.log": "dfda79e00892547e37027367b3378caa95d1557f8cfcd1a1745067ebe01bc442",
+    "logs/native-unit-vision-build.log": "6b75041808660288ff655145cfbb4327f96596ddd42f87f7da0818ca7a912a7a",
+    "target/debug/openleague-client.exe": "2cc0eae4be767d79279d0b7fde4a24f99435ea7c2bcaf0bf3154d21dfff13218",
+    "target/debug/openleague-server.exe": "6de4a6dce78cac731ad6c2089bfa272c9e76ae870ed60b240d12c7ac40dca26a"
+  }
+}

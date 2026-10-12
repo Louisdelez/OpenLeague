@@ -1,0 +1,63 @@
+{
+  "saved_utc": "2026-10-10T09:10:52.893503+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "audio_tests_passed": 670,
+  "filtered_tests_not_run": 480,
+  "isolated_production_tests_passed": 99,
+  "native_active_registry_initializations_ported": 4,
+  "native_initial_missing_removals_ported": 16,
+  "native_matching_pending_missing_removals_ported": 32,
+  "native_full_active_lifetimes_prepared": 8,
+  "native_event_dispatches_prepared": 32,
+  "native_shared_active_removals_prepared": 64,
+  "contracts": {
+    "audio_announcer_active_service_initialization_contract.json": {
+      "cases": 4,
+      "sha256": "db8554dca53e4723a6233901c0e56b385f27d76d3a9870e37125982b5808560d"
+    },
+    "audio_announcer_active_service_removals_contract.json": {
+      "cases": 4,
+      "sha256": "1b7dc75a50da88b2562d1f098b131f79ea107736bf3a877a366931c2d4ef1ef4"
+    },
+    "audio_announcer_active_service_lifetimes_contract.json": {
+      "cases": 8,
+      "sha256": "77af81f72952ced24fa2b274970c3bbb31d783776eb9d005ab3fb001a2b87c26"
+    },
+    "audio_announcer_shared_active_service_removals_contract.json": {
+      "cases": 4,
+      "sha256": "ce67688a759996c39b16de19f082c7a4f7dc860c02755ed83dd5187ecbfade64"
+    }
+  },
+  "regression_log_sha256": "e691d9d495ccb675e6c13cc3b8d4e99f60152dc24d0b621889f8a5fe979bc716",
+  "isolated_log_sha256": "af40d7ce4b7fc5413f16171b4a7a4bb1652c3a48a08c9bd180c6f9d932c54d34",
+  "test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_core-5b2a9def275dcedd.exe",
+  "test_executable_sha256": "d9e183946df9e9f92e178390ca07164b6e217d94847abd57c3bc10dd37fdeb40",
+  "source_hashes": {
+    "crates/core/src/audio_announcer_active_service.rs": "661a1d45f67b7902b90888e81e5cdcb0727707b26ebb023497557e2656235db7",
+    "crates/core/src/audio_announcer_owner_metadata.rs": "15226f923daf0ec3413c9875323288dd5797407deb9359f113f3bae76f85e6f8",
+    "crates/core/src/audio_announcer_pending_service.rs": "2f50a833fc50c07029524655b4884dc7c80297d5dda57c2a563eee91013c1a48",
+    "crates/core/src/lib.rs": "782110afb262ce0f3b702bac4144e047827c1aec6903b5d5d2d405d9fdb7759f",
+    "tools/announcer_active_service_production_tests.rs": "bf23e32cbff772d1fa52ff39e2b431d0e3f29aaf3b0f04189be6cf0f5f6723e3",
+    "tools/qualify_active_service_initialization.py": "d40994e71bde7d7abba8edc51ce974e474c297d604197449f7e67b5b68e9a04b",
+    "tools/qualify_active_service_lifetimes.py": "10b555617c08067291a279af522a48dbad7524ea1330129107d2b6473f2beabb",
+    "tools/qualify_active_service_removals.py": "23a4a23e0a4550e11e1586727cc993699757c09bc707c1ea9073d5d2e2343162",
+    "tools/qualify_shared_active_service_removals.py": "aabbf1b422b65a2501373f2a810a8b71039d11a9baec3b7941e1546c7b6fea90"
+  },
+  "behavior": [
+    "Native7306C0/7307F0 active registry construction ported against4 complete byte layouts:32-byte compound sentinel,24-byte identity sentinel,64-byte buckets, precise header offsets and opaque byte/padding.16 actual pending-to-active missing removals match original behavior.",
+    "Native72EE20 active listener removal ported against32 real service calls on native-activated owned graphs: original legacy identity lookup, compound(owner,u16event) sorted lookup, first identity vector erase, empty compound-node/vector destruction then owner-node erasure. Repeated missing calls and sentinel-owner pending path match original live words and free traces.",
+    "Actual730770 compound bucket unlink and6F17B0 payload disposal ported, preserving unlink/count before free and cached standard/free-route selection. Production pending service provider now calls this actual Rust active-removal implementation instead of returning unavailable."
+  ],
+  "limits": [
+    "64 further native removals across4 two-metadata lifetimes newly prepared: same-owner descriptor vectors retain another callback until last removal; distinct owners use separate descriptor nodes. These shared cases are not yet covered by Rust tests. Active-removal tests begin from actual native activation graphs supplied as owned physical storage; native activation/insertion itself has not yet been ported. Native8 complete service lifetimes and32 real event dispatches newly qualified with actual service spectator getter and callback consumers, prepared for activation/dispatch port.",
+    "Whole72A3B0 service constructor/settings, allocation failures/native exceptions, custom free callback mutations, full service teardown and live storage synchronization remain required. Exact native custom context mutation ordering still needs dedicated cases.",
+    "Metadata/shared-control disposal, actor/world lifecycle and simulation integration, normal announcement queues/priorities/mixing/audible playback, human fidelity acceptance and complete game remain incomplete."
+  ],
+  "next_action": "Compare Rust active removal against64 prepared shared-node removals in audio_announcer_shared_active_service_removals_contract.json. Port native72EC40 pending activation and72EEC0 active event dispatch against8 prepared full lifetimes/32 dispatches in audio_announcer_active_service_lifetimes_contract.json. Implement native731990/733BF0 compound find-or-insert,24-byte identity-node insertion737200/663710, actual descriptor callback return gates and reverse pending processing. Preserve owner/u16event keys, native hash/bucket folds, pointer vector growth and original allocation/free/dispatch ordering. Then compose actual shared-control metadata disposal and actor/world lifecycle, simulation events and full announcement queues/priorities/mixing/playback. Preserve24domains114tasks37requirements."
+}

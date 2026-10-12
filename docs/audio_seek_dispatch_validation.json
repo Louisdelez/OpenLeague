@@ -1,0 +1,34 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T08:17:54.386161+00:00",
+  "change": [
+    "Native numeric event seek queue and worker routing ported to Rust.",
+    "Event dispatcher retains Play target order and routes seek without repeating selection or consuming RNG."
+  ],
+  "native_cases": {
+    "api": 240,
+    "worker": 288
+  },
+  "tests": {
+    "passed": 194,
+    "failed": 0,
+    "session": 83144,
+    "log": "logs/audio-seek-dispatch-tests.log"
+  },
+  "sha256": {
+    "crates/core/src/audio_seek_dispatch.rs": "48a127f10fdcf545673fabf6d2ec1beb0eca1e1798e6b4aad56318411cef2a2e",
+    "crates/core/src/audio_action_dispatch.rs": "94349984eb55cdd72678b1a3ecfa62fb7899fd7910e51a4346c4f8a0460c05ce",
+    "crates/core/src/lib.rs": "377d95740973582643369fc45fec1f8405262a63755a77ed1bd5d93ab6cb680c",
+    "tools/probe_native_audio_seek_dispatch.py": "843951af3338371ab0e85ed694e159f10e1570fff0dc0cac935b3febad203c33",
+    "data/4.20/audio_seek_dispatch_contract.json": "e2b36f512b14a049a803d45e09a789442c25db15253a2fa972d44a6520f377a3",
+    "logs/audio-seek-dispatch-tests.log": "4c8544b012762a3164d40c3f1ac866e6303f2ef31e19c99a7a393147380e5e31"
+  },
+  "test_binary_sha256": {
+    "target\\debug\\deps\\openleague_core-5b2a9def275dcedd.exe": "2c813a5b06f5554f96b51fa01b1c7ae3a7f9f920596a686d65cb1ccfe89b8fa9"
+  },
+  "limits": [
+    "Native node lookup and device execution remain adapters in native probe; this proves event routing only.",
+    "Negative milliseconds are preserved upstream; sample conversion, nearest marker and partial loop semantics still require node-level integration.",
+    "No new normal client executable, physical audio playback or full-game acceptance."
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "updated_utc": "2026-10-04T10:11:48.958379+00:00",
+  "complete": false,
+  "core_tests_passed": 391,
+  "client_tests_passed": 31,
+  "unit_checks": 5,
+  "network_checks": 8,
+  "official_numeric_crosschecks": 25,
+  "executables": [
+    {
+      "path": "target/debug/openleague-server.exe",
+      "bytes": 4477440,
+      "sha256": "6cd30445fb6c6389f14eb1947cec424b036d1982cbf92c7e688f6176db8bf4c7"
+    },
+    {
+      "path": "target/debug/openleague-client.exe",
+      "bytes": 118147584,
+      "sha256": "180f1dfa426242f33b80e57762b1c362f9758043a2867ba27565c0a6d4b34a15"
+    },
+    {
+      "path": "launcher/src-tauri/target/debug/openleague-launcher.exe",
+      "bytes": 12411904,
+      "sha256": "ac22a8346c0b2af574bdee16311acc510e657c73ca5f85584223f0049c4f57de"
+    }
+  ],
+  "files_sha256": {
+    "crates/core/src/annie.rs": "cbedef1c31f4f2de9a44e3fac831ff37139c3dbd1c4cc0f640e88d1fe9bde127",
+    "crates/core/src/spells.rs": "41a1038f881b95ee7c43d55b1e7221c0509805becb6e947c5e9c28f7deb4fa11",
+    "crates/core/src/progression.rs": "3d0952b084802805e3efc31f3873fcde6108f78709d40fa6b4a7736d235acdc0",
+    "crates/core/src/lifesteal.rs": "7a762577aa0d5255f643325fc16c3eb8847c67eaef936cbc64cbb6cf633accae",
+    "crates/core/src/attacks.rs": "755196a58c7c6ca08ff398ff8c8c0d3c2dc7fe2b4948b85d4e3065a1e9f156e9",
+    "crates/core/src/world.rs": "bfdd1b0a477f7bea89c31556ca985204cebec6115d59f36b46a23c11cc78d7aa",
+    "crates/core/src/damage.rs": "bbdc57e04f7b8c54c1dfaf1b60cb33c4cc4a8b474659b86fb7fdeb7909c5b029",
+    "data/4.20/annie_e_rules.json": "391ced3acbf4f71bad8561e015ab98809f98495ee9d363d96897cc3e63a1ff46",
+    "docs/annie_e_sources.json": "7bee1ccc1127d559e95aca42da40c10c5319fe27ffcbcd8c95b0f4a160fdeffc",
+    "docs/annie_e_network_validation.json": "61fa01e10653d28a91e3c1427d5f8cd741451c8c22f43733025efadf4844465f",
+    "logs/annie-e-tests.log": "f80c36864219432357775b15fbc16a9c5b942144ac239053e2ea879765408c73",
+    "logs/annie-e-build.log": "21b2b7f382439781254f693abce57759a38f99b3d7e9cf3773bd243c60f93d8d"
+  },
+  "sources": "docs/annie_e_sources.json",
+  "network": "docs/annie_e_network_validation.json",
+  "limits": [
+    "Native and Riot4.20.1 match25cost/defense/retaliation/duration/cooldown values. Coefficient0.2 native recovered.",
+    "Community buff incorrectly scales armor/MR with champion level; implementation uses native spell-rank20/30/40/50/60.",
+    "Instant self-cast, allowance during committed Q, retaliation snapshot before damage/death, lifesteal-before-retaliation ordering and zero-damage policy reconstructed; original server event order unqualified.",
+    "Only basic and empowered attack paths trigger magical retaliation; no recursive spell retaliation. Champion/lane/camp attackers connected, structures excluded. Shield absorption behavior needs historical acceptance.",
+    "Tibbers application missing with pet system, passive charge/stun sequencing unresolved, W/R/animations/particles/audio/nativeHUD incomplete. Entiregame incomplete.",
+    "Five core checks cover all5rank defenses at championlevel18, exact150tick expiry, mana/CDR/guards, AP retaliation/basic-vs-spell separation, no recursion/lethal hit, actual worldmonster/tower attack pipeline.",
+    "Eight actual two-client UDP checks cover purchase20AP, learningE,20mana/150tickbuff/300tickcooldown, repeat rejection, multiple24rawmagical returns and continued enemy attacks without return after expiry. Fulloriginalserverqualifications/graphics/audio/physicalinput not achieved.",
+    "Q network/mana potion and prior GPU evidence retain previous executable hashes. No current spell animation/particles/retaliationvisuals/audio acceptance implied. All24domains still incomplete."
+  ],
+  "visual": "docs/annie_e_live_validation.json",
+  "runtime": {
+    "client": 16348,
+    "diagnostic": true,
+    "client_sha256": "180f1dfa426242f33b80e57762b1c362f9758043a2867ba27565c0a6d4b34a15",
+    "server_sha256": "6cd30445fb6c6389f14eb1947cec424b036d1982cbf92c7e688f6176db8bf4c7",
+    "server": 2140,
+    "champion": "annie",
+    "port": 5952,
+    "checked_utc": "2026-10-04T10:12:28.1487584Z",
+    "complete": false
+  }
+}

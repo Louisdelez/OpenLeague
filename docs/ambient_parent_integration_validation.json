@@ -1,0 +1,80 @@
+{
+  "verified_utc": "2026-10-08T06:35:28.558926+00:00",
+  "complete": false,
+  "implemented": [
+    "Normal Bevy producer now calls AmbientParent.update_scene_shared with actual attachment GlobalTransform, native camera planes, primary viewport, Loaded.effects_quality and wrapping pass stamp.",
+    "Creation-token order replaces source-key order; missing poses retain birth/prior-frame age and never post origin.",
+    "Ambient stream seeded once via Windows FILETIME and qualified Rng55 conversion; state returned after success or error.",
+    "Animation End retains owned parent until explicit cleanup, without immediate release."
+  ],
+  "tests": [
+    {
+      "command": "cargo test -p openleague-client --offline -j1 map_audio_requests",
+      "session": 10831,
+      "passed": 10,
+      "failed": 0,
+      "exit_code": 0
+    },
+    {
+      "command": "cargo test -p openleague-client --offline -j1 native_ambient_parent",
+      "passed": 4,
+      "failed": 0,
+      "exit_code": 0
+    }
+  ],
+  "build": {
+    "command": "cargo build -p openleague-client --offline -j1",
+    "session": 19025,
+    "exit_code": 0,
+    "client_sha256": "6bcbcdc75c234bc925c9e5a538416a43dec0a56091191a80c45f4403139e22b7"
+  },
+  "runtime": {
+    "report": "docs/ambient_parent_runtime_validation.json",
+    "session": 3172,
+    "strict_gate_passed": false,
+    "samples": 56,
+    "owned_processes_stopped": true,
+    "analysis": {
+      "sample_count": 56,
+      "rejected_samples": 0,
+      "unresolved_counts": [
+        {
+          "source": [
+            "LevelProp_TT_Chains_Bot_Lane.001",
+            416
+          ],
+          "samples": 4
+        },
+        {
+          "source": [
+            "LevelProp_TT_Chains_Bot_Lane.001",
+            304
+          ],
+          "samples": 3
+        }
+      ],
+      "known_source_gap": "ambient_events.json TT_Chains_Bot_Lane offsets304/416 name Chain4-3 attachment_source_resolved=false",
+      "final_logical_pending": [
+        1
+      ],
+      "final_ended_count": 95,
+      "finding": "Parent ran in DX12 real scene and registered visible shopkeeper. Strict zero-unresolved gate remains failed; no fallback bone invented.",
+      "capture_warning": "Two file-replace access-denied warnings while observer file was read; subsequent fresh samples were captured. No framebuffer screenshot generated."
+    }
+  },
+  "limits": [
+    "Physical worker/voice dispatch remains unconnected; position-update and ended-parent queues need real consumption/cleanup before endurance acceptance.",
+    "Shared RNG currently covers ambient parents only; other effects/camera stream ordering remains open.",
+    "Host status0/direction0 used for normal ambient frames; full native producers/special modes remain to qualify.",
+    "Native missing-bone fallback unresolved for Chain4-3; no silent substitute.",
+    "No audible playback or visual fidelity acceptance. All24domains/114tasks/37requirements retained."
+  ],
+  "source_sha256": {
+    "crates/client/src/map_audio_requests.rs": "0bbe7b08166937b5f9dded0b75b13321e185a71808ede62e70c66ac51d41f8f4",
+    "crates/client/src/native_ambient_parent.rs": "b738d20e52a182ef632af2d6bde1c29e9b5f2725fe76860aa676abeb354638de",
+    "crates/client/src/native_projected_cycle.rs": "98fd073c145e89104705bc835382923e47ae18332b604e23c71bb36970404293",
+    "crates/client/src/main.rs": "2637c7118786559b8fb844ba42a13feb1324122256b476d6c02b05196103d268",
+    "tools/capture_ambient_parent_runtime.py": "2f138c94a14ff6f887e62ba2360f2864455a66d5f4ea6c3373b2616af39d8b2f",
+    "data/4.20/ambient_events.json": "cfba72ce3b7ce3bbecfa233937f292b56f5fef5a72309352b17e05333d1454d8"
+  }
+}

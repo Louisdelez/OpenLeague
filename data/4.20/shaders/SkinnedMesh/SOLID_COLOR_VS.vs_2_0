@@ -1,0 +1,55 @@
+
+#include "IOParam/IODefine_VS.hls"
+
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// Constants
+///
+/////////////////////////////////////////////////////////////////////////////////////
+
+// World x view x projection
+column_major float4x4 VIEW_PROJECTION_MATRIX	: register(c0);
+
+/// Bones
+column_major float4x3 BONES[68] 	: register(c24);
+
+
+struct VERTEX
+{
+	float3 m_Position : X3D_VSIN_POSITION;
+	blendindex4 m_BlendIndices : X3D_VSIN_BLENDINDICES;	
+	float4 m_BlendWeight : X3D_VSIN_BLENDWEIGHT;
+	float3 m_Normal : X3D_VSIN_NORMAL;
+	float2 m_TexCoord : X3D_VSIN_TEXCOORD0;
+};
+
+struct INTERPOLANTS
+{
+	float4	m_Position : POSITION;
+
+};
+
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// Shader
+///
+/////////////////////////////////////////////////////////////////////////////////////
+void 
+	main
+	(
+		VERTEX vertex,
+		out INTERPOLANTS interpolants
+	)
+{
+	// Compute skinned local position
+	float3 skinnedPosition = float3(0,0,0);
+	for (int i = 0; i < NUM_BLEND_WEIGHTS; ++i)
+	{
+		blendindex boneIndex = vertex.m_BlendIndices[i];
+		float weight = vertex.m_BlendWeight[i];
+		skinnedPosition += (mul(float4(vertex.m_Position, 1.f), BONES[boneIndex]) * weight);
+	}
+
+	// Output homogeneous position
+	interpolants.m_Position = mul(float4(skinnedPosition.xyz, 1.0f), VIEW_PROJECTION_MATRIX ); 
+}

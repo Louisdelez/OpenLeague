@@ -1,0 +1,46 @@
+{
+  "updated_utc": "2026-10-04T04:40:10.145792+00:00",
+  "files_sha256": {
+    "tools/qualify_native_camera_prepare.py": "a2396c2ff908318031c064d668506a3b8261ec942e07be13bdafdb377fb7abc9",
+    "data/4.20/camera_prepare_contract.json": "e202ee76699b3b98602cb3f520d658f1a850db8571b73b6db4556f24751eb2b8",
+    "crates/core/src/camera_prepare.rs": "9e113b42e49d9925189d694fdbfbbc1ed2422678740c1e031f8f2701fd247ea7",
+    "crates/core/src/camera_view.rs": "3a914a1ab4c6e6544412cfee95fd60f4a688d9679937c9b43ab5e690193ca3f9",
+    "crates/core/src/audio_emitter_planes.rs": "fb6d1864db09ae6399d5b63d020b61b5fdfa432ef6dad1558b06342a28ad3bb0",
+    "crates/core/src/lib.rs": "bb402312489e6a0a7d6d322b39ef349d646e129cede8bd77ddaecd3eb0cfbaf9",
+    "logs/native-camera-prepare-core-tests.log": "c5430c3ccef8776ac80390e1c9d8e547d3025be5d6bd3ea916af2fdfec13f96b"
+  },
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_camera_prepare_cases": 960,
+  "native_camera_prepare_fallback_cases": 704,
+  "core_tests_passed": 306,
+  "ported": [
+    "Full9820F0 native render camera position/far stores and view/projection preparation",
+    "Scalar SSE view-projection product, original inverse fallback, eight ordered clip corners depth0/1, six native plane triples",
+    "Rust camera_prepare exposes parameter-to-prepared camera and explicit-view/projection-to-prepared camera APIs"
+  ],
+  "acceptance": {
+    "native": "Full original9820F0 and allmath dependencies executed, only security-cookie check adapter.960 controlled cases,704 inverse-fallback paths.",
+    "rust_downstream": "From original view/projection inputs: inverse-fallback decisions, product/inverse matrices and24corner words bitexact exceptNaNpayloads; plane coefficients max1e-5abs/2e-6relative SSE estimate tolerance.",
+    "rust_parameters": "960parameter API cases compare source view/projection entries with explicit max1e-5abs/2e-6relative tolerance. These do not establish exact downstream corner equivalence from independently normalized parameter inputs, particularly ill-conditioned inverse projections."
+  },
+  "static_followup": {
+    "prepare_direct_callers": [
+      "0x73C517 with123E088",
+      "0x73DFCC with1239600",
+      "0x73E065 with1239600"
+    ],
+    "camera_producer": "58C8B0 dispatches on config(global2D78D24->object)1C0: default7CFB70,mode1 7CFE90,mode2 7CFFA0,mode3 copies object78 via565910. Afterwards58C960 copies camera64bytes into123E108/123E148.",
+    "normal_camera_builder": "7CFB70 outputs rawmode0, position and normalized direction, takes FOV from controller130, focus104/108/10C, pitch120 and zoom-related1A8..1B8 inputs. Calls7D1A60,7D2ED0,7D3040,866E00,5FA7C0,66D6E0,5F4550,7D2BE0; full producer/context/defaults remain unqualified."
+  },
+  "limits": [
+    "Full9820F0 camera preparation and all original view/projection/product/inverse/plane math executed; only security-cookie check adapted.",
+    "Original near clip corners depth0 and far clip corners depth1; native row-major layout retained.",
+    "Inverse fallback global2D77410 supplied as zero/identity, actual runtime initialization unqualified.",
+    "Camera fields and aspect supplied; does not establish final player camera parameters or Bevy/GPU integration.",
+    "Native normal-camera/controller producers and config defaults, final camera role/selection, resize, GPU depth conversion, real visible client rendering and controls remain pending.",
+    "Source core306passed; prior client18test evidence and standalone executable hashes unchanged."
+  ],
+  "client_camera_integrated": false,
+  "visible_render_verified": false,
+  "complete": false
+}

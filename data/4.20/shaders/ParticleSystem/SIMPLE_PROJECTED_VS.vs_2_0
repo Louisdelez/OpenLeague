@@ -1,0 +1,41 @@
+#include "IOParam/IODefine_VS.hls"
+#include "../FogOfWar/FogOfWar_VS.hls"
+
+float4 OFFSET_AND_SCALE : register(c235);
+float4 SIN_AND_COS      : register(c236);
+
+struct VS_IN
+{
+    float4  position        : X3D_VSIN_POSITION;
+    float2  texcoord0       : X3D_VSIN_TEXCOORD0;
+};
+
+struct VS_OUT
+{
+    float4  position    : POSITION;
+    float4  uv0_uvFOW   : TEXCOORD0;
+};
+
+void main( in VS_IN input, out VS_OUT output )
+{
+    // Transform position
+    output.position = mul( input.position, mProj ); 
+
+    // Create texture coordinates from uv transform
+    float4 world_position = mul(input.position, mWorld);
+
+    float2 temp;
+    temp.x = world_position.x;
+    temp.y = world_position.z;
+    temp = (temp - OFFSET_AND_SCALE.xy) * OFFSET_AND_SCALE.zw;
+    float2 uv0;
+    uv0.x = temp.x * SIN_AND_COS.y - temp.y * SIN_AND_COS.x;
+    uv0.y = temp.x * SIN_AND_COS.x + temp.y * SIN_AND_COS.y;
+    
+    // Fog of war
+    float2 uvFOW = FogOfWarTextureCoordinates( input.position.xyz ).xy;
+    
+    output.uv0_uvFOW = float4(uv0,uvFOW);
+    
+    // @todo no vertex/pixel fog?
+}

@@ -1,0 +1,2 @@
+from pathlib import Path
+p=Path('E:/OpenLeague/tools/verify_native_fog_render.py');s=p.read_text();s=s.replace("all(screen.getpixel((x+dx,y))==observed_ui for dx in [-8,-4,4,8])", "any(all(screen.getpixel((x+dx,y))==observed_ui for dx in side) for side in [[-12,-8,-4],[4,8,12]])");s=s.replace("'pixel':row['pixel'],'material':visible['material']", "'candidate_hits':row['hits'],'pixel':row['pixel'],'material':visible['material']");p.write_text(s)

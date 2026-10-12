@@ -1,0 +1,53 @@
+{
+  "reviewed_utc": "2026-10-10T20:10:55.963115+00:00",
+  "scope": "static read-only Windows standard loading ledger review",
+  "compiler_executed": false,
+  "tests_executed": false,
+  "production_modified": false,
+  "reviewed_files": {
+    "audio_replay_windows_loading_retirement.rs": "84fe574d7d506f7daa79b4ccadb6ddbfb4da5b8139ad519f2bbe5208559e0659",
+    "audio_replay_windows_loading_retirement_tests.rs": "8d5042775d1d8b284aa59b0e8df25f815df170fba7cd660a03217c95c59ab580",
+    "audio_replay_windows_loading_packets.rs": "9e0ff0b29685673467a20aa253db0df760c66a20c3caec46be3476bae8144063",
+    "audio_replay_windows_transport.rs": "ee7fa229a1780107254c6a3bf19a1255a666bfd5fa189f471fc044d1de25158c"
+  },
+  "verified_by_static_inspection": [
+    "Reserved slot precedes scratch acquisition and any consumer call",
+    "Live record owns scratch and Arc before callback",
+    "Typed failure stored before formatting",
+    "Remaining owner prevents descriptor recycling",
+    "Standard retirement reserves release-log capacity before removing ownership; Custom rejected first",
+    "Successful settlement vacates slot and drops keepalive Arc",
+    "Nested active/pending slots are not selected for reuse",
+    "Shutdown retries before manager/service/clock teardown",
+    "No concrete lock inversion or borrow conflict found in the inspected flow"
+  ],
+  "findings": [
+    {
+      "severity": "P2 diagnostic evidence",
+      "location": "audio_replay_windows_loading_retirement.rs: settle_loading_slot and retire_loading_temporaries",
+      "finding": "A new retry Error is stored but shutdown propagates only the static message. A later successful retry clears retry_error and loses that new detail without logging it. The original primary/cleanup remain logged.",
+      "recommendation": "Borrow and log failure/retry_error/scratch_error on failed retirement before propagating, without consuming remaining or lease.",
+      "sent_to_author": true
+    }
+  ],
+  "test_recommendations": [
+    "Assert Custom release refusal preserves heap bytes and the owned set before normal retirement."
+  ],
+  "limits": [
+    "No Rust compiler or runtime execution in this review",
+    "Panic/OOM recovery remains outside returned-Error contract",
+    "Tutorial and provider rollback contracts are unchanged; Operation is not a universal no-owned-resource claim",
+    "A permanently unresolved cleanup deliberately retains a Shared cycle; no successful shutdown is claimed in that state"
+  ],
+  "resolution": {
+    "static_recheck_passed": true,
+    "finding_resolved": "Failed shutdown retries now log original failure, retry error and scratch error by reference before propagation. New checks cover the additional retry log and Custom refusal with unchanged heap/ownership/release-log.",
+    "compiler_executed": false,
+    "tests_executed": false,
+    "windows_manifest_sha256": "c0e9e229bdd495d3db5be9c87e30a87751836ad840fc59301f87dd092b2f879c",
+    "rechecked_files": {
+      "audio_replay_windows_loading_retirement.rs": "c06c83666387c4e57c5de16404d00fcda25242f597f1387e52982c4d3b7cb0bf",
+      "audio_replay_windows_loading_retirement_tests.rs": "3a58b979baf4aba5b46b619bbb8f2b830a8e74d6c97453c922b663dd2aed9533"
+    }
+  }
+}

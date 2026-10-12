@@ -1,0 +1,42 @@
+{
+  "updated_utc": "2026-10-07T05:42:58.700040+00:00",
+  "complete": false,
+  "focused_client_tests_passed": 1,
+  "native_sequences": 48,
+  "native_frames": 384,
+  "full_client_suite_rerun": false,
+  "graphical_client_rebuilt": true,
+  "current_runtime_capture": true,
+  "source_fields": {
+    "MissileGravity": false,
+    "MissileSpeed": "1400.0000",
+    "MissileAccel": false,
+    "MissileMinSpeed": "1400.0000",
+    "MissileMaxSpeed": "1400.0000",
+    "MissileTargetHeightAugment": "100.0000",
+    "MissileFixedTravelTime": false,
+    "MissileBoneName": "neck"
+  },
+  "original_inibin_path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Annie\\Spells\\Disintegrate.inibin",
+  "original_inibin_sha256": "bc2bd0147dcb54f03f39c5790b3aeeca7c285d2319e2dfe8e169dc12956fc773",
+  "artifacts_sha256": {
+    "crates/client/src/annie_q_vfx.rs": "5c3c6271d40ffbaf577a4c71f44b26762dff36fcc71bb84a9b3ec5c661541122",
+    "crates/core/src/native_missile_motion.rs": "39d6464e67aa7de0ecc56aa578eedf0a0fa2c37fef39fb3641a97544e23314a1",
+    "crates/core/src/native_missile_position_sync.rs": "d52ab286c684b7fada94b358132af3ecc80d4e49d05b91e2ceef88d8da4db39d",
+    "data/4.20/missile_motion_sequences_contract.json": "9ed3df7fde55dff5354f90ea40d4c6c98d23e1cf252013f7f22f7c9c3a40ce68",
+    "logs/annie-native-flight-consumer-tests.log": "ff126a10f943838cc0b9e6cddb43d4b79360d83773eca677561cfc943932e501"
+  },
+  "findings": [
+    "Ordinary Annie visual flight consumer now advances native units using75F130 profile, then native7631C0/7648C0 position sync; reconstructed vertical interpolation removed.",
+    "Client consumer matches all384original moving-target frames in raw f32 words for position,direction and stored target.",
+    "Original Disintegrate INIBIN confirms zero gravity/acceleration/fixedtime,speed1400,min=max,targetheight100,neck."
+  ],
+  "limits": [
+    "Actual bone global transform, native launch offset/caller order, local frame clock, missing target lifecycle and server disappearance remain to qualify.",
+    "Target absence still skips ordinary update; fallback is verified in helper but not routed from the live consumer.",
+    "Identity projection orientation remains; particle rendering/factors/collisions and server lifecycle remain incomplete.",
+    "Zero completed domains; all24domains114tasks retained."
+  ],
+  "next_action": "Construire et capturer le client avec déplacement natif d’Annie ; raccorder la direction et la pose propriétaire au rendu, qualifier collisions, cible absente et arrêt, puis poursuivre les24domaines.",
+  "runtime_progress": "docs/annie_native_motion_runtime_progress.json"
+}

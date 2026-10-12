@@ -1,0 +1,219 @@
+{
+  "passed": true,
+  "complete": false,
+  "native_file": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\League of Legends.exe",
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "tls_directory": {
+    "data_start": 47869952,
+    "data_end": 47870472,
+    "index": 47792320,
+    "callback_array": 16417932,
+    "callbacks": [],
+    "zero_fill": 0
+  },
+  "post_root_initializer_reference": 13304327,
+  "initializer_begin": 18283028,
+  "initializer_end": 18283028,
+  "instructions": [
+    {
+      "address": 13304327,
+      "bytes": "56",
+      "mnemonic": "push",
+      "operands": "esi"
+    },
+    {
+      "address": 13304328,
+      "bytes": "57",
+      "mnemonic": "push",
+      "operands": "edi"
+    },
+    {
+      "address": 13304329,
+      "bytes": "be14fa1601",
+      "mnemonic": "mov",
+      "operands": "esi, 0x116fa14"
+    },
+    {
+      "address": 13304334,
+      "bytes": "bf14fa1601",
+      "mnemonic": "mov",
+      "operands": "edi, 0x116fa14"
+    },
+    {
+      "address": 13304339,
+      "bytes": "eb0b",
+      "mnemonic": "jmp",
+      "operands": "0xcb0220"
+    },
+    {
+      "address": 13304341,
+      "bytes": "8b06",
+      "mnemonic": "mov",
+      "operands": "eax, dword ptr [esi]"
+    },
+    {
+      "address": 13304343,
+      "bytes": "85c0",
+      "mnemonic": "test",
+      "operands": "eax, eax"
+    },
+    {
+      "address": 13304345,
+      "bytes": "7402",
+      "mnemonic": "je",
+      "operands": "0xcb021d"
+    },
+    {
+      "address": 13304347,
+      "bytes": "ffd0",
+      "mnemonic": "call",
+      "operands": "eax"
+    },
+    {
+      "address": 13304349,
+      "bytes": "83c604",
+      "mnemonic": "add",
+      "operands": "esi, 4"
+    },
+    {
+      "address": 13304352,
+      "bytes": "3bf7",
+      "mnemonic": "cmp",
+      "operands": "esi, edi"
+    },
+    {
+      "address": 13304354,
+      "bytes": "72f1",
+      "mnemonic": "jb",
+      "operands": "0xcb0215"
+    },
+    {
+      "address": 13304356,
+      "bytes": "5f",
+      "mnemonic": "pop",
+      "operands": "edi"
+    },
+    {
+      "address": 13304357,
+      "bytes": "5e",
+      "mnemonic": "pop",
+      "operands": "esi"
+    },
+    {
+      "address": 13304358,
+      "bytes": "c3",
+      "mnemonic": "ret",
+      "operands": ""
+    }
+  ],
+  "evidence": [
+    "Original PE TLS directory has an empty callback array. CB0207 post-root initializer iterates an empty begin/end range in this image.",
+    "Contiguous C9C356 worker exit decode invokes original context getter CA91A9, conditionally calls C9C459 when record+3B4 is nonzero, invokes CA915B explicit detachment on the obtained context, then calls imported ExitThread with caller exit code. NULL context bypasses detach."
+  ],
+  "limits": [
+    "Static original PE/control-flow evidence; worker exit routine and conditional C9C459 dependency are not yet emulated/integrated in real legacy TLS workers. Existing CA915B detach port needs actual worker binding. Do not substitute an assumed automatic TLS callback for the original explicit exit route."
+  ],
+  "worker_exit_reference": 13222742,
+  "worker_exit_instructions": [
+    {
+      "address": 13222742,
+      "bytes": "55",
+      "mnemonic": "push",
+      "operands": "ebp"
+    },
+    {
+      "address": 13222743,
+      "bytes": "8bec",
+      "mnemonic": "mov",
+      "operands": "ebp, esp"
+    },
+    {
+      "address": 13222745,
+      "bytes": "56",
+      "mnemonic": "push",
+      "operands": "esi"
+    },
+    {
+      "address": 13222746,
+      "bytes": "e84ace0000",
+      "mnemonic": "call",
+      "operands": "0xca91a9"
+    },
+    {
+      "address": 13222751,
+      "bytes": "8bf0",
+      "mnemonic": "mov",
+      "operands": "esi, eax"
+    },
+    {
+      "address": 13222753,
+      "bytes": "85f6",
+      "mnemonic": "test",
+      "operands": "esi, esi"
+    },
+    {
+      "address": 13222755,
+      "bytes": "7415",
+      "mnemonic": "je",
+      "operands": "0xc9c37a"
+    },
+    {
+      "address": 13222757,
+      "bytes": "83beb403000000",
+      "mnemonic": "cmp",
+      "operands": "dword ptr [esi + 0x3b4], 0"
+    },
+    {
+      "address": 13222764,
+      "bytes": "7405",
+      "mnemonic": "je",
+      "operands": "0xc9c373"
+    },
+    {
+      "address": 13222766,
+      "bytes": "e8e6000000",
+      "mnemonic": "call",
+      "operands": "0xc9c459"
+    },
+    {
+      "address": 13222771,
+      "bytes": "56",
+      "mnemonic": "push",
+      "operands": "esi"
+    },
+    {
+      "address": 13222772,
+      "bytes": "e8e2cd0000",
+      "mnemonic": "call",
+      "operands": "0xca915b"
+    },
+    {
+      "address": 13222777,
+      "bytes": "59",
+      "mnemonic": "pop",
+      "operands": "ecx"
+    },
+    {
+      "address": 13222778,
+      "bytes": "ff7508",
+      "mnemonic": "push",
+      "operands": "dword ptr [ebp + 8]"
+    },
+    {
+      "address": 13222781,
+      "bytes": "ff15d842fa00",
+      "mnemonic": "call",
+      "operands": "dword ptr [0xfa42d8]"
+    },
+    {
+      "address": 13222787,
+      "bytes": "cc",
+      "mnemonic": "int3",
+      "operands": ""
+    }
+  ],
+  "worker_exit_import": {
+    "reference": 16401112,
+    "name": "ExitThread"
+  }
+}

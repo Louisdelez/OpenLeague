@@ -1,0 +1,41 @@
+{
+  "updated_utc": "2026-10-05T04:43:45.922620+00:00",
+  "complete": false,
+  "selection_contract": "data/4.20/skinned_shader_selection_contract.json",
+  "descriptor_catalog": "data/4.20/native_shader_descriptor_catalog.json",
+  "native_selection_cases": 20,
+  "native_selection_addresses": 56,
+  "native_descriptors": 67,
+  "distinct_variant_names": 66,
+  "native_source_files": 34,
+  "archived_sources_and_dependencies": 43,
+  "missing_includes": 0,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "findings": [
+    "Signed quality<=1 chooses low shaders.",
+    "High quality death-screen uses ordinary vertex shader and death-screen pixel shader, taking precedence over reflective flag.",
+    "High quality living reflective material chooses reflective vertex/pixel shaders; other living materials choose ordinary pair.",
+    "Native static descriptors identify ordinary and reflective actor variants; reflective pair shares ordinary source files with REFLECTIVE macro.",
+    "67 static descriptors reference34originalsources, including environment dual color, vertex alpha, decal, grass, four-layer blend, shadow/depth and unlit variants;43sources/dependencies archived with verified hashes.",
+    "Current client shares one reconstructed FogExtension shader between actor/environment bindings. Selection contract and recovered source catalog do not imply full variant implementation."
+  ],
+  "limits": [
+    "Starts after upstream render eligibility and skin/model descriptor preparation; their producer behavior remains unqualified.",
+    "Actual shader macro registration, reflection textures, death rendering and complete original draw path remain open.",
+    "No full shader variants or all champion skins implemented by this qualification.",
+    "Static original PE records link shader name, source and defines; registration consumer/compiler and device execution not qualified.",
+    "No inference of NVR type/flags to shader selection; environment dispatch remains open.",
+    "Death-screen generated variants and source/quality descriptor producers remain open.",
+    "Archiving does not implement every variant or prove fidelity."
+  ],
+  "next_actions": [
+    "Qualify native environment shader dispatch and NVR material type/flag producer; recover reflective property and quality/death-screen producers.",
+    "Implement original lighting/reflection/death/alpha variants using recovered sources, then compare actual GPU pixels and animated models.",
+    "Verify moving-unit vision, bushes/detection/stealth/team/session changes and six-client Map10 victory/results; complete remaining full-plan requirements."
+  ],
+  "files_sha256": {
+    "data/4.20/skinned_shader_selection_contract.json": "5a7729883cf47a4fa84b3f19714de89d933f624c5a7487db5231f96dc6793212",
+    "data/4.20/native_shader_descriptor_catalog.json": "e685343d717e7326f2a5b6bf30d6ea1881b01ac1a3519d42e23a21e7deb5f5e4",
+    "target/debug/openleague-client.exe": "dc36b35eaa4880e0e3afbca0aac8caea172b8b589a7cd4e292a964feb2afcadf"
+  }
+}

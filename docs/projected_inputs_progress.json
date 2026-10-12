@@ -1,0 +1,37 @@
+{
+  "updated_utc": "2026-10-04T16:37:56.270616+00:00",
+  "complete": false,
+  "client_tests_passed": 60,
+  "native_render_input_cases": 36,
+  "native_owner_pose_cases": 24,
+  "native_owner_pose_frames": 9,
+  "native_scale_default_cases": 3,
+  "runtime_annie_projected_emitter_bound": false,
+  "current_build_gpu_rerun": false,
+  "findings": [
+    "Original owner setters preserve matrix orientation and clear translation; 24 native cases and 9 full particle frames match Rust.",
+    "Original projected render input multiplies particle scale by emitter scale, then system C0*BC, then each axis bias; 36 original arithmetic segment cases match Rust.",
+    "Original constructor field stores initialize emitter scale and system C0/BC to one; 3 previous-memory patterns verified. Full constructors and subsequent setters remain separate.",
+    "Corrected fixture uses particle scale D8=500 and rotation velocity108=0; all 9 owner-pose frames report scale500/angle0. Previous fixture labels were incorrect; earlier position/lifetime evidence remains valid."
+  ],
+  "limits": [
+    "Prepared arithmetic and owner pose are not yet attached to normal Annie projected rendering.",
+    "No current GPU/audio acceptance; prior captures retain their original executable hashes.",
+    "Runtime factor setters, exact missile owner interface, receiver selection, FOW and native blend/depth/sampler state remain open."
+  ],
+  "files_sha256": {
+    "data/4.20/projected_inputs_contract.json": "cafb002e01e388342e3b178d084687090b1421c029421d9efb6fc08e93cc6b20",
+    "data/4.20/projected_scale_defaults_contract.json": "4ec3389bef5c6c7083665c7831743b8625ece90a495b81bad12cc82123c75a12",
+    "data/4.20/simple_owner_pose_contract.json": "837bb0d5b314110638e485685280de55502f5137de29ef353acb703a7be79583",
+    "data/4.20/simple_cycle_contract.json": "55f3f4162dd2b3fb88308dd53e823fe5c69852b43ec9be50367b0deed298e549",
+    "docs/simple_scale_fixture_correction.json": "82233ce7c4c14b7ba283afcab3ab3d1f913685071ebd7fb78902b2cbe14fe12c",
+    "crates/client/src/projected_inputs.rs": "44a613a27578bab662b83b49d9a4ad259b0893ad737e991770569180269da671",
+    "crates/client/src/simple_owner_pose.rs": "bc90dc2d7a9171f9a90876d6a41d17eb1305ecac8c60b1bb30917f3d925cab4f",
+    "crates/client/src/main.rs": "1eaaa147c4daa0a03bfcaa5a7684bba688af3778ce5262ad37ffa8e34cd6ca20",
+    "tools/probe_native_projection_inputs.py": "ce9b50dac7f9b5962a9882991584e30f41c4709a2d04546129d73ac37d066c64",
+    "tools/probe_projection_scale_defaults.py": "e62179fc8f2355c648715d34e1003a3435acaae2e5d0ad28db0739e084729be1",
+    "logs/projected-input-tests.log": "4b0ecedaa78ab7b6952720b586a887b53c53bc6570990a3cf37488ba856ca6f0",
+    "logs/projected-input-build.log": "5a79746a0638bd72c3a47a8e235d32bf5bbfbde3fcd1cbb1e7b08742bbf6f770",
+    "target/debug/openleague-client.exe": "1d238a843d27d5e72a2c9eb011e638223ac7f0b3bb967d8610e19e7cdc9be7b9"
+  }
+}

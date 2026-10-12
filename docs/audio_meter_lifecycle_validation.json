@@ -1,0 +1,54 @@
+{
+  "updated_utc": "2026-10-08T17:50:21.766980+00:00",
+  "complete": false,
+  "audio_tests_passed": 307,
+  "test_exit_code": 0,
+  "native_lifecycle_cases": {
+    "set": 280,
+    "reset": 15,
+    "term": 12,
+    "init": 12
+  },
+  "native_callback_update_cases": 837,
+  "preparatory_dsp_cases": 256,
+  "preparatory_dsp_steps": 768,
+  "native_dsp_generated_nan_steps": 72,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "files_sha256": {
+    "crates/core/src/audio_meter_lifecycle.rs": "c7f4caa7c0a6185acee87d9bed6cae339b8f2763ab0dc395c3995f8adfeec944",
+    "crates/core/src/audio_plugin_factory.rs": "a2d5ea1a7f1910ebb885d930e578250262c2d11d429d8fdf178d9c423ec3e05d",
+    "crates/core/src/lib.rs": "a134da1584dfb111cb6a0f2a8aef7f41baa3a63bf042bc66970714b5f7a5de48",
+    "tools/probe_native_audio_meter_lifecycle.py": "67cb82f5275fec4236182c8da946520815644195fae1e0c7701f43b9048ea124",
+    "tools/probe_native_audio_meter_update.py": "860fe403204c0c6558217b4ee0fb56be1fd1b0fac407146b1f3de5679f69bbd8",
+    "tools/probe_native_audio_meter_dsp.py": "78904f55d86c4ad41b557a0820287e3f31308961e1c765904351ac395c2ea295",
+    "tools/record_audio_meter_lifecycle_progress.py": "21b8f9c1a3ffa860a4baa5c22b0d167fca82a6115b4df44295454b0f3bd0b81d",
+    "data/4.20/audio_meter_lifecycle_contract.json": "34551fffc66eae84950a7ebfdf08c13753e89a55a8242fbd23597c8d4e0af2da",
+    "data/4.20/audio_meter_update_contract.json": "34a886e582a58271a522e3514eeaa1e9f6a538f05f89e16f9a4034dcbb7919a4",
+    "data/4.20/audio_meter_dsp_contract.json": "9b1b85d416929bc0ffdbc3e3d28f28d10b3781ebb92036445fb35b5cf87d66ce",
+    "logs/audio-meter-dsp-probe.log": "c3c4e8d9d7cebd1409736e0bdada1e3ee34de7a94c572a8d769ecab2b1472f53",
+    "logs/audio-meter-lifecycle-update-tests.log": "9dbb043dbf18ffc5a9173f2b4755857761c48dc09b0233f22c11ca164619d8a8",
+    "logs/audio-meter-update-probe.log": "ae9b3ac09748a25d7881171f288979c023120db7dbdfb5064a03176f0d8c5f32",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "5f663e80562f8e62885aeb86c0db5d955b3e602949271e35c524bdf24079768a"
+  },
+  "preparatory_dsp": "Actual native constructors/Init/Reset/Process detector/smoothing/tail bodies execute over256 cases and768 retained steps;only allocator and exact byte-clear helper are controlled boundaries. No Rust DSP port yet.",
+  "implementation": [
+    "SetParam signed low16 ID and length-independent payload, explicit status31 for unsupported IDs. Float NaN payloads explicitly unqualified rather than silently reconstructed.",
+    "Init retains native partial writes on singleton allocation failure and raw context/allocator/sample-rate pointers; constructs16-byte singleton manager, mandatory callback registration and intrusive list insertion.",
+    "Reset clears counter and populates10 per-channel state words. Effect termination defers via byte50 when manager exists; immediate effect/parameter destruction rewrites class before mandatory allocator free.",
+    "Actual callback/update unlinks deferred effects at head/middle/tail, decrements count and releases through manager allocator. Active/deferred measurements use distinct24/48 words. Aggregate nonzero IDs in first-seen order, native max/tie semantics retain incoming signed-zero bits.",
+    "Mandatory RTPC delivery after effect removal, owner0/transition[0,4]/mode1; empty manager unregisters callback,zeros counts/list/global and frees after deliveries. Raw ownership snapshots validated for every member."
+  ],
+  "acceptance": "280 SetParam,15 Reset,12 Term,12 Init/singleton and837 actual callback/update cases compare full raw state, ownership and callback order.307 selected audio tests pass.",
+  "interfaces": [
+    "Physical allocator/free,callback registration/unregistration and actual RTPC setter/subscriber mutation remain mandatory Rust trait methods with no success defaults. Native reference executes lifecycle/destructor/list/scratch allocation bodies; these boundary services are controlled interfaces.",
+    "Rust Runtime retains caller memory allocations by reference and exposes lifecycle/update to a scheduler; normal instance/bank/device runtime has not yet been wired to it."
+  ],
+  "limits": [
+    "Actual Meter Process detector/smoothing/tail/sample handling and integrated real Meter instance/effect-reader references remain required.",
+    "Lifecycle floating cases cover finite/signed-zero/positive infinity; callback aggregation qualifies finite negative values/signed-zero/ties only. NaN and altered native FP modes unqualified.",
+    "Malformed/cyclic/unresolved/class/transport errors are defensive explicit Rust errors outside normal native equivalence fixtures; no general native fault behavior equivalence claimed.",
+    "Actual RTPC mutation/propagation,scheduling,normal registration producer/growth,HIRC8 shared resources and audio-device output remain incomplete.",
+    "Full24domains/114tasks/37requirements remain active; isolated audio checks do not qualify the complete game or human fidelity acceptance."
+  ],
+  "next_action": "Port actual Meter Process B3E400/helpers B3E490/B3E700/B3EA40 from256 native planar DSP cases/768 retained steps (silence/pulse,mode0/1,0/1/2/10 channels,0/1/4/8 validframes,max8frames,22050/48000Hz,status17/45); preserve detector/smoothing raw arithmetic and tail state, including72 zero-channel mode1 snapshots generating raw FFC00000 at effect20. Expand actual long tails/parameter ramps/normal rates and frame counts, then integrate measured samples/state. Meter SetParam280/Reset15/Term12/Init+singleton12 and actual callback/update/deferred release837 cases now match Rust;307 selected audio tests pass. Compose real Meter factories/parameters/lifecycle with actual instance replacement and whole effect reader before normal HIRC8/resource/device runtime. Actual RTPC mutation B12320 and subscriber propagation, callback scheduler/unregister, physical allocation/free and resource/context lifetime remain mandatory producers. Port actual registration B09590/B09610 from432 cases and qualify successful growth. Retain full24domains/114tasks/37requirements; bank RTPC/state/position readers, extended nonzero bypass and retained logarithm scaling2, normal bindings/smoothing/admission/shared ownership and audible/game/network/installation acceptance remain open."
+}

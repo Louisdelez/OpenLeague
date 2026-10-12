@@ -1,0 +1,155 @@
+--- a/crates/core/src/audio_replay_metadata.rs
++++ b/crates/core/src/audio_replay_metadata.rs
+@@ -116,6 +116,46 @@
+     empty_string(b, add(p, 0x1e8)?)?;
+     Ok(p)
+ }
++///728150 returns only AL. Counts above48 fail before entering the lock;
++///unknown IDs still enter and leave it when the count passes that check.
++pub fn set_count(b: &mut impl Boundary, p: u32, id: u32, count: u32) -> Result<u8, Error> {
++    if count > 48 {
++        return Ok(0);
++    }
++    let lock = add(p, 0x1c8)?;
++    b.enter_lock(lock).map_err(Error::Boundary)?;
++    let result = (|| -> Result<u8, Error> {
++        let offset = match id {
++            100 => 0x1a0,
++            200 => 0x1a4,
++            _ => return Ok(0),
++        };
++        put(b, p, offset, count)?;
++        Ok(1)
++    })();
++    let unlock = b.leave_lock(lock).map_err(Error::Boundary);
++    match (result, unlock) {
++        (Ok(value), Ok(())) => Ok(value),
++        (Err(e), Ok(())) | (Ok(_), Err(e)) => Err(e),
++        (Err(primary), Err(cleanup)) => Err(Error::Cleanup {
++            primary: Box::new(primary),
++            cleanup: Box::new(cleanup),
++        }),
++    }
++}
++///7281C0 takes no lock and selects the counter bank using only selector's
++///low byte. An unknown ID returns zero without touching metadata memory.
++pub fn get_count(b: &mut impl Boundary, p: u32, id: u32, selector: u32) -> Result<u32, Error> {
++    let offset = match (id, selector as u8 != 0) {
++        (100, false) => 0x1a8,
++        (200, false) => 0x1ac,
++        (100, true) => 0x1a0,
++        (200, true) => 0x1a4,
++        _ => return Ok(0),
++    };
++    w(b, p, offset)
++}
++
+ ///5C65C0 visits right subtree, then current string/node, then left subtree.
+ ///A custom string deallocator can replace its route before the node is freed.
+ fn clear_nodes(
+--- a/crates/core/src/audio_replay_metadata_tests.rs
++++ b/crates/core/src/audio_replay_metadata_tests.rs
+@@ -274,3 +274,103 @@
+         }
+     }
+ }
++
++fn count_oracle() -> Value {
++    let proof: Value = serde_json::from_str(&crate::audio_test_fixture(
++        "data/4.20/replay_metadata_count_probe.json",
++    ))
++    .unwrap();
++    assert_eq!(proof["passed"], true);
++    assert_eq!(
++        proof["native_sha256"],
++        "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862"
++    );
++    assert_eq!(
++        proof["source_oracle_sha256"],
++        "c261df7c77265c610f85c39546367a89dd2c6d959dafc50dd3f7a0f22c68aa73"
++    );
++    assert_eq!(proof["cases"].as_array().unwrap().len(), 2);
++    proof
++}
++fn seed_count_words(b: &mut Host, p: u32, counts: &Value) {
++    assert_eq!(counts.as_array().unwrap().len(), 4);
++    for (index, count) in counts.as_array().unwrap().iter().enumerate() {
++        Storage::write_word(b, p + 0x1a0 + 4 * index as u32, n(count)).unwrap();
++    }
++}
++#[test]
++fn audio_replay_metadata_set_count_matches72_native_limits_ids_al_and_lock_orders() {
++    let proof = count_oracle();
++    let mut calls = 0;
++    for case in proof["cases"].as_array().unwrap() {
++        let p = n(&case["metadata"]);
++        let mut b = host(n(&case["fill"]) as u8);
++        reserve(&mut b, p, BYTES);
++        seed(&mut b, p, &decode(case["initial_metadata_hex"].as_str().unwrap()));
++        seed_count_words(&mut b, p, &case["initial_scalar_counts"]);
++        assert!(b.locks.insert(p + 0x1c8));
++        let mut expected_bytes = read_bytes(&b, p, BYTES);
++        for step in case["scalar_steps"].as_array().unwrap() {
++            let id = n(&step["selector"]);
++            let count = n(&step["value"]);
++            assert_eq!(
++                u32::from(set_count(&mut b, p, id, count).unwrap()),
++                n(&step["returned_low_byte"]),
++                "id={id}, count={count}, fill={}", case["fill"]
++            );
++            assert_eq!(json!(b.events), step["lock_events"]);
++            assert!(b.held.is_empty());
++            b.events.clear();
++            for (index, value) in step["counts"].as_array().unwrap().iter().enumerate() {
++                let offset = 0x1a0 + 4 * index;
++                expected_bytes[offset..offset + 4].copy_from_slice(&n(value).to_le_bytes());
++            }
++            assert_eq!(read_bytes(&b, p, BYTES), expected_bytes);
++            calls += 1;
++        }
++        assert!(b.queue.is_empty() && b.allocations.is_empty());
++        assert!(b.memory.released_labels.is_empty());
++        assert_eq!(b.live.len(), 1);
++        // The source rejects these before it even addresses the object lock.
++        for absent in [0, u32::MAX] {
++            for excessive in [49, u32::MAX] {
++                assert_eq!(set_count(&mut b, absent, 100, excessive).unwrap(), 0);
++            }
++        }
++        assert!(b.events.is_empty());
++    }
++    assert_eq!(calls, 72);
++}
++#[test]
++fn audio_replay_metadata_get_count_matches360_native_low_byte_selectors_without_locking() {
++    let proof = count_oracle();
++    let mut calls = 0;
++    for case in proof["cases"].as_array().unwrap() {
++        let p = n(&case["metadata"]);
++        let mut b = host(n(&case["fill"]) as u8);
++        reserve(&mut b, p, BYTES);
++        seed(&mut b, p, &decode(case["initial_metadata_hex"].as_str().unwrap()));
++        // Intentionally register no lock: any attempted getter lock is an error.
++        for step in case["scalar_steps"].as_array().unwrap() {
++            seed_count_words(&mut b, p, &step["counts"]);
++            let bytes_before = read_bytes(&b, p, BYTES);
++            for (selector, expected) in step["getters"].as_object().unwrap() {
++                let selector = selector.parse::<u32>().unwrap();
++                assert_eq!(
++                    get_count(&mut b, p, n(&step["selector"]), selector).unwrap(),
++                    n(expected),
++                    "id={}, selector={selector}, fill={}", step["selector"], case["fill"]
++                );
++                assert!(b.events.is_empty() && b.held.is_empty());
++                assert_eq!(read_bytes(&b, p, BYTES), bytes_before);
++                calls += 1;
++            }
++        }
++        assert!(b.queue.is_empty() && b.allocations.is_empty());
++        assert!(b.memory.released_labels.is_empty());
++        assert_eq!(b.live.len(), 1);
++        // An unknown ID also avoids any metadata read, independently of selector.
++        assert_eq!(get_count(&mut b, u32::MAX, 0, u32::MAX).unwrap(), 0);
++    }
++    assert_eq!(calls, 360);
++}

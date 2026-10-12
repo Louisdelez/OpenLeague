@@ -1,0 +1,37 @@
+{
+  "saved_utc": "2026-10-09T17:58:58.406835+00:00",
+  "passed": true,
+  "complete": false,
+  "audio_tests_passed": 508,
+  "native_crt_static_lock_thread_composition_cases_rust_validated": 72,
+  "native_crt_windows_dispatch_resolver_cases_prepared": 48,
+  "native_crt_windows_dispatch_resolver_cases_rust_validated": 0,
+  "native_crt_windows_dispatch_resolver_export_count": 33,
+  "test_log": "logs/audio-crt-static-lock-thread-composition-tests.log",
+  "test_executable": "target\\debug\\deps\\openleague_core-92fab3f20accd79c.exe",
+  "test_executable_sha256": "b5b665a4c1d22b67f970f5c5a30b9deab122641e7c962befa7f521f10b32b79f",
+  "previous_receipt": "docs/audio_crt_static_locks_locale_validation.json",
+  "evidence": [
+    "72 original CB0378/CABD7A static-lock startup then CA91A9/CA9218/CA8980 context cases match real Rust initializer and creator in sequence. Original PE table flags and initiallyNULL lock slots retained; no supplied12/13 pointer shortcut. Complete intermediate post-startup bank, final bank and all initializer/Windows/calloc/free entry snapshots match.",
+    "Zero/A5 memory, extended/fallback dispatch, supplied Windows initialize result0/1, error0/97/MAX and successful/calloc/TLS-failed context paths qualified. Result pointer, TLS publication, LastError and failed publication retirement agree. Full508 audio tests pass, preserving prior507 regressions.",
+    "48 original CABDE8 Windows function resolver cases captured.33 original export names/order and XOR-cookie pointer publication execute under moduleNULL/nonNULL and none/all/alternating/FLS export outcomes, cookies0/11223344/MAX and initial memory0/A5. Every service entry/full final dispatch table and original global-write address retained; Rust replay pending.",
+    "First resolver capture stopped at observed write2DA5380 outside initial128byte assumption; capture extended to256byte bank and all48 cases terminate. Original name list retained, no normalization to presumed Windows API names."
+  ],
+  "limits": [
+    "Startup/context composition uses supplied Windows initialization opaque5A storage, return results, calloc and imported TLS services. It qualifies native execution order/state, not actual OS lock objects, concurrency, complete CRT heap or delivered startup availability.",
+    "Resolver exports are controlled pointers/outcomes, not actual host Windows module availability. EncodePointer-based default handlers C9A0B9, actual TLSslot allocation, heap/security-cookie and native caller to normal game startup remain unqualified.",
+    "Normal-frame audio dispatch/progression/retirement, physical playback and full24-domain game remain open."
+  ],
+  "next_action": "Implement/replay48 actual CABDE8 Windows export resolver cases, preserve33 original names/order and XOR-cookie globals. Qualify C9A0B9 encoded default-handler initialization, TLSslot allocation and native CRT startup caller composition, then actual OS/heap providers and normal-frame audio dispatch/retirement/physical playback. Preserve full24-domain114-task37-requirement scope.",
+  "files_sha256": {
+    "logs/audio-crt-static-lock-thread-composition-tests.log": "8413984937a7eb7e1a3a5ade679a612e0804f2f69baa0481a16729c6c500bebc",
+    "crates/core/src/audio_crt_thread_context.rs": "decb329cad25cfb497318b6feef4362d331e681a85c9cfef207ba35eac9b1b8d",
+    "crates/core/src/audio_crt_static_lock_startup.rs": "fd01e361f61ef15f79cab912ac1e9d9ad7060224b1c924efa97f72213ff14161",
+    "data/4.20/audio_crt_static_lock_thread_composition_preparation.json": "202fa8c0756942a2daefc223349a00e547173971f72d5b46dc78e8105a25603a",
+    "tools/probe_native_audio_crt_static_lock_thread_composition.py": "f763f3c9abc37244a5afecc55d0d490a6460233d385aa4b2636162fce63adb7a",
+    "tools/qualify_audio_crt_static_lock_thread_composition.py": "dfa541dd15507f4e4d57adfb6827577c3eecbb279efa22fd2872456147f73da2",
+    "data/4.20/audio_crt_windows_dispatch_resolver_preparation.json": "1066d51c57c341b5937daf05f116f132cc1744c7d7346ae28f943412cab0f375",
+    "tools/probe_native_audio_crt_windows_dispatch_resolver.py": "ccacb456867c75faf0471ca630ac6bbe6dfa657ef8c6f3b9c2d5b8106d90703a",
+    "tools/record_audio_crt_static_lock_thread_composition_progress.py": "02ed9d898bbe494cb9082a2ef409c367d1cf3f75baeda2bf640979e1d371091f"
+  }
+}

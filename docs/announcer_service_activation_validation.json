@@ -1,0 +1,67 @@
+{
+  "saved_utc": "2026-10-10T09:27:12.585336+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "audio_tests_passed": 673,
+  "filtered_tests_not_run": 480,
+  "isolated_production_tests_passed": 102,
+  "native_full_service_lifetimes_ported": 8,
+  "native_event_dispatches_ported": 32,
+  "native_shared_active_removals_ported": 64,
+  "native_growth_sequences_ported": 8,
+  "native_growth_metadata_components_ported": 44,
+  "contracts": {
+    "audio_announcer_active_service_initialization_contract.json": {
+      "cases": 4,
+      "sha256": "db8554dca53e4723a6233901c0e56b385f27d76d3a9870e37125982b5808560d"
+    },
+    "audio_announcer_active_service_removals_contract.json": {
+      "cases": 4,
+      "sha256": "1b7dc75a50da88b2562d1f098b131f79ea107736bf3a877a366931c2d4ef1ef4"
+    },
+    "audio_announcer_active_service_lifetimes_contract.json": {
+      "cases": 8,
+      "sha256": "33bb7809277db37ca811268f024f6a5709e9417284501b3297ffdbbb353b5f0e"
+    },
+    "audio_announcer_shared_active_service_removals_contract.json": {
+      "cases": 4,
+      "sha256": "ce67688a759996c39b16de19f082c7a4f7dc860c02755ed83dd5187ecbfade64"
+    },
+    "audio_announcer_service_activation_growth_contract.json": {
+      "cases": 8,
+      "sha256": "6c7dab5116c093dd282d67e8127d6513a269dcb96fc6a7eb96ee7b5b8044c51a"
+    }
+  },
+  "regression_log_sha256": "51564fda3f6776873d99c47922fd4073ca26348f380941c77255c69012377d22",
+  "isolated_log_sha256": "b2eb2d8d6ebc7e484df277d061bf075e4653a4e663740234b9767956a8897415",
+  "test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_core-5b2a9def275dcedd.exe",
+  "test_executable_sha256": "7f0a65a5722077443b53182842a7c8bb496f2c57229a0bd051e281ee085542fa",
+  "source_hashes": {
+    "crates/core/src/audio_announcer_service_activation.rs": "96e2ae36e44d5ed783c2c9fcdcd1e9a5012aabfec8aa2fee3b54bc0afd919d4d",
+    "crates/core/src/audio_announcer_descriptor_insert.rs": "b7068795c0d24133eacedd4fe3e1276a9f2eba77e7321691048205aa607b7ff7",
+    "crates/core/src/audio_announcer_active_service.rs": "2bf6ca214bd9417292ed6e7a83923fcb4f55b09c4d20acba0fe3b0485514cdca",
+    "crates/core/src/audio_announcer_owner_metadata.rs": "6d6dc119a4db3443cb2bcba40a129b14c2e92de1fddfea9c01a6a71f0bb3d005",
+    "crates/core/src/audio_announcer_pending_service.rs": "dece417222c5aa69d27cf7b5c43d3a6c603809d04ec4f6b327962acf68377333",
+    "crates/core/src/audio_announcer_registry_insert.rs": "16e659723feeab47c12a3102815ed954e9bd37a4ca588e1f4e93d308d1038a71",
+    "crates/core/src/lib.rs": "01967dd053856730e3c65896af87abdfd763728442cfb64410f02cba2dd41fec",
+    "tools/announcer_service_activation_production_tests.rs": "68462574dd083890589fa1c1f5d37c52d99cddaebbce5c851f2bfcfb56766b17",
+    "tools/qualify_active_service_lifetimes.py": "dee1bc0f42788448d60f3030907953d9537f82eabdf88bc26984b2c9f268d4ac",
+    "tools/qualify_service_activation_growth.py": "81725472dee7db420a2673fdd9a45f50edea28f0bdba1d4a7ac4e6c1f01f2377"
+  },
+  "behavior": [
+    "Actual native72EC40 pending activation ported: reverse traversal, real descriptor callback AL gate, compound owner/u16event find-or-insert, native vector append, legacy owner map insertion, complete packet publication, stable pending erase and descriptor/pair destruction. Opaque stack padding is explicit caller-owned input.",
+    "Native731990/733BF0 compound insertion and sorting/growth ported against8 native creation/activation/destruction sequences containing44 metadata components. Distinct owners trigger both registry growth8-to64; shared owners trigger owner-registry and callback-vector growth. All live words and allocation/free traces compared after creation, activation and each metadata destruction.",
+    "Native72EEC0 dispatch ported with owned callback snapshot allocation, source reload after allocation, actual callback consumers and service spectator byte getter, AL accumulation and snapshot free. Eight complete native lifetimes and32 dispatches match state, allocation/free traces and actor calls. Shared active removal now passes64 actual native calls."
+  ],
+  "limits": [
+    "Service member constructors run within caller-owned188-byte storage. Whole72A3B0 startup/settings and72A530 teardown have not been implemented or qualified. Actor virtual operations remain explicit boundaries; these tests do not prove live actor/world integration or audible playback.",
+    "Normal allocation/return paths only: allocator failure, exception unwinding, reentrant callback mutation, custom allocator mutation and dispatch after registry growth need dedicated qualification. Native opaque activation stack bytes are captured and supplied without assigning gameplay semantics.",
+    "Metadata shared-control disposal, actor/world lifecycle and simulation event integration, announcement queues/priorities/mixing/playback, delivered executable fidelity and human acceptance remain incomplete. No complete champion, domain or game claim."
+  ],
+  "next_action": "Qualify actual72A600 service-member teardown and72A530 whole service destruction, and72A3B0 startup with native settings/string/callback subobjects. Compose shared-control metadata disposal and actor/world lifecycle; qualify callback mutations, allocation failures and dispatch with grown shared vectors. Integrate simulation announcements and normal queues/priorities/mixing/playback. Preserve24domains114tasks37requirements."
+}

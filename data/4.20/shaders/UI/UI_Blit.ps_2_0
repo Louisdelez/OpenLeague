@@ -1,0 +1,9 @@
+sampler sampler0: register(s0);
+
+float4 color : register(c3);
+
+float4 main(float4 col0 : COLOR0, float2 tex0 : TEXCOORD0) : COLOR
+{
+	float4 col = tex2D(sampler0, tex0) * col0;
+	return float4(col.rgb*color.rgb*color.a, col.a*color.a);
+}

@@ -1,0 +1,64 @@
+{
+  "saved_utc": "2026-10-09T16:13:06.433389+00:00",
+  "passed": true,
+  "complete": false,
+  "case_count": 6,
+  "source": "tools/windows_tls_hardware_probe.cs",
+  "source_sha256": "17b6ee35113ed1201e9c3fec1e842e3b0abd68c209f9bdb06d8228c4b8ad6af8",
+  "output": "logs/windows-tls-hardware-probe.json",
+  "output_sha256": "3b4e0bef4867880bd021ffde46a656c0735aab39c672b4be731318b875f3d562",
+  "cases": [
+    {
+      "previous": 0,
+      "payload": 0,
+      "before": 0,
+      "returned": 0,
+      "after": 0,
+      "restored": 0
+    },
+    {
+      "previous": 0,
+      "payload": 1073815552,
+      "before": 0,
+      "returned": 1073815552,
+      "after": 0,
+      "restored": 0
+    },
+    {
+      "previous": 97,
+      "payload": 0,
+      "before": 97,
+      "returned": 0,
+      "after": 0,
+      "restored": 97
+    },
+    {
+      "previous": 97,
+      "payload": 1073815552,
+      "before": 97,
+      "returned": 1073815552,
+      "after": 0,
+      "restored": 97
+    },
+    {
+      "previous": 4294967295,
+      "payload": 0,
+      "before": 4294967295,
+      "returned": 0,
+      "after": 0,
+      "restored": 4294967295
+    },
+    {
+      "previous": 4294967295,
+      "payload": 1073815552,
+      "before": 4294967295,
+      "returned": 1073815552,
+      "after": 0,
+      "restored": 4294967295
+    }
+  ],
+  "limits": [
+    "Measured real Windows KERNEL32.dll APIs via DllImport on current64bit host. TlsAlloc/TlsSetValue create actual temporary slot; TlsFree always releases it. GetLastError preserves supplied97/MAX/0; TlsGetValue retrieves NULL/nonNULL and resets LastError0; SetLastError restores prior value.",
+    "This is actual imported API behavior, not whole original32bit game/CRT startup or numerical fidelity qualification."
+  ]
+}

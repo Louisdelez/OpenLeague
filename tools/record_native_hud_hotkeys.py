@@ -1,0 +1,38 @@
+from pathlib import Path
+import json,hashlib,datetime,shutil
+r=Path('E:/OpenLeague');stage=Path('E:/mapslol3v3')
+def load(p):return json.loads((r/p).read_text(encoding='utf-8-sig'))
+def sha(p):return hashlib.sha256((r/p).read_bytes()).hexdigest()
+assert '350 passed; 0 failed' in (r/'logs/native-hud-hotkeys-client-tests.log').read_text(encoding='utf-8',errors='replace')
+assert 'Finished' in (r/'logs/native-hud-hotkeys-client-build.log').read_text(encoding='utf-8',errors='replace')
+c=load('data/4.20/native_hud_hotkeys_contract.json');assert c['passed'] and c['case_count']==11
+now=datetime.datetime.now(datetime.timezone.utc).isoformat();runs=[];artifacts=['crates/client/src/spell_input.rs','crates/client/src/native_hud_widgets.rs','crates/client/src/main.rs','data/4.20/native_hud_hotkeys_contract.json','data/4.20/configuration/defaults/Input.ini','data/4.20/configuration/Input.ini','logs/native-hud-hotkeys-client-tests.log','logs/native-hud-hotkeys-client-build.log','target/debug/openleague-client.exe']
+for backend in ['vulkan','dx12']:
+ prefix=f'logs/native-hud-hotkeys-live-{backend}-annie';run=load(prefix+'-run.json');assert run['passed'] and run['client_sha256']==sha('target/debug/openleague-client.exe')
+ captures=[x for x in run['probe']['records'] if x['kind']=='capture_requested'];assert [x['label'] for x in captures]==['baseline','purchased','precast','cast','regenerated','ready']
+ for e in captures:
+  hud=e['hud_draw_trace'];assert len(hud['sources'])==13
+  for slot,label in enumerate(['q','w','e','r']):
+   assert hud['values'][f'SpellHotKey{slot}']==label
+   source=next(x for x in hud['sources'] if x['name']==f'SpellHotKey{slot}');assert source['active'] and source['packed_color']==0xffffcc67 and source['alignment']==1
+  p=prefix+'-'+e['label']+'.png';assert sha(p)==run['capture_sha256'][e['label']];artifacts.append(p)
+ for suffix in ['-run.json','-probe.json','-trace.json','-spells-trace.json','-ranks-trace.json','-bars-trace.json','-portrait-trace.json','-panels-trace.json','-client.stdout.log','-client.stderr.log','-server.stdout.log','-server.stderr.log']:artifacts.append(prefix+suffix)
+ runs.append(run)
+proof=dict(updated_utc=now,passed=True,complete=False,client_tests_passed=350,native_short_label_cases=11,native_text_sources=13,client_binary_sha256=sha('target/debug/openleague-client.exe'),runs=runs,actual_capture_count=12,visually_inspected_phases=['baseline','precast'],visually_inspected_backends=['vulkan','dx12'],findings=['Original default Input.ini and supplied input.ini copied byte-for-byte. Effective cast defaults q/w/e/r and learning Ctrl+q/w/e/r recovered; quickbind configuration preserved as source data.','Native short-label branch83DF6F executed for11ASCII cases with adapted string helpers. Case preserved: original default [q] produces q, not a guessed uppercase string.','Actual spell key dispatch and HUD label slots share the same four physical Bevy keys. Unit checks exercise just-pressed selection, release, unrelated key and simultaneous-key priority.','Four original SpellHotKey Text sources preserve source rectangles, Arial10font binding/order, center alignment, layer6 and packedgoldFFFFCC67. Actual q/w/e/r glyphs inspected in Vulkan and DX12 ordinary command runs.'],limits=['Native83ED50event initialization, runtime remapping/localization6D77E0, original string helper implementation, long labels and original loader equivalence remain open. Fixed recovered defaults are consumed, not editable options.','Physical keyboard layout/localized characters, OS key event delivery and native quickcast/alternate/modifier command policies not qualified by these snapshots. Key dispatch unit checks cover ButtonInput, GPU scenario sends ordinary commands directly.','Current capture covers Annie at1280x800/DPI1; other champions, resize/fullscreen/DPI and non-ASCII labels remain open.','Learn buttons, cooldown rings/effects, interactive tooltips, remaining HUD slots, full map/champion kits and every24-domain final acceptance remain open.'],next_action='Intégrer les boutons d’apprentissage et leurs états/actions depuis le HUD natif, puis les anneaux de recharge, configuration des touches et interactions. Continuer la carte restaurée, Garen, la partie complète à six clients et tous les domaines du plan.')
+proof['artifacts_sha256']={p:sha(p) for p in artifacts}
+history=r/'docs/plan_history'/('hud-hotkeys-record-'+datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ'));history.mkdir(parents=True)
+(r/'docs/native_hud_hotkeys_progress.json').write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+for name in ['coverage.json','completion_plan.json','resume_checkpoint.json']:
+ p=r/'docs'/name;shutil.copy2(p,history/name);d=load('docs/'+name);d.update(updated_utc=now,complete=False,native_hud_hotkeys_progress='docs/native_hud_hotkeys_progress.json');e=d['last_verified'] if name=='resume_checkpoint.json' else d['current_evidence'];e.update(client_tests=350,client_tests_passed=350,current_source_progress='docs/native_hud_hotkeys_progress.json',ordinary_client_build_matches_current_source=True,latest_client_build_sha256=proof['client_binary_sha256'],native_short_hotkey_cases=11,native_hud_text_sources=13,native_hotkey_gpu_backends=['vulkan','dx12'])
+ if name=='resume_checkpoint.json':d.update(saved_utc=now,pending_native_jobs=[],next_projected_action=proof['next_action'])
+ if name=='completion_plan.json':
+  d['next_execution_steps']=[proof['next_action']]+d.get('next_execution_steps',[])[1:]
+  for domain in d.get('domains',[]):
+   if domain['id']=='17':domain.update(progress_updated_utc=now,current_state='Cadres, portraits, HP/MP, XP initial, QWER/états, chiffres de recharge, rangs et libellés q/w/e/r partiellement intégrés et observés Vulkan/DX12. Boutons, anneaux, configuration des touches, objets, minimap et interactions ouverts.');domain.setdefault('progress_evidence',[]).append('docs/native_hud_hotkeys_progress.json')
+ p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+for name in ['GOAL-OPENLEAGUE-ACTUALISE.txt','GOAL-OPENLEAGUE-NOUVEAU.txt']:
+ p=r/'docs'/name;shutil.copy2(p,history/name);s=p.read_text(encoding='utf-8').replace('348 tests client','350 tests client').replace('19 polices et 9 textes intégrés','19 polices et 13 textes intégrés').replace('QWER : 486 icônes, compteur E et rangs intégrés.','QWER : 486 icônes, compteur E, rangs et touches intégrés.');assert len(s)<=4000;p.write_text(s,encoding='utf-8');(stage/name).write_text(s,encoding='utf-8')
+p=r/'docs/goal_plan_revision.json';d=load('docs/goal_plan_revision.json');d.update(updated_utc=now,client_source_tests_passed=350,objective_sha256=sha('docs/GOAL-OPENLEAGUE-NOUVEAU.txt'),latest_source_progress='docs/native_hud_hotkeys_progress.json',next_steps=[proof['next_action']]);p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+p=r/'docs/completion_plan.html';shutil.copy2(p,history/p.name);s=p.read_text(encoding='utf-8');assert 'id="native-hud-hotkeys-progress"' not in s;s=s.replace('</body>','<section id="native-hud-hotkeys-progress"><h2>Touches des sorts</h2><p>350 tests client ; 11 cas natifs de libellés courts. Treize textes natifs intégrés. Touches q/w/e/r liées aux mêmes slots que les commandes, captures réelles Vulkan/DX12. Reconfiguration, boutons et interactions restent ouverts.</p><a href="native_hud_hotkeys_progress.json">Preuves et limites</a></section></body>');p.write_text(s,encoding='utf-8')
+for name in ['run_native_hud_hotkeys_live.ps1','record_native_hud_hotkeys.py']:shutil.copy2(stage/name,r/'tools'/name)
+print(json.dumps({'client_tests':350,'native_short_labels':11,'actual_captures':12,'complete':False}))

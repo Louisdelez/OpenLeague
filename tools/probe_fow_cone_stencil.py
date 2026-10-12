@@ -1,0 +1,11 @@
+from pathlib import Path
+r=Path('E:/OpenLeague')
+s=(r/'tools/probe_fow_circle_stencil.py').read_text(encoding='utf-8')
+s=s.replace('for radius in [0.,cell,2.5*cell]:','for direction,threshold in [([1.,0.],0.),([1.,0.],0.5),([0.,1.],0.5),([-1.,0.],0.99)]:\n   radius=2.5*cell')
+s=s.replace('write32(obj+0x40,bits);',"u.mem_write(obj+0x70,struct.pack('<3f',threshold,*direction));write32(obj+0x40,bits);")
+s=s.replace('0x10a03d0','0x10a03b0').replace('0x6aff80','0x6b0380')
+s=s.replace("'scale':1.,'bias':0.,", "'scale':1.,'bias':0.,'direction':direction,'threshold':threshold,")
+s=s.replace('fow_circle_stencil_contract.json','fow_cone_stencil_contract.json').replace("'circle_vtable'","'cone_vtable'")
+s=s.replace('Original full non-occluded circle stencil generation','Original full non-occluded cone stencil generation')
+s=s.replace('cone shapes, live source collection','cone direction/threshold configuration, live source collection')
+exec(compile(s,'native cone stencil','exec'))

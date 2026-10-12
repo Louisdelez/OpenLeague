@@ -1,0 +1,44 @@
+#include "../ColorPalette.hls"
+#include "../DeathScreen.hls"
+#include "../MipLevels.hls"
+#include "../FogOfWar/FogOfWar_PS.hls"
+
+sampler TEXTURE     : register (s0);
+
+#if defined(COLORPALETTE_COLORBLIND) || defined(COLORPALETTE_SPECTATOR)
+   float4 APPLY_TEAM_COLOR_CORRECTION : register(c11);
+#endif
+
+struct PS_IN
+{
+    float4  uv0_uvFOW   : TEXCOORD0;
+};
+
+void main( in PS_IN input, out float4 out_color0:COLOR0 )
+{
+    float2 uv0 = input.uv0_uvFOW.xy;
+    float4 texel = tex2D(TEXTURE, uv0);
+    out_color0 = texel;
+
+#ifdef COLORPALETTE_COLORBLIND
+    if (APPLY_TEAM_COLOR_CORRECTION.r != 0.0f)
+    {
+        ApplyColorCorrectionColorblind(out_color0);
+    }
+#endif 
+#ifdef COLORPALETTE_SPECTATOR
+    if (APPLY_TEAM_COLOR_CORRECTION.r != 0.0f)
+    {
+        ApplyColorCorrectionSpectator(out_color0);
+    }
+#endif 
+
+    // Fog of War
+    float2 uvFOW = input.uv0_uvFOW.zw;
+    float4 fowFactors = GetFogOfWarFactors(uvFOW);
+    // NOTE:  This ignores the FowOverlay texture tint and assumes the FoW is black
+    out_color0.rgb *= fowFactors.a;
+
+    out_color0.rgb = GetEnvironmentDeathColor(out_color0.rgb);
+    out_color0.rgb = ApplyMipColorsVisualization(out_color0.rgb, uv0);
+}

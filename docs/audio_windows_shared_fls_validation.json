@@ -1,0 +1,41 @@
+{
+  "saved_utc": "2026-10-09T20:01:06.247423+00:00",
+  "passed": true,
+  "complete": false,
+  "audio_tests_passed": 525,
+  "actual_windows_shared_fls_component_cases": 24,
+  "actual_windows_shared_fls_native_pair_cases": 96,
+  "native_paired_context_cases_prepared": 24,
+  "test_log": "logs/audio-windows-shared-fls-tests.log",
+  "test_executable": "target\\debug\\deps\\openleague_core-92fab3f20accd79c.exe",
+  "test_executable_sha256": "b37fa3921ce17145734e9570316eebabaff9db12569d9f6a057346b45757e2b9",
+  "previous_receipt": "docs/audio_windows_owned_fls_validation.json",
+  "next_action": "Integrate the shared global Windows FLS slot into original CRT startup/getter/setter/free service provider and normal audio workers, with actual initialized Windows critical sections, heap ownership and security-cookie services. Add paired native capture replay to full core tests, including contention, callback reentry/busy failures, panic propagation and teardown under real worker operation. Continue normal audio dispatch/progression/retirement/physical playback and full 24-domain/114-task/37-requirement scope; this component is not normal client integration or complete audio.",
+  "evidence": [
+    "Production SharedSlot allocates one real FLS index shared by worker handles, binds distinct owned records, preserves per-thread value isolation, prevents rebinding/duplicate record ownership, releases via natural thread exit or global close, and shares one synchronized canonical context/global reference bank. Callbacks invoke the actual Rust CRT destructor and report errors/panics without native unwinding. Same-thread shared-context reentry returns StateBusy; other threads serialize.",
+    "Actual production shared component executes 24 cases across x86/x64 Windows; second record uses production constructor against same captured globals and both destructors return all canonical global counts to original single-record native final bank.",
+    "24 original paired native startup/getter/destructor captures prepared with shared PE globals and both retirement orders. 96 actual x86/x64 shared-FLS cases compare every callback lock/free service-entry byte bank, exact native order/free identities, final banks and callback thread identity; natural exits and owner close covered. Sequential registration/exits make observed order explicit, no portable callback order guarantee inferred.",
+    "Full 525 audio core tests pass after shared component addition; prior 59 runtime fixture hashes unchanged, existing owned component 24 x86/x64 cases replayed. 24 domains/114 tasks/37 additional requirements retained, none newly closed."
+  ],
+  "limits": [
+    "Shared component is not yet integrated into original global startup dispatch or normal client audio workers. Full core suite compiles component but paired shared callback checks currently run in isolated executable type/service facades; full crate paired integration tests remain next.",
+    "OS critical-section effects and CRT heap free are explicit service boundaries in callback probes; real lock/heap/security-cookie and normal producers not qualified. Native paired callback initiation is supplied; actual real Rust shared slot is independently observed on hardware.",
+    "Arbitrary fiber migration, native SEH equivalence, normal audio physical playback and full game remain incomplete. Busy/error paths retain record state and report failure, no blanket leak-free or complete-audio claim."
+  ],
+  "files_sha256": {
+    "docs/audio_windows_shared_fls_component_hardware_discovery.json": "571401579e2b259df77d37bdd9a9c63b6aa781fb7130f27ac7182cf310f8966a",
+    "docs/audio_windows_shared_fls_native_pair_hardware_discovery.json": "237a15524210b49514cb9dd2a8387b867e5159576d4357e172504e3ed316336a",
+    "docs/audio_windows_owned_fls_component_hardware_discovery.json": "6f2af5da365655d9a79fc08ef005a703f08f3de5b5bcc7fa7f619e27d3bb606a",
+    "logs/audio-windows-shared-fls-tests.log": "ee0f18b5f2e2a22a7ae4108ddbbb50977ed9238f7d12502a6ae27d2d30922c91",
+    "crates/core/src/lib.rs": "1af6ccbcfc9c0b3f7de4aa14cd33cab6701e26866ba22115143a5cb76953d00d",
+    "crates/core/src/audio_crt_windows_fls_slot.rs": "9f5a15639d0c51fc21637c89bedb5035f0815d0f4d33f7d079676eae008cc1ac",
+    "crates/core/src/audio_crt_windows_shared_fls.rs": "2f503e14d006867ece6ed033f65421d93ca0f30d0db2c64cb0a63bcc95bef0c9",
+    "data/4.20/audio_crt_paired_thread_lifetime_preparation.json": "eeb8dcd1054e4a4170493ab749f612590fd58e8d2edcd6e49becd778f2da044c",
+    "tools/implement_audio_windows_shared_fls.py": "62648db3672ceccbeb0c907c6a220674d1f4745fa54336cf8abe27d27fbf97c4",
+    "tools/fix_audio_windows_shared_fls_counter.py": "a436220945e85cce554ac85c4efc1365782ff334a63d8dc45fbb59ea07251521",
+    "tools/probe_native_audio_crt_paired_thread_lifetime.py": "7939b74916ecfbd608c80865dbb26c85459ea0958062f55feb2fc3bf4d91874c",
+    "tools/probe_windows_shared_fls_component.py": "8715a29caad5de648a3575864e8141351b8a70f97cbd578f33dbe104417e6cdd",
+    "tools/probe_windows_shared_fls_native_pair.py": "d2de172ba77285b0e155c79f185aea600a2204cbe77e18e88dfae2eda4e66db1",
+    "tools/record_audio_windows_shared_fls_progress.py": "5672a8905d98eecb4973c92e4015a64cada87683d73ce7053c49e869a822e74c"
+  }
+}

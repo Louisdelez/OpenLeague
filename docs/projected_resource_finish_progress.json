@@ -1,0 +1,46 @@
+{
+  "complete": false,
+  "native_contract": "data/4.20/projectile_resource_finished_contract.json",
+  "native_gate_cases": 16,
+  "native_publication_cases": 256,
+  "change": "Owner update now consumes parent finish bit instead of constant false, matching native post-simulation resource2D publication and928490 getter.",
+  "test_session": null,
+  "test_log": "logs/projected-resource-finish-tests.log",
+  "status": "11 tests passed; build passed; Vulkan v49 and DX12 v49retry runtime passed; initial DX12 failure unresolved",
+  "limits": [
+    "First DX12 zero-effect timeout remains unresolved despite successful retry.",
+    "Fixture seeds readiness/position; full Annie kit and ordinary progression remain incomplete.",
+    "Weak ownership and within-phase ordering remain adapters; no original framebuffer equivalence."
+  ],
+  "tests_passed": 11,
+  "build_session": null,
+  "build_log": "logs/projected-resource-finish-build.log",
+  "tested_source_sha256": {
+    "crates/client/src/projected_live.rs": "9c5a41da92e8aa8bc21f70b77e166d8a9e05d32875a0c6ce3a36157b77c1c7d3",
+    "data/4.20/projectile_resource_finished_contract.json": "636f29ec718f0884a47ce1eef7197f6fe034e5480c29f9109aad08c76c72b424",
+    "tools/probe_projectile_resource_finished.py": "440158d8e5576b55a4585b70657ebea197acf890f624bce2ca3ec7ddad60a181",
+    "logs/projected-resource-finish-tests.log": "66c89337c3efdf1cdade00edd440a7990d36c1f3f62b7becd8788fa7b7f9b0ab"
+  },
+  "test_scope": "11 projected_live unit tests; new gate case checks256 native finish publication inputs. Runtime verification remains pending.",
+  "client_sha256": "d7367cca86c0c67925ea6e044d6ea2bbf1283bb7f72f9218cbcfc554aebd0a9b",
+  "runtime_receipts": [
+    "docs/projected_core_cycle_capture_v49retry_receivers_dx12.json",
+    "docs/projected_core_cycle_capture_v49_receivers_vulkan.json"
+  ],
+  "pixel_receipts": [
+    "docs/projected_receiver_pixels_v49retry_dx12.json",
+    "docs/projected_receiver_pixels_v49_vulkan.json"
+  ],
+  "cleanup_receipt": "docs/receiver_cleanup_v49_verified_raw.json",
+  "cleanup_frames_passed": 4,
+  "inspected_images": [
+    "logs/projected-core-cycle-v49retry-receivers-dx12-on.owner-2-returned.png",
+    "logs/projected-core-cycle-v49-receivers-vulkan-on.owner-2-returned.png"
+  ],
+  "open_failure": {
+    "log": "logs/capture-v49-dx12.log",
+    "symptom": "Timeout with created_effects0; no effect reached projection consumer. Retry passed unchanged executable.",
+    "cause": "unknown; original harness discarded Rejected packets and lacked authoritative cast receipt",
+    "resolved": false
+  }
+}

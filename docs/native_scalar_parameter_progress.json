@@ -1,0 +1,42 @@
+{
+  "updated_utc": "2026-10-06T14:21:50.493863+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "baked_lookup_cases": 437,
+  "full_scalar_reader_cases": 60,
+  "native_map_scalar_cases": 54,
+  "captured_table_values": 314,
+  "core_tests_passed": 442,
+  "last_client_tests_passed": 364,
+  "product_rust_sources_changed": true,
+  "ordinary_emitter_consumer_bound": false,
+  "ordinary_applications_rebuilt": false,
+  "artifacts_sha256": {
+    "data/4.20/baked_scalar_lookup_contract.json": "1d23d795983386b5edfc82bded248c49c4b1696a5db7ab87b8e056dac1795ff1",
+    "data/4.20/complex_scalar_parameter_contract.json": "a59beedf6300761496ab484b8721156a7f1c78bcef6c7351e0d81c69512b3d48",
+    "tools/probe_native_baked_scalar_lookup.py": "ae670819b8398ab92e1bac21991005bd12b5066ce799691b5d0e06416f6e2af8",
+    "tools/probe_native_complex_scalar_parameter.py": "bde434f88d4422c8c07217a790de7832e571aade1df40034ea25c633222add89",
+    "crates/core/src/native_scalar_curve.rs": "6c436d9ba33ae2f69a7c77c2c03e44795d99b86997fefb4da4322663571d8e07",
+    "crates/core/src/native_scalar_parameter.rs": "66cf15389c1c49ca0474dc6a3ac6890a1ceed7c50fba67284b470465673447f1",
+    "crates/core/src/native_probability_curve.rs": "e6d275b5d10ee0253214c2a631c863567f4f061c456296fba1f6aa8e0b8dfd6e",
+    "crates/core/src/lib.rs": "8b231a597350923eed052917fb583112f2434c390af8f909e3380a2a7f8d2886",
+    "logs/native-scalar-parameter-core-tests.log": "1f879a2838149be31404bc8b021b0da2891c2d1b67107d8b1dc4ad2c1f56d448",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "eb922994149666b56493df8fde6b60339c7ffb6818045ec347103188bfa22071"
+  },
+  "findings": [
+    "Original baked table selector uses trunc(f32(count)*normalized_age), clamps valid indices, and performs no runtime interpolation. NaN/infinity/positive conversion overflow yield INT_MIN under SSE and then select index0. Empty tables unsupported.",
+    "ScalarParameter combines decoded field reader, scaled knot maximum, native256table baking, probability configuration and seeded probability consumer into a reusable Rust component.",
+    "Original94A7F0 reads XP then P into the same object; P resets XP, including when P absent. Rust preserves lookup order and final stored result. Sixty original whole-reader cases compare table/maximum/probability metadata bit for bit, including54Map10rate/life configurations."
+  ],
+  "limits": [
+    "Nonempty scalar tables sizes1,3,7,16,64,256 and supplied normalized-time register. Original age/time normalization before this fragment not qualified.",
+    "Original cvttss2si yields INT_MIN on NaN, infinity or positive overflow, then lower clamp selects first entry. Empty-table read unsafe and unsupported.",
+    "No interpolation at runtime: quantized table selection. Ordinary emitter integration remains pending.",
+    "Raw getter/cache/lexical parity and global startup initializer not qualified.",
+    "Missing emitter-field caller fallback is outside this reader and covered by separate prior contract.",
+    "Ordinary emitter/render integration pending.",
+    "Rust component exists in engine core but ordinary emitter/render binding is still pending. Normalized age is supplied; its producer not qualified.",
+    "No new ordinary application builds, graphical/client tests or domain completion."
+  ],
+  "next_action": "Qualifier et porter le lecteur vectoriel94AA60/94C150, ses courbes et variations X/Y/Z, puis intégrer les paramètres au cycle émission/naissance/pose et au rendu Map10. Qualifier le calcul de l’âge avant sélection de table. Résoudre TT_Mist_circle/fogcircle et poursuivre les24domaines."
+}

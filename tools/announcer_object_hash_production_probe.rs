@@ -1,0 +1,2 @@
+#[path="E:/OpenLeague/crates/core/src/audio_announcer_object_lookup.rs"] mod native;
+fn main(){let proof:serde_json::Value=serde_json::from_str(&std::fs::read_to_string("E:/OpenLeague/data/4.20/audio_announcer_object_hash_contract.json").unwrap()).unwrap();for c in proof["cases"].as_array().unwrap(){assert_eq!(native::key_hash(c["key"].as_u64().unwrap() as u32),c["hash"].as_u64().unwrap() as u32);}println!("378 complete native hash values match production Rust");}

@@ -1,0 +1,101 @@
+{
+  "updated_utc": "2026-10-07T07:15:37.470483+00:00",
+  "complete": false,
+  "passed": true,
+  "client_sha256": "d6971d05c5e4dc31c8d0a199ed3c5187e0b451171159d024390d6c51ea2c5ad2",
+  "graphical_client_rebuilt": true,
+  "current_runtime_capture": true,
+  "backends": {
+    "dx12": {
+      "casts": 2,
+      "cleaned": 2,
+      "active_effects_final": 0,
+      "active_draws_final": 0,
+      "baseline": {
+        "frames": 33,
+        "nonzero_frames": 0,
+        "changed_pixels_min": 0,
+        "changed_pixels_max": 0,
+        "max_rgb_difference": 0
+      },
+      "instances": [
+        {
+          "entity": 4294959526,
+          "frames": 4,
+          "changed_pixels_max": 70853
+        },
+        {
+          "entity": 8589926774,
+          "frames": 3,
+          "changed_pixels_max": 69742
+        }
+      ],
+      "pipeline_frames": 9,
+      "visual_inspection": {
+        "inspected": true,
+        "human_fidelity_acceptance": false,
+        "observed": "Terrain and actors visible; two cast images and final cleanup inspected. Projected ground contribution appears in paired on image and is absent in same-frame off image. Other projectile particles are not a projection-cleanup failure."
+      }
+    },
+    "vulkan": {
+      "casts": 2,
+      "cleaned": 2,
+      "active_effects_final": 0,
+      "active_draws_final": 0,
+      "baseline": {
+        "frames": 60,
+        "nonzero_frames": 0,
+        "changed_pixels_min": 0,
+        "changed_pixels_max": 0,
+        "max_rgb_difference": 0
+      },
+      "instances": [
+        {
+          "entity": 4294959526,
+          "frames": 10,
+          "changed_pixels_max": 70600
+        },
+        {
+          "entity": 12884894092,
+          "frames": 7,
+          "changed_pixels_max": 71639
+        }
+      ],
+      "pipeline_frames": 19,
+      "visual_inspection": {
+        "inspected": true,
+        "human_fidelity_acceptance": false,
+        "observed": "Terrain and actors visible; two cast images and final cleanup inspected. Projected ground contribution appears in paired on image and is absent in same-frame off image. Other projectile particles are not a projection-cleanup failure."
+      }
+    }
+  },
+  "native_stop_dispatch_runtime_executed": true,
+  "native_reference_profiles": 120,
+  "focused_core_tests_passed": 1,
+  "focused_client_tests_passed": 3,
+  "full_suites_rerun": false,
+  "artifacts_sha256": {
+    "target/debug/openleague-client.exe": "d6971d05c5e4dc31c8d0a199ed3c5187e0b451171159d024390d6c51ea2c5ad2",
+    "logs/annie-native-stop-dispatch-client-build.log": "7cad099e6b61e3d60d7280dfb58446d59c0029f5a07c181a2279373be0d8d5a6",
+    "logs/annie-native-stop-dispatch-tests.log": "63a32e74a56d3d262b061af8606bfa6057075ffc5cb59ee9efb80b851283cef4",
+    "logs/native-projectile-stop-dispatch-tests.log": "931ce35c1af50f1cab86f86e61b97d08d4b3422f52b44013076a759f7a8ed064",
+    "crates/client/src/projected_live.rs": "3d2e635f6dbdf247351149ae312ae1d71dfbbb35f9faeec1231ee5235eed14e1",
+    "crates/client/src/annie_q_vfx.rs": "41d23b712714fdb57d599405337d181d823f68233be3ae0ca077debb3dad4000",
+    "crates/core/src/native_projectile_stop_dispatch.rs": "0d0923449b50dd5764e2822babd77f80cd7efe1e64b06e1ecd274a07e93c5f08",
+    "data/4.20/projectile_stop_dispatch_contract.json": "3b06437788a2a544972fd4e259884e4be1335db1794449c57ccd3c041b3cf9be",
+    "docs/projected_core_cycle_capture_v18_native_stop_dispatch_dx12.json": "c955266c725a8724015e4980e38782181e710eca6475de79a4433a29e91c540a",
+    "docs/projected_pair_control_v18_native_stop_dispatch_dx12.json": "3cc69f50d0fc2f04cf43273112945b3b81f62318ab5103431438f7589be1652c",
+    "logs/projected-core-cycle-v18-native-stop-dispatch-dx12-pipeline.json": "b77ff86dc0385e22464c38673fce26900a5113e7edf0431a514ebcdb844e1c62",
+    "docs/projected_core_cycle_capture_v18_native_stop_dispatch_vulkan.json": "1b49844563b68853ab7e7732542ff988e7bf0a69fa0a22b857ea1f5671bae64e",
+    "docs/projected_pair_control_v18_native_stop_dispatch_vulkan.json": "cb18669303e3396eb85886fa4fdade80fd5345614cdaf15d64bca5863ee7bf6e",
+    "logs/projected-core-cycle-v18-native-stop-dispatch-vulkan-pipeline.json": "e73fe32c34981986dad07c6443f225a18e57f611566fa70d45cbdb8802277719"
+  },
+  "limits": [
+    "Two seeded diagnostic casts per backend; not ordinary progression, complete champion or whole-game acceptance.",
+    "Native marker/cleanup/request route executes in live client; local network disappearance supplies controller-end trigger, same-frame registry scheduling and ownership remain reconstructed adapters.",
+    "Owner pose, native scale setters, FOW, blend/depth/sampler, receiver fidelity and full Q effects remain incomplete.",
+    "Clock uses local Bevy source with native default wrapper; original time source and pause/speed transitions remain open.",
+    "Technical checks are not human acceptance of original-game fidelity; zero domains closed."
+  ],
+  "next_action": "Qualifier le producteur de pose et l’ordonnancement natifs d’Annie, puis poursuivre les 24 domaines et les 114 tâches du plan complet."
+}

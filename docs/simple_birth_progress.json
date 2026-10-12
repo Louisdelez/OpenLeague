@@ -1,0 +1,31 @@
+{
+  "updated_utc": "2026-10-04T14:55:03.199082+00:00",
+  "complete": false,
+  "client_tests_passed": 50,
+  "native_birth_cases": 48,
+  "native_emission_cases": 96,
+  "native_instruction_addresses": 1003,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "runtime_annie_projected_emitter_bound": false,
+  "current_build_gpu_rerun": false,
+  "files_sha256": {
+    "data/4.20/simple_birth_contract.json": "0d75f5989693718019fe311b5e24749cb20de7a699898c7be434f5a26869d5f3",
+    "crates/client/src/simple_emission.rs": "714488b3524ad553e9a9186f5e081a88ecde5b1df63cdb9aec3cc8a25a59b26a",
+    "logs/simple-birth-tests.log": "38dd419992f18248ec825861e00f749ebbec044bf059074ce0164d42532ae225",
+    "logs/simple-birth-build.log": "0d598d47ada2ced4f6945a4ef74678d56b86e593f7af02d0278b95a62dd10702",
+    "target/debug/openleague-client.exe": "34765c5ab9a87c238be904f8a7c5f38d57c69d7d7f533623dec04f30736ef556"
+  },
+  "findings": [
+    "Original941F00 runs through return, including943CD0 particle array insertion and native RNG, without adapters.",
+    "48cases cover one/two particle bursts, three supplied matrices, translated emitter positions, nonzero local offsets and two particle lifetimes.",
+    "Native arrays store actual birth times, lifetimes, positions and velocities; emitter time updates to10.125 and burst latch becomes1. Repeated call produces no additional births or array changes.",
+    "Rust birth interpolation and matrix application match all48native array cases."
+  ],
+  "limits": [
+    "Explicit valid preallocated particle arrays, constant curve tables, owner metadata, emitter matrix and native RNG seed supplied. Surrounding constructor/reader and matrix producer not executed.",
+    "Original emission, scalar/vector sampling, RNG, particle insertion, emission time and burst latch instructions execute without adapters.",
+    "Placement matrices are fixtures; relation to authored local-orient and owner/bone attachment remains unqualified. No subsequent particle update/destruction or renderer acceptance.",
+    "Native matrix producer/local-orient, owner attachment, particle update and owner destruction remain unqualified. Zero-fixture velocity does not qualify moving-particle behavior.",
+    "No live Q projection or current executable GPU rerun. Full24domain objective remains incomplete."
+  ]
+}

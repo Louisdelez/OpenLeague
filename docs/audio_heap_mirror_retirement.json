@@ -1,0 +1,41 @@
+{
+  "saved_utc": "2026-10-09T21:22:08.880692+00:00",
+  "passed": true,
+  "complete": false,
+  "audio_tests_passed": 543,
+  "physical_retirement_cycles_per_architecture": 1024,
+  "optional_owned_heap_cases": 252,
+  "shared_callback_retirement_cases": 12,
+  "test_log": "logs/audio-heap-mirror-retirement-tests.log",
+  "proofs": [
+    "docs/audio_heap_mirror_retirement_validation.json",
+    "docs/audio_heap_mirror_context_retirement_validation.json",
+    "docs/audio_optional_owned_heap_validation.json"
+  ],
+  "next_action": "Connect normal constructors and FLS callback ownership for optional buffers, custom locales and dynamic locks. Integrate explicit post-callback mirror retirement into normal client worker lifetimes. Implement original global CRT startup/export dispatch/security-cookie and real FLS startup/getter services without captured first-context restoration. Qualify fresh errno context/callback reentry and handler/retry failures through actual providers. Connect normal audio worker dispatch/progression/physical playback. Preserve full24-domain114-task37-requirement scope; normal client audio and whole game remain unfinished.",
+  "evidence": [
+    "Atomic batch preflight retires only physically freed owned mirrors and corresponding tombstones after original callbacks and forensic readers. Invalid size/reference, overlap or missing tombstones abort without partial deletion.",
+    "Live physical and retired logical ranges remain reserved even when external map entries are missing. Adoption rejects overlapping live/retired blocks.",
+    "Real x86/x64 process heaps pass1024 three-buffer cycles each with3075 physical allocations/frees each, unchanged unrelated memory and tombstones; full core includes256 cycles and address reservation checks.",
+    "Six real FLS/critical-section context shutdown cases in each architecture now retire both mirrors only after completed callbacks and native final-byte comparison.",
+    "All126 native optional-buffer cases in each architecture restore individual physical owners, never a merged256-byte block. Original destructor uses real Windows heap/locks; exact final bytes and free identities, wrapped multibyte counts and surviving ownership checked. Full543 audio tests pass."
+  ],
+  "limits": [
+    "Retirement is explicit API; normal client audio workers not connected.",
+    "Optional states are restored captures and destructor invoked directly; normal buffer constructors and their OS FLS callbacks not qualified.",
+    "Canonical map ownership contract forbids replacing owned entries between allocation/free/retirement; same-shape external replacement identity cannot be inferred from public byte records.",
+    "Global original startup/dispatch/cookie, custom locale/dynamic allocations, errno reentry/handler failures and complete physical playback remain unfinished."
+  ],
+  "test_executable": "target\\debug\\deps\\openleague_core-92fab3f20accd79c.exe",
+  "files_sha256": {
+    "logs/audio-heap-mirror-retirement-tests.log": "114d39aac6f72d6cc457aec48458fe18ab148084346d01fe49ca1d433f2d0a3d",
+    "target\\debug\\deps\\openleague_core-92fab3f20accd79c.exe": "17856eb414795ba7a508b83a5e35dca0e892ed354709cb5865bd5063fa66987a",
+    "crates/core/src/audio_crt_windows_process_heap.rs": "97f69a6baf3e878225368a5703a70d2ea2bbfeb7bf61a7b5577102c2f250ff86",
+    "tools/implement_audio_heap_mirror_retirement.py": "7c94da5e48e99fd355cc48d2fe5e83ac63b22487bbc074fabb56906fa42e293c",
+    "tools/extend_audio_heap_mirror_retirement.py": "415c07fab90a8abc240b6757a28af43de1256fd0124faeb015a4e0ed61327ec2",
+    "tools/record_audio_heap_mirror_retirement.py": "3935016514c5d21b280bf0bbeab61475fbeff4b0a40a00d11efb58a7ce71924f",
+    "docs/audio_heap_mirror_retirement_validation.json": "0b8fa8bd3ea42a4d08d611b44a09e8effb0fd84ffa4d26f455d3c1d5db62c265",
+    "docs/audio_heap_mirror_context_retirement_validation.json": "1eea15d26e55eeeaf6f8fd483bf5927c3abb2a1ff2d7478c68102a4482f6cef5",
+    "docs/audio_optional_owned_heap_validation.json": "8f6135e3b6210bddf614c755fb8d32feb549343dd79e366c587b4433c8e67368"
+  }
+}

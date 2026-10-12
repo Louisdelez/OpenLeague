@@ -1,0 +1,27 @@
+{
+  "updated_utc": "2026-10-03T22:00:44.040582+00:00",
+  "contract": "data/4.20/audio_gain_contract.json",
+  "contract_sha256": "951c13f8a7cbb326d0b9ad2d349aedfbabd67132bcd1f2fb531856ee5ea10baa",
+  "module": "crates/core/src/audio_gain.rs",
+  "module_sha256": "8a8c5b23a00faad00af21ddaee1277e2a297d5d8ab7990af8164a17270681ee3",
+  "native_gain_cases": 173,
+  "native_region_sha256": "a06149ba656b7e8dd7a5ce306f1300c9f33aa4ae45ef31bb7c659eebcb569e32",
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "rust_gain_tests": 2,
+  "matching_policy": "exact f32 bit patterns for all173 samples",
+  "native_gain_at_0db": 0.9990389943122864,
+  "native_zero_threshold_scaled": -37.0,
+  "qualified_positive_limit_db": 48.0,
+  "test_log": "logs/native-audio-gain-core-tests.log",
+  "test_log_sha256": "b7497e11ec0561c2f65f31fcb9f1034d1fa2c286aa79cf93199834fd82c033bc",
+  "core_tests": 174,
+  "client_mixer_integrated": false,
+  "ambient_playback_enabled": false,
+  "complete": false,
+  "limits": [
+    "Native scaling4 branch and its lazy constant initialization executed, without the generic interpolation prefix.",
+    "Rust support qualified up to48dB; higher positive gains not implemented. Very negative input uses native zero branch.",
+    "Voice property aggregation, gain smoothing, LPF, pitch, spatial distance and audible mixer remain incomplete.",
+    "The conversion primitive is qualified; it does not establish final voice-volume cutoff or aggregation order. Running client executable remains unchanged."
+  ]
+}

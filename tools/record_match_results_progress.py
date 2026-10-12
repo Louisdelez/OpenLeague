@@ -1,0 +1,26 @@
+from pathlib import Path
+import json,hashlib,datetime,shutil,html,re
+r=Path(r'E:\OpenLeague');now=datetime.datetime.now(datetime.timezone.utc).isoformat()
+load=lambda p:json.loads((r/p).read_text(encoding='utf-8-sig'))
+save=lambda p,d:(r/p).write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+tests=(r/'logs/match-results-client-tests.log').read_text(encoding='utf-8-sig');build=(r/'logs/match-results-build.log').read_text(encoding='utf-8-sig')
+for count in [227,429,1]:assert f'test result: ok. {count} passed; 0 failed' in tests
+assert 'Finished `dev`' in build
+visual=load('docs/match_results_visual_validation.json');assert visual['visual_inspected']
+paths=['crates/core/src/match_results.rs','crates/core/src/lib.rs','crates/core/src/world.rs','crates/client/src/match_results_ui.rs','crates/client/src/main.rs','crates/client/src/shop_ui.rs','crates/server/src/main.rs','crates/server/src/result_store.rs','logs/match-results-client-tests.log','logs/match-results-build.log','target/debug/openleague-client.exe','target/debug/openleague-server.exe','logs/match-results-visual.png']
+receipt=dict(updated_utc=now,complete=False,server_final_result_immutable=True,result_survives_live_roster_disconnects=True,result_persistence_tested=True,client_scoreboard_integrated=True,client_terminal_input_gates_integrated=True,core_tests_passed=429,client_tests_passed=227,server_tests_passed=1,build_passed=True,visual=visual,files_sha256={p:hashlib.sha256((r/p).read_bytes()).hexdigest() for p in paths},limits=['Winner was injected only in the framebuffer fixture; no ordinary six-graphical-client victory or full match qualified.','Scoreboard presents tracked kills/deaths/assists/level and remaining gold; gold earned, damage totals and native complete post-game UI remain open.','Native end-game ceremony, camera pan, sound fade, nexus cinematic, Continue action and launcher return remain open.','Persistence is a local immutable JSON result; launcher match history, account association, reconnect and ranking integration remain open.','Terminal input gates implemented from native end-game source; dedicated keyboard/camera interaction runtime verification remains open.','Earlier ordinary tower and native pose proofs retain their original executable hashes and are not rerun qualification of these rebuilt binaries.'])
+save('docs/match_results_progress.json',receipt)
+actions=['Achever la cérémonie native de fin de partie, les ressources graphiques historiques, les interactions et le retour au launcher ; qualifier victoire et résultats dans une partie réelle à six clients graphiques.','Achever chargement/sélection BLND et ANM, matériaux/effets, destructions/réapparitions/protection ; raccorder visibilité au masque et rendu WALL.','Poursuivre les 24 domaines : tous les champions, contenus 4.20, services, qualification et livraison autonome restent à terminer.']
+archive=r/'docs/plan_history'/('match-results-'+datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ'));archive.mkdir(parents=True)
+for name in ['coverage.json','completion_plan.json','resume_checkpoint.json']:
+ p='docs/'+name;shutil.copy2(r/p,archive/name);d=load(p);d.update(updated_utc=now,complete=False,match_results_progress=receipt)
+ if name=='resume_checkpoint.json':
+  d.update(saved_utc=now,pending_native_jobs=[],next_projected_action=' '.join(actions));d['last_verified'].update(core_tests=429,client_tests=227,server_result_store_checks=1)
+ else:d['current_evidence'].update(core_tests=429,client_tests=227,server_final_result_immutable=True,post_game_scoreboard_diagnostic_visual_verified=True,current_binary_normal_turret_destruction_verified=False,current_binary_normal_destroyed_final_pose_verified=False)
+ if name=='completion_plan.json':d['next_execution_steps']=actions
+ save(p,d)
+text=Path('E:/mapslol3v3/goal-openleague-actualise-2026-10-05.txt').read_text(encoding='utf-8').replace('226 tests et compilation réussis','227 tests et compilation réussis').replace('écran, persistance et partie complète encore à qualifier','écran et persistance intégrés et testés ; cérémonie native, retour au launcher et partie complète encore à qualifier')
+(r/'docs/goal_objective_current_request.txt').write_text(text,encoding='utf-8');(r/'docs/goal_objective_current_request.html').write_text('<!doctype html><html lang="fr"><meta charset="utf-8"><title>Goal actualisé</title><pre>'+html.escape(text)+'</pre></html>',encoding='utf-8')
+p=r/'docs/completion_plan.html';s=p.read_text(encoding='utf-8');p.write_text(s.replace('</body>','<section><h2>Résultats de fin de partie</h2><p>Résultat figé côté serveur, conservation après déconnexion, sauvegarde JSON et affichage client intégrés. Tests : 429 cœur, 227 client, 1 sauvegarde serveur. Capture diagnostique vérifiée ; cérémonie historique, retour au launcher et partie réelle à six clients restent ouverts.</p><a href="match_results_progress.json">Preuves et limites</a></section></body>'),encoding='utf-8')
+for name in ['implement_match_results_client.py','finish_match_result_persistence.py','prepare_results_visual_fixture.py','verify_results_framebuffer.py','record_match_results_progress.py']:shutil.copy2(Path('E:/mapslol3v3')/name,r/'tools'/name)
+print(json.dumps(dict(core_tests=429,client_tests=227,result_saved=True,full_goal_complete=False)))

@@ -1,0 +1,25 @@
+from pathlib import Path
+import json,hashlib,itertools
+r=Path('E:/OpenLeague');s=(r/'tools/probe_native_audio_bank_media_lookup.py').read_text(encoding='utf-8').split('\nfor pattern,')[0];s=s.replace('u.hook_add(unicorn.UC_HOOK_CODE,guard_media)','media_hook=u.hook_add(unicorn.UC_HOOK_CODE,guard_media)');exec(compile(s,'setup','exec'));obj=heap+0x7400;records=heap+0x7600;regions.extend([(0xafc0d0,0xafc160),(0xb09970,0xb099cb),(0xaf9230,0xaf92d2),(0xb291a0,0xb29280)])
+local=[(0xb3df60,0xb3df96),(0xb3e080,0xb3e0a3),(0xb3e1d0,0xb3e1f2),(0xb12e20,0xb12f48),(0xb29140,0xb29170),(0xb3e260,0xb3e29d),(0xb3e350,0xb3e383),(0xb3f280,0xb3f2a2),(0xb26970,0xb26a02),(0xb0f7a0,0xb0f89d),(0xb29910,0xb2996e),(0xb29340,0xb29420),(0x586230,0x586233)];regions.extend(local);voice=heap+0x8000;table=heap+0x8800;allocator_table=heap+0x7900;plugin=heap+0xc000
+put(0x121023c,'I',allocator_table);put(allocator_table+4,'2I',trap+0x800,trap+0x810)
+def guard_scan(uc,a,n,d):
+ sp=u.reg_read(UC_X86_REG_ESP)
+ if a==trap+0x800:
+  size=read(sp+4,'I')[0];assert size in [32,84];ref=plugin if size==84 else plugin+512;u.mem_write(ref,bytes([pattern])*size);allocations.append({'reference':ref,'size':size,'freed':False});calls.append({'kind':'allocate','method':'virtual','allocator':u.reg_read(UC_X86_REG_ECX),'size':size,'reference':ref});ret(ref,4);return
+ if a==trap+0x810:
+  ref=read(sp+4,'I')[0];allocation=next(v for v in allocations if v['reference']==ref);assert not allocation['freed'];allocation['freed']=True;calls.append({'kind':'free','method':'virtual','allocator':u.reg_read(UC_X86_REG_ECX),'reference':ref});ret(0,4);return
+ if any(lo<=a<hi for lo,hi in local):return
+ guard_media(uc,a,n,d)
+u.hook_del(media_hook);u.hook_add(unicorn.UC_HOOK_CODE,guard_scan);rows=[]
+for pattern,collection,slot,matching in itertools.product([0,0xa5],['primary','secondary'],[0,3],[False,True]):
+ calls.clear();allocations.clear();u.mem_write(manager,bytes(0x500));put(manager+0x80,'I',42);put(manager+0x84,'I',node);put(manager+0x388,'I',1);u.mem_write(holders[0],bytes(80));put(holders[0]+64,'I',1);put(node,'8I',0,0,0,100,array,1,1,0);put(array,'3I',holders[0],heap+0x9000,100);allocations.extend([{'reference':node,'size':32,'freed':False},{'reference':array,'size':12,'freed':False}]);put(owner_out,'I',0);invoke(0xaf94a0,[out,0,owner_out],manager);media,length=read(out,'2I');assert read(owner_out,'I')[0]==holders[0]
+ invoke(0xb29140,[7,voice],obj);put(obj+8,'3I',records,1,1);put(records,'5I',0,media,length,0,holders[0]);allocations.extend([{'reference':obj,'size':24,'freed':False},{'reference':records,'size':20,'freed':False}]);assert invoke(0xb3e260,[0x121023c],0)==plugin
+ assert invoke(0xb3df60,[0x121023c],0)==plugin+512;u.mem_write(heap+0xe000,bytes(0x920));put(0x14a7a3c,'I',heap+0xe000);u.mem_write(voice,bytes([pattern])*0x4d4)
+ for i in range(4):put(voice+0x470+i*20,'4I',7 if i==slot else 0,plugin+512 if i==slot else 0,plugin if i==slot else 0,obj if i==slot else 0)
+ u.mem_write(table,bytes([pattern])*56);put(table,'I',voice);put(0x14a7d58,'2I',table if collection=='primary'else 0,int(collection=='primary'));put(0x14a7cf8,'2I',table if collection=='secondary'else 0,int(collection=='secondary'))
+ def snapshot():return {'manager':bytes(u.mem_read(manager,0x500)).hex(),'holder':bytes(u.mem_read(holders[0],80)).hex(),'voice':bytes(u.mem_read(voice,0x4d4)).hex(),'table':bytes(u.mem_read(table,56)).hex(),'rtpc':bytes(u.mem_read(heap+0xe000,0x920)).hex(),'allocations':[{**v,'raw':bytes(u.mem_read(v['reference'],v['size'])).hex()}for v in allocations]}
+ before=snapshot();calls.clear();invoke(0xb0f7a0,[holders[0]if matching else holders[0]+512],0);after=snapshot();assert all(v['freed']==matching for v in allocations)
+ rows.append({'pattern':pattern,'collection':collection,'slot':slot,'matching':matching,'before':before,'after':after,'calls':list(calls)})
+proof={'passed':True,'complete':False,'case_count':len(rows),'native_sha256':hashlib.sha256(b).hexdigest(),'cases':rows,'regions':[{'start':hex(a),'end':hex(e),'sha256':hashlib.sha256(p.get_data(a-base,e-a)).hexdigest()}for a,e in local],'adapters':['Actual AF94A0 acquisition, native context/Meter construction, B0F7A0/B29910/B29340 matching-bank scan, Meter relocation refusal, B26970/Meter termination/context destruction/media release execute. Only physical allocation/free/mutex/atomic operations adapted.'],'limits':['Controlled voice storage and manually bound context record populated by native acquisition;Native Meter parameter creator and parameter termination execute. RTPC manager193 hash heads are controlled empty;actual B12E20 missing subscriber scan executes. Uninitialized Meter manager,one voice and one plugin. Full voice constructor/record producer/RTPC/initialized plugins/pending actions/queue composition/Rust replay remain required.']}
+(r/'data/4.20/audio_bank_meter_parameter_owner_scan_preparation.json').write_text(json.dumps(proof,indent=2)+'\n',encoding='utf-8');print('PASS',len(rows),'native matching Meter owner scan/slot destruction/media ownership sequences')

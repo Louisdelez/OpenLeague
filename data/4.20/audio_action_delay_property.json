@@ -1,0 +1,88 @@
+{
+  "passed": true,
+  "case_count": 14,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "cases": [
+    {
+      "delay_bits": 0,
+      "initial": 0,
+      "readback": 0
+    },
+    {
+      "delay_bits": 0,
+      "initial": 700,
+      "readback": 0
+    },
+    {
+      "delay_bits": 1,
+      "initial": 0,
+      "readback": 1
+    },
+    {
+      "delay_bits": 1,
+      "initial": 700,
+      "readback": 1
+    },
+    {
+      "delay_bits": 1023,
+      "initial": 0,
+      "readback": 1023
+    },
+    {
+      "delay_bits": 1023,
+      "initial": 700,
+      "readback": 1023
+    },
+    {
+      "delay_bits": 1024,
+      "initial": 0,
+      "readback": 1024
+    },
+    {
+      "delay_bits": 1024,
+      "initial": 700,
+      "readback": 1024
+    },
+    {
+      "delay_bits": 1025,
+      "initial": 0,
+      "readback": 1025
+    },
+    {
+      "delay_bits": 1025,
+      "initial": 700,
+      "readback": 1025
+    },
+    {
+      "delay_bits": 48000,
+      "initial": 0,
+      "readback": 48000
+    },
+    {
+      "delay_bits": 48000,
+      "initial": 700,
+      "readback": 48000
+    },
+    {
+      "delay_bits": 4294967295,
+      "initial": 0,
+      "readback": 4294967295
+    },
+    {
+      "delay_bits": 4294967295,
+      "initial": 700,
+      "readback": 4294967295
+    }
+  ],
+  "findings": [
+    "FF1C34 virtual18 is B22100, a property setter, not action execution.",
+    "Property14 set through actual B22100/AF26D0 and read through actual B21F10 without randomization when range map absent.",
+    "B05F00 reads B21F10, splits unsigned value into 1024-unit blocks and remainder; scheduling path not executed by this probe."
+  ],
+  "adapters": [
+    "Supplied one-entry preallocated property map; no native function intercepted."
+  ],
+  "limits": [
+    "Map allocation, random ranges and actual scheduling/voice execution remain unqualified. Units not inferred from this property-only probe."
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "updated_utc": "2026-10-04T00:25:29.523736+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_logical_registration.py": "fee8f3fe67c4356348cbc7ab4d927146334c35ce55074187849917d9c04b3acd",
+    "data/4.20/audio_logical_registration_contract.json": "b1b6fcd6d2c67d9552e5c053224b1fd05cfd07eaba4d93184960ab0411d4c8e0",
+    "crates/core/src/audio_logical_registration.rs": "0b7789f7455e9289b99ba303c51c5f9d2001a72b2fb7e030cf6d775138bdb57c",
+    "crates/core/src/lib.rs": "6d622e86f77bf4ef9af646c6f4539fdddde5f9f4518b5fdbacdc589507b7741e",
+    "logs/native-audio-logical-registration-core-tests.log": "dc70c5e17d783a1dc0f7c41a51ec4bced711b3917143b6e09a25ae963ddec6cc"
+  },
+  "native_registration_cases": 45,
+  "core_tests_passed": 212,
+  "native_functions": [
+    "0x920d50",
+    "0x5bd2f0 capacity-available append"
+  ],
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "logical_registration_ported": true,
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false,
+  "limits": [
+    "String descriptor copy, map entry lookup/allocation, lock, string destruction and security check explicitly adapted. Native pending-key vector append executed with capacity available; vector growth/allocation failure not qualified.",
+    "Logical reference registration and counter are original code; no Wwise voice acceptance, audible playback or worker lifetime claim.",
+    "Rust logical IDs represent pending registration, never playing IDs. Initial counter must be supplied from qualified caller state; native manager constructor seed not yet qualified.",
+    "Logical release/position/boolean worker integration and source ownership still incomplete. No standalone binary rebuild in this step."
+  ]
+}

@@ -1,0 +1,28 @@
+from pathlib import Path
+r=Path('E:/OpenLeague');s=Path('E:/mapslol3v3')
+p=r/'crates/core/src/audio_replay_windows_transport.rs';text=p.read_text()
+def replace(old,new):
+ global text
+ assert text.count(old)==1,(p,old);text=text.replace(old,new)
+replace('pub trait Diagnostics:', '#[path="audio_replay_windows_configuration.rs"]\nmod configuration;\npub use configuration::{ConfigurationRequest,ConfigurationCallback,ConfigurationSnapshot};\n\npub trait Diagnostics:')
+replace('    logger_init: Mutex<()>,','    logger_init: Mutex<()>,\n    configuration: Mutex<Option<configuration::Record>>,')
+replace('                logger_init: Mutex::new(()),','                logger_init: Mutex::new(()),\n                configuration: Mutex::new(None),')
+replace('        self.release_owned()\n','        if self.shared.configuration.lock().unwrap().is_some() {\n            return Err("close the owned configuration before releasing transport".into());\n        }\n        self.release_owned()\n')
+replace('        let references = b\n            .word(startup::REFERENCES)','        self.close_configuration_owned(&mut b)?;\n        let references = b\n            .word(startup::REFERENCES)')
+replace('    last: u32,','    last: u32,\n    address_frame: Option<[u8;16]>,')
+replace('            last: 0,','            last: 0,\n            address_frame: None,')
+(s/p.name).write_text(text,encoding='utf-8')
+p=r/'crates/core/src/audio_replay_runtime_image.rs';text=p.read_text()
+replace('const REGIONS: [(u32, u32, u32); 9]', 'const REGIONS: [(u32, u32, u32); 11]')
+replace('    (1, 0x2d8d358, 2560),','    (1, 0x2d8d358, 2560),\n    (1, 0x10d5fa4, 8),\n    (1, 0x2d8dd58, 144),')
+replace('word(data, 12)? != 9','word(data, 12)? != REGIONS.len() as u32')
+replace('        a.transport.write_word(0x2d78f04, 2).unwrap();','        assert_eq!(a.transport.word(0x10d5fa4).unwrap(),0x8fc7b0);\n        assert_eq!(a.transport.word(0x10d5fa8).unwrap(),0x8fc2d0);\n        for i in 0..144 { assert_eq!(a.transport.read_byte(0x2d8dd58+i).unwrap(),0); }\n        a.transport.write_word(0x2d78f04, 2).unwrap();')
+(s/p.name).write_text(text,encoding='utf-8')
+p=r/'tools/extract_replay_runtime_image.py';text=p.read_text()
+replace(" ('transport_log_buffer',1,0x2d8d358,2560),", " ('transport_log_buffer',1,0x2d8d358,2560),\n ('transport_configuration_vtable',1,0x10d5fa4,8),\n ('transport_uid_and_validation_scratch',1,0x2d8dd58,144),")
+(s/p.name).write_text(text,encoding='utf-8')
+p=r/'crates/core/src/audio_replay_windows_application.rs';text=p.read_text()
+replace('"errors":r.errors()', '"errors":r.errors(),"configuration":r.configuration_snapshot()?')
+text+='\n#[cfg(test)]\n#[path="audio_replay_windows_configuration_tests.rs"]\nmod configuration_tests;\n'
+(s/p.name).write_text(text,encoding='utf-8')
+print('Prepared Windows runtime configuration, lifecycle and additional initial PE regions')

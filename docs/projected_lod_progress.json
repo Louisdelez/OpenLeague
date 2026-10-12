@@ -1,0 +1,28 @@
+{
+  "updated_utc": "2026-10-04T17:22:28.374393+00:00",
+  "complete": false,
+  "client_tests_passed": 66,
+  "projected_current_build_vulkan_rerun": true,
+  "current_build_all_gpu_checks_rerun": false,
+  "server_casts": 2,
+  "remaining_draws": 0,
+  "findings": [
+    "Projected texture loader now enforces LOD min/max0, preserving native MIPFILTER NONE even if multilevel assets are loaded later.",
+    "U/V clamp and linear min/mag filters remain linked to original D3D state traces; generic terrain and other image settings preserved.",
+    "66tests and build passed; two real server casts on current Vulkan executable produce camera-visible projected geometry and clean all owned draws."
+  ],
+  "limits": [
+    "Native owner adapter, global alpha operation/depth comparison/culling, FOW, later pixelate/skin overrides and native visual fidelity remain open.",
+    "Diagnostic fixture seeds level6/position/readiness; not full ordinary-game acceptance."
+  ],
+  "files_sha256": {
+    "data/4.20/particle_filter_contract.json": "ea8ef937b15fc37398f07d3d4bf0c65d82f72dd66b1f2cb0e28c0b9104ca9269",
+    "crates/client/src/terrain_material.rs": "591e55b6420a581b9dfce753f587faa5074d8f6dddee548864ca8981628d9ace",
+    "crates/client/src/projected_live.rs": "513598361b42073cbdae1f876d8c115ec43e6dbde9174d840e589951c03c2493",
+    "crates/client/src/projected_render.rs": "11d6ded036b0324e9b4063b0929f17a2053e1155f3a7d0cbd578751969c17505",
+    "docs/projected_normal_capture_v4.json": "b2a30d86ffb472aaab9bc92e32ec9aff5f38e3d4a598fa04ff4f84e82e5d2f6c",
+    "logs/projected-lod-tests.log": "1cd805a494000b814ed06b94ab7ce084c6581508d0fc9fae6305cb23d5c8c4c9",
+    "logs/projected-lod-build.log": "bb17c0b427389b7f05b649766313c7f76f2f7098b54f2de93a672fb92482d38c",
+    "target/debug/openleague-client.exe": "1769343bc436250c91de1840f29929e48cd4d899b5ae37a11de219c5e2f9c36c"
+  }
+}

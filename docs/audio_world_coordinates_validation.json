@@ -1,0 +1,28 @@
+{
+  "verified_utc": "2026-10-08T05:21:04.410842+00:00",
+  "complete": false,
+  "change": "Audio render-world positions now use native units = world * 20, matching camera_native and game entities; removed second Z reflection.",
+  "test_command": "cargo test -p openleague-client map_audio:: --offline -j1",
+  "test_result": {
+    "passed": 7,
+    "failed": 0,
+    "filtered": 402,
+    "exit_code": 0,
+    "session": 52528
+  },
+  "evidence": [
+    "Real NativeCamera::pose tested at two separated map locations against listener focus, eye and horizontal direction.",
+    "Animated child propagation, moving source positions, unavailable bones, listener pan and backend distance covered."
+  ],
+  "files": {
+    "crates/client/src/map_audio.rs": "eb5e0bf68b33d9a19653a174e2b9544eb66c733929e3557f6026ea74cb2c1972",
+    "crates/client/src/camera_native.rs": "e0217734913addd0c87e1a93d013aa4bc17b209a13b3335dc86837d497be4f86"
+  },
+  "supersedes": "Prior mirror-root round-trip test proved inverse-transform consistency only, not agreement with the actual render/native camera coordinate system. Historical runtime captures remain historical and do not validate this change.",
+  "limits": [
+    "No normal executable rebuild or live audio capture.",
+    "Ambient parent still not connected to Bevy producer.",
+    "Full original placement fidelity is separate from render-world/audio coordinate agreement.",
+    "Physical launch, PCM playback, admission, RNG ownership, mix and seek remain open."
+  ]
+}

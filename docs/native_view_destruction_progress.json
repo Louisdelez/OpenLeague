@@ -1,0 +1,37 @@
+{
+  "updated_utc": "2026-10-04T23:37:37.089539+00:00",
+  "complete": false,
+  "client_tests_passed": 123,
+  "client_build_passed": true,
+  "native_view_lifecycle_cases": 4,
+  "native_addresses": 1944,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Original view construction/registration and source creation execute for four cases: two extents, with view alive or destroyed before source retirement.",
+    "Original6B3D70 requests release of pixel/count/scratch buffers and self-wrapper. Its shared control becomes strong0/weak1 while the event slot initially remains. Later original source dispatch skips the expired view and erases its subscription: zero callbacks and zero event slots. Live views instead receive one callback and retire counts/pixels.",
+    "Rust ViewRegistry now removes expired weak subscriptions during dispatch, retaining live-view order; dropping the last view owner expires its reference. Retirement report preserves whether an applied region remained when no view callback ran. Native lifecycle comparison and full123client tests pass; build passed."
+  ],
+  "limits": [
+    "Original view constructor including6B7D70 self-wrapper shared initialization, zero buffers,68CF70 subscriber creation,66D460 existing-event registration and6B2D10 stencil allocation executes. Original source creation/removal and registered view callback retire the applied stencil.",
+    "Allocator/mutex boundaries adapted. Event tree/event list/control and subscriber capacity supplied rather than initialized from empty dispatcher.",
+    "Original view destruction6B3D70 executes before later source dispatch in half the cases. Freed buffers remain mapped by deallocation adapter; their contents after destruction are stale memory, not an active view. First argument semantics and full texture/GPU activation remain unqualified. Fields1C and48 retain preexistingCC bytes; not assigned fabricated defaults.",
+    "Deallocation adapter records free requests without unmapping memory. Buffer contents after destruction are stale storage; zero/nonzero bytes there are not live fog output.",
+    "Only one constructed subscriber and empty pending view heap qualified in these lifecycle cases. Destroying a view with pending sources, absent-event creation, multiple subscriptions/order and concurrent dispatch remain open.",
+    "No ordinary source/view activation, server/GPU fog binding or current graphical rerun."
+  ],
+  "next_actions": [
+    "Qualify absent-event creation and callback-list growth, then pending-source view destruction and multiple subscriptions.",
+    "Qualify extent/camera/configuration and entity field producers; activate native source/view lifecycle in ordinary gameplay.",
+    "Bind qualified masks to authoritative visibility and GPU rendering and verify current restored Map10 gameplay."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_view_destruction_contract.json": "e4154fb20ba7c8c24b5a60d6776fc08c879f0674007f971448465a21d07b59f4",
+    "tools/probe_fow_view_destruction.py": "22ad7b0ee7b0ac898f33bea85577b975273093d279b706455314a93f3d38259a",
+    "tools/probe_fow_view_destruction_generated.py": "dbe83ac8322cc28a66394dd4a96178a07d18740278f22c2bee80e3c369ca1eda",
+    "crates/client/src/fow_view_registry.rs": "ea5a0cb408cd6fcc512c1f075e54170a2c5c85525f5cab98d62b4055940d40ab",
+    "logs/native-view-destruction-tests.log": "5c7363a24f3400c866687306b689bbfb5dc0a2333e01343398cb09116dc1f667",
+    "logs/native-view-destruction-build.log": "1a1d4225564dd1679cb32436d091e8e6570407e7048337745a537deed513b8cd",
+    "target/debug/openleague-client.exe": "99af4453e2be485ef6f05bf7cef4cf438bc37a076c20f213c3f2ce1ad9a40d35"
+  }
+}

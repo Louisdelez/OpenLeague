@@ -1,0 +1,243 @@
+#include "../Fog/Fog.hls"
+#include "../FogOfWar/FogOfWar_VS.hls"
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+///
+/// Constants
+///
+/////////////////////////////////////////////////////////////////////////////////////
+
+float4 c_smFade : register(c31);
+
+column_major float4x4 WORLD_VIEW_PROJECTION_MATRIX	: register(c0);
+column_major float4x4 WORLD_MATRIX				 	: register(c4);
+column_major float4x4 SHADOW_PROJECTION_MATRIX 		: register(c8);
+
+float3   DIRECTIONAL_LIGHT_COLOR		: register(c14);
+float3   DIRECTIONAL_LIGHT_VECTOR		: register(c15);
+#ifdef VS_LIGHT_INTERPOLATE
+float3   AMBIENT_COLOR  				: register(c17);
+#endif // VS_LIGHT_INTERPOLATE
+
+float4   vCloudsParam    				: register(c231);   // R3D_SHADER_VS_CONSTANT_CLOUDS_PARAM
+float4   TERRAIN_XFORM					: register(c233);
+
+//Make the Cooker pick up the combinations...
+#ifdef MOD2X_COLORMAP
+#endif
+#ifdef USE_HEIGHT_BLEND
+#endif
+#ifdef QUALITY_LOW
+#endif
+
+#if !defined(QUALITY_LOW) || !defined(MOD2X_COLORMAP)
+//////////////////////////////////////////////////////////////
+// NORMAL version of the shader.
+//////////////////////////////////////////////////////////////
+
+#ifdef MOD2X_COLORMAP
+	#if defined(FOUR_BLEND) || defined(DECAL) || !defined(FOG_QUALITY_LOW)
+		#define READ_COLORMAP 1
+	#endif
+#endif
+
+struct VERTEX
+{
+	float3 m_Position : X3D_VSIN_POSITION;
+#if !defined(MOD2X_COLORMAP)
+	float3 m_Normal : X3D_VSIN_NORMAL;
+#endif
+
+	float2 m_TexCoord0 : X3D_VSIN_TEXCOORD0;
+#if defined(FOUR_BLEND) && !defined(USE_HEIGHT_BLEND)
+    float3 m_TexCoord1 : X3D_VSIN_TEXCOORD1;
+#endif
+	float4 m_Color0: X3D_VSIN_COLOR0;
+#if defined(DUAL_COLOR)
+	float4 m_Color1 : X3D_VSIN_COLOR1;
+#endif
+};
+
+struct INTERPOLANTS
+{
+	float4 m_Position : POSITION;
+	float4 m_TexCoord0 : TEXCOORD0;
+#ifndef DISABLE_SHADOWS
+	float4 m_TexCoord3 : TEXCOORD1;
+#endif
+	float4 m_TexCoord4 : TEXCOORD2;
+#if defined(WALL_OF_GRASS)
+	float4 m_TexCoord1 : TEXCOORD3;
+#elif defined(FOUR_BLEND) || defined(READ_COLORMAP) || defined(TERRAIN_EDITOR)
+    float2 m_TexCoord1 : TEXCOORD3;
+#endif
+#if !defined(MOD2X_COLORMAP) || defined(VERTEX_ALPHA)
+	float4 m_Color0 : COLOR0;
+#endif
+	float4 m_Color1 : COLOR1;
+#if defined(VERTEX_FOG)
+	float m_Fog : FOG;
+#endif
+};
+
+/////////////////////////////////////////////////////////////////////////////////////
+// Shader (MEDIUM to VERY HIGH, or not using the Colormap).
+/////////////////////////////////////////////////////////////////////////////////////
+void main(VERTEX vertex, out INTERPOLANTS interpolants)
+{
+	// Output homogeneous position
+	interpolants.m_Position = mul(float4(vertex.m_Position, 1.0f), WORLD_VIEW_PROJECTION_MATRIX ); 
+	
+#if !defined(MOD2X_COLORMAP) || defined(VERTEX_ALPHA)
+	interpolants.m_Color0 = float4(1.0f, 1.0f, 1.0f, 1.0f);
+#endif
+	
+#if defined(WALL_OF_GRASS)
+	interpolants.m_TexCoord1 = interpolants.m_Position;	
+#else
+	#if defined(FOUR_BLEND)
+		#if defined(USE_HEIGHT_BLEND)
+			interpolants.m_TexCoord1.xy = TERRAIN_XFORM.xy*vertex.m_Position.xz + TERRAIN_XFORM.zw;
+		#else
+			interpolants.m_TexCoord1.xy = vertex.m_TexCoord1;
+		#endif
+	#elif defined(READ_COLORMAP)
+		interpolants.m_TexCoord1.xy = TERRAIN_XFORM.xy*vertex.m_Position.xz + TERRAIN_XFORM.zw;
+	#endif
+#endif
+
+	// Texture coordinate
+	interpolants.m_TexCoord0 = float4(vertex.m_TexCoord0, 0.f, 0.f);
+	
+	// World position
+	float4 worldPosition = float4(vertex.m_Position, 1.f); //mul(float4(vertex.m_Position, 1.f), WORLD_MATRIX);
+	
+	// Shadow position
+#ifndef DISABLE_SHADOWS
+	interpolants.m_TexCoord3.xyz = mul(worldPosition, SHADOW_PROJECTION_MATRIX).xyz;
+	interpolants.m_TexCoord3.w = saturate((worldPosition.y-c_smFade.x)*c_smFade.y+c_smFade.z);
+#endif
+
+	// Fog of war
+    // TODO:  Can we make room to move these values into one interpolant?  Presumably by moving (or removing) the cloud texture coordinates...
+    float4 fogOfWarTexCoords = FogOfWarTextureCoordinates(worldPosition.xyz);
+	interpolants.m_TexCoord4.xy = fogOfWarTexCoords.xy;
+    interpolants.m_TexCoord0.w = fogOfWarTexCoords.w;
+
+	// Clouds
+#if !defined(DISABLE_CLOUDS) || !defined(FOG_QUALITY_LOW)
+	float2 cloudTexCoord = vertex.m_Position.xz*vCloudsParam.xx + vCloudsParam.yz;
+#else
+	float2 cloudTexCoord = 0;
+#endif
+	interpolants.m_TexCoord4.zw = cloudTexCoord;
+
+	//Vertex fog.
+	interpolants.m_Color1.a = 0.0f;
+#if defined(VERTEX_FOG)
+	interpolants.m_Fog = ComputeFogValue(interpolants.m_Position, worldPosition.xyz);
+#elif defined(FOG_PIXELSHADER_BLEND)
+	#ifndef FOG_QUALITY_LOW
+		interpolants.m_Color1.a = 1.0f-ComputeFogValue(interpolants.m_Position, worldPosition.xyz);
+	#endif
+	//handle opaque layer of the height fog
+	interpolants.m_TexCoord0.z = ComputeFogOpaqueLayer(worldPosition.xyz);
+#endif
+
+// Directional light
+#ifndef MOD2X_COLORMAP
+
+	#ifdef REFLECTION
+		float intensity = saturate( -1.f * dot(-DIRECTIONAL_LIGHT_VECTOR, vertex.m_Normal) );
+	#else
+		float intensity = saturate( -1.f * dot(DIRECTIONAL_LIGHT_VECTOR, vertex.m_Normal) );
+	#endif
+	
+	// Vertex color
+	interpolants.m_Color0.rgb = intensity * DIRECTIONAL_LIGHT_COLOR * 2.0f;
+	
+	#ifdef VS_LIGHT_INTERPOLATE
+		interpolants.m_Color1.rgb = ( vertex.m_Color0.VCOLORSWIZZLE ).rgb * 4 + AMBIENT_COLOR;
+	#else
+		interpolants.m_Color1.rgb = ( vertex.m_Color0.VCOLORSWIZZLE ).rgb;
+	#endif // VS_LIGHT_INTERPOLATE
+
+#else	//!defined(MOD2X_COLORMAP)
+	interpolants.m_Color1.rgb = ( vertex.m_Color0.VCOLORSWIZZLE ).rgb;
+	
+	#ifdef DUAL_COLOR	//Mod 2X vertex color Tint.
+		interpolants.m_Color1.rgb *= (2.0f*(vertex.m_Color1.VCOLORSWIZZLE).rgb);
+	#endif
+#endif
+
+	// Alpha passthrough
+#if !defined(MOD2X_COLORMAP) || defined(VERTEX_ALPHA)	
+	interpolants.m_Color0.a = ( vertex.m_Color0.VCOLORSWIZZLE ).a;
+#endif
+}
+
+#else
+
+//////////////////////////////////////////////////////////////
+// LOW QUALITY version of the shader, using the Mod2X Colormap.
+//////////////////////////////////////////////////////////////
+#ifdef MOD2X_COLORMAP
+	#if defined(FOUR_BLEND) || defined(DECAL)
+		#define READ_COLORMAP 1
+	#endif
+#endif
+
+struct VERTEX
+{
+	float3 m_Position : X3D_VSIN_POSITION;
+	float2 m_TexCoord0 : X3D_VSIN_TEXCOORD0;
+	float4 m_Color0: X3D_VSIN_COLOR0;
+#if defined(DUAL_COLOR)
+	float4 m_Color1 : X3D_VSIN_COLOR1;
+#endif
+};
+
+struct INTERPOLANTS
+{
+	float4 m_Position  : POSITION;
+	float4 m_TexCoord0 : TEXCOORD0;
+#if defined(WALL_OF_GRASS)
+	float4 m_TexCoord1 : TEXCOORD1;
+#elif defined(READ_COLORMAP)
+    float2 m_TexCoord1 : TEXCOORD1;
+#endif
+	float4 m_Color0    : COLOR0;
+};
+
+/////////////////////////////////////////////////////////////////////////////////////
+// Shader Body - Low Quality
+/////////////////////////////////////////////////////////////////////////////////////
+void main(VERTEX vertex, out INTERPOLANTS interpolants)
+{
+	// Output homogeneous position
+	interpolants.m_Position = mul(float4(vertex.m_Position, 1.0f), WORLD_VIEW_PROJECTION_MATRIX ); 
+	
+#if defined(WALL_OF_GRASS)
+	interpolants.m_TexCoord1 = interpolants.m_Position;	
+#elif defined(READ_COLORMAP)
+	interpolants.m_TexCoord1.xy = TERRAIN_XFORM.xy*vertex.m_Position.xz + TERRAIN_XFORM.zw;
+#endif
+
+	// Fog of war 
+	float2 fogOfWarTexCoord = FogOfWarTextureCoordinates(vertex.m_Position.xyz).xy;
+
+	// Texture coordinate
+	interpolants.m_TexCoord0 = float4(vertex.m_TexCoord0.x, vertex.m_TexCoord0.y, fogOfWarTexCoord.x, fogOfWarTexCoord.y);
+	
+	//handle opaque layer of the height fog
+	interpolants.m_Color0.rgb  = ( vertex.m_Color0.VCOLORSWIZZLE ).rgb;
+	interpolants.m_Color0.a    = ComputeFogOpaqueLayer(vertex.m_Position.xyz);
+
+#ifdef DUAL_COLOR	//Mod 2X vertex color Tint.
+	interpolants.m_Color0.rgb *= (2.0f*(vertex.m_Color1.VCOLORSWIZZLE).rgb);
+#endif
+}
+
+//LOW QUALITY.
+#endif

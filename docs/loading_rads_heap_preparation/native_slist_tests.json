@@ -1,0 +1,104 @@
+{
+  "passed": true,
+  "native_pe_execution": true,
+  "host_x86_dll_execution": false,
+  "checks": [
+    "exact Windows x86 source19bytes",
+    "actual source zeroes header 0",
+    "actual writes preserve both guards 0",
+    "actual ret4 preserves frame 0",
+    "exact eight instructions executed 0",
+    "actual source zeroes header 165",
+    "actual writes preserve both guards 165",
+    "actual ret4 preserves frame 165",
+    "exact eight instructions executed 165",
+    "actual source zeroes header 255",
+    "actual writes preserve both guards 255",
+    "actual ret4 preserves frame 255",
+    "exact eight instructions executed 255"
+  ],
+  "check_count": 13,
+  "source": {
+    "kernel_path": "C:\\Windows\\SysWOW64\\kernel32.dll",
+    "kernel_sha256": "bafd9e061964642802d62f1eb694e7e4af60de739a8df1a492f90006dc5680f3",
+    "ntdll_path": "C:\\Windows\\SysWOW64\\ntdll.dll",
+    "ntdll_sha256": "7e15bd30890e9bf93b47fc894a68b2445618ee7528eb39584a263b21e112f9df",
+    "export": "RtlInitializeSListHead",
+    "forwarder": "NTDLL.RtlInitializeSListHead",
+    "entry": 1261367536,
+    "rva": 454896,
+    "bytes": 19,
+    "code_hex": "8bff558bec8b4508832000836004005dc20400",
+    "code_sha256": "10daf631a5f53c5d3bfd413d00cd62e1c0b7703f114e95cc635b07705d2d5fe4",
+    "scope": "One source-verified x86 leaf with no calls/imports/absolute references; not an ntdll module loader."
+  },
+  "cases": [
+    {
+      "fill": 0,
+      "visited": [
+        1261367536,
+        1261367538,
+        1261367539,
+        1261367541,
+        1261367544,
+        1261367547,
+        1261367551,
+        1261367552
+      ],
+      "events": [
+        {
+          "operation": "native_leaf_call",
+          "header": 805306624,
+          "before_hex": "0000000000000000",
+          "entry": 1261367536
+        }
+      ]
+    },
+    {
+      "fill": 165,
+      "visited": [
+        1261367536,
+        1261367538,
+        1261367539,
+        1261367541,
+        1261367544,
+        1261367547,
+        1261367551,
+        1261367552
+      ],
+      "events": [
+        {
+          "operation": "native_leaf_call",
+          "header": 805306624,
+          "before_hex": "a5a5a5a5a5a5a5a5",
+          "entry": 1261367536
+        }
+      ]
+    },
+    {
+      "fill": 255,
+      "visited": [
+        1261367536,
+        1261367538,
+        1261367539,
+        1261367541,
+        1261367544,
+        1261367547,
+        1261367551,
+        1261367552
+      ],
+      "events": [
+        {
+          "operation": "native_leaf_call",
+          "header": 805306624,
+          "before_hex": "ffffffffffffffff",
+          "entry": 1261367536
+        }
+      ]
+    }
+  ],
+  "source_hashes": {
+    "test_native_slist.py": "bbb460c6795f472cbcbfb5dae09bce9bc10c6da6f1d81cc4378a03ab5b06454b",
+    "native_slist.py": "7d73739f62c6d6a724a5ee5b0f6169604f17e78c0c9672099423ff3e5a727610"
+  }
+}

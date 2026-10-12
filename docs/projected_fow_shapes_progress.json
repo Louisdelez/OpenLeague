@@ -1,0 +1,40 @@
+{
+  "updated_utc": "2026-10-04T19:00:46.094352+00:00",
+  "complete": false,
+  "client_tests_passed": 85,
+  "client_build_passed": true,
+  "native_circle_stencils": 24,
+  "native_cone_stencils": 32,
+  "native_circle_addresses": 368,
+  "native_cone_addresses": 429,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Executed original6B14E0 generator with actual circle/cone vtables, radius/predicate methods, original memset and add-region without runtime adapters.",
+    "Rust circle mask matches native strict radius, nearest-even bound rounding, grid-point sampling and off-map clipping for recorded8/128cell cases.",
+    "Rust cone masks preserve native0x5F3759DF approximation and SSE operation order rather than exact normalization.",
+    "Original counters and vertically flipped output pixels independently checked against generated word bits."
+  ],
+  "limits": [
+    "Recorded shapes have owner pointer0, scale1, bias0 and occlusion flagfalse. Owner-dependent modifiers and occluded branch remain unqualified.",
+    "Cone direction/threshold configuration and live source collection have not been connected.",
+    "Native x87 extended precision outside supplied radius cases and arbitrary non-power-of-two dimensions remain unqualified.",
+    "Previous96-stage GPU diagnostic is separate; current ordinary rendering has not been rerun and real FOW is not bound.",
+    "Entire24-domain game remains incomplete."
+  ],
+  "next_actions": [
+    "Recover occluded source path6B1140 and its terrain/height queries; qualify owner-dependent shape modifiers and live source configuration.",
+    "Connect source stencils with counted raw visibility and real source lifecycle, then upload/fade/blur/overlay.",
+    "Resolve actual Map10 extent/config and qualify current normal gameplay rendering."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_circle_stencil_contract.json": "c6e31eaa67ce6048d4e81bb2072a75f80321c75d8a5d0510a877ea366fcb8a91",
+    "data/4.20/fow_cone_stencil_contract.json": "7605e88d90ccbcefdb4530ee7c36a1f9dd190b622944f54a384f2289f5a72e4a",
+    "crates/client/src/fow_shapes.rs": "0288a8ef1f26a358b969dd74e139f4bcbef0365aa85e725f72acfae857d2227f",
+    "tools/probe_fow_circle_stencil.py": "803f9c939c3ad6e9c2016ad1bafae3503a19364ed901adb493a3cbbbc230c9a9",
+    "tools/probe_fow_cone_stencil.py": "29591e1515975a9a712a9475965bc63295ddb588beb3d0c3905fc23dbd6eb953",
+    "logs/fow-shapes-tests.log": "773ffd56a1d69a5cf42343b15ff8e198e352e1f330e33ed610b161e2a2535027",
+    "logs/fow-shapes-build.log": "b7e28d76e3f8bc47cee2b6333522a4d75ed3f8031b6d21127a6d2888978506d2",
+    "target/debug/openleague-client.exe": "ffcb2c8a464ee4b5e00c630dedd93f8c3e34b131370693559ce70dd4c203a6ff"
+  }
+}

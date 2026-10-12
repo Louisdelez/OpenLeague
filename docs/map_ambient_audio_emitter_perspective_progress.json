@@ -1,0 +1,30 @@
+{
+  "updated_utc": "2026-10-04T03:56:16.695319+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_emitter_perspective.py": "ce42a4acfc785acc0c0d3b4bf9aed1fc20bd659cab46f82a19fbe34ea98e8761",
+    "data/4.20/audio_emitter_perspective_contract.json": "e06df04ad0add7d8c7ac5cdf94e85e6a0daa02dd85e57d5ea0cbab1be5f4a942",
+    "crates/core/src/audio_emitter_camera_volume.rs": "dc32124a3e59b0fbee2898143e4c311285faa6cd39cb5b5eda77dc2a85c340d2",
+    "logs/native-audio-emitter-perspective-core-tests.log": "c0dcc43fe4355bb8054908e7854e1678aa2c40b82522fefc8fc73bdd8a3a52ea"
+  },
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_complete_perspective_volume_cases": 108,
+  "core_tests_passed": 295,
+  "ported": [
+    "Full original8E2F30 raw angleA/angleB, near/far and explicit14BEEA0 midpoint factor",
+    "Native x87FPTAN sequence retained via x86 inline assembly, unsupported angle range/architecture explicit errors",
+    "Original near/far asymmetrical local corners, world transform, planes, bounds and indices via qualified Rust modules"
+  ],
+  "floating_acceptance": "max1e-5absolute or1e-6relative explicit x87/SSE estimate tolerance; indices exact for all108cases",
+  "current_runtime_observation": "crates/client/src/main.rs camera uses Camera3d default projection and hardcoded transform offset340/265. Historical projection params/type/worldmatrix and global14BEEA0 source not bound. Do not claim actual native camera fidelity from core volume API.",
+  "limits": [
+    "Full8E2F30 perspective constructor with native x87FPTAN and all8E1220/8E3350/8E3AA0/66D6E0/8E2C00/8E30D0 dependencies executed. Security check adapted only.",
+    "Parameters angleA/B, near/far, transform and global14BEEA0 factor explicit controlled inputs. Actual runtime parameter meanings/selection not inferred.",
+    "Native near/far use different tangent scaling and asymmetric coordinates; retain original formulas, no generic FOV/aspect substitute.",
+    "SSErsqrt coefficient tolerance explicit; x87 processor/emulator differences require stated corner comparison tolerance. Runtime camera binding and particle lifecycle remain incomplete.",
+    "Source core295passed. Actual runtime camera defaults/parameter writers, particle bounds/lifetime/config/child status and joined client cleanup integration remain incomplete.",
+    "Prior client18test evidence and standalone executables unchanged; audible output unverified."
+  ],
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false
+}

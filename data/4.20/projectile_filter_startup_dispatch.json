@@ -1,0 +1,128 @@
+{
+  "passed": true,
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "cases": [
+    {
+      "rofl": false,
+      "spectator": false,
+      "replay": false,
+      "alternate": false,
+      "path": "ordinary_skip"
+    },
+    {
+      "rofl": false,
+      "spectator": false,
+      "replay": false,
+      "alternate": true,
+      "path": "ordinary_skip"
+    },
+    {
+      "rofl": false,
+      "spectator": false,
+      "replay": true,
+      "alternate": false,
+      "path": "observer_replay_other"
+    },
+    {
+      "rofl": false,
+      "spectator": false,
+      "replay": true,
+      "alternate": true,
+      "path": "observer_replay_A4"
+    },
+    {
+      "rofl": false,
+      "spectator": true,
+      "replay": false,
+      "alternate": false,
+      "path": "observer_replay_other"
+    },
+    {
+      "rofl": false,
+      "spectator": true,
+      "replay": false,
+      "alternate": true,
+      "path": "observer_replay_A4"
+    },
+    {
+      "rofl": false,
+      "spectator": true,
+      "replay": true,
+      "alternate": false,
+      "path": "observer_replay_other"
+    },
+    {
+      "rofl": false,
+      "spectator": true,
+      "replay": true,
+      "alternate": true,
+      "path": "observer_replay_A4"
+    },
+    {
+      "rofl": true,
+      "spectator": false,
+      "replay": false,
+      "alternate": false,
+      "path": "rofl_AC0"
+    },
+    {
+      "rofl": true,
+      "spectator": false,
+      "replay": false,
+      "alternate": true,
+      "path": "rofl_AC0"
+    },
+    {
+      "rofl": true,
+      "spectator": false,
+      "replay": true,
+      "alternate": false,
+      "path": "rofl_AC0"
+    },
+    {
+      "rofl": true,
+      "spectator": false,
+      "replay": true,
+      "alternate": true,
+      "path": "rofl_AC0"
+    },
+    {
+      "rofl": true,
+      "spectator": true,
+      "replay": false,
+      "alternate": false,
+      "path": "rofl_AC0"
+    },
+    {
+      "rofl": true,
+      "spectator": true,
+      "replay": false,
+      "alternate": true,
+      "path": "rofl_AC0"
+    },
+    {
+      "rofl": true,
+      "spectator": true,
+      "replay": true,
+      "alternate": false,
+      "path": "rofl_AC0"
+    },
+    {
+      "rofl": true,
+      "spectator": true,
+      "replay": true,
+      "alternate": true,
+      "path": "rofl_AC0"
+    }
+  ],
+  "findings": [
+    "Startup string searches at5905DF/590603/590627 use spectator/replay/.rofl and populate flags1554/1542/1541.",
+    "Without these modes branch590B50 jumps59033C without activation; .rep branch was separately identified earlier."
+  ],
+  "limits": [
+    "Original dispatch block executes; parser outputs supplied as flags, not full command-line parser execution.",
+    "Alternate observer path from590B84 still requires tracing to its eventual manager call.",
+    "Other runtime transitions and all gameplay/team-mask producers remain open."
+  ]
+}

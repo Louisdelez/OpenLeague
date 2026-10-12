@@ -1,0 +1,63 @@
+{
+  "updated_utc": "2026-10-04T14:00:56.218720+00:00",
+  "complete": false,
+  "client_tests_passed": 46,
+  "build_passed": true,
+  "gpu_client_run": true,
+  "runtime_particle_rendered": false,
+  "geometry_measurement": {
+    "clipped_triangles": 49,
+    "complete": false,
+    "diagnostic_angle_degrees": 0,
+    "diagnostic_half_size": 500,
+    "diagnostic_only": true,
+    "frames_after_geometry_available": 60,
+    "limits": [
+      "Actual restored GLB mesh positions and GlobalTransforms measured in live client, not a synthetic flat surface.",
+      "Patch size/orientation supplied explicitly for diagnostic only; native emitter binding/FOW/depth/sampler/lifetime and actual GPU projected consumer still incomplete."
+    ],
+    "native_center_xz": [
+      7684.98193359375,
+      6934.240234375
+    ],
+    "restored_terrain_meshes": 82,
+    "runtime_particle_rendered": false,
+    "source_triangles": 1163,
+    "world_y_max": -5.75902795791626,
+    "world_y_min": -5.946462154388428
+  },
+  "restored_map_sha256": "909513a80e01ae67ee6b15783177a2891363efc640ca47d727f189bcaa429c1a",
+  "receipt": "docs/projected_terrain_live_capture.json",
+  "executables": [
+    {
+      "path": "target/debug/openleague-server.exe",
+      "bytes": 4609536,
+      "sha256": "396824a372935c5a2ee409701c995e0edde0bb018d990633cf884a463b04d3e6"
+    },
+    {
+      "path": "target/debug/openleague-client.exe",
+      "bytes": 119624192,
+      "sha256": "e803a439ca5891474299632b47a0e8f43562eb823bafe5767f1c49fc74ff306f"
+    },
+    {
+      "path": "launcher/src-tauri/target/debug/openleague-launcher.exe",
+      "bytes": 12411904,
+      "sha256": "ac22a8346c0b2af574bdee16311acc510e657c73ca5f85584223f0049c4f57de"
+    }
+  ],
+  "files_sha256": {
+    "crates/client/src/projected_terrain.rs": "58e93cfee8a18503c4a2746a3b50fc048a137de35da9fc1cc1d0352879703547",
+    "crates/client/src/main.rs": "9527a05cb0ed6bb422b24695ce0bd2451a7d45bbf7f375c4b7c96471eb4baa2f",
+    "logs/projected-terrain-tests.log": "3c53868184eb17fe59f9f910c45853f5f378f6642e8ba1c0b7f4822e60427904",
+    "logs/projected-terrain-build.log": "5ffd8755e482d9f8983e029ae51af6d735fbcae0043b47c5253e2d3e1d98a9b4",
+    "docs/projected_terrain_live_capture.json": "9ee4c124250e5ce23a3f78b7d76a3a000c0730e6d81bf050df3abe8539f7d861",
+    "logs/projected-terrain-loaded.json": "a6c4115b76bdb49b32ac68b69ee959a69c7451263e2d1c2d330905ab93bd8b34"
+  },
+  "limits": [
+    "Live client geometry cache includes the82height-blend terrain meshes with TT_Jungle1/TT_Lanes1 materials. Other floor/stair/bridge/boss-floor receiving surfaces and original type7 spatial query selection remain to qualify.",
+    "World triangles are actual restored GLB vertices transformed by actual GlobalTransforms; cache refreshes changed transforms, asset events and disappeared entities.",
+    "World-space clipped mesh/UVs/normals prepared; no live projected particle shader/material/emitter consumer yet. No visible projected effect claimed.",
+    "Explicit fixture patch dimensions used to measure geometry only; native p-scale/local-orient, bindings/depth/sampler/FOW/lifetime and texture resolver still open.",
+    "Native full renderer and complete24domain game remain unachieved."
+  ]
+}

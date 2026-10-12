@@ -1,0 +1,1040 @@
+{
+  "saved_utc": "2026-10-10T21:40:14.055024+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": "Resource manager empty lifetime, normalized cache lookup and paired temporary cleanup",
+  "previous_qualification": {
+    "path": "docs/loading_standard_validation.json",
+    "sha256": "cb966f4328ea827eb7ca398d501ab8a94b16f68807cb395371b4f4a123f7f84d"
+  },
+  "assembled_sha256": "a07e6fa9a55207acb233a750cfca64331f5d54da498ef687f5ce1bbe5fd39d9e",
+  "installed_sha256": "195932cf414ea3cbd6e80053cf297b502f36d64c4d94750186e9f839c15347f8",
+  "core_tests": {
+    "passed": 892,
+    "failed": 0,
+    "filtered": 480,
+    "log": "logs/core-loading-resource-manager-tests.log",
+    "log_sha256": "face30e568d86314ca2af3e27269274b71526fe7ec0bc85afba74427babb83f8",
+    "executable": "target/debug/deps/openleague_core-49a622d61db58080.exe",
+    "executable_sha256": "f39d1a3ca0fb93d20a9f00d99f9afe199d79904f9166ac61ec31774402423614",
+    "required_tests": [
+      "audio_loading_owned_group_keeps_pending_key_allocation_and_original_name_on_assignment_failure",
+      "audio_loading_owned_group_preserves_two_cleanup_failures_and_retries_each_owner_independently",
+      "audio_loading_owned_group_retains_reset_only_key_after_each_fallible_reset_write",
+      "audio_loading_owned_group_success_obeys_key_reset_then_name_discard_and_rejects_occupied_slot",
+      "audio_loading_owned_string_failures_before_transfer_preserve_both_owners",
+      "audio_loading_owned_string_matches128_native_success_cases_and_final_read_order",
+      "audio_loading_owned_string_partial_publication_never_releases_old_buffer_twice",
+      "audio_loading_owned_string_retains_primary_cleanup_and_recoverable_ownership",
+      "audio_loading_resource_cache_corrupt_tree_cycle_is_explicit_and_key_still_retirable",
+      "audio_loading_resource_cache_failed_copy_publication_keeps_detached_allocation",
+      "audio_loading_resource_cache_group_preserves_two_owners_and_primary_lookup_failure",
+      "audio_loading_resource_cache_matches66_native_hits_and_full_lookup_retirement_traces",
+      "audio_loading_resource_cache_matches8_native_misses_without_calling_factory",
+      "audio_loading_resource_cache_non_c_locale_is_explicit_and_empty_names_skip_tolower",
+      "audio_loading_resource_cache_reset_write_failures_retry_without_read_or_double_free",
+      "audio_loading_resource_manager_each_retirement_write_and_free_failure_is_retryable",
+      "audio_loading_resource_manager_every_constructor_host_failure_keeps_raw_ownership",
+      "audio_loading_resource_manager_hash_matches264_native_inputs_including_signed_bytes",
+      "audio_loading_resource_manager_matches_two_native_lifetimes_and_exact_heap_writes",
+      "audio_loading_resource_manager_null_producer_and_external_global_are_distinct",
+      "audio_loading_resource_manager_refuses_populated_cache_without_free_or_mutation",
+      "audio_loading_screen_packet_delivers_two_owners_and_independent_cleanup_errors_to_its_caller",
+      "audio_loading_screen_packet_matches1600_existing_native_records_all_flags",
+      "audio_loading_screen_packet_reports_absent_ui_and_cleans_tutorial_name_on_clock_error",
+      "audio_loading_screen_packet_standard_drops_name_after_unsupported_ui_without_reset",
+      "audio_loading_screen_packet_standard_matches64_native_empty_name_calls",
+      "audio_loading_screen_packet_tutorial_matches256_first_name_native_contracts",
+      "audio_loading_screen_packet_x87_bits_match26_physical_load_store_cases",
+      "audio_loading_standard_prefix_consumer_retires16_partial_publications_without_second_old_free",
+      "audio_loading_standard_prefix_consumer_returns_owned_failure_until_explicit_retry",
+      "audio_loading_standard_prefix_keeps_service_captured_before_name_provider",
+      "audio_loading_standard_prefix_matches128_native_stops_and_distinct_cleanup",
+      "audio_replay_production_image_contains_original_uninitialized_banks_and_independent_owned_storage",
+      "audio_replay_production_image_rejects_foreign_identity_layout_and_truncation_without_fallback",
+      "audio_replay_windows_loading_deferred_descriptor_survives_nested_lease_and_failed_close_then_retry_releases_keepalive",
+      "audio_replay_windows_loading_group_retains_both_descriptors_until_independent_retries_complete",
+      "audio_replay_windows_loading_group_retains_reset_only_lease_after_all_heap_buffers_are_released",
+      "audio_replay_windows_loading_keeps_missing_standard_ui_and_unknown_targets_explicit",
+      "audio_replay_windows_loading_nested_slots_do_not_reuse_active_descriptors_or_retain_successful_keepalives",
+      "audio_replay_windows_loading_rejects_truncation_before_any_runtime_mutation",
+      "audio_replay_windows_loading_standard_matches64_empty_names_through_real_metadata",
+      "audio_replay_windows_loading_standard_packet_uses_real_resource_manager_and_retires_normalized_key_on_factory_boundary",
+      "audio_replay_windows_loading_standard_prefix_uses_real_name_skin_and_owned_override_at_both_stops",
+      "audio_replay_windows_loading_tutorial_first_names_use_real_clock_once_and_retire_with_owner",
+      "audio_replay_windows_loading_uses_real_trees_and_consumer_for48_hot_packets",
+      "audio_replay_windows_resource_manager_constructs_real_initializers_fourteen_allocations_and_retires_empty_lifetime",
+      "audio_replay_windows_resource_manager_failed_final_free_retains_bank_and_global_until_retry_without_double_release",
+      "audio_replay_windows_resource_manager_rejects_external_global_before_initialization_or_allocation",
+      "audio_replay_windows_resource_manager_retirement_checks_active_status_before_mutation",
+      "audio_loading_resource_index_matches8_native_insertions_including_exact_read_order",
+      "audio_loading_resource_index_each_native_read_failure_preserves_partial_constructor_ownership"
+    ],
+    "original_required_test_count": 55,
+    "effective_required_test_count": 51,
+    "required_test_correction": {
+      "path": "docs/loading_resource_manager_sources/required_tests_correction.json",
+      "sha256": "9be8760164910052f6c7ff44ca4e46568a01283d18e0ee63c34f89dd8788ce78"
+    },
+    "unchanged_filtered_tests_not_executed": [
+      "attack_damage_is_authoritative_and_respects_cooldown",
+      "catalog_contains_native_roster",
+      "movement_routes_around_blocked_cells",
+      "reconnect_fills_the_team_with_a_free_slot",
+      "rejects_nonfinite_and_wall_destinations",
+      "simulation_limits_lobby_and_forbids_friendly_fire"
+    ],
+    "exact_cache_regression_test": {
+      "passed": 1,
+      "failed": 0,
+      "filtered": 1371,
+      "test": "audio_replay_windows_transport::loading_packets::tests::audio_replay_windows_loading_standard_packet_uses_real_resource_manager_and_retires_normalized_key_on_factory_boundary",
+      "log": "logs/core-loading-resource-manager-cache-exact-test.log",
+      "log_sha256": "a9ca151106b2125dc22cef8c4c71d45390d06953693d51fa970e851b6ac7d816",
+      "executable": "target/debug/deps/openleague_core-49a622d61db58080.exe",
+      "executable_sha256": "f39d1a3ca0fb93d20a9f00d99f9afe199d79904f9166ac61ec31774402423614"
+    }
+  },
+  "client": {
+    "passed": true,
+    "complete": false,
+    "commands": 11,
+    "workers": 16,
+    "workers_scope": "nine legacy commands plus clock; events publishes only final active workers",
+    "events_workers_created_reported": false,
+    "executable_sha256": "a4ab0340240e49b27edbcbc36efe005b701dba6cc670e07d681b5713ef20606c",
+    "executable": "E:\\OpenLeague\\target\\debug\\openleague-client.exe",
+    "command_flags": [
+      "--native-process-clock-probe",
+      "--native-replay-events-probe",
+      "--native-replay-game-manager-probe",
+      "--native-replay-recording-stream-probe",
+      "--native-replay-recording-file-probe",
+      "--native-replay-stream-running-probe",
+      "--native-replay-stream-opening-probe",
+      "--native-replay-stream-transport-probe",
+      "--native-replay-configuration-probe",
+      "--native-replay-runtime-probe",
+      "--native-replay-service-probe"
+    ],
+    "logs": {
+      "logs/client-loading-resource-manager-command-run.json": "cb5e275baefe134370c15b0c0a35a11b0b433bf223b4d748a377dc4380dbd1d2",
+      "logs/client-loading-resource-manager-clock.json": "62a7e3e62918243e44366479d9c6282d238c39ea82459acefa07aadfa93fb239",
+      "logs/client-loading-resource-manager-clock.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "logs/client-loading-resource-manager-events.json": "c4251bb3afd7cce856338454c1d48cdc2913d998c14ca851f18f1aea62092f53",
+      "logs/client-loading-resource-manager-events.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "logs/client-loading-resource-manager-probe.json": "4dd0773ba9a1a503625930d87f5ec773596e29b611ce80c6b9b809f4656fe94f",
+      "logs/client-loading-resource-manager-probe.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "logs/client-loading-resource-manager-stream-regression.json": "67089ef1d9d58f28833ece58ebd05fb2fbce0bd677fad2ee16627adb534a9b00",
+      "logs/client-loading-resource-manager-stream-regression.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "logs/client-loading-resource-manager-file-regression.json": "c6341c331a70449a23edd1cc21ae8062f4dc8491ddc75d6275fba34d49caa777",
+      "logs/client-loading-resource-manager-file-regression.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "logs/client-loading-resource-manager-running-regression.json": "a4747c79ee070d5528f1bb27764d075b0964f75c36e2ff32c5b6eadd2f6a9597",
+      "logs/client-loading-resource-manager-running-regression.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "logs/client-loading-resource-manager-opening-regression.json": "f77136792c21ae4240e0eb18c5334b20f2cf549a88d92b5094ff77d76f848a51",
+      "logs/client-loading-resource-manager-opening-regression.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "logs/client-loading-resource-manager-transport-regression.json": "bb16c4678889c3a8ef9c5df60c76f0acb6525c8d702cda1310340e2f0f957348",
+      "logs/client-loading-resource-manager-transport-regression.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "logs/client-loading-resource-manager-base-regression.json": "8e06f4398a5f7ac3e8b68122207178a1e3aa5e3d9355a7a48822ab3fb4932862",
+      "logs/client-loading-resource-manager-base-regression.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "logs/client-loading-resource-manager-runtime-regression.json": "de1e1ac4657910068c59dd8b76727eecb18df1262abe11b98bffefd9096f7b24",
+      "logs/client-loading-resource-manager-runtime-regression.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "logs/client-loading-resource-manager-service-regression.json": "10a3ae0d555c113713b1323e078d8943acebfc2b0cb54a0e91bc405083734030",
+      "logs/client-loading-resource-manager-service-regression.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "disk_outputs": [
+      {
+        "path": "E:\\OpenLeague\\logs\\native-manager-diagnostic-1791668370231264800-1.log",
+        "sha256": "3e8ceffee9c7b9b36f358a39a3e5b0f3c3e780758886b76cb126554928693cf9",
+        "bytes": 241,
+        "lines": 4,
+        "probe": "game-manager"
+      },
+      {
+        "path": "E:\\OpenLeague\\logs\\native-stream-diagnostic-1791668374931840900.log",
+        "sha256": "d8c58836eb847e640dfdd0274efaed418a1946ed1c4e5291b8de3d7e469842f2",
+        "bytes": 233,
+        "lines": 4,
+        "probe": "recording-stream-regression"
+      }
+    ],
+    "clock_summary": {
+      "frame_updates": 7,
+      "paused_frames": 4,
+      "qpf_calls": 1,
+      "qpc_calls": 33,
+      "origin": 863508776966,
+      "frequency": 10000000,
+      "workers": 0,
+      "events_created": 0,
+      "events_closed": 0,
+      "effect_time_after_resume": 0.04079030081629753,
+      "closed_handle_refused_without_mutation": true,
+      "scope_critical_section_reference": 47639896,
+      "scope_critical_sections_before_drop": 1,
+      "critical_section_report_owners_before_drop": 3,
+      "critical_section_report_owners_after_drop": 1,
+      "bank_and_sections_retired": true,
+      "direct_os_deletion_count_observed": false
+    },
+    "events_summary": {
+      "notifications": 4100,
+      "array_frames": 1,
+      "text_frames": 2,
+      "active_workers_after_close": 0,
+      "workers_created_reported": false
+    },
+    "clock_report": {
+      "application_instances": 1,
+      "cleanup_errors": [],
+      "closed": {
+        "application": {
+          "closed": true,
+          "crt": {
+            "cookie": 2650903011,
+            "cookie_complement": 1644064284,
+            "critical_sections": 0,
+            "heap_allocations": 2,
+            "heap_blocks": 0,
+            "heap_failures": 0,
+            "heap_frees": 2,
+            "locale_references": 1,
+            "lock_failures": 0,
+            "mb_references": 0,
+            "retained_mirrors": 0,
+            "slot_index": 4294967295
+          },
+          "handle_failures": 0,
+          "native_source_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+          "transport": null,
+          "worker_completions": 0,
+          "worker_failures": [],
+          "workers_closed": 0,
+          "workers_created": 0
+        },
+        "f32_handle_rejection": "process clock runtime is shut down",
+        "process_clock": {
+          "crt_allocations": 0,
+          "event_close_failures": 0,
+          "events_closed": 0,
+          "events_created": 0,
+          "failure": null,
+          "frequency": 10000000,
+          "initialized": true,
+          "inner_mutexes": 0,
+          "origin": 863508776966,
+          "pending_mirrors": 0,
+          "qpc_calls": 33,
+          "qpf_calls": 1,
+          "registered_cleanups": []
+        },
+        "raw_handle_rejection": "process clock runtime is shut down",
+        "rejected_calls_preserved_clock_snapshot": true
+      },
+      "complete": false,
+      "configuration": {
+        "default_loaded": true,
+        "default_path": "\\\\?\\E:\\OpenLeague\\data\\4.20\\configuration\\defaults\\Game.cfg",
+        "layout_mode": 0,
+        "parse_warnings": 0,
+        "user_loaded": false,
+        "user_path": "E:/OpenLeague/Config/Game.cfg"
+      },
+      "exercise": {
+        "configured_service": {
+          "DisableCatchup": 1,
+          "PingTimeForReconnectMessage": 5000,
+          "UseLookAhead": 1,
+          "canonical_runtime_bank": true,
+          "float_bits": {
+            "FastForwardSpeed": 1120403456,
+            "HeartbeatDelay": 1036831949,
+            "LagUpdateFreq": 1065353216,
+            "MaxLiveTimeBehind": 1036831949,
+            "SlowFastForwardSpeed": 1082130432,
+            "SpeedupSpeed": 1067869798
+          },
+          "history_mode": 0,
+          "live_allocations": 11,
+          "pointer": 956301312
+        },
+        "frame_updates": 7,
+        "frequency": 10000000,
+        "origin": 863508776966,
+        "paused_frames": 4,
+        "qpf_calls": 1
+      },
+      "exercise_error": null,
+      "normal_application_attachment": true,
+      "passed": true,
+      "probe": "native-process-clock",
+      "retired_runtime": {
+        "active_workers": 0,
+        "critical_section_report_owners": 3,
+        "critical_sections": 1,
+        "engine_allocations": 0,
+        "errors": [],
+        "handles": 0,
+        "scope_critical_section_reference": 47639896
+      },
+      "scope": {
+        "animation_clips_played": false,
+        "canonical_windows_clock": true,
+        "effect_plugin_frames": true,
+        "fifo_contention_exercised": false,
+        "gameplay_complete": false,
+        "loading_packet_dispatched": false,
+        "network_packet_delivery": false,
+        "pause_resume_delivery": "local ordered adapter",
+        "ui_rendered": false
+      },
+      "service_allocations_after_close": 0,
+      "shared_drop": {
+        "app_dropped": true,
+        "bank_and_sections_retired": true,
+        "clock_handle_dropped": true,
+        "critical_section_failures": [],
+        "critical_section_report_owners": 1,
+        "direct_os_deletion_count_observed": false
+      },
+      "trace": [
+        {
+          "phase": "attached",
+          "process_clock": {
+            "crt_allocations": 0,
+            "event_close_failures": 0,
+            "events_closed": 0,
+            "events_created": 0,
+            "failure": null,
+            "frequency": 0,
+            "initialized": false,
+            "inner_mutexes": 0,
+            "origin": 0,
+            "pending_mirrors": 0,
+            "qpc_calls": 0,
+            "qpf_calls": 0,
+            "registered_cleanups": []
+          }
+        },
+        {
+          "effects": {
+            "animation_delta_bits": 0,
+            "clock": {
+              "delta_bits": 0,
+              "failed": false,
+              "ordinal": 0,
+              "paused": false,
+              "remaining": 0.0,
+              "resume_pending": false,
+              "time": 0.0,
+              "time_bits": 0
+            }
+          },
+          "phase": "first_effect_frame",
+          "raw": {
+            "counter": 863508776996,
+            "frequency": 10000000,
+            "origin": 863508776966,
+            "wall_f32_bits": 910775196
+          }
+        },
+        {
+          "effects": {
+            "animation_delta_bits": 1017562041,
+            "clock": {
+              "delta_bits": 1017562041,
+              "failed": false,
+              "ordinal": 0,
+              "paused": false,
+              "remaining": 0.0,
+              "resume_pending": false,
+              "time": 0.020356999710202217,
+              "time_bits": 1017562041
+            }
+          },
+          "phase": "running",
+          "raw": {
+            "counter": 863508987109,
+            "frequency": 10000000,
+            "origin": 863508776966,
+            "wall_f32_bits": 1017914926
+          }
+        },
+        {
+          "effects": {
+            "animation_delta_bits": 0,
+            "clock": {
+              "delta_bits": 0,
+              "failed": false,
+              "ordinal": 1,
+              "paused": true,
+              "remaining": 0.0,
+              "resume_pending": false,
+              "time": 0.020356999710202217,
+              "time_bits": 1017562041
+            }
+          },
+          "frame": 0,
+          "phase": "paused",
+          "raw": {
+            "counter": 863509090840,
+            "frequency": 10000000,
+            "origin": 863508776966,
+            "wall_f32_bits": 1023447059
+          }
+        },
+        {
+          "effects": {
+            "animation_delta_bits": 0,
+            "clock": {
+              "delta_bits": 0,
+              "failed": false,
+              "ordinal": 1,
+              "paused": true,
+              "remaining": 0.0,
+              "resume_pending": false,
+              "time": 0.020356999710202217,
+              "time_bits": 1017562041
+            }
+          },
+          "frame": 1,
+          "phase": "paused",
+          "raw": {
+            "counter": 863509193687,
+            "frequency": 10000000,
+            "origin": 863508776966,
+            "wall_f32_bits": 1026207837
+          }
+        },
+        {
+          "effects": {
+            "animation_delta_bits": 0,
+            "clock": {
+              "delta_bits": 0,
+              "failed": false,
+              "ordinal": 1,
+              "paused": true,
+              "remaining": 0.0,
+              "resume_pending": false,
+              "time": 0.020356999710202217,
+              "time_bits": 1017562041
+            }
+          },
+          "frame": 2,
+          "phase": "paused",
+          "raw": {
+            "counter": 863509301400,
+            "frequency": 10000000,
+            "origin": 863508776966,
+            "wall_f32_bits": 1029099236
+          }
+        },
+        {
+          "effects": {
+            "animation_delta_bits": 0,
+            "clock": {
+              "delta_bits": 0,
+              "failed": false,
+              "ordinal": 1,
+              "paused": true,
+              "remaining": 0.0,
+              "resume_pending": false,
+              "time": 0.020356999710202217,
+              "time_bits": 1017562041
+            }
+          },
+          "frame": 3,
+          "phase": "paused",
+          "raw": {
+            "counter": 863509403791,
+            "frequency": 10000000,
+            "origin": 863508776966,
+            "wall_f32_bits": 1031823279
+          }
+        },
+        {
+          "effects": {
+            "animation_delta_bits": 1017603005,
+            "clock": {
+              "delta_bits": 1017603005,
+              "failed": false,
+              "ordinal": 2,
+              "paused": false,
+              "remaining": 0.0,
+              "resume_pending": false,
+              "time": 0.04079030081629753,
+              "time_bits": 1025971131
+            }
+          },
+          "phase": "resumed",
+          "process_clock": {
+            "crt_allocations": 1,
+            "event_close_failures": 0,
+            "events_closed": 0,
+            "events_created": 0,
+            "failure": null,
+            "frequency": 10000000,
+            "initialized": true,
+            "inner_mutexes": 1,
+            "origin": 863508776966,
+            "pending_mirrors": 0,
+            "qpc_calls": 33,
+            "qpf_calls": 1,
+            "registered_cleanups": [
+              13521601,
+              13510997
+            ]
+          },
+          "raw": {
+            "counter": 863509608243,
+            "frequency": 10000000,
+            "origin": 863508776966,
+            "wall_f32_bits": 1034567387
+          },
+          "wall_clock_api_f32_bits": 1034567655
+        }
+      ]
+    },
+    "event_report": {
+      "complete": false,
+      "consumers": {
+        "array_frames": 1,
+        "complete": false,
+        "counts": [
+          2,
+          1,
+          41,
+          43
+        ],
+        "decoded_event_ingress": true,
+        "metadata_references": 1,
+        "network_decoder_connected": false,
+        "notifications": 4100,
+        "passed": true,
+        "samples": [
+          17,
+          19,
+          23,
+          29,
+          31,
+          37
+        ],
+        "scratch_bounded": true,
+        "service_packets": {
+          "complete": false,
+          "filtered_context_unchanged": true,
+          "filtered_or_dd_packets": 12,
+          "gameplay_actions": 0,
+          "network_decoder_connected": false,
+          "packet95_empty_receiver_packets": 4,
+          "parent_callback_connected": true,
+          "passed": true,
+          "truncated_packets_rejected": 5
+        },
+        "six_argument_callbacks": 1,
+        "states": {
+          "0": 2,
+          "4294967295": 2,
+          "7": 2
+        },
+        "text_frames": 2,
+        "texts": [
+          "restored-native-replay-metadata",
+          "restored-native-replay-metadata"
+        ]
+      },
+      "passed": true,
+      "retired": {
+        "allocations": 0,
+        "errors": [],
+        "handles": 0,
+        "workers": 0
+      }
+    },
+    "legacy_verifier": {
+      "path": "tools/record_replay_game_manager.py",
+      "sha256": "7f2502bb1739b712acce43d77e72c7f990d9efb7abe7a112315cf5273b4c8810",
+      "prefix": "client-loading-resource-manager-",
+      "command_slice_start": 2,
+      "body_modified": false
+    },
+    "verifier_sha256": "7701fcf6cec4fd862b5579f54f2f0018a2a8208672308abbd43bf0ec8b35966b",
+    "build_and_test_receipts_verified_here": false
+  },
+  "source_and_resource_hashes": {
+    "crates/core/src/audio_loading_owned_string.rs": "b858b526cf523ddb28c8609f9fd8e9a1fbe6e788ab4a17e7cdecbcce9c296cf5",
+    "crates/core/src/audio_loading_owned_string_tests.rs": "d2888eea968d2b0f7b7bd85ba74a7e402c1cc0cef7a4559f4b1ab742d976bf27",
+    "crates/core/src/audio_loading_resource_cache.rs": "c323ab1d4abfa5cb3c4c161fe9257b4796957f353999db860b16e6f6b731c0e8",
+    "crates/core/src/audio_loading_resource_cache_tests.rs": "367781b1fa12c7267df8038b59344e8a60831c877765efb6894aa377f95f9dcd",
+    "crates/core/src/audio_loading_resource_manager.rs": "f675e96033a1245f83bba5958857c7d8dcb099012a9c493a962dfebe43a45591",
+    "crates/core/src/audio_loading_resource_manager_index.rs": "da0dfaae3ea266943cb95387747fa5bffea33c00dac0b6221589acb9c2de4c37",
+    "crates/core/src/audio_loading_resource_manager_index_read_tests.rs": "39d7866e70c0760a53f46fdf6f968303424f678574767489dcd1555037251e84",
+    "crates/core/src/audio_loading_resource_manager_tests.rs": "49201e6e43c7e4900eddfd1e260e15f58f31e1f74fa373934b18e6713be223d8",
+    "crates/core/src/audio_loading_screen_packet.rs": "e0b4030052022e5cf8a29816be7134c35595378d8843c2abb6cfb333162ab34d",
+    "crates/core/src/audio_loading_screen_packet_tests.rs": "157cc5ffe65d7761a454c79052d286137a0689db26d8314bd5482ffb5567e7b5",
+    "crates/core/src/audio_replay_runtime_image.rs": "2750a3891aa10896ea770c65133925230101dfafe91e3881d3e2c180930c2d18",
+    "crates/core/src/audio_replay_windows_loading_packets.rs": "eeb6e6fd939dffaff0c699d5750313625f85d535f9a195d8519dfbfada93d539",
+    "crates/core/src/audio_replay_windows_loading_retirement.rs": "67c3af0c595f3033b8c8c1ca58f5dc6c37d6113c5ada5fa0591b2b98a011cc86",
+    "crates/core/src/audio_replay_windows_loading_retirement_tests.rs": "1f978e4f17ac00816a38ca82d2dafc6beba09cdb52fd71858e3311107dbf8679",
+    "crates/core/src/audio_replay_windows_resource_manager.rs": "65cbaa5faef5acedd7613c2396074d212369ed31698914856bb811434cfe4acc",
+    "crates/core/src/audio_replay_windows_resource_manager_tests.rs": "7c5f750ae83a32f9a3d3fa747357744e9f45990969ae21611ad140b278cc39c1",
+    "crates/core/src/audio_replay_windows_transport.rs": "7f7e0376b69f5e8520d58430790f464464b2c883f3deb6eab7ac5ae09cc3da6f",
+    "crates/core/src/lib.rs": "b0524f5588ac1b22c98d0bc5a1171923103f274e0bc55e38a16ce758f7e5758b",
+    "data/4.20/loading_resource_cache_contract.json": "0644dc8a487d219f873c97834e80570984d4d507fb8d6bacb4149267d2390b31",
+    "data/4.20/loading_resource_index_read_contract.json": "cefe4ce9bb1ba561fce8825553ed6a15d0dc395e6aa680ce4bd8e5fdf8413333",
+    "data/4.20/loading_resource_manager_null_probe.json": "cd674797956ec636552770a1a08a0a1c8d145c57ba9bad61935dc45232902c2d",
+    "data/4.20/loading_resource_manager_oracle.json": "a85c4ceb614ca384abd8209295253c1e35d1f5cfe65169444f7b86ac8fa97f61",
+    "data/4.20/runtime/replay_runtime_image.bin": "d2d0a8517da861a959bbb4f6914573a7897c6f78c1f1d8d7e6e90b50e50a5099",
+    "data/4.20/runtime/replay_runtime_image_manifest.json": "2aa15e7601ffe9cb93696417a105f1e07b68be39ff4bd18f749be036d2a0e19c",
+    "tools/extract_replay_runtime_image.py": "e7976e7cb7d313605da012bb31ce113cf94ca7c88a3efa35b08298e1ee4167d0",
+    "tools/run_loading_resource_manager_probes.ps1": "fcad45e28c85bce554722cb8b38bd29a9f40f9c7786e5e1e02c2e78a9987dfbc"
+  },
+  "client_source_hashes": {
+    "crates/client/src/main.rs": "60ead59c1c409a8991c08c0c9370e8edc40acaeaa5b23f6968f26fb0fca55f2f",
+    "crates/client/src/native_effect_clock.rs": "d5e663ebd9d5a95c6dcb14996fc0d7e3e4d1e4c7e538256199c4bbdb11f4a190"
+  },
+  "qualified_repairs": [
+    {
+      "path": "crates/core/src/audio_loading_resource_manager_index.rs",
+      "installed_sha256": "b671fc4a35a1bc6dfe7d95d6fe0ee0256b63d4eb6790788b5d9233c35899e9ff",
+      "qualified_sha256": "da0dfaae3ea266943cb95387747fa5bffea33c00dac0b6221589acb9c2de4c37",
+      "authorized_predecessor_sha256": "b671fc4a35a1bc6dfe7d95d6fe0ee0256b63d4eb6790788b5d9233c35899e9ff",
+      "added_file": false,
+      "candidate": "audio_loading_resource_manager_index.rs"
+    },
+    {
+      "path": "crates/core/src/audio_loading_resource_manager_index_read_tests.rs",
+      "installed_sha256": null,
+      "qualified_sha256": "39d7866e70c0760a53f46fdf6f968303424f678574767489dcd1555037251e84",
+      "authorized_predecessor_sha256": null,
+      "added_file": true,
+      "candidate": "audio_loading_resource_manager_index_read_tests.rs"
+    },
+    {
+      "path": "crates/core/src/audio_replay_windows_loading_retirement_tests.rs",
+      "installed_sha256": "73ec176c36c32b0b98ef0b2654289a95d71a1af5f2ec897b46cae12a7afe9204",
+      "qualified_sha256": "1f978e4f17ac00816a38ca82d2dafc6beba09cdb52fd71858e3311107dbf8679",
+      "authorized_predecessor_sha256": "1a42819dabcf94f6b7b67ba1b509752c20dd5f4ef7d872fbbe395778a2f8879d",
+      "added_file": false,
+      "candidate": "review/test_binding_repair/audio_replay_windows_loading_retirement_tests.rs"
+    },
+    {
+      "path": "data/4.20/loading_resource_index_read_contract.json",
+      "installed_sha256": null,
+      "qualified_sha256": "cefe4ce9bb1ba561fce8825553ed6a15d0dc395e6aa680ce4bd8e5fdf8413333",
+      "authorized_predecessor_sha256": null,
+      "added_file": true,
+      "candidate": "loading_resource_index_read_contract.json"
+    }
+  ],
+  "repair_manifest": {
+    "path": "docs/loading_resource_manager_sources/review/index_read_repair/repair_manifest.json",
+    "sha256": "467914aefc209b70c01212083728447cbc8302e0abc167f674d1d1d233e9bec6",
+    "added_tests": [
+      "audio_loading_resource_index_matches8_native_insertions_including_exact_read_order",
+      "audio_loading_resource_index_each_native_read_failure_preserves_partial_constructor_ownership"
+    ],
+    "added_files": [
+      "crates/core/src/audio_loading_resource_manager_index_read_tests.rs",
+      "data/4.20/loading_resource_index_read_contract.json"
+    ],
+    "native_validation_limits": [
+      "Only four actual constructor insertions per fill dynamically qualified.",
+      "Rotation read repairs are static opcode comparisons; these fixed keys do not rotate.",
+      "New Rust tests are prepared, not executed here.",
+      "No real provider or nonempty UI connection."
+    ],
+    "candidate_historical_execution_flags_preserved": true
+  },
+  "repair_installation": {
+    "receipt": "docs/loading_resource_manager_sources/index_repair_installed.json",
+    "receipt_sha256": "50cc55387d9f1460d08fa71b5d6b0f0336ab7de267793b0449fbc6f7a051af16",
+    "installed_utc": "2026-10-10T21:01:42.295798+00:00",
+    "backup": "E:\\OpenLeague\\docs\\plan_history\\resource-index-read-repair-20261010T210142295798Z",
+    "historical_tests_pending_flag_preserved": true
+  },
+  "test_order_repair": {
+    "manifest": "docs/loading_resource_manager_sources/test_order_repair.json",
+    "sha256": "b17f1699ebb35154690809891d34090f828706223b30787f4dfafb8ba3c74c86",
+    "installation": {
+      "receipt": "docs/loading_resource_manager_sources/test_order_repair_installed.json",
+      "receipt_sha256": "28a34e1f434e903ec59c84ae7dccfe9cc6daa68a9b0bebff878f2ef6dd35814e",
+      "installed_utc": "2026-10-10T21:15:15.792780+00:00",
+      "backup": "E:\\OpenLeague\\docs\\plan_history\\resource-test-order-repair-20261010T211515792780Z",
+      "historical_tests_pending_flag_preserved": true
+    },
+    "only_changed_file": "crates/core/src/audio_replay_windows_loading_retirement_tests.rs",
+    "added_tests": [],
+    "full_original_startup_order_qualified": false,
+    "failed_run_diagnostic_only": {
+      "log": "docs/loading_resource_manager_sources/review/test_order_repair/core-tests-before-order-fix.log",
+      "sha256": "fe309ef6235f93114b7a81d504210a2e9271f35dac987dfc10f696a4f97e019d",
+      "passed": 891,
+      "failed": 1,
+      "filtered": 480,
+      "failed_test": "audio_replay_windows_transport::loading_packets::tests::audio_replay_windows_loading_standard_packet_uses_real_resource_manager_and_retires_normalized_key_on_factory_boundary",
+      "client_build_executed": false,
+      "qualification_evidence": false
+    }
+  },
+  "metadata_cache_repair": {
+    "manifest": "docs/loading_resource_manager_sources/metadata_cache_repair.json",
+    "sha256": "18e6be63baf5e88858bd16671a6399c587845c0e7092ab74d731329ae9ca7b04",
+    "installation": {
+      "receipt": "docs/loading_resource_manager_sources/metadata_cache_repair_installed.json",
+      "receipt_sha256": "ed1c9d943b11a0e291b20498df137e749c6b0cf693334ac1964dde5d15327b5d",
+      "installed_utc": "2026-10-10T21:23:45.271023+00:00",
+      "backup": "E:\\OpenLeague\\docs\\plan_history\\resource-metadata-cache-repair-20261010T212345271023Z",
+      "historical_tests_pending_flag_preserved": true
+    },
+    "only_changed_file": "crates/core/src/audio_replay_windows_loading_retirement_tests.rs",
+    "added_tests": [],
+    "cold_path_preserved": true,
+    "exact_cached_owner_and_its_retirement_required": true,
+    "full_original_startup_order_qualified": false,
+    "failed_run_diagnostic_only": {
+      "pipeline_session": 76418,
+      "log": "docs/loading_resource_manager_sources/review/metadata_cache_repair/core-tests-before-cache-fix.log",
+      "sha256": "dbacee076170a68c10f741a7d03aed4e55dfe6253320fce4a5d68ebbb79fabca",
+      "passed": 891,
+      "failed": 1,
+      "filtered": 480,
+      "failed_test": "audio_replay_windows_transport::loading_packets::tests::audio_replay_windows_loading_standard_packet_uses_real_resource_manager_and_retires_normalized_key_on_factory_boundary",
+      "client_build_executed": false,
+      "qualification_evidence": false
+    }
+  },
+  "test_binding_repair": {
+    "manifest": "docs/loading_resource_manager_sources/test_binding_repair.json",
+    "sha256": "a5ca67871ebe3e79b91b7b6056b2ec19ea4173f80f3d0f830b6dfcead48885a5",
+    "installation": {
+      "receipt": "docs/loading_resource_manager_sources/test_binding_repair_installed.json",
+      "receipt_sha256": "63cbb114720ed0c6d93473d9fe8d4f05254688340bfcd88e178732371b66f7ea",
+      "installed_utc": "2026-10-10T21:25:51.042638+00:00",
+      "backup": "E:\\OpenLeague\\docs\\plan_history\\resource-test-binding-repair-20261010T212551042638Z",
+      "historical_tests_pending_flag_preserved": true
+    },
+    "only_changed_file": "crates/core/src/audio_replay_windows_loading_retirement_tests.rs",
+    "added_tests": [],
+    "compiler_failure_diagnostic_only": {
+      "log": "docs/loading_resource_manager_sources/review/test_binding_repair/compile-error-before-mut.log",
+      "sha256": "87ef48773473bf4e95e74179ceaaa6c4b4b2b2b5c358f98f5c6bfbf4d472e095",
+      "error": "E0596",
+      "pipeline_session": 89703,
+      "tests_executed": false,
+      "qualification_evidence": false
+    }
+  },
+  "interrupted_compile_diagnostic_only": {
+    "receipt": "docs/loading_resource_manager_sources/review/interrupted_compile_20261010T205136Z/receipt.json",
+    "receipt_sha256": "925bcf2c8676151ce1b0c6f61fc6da6da28762212b544132bd532b8b2c8a11fd",
+    "log": "docs/loading_resource_manager_sources/review/interrupted_compile_20261010T205136Z/core-loading-resource-manager-tests.log",
+    "log_sha256": "3ca88a4120ac42beb4e5e7d49f74fb5dfcf96d80d7261310feb44908ed08d34b",
+    "reason": "Intentionally stopped only the validated rustc17124 child of pipeline43259 after native index read-order defect confirmation",
+    "tests_executed": false,
+    "qualification_evidence": false
+  },
+  "prepared_loading_resource_provider": {
+    "manifest": "docs/loading_resource_manager_sources/next_provider_preparation/manifest.json",
+    "manifest_sha256": "dde701270da710c68c49890a8eb4669a89b91da4c582fa7670904a5aeff61232",
+    "readme": "docs/loading_resource_manager_sources/next_provider_preparation/README.md",
+    "scratch_environment": "docs/loading_resource_manager_sources/next_provider_preparation/SCRATCH_ENVIRONMENT.md",
+    "integrated": false,
+    "complete": false,
+    "rust_compiled": false,
+    "directory_lifetimes": 4,
+    "directory_calls_with_null_context": 8,
+    "assets_inventoried": 31,
+    "abandoned_provider_attempts_preserved": 2,
+    "provider56_completed": false,
+    "native_ini_completed": false,
+    "loading_ui_completed": false,
+    "historical_next_action_superseded_by": "docs/loading_resource_manager_sources/next_provider_io/manifest.json",
+    "limits": [
+      "Preparation only: integrated=false, complete=false; no Rust compilation or production changes in the frozen package.",
+      "Four directory lifetimes and eight create/cache-hit calls use an explicitly null search context;17 native allocations/frees per lifetime do not qualify a working full provider.",
+      "Both bounded provider attempts failed or stopped: before CreateDirectoryA and at uninitialized CRT execution BB40E64E. Their live-state/error evidence is preserved, not treated as successful provider cleanup.",
+      "The31 inventoried source files are16 INIBIN and15 DDS; inventory/community parsing does not establish native INI loading, physical import, texture upload or rendering.",
+      "Provider56, native INI/fallback, recursive parent/cache publication, populated-provider destruction and complete loading UI remain unfinished.",
+      "The isolated scratch I/O environment is a design only; it has not been implemented or executed by this preparation."
+    ],
+    "next_action": "First implement and test a new isolated scratch I/O environment described by next_provider_preparation/SCRATCH_ENVIRONMENT.md: one declared virtual deployment, real read-only source mapping, explicit scratch-only Config writes, path/reparse escape refusal, actual handle/error behavior, and unchanged source hashes. Preserve the original deployment. Then restart the native provider at its actual entry in a fresh machine state; do not inject success into either abandoned probe. Qualify the real CRT/thread formatting state, provider56, native INI/fallback, publication/recursion/ownership and populated teardown before UI integration. "
+  },
+  "prepared_loading_resource_provider_io": {
+    "manifest": "docs/loading_resource_manager_sources/next_provider_io/manifest.json",
+    "manifest_sha256": "d275c6dc2ab1cfb0416bfff6e6fdecc3bbf2512988b3ae8932507a5c368cb698",
+    "readme": "docs/loading_resource_manager_sources/next_provider_io/README.md",
+    "independent_review": "docs/loading_resource_manager_sources/next_provider_io_review/review_limits.json",
+    "review_sha256": "882c6e50404806350b5e7a71fa1424da83b8e0ffd349c75134acd00c96cd99b1",
+    "integrated": false,
+    "complete": false,
+    "rust_compiled": false,
+    "io_checks_passed": 36,
+    "real_scratch_config_mkdir_result": 1,
+    "provider_complete": false,
+    "native_stop": "CABDA8",
+    "earlier_failed_boundary_preserved": "BB40E64E UcError",
+    "native_ini_complete": false,
+    "loading_ui_complete": false,
+    "prior_preparation_preserved": "docs/loading_resource_manager_sources/next_provider_preparation/manifest.json",
+    "limitations_from_independent_review": [
+      "Confinement requires no concurrent external filesystem mutation. Root setup is not pinned, missing parents cannot be pinned, and parent pins are released before later WriteFile calls. This is not a hardened cross-process sandbox.",
+      "Writable junction fixture creation and hardlink fixture creation were denied with Win32 5. This is an observed OS error, not a claim of automatic approval-review rejection. Tests use narrower read-only checks against real existing Windows junction/hardlink metadata.",
+      "Successful CREATE_ALWAYS and TRUNCATE_EXISTING adapted paths were not executed by the 36 tests. Their code was statically reviewed. The native bounded trace uses mkdir only and does not depend on those modes.",
+      "Scratch Config is initially absent: native CreateDirectory returns1. The existing original D: Config is not changed; historical Config-state/full-startup parity is not claimed.",
+      "No INI/provider success is synthesized. Native provider completion, native teardown at the stopped boundary, texture upload and loading UI remain unqualified."
+    ],
+    "next_action": "Continue in a fresh copy of the confined scratch I/O preparation with genuine native CRT initialization C9A0B9/CABDE8, CA92CB, CB0378 and CAFF53, retaining its process/thread state, then restart the real provider entry toward INI8B0630. Do not synthesize formatting, INI or provider results. The36 I/O checks and real scratch Config mkdir do not complete a provider; CABDA8 remains an explicit stop. Preserve the no-concurrent-filesystem-mutation condition and recorded unexercised write/link cases. "
+  },
+  "client_unit_tests_run_this_lot": false,
+  "prior_client_unit_test_receipt": "docs/process_clock_validation.json",
+  "historical_client_unit_tests": {
+    "passed": 14,
+    "current_core_not_requalified": true,
+    "receipt_sha256": "312ee0b7dcf978c2530a1d479ee27fdd1734267630bfb7c512868d1e12338c9c"
+  },
+  "build_log": {
+    "path": "logs/client-loading-resource-manager-build.log",
+    "sha256": "78a67441c2178cfd84825083ec7625afd87e2aecc1fbb96b0f3300b92bec7161"
+  },
+  "image": {
+    "regions": 73,
+    "bytes": 21110,
+    "sha256": "d2d0a8517da861a959bbb4f6914573a7897c6f78c1f1d8d7e6e90b50e50a5099",
+    "independent_audit": "docs/loading_resource_manager_sources/independent_image_verification.json",
+    "independent_audit_sha256": "760e295eb8a12779d7ad2d693b63f9f5a9ecdc115d5a6ca448d4bd8309132905"
+  },
+  "native_proofs": {
+    "manager": {
+      "path": "data/4.20/loading_resource_manager_oracle.json",
+      "sha256": "a85c4ceb614ca384abd8209295253c1e35d1f5cfe65169444f7b86ac8fa97f61"
+    },
+    "cache": {
+      "path": "data/4.20/loading_resource_cache_contract.json",
+      "sha256": "0644dc8a487d219f873c97834e80570984d4d507fb8d6bacb4149267d2390b31"
+    },
+    "null": {
+      "path": "data/4.20/loading_resource_manager_null_probe.json",
+      "sha256": "cd674797956ec636552770a1a08a0a1c8d145c57ba9bad61935dc45232902c2d"
+    },
+    "repair:data/4.20/loading_resource_index_read_contract.json": {
+      "path": "data/4.20/loading_resource_index_read_contract.json",
+      "sha256": "cefe4ce9bb1ba561fce8825553ed6a15d0dc395e6aa680ce4bd8e5fdf8413333",
+      "verified_json_checks": {
+        "passed": true,
+        "source_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+        "lifetimes": 2,
+        "insertions": 8,
+        "read_operations": 232
+      }
+    }
+  },
+  "native_manager_lifetimes": 2,
+  "manager_allocations_per_lifetime": 14,
+  "native_static_initializers": 4,
+  "bounded_backpointer_fragment": "592E49..592E6A",
+  "native_hash_cases": 264,
+  "native_null_producer_cases": 2,
+  "native_cache_hit_tokens": 66,
+  "native_miss_boundaries": 8,
+  "current_core_tests_added": 27,
+  "qualified_source_file_count": 26,
+  "required_tests_correction": {
+    "schema": 1,
+    "assembled_sha256": "a07e6fa9a55207acb233a750cfca64331f5d54da498ef687f5ce1bbe5fd39d9e",
+    "installed_sha256": "195932cf414ea3cbd6e80053cf297b502f36d64c4d94750186e9f839c15347f8",
+    "reason": "The filtered run selects audio_ or native_clock. Six unchanged lib.rs tests were included by whole-file enumeration after adding only two module exports; they are not executed by this run.",
+    "filters": [
+      "audio_",
+      "native_clock"
+    ],
+    "original_required_core_tests": [
+      "attack_damage_is_authoritative_and_respects_cooldown",
+      "audio_loading_owned_group_keeps_pending_key_allocation_and_original_name_on_assignment_failure",
+      "audio_loading_owned_group_preserves_two_cleanup_failures_and_retries_each_owner_independently",
+      "audio_loading_owned_group_retains_reset_only_key_after_each_fallible_reset_write",
+      "audio_loading_owned_group_success_obeys_key_reset_then_name_discard_and_rejects_occupied_slot",
+      "audio_loading_owned_string_failures_before_transfer_preserve_both_owners",
+      "audio_loading_owned_string_matches128_native_success_cases_and_final_read_order",
+      "audio_loading_owned_string_partial_publication_never_releases_old_buffer_twice",
+      "audio_loading_owned_string_retains_primary_cleanup_and_recoverable_ownership",
+      "audio_loading_resource_cache_corrupt_tree_cycle_is_explicit_and_key_still_retirable",
+      "audio_loading_resource_cache_failed_copy_publication_keeps_detached_allocation",
+      "audio_loading_resource_cache_group_preserves_two_owners_and_primary_lookup_failure",
+      "audio_loading_resource_cache_matches66_native_hits_and_full_lookup_retirement_traces",
+      "audio_loading_resource_cache_matches8_native_misses_without_calling_factory",
+      "audio_loading_resource_cache_non_c_locale_is_explicit_and_empty_names_skip_tolower",
+      "audio_loading_resource_cache_reset_write_failures_retry_without_read_or_double_free",
+      "audio_loading_resource_manager_each_retirement_write_and_free_failure_is_retryable",
+      "audio_loading_resource_manager_every_constructor_host_failure_keeps_raw_ownership",
+      "audio_loading_resource_manager_hash_matches264_native_inputs_including_signed_bytes",
+      "audio_loading_resource_manager_matches_two_native_lifetimes_and_exact_heap_writes",
+      "audio_loading_resource_manager_null_producer_and_external_global_are_distinct",
+      "audio_loading_resource_manager_refuses_populated_cache_without_free_or_mutation",
+      "audio_loading_screen_packet_delivers_two_owners_and_independent_cleanup_errors_to_its_caller",
+      "audio_loading_screen_packet_matches1600_existing_native_records_all_flags",
+      "audio_loading_screen_packet_reports_absent_ui_and_cleans_tutorial_name_on_clock_error",
+      "audio_loading_screen_packet_standard_drops_name_after_unsupported_ui_without_reset",
+      "audio_loading_screen_packet_standard_matches64_native_empty_name_calls",
+      "audio_loading_screen_packet_tutorial_matches256_first_name_native_contracts",
+      "audio_loading_screen_packet_x87_bits_match26_physical_load_store_cases",
+      "audio_loading_standard_prefix_consumer_retires16_partial_publications_without_second_old_free",
+      "audio_loading_standard_prefix_consumer_returns_owned_failure_until_explicit_retry",
+      "audio_loading_standard_prefix_keeps_service_captured_before_name_provider",
+      "audio_loading_standard_prefix_matches128_native_stops_and_distinct_cleanup",
+      "audio_replay_production_image_contains_original_uninitialized_banks_and_independent_owned_storage",
+      "audio_replay_production_image_rejects_foreign_identity_layout_and_truncation_without_fallback",
+      "audio_replay_windows_loading_deferred_descriptor_survives_nested_lease_and_failed_close_then_retry_releases_keepalive",
+      "audio_replay_windows_loading_group_retains_both_descriptors_until_independent_retries_complete",
+      "audio_replay_windows_loading_group_retains_reset_only_lease_after_all_heap_buffers_are_released",
+      "audio_replay_windows_loading_keeps_missing_standard_ui_and_unknown_targets_explicit",
+      "audio_replay_windows_loading_nested_slots_do_not_reuse_active_descriptors_or_retain_successful_keepalives",
+      "audio_replay_windows_loading_rejects_truncation_before_any_runtime_mutation",
+      "audio_replay_windows_loading_standard_matches64_empty_names_through_real_metadata",
+      "audio_replay_windows_loading_standard_packet_uses_real_resource_manager_and_retires_normalized_key_on_factory_boundary",
+      "audio_replay_windows_loading_standard_prefix_uses_real_name_skin_and_owned_override_at_both_stops",
+      "audio_replay_windows_loading_tutorial_first_names_use_real_clock_once_and_retire_with_owner",
+      "audio_replay_windows_loading_uses_real_trees_and_consumer_for48_hot_packets",
+      "audio_replay_windows_resource_manager_constructs_real_initializers_fourteen_allocations_and_retires_empty_lifetime",
+      "audio_replay_windows_resource_manager_failed_final_free_retains_bank_and_global_until_retry_without_double_release",
+      "audio_replay_windows_resource_manager_rejects_external_global_before_initialization_or_allocation",
+      "audio_replay_windows_resource_manager_retirement_checks_active_status_before_mutation",
+      "catalog_contains_native_roster",
+      "movement_routes_around_blocked_cells",
+      "reconnect_fills_the_team_with_a_free_slot",
+      "rejects_nonfinite_and_wall_destinations",
+      "simulation_limits_lobby_and_forbids_friendly_fire"
+    ],
+    "excluded_unchanged_filtered_tests": [
+      "attack_damage_is_authoritative_and_respects_cooldown",
+      "catalog_contains_native_roster",
+      "movement_routes_around_blocked_cells",
+      "reconnect_fills_the_team_with_a_free_slot",
+      "rejects_nonfinite_and_wall_destinations",
+      "simulation_limits_lobby_and_forbids_friendly_fire"
+    ],
+    "effective_required_core_tests": [
+      "audio_loading_owned_group_keeps_pending_key_allocation_and_original_name_on_assignment_failure",
+      "audio_loading_owned_group_preserves_two_cleanup_failures_and_retries_each_owner_independently",
+      "audio_loading_owned_group_retains_reset_only_key_after_each_fallible_reset_write",
+      "audio_loading_owned_group_success_obeys_key_reset_then_name_discard_and_rejects_occupied_slot",
+      "audio_loading_owned_string_failures_before_transfer_preserve_both_owners",
+      "audio_loading_owned_string_matches128_native_success_cases_and_final_read_order",
+      "audio_loading_owned_string_partial_publication_never_releases_old_buffer_twice",
+      "audio_loading_owned_string_retains_primary_cleanup_and_recoverable_ownership",
+      "audio_loading_resource_cache_corrupt_tree_cycle_is_explicit_and_key_still_retirable",
+      "audio_loading_resource_cache_failed_copy_publication_keeps_detached_allocation",
+      "audio_loading_resource_cache_group_preserves_two_owners_and_primary_lookup_failure",
+      "audio_loading_resource_cache_matches66_native_hits_and_full_lookup_retirement_traces",
+      "audio_loading_resource_cache_matches8_native_misses_without_calling_factory",
+      "audio_loading_resource_cache_non_c_locale_is_explicit_and_empty_names_skip_tolower",
+      "audio_loading_resource_cache_reset_write_failures_retry_without_read_or_double_free",
+      "audio_loading_resource_manager_each_retirement_write_and_free_failure_is_retryable",
+      "audio_loading_resource_manager_every_constructor_host_failure_keeps_raw_ownership",
+      "audio_loading_resource_manager_hash_matches264_native_inputs_including_signed_bytes",
+      "audio_loading_resource_manager_matches_two_native_lifetimes_and_exact_heap_writes",
+      "audio_loading_resource_manager_null_producer_and_external_global_are_distinct",
+      "audio_loading_resource_manager_refuses_populated_cache_without_free_or_mutation",
+      "audio_loading_screen_packet_delivers_two_owners_and_independent_cleanup_errors_to_its_caller",
+      "audio_loading_screen_packet_matches1600_existing_native_records_all_flags",
+      "audio_loading_screen_packet_reports_absent_ui_and_cleans_tutorial_name_on_clock_error",
+      "audio_loading_screen_packet_standard_drops_name_after_unsupported_ui_without_reset",
+      "audio_loading_screen_packet_standard_matches64_native_empty_name_calls",
+      "audio_loading_screen_packet_tutorial_matches256_first_name_native_contracts",
+      "audio_loading_screen_packet_x87_bits_match26_physical_load_store_cases",
+      "audio_loading_standard_prefix_consumer_retires16_partial_publications_without_second_old_free",
+      "audio_loading_standard_prefix_consumer_returns_owned_failure_until_explicit_retry",
+      "audio_loading_standard_prefix_keeps_service_captured_before_name_provider",
+      "audio_loading_standard_prefix_matches128_native_stops_and_distinct_cleanup",
+      "audio_replay_production_image_contains_original_uninitialized_banks_and_independent_owned_storage",
+      "audio_replay_production_image_rejects_foreign_identity_layout_and_truncation_without_fallback",
+      "audio_replay_windows_loading_deferred_descriptor_survives_nested_lease_and_failed_close_then_retry_releases_keepalive",
+      "audio_replay_windows_loading_group_retains_both_descriptors_until_independent_retries_complete",
+      "audio_replay_windows_loading_group_retains_reset_only_lease_after_all_heap_buffers_are_released",
+      "audio_replay_windows_loading_keeps_missing_standard_ui_and_unknown_targets_explicit",
+      "audio_replay_windows_loading_nested_slots_do_not_reuse_active_descriptors_or_retain_successful_keepalives",
+      "audio_replay_windows_loading_rejects_truncation_before_any_runtime_mutation",
+      "audio_replay_windows_loading_standard_matches64_empty_names_through_real_metadata",
+      "audio_replay_windows_loading_standard_packet_uses_real_resource_manager_and_retires_normalized_key_on_factory_boundary",
+      "audio_replay_windows_loading_standard_prefix_uses_real_name_skin_and_owned_override_at_both_stops",
+      "audio_replay_windows_loading_tutorial_first_names_use_real_clock_once_and_retire_with_owner",
+      "audio_replay_windows_loading_uses_real_trees_and_consumer_for48_hot_packets",
+      "audio_replay_windows_resource_manager_constructs_real_initializers_fourteen_allocations_and_retires_empty_lifetime",
+      "audio_replay_windows_resource_manager_failed_final_free_retains_bank_and_global_until_retry_without_double_release",
+      "audio_replay_windows_resource_manager_rejects_external_global_before_initialization_or_allocation",
+      "audio_replay_windows_resource_manager_retirement_checks_active_status_before_mutation"
+    ],
+    "added_tests_still_required": [
+      "audio_loading_owned_group_keeps_pending_key_allocation_and_original_name_on_assignment_failure",
+      "audio_loading_owned_group_preserves_two_cleanup_failures_and_retries_each_owner_independently",
+      "audio_loading_owned_group_retains_reset_only_key_after_each_fallible_reset_write",
+      "audio_loading_owned_group_success_obeys_key_reset_then_name_discard_and_rejects_occupied_slot",
+      "audio_loading_resource_cache_corrupt_tree_cycle_is_explicit_and_key_still_retirable",
+      "audio_loading_resource_cache_failed_copy_publication_keeps_detached_allocation",
+      "audio_loading_resource_cache_group_preserves_two_owners_and_primary_lookup_failure",
+      "audio_loading_resource_cache_matches66_native_hits_and_full_lookup_retirement_traces",
+      "audio_loading_resource_cache_matches8_native_misses_without_calling_factory",
+      "audio_loading_resource_cache_non_c_locale_is_explicit_and_empty_names_skip_tolower",
+      "audio_loading_resource_cache_reset_write_failures_retry_without_read_or_double_free",
+      "audio_loading_resource_manager_each_retirement_write_and_free_failure_is_retryable",
+      "audio_loading_resource_manager_every_constructor_host_failure_keeps_raw_ownership",
+      "audio_loading_resource_manager_hash_matches264_native_inputs_including_signed_bytes",
+      "audio_loading_resource_manager_matches_two_native_lifetimes_and_exact_heap_writes",
+      "audio_loading_resource_manager_null_producer_and_external_global_are_distinct",
+      "audio_loading_resource_manager_refuses_populated_cache_without_free_or_mutation",
+      "audio_loading_screen_packet_delivers_two_owners_and_independent_cleanup_errors_to_its_caller",
+      "audio_replay_windows_loading_group_retains_both_descriptors_until_independent_retries_complete",
+      "audio_replay_windows_loading_group_retains_reset_only_lease_after_all_heap_buffers_are_released",
+      "audio_replay_windows_loading_standard_packet_uses_real_resource_manager_and_retires_normalized_key_on_factory_boundary",
+      "audio_replay_windows_resource_manager_constructs_real_initializers_fourteen_allocations_and_retires_empty_lifetime",
+      "audio_replay_windows_resource_manager_failed_final_free_retains_bank_and_global_until_retry_without_double_release",
+      "audio_replay_windows_resource_manager_rejects_external_global_before_initialization_or_allocation",
+      "audio_replay_windows_resource_manager_retirement_checks_active_status_before_mutation"
+    ],
+    "expected_core_passed": 890,
+    "expected_core_filtered": 480,
+    "excluded_tests_executed_or_qualified_here": false,
+    "lib_proof": {
+      "baseline_path": "E:\\OpenLeague\\docs\\plan_history\\resource-manager-20261010T204813385306Z\\files\\crates\\core\\src\\lib.rs",
+      "baseline_sha256": "49d7417a2444e7244a19bb0f689fb5827c1768264f63e1c27d021445ab5d0198",
+      "staged_path": "E:\\mapslol3v3\\loading_resource_manager_integration\\production\\crates\\core\\src\\lib.rs",
+      "staged_sha256": "b0524f5588ac1b22c98d0bc5a1171923103f274e0bc55e38a16ce758f7e5758b",
+      "baseline_is_exact_byte_prefix": true,
+      "appended_bytes_hex": "0d0a707562206d6f6420617564696f5f6c6f6164696e675f7265736f757263655f6d616e616765723b0d0a0d0a707562206d6f6420617564696f5f6c6f6164696e675f7265736f757263655f63616368653b0d0a",
+      "only_added_nonempty_lines": [
+        "pub mod audio_loading_resource_manager;",
+        "pub mod audio_loading_resource_cache;"
+      ]
+    }
+  },
+  "qualified_candidate_manifests": {
+    "cache/manifest.json": "e640282d63b657633e9ecefdb40127071d482595abd0f3d756fc87ba4c53810d",
+    "ownership/stage_manifest.json": "f2eb751b4a8f5fe19e97213cd308964c5bcc9ada51a3e457b5e888c843591356",
+    "manager/stage_manifest.json": "41413037f2d2645b7553fde11b91676e4e08d7bcc0d57128ed85a4f12ae73356"
+  },
+  "candidate_historical_flags_preserved": true,
+  "empty_manager_connected": true,
+  "normalized_cache_connected": true,
+  "paired_owned_cleanup_connected": true,
+  "normal_startup_caller_complete": false,
+  "normal_shutdown_caller_complete": false,
+  "real_resource_factory_connected": false,
+  "real_provider_cache_constructed": false,
+  "populated_provider_destruction_qualified": false,
+  "normal_loading_screen_complete": false,
+  "limits": [
+    "Only the empty manager lifecycle is qualified:14 real allocations, four native static hash initializers and the bounded592E49..592E6A backpointer fragment. The complete normal startup/shutdown callers are not executed by this port.",
+    "The66 native cache hits contain opaque fixture tokens. They prove lookup/comparison and borrowed return only, not actual provider construction or populated destruction. The8 native misses stop before90B520 and their temporary cleanup is a separate abandonment, not native SEH equivalence.",
+    "The additional2 null-allocation producer cases and264 native hash inputs are narrow contracts. They do not establish a functioning resource factory, context directories, INIBIN fallback or textures.",
+    "Windows core tests use the real explicitly initialized manager, metadata providers and packet95 dispatch until the factory90B520 boundary. Diagnostic recipient/service bindings are explicit; normal startup publication and rendered nonempty loading UI remain open.",
+    "Paired String24 guards and lease64 preserve separate cleanup failures and reset-only work. Unresolved cleanup retains its shared bank and close fails. Panic/OOM/abort, arbitrary non-atomic custom deallocation and unqualified tutorial/provider rollback are outside this adaptation.",
+    "The eleven fresh executable commands exercise existing application/clock/replay behavior on the rebuilt client. They do not render or dispatch the new loading UI; resource/ownership paths are exercised by current core tests.",
+    "The14 selected client unit tests in process_clock_validation are historical and were not rerun here. Six unchanged lib.rs tests accidentally listed by whole-file enumeration are filtered out and are not claimed as executed. No visual/audio/network/endurance or human fidelity acceptance is claimed."
+  ],
+  "next_action": "Continue in a fresh copy of the confined scratch I/O preparation with genuine native CRT initialization C9A0B9/CABDE8, CA92CB, CB0378 and CAFF53, retaining its process/thread state, then restart the real provider entry toward INI8B0630. Do not synthesize formatting, INI or provider results. The36 I/O checks and real scratch Config mkdir do not complete a provider; CABDA8 remains an explicit stop. Preserve the no-concurrent-filesystem-mutation condition and recorded unexercised write/link cases. Continue the real resource miss90B520: source context producer9063E0/global2D78F20, directory32 construction90B4A0/90B360/903030/9030C0 and population, provider56 factory9034D0, existence/path resolution9041E0/903EE0 and original INIBIN [Package]FallbackPackage/8B0630, parent905000 and cache publication90B270; preserve source publication-before-INI order and qualify failures/recursion and populated-provider destruction. Then connect the actual resources to 57D775/57D77A loading UI continuation and rendering. Empty manager172, four native hash initializers, bounded backpointers, normalized cache lookup, and paired temporary retirement are qualified in this receipt. Opaque native hit tokens are not constructed providers; Windows currently reaches the explicit90B520 miss boundary. Full normal startup/shutdown callers, screen selection/factories5765F0, service-global publication, actual transport/event delivery, complete UI/audio/gameplay fidelity and all24 domains114 tasks37 requirements remain. Qualify the unintegrated GUI shutdown/error-exit proposal separately. No completed screen or complete game is claimed.",
+  "evidence": {
+    "manifest": "docs/loading_resource_manager_sources/index.json",
+    "sha256": "89aa78141991caa7ef308f3756c96ef6be47aacdc7cd8faf48ee4e6b82d678ee",
+    "qualified_file_count": 26
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "updated_utc": "2026-10-03T22:12:26.342122+00:00",
+  "mapping_contract": "data/4.20/audio_filter_contract.json",
+  "mapping_contract_sha256": "921a962a09a635434bd23c16db56502ea8dbac8f0c5644a616c1134b1e2a26c1",
+  "coefficient_contract": "data/4.20/audio_filter_coefficients_contract.json",
+  "coefficient_contract_sha256": "862a4dae07d1553f24f1537589583ab0d3a91ffc02096f50039a848a1d54cf67",
+  "module": "crates/core/src/audio_filter.rs",
+  "module_sha256": "6b199a290150d944a2b093f5234022efb051cbedf6c4a8af38696ef1b762efd5",
+  "native_mapping_cases": 936,
+  "native_mapping_instructions": 80,
+  "native_coefficient_cases": 30,
+  "native_coefficient_instructions": 51,
+  "mapping_comparison": "exact f32 bits",
+  "coefficient_tolerance_absolute": 1e-06,
+  "qualified_sample_rates": [
+    44100,
+    48000,
+    96000
+  ],
+  "rust_filter_tests": 5,
+  "core_tests": 181,
+  "test_log": "logs/native-audio-filter-core-tests.log",
+  "test_log_sha256": "5d76c031d4ddcdd143098a44c0c83d8b960a3fe12b0f372753f118603c18934a",
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "client_integration_enabled": false,
+  "ambient_playback_enabled": false,
+  "complete": false,
+  "limits": [
+    "Both raw cutoff mapping branches executed; nonzero selector takes alternate sample-rate-dependent path. Meaning and selection of mode field+bc remain to qualify.",
+    "Frequency mapping only. Native coefficient calculation/bypass/smoothing/PCM filter still to implement.",
+    "Control0..100 and sample rates44100/48000/96000 tested. No audible playback acceptance.",
+    "Original coefficient argument computation executed; setter/SIMD expansion and PCM filter not executed.",
+    "Bypass, smoothing, channel histories and raw mode semantics remain incomplete.",
+    "Host tan approximation compared within1e-6 coefficient tolerance; PCM SIMD/state behavior not qualified.",
+    "Running client executable unchanged; this is a core control/coefficient implementation."
+  ]
+}

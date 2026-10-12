@@ -1,0 +1,25 @@
+{
+  "complete": false,
+  "frame_start_writers": [
+    "0x58d55e",
+    "0x586479"
+  ],
+  "normal_sequence": [
+    "58D553 calls993CE0",
+    "58D55E stores wall sample f32 to2D78DFC",
+    "optional manager virtual10",
+    "58D56F calls58CB20 frame work",
+    "58D574 calls586350 dispatcher"
+  ],
+  "correction": "2D78DFC is a frame-start sample, not assumed previous frame update timestamp.",
+  "implementation": "crates/core/src/native_game_clock.rs::frame_delta",
+  "verification": "tools/verify_native_frame_delta.rs",
+  "native_cases": 40,
+  "rust_physical_match": true,
+  "client_check": "logs/native-frame-delta-check.log",
+  "limits": [
+    "No live integration yet.",
+    "Frame work58CB20 and validity initialization not yet qualified.",
+    "Limiter and statistics remain outside frame_delta."
+  ]
+}

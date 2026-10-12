@@ -1,0 +1,44 @@
+{
+  "updated_utc": "2026-10-04T16:53:47.190436+00:00",
+  "complete": false,
+  "client_tests_passed": 62,
+  "normal_projected_emitter_bound": true,
+  "native_owner_binding_fully_qualified": false,
+  "projected_current_build_vulkan_rerun": true,
+  "current_build_all_gpu_checks_rerun": false,
+  "server_casts": 2,
+  "max_patch_vertices": 147,
+  "remaining_effects": 0,
+  "remaining_draws": 0,
+  "max_camera_visible_draws": 1,
+  "findings": [
+    "Normal Annie Q uses the same current neck/missile anchor as Fire/Fire_Head/Embers, native Simple lifetime/owner-end logic and qualified projected arithmetic.",
+    "Two actual server casts on the current Vulkan client each create and release their own entity, mesh and material; camera-visible draw counter is nonzero; zero effects/draws remain.",
+    "Capture is delayed until the texture is loaded and camera visibility observed, at least120ms after shot creation.",
+    "Current shader/material pipeline executes with the restored real terrain, native texture and147vertices maximum; this is not original-game pixel fidelity acceptance."
+  ],
+  "limits": [
+    "Exact native missile interface, identity-orientation adapter and stop dispatch are reconstructed, not fully qualified.",
+    "Default scale factors1; runtime scale setters, full receiver selection, FOW, blend/depth/sampler and palette/shader variants remain unqualified.",
+    "Diagnostic server fixture seeds level6/center/readiness; ordinary progression, other skins and full Q kit remain unfinished.",
+    "Capture inspection must distinguish render presence from native fidelity; other current Q effects overlap in the framebuffer."
+  ],
+  "files_sha256": {
+    "crates/client/src/projected_live.rs": "5af1ff624170f116a1521e1b928e9e4a7e12393de06e703432a6ee82696d2fee",
+    "crates/client/src/annie_q_vfx.rs": "120b80235df78c2f39f83017f5c96fa7595d1ea28b26c0147102661234a8f622",
+    "crates/client/src/main.rs": "f872acd356f63a799c637c5407a2df30a8e49ef17351a8ea400d44976fad916e",
+    "assets/shaders/projected_terrain.wgsl": "8f73939544af140b50cb2fdc0ec2cf8f503bc4be8514caab6121cda5ff5ca619",
+    "docs/projected_normal_capture_v2.json": "a6f5466b18fe1356765d30d7855a804b10b6b61255b5956d2a25abc8b91716ed",
+    "logs/projected-live-tests-v2.log": "fb900ea37d017a0795169bc80f7b44c62b6533513fc62600af03801d60b46e45",
+    "logs/projected-live-build-v2.log": "dc2c4d1eaf8b21a1a69202f264f40006175f04e1381e2e1d50a5540c38b05ec6",
+    "target/debug/openleague-client.exe": "35997bbbb156f9e2ea895286f534b4bfa15c0fa65f3227e8c00497675d0e2b5a",
+    "tools/install_projected_live.py": "c07f9339d51fd0677e94ec0fd118ba60143f4408baa3350c2f9f669f598fc953",
+    "tools/capture_projected_live_v2.py": "b3c3c6a45a2096da8af45e627b568b1ebddc55c5f9deac6e0e4e558ee3ba0acb"
+  },
+  "visual_review": {
+    "current_on_off_images_inspected": true,
+    "observation": "The loaded-texture on frame shows a subtle orange ground glow below the projectile path; the off frame no longer shows that ground glow. Fire/Embers remain visible after owner end and overlap in both captures.",
+    "native_fidelity_accepted": false,
+    "isolated_pixel_attribution_verified": false
+  }
+}

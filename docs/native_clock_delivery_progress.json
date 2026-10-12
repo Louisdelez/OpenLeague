@@ -1,0 +1,41 @@
+{
+  "complete": false,
+  "passed": true,
+  "decoder": "crates/core/src/native_pause_packet.rs",
+  "transport_adapter": "ServerPacket::ClockControl {session,ordinal,opcode,payload}; JSON envelope is OpenLeague local protocol, native A1/0A payload fields preserved.",
+  "delivery": "Known Welcome session checked before decoding. Ordinals start1; bounded64-window queues out-of-order directives, ignores consumed duplicates, rejects queued conflicts. New Welcome identity resets queue/pause while keeping process-local effect time monotonic.",
+  "integration": "EffectClock owns PauseControl and advances countdown from real frame delta; normal network receive calls its receiver before effects update.",
+  "tests": {
+    "decoder": {
+      "log": "logs/native-pause-packet-tests.log",
+      "passed": 2
+    },
+    "clock_delivery": {
+      "log": "logs/native-clock-delivery-tests-fixed.log",
+      "passed": 3,
+      "freeze_frames": 12
+    },
+    "fixture_repairs": {
+      "passed": 5,
+      "logs": [
+        "logs/native-clock-fixture-native_endgame_ui.log",
+        "logs/native-clock-fixture-match_results_ui.log",
+        "logs/native-clock-fixture-health.log"
+      ]
+    }
+  },
+  "check": "logs/native-clock-delivery-check.log",
+  "source_hashes": {
+    "crates/core/src/native_pause_packet.rs": "72245c72f2cf90ed869b15a467644b523bfa6d0be3428db0452192d88064d717",
+    "crates/core/src/lib.rs": "3103e127c884003cf5bde3d42bab65609bbadc98e03d40b8c75f965cf633df57",
+    "crates/client/src/native_effect_clock.rs": "6006c9f8719d0a0e5b23c36bbcceb2b06f01c6fbe14da2a04b8e3895e3e5ede9",
+    "crates/client/src/main.rs": "6e4b67ef41193064fb058af8069e1a43fd887dc6bfcb53e5f9532c6ffa8a8198"
+  },
+  "limits": [
+    "Server does not yet emit ClockControl or freeze simulation; no live UDP/GPU pause qualification yet.",
+    "Missing ordinal holds subsequent directives; sender retransmission/acknowledgment/reconnect state not yet implemented.",
+    "TournamentPause constructor defaults1800/5 used; authoritative override propagation and server mode/player authorization pending.",
+    "Actor UI notifications and heartbeat remain pending.",
+    "Last normal graphical executable qualification remains v69; latest tests use test binary, not rebuilt game executable."
+  ]
+}

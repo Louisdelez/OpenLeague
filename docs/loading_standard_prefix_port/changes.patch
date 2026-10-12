@@ -1,0 +1,131 @@
+--- E:/OpenLeague/crates/core/src/audio_loading_metadata.rs
++++ E:\mapslol3v3\loading_standard_prefix_port\audio_loading_metadata.rs
+@@ -75,10 +75,11 @@
+     }
+     Ok(())
+ }
+-// Only the non-alias, full-string assignment invoked by728410 is exposed.
++// Full-string non-alias assignment from728410 and standard57D71D.
++// Destination may already own a buffer; capacity and old length are preserved.
+ // Native564F30 preserves old length while replacing the allocation, then
+ // 564AF0 copies the source and publishes its length. SEH/OOM retry is explicit.
+-fn assign(b: &mut impl Boundary, d: u32, s: u32) -> Result<(), Error> {
++pub(crate) fn assign_owned_non_alias(b: &mut impl Boundary, d: u32, s: u32) -> Result<(), Error> {
+     let length = word(b, s, 16)?;
+     if length == u32::MAX {
+         return Err(Error::Boundary(
+@@ -196,12 +197,12 @@
+         if node != word(b, p, 8)? {
+             let source = add(node, 24)?;
+             if source != cached {
+-                assign(b, cached, source)?;
++                assign_owned_non_alias(b, cached, source)?;
+             }
+         }
+         empty(b, out)?;
+         output_initialized = true;
+-        assign(b, out, cached)?;
++        assign_owned_non_alias(b, out, cached)?;
+         Ok(out)
+     })();
+     let cleanup = b.leave_lock(lock).map_err(Error::Boundary);
+--- E:/OpenLeague/crates/core/src/audio_loading_screen_packet.rs
++++ E:\mapslol3v3\loading_standard_prefix_port\audio_loading_screen_packet.rs
+@@ -25,10 +25,13 @@
+     /// Remaining native57D6FE..57DCAE UI initialization for a nonempty name.
+     /// The25-byte record update has happened, and scratch contains the owned
+     /// String24 returned by service_name. This consumer destroys it afterward,
+-    /// including on an error. No success is supplied by default.
++    /// including on an error. retained_service is captured before the name
++    /// provider; it must not be replaced by another read of SERVICE_GLOBAL.
++    /// No success is supplied by default.
+     fn initialize_standard_record(
+         &mut self,
+         _recipient: u32,
++        _retained_service: u32,
+         _record: u32,
+         _payload: u32,
+         _scratch: u32,
+@@ -128,7 +131,7 @@
+             .map_err(Error::Boundary)?;
+         let primary = (|| -> Result<(), Error> {
+             if word(b, scratch, 16)? != 0 {
+-                b.initialize_standard_record(recipient, record, payload, scratch)
++                b.initialize_standard_record(recipient, service, record, payload, scratch)
+                     .map_err(Error::Boundary)?;
+             }
+             Ok(())
+--- E:/OpenLeague/crates/core/src/audio_loading_screen_packet_tests.rs
++++ E:\mapslol3v3\loading_standard_prefix_port\audio_loading_screen_packet_tests.rs
+@@ -193,10 +193,12 @@
+     fn initialize_standard_record(
+         &mut self,
+         recipient: u32,
++        retained_service: u32,
+         record: u32,
+         payload: u32,
+         scratch: u32,
+     ) -> Result<(), &'static str> {
++        assert_eq!(retained_service, SERVICE);
+         assert_eq!(
+             (recipient, record, payload, scratch),
+             (RECIP, self.target, PAYLOAD, SCR)
+--- E:/OpenLeague/crates/core/src/audio_replay_windows_loading_packets.rs
++++ E:\mapslol3v3\loading_standard_prefix_port\audio_replay_windows_loading_packets.rs
+@@ -3,6 +3,7 @@
+ use super::*;
+ use crate::{
+     audio_loading_metadata as names, audio_loading_record_tree::Kind,
++    audio_loading_standard_prefix as standard_prefix,
+     audio_loading_screen_packet as loading, audio_replay_packet95 as packet95,
+ };
+ 
+@@ -27,8 +28,23 @@
+     fn clock_f32_bits(&mut self) -> Result<u32, &'static str> {
+         self.loading_clock_f32_bits()
+     }
+-    // A real empty metadata name completes without UI. The nonempty standard
+-    // UI continuation remains an explicit default error.
++    fn initialize_standard_record(
++        &mut self,
++        recipient: u32,
++        retained_service: u32,
++        _record: u32,
++        payload: u32,
++        name24: u32,
++    ) -> Result<(), &'static str> {
++        self.event_temporary(8, |b, scratch| {
++            let stop = standard_prefix::prepare(
++                b, recipient, retained_service, payload, name24, scratch,
++            ).map_err(|e| b.failure(e, "loading name/skin prefix failed"))?;
++            // These consumers remain unported. Returning a selected request
++            // must never be counted as completed loading UI.
++            Err(b.failure(stop, stop.unavailable()))
++        })
++    }
+ }
+ 
+ impl<N: startup::Network + Send + 'static> Backend<N> {
+--- E:/OpenLeague/crates/core/src/audio_replay_windows_loading_packets_tests.rs
++++ E:\mapslol3v3\loading_standard_prefix_port\audio_replay_windows_loading_packets_tests.rs
+@@ -375,6 +375,11 @@
+         .word(crate::audio_replay_service_receive::LOCAL_OWNER)
+         .unwrap();
+     let recipient = Recipient::create(&mut b, Kind::Standard);
++    // Diagnostic input String24 and sentinel skin; no UI factory is claimed.
++    write(&mut b, recipient.p + 0x1a0, u32::MAX);
++    write(&mut b, recipient.p + 0x1b8, 0);
++    write(&mut b, recipient.p + 0x1bc, 15);
++    b.write_byte(recipient.p + 0x1a8, 0).unwrap();
+     let p = packet(local, 42, 1, false);
+     let before = r.snapshot().unwrap().engine_allocations;
+     let frees = r.shared.bank.lock().unwrap().memory.released_labels.len();
+@@ -386,7 +391,7 @@
+     assert_eq!(read_bytes(&mut b, record, 25), expected);
+     assert_eq!(r.snapshot().unwrap().engine_allocations, before + 1);
+     assert!(
+-        r.errors().iter().any(|e| e.contains("UI continuation57D6FE")),
++        r.errors().iter().any(|e| e.contains("resource provider90AD00")),
+         "expected unavailable UI after real name lookup; runtime errors: {:?}",
+         r.errors()
+     );

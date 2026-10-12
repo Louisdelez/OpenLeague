@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-10-10T21:14:13.087686+00:00",
+  "kind": "independent_static_review_limits",
+  "reviewer": "/root/receive_adapter_review",
+  "provenance": "Reviewer messages in the current agent conversation; read-only review, no tests run or files changed by reviewer.",
+  "archive": "E:\\mapslol3v3\\loading_resource_manager_integration\\next_provider_io",
+  "archive_manifest_sha256": "d275c6dc2ab1cfb0416bfff6e6fdecc3bbf2512988b3ae8932507a5c368cb698",
+  "integrated": false,
+  "complete": false,
+  "reviewed_hashes": {
+    "isolated_io.py": "a51c2da8685858208b87f1116610273e60666cd98ce90ffe58c5581c1d06c776",
+    "test_isolated_io.py": "ffa002385d60614ff24dc48c7fc610c603c041c044cd5a7f8c98c31b8e3ab5db",
+    "io_isolation_tests.json": "342810a2d4b9dc2ccea116245180eb78cae89b79ddf2f383a38ad017d5d28dfa"
+  },
+  "observations": [
+    "Concrete missing-parent handling defect corrected: pin_parents stops pinning on Win32 2/3 and the real final API returns its error; correction reviewed statically.",
+    "Producer executed 36 bridge checks. Reviewer executed no tests. Native provider trace stops explicitly before CABDA8; earlier BB40E64E UcError preserved.",
+    "No additional deterministic escape found through case, .., ADS/UNC/device paths or pre-existing reparse components under the declared no-concurrent-filesystem-mutation condition."
+  ],
+  "limits": [
+    "Confinement requires no concurrent external filesystem mutation. Root setup is not pinned, missing parents cannot be pinned, and parent pins are released before later WriteFile calls. This is not a hardened cross-process sandbox.",
+    "Writable junction fixture creation and hardlink fixture creation were denied with Win32 5. This is an observed OS error, not a claim of automatic approval-review rejection. Tests use narrower read-only checks against real existing Windows junction/hardlink metadata.",
+    "Successful CREATE_ALWAYS and TRUNCATE_EXISTING adapted paths were not executed by the 36 tests. Their code was statically reviewed. The native bounded trace uses mkdir only and does not depend on those modes.",
+    "Scratch Config is initially absent: native CreateDirectory returns1. The existing original D: Config is not changed; historical Config-state/full-startup parity is not claimed.",
+    "No INI/provider success is synthesized. Native provider completion, native teardown at the stopped boundary, texture upload and loading UI remain unqualified."
+  ],
+  "next_action": "Compose genuine native CRT initialization C9A0B9/CABDE8, CA92CB, CB0378 and CAFF53 with the isolated IO bridge, then rerun a fresh provider entry toward native INI8B0630; do not inject formatting or INI results."
+}

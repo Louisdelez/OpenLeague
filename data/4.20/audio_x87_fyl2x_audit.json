@@ -1,0 +1,199 @@
+{
+  "passed": true,
+  "case_count": 9,
+  "cases": [
+    {
+      "bits": 0,
+      "y": [
+        11106046577046714265,
+        16381
+      ],
+      "x": [
+        0,
+        0
+      ],
+      "hardware_result": [
+        9223372036854775808,
+        65535
+      ],
+      "hardware_status": 14340,
+      "unicorn_result": [
+        0,
+        0
+      ]
+    },
+    {
+      "bits": 2147483648,
+      "y": [
+        11106046577046714265,
+        16381
+      ],
+      "x": [
+        0,
+        32768
+      ],
+      "hardware_result": [
+        9223372036854775808,
+        65535
+      ],
+      "hardware_status": 14340,
+      "unicorn_result": [
+        0,
+        32768
+      ]
+    },
+    {
+      "bits": 1065353216,
+      "y": [
+        11106046577046714265,
+        16381
+      ],
+      "x": [
+        9223372036854775808,
+        16383
+      ],
+      "hardware_result": [
+        0,
+        0
+      ],
+      "hardware_status": 14336,
+      "unicorn_result": [
+        0,
+        0
+      ]
+    },
+    {
+      "bits": 3212836864,
+      "y": [
+        11106046577046714265,
+        16381
+      ],
+      "x": [
+        9223372036854775808,
+        49151
+      ],
+      "hardware_result": [
+        13835058055282163712,
+        65535
+      ],
+      "hardware_status": 14337,
+      "unicorn_result": [
+        9223372036854775808,
+        49151
+      ]
+    },
+    {
+      "bits": 1048576000,
+      "y": [
+        11106046577046714265,
+        16381
+      ],
+      "x": [
+        9223372036854775808,
+        16381
+      ],
+      "hardware_result": [
+        11106046577046714265,
+        49150
+      ],
+      "hardware_status": 14880,
+      "unicorn_result": [
+        11106046577046714368,
+        49150
+      ]
+    },
+    {
+      "bits": 1073741824,
+      "y": [
+        11106046577046714265,
+        16381
+      ],
+      "x": [
+        9223372036854775808,
+        16384
+      ],
+      "hardware_result": [
+        11106046577046714265,
+        16381
+      ],
+      "hardware_status": 14368,
+      "unicorn_result": [
+        11106046577046714368,
+        16381
+      ]
+    },
+    {
+      "bits": 2139095040,
+      "y": [
+        11106046577046714265,
+        16381
+      ],
+      "x": [
+        9223372036854775808,
+        32767
+      ],
+      "hardware_result": [
+        9223372036854775808,
+        32767
+      ],
+      "hardware_status": 14336,
+      "unicorn_result": [
+        9223372036854775808,
+        32767
+      ]
+    },
+    {
+      "bits": 4286578688,
+      "y": [
+        11106046577046714265,
+        16381
+      ],
+      "x": [
+        9223372036854775808,
+        65535
+      ],
+      "hardware_result": [
+        13835058055282163712,
+        65535
+      ],
+      "hardware_status": 14337,
+      "unicorn_result": [
+        9223372036854775808,
+        65535
+      ]
+    },
+    {
+      "bits": 4290772992,
+      "y": [
+        11106046577046714265,
+        16381
+      ],
+      "x": [
+        13835058055282163712,
+        65535
+      ],
+      "hardware_result": [
+        13835058055282163712,
+        65535
+      ],
+      "hardware_status": 14336,
+      "unicorn_result": [
+        13835058055282163712,
+        65535
+      ]
+    }
+  ],
+  "hardware": {
+    "kind": "hardware_x87_fyl2x",
+    "code_hex": "dd7140d96932db29db6910d9f1dd7934db7920dd6140c3",
+    "sha256": "2152d44eddf871eedaec6593c9fea16c8b82547caaee5d8e7664235d8b793b8b",
+    "executions": 9,
+    "reason": "Unicorn FYL2X zero-domain reference returned0;actual processor returns negative infinity. Exact80-bit operands/results and FPU stack/tags/status are transferred."
+  },
+  "instruction_code_hex": "dbe3d90500010030d9ecd9c9d9f1db3d00020030c3",
+  "difference_count": 6,
+  "finding": "Unicorn FYL2X maps zero-domain to0 rather than actual x87 negative infinity. Native DSP silence reference must use actual instruction arithmetic instead of this emulator result.",
+  "limits": [
+    "Instruction-level comparison on localx86_64 processor, not a full original client hardware run. Other native helper/emulator semantics remain subject to DSP integration comparisons."
+  ]
+}

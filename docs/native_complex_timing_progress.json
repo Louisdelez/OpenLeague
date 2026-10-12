@@ -1,0 +1,43 @@
+{
+  "updated_utc": "2026-10-06T15:27:43.305789+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "core_tests_passed": 463,
+  "last_client_tests_passed": 364,
+  "native_timing_cases": 71,
+  "actual_map_timing_groups_verified": 27,
+  "product_rust_sources_changed": true,
+  "ordinary_emitter_consumer_bound": false,
+  "ordinary_applications_rebuilt": false,
+  "artifacts_sha256": {
+    "data/4.20/complex_emitter_timing_contract.json": "eb1ac5c5821f9faa61d0845ebf209745e15a9226ae764fc73d1045892d531402",
+    "tools/probe_native_complex_timing.py": "0e9fbdfc61ed9c10c4bfeb0c1ca16d42ce337a1dce084c06e2b8af9d8a6c9a6f",
+    "crates/core/src/native_complex_timing.rs": "bfb8a3f6d507252b806cb4e19f5fc5a6548b2ccf10be89798c751d662c1ffead",
+    "crates/core/src/native_complex_age.rs": "6b05f98ff1eccee1708bd84100dce1338a28813da23e1ccb0da1f2255f4cc552",
+    "crates/core/src/lib.rs": "5b1d50e003a497bc512c88658203481d8e3ee812d22382547b7d5f328682c118",
+    "logs/native-complex-timing-core-tests.log": "62255334ab356440f53539e303a0a53210e1979177fc4b4c86c5f45519aad34b",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "4350e719f47da863be56bf75ebb504a8f5fc20f7209e408ed12b04f90d2bb830",
+    "data/4.20/map10_particles/definitions/Chaos_Spawn.json": "ed4523a7e82b68be76489ae9c76aa258d72314ba26774854d7cf5319c585b130",
+    "data/4.20/map10_particles/definitions/Order_Spawn.json": "63a412b19e9f9d46d8ce09530aa844192a032faffd695a3e9c7aa238be788de2",
+    "data/4.20/map10_particles/definitions/TT_Fire_01_Blue.json": "45c17b9bf7abaa8f792612c9ec087f117a59d176d66dff66599e8009a16ccebc",
+    "data/4.20/map10_particles/definitions/TT_Fire_02_Yellow.json": "86562731d277d4cae941b1c7926516512a23d660650951902a3d192c3d14632b",
+    "data/4.20/map10_particles/definitions/TT_Fire_03_Orange.json": "b8ff4198dc668eff3e3ea0c3cb16e21428569e7a677d80199eeb3f8fd9c18ff0",
+    "data/4.20/map10_particles/definitions/TT_Fire_04_Purple.json": "9686d548428dcf7c3520ce8c031ad033aae5e2794c2cf46241859b8ec4905d4c",
+    "data/4.20/map10_particles/definitions/TT_Ghosts_01.json": "5ccbad3361dc2e1d0780abffa771a4f0e62a5a5adac0fd446a5cffdc6455c496",
+    "data/4.20/map10_particles/definitions/TT_Mist_01.json": "e196f83f27d89e01fc42dc19c18048dc74b564e2809e97bb50ce8156cd623be2",
+    "data/4.20/map10_particles/definitions/TT_Mist_02.json": "9504c6e9accd2bb2f3c82c40a6a918c5ee741b734a13817bcbfbbe0880873258"
+  },
+  "findings": [
+    "Original caller getter defaults checked dynamically: e-timeoffset=0, e-period/e-active=maximum finite f32, Hacks/default-e-life=-1; negative effective e-life becomes maximum finite.",
+    "Period/active/timeoffset keep authored signed zero, infinity and NaN; no invented clamp or period-1 default. Global life fallback is overridden by authored life.",
+    "Timing::from_group reads decoded scalar fields and rejects unsupported types. Timing::emitter_age_input maps period→config308, active→config30C, timeoffset→config2EC into the qualified native-age producer.",
+    "71cases match original caller output bits, including27actual Map10Complex sections read directly from current files."
+  ],
+  "limits": [
+    "Original underlying INIBIN/cache/lexical getters not executed. Overrides limited to explicit supplied global life.",
+    "Period/active/timeoffset stored without clamping; no full emitter lifecycle/update/render qualification.",
+    "Instance7C lifetime producer, per-particle age and full stop/loop/render lifecycle still unqualified.",
+    "463full core tests passed. No new ordinary client build/render/GPU verification. No champion/map/domain or six-client match closed."
+  ],
+  "next_action": "Qualifier le producteur de durée instance7C, l’âge propre et les mises à jour couleur/pose de chaque particule ; compléter le cycle Complex et relier les52groupes Map10 et244placements au rendu. Les quatre paramètres temporels natifs sont maintenant lus dans Rust sur les27groupes Complex et raccordés au calcul d’âge émetteur. Reconstruire les exécutables, résoudre TT_Mist_circle/fogcircle, vérifier six clients et poursuivre les24domaines."
+}

@@ -1,0 +1,44 @@
+{
+  "updated_utc": "2026-10-04T18:26:37.766406+00:00",
+  "complete": false,
+  "client_tests_passed": 74,
+  "client_build_passed": true,
+  "native_gaussian_cases": 20,
+  "gpu_diagnostic_cases": 44,
+  "pixels_per_case": 64,
+  "gpu_adapter": "NVIDIA GeForce RTX 3060",
+  "gpu_backend": "Vulkan",
+  "gpu_maximum_rgb_error": 0.0004496574401855469,
+  "gpu_tolerance": 0.002,
+  "diagnostic_gpu_verified": true,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Ported original Fade and FastSeparableGaussianBlur formulas to CPU reference and WGSL compute.",
+    "Native Gaussian constructor arithmetic executed for 20 supplied sigma/upscale cases; non-finite cases are explicitly unsupported.",
+    "Actual Vulkan GPU readback verifies 44 isolated cases over impulse, step, byte pattern and constant textures; horizontal and vertical blur and fade branches included."
+  ],
+  "limits": [
+    "GPU input textures are diagnostic fixtures, not live team visibility.",
+    "Original D3D shader execution and original render-target quantization are not compared.",
+    "Native 4x lookup-table upscaler, fade timing/parameters, world extent/config selection, stencil generation and live renderer integration remain open.",
+    "74 client tests and rebuilt binary do not establish a complete champion, map, or game."
+  ],
+  "next_actions": [
+    "Recover and port original native 4x upscaler 6B5080 and its lookup table.",
+    "Qualify source stencil generation and Map10 extent/config providers.",
+    "Bind actual team visibility textures, fade/blur stages and projected overlay to normal rendering; qualify gameplay and current client captures."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_gaussian_contract.json": "cbac7e28c199f59755c162bd60ef5809d0d46cfc7d49271659d21581ad3d8c94",
+    "crates/client/src/fow_postprocess.rs": "0b5962e4f7f403bd076a774c767e1da247c8dadd18b8045c4bd982107ef4ee43",
+    "assets/shaders/fow_postprocess.wgsl": "bcc1bdd5550fcd4a561bde213e036dc3c978a990da4e37a58bf093c2ae16f783",
+    "crates/client/examples/fow_gpu_probe.rs": "3915f32f0346c9a43196dc567ae7c18c8c24ec23f867b470cd105543f2030dbb",
+    "logs/fow-postprocess-tests.log": "5561c0a339c6acdd38f5bf782dadef5ae2c52f652a553f6bc1942927f65d4771",
+    "logs/fow-postprocess-build.log": "dff2264b46b8e522a0904913fc4a6066ae3acf7695034fd666292b4e12323fd0",
+    "logs/fow-postprocess-gpu.log": "3ccfb139ed4382ccaaa1a062699e146e31cdda80d0b3da78d53616b76b344534",
+    "logs/fow-postprocess-gpu.json": "fe8e817c51fbb8696a61fdffc03e5a023bf88371f8803efc919e9872695dd723",
+    "target/debug/openleague-client.exe": "187ed15e6aa6f738e4e7ae72474f9b4aab32cda9202769ace4afeab91227c2b5",
+    "target/debug/examples/fow_gpu_probe.exe": "ac28ca0d1ba095e5c6a3c75545a33e0319e0eacd1f06c9c16b67bb047a4f323d"
+  }
+}

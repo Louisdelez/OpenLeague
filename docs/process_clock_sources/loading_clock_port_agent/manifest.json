@@ -1,0 +1,115 @@
+{
+  "schema": 1,
+  "status": "Oracle natif et x87 physique vérifiés; Rust non compilé",
+  "frozen": true,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_execution_run": true,
+  "native_sequences": 253,
+  "native_calls": 349,
+  "native_events": 3387,
+  "hardware_samples": 277,
+  "hardware_mismatches": 0,
+  "rust_compilation_attempted": false,
+  "rust_tests_run": false,
+  "rust_tests_passed": null,
+  "planned_rust_tests": [
+    "clock_source_matches253_native_sequences349_calls_all_global_bytes_and3387_ordered_events",
+    "clock_division_matches277_physical_x87_results_including_zero_frequency",
+    "clock_host_errors_do_not_publish_ready_and_cleanup_errors_remain_visible",
+    "clock_guard_read_unknown_callback_and_post_unlock_read_failures_have_correct_lifetimes"
+  ],
+  "windows_connected": false,
+  "client_producer_changed": false,
+  "production_integrated": false,
+  "boundary_functions": [
+    "CE5247",
+    "CE290B",
+    "CE2934",
+    "KERNEL32!QueryPerformanceCounter",
+    "KERNEL32!QueryPerformanceFrequency"
+  ],
+  "x87_control_word": 895,
+  "limits": [
+    "Mutex allocation, synchronization, concurrency and shutdown remain unqualified boundaries.",
+    "QPF untouched bytes are controlled inputs, never invented Windows outputs. Native BOOL values remain ignored.",
+    "Physical x87 output bits match; arbitrary control words and status/exception side effects remain unqualified.",
+    "Proposed Rust has NOT been compiled or run. No code from this preparation is integrated in production."
+  ],
+  "files": [
+    {
+      "path": "audio_native_process_clock.rs",
+      "bytes": 6544,
+      "sha256": "7297edb0a26ca2da2abee2b51660f21f0a6465bfa29fd0494c1b07fe24fee6c6"
+    },
+    {
+      "path": "audio_native_process_clock_tests.rs",
+      "bytes": 10502,
+      "sha256": "a0a62a58f817afefa50729de02048c0185e1f636663cd650c17a4ee2a767ecc3"
+    },
+    {
+      "path": "clock_harness.rs",
+      "bytes": 153,
+      "sha256": "bb9ac4a5670ab941800e04f7d1bcd569edde7acc2f99aaa42d31f01f30453ede"
+    },
+    {
+      "path": "clock_x87_hardware.json",
+      "bytes": 77641,
+      "sha256": "062db5c410e33cf9f11903e0866f8606fa177a6b04d812762953ba2d753a08e1"
+    },
+    {
+      "path": "native_clock_results.json",
+      "bytes": 788904,
+      "sha256": "dd95b6d8a483b5b1dba4d19b53eadab8ae47d4b4498c2862e942db70f4ace439"
+    },
+    {
+      "path": "probe_clock_x87.py",
+      "bytes": 3570,
+      "sha256": "13cc89a1407086e79f1e43c4d8a3bbd227739c69bf60e0e8ed42a843716a617d"
+    },
+    {
+      "path": "probe_loading_clock.py",
+      "bytes": 7990,
+      "sha256": "f24fba02a847225e423f5373100079935d7c652fdca5b68cafaaeb91579bd9d0"
+    },
+    {
+      "path": "README.md",
+      "bytes": 7054,
+      "sha256": "28289e17acabebb3d7e46d6a0ef9d0afcbf5e1176ca51ab87c5d48709656f0b9"
+    },
+    {
+      "path": "record_preparation.py",
+      "bytes": 4060,
+      "sha256": "a0443834e6e62b0be4e381abf7d2f545d01fd3bd696318afbe7aeed5a4c34e3f"
+    },
+    {
+      "path": "source/code_00993c70.bin",
+      "bytes": 111,
+      "sha256": "e962f2a39de9df8e2498d0e7d7d7771730954f517cfcf4dc0ebd788d86354505"
+    },
+    {
+      "path": "source/code_00993ce0.bin",
+      "bytes": 192,
+      "sha256": "29b07257e1dc806c91640880494a4d95749035bb10f27f8121b39c04da9df50f"
+    },
+    {
+      "path": "source/code_00995850.bin",
+      "bytes": 7,
+      "sha256": "9646dc415de18f39deea40e922a6ed3588f2ee5cf0b7d03089d75295e4cc3a7b"
+    },
+    {
+      "path": "source/code_00ce13e2.bin",
+      "bytes": 11,
+      "sha256": "93d495c63ba30826c9d45967a1159d7094a277f25c74240b29787f52d5b0bf5b"
+    },
+    {
+      "path": "source/code_00ce298a.bin",
+      "bytes": 66,
+      "sha256": "0ffc6af2c9ea4705d537bd5a5081d9a4d5e28fad2afb93185bc7572d7a97495a"
+    },
+    {
+      "path": "source/native_sources.json",
+      "bytes": 3275,
+      "sha256": "b446e5fc547c8efed8751dddbf08d92dbd688facb2ff066cda9280915743cd4b"
+    }
+  ]
+}

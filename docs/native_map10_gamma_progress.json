@@ -1,0 +1,30 @@
+{
+  "updated_utc": "2026-10-05T19:14:16.954444+00:00",
+  "complete": false,
+  "product_changed": false,
+  "application_binary_unchanged": true,
+  "application_binary_sha256": "f5ad2c93edcf6bb7a88f861dbb680d9dedbb8f70e6085ac563956f811eb04a5d",
+  "contract": "data/4.20/native_map10_gamma_contract.json",
+  "gamma_parameters": {
+    "Level": 1.100000023841858,
+    "Gamma": 0.8999999761581421,
+    "Brightness": 1.0499999523162842,
+    "Contrast": 1.1200000047683716
+  },
+  "native_lut_samples": 256,
+  "native_argb_samples": 256,
+  "native_selector_cases": 8,
+  "native_pow_executed": true,
+  "client_tests_last_passed": 238,
+  "chaos_base_defect_fixed": false,
+  "findings": [
+    "Original Gamma.inibin loads Level1.1, Gamma0.9, Brightness1.05, Contrast1.12; values stored with native f32 rounding.",
+    "Original table uses i/256, original CRT pow, then contrast/brightness/level and clamping. Upload truncates to255-scale and writes FFgggggg.",
+    "Entered selector chooses gamma for enabled byte or nonempty queue; original table/upload refresh only when revision differs. Final draw calls observed through adapters."
+  ],
+  "limits": [
+    "Enabled flag producer, queued object semantics, user overrides, physical texture allocation/GPU upload, sampler filtering and complete framebuffer composition remain unqualified.",
+    "No claim that gamma removes background regions or completes map rendering."
+  ],
+  "next_action": "Intégrer la passe gamma Map10 dans le moteur après qualification du transfert, des états de sampler et de son ordre par rapport au HUD. Table native256valeurs et conversion ARGB qualifiées ; huit branches de sélection/rafraîchissement vérifiées. Producteur du réglage GammaEnabled et composition entière restent ouverts. Vérifier ensuite une capture Vulkan du nouvel exécutable ; défaut cyan Chaos toujours ouvert. Puis effets de fin de partie, réseau/launcher et partie ordinaire à six clients graphiques, avant les autres domaines."
+}

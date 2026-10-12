@@ -1,0 +1,2 @@
+from pathlib import Path
+p=Path('E:/OpenLeague/tools/verify_native_fog_render.py');s=p.read_text();s=s.replace("image=images[source];a=np.asarray(image,dtype=float);", "image=images[source];a=np.asarray(image,dtype=float);rgb=a[:,:,:3]/255;a[:,:,:3]=np.where(rgb<=.04045,rgb/12.92,((rgb+.055)/1.055)**2.4)*255;");s=s.replace("rgba=rgba.tolist()", "rgb=rgba[:3]/255;rgba[:3]=np.where(rgb<=.0031308,rgb*12.92,1.055*np.maximum(rgb,0)**(1/2.4)-.055)*255;rgba=rgba.tolist()");p.write_text(s)

@@ -1,0 +1,28 @@
+{
+  "updated_utc": "2026-10-04T06:40:14.166019+00:00",
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "files_sha256": {
+    "tools/qualify_native_camera_angles.py": "98d7bdf152b344f5cfdc6efb24e1402071ac03ce1b95296e6131f0cde719e883",
+    "data/4.20/camera_angles_contract.json": "8a5556934c473f6c6abca0d300535b68cd2c385e951c33b5445e4379a26d9a44",
+    "crates/core/src/camera_angles.rs": "b908d47189af5fe78a52d2a88b8b92035ae4b25ff264bffe3c75d5f6b0e3e3eb",
+    "crates/core/src/lib.rs": "a3b70b7dd5df27359ab85a780839a2527ad3dc6eb7cb90e49f9ce3d262036fed",
+    "logs/native-camera-angles-focused-tests.log": "dc9ec8ab22c5b94b6e9f0f639e3ae72126ce2013a12aae7e7b53e9291bbf515e",
+    "logs/native-camera-angles-tests.log": "513cb079a8c4699d8f65f51298e7302d88c9303ddf43c7410e9b17551b76d2cf"
+  },
+  "passed": true,
+  "complete": false,
+  "native_angle_builder_cases": 120,
+  "native_polynomial_pairs": 269,
+  "core_tests_passed": 327,
+  "client_tests_passed": 22,
+  "source_integration": "camera_angles::assemble reproduces original565910 mode3: polynomial angles, normalization, supplied entity affine matrix, normalized side basis, side/up offsets, camera position/direction,far25000/FOV50. Mode3 preserves existing projection rather than forcing0 and does not call shake.",
+  "numerical_acceptance": "269sin/cos pairs bit-exact; preserved camera fields exact. Position/direction allowance1e-5absolute or2e-7relative covers SSE reciprocal square root estimate differences.",
+  "limits": [
+    "Full565910 and original8E1F40/8E2030/66D6E0 execute without math adapters. Entity matrix virtual20 supplies explicit16float matrix; world/entity matrix producer and mode/input bindings not qualified.",
+    "Polynomial helpers do not perform generic periodic angle wrapping: preserve original branch/order/sign behavior instead of replacing by standard sin/cos.",
+    "Mode3 sets far25000/FOV50, preserves projection mode/near/up/dimensions/auxiliary, applies no7D2BE0 shake call. Whole58C8B0 renderer sequence remains incomplete.",
+    "Source core integration and tests only; client mode activation, world matrix producer and GPU integration remain unqualified. Standalone binaries/live normal camera unchanged.",
+    "Existing clientPID8228 and serverPID10600 observed responding this turn; this is not new-mode rendering or gameplay validation.",
+    "Full24-domain game remains incomplete."
+  ]
+}

@@ -1,0 +1,14 @@
+float4x4 PROJECTION_MATRIX 		: register(c0);
+
+void 
+	main
+	( 
+		in float4 in_position: X3D_VSIN_POSITION,
+		in float2 in_texcoord: X3D_VSIN_TEXCOORD0,
+        out float4 out_position: POSITION,
+		out float2 out_texcoord: TEXCOORD0
+	)
+{
+	out_texcoord = in_texcoord;
+	out_position = mul( in_position, PROJECTION_MATRIX ); 
+}

@@ -1,0 +1,46 @@
+{
+  "updated_utc": "2026-10-06T18:51:34.174679+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "core_tests_passed": 507,
+  "native_troy_target_pose_cases": 608,
+  "actual_cpu_sse_operations": 1120,
+  "actual_cpu_x87_copies": 6120,
+  "emulator_cpu_case_disagreements": 0,
+  "actual_cpu_rotation_calls": 180,
+  "target_pose_phase_ported": true,
+  "ordinary_emitter_consumer_bound": false,
+  "ordinary_applications_rebuilt": false,
+  "artifacts_sha256": {
+    "data/4.20/troy_target_pose_contract.json": "f29dbbb5a009fd819cd2985d53c0b52a841addceb6b04c82f6ac2c6f654ee454",
+    "tools/probe_native_troy_target_pose.py": "0e320589711933a86e39788eebc1b59717e7a4641b9856f3601032beba9c0019",
+    "crates/core/src/native_troy_target_pose.rs": "b59bc6d88e7f8c209a04e241d4a257b415ed2e1af4e2ebcd386008cdabc81817",
+    "data/4.20/troy_scalar_contract.json": "54005518faa9000dc9f0f330e569cb21e66b5d6e916727e469a8e66d24ce6b0d",
+    "crates/core/src/native_troy_scalar.rs": "f782ab31c463cddfda369c52344103c5147d5db616ba2a0eb626d08c13fb74e1",
+    "data/4.20/troy_position_bounds_contract.json": "9191b4d30eb9a3dba97c2eec59a54648a138f5237ce60c20a2427803e7d30a5e",
+    "crates/core/src/native_troy_position_bounds.rs": "8f16435291e0b3551d72fcc28eac8a6e71bf32a31c4549dad63f34cff4bf69ad",
+    "crates/core/src/native_troy_properties.rs": "f906ec120d6681fae9743760184d7f75eb050cdda49d9e2563c12fa7c038e0f2",
+    "crates/core/src/lib.rs": "a203999d61cb3bb6681a93c7a72deb09708ec5b44240ddefd918217572e4c4dc",
+    "logs/native-troy-target-pose-core-tests.log": "cc8d1a75584e591d38d84e8f0cc58ab0d5df3685d25ef08e425dc6d7eb7ea69c",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "85f0cdba5376ae904fd2ceb096f6c762688fa175bf413854d5b11f3820568726"
+  },
+  "findings": [
+    "Whole second attach phase940AEE..940C15 captured in608cases. Rust matches target channels, wrapper/emitter matrices and callback order.",
+    "Absent target owner or eligibility0 skips the phase. Target success copies rawXYZ to emitter74/78/7C and unaligned wrapper2F/33/37; failed target query retains existing channels.",
+    "Rotation requires both wrapper flags10 and20 plus strictly positive squared horizontal length. NaN and zero length preserve orientation. Y axis does not enter the angle.",
+    "Original FPATAN angle(dx,dz) stored to f32 beforeFSIN/FCOS. Rust executes matching x87 instructions with saved/restored control word and masked nearest mode.",
+    "1120actualCPU SSE operations,6120actualCPU x87 copies and180hardware rotation references. Original emulator captures retained separately;0case disagreements."
+  ],
+  "adapters": [
+    "Original entire target phase and rotation8DF690 execute in emulator capture; explicit owner eligible/target endpoints.",
+    "Separate CPU reference executes original scalar SSE operations and x87 copies. At rotation helper boundary, actual hardware FLD/FPATAN/FSTP32 and original FSIN/FCOS/FCHS instruction sequence provide angle/matrix instead of emulator transcendental arithmetic.",
+    "Stack argument balance checked at phase exit. Target success/failure and raw vectors supplied."
+  ],
+  "limits": [
+    "Full frame, owner producer bodies, reset/audio/child flags, resource acquisition and ordinary renderer integration incomplete.",
+    "Reference rotation substitutes helper at its boundary with hardware counterpart; whole32bit native function not executed on real hardware.",
+    "Default masked arithmetic control only; x86_64 hardware implementation requires qualification on other architectures.",
+    "506previous core tests and the new property comparison pass; this does not qualify complete game/champion kits or graphical rendering."
+  ],
+  "next_action": "Achever le reste du cycle Troy : reset200, carte audio8000, flag enfant10000, copie de sortie vers le wrapper et reset final des requêtes ; qualifier les producteurs virtuels et les paramètres natifs, raccorder le cycle complet au rendu normal des52groupes/244placements Map10, reconstruire les applications puis poursuivre les24domaines."
+}

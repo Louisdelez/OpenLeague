@@ -1,0 +1,48 @@
+{
+  "decision": "Do not map every ambient producer lifetime to one reusable registered game object.",
+  "evidence": [
+    {
+      "file": "crates/core/src/audio_launch_dispatcher.rs",
+      "behavior": "Bound object dispatch posts using the existing ID; unbound dispatch delegates allocation for each nonempty launch."
+    },
+    {
+      "file": "crates/core/src/audio_unbound_post.rs",
+      "behavior": "Allocates before position/post. Failed post retires scratch and signals linked end; successful aged post seeks."
+    },
+    {
+      "file": "crates/core/src/audio_logical_registration.rs",
+      "behavior": "Persistent producer registration returns logical handle before physical launch; process_pending performs create/update/release in order."
+    }
+  ],
+  "native_contracts": [
+    "data/4.20/audio_launch_dispatcher_contract.json",
+    "data/4.20/audio_unbound_post_contract.json"
+  ],
+  "removed_experiment": {
+    "file": "crates/core/src/audio_owner_objects.rs",
+    "tests_passed": 3,
+    "session": 88957,
+    "reason": "Passing reuse tests only established the proposed implementation, not ambient native ownership. Experimental module and export removed before runtime integration."
+  },
+  "next": "Compose the qualified shared factory, scratch lifetime, registered objects, logical worker and actual PCM voice backend. Preserve distinct producer tokens, logical IDs, backend references, game-object IDs and playing IDs.",
+  "limits": [
+    "No live audio enabled.",
+    "Startup direction and RNG ownership remain explicit unresolved inputs."
+  ],
+  "source_sha256": {
+    "crates/core/src/audio_launch_dispatcher.rs": "63ef2c9ee177a0314c944ad2f7dd810de63559e5e0a11d7de40e9dda4ff80b1c",
+    "crates/core/src/audio_unbound_post.rs": "e442197ecb2246b28805a888b3de89ec5b1ddf369f3f2c4f677886a2b3c04818",
+    "crates/core/src/audio_logical_registration.rs": "0828974d6355c34ddfe4df98ef7d8d26c7e19f5f499c7ee6d54bd1cf76035bd6"
+  },
+  "qualified_startup": {
+    "object_factory_counter": 2,
+    "backend_reference_counter": 0,
+    "cached_vector_image_words": [
+      0,
+      0,
+      0
+    ],
+    "evidence": "docs/audio_startup_validation.json",
+    "scope": "Shared engine initialization; do not reset object ID for each producer. Backend reference0 is valid. Image vector is not the current listener basis."
+  }
+}

@@ -1,0 +1,9 @@
+from pathlib import Path
+import itertools,json,hashlib
+r=Path('E:/OpenLeague');setup=(r/'tools/probe_native_audio_bank_header.py').read_text(encoding='utf-8').split('\nactual=json.loads')[0];exec(compile(setup,'bank_header_setup','exec'))
+regions.append((0xaf8a20,0xaf8aa7));object=heap+0x6000;rows=[]
+for id,pool,flag,initial,owned,pattern in itertools.product([0,276786588],[0,0xffffffff],[0,0xffffffff],[0,0xffffffff],[0,1,0xffffffff],[0,0xa5]):
+ calls.clear();raw=bytes([pattern])*80;u.mem_write(object,raw);result=invoke(0xaf8a20,[id,pool,flag,initial,owned],object)
+ rows.append({'id':id,'pool':pool,'flag':flag,'initial':initial,'owned':owned,'pattern':pattern,'before':raw.hex(),'result':result,'raw':bytes(u.mem_read(object,80)).hex(),'calls':list(calls)})
+proof={'passed':True,'complete':False,'case_count':len(rows),'cases':rows,'native_sha256':hashlib.sha256(b).hexdigest(),'regions':[{'start':hex(a),'end':hex(e),'sha256':hashlib.sha256(p.get_data(a-base,e-a)).hexdigest()}for a,e in regions],'findings':['Actual AF8A20 initializes80-byte bank holder;preserves leading12 bytes and padding,zeros resource arrays/callback fields,stores supplied bankID/pool/count fields and wraps initial+owned.','Flags low nibble cleared then bit0 set from nonzero third input;upper nibble survives. Owned field4C copied and total44 wraps32 bits.'],'adapters':['No logical or OS interfaces needed;actual constructor straight-line body executes with explicit80-byte owned storage.'],'limits':['Native evidence prepared;Rust full holder construction/outer-reader integration pending. Physical allocation/registry/language/callback/ownership/destruction still required.']}
+(r/'data/4.20/audio_bank_holder_contract.json').write_text(json.dumps(proof,indent=2)+'\n',encoding='utf-8');print('PASS',len(rows),'native80-byte bank holder construction cases')

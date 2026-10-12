@@ -1,0 +1,24 @@
+{
+  "complete": false,
+  "passed": true,
+  "native_cases": 72,
+  "native_accepted": 26,
+  "physical_rust_match": true,
+  "prior_pause_sequences_rechecked": 24,
+  "contract": "data/4.20/game_clock_pause_budget_contract.json",
+  "implementation": "crates/core/src/native_game_clock.rs::PauseControl::request_pause",
+  "verification": "tools/verify_native_pause_budget.rs",
+  "client_check": "logs/native-pause-budget-check.log",
+  "direct_callers": [
+    "0x58af29",
+    "0x5a7b56",
+    "0x5a8720",
+    "0x6a7a25"
+  ],
+  "config_search": "No TournamentPause/TotalLimitSecs/HeartbeatDelay matches in deployment ini/cfg/txt files <=2MiB or OpenLeague data ini/cfg/json<=2MiB. Does not exclude archived or dynamically supplied config.",
+  "limits": [
+    "Budget gate is not player/mode authorization.",
+    "Notification represented as Some(full32 marker), with low8 stored; external callback not wired.",
+    "Live pause, heartbeat and effective config still pending."
+  ]
+}

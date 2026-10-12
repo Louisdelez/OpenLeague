@@ -1,0 +1,18 @@
+sampler srcTex : register (s0);
+
+float4 offset : register(c0);
+
+// http://rastergrid.com/blog/2010/09/efficient-gaussian-blur-with-linear-sampling/
+// This is a 5-tap case based on the linked article above.
+float4 main(float2 texcoord : TEXCOORD0) : COLOR0
+{
+    float weight0 = offset.z;
+    float weight1 = offset.w;
+
+	float result = tex2D(srcTex, texcoord).r * weight0;
+
+    result += tex2D(srcTex, texcoord+offset.xy).r * weight1;
+    result += tex2D(srcTex, texcoord-offset.xy).r * weight1;
+
+    return float4(result, result, result, 1.0f);
+}

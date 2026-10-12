@@ -1,0 +1,94 @@
+{
+  "updated_utc": "2026-10-04T05:38:36.788561+00:00",
+  "files_sha256": {
+    "tools/extract_native_map_camera.py": "cb7261ab468dd75be5088f1cda0936edfa875b5aebc905cc9c7a47d3d7612945",
+    "tools/qualify_native_camera_sequence.py": "eeca52f327e9d976b9c2cb5042cc9cf9cd1b3a6b75da322de01b9367f54b45a5",
+    "data/4.20/camera_map10_settings.json": "d7d9095db4639084563808c338e3b477db96e627f0e904b5b3d9deffd5bcb5f9",
+    "data/4.20/camera_sequence_contract.json": "f99a4874442320f0d9f7fdb3dd31b2d8a822395fafcf7ae988aa427822a15fb8",
+    "crates/core/src/camera_sequence.rs": "397186bc639a555b6988ea8b19bc8da98fbc4caa866aa880097839eab3df1e64",
+    "crates/core/src/lib.rs": "4c408d514a86fe6e030ae77c955ea5f78cb172861aeb55d844502f818c463c35",
+    "crates/client/src/camera_native.rs": "57e6af46a1d3e8e5818598e7a39a9fe720ceafaec0500c5f57feafecf9df23fb",
+    "crates/client/src/main.rs": "348a8861e5138f355db6b2232e261bf7db7e67dbfcebc010239c6b3d142d73d3",
+    "logs/native-camera-sequence-client-tests.log": "7fff5bea2e3b108e9b37cada1474ecf144e7ea6731f5a9004b01ff27074899a7",
+    "logs/native-camera-sequence-client-build.log": "8f90ca763592c71210ebe4192367f02de0232809ef0c7fc5fbd5de42989c3ab4",
+    "logs/native-camera-sequence-client.out.log": "7abf56e33ec8a820600cce6206308252186efdb308195a2282ca240e73f4e682",
+    "logs/native-camera-sequence-client.err.log": "f39722ad83a70fe6c011507e23ec77979133fd6ffc0ca3103f75f26dc875c739",
+    "logs/native-camera-sequence-map10.png": "43f54fd700217880d4370ca340617b2f25beec901b4866637faf9a1d630e6fbc",
+    "logs/native-camera-sequence-runtime.json": "c7da4a3d768f63e9888c6912bd847c3639a86ee9056bdf90c47bc6da9a18a12a"
+  },
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "map_source": {
+    "source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\Constants.var",
+    "source_sha256": "178d86117826819d02af09477083eae625d418ee4b0b8bff4763a1a56c7b2be2",
+    "native_values": {
+      "cam_MinX": 800.0,
+      "cam_MinY": 4200.0,
+      "cam_MaxX": 14700.0,
+      "cam_MaxY": 10000.0,
+      "cam_FarZ": 5000.0,
+      "cam_KeyboardOrbitSpeedX": 100.0,
+      "cam_KeyboardOrbitSpeedY": 50.0
+    },
+    "rectangle": [
+      800.0,
+      4200.0,
+      14700.0,
+      10000.0
+    ],
+    "rectangle_order": "min_x, min_z, max_x, max_z; source Y maps to native horizontal Z in7D1A60",
+    "limits": [
+      "cam_FarZ qualified through5755C4 raw depth transfer; keyboard orbit values remain recorded only. Generic near50 bootstrap and native config registration/parser remain unqualified.",
+      "Runtime config registration/parser is not emulated; native rectangle clamp reads directly traced global variables with these map source values supplied."
+    ]
+  },
+  "native_normal_sequence_cases": 512,
+  "native_depth_transfer_cases": 16,
+  "core_tests_passed": 316,
+  "client_tests_passed": 19,
+  "client_executable_sha256": "a2c9d44442f4aae97902d7bd408c8daeb9918f946ba730230a70374ebcea0579",
+  "server_executable_sha256": "b51b2dfc8ea19f735482e8f87e353feafdac242af91c54f0754f851bb202bb16",
+  "runtime": {
+    "started_utc": "2026-10-04T05:35:56.4123915Z",
+    "client": 13664,
+    "server": 10600,
+    "port": 5896,
+    "backend": "vulkan",
+    "checked_utc": "2026-10-04T05:38:36.6876655Z",
+    "client_alive": true,
+    "client_responding": true,
+    "server_alive": true
+  },
+  "client_integrated": true,
+  "framebuffer": {
+    "path": "logs/native-camera-sequence-map10.png",
+    "dimensions": [
+      1280,
+      800
+    ],
+    "inspected": true,
+    "human_fidelity_acceptance": false
+  },
+  "ported": [
+    "Full7CFB70 normal-camera sequence in service contexts with unresolved auto target absent and active shake disabled; native Y reset precedes focus holds/restrictions and normal geometry.",
+    "Native Map10 rectangle X800..14700/Z4200..10000 from Constants.var applied through qualified7D1A60 clamp. Client focus is replaced by constrained native output, so pan/listener state cannot accumulate out-of-map offsets.",
+    "Original5755C4..5755F9 raw depth transfer: cam_FarZ global123E9A0 to renderer22C and main camera1239610; renderer228 near to main123960C. Source Map10far5000 now applied, scaled to client250."
+  ],
+  "acceptance": {
+    "sequence": "512full native sequences: focus geometry within1e-5abs/2e-6relative, saved focus/rawhold/zoom/distance/preserved camera fields exact; context query branch counts asserted.",
+    "depth": "16raw near/far transfers exact, including negative zero/NaN/infinite words.",
+    "client": "19tests passed, expanded camera case includes out-of-bounds requests, flattened focus and native far250. Real1280x800 Vulkan framebuffer with restored map/Garen/HUD inspected."
+  },
+  "limits": [
+    "Automatic target reference5A54E0/entity resolver5BDD20/target setter7D0E80 path and active shake not yet qualified.",
+    "Original input/context service producers and full58C8B0 mode dispatch still unqualified. Client uses explicit inactive hold flags and reconstructed arrow-pan/initial champion focus.",
+    "Native map variable registration/config parser not emulated; original Constants.var values supplied directly to the proven math consumers.",
+    "Near plane still generic986150 default50; bootstrap renderer228 initialization not yet qualified. Bevy reverse-depth/infinite GPU projection equivalence with original renderer not claimed.",
+    "Source cam_KeyboardOrbitSpeedX100/Y50 recorded only; not substituted for current pan speed.",
+    "Vulkan loader reports missing TikTok third-party layer JSON; no driver mutation.",
+    "Source core316/client19passed; current client rebuilt. Server unchanged from prior b51b2d... build; no server feature completion claimed.",
+    "An initial test assertion expected512 while the first fixture had256; expanded with four source-threshold/edge positions to512 and reran. Temporary Rust mutable-borrow compilation error corrected before final tests/build.",
+    "No new full-game/domain/human acceptance; champions/kits/effects/audio/launcher/services/network qualification remain incomplete."
+  ],
+  "full_native_camera_complete": false,
+  "complete": false
+}

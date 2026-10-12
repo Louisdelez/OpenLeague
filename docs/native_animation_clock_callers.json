@@ -1,0 +1,151 @@
+{
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "regions": [
+    {
+      "start": "0x877440",
+      "callsite": "0x87744d",
+      "sha256": "d80142b82824c7875bd1f4ee40a3db5510284973a66f4e0719254ff38d598f05",
+      "instructions": [
+        {
+          "address": "0x877440",
+          "mnemonic": "push",
+          "operands": "esi"
+        },
+        {
+          "address": "0x877441",
+          "mnemonic": "mov",
+          "operands": "esi, ecx"
+        },
+        {
+          "address": "0x877443",
+          "mnemonic": "push",
+          "operands": "edi"
+        },
+        {
+          "address": "0x877444",
+          "mnemonic": "mov",
+          "operands": "edi, dword ptr [esi + 0x130]"
+        },
+        {
+          "address": "0x87744a",
+          "mnemonic": "mov",
+          "operands": "ecx, dword ptr [edi + 0x6c]"
+        },
+        {
+          "address": "0x87744d",
+          "mnemonic": "call",
+          "operands": "0x878ce0"
+        }
+      ]
+    },
+    {
+      "start": "0x879fc0",
+      "callsite": "0x879fc6",
+      "sha256": "39b24d2f2665f42b1e9db5cf8bbeca849f5659b8d04b02a638967ffff5740490",
+      "instructions": [
+        {
+          "address": "0x879fc0",
+          "mnemonic": "push",
+          "operands": "esi"
+        },
+        {
+          "address": "0x879fc1",
+          "mnemonic": "mov",
+          "operands": "esi, ecx"
+        },
+        {
+          "address": "0x879fc3",
+          "mnemonic": "mov",
+          "operands": "ecx, dword ptr [esi + 0x6c]"
+        },
+        {
+          "address": "0x879fc6",
+          "mnemonic": "call",
+          "operands": "0x878ce0"
+        }
+      ]
+    },
+    {
+      "start": "0x87e9d0",
+      "callsite": "0x87ea00",
+      "sha256": "80979bc2dfc33efcba356677ebccb1bd2f39a2633460e4b0f1fd513632feef4f",
+      "instructions": [
+        {
+          "address": "0x87e9d0",
+          "mnemonic": "push",
+          "operands": "esi"
+        },
+        {
+          "address": "0x87e9d1",
+          "mnemonic": "mov",
+          "operands": "esi, ecx"
+        },
+        {
+          "address": "0x87e9d3",
+          "mnemonic": "cmp",
+          "operands": "byte ptr [esi + 0xdc], 0"
+        },
+        {
+          "address": "0x87e9da",
+          "mnemonic": "jne",
+          "operands": "0x87e9e5"
+        },
+        {
+          "address": "0x87e9dc",
+          "mnemonic": "cmp",
+          "operands": "byte ptr [esi + 0x231], 0"
+        },
+        {
+          "address": "0x87e9e3",
+          "mnemonic": "je",
+          "operands": "0x87ea55"
+        },
+        {
+          "address": "0x87e9e5",
+          "mnemonic": "call",
+          "operands": "0x87fb60"
+        },
+        {
+          "address": "0x87e9ea",
+          "mnemonic": "cmp",
+          "operands": "byte ptr [0x2d78d34], 0"
+        },
+        {
+          "address": "0x87e9f1",
+          "mnemonic": "je",
+          "operands": "0x87ea3a"
+        },
+        {
+          "address": "0x87e9f3",
+          "mnemonic": "mov",
+          "operands": "ecx, esi"
+        },
+        {
+          "address": "0x87e9f5",
+          "mnemonic": "call",
+          "operands": "0x87f860"
+        },
+        {
+          "address": "0x87e9fa",
+          "mnemonic": "mov",
+          "operands": "ecx, dword ptr [esi + 0x20c]"
+        },
+        {
+          "address": "0x87ea00",
+          "mnemonic": "call",
+          "operands": "0x878ce0"
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "877440 loads owner+130 render controller then controller+6c for878ce0.",
+    "879fc0 directly loads controller+6c for878ce0.",
+    "87e9d0 conditionally loads receiver+20c for878ce0 after87fb60/87f860."
+  ],
+  "limits": [
+    "Static decoded call paths, not executed caller qualification.",
+    "Third receiver type and upstream dispatch/visibility scheduling not established."
+  ]
+}

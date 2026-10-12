@@ -1,0 +1,29 @@
+{
+  "updated_utc": "2026-10-07T10:56:49.620135+00:00",
+  "passed": true,
+  "complete": false,
+  "focused_client_tests": 4,
+  "focused_core_tests": 8,
+  "parent_child_bridge": true,
+  "normal_runtime_bound": false,
+  "graphical_build_current": false,
+  "findings": [
+    "Native parent gate commits actual child storage before substeps through commit_simple_gate.",
+    "Parent drives native timing, interpolated positions, child last-step bounds flag and completion.",
+    "Test covers active particle, storage suspension, repeated hidden frame without advancing motion clock, reuse on visibility return and hidden stop."
+  ],
+  "limits": [
+    "Explicit supplied clock/rate/flags/camera inputs; no normal runtime binding yet.",
+    "Audio descriptors disabled and engine status0/root clock0 are explicit adapter inputs.",
+    "Composition test uses separately qualified native contracts; no new whole native parent-child oracle.",
+    "No new graphical executable or acceptance."
+  ],
+  "artifacts_sha256": {
+    "crates/client/src/native_projected_parent.rs": "824ed14da0cef8b38385a738433437ba36ffbf0aef9d054743acc4912a08d6b9",
+    "crates/client/src/native_projected_cycle.rs": "0a58a27f97fc211b0957e11db13a252d92a4353c8468ab3efa7ab3e8ad23368b",
+    "crates/core/src/native_troy_frame.rs": "4d7d03f982eda37107e806b0a4e2df162731692b0a907fb58c503680fe2eba1b",
+    "logs/projected-parent-tests.log": "0811283d12f868ee9d10ca23f50901091f954c4fc790aed8de46e46710229b2e",
+    "logs/projected-parent-core-tests.log": "2d4e12bd790b98cb198479f151a6704263f97a5917a65d0acff09c9eca624da0"
+  },
+  "next_action": "Brancher native_projected_parent::Parent dans projected_live::Lifetime avec le paquet camera reel et le reglage moteur explicite. Adapter les tests de la vie complete au parent (les anciens oracles Simple restent au niveau enfant). Verifier visible/hors champ/reprise/arret, puis captures DX12/Vulkan. Le rendu normal utilise encore le cycle enfant direct."
+}

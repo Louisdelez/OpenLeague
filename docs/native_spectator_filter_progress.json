@@ -1,0 +1,38 @@
+{
+  "updated_utc": "2026-10-04T23:10:44.297913+00:00",
+  "complete": false,
+  "client_tests_passed": 119,
+  "client_build_passed": true,
+  "native_spectator_filter_frames": 2304,
+  "native_addresses": 1423,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Original6B3FA0 executes2304spectator frames with local player absent, native selection-2/-1/0/1, source tags100/200/300, registration absent/actor absent/actor present, actor teams100/300, descriptor24/2C booleans, descriptor28 masks0/1/2/3 and applied/unapplied sources. AD true and118 false supplied.",
+    "Original mode-to-team conversion executes; mismatched selected-team sources withdraw their stencil. Selection-2 bypasses descriptor eligibility but keeps actorAD/118/neutral-team gates and withdraws source tags other than100/200 through original6B3EF0. Selection-1 produces team0 with no tag0 sources in this proof.",
+    "Original6B2C30 reads descriptor28 team visibility bits for selections0/1; unlike local-player non-spectator filtering, descriptor2C does not override descriptor24 in these paths. Original actor lookup/getters, counters, source withdrawal and queue processing execute.",
+    "Rust SpectatorSelection/SpectatorActor/CircleView.select_spectator_source ports qualified selections and filters.2304comparisons verify counts, applied/pending flags, priority/order and generated sources;119client tests and build passed."
+  ],
+  "limits": [
+    "Original source enumeration, dirty/applied/pending gates, circle effective-radius getter, distance approximation, priority calculation, heap enqueue/pop and frame budget execute.",
+    "Both original identity and handle lookups execute on supplied registries; actor virtual getters600830 and617360 execute. Source tags100/200/300 with player absent; original mode-to-team conversion executes for -2/-1/0/1. Spectator true supplied at seven virtual call sites. Original6B2C30 descriptor28 visibility-bit query and6B3EF0 neutral-source withdrawal execute; actor/descriptor flag producers and constructors remain unqualified. QPC/clock and mask generation boundaries adapted; no generated mask is applied.",
+    "Allocator boundaries adapted; camera/world extent supplied. No live gameplay/GPU integration.",
+    "Spectator predicate supplied true at seven virtual call sites. Actor/descriptor flags, visibility masks, registries and view initialization are supplied rather than produced through constructors.",
+    "Only no-local-player spectator views are qualified here; player-present restricted view bit11, selection transitions, unsupported selector values and source tag0 remain open. Mask generation boundary is adapted.",
+    "No live spectator session, replay integration, ordinary entity activation, authoritative/GPU fog binding or graphical rerun."
+  ],
+  "next_actions": [
+    "Qualify spectator selection transitions, player-present restricted views and view initialization/subscriptions.",
+    "Qualify actor/registry/descriptor field producers; connect native source lifecycle to ordinary gameplay entities.",
+    "Bind qualified masks to authoritative visibility and GPU rendering and verify restored Map10 gameplay."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_spectator_filter_contract.json": "0abf9d883e1cc49bfb374f28f28ef428e448c9ff17d7b8ef024d7d5b38d30467",
+    "tools/probe_fow_spectator_filter.py": "ae94faf78f21b8a36df129adead6f8cf55dc74c3a600461788f227b44b166c91",
+    "tools/probe_fow_spectator_filter_generated.py": "8faf5423380830f82d2c2561f52c36f8b49e9db059ebd7900d19f2ad3dcaf993",
+    "crates/client/src/fow_spectator_filter.rs": "f4cdf288134dd6fd3f41391e42dc01cc082b4d8f651dd92332db4d0418fd5646",
+    "logs/native-spectator-filter-tests.log": "392189c2da00a1c1112ac394438da60a7b0b75e0ee010cfaa8fc6a4a7ccdadb0",
+    "logs/native-spectator-filter-build.log": "0d9076a0aa2af837a70cc944e2ebcf9681d257799b9e9ac863059a189365102d",
+    "target/debug/openleague-client.exe": "0a43666c892ecff30bb30cb6d4842321cca8a308bb2d225298eb0c747f5cebd2"
+  }
+}

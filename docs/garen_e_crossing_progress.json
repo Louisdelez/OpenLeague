@@ -1,0 +1,24 @@
+{
+  "complete": false,
+  "source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Menu\\fontconfig_fr_FR.txt",
+  "sha256": "47429564a76830c2cb5a05f7cdad0c62e987532a71789347dccef8322f4d4562",
+  "native_tooltip": "tr \"game_spell_tooltip_GarenE\" = \"<titleLeft>Jugement (@Level@)</titleLeft><titleRight>[@Hotkey@]</titleRight><subtitleLeft>Pas de coût</subtitleLeft><subtitleRight>@Cooldown@ sec de récupération</subtitleRight><mainText>Garen fait rapidement tournoyer son épée autour de lui pendant @Effect2Amount@ sec, infligeant @Effect1Amount@ [plus @Effect3Amount@% de ses dégâts d'attaque <font color='#FF8C00'>(+@f1@)</font>] pts de dégâts physiques chaque seconde aux ennemis proches. Garen peut traverser les unités pendant qu'il tournoie, mais il se déplace 20% moins vite en traversant des sbires ou des monstres.<br><br><font color='#99FF99'>Jugement peut infliger des coups critiques.<br>Jugement inflige 25% de dégâts en moins aux sbires.</font></mainText>\"",
+  "implemented": "Native 20 percent crossing penalty, live minions/monsters only, shared Stats and walking speed; no stacking for multiple overlapping units.",
+  "reconstruction": [
+    "Contact uses champion center inside imported NPC radius; exact native collision body and swept contact unqualified.",
+    "Crossing multiplier applied after existing movement soft caps; historical modifier ordering unqualified."
+  ],
+  "critical_gap": "Native tooltip explicitly permits criticals; supplied community E source omits critical sampling and numeric multiplier not proved in current native fields. Remains unimplemented.",
+  "limits": [
+    "General body collision and unit traversal for other abilities remain incomplete.",
+    "Visual/audio and original-runtime crossing qualification incomplete."
+  ],
+  "core_tests_passed": 3,
+  "core_test_log": "logs/garen-crossing-build.log",
+  "updated_utc": "2026-10-03T13:28:09.272576+00:00",
+  "network_crossing_qualified": true,
+  "historical_native_crossing_qualified": false,
+  "network_validation": "docs/garen_crossing_network_validation.json",
+  "network_checks": 6,
+  "native_npc_radius_source_validation": "docs/garen_collision_source_validation.json"
+}

@@ -1,0 +1,26 @@
+{
+  "verified_utc": "2026-10-08T05:38:07.607451+00:00",
+  "complete": false,
+  "native_cases": 360,
+  "entry": "6C96F0 with original928440getter/928460setter",
+  "change": "Rust transfer maps wrapper144 bits1/2/4 to Troy24 bits10/2/20, preserves existing flags and marks request800 on every alive setter call. Missing weak target causes no updates.",
+  "test": {
+    "command": "cargo test -p openleague-core audio_emitter_flags --offline -j1",
+    "session": 36850,
+    "passed": 1,
+    "failed": 0,
+    "filtered": 661,
+    "exit_code": 0
+  },
+  "files": {
+    "tools/probe_native_audio_emitter_flags.py": "d0cea34be13900b0eb9972ecf52672b80292e932bd0c0e857b2286ebd0cba03e",
+    "data/4.20/audio_emitter_flags_contract.json": "28429b46c2b4a4bc6fe77c993b3312cce2a251318776c399e40647eef8c77877",
+    "crates/core/src/audio_emitter_flags.rs": "d5fc54ae81c12450af1294afed54591c8abcc50fd7a1e973dc25f74f0559ab5f"
+  },
+  "limits": [
+    "Weak lock adapted with target/null and no reference counter.",
+    "Full animation callback and wrapper creation not executed.",
+    "No Bevy caller or physical audio integration yet.",
+    "5B56BA OR wrapper144 bit1 then6C96F0 confirmed by current disassembly only; full initial wrapper flags remain open."
+  ]
+}

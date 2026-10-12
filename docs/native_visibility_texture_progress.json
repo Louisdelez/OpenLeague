@@ -1,0 +1,68 @@
+{
+  "updated_utc": "2026-10-05T00:59:49.265742+00:00",
+  "complete": false,
+  "client_tests_passed": 133,
+  "client_build_passed": true,
+  "runtime": {
+    "checked_utc": "2026-10-05T00:59:27.927601+00:00",
+    "complete": false,
+    "normal_server": true,
+    "client_sha256": "b18027a7eb6086aa50d18178336f4499d18b45e985d91b53d4793dc5eb15d26b",
+    "measurement": {
+      "complete": false,
+      "error": null,
+      "format": "R8Unorm",
+      "gpu_readback_verified": false,
+      "height": 512,
+      "limits": [
+        "Raw visibility only; native fade/blur and material binding pending.",
+        "Corner allocation and sampler are explicit Bevy adapters; original initialization/device producers remain open."
+      ],
+      "material_bound": false,
+      "nonzero_texels": 20328,
+      "render_asset_registered": true,
+      "uploads": 121,
+      "width": 512
+    },
+    "capture": "E:\\OpenLeague\\logs\\visibility-texture-133.png",
+    "capture_sha256": "ccc57fdeb6888766c882be9af0e2f3f7d1771c0e2b490778c2761cf84edcf842",
+    "visual_inspection_required": false,
+    "limits": [
+      "Image asset updates observed in live Vulkan client; GPU texture readback and material sampling not verified.",
+      "Raw mask expansion only; full native fade/blur pipeline remains open."
+    ],
+    "visual_inspection": {
+      "observed": [
+        "Actual Vulkan framebuffer displays textured blue base, champion and health bars. French HUD accents remain corrupted."
+      ],
+      "limits": [
+        "Texture diagnostics report Image asset updates; screenshot does not show dynamic fog because material sampling is not bound."
+      ]
+    }
+  },
+  "material_bound": false,
+  "gpu_readback_verified": false,
+  "findings": [
+    "Qualified native128-to512expansion connected to persistent Bevy R8Unorm Image asset updates. Native strict>0.2supload cadence reused.",
+    "Session/team change clears previous visibility; invalid buffers/clocks are rejected before mutation.",
+    "Actual local server/Vulkan client probe observes repeated nonzero texture updates."
+  ],
+  "limits": [
+    "Raw mask only; native fade/blur, original texture initialization/sampler/device producers remain open.",
+    "Zero allocation and Bevy sampler are explicit transport adapters. No dynamic fog shader binding or GPU readback acceptance.",
+    "Source identity/eligibility and camera/config producers remain adapters; wards, stealth, spectator and six-client match pending."
+  ],
+  "next_actions": [
+    "Qualify native fog render target/sampler/fade/blur integration and original overlay/edge parameter producers.",
+    "Bind actual visibility/overlay factors to terrain, structures and projected effect shaders; verify GPU readback and rendered positions/edges.",
+    "Fix observed HUD accent corruption and continue all completion-plan domains."
+  ],
+  "files_sha256": {
+    "crates/client/src/fow_visibility_texture.rs": "9a643c77bfa1defe5d35721a2351078345ad2b945b856b3b70c435cefb40b517",
+    "crates/client/src/main.rs": "daa415088123d5c640cd77695043efb863ad9b5473e2b153fe73123d7c96aecc",
+    "logs/visibility-texture-tests.log": "896f37d023e22c4fed9f32f693ef96317fd5235117453491ad38d87afbbfcd9a",
+    "logs/visibility-texture-build.log": "582bd7f86260ba29d22c40f6f8be82e6d45adf7a31017cfc3e4cc2cc561e04ab",
+    "logs/visibility-texture-133.png": "ccc57fdeb6888766c882be9af0e2f3f7d1771c0e2b490778c2761cf84edcf842",
+    "target/debug/openleague-client.exe": "b18027a7eb6086aa50d18178336f4499d18b45e985d91b53d4793dc5eb15d26b"
+  }
+}

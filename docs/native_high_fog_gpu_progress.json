@@ -1,0 +1,67 @@
+{
+  "updated_utc": "2026-10-05T20:17:06.122891+00:00",
+  "complete": false,
+  "passed": true,
+  "production_shader_body_gpu_arithmetic_qualified": true,
+  "blend_gpu_cases": 1080,
+  "vertex_gpu_cases": 360,
+  "total_channels_checked": 11520,
+  "blend": {
+    "adapter": "NVIDIA GeForce RTX 3060",
+    "backend": "Vulkan",
+    "cases": 1080,
+    "channels_checked": 8640,
+    "complete": false,
+    "limits": [
+      "Production blend bodies extracted; textureSample calls replaced by controlled values. No texture filtering, mip selection or vertex interpolation proof.",
+      "FoW factor vectors supplied after prior blend; full factors production, full shader variant/routing and original D3D framebuffer remain unqualified."
+    ],
+    "maximum_error": 2.086162567138672e-07,
+    "passed": true,
+    "production_blend_paths": 2,
+    "tolerance": 2e-06
+  },
+  "vertex": {
+    "adapter": "NVIDIA GeForce RTX 3060",
+    "backend": "Vulkan",
+    "cases": 360,
+    "channels_checked": 2880,
+    "complete": false,
+    "limits": [
+      "Production vertex arithmetic bodies extracted into compute harness. Supplied world/clip positions bypass actual mesh transform and camera projection.",
+      "Clamps at vertex verified; perspective interpolation/rasterization, original native clock and physical texture sampling remain unqualified."
+    ],
+    "maximum_error": 4.76837158203125e-07,
+    "passed": true,
+    "production_blend_paths": 2,
+    "tolerance": 2e-06
+  },
+  "production_runtime_source_changed": false,
+  "application_binary_unchanged": true,
+  "application_binary_sha256": "37de22a9aac32ce4c77ffdee498fc6019e4169ebd1dfebaa7074b556ccbb1f32",
+  "physical_cloud_filter_qualified": false,
+  "perspective_interpolation_qualified": false,
+  "artifacts": [
+    "data/4.20/native_high_fog_gpu_cases.json",
+    "data/4.20/native_high_fog_vertex_gpu_cases.json",
+    "logs/native-high-fog-arithmetic-probe.wgsl",
+    "logs/native-high-fog-vertex-probe.wgsl",
+    "logs/native-high-fog-arithmetic-gpu.json",
+    "logs/native-high-fog-vertex-gpu.json"
+  ],
+  "hashes": {
+    "data/4.20/native_high_fog_gpu_cases.json": "59c743c83ec76e371474a869892c0e1010662a37986111199106158da8b21d24",
+    "data/4.20/native_high_fog_vertex_gpu_cases.json": "fb403337cac395cebaad8b9e0a1d036cb78b4be0d8393fb3b970a66f7e202afa",
+    "logs/native-high-fog-arithmetic-probe.wgsl": "1e552f95db06e79408471e5e4f01d6d798b714494c07569d124dbe5a87942b3d",
+    "logs/native-high-fog-vertex-probe.wgsl": "8075ff090cc4708f5c865e4da34ead0b7d8ef796cc4076ab84bb3aa7c77165d0",
+    "logs/native-high-fog-arithmetic-gpu.json": "1c2ef958cac0c920647b494df1b8fb068ed14c3b0f84d05c8645f39ddb44b100",
+    "logs/native-high-fog-vertex-gpu.json": "662cdb7eb18feeff8bd5ae48ac420483429d42c2515bb8a80c3db027045d3a19"
+  },
+  "limits": [
+    "Production blend bodies extracted; textureSample calls replaced by controlled values. No texture filtering, mip selection or vertex interpolation proof.",
+    "FoW factor vectors supplied after prior blend; full factors production, full shader variant/routing and original D3D framebuffer remain unqualified.",
+    "Production vertex arithmetic bodies extracted into compute harness. Supplied world/clip positions bypass actual mesh transform and camera projection.",
+    "Clamps at vertex verified; perspective interpolation/rasterization, original native clock and physical texture sampling remain unqualified."
+  ],
+  "next_action": "Qualifier le filtrage réel Cloud2 BC1/mipmaps et l’interpolation perspective des valeurs de brouillard sur triangles rasterisés, avec cas contrôlés. Les1080cas de mélange et360cas de sommet des deux shaders passent Vulkan ; textureSample est adapté dans ces sondes. Profil/options finaux, exclusions FULLBRIGHT/NOLIGHTING, matériaux Blender et référence de rendu Chaos restent ouverts. Puis cérémonie/audio/sbires, reconnexion, résultats/launcher, partie ordinaire à six clients graphiques et les24domaines."
+}

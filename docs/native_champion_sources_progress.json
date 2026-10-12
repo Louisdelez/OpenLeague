@@ -1,0 +1,90 @@
+{
+  "updated_utc": "2026-10-05T00:38:09.239427+00:00",
+  "complete": false,
+  "client_tests_passed": 130,
+  "client_build_passed": true,
+  "native_character_field_cases": 125,
+  "native_character_profiles": 122,
+  "native_addresses": 50,
+  "living_allied_champion_cpu_sources_bound": true,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": true,
+  "runtime_capture": {
+    "checked_utc": "2026-10-05T00:36:59.221062+00:00",
+    "complete": false,
+    "diagnostic_fixture": false,
+    "normal_server": true,
+    "client_sha256": "144342e24dea0b7b5e5e94a31aa751a9741ee3ef5d973d02ef941914ab2bf7cc",
+    "server_sha256": "6de4a6dce78cac731ad6c2089bfa272c9e76ae870ed60b240d12c7ac40dca26a",
+    "measurement": {
+      "complete": false,
+      "error": null,
+      "gpu_bound": false,
+      "limits": [
+        "Snapshot adapter; native actor descriptor/provider and filter producers remain open.",
+        "Living allied champions only; NPC, altar, ward, stealth and spectator vision missing.",
+        "CPU masks only; server filtering remains authoritative and GPU fog is not bound."
+      ],
+      "pending": 0,
+      "session": 1791160588792652500,
+      "source_ids": [
+        21,
+        23
+      ],
+      "sources": 2,
+      "tick": 910,
+      "visible_cells": 159
+    },
+    "control_player_ids": [
+      21,
+      22
+    ],
+    "capture": "E:\\OpenLeague\\logs\\champion-vision-130.png",
+    "capture_sha256": "1d51c0fbe127cec8104d815ba4019f67072ab70f9923755fc7615c3652e22946",
+    "visual_inspection_required": false,
+    "limits": [
+      "Normal local server and three connected players; only living allied champion CPU mask integration checked.",
+      "Server binary reused; its hash recorded rather than claiming new server/core compilation.",
+      "Native source IDs/providers, full actor filtering and refresh initialization use snapshot adapter or remain incomplete; no GPU fog binding, NPC/ward/altar/stealth or six-client full-match acceptance."
+    ],
+    "visual_inspection": {
+      "observed": "Actual1280x800 framebuffer shows restored blue base, champion models with health bars, structures and HUD connected to normal server.",
+      "limits": "No GPU vision mask visible because shader binding is not implemented. One camera view, no complete-map or complete-game fidelity acceptance. French HUD contains visible mojibake and remains a rendering/localization defect."
+    }
+  },
+  "findings": [
+    "Original56BD88 reader call sites resolve SelectionHeight60C/SelectionRadius610/PathfindingCollisionRadius614 with-1defaults; GameplayCollisionRadius618 uses nested GeneralDataHero/DefaultChampionCollisionRadius65 fallback.125cases include122original verified champion files and3missing/override cases.",
+    "Rust loader supplies actual raw selection/pathfinding metrics to champion circular sources. Snapshot adapter reconciles living allied champions, native radius modifiers and position epsilon; retirement dispatch removes applied counts and pending queue entries on death/removal/session reset.",
+    "Qualified scheduling, native Map10 mask generation/cache and count application now execute on ordinary client snapshots; authoritative server filtering unchanged. Full130client tests and build passed.",
+    "Normal local server with three connected players produced two allied champion sources; enemy controller excluded, pending queue empty and live CPU visibility nonzero. Current Vulkan framebuffer captured; inspect receipt for source/capture scope."
+  ],
+  "limits": [
+    "Original CharacterData reader call sites/default propagation and field writes execute for122authored champion resources and3override/missing cases.8B1F50 actual configuration lookup is adapted to parsed original INIBIN values.",
+    "Global GeneralDataHero lookup supplies native fallback65 or explicit diagnostic82.5 override. Full configuration hierarchy/global resource reader is not executed; no unqualified global override silently inferred.",
+    "Field618 is GameplayCollisionRadius and native614E40 scales it by actor740. Actor field/model scale producers remain separate.",
+    "CharacterData reader entry569560 remainder, caches, skins, NPC resources and gameplay source activation/GPU remain incomplete.",
+    "Runtime source ID maps snapshot player ID to opaque0; native descriptor ID remains unavailable and opaque1=0 is an explicit adapter. No original AI weak provider/owner registry producer or native actor identity/team constructor supplied.",
+    "Only living allied champions integrated. NPC/tower/pet/altar/ward/stealth sources and spectator filters remain incomplete.",
+    "Scheduling uses snapshot tick/30 and CameraFocus as priority camera adapter, refresh counter0 and forcefalse. Actual native camera/configuration producers and shared refresh activation remain unqualified.",
+    "CPU masks are not yet GPU fog or server visibility. Existing server-private snapshots continue to control dynamic enemy availability.",
+    "Raw resource catalog/defaults qualified through parsed original INIBIN lookup adapter; full native configuration hierarchy/cache loader not executed."
+  ],
+  "next_actions": [
+    "Extend original resource geometry/radius catalog and qualified source activation to lane units, pets and appropriate buildings.",
+    "Qualify native runtime source identity/provider, camera/configuration/refresh producers, then bind CPU mask texture to projected/terrain GPU fog.",
+    "Verify movement/death/reconnect and all vision rules over real network gameplay; continue complete24-domain plan."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_character_geometry_contract.json": "46be6a1c3c030cb97b87f3f8b262bc853bf3dd19ba69bc20937e58ea5fe4fe90",
+    "data/4.20/native_character_geometry.json": "c7ed7e50f5561f67966f5bad0f1680286d66d04937bec2ef1b0ba335f161de7f",
+    "tools/probe_fow_character_geometry.py": "616b8c216a4d95d4a12c8cdc561787afac685f335ef50e571686afc344711609",
+    "crates/client/src/fow_character_geometry.rs": "9c20571b35d593ab070c708b8f9710a58cca15f937377c994649e294f4521943",
+    "crates/client/src/fow_champion_sources.rs": "f9d712f79311dc0f31948ed34651fd0d206af1528593ec36aab7db566f2f4270",
+    "crates/client/src/main.rs": "f02a75687c84e76595e2bcd1ebed7338a4554d182d98732b0d0973dd15f949c1",
+    "crates/client/Cargo.toml": "cd94c6c4eb872e59ec13b90f75128613c416bfdd09b1bb2153310940be202979",
+    "Cargo.lock": "40822e690ed8283067e9bd5e0650d38e325d3f4c4e70dec40a16a80fad970535",
+    "logs/native-champion-sources-tests.log": "3158e80bb2555e0713181e2be14d54d13baddf01cd33ab732d5a9596a0f22952",
+    "logs/native-champion-sources-build.log": "e5213522cf02839fecff38c9927f8f673cdb04bafd4fee0d410d161244141790",
+    "target/debug/openleague-client.exe": "144342e24dea0b7b5e5e94a31aa751a9741ee3ef5d973d02ef941914ab2bf7cc"
+  }
+}

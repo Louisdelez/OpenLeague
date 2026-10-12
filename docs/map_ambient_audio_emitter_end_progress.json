@@ -1,0 +1,33 @@
+{
+  "updated_utc": "2026-10-04T02:50:04.520797+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_emitter_end.py": "b4cdb7b11ef4f579d48792738f7483ab4b7f4b23385285498abc6b2d23c3d613",
+    "data/4.20/audio_emitter_end_contract.json": "96af6b04aac2d3360b71e9b1d30102bf61fdb976ebba6e26dcbf39e32c978dfa",
+    "crates/core/src/audio_emitter_end.rs": "89d53f45e5a57dc060cd3424f7b8a793003128b62f64e85b9fc95a4410e59041",
+    "crates/client/src/map_audio_requests.rs": "0cf70977dd4c60616f3d29aa07df7ceac5fbb614ed42cdc754816fd81253a460",
+    "crates/core/src/lib.rs": "46f4278cce4124d6d9c5d8ba66492255e9491c8a9907b46c5e708a89f500b532",
+    "logs/native-audio-emitter-end-core-tests.log": "2a47eb743b54da51d93709e4384d14243ff2fe5b8f4443d24b191060bb0a791d",
+    "logs/native-audio-emitter-end-client-tests.log": "db9201c44d085e73caa239949e4eedc5d54d305eaa84a12c2513c2f03fd5bc75"
+  },
+  "native_emitter_end_cases": 96,
+  "core_tests_passed": 274,
+  "client_tests_passed": 18,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "ported": [
+    "Alive End callback marks ending124=1 and remaining12C=0 without changing persistent logical reference",
+    "Client End retains emitter ownership in explicit pending-cleanup storage; new start receives independent local token",
+    "Explicit cleanup queues persistent logical release once; duplicate cleanup no-op",
+    "Duplicate active start rejected rather than silently replacing a potentially owned emitter"
+  ],
+  "client_end_retention_integrated": true,
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false,
+  "limits": [
+    "Actual5B5440 marking executed twice per case; weak-lock dependency explicitly adapted with no control pointer. Native weak ownership separately qualified.",
+    "All512 particle bytes compared; only124=1 and12C=0 change when alive; persistent handle untouched. No audio release callback invoked.",
+    "Full particle update/cleanup timing remains unqualified; marking does not itself qualify lifetime termination.",
+    "Client still cannot accept real backend handles; accepted42 is test-only. Ended producer updates and actual particle cleanup timing/caller remain unqualified/unintegrated. Retained states await explicit qualified cleanup; no automatic age timeout invented.",
+    "Local ownership tokens are Rust state identities, not native playing/logical IDs. Creation voice lifetime independent. Standalone binaries/visual and audible qualification unchanged."
+  ]
+}

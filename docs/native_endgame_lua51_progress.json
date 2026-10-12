@@ -1,0 +1,53 @@
+{
+  "updated_utc": "2026-10-05T18:21:42.227736+00:00",
+  "complete": false,
+  "original_bytecode_lua51_cases": 16,
+  "default_configuration_cases": 8,
+  "client_tests_passed": 237,
+  "core_tests_last_passed": 430,
+  "server_store_tests_last_passed": 1,
+  "original_instruction_arrays_preserved": true,
+  "original_chunk_roundtrip_exact": true,
+  "runtime_application_source_unchanged": true,
+  "runtime_application_binary_unchanged": true,
+  "current_binary_nexus_and_camera_proof_retained": "docs/native_nexus_skin_progress.json",
+  "runtime_backend": {
+    "name": "lupa.lua51",
+    "lupa_version": "2.8",
+    "lua_version": "Lua 5.1",
+    "string_size_t_adapter": "32bit to64bit; no instruction or numeric constant edits"
+  },
+  "corrections": [
+    "FadeMinions(losingTeam,0,2), not a fade of both teams.",
+    "SetMinionsNoRender(losingTeam,true) at5.5s.",
+    "MoveCameraFromCurrentPositionToPoint(champion,losingHQPosition,3,true): owner and final boolean must be preserved when binding server/client APIs.",
+    "SetGreyscaleEnabledWhenDead(champion,false), not true.",
+    "Death-animation=true Lua branch skips SetHQCurrentSkin; only native-default false runtime branch integrated."
+  ],
+  "community_references": {
+    "server_commit": "b37c75483abf66048af7c914e7fab700efaa5e21",
+    "packet_commit": "207baab80dc4cd203dd2d41ce9d98f1aae7a1544",
+    "audio_packet_candidate": 95,
+    "minion_packet_candidate": 203,
+    "original_packet_handlers_qualified": false,
+    "source_code_integrated": false,
+    "location": "E:\\OpenLeague\\tools\\references\\endgame"
+  },
+  "files_sha256": {
+    "crates/client/src/endgame_timeline.rs": "4741f27b81f7aff4e9940755c1bb1a9bcac6e35113fd3ace8624b07e3b82714c",
+    "data/4.20/native_endgame_lua51_contract.json": "8a5f5afdb8c384aa934cfdf27dc340fcc14fa55de1b0c7bcc286615db80df0fd",
+    "logs/native-endgame-lua51-tests.log": "7592f0b89def389f8f89968f12ac7070ea0856acdc7f6c77855d307c9e1c1c74",
+    "logs/lua51-qualification-install.log": "a1939ec1b372e0d86e38aa4a6872e224a36d3ad8e7eaa9183425d0497950f444",
+    "tools/pythonlibs/lupa/lua51.cp312-win_amd64.pyd": "29bc76a1cd9d2ac799edd84f0e6061f25324713228da9ffe9e4727570ac7f9e9",
+    "target/debug/openleague-client.exe": "22817375ee3a6ec667cc8ff4ceaef93f83daef34b41fbf8094106ef929b3fbb3"
+  },
+  "limits": [
+    "Actual original instruction arrays executed by bundled Lua5.1 VM. Only size_t string length fields adapted from32 to64bits; no Lua instruction or numeric constant changed. This is not the original game embedded VM binary.",
+    "Engine APIs, champion iteration, HQ descriptors, symbolic input-lock values and timers are adapters. Original registration, message delivery, fade interpolation/audio mixing, rendering and latency not executed.",
+    "Default death-animation=false is native getter-qualified. True branch executes original Lua instructions but original configuration overrides remain unqualified.",
+    "Simulated timers prove requested callback deadlines and Lua call order, not the native timer scheduler implementation.",
+    "Native packet handler research remains unresolved. Immediate constants, switch tables and metadata candidates are unqualified and include unrelated events, OpenSSL data and system error tables.",
+    "237 client tests verify schedule against original bytecode execution through engine adapters; actual audio/minion fade consumers, original game embedded Lua VM and original scheduler remain unqualified.",
+    "No new ordinary six graphical client victory, map visual repair, launcher/history or full-game acceptance evidence."
+  ]
+}

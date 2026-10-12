@@ -1,0 +1,32 @@
+{
+  "updated_utc": "2026-10-07T06:34:26.314068+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_cases": 288,
+  "native_instruction_addresses": 49,
+  "focused_core_tests_passed": 2,
+  "full_core_suite_rerun": false,
+  "artifacts_sha256": {
+    "data/4.20/troy_start_time_contract.json": "20b0fca474a78b76d7c84926e230a685e3312383f6ccd3d93ba1c470ac08dd9a",
+    "tools/probe_native_troy_start_time.py": "0ab7ef2106443334e266bf22a74f46be1a9f7e9cb4fbb3c4963e0a5ecb88739d",
+    "crates/core/src/native_troy_resource_initial.rs": "0407004c300ea8af99c146a695e6c21af28ab446f89926ef83de44d6ead7952e",
+    "crates/core/src/lib.rs": "af15e2fe7275e020071af053cba8593147dc51f89e433860241d8f12beb32638",
+    "logs/native-troy-start-time-tests.log": "e57211cebf3b07ad66b214a2f84dbeff90040e2e2dcf73b931c09037a13ec889"
+  },
+  "findings": [
+    "93E5D0 writes clocksA8/AC/B0 = supplied clock minus supplied offset with one original SSE subtraction.",
+    "Resets fieldEC, previous84..8C and position90..98 to zero; recomputes bounds with native resource coefficient.",
+    "Signed zero and large-clock rounding cases are included."
+  ],
+  "adapters": [
+    "93E9A0 direction matrix initialization omitted; matrix state is not captured or qualified.",
+    "Clock/offset/radius supplied; original clock virtual producer and binding to live renderer still open."
+  ],
+  "limits": [
+    "Qualified initial time state only; does not prove updates, completion, particle emission or graphics fidelity.",
+    "Nonfinite values and overflow unqualified; resource parser and children remain separate.",
+    "Qualified fields ported in core native_troy_resource_initial; live client initialization not integrated.",
+    "Full objective remains incomplete, zero domains accepted."
+  ],
+  "next_action": "Qualifier l’horloge native 928360 et sa conversion pour les effets, puis raccorder âge, fin de vie, pose et projection normale d’Annie ; poursuivre les 24 domaines."
+}

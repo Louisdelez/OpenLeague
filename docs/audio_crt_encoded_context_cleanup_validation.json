@@ -1,0 +1,46 @@
+{
+  "saved_utc": "2026-10-09T18:43:21.468385+00:00",
+  "passed": true,
+  "complete": false,
+  "audio_tests_passed": 515,
+  "native_crt_startup_getter_cases_rust_validated": 36,
+  "native_crt_thread_system_cleanup_cases_rust_validated": 72,
+  "native_crt_thread_lifecycle_cases_prepared": 72,
+  "native_crt_thread_lifecycle_cases_rust_validated": 0,
+  "native_crt_optional_thread_buffer_cases_prepared": 126,
+  "native_crt_optional_thread_buffer_cases_rust_validated": 0,
+  "test_log": "logs/audio-crt-encoded-context-cleanup-tests.log",
+  "test_executable": "target\\debug\\deps\\openleague_core-92fab3f20accd79c.exe",
+  "test_executable_sha256": "63e90692c5558a4bf3bf29ca6dcc2c9a5ccba22d8bc99ec358647e60813b78d0",
+  "previous_receipt": "docs/audio_crt_thread_system_startup_validation.json",
+  "evidence": [
+    "Reusable encoded Windows provider now routes actual CRT getter/NULL-context constructor/default-power-compatible service through CABCC2/CABCE1 dispatch while forwarding allocator, locks,LastError and current-thread services.36 complete startup-then-getter comparisons match all55 canonical regions, intermediate startup, actual TLS/FLS import entry banks, no extra allocation and original LastError0/97/MAX preservation.",
+    "72 original CA9341/CABCA3/CB027B cleanup comparisons match fallback/extended slot free, NULL/MAX index branches, null/static/dynamic/mixed/flag2/holes tables, all call-entry and final banks. Dynamic non-one flags deleted/freed/cleared in first pass; static flag1 nodes deleted in second pass with table pointer retention. Ownership in Rust map uses36 distinct24-byte allocations instead of mistaking contiguous canonical capture for a single heap block; dead identities match exact native frees.",
+    "72 complete original CA92CB startup -> CA915B detachment -> CA9341 system cleanup lifetimes captured. Actual CA9026 destructor runs, including CA8B6F locale decrement and multibyte references; caller clears TLS/FLS before destruction and frees exactly one original thread record. Explicit-record and slot-lookup detach paths, fallbackTLS/FLS, cookies0/11223344/MAX, zero/A5 initial storage and LastError0/97/MAX covered.33 complete canonical regions plus both intermediate banks captured. Rust lifecycle replay pending.",
+    "126 actual startup/detachment cases additionally capture7 optional string pointers, static/NULL/heap exception field, NULL/default/static-count1/custom0/1/2/MAX multibyte ownership and both TLS/FLS paths. Controlled intermediate field changes recorded explicitly. Native free(NULL) exception branch, wrapped decrement and static-buffer retention preserved; Rust replay pending.",
+    "Full515-test audio suite passes;59 prior runtime fixture reference hashes retained unchanged."
+  ],
+  "limits": [
+    "Imported pointer encoding,exports,critical storage and allocator outcomes remain explicit supplied services. These reconstructed core paths do not establish actual OS/heap/security-cookie providers or actual normal client audio startup.",
+    "Whole destructor lifetime and126 controlled optional-buffer cases only native prepared. Default native locale used; custom locale destruction, normal optional-buffer producers and actual OS-triggered FLS callback/concurrency/SEH remain unqualified.",
+    "Normal-frame audio dispatch, voice progression/retirement and physical playback remain incomplete. No domain or task marked complete; full24/114/37 scope preserved."
+  ],
+  "next_action": "Implement/replay72 complete original CA92CB -> CA915B/CA9026 -> CA9341 thread lifetimes and126 optional-buffer/multibyte ownership cases, including TLS clear before destructor, ordered strings/free(NULL), wrapped reference release and static retention; qualify custom locales and OS-triggered FLS callback. Complete actual OS/heap/security-cookie providers and connect normal audio worker startup/dispatch/progression/retirement and physical playback. Continue full24-domain114-task37-requirement scope.",
+  "files_sha256": {
+    "logs/audio-crt-encoded-context-cleanup-tests.log": "b28dec6bd3e99050c10e0677989622d60a1c7fd5d8f5c865b999745e36bcc50b",
+    "docs/audio_crt_thread_system_startup_validation.json": "d9153c33a65403dbb2ad291f1783c08a42b784fb0e53212af4eacb9e50767835",
+    "crates/core/src/lib.rs": "2df54d195dd2d616e4f8cbe6e0790ce46fa0b2eb2a165216959a16a1f9a25982",
+    "crates/core/src/audio_crt_encoded_thread_provider.rs": "43a92f8b752b7447468346384690c717a8fa6b96248ab91ab8221eb959a3f928",
+    "crates/core/src/audio_crt_thread_system_startup.rs": "acd378d8e5d60d6d738048aa4e11c76f7deb7e4070e7c0814b339ffe334507bf",
+    "tools/integrate_audio_crt_encoded_context_cleanup.py": "bda544e9160dda4e984e1fbdfc8e02aca2fb078df465eb21fb5e15f938571d40",
+    "tools/record_audio_crt_encoded_context_cleanup_progress.py": "ef362a1903f9efca72dd46e78da4902e6be3757f86ee6b03da8e098a9938b04f",
+    "data/4.20/audio_crt_startup_getter_preparation.json": "aa6ae8346b3be84e63cba48e4261633a5c660f12af3b39321a97cf8438697788",
+    "tools/probe_native_audio_crt_startup_getter.py": "a3b95c401bb4992b47a865e3206a3e7e278b8ea81db75e2e8aa8423716076ca9",
+    "data/4.20/audio_crt_thread_system_cleanup_preparation.json": "2bccba845010bb88bb52d8ed8898d1ad2a5adf61eea899a8390351ade34fd14d",
+    "tools/probe_native_audio_crt_thread_system_cleanup.py": "261f3ee957732416c0f88ad160c187e591fbcce30f7048ffc448a32facd6651d",
+    "data/4.20/audio_crt_thread_lifecycle_preparation.json": "888dc67d96a4800455c1e2d737031b795660d8c903d9859446be257fa394b6fb",
+    "tools/probe_native_audio_crt_thread_lifecycle.py": "220c787b245e186f2fc78e4bcd234250e79d065895f4307d21aaf991bccde603",
+    "data/4.20/audio_crt_optional_thread_buffers_preparation.json": "073ca3d61dc0c36f4bfaa3e004b11162105dd61dcaeac49ea61b49ad1c53da6b",
+    "tools/probe_native_audio_crt_optional_thread_buffers.py": "e4a5cf018703666870f252f1c6a499018f196662781b21ef2a8ad409cbdbb861"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "complete": false,
+  "observed": {
+    "paused_pixels_changed": 41,
+    "max_rgb_levels": 2,
+    "without_ready_changed": 0,
+    "ready_quad_count": 10,
+    "unique_quad_translations": 1
+  },
+  "source_findings": [
+    "Ready shader samples only texture/color/UV; no time read.",
+    "Writing through AssetMut::DerefMut marks changed even for identical values (bevy_asset assets.rs668); get_mut alone does not.",
+    "Bevy Transparent3d sort_key is only distance; colocated quads tie."
+  ],
+  "hypothesis": "Identical material mutation can rebuild render assets and alter equal-distance submission order; not yet proven by render-phase trace.",
+  "change": "Ready-only exact-distance stable ordering by entity ID after phase sort; preserves nonselected slots, no bias or geometry changes.",
+  "next": "Continue remaining audio clock and full project requirements.",
+  "intervention_result": "v86 on new c8c6ebbfd4b6fa321c7edabc239817b9f0abe73dfee34de4dc3f4c02d51915e1:74pixels max2RGB still differ; off0. Redundant material writes are not sufficient explanation/fix.",
+  "trace_result": "v87 actual equal-distance Ready order differs across paused GPUframes749/759;76pixels differ, off0.",
+  "verified_resolution": {
+    "runs": [
+      {
+        "version": "v90",
+        "backend": "vulkan",
+        "client_sha256": "3fb8bb495cd7423844d441af3a7020e1ef5fddcf2379d03c78269269f710d4d5",
+        "frames": [
+          786,
+          796
+        ],
+        "pixels_changed": 0,
+        "phase_order_stable": true
+      },
+      {
+        "version": "v91",
+        "backend": "dx12",
+        "client_sha256": "3fb8bb495cd7423844d441af3a7020e1ef5fddcf2379d03c78269269f710d4d5",
+        "frames": [
+          389,
+          399
+        ],
+        "pixels_changed": 0,
+        "phase_order_stable": true
+      }
+    ],
+    "scope": "Observed paused Ready rendering residual resolved in sampled Vulkan/DX12 pairs with deterministic equal-distance order.",
+    "limits": [
+      "Host tie policy by MainEntity, not original native order equivalence.",
+      "Two GPU frames per backend, not all scenes or all particle systems."
+    ]
+  }
+}

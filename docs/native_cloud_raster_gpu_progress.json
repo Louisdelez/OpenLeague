@@ -1,0 +1,75 @@
+{
+  "updated_utc": "2026-10-05T20:21:33.218663+00:00",
+  "complete": false,
+  "passed": true,
+  "cloud_filter_gpu_cases": 128,
+  "high_fog_raster_cases": 85,
+  "actual_map_height_triangle_cases": 64,
+  "perspective_triangle_cases": 14,
+  "controlled_explicit_lod_filter_qualified": true,
+  "controlled_vertex_fragment_interpolation_qualified": true,
+  "implicit_lod_full_frame_qualified": false,
+  "original_frame_fidelity_qualified": false,
+  "filter": {
+    "adapter": "NVIDIA GeForce RTX 3060",
+    "address_u": "repeat",
+    "address_v": "repeat",
+    "backend": "Vulkan",
+    "cases": 128,
+    "channels_checked": 512,
+    "complete": false,
+    "format": "Bc1RgbaUnorm",
+    "limits": [
+      "Explicit LOD fixtures; derivative-driven mip selection in ordinary raster frame not proven.",
+      "Reference uses 8-bit decoded BC1 samples; hardware BC1 interpolation and filtering rounding may differ within2/255 tolerance.",
+      "Native D3D sampler backend sequence qualified separately; no original-game framebuffer equivalence or whole frame sampler state proof."
+    ],
+    "mag": "linear",
+    "maximum_error": 0.003921568393707275,
+    "min": "linear",
+    "mip": "linear",
+    "mip_count": 11,
+    "passed": true,
+    "tolerance": 0.007843137718737125
+  },
+  "raster": {
+    "actual_map_triangle_cases": 64,
+    "adapter": "NVIDIA GeForce RTX 3060",
+    "backend": "Vulkan",
+    "complete": false,
+    "limits": [
+      "Triangles rasterized at controlled one-pixel centroids; native map height triples retained, geometry X/Z and camera positions adapted.",
+      "Shared production vertex arithmetic extracted unchanged. Map10 radial coefficient makes its radial term nonpositive at all fixture screen positions.",
+      "Fragment returns top, unbounded far and far clamped after interpolation; full cloud/colormap/vision/color blend and original D3D frame remain separate."
+    ],
+    "maximum_error": 8.344650268554688e-07,
+    "passed": true,
+    "perspective_cases": 14,
+    "rasterized_cases": 85,
+    "tolerance": 1e-05
+  },
+  "production_runtime_source_changed": false,
+  "application_binary_unchanged": true,
+  "application_binary_sha256": "37de22a9aac32ce4c77ffdee498fc6019e4169ebd1dfebaa7074b556ccbb1f32",
+  "artifacts": [
+    "data/4.20/native_cloud_filter_gpu_cases.json",
+    "data/4.20/native_high_fog_raster_cases.json",
+    "logs/native-cloud-filter-gpu.json",
+    "logs/native-high-fog-raster-gpu.json"
+  ],
+  "hashes": {
+    "data/4.20/native_cloud_filter_gpu_cases.json": "f814e172ee25caf60acc57a16b6b0e71432604f467b63372f695859688321e59",
+    "data/4.20/native_high_fog_raster_cases.json": "3a0ec982b3e0483201bf0ec583080fcc8fbbdd2b3658754443ed1799c169b972",
+    "logs/native-cloud-filter-gpu.json": "9556e527e41237aa471121b816c7e0cf188396d15dbedbdafddd9556cf21ea2b",
+    "logs/native-high-fog-raster-gpu.json": "a1035ed5e06ce4e0caf9705833fefb6b3890db722780dbb981f360ecb4c29b4d"
+  },
+  "limits": [
+    "Explicit LOD fixtures; derivative-driven mip selection in ordinary raster frame not proven.",
+    "Reference uses 8-bit decoded BC1 samples; hardware BC1 interpolation and filtering rounding may differ within2/255 tolerance.",
+    "Native D3D sampler backend sequence qualified separately; no original-game framebuffer equivalence or whole frame sampler state proof.",
+    "Triangles rasterized at controlled one-pixel centroids; native map height triples retained, geometry X/Z and camera positions adapted.",
+    "Shared production vertex arithmetic extracted unchanged. Map10 radial coefficient makes its radial term nonpositive at all fixture screen positions.",
+    "Fragment returns top, unbounded far and far clamped after interpolation; full cloud/colormap/vision/color blend and original D3D frame remain separate."
+  ],
+  "next_action": "Répercuter le brouillard haut et Cloud2 dans les matériaux Blender de la carte restaurée, puis qualifier le producteur des options Fog/profile et les exclusions FULLBRIGHT/NOLIGHTING du rendu. Les128cas de filtrage GPU BC1 explicite et85cas raster de brouillard passent ; dérivées de mip, caméra réelle, état complet des samplers et référence originale de la base Chaos restent ouverts. Poursuivre cérémonie/audio/sbires, reconnexion, résultats/launcher, partie ordinaire à six clients graphiques et tous les24domaines."
+}

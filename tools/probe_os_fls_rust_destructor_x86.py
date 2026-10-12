@@ -1,0 +1,7 @@
+from pathlib import Path
+import subprocess,json,datetime,hashlib
+r=Path('E:/OpenLeague');p=r/'tools/hardware/fls_rust_destructor';exe=p/'probe-x86.exe';log=p/'probe-x86.log'
+build=subprocess.run(['C:/Users/loicd/.cargo/bin/rustc.exe','--edition=2021','--target','i686-pc-windows-msvc','-C','debuginfo=0',str(p/'probe.rs'),'-o',str(exe)],capture_output=True,text=True);log.write_text(build.stdout+build.stderr,encoding='utf-8');assert build.returncode==0,build.stderr
+run=subprocess.run([str(exe),str(p)],capture_output=True,text=True);log.write_text(log.read_text(encoding='utf-8')+run.stdout+run.stderr,encoding='utf-8');assert run.returncode==0,run.stdout+run.stderr;assert 'pointer_width=32'in run.stdout
+proof=json.loads((r/'docs/audio_windows_fls_rust_destructor_hardware_discovery.json').read_text());proof['saved_utc']=datetime.datetime.now(datetime.timezone.utc).isoformat();proof['host_pointer_width']=32;proof['target']='i686-pc-windows-msvc';proof['files_sha256'].update({str(x.relative_to(r)):hashlib.sha256(x.read_bytes()).hexdigest()for x in [exe,log]});proof['limits'].append('Actual original32bit Windows callback ABI measured with Rust i686 executable; standalone probe boundaries still apply, not a full game provider claim.')
+(r/'docs/audio_windows_fls_rust_destructor_x86_hardware_discovery.json').write_text(json.dumps(proof,indent=2)+'\n',encoding='utf-8');(r/'tools/probe_os_fls_rust_destructor_x86.py').write_text(Path(__file__).read_text(encoding='utf-8-sig'),encoding='utf-8');print(run.stdout.strip())

@@ -1,0 +1,282 @@
+{
+  "updated_utc": "2026-10-05T02:07:45.661591+00:00",
+  "passed": true,
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "entry": "0x905810",
+  "native_addresses": 2567,
+  "cases": [
+    {
+      "name": "empty",
+      "iterator_rows": [],
+      "entries": {}
+    },
+    {
+      "name": "nested-routing",
+      "iterator_rows": [
+        {
+          "name": "terrain.inibin",
+          "folder": "DATA/Shared/one"
+        },
+        {
+          "name": "fog.dds",
+          "folder": "DATA/Shared/two"
+        },
+        {
+          "name": "skip.dds",
+          "folder": "DATA/Shared/two",
+          "directory": true
+        }
+      ],
+      "entries": {
+        "fog.dds": "DATA/Shared/two/fog.dds",
+        "fog.tga": "DATA/Shared/two/fog.dds",
+        "terrain.ini": "DATA/Shared/one/terrain.ini",
+        "terrain.inibin": "DATA/Shared/one/terrain.inibin"
+      }
+    },
+    {
+      "name": "duplicate-base-name",
+      "iterator_rows": [
+        {
+          "name": "same.dds",
+          "folder": "DATA/Shared/one"
+        },
+        {
+          "name": "same.dds",
+          "folder": "DATA/Shared/two"
+        }
+      ],
+      "entries": {
+        "same.dds": "DATA/Shared/one/same.dds",
+        "same.tga": "DATA/Shared/one/same.dds"
+      }
+    },
+    {
+      "name": "actual-shared-files",
+      "iterator_rows": [
+        {
+          "name": "0fluid.dds",
+          "folder": "DATA/Shared/Particles"
+        },
+        {
+          "name": "0fluid_bloodless.dds",
+          "folder": "DATA/Shared/Particles"
+        },
+        {
+          "name": "ability_indicator_p-rgba.DDS",
+          "folder": "DATA/Shared/Particles"
+        },
+        {
+          "name": "ability_indicator_p-rgba_02.dds",
+          "folder": "DATA/Shared/Particles"
+        },
+        {
+          "name": "AbsoluteZero_tar.troybin",
+          "folder": "DATA/Shared/Particles"
+        },
+        {
+          "name": "AbsoluteZeroWind02.DDS",
+          "folder": "DATA/Shared/Particles"
+        }
+      ],
+      "entries": {
+        "0fluid.dds": "DATA/Shared/Particles/0fluid.dds",
+        "0fluid.tga": "DATA/Shared/Particles/0fluid.dds",
+        "0fluid_bloodless.dds": "DATA/Shared/Particles/0fluid_bloodless.dds",
+        "0fluid_bloodless.tga": "DATA/Shared/Particles/0fluid_bloodless.dds",
+        "ability_indicator_p-rgba.DDS": "DATA/Shared/Particles/ability_indicator_p-rgba.DDS",
+        "ability_indicator_p-rgba.tga": "DATA/Shared/Particles/ability_indicator_p-rgba.DDS",
+        "ability_indicator_p-rgba_02.dds": "DATA/Shared/Particles/ability_indicator_p-rgba_02.dds",
+        "ability_indicator_p-rgba_02.tga": "DATA/Shared/Particles/ability_indicator_p-rgba_02.dds",
+        "AbsoluteZero_tar.troy": "DATA/Shared/Particles/AbsoluteZero_tar.troy",
+        "AbsoluteZero_tar.troybin": "DATA/Shared/Particles/AbsoluteZero_tar.troybin",
+        "AbsoluteZeroWind02.DDS": "DATA/Shared/Particles/AbsoluteZeroWind02.DDS",
+        "AbsoluteZeroWind02.tga": "DATA/Shared/Particles/AbsoluteZeroWind02.DDS"
+      }
+    },
+    {
+      "name": "same.inibin-then-same.inibin",
+      "iterator_rows": [
+        {
+          "name": "same.inibin",
+          "folder": "DATA/Shared/one"
+        },
+        {
+          "name": "same.inibin",
+          "folder": "DATA/Shared/two"
+        }
+      ],
+      "entries": {
+        "same.ini": "DATA/Shared/two/same.ini",
+        "same.inibin": "DATA/Shared/two/same.inibin"
+      }
+    },
+    {
+      "name": "same.dat-then-same.dat",
+      "iterator_rows": [
+        {
+          "name": "same.dat",
+          "folder": "DATA/Shared/one"
+        },
+        {
+          "name": "same.dat",
+          "folder": "DATA/Shared/two"
+        }
+      ],
+      "entries": {
+        "same.dat": "DATA/Shared/two/same.dat"
+      }
+    },
+    {
+      "name": "same.dds-then-same.tga",
+      "iterator_rows": [
+        {
+          "name": "same.dds",
+          "folder": "DATA/Shared/one"
+        },
+        {
+          "name": "same.tga",
+          "folder": "DATA/Shared/two"
+        }
+      ],
+      "entries": {
+        "same.dds": "DATA/Shared/one/same.dds",
+        "same.tga": "DATA/Shared/two/same.tga"
+      }
+    },
+    {
+      "name": "same.tga-then-same.dds",
+      "iterator_rows": [
+        {
+          "name": "same.tga",
+          "folder": "DATA/Shared/one"
+        },
+        {
+          "name": "same.dds",
+          "folder": "DATA/Shared/two"
+        }
+      ],
+      "entries": {
+        "same.dds": "DATA/Shared/two/same.dds",
+        "same.tga": "DATA/Shared/one/same.tga"
+      }
+    },
+    {
+      "name": "same.scb-then-same.sco",
+      "iterator_rows": [
+        {
+          "name": "same.scb",
+          "folder": "DATA/Shared/one"
+        },
+        {
+          "name": "same.sco",
+          "folder": "DATA/Shared/two"
+        }
+      ],
+      "entries": {
+        "same.scb": "DATA/Shared/one/same.scb",
+        "same.sco": "DATA/Shared/one/same.scb"
+      }
+    },
+    {
+      "name": "same.sco-then-same.scb",
+      "iterator_rows": [
+        {
+          "name": "same.sco",
+          "folder": "DATA/Shared/one"
+        },
+        {
+          "name": "same.scb",
+          "folder": "DATA/Shared/two"
+        }
+      ],
+      "entries": {
+        "same.scb": "DATA/Shared/two/same.scb",
+        "same.sco": "DATA/Shared/two/same.scb"
+      }
+    },
+    {
+      "name": "same.gfx-then-same.swf",
+      "iterator_rows": [
+        {
+          "name": "same.gfx",
+          "folder": "DATA/Shared/one"
+        },
+        {
+          "name": "same.swf",
+          "folder": "DATA/Shared/two"
+        }
+      ],
+      "entries": {
+        "same.gfx": "DATA/Shared/one/same.gfx",
+        "same.swf": "DATA/Shared/one/same.gfx"
+      }
+    },
+    {
+      "name": "same.swf-then-same.gfx",
+      "iterator_rows": [
+        {
+          "name": "same.swf",
+          "folder": "DATA/Shared/one"
+        },
+        {
+          "name": "same.gfx",
+          "folder": "DATA/Shared/two"
+        }
+      ],
+      "entries": {
+        "same.gfx": "DATA/Shared/two/same.gfx",
+        "same.swf": "DATA/Shared/two/same.gfx"
+      }
+    },
+    {
+      "name": "same.DDS-then-same.dds",
+      "iterator_rows": [
+        {
+          "name": "same.DDS",
+          "folder": "DATA/Shared/one"
+        },
+        {
+          "name": "same.dds",
+          "folder": "DATA/Shared/two"
+        }
+      ],
+      "entries": {
+        "same.DDS": "DATA/Shared/one/same.DDS",
+        "same.tga": "DATA/Shared/one/same.DDS"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shared\\Particles\\0fluid.dds",
+      "sha256": "b215186dffbf6a76df2045f5c3d7a6a50d1c36bf51151ff86a697a8c0abac66c"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shared\\Particles\\0fluid_bloodless.dds",
+      "sha256": "8575bb84605a6c97983352e4e978ba9fd2e0c19684512311d5e0f712beedb881"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shared\\Particles\\ability_indicator_p-rgba.DDS",
+      "sha256": "36cc0707880ad0e4bb868da86427dbe37032d1b9d8e782148799494d92eb44b0"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shared\\Particles\\ability_indicator_p-rgba_02.dds",
+      "sha256": "4d536c0375dfbfa10dad48a0130b7c099dd48e3ec430a2394ea580b0518199cf"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shared\\Particles\\AbsoluteZero_tar.troybin",
+      "sha256": "e5d31b1ab562c89aea95f9f0c9a1c2790cb89eeb73467a673daaf65a82db4aae"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shared\\Particles\\AbsoluteZeroWind02.DDS",
+      "sha256": "d0e3c2ff147cefbcd85ac500c000570592d470f3f510a023a2945c0fc35406d4"
+    }
+  ],
+  "limits": [
+    "Original recursive collector loop, native full-folder/filename string copies, directory skipping and905090insertion execute. Iterator8B4B30/virtual accessors explicitly adapted to supplied rows.",
+    "Recursive iterator enumeration/order/ownership constructed as external IO adapter; original iterator factory/destructor and OS/archive traversal unqualified.",
+    "Actual Shared sample uses six extracted files; not full Shared or global table. Duplicate path precedence is observed for supplied row order only."
+  ]
+}

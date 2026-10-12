@@ -1,0 +1,50 @@
+{
+  "updated_utc": "2026-10-03T22:47:29.016649+00:00",
+  "contract": "data/4.20/audio_distance_contract.json",
+  "contract_sha256": "7344d59968db3db68ef3235103a634629c3ca3c4d4fd4371bbac0dd24fb3d8d7",
+  "module": "crates/core/src/audio_distance.rs",
+  "module_sha256": "c68cc18827529d99f00093ce4c495c5f615dda894394e18047096ff706714883",
+  "mix_module": "crates/core/src/audio_mix.rs",
+  "mix_module_sha256": "0e1c999d8442c2de2475ad480f7889e8a760ba54f085d3c44e625286f34e3010",
+  "native_distance_cases": 361,
+  "native_scale_setter_cases": 32,
+  "rust_distance_tests": 2,
+  "rust_route_bridge_tests": 1,
+  "route_bridge_pairs": 15162,
+  "source_routes": 42,
+  "core_tests": 190,
+  "comparison": "Exact f32bits for closest scaled native descriptor distance; route bridge composes native-distance reference cases with previously qualified curve API, preserving default bus RTPC gains.",
+  "native_region_hashes": {
+    "0xaf3700": "5e93e60d9939e14628f5b118dd12f2cb3b594d7bf33565ba57b337fff39a27f8",
+    "0xb05310": "fde8935bbc2842e7c8caccb384907ddb0a54f693f7f319ab80cf42e0f5a38802",
+    "0xb1a690": "03f58a5428fe3cd5874ce60eab2a4475fd15f36e930488c96352650eb3bfe13e"
+  },
+  "native_minimum_sentinel": {
+    "address": "0x1139284",
+    "bytes": "f9021550",
+    "value": 10000000000.0
+  },
+  "native_fallback_components": {
+    "address": "0x121026c",
+    "bytes": "00000000000000000000803f",
+    "value": [
+      0.0,
+      0.0,
+      1.0
+    ]
+  },
+  "test_log": "logs/native-audio-distance-core-tests.log",
+  "test_log_sha256": "94d3f1fd79ef41580570263341c384008a5f52438c68e43fe4a1cd563c4d3df3",
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "client_integration_enabled": false,
+  "ambient_playback_enabled": false,
+  "complete": false,
+  "limits": [
+    "Native Euclidean helper, scaled listener minimum, mask and source-mode iteration executed. Listener/source positions injected, not captured from original running client.",
+    "Full world-to-backend descriptor mapping, default descriptor usage and scale-setting callers remain to qualify. Tested finite positive listener scales only.",
+    "No complete gain/pitch/LPF aggregation, actual client playback or audible acceptance.",
+    "AF3700 supplies closest scaled descriptor distance and is called by voice priority update AEF410. Native per-listener/multi-source attenuation mixing and equivalent original attenuation callsite are not qualified by the route bridge.",
+    "f64 Euclidean intermediate matches all injected native cases exactly but arbitrary extreme-coordinate x87 rounding fidelity is unqualified. Defensive finite/positive-scale rejection differs from invalid native input behavior.",
+    "32 original scale setter executions prove its table write/dirty byte, not full runtime setter integration; backend-position transfer and scale callers remain outstanding."
+  ]
+}

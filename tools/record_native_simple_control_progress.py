@@ -1,0 +1,48 @@
+from pathlib import Path
+import json,hashlib,shutil,re
+from datetime import datetime,timezone
+r=Path('E:/OpenLeague');now=datetime.now(timezone.utc).isoformat();receipt='docs/native_simple_control_progress.json';log='logs/native-simple-control-core-tests.log'
+def load(path):return json.loads((r/path).read_text(encoding='utf-8-sig'))
+def sha(path):return hashlib.sha256((r/path).read_bytes()).hexdigest()
+assert 'test result: ok. 532 passed; 0 failed;' in (r/log).read_text(encoding='utf-8-sig')
+native=load('data/4.20/troy_reset_contract.json');assert native['passed'] and len(native['cases'])==432
+files=['data/4.20/simple_control_contract.json','tools/probe_native_simple_control.py','crates/core/src/native_simple_control.rs','data/4.20/troy_frame_trails_contract.json','tools/probe_native_troy_frame_trails.py','crates/core/src/native_complex_trail_resources.rs','data/4.20/troy_frame_clear_contract.json','tools/probe_native_troy_frame_clear.py','data/4.20/troy_frame_children_contract.json','tools/probe_native_troy_frame_children.py','data/4.20/troy_frame_contract.json','tools/probe_native_troy_frame.py','crates/core/src/native_troy_frame.rs','data/4.20/troy_oneshot_contract.json','tools/probe_native_troy_oneshot.py','crates/core/src/native_troy_oneshot.rs','data/4.20/troy_frame_finish_contract.json','tools/probe_native_troy_frame_finish.py','crates/core/src/native_troy_frame_finish.rs','data/4.20/troy_substeps_contract.json','tools/probe_native_troy_substeps.py','crates/core/src/native_troy_substeps.rs','data/4.20/troy_frame_timing_contract.json','tools/probe_native_troy_frame_timing.py','crates/core/src/native_troy_frame_timing.rs','data/4.20/troy_frame_gate_contract.json','tools/probe_native_troy_frame_gate.py','crates/core/src/native_troy_frame_gate.rs','data/4.20/troy_visibility_contract.json','tools/probe_native_troy_visibility.py','data/4.20/troy_scratch_contract.json','tools/probe_native_troy_scratch.py','crates/core/src/native_troy_scratch.rs','data/4.20/troy_resume_contract.json','tools/probe_native_troy_resume.py','crates/core/src/native_troy_resume.rs','data/4.20/troy_pause_contract.json','tools/probe_native_troy_pause.py','data/4.20/troy_prewarm_contract.json','tools/probe_native_troy_prewarm.py','crates/core/src/native_troy_prewarm.rs','data/4.20/troy_reset_caller_contract.json','tools/probe_native_troy_reset_caller.py','data/4.20/troy_reset_contract.json','tools/probe_native_troy_reset.py','crates/core/src/native_troy_reset.rs','crates/core/src/native_complex_particle_storage.rs','data/4.20/troy_scalar_contract.json','crates/core/src/native_troy_scalar.rs','data/4.20/troy_position_bounds_contract.json','crates/core/src/native_troy_position_bounds.rs','crates/core/src/native_troy_properties.rs','crates/core/src/lib.rs',log]
+files.append(str(max((r/'target/debug/deps').glob('openleague_core-*.exe'),key=lambda p:p.stat().st_mtime).relative_to(r)).replace('\\','/'))
+next_action='Qualifier le reste de9437E0, ses corps de rattachement, émission et mise à jour des particules, puis934340 et le profilage ; remplacer les adaptateurs dans93F2F0, qualifier les émetteurs à la mort et producteurs des plans/selecteurs/audio, raccorder le cycle au rendu normal des52groupes/244placements Map10, reconstruire les applications et poursuivre les24domaines.'
+caller=load('data/4.20/troy_reset_caller_contract.json');warm=load('data/4.20/troy_prewarm_contract.json');assert len(caller['cases'])==363 and len(warm['cases'])==240
+paused=load('data/4.20/troy_pause_contract.json');assert len(paused['cases'])==432 and paused['passed']
+resumed=load('data/4.20/troy_resume_contract.json');assert resumed['passed'] and len(resumed['cases'])==1152
+scratch=load('data/4.20/troy_scratch_contract.json');assert scratch['passed'] and len(scratch['cases'])==16
+visibility=load('data/4.20/troy_visibility_contract.json');assert visibility['passed'] and len(visibility['cases'])==322
+gate=load('data/4.20/troy_frame_gate_contract.json');assert gate['passed'] and len(gate['cases'])==1280
+timing=load('data/4.20/troy_frame_timing_contract.json');assert timing['passed'] and len(timing['cases'])==1040
+substeps=load('data/4.20/troy_substeps_contract.json');assert substeps['passed'] and len(substeps['cases'])==648
+tail=load('data/4.20/troy_frame_finish_contract.json');assert tail['passed'] and len(tail['cases'])==2048
+oneshot=load('data/4.20/troy_oneshot_contract.json');assert oneshot['passed'] and len(oneshot['cases'])==960
+frame=load('data/4.20/troy_frame_contract.json');assert frame['passed'] and len(frame['cases'])==2560
+children=load('data/4.20/troy_frame_children_contract.json');assert children['passed'] and len(children['cases'])==1296
+clear=load('data/4.20/troy_frame_clear_contract.json');assert clear['passed'] and len(clear['cases'])==5184
+trails=load('data/4.20/troy_frame_trails_contract.json');assert trails['passed'] and len(trails['cases'])==768
+control=load('data/4.20/simple_control_contract.json');assert control['passed'] and len(control['cases'])==1024
+proof={'updated_utc':now,'complete':False,'native_sha256':control['native_sha256'],'core_tests_passed':532,'simple_control_cases':1024,'actual_cpu_sse_operations':4096,'emulator_cpu_case_disagreements':132,'simple_progress_dispatch_ported':True,'complete_simple_update_ported':False,'child_producer_bodies_qualified':False,'ordinary_emitter_consumer_bound':False,'ordinary_applications_rebuilt':False,'artifacts_sha256':{p:sha(p) for p in files},'findings':['9437E0..943924 progress/expiration dispatch matches1024native CPU captures: raw special values plus256seeded finite profiles.','Owner-end bit10 chooses emitter linger for strict elapsed comparison. Native denominator uses ordered comparisons of definition170/174 and life; unordered CMOVBE selects life. Progress is clamped only by native ordered0/1 comparisons.','Attachment dispatch always precedes emission, which is skipped after expiration. Emission can supply storage consumed immediately by particle update. Owner-end particle cap applies only after strict expiration.','x87 time/cap/progress copies quiet NaNs; raw last-step word preserved.4096actual SSE operations;132independent VM/CPU discrepancies retained.'],'adapters':control['adapters'],'limits':control['limits']+['Concrete Simple producer bodies and ordinary integration remain incomplete. No domain/champion kit complete.'],'next_action':next_action}
+(r/receipt).write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+history=r/'docs/plan_history'/('simple-control-'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ'));history.mkdir(parents=True,exist_ok=True)
+for name in ('coverage.json','completion_plan.json','resume_checkpoint.json','goal_plan_revision.json'):
+ p=r/'docs'/name;shutil.copy2(p,history/name);d=load('docs/'+name);d.update(updated_utc=now,native_simple_control_progress=receipt)
+ if name=='goal_plan_revision.json':d.update(core_tests_passed=532,core_source_tests_passed=532,latest_native_execution_progress=receipt,next_steps=[next_action])
+ else:
+  d['complete']=False;e=d['last_verified'] if name=='resume_checkpoint.json' else d['current_evidence'];e.update(core_tests_passed=532,latest_native_execution_progress=receipt,simple_control_cases=1024,simple_progress_dispatch_ported=True,complete_simple_update_ported=False,troy_actual_audio_playback_qualified=False,troy_child_producers_qualified=False,troy_complete_frame_ported=False,latest_core_test_log=log)
+  if name=='resume_checkpoint.json':e['core_tests']=532;d.update(saved_utc=now,next_projected_action=next_action)
+  if name=='completion_plan.json':
+   d['next_execution_steps']=[next_action]+d.get('next_execution_steps',[])[1:]
+   for domain in d['domains']:
+    if domain['id'] in ('03','10','15'):
+     if receipt not in domain.setdefault('progress_evidence',[]):domain['progress_evidence'].append(receipt)
+ p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+for p in (r/'docs/GOAL-OPENLEAGUE-NOUVEAU.txt',r/'docs/GOAL-OPENLEAGUE-ACTUALISE.txt',Path('E:/mapslol3v3/GOAL-OPENLEAGUE-NOUVEAU.txt'),Path('E:/mapslol3v3/GOAL-OPENLEAGUE-MIS-A-JOUR.txt')):
+ s=p.read_text(encoding='utf-8').replace('531 tests moteur','532 tests moteur');s=re.sub(r'PROCHAINE ÉTAPE :.*?(?=\n\nCLÔTURE)',f'PROCHAINE ÉTAPE : {next_action}',s,flags=re.S);p.write_text(s,encoding='utf-8')
+p=r/'docs/completion_plan.json';d=load('docs/completion_plan.json');d['goal_objective_proposed']=(r/'docs/GOAL-OPENLEAGUE-NOUVEAU.txt').read_text(encoding='utf-8');p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+p=r/'docs/goal_plan_revision.json';d=load('docs/goal_plan_revision.json');d['objective_sha256']=sha('docs/GOAL-OPENLEAGUE-NOUVEAU.txt');p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+p=r/'docs/completion_plan.html';shutil.copy2(p,history/p.name);s=p.read_text(encoding='utf-8');section='<section id="native-simple-control"><h2>Progression et fin des émetteurs Simple</h2><p>1024captures natives du bloc9437E0..943924 :progression, seuils, ordre des appels et consommation du stockage créé correspondent.4096opérations SSE sur CPU réel.532tests moteur passent. Corps producteurs, reste de la mise à jour et intégration restent à qualifier.</p><a href="native_simple_control_progress.json">Preuves et limites</a></section>';s=s.replace('</body>',section+'</body>');p.write_text(s,encoding='utf-8')
+if Path(__file__).resolve()!=(r/'tools'/Path(__file__).name).resolve():shutil.copy2(Path(__file__),r/'tools'/Path(__file__).name)
+print(json.dumps({'receipt':receipt,'core_tests':532,'simple_control_cases':1024,'complete':False}))

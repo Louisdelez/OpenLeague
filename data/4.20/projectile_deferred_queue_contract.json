@@ -1,0 +1,226 @@
+{
+  "complete": false,
+  "passed": true,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "cases": [
+    {
+      "initial_order": [
+        0
+      ],
+      "injected_during_callback": false,
+      "callbacks": [
+        [
+          0,
+          "0x6c9210"
+        ],
+        [
+          0,
+          "0x6153d0"
+        ],
+        [
+          0,
+          "0x5eb4b0"
+        ]
+      ]
+    },
+    {
+      "initial_order": [
+        0
+      ],
+      "injected_during_callback": true,
+      "callbacks": [
+        [
+          0,
+          "0x6c9210"
+        ],
+        [
+          0,
+          "0x6153d0"
+        ],
+        [
+          0,
+          "0x5eb4b0"
+        ],
+        [
+          2,
+          "0x6c9210"
+        ],
+        [
+          2,
+          "0x6153d0"
+        ],
+        [
+          2,
+          "0x5eb4b0"
+        ]
+      ]
+    },
+    {
+      "initial_order": [
+        0,
+        1
+      ],
+      "injected_during_callback": false,
+      "callbacks": [
+        [
+          0,
+          "0x6c9210"
+        ],
+        [
+          0,
+          "0x6153d0"
+        ],
+        [
+          0,
+          "0x5eb4b0"
+        ],
+        [
+          1,
+          "0x6c9210"
+        ],
+        [
+          1,
+          "0x6153d0"
+        ],
+        [
+          1,
+          "0x5eb4b0"
+        ]
+      ]
+    },
+    {
+      "initial_order": [
+        0,
+        1
+      ],
+      "injected_during_callback": true,
+      "callbacks": [
+        [
+          0,
+          "0x6c9210"
+        ],
+        [
+          0,
+          "0x6153d0"
+        ],
+        [
+          0,
+          "0x5eb4b0"
+        ],
+        [
+          1,
+          "0x6c9210"
+        ],
+        [
+          1,
+          "0x6153d0"
+        ],
+        [
+          1,
+          "0x5eb4b0"
+        ],
+        [
+          2,
+          "0x6c9210"
+        ],
+        [
+          2,
+          "0x6153d0"
+        ],
+        [
+          2,
+          "0x5eb4b0"
+        ]
+      ]
+    },
+    {
+      "initial_order": [
+        1,
+        0
+      ],
+      "injected_during_callback": false,
+      "callbacks": [
+        [
+          1,
+          "0x6c9210"
+        ],
+        [
+          1,
+          "0x6153d0"
+        ],
+        [
+          1,
+          "0x5eb4b0"
+        ],
+        [
+          0,
+          "0x6c9210"
+        ],
+        [
+          0,
+          "0x6153d0"
+        ],
+        [
+          0,
+          "0x5eb4b0"
+        ]
+      ]
+    },
+    {
+      "initial_order": [
+        1,
+        0
+      ],
+      "injected_during_callback": true,
+      "callbacks": [
+        [
+          1,
+          "0x6c9210"
+        ],
+        [
+          1,
+          "0x6153d0"
+        ],
+        [
+          1,
+          "0x5eb4b0"
+        ],
+        [
+          0,
+          "0x6c9210"
+        ],
+        [
+          0,
+          "0x6153d0"
+        ],
+        [
+          0,
+          "0x5eb4b0"
+        ],
+        [
+          2,
+          "0x6c9210"
+        ],
+        [
+          2,
+          "0x6153d0"
+        ],
+        [
+          2,
+          "0x5eb4b0"
+        ]
+      ]
+    }
+  ],
+  "findings": [
+    "Original64ADA0 copies pending pointers into work vector;6E3080 clears pending before callbacks.",
+    "Effects inserted during callback are handled in next batch of the SAME717DF0 processing call, after current batch."
+  ],
+  "adapters": [
+    "Preallocated work/source vector capacity avoids allocation. Insertion simulated at callback50, as a controlled external event.",
+    "Absent resources; inherited bounds callback adapted. Entry717E70 stops before717F26 phase transition."
+  ],
+  "limits": [
+    "Real enqueue API, reallocation, deletion and subsequent frame phases not covered."
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T12:47:45.303202+00:00",
+  "change": [
+    "Connect actor controls to explicitly bound actual bus controls, preserving closest selected bus, parent-before-bus recursion, unmasked local23/24 and RTPC22/23 contributions.",
+    "Port gain-entry first match by id+flags bit0, gain-only replacement preserving existing flags, and append with full incoming flags.",
+    "Allow routing/actor backend to use explicit bus bindings with the same mutable random stream."
+  ],
+  "validation": {
+    "new_targeted_tests_passed": 4,
+    "audio_regression_tests_passed": 250,
+    "failed": 0,
+    "session": 29913,
+    "terminal_exit_code": 0,
+    "native_actor_bus_cases": 1536,
+    "native_gain_entry_cases": 420,
+    "preparatory_native_state_gain_cases": 1024,
+    "log": "logs/audio-actor-bus-tests.log"
+  },
+  "findings": [
+    "Original actor global state10 uses flag bit0=1; actor owner state10 uses bit0=0; actual bus global state10 uses bit0=1. These are distinct gain keys, not owner replacement of global. Upper native flag bits contain frame-local residue and require semantic qualification."
+  ],
+  "sha256": {
+    "crates/core/src/audio_actor_controls.rs": "a483f82aa926b5c0977e4d76ee856a9ec4b66c22c4a1363fee9b11403a5e68a3",
+    "crates/core/src/audio_bus_controls.rs": "962c22467996f13021198302e7ba4ad3fd9b35d6c4cb9014749bdc706bdb8914",
+    "crates/core/src/audio_routing_context.rs": "2b9b16c296bcf072b2b3c3f3fdf0b961a868fe107848a4d13f645fe7e74b7157",
+    "crates/core/src/audio_gain_entries.rs": "3469b84cbbc46dbc4909e48a9482e8e98c12f1736e14339ed7fcdb52d185eb6a",
+    "crates/core/src/lib.rs": "2adc7463864a71b495f2bf3f13594b9a7867a13473f613e980032b47892345f9",
+    "tools/probe_native_audio_actor_bus_composition.py": "569d5b82a01dd04cbf1e55118b0cdb3b8acbb554e35f7276b0b4b787c277ec26",
+    "tools/probe_native_audio_gain_entries.py": "99988daff203b2fcdf97bb8b378133dfe3cde106d656c2440ad330ba3a58f99c",
+    "tools/probe_native_audio_actor_bus_state_gain.py": "6123470ec5cdea2a63003cb4f571315b2f2143556b0e55ef392f1880a9dbc9a9",
+    "data/4.20/audio_actor_bus_composition_contract.json": "f02ea8d9e8c566692420943cba3dc70c2fa2c95720a818c47be907140e869c7c",
+    "data/4.20/audio_gain_entries_contract.json": "d9d070ad3bfdafc0074f094429820371cd2180e16491e0328524568c064af93d",
+    "data/4.20/audio_actor_bus_state_gain_contract.json": "69f39680813e181e66951dc75e262c8b595604c9a148068ef358f2a57b580232",
+    "logs/audio-actor-bus-tests.log": "728e9d5e564eddaf9b9fe252e1c7ba065a3c6792e527741082fbc7216853e211",
+    "logs/audio-actor-bus-state-gain-probe.log": "47f3ceddf2db18763cc879943bdac0f501eb6e1b546f31c3f77541a2647e57d0",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "a99384815cf5811b87d486c1b1f387c66a93e17bff3b0bffd87a47f69f8ed0d4"
+  },
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "limits": [
+    "Non-unit state10 callers still explicitly unsupported; gain-entry helper is not yet connected to them.",
+    "Actual-bus whole refresh, native routing class distinctions, initialization, bank loading, effects and allocator growth/lifetime are not yet qualified.",
+    "Normal runtime/device output and complete project acceptance remain open."
+  ],
+  "next_action": "Integrate non-unit actor global/owner and bus state10 through qualified gain-entry mutation and full refresh; qualify defined gain flag bits versus native opaque upper bits. Qualify actual FF1380 routing inheritance/getter class differences, initialization/bank/effects and normal audio runtime."
+}

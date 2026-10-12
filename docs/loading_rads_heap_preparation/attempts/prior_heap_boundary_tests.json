@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "error": null,
+  "checks": [
+    "HeapAlloc x86 stdcall12 and owned mirror",
+    "HeapReAlloc x86 stdcall16 and preserved bytes",
+    "HeapSize x86 stdcall12",
+    "HeapFree x86 stdcall12",
+    "stale CRT primitive cannot route to engine",
+    "unreserved CRT primitive cannot route to engine",
+    "engine untouched by stale CRT frees",
+    "separate engine route retained",
+    "GetCPInfo cannot pre-read20 into8byte heap block",
+    "GetThreadTimes cannot span past heap request",
+    "LCMapStringEx destination remains within heap request",
+    "strz cannot search beyond unterminated heap block",
+    "rejected adapter copies preserve heap bytes",
+    "free publication fault stays explicit",
+    "mapping is counted after raw successful release",
+    "interrupted primitive never routes to engine",
+    "terminal cleanup retires remaining mapping"
+  ],
+  "check_count": 17,
+  "remaining": {
+    "raw_owners": 0,
+    "mapped_regions": 0,
+    "live_owners": 0,
+    "reserved_regions": 4,
+    "allocated_owners": 3,
+    "interrupted": []
+  },
+  "native_EXE_DLL_execution": false,
+  "injected_failure": "free_after_os only",
+  "source_hashes": {
+    "test_heap_boundary.py": "e744e1456edc6001e09c319bb41114983532a9ebdeb2c9419c0b83a249d87ed4",
+    "heap_mirrors.py": "f5e2905ecb430da9aad36eea28a6c1b8a99977441504c9e6a5a714b125cf47f5",
+    "crt_os.py": "a0e3221ba0a78d36343f828937abfaa59d42c83f7b48f5729b8d988e6b5f4112"
+  }
+}

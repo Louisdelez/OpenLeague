@@ -1,0 +1,59 @@
+{
+  "updated_utc": "2026-10-06T05:53:37.496758+00:00",
+  "complete": false,
+  "client_source_tests_passed": 317,
+  "font_raster_tests_passed": 20,
+  "last_qualified_application_tests": 315,
+  "current_binary_sha256": "caeb3493faae7afbdaff4973d26c73db9c57e91c0f1a70376318d34c47fd38cb",
+  "application_rebuilt_after_changes": false,
+  "native_packing_sequences": 12,
+  "native_packing_insertions": 108,
+  "native_uv_cases": 216,
+  "native_pixel_copy_routes": 30,
+  "native_mask_cases": 2566,
+  "native_full_update_cases": 10,
+  "packing_uv_pixel_update_rust_ported": true,
+  "source_text_bindings": 154,
+  "font_banks": 19,
+  "page_candidates": [
+    256,
+    512
+  ],
+  "gpu_text_rendering_qualified": false,
+  "hud_widgets_drawn": false,
+  "artifacts": [
+    "crates/font-raster/src/native_font_atlas.rs",
+    "crates/font-raster/src/native_font_atlas_pixels.rs",
+    "crates/font-raster/src/lib.rs",
+    "crates/client/src/native_font_metrics.rs",
+    "data/4.20/native_font_atlas_packing_contract.json",
+    "data/4.20/native_font_atlas_uv_contract.json",
+    "data/4.20/native_font_atlas_pixels_contract.json",
+    "data/4.20/native_font_atlas_update_contract.json",
+    "data/4.20/native_font_shader_catalog.json",
+    "logs/native-font-atlas-update-raster-tests.log",
+    "logs/native-font-atlas-update-client-tests.log"
+  ],
+  "hashes": {
+    "crates/font-raster/src/native_font_atlas.rs": "8cb61d53f4ebd1e4afae9e7848dab86b93699075a5ca98586b2edfce6badece2",
+    "crates/font-raster/src/native_font_atlas_pixels.rs": "9bc719121a9c74a5cc77b6cf237239dbcb8efebfcbf7deb4b63bebee4cf0362b",
+    "crates/font-raster/src/lib.rs": "ba7ea070b00be4b58356a0dfcb77a308fc2c01df73ebe3deec747eefded06de3",
+    "crates/client/src/native_font_metrics.rs": "d38bf696af16640945ed979d4e12412d26fd976f19b4c68c313d1bc1a21489bf",
+    "data/4.20/native_font_atlas_packing_contract.json": "0208092d91f72bf0b6cc215aa78bab797e69a2d567f2125afa060bb4b30c684d",
+    "data/4.20/native_font_atlas_uv_contract.json": "dd89bc2c59f1684799073c48bd390c89d7a95eeb75ff2bd1e590c14f410c19de",
+    "data/4.20/native_font_atlas_pixels_contract.json": "085469dd8407be51e17c836ef49a792bb5bcd5072a089d7b1bdc36add40f8e12",
+    "data/4.20/native_font_atlas_update_contract.json": "b412e7ec8bc68d91f93d0d50157e5676a42d29e79532e05950e4bcd1a867d79f",
+    "data/4.20/native_font_shader_catalog.json": "dc1539c3940194f292bd6f95c6a4eabe3f8e0b1de6aaa10ba05517d5ae80698f",
+    "logs/native-font-atlas-update-raster-tests.log": "0460c3b8ab67f0445afc67cd9e995a51a32c9b75319617cc56168b7d7cc8f88c",
+    "logs/native-font-atlas-update-client-tests.log": "c2c2daed3c1a748133da48d8e44354d39e96d7a1aad386d91ae5ba1197058b93"
+  },
+  "next_action": "Qualifier format GPU, rafraîchissement/dirty et dessin des atlas de glyphes ; raccorder layout/textes/widgets/interactions HUD. Corriger les zones bleues de la carte, puis poursuivre tous les domaines du plan.",
+  "limits": [
+    "Native row packing108 and UV216 cases use supplied row/texture contexts with adapted allocation boundaries. Original heap/reference lifetime and GPU allocation errors remain open.",
+    "Original row traversal/copy30 and masks2566 cases execute against supplied successful FT provider and bitmap data. Original compile/hinting pixel identity and failures unqualified.",
+    "Whole update8C0650 executes10contexts, including4native-size256pages. GPU lock/unlock, scratch-vector allocation, memset/free explicitly adapted; no actual GPU upload or channel-format proof.",
+    "Shadow flag adds8pixels to copy origin; no shadow blur inferred. Secondary texture flagfalse only.",
+    "Source APIs preserve19fontbanks and154textbindings across resize. CPU update tested with actual source glyphs; no widget runtime callers or complete original HUD.",
+    "317source tests/20backend tests pass. Last application315tests remains last Vulkan/DX12 observed build; full-game requirements still open."
+  ]
+}

@@ -1,0 +1,32 @@
+from pathlib import Path
+import json,hashlib,re,datetime,shutil
+r=Path('E:/OpenLeague')
+def load(p):return json.loads(p.read_text(encoding='utf-8-sig'))
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def write(p,v):
+ t=p.with_suffix(p.suffix+'.tmp');t.write_text(json.dumps(v,indent=2,ensure_ascii=False)+'\n',encoding='utf-8');load(t);t.replace(p)
+log=r/'logs/audio-announcer-actor-registry-composition-regression.log';text=log.read_text(encoding='utf-8-sig');assert '650 passed; 0 failed; 0 ignored; 0 measured; 480 filtered out' in text
+small=r/'logs/announcer-actor-registry-composition-tests.log';assert '79 passed; 0 failed' in small.read_text(encoding='utf-8-sig')
+exe=r/re.search(r'Running unittests .*?\(([^)]+\.exe)\)',text)[1].replace('\\','/')
+plan=load(r/'docs/completion_plan.json');scope={'domains':len(plan['domains']),'tasks':sum(len(d['tasks']) for d in plan['domains']),'additional_requirements':sum(len(d['additional_requirements']) for d in plan['domains'])};assert scope=={'domains':24,'tasks':114,'additional_requirements':37}
+for ref in load(r/'docs/audio_test_fixture_loading.json')['references']:
+ p=r/ref['fixture'];assert p.stat().st_size==ref['bytes'] and sha(p)==ref['sha256']
+contracts={}
+for name,count in [('audio_announcer_actor_registry_composition_contract.json',288),('audio_announcer_secondary_unregister_contract.json',16)]:
+ p=r/'data/4.20'/name;v=load(p);assert v['passed'] and len(v['cases'])==count;contracts[name]={'cases':count,'calls':sum(len(c['steps']) for c in v['cases']),'sha256':sha(p)}
+assert contracts['audio_announcer_actor_registry_composition_contract.json']['calls']==576 and contracts['audio_announcer_secondary_unregister_contract.json']['calls']==332
+now=datetime.datetime.now(datetime.timezone.utc)
+sources=['crates/core/src/audio_announcer_actor_registry_composition.rs','crates/core/src/audio_announcer_actor_admission.rs','crates/core/src/audio_announcer_registry_init.rs','crates/core/src/audio_announcer_secondary_registries.rs','crates/core/src/lib.rs','tools/announcer_actor_registry_composition_production_tests.rs','tools/qualify_actor_registry_composition.py','tools/qualify_secondary_unregister.py']
+receipt={'saved_utc':now.isoformat(),'passed':True,'complete':False,'scope':scope,'audio_tests_passed':650,'filtered_tests_not_run':480,'isolated_production_tests_passed':79,'native_actor_registry_composition_calls_ported':576,'native_unregister_calls_prepared':332,'contracts':contracts,'regression_log_sha256':sha(log),'isolated_log_sha256':sha(small),'test_executable':str(exe),'test_executable_sha256':sha(exe),'source_hashes':{n:sha(r/n) for n in sources},'behavior':['Complete62A140 registration now composes actual primary, secondary and owner Rust helpers on one backend, with two fresh IDs, fresh secondary key, metadata after callbacks, invalid owner skip and owner low-byte failure diagnostic. No supplied registry-helper result in this API.','576 complete native registration calls matched across288 lifetimes with physical owned actor/metadata/global table byte storage, exact allocation labels/sizes, free traces, lock order, ID/owner diagnostics and all live table/node/vector words.','Shared admission reuses original primary publication implementation. Explicit caller-owned storage reservation rejects overlaps and allocator collisions without erasing bytes. Primary table shutdown preserves borrowed actor and metadata storage. Missing metadata returns an explicit error after prior primary/secondary publication.'],'limits':['The unified core API still requires game-world ID/metadata integration and real lock/engine allocator boundaries. Fixture actor fields and virtual ID/diagnostic/lock callbacks remain explicit supplied inputs; this is not yet live match actor registration.','Actual secondary/owner unregister bodies newly qualified in16 lifetimes332 calls including grown tables, repeated null entries, duplicate actor labels, mismatched supplied actor/key, missing cases and vector shift. Rust unregister and actor teardown remain open.','Normal announcement queue, priorities, mixing, actual audible playback and full game coverage remain incomplete. Native exception unwinding and concurrent mutation not qualified.'],'next_action':'Port actual secondary64C330/owner6B5AB0 unregister against16 lifetimes332 calls in audio_announcer_secondary_unregister_contract.json; add identity-hash64F3E0/6B6400 deletion, independent node/key and actor-vector checks, first matching vector erase/shift and native index-or-FFFFFFFF return. Then integrate unified registration/teardown with game-world actor metadata and announcement queues, priorities, mixing/playback. Preserve24domains114tasks37requirements.'}
+backup=r/'docs/plan_history'/('announcer-actor-registry-composition-'+now.strftime('%Y%m%dT%H%M%SZ'));backup.mkdir(parents=True)
+for name in ['coverage.json','resume_checkpoint.json','completion_plan.json','completion_plan.html']:shutil.copy2(r/'docs'/name,backup/name)
+write(r/'docs/announcer_actor_registry_composition_validation.json',receipt)
+for name in ['coverage.json','resume_checkpoint.json','completion_plan.json']:
+ p=r/'docs'/name;doc=load(p);doc['announcer_actor_registry_composition_validation']=receipt
+ if name!='coverage.json':doc['next_action']=receipt['next_action'];doc['updated_utc']=now.isoformat()
+ write(p,doc);assert load(p)['announcer_actor_registry_composition_validation']==receipt
+p=r/'docs/completion_plan.html';html=p.read_text(encoding='utf-8');marker='announcer-actor-registry-composition-validation';assert '</body>' in html and 'id="'+marker+'"' not in html
+section='<section id="'+marker+'"><h2>Annonces : composition des registres et stockage des acteurs</h2><p>Trois helpers Rust composés dans un même stockage possédé : 576 appels natifs, métadonnées, diagnostics, allocations et listes comparés. 79 tests isolés et 650 tests audio réussis. Désenregistrement natif préparé sur 332 appels. Raccordement à la simulation, destruction des acteurs et lecture des annonces restent à terminer.</p></section>'
+t=p.with_suffix('.html.tmp');t.write_text(html.replace('</body>',section+'</body>'),encoding='utf-8');t.replace(p)
+shutil.copy2(Path(__file__),r/'tools/record_actor_registry_composition.py')
+print(json.dumps({'audio_tests':650,'isolated_tests':79,'native_composed_registration_calls':576,'native_unregister_calls_prepared':332,'scope':scope,'complete':False}))

@@ -1,0 +1,45 @@
+{
+  "updated_utc": "2026-10-04T04:32:59.136812+00:00",
+  "files_sha256": {
+    "tools/qualify_native_matrix_inverse.py": "c721c743d167f2db0ea7902d82f0213a2daa15ab11a16662efab1a9959998cec",
+    "tools/qualify_native_camera_culling.py": "2ac3460a2bf475a4c83f4a4de76e27babfd0edf1dceecf382e22919d5dd5de82",
+    "data/4.20/matrix_inverse_contract.json": "9fe4f87e53fcdd69b3cdb816428b22be518e61c1cda6ef83dfdd27bbd32f7537",
+    "data/4.20/camera_culling_contract.json": "d28066d34ffd970d12cd4a96cde05982f778d1568195bf83d51f8db694bcb81c",
+    "crates/core/src/matrix_inverse.rs": "52a066486bb9913bde555087157666b6feba0ff100e6143fb3dcba22b07a4a68",
+    "crates/core/src/camera_culling.rs": "5ee48be0f5d9b0dd9b3863c8949384877f8b9f060cd7c15ecee043bff98a7ca6",
+    "crates/core/src/lib.rs": "077aaaf003361a22a8943ca0e55a583d57a9a3893ef4d83940bb1c91f54ae090",
+    "logs/native-camera-inverse-culling-core-tests.log": "82b26777aec45f4309d4b8f688a1e46e27c7d944f9fa975c0614bebfd7e70189"
+  },
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_matrix_inverse_cases": 807,
+  "native_matrix_inverse_fallback_cases": 309,
+  "native_camera_full_culling_cases": 480,
+  "native_camera_full_culling_fallback_cases": 288,
+  "core_tests_passed": 304,
+  "ported": [
+    "Full8DEC10 inverse with native scalar SSE operation order, exact determinant threshold, ordered absolute determinant comparison, supplied global fallback retained",
+    "Full9863A0 camera/view sign flips, native inverse, rawmode dispatch, original angle/depth forwarding into qualified volume constructors",
+    "camera_culling joins camera_parameters, camera_view, matrix_inverse and audio_emitter_camera_volume APIs"
+  ],
+  "acceptance": {
+    "inverse": "807cases: branch and all16output words exact exceptNaNpayloads,309fallback cases; source camera matrices plus64synthetic general matrices and determinant boundary/exceptional fixtures.",
+    "full_culling": "480cases: native inverse-fallback branch and all18plane selection indices exact. Normalized matrix/plane float tolerance max1e-5abs/2e-6relative; translation tolerance additionally eye scale times2e-6. Spatial corners/bounds/plane offsets additionally tolerate (maxabs eye +65000+1000+1000)*2e-6native units for propagated RSQRT/x87 differences. NaN classification retained, infinite signs exact."
+  },
+  "static_followup": "Global2D77410 PE loader image is all16zero words in virtual .data; direct literal reference scan located only8DF15E fallback read. This does not prove absence of indirect runtime writes. Keep fallback explicit until initialization qualified. Renderer9820F0 matrix preparation/inverse and main player camera runtime setters remain pending.",
+  "limits": [
+    "Full8DEC10 plus original8DE480/8DE500 executed; no math adapters.",
+    "Global2D77410 singular fallback supplied as explicit input in three variants; its runtime initialization remains unqualified.",
+    "Source camera matrices and synthetic general/boundary/exceptional inputs are arithmetic fixtures, not runtime rendering evidence.",
+    "Full9863A0,986250,8DEC10,projection volume constructors and original transform/planes/bounds/index math executed. Only CRT array initialization/memsets and security-cookie check adapted.",
+    "CRT array constructor adapter initializes storage that original8E2E80 immediately overwrites; it does not replace volume math.",
+    "Global2D77410 inverse fallback supplied as zero/identity; runtime initialization unknown. Camera fields and aspect controlled inputs.",
+    "This joins native camera math to culling volumes, without proving visible client camera binding or full emitter lifecycle.",
+    "No Bevy/GPU binding, visible client rendering, camera controls/resize, native entity particle bounds producers, lifetime integration or audio output qualification supplied by these math fixtures.",
+    "Source core304passed; prior client18test evidence and standalone executable hashes unchanged."
+  ],
+  "client_camera_integrated": false,
+  "visible_render_verified": false,
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false
+}

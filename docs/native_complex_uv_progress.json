@@ -1,0 +1,41 @@
+{
+  "updated_utc": "2026-10-06T17:08:36.944465+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "core_tests_passed": 488,
+  "native_uv_update_cases": 512,
+  "native_uv_flag_write_cases": 64,
+  "actual_map_unclamped_groups": 27,
+  "emulator_cpu_disagreements": 16,
+  "actual_cpu_arithmetic_instructions": 4096,
+  "ordinary_emitter_consumer_bound": false,
+  "ordinary_applications_rebuilt": false,
+  "product_rust_sources_changed": true,
+  "artifacts_sha256": {
+    "data/4.20/complex_uv_update_contract.json": "b1f3a03386ff4fe5c1800c74a07e18e64d05ae8a3ac1b4c7cb256203791e28a0",
+    "tools/probe_native_complex_uv_update.py": "2419cc2499093b2edfbc6fa538c2c73c080d2e214c9ffc3372879c61f7ebb1e0",
+    "tools/check_scale_sse_cpu.py": "f821d441d6b4cea8ad7b38876876ec7ff8178b63756e80225959ccd74993f809",
+    "crates/core/src/native_complex_uv_scroll.rs": "5de876fb1b24cb5473c733d02a0783b3a1eb7328f299290af6c51b66a1cec978",
+    "crates/core/src/lib.rs": "db6fc2e89784fec678e4365f5701b2bc6e1189902c926db2f383e70ab2045335",
+    "logs/native-complex-uv-scroll-core-tests.log": "44686005e8547037c689bb7cebba7a2059c26dffed781dce3109d2c9db5a9ebb",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "622c834bc78a54d6c4dc8e512a60baada0fac8d1d2c2783453ab842460ffc677"
+  },
+  "findings": [
+    "Original939DBE..939F75 applies distinct stored RGB/multiplicative RGB origins and rates to elapsed particle time. Flags2/4 select ordered[-1,1] clamp or signed fractional part through original CRT.",
+    "Native raw bool packing preserves other bits and uses low bit, not raw byte!=0. All64captured flag updates match. Actual27Map10groups have both clamp fields absent and use defaultzero.",
+    "512updates match real processor MULSS/ADDSS plus original CRT fractional outputs, retaining negative zero, infinities and NaN. Original emulated outputs and16NaN payload disagreements retained separately. Stored UV origins/rates remain unchanged."
+  ],
+  "adapters": [
+    "Stored UV offsets, rates, elapsed time and flags supplied. Original loop fragment and whole native CRT fractional function execute.",
+    "CRT startup SSE2 capability flag supplied as1, with original default masked arithmetic controls. SSE2 fallback-x87 branch not qualified.",
+    "Supplemental actual CPU MULSS and ADDSS arithmetic plus original CRT fraction used to qualify nonfinite payloads. Original emulator output retained. Raw flag write fragments execute; typed source transport uses previously qualified binary bool rules.",
+    "CRT thread-context getterCA91A9 supplies legal zeroed per-thread errno storage. Native math/error handling executes; Windows TLS/runtime initialization itself is not qualified."
+  ],
+  "limits": [
+    "UV rate/offset readers, birth sampling and owner transport not qualified. Main and multiplicative UV layer stages only; alpha/material/texture binding and renderer pending.",
+    "Global override/text-file boolean reader and startup CPU capability detection not qualified.",
+    "Ordinary applications are not rebuilt and this port has no visual acceptance. UV rate/offset readers, birth sampling, owner/material/texture binding, full lifecycle and rendering remain incomplete.",
+    "0 domains/0 champion kits closed; whole map, six graphical clients, full game and installer remain unqualified."
+  ],
+  "next_action": "Achever les lecteurs et échantillonnages des UV, la modulation de couleur par distance, les mises à jour mouvement/surface et les transformations propriétaires ; intégrer les 52 groupes et 244 placements Map10 au rendu, reconstruire les applications et poursuivre les 24 domaines."
+}

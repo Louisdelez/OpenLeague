@@ -1,0 +1,29 @@
+{
+  "updated_utc": "2026-10-07T10:37:46.282127+00:00",
+  "passed": true,
+  "complete": false,
+  "focused_client_tests_passed": 3,
+  "pause_storage_bridge_implemented": true,
+  "acquisition_bridge_implemented": true,
+  "live_hidden_frame_corrected": false,
+  "graphical_build_current": false,
+  "findings": [
+    "93EF80 SimpleChild mapping: emitted D4, emission timestamp D8, last update DC, storage handle C.",
+    "Pause defers owned storage and birth arrays; second pause does not duplicate deferred storage.",
+    "Eligible single1/rate1 emission reuses native_simple_storage::acquire; expired emission leaves storage absent.",
+    "Cycle now accepts absent storage instead of rejecting the native expired state."
+  ],
+  "limits": [
+    "Projected constant single1/rate1 profile with local storage handle1/context0; unsupported profiles remain rejected at construction.",
+    "New integration test composes separately qualified reset/storage/emission contracts, not a new full native execution oracle.",
+    "Parent visibility gate and clock offset transitions not wired into normal lifetime yet; offscreen mismatch remains open.",
+    "No new graphical executable/captures; prior v23 evidence retains its original scope."
+  ],
+  "artifacts_sha256": {
+    "crates/client/src/native_projected_cycle.rs": "a482907670771dd5ff295e713f077eaee7a066ee17cf67f85b5391cd4d436b37",
+    "crates/core/src/native_troy_reset.rs": "d4bfed0fe60df6ff6c696e1b8f282a9769b82dcf184758a23a1f1ad0ae483c55",
+    "crates/core/src/native_simple_storage.rs": "f6a031794d626197a07bb95b4173b8eb5566a02df38fff4fb85b5475bda3d76d",
+    "logs/projected-visibility-storage-tests.log": "79de8e191c10f1dc3a789e8b2f6147f761396d6e790b6a658d245c2cfbfffeba"
+  },
+  "next_action": "Raccorder native_troy_frame_gate/reset/resume/timing/tail au cycle Projected. Le stockage peut maintenant etre suspendu via pause_for_visibility et reacquis lors de emission ; ne pas remplacer les transitions par un simple masquage. Verifier les sequences visibles/hors champ/reprise et le rendu DX12/Vulkan, puis poursuivre les24domaines/114taches."
+}

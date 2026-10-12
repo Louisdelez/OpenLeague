@@ -1,0 +1,51 @@
+{
+  "updated_utc": "2026-10-06T13:44:08.965646+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "constructor_cases": 9,
+  "constructor_original_instruction_addresses": 1413,
+  "constructor_allocations_per_case": 20,
+  "constructor_initialized_bytes": 1261,
+  "field_reader_string_references": 73,
+  "lifetime_boundary_cases": 44,
+  "native_map_complex_lifetime_cases": 27,
+  "missing_curve_fallback_cases": 9,
+  "product_rust_sources_changed": false,
+  "ordinary_client_changed": false,
+  "rust_tests_rerun": false,
+  "last_client_tests_passed": 364,
+  "renderer_implemented": false,
+  "artifacts_sha256": {
+    "data/4.20/complex_emitter_defaults_contract.json": "14ea90ecee8f03716a21400f0c2dbddded8ef1503ac0e5eccfad85ccca4e48e6",
+    "data/4.20/complex_emitter_lifetime_contract.json": "46f7b40771d4d825d353463585632c861760435bbf703ee01974aa8d912d020b",
+    "data/4.20/complex_missing_curve_contract.json": "83bb4c52b5ba238ecf4226e2a5357400f5ae03488be7d5b66ddf81cb244b2364",
+    "docs/native_complex_emitter_discovery.json": "09cf4c36156ee22ad42e0707bcd8fb4971245e9340a2417fdfdb76d1276452f0",
+    "docs/native_complex_field_readers.json": "9451d9d549e25a4481cf889ae267b12f93770c433242294f12e92efe540ab607",
+    "tools/inspect_native_complex_emitter.py": "12eea16606b78b5f395e898e7a9c82c338635e925ad8e008a899576a1ef66090",
+    "tools/discover_native_complex_field_readers.py": "2db1592b97cbcfaed327bf1a45e3e7b72d9ec9ecf6385168e24ffa18bb7320d8",
+    "tools/probe_native_complex_emitter_defaults.py": "fcb08c7473d02fe93dc26965caa6fca707fdf2769a12928ac51207ecd3a56dcb",
+    "tools/probe_native_complex_emitter_lifetime.py": "e3567ea498f3742ed1f3493bd57dfc5d3bab19c161e7b8c4768db5b163b87f63",
+    "tools/probe_native_complex_missing_curves.py": "03cb0cfb85523c4fc320b4b5462ccf0797db4e451eeabeb5daaa70d935e286b2"
+  },
+  "findings": [
+    "Original whole Complex constructor90FA70/defaults910180 executed. Owned vector reserves and default writes run; allocation/free/cookie adapters only. Byte-level write coverage distinguishes initialized fields from padding.",
+    "Constructor constants e-rate100 and p-life1 must not be used as absent-field reader defaults: original missing-curve fallback branches replace them by e-rate0 and p-life3, each with one curve constant.",
+    "Original e-life reader caller asks Hacks/default-e-life using fallback-1, then authored e-life. Negative effective values map to0x7F7FFFFF; signed zero, positive infinity and quiet NaN follow native x87 comparator behavior.",
+    "All27native declared Complex groups in Map10 evaluate to MAX lifetime with no Hacks override under supplied decoded field lookups."
+  ],
+  "limits": [
+    "Constructor supplied a zeroed parent-system memory object; parent system construction and emitter ownership lifecycle not executed.",
+    "Nine constructor snapshots cover three prior scalar seeds and three importance values. Field meanings require native reader/consumer qualification.",
+    "No emitted particle, curve interpolation, actual render or full map completion proved.",
+    "e-life constructor value20 is not the reader default. Reader asks Hacks/default-e-life with fallback-1, then reads authored e-life with the resolved fallback.",
+    "Negative effective values become maximum finite f32, not infinity. Explicit zero, negative zero, positive infinity and quiet NaN retain native comparator behavior.",
+    "27 Map10 Complex groups evaluated with no Hacks override. Actual user-config overrides, full lifetime update/stop path, curves and rendering remain to qualify.",
+    "Constructor e-rate100 and p-life1 are replaced by reader missing-curve fallbacks e-rate0 and p-life3. Original resizer and fallback writes execute.",
+    "Existing constants tested as zero,100,quiet NaN under three importance values; exact scalar/curve constant bits and count1 checked.",
+    "Does not prove why a full curve reader returns not-found, authored curve decoding, interpolation, random sampling or ordinary rendering.",
+    "Native field-name references recovered statically; full curve readers, interpolation/randomness, ordinary emitter activation, pose and rendered fidelity remain incomplete.",
+    "364previous source client tests and prior rebuilt executable retained unchanged; no new Rust/GPU/visual acceptance claimed.",
+    "No whole map, champion kit, six-client match or domain closed."
+  ],
+  "next_action": "Exécuter et porter les lecteurs de courbes Complex 94A7F0/94AA60 et leurs paramètres aléatoires, puis les consommateurs de vie/émission/pose et rendu de Map10. Respecter les replis du lecteur (émission0, particule3, e-life négatif→MAX) et les réglages Hacks/default-e-life ; résoudre TT_Mist_circle/fogcircle et poursuivre la partie à six clients et les 24 domaines."
+}

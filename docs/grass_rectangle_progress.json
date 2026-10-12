@@ -1,0 +1,44 @@
+{
+  "updated_utc": "2026-10-05T07:34:48.210468+00:00",
+  "complete": false,
+  "client_tests_passed": 168,
+  "client_build_passed": true,
+  "rectangle_consumer_ported": true,
+  "live_grass_mask_integrated": false,
+  "native_shader_registry_executions": 60,
+  "native_actor_filter_cases": 512,
+  "native_rectangle_cases": 432,
+  "native_corner_projections": 3456,
+  "native_quarter_rectangle_list_cases": 63,
+  "native_quarter_rectangles": 252,
+  "findings": [
+    "World selector3 selects WALL_OF_GRASS shaders; selector4 selects ZPASS shaders. Cold context initializes30shader handles; warm contexts reuse tables.",
+    "Native source collector supplies six-float AABB and0.3expansion margin, not a position/radius/circle. Corrected previous metadata; distinctive adapter output words do not describe actual native coordinate type.",
+    "Rust consumer reproduces native eight-corner expansion, CVTTSS2SI aggregation, any-corner-success rule and asymmetric viewport clamps in432cases.",
+    "Native quarter-resolution conversion preserves order, multiplicity, invalid sentinel and empty rectangles; Rust consumer matches63lists/252rectangles. No native merging in95BA70."
+  ],
+  "limits": [
+    "Camera9854F0/985680 projection, AABB producers and actor eligibility semantics remain open.",
+    "Rust helpers are compiled and tested but are not connected to a live grass-mask producer. Current grass rendering remains incomplete.",
+    "Original target initialization, default texture, quad shader/device path, stencil and scene order remain open; no generated mask pixel proof.",
+    "No new runtime capture performed for this executable; earlier165-test screenshot remains evidence only for its recorded executable hash.",
+    "All24domains and complete six-client match remain unfinished."
+  ],
+  "next_actions": [
+    "Qualify camera projection9854F0/985680 and grass target95BBE0 clear/default/quad source; qualify stencil/pass state and actor AABB/gates.",
+    "Bind the verified rectangle consumers to actual live actor/camera producers and GPU mask, then verify mask pixels and normal Map10 rendering.",
+    "Continue full native rendering, vision, six-client victory/results and every remaining full-plan domain."
+  ],
+  "files_sha256": {
+    "crates/client/src/grass_rectangle.rs": "1d567da7773482810dfbb0a592f19aaa3f0ab9ec1611d55e6262b1e11d31041d",
+    "crates/client/src/main.rs": "8f8201d7b14e163a092e9a81b338bf3db104260a1f0a575267f668d0b07f1e9b",
+    "logs/grass-rectangle-tests.log": "dc246312aa2506529826e9e2234d5bd211d150904407ed4c0d8238a4e60df117",
+    "logs/grass-quarter-rectangles-tests.log": "4ca5bfc3c45a2167595c470ff1b60d639261b359b776b37b942878d33f398ca5",
+    "logs/grass-rectangle-build.log": "5f68860b40a683a8a13c9434eb269af04adffd29ddc42beadf2b8ef05d2e459e",
+    "target/debug/openleague-client.exe": "9b7270bb2f55ffb20412c64475bb148c678ee341128812f43e2e6b9e4423a96a",
+    "data/4.20/grass_shader_registry_contract.json": "f7bd0cd203a3f58be987578e8d03d00e251784ca37ff3efbfa8ece0b4a7bcd07",
+    "data/4.20/grass_mask_sources_contract.json": "1db528afdb5de4b357907ee846b7fe0ff670f33b5551bf51e3a81f69d29ea72d",
+    "data/4.20/grass_rectangle_contract.json": "082c9e986f75678f2b38060339bd74664a487cc6a26bd2595a82c4156aa7e921",
+    "data/4.20/grass_quarter_rectangles_contract.json": "e2d752754662a0a5a39b02ae51ff8914122f711a03179b5954475c5a15400902"
+  }
+}

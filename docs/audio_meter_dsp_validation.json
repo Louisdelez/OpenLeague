@@ -1,0 +1,51 @@
+{
+  "updated_utc": "2026-10-08T18:23:48.832421+00:00",
+  "complete": false,
+  "audio_tests_passed": 310,
+  "test_exit_code": 0,
+  "native_dsp_cases": 256,
+  "native_dsp_steps": 768,
+  "native_extended_dsp_cases": 96,
+  "native_extended_dsp_steps": 4608,
+  "native_generated_nan_steps": 72,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "files_sha256": {
+    "crates/core/src/audio_meter_dsp.rs": "135407b8970c7c8c5d4ebfdf2f1a669e8a130875b483e80cadf9d854eb2f3cb5",
+    "crates/core/src/audio_meter_lifecycle.rs": "c7f4caa7c0a6185acee87d9bed6cae339b8f2763ab0dc395c3995f8adfeec944",
+    "crates/core/src/audio_plugin_factory.rs": "a2d5ea1a7f1910ebb885d930e578250262c2d11d429d8fdf178d9c423ec3e05d",
+    "crates/core/src/lib.rs": "770ed260eea10efdaf0eae3af141cab6413de75770605315b613b14cac15ae98",
+    "tools/probe_native_audio_meter_dsp.py": "c0d4c18811044e5bddec6ad5ca10ab53b5c284dc8df530eeb630d6e90ec94050",
+    "tools/native_x87.py": "78b7187a3800e49ecbc04715a6b6a4e13a5743e4c184bc7d841901006fcfdeff",
+    "tools/qualify_native_x87_fyl2x.py": "47fc78901aa4afc794c0433b9fbd98ee7db7a2cd7c731d22198eb00a3b9ee4b8",
+    "data/4.20/audio_x87_fyl2x_audit.json": "1307d901e620aa1ef7dbc5233efb221281a7f0792c6dbf63b25a349fa0b5a07f",
+    "logs/audio-x87-fyl2x-audit.log": "d627560c4de263a543e9415ac7f87ed561f29d4292a50f479afda7eb9db9e1ee",
+    "tools/probe_native_audio_meter_dsp_extended.py": "9b054dfaea4911eb77ff5b4dd63e5d8d375ccdff0618ed4e566661f1ec1960bb",
+    "tools/record_audio_meter_dsp_progress.py": "7041060cd40f96cf713d9aa18f4edb3027498a7f8872426bf92a89fbed932137",
+    "data/4.20/audio_meter_dsp_contract.json": "e485491310abec714a3210eac4de7c503e03161ba5a06e674298435b10bc9111",
+    "data/4.20/audio_meter_dsp_extended_contract.json": "7dc088564e584b9d6f698fa482056b22a7a922916b9b0cf9b53da81c1af4b3a0",
+    "logs/audio-meter-dsp-extended-tests.log": "115f8c8c273cef0f722ddddb252f49e30cb23c1c8b864c4460b5ad33803542ea",
+    "logs/audio-meter-dsp-probe.log": "c3c4e8d9d7cebd1409736e0bdada1e3ee34de7a94c572a8d769ecab2b1472f53",
+    "logs/audio-meter-dsp-extended-probe.log": "9b9b7b7ece3ed235f0fa1787477d818cdfdcbe672756cdb7f28e7b4916e8f989",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "f2b80703384d0d11034bd50bc9427a1f75f5528ad018d79b8578c4ec6a0e7885"
+  },
+  "reference_correction": "Unicorn FYL2X zero-domain produced0 instead of physical x87 negative infinity.9 instruction comparisons prove the discrepancy;both native DSP references regenerated using actual hardware FYL2X and80-bit FPU transfers. Earlier uncorrected preparatory DSP arithmetic is superseded. Full client hardware acceptance not claimed.",
+  "implementation": [
+    "Correct inline-assembly late-output ordering: restore x87 control word before SETA writes a potentially overlapping temporary register;regression checks both comparison outcomes preserve caller control word.",
+    "Port actual Process and peak/RMS detector with planar layout and valid frame count. Native x87 logarithm and extended division/attack calculations preserve original rounding/control-word boundaries. SSE scalar square-root retains native generated negative quiet NaN.",
+    "Port history/attack/release and frame-count/time state, native max/tie selections and raw counter/history writes. Preserve measurement cache/final parameter ID and caller object bytes.",
+    "Port tail fill at each channel valid..max range, valid-frame/state changes and exact clear-call order. Connect process_meter to shared Meter lifecycle Runtime; use actual parameter SetBlock producer during retained sequences."
+  ],
+  "acceptance": "256 native cases/768 retained steps plus96 expanded cases/4608 steps, comparing raw84-byte effect,32-byte parameter,16-byte buffer,full planar samples and clear-call order after each step. Extended cases change native parameter blocks at16/32 and cover normal44100/48000Hz,8/256 maxframes,1/2 channels,valid-frame changes,mode0/1,status17/45,nonzero attack/release/history windows and zero-release variants.310 selected audio tests passed.",
+  "interfaces": [
+    "Native references execute actual constructors/SetBlock/Init/Reset/Process and detector/smoothing/tail bodies; allocation and exact memset backing are supplied;FYL2X executes on the actual processor with80-bit FPU stack/status transfers. Remaining DSP instructions execute from native PE in emulation;no supplied function-result fixtures.",
+    "Rust Runtime calls actual DSP implementation on retained raw allocations, but normal bank/instance/effect-reader/device scheduling is still required."
+  ],
+  "limits": [
+    "Current accepted matrices cover finite bounded silence/pulse samples,selected attack/release/window/floor/ceiling profiles and ramps,normal rates and listed frame/channel masks. Not full parameter/FP/frame/channel/device fidelity.",
+    "External nonfinite samples/parameters,zero sample rate,invalid physical bounds/history conversions and unresolved classes/references return explicit errors; normal native fault/exception behavior is outside these fixtures. Generated zero-channel mode1 NaN is retained exactly; it is not rejected as an external input.",
+    "References are hybrid PE emulation/physical FYL2X;9-case arithmetic audit proves the zero-domain correction, not full hardware execution. Hardware x87 and native FP assumptions apply onx86/x86_64; alternate architectures explicitly error for unavailable x87. General floating modes/exception-state equivalence not claimed.",
+    "Real Meter replacement/effects reader integration,normal registration/resource/shared lifetime,RTPC mutation/propagation and callback scheduler remain required.",
+    "Audible output,champion kits,six-client victory and delivered installation remain incomplete. Full24domains/114tasks/37requirements remain active."
+  ],
+  "next_action": "Compose actual Meter factories/parameters/lifecycle/DSP with native B270B0 instance replacement and whole effects reader: implement Meter backend adapter over shared raw Runtime allocations with mandatory allocation/context/binding/free/scheduler/RTPC boundaries and qualify actual creator/clone/info/Init/Reset/Term/Process/Update order and failures. Meter DSP256 cases/768 steps and96 expanded cases/4608 retained steps now match Rust exact full effect/parameter/buffer/sample/clear-call state, including72 generated FFC00000 states and actual SetBlock parameter ramps;310 selected audio tests pass. Qualify full physical device/bank/runtime rates/frame sizes and uncommon FP/parameter inputs, actual RTPC setter B12320/propagation, callbacks and shared ownership. Port actual plugin registration B09590/B09610 from432 cases and qualify successful capacity growth; load normal HIRC8 resources/context and bank RTPC/state/position readers. Retain all24domains/114tasks/37requirements; extended nonzero bypass, retained RTPC logarithm scaling2, normal smoothing/admission and audible/six-client-game/installation fidelity acceptance remain unfinished."
+}

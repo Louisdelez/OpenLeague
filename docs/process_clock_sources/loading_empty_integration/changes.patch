@@ -1,0 +1,538 @@
+--- a/crates/core/src/audio_loading_screen_packet.rs
++++ b/crates/core/src/audio_loading_screen_packet.rs
+@@ -6,12 +6,13 @@
+ pub use crate::audio_replay_metadata::Error;
+ pub const SERVICE_GLOBAL: u32 = 0x2d787b8;
+ pub const PAYLOAD_BYTES: u32 = 25;
+-pub const TUTORIAL_SCRATCH_BYTES: u32 = 24;
++pub const NAME_SCRATCH_BYTES: u32 = 24;
++pub const TUTORIAL_SCRATCH_BYTES: u32 = NAME_SCRATCH_BYTES;
+ 
+ pub trait Boundary: tree::Boundary {
+     /// Service virtual+48, source72AD90: constructs a fresh String24 at out.
+     /// The key is passed by value. On error the boundary owns its rollback;
+-    /// on success this consumer owns the returned string until564900 cleanup.
++    /// on success this consumer owns and destroys the returned string.
+     fn service_name(
+         &mut self,
+         service: u32,
+@@ -21,8 +22,10 @@
+     ) -> Result<(), &'static str>;
+     /// Source993CE0 ST0 rounded by the caller's FSTP f32; exact stored bits.
+     fn clock_f32_bits(&mut self) -> Result<u32, &'static str>;
+-    /// Remaining native57D6CB..57DCE6 UI initialization. The25-byte record
+-    /// update has already happened. No success is supplied by default.
++    /// Remaining native57D6FE..57DCAE UI initialization for a nonempty name.
++    /// The25-byte record update has happened, and scratch contains the owned
++    /// String24 returned by service_name. This consumer destroys it afterward,
++    /// including on an error. No success is supplied by default.
+     fn initialize_standard_record(
+         &mut self,
+         _recipient: u32,
+@@ -30,7 +33,7 @@
+         _payload: u32,
+         _scratch: u32,
+     ) -> Result<(), &'static str> {
+-        Err("native loading-screen UI continuation57D6CB is not connected")
++        Err("native loading-screen UI continuation57D6FE is not connected")
+     }
+ }
+ fn add(a: u32, n: u32) -> Result<u32, Error> {
+@@ -54,13 +57,19 @@
+         bits
+     }
+ }
+-fn destroy_string(b: &mut impl Boundary, p: u32) -> Result<(), Error> {
++fn drop_string(b: &mut impl Boundary, p: u32) -> Result<(), Error> {
+     if word(b, p, 20)? >= 16 {
+-        //564900 reads the deallocation route before the buffer pointer.
++        // Both57DCAE and564900 read the route before the buffer pointer.
+         let route = b.deallocator()?;
+         let raw = b.word(p)?;
+         b.free(raw, route)?;
+     }
++    //57DCAE destroys its stack temporary without resetting its fields.
++    Ok(())
++}
++fn destroy_string(b: &mut impl Boundary, p: u32) -> Result<(), Error> {
++    drop_string(b, p)?;
++    // The tutorial invokes564900, which additionally resets the String24.
+     put(b, p, 20, 15)?;
+     put(b, p, 16, 0)?;
+     b.write_byte(p, 0)?;
+@@ -76,10 +85,9 @@
+         }),
+     }
+ }
+-/// Payload must expose25 readable bytes. Fresh scratchString24 is only used by
+-/// the tutorial's first-name lookup. The caller must keep it disjoint from the
+-/// recipient, record tree, payload and live allocations. Standard scratch is
+-/// interpreted exclusively by its explicit UI continuation boundary.
++/// Payload must expose25 readable bytes. Fresh scratchString24 is used by both
++/// first-name lookups. The caller must keep it disjoint from the recipient,
++/// record tree, payload and live allocations.
+ pub fn receive(
+     b: &mut impl Boundary,
+     kind: Kind,
+@@ -110,9 +118,23 @@
+         return Ok(());
+     }
+     if matches!(kind, Kind::Standard) {
+-        return b
+-            .initialize_standard_record(recipient, record, payload, scratch)
+-            .map_err(Error::Boundary);
++        //57D6CB loads the global service before the payload key;5B3230 below
++        //does the inverse. Do not combine these distinct source read orders.
++        let service = b.word(SERVICE_GLOBAL)?;
++        let key = b.word(payload)?;
++        let table = b.word(service)?;
++        let target = word(b, table, 0x48)?;
++        b.service_name(service, target, scratch, key)
++            .map_err(Error::Boundary)?;
++        let primary = (|| -> Result<(), Error> {
++            if word(b, scratch, 16)? != 0 {
++                b.initialize_standard_record(recipient, record, payload, scratch)
++                    .map_err(Error::Boundary)?;
++            }
++            Ok(())
++        })();
++        let cleanup = drop_string(b, scratch);
++        return finish(primary, cleanup);
+     }
+     let key = b.word(payload)?;
+     let service = b.word(SERVICE_GLOBAL)?;
+--- a/crates/core/src/audio_loading_screen_packet_tests.rs
++++ b/crates/core/src/audio_loading_screen_packet_tests.rs
+@@ -32,6 +32,7 @@
+     fill: u8,
+     events: Vec<Value>,
+     name: Vec<u8>,
++    provider_output: Option<Vec<u8>>,
+     mutate: bool,
+     detailed: bool,
+     fail_name: bool,
+@@ -39,6 +40,7 @@
+     fail_free: bool,
+     freed: Vec<u32>,
+     clock_calls: u32,
++    standard_calls: u32,
+ }
+ impl Host {
+     fn raw(&mut self, p: u32) -> u32 {
+@@ -61,7 +63,7 @@
+             .collect()
+     }
+     fn watched(&self, p: u32) -> bool {
+-        self.target <= p && p < self.target + 76
++        self.target <= p && p < self.target + 120
+             || SCR <= p && p < SCR + 24
+             || [SERVICE_GLOBAL, SERVICE, TABLE + 0x48, PAYLOAD].contains(&p)
+     }
+@@ -155,6 +157,12 @@
+         }
+         self.events
+             .push(json!({"op":"name","service":service,"target":target,"output":out,"key":key}));
++        // This boundary-only test replays the exact output of the separately
++        // executed native provider. The Windows tests exercise that provider.
++        if let Some(output) = self.provider_output.clone() {
++            self.set(out, &output);
++            return Ok(());
++        }
+         self.set(out, &[self.fill; 24]);
+         let name = self.name.clone();
+         if name.len() < 16 {
+@@ -182,6 +190,18 @@
+         self.events.push(json!({"op":"clock","bits":0x42f6e979u32}));
+         Ok(0x42f6e979)
+     }
++    fn initialize_standard_record(
++        &mut self,
++        recipient: u32,
++        record: u32,
++        payload: u32,
++        scratch: u32,
++    ) -> Result<(), &'static str> {
++        assert_eq!((recipient, record, payload, scratch), (RECIP, self.target, PAYLOAD, SCR));
++        assert_ne!(self.raw(SCR + 16), 0);
++        self.standard_calls += 1;
++        Err("native loading-screen UI continuation57D6FE is not connected")
++    }
+ }
+ fn node(i: usize) -> u32 {
+     H + 0x1200 + i as u32 * 0x100
+@@ -207,6 +227,7 @@
+         fill,
+         events: vec![],
+         name: vec![],
++        provider_output: None,
+         mutate: false,
+         detailed: false,
+         fail_name: false,
+@@ -214,6 +235,7 @@
+         fail_free: false,
+         freed: vec![],
+         clock_calls: 0,
++        standard_calls: 0,
+     };
+     b.memory.reserve_at(H, 0x4000).unwrap();
+     b.memory.reserve_at(SERVICE_GLOBAL, 4).unwrap();
+@@ -350,10 +372,11 @@
+     let record = b.target;
+     b.put(record + 0x40, 0);
+     b.put(PAYLOAD, KEYS[4]);
++    b.name = b"nonempty".to_vec();
+     assert_eq!(
+         receive(&mut b, Kind::Standard, RECIP, PAYLOAD, SCR),
+         Err(Error::Boundary(
+-            "native loading-screen UI continuation57D6CB is not connected"
++            "native loading-screen UI continuation57D6FE is not connected"
+         ))
+     );
+     assert_eq!(b.raw(record), KEYS[4]);
+@@ -377,3 +400,131 @@
+         }
+     }
+ }
++
++// The native fixture records the complete provider chain as well as its caller.
++// Keep the caller's record operations and post-provider String24 operations;
++// provider internals have their own native composition and Windows tests.
++fn native_empty_caller_events(step: &Value, record: u32) -> Vec<Value> {
++    let native_record = n(&step["record"]);
++    let native_scratch = n(&step["temporary_string"]);
++    let mut caller = false;
++    let mut events = vec![];
++    for e in step["events"].as_array().unwrap() {
++        if e["op"] == "record_ready" || e["op"] == "provider_return" {
++            caller = true;
++        } else if e["op"] == "call" && n(&e["method"]) == 0x72ad90 {
++            caller = false;
++        }
++        if !caller || !(e["op"] == "read" || e["op"] == "write") {
++            continue;
++        }
++        let p = n(&e["pointer"]);
++        let address = if (native_record..native_record + 120).contains(&p) {
++            record + p - native_record
++        } else if (native_scratch..native_scratch + 24).contains(&p) {
++            SCR + p - native_scratch
++        } else {
++            continue;
++        };
++        events.push(json!({"op":e["op"],"address":address,"bytes":e["bytes"],"value":e["value"]}));
++    }
++    events
++}
++
++#[test]
++fn audio_loading_screen_packet_standard_matches64_native_empty_name_calls() {
++    let oracle = fixture("data/4.20/loading_standard_empty_name_probe.json");
++    assert_eq!(oracle["passed"], true);
++    let cases = oracle["cases"].as_array().unwrap();
++    assert_eq!(cases.len(), 16);
++    let mut calls = 0;
++    for c in cases {
++        let id = n(&c["identifier"]);
++        let index = match id {
++            73 | 9000 => 1,
++            0x80000000 => 4,
++            0xffffffff => 8,
++            _ => panic!("unknown native profile"),
++        };
++        let mut b = host(Kind::Standard, n(&c["fill"]) as u8, index);
++        b.put(node(index) + 16, id);
++        let record = b.target;
++        for step in c["steps"].as_array().unwrap() {
++            b.detailed = false;
++            b.set(record, &bytes(step["record_before_hex"].as_str().unwrap()));
++            b.set(PAYLOAD, &bytes(step["payload_hex"].as_str().unwrap()));
++            b.set(SCR, &[0xcc; 24]);
++            let returned = step["events"].as_array().unwrap().iter()
++                .find(|e| e["op"] == "provider_return").unwrap();
++            b.provider_output = Some(bytes(returned["hex"].as_str().unwrap()));
++            let mut expected = b.snapshot(H, 0x4000);
++            let after = bytes(step["record_after_hex"].as_str().unwrap());
++            expected[(record - H) as usize..(record - H) as usize + 120]
++                .copy_from_slice(&after);
++            let scratch = bytes(step["temporary_string_hex"].as_str().unwrap());
++            expected[(SCR - H) as usize..(SCR - H) as usize + 24]
++                .copy_from_slice(&scratch);
++            b.events.clear();
++            b.detailed = true;
++            receive(&mut b, Kind::Standard, RECIP, PAYLOAD, SCR).unwrap();
++            assert_eq!(b.snapshot(H, 0x4000), expected, "{} flag{}", c["profile"], step["flags"]);
++            let actual: Vec<_> = b.events.iter().filter(|e| {
++                if !(e["op"] == "read" || e["op"] == "write") { return false; }
++                let p = n(&e["address"]);
++                (record..record + 120).contains(&p) || (SCR..SCR + 24).contains(&p)
++            }).cloned().collect();
++            assert_eq!(actual, native_empty_caller_events(step, record));
++            let name = b.events.iter().position(|e| e["op"] == "name").unwrap();
++            let reads: Vec<_> = b.events[..name].iter().filter(|e| {
++                e["op"] == "read" && [SERVICE_GLOBAL, PAYLOAD, SERVICE, TABLE + 0x48].contains(&n(&e["address"]))
++            }).map(|e| n(&e["address"])).collect();
++            assert_eq!(&reads[reads.len() - 4..], &[SERVICE_GLOBAL, PAYLOAD, SERVICE, TABLE + 0x48]);
++            assert_eq!(b.events[name]["key"], id);
++            assert_eq!(b.clock_calls, 0);
++            assert_eq!(b.standard_calls, 0);
++            assert!(b.freed.is_empty());
++            assert!(b.memory.allocations.is_empty());
++            calls += 1;
++        }
++    }
++    assert_eq!(calls, 64);
++}
++
++#[test]
++fn audio_loading_screen_packet_standard_drops_name_after_unsupported_ui_without_reset() {
++    for (name, fail_free) in [(b"short".as_slice(), false),
++        (b"LoadingRecipientNameLongerThan15".as_slice(), false),
++        (b"LoadingRecipientNameLongerThan15".as_slice(), true)] {
++        let mut b = host(Kind::Standard, 165, 4);
++        let record = b.target;
++        b.put(record + 0x40, 0);
++        b.put(PAYLOAD, KEYS[4]);
++        b.name = name.to_vec();
++        b.fail_free = fail_free;
++        let result = receive(&mut b, Kind::Standard, RECIP, PAYLOAD, SCR);
++        if fail_free {
++            assert!(matches!(result, Err(Error::Cleanup { primary, cleanup })
++                if *primary == Error::Boundary("native loading-screen UI continuation57D6FE is not connected")
++                && matches!(*cleanup, Error::Free(_))));
++        } else {
++            assert_eq!(result, Err(Error::Boundary("native loading-screen UI continuation57D6FE is not connected")));
++        }
++        assert_eq!(b.standard_calls, 1);
++        assert_eq!(b.clock_calls, 0);
++        assert_eq!(b.raw(SCR + 16), name.len() as u32);
++        assert_eq!(b.raw(SCR + 20), if name.len() < 16 { 15 } else { 47 });
++        assert_eq!(b.freed, if name.len() >= 16 && !fail_free { vec![DATA] } else { vec![] });
++    }
++    // A provider error owns its rollback. The uninitialized output must not
++    // be inspected or destroyed by this caller.
++    let mut b = host(Kind::Standard, 165, 4);
++    let record = b.target;
++    b.put(record + 0x40, 0);
++    b.put(PAYLOAD, KEYS[4]);
++    b.fail_name = true;
++    b.detailed = true;
++    assert_eq!(receive(&mut b, Kind::Standard, RECIP, PAYLOAD, SCR), Err(Error::Boundary("service unavailable")));
++    assert!(!b.events.iter().any(|e| e["op"] == "destroy_string"));
++    assert_eq!(b.standard_calls, 0);
++    assert_eq!(b.clock_calls, 0);
++}
+--- a/crates/core/src/audio_replay_windows_loading_packets.rs
++++ b/crates/core/src/audio_replay_windows_loading_packets.rs
+@@ -27,7 +27,8 @@
+     fn clock_f32_bits(&mut self) -> Result<u32, &'static str> {
+         self.loading_clock_f32_bits()
+     }
+-    // The native standard UI continuation remains an explicit default error.
++    // A real empty metadata name completes without UI. The nonempty standard
++    // UI continuation remains an explicit default error.
+ }
+ 
+ impl<N: startup::Network + Send + 'static> Backend<N> {
+@@ -42,7 +43,7 @@
+             0x5b3230 => Kind::Tutorial,
+             _ => return Err(self.failure((recipient, target), "unknown native packet95 recipient")),
+         };
+-        self.event_temporary(loading::TUTORIAL_SCRATCH_BYTES, |b, scratch| {
++        self.event_temporary(loading::NAME_SCRATCH_BYTES, |b, scratch| {
+             loading::receive(b, kind, recipient, payload, scratch)
+                 .map_err(|e| b.failure(e, "native loading-screen packet consumer failed"))
+         })
+--- a/crates/core/src/audio_replay_windows_loading_packets_tests.rs
++++ b/crates/core/src/audio_replay_windows_loading_packets_tests.rs
+@@ -1,6 +1,10 @@
+ use super::*;
+ use crate::audio_replay_windows_application::Application;
+-use crate::{audio_loading_record_tree as tree, audio_replay_metadata as metadata};
++use crate::{
++    audio_loading_record_tree as tree, audio_replay_metadata as metadata,
++    audio_replay_metadata_text as text, audio_replay_object_commands as commands,
++    audio_replay_object_manager as objects, audio_replay_manager_control as index_control,
++};
+ 
+ struct Defaults;
+ impl crate::audio_game_service_lifecycle::Settings for Defaults {
+@@ -21,6 +25,66 @@
+     (0..n)
+         .map(|i| metadata::Boundary::read_byte(b, p + i).unwrap())
+         .collect()
++}
++
++fn hex_bytes(s: &str) -> Vec<u8> {
++    s.as_bytes().chunks_exact(2)
++        .map(|p| u8::from_str_radix(std::str::from_utf8(p).unwrap(), 16).unwrap()).collect()
++}
++
++// Explicit diagnostic preparation, matching the native empty-name oracle:
++// construct8F8810 and publish with9019A0. This qualifies the real index/provider
++// lifetime, not a normal stream-opening producer or a loading-screen factory.
++fn initialize_index<N: startup::Network + Send + 'static>(b: &mut Backend<N>, parent: u32) -> [u32; 2] {
++    let nested = b.word(parent + 0x30).unwrap();
++    assert_eq!([b.word(nested + 0x6c).unwrap(), b.word(nested + 0x70).unwrap()], [0, 0]);
++    let index = b.allocate(48).unwrap();
++    objects::construct(b, index).unwrap();
++    index_control::replace_pair(b, nested + 0x6c, index).unwrap();
++    [index, b.word(nested + 0x70).unwrap()]
++}
++
++fn prepare_name<N: startup::Network + Send + 'static>(
++    b: &mut Backend<N>, metadata: u32, id: Option<u32>, key: u32, index: u32, name: Option<&[u8]>,
++) {
++    b.event_temporary(256, |b, s| {
++        if let Some(id) = id {
++            for (o, v) in [(0, 0), (4, id), (8, key), (12, index)] {
++                b.event_reference(s + o, v)?;
++            }
++            commands::dispatch(b, [0, 0, 0, 0, s], s + 32)
++                .map_err(|e| b.failure(e, "empty-name test index producer failed"))?;
++        }
++        if let Some(name) = name {
++            assert!(name.len() < 64);
++            let raw = s + 96;
++            for (i, v) in name.iter().copied().chain(std::iter::once(0)).enumerate() {
++                Storage::write_byte(b, raw + i as u32, v).unwrap();
++            }
++            b.event_reference(s + 64, raw)?;
++            b.event_reference(s + 80, name.len() as u32)?;
++            b.event_reference(s + 84, 63)?;
++            text::put_string_extra(b, metadata, key, index, s + 64, 0, s + 192)
++                .map_err(|e| b.failure(e, "empty-name test metadata producer failed"))?;
++        }
++        Ok(())
++    }).unwrap();
++}
++
++fn query_name<N: startup::Network + Send + 'static>(b: &mut Backend<N>, id: u32, expected: &[u8]) {
++    b.event_temporary(32, |b, s| {
++        names::service_name(b, s, id, s + 24)
++            .map_err(|e| b.failure(e, "empty-name test real name getter failed"))?;
++        let len = b.word(s + 16).unwrap();
++        let cap = b.word(s + 20).unwrap();
++        let raw = if cap < 16 { s } else { b.word(s).unwrap() };
++        assert_eq!(read_bytes(b, raw, len), expected);
++        if cap >= 16 {
++            let route = remove::Backend::deallocator(b).unwrap();
++            remove::Backend::free(b, raw, route).unwrap();
++        }
++        Ok(())
++    }).unwrap();
+ }
+ 
+ // These are explicit diagnostic storage bindings, NOT recipient constructors
+@@ -253,13 +317,20 @@
+     let r = app.transport().unwrap();
+     let service = r.configure_service(Defaults).unwrap();
+     r.initialize_game_manager().unwrap();
++    let parent = r.game_manager_snapshot().unwrap().unwrap();
+     let mut b = Backend::new(r.shared.clone());
++    initialize_index(&mut b, parent.pointer);
++    let name = b"Nonempty real metadata name longer than fifteen";
++    prepare_name(&mut b, parent.metadata[0], Some(42), 123, 456, Some(name));
++    // Warm the metadata cache before measuring temporary output retirement.
++    query_name(&mut b, 42, name);
+     let local = b
+         .word(crate::audio_replay_service_receive::LOCAL_OWNER)
+         .unwrap();
+     let recipient = Recipient::create(&mut b, Kind::Standard);
+     let p = packet(local, 42, 1, false);
+     let before = r.snapshot().unwrap().engine_allocations;
++    let frees = r.shared.bank.lock().unwrap().memory.released_labels.len();
+     assert!(r.receive_game_event(0, 3, 2, 77, &p).is_err());
+     assert_eq!(b.word(recipient.tree() + 4).unwrap(), 1);
+     let record = recipient.record(&mut b, 42);
+@@ -270,10 +341,12 @@
+     assert!(r
+         .errors()
+         .iter()
+-        .any(|e| e.contains("UI continuation57D6CB")));
++        .any(|e| e.contains("UI continuation57D6FE")));
++    assert_eq!(r.shared.bank.lock().unwrap().memory.released_labels.len(), frees + 1);
+     let live = r.snapshot().unwrap().engine_allocations;
+     assert!(r.receive_game_event(0, 3, 2, 78, &p).is_err());
+     assert_eq!(r.snapshot().unwrap().engine_allocations, live);
++    assert_eq!(r.shared.bank.lock().unwrap().memory.released_labels.len(), frees + 2);
+     assert!(packet95::Boundary::receive_payload(&mut b, recipient.p, 0xdeadbeef, 0).is_err());
+     assert!(loading::Boundary::service_name(&mut b, 0, 0xdeadbeef, 0, 42).is_err());
+     assert_eq!(r.snapshot().unwrap().engine_allocations, live);
+@@ -283,3 +356,77 @@
+     assert_eq!(r.snapshot().unwrap().engine_allocations, 0);
+     app.close().unwrap();
+ }
++
++#[test]
++fn audio_replay_windows_loading_standard_matches64_empty_names_through_real_metadata() {
++    let oracle: serde_json::Value = serde_json::from_str(&crate::audio_test_fixture(
++        "data/4.20/loading_standard_empty_name_probe.json")).unwrap();
++    assert_eq!(oracle["passed"], true);
++    let cases = oracle["cases"].as_array().unwrap();
++    assert_eq!(cases.len(), 16);
++    let mut calls = 0;
++    for case in cases {
++        let mut app = Application::new().unwrap();
++        let r = app.transport().unwrap();
++        let service = r.configure_service(Defaults).unwrap();
++        r.initialize_game_manager().unwrap();
++        let parent = r.game_manager_snapshot().unwrap().unwrap();
++        let mut b = Backend::new(r.shared.clone());
++        let index = initialize_index(&mut b, parent.pointer);
++        let cached_long = case["cached_long"].as_bool().unwrap();
++        if cached_long {
++            let old = b"Old cached metadata name kept on its real heap buffer";
++            // The native oracle seeds the cache using564C20. Here the actual
++            // object/metadata producers and service getter populate it instead.
++            prepare_name(&mut b, parent.metadata[0], Some(74), 123, 456, Some(old));
++            query_name(&mut b, 74, old);
++        }
++        let cached = parent.metadata[0] + 0x1b0;
++        let cache_capacity = b.word(cached + 20).unwrap();
++        let cache_buffer = b.word(cached).unwrap();
++        assert_eq!(cache_capacity >= 16, cached_long);
++        let id = case["identifier"].as_u64().unwrap() as u32;
++        match case["profile"].as_str().unwrap() {
++            "present_empty" => prepare_name(&mut b, parent.metadata[0], Some(id), 0xdeadbeef, 0x80000000, Some(b"")),
++            "present_missing_metadata" => prepare_name(&mut b, parent.metadata[0], Some(id), 1, 2, None),
++            "missing_all" => {},
++            "missing_zero_empty" => prepare_name(&mut b, parent.metadata[0], None, 0, 0, Some(b"")),
++            _ => panic!("unknown native empty-name profile"),
++        }
++        let recipient = Recipient::create(&mut b, Kind::Standard);
++        let record = recipient.record(&mut b, id);
++        let local = b.word(crate::audio_replay_service_receive::LOCAL_OWNER).unwrap();
++        for (step_index, step) in case["steps"].as_array().unwrap().iter().enumerate() {
++            // Match the recorded initial120 bytes, including native00/A5
++            // padding. The tree and all name/index objects remain real ports.
++            let initial = hex_bytes(step["record_before_hex"].as_str().unwrap());
++            assert_eq!(initial.len(), 120);
++            for (i, v) in initial.into_iter().enumerate() {
++                Storage::write_byte(&mut b, record + i as u32, v).unwrap();
++            }
++            let mut packet = vec![0x95];
++            packet.extend_from_slice(&local.to_le_bytes());
++            packet.extend_from_slice(&hex_bytes(step["payload_hex"].as_str().unwrap()));
++            assert_eq!(packet.len(), 30);
++            let before = r.snapshot().unwrap().engine_allocations;
++            let frees = r.shared.bank.lock().unwrap().memory.released_labels.len();
++            assert_eq!([b.word(parent.metadata[1] + 4).unwrap(), b.word(index[1] + 4).unwrap()], [1, 1]);
++            assert_eq!(r.receive_game_event(0, 3, 2, step_index as u32 + 1, &packet).unwrap(), 1);
++            assert_eq!(read_bytes(&mut b, record, 120), hex_bytes(step["record_after_hex"].as_str().unwrap()));
++            assert_eq!([b.word(parent.metadata[1] + 4).unwrap(), b.word(index[1] + 4).unwrap()], [1, 1]);
++            assert_eq!(r.snapshot().unwrap().engine_allocations, before);
++            assert_eq!(r.shared.bank.lock().unwrap().memory.released_labels.len(), frees);
++            assert_eq!(b.word(cached + 16).unwrap(), 0);
++            assert_eq!(b.word(cached + 20).unwrap(), cache_capacity);
++            if cached_long { assert_eq!(b.word(cached).unwrap(), cache_buffer); }
++            assert!(r.errors().is_empty());
++            calls += 1;
++        }
++        recipient.destroy(&mut b);
++        r.close_game_manager().unwrap();
++        service.close().unwrap();
++        assert_eq!(r.snapshot().unwrap().engine_allocations, 0);
++        app.close().unwrap();
++    }
++    assert_eq!(calls, 64);
++}

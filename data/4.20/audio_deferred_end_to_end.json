@@ -1,0 +1,265 @@
+{
+  "passed": true,
+  "case_count": 8,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "cases": [
+    {
+      "delay": 0.125,
+      "has_context": false,
+      "allocations": [
+        [
+          16,
+          1073844224
+        ],
+        [
+          16,
+          1073844480
+        ],
+        [
+          176,
+          1073823744
+        ],
+        [
+          64,
+          1073844992
+        ],
+        [
+          8,
+          1073845248
+        ]
+      ],
+      "freed": [
+        1073844224
+      ],
+      "action_refs": 1,
+      "source_refs": 1,
+      "target": 105,
+      "remainder": 880
+    },
+    {
+      "delay": 0.125,
+      "has_context": true,
+      "allocations": [
+        [
+          16,
+          1073844224
+        ],
+        [
+          176,
+          1073823744
+        ],
+        [
+          64,
+          1073844736
+        ],
+        [
+          8,
+          1073844992
+        ]
+      ],
+      "freed": [
+        1073844224
+      ],
+      "action_refs": 1,
+      "source_refs": null,
+      "target": 105,
+      "remainder": 880
+    },
+    {
+      "delay": 0.5,
+      "has_context": false,
+      "allocations": [
+        [
+          16,
+          1073844224
+        ],
+        [
+          16,
+          1073844480
+        ],
+        [
+          176,
+          1073823744
+        ],
+        [
+          64,
+          1073844992
+        ],
+        [
+          8,
+          1073845248
+        ]
+      ],
+      "freed": [
+        1073844224
+      ],
+      "action_refs": 1,
+      "source_refs": 1,
+      "target": 123,
+      "remainder": 448
+    },
+    {
+      "delay": 0.5,
+      "has_context": true,
+      "allocations": [
+        [
+          16,
+          1073844224
+        ],
+        [
+          176,
+          1073823744
+        ],
+        [
+          64,
+          1073844736
+        ],
+        [
+          8,
+          1073844992
+        ]
+      ],
+      "freed": [
+        1073844224
+      ],
+      "action_refs": 1,
+      "source_refs": null,
+      "target": 123,
+      "remainder": 448
+    },
+    {
+      "delay": 1.0,
+      "has_context": false,
+      "allocations": [
+        [
+          16,
+          1073844224
+        ],
+        [
+          16,
+          1073844480
+        ],
+        [
+          176,
+          1073823744
+        ],
+        [
+          64,
+          1073844992
+        ],
+        [
+          8,
+          1073845248
+        ]
+      ],
+      "freed": [
+        1073844224
+      ],
+      "action_refs": 1,
+      "source_refs": 1,
+      "target": 146,
+      "remainder": 896
+    },
+    {
+      "delay": 1.0,
+      "has_context": true,
+      "allocations": [
+        [
+          16,
+          1073844224
+        ],
+        [
+          176,
+          1073823744
+        ],
+        [
+          64,
+          1073844736
+        ],
+        [
+          8,
+          1073844992
+        ]
+      ],
+      "freed": [
+        1073844224
+      ],
+      "action_refs": 1,
+      "source_refs": null,
+      "target": 146,
+      "remainder": 896
+    },
+    {
+      "delay": 2.0,
+      "has_context": false,
+      "allocations": [
+        [
+          16,
+          1073844224
+        ],
+        [
+          16,
+          1073844480
+        ],
+        [
+          176,
+          1073823744
+        ],
+        [
+          64,
+          1073844992
+        ],
+        [
+          8,
+          1073845248
+        ]
+      ],
+      "freed": [
+        1073844224
+      ],
+      "action_refs": 1,
+      "source_refs": 1,
+      "target": 193,
+      "remainder": 768
+    },
+    {
+      "delay": 2.0,
+      "has_context": true,
+      "allocations": [
+        [
+          16,
+          1073844224
+        ],
+        [
+          176,
+          1073823744
+        ],
+        [
+          64,
+          1073844736
+        ],
+        [
+          8,
+          1073844992
+        ]
+      ],
+      "freed": [
+        1073844224
+      ],
+      "action_refs": 1,
+      "source_refs": null,
+      "target": 193,
+      "remainder": 768
+    }
+  ],
+  "findings": [
+    "Full AF0500 returns1 through actual construction, property allocation, AF0270 and B05F00/B06140 scheduling, then native action release and temporary source release.",
+    "Queued action retains one reference after caller release; source context remains retained by action when constructed locally."
+  ],
+  "adapters": [
+    "Mapped allocator/free and single-thread lock imports only; supplied zero-ID context and empty queue."
+  ],
+  "limits": [
+    "Queued action not yet executed or destroyed; RTPC/randomization and nonzero owner associations remain open. No audible output proof."
+  ]
+}

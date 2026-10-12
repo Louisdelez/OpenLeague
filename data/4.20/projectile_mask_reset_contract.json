@@ -1,0 +1,49 @@
+{
+  "complete": false,
+  "passed": true,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "cases": [
+    {
+      "initial_mask": 0,
+      "final_mask": 4294967295,
+      "return_value": 1
+    },
+    {
+      "initial_mask": 1,
+      "final_mask": 4294967295,
+      "return_value": 1
+    },
+    {
+      "initial_mask": 2,
+      "final_mask": 4294967295,
+      "return_value": 1
+    },
+    {
+      "initial_mask": 3,
+      "final_mask": 4294967295,
+      "return_value": 1
+    },
+    {
+      "initial_mask": 2147483648,
+      "final_mask": 4294967295,
+      "return_value": 1
+    },
+    {
+      "initial_mask": 4294967295,
+      "final_mask": 4294967295,
+      "return_value": 1
+    }
+  ],
+  "findings": [
+    "Wrapper table10A4960 slot44 points to6C9210.",
+    "6C9210 writes maskFFFFFFFF at6C9330 then invokes wrapper34 (bounds update).",
+    "Function resets mask for all six input masks with no acquired Troy resource."
+  ],
+  "adapters": [
+    "Resource weak handle absent. Inherited6C9490 bounds-update hook omitted. Native method otherwise executes."
+  ],
+  "limits": [
+    "Not proof of constructor or initial load default; prior attribution corrected.",
+    "Caller of slot44 and live-resource branch still unqualified."
+  ]
+}

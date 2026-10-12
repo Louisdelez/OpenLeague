@@ -1,0 +1,35 @@
+{
+  "updated_utc": "2026-10-06T15:15:18.249596+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "core_tests_passed": 459,
+  "last_client_tests_passed": 364,
+  "birth_cases": 48,
+  "birth_steps": 384,
+  "sample_cases": 624,
+  "sample_steps": 1248,
+  "product_rust_sources_changed": true,
+  "ordinary_emitter_consumer_bound": false,
+  "ordinary_applications_rebuilt": false,
+  "artifacts_sha256": {
+    "data/4.20/color_consumer_contract.json": "9fd303a965d5de0df26cb840c9c82a2c48ea36940f79368218900cc52e7a0c25",
+    "tools/probe_native_color_consumers.py": "37b1ae7606489cb8a9fa8e457cb242159711f8d5f7ef6561b8dcf2aaa4af6098",
+    "crates/core/src/native_color_consumers.rs": "643fccd1f3e431cbc871b050326efff357727526e00d530773ae2367c4715fad",
+    "crates/core/src/native_complex_color.rs": "9c919b1bca699077db96931eb453595d55ba12db0747407ff0357274cc28b969",
+    "crates/core/src/lib.rs": "b6d1850d5644d06045cc13ee0873da202cd332f7dfdfcf3a60930b804c94956f",
+    "logs/native-color-consumers-core-tests.log": "58e69f790a010d175ec248bbf7b65b003a5f18e0c3fc650173e07c40c1ca5a7b",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "247ed5f4d4e3737227d619cc691a5981cdcfc2c35a96f6c4c3cdb45983ab34a2"
+  },
+  "findings": [
+    "Original949550 birth helper executes RGBA order, skips draws for null/constants, and draws once for each variable channel. Rust matches384outputs and all55RNG words/indices after every step.",
+    "Original949420 selects/clamps the baked table before applying RGBA probabilities, drawing fresh values on each call for variable channels. Rust matches1248outputs and full RNG states, including repeated calls.",
+    "Selector includes count1/3/16/256, normal boundaries, negative zero, NaN, positive/negative infinity and maximum finite values. A distinct public API prevents conflating sampled probabilities with stored birth multipliers."
+  ],
+  "limits": [
+    "Actual lifecycle call sites not qualified: the table sampler draws each call for variable channels, while the birth helper produces stored multipliers. Do not conflate these paths in the renderer.",
+    "Normalized-age producer, actual color update using stored factors, ownership and ordinary graphical integration remain pending.",
+    "Full459core tests passed; no new ordinary client build/render/GPU verification.",
+    "No map/champion/domain or six-client match complete."
+  ],
+  "next_action": "Qualifier les appels/lifecycle RGBA réels et leur âge normalisé ; compléter les paramètres/lifetime Complex et relier le rendu des52groupes Map10 et244placements. Les multiplicateurs de naissance et le lecteur RGBA avec tirage à chaque appel sont maintenant deux chemins Rust distincts et qualifiés. Reconstruire les exécutables, résoudre TT_Mist_circle/fogcircle, vérifier six clients et poursuivre les24domaines."
+}

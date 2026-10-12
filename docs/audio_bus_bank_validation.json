@@ -1,0 +1,54 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T13:40:22.065727+00:00",
+  "change": [
+    "Port actual B044E0 bank orchestration: parent lookup/retain/attach/release, primary/secondary roots, property stage, duration/raw control fields and ordered effects/RTPC/state/position readers. Mandatory dependencies never default to successful loading. Native status codes are propagated without flattening.",
+    "Port first matching control ID mutation, append ordering, count/capacity checks, native sample-rate multiplication and allocator failure2. Raw control words and bytes are preserved without inferred semantic names.",
+    "Port B02430 available-control free-list reuse before allocation, including reuse despite reached capacity. Resolve explicit reference tokens and reject missing/cyclic pools instead of inventing controls. Safe truncated prefix fails before external effects."
+  ],
+  "validation": {
+    "new_targeted_tests_passed": 3,
+    "audio_regression_tests_passed": 261,
+    "failed": 0,
+    "session": 52015,
+    "terminal_exit_code": 0,
+    "native_bank_orchestration_cases": 2304,
+    "native_control_pool_capacity_cases": 72,
+    "preparatory_native_property_prefix_cases": 2304,
+    "preparatory_native_bank_property_composition_cases": 480,
+    "comparison": "Exact200-byte node, roots, linked controls/raw7-word records and ordered lookup/retain/attach/release/allocator/stage calls, all native failure branches and duplicate-control/capacity/free-pool cases.",
+    "log": "logs/audio-bus-bank-tests.log"
+  },
+  "sha256": {
+    "crates/core/src/audio_bus_bank.rs": "b61cb1266621eba352742ae61f462969bfb9e480f0d58f81491182164a8047b2",
+    "crates/core/src/audio_bus_registry.rs": "68983279888e0d489eef015b045f831c9a74db333d19820d72176009803d10f5",
+    "crates/core/src/lib.rs": "055703fef707860461d6fe1e0fd244a147ce01cb73cbd3b6116b8156f8cc73a6",
+    "tools/probe_native_audio_bus_bank_orchestration.py": "e6aa3df981f0836f7c77d663931e0222149e3092912c57ce685d8595692ed204",
+    "tools/probe_native_audio_bus_bank_pool.py": "7205d342b12a1d82e7824a90f66e9575c4acfb087a792844b4298b51800e7fad",
+    "tools/probe_native_audio_bus_properties_bank.py": "74312a0b16fadd4bbc1ec3779735f04d7fb859f2ce1c9eff1b865b836e06106b",
+    "tools/probe_native_audio_bus_bank_properties_composition.py": "89c75905be9c13c31cf87d2369f4b88b6535d785c4a787b04a46e0b9279ca1f5",
+    "data/4.20/audio_bus_bank_orchestration_contract.json": "59c7915b0fb166f606053ce6737fd73477e0f89bbdb5d7159f65d9bdad2c894e",
+    "data/4.20/audio_bus_bank_pool_contract.json": "250f4f5fe203d07fdb4462e89eb83299d57abf7a208a33259ac2d1f3be3cc1da",
+    "data/4.20/audio_bus_properties_bank_contract.json": "db578785b7214a74cc6953b222e771c9240c8faa1bafd1609423b506a8a3fe19",
+    "data/4.20/audio_bus_bank_properties_composition_contract.json": "f7ecc34f647f4a89cd81f3bc356198dc08bf6d7c894963bd0556abec86dbd3c6",
+    "logs/audio-bus-bank-tests.log": "a8b6baaa00005762fb9232e855176cd4cacd1bba0af49426c150f240401478a3",
+    "logs/audio-bus-bank-orchestration-probe.log": "e8f35c35d240e13c1bd31012e4f6bd2a1bd62c58be39ce02f7fee315b809b086",
+    "logs/audio-bus-bank-pool-probe.log": "3762934e496b3c124e91d405e19e21d9a6bfaa25898697260482c49105af5ddc",
+    "logs/audio-bus-properties-bank-probe.log": "9d43277879715367b8e10480da0980f7f2ffde713d9d7cc04d681f8a132f73d2",
+    "logs/audio-bus-bank-properties-composition-probe.log": "8ba377068e261d9c8516a06616b3d887a22cf3b965b72104813a2649294980f5",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "a88ff1e6cc902d78949c517e2a718a09c84bc4c06de1c1191ad9ef603ce7a689"
+  },
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "interfaces": [
+    "Bank orchestration comparison executes original B044E0/B02430; parent callbacks and property/effects/RTPC/state/position readers are explicit mandatory result interfaces consuming zero bytes. Payload is an orchestration fixture, not a complete native bank payload.",
+    "Property-prefix preparation executes actual B043F0/B225A0/B009B0/B00C20 with allocator/memcpy interfaces and absent group pointer1C. Native property table alloc failure returns52.",
+    "480-case native composition executes actual property-prefix bodies inside B044E0, retaining mandatory interfaces for parents/effects/RTPC/state/position."
+  ],
+  "limits": [
+    "Rust bank module requires concrete parent and loader dependencies; it is not connected to normal HIRC8 resource creation or complete real bank payloads.",
+    "Property-prefix cases and whole bank/prefix composition are preparatory native references, not yet a Rust prefix port. Active group reordering/notifications and property-table lifetime remain open.",
+    "Only sample rate48000 is qualified in bank comparisons; other rates and complete pool/resource lifetime require qualification. Native Bus parent/RTPC callbacks require class-specific bodies, not Sound substitutes.",
+    "Constructor/factory/bank creation, production gain flags, live state/RTPC/ownership/device output and normal-client acceptance remain open. Full project remains incomplete."
+  ],
+  "next_action": "Port actual Bus B043F0/B225A0 property-table/flag prefix from2304 native cases and connect to bank orchestration using480 native composition cases. Qualify active group callbacks B009B0/B00C20, actual parent attach B023C0/B03AB0 and Bus RTPC notification B04A00; connect effects/state/position readers and real bank payloads. Port constructor/factory creation integration from10 cases; production flags/ownership/device lifecycle remain open."
+}

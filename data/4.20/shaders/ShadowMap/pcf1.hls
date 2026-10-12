@@ -1,0 +1,79 @@
+#ifndef PCF_MODE
+	#define PCF_MODE 0
+#endif
+
+//Make sure the Cooker Tool sees this value for all shaders that include this file...
+#ifdef DISABLE_SHADOWS
+#endif
+
+float3 SHADOW_COLOR : register(c17); // artist-tunable shadow color
+float3 SHADOW_COLOR_COMPLEMENT : register(c18); // This is basically (1-SHADOW_COLOR) and for reducing one shader instruction.
+
+
+float2 packFloatToVec2(float val)
+{
+	float2 res = frac(float2(val*256.f, val));
+	return float2(res.x, res.y-res.x*1.f/256.f);
+}
+
+float unpackFloatFromVec2(float2 val)
+{
+	return val.x*1.f/256.f + val.y;
+}
+
+float3 packFloatToVec3(float val)
+{
+	float3 bitShift = float3(256.f*256.f, 256.f, 1.f);
+	float3 bitMask = float3(0.f, 1.f/256.f, 1.f/256.f);
+	
+	float3 res = frac(val * bitShift);
+	return res - res.xxy * bitMask;
+}
+
+float unpackFloatFromVec3(float3 val)
+{
+	float3 bitShift = float3(1.f/(256.f*256.f), 1.f/256.f, 1.f);
+	return dot(val, bitShift);
+}
+
+// Do not use 32-bit depth functions when our game only supports 24-bit depth!
+float4 packFloatToVec4(float val)
+{
+	float4 bitShift = float4(256.f*256.f*256.f, 256.f*256.f, 256.f, 1.f);
+	float4 bitMask = float4(0.f, 1.f/256.f, 1.f/256.f, 1.f/256.f);
+	
+	float4 res = frac(val * bitShift);
+	return res - res.xxyz * bitMask;
+}
+
+// Do not use 32-bit depth functions when our game only supports 24-bit depth!
+float unpackFloatFromVec4(float4 val)
+{
+	float4 bitShift = float4(1.f/(256.f*256.f*256.f), 1.f/(256.f*256.f), 1.f/256.f, 1.f);
+	return dot(val, bitShift);
+}
+
+// Do not use 32-bit depth functions when our game only supports 24-bit depth!
+float4 packDepthToVec4(float depth)
+{
+	return packFloatToVec4(depth);
+}
+
+float3 packDepthToVec3(float depth)
+{
+	return packFloatToVec3(depth);
+}
+
+
+float SampleShadowMap(sampler Tex, float3 smPos)
+{
+#if PCF_MODE == 2   // NOTE:  As of 5/20/2014, PCF is _always_ off in GetPCFMode in ShadowSettings.cpp
+	return tex2Dproj(Tex,float4(smPos.xyz,1)).x;
+#endif
+
+    // Sample the shadow map without PCF
+	const float4 shadowSample = tex2D(Tex, smPos.xy);
+	const float  depth        = unpackFloatFromVec3(shadowSample.xyz);
+	const float  visible      = (smPos.z < depth) ? 1 : shadowSample.a;
+	return visible;
+}

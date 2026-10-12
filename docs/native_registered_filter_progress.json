@@ -1,0 +1,41 @@
+{
+  "updated_utc": "2026-10-04T22:53:42.620457+00:00",
+  "complete": false,
+  "client_tests_passed": 116,
+  "client_build_passed": true,
+  "native_registered_filter_frames": 288,
+  "native_two_stage_resolution_cases": 102,
+  "native_addresses": 1321,
+  "live_fow_gpu_bound": false,
+  "current_client_graphical_rerun": false,
+  "findings": [
+    "Original62B380/5C6830 resolves the opaque source identity into a registration payload; payload+8 then passes through original5BDD80/5C3160 into a separately supplied actor registry.102cases include unsigned identities, collisions and missing actor entries. No lookup adapters.",
+    "Original6B3FA0 executes288frames across absent registration/absent actor/present actor, tags100/200/300, actor flagsAD/118, descriptor flags24/2C and applied/unapplied masks. Virtual getters600830/617360 execute; the latter reads actor+18 team tag.",
+    "For local sources with spectator false, a present actor is eligible iff AD is true,118 false, team differs from300 and descriptor24 or2C is true. Missing registration or actor continues to source scheduling. Ineligible actors withdraw an applied stencil before scheduling.",
+    "Rust ActorFilter/CircleView.select_local_source ports these gates and mask withdrawal. Comparisons include original pending queue, counts and applied flags before processing, generated source order and post-frame flags/counts. Full116client tests and build passed."
+  ],
+  "limits": [
+    "Original source enumeration, dirty/applied/pending gates, circle effective-radius getter, distance approximation, priority calculation, heap enqueue/pop and frame budget execute.",
+    "Both original identity and handle lookups execute on supplied registries; actor virtual getters600830 and617360 execute. Local source tag100 and spectator false supplied at three virtual call sites; actor/descriptor flag producers and constructors remain unqualified. QPC/clock and mask generation boundaries adapted; no generated mask is applied.",
+    "Allocator boundaries adapted; camera/world extent supplied. No live gameplay/GPU integration.",
+    "Registries are supplied single-bucket sorted nodes; their constructors, insertion, resizing and registration lifetime are not ported. BTreeMap implements qualified two-stage lookup semantics only.",
+    "Raw flag producers/actor and descriptor initialization remain unqualified. Other-team/spectator filtering returns an explicit error in the new Rust selection entry.",
+    "Mask generation is adapted in these288frames; prior Map10 generator proofs remain separate. No current graphical verification, live GPU fog binding or ordinary gameplay source integration."
+  ],
+  "next_actions": [
+    "Qualify registered actors inside full Map10 generation frames and extend filtering to other-team/spectator paths.",
+    "Qualify actor initialization/registration producers, view subscriptions and camera/world extent; connect source creation/update/retirement to ordinary entities.",
+    "Integrate native masks with authoritative visibility and GPU fog, then verify gameplay on the current executable."
+  ],
+  "files_sha256": {
+    "data/4.20/fow_registered_filter_contract.json": "af3062c4f77bca75c04b6b0a91dcbfe6f09560cf32ca4010405d91ae44eddfaf",
+    "data/4.20/fow_entity_resolution_contract.json": "4dea37ad5ac613056fb05d74024b420732641244df849fde1f5bc346f913c912",
+    "tools/probe_fow_registered_filter.py": "5ac0686c00fe905a04cd01f466eabc8d2d2501102f364fe2f8eab635e8bec3f9",
+    "crates/client/src/fow_registered_filter.rs": "706b1c9f517ccd0dc9f1fe4983ee339667d8df7a5bc106834a527647fd7c1c99",
+    "crates/client/src/fow_entity_registry.rs": "e01b97dff54295da9a6121182c746b862dc2c8bb949c1ba32c7726468c9d4cc1",
+    "crates/client/src/fow_source_factory.rs": "f393998bae5201e65d18d03bb2efe3bd3391341e84a16798050fd5cae7d3b57a",
+    "logs/native-registered-filter-tests.log": "ac509ebaf43b685b2577e88f3dfdc695d64565889a33b01a1f57befc61d16d54",
+    "logs/native-registered-filter-build.log": "c0e3bb261c1c065e13576424d3a766ab22cdf5abb6b993ef1d77607bae5c6a46",
+    "target/debug/openleague-client.exe": "c6ac01dbb13856b68e6e433ac34211a0011aadf803df5710884db049302a184a"
+  }
+}

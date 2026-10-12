@@ -1,0 +1,59 @@
+{
+  "saved_utc": "2026-10-10T11:45:11.997024+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "native_stream_lifetimes": 32,
+  "native_direct_transitions": 192,
+  "native_event_sequences": 4,
+  "native_sequence_operations": 1076,
+  "native_mutating_callback_transitions": 4,
+  "isolated_tests_passed": 143,
+  "core_audio_tests_passed": 699,
+  "core_tests_filtered_not_run": 480,
+  "core_test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_core-5b2a9def275dcedd.exe",
+  "core_test_executable_sha256": "d6e5f9888423f93d82e95a0d40bd8893a9411b40f866e36e8d2ad31b536736a9",
+  "isolated_test_executable_sha256": "afc4a650ea22353046179cf63e1889450195995c2e15df4093bf104daae5e6cd",
+  "native_source_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "source_hashes": {
+    "crates/core/src/audio_replay_stream.rs": "b42394c7c6ef06dcf805593507cac6ade10dcf761b95207f23c3a30c3bb87640",
+    "crates/core/src/audio_replay_stream_tests.rs": "1c190d2380298b2c840dfe011b57ec73990687d4db2a72fa57819c679838dd11",
+    "crates/core/src/audio_replay_object_manager_tests.rs": "10d203af454359974b14455a869c7a8edb4d7174b54d929e5e6b15b77f6e27c6",
+    "crates/core/src/audio_replay_manager_control.rs": "1dde7a7940674c6f9563eabff533212267ca12d8412b1ba82778499817e3adab",
+    "crates/core/src/audio_replay_shared_pair.rs": "46c25e1eae30084524df71e57f5ee45254f6064471b4e385057d1a13f69f061d",
+    "crates/core/src/audio_replay_object_manager.rs": "a02688bf3d7e9ed40c4876cf52f975c7b57617d36725058329bab651873d5196",
+    "crates/core/src/audio_announcer_owner_metadata.rs": "452f7bb3b33b8ffddb29205cf773e5a1d2cfc7b89dae464855a1d6f19a746d33",
+    "crates/core/src/lib.rs": "a11b5b1a95f4c2a72a09a001977f91ec057fa01e6220dea3b8f427bdf7fd8f85",
+    "tools/qualify_replay_stream_states.py": "ad680af9fbb0d17e61abfc69ceae7035361c451847f682c4b61493fd534a3d46",
+    "tools/qualify_replay_stream_initialization.py": "2f8fe3f3728dd9b364f6f6bb9b96ddeda6efe18cdac440a1cf00ea376d0dca54",
+    "tools/probe_replay_stream_opening.py": "935499ba63e1c1b752fc0d65c502201af84daede2328520dd4710d93eb3c34a0",
+    "tools/replay-stream-tests.rs": "43d98da6fc48899e48e8b5363a89cd8f909e1c38057d877d47dbb2e2790b1ec4"
+  },
+  "contract_hashes": {
+    "replay_stream_initialization_contract.json": "d800ee8a3dc5140022f380ebdef5dea91e69d4b4cb7528923114af6ce038c4f8",
+    "replay_stream_states_contract.json": "dcacc5ce0bf6b50f1a88d10dbc63bdd83db7ba966ac99cd902b6e984625b3b50",
+    "replay_stream_opening_probe.json": "f5361704c92abb734ee82b1a9153f76c4de5ede603874c69c7fd13400f7a2b8c"
+  },
+  "log_hashes": {
+    "logs\\replay-stream-tests.log": "bfc07a76aedef01de0e4518e017d5611892be8f77b85c3e7291e08ec39a15696",
+    "logs\\core-replay-stream-tests.log": "bf42c2bda003821742bd5630d484f94cd1cff13d5af917e8f43711a5f0b192cf",
+    "logs\\replay-stream-build.log": "175e50e0a30bd7b698fd011fbf99e9eba76175b0aea262fc78344bfc52f3b6a6"
+  },
+  "behavior": [
+    "Rust8F6700 constructs the native120-byte stream, base stopped flags, mutex, empty shared pairs, five hierarchical state nodes and13 retained callback clones. The initial state1 entry occurs before later states are allocated.8F6800/8F67C0 preserve stop, object-manager/control disposal, implementation release, event/exit/entry callback destruction, base resource closure, mutex destruction and scalar free order.",
+    "Rust990BB0 preserves front-insert pointer vectors, native1.5x growth, root comparison, common-prefix removal, publication before exit callbacks, leaf-to-root exits, root-to-leaf entries and fresh current-state arguments. Both temporary vectors are freed in native order, including custom route selection.192 direct transitions cover all native states, null/same/unrelated targets and deeper borrowed hierarchies exercising vector growth/in-place insertion.",
+    "Rust990DC0 preserves event-parent traversal and low-byte callback return gates. Native8FC0A0/8FC0C0 state selection and8F6BC0 active-ancestor stop match1076 sequential event/stop/transition operations, covering all256 event-byte values plus high-bit inputs. Four explicit terminal virtual-action mutation cases verify current-state rereads without changing the captured target.",
+    "Native32 complete lifetimes and all state cases compare complete live allocated bytes, callback traces, allocation classes, frees and reference ownership. Additional Rust tests reject unavailable worker waits/implementation stop and detect cyclic corrupt hierarchies while releasing already-created temporary vectors.",
+    "A separate native opening probe identifies the next runtime prerequisite. Actual CRT static-lock/low-I/O startup resolves the initial recursive allocation/stack exhaustion. Enabled transport construction/configuration reaches CreateThread, which the probe does not yet supply. Native no-op implementation succeeds independently and releases all allocations beyond the CRT baseline; it is explicitly distinguished from actual replay playback."
+  ],
+  "limits": [
+    "Native qualifiers supply existing mutex, OS critical-section, allocation/memmove and callback-clone allocator boundaries. Normal cases run original no-op state virtual actions; four mutation cases supply only terminal virtual actions. Borrowed hierarchy selections are explicit preconditions. Native concurrency, allocator callback mutation and exception/OOM unwinding are not qualified.",
+    "Worker wait8A8C50, resource close8F8F90 and implementation stop require concrete runtime implementations and return explicit errors by default. Actual stream opening8F68D0, transport worker, file/network I/O and full manager metadata/callback bundle still require implementation/integration. Opening probe failure is an unprovided emulator primitive, not a claim that Windows or the existing Rust thread adapter is unavailable.",
+    "Normal client executable was not rebuilt or graphically retested and still delivers no replay frames to simulation.143 isolated and699 selected core tests passed;480 other core tests were filtered. No whole domain, champion or full-game completion is claimed."
+  ],
+  "next_action": "Continue enabled replay stream8F68D0 configuration and actual transport startup. New probe_replay_stream_opening.py runs original CB0378 static-lock and CAFF53 low-I/O startup, eliminating the CRT recursive-lock allocation/stack exhaustion; enabled flag0 now reaches an explicitly unprovided KERNEL32 CreateThread in8FC380 through8A8B80/8A9040. Supply the real thread-launch ABI and execute/qualify its actual worker8FC100 and wait/cleanup, reusing existing audio_crt_worker_packet/audio_crt_windows_worker_thread/audio_crt_windows_root_startup and native packet/worker probes rather than duplicating them. Do not force transport globals to success. Flag1 selects native16-byte no-op implementation8F6650 and reaches state3 with manager ownership and full cleanup; that is not replay playback. Flag0 constructs0x918 implementation8F6D00, aliases raw+E0 via9018C0/10D5FDC control, runs key setup98F710 and configure8F6EB0/8FC610 before thread startup. Port real configuration/I/O and5BD470 copy assignment, callback bundle and metadata727DE0 to complete manager728E20/728FD0/728EE0, then connect service frames/real simulation events. Stream8F6700/8F6800/8F67C0, hierarchical state construction/destruction,990BB0/990DC0 transitions/events and8F6BC0 stop are now Rust ports matching32 lifetimes,192 direct transitions,1076 sequential operations and4 mutating terminal-callback cases. Worker waiting8A8C50, resource close8F8F90 and implementation stop remain explicit runtime boundaries. Client still owns the configured service without replay event delivery. Continue graceful graphical AppExit, configuration overlays/cache, actor listeners, maps/champions/audio and all24domains114tasks37requirements."
+}

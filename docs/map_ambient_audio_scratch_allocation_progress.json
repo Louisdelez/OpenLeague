@@ -1,0 +1,29 @@
+{
+  "updated_utc": "2026-10-04T01:14:50.069833+00:00",
+  "files_sha256": {
+    "tools/qualify_native_audio_scratch_allocation.py": "a5a516bfe3b82f4595a00aedf58632d21d43250a1d3a362a95443c62c8756aa6",
+    "data/4.20/audio_scratch_allocation_contract.json": "55482176542ca6f9a794b3591a38395a77c6a82f9a3754f1450c6097548cd9fa",
+    "crates/core/src/audio_deferred_pool.rs": "f348f7bb299107c58da958e2cbb1b751a43788aa084657105e9b34364455a272",
+    "logs/native-audio-scratch-allocation-core-tests.log": "43b6fb1205377f011d95acc91d1825c961cf1b3e393b7568ecee43e5f95921ba"
+  },
+  "native_allocation_cases": 16,
+  "core_tests_passed": 234,
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "ported": [
+    "706600 object factory then shared once-only initialization then scratch allocation",
+    "successful scratch registration preserves object/owner/linked identity and clears retired byte",
+    "failed scratch allocation returns created object explicitly without invented rollback",
+    "allocation -> native End callback -> deferred disposal/linked destruction/removal bridge"
+  ],
+  "physical_voice_factory_implemented": false,
+  "client_consumer_integrated": false,
+  "audible_playback_verified": false,
+  "complete": false,
+  "limits": [
+    "Original706600 and native vector append5BDC40 executed with capacity. Game object factory, scratch heap allocator and once-only initializer adapted. Alternative configured allocator branch excluded.",
+    "When object creation succeeds but scratch allocation fails, original returns0 without object disposal. No invented rollback/release; native orphan ownership must remain explicit.",
+    "Actual factory object registration/resource cleanup and physical voice launch remain separate integration.",
+    "Rust adapters supply actual object/storage identities; default native allocator branch only.",
+    "Native allocator vector growth, global threading, physical unbound launch and voice construction remain unqualified. Standalone binaries unchanged."
+  ]
+}

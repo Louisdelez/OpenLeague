@@ -1,0 +1,50 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T07:43:49.841694+00:00",
+  "native_results": {
+    "object_sequences": 5,
+    "backend_constructor_sequences": 3,
+    "object_initial_id": 2,
+    "backend_initial_reference": 0,
+    "image_cached_vector_words": [
+      0,
+      0,
+      0
+    ]
+  },
+  "implementation": [
+    "Factory::default initializes shared object counter to2.",
+    "Registry<V>::default initializes backend reference counter to0; reference0 remains valid.",
+    "Cached vector image state explicitly exposed; no assumption that current listener direction supplies this value."
+  ],
+  "source_sha256": {
+    "crates/core/src/audio_object_registration.rs": "7d8e1793c426eab9e9f8d5ef26baf9b256e169543e384c477b46c15f25640f3f",
+    "crates/core/src/audio_backend_references.rs": "c94ee7621e9e86e170efbf022efbe009b1bcba5726927a1e26c69675d681c699",
+    "tools/probe_native_audio_object_startup.py": "cd8433e9db9a160f0d0643777893b29a54e3183425dbce7778647ce7a6d255c6",
+    "tools/probe_native_audio_backend_startup.py": "f5046eaed09a58bd1f6a920cb86efb578a2f60fb8fb5e4bce8c73e4a6fd9d8fd",
+    "data/4.20/audio_object_startup_contract.json": "58a9fbb0d602586b2bfddfc167f3e74a055361bd92b5188107254430f31e0bd3",
+    "data/4.20/audio_backend_startup_contract.json": "09c7bcc401bb55a80051fa83c4d43886bdcac58bb18df237b58172aa9178fc2f"
+  },
+  "tests": {
+    "object_registration": {
+      "passed": 11,
+      "session": 96462,
+      "log": "logs/audio-object-startup-tests.log"
+    },
+    "backend_references": {
+      "passed": 6,
+      "failed": 0,
+      "session": 16779,
+      "log": "logs/audio-backend-startup-tests.log"
+    }
+  },
+  "limits": [
+    "No live audio worker enabled by these changes.",
+    "Image startup counter is not the counter at first ambient event if other subsystems already allocated objects.",
+    "Zero cached vector is loader initial state only; actual runtime value remains explicit input.",
+    "Native constructor container allocations and physical voice returns are adapted as documented in contracts.",
+    "Normal client executable remains prior validated6298954384ab43c530e6781422dc3cfe000c17bd9a1c57e9af85a06f3897a981; no new runtime acceptance claimed."
+  ],
+  "test_binary_sha256": "0b99e609f6060bc4395c304ba392e2f0c5444ea25ead5b069cbef18fbc96de61",
+  "validation": "Eight native startup sequences pass;11 object-registration tests and6 backend-reference tests pass. No live audio worker enabled."
+}

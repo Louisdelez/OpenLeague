@@ -1,0 +1,27 @@
+import datetime,hashlib,json,re,shutil
+from pathlib import Path
+r=Path('E:/OpenLeague');now=datetime.datetime.now(datetime.timezone.utc)
+def load(p):return json.loads(p.read_text(encoding='utf-8-sig'))
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def write(p,d):
+ t=p.with_suffix(p.suffix+'.tmp');t.write_text(json.dumps(d,indent=2,ensure_ascii=False)+'\n',encoding='utf-8');load(t);t.replace(p)
+log=r/'logs/audio-announcer-actor-name-regression.log';m=re.search(r'test result: ok. (\d+) passed; 0 failed;',log.read_text(encoding='utf-8-sig'));assert m and int(m[1])==582
+small=r/'logs/announcer-actor-name-production-tests.log';assert '9 passed; 0 failed' in small.read_text(encoding='utf-8-sig')
+contracts={}
+for name,count in [('audio_announcer_actor_name_fallback_contract.json',324),('audio_announcer_name_provider_control_contract.json',18),('audio_announcer_name_provider_allocator_contract.json',36)]:
+ p=r/'data/4.20'/name;d=load(p);assert d['passed'] and len(d['cases'])==count;contracts[name]={'cases':count,'sha256':sha(p)}
+refs=load(r/'docs/audio_test_fixture_loading.json')['references']
+for e in refs:
+ p=r/e['fixture'];assert p.stat().st_size==e['bytes'] and sha(p)==e['sha256']
+plan=load(r/'docs/completion_plan.json');assert len(plan['domains'])==24 and sum(len(d['tasks']) for d in plan['domains'])==114 and sum(len(d['additional_requirements']) for d in plan['domains'])==37
+receipt={'saved_utc':now.isoformat(),'passed':True,'complete':False,'native_name_fallback_cases_ported':324,'native_provider_control_cases_prepared':18,'native_provider_allocator_cases_prepared':36,'audio_regression_tests_passed':582,'isolated_production_module_tests':9,'contracts':contracts,'historical_fixture_references_hash_verified':len(refs),'log':str(log.relative_to(r)),'log_sha256':sha(log),'isolated_test_log_sha256':sha(small),'test_executable_sha256':sha(r/'target/debug/deps/openleague_core-92fab3f20accd79c.exe'),'sources':{n:sha(r/n) for n in ['crates/core/src/audio_announcer_actor_name.rs','crates/core/src/audio_announcer_actor_tokens.rs','crates/core/src/audio_announcer_actor_wrapper.rs','crates/core/src/audio_announcer_object_lookup.rs','crates/core/src/lib.rs']},'scope':{'domains':24,'tasks':114,'additional_requirements':37},'limits':['Native name family and exhausted fallback ported for qualified ASCII, with explicit provider, inline/heap storage selection and copied borrowed names. Both original dispatchers use plain name fallback after all family matchers are exhausted.','Native716CE0 provider returns actor+B4 converted cache; failed conversion invokes three fresh raw-name getters for diagnostics. This control flow and standard/custom temporary free branches are prepared evidence, not a production provider implementation.','Raw-name getter,99AC80 conversion, temporary allocation, diagnostic sinks and frees remain supplied boundaries. Encoding algorithms, exceptional conversion, live ownership and concurrent cache mutation unqualified.','Full ordered formatter families, callback registration, live registry, normal announcement queue and actual in-game playback remain incomplete.'], 'next_action':'Implement native716CE0 provider control with qualified narrow/wide conversion99AD50/99AB40/99AC80 and explicit ownership; qualify non-ASCII, failed/exceptional conversion and allocator/lifetime behavior. Continue remaining native token families and outer formatter registration. Complete live registry661410, normal announcement dispatch/queue priorities/admission/mixing and in-game audio. Preserve CRT/COM/TLS/custom-locale work and full24domains114tasks37requirements.'}
+backup=r/'docs/plan_history'/('announcer-actor-name-'+now.strftime('%Y%m%dT%H%M%SZ'));backup.mkdir(parents=True)
+for name in ['coverage.json','resume_checkpoint.json','completion_plan.json','completion_plan.html']:shutil.copy2(r/'docs'/name,backup/name)
+coverage=load(r/'docs/coverage.json');coverage['announcer_actor_name_validation']=receipt
+checkpoint=load(r/'docs/resume_checkpoint.json');checkpoint['saved_utc']=now.isoformat();checkpoint['announcer_actor_name_validation']=receipt;checkpoint['next_action']=receipt['next_action']+' Whole game incomplete.'
+plan['announcer_actor_name_validation']=receipt;plan['updated_utc']=now.isoformat();plan['next_action']=receipt['next_action'];plan['complete']=False
+write(r/'docs/announcer_actor_name_validation.json',receipt);write(r/'docs/coverage.json',coverage);write(r/'docs/resume_checkpoint.json',checkpoint);write(r/'docs/completion_plan.json',plan)
+page=r/'docs/completion_plan.html';markup=page.read_text(encoding='utf-8');section='<section id="announcer-actor-name-validation"><h2>Annonces : noms des personnages</h2><p>324 cas originaux portés, 582 tests audio réussis. Fournisseur de noms : 18 cas de contrôle et 36 cas couvrant les deux branches de libération mémoire. Conversion complète, formateur complet et lecture en partie restent à terminer.</p></section>';assert '</body>' in markup and 'id="announcer-actor-name-validation"' not in markup
+t=page.with_suffix('.html.tmp');t.write_text(markup.replace('</body>',section+'</body>'),encoding='utf-8');assert section in t.read_text(encoding='utf-8');t.replace(page)
+shutil.copy2(Path('E:/mapslol3v3/record_announcer_actor_name.py'),r/'tools/record_announcer_actor_name.py')
+print(json.dumps({'audio_tests':582,'native_name_cases_ported':324,'native_allocator_cases_prepared':36,'scope_preserved':receipt['scope']}))

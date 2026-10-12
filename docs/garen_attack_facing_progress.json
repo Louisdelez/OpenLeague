@@ -1,0 +1,225 @@
+{
+  "saved_utc": "2026-10-11T11:20:01.555117+00:00",
+  "scope": "Persistent public Garen physical heading during movement and valid basic/Q attacks",
+  "source_integrated": true,
+  "complete_game": false,
+  "complete_garen_kit": false,
+  "native_attack_facing_producer_qualified": false,
+  "implemented": [
+    "Garen facing is server-owned physical yaw; no target identity, target coordinates or distance is added to the new field.",
+    "Validated yaw reuses the original native FPATAN and quantized matrix arithmetic; finite [-360,0] values are required before mutation.",
+    "Reconstructed producer: actual movement, valid attack start and valid windup update the heading; resolution/cancellation retain it.",
+    "The client applies the heading on first appearance and subsequent snapshots, including after a hit whose windup was not received.",
+    "Known-to-unknown and observed respawn reset the render root to its existing identity default; old packets retain displacement fallback.",
+    "Source visibility filtering remains in snapshot_for. Other champions keep their existing producers; Annie W priority/end/movement are regression tested.",
+    "The opt-in Garen probe records the actual root quaternion/forward independently of the network heading."
+  ],
+  "tests": {
+    "core_full": {
+      "passed": 1407,
+      "ignored": 0,
+      "log": {
+        "path": "E:\\mapslol3v3\\garen_attack_facing_install\\core_full.log",
+        "bytes": 176075,
+        "sha256": "7a5a9c7eb0d6b81c764726571f1445f06266b89f88c009c86a8c84f47ee17acc"
+      }
+    },
+    "client_entity_orientation_": {
+      "passed": 6,
+      "ignored": 0,
+      "log": {
+        "path": "E:\\mapslol3v3\\garen_attack_facing_install\\client_entity_orientation_.log",
+        "bytes": 32341,
+        "sha256": "9c2857d4fa40640a69403c760aac6aac2afa058e47ae82e3204541742026d892"
+      }
+    },
+    "client_attack_animation_tests": {
+      "passed": 15,
+      "ignored": 0,
+      "log": {
+        "path": "E:\\mapslol3v3\\garen_attack_facing_install\\client_attack_animation_tests.log",
+        "bytes": 33032,
+        "sha256": "8adf4660f85bda2876f99a827113d2b9b8c6d5e7a8f30af954ab1710ccab8f14"
+      }
+    },
+    "client_animation_attack_binding_tests": {
+      "passed": 3,
+      "ignored": 0,
+      "log": {
+        "path": "E:\\mapslol3v3\\garen_attack_facing_install\\client_animation_attack_binding_tests.log",
+        "bytes": 31824,
+        "sha256": "efe4221cfc53594a19d5b07f3a730cee0a7da28baee0ae49882573639477cf4e"
+      }
+    },
+    "client_native_effect_clock_animation_delta_tests": {
+      "passed": 2,
+      "ignored": 0,
+      "log": {
+        "path": "E:\\mapslol3v3\\garen_attack_facing_install\\client_native_effect_clock_animation_delta_tests.log",
+        "bytes": 31728,
+        "sha256": "61baec0bea322dba9101adf71b8221dc35e7efab81ca68795df6d18e411f7621"
+      }
+    },
+    "client_session_departure_tests": {
+      "passed": 2,
+      "ignored": 0,
+      "log": {
+        "path": "E:\\mapslol3v3\\garen_attack_facing_install\\client_session_departure_tests.log",
+        "bytes": 31672,
+        "sha256": "5aa9df3a32abe4253349d51028c3d7df56f61b12aee083a472c13c11a78ec324"
+      }
+    },
+    "client_match_results_ui_tests": {
+      "passed": 2,
+      "ignored": 0,
+      "log": {
+        "path": "E:\\mapslol3v3\\garen_attack_facing_install\\client_match_results_ui_tests.log",
+        "bytes": 31669,
+        "sha256": "ebb238e5ea8b51c7c9f25450816a3ab027ccb2c73ff0b65abe8a842ab2940d0c"
+      }
+    },
+    "server_tests": {
+      "passed": 11,
+      "ignored": 0,
+      "log": {
+        "path": "E:\\mapslol3v3\\garen_attack_facing_install\\server_tests.log",
+        "bytes": 4452,
+        "sha256": "01d76a750cc3b9d7c47e907f48b656f7647a96e215b92e40960a5110525ed7ea"
+      }
+    }
+  },
+  "checks": {
+    "path": "E:\\mapslol3v3\\garen_attack_facing_install\\checks.json",
+    "bytes": 5865,
+    "sha256": "9e271e1927ac93c5da93301710408b479b4677f6a4f8552bbcd6d066f169e679"
+  },
+  "installation": {
+    "path": "E:\\mapslol3v3\\garen_attack_facing_install\\installed.json",
+    "bytes": 2234,
+    "sha256": "3d2b04c75829b543e8108424fb463bf9767f0031ddf56b692d3276ea7a499db1"
+  },
+  "sources": {
+    "crates/client/src/animation.rs": "4a704fbf3a2efd7ad0bb8f2ccb8dd0330462f3d49a1ac4c9f9930a7acc23e5ad",
+    "crates/client/src/entity_facing_tests.rs": "c52d9d571d986704b85027eb1628d669b1fd126057b8ed058a322a85afedca88",
+    "crates/client/src/entity_orientation.rs": "d984bd1ff137ac06dcffdf20c57db27aa867ae6cd3da5f46f6869c771a12d696",
+    "crates/client/src/main.rs": "d4178f5db263fd162af2355084dd069f6616e8ee5ba6fa4ce20cfa17e90e7e3d",
+    "crates/core/src/attacks.rs": "ad1b86f8cae8615b16ba43e409e60b6bd688bdd23ecff37c665b019042dd8fd8",
+    "crates/core/src/entity_facing.rs": "f70c0a885077dc07f711013e4b29b51be35357b6265386507dab2adf7844f07c",
+    "crates/core/src/entity_facing_tests.rs": "21311608fc242ca0e6d7fae3687a5b282747c05769678b40ab437adcf28c555a",
+    "crates/core/src/entity_yaw.rs": "4383550150657db6f657a2df0e42d3ecfba92c6a400fb63c99964d9bd05e704d",
+    "crates/core/src/lib.rs": "3e9852927402c466e209f4b01b4044d3853e5b0a9d28a8c3191106780e3bc2c5",
+    "crates/core/src/lifecycle.rs": "3060374464b0a354374a9454f210c58bb83cc329b17ba4b2c1e033de7c164ee1"
+  },
+  "previous_animation_identity_receipt": {
+    "path": "E:\\OpenLeague\\docs\\garen_attack_identity_progress.json",
+    "bytes": 13822,
+    "sha256": "c4edd4ef8bee3284440a7fca6cdf8930e42d2cb89555a76533e08bf05d3641ec"
+  },
+  "normal_runtime": {
+    "receipt": {
+      "path": "E:\\mapslol3v3\\garen_attack_facing_runtime\\run-20261011T111733.719993Z\\receipt.json",
+      "bytes": 38554,
+      "sha256": "e167fe7ae2ad82a60dafd4ba87303eab566b12568c92f7233521c6958afbc331"
+    },
+    "graphical_clients": 1,
+    "ordinary_udp_controllers": 5,
+    "minimum_target_direction_dot": 0.9999986148290847,
+    "turn_from_misaligned_heading_observed": true,
+    "q_and_basic_impacts_and_animation_players_observed": true,
+    "clean_shutdown_observed": true
+  },
+  "visual_observation": {
+    "saved_utc": "2026-10-11T11:19:47.092695+00:00",
+    "runtime_receipt": "E:\\mapslol3v3\\garen_attack_facing_runtime\\run-20261011T111733.719993Z\\receipt.json",
+    "method": "Fresh @oai/sky window selection, foreground captures and normal Alt+F4 close",
+    "window": {
+      "app": "process:E:\\OpenLeague\\target\\debug\\openleague-client.exe",
+      "id": 32376476,
+      "title": "OpenLeague - developpement 4.20"
+    },
+    "captures": {
+      "before_q.jpg": {
+        "path": "E:\\mapslol3v3\\garen_attack_facing_runtime\\run-20261011T111733.719993Z\\before_q.jpg",
+        "bytes": 146320,
+        "sha256": "6ce0ad288b9158d6aac618aaa6f80c6ee9f132b726d75849a78b6d7da6eb710e"
+      },
+      "during_q.jpg": {
+        "path": "E:\\mapslol3v3\\garen_attack_facing_runtime\\run-20261011T111733.719993Z\\during_q.jpg",
+        "bytes": 147735,
+        "sha256": "43e5de6d7f68bc150e2def2a0697f44871b3d6b67a357a5613b11dd742d14882"
+      },
+      "after_attack.jpg": {
+        "path": "E:\\mapslol3v3\\garen_attack_facing_runtime\\run-20261011T111733.719993Z\\after_attack.jpg",
+        "bytes": 146602,
+        "sha256": "2c28c9082968bdfed3e42da3dfbf1ca3e832bd8408bc2ad1793802472778205f"
+      }
+    },
+    "observations": [
+      "The foreground client displayed the restored textured Twisted Treeline map and two textured Garen models at the normal-command meeting point.",
+      "During the gated normal Q sequence, the capture showed one Garen airborne with his sword extended; this transient pose differs from the standing before/after frames.",
+      "Both characters remained rendered after the Q/basic sequence; the nearby target health bar was reduced.",
+      "The owned client was closed through Alt+F4. The harness recorded both client and server exit code zero, and a fresh Sky window inventory contained no OpenLeague client window."
+    ],
+    "client_closed_normally": true,
+    "all_client_windows_absent_after_close": true,
+    "limits": [
+      "Three isolated captures do not establish all animation frames, exact blade contact, original BLND transitions or native timing.",
+      "Actual root quaternion/target alignment and AnimationPlayer clip progression are supported by the separate runtime trace, not inferred solely from these images.",
+      "The close spacing partly overlaps the models in the camera. This is not a qualification of champion collision radii, a complete game, audio or human fidelity acceptance."
+    ]
+  },
+  "executables": {
+    "client": {
+      "path": "E:\\OpenLeague\\target\\debug\\openleague-client.exe",
+      "bytes": 139904512,
+      "sha256": "063bd2d31c2feaac28c221cf152bb52e885969db187a7ddd1a71fff66128af6d"
+    },
+    "server": {
+      "path": "E:\\OpenLeague\\target\\debug\\openleague-server.exe",
+      "bytes": 4889600,
+      "sha256": "e7b9ee49f77e46c434920f21960387966652e72475f0e0bdab1b83ffec3d71fd"
+    }
+  },
+  "reviews": {
+    "facing_source_audit": {
+      "path": "E:\\mapslol3v3\\garen_attack_facing_review\\manifest.json",
+      "bytes": 579,
+      "sha256": "101316495b8dff4c3190693f3961f14e7e4b3deddbe3448c37fb19203559814f"
+    },
+    "facing_candidate": {
+      "path": "E:\\mapslol3v3\\garen_attack_facing_candidate\\manifest.json",
+      "bytes": 5811,
+      "sha256": "ae2e062983438905d1955fad3c8a29b8be9c48f0f1a99f74564ec7327f09c904"
+    },
+    "normal_runner": {
+      "path": "E:\\mapslol3v3\\garen_attack_facing_runtime\\manifest.json",
+      "bytes": 2460,
+      "sha256": "8100ace0a4705bfaeb00f34c93b680ba74b6ee460670f062c38616e17359fb45"
+    },
+    "q_cancel_gate_oracle_candidate_only": {
+      "path": "E:\\mapslol3v3\\garen_q_cancel_oracle\\manifest.json",
+      "bytes": 3862,
+      "sha256": "73ef52ec0e63cacf7c9eafc96d5785d4d9304a5ff69c3ec65fe9fedcbf9c917a"
+    },
+    "w_material_selection_oracle_candidate_only": {
+      "path": "E:\\mapslol3v3\\garen_w_material_oracle\\manifest.json",
+      "bytes": 3478,
+      "sha256": "e64b151c8c1e0ed6b75e0f3a5951b603e45ea2dcff20d5c5ee8eb02edbfc82b6"
+    },
+    "w_material_bind_oracle_no_gpu": {
+      "path": "E:\\mapslol3v3\\garen_w_material_bind_oracle\\manifest.json",
+      "bytes": 2601,
+      "sha256": "9999988e1c9057d804c3b912c527470bc11c3bf4131b03b88c3a7fb175704d5a"
+    }
+  },
+  "limits": [
+    "Only Garen produces persistent facing in this change. Native attack pivot tick, continuous target tracking and turn speed remain unqualified; the policy is explicitly reconstructed.",
+    "The existing identity spawn orientation is not a qualified native spawn direction.",
+    "A whole death/respawn cycle missed while both old and new headings are unknown remains indistinguishable from legacy displacement; tests cover observed respawn and known-to-unknown reset.",
+    "Root quaternion alignment and actual AnimationPlayer progression are not full skinned-pose, sword contact, BLND transition, audio or human fidelity acceptance.",
+    "No damage, cooldown, attack cadence or cancellation policy was changed. The native client cancellation gate alone does not justify rejecting all Move/Stop commands.",
+    "One graphical client and five UDP controllers do not qualify six rendered clients, a complete match or all champions.",
+    "W texture/material/state work and the native cancellation helper remain separate preparation; the six W effects are not completed by these proofs."
+  ],
+  "next_action": "Integrate and qualify the base Garen W sustained material effect using the prepared original DDS, native selection/restore contracts and per-instance state, preserving fog/skinning/other actors. Continue verified Q timing/cancellation and all other open LoL4.20 requirements; qualify six rendered clients through ordinary combat and victory/results."
+}

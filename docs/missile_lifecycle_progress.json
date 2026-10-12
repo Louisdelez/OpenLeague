@@ -1,0 +1,67 @@
+{
+  "complete": false,
+  "source": "crates/core/src/missile_lifecycle.rs",
+  "status": "Reconnect stale-Welcome regression verified v66; visible old-effect teardown and full native fidelity remain open",
+  "test_session": 9203,
+  "test_log": "logs/missile-lifecycle-fixture-tests.log",
+  "scope": [
+    "Preserve appeared/observed/disappeared per accepted authoritative tick",
+    "Reject wrong session and duplicate identities; ignore old/equal ticks",
+    "Drain transitions once; reset clears obsolete events",
+    "Replay actual v53 observed packet sequence"
+  ],
+  "limits": [
+    "Mixed-owner and reconnect timeline scenarios remain to verify.",
+    "Historical pose uses server missile XZ and observed target height, not historical native neck pose.",
+    "Historical camera uses current camera; tick mapping is reconstructed.",
+    "GPU attribution compares reconstructed projection with itself suppressed, not original LoL.",
+    "Disappearance does not imply impact; full Q and game remain incomplete."
+  ],
+  "compact_replay_fixture": "data/4.20/missile_lifecycle_v53_replay.json",
+  "fixture_states": 5,
+  "fixture_connected_to_test": true,
+  "integration_constraint": "Preserve authoritative age and disappearance; do not restart fully elapsed lifecycles as live projectiles.",
+  "test_result": {
+    "exit_code": 0,
+    "failed": 0,
+    "passed": 3
+  },
+  "client_check_session": 87869,
+  "client_check_log": "logs/missile-inbox-client-check.log",
+  "client_check_exit_code": 0,
+  "replay_check_log": "logs/missile-replay-client-check.log",
+  "replay_build_session": 66078,
+  "replay_build_log": "logs/missile-replay-client-build.log",
+  "batched_runtime_evidence": [
+    "docs/projected_batch_v54.json",
+    "docs/projected_startup_v54_analysis.json"
+  ],
+  "normal_dx12_session": 86055,
+  "replay_build_exit_code": 0,
+  "normal_dx12_exit_code": 0,
+  "normal_vulkan_exit_code": 0,
+  "normal_runtime_evidence": [
+    "docs/projected_core_cycle_capture_v55_receivers_dx12.json",
+    "docs/projected_core_cycle_capture_v55_receivers_vulkan.json",
+    "docs/projected_receiver_pixels_v55_dx12.json",
+    "docs/projected_receiver_pixels_v55_vulkan.json",
+    "docs/receiver_cleanup_v55_verified_raw.json"
+  ],
+  "visual_inspection": "Viewed owner2 returned screenshots in DX12 and Vulkan; fire visible between Annie and Garen. Not human fidelity acceptance.",
+  "partial_batch_evidence": [
+    "docs/projected_batch_v58.json",
+    "docs/projected_startup_v58_analysis.json",
+    "docs/missile_batch_v58_gpu.json"
+  ],
+  "timer_only_trials": {
+    "versions": [
+      "v56",
+      "v57"
+    ],
+    "passed": true,
+    "missile_states_coalesced": false
+  },
+  "mixed_owner_progress": "docs/missile_mixed_owner_progress.json",
+  "mixed_owner_evidence": "docs/missile_mixed_v63_verified.json",
+  "reconnect_evidence": "docs/missile_reconnect_v66_verified.json"
+}

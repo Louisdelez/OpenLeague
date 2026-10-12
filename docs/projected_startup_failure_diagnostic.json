@@ -1,0 +1,103 @@
+{
+  "complete": false,
+  "original_failure_resolved": false,
+  "wire_journal": "logs/projected-v50-dx12-wire.json",
+  "wire_sha256": "bf1a5656cdf62775e325a0bcaa2f7d8c1972c3a5ff91029d83fb12dd1b7503ce",
+  "observed_projectiles": [
+    [
+      21,
+      22,
+      967
+    ],
+    [
+      21,
+      22,
+      1087
+    ]
+  ],
+  "observed_projectile_snapshots": 6,
+  "server_rejections": 0,
+  "runtime_receipt": "docs/projected_core_cycle_capture_v50_receivers_dx12.json",
+  "finding": "Instrumented retry observed both authoritative projectiles and completed both visual cycles.",
+  "hypothesis": "Client skips creating new flight if source neck bone unavailable; short-lived missile may disappear before asset readiness.",
+  "limits": [
+    "Hypothesis not reproduced or proven as cause of original v49 failure.",
+    "Harness socket observations do not prove the graphical client consumed the same snapshots.",
+    "v50 pixels not separately analyzed; v49 successful pixel evidence remains separate."
+  ],
+  "client_instrumentation": {
+    "source": "crates/client/src/annie_q_vfx.rs",
+    "enable": "OPENLEAGUE_Q_STARTUP_PROBE",
+    "marker": "ANNIE_STARTUP",
+    "fields": [
+      "session",
+      "tick",
+      "elapsed",
+      "sources root/neck readiness",
+      "missile identities/target presence/existing flights",
+      "flights_created"
+    ],
+    "build_session": null,
+    "build_log": "logs/projected-startup-diagnostic-build.log",
+    "capture": "tools/capture_projected_receivers_v51_dx12.py",
+    "status": "build and v51 diagnostic capture passed"
+  },
+  "analysis_tool": "tools/analyze_projected_startup.py",
+  "analysis_usage": "python tools/analyze_projected_startup.py v51",
+  "analysis_validation": "Python syntax parsed; real client log still pending",
+  "snapshot_replacement_audit": {
+    "source": "crates/client/src/main.rs",
+    "function": "receive",
+    "observed": "Socket drain loop assigns state.snapshot for each newer state; visual consumer runs after drain and only sees final snapshot.",
+    "implication": "Short-lived missile may be present in an intermediate received state but absent from latest visual state.",
+    "causal_status": "Plausible mechanism, not reproduced or proven cause of v49 failure.",
+    "diagnostic_limit": "ANNIE_STARTUP records visual consumer observations, not each accepted packet in receive."
+  },
+  "client_analysis": "docs/projected_startup_v51_analysis.json",
+  "client_findings": {
+    "rows": 243,
+    "flights_created": 2,
+    "observed_missing_neck": 0,
+    "observed_missing_target": 0,
+    "first_missile_client_states": 1,
+    "cause_confirmed": false
+  },
+  "receive_instrumentation": {
+    "source": "crates/client/src/main.rs",
+    "marker": "ANNIE_RECEIVE",
+    "scope": "Every session-matched newer accepted snapshot before visual mutation/replacement",
+    "build_session": null,
+    "build_log": "logs/projected-receive-diagnostic-build.log",
+    "capture": "tools/capture_projected_receivers_v52_dx12.py",
+    "status": "build and v52 capture passed"
+  },
+  "receive_analysis": "docs/projected_startup_v52_analysis.json",
+  "observed_same_frame_replacement": {
+    "elapsed": 26.0746839,
+    "accepted_with_missile_tick": 1351,
+    "accepted_without_missile_tick": 1357,
+    "visual_tick": 1357,
+    "scope": "Confirmed intermediate state containing missile replaced before visual consumer; two flights still created in this run.",
+    "original_failure_cause_proven": false
+  },
+  "controlled_reproduction": {
+    "receipt": "docs/projected_batch_v53.json",
+    "analysis": "docs/projected_startup_v53_analysis.json",
+    "datagrams_batched": 57,
+    "accepted_missile_ticks": [
+      826,
+      830,
+      833
+    ],
+    "visual_missile_ticks": [],
+    "created_effects": 0,
+    "finding": "Complete visual lifecycle loss reproduced by real packet batching; accepted snapshots containing missile are replaced before visual consumption.",
+    "original_v49_cause_proven": false,
+    "fixed": false
+  },
+  "reproduced_batch_fix": {
+    "status": "verified v54 full-batch lifecycle and v55 normal DX12/Vulkan",
+    "evidence": "docs/missile_lifecycle_progress.json",
+    "original_v49_cause": "still unproven"
+  }
+}

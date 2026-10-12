@@ -1,0 +1,62 @@
+{
+  "saved_utc": "2026-10-10T13:28:41.391411+00:00",
+  "passed": true,
+  "complete": false,
+  "scope": {
+    "domains": 24,
+    "tasks": 114,
+    "additional_requirements": 37
+  },
+  "native_source_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_logger_lifetimes": 16,
+  "native_full_formatter_buffers": 84,
+  "additional_real_windows_runtime_workers": 8,
+  "total_shared_runtime_workers_in_suite": 17,
+  "isolated_tests_passed": 156,
+  "core_audio_tests_passed": 721,
+  "core_tests_filtered_not_run": 480,
+  "core_test_executable": "E:\\OpenLeague\\target\\debug\\deps\\openleague_core-49a622d61db58080.exe",
+  "core_test_executable_sha256": "be3ee61ec4a3d2b92f5e1c9e59f314f6403ed3bb5609e9ddf867d86711d38a31",
+  "isolated_test_executable_sha256": "ca2601398fc8943727a248afab3c27b89871d528c732421d0629dd9c406a5eb4",
+  "source_hashes": {
+    "crates/core/src/audio_replay_logger.rs": "ca641f6d07c19e6630fa3bdbcef6cf194c82c50c0a5dd7a2813576f2f25d405e",
+    "crates/core/src/audio_replay_logger_tests.rs": "084e5b4d7119c4be8871013acdd8129867ffe97ef170c75c67d363962829602b",
+    "crates/core/src/audio_replay_windows_transport.rs": "be31f1a5318f8c777d2e9a14a70e4e8943b4d6240b044a0c74965c1759ab5783",
+    "crates/core/src/audio_replay_windows_transport_tests.rs": "39cb849cb558d8c0cfe8b157843bd2f64f7d90de41f3c7c11439ae8a86fd055d",
+    "crates/core/src/audio_announcer_owner_metadata.rs": "452f7bb3b33b8ffddb29205cf773e5a1d2cfc7b89dae464855a1d6f19a746d33",
+    "crates/core/src/audio_crt_windows_engine_worker.rs": "8494b76eeb6be93347393f4f979ae08cfc4e15b44f2bc814ceb7b7fc956e1998",
+    "crates/core/src/audio_replay_transport_startup.rs": "a109497803441d8120a41efb0c37494b9b866d00759286ce70272101dbf0ff1a",
+    "crates/core/src/lib.rs": "eb88577fc12e4647ee6856560998250b5206b3ae646eed8dcf4d01084c5ccb12",
+    "tools/probe_replay_logger_lifetime.py": "a059ce0b377f39b14015a8409255f0d7e3df415d7f2088d6fd8de9f9278d305e",
+    "tools/probe_replay_logger_format.py": "00d3c83bde161e530638f2b9f9dd4312b10a99a76dccf05563f4aaad34566eb2",
+    "tools/check_replay_logger_probe.py": "6c261f35c5cdfe951eb70ba1ceda9ae80cfe315f42660206f01fd63fcabd58b2",
+    "tools/install_replay_logger.py": "465b18f6ed4f943bf5d49343fa6fcd4c9a5f4a40a336c4223a56a2648652a46e",
+    "tools/install_replay_native_logger_runtime.py": "227814d3224d4a7e555aa76d90ef087d6ef2689ffb1387b7f1aaf8d7f2cabbb6",
+    "tools/replay-logger-tests.rs": "9d5126cc048ebd03e760c3d3b533c4d43d7520cc71cbfd102b47012b62c23844",
+    "tools/record_replay_native_logger.py": "c421efcc9ed3224e105ee556efee8738e745a4c7e10c37132d9826c236d1305d"
+  },
+  "contract_hashes": {
+    "replay_logger_lifetime_probe.json": "e1756faed235a7345d9a08fd887a2cf27e678c55db75225746e97d29fe1bd79b",
+    "replay_logger_format_probe.json": "34124e2734469fb5066f7e4c7f36ea8d818f9093d071a9023035ce07daaae940"
+  },
+  "log_hashes": {
+    "logs\\core-replay-native-logger-tests.log": "3961cc5f2d23abc41fc38f004fa0a65f0d267d578fa22f4224a68b54be593f2e",
+    "logs\\replay-logger-tests.log": "f03bb90b6062535964ace14417eb1bb37c19cb33010d0bf2b5c2fe0e980bc947",
+    "logs\\replay-logger-compile.log": "fc3cd7c508baf51ff51e58999e9d33314d7275e6de3fe84f610a617a87e6ea03",
+    "logs\\replay-logger-format-probe.log": "3670e0d18a4af3cc663f5bb4c52b1c5980144f92955827145ac754f84e6c7ecb"
+  },
+  "behavior": [
+    "Native lazy logger initialization preserves both lifecycle flags and padding; registration does not itself set the registered byte. Static36-byte storage owns a physical critical section and a cloned12-byte callback. Replacement publishes the clone before freeing the old and temporary objects. Shutdown preserves the dangling callback label in static bytes, clears the global pointer and sets the reinitialization flag. Sixteen native lifetimes match exact allocations, frees, logger words, live callback words, flags and registration sequences.",
+    "Original8F92B0,993860 and C9B551 execute in the PE32 probe for84 cases. Full2560-byte buffers match raw narrow input bytes, embedded NUL, null versus empty source string, signed line number, short/boundary/oversize messages and fill0/A5. Timestamp format is %04d-%02d-%02dT%02d-%02d-%02d with24-byte storage. Besides the terminating NUL, the original CRT always zeroes buffer byte2559; bytes between terminators remain unchanged.",
+    "Virtual dispatch verifies slot8 is5CCE30 and reads the bound owner and member. Byte-verified573FA0 is a no-op whose return is ignored. Other members go to an explicit dispatcher boundary; tests verify owner/buffer arguments, ignored return bytes and explicit errors, without inventing native member semantics.",
+    "Runtime::new_with_native_logger adopts caller-supplied initial global banks and creates the logger only when source transport code requests it. Six fresh CRT roots initialize transport without a logger, then create it during final release, use actual GetLocalTime and physical critical sections, and retire its callback/lock on explicit shutdown. A further two real workers cover supplied WSAStartup failure then real Windows success; the same logger survives retry and is freed after final release.",
+    "External-logger mode remains supported and its prior tests still pass. The runtime records native shutdown registration in its owner, executes shutdown through Rust dispatch instead of casting a PE32 callback to a host function pointer, and rejects unsupported nondefault members explicitly."
+  ],
+  "limits": [
+    "The shared runtime has not yet been attached to the normal graphical client. The client executable was not rebuilt or graphically rechecked in this milestone. Production CRT/global-image provisioning, stream configuration, manager callbacks and actual replay frames remain unfinished.",
+    "The native formatting probe supplies one valid SYSTEMTIME profile; Windows integration uses the actual host local clock. Null message pointers, invalid dates, allocation failures, native exception unwinding and custom allocators are not newly qualified. Callback clone/delete reuse previously ported methods. Nondefault output members require an actual configured dispatcher.",
+    "Eight new real runtime workers run in addition to nine prior shared-runtime workers; this does not qualify overlapping active workers or pending-timeout shutdown. Native probe OS critical sections and allocator routing use documented supplied boundaries; Windows integration uses physical locks and the existing real CRT worker pipeline.",
+    "721 selected core tests and156 isolated tests pass;480 core tests were filtered. The suites overlap and their counts must not be summed as distinct coverage. No complete map, champion, replay feature, game domain or whole-game acceptance is claimed."
+  ],
+  "next_action": "Wire the shared Windows replay Runtime, now with new_with_native_logger ownership, into the normal service using a production CRT-root/global-image provider. Native logger901A70/901B80/8F9000/901C00 ownership and8F92B0 formatting/default5CCE30→573FA0 dispatch are now ported and tested:16 original lifetimes,84 original CRT full-buffer comparisons,8 additional real Windows workers with lazy logging and actual GetLocalTime. The native default member does nothing; do not add invented output. Nondefault configured callbacks remain explicit dispatcher dependencies. Normal client integration still needs actual initial global bytes/CRT ownership; native fixture JSON remains qualification data only. Port configuration8FC230/8FC310/8FC610/8FC930/8FCA30 against60 prepared profiles, including source callback installation and IPv4/IPv6/DNS behavior. Preserve initializer byte1 independently of status and status2 after final reference release. Qualify pending-timeout/active overlap, OOM/custom allocator/exception paths. Then complete enabled8F68D0 stream/key setup,5BD470 copy assignment, manager callback bundle/metadata727DE0,728E20/728FD0/728EE0 and actual replay frame delivery. Continue graceful graphical AppExit, configuration overlays/cache, actor listeners, maps/champions/audio and all24domains114tasks37requirements."
+}

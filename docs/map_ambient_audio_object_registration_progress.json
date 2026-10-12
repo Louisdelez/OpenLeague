@@ -1,0 +1,45 @@
+{
+  "updated_utc": "2026-10-03T23:45:47.607430+00:00",
+  "native_factory_cases": 40,
+  "native_registration_worker_cases": 120,
+  "core_tests": 202,
+  "new_core_tests": 3,
+  "files": {
+    "tools/qualify_native_audio_object_registration.py": "d4c43f7fe9cbc92d6205def89587d0253b0e899913fa0d7591f9e6d4ff3e166c",
+    "data/4.20/audio_object_registration_contract.json": "da8a778af779d7cec74b3760e95e9c0e6f12cbd7fc52f88b06692bd162915814",
+    "crates/core/src/audio_object_registration.rs": "bbcdd76bdd7a85078bab419ac79a8aa93f388a43406c25e77220be8abc1fa025",
+    "logs/native-audio-object-registration-core-tests.log": "2c55ad99e66e4d18d5ec1e4c7b80b6db8a471dc20dfd73a5b717bbc14e6778be"
+  },
+  "native_executable_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "native_regions": {
+    "0x7055d0": "009c47bd16e01ea3620d6cb3583e7dff6f9664c13d2b14cb93fef27c1d675978",
+    "0x707080": "d714e7ac6168e8ba7ded9aeb5ed3a2c20c145cfad5bdcdab224e501ab9894ceb",
+    "0x7072f0": "f7e0208f5e988ae39c7a45dfddbd12921d02f9c3deb5695d4c534c8ab0ccdb0f",
+    "0xaeaee0": "6c6b10c3a59e68b2ab0424f762906364d08e2b91f01c73a9d6a04e9191faf73e",
+    "0xb073fe": "df519c80ad5f9fe6665ad8df12e210138708e3371343bed5b99d9bf4b7d48d62",
+    "0xb09bf0": "cd7f56130887007858bc89df12afa8e5396dd958042a877b4d48c4939f4fe874",
+    "0xaf5ce0": "dc1b80d956496a6cee403ad890a19e071178c649b792882ee2f6c1ec2e6703be",
+    "0xaf6270": "cb0205096faf02835b880a375566a00e40ca31dcc0817324a85170e2dc9f1e23",
+    "0xb09d10": "1687b3cf6b5cb6ce85d073e964ef4b5a0618b9f418060137d9203a273b9e6cdf"
+  },
+  "native_behavior": "7055D0/707080 counter1224D20 captures ID then advances even allocation failure/wrap. Constructor registers(object,mask1) only available;0/FFFFFFFF rejected byAEAEE0. Worker11 B09BF0 retains existing positions/mode and updates mask/dirty; newAF5CE0 has empty positions,mode low3 zero,mask1,dirtyC0000001; allocator upper5 mode bits retained.",
+  "bridge": "Rust Factory -> Registry -> native point-only producer -> RegisteredSources -> native distance tested.",
+  "native_stubs": [
+    "C9F39B wrapper allocator returns fixed buffer/zero;64D040 wrapper map insertion captures slot;AEA6B0 availability;5BFEE0 packet size56;B05ED0 packet capture/return.",
+    "ADA670 object/node allocators explicit fixed buffers/failures;AF5D80 destructor captured;ADA3E0 free captured. Native pool hash insertion B09D10, object ctorAF5CE0, mask setterAF6270 and worker11 call execute."
+  ],
+  "client_integration_enabled": false,
+  "ambient_playback_enabled": false,
+  "complete": false,
+  "limits": [
+    "SEH fs:[0] storage mapped in emulator; native exception handling and custom allocator paths not exercised.",
+    "Wrapper map container64D040 not executed; registered object hash collision test covered in prior storage contract but new registration inserts empty bucket.",
+    "Constructor leaves upper5 mode bits from allocator bytes unchanged; they are not initialized native defaults.",
+    "Wrapper orientation initial words come from direction global2D773B4; not a source position.",
+    "Unregister/destruction, full queue scheduling, all extended object fields and audible playback not qualified.",
+    "Core Rust registry uses BTreeMap for lookup; native hash layout is verified separately. Allocation callback supplies native allocation outcome/mode seed; actual Rust allocator failure behavior and native heap ownership not qualified.",
+    "Registry represents source fields only, not every extended original100-byte object field.",
+    "Factory orientation supplied explicitly; no initial counter/default direction global inferred.",
+    "No current client runtime bridge, new standalone binary or audible evidence. Prior client13 tests remain historical."
+  ]
+}

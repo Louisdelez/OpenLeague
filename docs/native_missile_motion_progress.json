@@ -1,0 +1,37 @@
+{
+  "updated_utc": "2026-10-07T04:55:10.948836+00:00",
+  "complete": false,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "motion_cases": 72,
+  "actual_cpu_rsqrt_operations": 216,
+  "native_instruction_addresses": 439,
+  "focused_core_tests_passed": 1,
+  "filtered_core_tests": 595,
+  "full_core_suite_rerun": false,
+  "artifacts_sha256": {
+    "data/4.20/missile_motion_contract.json": "a38467f0f331a9d613e860dd4086838886da67fb7262e8a5570e4893c6c42575",
+    "tools/probe_native_missile_motion.py": "eede48a181e29d79f8742275b37c8451009a8764442fc97f0854753e1bc088a8",
+    "crates/core/src/native_missile_motion.rs": "4b1a3e9db4021522f11c1822d740d1145bdf05026cb114ccdfc52862f0701017",
+    "crates/core/src/lib.rs": "639ac5567f9547fcc04186c5ab6525d0e3d48e6c08d752ce080dedc7d7ba8a6d",
+    "logs/native-missile-motion-tests.log": "8b20ae8434ea6e627d39ffba54ac2dabd7ae18e0a73d57b666c51518a2193bbf"
+  },
+  "findings": [
+    "Whole75F130 follows valid target position or stored fallback, adds height100, normalizes direction, scales horizontal speed1400 and advances moving position544 by frame delta.",
+    "72original executions and Rust outputs match direction/moving position/target raw words; zero acceleration/gravity/travel time, unobstructed terrain.",
+    "Physical CPU supplies216RSQRTSS operands; native66D6E0/75EF50/75EC90/75F840/5F76F0 execute.",
+    "First Rust comparison detected stale emulator code-cache for target validity; changed provider to read data memory, reran all72cases successfully."
+  ],
+  "adapters": [
+    "Clock virtuals supply explicit now/dt; native5F76F0 wrapper executes.",
+    "Target90 supplies explicit valid flag; target1CC supplies radius.",
+    "Terrain6A2560 supplies unobstructed result; geometry behavior is not qualified.",
+    "Finite classificationC99E4E returns non-NaN for supplied finite coordinates."
+  ],
+  "limits": [
+    "Clock and target validity/radius explicitly supplied; terrain query returns unobstructed and finite classification is adapted.",
+    "Target motion across frames, collision geometry, positive travel time/acceleration, end crossing/lifecycle and current-position copy remain unqualified.",
+    "No client rebuild, live binding, GPU/audio or full-suite qualification.",
+    "One focused Cargo test;595filtered.24domains114tasks retained; zero domains closed."
+  ],
+  "next_action": "Qualifier les séquences de déplacement avec cible mobile et franchissement de fin de course, puis la copie de position vers le propriétaire10B0D20 et le rendu normal ; poursuivre scale/alpha/récepteurs terrain et les24domaines."
+}

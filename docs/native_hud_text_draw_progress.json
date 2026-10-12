@@ -1,0 +1,51 @@
+{
+  "updated_utc": "2026-10-06T07:16:39.509170+00:00",
+  "complete": false,
+  "passed": true,
+  "client_source_tests_last_passed": 322,
+  "font_raster_tests_last_passed": 28,
+  "native_draw_wrapper_cases": 1350,
+  "native_packet_pixel_cases": 270,
+  "source_bindings_integrated_in_test": 154,
+  "source_alignments_per_binding": 3,
+  "native_pixel_and_draw_wrapper_ported": true,
+  "source_geometry_hud_bridge_ported": true,
+  "ordinary_hud_widgets_drawn": false,
+  "ordinary_application_rebuilt": false,
+  "last_visually_observed_application_client_tests": 319,
+  "last_visually_observed_application_font_tests": 20,
+  "artifacts": [
+    "data/4.20/native_hud_text_draw_contract.json",
+    "data/4.20/native_hud_text_pixels_contract.json",
+    "tools/qualify_native_hud_text_draw.py",
+    "tools/qualify_native_hud_text_pixels.py",
+    "crates/font-raster/src/native_hud_text_draw.rs",
+    "crates/font-raster/src/lib.rs",
+    "crates/client/src/native_font_metrics.rs",
+    "logs/native-hud-text-draw-client-tests.log",
+    "logs/native-hud-text-draw-raster-tests.log",
+    "logs/native-hud-text-draw-client-tests-initial-failure.log"
+  ],
+  "hashes": {
+    "data/4.20/native_hud_text_draw_contract.json": "84dcf2cfba7b4a5fd340553f65e0bf906a81fef3606798f2b9143cb6c08aa68c",
+    "data/4.20/native_hud_text_pixels_contract.json": "bd8f175cfb5ce6317f95a3b6fdf3f5fc59748ab5208efef183362ab8ab5226ae",
+    "tools/qualify_native_hud_text_draw.py": "fc69c0d1ba417f3122c146b34c1cd3413afa200f3dee779092bb785a30ef5da7",
+    "tools/qualify_native_hud_text_pixels.py": "8531439218ceee65f6942791276db5d423dc908747d69ca1a3f70036c429a36a",
+    "crates/font-raster/src/native_hud_text_draw.rs": "3c98f1cf9b341bc42c3a5fc085f23f508aff1907c9e36a64ff85826368b46292",
+    "crates/font-raster/src/lib.rs": "1c6520ba0d84ef22283a8e5d311d5f89fc8da6c4ee4b0f38152d70a601e0afef",
+    "crates/client/src/native_font_metrics.rs": "2cfae6e7385946e89805d8523088fe592b744472ef20112558cdf5a50e198ab8",
+    "logs/native-hud-text-draw-client-tests.log": "4fb69f4a289f6fbba1a1ea48decf3359ffdef67728476f126f77addc74efb9d3",
+    "logs/native-hud-text-draw-raster-tests.log": "b7af23a101c6bd60855aeb8cab4f9f1a15c9bb011c54e0e6690297d2f8bb47d3",
+    "logs/native-hud-text-draw-client-tests-initial-failure.log": "0ba618aaae4678d49d61bee6ac10746aa197e44d509f0bde37ca192e6d937140"
+  },
+  "limits": [
+    "Native draw wrapper1350 and packet270 executions use prepared records/owners. String conversion, device virtual draw, allocations and font flush callback are adapted boundaries.",
+    "Client bridge test connects154source fonts at3alignments, compares original draw anchor fixtures with source font metrics and geometry colors. FirstNUL termination checked. This does not prove original UTF8/localization or ordinary HUD widgets.",
+    "Owner glyph draw scale remains an explicit caller input. Packet owner+1C selected scale is qualified; font device owner-scale consumer and final framebuffer projection remain open.",
+    "Finite selected inputs only; Rust rejects nonfinite/out-of-range coordinates and nonpositive scales explicitly.",
+    "Initial integration test fixture lookup did not cover flags16; fixed comparison by actual native shadow mask4. Initial failure log preserved; corrected full322suite passes.",
+    "Current source changes not yet rebuilt/visually observed in ordinary main application. Previous offscreen Vulkan/DX12 receipts cover preceding quad bridge, not this new HUD wrapper.",
+    "All24domains and all122champion complete kits remain open."
+  ],
+  "next_action": "Qualifier la préparation des Text HUD (9A81B0), le fournisseur de taille d’interface et la consommation de owner+1C par les polices ; raccorder GameTime/GoldStat/LevelStat aux données de partie et aux matériaux GPU. Reconstruire et vérifier le client réel Vulkan/DX12, puis poursuivre tous les domaines."
+}

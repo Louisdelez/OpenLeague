@@ -1,0 +1,142 @@
+{
+  "updated_utc": "2026-10-05T07:58:13.840184+00:00",
+  "complete": false,
+  "client_tests_passed": 171,
+  "client_build_passed": true,
+  "quad_parameters_ported": true,
+  "native_quad_cases": 144,
+  "native_quad_addresses": 292,
+  "texture_constructor_cases": 12,
+  "native_assets_recovered": [
+    {
+      "native_path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shaders\\TEXTURE\\wall_of_grass_mask.dds",
+      "native_sha256": "4783a165e003f73a1eb38cf8e07740d3aa6f3c830a5cee54f33e2fc49a885a64",
+      "dds_asset": "assets\\maps\\grass_native\\wall_of_grass_mask.dds",
+      "png_asset": "assets\\maps\\grass_native\\wall_of_grass_mask.png",
+      "png_sha256": "f728e3974b91177a12499134cf8785482878d363fb3401c835a4a5f6cb22e7fc",
+      "decoded_rgba_sha256": "c28b7637f8aa19086e26d2034eca6e6fea9d0271d8db367b75eaacfa46b1cf26",
+      "size": [
+        256,
+        256
+      ],
+      "extrema": [
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          0,
+          255
+        ]
+      ],
+      "distinct_rgba": 253,
+      "decoded_pixels_equal": true
+    },
+    {
+      "native_path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shaders\\TEXTURE\\White.dds",
+      "native_sha256": "796ad3af8bd8ae9415069b0e546fde676f3411c94caf141f546537c03d937fa0",
+      "dds_asset": "assets\\maps\\grass_native\\White.dds",
+      "png_asset": "assets\\maps\\grass_native\\White.png",
+      "png_sha256": "f7b9da3b59df7c5a2d0ea2f7ce260c20fef37a0f550d150075a7f3c08b50a7de",
+      "decoded_rgba_sha256": "f47a8ec3e9aff2318d896942282ad4fe37d6391c82914f54a5da8a37de1300c6",
+      "size": [
+        32,
+        32
+      ],
+      "extrema": [
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ],
+        [
+          255,
+          255
+        ]
+      ],
+      "distinct_rgba": 1,
+      "decoded_pixels_equal": true
+    },
+    {
+      "native_path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shaders\\TEXTURE\\Blank.dds",
+      "native_sha256": "2c09fe54264db6d256a5e1dfe2fc9d8ada1bbd5087eb2c805e7b29a8270dfd62",
+      "dds_asset": "assets\\maps\\grass_native\\Blank.dds",
+      "png_asset": "assets\\maps\\grass_native\\Blank.png",
+      "png_sha256": "6fa466e21df6bf014ed03517399a711777f572b1f0be6a561b947790cda9f634",
+      "decoded_rgba_sha256": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
+      "size": [
+        4,
+        4
+      ],
+      "extrema": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "distinct_rgba": 1,
+      "decoded_pixels_equal": true
+    }
+  ],
+  "live_grass_mask_integrated": false,
+  "findings": [
+    "Rust OffsetCache and quad preparation reproduce actual986760/986AD0destinationxywh, sourceUVorigin/span and cached/API-specific pixel offsets in144nativeexecutions.",
+    "Native driver quad receives sourcecontext or originaldefault atslot0and uses indexed rectangle draw; sampler address state set/restored. Device/enum interpretation remains open.",
+    "Original constructor loads wall_of_grass_mask.ddsand stores it atcontext+20;12prefix cases cover missingmanager/nullcontext/independentloaderreturns. Native default initializer referencesWhite.dds.",
+    "Recovered grass brush is256x256RGBwhite/alpha0..255with253distinctRGBAvalues; White is32x32opaque white, Blank is4x4transparent black. DDSbytes and decodedPNGpixels verified unchanged."
+  ],
+  "limits": [
+    "Compiled projection/rectangle/quad consumers and recoveredtextures are not yet connected to actual normal-camera/actor-gate GPUgrassproducer.",
+    "Native sourcecontext path resolution, loaderoptions, compressed texture filtering, native buffer/vertexshader and target/clear driverformat remain open.",
+    "Stencil/fullpass ordering and zero/invalid inputs outside fixtures remain unqualified.",
+    "No new runtime capture or GPUmask pixels for currentexecutable; earlier screenshots retain only their recorded executable hashes.",
+    "All24domains and six-client victory/results remainunfinished."
+  ],
+  "next_actions": [
+    "Qualify native quad vertexshader/buffers, targettype2format and driver clear/color/sampler interpretation, then build and verify GPUmask using recoveredbrush/default.",
+    "Resolve realactorAABB/eligibility and camera/viewportproducers, wire verified mask into nativegrasspass and inspect normalMap10runtime.",
+    "Continue fullrendering/vision, six-client victory/results and every remaining full-plan requirement."
+  ],
+  "files_sha256": {
+    "crates/client/src/grass_quad.rs": "d435cba324f6953739e20fddc5e7f10efa3cf4219bc4373aa8d76ac9251dab2e",
+    "crates/client/src/main.rs": "8293e454f6999f86f8fc1303c75bd13f2b855fb5eadffef615e41eba82b46624",
+    "data/4.20/grass_quad_contract.json": "d494fba9582a3cddb9dbe882cae4a075f5adcf6cae38f9a5a77bb6c81ffc4c57",
+    "data/4.20/grass_texture_sources_contract.json": "43fa33fc2c0a3bb5e8b353ec302ddf417d6e667eba608c7f481773599c713b11",
+    "logs/grass-quad-tests.log": "025516c5acc5476c3e0c0daab6aef6597c4ddb8669743902b7373cd20f033942",
+    "logs/grass-quad-build.log": "433e78ac29c7f041bd3ecd4a329aeb253f9fee270d85cad61201f47e9ae43c9c",
+    "target/debug/openleague-client.exe": "4bc48797f0aab2292beab6b4ef9d57818de0e564aa27bb06659fa2bc3e943fae",
+    "assets\\maps\\grass_native\\wall_of_grass_mask.dds": "4783a165e003f73a1eb38cf8e07740d3aa6f3c830a5cee54f33e2fc49a885a64",
+    "assets\\maps\\grass_native\\wall_of_grass_mask.png": "f728e3974b91177a12499134cf8785482878d363fb3401c835a4a5f6cb22e7fc",
+    "assets\\maps\\grass_native\\White.dds": "796ad3af8bd8ae9415069b0e546fde676f3411c94caf141f546537c03d937fa0",
+    "assets\\maps\\grass_native\\White.png": "f7b9da3b59df7c5a2d0ea2f7ce260c20fef37a0f550d150075a7f3c08b50a7de",
+    "assets\\maps\\grass_native\\Blank.dds": "2c09fe54264db6d256a5e1dfe2fc9d8ada1bbd5087eb2c805e7b29a8270dfd62",
+    "assets\\maps\\grass_native\\Blank.png": "6fa466e21df6bf014ed03517399a711777f572b1f0be6a561b947790cda9f634"
+  }
+}

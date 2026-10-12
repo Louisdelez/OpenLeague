@@ -1,0 +1,60 @@
+{
+  "passed": true,
+  "case_count": 3,
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "cases": [
+    {
+      "priority": 25.0,
+      "mode": 0,
+      "allocations": [
+        424
+      ],
+      "freed": [
+        1073815552,
+        1073831936
+      ],
+      "node_refs": 7,
+      "priority_count": 0,
+      "state_counters": "0000000000000000"
+    },
+    {
+      "priority": 50.0,
+      "mode": 0,
+      "allocations": [
+        424
+      ],
+      "freed": [
+        1073815552,
+        1073831936
+      ],
+      "node_refs": 7,
+      "priority_count": 0,
+      "state_counters": "0000000000000000"
+    },
+    {
+      "priority": 75.0,
+      "mode": 0,
+      "allocations": [
+        424
+      ],
+      "freed": [
+        1073815552,
+        1073831936
+      ],
+      "node_refs": 7,
+      "priority_count": 0,
+      "state_counters": "0000000000000000"
+    }
+  ],
+  "findings": [
+    "Actual failed initialization unwinds through voice virtual methods and frees the voice exactly once.",
+    "Priority registration is removed; empty node state is freed; node references return to 7 and owner references to 2."
+  ],
+  "adapters": [
+    "Allocator maps424bytevoice, free captured; lock importsret4; preallocated global priority array with8slots.",
+    "Mode0 and playingID0; stopAF3DCD before diagnostic logging."
+  ],
+  "limits": [
+    "Positive playingID, successful initialization, reader final return and physical sound remain open."
+  ]
+}

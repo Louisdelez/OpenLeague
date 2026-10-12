@@ -1,0 +1,70 @@
+{
+  "updated_utc": "2026-10-04T11:14:00.978473+00:00",
+  "complete": false,
+  "core_tests_passed": 408,
+  "client_tests_passed": 32,
+  "unit_checks": 9,
+  "diagnostic_network_checks": 13,
+  "official_numeric_crosschecks": 29,
+  "sources": "docs/annie_r_native_contract.json",
+  "community_sources": "docs/tibbers_native_sources.json",
+  "network": "docs/tibbers_network_validation.json",
+  "visual": "docs/tibbers_render_capture.json",
+  "executables": [
+    {
+      "path": "target/debug/openleague-server.exe",
+      "bytes": 4606976,
+      "sha256": "c197883de9dcee2b4124610dd1e3956117664a78d9b38b32a71574292983705f"
+    },
+    {
+      "path": "target/debug/openleague-client.exe",
+      "bytes": 118176256,
+      "sha256": "44ce94e5512044acf84da5737b82843181fc1ba373c73df46a1fedaf72272c9c"
+    },
+    {
+      "path": "launcher/src-tauri/target/debug/openleague-launcher.exe",
+      "bytes": 12411904,
+      "sha256": "ac22a8346c0b2af574bdee16311acc510e657c73ca5f85584223f0049c4f57de"
+    }
+  ],
+  "files_sha256": {
+    "crates/core/src/annie_r.rs": "7a3999a5262e201a7d74a678d2d3503d57d382818526cff3fef6ef3162f5f010",
+    "crates/core/src/annie_r_tests.rs": "d84f56d4103370f72a36e550a01bb59d7a8df4b1aa14137c5862ff031ef25c09",
+    "crates/core/src/annie.rs": "efaf4542d853d2b0810e14449727b80b36186222a57ff02658a064efb2278ab3",
+    "crates/core/src/annie_w.rs": "70f96279ead70deebf19b0b2697783948ed460e838ec6f88623c3d28c55090f5",
+    "crates/core/src/world.rs": "6c5d20b803491d01beb4a039fe356d38d9d88007f63276929c3a15aeb7cc24db",
+    "crates/core/src/damage.rs": "a150a5ae31b0de8dfe8924a0af76390756b1ecdc39558af3168e15c6713cb96f",
+    "crates/core/src/spells.rs": "4e4c82b38b990e68b99aac8f74c1b931a89f0b8ee01cb01d3f3cf5f96e3aa7c7",
+    "crates/core/src/lib.rs": "86fbbe5677226145444cd24bd77b94406a00b7cd2f8b7d340a2a2c04c4670715",
+    "crates/core/src/combat.rs": "fb8b35a6adfa2d91557c2881e06bfd9d3391b621ada4219b6cc0d753b8b64443",
+    "crates/core/src/attacks.rs": "c215a0df2e19ecd49b42c19ab3a4b801de240c84f889a453d15618d5ff4eae29",
+    "crates/core/src/vision.rs": "7e680ca79539d032f5f712064327d032c1c6e967eea3c6d22980e20265d468b8",
+    "crates/client/src/main.rs": "7cc451550205b9047a77e1fdf02caa80d679183a457b387e06cfc2bfa637ef49",
+    "crates/client/src/animation.rs": "8a26bf709b7856fedeb3e309bb2b343e4cfb8abadb62552225c51d07cfc94bd6",
+    "crates/client/src/spell_input.rs": "7038aa9408eac6b12fd7153c1564c812b072fe279272b1b5137f6daf63d26200",
+    "data/4.20/annie_r_rules.json": "4c555071162ee12fb958ce0d41e5093c028ad3e5b98c9d6b17a0ee2446f730a9",
+    "data/4.20/tibbers_definition.json": "550cf993fa80493ba71e113ba9238dc13f9bf67ea04a16671b6b10f2de62ad03",
+    "data/4.20/world_animation_manifest.json": "a76f7d781ff347b1b0d79a327b7749a3548ea5dab16559c70f6f91a9768cf4d4",
+    "data/4.20/npc_selection_profiles.json": "a1896ae72a379ce47bdcf62b04a08b195b0995e8b523706c5c31ef521228ffa0",
+    "docs/annie_r_native_contract.json": "477f9d4bc0a4746b78efa8bae53ea949c3f6f9a71e4e1a533e9b48b1a9f23023",
+    "docs/tibbers_native_sources.json": "f397b90bd718885c7616d75be90f191e3412fa14fa5057ef604f8f33f54ac2e1",
+    "docs/tibbers_network_validation.json": "983fd2e695e488699f92a6548270eb973bb91b4d96334a623edd4b3cdbd958e9",
+    "docs/tibbers_render_capture.json": "e192a7b9f87d5e25a9c945eb9e2a6ebe365e60b7701d3ef0bca3cb3230a62acf",
+    "logs/annie-r-tests.log": "6eea52f6046bbd2b704548a3ea8970ed389146a7110aaa436138049e5849dbd6",
+    "logs/annie-r-build.log": "9e5f1bd991defabec5245ba005b984c9c57824e64775693b2bd20ebf3c3f030a",
+    "crates/server/examples/tibbers_fixture.rs": "297ccc44a44a5c6ab36237c11f2959d1fd87e42f34fd40314a8b6a3124a42c8e"
+  },
+  "limits": [
+    "Native R damage175/300/425+0.8AP,mana100,CD120/100/80,range600,radius250.3,petHP1200/2100/3000,AD80/105/130,defenses30/50/70,lifetime45 and aura35+0.2AP recovered;29Riot4.20.1 numeric comparisons passed.",
+    "Community-scoped8tick cast, body-bound circle contact,350aura radius/1second pulses delayed one second, nearest enemy within100cursor,125pet acquisition,8tickrepath,200return/2000teleport,one pet/owner and dead-owner survival until45 implemented. Original Riot server sequencing/AI/geometry/death policy unqualified.",
+    "Native pet attack offsets derive1.6second recovery48ticks/windup19ticks using existing reconstructed default formula; native cannot-cancel0 permits command cancellation while preserving recovery. Ordinary shared range currently treats champion target body radius as0; full body-aware NPC attacks remain unfinished.",
+    "Guide native CanCastWhileDisabled=true bypasses owner stun, preserves mana and summon deadline; silence/dead-owner command gates and nearest-visible cursor selection reconstruction remain unqualified. GuideEffect6=60 never replaces native summon45 lifetime.",
+    "Pet basic source remains pet, rewards/assists map to owner; native gold50/noXP pet bounty, natural expiry grants no reward. Pet source does not silently inherit owner item penetration/life steal; full native item/onhit/Exhaust/pet modifiers remain unqualified.",
+    "E forwards native spell-rank defenses/return damage to current living pet for5seconds; retaliation nonrecursive. Original pet retaliation source/penetration, ownerdeath/buff persistence and full native modifier ordering unqualified.",
+    "Native gameplay radius80/selection155/pathfinding50 remain separate. Pet selection155 wired; radius50 pathfinding not yet consumed by shared point-grid BFS. Pet sight uses existing reconstructed lane/minion1100 policy. Model scale1.2 inherited from previous catalog; SkinScale native field absent in audited section.",
+    "Native R spell4 and seven pet GLB clips verified; five pet roles including spawn/21ticks wired. Attack2/idle-enter variations, original playback/blends, all skins, particles/audio/minimap/petHUD and physicalinput remain incomplete.",
+    "Nine core behavior tests passed;13actualUDP checks use separate level6/centre-position fixture. Production server built unchanged authentication/ClientPacket authority but ordinary R progression/network gameplay not yet tested.",
+    "Current Vulkan frame inspected with living textured Tibbers/Annie/restored map; diagnostic fixture overlapped allied actors. Full original renderer, native camera acceptance, physics/scale and human fidelity acceptance remain incomplete.",
+    "Pyromania stun not yet implemented; full Annie kit and all24domains remain incomplete. Secondary web mirrors found4.1 stun durations but no newly qualified primary historical duration source this turn."
+  ]
+}

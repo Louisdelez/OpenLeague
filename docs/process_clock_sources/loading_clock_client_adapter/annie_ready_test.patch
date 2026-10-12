@@ -1,0 +1,11 @@
+--- a/crates/client/src/annie_ready.rs
++++ b/crates/client/src/annie_ready.rs
+@@ -123,7 +123,7 @@
+  use super::*;
+  #[cfg(windows)]
+  #[test] fn native_pause_freezes_ready_emission_rotation_and_uv_then_resumes() {
+-  let mut app=App::new();app.add_plugins(crate::native_effect_clock::Plugin);app.update();app.update();
++  let mut app=App::new();crate::native_effect_clock::install_test_clock(&mut app);app.add_plugins(crate::native_effect_clock::Plugin);app.update();app.update();
+   let start=app.world().resource::<crate::native_effect_clock::EffectClock>().now-1.;
+   let before=samples((app.world().resource::<crate::native_effect_clock::EffectClock>().now-start) as f32);
+   let mut packet=vec![0;14];packet[9..13].copy_from_slice(&30i32.to_le_bytes());packet[13]=1;

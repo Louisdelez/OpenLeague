@@ -1,0 +1,34 @@
+{
+  "complete": false,
+  "passed": true,
+  "implementation": [
+    "crates/server/src/pause.rs",
+    "crates/server/src/clock_delivery.rs",
+    "crates/server/src/main.rs"
+  ],
+  "server_sha256": "b81a1d08d529149b34fcdc18f82128021db2e273f1618c24dc63f8926017916c",
+  "unit_tests": 6,
+  "all_targets_check": "logs/server-pause-check.log",
+  "build": "logs/server-pause-build.log",
+  "udp": "docs/server_pause_udp_v1.json",
+  "policy": {
+    "enable": "OPENLEAGUE_ALLOW_PAUSE=1",
+    "default": "disabled",
+    "allowed": "joined peer with increasing command sequence while match unfinished",
+    "qualification": "explicit local host policy; not qualified as original Riot server permissions"
+  },
+  "runtime_behaviors": [
+    "Tick19 remained frozen across pause and resume countdown.",
+    "Gameplay commands rejected while paused.",
+    "Identical pause payload retransmitted before acknowledgment.",
+    "New identities during pause and countdown bootstrapped with pause then final immediate resume.",
+    "Delayed resume observed5.031s; simulation resumed without catchup debt."
+  ],
+  "limits": [
+    "No graphical UDP/GPU paused-effect verification yet.",
+    "Original mode/player authorization and config propagation unqualified.",
+    "Pause request UI/chat not yet wired.",
+    "Same socket identity reused by replacement client process not covered.",
+    "Community behavior is reference only, not original server proof."
+  ]
+}

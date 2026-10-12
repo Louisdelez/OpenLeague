@@ -1,0 +1,58 @@
+{
+  "complete": false,
+  "updated_utc": "2026-10-08T11:09:18.501183+00:00",
+  "change": [
+    "Port native AF3060/AFECA0 selected-ancestor spatial controls: static properties11/12 when neither parameter20/21 is active; otherwise actual manager controls replace both fields and inactive components are zero. Property13 and flag2F bit20 retained.",
+    "Port AFEE20 optional pose parameter37/38 arithmetic, conditional AF19E0 attenuation lookup and last selected curve first-field extraction. Preserve missing descriptor/resource/index/points behavior, zero-range repeated lookup and absent pose/no-control untouched fields.",
+    "Expand mandatory core Backend spatial method to mutate full State, retaining all16 raw spatial bytes and optional60-byte pose, replacing previous incomplete two-value pair.",
+    "Connect SpatialBackend and ActorBackend into whole refresh/cache APIs; native whole-refresh composition supplies no spatial/pose/actor result adapters.",
+    "Keep unrelated padding, flag bits and copied fields intact; reject empty/invalid spatial resource inputs explicitly."
+  ],
+  "validation": {
+    "new_targeted_tests_passed": 4,
+    "audio_regression_tests_passed": 226,
+    "failed": 0,
+    "session": 17070,
+    "terminal_exit_code": 0,
+    "native_spatial_cases": 1920,
+    "native_spatial_pose_attenuation_cases": 9216,
+    "native_whole_refresh_spatial_actor_cases": 2048,
+    "comparison": "Exact16-byte spatial block and60-byte optional pose; original full control84-byte block, flags, cc/d0 bits, extras, RNG and logical call order. Native OS lock/unlock interface calls are explicitly excluded from Rust immutable-snapshot call comparison.",
+    "log": "logs/audio-spatial-controls-tests.log"
+  },
+  "sha256": {
+    "crates/core/src/audio_spatial_controls.rs": "2783c027fdb2b966cafc641a5ea646992de9ce5796587ce8a5cedbc3595412ae",
+    "crates/core/src/audio_control_refresh.rs": "4bebd1f4d4e330cae3c7fe653c5fb76b1edf492b0fe479ae7eb8a541371e9293",
+    "crates/core/src/audio_actor_controls.rs": "18763d1dd5561ca3b0d89178d93557d96c00fffc8ad3b78997270dbf59bdd26c",
+    "crates/core/src/audio_rtpc_manager.rs": "37ba1cb8daad2924cedfcf0c33c8dad03bcd16be9395170029d0f74a9354cf04",
+    "crates/core/src/lib.rs": "7af91438309e9cfcb72ee83ba2c2d8e5f99b100f80d90ee39e585bdc1d12baf7",
+    "tools/probe_native_audio_spatial_controls.py": "73125ec780beb188bd70c1674aa6be2474b881d3f44bc14b7e4d3d8dbcf833e2",
+    "tools/probe_native_audio_spatial_pose.py": "c7ae459ba373437b4251c97e485dd8a044fbae43e78b18c32d5959f11bbf4c14",
+    "tools/probe_native_audio_spatial_refresh_composition.py": "65f5add0752bef35a75c58779a5c384f274abae2d6a71d6b9762c4d6b90899e7",
+    "data/4.20/audio_spatial_controls_contract.json": "f58ad9f416a61b1b7991160b230dc71aa80c302bcb720292aa15e17a6355154d",
+    "data/4.20/audio_spatial_pose_contract.json": "6314547e11d079126a0a8fcf199014c22d8fe70394367f453a0a80bf86ab030e",
+    "data/4.20/audio_spatial_refresh_composition_contract.json": "693b53573d96e5863010ab4123ddb73f58386a72493416b3c025f69257fdedb8",
+    "logs/audio-spatial-controls-probe.log": "5df6da27b97deb6c93de6ef40a080282beeed796e5c2d4bdfc900d19efe22d34",
+    "logs/audio-spatial-pose-probe.log": "636bd5f5c1160c83c050ef74ff94416c3f0e6a138a2699c92bc8e1506c526ecb",
+    "logs/audio-spatial-refresh-composition-probe.log": "4db10f80aa477f492b1b57f7fb601721944982a5518fc5e8d6c23dc8c376b47b",
+    "logs/audio-spatial-controls-tests.log": "c2ce22f35379bbefa5c343a5f14f60d2e2d4a57e6b559927053e67b42719fdae",
+    "target/debug/deps/openleague_core-5b2a9def275dcedd.exe": "ca906549477ec7963071481be5790d0b8ba297ff4815990392fb87ad45f55ba8"
+  },
+  "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+  "adapters": [
+    "Original AF3060/AFECA0/AFEE20/AF19E0/AF9530 and actual manager/curves execute unchanged.",
+    "Only OS critical-section enter/leave and resource release callback are explicit adapters; original AF9530 increments the resource counter, adapter decrements it and verifies balance. Resource release/destruction body is not qualified.",
+    "Constructed native-layout spatial/pose nodes, resource hash registry and attenuation records, including absent descriptors/resources/curve index/points. No spatial/pose/attenuation result adapter.",
+    "E8 flag1, source-13.125, routing callback, pair2/3.25 and transition callback are explicit dependency interfaces. Whole AEE790/AEC310/AEE9A0, AF0880, AF3060/AFECA0/AFEE20/AF19E0/AF9530 and actual manager/curves execute unchanged.",
+    "OS lock/unlock and resource release callback are explicit adapters; original acquisition increments counter and adapted release decrements it, verified balanced. Release/destruction body remains separate.",
+    "Only CRT random result adapted to explicit seed17 sequence (prior CRT arithmetic qualification). Original AF0880/AFEF40 parent recursion, state/static/range arithmetic and actual RTPC manager/curve code execute unchanged.",
+    "Constructed verified-layout static/global/object/cached tables, raw flags and manager bindings. Extended spatial/bus/effect handlers intentionally absent, not replaced by zero results."
+  ],
+  "limits": [
+    "Attenuation registry is an explicit immutable native-layout resource snapshot. OS synchronization and actual resource release/destruction bodies are not qualified or implemented by these pure calculations; native original acquire increment/adapted release balance is verified in probe.",
+    "E8 flag getter, source, routing, AFF450 pair and AEF2F0 transition interfaces remain explicit supplied dependencies in full-refresh composition.",
+    "Bus24/state10/effects4C, native bank-to-node initialization, live state/RTPC changes and smoothing remain open.",
+    "Logical worker physical/device Backend, shared runtime RNG/cadence, actual sound output/voice completion, filtered seek, owner loss and endurance remain open.",
+    "No normal client rebuild, audible output or full-game acceptance."
+  ]
+}
