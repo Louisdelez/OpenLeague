@@ -1,11 +1,11 @@
-# Contribuer � OpenLeague
+# Contribuer à OpenLeague
 
-Utiliser une branche d�di�e et une pull request. Pr�server les travaux existants. Relier chaque changement � un comportement attendu de LoL 4.20 et distinguer ressource native, r�paration et reconstruction.
+Utiliser une branche dédiée et une pull request. Préserver les travaux existants. Relier chaque changement à un comportement attendu de LoL 4.20 et distinguer ressource native, réparation et reconstruction.
 
-Suivre le [workflow Git/GitHub](docs/GIT_WORKFLOW.md) et le [versionnement](docs/VERSIONING.md). La PR utilise le mod�le du d�p�t, un titre Conventional Commits et une description renseign�e. Les hooks optionnels prek et les contr�les GitHub appliquent la m�me politique de d�p�t. Les versions restent synchronis�es entre workspace, launcher et configuration Tauri ; les packs d'assets existants restent s�par�s du code.
+Suivre le [workflow Git/GitHub](docs/GIT_WORKFLOW.md) et le [versionnement](docs/VERSIONING.md). La PR utilise le modèle du dépôt, un titre Conventional Commits et une description renseignée. Les hooks optionnels prek et les contrôles GitHub appliquent la même politique de dépôt. Les versions restent synchronisées entre workspace, launcher et configuration Tauri ; les packs d'assets existants restent séparés du code.
 
-Ex�cuter les v�rifications adapt�es ; documenter commandes, r�sultat, environnement et limites. Pour un effet visuel ou audio, conserver une observation r�elle. Pour le r�seau, v�rifier les informations cach�es, d�parts et reconnexions. Ne pas �crire qu'un champion ou mode est complet sans ses sc�narios d'acceptation.
+Exécuter les vérifications adaptées ; documenter commandes, résultat, environnement et limites. Pour un effet visuel ou audio, conserver une observation réelle. Pour le réseau, vérifier les informations cachées, départs et reconnexions. Ne pas écrire qu'un champion ou mode est complet sans ses scénarios d'acceptation.
 
-Les contributions originales au code sont propos�es sous MIT. Ne contribuer aucun contenu tiers sans droit de redistribution compatible et mentions de provenance. Conserver les licences des d�pendances.
+Les contributions originales au code sont proposées sous MIT. Ne contribuer aucun contenu tiers sans droit de redistribution compatible et mentions de provenance. Conserver les licences des dépendances.
 
-Ne pas soumettre secrets, identifiants de session, caches de compilation ou logs priv�s. Ne pas ajouter de services externes ou de changement d'architecture sans expliquer la n�cessit�. Les noms et contrats historiques doivent rester tra�ables.
+Ne pas soumettre secrets, identifiants de session, caches de compilation ou logs privés. Ne pas ajouter de services externes ou de changement d'architecture sans expliquer la nécessité. Les noms et contrats historiques doivent rester traçables.

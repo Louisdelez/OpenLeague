@@ -14,7 +14,7 @@ COMMIT = re.compile(r"^(feat|fix|docs|test|build|ci|chore|refactor|perf|revert)(
 PRERELEASE = r"(?:0|[1-9]\d*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)"
 SEMVER = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)"
                     + rf"(?:-{PRERELEASE}(?:\.{PRERELEASE})*)?(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$")
-SECTIONS = ("Probl�me et r�sultat", "P�rim�tre et r�f�rences", "V�rifications", "Limites")
+SECTIONS = ("Problème et résultat", "Périmètre et références", "Vérifications", "Limites")
 MAX_FILE_BYTES = 5 * 1024 * 1024
 
 
@@ -113,6 +113,12 @@ def file_errors(base: str | None, staged: bool) -> list[str]:
         data = git("show", ":" + name) if staged else git("show", "HEAD:" + name)
         if len(data) > MAX_FILE_BYTES:
             errors.append(f"Changed file exceeds 5 MiB; use a release pack or reviewed exception: {name}")
+        if PurePosixPath(name).suffix in {".md", ".py", ".json", ".toml", ".yaml", ".yml", ".js", ".wgsl"}:
+            try:
+                if "\ufffd" in data.decode("utf-8"):
+                    errors.append(f"Replacement character indicates damaged text encoding: {name}")
+            except UnicodeError:
+                errors.append(f"Changed text file must be valid UTF-8: {name}")
         if name.endswith(".json"):
             try:
                 json.loads(data)

@@ -1,6 +1,6 @@
 ---
-name: Fonctionnalit� ou fid�lit� historique
-about: D�crire une am�lioration et ses crit�res de v�rification
+name: Fonctionnalité ou fidélité historique
+about: Décrire une amélioration et ses critères de vérification
 title: ''
 labels: ''
 assignees: ''
@@ -8,10 +8,10 @@ assignees: ''
 
 ## Comportement attendu
 
-## Version, r�f�rences et ressources disponibles
+## Version, références et ressources disponibles
 
-## P�rim�tre propos�
+## Périmètre proposé
 
-## Crit�res de v�rification
+## Critères de vérification
 
-## Inconnues et d�pendances
+## Inconnues et dépendances

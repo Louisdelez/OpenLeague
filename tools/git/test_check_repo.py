@@ -18,7 +18,7 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(len(check_repo.pr_errors({"pull_request": {"title": "docs: clarify workflow", "body": body}})), 4)
 
     def test_documented_limits_can_pass_without_false_game_claim(self):
-        body = "## Probl�me et r�sultat\nAlign versions.\n## P�rim�tre et r�f�rences\nManifests only.\n## V�rifications\nRepository checks passed.\n## Limites\nNo game or GPU test run.\n"
+        body = "## Problème et résultat\nAlign versions.\n## Périmètre et références\nManifests only.\n## Vérifications\nRepository checks passed.\n## Limites\nNo game or GPU test run.\n"
         self.assertEqual(check_repo.pr_errors({"pull_request": {"title": "chore: align versions", "body": body}}), [])
 
     def test_asset_pack_and_private_runtime_paths_rejected(self):
@@ -58,6 +58,10 @@ class PolicyTests(unittest.TestCase):
     def test_modified_large_file_is_rejected(self):
         with patch.object(check_repo, "diff_paths", side_effect=[[], ["docs/capture.png"]]), patch.object(check_repo, "git", return_value=b"x" * (check_repo.MAX_FILE_BYTES + 1)):
             self.assertIn("5 MiB", check_repo.file_errors(None, True)[0])
+
+    def test_corrupt_utf8_document_is_rejected(self):
+        with patch.object(check_repo, "diff_paths", side_effect=[[], ["docs/workflow.md"]]), patch.object(check_repo, "git", return_value="Probl\ufffdme".encode()):
+            self.assertIn("encoding", check_repo.file_errors(None, True)[0])
 
 
 if __name__ == "__main__":

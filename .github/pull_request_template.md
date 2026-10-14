@@ -1,15 +1,15 @@
-## Probl�me et r�sultat
+## Problème et résultat
 
-<!-- D�crire le probl�me concret et le comportement obtenu. -->
+<!-- Décrire le problème concret et le comportement obtenu. -->
 
-## P�rim�tre et r�f�rences
+## Périmètre et références
 
-<!-- Issue �ventuelle, composants touch�s et r�f�rences 4.20 si pertinentes. Distinguer original, r�paration et reconstruction. -->
+<!-- Issue éventuelle, composants touchés et références 4.20 si pertinentes. Distinguer original, réparation et reconstruction. -->
 
-## V�rifications
+## Vérifications
 
-<!-- Commandes ex�cut�es, r�sultats et commit/ex�cutable concern�. Pour un changement visuel/audio/r�seau, joindre les preuves adapt�es. -->
+<!-- Commandes exécutées, résultats et commit/exécutable concerné. Pour un changement visuel/audio/réseau, joindre les preuves adaptées. -->
 
 ## Limites
 
-<!-- Ce qui reste non v�rifi�, risques connus et ressources tierces. �crire � Aucune limite identifi�e dans ce p�rim�tre � si pertinent. -->
+<!-- Ce qui reste non vérifié, risques connus et ressources tierces. Écrire « Aucune limite identifiée dans ce périmètre » si pertinent. -->
