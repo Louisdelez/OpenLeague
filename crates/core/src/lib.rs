@@ -12,6 +12,9 @@ pub mod native_crown_birth;
 pub mod native_complex_mesh_pose;
 pub mod native_complex_surface_prepare;
 pub mod native_complex_movement;
+pub mod native_complex_factory_admission;
+pub mod native_complex_flex_selection;
+#[cfg(test)] mod native_complex_factory_tests;
 pub mod native_complex_kinematics;
 pub mod native_particle_euler_matrix;
 #[cfg(test)] mod native_complex_movement_tests;
@@ -1487,3 +1490,17 @@ pub mod garen_w_shimmer_profile;
 pub mod native_complex_type0_quad;
 pub mod native_simple_type0_quad;
 pub mod native_complex_quad_binding;
+
+pub mod audio_bus_rtpc_delta;
+pub mod audio_mixed_rtpc_notification;
+
+pub mod audio_main_sfx_mixed_transport;
+pub mod audio_init_rtpc_owner;
+
+pub mod audio_rtpc_first_global_value;
+
+
+pub mod audio_rtpc_values_retirement;
+
+
+pub mod audio_rtpc_remaining_retirement;

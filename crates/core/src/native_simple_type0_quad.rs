@@ -1,7 +1,7 @@
 //! Original Simple type0 packet92F160, UV92EF10 and rounded ARGB90F2B0.
-//! Selected p-local-orient=false and type0 (height adjustment=false) only.
-//! This helper does not compute camera axes or interpret shader/atlas channels.
-//! Candidate only: Rust compilation and target-platform equivalence remain to run.
+//! Quad packing selects p-local-orient=false and height adjustment=false.
+//! Camera axes include all integer rotations; shader/atlas interpretation is external.
+//! Native camera-axis vectors are qualified; complete gameplay rendering remains open.
 
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Input {
@@ -70,31 +70,49 @@ pub fn pack(input: Input) -> Result<Quad, Error> {
     Ok(quad)
 }
 
-///92B210 transposes the original LH view;92E570 uses cross(up,right).
-///Only table entry0 is admitted: absent p-quadrot/rotvel in the two actual profiles.
+/// Original92B210 camera basis and complete92E570 integer rotation table.
 #[derive(Clone,Copy,Debug)]
 pub struct Axes {pub a:[f32;3],pub b:[f32;3]}
-fn neg(v:f32)->f32{f32::from_bits(v.to_bits()^0x8000_0000)}
-pub fn axes_zero(view:[f32;16])->Result<Axes,Error>{
-    if view.iter().any(|v|!v.is_finite()){return Err(Error::NonFinite);}
+fn neg(v:f32)->f32 {f32::from_bits(v.to_bits() ^ 0x8000_0000)}
+pub fn angle_index(angle:f32)->usize {
+    let i=if !angle.is_finite() || angle>=2147483648. || angle< -2147483648. {i32::MIN} else {angle.trunc() as i32};
+    i.rem_euclid(360) as usize
+}
+pub fn axes(view:[f32;16],angle:f32)->Result<Axes,Error> {
+    if view.iter().any(|v|!v.is_finite()) {return Err(Error::NonFinite);}
+    let degree=-(angle_index(angle) as i32);
+    let [s,c]=crate::camera_rotation::coefficients(degree as f32);
     let up=[view[1],view[5],view[9]];let right=[view[0],view[4],view[8]];
     let x=right[1]*up[2]-right[2]*up[1];let y=up[0]*right[2]-right[0]*up[2];
     let z=neg(right[0]*up[1]-up[0]*right[1]);
     let (xx,yy,zz)=(x*x,y*y,z*z);let (xy,zx,zy)=(x*y,z*x,z*y);
-    // Original PE sine[0]=0 and sine[900]=1, verified by the native fixture.
-    let (s,c)=(0f32,1f32);let t=1.-c;
-    let (zs,ys,xs)=(z*s,y*s,s*x);let (txy,txz,tyz)=(t*xy,zx*t,zy*t);
+    let t=1.-c;let (zs,ys,xs)=(z*s,y*s,s*x);
+    let (txy,txz,tyz)=(t*xy,zx*t,zy*t);
     let (r00,r11,r22)=((1.-xx)*c+xx,(1.-yy)*c+yy,(1.-zz)*c+zz);
     let vector=|v:[f32;3]|[
         ((zs+txy)*v[1]+r00*v[0])-(txz-ys)*v[2],
         ((txy-zs)*v[0]+r11*v[1])-(xs+tyz)*v[2],
         neg(((tyz-xs)*v[1]+(ys+txz)*v[0])-r22*v[2])];
     let a=vector(up);let b=vector(right);
-    if a.into_iter().chain(b).any(|v|!v.is_finite()){return Err(Error::ArithmeticOverflow);}Ok(Axes{a,b})
+    if a.into_iter().chain(b).any(|v|!v.is_finite()) {return Err(Error::ArithmeticOverflow);}
+    Ok(Axes{a,b})
 }
+pub fn axes_zero(view:[f32;16])->Result<Axes,Error>{axes(view,0.)}
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn simple_all360_angles_match_eight_original_camera_views(){
+        let proof:serde_json::Value=serde_json::from_str(include_str!("../../../data/4.20/simple_camera_axes_vectors.json")).unwrap();
+        let cases=proof["cases"].as_array().unwrap();assert_eq!(cases.len(),8);
+        for c in cases {let view=std::array::from_fn(|i|f32::from_bits(c["view_bits"][i].as_u64().unwrap() as u32));
+            let rows=c["all_angle_words"].as_array().unwrap();assert_eq!(rows.len(),360);
+            for (angle,row) in rows.iter().enumerate(){let a=axes(view,angle as f32).unwrap();
+                assert_eq!(a.a.into_iter().chain(a.b).map(f32::to_bits).collect::<Vec<_>>(),row.as_array().unwrap().iter().map(|v|v.as_u64().unwrap() as u32).collect::<Vec<_>>());}
+        }
+        assert!(axes([f32::NAN;16],1.).is_err());
+        assert_eq!(angle_index(f32::NAN),232);assert_eq!(angle_index(-800.),280);
+    }
     #[test]
     fn simple_angle_zero_matches16_native_camera_prefix_and_table_outputs(){
         let proof:serde_json::Value=serde_json::from_str(include_str!("../../../data/4.20/simple_glow_axes_vectors.json")).unwrap();

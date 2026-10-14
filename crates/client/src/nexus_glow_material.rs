@@ -73,13 +73,45 @@ impl GlowMaterial {
     pub fn new(textures:&Textures,visibility:Handle<Image>,overlay:Handle<Image>,input:Inputs)
         ->Result<Self,&'static str>
     {
+        Self::from_handles([textures.image.clone(),textures.color.clone(),visibility,overlay],input)
+    }
+    /// Uses owned native DDS leases, retaining main-world and render-world ownership.
+    /// Upload/pipeline readiness is a separate requirement, as for existing glow.
+    pub fn new_owned(bindings:&crate::relic_rune_image_bindings::Bindings,store:&crate::relic_image_reference_store::Store,
+                     assets:&Assets<Image>,fog:[Handle<Image>;2],input:Inputs)->Result<Self,String>{
+        for layout in bindings.layouts(store)? {if layout.source_has_block_padding(){return Err("native quad logical sampling for block-padded DDS is not qualified".into());}}
+        let handles=bindings.images(store,assets,fog)?;
+        Self::from_owned_handles(handles,assets,input)
+    }
+    /// Additive admission path for fow_gpu's externally owned render-only images.
+    /// Owned DDS must still exist in MAIN_WORLD with exact layout and explicit
+    /// sampler. Fog handles must be strong; the ordinary render host separately
+    /// verifies RenderAssets<GpuImage>, texture metadata and pipeline readiness.
+    /// No fog image or sampler is synthesized and admission initially stays false.
+    pub fn new_owned_render_fog(bindings:&crate::relic_rune_image_bindings::Bindings,store:&crate::relic_image_reference_store::Store,
+                                assets:&Assets<Image>,fog:[Handle<Image>;2],input:Inputs)->Result<Self,String>{
+        for layout in bindings.layouts(store)? {if layout.source_has_block_padding(){return Err("native quad logical sampling for block-padded DDS is not qualified".into());}}
+        let handles=bindings.images_render_fog(store,assets,fog)?;
+        Self::from_owned_handles(handles,assets,input)
+    }
+    fn from_owned_handles(handles:[Handle<Image>;4],assets:&Assets<Image>,input:Inputs)->Result<Self,String>{
+        for handle in &handles[..2] {
+            let image=assets.get(handle).ok_or("owned quad image disappeared")?;let d=&image.texture_descriptor;
+            if d.dimension!=TextureDimension::D2 || d.size.depth_or_array_layers!=1 || d.size.width==0 || d.size.height==0
+                || !matches!(d.format,TextureFormat::Bc1RgbaUnorm|TextureFormat::Bc3RgbaUnorm|TextureFormat::Rgba8Unorm){return Err("owned quad image format outside native linear DDS subset".into());}
+            let ImageSampler::Descriptor(s)=&image.sampler else{return Err("owned quad requires explicit native sampler".into());};
+            if s.compare.is_some() || !s.lod_min_clamp.is_finite() || !s.lod_max_clamp.is_finite() || s.lod_min_clamp<0. || s.lod_max_clamp<s.lod_min_clamp{return Err("owned quad sampler invalid".into());}
+        }
+        Self::from_handles(handles,input).map_err(str::to_owned)
+    }
+    fn from_handles(handles:[Handle<Image>;4],input:Inputs)->Result<Self,&'static str>{
         if input.render_mode!=0 || input.render_flags!=0 || input.shader_features!=0 {
             return Err("CrystalGlow only supports mode0 default QUAD variant");
         }
         let state=crate::particle_render_state::ParticleState::route(0,0)?;
         if state.blend_preset!=2 {return Err("CrystalGlow mode0 blend contract changed");}
         let native=crate::native_fow::FogParams::from_native_extent(input.native_fog_extent)?.params();
-        Ok(Self {image:textures.image.clone(),color:textures.color.clone(),visibility,overlay,cull:input.cull,
+        Ok(Self {image:handles[0].clone(),color:handles[1].clone(),visibility:handles[2].clone(),overlay:handles[3].clone(),cull:input.cull,
             params:Uniform {fog:Vec4::new(native.x*20.,native.y*20.,native.z,native.w),control:UVec4::new(0,input.encoding as u32,0,0)}})
     }
     /// Permission is supplied after the host admits exact CPU resources. Bevy
@@ -126,3 +158,11 @@ mod tests {
         images.remove(textures.color.id());assert!(textures.validate(&images).is_err());
     }
 }
+
+#[cfg(test)]
+#[path="nexus_glow_owned_material_tests.rs"]
+mod owned_tests;
+
+#[cfg(test)]
+#[path="nexus_glow_render_fog_material_tests.rs"]
+mod render_fog_owned_tests;

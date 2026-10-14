@@ -460,3 +460,11 @@ mod vilemaw_binding_tests;
 
 #[path = "vilemaw_animation_probe.rs"]
 pub(crate) mod vilemaw_probe;
+
+// Append inside crate::animation for controlled actor identity fixtures only.
+#[cfg(test)]
+pub(crate) fn endgame_test_playback(id:u32,name:&str,model:Handle<Gltf>)->Playback {
+    let mut playback=material_test_playback(id,model);
+    playback.model_name=name.into();
+    playback
+}

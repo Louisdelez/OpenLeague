@@ -1,3 +1,55 @@
+mod tt_capture_observation;
+mod tt_well_ring_sampler;
+mod tt_well_ring_state;
+mod tt_well_ring_live;
+mod tt_well_ring_readiness;
+mod tt_well_ring_observation;
+mod tt_capture_sampler;
+mod tt_capture_state;
+mod tt_capture_material;
+mod tt_capture_live;
+mod tt_capture_readiness;
+mod relic_pickup_complex_profiles;
+mod relic_pickup_complex_rgba;
+mod relic_pickup_complex_draw_inputs;
+mod relic_pickup_seven_host;
+mod relic_pickup_seven_identity;
+mod relic_pickup_seven_live;
+mod relic_pickup_seven_draw;
+mod relic_pickup_seven_render;
+mod relic_pickup_seven_readiness;
+mod relic_pickup_complex_sources;
+mod relic_pickup_complex_simulation;
+mod relic_pickup_complex_source_matrix;
+mod relic_pickup_render_sources;
+mod relic_pickup_seven_integration;
+mod relic_pickup_forces;
+mod relic_pickup_force_sources;
+mod relic_pickup_live;
+mod relic_pickup_packets;
+mod relic_pickup_render;
+mod relic_pickup_readiness;
+mod relic_pickup_simulation;
+mod relic_pickup_profiles;
+mod relic_pickup_events;
+mod relic_pickup_simple_draw;
+mod simple_selected_axes;
+#[allow(dead_code)] // Original resource table rules; full provider/game effect binding pending.
+mod relic_namespace;
+#[allow(dead_code)] // Prepared native package chain; ordinary actor binding pending.
+mod relic_namespace_cache;
+#[allow(dead_code)]
+mod relic_package_provider;
+#[allow(dead_code)] // Recovered nine-DDS subset only; no full native mount claim.
+mod relic_recovered_catalog;
+#[allow(dead_code)] // Native resource-name selection; actual VFS integration pending.
+mod relic_texture_name;
+#[allow(dead_code)] // Effect material leases compiled; ordinary rune publication pending.
+mod relic_rune_image_bindings;
+#[allow(dead_code)] // Native DDS ownership integrated; ordinary rune draw binding pending.
+mod relic_texture_reference_cache;
+#[allow(dead_code)]
+mod relic_image_reference_store;
 mod native_effect_clock;
 #[cfg(windows)]
 mod native_runtime_shutdown;
@@ -9,6 +61,7 @@ mod native_hud_recharge_gpu_probe;
 mod native_hud_bars;
 mod native_hud_pool_numbers;
 mod native_hud_live_probe;
+mod doran_gui_probe;
 mod native_hud_experience;
 mod native_hud_spells;
 mod native_hud_summoners;
@@ -94,6 +147,15 @@ mod native_cloud_phase;
 mod native_gamma;
 mod nexus_ceremony;
 mod endgame_timeline;
+mod native_minion_opacity;
+mod native_minion_fade_warmup;
+mod native_minion_fade_material;
+mod native_minion_fade_producer;
+mod native_minion_fade_observation;
+mod native_minion_fade_gpu_observation;
+mod endgame_minion_no_render;
+mod endgame_ui_observation;
+mod endgame_minion_probe;
 mod native_endgame_ui;
 mod match_results_ui;
 mod session_departure;
@@ -250,6 +312,17 @@ mod nexus_complex_mesh;
 mod nexus_complex_material;
 mod nexus_complex_host;
 mod nexus_complex_live;
+mod spawn_mist_sources;
+mod spawn_mist_material;
+mod spawn_mist_surface;
+mod spawn_mist_host;
+mod spawn_mist_world;
+mod spawn_mist_state;
+mod spawn_mist_readiness;
+mod spawn_mist_live;
+mod spawn_mist_cleanup_observation;
+#[cfg(test)]
+mod spawn_mist_endurance_tests;
 mod nexus_crown_state;
 mod nexus_crown_live;
 mod nexus_glow_state;
@@ -480,6 +553,8 @@ fn run_client(exit: &mut bevy::app::AppExit) {
         .add_plugins(garen_w_slice_live::Plugin)
         .add_plugins(nexus_idle_particles::Plugin)
         .add_plugins(nexus_complex_live::Plugin)
+        .add_plugins(spawn_mist_live::Plugin)
+        .add_plugins(spawn_mist_cleanup_observation::Plugin)
         .add_plugins(nexus_crown_live::Plugin)
         .add_plugins(nexus_glow_live::Plugin)
         .add_plugins(native_hud_atlases::Plugin)
@@ -493,9 +568,19 @@ fn run_client(exit: &mut bevy::app::AppExit) {
         .add_plugins(native_hud_inventory::Plugin)
         .add_plugins(native_minimap::Plugin)
         .add_plugins(map_relic_world::Plugin)
+        .add_plugins(relic_pickup_events::Plugin)
+        .add_plugins(relic_pickup_seven_integration::Plugin)
+        .add_plugins((tt_capture_live::Plugin,tt_capture_observation::Plugin,tt_well_ring_live::Plugin,tt_well_ring_observation::Plugin))
+        .add_plugins(native_minion_fade_material::Plugin)
+
+        .add_plugins(native_minion_fade_producer::Plugin)
+        .add_plugins(native_minion_fade_observation::Plugin)
+        .add_plugins(endgame_minion_no_render::Plugin)
+        .add_plugins((endgame_ui_observation::Plugin,endgame_minion_probe::Plugin))
         .add_plugins(spell_input::Plugin)
         .add_plugins(ordinary_camera_input::Plugin)
         .add_plugins(native_hud_live_probe::Plugin)
+        .add_plugins(doran_gui_probe::Plugin)
         .add_plugins(native_hud_panels::Plugin)
         .add_plugins(native_hud_recharge_live::Plugin)
         .add_plugins(native_hud_portraits::Plugin)

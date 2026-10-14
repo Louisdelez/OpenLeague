@@ -147,3 +147,46 @@ fn audio_replay_windows_receive_keeps_unimplemented_packet_handlers_explicit() {
     assert_eq!(r.snapshot().unwrap().engine_allocations, 0);
     app.close().unwrap();
 }
+
+
+#[test]
+fn audio_replay_windows_receive_packet5f_fallback_matches40_native_frames_without_payload_or_state_mutation() {
+    let proof:serde_json::Value=serde_json::from_str(include_str!("../../../data/4.20/native_main_sfx_packet5f_fallback_contract.json")).unwrap();
+    assert_eq!(proof["passed"],true);assert_eq!(proof["case_count"],40);
+    assert_eq!(proof["original_addresses_reached"],48);
+    let mut app=Application::new().unwrap();let r=app.transport().unwrap();
+    let service=r.configure_service(Defaults).unwrap();r.initialize_game_manager().unwrap();
+    let owner=service.diagnostic().unwrap()["pointer"].as_u64().unwrap() as u32;
+    let mut b=Backend::new(r.shared.clone());
+    let old_global=b.word(callbacks::SERVICE_GLOBAL).unwrap();
+    let old_flag=consumers::ConsumerBoundary::byte(&mut b,owner+0x122).unwrap();
+    // Controlled binding to the actual owned source72A3B0 service. This does
+    // not qualify ordinary startup publication or preceding listener callbacks.
+    Storage::write_word(&mut b,callbacks::SERVICE_GLOBAL,owner).unwrap();
+    assert_eq!(b.word(owner).unwrap(),0x10afe8c);
+    assert_eq!(receive::packet_target(&mut b,0x5f).unwrap(),0x58bb2e);
+    let packet_storage=b.allocate(9).unwrap();
+    for (index,case) in proof["cases"].as_array().unwrap().iter().enumerate() {
+        let input=&case["input"];let flag=input["service_flag122"].as_u64().unwrap() as u8;
+        let bits=input["payload_bits"].as_u64().unwrap() as u32;
+        b.write_byte(owner+0x122,flag).unwrap();
+        let mut bytes=vec![0x5f,0,0,0,0];bytes.extend(bits.to_le_bytes());
+        for (i,value) in bytes.iter().copied().enumerate(){b.write_byte(packet_storage+i as u32,value).unwrap();}
+        let before:Vec<u8>=(0..0x188).map(|i|consumers::ConsumerBoundary::byte(&mut b,owner+i).unwrap()).collect();
+        let allocations=r.snapshot().unwrap().engine_allocations;
+        let packet=if input["packet_pointer_unmapped"].as_bool().unwrap(){0x3f000000}else{packet_storage};
+        let result=receive::Boundary::packet_fallback(&mut b,0x5f,packet,0).unwrap();
+        assert_eq!(result,case["result_al"].as_u64().unwrap() as u8,"actual native return {index}");
+        let after:Vec<u8>=(0..0x188).map(|i|consumers::ConsumerBoundary::byte(&mut b,owner+i).unwrap()).collect();
+        assert_eq!(before,after,"owned service unchanged {index}");
+        assert_eq!(r.snapshot().unwrap().engine_allocations,allocations,"no lifetime change {index}");
+        let packet_after:Vec<u8>=(0..9).map(|i|consumers::ConsumerBoundary::byte(&mut b,packet_storage+i).unwrap()).collect();
+        assert_eq!(bytes,packet_after,"packet untouched {index}");
+        assert!(r.errors().is_empty());
+    }
+    remove::Backend::free(&mut b,packet_storage,remove::Deallocator::Standard).unwrap();
+    b.write_byte(owner+0x122,old_flag).unwrap();
+    Storage::write_word(&mut b,callbacks::SERVICE_GLOBAL,old_global).unwrap();
+    r.close_game_manager().unwrap();service.close().unwrap();
+    assert_eq!(r.snapshot().unwrap().engine_allocations,0);app.close().unwrap();
+}

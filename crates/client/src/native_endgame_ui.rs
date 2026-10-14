@@ -42,6 +42,9 @@ pub fn update(time:Res<Time>,clock:Res<crate::endgame_timeline::Clock>,state:Res
   if visible&&*interaction==Interaction::Pressed{view.armed=true;}
   if buttons.just_released(MouseButton::Left){if visible&&view.armed&&*interaction==Interaction::Hovered{view.dismissed=true;}view.armed=false;}
  }
+ // Continue release changes View after the first root layout pass. Retire the
+ // native hierarchy in this same Update before results and UI extraction.
+ if view.dismissed {for mut root in &mut roots {root.display=Display::None;}}
 }
 
 #[cfg(test)] mod tests {
@@ -62,6 +65,29 @@ pub fn update(time:Res<Time>,clock:Res<crate::endgame_timeline::Clock>,state:Res
   app.world_mut().resource_mut::<ButtonInput<MouseButton>>().press(MouseButton::Left);*app.world_mut().get_mut::<Interaction>(button).unwrap()=Interaction::Pressed;app.update();assert!(app.world().resource::<View>().armed);
   *app.world_mut().get_mut::<Interaction>(button).unwrap()=Interaction::Hovered;app.world_mut().resource_mut::<ButtonInput<MouseButton>>().release(MouseButton::Left);app.update();assert!(app.world().resource::<View>().dismissed);
   app.world_mut().resource_mut::<ButtonInput<MouseButton>>().clear();app.update();assert_eq!(app.world().get::<Node>(root).unwrap().display,Display::None);
+ }
+ #[test] fn continue_release_hides_native_splash_in_same_update_as_results(){
+  let (mut app,root,image,button)=app(0);
+  app.world_mut().entity_mut(image).insert(ChildOf(root));
+  app.world_mut().entity_mut(button).insert(ChildOf(root));
+  let label=app.world_mut().spawn((NativeImage("button_label"),Text::new("CONTINUER"),TextFont::default(),Node::default(),ChildOf(button))).id();
+  let results=app.world_mut().spawn((crate::match_results_ui::ResultsPanel,Node::default())).id();
+  app.world_mut().spawn((crate::match_results_ui::ResultsText,Text::default(),ChildOf(results)));
+  app.add_systems(Update,crate::match_results_ui::update.after(update));
+  app.update();app.insert_resource(bevy::time::TimeUpdateStrategy::ManualDuration(std::time::Duration::from_secs(6)));app.update();
+  assert_eq!(app.world().get::<Node>(root).unwrap().display,Display::Flex);
+  assert_eq!(app.world().get::<Node>(results).unwrap().display,Display::None);
+  app.insert_resource(bevy::time::TimeUpdateStrategy::ManualDuration(std::time::Duration::ZERO));
+  app.world_mut().resource_mut::<ButtonInput<MouseButton>>().press(MouseButton::Left);
+  *app.world_mut().get_mut::<Interaction>(button).unwrap()=Interaction::Pressed;app.update();
+  assert!(app.world().resource::<View>().armed);
+  *app.world_mut().get_mut::<Interaction>(button).unwrap()=Interaction::Hovered;
+  app.world_mut().resource_mut::<ButtonInput<MouseButton>>().release(MouseButton::Left);app.update();
+  assert!(app.world().resource::<View>().dismissed);
+  assert_eq!(app.world().get::<Node>(root).unwrap().display,Display::None,"native Splash must retire before the same-frame results extraction");
+  assert_eq!(app.world().get::<Node>(results).unwrap().display,Display::Flex);
+  assert_eq!(app.world().get::<ChildOf>(button).unwrap().parent(),root);
+  assert_eq!(app.world().get::<ChildOf>(label).unwrap().parent(),button);
  }
  #[test] fn losing_team_uses_original_red_asset_and_unarmed_release_is_ignored(){
   let (mut app,_,image,button)=app(1);app.update();let image_path=app.world().resource::<AssetServer>().get_path(app.world().get::<ImageNode>(image).unwrap().image.id()).unwrap();assert_eq!(image_path.path().to_str(),Some("ui/endgame/defeat.png"));
