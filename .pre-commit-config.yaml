@@ -1,0 +1,16 @@
+default_install_hook_types: [pre-commit, commit-msg]
+repos:
+  - repo: local
+    hooks:
+      - id: openleague-repository
+        name: OpenLeague repository policy
+        entry: python -B tools/git/check_repo.py --staged
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit]
+      - id: openleague-commit-message
+        name: OpenLeague Conventional Commits
+        entry: python -B tools/git/check_repo.py --commit-message
+        language: system
+        stages: [commit-msg]
