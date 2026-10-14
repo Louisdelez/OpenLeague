@@ -52,6 +52,7 @@ Des tests spécifiques nécessitent Windows, un GPU, les ressources LFS ou un cl
 - [Architecture](docs/ARCHITECTURE.md)
 - [Installation et vérifications](docs/BUILDING.md)
 - [Versionnement et releases](docs/VERSIONING.md)
+- [Workflow Git, PR et contrôles](docs/GIT_WORKFLOW.md)
 - [Feuille de route](docs/ROADMAP.md)
 - [Licences et ressources](docs/LICENSING.md)
 - [Plan détaillé](docs/completion_plan.json)

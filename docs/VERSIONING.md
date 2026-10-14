@@ -11,6 +11,8 @@ Utiliser Semantic Versioning : MAJOR.MINOR.PATCH. Avant 1.0, documenter toute ru
 
 main est la branche principale. Développer dans feat/..., fix/... ou docs/..., avec revue et contrôles appropriés avant fusion. Commits : feat:, fix:, docs:, test:, build:, chore:. Décrire le comportement réellement livré.
 
+Le [workflow Git](GIT_WORKFLOW.md) précise la préparation des PR et la fusion par squash. Les types ci:, refactor:, perf: et revert: sont également admis. Le contrôle tools/git/check_repo.py vérifie l'alignement des versions déclarées ; il ne qualifie pas une release ni la complétude du jeu. Les tags de préversion peuvent porter alpha/beta/rc, tandis que les manifests gardent leur version déclarée selon la convention ci-dessous.
+
 ## Releases
 
 Utiliser des tags annotés v0.1.0-alpha.1, v0.1.0-alpha.2, puis beta et rc uniquement lorsque leurs critères sont atteints. Aucun tag de release ni jeu complet n'est créé automatiquement par l'initialisation du dépôt.
