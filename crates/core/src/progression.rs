@@ -58,6 +58,8 @@ impl Simulation {
         } else {
             1.
         };
+        // Pure R lookup; no stats() recursion or persistent base/item mutation.
+        let r_defense = self.trundle_r_defense_adjustment(id);
         // Garen W amplifies bonus defenses only; level growth is part of base defenses.
         Stats {
             armor_penetration: items.armor_penetration,
@@ -66,8 +68,14 @@ impl Simulation {
             magic_penetration_percent: items.magic_penetration_percent,
             ability_power: items.ability_power * self.altar_damage_multiplier(p.team),
             cooldown_reduction: items.cooldown_reduction.clamp(0., cooldown::maximum_reduction()),
-            damage: (base.attack_damage + g.damage * factor + items.damage)
-                * self.altar_damage_multiplier(p.team),
+            // RECONSTRUCTION: Trundle flat temporary AD is applied after the
+            // existing base/items/altar computation, without changing base fields.
+            damage: {
+                let existing=(base.attack_damage + g.damage * factor + items.damage)
+                    * self.altar_damage_multiplier(p.team);
+                let adjustment=self.trundle_q_ad_adjustment(id);
+                if adjustment==0. {existing} else {(existing+adjustment).max(0.)}
+            },
             critical_chance: (critical::profile(&p.champion).chance
                 + critical::profile(&p.champion).chance_growth * factor
                 + items.critical_chance)
@@ -76,10 +84,16 @@ impl Simulation {
                 + items.critical_damage)
                 .max(1.),
             life_steal: items.life_steal.max(0.),
-            armor: base.armor + g.armor * factor + items.armor * bonus_defense + annie::defense(p,self.tick)
-                - summoner_exhaust::defense_reduction(p, self.tick),
-            magic_resist: base.magic_resist + g.mr * factor + items.magic_resist * bonus_defense + annie::defense(p,self.tick)
-                - summoner_exhaust::defense_reduction(p, self.tick),
+            armor: {
+                let existing=base.armor + g.armor * factor + items.armor * bonus_defense + annie::defense(p,self.tick)
+                    - summoner_exhaust::defense_reduction(p, self.tick);
+                if r_defense.0==0. {existing} else {existing+r_defense.0}
+            },
+            magic_resist: {
+                let existing=base.magic_resist + g.mr * factor + items.magic_resist * bonus_defense + annie::defense(p,self.tick)
+                    - summoner_exhaust::defense_reduction(p, self.tick);
+                if r_defense.1==0. {existing} else {existing+r_defense.1}
+            },
             max_mana: base.mana
                 + g.mana * factor
                 + if lifecycle::uses_mana(&p.champion) {
@@ -91,6 +105,7 @@ impl Simulation {
             move_speed: self.movement_speed(id),
             attack_cooldown_ticks: ((base.attack_cooldown_ticks as f32
                 / (1. + g.attack_speed_percent / 100. * factor + items.attack_speed
+                    + trundle_w::attack_speed_bonus(p, self.tick)
                     - summoner_exhaust::attack_speed_bonus_penalty(p, self.tick))
                 .max(0.05))
             .round() as u64)
@@ -129,7 +144,7 @@ impl Simulation {
 pub fn next_rank(p:&Champion,slot:u8)->Result<u8,String> {
     if slot>3 {return Err("invalid skill slot".into());}
         // Special ranking schemes need dedicated native contracts, never a fabricated fallback.
-        if p.champion != "garen" && p.champion != "annie" {
+        if p.champion != "garen" && p.champion != "annie" && p.champion != "trundle" {
             return Err("champion skill progression not implemented".into());
         }
         if p.ranks.iter().map(|n| *n as u16).sum::<u16>() >= p.level as u16 {

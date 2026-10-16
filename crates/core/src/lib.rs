@@ -12,6 +12,9 @@ pub mod native_crown_birth;
 pub mod native_complex_mesh_pose;
 pub mod native_complex_surface_prepare;
 pub mod native_complex_movement;
+pub mod native_complex_factory_admission;
+pub mod native_complex_flex_selection;
+#[cfg(test)] mod native_complex_factory_tests;
 pub mod native_complex_kinematics;
 pub mod native_particle_euler_matrix;
 #[cfg(test)] mod native_complex_movement_tests;
@@ -24,6 +27,7 @@ pub const TICK_RATE: u64 = 30;
 pub mod altars;
 pub mod annie;
 pub mod missile_lifecycle;
+pub mod linear_skillshot;
 pub mod welcome_history;
 pub mod session_transport;
 pub mod session_wire;
@@ -49,13 +53,24 @@ pub mod audio_emitter_position;
 pub mod audio_selection;
 pub mod attacks;
 pub mod attack_presentation;
+pub mod accepted_cast_presentation;
 pub mod vilemaw_attacks;
 pub mod garen_q_resource;
+// Reconstructed partial TrundleQ; native values and policy limits are explicit.
+pub mod trundle_q;
+// Partial reconstructed owner-only Frozen Domain; native callback parity open.
+pub mod trundle_w;
+pub mod trundle_r;
+pub mod trundle_e;
+pub(crate) mod pillar_navigation;
+// Partial reconstructed nearby-death passive; native callbacks remain unqualified.
+pub mod trundle_passive;
 #[cfg(test)]
 mod garen_q_resource_tests;
 #[cfg(test)]
 mod attack_presentation_server_tests;
 pub mod collision;
+pub(crate) mod ally_occupancy;
 pub mod combat;
 pub mod cooldown;
 #[cfg(test)] mod cooldown_totals_tests;
@@ -176,6 +191,11 @@ pub struct Champion {
 }
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Snapshot {
+    /// Optional local cast facts; malformed contents disable only their consumer.
+    #[serde(default,skip_serializing_if="Option::is_none")]
+    pub accepted_casts: Option<serde_json::Value>,
+    #[serde(default, skip_serializing_if="Vec::is_empty")]
+    pub trundle_e_pillars: Vec<trundle_e::VisiblePillar>,
     pub roster: Vec<vision::RosterEntry>,
     pub session: u64,
     pub tick: u64,
@@ -377,6 +397,7 @@ pub struct Simulation {
     pub winner: Option<u8>,
     final_result:Option<match_results::MatchResult>,
     world: Option<world::World>,
+    pub(crate) trundle_e: trundle_e::State,
     interactions: Option<interactions::Interactions>,
     growth: BTreeMap<String, progression::Growth>,
     pub(crate) projectiles: Vec<attacks::Projectile>,
@@ -385,6 +406,8 @@ pub struct Simulation {
     pub(crate) critical_rng: u64,
     pub(crate) kill_rewards: champion_kills::State,
     pub(crate) attack_presentation: attack_presentation::State,
+    pub(crate) accepted_casts: accepted_cast_presentation::State,
+    pub(crate) ally_occupancy: ally_occupancy::State,
     pub(crate) attack_presentation_error: Option<String>,
     pub(crate) vilemaw_attacks: vilemaw_attacks::State,
     // Validated data binding; mechanics remain their explicitly existing policy.
@@ -398,6 +421,8 @@ impl Simulation {
             next_projectile: 1,
             critical_rng: 0,
             kill_rewards: Default::default(),
+            accepted_casts: Default::default(),
+            ally_occupancy: Default::default(),
             // Local session limit, matching join's six-player policy.
             attack_presentation: attack_presentation::State::new(
                 attack_presentation::Limits::new(6).map_err(|e| format!("attack presentation capacity: {e:?}"))?),
@@ -414,6 +439,7 @@ impl Simulation {
             winner: None,
             final_result:None,
             world: None,
+            trundle_e: Default::default(),
             interactions: None,
             growth: serde_json::from_str(include_str!(
                 "../../../data/4.20/champion_growth_420.json"
@@ -436,13 +462,8 @@ impl Simulation {
         .map_err(|e| e.to_string())?;
         let seed: Point = serde_json::from_value(spawns[team as usize]["point"].clone())
             .map_err(|e| e.to_string())?;
-        let position = if self.navigation.ground(seed).is_some() {
-            seed
-        } else {
-            self.navigation
-                .nearest_walkable(seed)
-                .ok_or("no walkable spawn")?
-        };
+        let position = ally_occupancy::placement(self, name, team, seed, None)
+            .ok_or("no unoccupied allied spawn")?;
         let id = self.next_id;
         self.next_id += 1;
         self.players.insert(
@@ -484,6 +505,7 @@ impl Simulation {
                 next_repath: 0,
             },
         );
+        self.accepted_casts.register_owner(self.session,id);
         Ok(id)
     }
     pub fn command(&mut self, id: u32, action: Action) -> Result<(), String> {
@@ -495,6 +517,10 @@ impl Simulation {
             return Err("champion dead".into());
         }
         if stuns::active(player,self.tick) && matches!(&action,Action::Move{..}|Action::Attack{..}) {return Err("champion stunned".into());}
+        if trundle_e::champion_forced(player,self.tick) && matches!(&action,Action::Move{..}|Action::Attack{..}|Action::Stop|Action::Cast{..}|Action::CastAt{..}|Action::Summoner{..}|Action::SummonerTarget{..}|Action::UseItem{..}) {return Err("champion in forced movement".into());}
+        let resets_cached_completion = matches!(&action, Action::Stop | Action::Cast { .. }
+            | Action::CastAt { .. } | Action::Summoner { .. } | Action::SummonerTarget { .. }
+            | Action::UseItem { .. });
         match action {
             Action::Buy { item } => self.buy_item(id, item)?,
             Action::Sell { slot } => self.sell_item(id, slot)?,
@@ -511,15 +537,16 @@ impl Simulation {
                 if player.effects.ultimate.is_some() {
                     return Err("casting ultimate".into());
                 }
+                if self.ally_move_is_repeat(id, point) { return Ok(()); }
                 let path = self
-                    .navigation
-                    .path(player.position, point)
+                    .dynamic_path(player.position, point)
                     .ok_or("destination unreachable")?;
                 self.cancel_windup(id)?;
                 let p = self.players.get_mut(&id).unwrap();
                 p.destination = Some(point);
                 p.path = path;
                 p.target = None;
+                self.note_ally_move(id, point);
             }
             Action::Attack { target } => {
                 if player.effects.ultimate.is_some() || self.tick < player.effects.spin_until {
@@ -535,6 +562,10 @@ impl Simulation {
                 if !self.visible_to(player.team, target) {
                     return Err("target not visible".into());
                 }
+                // Every repeated attack has passed the same validity/cast/FoW guards.
+                if player.target == Some(target)
+                    && !player.windup.as_ref().is_some_and(|w| w.target != target) { return Ok(()); }
+                let destination = enemy.position;
                 let p = self.players.get_mut(&id).unwrap();
                 if p.windup.as_ref().is_some_and(|w| w.target != target) {
                     self.cancel_windup(id)?;
@@ -544,6 +575,7 @@ impl Simulation {
                 p.path.clear();
                 p.destination = None;
                 p.next_repath = 0;
+                self.note_ally_pursuit(id, target, destination);
             }
             Action::Stop => {
                 if player.effects.ultimate.is_some() {
@@ -556,29 +588,41 @@ impl Simulation {
                 p.target = None;
             }
         }
+        if resets_cached_completion && self.players[&id].destination.is_none()
+            && self.players[&id].target.is_none() {
+            self.ally_occupancy.clear_order(id);
+        }
         Ok(())
     }
     pub fn advance(&mut self) {
         if self.winner.is_some() {
+            self.clear_trundle_r_terminal();
+            self.clear_trundle_e();
             self.capture_final_results();
             return;
         }
         self.tick += 1;
+        self.accepted_casts.prune(self.tick);
         // Visual phase follows the authoritative tick even when advance_world
         // ends the match before the remaining interaction systems run.
         if let Some(i) = &mut self.interactions { i.state.nexus_crystal.advance(self.tick); }
         self.advance_shields();
         self.advance_slows();
         self.advance_stuns();
+        self.advance_trundle_e();
         self.advance_pet_orders();
         self.advance_world();
         if self.winner.is_some() {
+            self.clear_trundle_r_terminal();
+            self.clear_trundle_e();
             self.capture_final_results();
             return;
         }
         self.advance_passive_gold();
         self.advance_respawns();
         self.advance_ignite();
+        // RECONSTRUCTION: timed R after Ignite and before potions/other spells.
+        self.advance_trundle_r();
         self.advance_consumables();
         self.advance_interactions();
         self.advance_spells();
@@ -588,47 +632,13 @@ impl Simulation {
         self.advance_pet_aura();
         self.advance_regeneration();
         self.advance_pursuit();
-        let movement_speeds: HashMap<u32, f32> = self
-            .players
-            .keys()
-            .map(|id| (*id, self.movement_speed(*id)))
-            .collect();
-        for p in self.players.values_mut() {
-            if p.health <= 0. || stuns::active(p,self.tick) {
-                continue;
-            }
-            if p.effects.ultimate.is_some() || p.effects.annie_q.is_some() || p.effects.annie_w.is_some() || p.effects.annie_r.is_some() || p.windup.is_some() {
-                continue;
-            }
-            let before = p.position;
-            let mut remaining = movement_speeds[&p.id] / TICK_RATE as f32;
-            while let Some(goal) = p.path.front().copied() {
-                let distance = p.position.distance(goal);
-                if distance <= remaining {
-                    p.position = goal;
-                    p.path.pop_front();
-                    remaining -= distance;
-                } else {
-                    p.position.x += (goal.x - p.position.x) * remaining / distance;
-                    p.position.z += (goal.z - p.position.z) * remaining / distance;
-                    break;
-                }
-                if remaining <= 0. {
-                    break;
-                }
-            }
-            p.capture_facing([p.position.x - before.x, 0., p.position.z - before.z]);
-            if p.path.is_empty() {
-                p.destination = None;
-            }
-            if let Some(h) = self.navigation.ground(p.position) {
-                p.height = h;
-            }
-        }
+        self.advance_allied_motion();
         self.advance_attacks();
     }
     pub fn snapshot(&self) -> Snapshot {
         Snapshot {
+            accepted_casts: None, // no authenticated viewing team in the internal snapshot
+            trundle_e_pillars: self.trundle_e_projection(None),
             projectiles: self.projectiles.clone(),
             spell_projectiles: self.spell_projectiles.clone(),
             roster: self
@@ -1487,3 +1497,17 @@ pub mod garen_w_shimmer_profile;
 pub mod native_complex_type0_quad;
 pub mod native_simple_type0_quad;
 pub mod native_complex_quad_binding;
+
+pub mod audio_bus_rtpc_delta;
+pub mod audio_mixed_rtpc_notification;
+
+pub mod audio_main_sfx_mixed_transport;
+pub mod audio_init_rtpc_owner;
+
+pub mod audio_rtpc_first_global_value;
+
+
+pub mod audio_rtpc_values_retirement;
+
+
+pub mod audio_rtpc_remaining_retirement;

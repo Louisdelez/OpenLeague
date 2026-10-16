@@ -188,3 +188,60 @@ fn commit(connection:&mut Connection,state:&mut crate::Match,incoming:Incoming,n
     assert_eq!((before.origin,before.frequency),(after.origin,after.frequency));
     assert_eq!(clock.now,current["time"].as_f64().unwrap());
 }
+
+#[test] fn explicit_ipv6_loopback_accepted_by_policy_gets_matching_source_family() {
+    let peer:std::net::SocketAddr="[::1]:5896".parse::<std::net::SocketAddr>().unwrap();
+    assert!(validate_endpoint(peer).is_ok());
+    let local=loopback_bind_address_for_resolved_peers(&[peer]).unwrap();
+    assert_eq!(local,"[::1]:0".parse::<std::net::SocketAddr>().unwrap());
+    assert!(local.is_ipv6()&&local.ip().is_loopback());
+    let previous:std::net::SocketAddr="127.0.0.1:0".parse::<std::net::SocketAddr>().unwrap();
+    assert_ne!(previous.is_ipv6(),peer.is_ipv6());
+}
+
+#[test] fn ipv4_destinations_keep_the_existing_loopback_source_and_ephemeral_port() {
+    for remote in ["127.0.0.1:5896","127.8.9.10:65535","192.0.2.1:5896","0.0.0.0:0"] {
+        let peer:std::net::SocketAddr=remote.parse::<std::net::SocketAddr>().unwrap();
+        let local=loopback_bind_address_for_resolved_peers(&[peer]).unwrap();
+        assert_eq!(local,"127.0.0.1:0".parse::<std::net::SocketAddr>().unwrap());
+        assert_eq!(local.port(),0);
+    }
+}
+
+#[test] fn mixed_resolution_retains_ipv4_preference_without_rewriting_peer_order() {
+    let peers:Vec<std::net::SocketAddr>=["[::1]:5896","127.0.0.1:5896","127.8.9.10:5896"]
+        .into_iter().map(|s|s.parse::<std::net::SocketAddr>().unwrap()).collect();
+    let before=peers.clone();
+    assert_eq!(loopback_bind_address_for_resolved_peers(&peers).unwrap(),"127.0.0.1:0".parse::<std::net::SocketAddr>().unwrap());
+    assert_eq!(peers,before);
+    assert_eq!(loopback_bind_address_for_resolved_peers(&peers[..1]).unwrap(),"[::1]:0".parse::<std::net::SocketAddr>().unwrap());
+}
+
+#[test] fn missing_resolved_destination_cannot_select_a_socket_address() {
+    assert_eq!(loopback_bind_address_for_resolved_peers(&[]),Err("No resolved server endpoint"));
+}
+
+#[test] fn choosing_a_local_family_does_not_authorize_a_private_remote_peer() {
+    for remote in ["192.0.2.1:5896","0.0.0.0:5896","10.1.2.3:5896","[2001:db8::1]:5896","[::]:5896"] {
+        let peer:std::net::SocketAddr=remote.parse::<std::net::SocketAddr>().unwrap();
+        let local=loopback_bind_address_for_resolved_peers(&[peer]).unwrap();
+        assert!(local.ip().is_loopback());assert_eq!(local.port(),0);
+        assert_eq!(validate_endpoint(peer),Err("Private session endpoint is not local"));
+    }
+}
+
+#[test]
+fn ipv6_loopback_roundtrip_uses_candidate_source_choice() {
+    let server=UdpSocket::bind("[::1]:0").expect("OS IPv6 loopback required");
+    server.set_read_timeout(Some(Duration::from_secs(1))).unwrap();
+    let peer=server.local_addr().unwrap();
+    assert!(validate_endpoint(peer).is_ok());
+    let client=UdpSocket::bind(loopback_bind_address_for_resolved_peers(&[peer]).unwrap()).unwrap();
+    client.connect(peer).unwrap();client.set_read_timeout(Some(Duration::from_secs(1))).unwrap();
+    assert_eq!(client.send(b"OpenLeague-family-probe").unwrap(),23);
+    let mut bytes=[0u8;64];let(n,source)=server.recv_from(&mut bytes).unwrap();
+    assert_eq!(&bytes[..n],b"OpenLeague-family-probe");
+    assert!(source.is_ipv6()&&source.ip().is_loopback());
+    server.send_to(b"reply",source).unwrap();let n=client.recv(&mut bytes).unwrap();
+    assert_eq!(&bytes[..n],b"reply");
+}

@@ -1,4 +1,8 @@
 //! Source-derived MESH shader subset; not a claim of native GPU equivalence.
+#[path="heal_plus_native_material.rs"]
+pub(crate) mod heal_plus_native_material;
+#[path = "heal_plus_pass_eligibility.rs"]
+pub(crate) mod heal_plus_pass_eligibility;
 use bevy::{
     image::{ImageLoaderSettings, ImageSampler, ImageSamplerDescriptor},
     mesh::MeshVertexBufferLayoutRef,

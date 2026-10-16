@@ -1,0 +1,47 @@
+#include "IOParam/IODefine_VS.hls"
+#include "../Fog/Fog.hls"
+#include "../FogOfWar/FogOfWar_VS.hls"
+
+float4   kColorFactor   : register(c17);    // R3D_SHADER_VS_CONSTANT_PARTICLE_COLOR_FACTOR
+
+struct VS_IN
+{
+    float4  position        : X3D_VSIN_POSITION;
+    float3  normal          : X3D_VSIN_NORMAL;
+    float2  texcoord0       : X3D_VSIN_TEXCOORD0;
+};
+
+struct VS_OUT
+{
+    float4  position        : POSITION;
+    float4  color0          : TEXCOORD0;    // N.B. colors can be > 1 (e.g. mod2x), so use a full interpolator and not COLOR0 which saturates on ps_2_0
+    float4  uv0_uvDistort   : TEXCOORD1;
+
+#if defined(VERTEX_FOG)
+    float   fog             : FOG;
+#endif
+};
+
+void main( in VS_IN input, out VS_OUT output )
+{
+    output.position = mul( input.position, mProj );
+    output.color0 = kColorFactor;   // @todo no support for mesh vertex colors?
+
+    float2 uv0 = input.texcoord0 * vUVTransform.xy + vUVTransform.zw;
+    
+    // compute world position
+    float4 worldPosition = mul(input.position, mWorld);
+        
+    // Distortion
+    float2 uvDistort = output.position.xy/output.position.w;    // clip space uv
+    uvDistort   = uvDistort/2 + 0.5;    // convert to distortion buffer tex coords
+    uvDistort.y = 1 - uvDistort.y;
+    
+    output.uv0_uvDistort = float4(uv0, uvDistort);
+    
+    // Vertex fog
+    // @todo no FOG_PIXELSHADER_BLEND support?
+#if defined(VERTEX_FOG)
+    output.fog = ComputeFogValue( output.position, worldPosition.xyz );
+#endif
+}

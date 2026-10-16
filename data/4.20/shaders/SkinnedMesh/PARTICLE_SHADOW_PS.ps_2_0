@@ -1,0 +1,24 @@
+#include "../ParticleSystem/ComputeShadowMapValue.hls"
+
+sampler TEXTURE                 : register (s0);
+sampler PARTICLE_COLOR_TEXTURE  : register (s1);
+
+float2   COLOR_LOOKUP_UV        : register(c0);
+
+struct PS_IN
+{
+    float4  color0      : COLOR0;
+    float3  uv0_depth   : TEXCOORD0;    // xy = uv0, z = depth
+};
+
+float4  main(in PS_IN input) : COLOR0
+{
+    float2 uv0 = input.uv0_depth.xy;
+    float4 texel = tex2D(TEXTURE, uv0);
+    float4 particle_color_texel = tex2D(PARTICLE_COLOR_TEXTURE, COLOR_LOOKUP_UV);
+    float4 color = input.color0 * texel * particle_color_texel;
+    
+    clip(color.a - ALPHA_THRESHOLD);
+
+    return float4(packDepthToVec3(input.uv0_depth.z), 0.0f);
+}

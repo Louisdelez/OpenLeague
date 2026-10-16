@@ -9,6 +9,7 @@ import urllib.request
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
+WORKING_DOCUMENTS = frozenset(['docs/completion_plan.json', 'docs/coverage.json', 'docs/resume_checkpoint.json'])
 
 def digest(path):
     with path.open('rb') as stream:
@@ -25,6 +26,10 @@ def destination(root, relative):
 
 def restore(root, archive, entries, force=False):
     expected = {row['path']: row for row in entries}
+    for row in entries:
+        policy = row.get('preserve_existing_working_document', False)
+        if type(policy) is not bool or (policy and row['path'] not in WORKING_DOCUMENTS):
+            raise ValueError('Invalid working-document preservation policy: ' + row['path'])
     with zipfile.ZipFile(archive) as pack:
         names = pack.namelist()
         if len(names) != len(set(names)) or set(names) != set(expected):
@@ -37,6 +42,9 @@ def restore(root, archive, entries, force=False):
                 raise ValueError('Invalid size or symbolic link: ' + name)
             if target.exists():
                 if digest(target) == row['sha256']:
+                    continue
+                if row.get('preserve_existing_working_document') is True and not force:
+                    print('Preserved local working document ' + name, flush=True)
                     continue
                 if not force:
                     raise ValueError('Local file differs; preserve it or use --force: ' + name)
@@ -72,6 +80,8 @@ def main():
         if not local.exists() or local.stat().st_size != row['bytes'] or digest(local) != row['sha256']:
             if args.verify_only:
                 raise ValueError('Missing or invalid cached pack: ' + row['name'])
+            if row.get('local_only') is True:
+                raise ValueError('Missing or invalid local-only asset pack: ' + str(local))
             prefix = 'https://github.com/Louisdelez/OpenLeague/releases/download/'
             if not row['url'].startswith(prefix):
                 raise ValueError('Unexpected download origin')

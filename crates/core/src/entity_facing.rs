@@ -1,6 +1,7 @@
 //! Public physical yaw, without target identity or distance.
-//! The yaw arithmetic is native; Garen's direction producer is explicitly a
-//! reconstructed policy: real movement, attack start and each valid windup.
+//! The yaw arithmetic is native. Garen and Trundle direction producers are
+//! explicit reconstructed policies: real movement, attack start and valid windup.
+//! Trundle reuses existing call sites; native spell/callback timing is unqualified.
 use serde::{Deserialize, Deserializer, Serialize};
 
 #[derive(Debug, Clone, Copy, Serialize, PartialEq)]
@@ -32,7 +33,7 @@ impl<'de> Deserialize<'de> for Facing {
 impl crate::Champion {
     pub(crate) fn capture_facing(&mut self, direction: [f32; 3]) {
         // Deliberately do not generalize unqualified champion/cast policies.
-        if self.champion != "garen" { return; }
+        if self.champion != "garen" && self.champion != "trundle" { return; }
         match Facing::from_direction(direction) {
             Ok(Some(facing)) => self.facing = Some(facing),
             Ok(None) => {}, // Zero displacement must retain the current heading.
