@@ -1,4 +1,5 @@
-//! Active selected Ring component. Firefly and original Well/provider/whole-frame stay unqualified.
+//! Active selected Ring plus conditional own fresh-source Firefly Destroy admission.
+//! Original Firefly/Well/provider/whole-frame stay unqualified.
 //! Activation, stationary map ownership, seed/globals, sampler/cull are explicit own adapters.
 use bevy::{prelude::*,asset::{AssetId,AssetEvent,AssetEventSystems},ecs::message::MessageCursor,
     image::{ImageSampler,ImageSamplerDescriptor,ImageAddressMode,ImageFilterMode,CompressedImageFormats},
@@ -11,17 +12,115 @@ use crate::{tt_well_ring_sampler as sampler,tt_well_ring_state as state,
 pub const PLATFORM:&[u8]=include_bytes!("../../../assets/particles/relic_runes/TT_Heal_Platform.dds");
 pub const COLOR:&[u8]=include_bytes!("../../../assets/particles/relic_runes/DefaultColorOverLifetime.dds");
 const OVERLAY:&str="maps/terrain_native/DefaultFogOfWarOverlay.png";
+
+// Selected source admission at the actual Ring startup, before any retention
+// RNG/instance/image work. A null named group alone is never this admission.
+const FIREFLY_SOURCE_TEXT:&str=include_str!("../../../data/4.20/relic_runes/TT_Heal_RuneWell.json");
+const FIREFLY_GROUP:&str="Firefly_Spin";
+/// This owned adapter has no native merged cache/provider. Any future caller
+/// supplying those inputs must refuse this selected no-overlay admission.
+#[derive(Resource,Clone,Copy,Debug,PartialEq,Eq)]
+pub struct FireflySourcePolicy {
+    pub fresh_primary:bool,pub overlay_supplied:bool,pub external_provider_supplied:bool,
+    pub material_override_supplied:bool,pub prior_diffuse_supplied:bool,
+}
+impl Default for FireflySourcePolicy {
+    fn default()->Self {Self{fresh_primary:true,overlay_supplied:false,external_provider_supplied:false,
+        material_override_supplied:false,prior_diffuse_supplied:false}}
+}
+fn firefly_policy(policy:FireflySourcePolicy)->Result<(),String>{
+    if !policy.fresh_primary{return Err("Firefly dormant admission requires a fresh own primary".into());}
+    if policy.overlay_supplied{return Err("Firefly overlay is not admitted; cannot silently omit a group".into());}
+    if policy.external_provider_supplied{return Err("Firefly foreign provider is not admitted".into());}
+    if policy.material_override_supplied{return Err("Firefly foreign material overrides are not admitted".into());}
+    if policy.prior_diffuse_supplied{return Err("Firefly prior diffuse inheritance is not admitted".into());}
+    Ok(())
+}
+#[derive(Clone,Copy,Debug,PartialEq,Eq)]
+pub struct DormantFirefly {
+    single_field_334:u32,rate_max_field_d4_bits:u32,flex_flag_4b8:bool,
+    material_override_vector_empty:bool,particle_kind:u32,
+}
+impl DormantFirefly {
+    pub fn evidence(&self)->serde_json::Value {
+        serde_json::json!({"schema":1,"pid":std::process::id(),"slot":2,"group":FIREFLY_GROUP,
+            "source_troy_sha256":sampler::SOURCE_TROY_SHA256,"source_policy":"own fresh primary, no overlay/provider/override/prior diffuse",
+            "inputs":{"single_field_334":self.single_field_334,"rate_max_field_d4_bits":self.rate_max_field_d4_bits,
+                "flex_flag_4b8":self.flex_flag_4b8,"auxiliary_material_override_vector_nonempty":!self.material_override_vector_empty},
+            "particle_kind":self.particle_kind,"emitter_class":"Complex","factory_decision":"Destroy",
+            "local_status":"Dormant","active_instance_allocated":false,"diffuse_request":null,
+            "original_provider_qualified":false,"original_factory_execution_qualified":false,
+            "full_Well_qualified":false,"original_global_RNG_qualified":false,"native_pixels_qualified":false})
+    }
+}
+fn firefly_raw_absent(input:&serde_json::Value,key:&str)->Result<(),String>{
+    let hash=FIREFLY_GROUP.bytes().chain([b'*']).chain(key.bytes()).fold(0u32,|value,byte|
+        value.wrapping_mul(65599).wrapping_add(byte.to_ascii_lowercase() as u32));
+    let named=input["fields"].as_array().ok_or("Firefly raw named ledger absent")?;
+    let unknown=input["unknown_fields"].as_object().ok_or("Firefly raw unknown ledger absent")?;
+    if named.iter().any(|row|row["native_hash"].as_u64()==Some(hash as u64))||unknown.contains_key(&hash.to_string()){
+        return Err(format!("Firefly source producer {key} is present; active/Retain route is unsupported"));
+    }Ok(())
+}
+fn firefly_require_destroy(input:openleague_core::native_complex_factory_admission::Input)->Result<(),String>{
+    use openleague_core::native_complex_factory_admission::{self as factory,Decision};
+    if factory::decide(input)!=Decision::Destroy{
+        return Err(format!("Firefly native factory Retain is unsupported; cannot silently mark Dormant: {input:?}"));
+    }Ok(())
+}
+fn firefly_from_document(input:&serde_json::Value,policy:FireflySourcePolicy)->Result<DormantFirefly,String>{
+    firefly_policy(policy)?;
+    if input["source"]["sha256"].as_str()!=Some(sampler::SOURCE_TROY_SHA256)||input["semantics_qualified"]!=false{
+        return Err("Firefly source identity/qualification scope changed".into());
+    }
+    let sections=input["sections"].as_object().ok_or("Firefly source sections absent")?;
+    let system=sections.get("System").ok_or("Firefly System absent")?;
+    let groups=input["groups"].as_array().ok_or("Firefly declarations absent")?;
+    if groups.len()!=2||groups[1]["slot"]!=2||groups[1]["name"]!=FIREFLY_GROUP
+        ||!groups[1]["fields"].is_null()||sections.contains_key(FIREFLY_GROUP)||system["GroupPart2"]!=FIREFLY_GROUP
+        ||crate::native_particle_class::EmitterClass::from_system(system,2)?!=crate::native_particle_class::EmitterClass::Complex{
+        return Err("Firefly selected declaration/class changed; no dormant admission".into());
+    }
+    // Actual raw namespace hashes, including all310 unnamed entries. Missing
+    // scalar base AND first numbered knot closes the bounded reader branch.
+    for key in ["single-particle","e-rate","e-rate1","p-type","p-texture"]{firefly_raw_absent(input,key)?;}
+    for i in 0..3 {for key in [format!("e-rate_flex{i}"),format!("e-rate_flex{i}1")]{firefly_raw_absent(input,&key)?;}}
+    for i in 0..4 {for tail in ["SubMesh","Texture","GlossTexture","Priority","UVScroll","FixedAlphaScrolling","BlendMode"]{
+        firefly_raw_absent(input,&format!("MaterialOverride{i}{tail}"))?;
+    }}
+    let reference:serde_json::Value=serde_json::from_str(FIREFLY_SOURCE_TEXT).map_err(|e|format!("Firefly source JSON: {e}"))?;
+    if input!=&reference{return Err("Firefly frozen source changed; provider/overlay or unknown-hash additions are unsupported".into());}
+    // This is a selected decoded numeric adapter, not the original raw cache
+    // parser. It calls the existing scalar reader; its None result selects the
+    // primary912138..912151 one-entry zero/max0 fallback, not ctor max100.
+    let selected=&input["sections"][FIREFLY_GROUP];
+    let read=|key:&str|openleague_core::native_scalar_parameter::ScalarParameter::read_numeric(key,0.,
+        |name|crate::relic_pickup_complex_profiles::numeric(selected,name))
+        .map_err(|e|format!("Firefly selected missing scalar {key}: {e:?}"));
+    let rate_max=match read("e-rate")? {None=>0.,Some(_)=>return Err("Firefly authored rate requires active Retain route".into())};
+    let mut flex=false;
+    for i in 0..3 {if read(&format!("e-rate_flex{i}"))?.is_some(){flex=true;}}
+    // Selected getter caller fallback single0; primary910A5D fresh flexfalse;
+    // ctor3A8/3AC empty and material reader indices0..3 add only nonzero flags.
+    // These defaults are admitted only after all determinant hashes above.
+    let input=openleague_core::native_complex_factory_admission::Input{single_field_334:0,
+        rate_max_field_d4:rate_max,flex_flag_4b8:flex,auxiliary_vector_nonempty:false};
+    firefly_require_destroy(input)?;
+    Ok(DormantFirefly{single_field_334:input.single_field_334,rate_max_field_d4_bits:input.rate_max_field_d4.to_bits(),
+        flex_flag_4b8:input.flex_flag_4b8,material_override_vector_empty:!input.auxiliary_vector_nonempty,particle_kind:0})
+}
 #[derive(Clone,Copy,Debug,PartialEq,Eq,PartialOrd,Ord,Hash)]
 pub struct Key {pub session:u64,pub ready_tick:u64,pub generation:u64}
 #[derive(Clone)]
 struct Effect {key:Key,owner:state::OwnerFrame,emitter:state::Emitter}
 #[derive(Resource)]
 struct Host {profile:sampler::Profile,rotations:Vec<crate::tt_capture_sampler::RotationSource>,rng:Rng55,
-    effect:Option<Effect>,generation:u64,ordinal:u64,last_clock:Option<f64>}
+    effect:Option<Effect>,generation:u64,ordinal:u64,last_clock:Option<f64>,firefly:DormantFirefly}
 #[derive(Resource,Default)]
 pub struct Diagnostics {pub error:Option<String>,pub ordinal:u64,pub particles:usize,pub draws:usize,
     pub retired:u64,pub rng_seed:Option<u32>,pub normal_cleanup:Option<bool>,
-    pub active_key:Option<Key>,pub retired_key:Option<Key>}
+    pub active_key:Option<Key>,pub retired_key:Option<Key>,
+    pub firefly_admission:Option<DormantFirefly>,pub firefly_admission_error:Option<String>}
 #[derive(Component,Clone,Debug,PartialEq,Eq)]
 pub struct Ticket {pub key:Key,pub group:usize,pub birth:u32,pub draw:Entity,pub mesh:AssetId<Mesh>,
     pub material:AssetId<GlowMaterial>,pub images:[AssetId<Image>;4],pub layouts:[ImageLayout;2]}
@@ -191,16 +290,30 @@ impl Backend {
 }
 
 fn initialize(world:&mut World){
+    let firefly=(||->Result<DormantFirefly,String>{
+        let policy=world.get_resource::<FireflySourcePolicy>().copied().ok_or("Firefly own fresh source policy absent")?;
+        let document:serde_json::Value=serde_json::from_str(FIREFLY_SOURCE_TEXT).map_err(|e|format!("Firefly source JSON: {e}"))?;
+        firefly_from_document(&document,policy)
+    })();
+    match &firefly {
+        Ok(admission)=>{world.resource_mut::<Diagnostics>().firefly_admission=Some(*admission);
+            world.resource_mut::<Diagnostics>().firefly_admission_error=None;
+            println!("TT_Well_Firefly_source_admission {}",admission.evidence());},
+        Err(error)=>{world.resource_mut::<Diagnostics>().firefly_admission=None;
+            world.resource_mut::<Diagnostics>().firefly_admission_error=Some(error.clone());
+            warn!("TT Well Firefly source admission rejected: {error}");},
+    }
     let result=(||->Result<Host,String>{
+        let firefly=firefly?;
         let profile=sampler::profile()?;
         let time=std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map_err(|_|"Ring local seed before epoch")?;
         let filetime=u64::try_from(time.as_nanos()/100).ok().and_then(|v|v.checked_add(116_444_736_000_000_000))
             .ok_or("Ring local seed overflow")?;
         let seed=Rng55::seed_from_filetime(filetime);let mut rng=Rng55::from_filetime(filetime);
         let rotations=profile.retained(&mut rng)?;world.resource_mut::<Diagnostics>().rng_seed=Some(seed);
-        Ok(Host{profile,rotations,rng,effect:None,generation:0,ordinal:0,last_clock:None})
+        Ok(Host{profile,rotations,rng,effect:None,generation:0,ordinal:0,last_clock:None,firefly})
     })();
-    match result{Ok(host)=>{world.insert_resource(host);},Err(error)=>world.resource_mut::<Diagnostics>().error=Some(error)}
+    match result{Ok(host)=>{world.insert_resource(host);},Err(error)=>{world.resource_mut::<Diagnostics>().error=Some(error);return;}}
     let overlay=world.get_resource::<AssetServer>().map(|a|a.load(OVERLAY)).unwrap_or_default();
     world.resource_mut::<Backend>().overlay=overlay;
 }
@@ -252,6 +365,10 @@ pub fn synchronize(world:&mut World){
     let Some(mut host)=world.remove_resource::<Host>()else{return};
     let mut backend=world.remove_resource::<Backend>().unwrap_or_default();
     let mut diagnostic=world.remove_resource::<Diagnostics>().unwrap_or_default();let old=diagnostic.error.clone();
+    let firefly_guard=world.get_resource::<FireflySourcePolicy>().copied().ok_or("Firefly own fresh source policy removed".to_owned())
+        .and_then(firefly_policy);
+    diagnostic.firefly_admission_error=firefly_guard.as_ref().err().cloned();
+    diagnostic.firefly_admission=firefly_guard.as_ref().ok().map(|_|host.firefly);
     let result=(||->Result<(),String>{
         let connection=world.get_resource::<Connection>();let state=world.get_resource::<Match>();
         let wanted=connection.zip(state).and_then(|(c,s)|s.snapshot.as_ref().and_then(|s|desired(s,c.session,c.ready())));
@@ -262,7 +379,8 @@ pub fn synchronize(world:&mut World){
             host.effect=None;diagnostic.retired=diagnostic.retired.saturating_add(1);
         }
         let keys=host.effect.iter().map(|e|e.key).collect();backend.retire_effects(world,&keys)?;
-        let Some((session,ready_tick,owner))=wanted else{backend.release(world)?;return Ok(());};
+        let Some((session,ready_tick,owner))=wanted else{backend.release(world)?;return firefly_guard.clone();};
+        firefly_guard.clone()?;
         if let Some(events)=world.get_resource::<Messages<AssetEvent<Image>>>(){for event in backend.cursor.read(events){
             if matches!(event,AssetEvent::Modified{id}|AssetEvent::Removed{id} if backend.watched.contains(id)){backend.invalidated=true;}
         }}
@@ -308,6 +426,52 @@ pub(crate) fn shutdown(world:&mut World){
 mod tests{
     use super::*;
     #[derive(Resource)]struct FixtureFog(Handle<Image>);
+
+    #[test]
+    fn Firefly_selected_Well_destroy_admission_has_no_emitter_or_diffuse_substitution(){
+        let source:serde_json::Value=serde_json::from_str(FIREFLY_SOURCE_TEXT).unwrap();
+        let admitted=firefly_from_document(&source,FireflySourcePolicy::default()).unwrap();
+        assert_eq!(admitted,DormantFirefly{single_field_334:0,rate_max_field_d4_bits:0,flex_flag_4b8:false,
+            material_override_vector_empty:true,particle_kind:0});
+        let evidence=admitted.evidence();assert_eq!(evidence["factory_decision"],"Destroy");
+        assert_eq!(evidence["active_instance_allocated"],false);assert!(evidence["diffuse_request"].is_null());
+        assert_eq!(evidence["full_Well_qualified"],false);
+        let mut world=World::new();world.init_resource::<Backend>();world.init_resource::<Diagnostics>();
+        world.insert_resource(FireflySourcePolicy::default());initialize(&mut world);
+        assert!(world.contains_resource::<Host>());assert_eq!(world.resource::<Diagnostics>().firefly_admission,Some(admitted));
+        assert!(world.resource::<Diagnostics>().firefly_admission_error.is_none());
+        assert!(world.resource::<Host>().effect.is_none());assert!(world.resource::<Backend>().tickets().is_empty());
+        assert!(world.resource::<Backend>().bindings.is_none());
+    }
+    #[test]
+    fn Firefly_foreign_source_and_provider_reject_before_Ring_startup_side_effects(){
+        for failure in 0..6{
+            let mut world=World::new();world.init_resource::<Backend>();world.init_resource::<Diagnostics>();
+            world.init_resource::<Assets<Image>>();let overlay=world.resource_mut::<Assets<Image>>().add(Image::default());
+            world.resource_mut::<Backend>().overlay=overlay.clone();let mut policy=FireflySourcePolicy::default();
+            match failure{0=>policy.fresh_primary=false,1=>policy.overlay_supplied=true,2=>policy.external_provider_supplied=true,
+                3=>policy.material_override_supplied=true,4=>policy.prior_diffuse_supplied=true,_=>{}}
+            if failure!=5{world.insert_resource(policy);}initialize(&mut world);
+            assert!(!world.contains_resource::<Host>());let d=world.resource::<Diagnostics>();
+            assert!(d.error.as_ref().is_some_and(|e|e.contains("Firefly")));assert!(d.firefly_admission.is_none());
+            assert!(d.firefly_admission_error.is_some());assert!(d.rng_seed.is_none());
+            assert_eq!(world.resource::<Backend>().overlay,overlay);assert!(world.resource::<Backend>().bindings.is_none());
+            assert!(world.resource::<Backend>().tickets().is_empty());
+        }
+        let mut changed:serde_json::Value=serde_json::from_str(FIREFLY_SOURCE_TEXT).unwrap();
+        changed["unknown_fields"]["new_foreign_key"]=serde_json::json!({"value":1});
+        assert!(firefly_from_document(&changed,FireflySourcePolicy::default()).unwrap_err().contains("frozen source changed"));
+    }
+    #[test]
+    fn Firefly_retained_native_factory_inputs_never_become_dormant(){
+        use openleague_core::native_complex_factory_admission::Input;
+        for failure in 0..6{
+            let mut input=Input{single_field_334:0,rate_max_field_d4:0.,flex_flag_4b8:false,auxiliary_vector_nonempty:false};
+            match failure{0=>input.single_field_334=1,1=>input.rate_max_field_d4=1.,2=>input.flex_flag_4b8=true,
+                3=>input.auxiliary_vector_nonempty=true,4=>input.rate_max_field_d4=-1.,_=>input.rate_max_field_d4=f32::NAN}
+            assert!(firefly_require_destroy(input).unwrap_err().contains("Retain is unsupported"));
+        }
+    }
     fn snapshot()->openleague_core::Snapshot{
         let root=std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
         let nav=openleague_core::Navigation::load(
@@ -408,7 +572,8 @@ impl bevy::app::Plugin for Plugin{
         // GlowMaterial is shared with Nexus/Rune. Never register its plugin twice
         // or replace its global DrawMaterial/foreign guarded draw functions.
         if !app.is_plugin_added::<MaterialPlugin<GlowMaterial>>(){app.add_plugins(MaterialPlugin::<GlowMaterial>::default());}
-        app.init_resource::<Backend>().init_resource::<Diagnostics>().add_plugins(crate::tt_well_ring_readiness::Plugin)
+        app.init_resource::<Backend>().init_resource::<Diagnostics>().init_resource::<FireflySourcePolicy>()
+            .add_plugins(crate::tt_well_ring_readiness::Plugin)
             .add_systems(Startup,initialize.after(crate::fow_visibility_texture::setup))
             .add_systems(PostUpdate,synchronize.after(crate::receive).after(AssetEventSystems)
                 .before(bevy::camera::visibility::VisibilitySystems::CalculateBounds)

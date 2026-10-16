@@ -7,7 +7,7 @@ pub struct Definition {pub kind:Kind,pub amount:f32,pub duration_seconds:f32}
 impl Simulation {
  pub fn use_item(&mut self,id:u32,slot:u8)->Result<(),String> {
   if self.winner.is_some() {return Err("match ended".into());}
-  let p=self.players.get(&id).ok_or("unknown player")?;if p.health<=0. {return Err("champion dead".into());}
+  let p=self.players.get(&id).ok_or("unknown player")?;if trundle_e::champion_forced(p,self.tick) {return Err("champion in forced movement".into());}if p.health<=0. {return Err("champion dead".into());}
   let index=usize::from(slot);let item_id=p.inventory.get(index).ok_or("invalid inventory slot")?.ok_or("empty inventory slot")?;
   let item=shop::catalog().iter().find(|i|i.id==item_id).ok_or("item behavior not implemented")?;
   let effect=item.consumable.ok_or("item active not implemented")?;

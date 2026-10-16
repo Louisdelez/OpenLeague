@@ -1,0 +1,51 @@
+#include "../ColorPalette.hls"
+
+sampler TEXTURE                 : register(s0);
+sampler PARTICLE_COLOR_TEXTURE  : register(s1);
+sampler NORMAL_MAP              : register(s3);
+sampler REFRACT_MAP             : register(s5);
+
+float2  COLOR_LOOKUP_UV         : register(c0);
+float   DistortionPower         : register(c1);
+
+#if defined(COLORPALETTE_COLORBLIND) || defined(COLORPALETTE_SPECTATOR)
+   float4 APPLY_TEAM_COLOR_CORRECTION : register(c11);
+#endif
+
+struct PS_IN
+{
+    float4  color0          : TEXCOORD0;    // N.B. colors can be > 1 (e.g. mod2x), so use a full interpolator and not COLOR0 which saturates on ps_2_0
+    float4  uv0_uvDistort   : TEXCOORD1;
+};
+
+void main( in PS_IN input, out float4 out_color0:COLOR0 )
+{
+    float2 uv0 = input.uv0_uvDistort.xy;
+    float4 texel = tex2D(TEXTURE, uv0);
+
+    float4 particle_color_texel = tex2D(PARTICLE_COLOR_TEXTURE, COLOR_LOOKUP_UV);
+    texel = input.color0 * texel * particle_color_texel;
+    
+    // Key part of distortion
+    float2 uvDistort = input.uv0_uvDistort.zw;
+    float4 Normal = tex2D(NORMAL_MAP, uv0);
+    float2 distortion = (Normal.xy-0.5)*2.0 * DistortionPower * particle_color_texel.a;
+    float4 Refraction = tex2D(REFRACT_MAP, uvDistort + distortion);
+    out_color0 = Refraction * texel;
+    out_color0.a = Normal.a * particle_color_texel.a;
+
+    // @todo No Fog of War? Already assumed to be in the distortion buffer screen capture?
+
+#ifdef COLORPALETTE_COLORBLIND
+    if (APPLY_TEAM_COLOR_CORRECTION.r != 0.0f)
+    {
+        ApplyColorCorrectionColorblind(out_color0);
+    }
+#endif 
+#ifdef COLORPALETTE_SPECTATOR
+    if (APPLY_TEAM_COLOR_CORRECTION.r != 0.0f)
+    {
+        ApplyColorCorrectionSpectator(out_color0);
+    }
+#endif 
+}

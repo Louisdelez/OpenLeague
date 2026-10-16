@@ -9,7 +9,7 @@ impl Simulation {
             .collect();
         for (id, target) in orders {
             let p = &self.players[&id];
-            if p.health <= 0. || stuns::active(p,self.tick) || p.effects.ultimate.is_some() || p.effects.annie_q.is_some() || p.effects.annie_w.is_some() || p.effects.annie_r.is_some() || p.windup.is_some() {
+            if p.health <= 0. || stuns::active(p,self.tick) || trundle_e::champion_forced(p,self.tick) || p.effects.ultimate.is_some() || p.effects.annie_q.is_some() || p.effects.annie_w.is_some() || p.effects.annie_r.is_some() || p.windup.is_some() {
                 continue;
             }
             let Some(enemy) = self.target_info(target).filter(|enemy| {
@@ -33,10 +33,14 @@ impl Simulation {
                 continue;
             }
             let destination = enemy.position;
-            let path = self.navigation.path(p.position, destination).or_else(|| {
-                self.navigation
-                    .nearest_walkable(destination)
-                    .and_then(|goal| self.navigation.path(p.position, goal))
+            let range = self.definitions[&p.champion].attack_range + enemy.radius;
+            if self.ally_pursuit_path_current(id, target, destination, range) {
+                self.players.get_mut(&id).unwrap().next_repath = self.tick.saturating_add(10);
+                continue;
+            }
+            let path = self.dynamic_path(p.position, destination).or_else(|| {
+                self.dynamic_nearest(destination)
+                    .and_then(|goal| self.dynamic_path(p.position, goal))
             });
             let p = self.players.get_mut(&id).unwrap();
             p.next_repath = self.tick + 10;
@@ -47,6 +51,7 @@ impl Simulation {
                 p.path.clear();
                 p.destination = None;
             }
+            self.note_ally_pursuit(id, target, destination);
         }
     }
 }

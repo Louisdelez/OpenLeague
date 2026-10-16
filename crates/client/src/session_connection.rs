@@ -34,6 +34,20 @@ pub enum Incoming {
 fn nonce()->Result<t::RequestNonce,&'static str> {
     openleague_core::session_random::bytes::<16>().map(t::RequestNonce)
 }
+/// Select only a loopback source, with the resolved endpoint family.
+/// Keep the existing IPv4 source preference whenever DNS offers IPv4; this
+/// preserves legacy IPv4 behavior without granting external-session authority.
+/// An all-IPv6 result needs ::1 because an IPv4 socket cannot connect to it.
+pub fn loopback_bind_address_for_resolved_peers(peers:&[std::net::SocketAddr])->Result<std::net::SocketAddr,&'static str> {
+    use std::net::{Ipv4Addr,Ipv6Addr,SocketAddr};
+    let peer=peers.iter().find(|peer|peer.is_ipv4()).or_else(||peers.first())
+        .ok_or("No resolved server endpoint")?;
+    Ok(match peer {
+        SocketAddr::V4(_)=>SocketAddr::from((Ipv4Addr::LOCALHOST,0)),
+        SocketAddr::V6(_)=>SocketAddr::from((Ipv6Addr::LOCALHOST,0)),
+    })
+}
+
 /// Check the OS-resolved UDP peer before any secure capability is emitted.
 pub fn validate_endpoint(peer:std::net::SocketAddr)->Result<(),&'static str> {
     if peer.ip().is_loopback() {Ok(())} else {Err("Private session endpoint is not local")}
@@ -148,7 +162,8 @@ impl Connection {
             let replacement=(||->Result<UdpSocket,&'static str>{
                 let peer=self.socket.peer_addr().map_err(|_|"Session endpoint unavailable")?;
                 validate_endpoint(peer)?;
-                let socket=UdpSocket::bind("127.0.0.1:0").map_err(|_|"Recovery socket unavailable")?;
+                let local=loopback_bind_address_for_resolved_peers(std::slice::from_ref(&peer))?;
+                let socket=UdpSocket::bind(local).map_err(|_|"Recovery socket unavailable")?;
                 socket.connect(peer).map_err(|_|"Recovery connect failed")?;
                 socket.set_nonblocking(true).map_err(|_|"Recovery socket configuration failed")?;
                 self.link.client.as_mut().unwrap().recover(nonce()?)?;

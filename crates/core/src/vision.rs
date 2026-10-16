@@ -137,6 +137,8 @@ impl Simulation {
     pub fn snapshot_for(&self, viewer: u32) -> Option<Snapshot> {
         let team = self.players.get(&viewer)?.team;
         let mut snapshot = self.snapshot();
+        snapshot.accepted_casts = Some(self.accepted_casts.project(self.session,team,self.tick,|owner|self.visible_to(team,owner)));
+        snapshot.trundle_e_pillars = self.trundle_e_projection(Some(team));
         snapshot.spell_projectiles.retain(|m|self.visible_to(team,m.source)&&self.visible_to(team,m.target));
         snapshot.players.retain(|p| self.visible_to(team, p.id));
         snapshot.attack_events = match self.attack_presentation.events_for(team, |source| self.visible_to(team, source)) {

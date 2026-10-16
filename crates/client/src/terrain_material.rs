@@ -68,6 +68,13 @@ pub(crate) struct FogProbeInputs<'a> {
     pub coordinates:Vec4,pub lighting:&'a Handle<Image>,pub alpha_reference:f32,pub colormap:&'a Handle<Image>,
 }
 impl TerrainMaterial {
+    /// Borrowed exact CPU texture identities for the opt-in capture barrier.
+    /// This does not establish GPU allocation, encoded FoW, drawing or pixels.
+    pub(crate) fn capture_images(&self)->[&Handle<Image>;10] {
+        [&self.layer0,&self.layer1,&self.layer2,&self.layer3,&self.height_map,
+            &self.colormap,&self.fog_lighting,&self.cloud_opacity,
+            &self.visibility_map,&self.visibility_overlay]
+    }
     pub(crate) fn coordinate_uniform(&self)->Vec4 {self.fog_opaque}
     /// Borrowed CPU observations only; never alters material values or ownership.
     pub(crate) fn fog_probe_inputs(&self)->FogProbeInputs<'_> {
@@ -91,6 +98,10 @@ impl Material for TerrainMaterial {
 }
 #[derive(Resource, Default)]
 pub struct TerrainMaterials(HashMap<String, Handle<TerrainMaterial>>);
+impl TerrainMaterials {
+    /// Readonly current native Terrain conversion expectation; no Standard fallback.
+    pub(crate) fn expects(&self,name:&str)->bool {self.0.contains_key(name)}
+}
 #[derive(Component)]
 pub struct NativeTerrainBound;
 fn configure_image(s: &mut ImageLoaderSettings, tiled: bool) {

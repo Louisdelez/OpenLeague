@@ -7,6 +7,33 @@ import check_repo
 
 
 class PolicyTests(unittest.TestCase):
+    def pack_manifest(self, **changes):
+        pack = {"name": "local.zip", "bytes": 1, "sha256": "a" * 64,
+                "url": "https://github.com/Louisdelez/OpenLeague/releases/download/assets/local.zip"}
+        pack.update(changes)
+        return {"packs": [pack]}
+
+    def test_explicit_documented_local_pack_is_not_a_remote_release(self):
+        manifest = self.pack_manifest(local_only=True, url=None)
+        manifest["local_derivation"] = {"base_release": "assets-original", "scope": "Local corrected image; not uploaded"}
+        self.assertEqual(check_repo.asset_pack_errors(manifest), [])
+        manifest["packs"][0]["url"] = "https://github.com/Louisdelez/OpenLeague/releases/download/assets/local.zip"
+        self.assertTrue(check_repo.asset_pack_errors(manifest))
+
+    def test_local_pack_without_provenance_is_rejected(self):
+        self.assertTrue(check_repo.asset_pack_errors(self.pack_manifest(local_only=True, url=None)))
+
+    def test_null_remote_url_and_non_boolean_local_flag_are_rejected(self):
+        self.assertTrue(check_repo.asset_pack_errors(self.pack_manifest(url=None)))
+        self.assertTrue(check_repo.asset_pack_errors(self.pack_manifest(local_only="true", url=None)))
+
+    def test_private_agent_state_is_not_publishable(self):
+        self.assertTrue(check_repo.forbidden_path(".ai-tools/state/handoffs/private.json"))
+        self.assertFalse(check_repo.forbidden_path(".ai-tools/project.mjs"))
+
+    def test_boolean_asset_size_is_rejected(self):
+        self.assertTrue(check_repo.asset_pack_errors(self.pack_manifest(bytes=True)))
+
     def test_breaking_commit_with_multiline_body(self):
         self.assertEqual(check_repo.message_errors("feat(network)!: change packet format\n\nRequires matching clients."), [])
 

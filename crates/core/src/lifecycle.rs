@@ -46,15 +46,13 @@ impl Simulation {
                 .unwrap()
         });
         for id in due {
+            self.clear_trundle_r_for(id);
             let max_mana = self.stats(id).max_mana;
             let p = &self.players[&id];
             let seed: Point =
                 serde_json::from_value(spawns[p.team as usize]["point"].clone()).unwrap();
-            let Some(position) = self
-                .navigation
-                .ground(seed)
-                .map(|_| seed)
-                .or_else(|| self.navigation.nearest_walkable(seed))
+            let Some(position) = ally_occupancy::placement(
+                self, &p.champion, p.team, seed, Some(id))
             else {
                 continue;
             };
@@ -81,6 +79,7 @@ impl Simulation {
             p.stuns.clear();
             p.next_repath = 0;
             p.next_attack = self.tick;
+            self.ally_occupancy.remove_actor(id);
         }
     }
 }

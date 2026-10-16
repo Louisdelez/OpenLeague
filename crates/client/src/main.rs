@@ -1,3 +1,5 @@
+mod six_gui_capture_readiness;
+mod six_client_match_observation;
 mod tt_capture_observation;
 mod tt_well_ring_sampler;
 mod tt_well_ring_state;
@@ -212,6 +214,7 @@ mod grass_projection;
 #[allow(dead_code)] // Native rectangle consumer qualified; camera, mask producer and live actor gates pending.
 mod grass_rectangle;
 mod actor_fow;
+mod native_minion_mips;
 mod material_selection;
 mod garen_w_state;
 mod garen_w_profile;
@@ -305,8 +308,13 @@ mod annie_ready;
 mod entity_orientation;
 mod camera_native;
 mod camera_projection_bridge;
+mod camera_lock;
+mod camera_lock_ui;
 mod ordinary_camera_input;
 mod animation;
+mod trundle_w_animation;
+mod trundle_cast_animation;
+mod trundle_e_visual;
 mod nexus_idle_particles;
 mod nexus_complex_mesh;
 mod nexus_complex_material;
@@ -357,7 +365,7 @@ use bevy::{
     world_serialization::WorldAssetRoot,
 };
 use openleague_core::{Action, Point, Snapshot};
-use std::{collections::HashMap, net::UdpSocket, time::Instant};
+use std::{collections::HashMap, net::{ToSocketAddrs, UdpSocket}, time::Instant};
 #[derive(Resource)]
 struct Connection {
     socket: UdpSocket,
@@ -379,6 +387,9 @@ struct Match {
     attack_visuals: attack_animation::State,
     vilemaw_visuals: vilemaw_attack_animation::State,
     w_visuals: garen_w_live::Visuals,
+    trundle_w_visuals: trundle_w_animation::State,
+    trundle_cast_visuals: trundle_cast_animation::State,
+    trundle_e_visuals: trundle_e_visual::State,
     missile_contexts: Vec<Snapshot>,
     visuals: HashMap<u32, Entity>,
     destroyed_structures: HashMap<u32, bool>,
@@ -507,10 +518,12 @@ fn run_client(exit: &mut bevy::app::AppExit) {
         Ok(client)=>client,
         Err(error)=>{eprintln!("Session bootstrap failed: {error}");*exit=bevy::app::AppExit::error();return;}
     };
-    let socket = UdpSocket::bind("127.0.0.1:0").unwrap();
-    socket
-        .connect(std::env::var("OPENLEAGUE_SERVER").unwrap_or_else(|_| "127.0.0.1:5896".into()))
-        .unwrap();
+    let server = std::env::var("OPENLEAGUE_SERVER").unwrap_or_else(|_| "127.0.0.1:5896".into());
+    let peers: Vec<_> = server.to_socket_addrs().expect("resolve server endpoint").collect();
+    let local = session_connection::loopback_bind_address_for_resolved_peers(&peers)
+        .expect("resolved server endpoint required");
+    let socket = UdpSocket::bind(local).unwrap();
+    socket.connect(peers.as_slice()).unwrap();
     if session_client.is_some() && socket.peer_addr().map_err(|_|"Session endpoint unavailable")
         .and_then(session_connection::validate_endpoint).is_err() {
         eprintln!("Private session endpoint rejected");*exit=bevy::app::AppExit::error();return;
@@ -568,16 +581,21 @@ fn run_client(exit: &mut bevy::app::AppExit) {
         .add_plugins(native_hud_inventory::Plugin)
         .add_plugins(native_minimap::Plugin)
         .add_plugins(map_relic_world::Plugin)
+        .add_plugins(trundle_e_visual::Plugin)
         .add_plugins(relic_pickup_events::Plugin)
         .add_plugins(relic_pickup_seven_integration::Plugin)
         .add_plugins((tt_capture_live::Plugin,tt_capture_observation::Plugin,tt_well_ring_live::Plugin,tt_well_ring_observation::Plugin))
+        .add_plugins(native_minion_mips::Plugin)
         .add_plugins(native_minion_fade_material::Plugin)
 
         .add_plugins(native_minion_fade_producer::Plugin)
         .add_plugins(native_minion_fade_observation::Plugin)
         .add_plugins(endgame_minion_no_render::Plugin)
         .add_plugins((endgame_ui_observation::Plugin,endgame_minion_probe::Plugin))
+        .add_plugins(six_gui_capture_readiness::Plugin)
+        .add_plugins(six_client_match_observation::Plugin)
         .add_plugins(spell_input::Plugin)
+        .add_plugins((camera_lock::Plugin,camera_lock_ui::Plugin))
         .add_plugins(ordinary_camera_input::Plugin)
         .add_plugins(native_hud_live_probe::Plugin)
         .add_plugins(doran_gui_probe::Plugin)
@@ -841,6 +859,9 @@ fn receive(
                     state.attack_visuals.reset(session);
                     state.vilemaw_visuals.reset(session);
                     state.w_visuals.reset(session);
+                    state.trundle_w_visuals.reset(session);
+                    state.trundle_cast_visuals.reset(session,player);
+                    state.trundle_e_visuals.reset(session);
                     state.missile_contexts.clear();
                     if epoch.is_none() {effect_clock.reset_session();}
                     connection.sequence = 0;
@@ -853,6 +874,9 @@ fn receive(
                     if garen_w_live::begin_presentation_epoch(&mut state,session,context.epoch)!=Ok(true) {
                         connection.fail_session("Presentation epoch could not be established");break;
                     }
+                    state.trundle_w_visuals.begin_epoch(session,context.epoch);
+                    state.trundle_cast_visuals.begin_epoch(session,context.epoch,player);
+                    state.trundle_e_visuals.begin_epoch(session,context.epoch);
                     effect_clock.reset_session();
                 }
                 connection.rejection.clear();
@@ -886,6 +910,20 @@ fn receive(
                     Ok(true) => {},
                     Ok(false) => continue,
                     Err(error) => { warn!("Presentation snapshot rejected: {error}"); continue; },
+                }
+                // Optional W presentation observes only this already accepted
+                // authoritative packet; its errors never reject gameplay/attacks.
+                if let Err(error)=state.trundle_w_visuals.observe_accepted(&snapshot,effect_clock.now) {
+                    warn!("Trundle W presentation disabled: {error}");
+                }
+                if let Some(viewer)=connection.id {
+                    let Match{trundle_cast_visuals,trundle_w_visuals,..}=&mut *state;
+                    if let Err(error)=trundle_cast_visuals.observe_with_legacy(&snapshot,viewer,effect_clock.now,effect_clock.presentation_ready(),trundle_w_visuals) {
+                        warn!("Optional W/R cast presentation disabled: {error}");
+                    }
+                }
+                if let Err(error)=state.trundle_e_visuals.observe_accepted(&snapshot,effect_clock.now) {
+                    warn!("Trundle pillar presentation hidden: {error}");
                 }
                 if has_missile_context { state.missile_contexts.push(snapshot.clone()); }
                 if std::env::var_os("OPENLEAGUE_Q_STARTUP_PROBE").is_some() {
@@ -1043,12 +1081,14 @@ fn commands(
     learning_hud: Res<native_hud_learning::Live>,
     inventory_capture: Res<native_hud_inventory::Capture>,
     minimap_capture: Option<Res<native_minimap::Capture>>,
+    camera_lock_capture: Option<Res<camera_lock_ui::Capture>>,
     shortcuts: Res<spell_input::Shortcuts>,
 ) {
     if inventory_capture.blocks_commands() || (learning_hud.pointer_hover && buttons.just_pressed(MouseButton::Right)) || shop.focused || !connection.ready() || state.snapshot.as_ref().is_some_and(|s|s.winner.is_some()) {
         return;
     }
-    let minimap_pointer=minimap_capture.is_some_and(|capture|capture.blocks_world_pointer());
+    let minimap_pointer=minimap_capture.is_some_and(|capture|capture.blocks_world_pointer())
+        || camera_lock_capture.is_some_and(|capture|capture.blocks_world_pointer());
     let shortcut = shortcuts.selected();
     let skill = shortcut.map(|intent| intent.slot);
     let targeted_q=skill==Some(0)&&state.snapshot.as_ref().and_then(|s|s.players.iter().find(|p|Some(p.id)==connection.id)).is_some_and(|p|p.champion=="annie");

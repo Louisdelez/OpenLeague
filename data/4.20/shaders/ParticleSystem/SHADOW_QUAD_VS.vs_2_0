@@ -1,0 +1,37 @@
+#include "IOParam/IODefine_VS.hls"
+#include "common.hls"
+
+// x = num frames along x, y = 1 / num frames along x, z = 1 / num frames along y
+float4 TEXTURE_INFO : register(c235);
+
+struct VS_IN
+{
+    float4  position    : X3D_VSIN_POSITION;
+    float4  color0      : X3D_VSIN_COLOR0;
+    float3  texcoord0   : X3D_VSIN_TEXCOORD0;   // xy = uv0, z = Frame number (why not a constant?)
+    float2  texcoord1   : X3D_VSIN_TEXCOORD1;
+};
+
+struct VS_OUT
+{
+    float4  position    : POSITION;
+    float4  color0      : COLOR0;
+    float4  uv0_uv1     : TEXCOORD0;
+    float   depth       : TEXCOORD1;
+};
+
+void main( in VS_IN input, out VS_OUT output )
+{
+    // Position
+    output.position = mul( input.position, mProj ); 
+
+    // Color
+    output.color0 = input.color0.VCOLORSWIZZLE;
+
+    float frameNumber = input.texcoord0.z; // @todo why isn't this in a constant?
+    output.uv0_uv1.xy = CalculateTexDivUV(input.texcoord0.xy, frameNumber, TEXTURE_INFO);
+    
+    // Particle color texture lookup
+    output.uv0_uv1.zw = input.texcoord1;
+    output.depth = output.position.z;
+}

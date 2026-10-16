@@ -90,18 +90,28 @@ impl State {
         if !now.is_finite() { return Err("attack presentation received a non-finite clock".into()); }
         openleague_core::garen_q_resource::binding().map_err(str::to_owned)?;
         let roster: BTreeSet<_> = snapshot.roster.iter()
-            .filter(|entry| entry.champion == "garen").map(|entry| entry.id).collect();
+            .filter(|entry| openleague_core::attacks::supports_champion_presentation(&entry.champion)).map(|entry| entry.id).collect();
         if roster.len() > self.journal.limits().active_sources() {
             return Err("attack presentation roster exceeds configured capacity".into());
         }
         let players: BTreeMap<_, _> = snapshot.players.iter()
-            .filter(|player| player.champion == "garen").map(|player| (player.id, player)).collect();
+            .filter(|player| openleague_core::attacks::supports_champion_presentation(&player.champion)).map(|player| (player.id, player)).collect();
         if players.keys().any(|source| !roster.contains(source)) {
             return Err("visible attack source absent from the session roster".into());
         }
+        // Garen's empowered kind remains restricted to Garen for all other
+        // canonical champions, even in a correctly ordered packet.
+        if snapshot.attack_events.iter().any(|event| {
+            players.get(&event.attack.source).is_some_and(|player| player.champion != "garen")
+                && matches!(event.phase, Phase::Started{kind:Kind::GarenQ} | Phase::Resolved{kind:Kind::GarenQ,..})
+        }) { return Err("GarenQ presentation kind on a non-Garen scoped source".into()); }
+        if snapshot.attack_events.iter().any(|event| {
+            players.get(&event.attack.source).is_some_and(|player| player.champion != "trundle")
+                && matches!(event.phase, Phase::Started{kind:Kind::TrundleQ} | Phase::Resolved{kind:Kind::TrundleQ,..})
+        }) { return Err("TrundleQ presentation kind on a non-Trundle scoped source".into()); }
         // Build from the original player slice, so duplicate sources are still
         // rejected by Journal instead of being hidden by BTreeMap collection.
-        let visible: Vec<_> = snapshot.players.iter().filter(|player| player.champion == "garen")
+        let visible: Vec<_> = snapshot.players.iter().filter(|player| openleague_core::attacks::supports_champion_presentation(&player.champion))
             .map(|player| VisibleSource { source: player.id,
                 active_attack: player.windup.as_ref().and_then(|windup| windup.presentation.as_ref()).map(|attack| attack.id) })
             .collect();
@@ -149,7 +159,8 @@ impl State {
         for (&source, player) in &players {
             let active = player.windup.as_ref().and_then(|windup| windup.presentation.as_ref()).map(|attack| attack.id);
             let blocked = player.health <= 0. || openleague_core::stuns::active(player, snapshot.tick)
-                || snapshot.tick < player.effects.spin_until || player.effects.ultimate.is_some();
+                || snapshot.tick < player.effects.spin_until || player.effects.ultimate.is_some()
+                || player.effects.annie_q.is_some() || player.effects.annie_w.is_some() || player.effects.annie_r.is_some();
             if blocked {
                 if let Some(context) = next.contexts.get(&source).copied() { next.interrupt(source, context.attack.id); }
                 if let Some(id) = active { next.interrupt(source, id); }
@@ -208,6 +219,13 @@ impl State {
                 if age >= f64::from(duration) { return None; }
                 openleague_core::garen_q_resource::binding().ok()?.presentation_role()
             }
+            Kind::TrundleQ => {
+                // Reconstructed playback consumes the actual loaded bite clip;
+                // duration is not a native attack release/cancellation time.
+                let duration=q_duration.filter(|value|value.is_finite() && *value>0.)?;
+                if age>=f64::from(duration) {return None;}
+                "spell1"
+            }
             Kind::Basic | Kind::Critical => {
                 // Existing local 12-tick visual window, extended only while
                 // the snapshot still proves this exact windup is active.
@@ -225,6 +243,23 @@ mod tests {
     use super::*;
     use openleague_core::{attack_presentation::{Audience, CancelReason, State as Facts}, attacks::Windup,
         Navigation, Point, Simulation};
+
+    #[test]
+    fn reconstructed_trundle_q_kind_is_scoped_and_uses_loaded_bite_duration() {
+        let mut facts=Facts::default();let attack=facts.begin(1,1,10,Kind::TrundleQ,all()).unwrap();
+        let mut packet=snapshot(2,&facts,Some(attack));
+        packet.players[0].champion="trundle".into();packet.roster[0].champion="trundle".into();
+        let mut state=State::default();state.reset(7);state.observe(&packet,1.).unwrap();
+        let selected=state.selection(1,1.,Some(1.)).unwrap();
+        assert_eq!(selected.kind,Kind::TrundleQ);assert_eq!(selected.role,"spell1");
+        assert_eq!(selected.attack,attack.id);assert_eq!(selected.started,1);
+        assert!(state.selection(1,1.,None).is_none());
+        assert!(state.selection(1,1.,Some(0.01)).is_none());
+        assert!(state.selection(1,2.,Some(1.)).is_none());
+        // A forged empowered kind must fail before changing receiver state.
+        packet.players[0].champion="ashe".into();packet.roster[0].champion="ashe".into();
+        let before=state.clone();assert!(state.observe(&packet,1.1).is_err());assert_eq!(state,before);
+    }
 
     #[test]
     fn q_registry_selection_consumes_verified_alias_and_actual_duration() {
@@ -517,5 +552,244 @@ mod tests {
         hidden.roster.clear();state.observe_frame(&hidden,4,5.25).unwrap();
         assert!(state.contexts.is_empty());assert!(state.anchors.is_empty());
         assert!(state.interrupted.is_empty());assert!(state.selection(1,5.25,Some(1.)).is_none());
+    }
+
+
+    // Protocol fixtures, not native animation timing or an actual scene render.
+    fn scoped_snapshot(name:&str,tick:u64,facts:&Facts,active:Option<Attack>)->Snapshot {
+        let mut value=snapshot(tick,facts,active);
+        value.players[0].champion=name.into();value.roster[0].champion=name.into();value
+    }
+    #[test]
+    fn annie_ashe_delayed_identity_uses_started_age_and_duplicate_cannot_restart() {
+        for name in ["annie","ashe"] {
+            let mut facts=Facts::default();let attack=facts.begin(1,100,130,Kind::Basic,all()).unwrap();
+            let mut early=State::default();early.reset(7);early.observe(&scoped_snapshot(name,101,&facts,Some(attack)),5.).unwrap();
+            let mut late=State::default();late.reset(7);let packet=scoped_snapshot(name,110,&facts,Some(attack));late.observe(&packet,5.).unwrap();
+            let selected=late.selection(1,5.,None).unwrap();
+            assert_eq!((selected.attack,selected.started,selected.role),(attack.id,100,"attack"));
+            assert!((selected.age_seconds-10./30.).abs()<0.0001);
+            assert!((early.selection(1,5.,None).unwrap().age_seconds-1./30.).abs()<0.0001);
+            let before=late.clone();assert!(!late.observe(&packet,5.).unwrap());assert_eq!(late,before);
+            assert_eq!(late.selection(1,5.,None),Some(selected));
+        }
+    }
+    #[test]
+    fn annie_ashe_cooldown_without_started_or_active_windup_never_invents_attack() {
+        for name in ["annie","ashe"] {
+            let mut facts=Facts::default();let attack=facts.begin(1,100,111,Kind::Basic,all()).unwrap();
+            facts.resolve(attack,111,Kind::Basic,false,all()).unwrap();
+            let mut packet=scoped_snapshot(name,112,&facts,None);packet.players[0].next_attack=152;
+            let mut state=State::default();state.reset(7);state.observe(&packet,5.).unwrap();
+            assert!(state.selection(1,5.,None).is_none());
+        }
+    }
+    #[test]
+    fn annie_ashe_cancel_and_death_do_not_resume_old_identity_after_fog() {
+        for name in ["annie","ashe"] {for death in [false,true] {
+            let mut facts=Facts::default();let attack=facts.begin(1,1,30,Kind::Basic,all()).unwrap();
+            let mut state=State::default();state.reset(7);state.observe(&scoped_snapshot(name,2,&facts,Some(attack)),1.).unwrap();
+            if death {
+                let mut blocked=scoped_snapshot(name,3,&facts,Some(attack));blocked.players[0].health=0.;state.observe(&blocked,1.).unwrap();
+            } else {
+                facts.cancel(attack,3,CancelReason::Order,all()).unwrap();state.observe(&scoped_snapshot(name,3,&facts,None),1.).unwrap();
+            }
+            assert!(state.selection(1,1.,None).is_none());
+            let mut hidden=scoped_snapshot(name,4,&facts,None);hidden.players.clear();hidden.attack_events.clear();state.observe(&hidden,1.).unwrap();
+            if death {state.observe(&scoped_snapshot(name,5,&facts,Some(attack)),1.).unwrap();}
+            else {state.observe(&scoped_snapshot(name,5,&facts,None),1.).unwrap();}
+            assert!(state.selection(1,1.,None).is_none());
+        }}
+    }
+    #[test]
+    fn annie_ashe_reject_garen_q_kind_transactionally() {
+        for name in ["annie","ashe"] {
+            let mut facts=Facts::default();let attack=facts.begin(1,1,20,Kind::GarenQ,all()).unwrap();
+            let mut state=State::default();state.reset(7);let before=state.clone();
+            assert!(state.observe(&scoped_snapshot(name,2,&facts,Some(attack)),1.).is_err());assert_eq!(state,before);
+        }
+    }
+    #[test]
+    fn six_mixed_scoped_sources_fit_existing_journal_capacity() {
+        let facts=Facts::default();let template=snapshot(2,&facts,None);
+        let mut packet=template.clone();packet.players.clear();packet.roster.clear();
+        let mut facts=Facts::default();
+        for (index,name) in ["garen","annie","ashe","garen","annie","ashe"].iter().enumerate() {
+            let id=index as u32+1;let attack=facts.begin(id,1,20,Kind::Basic,all()).unwrap();
+            let mut player=template.players[0].clone();player.id=id;player.champion=(*name).into();
+            player.windup=Some(Windup{target:99,started:1,release:20,cancelable:true,critical:false,presentation:Some(attack)});packet.players.push(player);
+            let mut roster=template.roster[0].clone();roster.id=id;roster.champion=(*name).into();packet.roster.push(roster);
+        }
+        packet.attack_events=facts.events();let mut state=State::default();state.reset(7);state.observe(&packet,1.).unwrap();
+        for id in 1..=6 {assert_eq!(state.selection(id,1.,None).unwrap().age_seconds,1./30.);}
+    }
+
+
+    // Protocol facts across the canonical catalogue. These fixtures do not
+    // establish clip playback, native timing, champion spells or pixels.
+    fn all122_canonical_names() -> Vec<String> {
+        let catalog = openleague_core::champion_catalog().unwrap();
+        assert_eq!(catalog.len(), 122);
+        catalog.into_keys().collect()
+    }
+
+    #[test]
+    fn all122_basic_and_critical_facts_preserve_identity_and_start_at_resolution() {
+        for name in all122_canonical_names() { for kind in [Kind::Basic, Kind::Critical] {
+            let mut facts = Facts::default();
+            let attack = facts.begin(1, 1, 10, kind, all()).unwrap();
+            let mut state = State::default(); state.reset(7);
+            state.observe(&scoped_snapshot(&name, 2, &facts, Some(attack)), 1.).unwrap();
+            let role = if kind == Kind::Critical { "crit" } else { "attack" };
+            let started = state.selection(1, 1., None).unwrap();
+            assert_eq!((started.attack, started.kind, started.role, started.started),
+                (attack.id, kind, role, 1), "{name}");
+            assert!((started.age_seconds - 1. / 30.).abs() < 0.0001, "{name}");
+            facts.resolve(attack, 10, kind, true, all()).unwrap();
+            state.observe(&scoped_snapshot(&name, 10, &facts, None), 1.1).unwrap();
+            let resolved = state.selection(1, 1.1, None).unwrap();
+            assert_eq!((resolved.attack, resolved.kind, resolved.role, resolved.started),
+                (attack.id, kind, role, 1), "{name}");
+            assert!((resolved.age_seconds - 9. / 30.).abs() < 0.0001, "{name}");
+            assert!(state.error().is_none(), "{name}");
+        }}
+    }
+
+    #[test]
+    fn all122_delayed_basic_and_critical_age_and_duplicate_cannot_restart() {
+        for name in all122_canonical_names() { for kind in [Kind::Basic, Kind::Critical] {
+            let mut facts = Facts::default();
+            let attack = facts.begin(1, 100, 130, kind, all()).unwrap();
+            let mut early = State::default(); early.reset(7);
+            early.observe(&scoped_snapshot(&name, 101, &facts, Some(attack)), 5.).unwrap();
+            let mut late = State::default(); late.reset(7);
+            let packet = scoped_snapshot(&name, 110, &facts, Some(attack));
+            late.observe(&packet, 5.).unwrap();
+            let selected = late.selection(1, 5., None).unwrap();
+            assert_eq!((selected.attack, selected.started, selected.kind), (attack.id, 100, kind), "{name}");
+            assert!((selected.age_seconds - 10. / 30.).abs() < 0.0001, "{name}");
+            assert!((early.selection(1, 5., None).unwrap().age_seconds - 1. / 30.).abs() < 0.0001, "{name}");
+            let before = late.clone();
+            assert!(!late.observe(&packet, 6.).unwrap(), "{name}");
+            assert_eq!(late, before, "{name}");
+            assert_eq!(late.selection(1, 5., None), Some(selected), "{name}");
+        }}
+    }
+
+    #[test]
+    fn all122_cooldown_and_unidentified_windup_without_started_never_invent_attack() {
+        for name in all122_canonical_names() {
+            let facts = Facts::default();
+            let mut packet = scoped_snapshot(&name, 112, &facts, None);
+            packet.players[0].next_attack = 152;
+            let mut state = State::default(); state.reset(7);
+            state.observe(&packet, 5.).unwrap();
+            assert!(state.selection(1, 5., None).is_none(), "{name}");
+            packet.tick = 113;
+            packet.players[0].windup = Some(Windup { target: 2, started: 112, release: 120,
+                cancelable: true, critical: true, presentation: None });
+            state.observe(&packet, 5.1).unwrap();
+            assert!(state.selection(1, 5.1, None).is_none(), "{name}");
+            assert!(state.error().is_none(), "{name}");
+        }
+    }
+
+    #[test]
+    fn all122_fog_gap_hides_selection_then_resumes_only_same_active_identity_age() {
+        for name in all122_canonical_names() { for kind in [Kind::Basic, Kind::Critical] {
+            let mut facts = Facts::default();
+            let attack = facts.begin(1, 1, 30, kind, all()).unwrap();
+            let mut state = State::default(); state.reset(7);
+            state.observe(&scoped_snapshot(&name, 2, &facts, Some(attack)), 1.).unwrap();
+            let mut hidden = scoped_snapshot(&name, 3, &facts, None);
+            hidden.players.clear(); hidden.attack_events.clear();
+            state.observe(&hidden, 1.).unwrap();
+            assert!(state.selection(1, 1., None).is_none(), "{name}");
+            state.observe(&scoped_snapshot(&name, 10, &facts, Some(attack)), 1.).unwrap();
+            let resumed = state.selection(1, 1., None).unwrap();
+            assert_eq!((resumed.attack, resumed.kind, resumed.started), (attack.id, kind, 1), "{name}");
+            assert!((resumed.age_seconds - 9. / 30.).abs() < 0.0001, "{name}");
+        }}
+    }
+
+    #[test]
+    fn all122_cancel_and_death_barriers_prevent_old_identity_resumption_after_fog() {
+        for name in all122_canonical_names() { for kind in [Kind::Basic, Kind::Critical] { for death in [false, true] {
+            let mut facts = Facts::default();
+            let attack = facts.begin(1, 1, 30, kind, all()).unwrap();
+            let mut state = State::default(); state.reset(7);
+            state.observe(&scoped_snapshot(&name, 2, &facts, Some(attack)), 1.).unwrap();
+            if death {
+                let mut blocked = scoped_snapshot(&name, 3, &facts, Some(attack));
+                blocked.players[0].health = 0.; state.observe(&blocked, 1.).unwrap();
+            } else {
+                facts.cancel(attack, 3, CancelReason::Order, all()).unwrap();
+                state.observe(&scoped_snapshot(&name, 3, &facts, None), 1.).unwrap();
+            }
+            assert!(state.selection(1, 1., None).is_none(), "{name}, death={death}");
+            let mut hidden = scoped_snapshot(&name, 4, &facts, None);
+            hidden.players.clear(); hidden.attack_events.clear(); state.observe(&hidden, 1.).unwrap();
+            state.observe(&scoped_snapshot(&name, 5, &facts, if death { Some(attack) } else { None }), 1.).unwrap();
+            assert!(state.selection(1, 1., None).is_none(), "{name}, death={death}");
+            assert!(state.error().is_none(), "{name}");
+        }}}
+    }
+
+    #[test]
+    fn all121_non_garen_reject_garen_q_started_and_resolved_transactionally() {
+        let names: Vec<_> = all122_canonical_names().into_iter().filter(|name| name != "garen").collect();
+        assert_eq!(names.len(), 121);
+        for name in names { for at_resolution in [false, true] {
+            let mut facts = Facts::default();
+            let first_kind = if at_resolution { Kind::Basic } else { Kind::GarenQ };
+            let attack = facts.begin(1, 1, 10, first_kind, all()).unwrap();
+            let mut state = State::default(); state.reset(7);
+            if at_resolution {
+                state.observe(&scoped_snapshot(&name, 2, &facts, Some(attack)), 1.).unwrap();
+                facts.resolve(attack, 10, Kind::GarenQ, true, all()).unwrap();
+            }
+            let before = state.clone();
+            let packet = scoped_snapshot(&name, if at_resolution { 10 } else { 2 }, &facts,
+                if at_resolution { None } else { Some(attack) });
+            let error = state.observe(&packet, 1.1).unwrap_err();
+            assert!(error.contains("GarenQ presentation kind"), "{name}: {error}");
+            assert_eq!(state, before, "{name}, at_resolution={at_resolution}");
+        }}
+    }
+
+    #[test]
+    fn six_distinct_catalogue_champions_fit_and_seventh_roster_is_transactionally_rejected() {
+        let names = all122_canonical_names();
+        assert_eq!(names.iter().take(6).collect::<BTreeSet<_>>().len(), 6);
+        let facts = Facts::default(); let template = scoped_snapshot(&names[0], 2, &facts, None);
+        let mut packet = template.clone(); packet.players.clear(); packet.roster.clear();
+        let mut facts = Facts::default();
+        for (index, name) in names.iter().take(6).enumerate() {
+            let id = index as u32 + 1;
+            let kind = if index % 2 == 0 { Kind::Basic } else { Kind::Critical };
+            let attack = facts.begin(id, 1, 20, kind, all()).unwrap();
+            let mut player = template.players[0].clone(); player.id = id; player.champion = name.clone();
+            player.windup = Some(Windup { target: 99, started: 1, release: 20,
+                cancelable: true, critical: kind == Kind::Critical, presentation: Some(attack) });
+            packet.players.push(player);
+            let mut roster = template.roster[0].clone(); roster.id = id; roster.champion = name.clone();
+            packet.roster.push(roster);
+        }
+        packet.attack_events = facts.events();
+        let mut state = State::default(); state.reset(7); state.observe(&packet, 1.).unwrap();
+        for id in 1..=6 {
+            let selected = state.selection(id, 1., None).unwrap();
+            assert_eq!(selected.kind, if id % 2 == 1 { Kind::Basic } else { Kind::Critical });
+            assert!((selected.age_seconds - 1. / 30.).abs() < 0.0001);
+        }
+        let before = state.clone(); let mut over_capacity = packet.clone(); over_capacity.tick = 3;
+        let mut seventh = template.players[0].clone(); seventh.id = 7; seventh.champion = names[6].clone();
+        seventh.windup = None; over_capacity.players.push(seventh);
+        let mut roster = template.roster[0].clone(); roster.id = 7; roster.champion = names[6].clone();
+        over_capacity.roster.push(roster);
+        assert_eq!(over_capacity.roster.iter().map(|entry| &entry.champion).collect::<BTreeSet<_>>().len(), 7);
+        let error = state.observe(&over_capacity, 1.1).unwrap_err();
+        assert!(error.contains("roster exceeds configured capacity"));
+        assert_eq!(state, before);
     }
 }
