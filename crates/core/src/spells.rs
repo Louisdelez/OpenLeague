@@ -3,6 +3,18 @@ use crate::*;
 use std::sync::OnceLock;
 #[derive(Debug, Clone, Default, Serialize, Deserialize)]
 pub struct Effects {
+    #[serde(default, skip_serializing_if="Option::is_none")]
+    pub ezreal_q: Option<ezreal_q::CastLock>,
+    #[serde(default, skip_serializing_if="Option::is_none")]
+    pub ezreal_w: Option<ezreal_w::CastLock>,
+    #[serde(default, skip_serializing_if="Option::is_none")]
+    pub trundle_e_push: Option<trundle_e::ForcedMovement>,
+    #[serde(default)]
+    pub trundle_q: trundle_q::State,
+    #[serde(default)]
+    pub trundle_w: Option<trundle_w::Zone>,
+    #[serde(default)]
+    pub trundle_r: Option<trundle_r::Drain>,
     #[serde(default)]
     pub pyromania: u8,
     #[serde(default)]
@@ -91,11 +103,19 @@ impl Simulation {
             return Err("invalid skill slot".into());
         }
         let p = self.players.get(&id).ok_or("unknown player")?;
+        if trundle_e::champion_forced(p,self.tick) {return Err("champion in forced movement".into());}
         if p.health <= 0. {
             return Err("champion dead".into());
         }
         if stuns::active(p,self.tick) && !(p.champion=="annie"&&slot==3&&self.tibbers(id).is_some()) {return Err("champion stunned".into());}
+        if self.ezreal_r_casting(id) { return Err("skill blocked during cast".into()); }
+        if p.champion == "ezreal" {
+            return Err(match slot {0=>"Ezreal Q requires a ground point",1=>"Ezreal W requires a ground point",2=>"Ezreal E requires a ground point",_=>"Ezreal R requires a ground point"}.into());
+        }
         if p.champion == "annie" {return self.cast_annie(id,slot,target);}
+        if p.champion == "trundle" && slot == 1 {return Err("Trundle W requires a ground point".into());}
+        if p.champion == "trundle" && slot == 3 {return self.cast_trundle_r(id,target);}
+        if p.champion == "trundle" {return self.cast_trundle_q(id,slot,target);}
         if p.champion != "garen" {
             return Err("champion spell not implemented".into());
         }

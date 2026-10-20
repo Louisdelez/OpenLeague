@@ -19,8 +19,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         &fs::read(root.join("assets/maps/tt_navigation_grid.cells.bin"))?,
     )
     .map_err(std::io::Error::other)?;
+    openleague_core::map10_dense_height::binding().map_err(|error| {
+        std::io::Error::other(format!("Map10 dense-height initialization failed: {error}"))
+    })?;
     let mut game = Simulation::new(navigation).map_err(std::io::Error::other)?;
     game.enable_map10().map_err(std::io::Error::other)?;
+    game.enable_map10_cast_ground().map_err(std::io::Error::other)?;
     game.session = std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)?
         .as_nanos() as u64;

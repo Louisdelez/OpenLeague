@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path, PurePosixPath
 import re
@@ -16,6 +17,22 @@ SEMVER = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)"
                     + rf"(?:-{PRERELEASE}(?:\.{PRERELEASE})*)?(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$")
 SECTIONS = ("Problème et résultat", "Périmètre et références", "Vérifications", "Limites")
 MAX_FILE_BYTES = 5 * 1024 * 1024
+LARGE_FILE_EXCEPTIONS = "tools/git/large-file-exceptions.json"
+
+
+def reviewed_large_file(name: str, data: bytes, staged: bool) -> bool:
+    """Accept only an exact reviewed dataset, never a directory or size wildcard."""
+    if forbidden_path(name) or len(data) >= 100 * 1024 * 1024:
+        return False
+    try:
+        raw = git("show", ":" + LARGE_FILE_EXCEPTIONS) if staged else (ROOT / LARGE_FILE_EXCEPTIONS).read_bytes()
+        entries = json.loads(raw)
+    except (OSError, ValueError, subprocess.CalledProcessError):
+        return False
+    entry = entries.get(name) if isinstance(entries, dict) else None
+    return (isinstance(entry, dict) and type(entry.get("bytes")) is int
+            and entry["bytes"] == len(data) and bool(entry.get("reason"))
+            and entry.get("sha256") == hashlib.sha256(data).hexdigest())
 
 
 def git(*args: str) -> bytes:
@@ -62,15 +79,32 @@ def metadata_errors(staged: bool = False) -> list[str]:
         except (OSError, subprocess.CalledProcessError):
             errors.append(f"Missing application lockfile: {name}")
     manifest = json.loads(read("assets-manifest.json"))
+    errors.extend(asset_pack_errors(manifest))
+    return errors
+
+
+def asset_pack_errors(manifest: dict) -> list[str]:
+    """Validate remote packs and explicitly documented local-only derivations."""
+    errors = []
     packs = manifest.get("packs", [])
     if not packs:
         errors.append("Asset manifest must contain packs")
     for pack in packs:
         if not re.fullmatch(r"[0-9a-f]{64}", pack.get("sha256", "")):
             errors.append(f"Invalid asset SHA-256: {pack.get('name')}")
-        if not isinstance(pack.get("bytes"), int) or pack["bytes"] <= 0:
+        if type(pack.get("bytes")) is not int or pack["bytes"] <= 0:
             errors.append(f"Invalid asset size: {pack.get('name')}")
-        if not pack.get("url", "").startswith("https://github.com/Louisdelez/OpenLeague/releases/download/"):
+        local_only = pack.get("local_only", False)
+        if type(local_only) is not bool:
+            errors.append(f"local_only must be a boolean: {pack.get('name')}")
+        url = pack.get("url")
+        if local_only is True:
+            derivation = manifest.get("local_derivation")
+            if url is not None:
+                errors.append(f"Local-only pack must have a null URL: {pack.get('name')}")
+            if not isinstance(derivation, dict) or not derivation.get("base_release") or not derivation.get("scope"):
+                errors.append(f"Document local-only pack provenance in local_derivation: {pack.get('name')}")
+        elif not isinstance(url, str) or not url.startswith("https://github.com/Louisdelez/OpenLeague/releases/download/"):
             errors.append(f"Asset pack must reference an OpenLeague release: {pack.get('name')}")
     return errors
 
@@ -85,6 +119,8 @@ def forbidden_path(name: str) -> bool:
     if name.startswith("assets/") and not name.startswith("assets/shaders/"):
         return True
     if name.startswith("launcher/web/assets/"):
+        return True
+    if name.startswith(".ai-tools/state/"):
         return True
     return (path.name == ".env" or (path.name.startswith(".env.") and path.name != ".env.example")
             or path.suffix.lower() in {".key", ".pem", ".pdb", ".pyc", ".pyo", ".log"})
@@ -111,9 +147,9 @@ def file_errors(base: str | None, staged: bool) -> list[str]:
             errors.append(f"Do not add runtime files, private keys or asset-pack content: {name}")
     for name in diff_paths(base, staged):
         data = git("show", ":" + name) if staged else git("show", "HEAD:" + name)
-        if len(data) > MAX_FILE_BYTES:
+        if len(data) > MAX_FILE_BYTES and not reviewed_large_file(name, data, staged):
             errors.append(f"Changed file exceeds 5 MiB; use a release pack or reviewed exception: {name}")
-        if PurePosixPath(name).suffix in {".md", ".py", ".json", ".toml", ".yaml", ".yml", ".js", ".wgsl"}:
+        if PurePosixPath(name).suffix in {".md", ".py", ".json", ".jsonc", ".toml", ".yaml", ".yml", ".js", ".mjs", ".wgsl"}:
             try:
                 if "\ufffd" in data.decode("utf-8"):
                     errors.append(f"Replacement character indicates damaged text encoding: {name}")

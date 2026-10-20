@@ -1,5 +1,10 @@
 //! Bounded Order_Nexus gem/gem_inside mesh preparation. No emitter, timer or pose guess.
 //! Native 97EC60 must be represented by the supplied final row-vector world matrix.
+/// Exact source-only Heal_Plus mesh admission; no emitter or native visual claim.
+pub const HEAL_PLUS_SOURCE: &[u8] = include_bytes!("../../../assets/particles/relic_runes/TT_Heal_Plus.sco");
+#[path = "heal_plus_sco.rs"]
+mod heal_plus_sco;
+pub const PICKUP_SOURCE:&[u8]=include_bytes!("../../../data/4.20/relic_pickup/Saucer8.SCB");
 use bevy::{asset::RenderAssetUsages, mesh::PrimitiveTopology, prelude::*};
 
 pub const SOURCE: &[u8] = include_bytes!("../../../data/4.20/nexus_complex/Nexus_Gem.scb");
@@ -62,9 +67,11 @@ fn u32_at(bytes: &[u8], at: usize) -> u32 {
 impl Geometry {
     /// Accept only the exact bounded original. No general SCB-format claim.
     pub fn decode(bytes: &[u8]) -> Result<Self, &'static str> {
+        if bytes == HEAL_PLUS_SOURCE { return heal_plus_sco::decode(bytes); }
         let (vertices, triangles) = if bytes == SOURCE { (20,36) }
             else if bytes == SPARKLE_SOURCE { (86,168) }
             else if bytes == CROWN_SOURCE { (120,160) }
+            else if bytes==PICKUP_SOURCE {(80,80)}
             else { return Err("Nexus SCB differs from the three pinned originals"); };
         let positions = 176;
         let centre_at = positions + vertices * 12;

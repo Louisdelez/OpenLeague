@@ -1,5 +1,5 @@
-pub fn ground_target(champion:&str,slot:u8)->bool {champion=="annie"&&(slot==1||slot==3)}
-#[cfg(test)] mod tests {#[test] fn only_qualified_directional_slot_routes_to_ground(){assert!(super::ground_target("annie",1));assert!(super::ground_target("annie",3));for (c,s) in [("garen",1),("annie",0),("annie",2),("ahri",1)] {assert!(!super::ground_target(c,s));}}}
+pub fn ground_target(champion:&str,slot:u8)->bool {(champion=="annie"&&(slot==1||slot==3))||(champion=="trundle"&&(slot==1||slot==2))||(champion=="ezreal"&&(slot==0||slot==1||slot==2||slot==3))}
+#[cfg(test)] mod tests {#[test] fn only_supported_ground_slots_route_to_position_command(){assert!(super::ground_target("annie",1));assert!(super::ground_target("annie",3));assert!(super::ground_target("trundle",1));assert!(super::ground_target("trundle",2));assert!(super::ground_target("ezreal",1));assert!(super::ground_target("ezreal",2));assert!(super::ground_target("ezreal",3));for (c,s) in [("garen",1),("annie",0),("annie",2),("ahri",1),("trundle",0),("trundle",3)] {assert!(!super::ground_target(c,s));}}}
 
 // Shared physical keys match recovered4.20 default bindings; runtime rebinding remains open.
 pub const KEYS:[bevy::prelude::KeyCode;4]=[bevy::prelude::KeyCode::KeyQ,bevy::prelude::KeyCode::KeyW,bevy::prelude::KeyCode::KeyE,bevy::prelude::KeyCode::KeyR];

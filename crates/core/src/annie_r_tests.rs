@@ -79,3 +79,58 @@ fn pet_attack_range_uses_champion_body_and_preserves_native_radius_fields() {
  s.units.get_mut(&pet).unwrap().pet.as_mut().unwrap().order=Order::Attack{target:b};
  s.advance_pet_orders();assert!(s.units[&pet].destination.is_some());assert_eq!(s.units[&pet].next_attack,0);
 }
+
+
+// Isolated SOURCE test fixtures. These are not real match/navigation observations.
+fn tibbers_follow_fixture(distance:f32)->(Simulation,u32,u32,u32,Point) {
+ let mut cells=Vec::new();
+ for _ in 0..400 {cells.extend(0f32.to_le_bytes());cells.extend(0u16.to_le_bytes());cells.extend(0u32.to_le_bytes());cells.push(1);}
+ let mut simulation=Simulation::new(Navigation::load(r#"{"min":[0,0,0],"cellSize":50,"width":20,"height":20}"#,&cells).unwrap()).unwrap();
+ simulation.enable_map10().unwrap();simulation.interactions=None;
+ let owner=simulation.join("annie").unwrap();let enemy=simulation.join("garen").unwrap();
+ let origin=Point{x:100.,z:100.};
+ let player=simulation.players.get_mut(&owner).unwrap();player.position=origin;player.level=6;player.mana=1000.;
+ simulation.players.get_mut(&enemy).unwrap().position=Point{x:origin.x+distance,z:origin.z};
+ simulation.learn(owner,3).unwrap();let pet=summon(&mut simulation,owner,origin);
+ (simulation,owner,enemy,pet,origin)
+}
+
+#[test]
+fn tibbers_follow_acquires_outside_attack_range_and_uses_normal_pursuit_movement() {
+ let(mut simulation,_,enemy,pet,origin)=tibbers_follow_fixture(500.);
+ let definition=&simulation.world.as_ref().unwrap().config.definitions["annietibbers"];
+ assert_eq!(definition.acquisition,625.);assert_eq!(definition.attack_range,125.);
+ let goal=simulation.players[&enemy].position;
+ simulation.advance_pet_orders();
+ assert!(matches!(simulation.units[&pet].pet.as_ref().unwrap().order,Order::Follow));
+ assert_eq!(simulation.units[&pet].target,Some(enemy));
+ assert_eq!(simulation.units[&pet].destination,Some(goal));
+ assert!(!simulation.units[&pet].path.is_empty());assert_eq!(simulation.units[&pet].next_attack,0);
+ let health=simulation.players[&enemy].health;simulation.advance_world();
+ assert!(simulation.units[&pet].position.distance(origin)>0.);
+ assert!(simulation.units[&pet].position.distance(goal)<origin.distance(goal));
+ assert_eq!(simulation.players[&enemy].health,health);
+}
+
+#[test]
+fn tibbers_follow_range_filters_and_explicit_move_remain_bounded() {
+ for (distance,acquired,pursued) in [(190.,true,false),(191.,true,true),(690.,true,true),(691.,false,false)] {
+  let(mut simulation,_,enemy,pet,_)=tibbers_follow_fixture(distance);
+  assert_eq!(simulation.target_info(enemy).unwrap().radius,65.);
+  simulation.advance_pet_orders();
+  assert_eq!(simulation.units[&pet].target,if acquired {Some(enemy)} else {None});
+  assert_eq!(simulation.units[&pet].destination.is_some(),pursued);
+ }
+ for friendly in [false,true] {
+  let(mut simulation,owner,enemy,pet,_)=tibbers_follow_fixture(500.);
+  if friendly {simulation.players.get_mut(&enemy).unwrap().team=simulation.players[&owner].team;}
+  else {simulation.players.get_mut(&enemy).unwrap().health=0.;}
+  simulation.advance_pet_orders();assert_eq!(simulation.units[&pet].target,None);assert!(simulation.units[&pet].destination.is_none());
+ }
+ let(mut simulation,_,_,pet,_)=tibbers_follow_fixture(500.);
+ let requested=Point{x:100.,z:300.};
+ simulation.units.get_mut(&pet).unwrap().pet.as_mut().unwrap().order=Order::Move{point:requested};
+ simulation.advance_pet_orders();
+ assert!(matches!(simulation.units[&pet].pet.as_ref().unwrap().order,Order::Move{point} if point==requested));
+ assert_eq!(simulation.units[&pet].target,None);assert_eq!(simulation.units[&pet].destination,Some(requested));
+}

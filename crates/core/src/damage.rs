@@ -75,8 +75,8 @@ impl Simulation {
         }
         // Capture before health, shields, reveal/effects or either actor can change.
         let death_presentation = self.capture_attack_presentation(target);
+        let recap_capture = self.capture_death_recap(source, target);
         let outgoing = raw * self.exhaust_damage_multiplier(source, kind);
-        if raw>0. && self.players.contains_key(&target) {if let Some(id)=source {if let Some(owner)=self.combat_owner(id) {self.record_champion_contribution(owner,target);}}}
         let before = info.health;
         let mut shield_absorbed = 0.;
         let mut post_mitigation = 0.;
@@ -92,6 +92,9 @@ impl Simulation {
                 let amount = mitigate(outgoing, kind, armor, mr, reduction)
                     .ok_or("invalid defense stats")?;
                 post_mitigation = amount;
+                // Defense failures must not create or refresh kill/assist credit.
+                // Keep accepted raw>0 contributions before shields/HP, even if amount is zero.
+                if let Some(id)=source {if let Some(owner)=self.combat_owner(id) {self.record_champion_contribution(owner,target);}}
                 if amount > 0. {
                     self.note_garen_damage(target, source);
                 }
@@ -126,8 +129,13 @@ impl Simulation {
         if before > 0. && after == 0. {
             self.cancel_captured_attack_presentation(death_presentation, attack_presentation::CancelReason::Death);
         }
-        if before>0. && after==0. && self.players.contains_key(&target) {self.reward_champion_death(source.and_then(|id|self.combat_owner(id)),target);}
-        Ok(DamageOutcome {
+        if before>0. && after==0. && self.players.contains_key(&target) {
+            self.clear_trundle_r_for(target);
+            // RECONSTRUCTION: death-time level/position, before kill experience.
+            self.trundle_passive_damage_death(target);
+            self.reward_champion_death(source.and_then(|id|self.combat_owner(id)),target);
+        }
+        let outcome = DamageOutcome {
             source,
             target,
             kind,
@@ -136,7 +144,9 @@ impl Simulation {
             shield_absorbed,
             post_mitigation,
             lethal: after == 0.,
-        })
+        };
+        self.commit_death_recap(recap_capture, &outcome);
+        Ok(outcome)
     }
 }
 #[cfg(test)]
@@ -244,5 +254,82 @@ mod tests {
         let rewarded = s.players[&id].gold;
         assert!(s.apply_damage(Some(id), mob, hp, DamageKind::True).is_err());
         assert_eq!(s.players[&id].gold, rewarded);
+    }
+
+    #[test]
+    fn rejected_nonfinite_defenses_do_not_steal_environmental_kill_credit() {
+        for kind in [DamageKind::Physical, DamageKind::Magical] {
+            let mut s = game();
+            let rejected = s.join("garen").unwrap();
+            let victim = s.join("annie").unwrap();
+            let contributor = s.join("garen").unwrap();
+            s.apply_damage(Some(contributor), victim, 1., DamageKind::True).unwrap();
+            let before = serde_json::to_value(s.snapshot()).unwrap();
+            let gold = s.players[&rejected].gold;
+            let experience = s.players[&rejected].experience;
+            let original = if kind == DamageKind::Physical {
+                let value = s.definitions["annie"].armor;
+                s.definitions.get_mut("annie").unwrap().armor = f32::NAN;
+                value
+            } else {
+                let value = s.definitions["annie"].magic_resist;
+                s.definitions.get_mut("annie").unwrap().magic_resist = f32::NAN;
+                value
+            };
+            let expected = if kind == DamageKind::Physical {
+                "invalid penetration/armor"
+            } else {
+                "invalid penetration/magic resistance"
+            };
+            assert_eq!(s.apply_damage(Some(rejected), victim, 1., kind).unwrap_err(), expected);
+            if kind == DamageKind::Physical {
+                s.definitions.get_mut("annie").unwrap().armor = original;
+            } else {
+                s.definitions.get_mut("annie").unwrap().magic_resist = original;
+            }
+            assert_eq!(serde_json::to_value(s.snapshot()).unwrap(), before);
+            // The public snapshot above cannot see hidden contribution history.
+            // A later environmental death makes a rejected hit's false credit observable.
+            s.apply_damage(None, victim, 10000., DamageKind::True).unwrap();
+            assert_eq!(s.players[&rejected].score.kills, 0);
+            assert_eq!(s.players[&rejected].score.assists, 0);
+            assert_eq!(s.players[&rejected].gold, gold);
+            assert_eq!(s.players[&rejected].experience, experience);
+            assert_eq!(s.players[&contributor].score.kills, 1);
+            let snapshot = s.snapshot();
+            let death = snapshot.kill_events.last().unwrap();
+            assert_eq!(death.killer, Some(contributor));
+            assert!(death.assists.is_empty());
+        }
+    }
+    #[test]
+    fn finite_mitigation_overflow_cannot_create_or_refresh_assist_credit() {
+        for prior_hit in [false, true] {
+            let mut s = game();
+            let killer = s.join("garen").unwrap();
+            let victim = s.join("garen").unwrap();
+            let rejected = s.join("garen").unwrap();
+            if prior_hit {
+                s.apply_damage(Some(rejected), victim, 1., DamageKind::True).unwrap();
+                // Same expired-assist boundary as the existing champion_kills tests.
+                s.tick = 451;
+            }
+            s.definitions.get_mut("garen").unwrap().armor = -100.;
+            let before = serde_json::to_value(s.snapshot()).unwrap();
+            let gold = s.players[&rejected].gold;
+            // All inputs are finite: the valid negative-resistance multiplier is1.5,
+            // so finite raw MAX overflows during mitigation and must be rejected.
+            assert_eq!(s.apply_damage(Some(rejected), victim, f32::MAX, DamageKind::Physical)
+                .unwrap_err(), "invalid defense stats");
+            assert_eq!(serde_json::to_value(s.snapshot()).unwrap(), before);
+            s.apply_damage(Some(killer), victim, 10000., DamageKind::True).unwrap();
+            assert_eq!(s.players[&rejected].score.assists, 0);
+            assert_eq!(s.players[&rejected].score.kills, 0);
+            assert_eq!(s.players[&rejected].gold, gold);
+            let snapshot = s.snapshot();
+            let death = snapshot.kill_events.last().unwrap();
+            assert_eq!(death.killer, Some(killer));
+            assert!(death.assists.is_empty());
+        }
     }
 }

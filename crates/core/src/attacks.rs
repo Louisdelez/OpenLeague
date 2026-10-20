@@ -10,11 +10,18 @@ pub(crate) struct Profile {
     pub missile_speed: Option<f32>,
     pub cant_cancel: bool,
 }
-fn profile(champion: &str) -> &'static Profile {
+/// Exact canonical attack-profile IDs; gameplay attack support is unchanged.
+pub fn supports_champion_presentation(champion: &str) -> bool {
+    profiles().contains_key(champion)
+}
+fn profiles() -> &'static BTreeMap<String, Profile> {
     static DATA: OnceLock<BTreeMap<String, Profile>> = OnceLock::new();
-    &DATA.get_or_init(|| {
+    DATA.get_or_init(|| {
         serde_json::from_str(include_str!("../../../data/4.20/attack_contracts.json")).unwrap()
-    })[champion]
+    })
+}
+fn profile(champion: &str) -> &'static Profile {
+    &profiles()[champion]
 }
 pub fn windup_ticks(champion: &str, cadence: u64) -> u64 {
     profile_windup_ticks(profile(champion), cadence)
@@ -49,8 +56,9 @@ pub struct Projectile {
     pub critical: bool,
 }
 impl Simulation {
-    fn presentation_kind(&self, empowered: bool, critical: bool) -> attack_presentation::Kind {
-        self.garen_q_resource.kind_at_observation(empowered, critical)
+    fn presentation_kind(&self, empowered: bool, critical: bool, trundle_q: bool) -> attack_presentation::Kind {
+        if trundle_q { attack_presentation::Kind::TrundleQ }
+        else { self.garen_q_resource.kind_at_observation(empowered, critical) }
     }
     fn presentation_result<T>(&mut self, result: Result<T, attack_presentation::Error>) -> Option<T> {
         match result {
@@ -100,6 +108,15 @@ impl Simulation {
         for captured in affected {
             self.cancel_captured_attack_presentation(Some(captured), attack_presentation::CancelReason::Departure);
         }
+        self.remove_ezreal_q_owner(id);
+        self.remove_ezreal_w_owner(id);
+        self.remove_ezreal_e_owner(id);
+        self.remove_ezreal_r_owner(id);
+        self.remove_ezreal_passive_owner(id);
+        self.clear_trundle_r_for(id);
+        self.remove_trundle_e_owner(id);
+        self.accepted_casts.remove_owner(id);
+        self.death_recap.remove(id);
         self.players.remove(&id)
     }
     pub(crate) fn finish_attack_presentations(&mut self) {
@@ -157,9 +174,9 @@ impl Simulation {
         let ids: Vec<_> = self.players.keys().copied().collect();
         for id in ids {
             let p = &self.players[&id];
-            if p.health <= 0. || stuns::active(p,self.tick) || p.effects.ultimate.is_some() || p.effects.annie_q.is_some() || p.effects.annie_w.is_some() || p.effects.annie_r.is_some() || self.tick < p.effects.spin_until {
+            if p.health <= 0. || stuns::active(p,self.tick) || trundle_e::champion_forced(p,self.tick) || p.effects.ultimate.is_some() || p.effects.annie_q.is_some() || p.effects.annie_w.is_some() || p.effects.annie_r.is_some() || p.effects.ezreal_q.is_some() || p.effects.ezreal_w.is_some() || self.ezreal_e_casting(id) || self.ezreal_r_casting(id) || self.tick < p.effects.spin_until {
                 let reason = if p.health <= 0. { attack_presentation::CancelReason::Death }
-                    else if stuns::active(p, self.tick) { attack_presentation::CancelReason::Control }
+                    else if stuns::active(p, self.tick) || trundle_e::champion_forced(p,self.tick) { attack_presentation::CancelReason::Control }
                     else { attack_presentation::CancelReason::OtherCast };
                 self.cancel_attack_presentation(id, reason);
                 let p = self.players.get_mut(&id).unwrap();
@@ -192,11 +209,17 @@ impl Simulation {
                 p.attack_roll = None;
                 let p = &self.players[&id];
                 let empowered = p.champion == "garen" && self.tick < p.effects.empowered_until;
+                let trundle_rank = trundle_q::attack_rank(p, self.tick);
                 let rank = p.ranks[0];
                 let stats = self.stats(id);
                 let ad = stats.damage;
-                let critical = w.critical && !empowered;
-                let raw = if empowered {
+                // RECONSTRUCTION: Q replaces this ordinary raw hit and cannot crit.
+                // AD is sampled before the resulting self buff is applied.
+                let critical = w.critical && !empowered && trundle_rank.is_none();
+                let raw = if let Some(rank) = trundle_rank {
+                    let q = trundle_q::rules(rank).expect("armed Q rank validated at cast");
+                    q.base + q.ad_coefficient * ad
+                } else if empowered {
                     1.4 * ad + spells::garen_value(0, "Effect1", rank)
                 } else {
                     ad * if critical {
@@ -212,7 +235,9 @@ impl Simulation {
                 };
                 let mut presentation_hit = false;
                 if profile.melee {
-                    let hit = if empowered {
+                    let hit = if let Some(rank) = trundle_rank {
+                        self.trundle_q_attack_hit(id, w.target, raw, rank)
+                    } else if empowered {
                         self.empowered_attack_hit(id,w.target,raw)
                     } else {
                         self.basic_attack_hit(id, w.target, raw)
@@ -242,8 +267,9 @@ impl Simulation {
                     self.next_projectile += 1;
                 }
                 if let (Some(attack), Some(audience)) = (w.presentation, presentation_audience) {
-                    // Garen is melee. Use exactly the empowered/critical decisions above.
-                    let kind = self.presentation_kind(empowered, critical);
+                    // Resolution closes this windup using the decisions above. For ranged
+                    // Annie/Ashe, false records no hit at launch, not a missed projectile.
+                    let kind = self.presentation_kind(empowered, critical, trundle_rank.is_some());
                     let result = self.attack_presentation.resolve(attack, self.tick,
                         kind, presentation_hit, audience);
                     self.presentation_result(result);
@@ -259,8 +285,9 @@ impl Simulation {
             let cadence = stats.attack_cooldown_ticks;
             let name = p.champion.clone();
             let empowered = name == "garen" && self.tick < p.effects.empowered_until;
+            let trundle_armed = trundle_q::armed(p, self.tick);
             let can_crit =
-                !empowered && !self.units.get(&target).is_some_and(|u| u.kind.structure());
+                !empowered && !trundle_armed && !self.units.get(&target).is_some_and(|u| u.kind.structure());
             let critical = can_crit
                 && match p.attack_roll {
                     Some(value) => value,
@@ -275,9 +302,9 @@ impl Simulation {
             // timing or global Move/Stop policy. Preserve the current base profile.
             let duration = profile_windup_ticks(attack_profile, cadence).min(cadence);
             let cancelable = !attack_profile.cant_cancel;
-            let presentation = if name == "garen" && self.attack_presentation_error.is_none() {
+            let presentation = if supports_champion_presentation(&name) && self.attack_presentation_error.is_none() {
                 let audience = self.attack_audience(id, target);
-                let kind = self.presentation_kind(empowered, critical);
+                let kind = self.presentation_kind(empowered, critical, trundle_armed);
                 let result = self.attack_presentation.begin(id, self.tick, self.tick + duration,
                     kind, audience);
                 self.presentation_result(result)
@@ -285,7 +312,9 @@ impl Simulation {
             let target_position = self.target_info(target).expect("validated attack target").position;
             let p = self.players.get_mut(&id).unwrap();
             p.capture_facing([target_position.x-p.position.x,0.,target_position.z-p.position.z]);
-            p.attack_roll = Some(critical);
+            // Q never manufactures a cached false BA roll; its accepted cast
+            // already discarded the pre-existing cache as explicit reconstruction.
+            p.attack_roll = if trundle_armed { None } else { Some(critical) };
             p.windup = Some(Windup {
                 target,
                 started: self.tick,
@@ -486,5 +515,29 @@ mod tests {
         assert!(s.projectiles.is_empty());
         assert_eq!(s.players[&b].health, 0.);
         assert!(windup_ticks("ashe", 24) < windup_ticks("ashe", 48));
+    }
+}
+
+#[cfg(test)]
+mod canonical_presentation_membership_tests {
+    use super::*;
+    #[test]
+    fn exact_canonical_membership_shares_the_cached_numeric_profiles() {
+        let canonical=champion_catalog().unwrap();
+        let critical:BTreeMap<String,serde_json::Value>=serde_json::from_str(include_str!("../../../data/4.20/critical_contracts.json")).unwrap();
+        let animation:BTreeMap<String,serde_json::Value>=serde_json::from_str(include_str!("../../../data/4.20/animation_manifest.json")).unwrap();
+        let expected:Vec<_>=canonical.keys().collect();
+        assert_eq!(expected.len(),122);
+        assert_eq!(profiles().keys().collect::<Vec<_>>(),expected);
+        assert_eq!(critical.keys().collect::<Vec<_>>(),expected);
+        assert_eq!(animation.keys().collect::<Vec<_>>(),expected);
+        assert!(std::ptr::eq(profiles(),profiles()));
+        for name in canonical.keys() {
+            assert!(supports_champion_presentation(name));
+            assert!(std::ptr::eq(profile(name),&profiles()[name]));
+        }
+        for alias in ["", "Annie", "Ahri", "wukong", "unknown_champion"] {
+            assert!(!supports_champion_presentation(alias));
+        }
     }
 }
