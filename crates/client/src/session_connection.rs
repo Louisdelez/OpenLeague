@@ -29,6 +29,7 @@ pub enum Incoming {
     State { snapshot:Snapshot, delivery:Option<(t::Context,u64)> },
     Clock { session:u64, ordinal:u64, opcode:u16, payload:Vec<u8>, secure:Option<t::Context> },
     Rejected(String),
+    GameplayRejected { context:t::Context, sequence:u64, reason:String },
 }
 
 fn nonce()->Result<t::RequestNonce,&'static str> {
@@ -72,6 +73,17 @@ impl Connection {
     pub fn ready(&self)->bool {
         !self.link.closed && self.link.fatal.is_none() && !self.link.recover_socket
             && match &self.link.client {Some(c)=>c.ready(),None=>self.id.is_some()}
+    }
+    /// Admission only for observation inside receive, before presented(). This
+    /// grants no commands or physical playback and preserves exact OLSR identity.
+    pub(crate) fn observation_ready(&self, delivery: Option<(t::Context,u64)>) -> bool {
+        if self.link.closed || self.link.fatal.is_some() || self.link.recover_socket { return false; }
+        match (&self.link.client, delivery) {
+            (Some(client), Some((context, frame))) => self.session == Some(context.session)
+                && self.id == Some(context.player) && client.observation_ready(context, frame),
+            (None, None) => self.ready(), // unchanged explicit legacy observation
+            _ => false,
+        }
     }
     /// Public gesture identity only; no access/recovery credential escapes.
     pub(crate) fn inventory_input_identity(&self)->Option<(u64,u32,Option<u64>)> {
@@ -131,14 +143,21 @@ impl Connection {
         }
     }
     pub fn send_pause(&mut self,paused:bool)->Result<(),&'static str> {
+        self.send_pause_tracked(paused).map(|_|())
+    }
+    /// Return only the shared full-width input sequence for local UI correlation.
+    /// Never expose the authenticated transport packet or its capability.
+    pub(crate) fn send_pause_tracked(&mut self,paused:bool)->Result<u64,&'static str> {
         if !self.ready() {return Err("Session bootstrap is not ready");}
         if let Some(client)=&mut self.link.client {
-            let message=client.input(t::Input::PauseRequest{paused})?;self.send_secure(&message)
+            let message=client.input(t::Input::PauseRequest{paused})?;
+            let t::ClientMessage::Session(input)=&message else {return Err("Pause input envelope unavailable");};
+            let sequence=input.sequence;self.send_secure(&message)?;Ok(sequence)
         } else {
             let sequence=self.sequence.checked_add(1).ok_or("pause sequence overflow")?;
             let packet=ClientPacket::PauseRequest{sequence,paused};
             let bytes=serde_json::to_vec(&packet).map_err(|_|"Pause serialization failed")?;
-            self.sequence=sequence;datagram(&self.socket,&bytes)
+            self.sequence=sequence;datagram(&self.socket,&bytes)?;Ok(sequence)
         }
     }
     /// Run on each receive system invocation. Pending request bytes use the same
@@ -224,7 +243,7 @@ impl Connection {
             }
             t::ServerMessage::SessionGameplayRejected(rejection)=>{
                 if client.context()!=Some(rejection.context) || rejection.reason.len()>512 {return Err("Foreign gameplay rejection");}
-                Some(Incoming::Rejected(rejection.reason))
+                Some(Incoming::GameplayRejected{context:rejection.context,sequence:rejection.sequence,reason:rejection.reason})
             }
             t::ServerMessage::SessionState(_)=>return Err("Unframed session state is not accepted"),
         };

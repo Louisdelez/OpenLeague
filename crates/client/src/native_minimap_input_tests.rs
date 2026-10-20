@@ -170,3 +170,204 @@ fn target_required_summoners_and_underlying_world_pointer_stay_blocked_over_mini
         assert_eq!(app.world().resource::<crate::Connection>().sequence,0);
     }}
 }
+
+
+#[test]
+fn ezreal_ordered_ctrl_q_then_q_emits_real_learn_and_ground_commands_without_minimap_replay() {
+    use bevy::input::{InputPlugin,keyboard::{KeyboardInput,Key}};
+    use openleague_core::{Action,ClientPacket,Simulation,Navigation};
+    let(mut app,server,ally,window,camera)=heal_command_scene();
+    app.add_plugins((InputPlugin,crate::spell_input::Plugin));
+    app.world_mut().get_mut::<Window>(window).unwrap().focused=true;
+    let nav=Navigation::load(include_str!("../../../assets/maps/tt_navigation_grid.json"),include_bytes!("../../../assets/maps/tt_navigation_grid.cells.bin")).unwrap();
+    let mut game=Simulation::new(nav).unwrap();game.enable_map10().unwrap();let owner=game.join("ezreal").unwrap();let target=game.join("garen").unwrap();
+    assert_eq!(app.world().resource::<crate::Connection>().id,Some(owner));assert_eq!(ally,target);
+    let team=game.players[&owner].team;game.players.get_mut(&target).unwrap().team=team;
+    let own=game.players[&owner].position;
+    let target_position=game.navigation.nearest_walkable(openleague_core::Point{x:own.x+300.,z:own.z}).unwrap();
+    let height=game.navigation.ground(target_position).unwrap();
+    let actor=game.players.get_mut(&target).unwrap();actor.position=target_position;actor.height=height;
+    app.world_mut().resource_mut::<crate::Connection>().champion="ezreal".into();
+    app.world_mut().resource_mut::<crate::Match>().snapshot=Some(game.snapshot());app.update();
+    let key=|app:&mut App,key_code:KeyCode,state:ButtonState| {app.world_mut().write_message(KeyboardInput{key_code,logical_key:Key::Character("test".into()),state,text:None,repeat:false,window});};
+    // A complete Ctrl+Q chord in one frame is still LearnQ, never a cast.
+    for(code,state) in [(KeyCode::ControlLeft,ButtonState::Pressed),(KeyCode::KeyQ,ButtonState::Pressed),(KeyCode::KeyQ,ButtonState::Released),(KeyCode::ControlLeft,ButtonState::Released)] {key(&mut app,code,state);}
+    app.update();let ClientPacket::Command{action,sequence:1}=next_command(&server) else {panic!("learn command");};
+    assert!(matches!(&action,Action::Learn{slot:0}));game.command(owner,action).unwrap();no_command(&server);
+    app.world_mut().resource_mut::<crate::Match>().snapshot=Some(game.snapshot());app.update();no_command(&server);
+    let rect=app.world().resource::<Live>().rect.unwrap();let cursor=Vec2::new(rect.left/2.,rect.top/2.);
+    aim_command_pointer_at_ally(&mut app,target,window,camera,cursor);
+    key(&mut app,KeyCode::KeyQ,ButtonState::Pressed);app.update();
+    let ClientPacket::Command{action,sequence:2}=next_command(&server) else {panic!("ground command");};
+    assert!(matches!(&action,Action::CastAt{slot:0,point} if point.finite() && point.distance(own)>0.));
+    game.command(owner,action).unwrap();assert!(game.players[&owner].effects.ezreal_q.is_some());assert!(game.players[&owner].mana<game.definitions["ezreal"].mana);no_command(&server);
+    app.update();no_command(&server); // Held Q does not resend.
+    key(&mut app,KeyCode::KeyQ,ButtonState::Released);app.update();
+    let center=Vec2::new(rect.left+rect.width/2.,rect.top+rect.height/2.);
+    aim_command_pointer_at_ally(&mut app,target,window,camera,center);
+    key(&mut app,KeyCode::KeyQ,ButtonState::Pressed);app.update();no_command(&server);
+    assert!(app.world().resource::<crate::Connection>().rejection.contains("Visez une cible"));
+    key(&mut app,KeyCode::KeyQ,ButtonState::Released);app.update();no_command(&server);
+}
+
+#[test]
+fn ezreal_ordered_ctrl_w_then_w_emits_real_learn_and_ground_commands_without_minimap_replay() {
+    use bevy::input::{InputPlugin,keyboard::{KeyboardInput,Key}};
+    use openleague_core::{Action,ClientPacket,Simulation,Navigation};
+    let(mut app,server,ally,window,camera)=heal_command_scene();
+    app.add_plugins((InputPlugin,crate::spell_input::Plugin));
+    app.world_mut().get_mut::<Window>(window).unwrap().focused=true;
+    let nav=Navigation::load(include_str!("../../../assets/maps/tt_navigation_grid.json"),include_bytes!("../../../assets/maps/tt_navigation_grid.cells.bin")).unwrap();
+    let mut game=Simulation::new(nav).unwrap();game.enable_map10().unwrap();let owner=game.join("ezreal").unwrap();let target=game.join("garen").unwrap();
+    assert_eq!(app.world().resource::<crate::Connection>().id,Some(owner));assert_eq!(ally,target);
+    let team=game.players[&owner].team;game.players.get_mut(&target).unwrap().team=team;
+    let own=game.players[&owner].position;
+    let target_position=game.navigation.nearest_walkable(openleague_core::Point{x:own.x+300.,z:own.z}).unwrap();
+    let height=game.navigation.ground(target_position).unwrap();let actor=game.players.get_mut(&target).unwrap();actor.position=target_position;actor.height=height;
+    app.world_mut().resource_mut::<crate::Connection>().champion="ezreal".into();
+    app.world_mut().resource_mut::<crate::Match>().snapshot=Some(game.snapshot());app.update();
+    let key=|app:&mut App,key_code:KeyCode,state:ButtonState| {app.world_mut().write_message(KeyboardInput{key_code,logical_key:Key::Character("test".into()),state,text:None,repeat:false,window});};
+    for(code,state)in[(KeyCode::ControlLeft,ButtonState::Pressed),(KeyCode::KeyW,ButtonState::Pressed),(KeyCode::KeyW,ButtonState::Released),(KeyCode::ControlLeft,ButtonState::Released)] {key(&mut app,code,state);}
+    app.update();let ClientPacket::Command{action,sequence:1}=next_command(&server)else{panic!("learn command");};
+    assert!(matches!(&action,Action::Learn{slot:1}));game.command(owner,action).unwrap();no_command(&server);
+    app.world_mut().resource_mut::<crate::Match>().snapshot=Some(game.snapshot());app.update();no_command(&server);
+    let rect=app.world().resource::<Live>().rect.unwrap();let cursor=Vec2::new(rect.left/2.,rect.top/2.);
+    aim_command_pointer_at_ally(&mut app,target,window,camera,cursor);
+    key(&mut app,KeyCode::KeyW,ButtonState::Pressed);app.update();
+    let ClientPacket::Command{action,sequence:2}=next_command(&server)else{panic!("ground command");};
+    assert!(matches!(&action,Action::CastAt{slot:1,point}if point.finite()&&point.distance(own)>0.));
+    game.command(owner,action).unwrap();assert!(game.players[&owner].effects.ezreal_w.is_some());assert_eq!(game.players[&owner].ranks,[0,1,0,0]);no_command(&server);
+    app.update();no_command(&server);
+    key(&mut app,KeyCode::KeyW,ButtonState::Released);app.update();
+    let center=Vec2::new(rect.left+rect.width/2.,rect.top+rect.height/2.);aim_command_pointer_at_ally(&mut app,target,window,camera,center);
+    key(&mut app,KeyCode::KeyW,ButtonState::Pressed);app.update();no_command(&server);
+    assert!(app.world().resource::<crate::Connection>().rejection.contains("Visez une cible"));
+    key(&mut app,KeyCode::KeyW,ButtonState::Released);app.update();no_command(&server);
+}
+
+#[test]
+fn ezreal_ordered_ctrl_e_then_e_emits_real_learn_and_ground_udp_and_core_blink_without_replay() {
+    use bevy::input::{InputPlugin,keyboard::{KeyboardInput,Key}};
+    use openleague_core::{Action,ClientPacket,Simulation,Navigation,Point};
+    let(mut app,server,ally,window,camera)=heal_command_scene();
+    app.add_plugins((InputPlugin,crate::spell_input::Plugin));
+    app.world_mut().get_mut::<Window>(window).unwrap().focused=true;
+    // Controlled flat navigation avoids asserting native map wall-snap behavior.
+    // InputPlugin, camera ray, commands, real UDP serialization and Core are real.
+    let mut bytes=Vec::new();for _ in 0..6400 {bytes.extend(0f32.to_le_bytes());bytes.extend(0u16.to_le_bytes());bytes.extend(0u32.to_le_bytes());bytes.push(1);}
+    let nav=Navigation::load(r#"{"min":[0,0,0],"cellSize":200,"width":80,"height":80}"#,&bytes).unwrap();
+    app.world_mut().resource_mut::<crate::picking::Terrain>().0=nav.clone();
+    let mut game=Simulation::new(nav).unwrap();let owner=game.join("ezreal").unwrap();let target=game.join("garen").unwrap();
+    // This flat Simulation creates fresh player IDs; the Map10 HUD helper used
+    // different IDs. Bind its legacy connection and snapshot to this real scene.
+    let scene_owner=app.world().resource::<crate::Connection>().id.unwrap();
+    {let scene=app.world().resource::<crate::Match>();let snapshot=scene.snapshot.as_ref().unwrap();
+        assert!(snapshot.players.iter().any(|p|p.id==scene_owner));assert!(snapshot.players.iter().any(|p|p.id==ally));}
+    {let mut connection=app.world_mut().resource_mut::<crate::Connection>();
+        assert!(!connection.resumable());assert_eq!(connection.sequence,0);
+        connection.id=Some(owner);connection.session=Some(game.session);connection.sequence=0;
+        assert!(connection.ready());assert_eq!(connection.inventory_input_identity(),Some((game.session,owner,None)));}
+    app.world_mut().resource_mut::<crate::Match>().snapshot=Some(game.snapshot());
+    let ally={let scene=app.world().resource::<crate::Match>();let snapshot=scene.snapshot.as_ref().unwrap();
+        assert_eq!(snapshot.session,game.session);
+        assert!(snapshot.players.iter().any(|p|p.id==owner&&p.champion=="ezreal"));
+        snapshot.players.iter().find(|p|p.id!=owner&&p.champion=="garen").unwrap().id};
+    assert_eq!(app.world().resource::<crate::Connection>().id,Some(owner));assert_eq!(ally,target);
+    for(id,point)in[(owner,Point{x:2000.,z:2000.}),(target,Point{x:2800.,z:2000.})] {
+        let actor=game.players.get_mut(&id).unwrap();actor.position=point;actor.height=0.;actor.team=0;
+    }
+    let own=game.players[&owner].position;let mana=game.players[&owner].mana;
+    app.world_mut().resource_mut::<crate::Connection>().champion="ezreal".into();
+    app.world_mut().resource_mut::<crate::Match>().snapshot=Some(game.snapshot());app.update();
+    let key=|app:&mut App,key_code:KeyCode,state:ButtonState| {app.world_mut().write_message(KeyboardInput{key_code,logical_key:Key::Character("test".into()),state,text:None,repeat:false,window});};
+    for(code,state)in[(KeyCode::ControlLeft,ButtonState::Pressed),(KeyCode::KeyE,ButtonState::Pressed),(KeyCode::KeyE,ButtonState::Released),(KeyCode::ControlLeft,ButtonState::Released)] {key(&mut app,code,state);}
+    app.update();let ClientPacket::Command{action,sequence:1}=next_command(&server)else{panic!("learn command");};
+    assert!(matches!(&action,Action::Learn{slot:2}));game.command(owner,action).unwrap();no_command(&server);
+    app.world_mut().resource_mut::<crate::Match>().snapshot=Some(game.snapshot());app.update();no_command(&server);
+    let rect=app.world().resource::<Live>().rect.unwrap();let cursor=Vec2::new(rect.left/2.,rect.top/2.);
+    aim_command_pointer_at_ally(&mut app,target,window,camera,cursor);
+    key(&mut app,KeyCode::KeyE,ButtonState::Pressed);app.update();
+    let ClientPacket::Command{action,sequence:2}=next_command(&server)else{panic!("ground command");};
+    assert!(matches!(&action,Action::CastAt{slot:2,point}if point.finite()&&point.distance(own)>475.));
+    game.command(owner,action).unwrap();assert_eq!(game.players[&owner].ranks,[0,0,1,0]);assert_eq!(game.players[&owner].mana,mana-90.);
+    assert_eq!(game.players[&owner].position,own);for _ in 0..8 {game.advance();}
+    let landed=game.players[&owner].position;assert!(landed.distance(own)>474.&&landed.distance(own)<=475.01);assert_eq!(game.players[&owner].height,0.);
+    no_command(&server);app.update();no_command(&server);
+    key(&mut app,KeyCode::KeyE,ButtonState::Released);app.update();
+    let center=Vec2::new(rect.left+rect.width/2.,rect.top+rect.height/2.);aim_command_pointer_at_ally(&mut app,target,window,camera,center);
+    key(&mut app,KeyCode::KeyE,ButtonState::Pressed);app.update();no_command(&server);
+    assert!(app.world().resource::<crate::Connection>().rejection.contains("Visez une cible"));
+    key(&mut app,KeyCode::KeyE,ButtonState::Released);app.update();no_command(&server);
+}
+
+
+#[test]
+fn ezreal_ordered_ctrl_r_then_r_emits_real_udp_and_core_pending_release_damage_without_replay() {
+    use bevy::input::{InputPlugin,keyboard::{KeyboardInput,Key}};
+    use openleague_core::{Action,ClientPacket,Simulation,Navigation,Point};
+    let(mut app,server,ally,window,camera)=heal_command_scene();app.add_plugins((InputPlugin,crate::spell_input::Plugin));
+    app.world_mut().get_mut::<Window>(window).unwrap().focused=true;
+    let mut bytes=Vec::new();for _ in 0..6400 {bytes.extend(0f32.to_le_bytes());bytes.extend(0u16.to_le_bytes());bytes.extend(0u32.to_le_bytes());bytes.push(1);}
+    let nav=Navigation::load(r#"{"min":[0,0,0],"cellSize":200,"width":80,"height":80}"#,&bytes).unwrap();
+    app.world_mut().resource_mut::<crate::picking::Terrain>().0=nav.clone();
+    let mut game=Simulation::new(nav).unwrap();let owner=game.join("ezreal").unwrap();let target=game.join("garen").unwrap();
+    // This flat Simulation creates fresh player IDs; the Map10 HUD helper used
+    // different IDs. Bind its legacy connection and snapshot to this real scene.
+    let scene_owner=app.world().resource::<crate::Connection>().id.unwrap();
+    {let scene=app.world().resource::<crate::Match>();let snapshot=scene.snapshot.as_ref().unwrap();
+        assert!(snapshot.players.iter().any(|p|p.id==scene_owner));assert!(snapshot.players.iter().any(|p|p.id==ally));}
+    {let mut connection=app.world_mut().resource_mut::<crate::Connection>();
+        assert!(!connection.resumable());assert_eq!(connection.sequence,0);
+        connection.id=Some(owner);connection.session=Some(game.session);connection.sequence=0;
+        assert!(connection.ready());assert_eq!(connection.inventory_input_identity(),Some((game.session,owner,None)));}
+    app.world_mut().resource_mut::<crate::Match>().snapshot=Some(game.snapshot());
+    let ally={let scene=app.world().resource::<crate::Match>();let snapshot=scene.snapshot.as_ref().unwrap();
+        assert_eq!(snapshot.session,game.session);
+        assert!(snapshot.players.iter().any(|p|p.id==owner&&p.champion=="ezreal"));
+        snapshot.players.iter().find(|p|p.id!=owner&&p.champion=="garen").unwrap().id};
+    assert_eq!(app.world().resource::<crate::Connection>().id,Some(owner));assert_eq!(ally,target);
+    let own=Point{x:2000.,z:2000.};let target_point=Point{x:2600.,z:2000.};
+    {let p=game.players.get_mut(&owner).unwrap();p.position=own;p.height=0.;p.team=0;p.level=6;p.mana=2000.;}
+    {let p=game.players.get_mut(&target).unwrap();p.position=target_point;p.height=0.;p.team=1;p.health=10000.;p.max_health=10000.;}
+    let health=game.players[&target].health;let mana=game.players[&owner].mana;
+    app.world_mut().resource_mut::<crate::Connection>().champion="ezreal".into();app.world_mut().resource_mut::<crate::Match>().snapshot=Some(game.snapshot());app.update();
+    let key=|app:&mut App,key_code:KeyCode,state:ButtonState|{app.world_mut().write_message(KeyboardInput{key_code,logical_key:Key::Character("test".into()),state,text:None,repeat:false,window});};
+    for(code,state)in[(KeyCode::ControlLeft,ButtonState::Pressed),(KeyCode::KeyR,ButtonState::Pressed),(KeyCode::KeyR,ButtonState::Released),(KeyCode::ControlLeft,ButtonState::Released)]{key(&mut app,code,state);}
+    app.update();let ClientPacket::Command{action,sequence:1}=next_command(&server)else{panic!("ordinary LearnR datagram");};
+    assert!(matches!(&action,Action::Learn{slot:3}));game.command(owner,action).unwrap();assert_eq!(game.players[&owner].ranks,[0,0,0,1]);no_command(&server);
+    app.world_mut().resource_mut::<crate::Match>().snapshot=Some(game.snapshot());app.update();no_command(&server);
+    // Real camera-to-flat-ground aiming; this enemy needs no allied-target fixture.
+    let aim=|app:&mut App,cursor:Vec2|{
+        let rect=app.world().resource::<Live>().rect.unwrap();
+        let mut pose=Transform::from_translation(Vec3::new(0.,100.,0.)).looking_at(Vec3::ZERO,Vec3::Z);
+        let ray=app.world().get::<Camera>(camera).unwrap().viewport_to_world(&GlobalTransform::from(pose),cursor).unwrap();
+        let hit=ray.origin+*ray.direction*((0.-ray.origin.y)/ray.direction.y);
+        pose.translation.x+=target_point.x/20.-hit.x;pose.translation.z+=target_point.z/20.-hit.z;
+        app.world_mut().entity_mut(camera).insert(GlobalTransform::from(pose));app.world_mut().get_mut::<Window>(window).unwrap().set_cursor_position(Some(cursor));
+        let identity=app.world().resource::<crate::Connection>().inventory_input_identity().unwrap();let context=Some(Context{identity,window,rect:rect.bits()});
+        let mut capture=Capture::default();capture.frame(Some(window),true,Some(rect),context,std::iter::empty());
+        let event=WindowEvent::CursorMoved(bevy::window::CursorMoved{window,position:cursor,delta:None});
+        assert!(capture.frame(Some(window),true,Some(rect),context,std::iter::once(&event)).is_empty());assert_eq!(capture.blocks_world_pointer(),rect.contains(cursor));app.insert_resource(capture);
+    };
+    let rect=app.world().resource::<Live>().rect.unwrap();aim(&mut app,Vec2::new(rect.left/2.,rect.top/2.));
+    key(&mut app,KeyCode::KeyR,ButtonState::Pressed);app.update();
+    let ClientPacket::Command{action,sequence:2}=next_command(&server)else{panic!("ordinary ground R datagram");};
+    assert!(matches!(&action,Action::CastAt{slot:3,point}if point.finite()&&point.distance(target_point)<0.05));
+    let cast_tick=game.tick;game.command(owner,action).unwrap();assert_eq!(game.players[&owner].mana,mana-100.);
+    assert_eq!(game.players[&owner].cooldowns[3],cast_tick+2400);assert_eq!(game.players[&owner].cooldown_totals[3],Some(2400));
+    assert!(game.command(owner,Action::Move{point:own}).unwrap_err().contains("skill blocked during cast"));
+    let windup=openleague_core::ezreal_r::WINDUP_TICKS as u64;
+    for _ in 0..windup-1 {game.advance();assert_eq!(game.players[&target].health,health);assert_eq!(game.players[&owner].position,own);}
+    assert!(game.command(owner,Action::Move{point:own}).unwrap_err().contains("skill blocked during cast"));
+    game.advance();assert_eq!(game.tick,cast_tick+windup);assert_eq!(game.players[&target].health,health);assert_eq!(game.players[&owner].position,own);
+    game.command(owner,Action::Move{point:own}).unwrap();
+    let mut contact=None;
+    for _ in 0..30 {game.advance();let current=game.players[&target].health;if current<health {contact=Some(current);break;}}
+    let after=contact.expect("released R must contact the actual enemy through normal Simulation::advance");assert!(health-after>0.&&health-after<=350.);
+    for _ in 0..4 {game.advance();assert!(game.players[&target].health>=after-0.001);}
+    assert_eq!(game.players[&owner].position,own);
+    app.world_mut().resource_mut::<crate::Match>().snapshot=Some(game.snapshot());app.update();no_command(&server); // Held R never replays.
+    key(&mut app,KeyCode::KeyR,ButtonState::Released);app.update();no_command(&server);
+    aim(&mut app,Vec2::new(rect.left+rect.width/2.,rect.top+rect.height/2.));key(&mut app,KeyCode::KeyR,ButtonState::Pressed);app.update();no_command(&server);
+    assert!(app.world().resource::<crate::Connection>().rejection.contains("Visez une cible"));key(&mut app,KeyCode::KeyR,ButtonState::Released);app.update();no_command(&server);
+}

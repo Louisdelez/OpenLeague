@@ -83,6 +83,7 @@ mod native_hud_icon_draw;
 mod native_hud_icon_geometry;
 mod native_hud_widgets;
 mod native_hud_respawn;
+mod death_recap_panel;
 mod native_hud_text_gpu_probe;
 mod native_hud_text_render;
 mod native_hud_text_batch;
@@ -299,11 +300,82 @@ mod simple_emission;
 mod native_particle_class;
 mod simple_projected_config;
 mod projected_render;
+mod ezreal_r_projected_material;
+mod ezreal_r_projected_draw;
+mod ezreal_r_projected_live;
+mod ezreal_e_bolt_profile;
+mod ezreal_e_complex_parameters;
+mod ezreal_e_complex_engine;
+mod ezreal_e_complex_simulation;
+mod ezreal_e_simple_parameters;
+mod ezreal_e_simple_simulation;
+mod ezreal_e_bolt_presentation;
+mod ezreal_e_bolt_quad_material;
+mod ezreal_e_bolt_material;
+mod ezreal_e_bolt_draw;
+mod ezreal_e_complex_material;
+mod ezreal_e_complex_draw;
+mod ezreal_e_bolt_local;
+mod ezreal_e_bolt_images;
+mod ezreal_e_bolt_geometry;
+mod ezreal_e_bolt_simulation;
+mod ezreal_e_bolt_live;
+mod ezreal_w_missile_profile;
+mod ezreal_w_missile_presentation;
+mod ezreal_w_missile_simulation;
+mod ezreal_w_missile_material;
+mod ezreal_w_missile_draw;
+mod ezreal_w_missile_live;
+mod ezreal_r_sparks_profile;
+mod ezreal_r_sparks_simulation;
+mod ezreal_r_sparks_material;
+mod ezreal_r_sparks_draw;
+mod ezreal_r_sparks_live;
+mod ezreal_r_flash_profile;
+mod ezreal_r_flash_events;
+mod ezreal_r_flash_simulation;
+mod ezreal_r_flash_quad_material;
+mod ezreal_r_flash_material;
+mod ezreal_r_flash_draw;
+mod ezreal_r_flash_live;
+mod ezreal_q_flash_events;
+mod ezreal_q_flash_profile;
+mod ezreal_q_flash_simulation;
+mod ezreal_q_flash_material;
+mod ezreal_q_flash_draw;
+mod ezreal_q_flash_live;
+mod ezreal_e_release_events;
+mod ezreal_e_release_dispatch;
+mod ezreal_e_release_profile;
+mod ezreal_e_release_simulation;
+mod ezreal_e_release_material;
+mod ezreal_e_release_draw;
+mod ezreal_e_release_live;
+mod ezreal_e_arrival_heads_profile;
+mod ezreal_e_arrival_heads_simulation;
+mod ezreal_e_arrival_heads_material;
+mod ezreal_e_arrival_heads_draw;
+mod ezreal_e_arrival_heads_live;
+
+mod ezreal_r_impact_dispatch;
+mod ezreal_r_magicdust_profile;
+mod ezreal_r_magicdust_simulation;
+mod ezreal_r_magicdust_material;
+mod ezreal_r_magicdust_draw;
+mod ezreal_r_magicdust_live;
+mod ezreal_r_impact_complex_profile;
+mod ezreal_r_impact_complex_axes;
+mod ezreal_r_impact_complex_engine;
+mod ezreal_r_impact_complex_simulation;
+mod ezreal_r_impact_complex_material;
+mod ezreal_r_impact_complex_draw;
+mod ezreal_r_impact_complex_live;
 #[allow(dead_code)] // Surface preparation precedes the live projected particle consumer.
 mod projected_terrain;
 #[allow(dead_code)] // Native UV/terrain preparation; emitter constant producer and GPU consumer pending.
 mod projected_surface;
 mod annie_q_vfx;
+mod ezreal_q_projectile_vfx;
 mod annie_ready;
 mod entity_orientation;
 mod camera_native;
@@ -311,9 +383,14 @@ mod camera_projection_bridge;
 mod camera_lock;
 mod camera_lock_ui;
 mod ordinary_camera_input;
+mod ordinary_pause;
 mod animation;
 mod trundle_w_animation;
 mod trundle_cast_animation;
+mod ezreal_q_cast_animation;
+mod ezreal_r_cast_animation;
+mod ezreal_w_cast_animation;
+mod ezreal_e_cast_animation;
 mod trundle_e_visual;
 mod nexus_idle_particles;
 mod nexus_complex_mesh;
@@ -347,6 +424,17 @@ mod map_coordinates_probe;
 mod map_audio;
 mod map_relic_world;
 mod pcm_audio;
+mod ezreal_q_hit_audio;
+mod ezreal_q_hit_audio_state;
+mod ezreal_r_hit_audio;
+mod ezreal_r_hit_audio_state;
+mod ezreal_r_cast_audio;
+mod ezreal_r_cast_audio_state;
+mod ezreal_e_return_audio;
+mod ezreal_e_return_audio_state;
+mod ezreal_r_cast_audio_diagnostics;
+mod ezreal_r_passive_presentation;
+mod native_ezreal_passive_hud;
 mod map_audio_requests;
 mod map_events;
 mod map_fog;
@@ -382,6 +470,7 @@ struct Connection {
 }
 #[derive(Resource, Default)]
 struct Match {
+    pause_control: ordinary_pause::State,
     snapshot: Option<Snapshot>,
     missile_journal: openleague_core::missile_lifecycle::Journal,
     attack_visuals: attack_animation::State,
@@ -389,6 +478,21 @@ struct Match {
     w_visuals: garen_w_live::Visuals,
     trundle_w_visuals: trundle_w_animation::State,
     trundle_cast_visuals: trundle_cast_animation::State,
+    ezreal_q_cast_visuals: ezreal_q_cast_animation::State,
+    ezreal_r_cast_visuals: ezreal_r_cast_animation::State,
+    ezreal_w_cast_visuals: ezreal_w_cast_animation::State,
+    ezreal_e_cast_visuals: ezreal_e_cast_animation::State,
+    ezreal_q_projectile_visuals: ezreal_q_projectile_vfx::State,
+    ezreal_q_hit_sounds: ezreal_q_hit_audio_state::State,
+    ezreal_r_hit_sounds: ezreal_r_hit_audio_state::State,
+    ezreal_r_flash_events: ezreal_r_flash_events::State,
+    ezreal_q_flash_events: ezreal_q_flash_events::State,
+    ezreal_e_release_events: ezreal_e_release_events::State,
+    ezreal_r_cast_sounds: ezreal_r_cast_audio_state::State,
+    ezreal_e_return_sounds: ezreal_e_return_audio_state::State,
+    ezreal_w_missiles: ezreal_w_missile_presentation::State,
+    ezreal_e_bolts: ezreal_e_bolt_presentation::State,
+    ezreal_passive_hud: ezreal_r_passive_presentation::State,
     trundle_e_visuals: trundle_e_visual::State,
     missile_contexts: Vec<Snapshot>,
     visuals: HashMap<u32, Entity>,
@@ -559,6 +663,10 @@ fn run_client(exit: &mut bevy::app::AppExit) {
                 }),
         )
         .add_plugins(pcm_audio::Plugin)
+        .add_plugins(ezreal_q_hit_audio::Plugin)
+        .add_plugins(ezreal_r_hit_audio::Plugin)
+        .add_plugins(ezreal_r_cast_audio::Plugin)
+        .add_plugins(ezreal_e_return_audio::Plugin)
         .add_plugins(native_effect_clock::Plugin)
         .add_plugins(window_surface_lifecycle::Plugin)
         .add_plugins(fow_gpu::Plugin)
@@ -577,7 +685,9 @@ fn run_client(exit: &mut bevy::app::AppExit) {
         .add_plugins(native_font_metrics::Plugin)
         .add_plugins(native_font_gpu::Plugin)
         .add_plugins(native_hud_widgets::Plugin)
+        .add_plugins(native_ezreal_passive_hud::Plugin)
         .add_plugins(native_hud_respawn::Plugin)
+        .add_plugins(death_recap_panel::Plugin)
         .add_plugins(native_hud_inventory::Plugin)
         .add_plugins(native_minimap::Plugin)
         .add_plugins(map_relic_world::Plugin)
@@ -597,6 +707,7 @@ fn run_client(exit: &mut bevy::app::AppExit) {
         .add_plugins(spell_input::Plugin)
         .add_plugins((camera_lock::Plugin,camera_lock_ui::Plugin))
         .add_plugins(ordinary_camera_input::Plugin)
+        .add_plugins(ordinary_pause::Plugin)
         .add_plugins(native_hud_live_probe::Plugin)
         .add_plugins(doran_gui_probe::Plugin)
         .add_plugins(native_hud_panels::Plugin)
@@ -608,9 +719,33 @@ fn run_client(exit: &mut bevy::app::AppExit) {
         .add_plugins(MaterialPlugin::<terrain_material::TerrainMaterial>::default())
         .add_plugins(MaterialPlugin::<map_fog::FogMaterial>::default())
         .add_plugins(MaterialPlugin::<annie_q_vfx::QMaterial>::default())
+        .add_plugins(MaterialPlugin::<ezreal_q_projectile_vfx::QMaterial>::default())
         .add_plugins(MaterialPlugin::<annie_ready::ReadyMaterial>::default())
         .add_plugins(annie_ready::phase_order::Plugin)
         .add_plugins(MaterialPlugin::<projected_render::ProjectedMaterial>::default())
+        .add_plugins(ezreal_r_projected_draw::Plugin)
+        .add_plugins(ezreal_r_projected_live::Plugin)
+        .add_plugins(ezreal_w_missile_draw::Plugin)
+        .add_plugins(ezreal_w_missile_live::Plugin)
+        .add_plugins(ezreal_e_bolt_draw::Plugin)
+        .add_plugins(ezreal_e_complex_draw::Plugin)
+        .add_plugins(ezreal_e_bolt_live::Plugin)
+        .add_plugins(ezreal_r_sparks_draw::Plugin)
+        .add_plugins(ezreal_r_sparks_live::Plugin)
+        .add_plugins(ezreal_r_flash_draw::Plugin)
+        .add_plugins(ezreal_r_flash_live::Plugin)
+        .add_plugins(ezreal_q_flash_draw::Plugin)
+        .add_plugins(ezreal_q_flash_live::Plugin)
+        .add_plugins(ezreal_e_release_dispatch::Plugin)
+        .add_plugins(ezreal_e_release_draw::Plugin)
+        .add_plugins(ezreal_e_release_live::Plugin)
+        .add_plugins(ezreal_e_arrival_heads_draw::Plugin)
+        .add_plugins(ezreal_e_arrival_heads_live::Plugin)
+        .add_plugins(ezreal_r_impact_dispatch::Plugin)
+        .add_plugins(ezreal_r_magicdust_draw::Plugin)
+        .add_plugins(ezreal_r_magicdust_live::Plugin)
+        .add_plugins(ezreal_r_impact_complex_draw::Plugin)
+        .add_plugins(ezreal_r_impact_complex_live::Plugin)
         .add_plugins(projected_pipeline_probe::Plugin)
         .add_plugins(projected_warmup::Plugin)
         .add_plugins(projected_pixel_pair::Plugin)
@@ -635,6 +770,7 @@ fn run_client(exit: &mut bevy::app::AppExit) {
         .init_resource::<map_resource_provider::Map10Catalog>()
         .init_resource::<fow_champion_sources::Sources>()
         .init_resource::<annie_q_vfx::Flights>()
+        .init_resource::<ezreal_q_projectile_vfx::Live>()
         .init_resource::<annie_q_vfx::VisibilityProbe>()
         .init_resource::<annie_ready::Ready>()
         .init_resource::<annie_ready::Probe>()
@@ -690,6 +826,7 @@ fn run_client(exit: &mut bevy::app::AppExit) {
                 commands,
                 camera.after(annie_q_vfx::update),
                 map_audio::listener_position,
+                ezreal_q_hit_audio::update,
                 map_audio::listener_probe,
                 labels,
 
@@ -705,6 +842,9 @@ fn run_client(exit: &mut bevy::app::AppExit) {
             )
                 .chain(),
         )
+        .add_systems(Update, ezreal_r_hit_audio::update.after(receive).after(map_audio::listener_position).after(ezreal_q_hit_audio::update))
+        .add_systems(Update, ezreal_r_cast_audio::update.after(receive).after(map_audio::listener_position).after(ezreal_r_hit_audio::update))
+        .add_systems(Update, ezreal_e_return_audio::update.after(receive).after(ezreal_r_cast_audio::update))
         .add_systems(Update, endgame_timeline::update.after(receive).before(camera).before(native_endgame_ui::update))
         .add_systems(Update, nexus_ceremony::update.after(endgame_timeline::update).before(animation::load_models).before(animation::animate))
         .add_systems(Update, nexus_ceremony::probe.after(nexus_ceremony::update).after(animation::load_models).before(render_probe::capture))
@@ -729,6 +869,7 @@ fn run_client(exit: &mut bevy::app::AppExit) {
         .add_systems(Update, annie_ready::update.after(receive).before(render_probe::capture))
         .add_systems(PostUpdate, annie_ready::live_probe::observe.after(bevy::camera::visibility::VisibilitySystems::CheckVisibility))
         .add_systems(Update, annie_q_vfx::update.after(receive).before(render_probe::capture))
+        .add_systems(Update, ezreal_q_projectile_vfx::update.after(receive).after(annie_q_vfx::update).before(render_probe::capture))
         .add_systems(PostUpdate, health::update.after(bevy::camera::CameraUpdateSystems).before(bevy::ui::UiSystems::Prepare))
         .add_systems(Update, projected_live::update.after(annie_q_vfx::update).after(camera).before(render_probe::capture))
         .add_systems(Update, projected_render::probe.after(receive).before(render_probe::capture))
@@ -811,6 +952,20 @@ fn setup(mut commands: Commands, assets: Res<AssetServer>, focus: Res<CameraFocu
         PlayerLabel,
     ));
 }
+#[derive(bevy::ecs::system::SystemParam)]
+struct ReceiveDraws<'w> {
+    r_draw: ResMut<'w,ezreal_r_projected_draw::Current>,
+    r_sparks_draw: ResMut<'w,ezreal_r_sparks_draw::Current>,
+    r_flash_draw: ResMut<'w,ezreal_r_flash_draw::Current>,
+    q_flash_draw: ResMut<'w,ezreal_q_flash_draw::Current>,
+    e_release_draw: ResMut<'w,ezreal_e_release_draw::Current>,
+    e_arrival_heads_draw: ResMut<'w,ezreal_e_arrival_heads_draw::Current>,
+    r_magicdust_draw: ResMut<'w,ezreal_r_magicdust_draw::Current>,
+    r_impact_complex_draw: ResMut<'w,ezreal_r_impact_complex_draw::Current>,
+    w_missile_draw: ResMut<'w,ezreal_w_missile_draw::Current>,
+    e_bolt_draw: ResMut<'w,ezreal_e_bolt_draw::Current>,
+    e_complex_draw: ResMut<'w,ezreal_e_complex_draw::Current>,
+}
 fn receive(
     mut connection: ResMut<Connection>,
     mut state: ResMut<Match>,
@@ -822,8 +977,13 @@ fn receive(
     clock: Res<endgame_timeline::Clock>,
     time: Res<Time>,
     mut effect_clock: ResMut<native_effect_clock::EffectClock>,
+    draws: ReceiveDraws,
 ) {
     connection.maintain_session();
+    let ReceiveDraws{mut r_draw,mut r_sparks_draw,mut r_flash_draw,mut q_flash_draw,mut e_release_draw,mut e_arrival_heads_draw,mut r_magicdust_draw,mut r_impact_complex_draw,mut w_missile_draw,mut e_bolt_draw,mut e_complex_draw}=draws;
+    state.ezreal_e_bolts.maintain(effect_clock.now,effect_clock.paused(),
+        connection.ready() && effect_clock.presentation_ready());
+    if !connection.ready() { r_draw.invalidate();r_sparks_draw.invalidate();r_flash_draw.invalidate();q_flash_draw.invalidate();e_release_draw.invalidate();e_arrival_heads_draw.invalidate();r_magicdust_draw.invalidate();r_impact_complex_draw.invalidate();w_missile_draw.invalidate();e_bolt_draw.invalidate();e_complex_draw.invalidate(); state.ezreal_r_hit_sounds.suspend(); state.ezreal_w_cast_visuals.suspend(); state.ezreal_e_cast_visuals.suspend(); state.ezreal_r_cast_sounds.suspend(); state.ezreal_e_return_sounds.suspend(); state.ezreal_r_flash_events.suspend();state.ezreal_q_flash_events.suspend();state.ezreal_e_release_events.suspend();state.ezreal_w_missiles.suspend();state.ezreal_e_bolts.suspend(); }
     let mut buffer = [0u8; 16384];
     let mut waiting=std::collections::VecDeque::new();
     let mut received=0;
@@ -835,7 +995,7 @@ fn receive(
             let n=match connection.socket.recv(&mut buffer) {
                 Ok(n)=>n,
                 Err(error) if error.kind()==std::io::ErrorKind::WouldBlock=>break,
-                Err(_)=>{connection.network_interrupted();break;}
+                Err(_)=>{connection.network_interrupted();r_draw.invalidate();r_sparks_draw.invalidate();r_flash_draw.invalidate();q_flash_draw.invalidate();e_release_draw.invalidate();e_arrival_heads_draw.invalidate();r_magicdust_draw.invalidate();r_impact_complex_draw.invalidate();w_missile_draw.invalidate();e_bolt_draw.invalidate();e_complex_draw.invalidate();state.ezreal_r_hit_sounds.suspend(); state.ezreal_w_cast_visuals.suspend(); state.ezreal_e_cast_visuals.suspend(); state.ezreal_r_cast_sounds.suspend(); state.ezreal_e_return_sounds.suspend(); state.ezreal_r_flash_events.suspend();state.ezreal_q_flash_events.suspend();state.ezreal_e_release_events.suspend();state.ezreal_w_missiles.suspend();state.ezreal_e_bolts.suspend();break;}
             };
             received+=1;
             match connection.decode_datagram(&buffer[..n]) {
@@ -849,6 +1009,8 @@ fn receive(
                     warn!("Ignored retired welcome identity: session={session} player={player}");
                     continue;
                 }
+                r_draw.invalidate();r_sparks_draw.invalidate();r_flash_draw.invalidate();q_flash_draw.invalidate();e_release_draw.invalidate();e_arrival_heads_draw.invalidate();r_magicdust_draw.invalidate();r_impact_complex_draw.invalidate();w_missile_draw.invalidate();e_bolt_draw.invalidate();e_complex_draw.invalidate();
+                state.ezreal_e_bolts.suspend();
                 if connection.session != Some(session) || connection.id != Some(player) {
                     for (_, entity) in state.visuals.drain() {
                         commands.entity(entity).despawn();
@@ -861,6 +1023,20 @@ fn receive(
                     state.w_visuals.reset(session);
                     state.trundle_w_visuals.reset(session);
                     state.trundle_cast_visuals.reset(session,player);
+                    state.ezreal_q_cast_visuals.reset(session);
+                    state.ezreal_r_cast_visuals.reset(session);
+                    state.ezreal_w_cast_visuals.reset(session); state.ezreal_e_cast_visuals.reset(session);
+                    state.ezreal_q_projectile_visuals.reset(session);
+                    state.ezreal_q_hit_sounds.reset(session,player);
+                    state.ezreal_r_hit_sounds.reset(session,player);
+                    state.ezreal_r_flash_events.reset(session,player);
+                    state.ezreal_q_flash_events.reset(session,player);
+                    state.ezreal_e_release_events.reset(session,player);
+                    state.ezreal_r_cast_sounds.reset(session,player);
+                    state.ezreal_e_return_sounds.reset(session,player);
+                    state.ezreal_w_missiles.reset_session(session,player);
+                    state.ezreal_e_bolts.reset_session(session,player);
+                    state.ezreal_passive_hud.reset_session(session,player);
                     state.trundle_e_visuals.reset(session);
                     state.missile_contexts.clear();
                     if epoch.is_none() {effect_clock.reset_session();}
@@ -876,6 +1052,20 @@ fn receive(
                     }
                     state.trundle_w_visuals.begin_epoch(session,context.epoch);
                     state.trundle_cast_visuals.begin_epoch(session,context.epoch,player);
+                    state.ezreal_q_cast_visuals.begin_epoch(session,context.epoch);
+                    state.ezreal_r_cast_visuals.begin_epoch(session,context.epoch);
+                    state.ezreal_w_cast_visuals.begin_epoch(session,context.epoch); state.ezreal_e_cast_visuals.begin_epoch(session,context.epoch);
+                    state.ezreal_q_projectile_visuals.begin_epoch(session,context.epoch);
+                    state.ezreal_q_hit_sounds.begin_epoch(session,context.epoch,player);
+                    state.ezreal_r_hit_sounds.begin_epoch(session,context.epoch,player);
+                    state.ezreal_r_flash_events.begin_epoch(session,context.epoch,player);
+                    state.ezreal_q_flash_events.begin_epoch(session,context.epoch,player);
+                    state.ezreal_e_release_events.begin_epoch(session,context.epoch,player);
+                    state.ezreal_r_cast_sounds.begin_epoch(session,context.epoch,player);
+                    state.ezreal_e_return_sounds.begin_epoch(session,context.epoch,player);
+                    state.ezreal_w_missiles.begin_epoch(Some(context.epoch));
+                    state.ezreal_e_bolts.begin_epoch(Some(context.epoch));
+                    state.ezreal_passive_hud.begin_epoch(Some(context.epoch));
                     state.trundle_e_visuals.begin_epoch(session,context.epoch);
                     effect_clock.reset_session();
                 }
@@ -907,10 +1097,14 @@ fn receive(
                     None=>garen_w_live::accept_presentations(&mut state,&snapshot,effect_clock.now),
                 };
                 match accepted {
-                    Ok(true) => {},
+                    Ok(true) => { r_draw.invalidate();r_sparks_draw.invalidate();r_flash_draw.invalidate();q_flash_draw.invalidate();e_release_draw.invalidate();e_arrival_heads_draw.invalidate();r_magicdust_draw.invalidate();r_impact_complex_draw.invalidate();w_missile_draw.invalidate();e_bolt_draw.invalidate();e_complex_draw.invalidate(); },
                     Ok(false) => continue,
                     Err(error) => { warn!("Presentation snapshot rejected: {error}"); continue; },
                 }
+                // The delivered frame is being observed before snapshot commit.
+                // Input/physical readiness intentionally remains false until presented().
+                let observation_ready = connection.observation_ready(delivery)
+                    && effect_clock.presentation_ready();
                 // Optional W presentation observes only this already accepted
                 // authoritative packet; its errors never reject gameplay/attacks.
                 if let Err(error)=state.trundle_w_visuals.observe_accepted(&snapshot,effect_clock.now) {
@@ -924,6 +1118,101 @@ fn receive(
                 }
                 if let Err(error)=state.trundle_e_visuals.observe_accepted(&snapshot,effect_clock.now) {
                     warn!("Trundle pillar presentation hidden: {error}");
+                }
+                // Optional Q animation observes EVERY accepted packet before
+                // coalescing, including transient FoW/death/stun in this batch.
+                if let Err(error)=state.ezreal_q_cast_visuals.observe_accepted(&snapshot,effect_clock.now,effect_clock.presentation_ready(),effect_clock.paused()) {
+                    warn!("Ezreal Q cast presentation ignored: {error}");
+                }
+                // Body-visible R Pending rows observe this same accepted packet.
+                // Detect Q/R conflicts before a later packet in the batch hides them.
+                {
+                    let Match { ezreal_r_cast_visuals, ezreal_q_cast_visuals, .. } = &mut *state;
+                    if let Err(error) = ezreal_r_cast_visuals.observe_with_q(&snapshot, effect_clock.now,
+                        effect_clock.presentation_ready(), effect_clock.paused(), ezreal_q_cast_visuals) {
+                        warn!("Optional Ezreal R cast presentation retired: {error}");
+                    }
+                }
+                // W reads each accepted body-visible Pending before coalescing.
+                // Its committed cast survives later CC; conflicting Q/R rows do not.
+                {
+                    let Match { ezreal_w_cast_visuals, ezreal_r_cast_visuals, ezreal_q_cast_visuals, .. } = &mut *state;
+                    if let Err(error) = ezreal_w_cast_visuals.observe_with_other_casts(&snapshot, effect_clock.now,
+                        observation_ready, effect_clock.paused(),
+                        ezreal_q_cast_visuals, ezreal_r_cast_visuals) {
+                        warn!("Optional Ezreal W cast presentation retired: {error}");
+                    }
+                }
+                // E interruption/conflict observes every accepted packet before coalescing.
+                {
+                    let Match { ezreal_e_cast_visuals, ezreal_w_cast_visuals, ezreal_r_cast_visuals, ezreal_q_cast_visuals, .. } = &mut *state;
+                    if let Err(error) = ezreal_e_cast_visuals.observe_with_other_casts(&snapshot, effect_clock.now,
+                        observation_ready, effect_clock.paused(),
+                        ezreal_q_cast_visuals, ezreal_r_cast_visuals, ezreal_w_cast_visuals) {
+                        warn!("Optional Ezreal E cast presentation retired: {error}");
+                    }
+                }
+                // Persistent targetless Q observes this exact already accepted
+                // audience snapshot before coalescing; errors never gate gameplay.
+                if let Some(viewer)=connection.id {
+                    if let Err(error)=state.ezreal_q_projectile_visuals.observe_accepted(&snapshot,viewer,effect_clock.now,effect_clock.presentation_ready(),effect_clock.paused()) {
+                        warn!("Ezreal Q projectile presentation hidden: {error}");
+                    }
+                }
+                // Optional accepted-impact audio sees every accepted packet;
+                // errors never reject gameplay, animation or the next packet.
+                if let Err(error)=state.ezreal_q_hit_sounds.observe_accepted(&snapshot,effect_clock.now,effect_clock.presentation_ready(),effect_clock.paused()) {
+                    warn!("Optional Ezreal Q hit audio ignored: {error}");
+                }
+                // R hits are authorized only by this exact atomic OLSR frame;
+                // missing/legacy delivery revokes this audio channel immediately.
+                if let Err(error)=state.ezreal_r_hit_sounds.observe_accepted_frame(&snapshot,effect_clock.now,
+                    effect_clock.presentation_ready(),effect_clock.paused(),delivery) {
+                    warn!("Optional Ezreal R hit audio ignored: {error}");
+                }
+                // Independent flash VFX observes every accepted OLSR packet before coalescing.
+                // It never drains the audio queue and never follows a current target entity.
+                if let Err(error)=state.ezreal_r_flash_events.observe_accepted_frame(&snapshot,effect_clock.now,
+                    observation_ready,effect_clock.paused(),delivery) {
+                    warn!("Optional Ezreal R flash retired: {error}");
+                }
+                // Q VFX consumes only accepted Q impacts, independently of audio.
+                // A legacy/omitted frame revokes this channel before coalescing.
+                let _ = state.ezreal_q_flash_events.observe_accepted_frame(&snapshot,effect_clock.now,
+                    observation_ready,effect_clock.paused(),delivery);
+                // Each committed E phase is independent and observes this exact
+                // accepted OLSR delivery before coalescing or presented().
+                if let Err(error)=state.ezreal_e_release_events.observe_accepted_frame(&snapshot,effect_clock.now,
+                    observation_ready,effect_clock.paused(),delivery) {
+                    warn!("Optional Ezreal E release flashes retired: {error}");
+                }
+                // Independent Arrival audio observes the exact accepted frame; no VFX drain.
+                // Errors revoke only this optional channel; no per-frame logs.
+                let _ = state.ezreal_e_return_sounds.observe_accepted_frame(&snapshot,effect_clock.now,
+                    observation_ready,effect_clock.paused(),delivery);
+                // Only accepted OnCast facts from this exact OLSR frame may sound.
+                if let Err(error)=state.ezreal_r_cast_sounds.observe_accepted_frame(&snapshot,effect_clock.now,
+                    observation_ready,effect_clock.paused(),delivery) {
+                    warn!("Optional Ezreal R OnCast audio ignored: {error}");
+                }
+                // Current R samples and owner passive observe each already
+                // accepted frame; an optional error never rejects gameplay.
+                if let Some(viewer)=connection.id {
+                    // W XYZ and both emitters observe every accepted frame before coalescing.
+                    if let Err(error)=state.ezreal_w_missiles.observe_accepted_frame(&snapshot,viewer,
+                        effect_clock.now,effect_clock.paused(),observation_ready,delivery) {
+                        warn!("Optional Ezreal W missile retired: {error}");
+                    }
+                    // E current XYZ/direction comes only from this complete accepted
+                    // OLSR frame, before coalescing. This state does not draw particles.
+                    if let Err(error)=state.ezreal_e_bolts.observe_accepted_frame(&snapshot,viewer,
+                        effect_clock.now,effect_clock.paused(),observation_ready,delivery) {
+                        warn!("Optional Ezreal E Bolt state retired: {error}");
+                    }
+                    if let Err(error)=state.ezreal_passive_hud.observe_accepted_frame(&snapshot,viewer,
+                        effect_clock.now,effect_clock.paused(),effect_clock.presentation_ready(),delivery) {
+                        warn!("Optional Ezreal R/passive presentation hidden: {error}");
+                    }
                 }
                 if has_missile_context { state.missile_contexts.push(snapshot.clone()); }
                 if std::env::var_os("OPENLEAGUE_Q_STARTUP_PROBE").is_some() {
@@ -1050,7 +1339,12 @@ fn receive(
                     connection.report(error);
                 }
             }
-            session_connection::Incoming::Rejected(reason)=>connection.report(&reason),
+            session_connection::Incoming::Rejected(reason)=>{
+                state.pause_control.rejected(None,None,&reason);connection.report(&reason);
+            },
+            session_connection::Incoming::GameplayRejected{context,sequence,reason}=>{
+                state.pause_control.rejected(Some(context),Some(sequence),&reason);connection.report(&reason);
+            },
         }
     }
 }

@@ -54,6 +54,10 @@ impl EffectClock {
  pub fn diagnostic(&self)->serde_json::Value{serde_json::json!({"time":self.now,"time_bits":self.game.time.to_bits(),"delta_bits":self.game.delta.to_bits(),"paused":self.control.paused,"resume_pending":self.control.resume_pending,"remaining":self.control.remaining,"ordinal":self.last_ordinal,"failed":self.failed})}
  pub fn paused(&self)->bool{self.control.paused}
  pub fn acknowledged_ordinal(&self)->u64{self.last_ordinal}
+ /// Ordinary HUD observes applied server-clock state without changing the clock.
+ pub(crate) fn pause_ui_status(&self)->(u64,bool,bool){
+  (self.last_ordinal,self.control.paused,self.control.resume_pending)
+ }
  /// A new Welcome identity discards queued directives and a previous pause.
  /// Keep process-local time monotonic; consumers already retire session effects.
  pub fn reset_session(&mut self){self.control=PauseControl::default();self.adjustment=0.;self.last_ordinal=0;self.pending.clear();self.game.scale=1.;}

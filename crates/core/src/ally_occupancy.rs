@@ -518,7 +518,7 @@ fn movable(p: &crate::Champion, tick: u64) -> bool {
     p.health.is_finite() && p.health > 0. && p.position.finite()
         && !crate::stuns::active(p, tick) && !crate::trundle_e::champion_forced(p, tick)
         && p.effects.ultimate.is_none() && p.effects.annie_q.is_none()
-        && p.effects.annie_w.is_none() && p.effects.annie_r.is_none() && p.windup.is_none()
+        && p.effects.annie_w.is_none() && p.effects.annie_r.is_none() && p.effects.ezreal_q.is_none() && p.effects.ezreal_w.is_none() && p.windup.is_none()
 }
 
 struct Prefix { motion: Motion, popped: usize }
@@ -673,7 +673,7 @@ impl Simulation {
         for p in self.players.values() {
             if !p.health.is_finite() || p.health <= 0. { continue; }
             let Some(radius) = crate::collision::pathfinding_radius(&p.champion) else { return; };
-            let budget = if movable(p, self.tick) {
+            let budget = if movable(p, self.tick) && !self.ezreal_e_casting(p.id) && !self.ezreal_r_casting(p.id) {
                 f64::from(self.movement_speed(p.id) / crate::TICK_RATE as f32)
             } else { 0. };
             let b = Body { id: p.id, team: p.team, position: p.position, radius, budget };

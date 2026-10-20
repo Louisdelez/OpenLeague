@@ -102,3 +102,4 @@ pub fn original6_surface_getters_match_owned_attribute_hit_missing_and_direction
  assert_eq!(count,6);println!("original6_surface_getters_match_owned_attribute_hit_missing_and_direction_normalization: passed");
 }
 pub fn run_all(){original96_mist_frames_match_birth69_buffers12_rng55_clocks_and_surface56();late_mist_birth_failure_preserves_owned_context_owner_buffers_clocks_and_shared_rng();original6_surface_getters_match_owned_attribute_hit_missing_and_direction_normalization();}
+

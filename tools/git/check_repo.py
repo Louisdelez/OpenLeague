@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path, PurePosixPath
 import re
@@ -16,6 +17,22 @@ SEMVER = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)"
                     + rf"(?:-{PRERELEASE}(?:\.{PRERELEASE})*)?(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$")
 SECTIONS = ("Problème et résultat", "Périmètre et références", "Vérifications", "Limites")
 MAX_FILE_BYTES = 5 * 1024 * 1024
+LARGE_FILE_EXCEPTIONS = "tools/git/large-file-exceptions.json"
+
+
+def reviewed_large_file(name: str, data: bytes, staged: bool) -> bool:
+    """Accept only an exact reviewed dataset, never a directory or size wildcard."""
+    if forbidden_path(name) or len(data) >= 100 * 1024 * 1024:
+        return False
+    try:
+        raw = git("show", ":" + LARGE_FILE_EXCEPTIONS) if staged else (ROOT / LARGE_FILE_EXCEPTIONS).read_bytes()
+        entries = json.loads(raw)
+    except (OSError, ValueError, subprocess.CalledProcessError):
+        return False
+    entry = entries.get(name) if isinstance(entries, dict) else None
+    return (isinstance(entry, dict) and type(entry.get("bytes")) is int
+            and entry["bytes"] == len(data) and bool(entry.get("reason"))
+            and entry.get("sha256") == hashlib.sha256(data).hexdigest())
 
 
 def git(*args: str) -> bytes:
@@ -130,7 +147,7 @@ def file_errors(base: str | None, staged: bool) -> list[str]:
             errors.append(f"Do not add runtime files, private keys or asset-pack content: {name}")
     for name in diff_paths(base, staged):
         data = git("show", ":" + name) if staged else git("show", "HEAD:" + name)
-        if len(data) > MAX_FILE_BYTES:
+        if len(data) > MAX_FILE_BYTES and not reviewed_large_file(name, data, staged):
             errors.append(f"Changed file exceeds 5 MiB; use a release pack or reviewed exception: {name}")
         if PurePosixPath(name).suffix in {".md", ".py", ".json", ".jsonc", ".toml", ".yaml", ".yml", ".js", ".mjs", ".wgsl"}:
             try:

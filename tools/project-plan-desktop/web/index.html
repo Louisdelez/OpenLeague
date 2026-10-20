@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OpenLeague — Plan de travail</title>
+<style>
+:root{font:14px/1.5 "Segoe UI",system-ui,sans-serif;color:#292929;background:#fafafa;font-synthesis:none;--line:#e5e5e5;--muted:#767676}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+button,a,input,select,textarea,summary{outline-offset:3px}
+:focus-visible{outline:2px solid #696969}
+button{cursor:pointer}
+button:disabled{cursor:default;opacity:.45}
+a{color:inherit}
+svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.app{max-width:1040px;margin:auto;padding:32px 32px 40px}
+.header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.project-progress{margin-bottom:24px}
+.progress-caption{display:flex;align-items:center;gap:10px;margin-bottom:7px;font-size:11px;color:var(--muted)}
+.progress-caption label{flex:1}
+.progress-caption output{color:#424242;font-variant-numeric:tabular-nums}
+.progress-count{font-size:10px}
+.project-progress progress{display:block;appearance:none;-webkit-appearance:none;width:100%;height:6px;border:0;border-radius:4px;overflow:hidden;background:#e7e7e7;color:#555}
+.project-progress progress::-webkit-progress-bar{background:#e7e7e7;border-radius:4px}
+.project-progress progress::-webkit-progress-value{background:#555;border-radius:4px;min-width:2px}
+.project-progress progress[value="0"]::-webkit-progress-value{min-width:0}
+.project-progress progress::-moz-progress-bar{background:#555;border-radius:4px}
+@media(max-width:400px){.header{gap:8px}.saved{display:none}.progress-count{display:none}}
+h1{font-size:22px;font-weight:600;letter-spacing:-.035em;line-height:1.3;margin:0}
+.saved{margin-left:auto;color:var(--muted);font-size:11px;white-space:nowrap}
+.saved.error{color:#8c3939}
+.more{position:relative}
+.icon{width:34px;height:34px;border:0;border-radius:5px;background:none;color:#797979;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;padding:0}
+.icon:hover{background:#eeeeee;color:#242424}
+.more-list{position:absolute;right:0;top:39px;z-index:10;min-width:220px;padding:5px;background:white;border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px #0000000d}
+.more-list a,.more-list button{display:block;text-decoration:none;text-align:left;width:100%;font-size:12px;background:none;border:0;border-radius:4px;padding:10px 12px;cursor:pointer}
+.more-list a:hover,.more-list button:hover{background:#f4f4f4}
+.toolbar{display:grid;grid-template-columns:minmax(150px,1fr) minmax(160px,230px) 128px;gap:9px;margin-bottom:22px}
+.search{display:flex;align-items:center;gap:8px;background:white;border:1px solid #dedede;border-radius:6px;padding:0 11px;color:#828282}
+.search input{min-width:0;width:100%;background:none;border:0;outline:0;padding:10px 0;font-size:13px}
+.search:focus-within{outline:2px solid #999;outline-offset:1px}
+select{min-width:0;padding:9px 26px 9px 10px;background:white;border:1px solid #dedede;border-radius:6px;font-size:12px;cursor:pointer}
+.context{display:flex;align-items:center;gap:10px;margin:0 0 12px;min-height:30px}
+.context h2{font-size:14px;font-weight:600;margin:0;letter-spacing:-.01em}
+.count{margin-left:auto;font-size:11px;color:var(--muted);white-space:nowrap}
+.lot{border:1px solid var(--line);border-radius:8px;background:white;margin-bottom:12px;overflow:hidden}
+.lot-header{display:flex;align-items:center;gap:6px;padding:7px 9px;background:#f6f6f6;border-bottom:1px solid #eaeaea}
+.lot-toggle{display:flex;align-items:center;gap:8px;flex:1;min-width:0;background:none;border:0;text-align:left;padding:4px 2px;line-height:1.5}
+.lot-toggle svg{width:14px;height:14px;color:#909090;transition:transform .15s}
+.lot-toggle h3{font-size:12px;font-weight:600;margin:0;overflow-wrap:anywhere}
+.lot.collapsed .lot-toggle svg{transform:rotate(-90deg)}
+.lot.collapsed .tasklist{display:none}
+.lot.collapsed .lot-header{border-bottom:0}
+.lot-count{font-size:10px;color:#8b8b8b;white-space:nowrap;margin:0 4px}
+.check-target{width:30px;min-height:30px;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer}
+.check{width:16px;height:16px;margin:0;accent-color:#494949;cursor:pointer}
+.check:disabled{cursor:wait}
+.taskrow{display:flex;align-items:center;gap:6px;padding:7px 9px;border-bottom:1px solid #efefef;min-height:48px}
+.taskrow:last-child{border:0}
+.taskrow:hover{background:#fcfcfc}
+.task-title{flex:1;min-width:0;text-align:left;border:0;background:none;padding:6px 2px;font-size:13px;line-height:1.65;font-weight:400;overflow-wrap:anywhere}
+.task-title:hover{text-decoration:underline;text-decoration-color:#aaaaaa;text-underline-offset:3px}
+.taskrow.done .task-title{color:#7c7c7c;text-decoration:line-through;text-decoration-color:#b5b5b5}
+.pager{display:flex;align-items:center;justify-content:center;gap:18px;padding:13px 0 0;font-size:11px;color:var(--muted)}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;padding:8px 13px;border:1px solid #dadada;border-radius:6px;background:white;font-size:12px;cursor:pointer}
+.button:hover{background:#f4f4f4}
+.button.primary{background:#303030;color:white;border-color:#303030}
+.button.primary:hover{background:#474747}
+.empty{padding:35px 16px;text-align:center;color:var(--muted);font-size:13px}
+.empty p{margin:0 0 14px}
+.error-text{font-size:12px;color:#8c3939;line-height:1.8}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:30;max-width:calc(100vw - 24px);display:flex;align-items:center;gap:18px;padding:11px 15px;background:#303030;color:#fff;border-radius:7px;font-size:12px;box-shadow:0 3px 15px #00000018}
+.toast button{border:0;background:none;color:white;text-decoration:underline;cursor:pointer;font-size:12px;padding:0}
+dialog{border:1px solid #ddd;border-radius:10px;padding:0;width:calc(100vw - 32px);max-width:780px;color:#303030;background:white;box-shadow:0 14px 60px #00000022}
+dialog::backdrop{background:#00000050}
+.dialog-head{display:flex;align-items:flex-start;gap:15px;justify-content:space-between;border-bottom:1px solid var(--line);padding:20px 23px 16px}
+.dialog-head h2{font-size:18px;font-weight:600;line-height:1.5;margin:4px 0 0;letter-spacing:-.02em}
+.dialog-head small{font-size:10px;color:var(--muted)}
+.dialog-body{max-height:64vh;overflow:auto;padding:20px 23px}
+.instruction{margin:0;font:12px/1.8 "Segoe UI",sans-serif;white-space:pre-wrap;overflow-wrap:anywhere;color:#4f4f4f}
+.dialog-actions{display:flex;align-items:center;gap:10px;justify-content:flex-end;padding:14px 23px;border-top:1px solid var(--line)}
+.dialog-actions .left{margin-right:auto}
+details{font-size:12px;margin-top:22px}
+summary{cursor:pointer;color:#626262;line-height:2}
+.notes{width:100%;min-height:95px;padding:10px;font-size:12px;line-height:1.7;border:1px solid #d8d8d8;border-radius:5px;margin:10px 0;resize:vertical;background:#fcfcfc}
+.small-text{font-size:12px;line-height:1.8;color:#6d6d6d;margin:0}
+.db-path{font-size:11px;background:#fafafa;border:1px solid var(--line);border-radius:5px;padding:10px;margin-top:9px}
+.file-entry{display:none;max-width:570px;padding:30px;margin:12vh auto;line-height:1.8}
+body.filemode .app{display:none}
+body.filemode .file-entry{display:block}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:650px){.app{padding:22px 16px 30px}.header{margin-bottom:20px}h1{font-size:20px}.toolbar{grid-template-columns:minmax(0,1fr) 125px;margin-bottom:16px}.search{grid-column:1/-1}.lot-header,.taskrow{padding-left:6px;padding-right:6px}.lot-toggle h3{font-size:12px}.task-title{font-size:13px}.lot-count{display:none}.dialog-head,.dialog-body{padding:17px}.dialog-actions{padding:13px 17px}.saved{font-size:10px}.context h2{font-size:13px}}
+
+.part-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.part-card{display:flex;align-items:center;gap:13px;border:1px solid var(--line);border-radius:7px;background:white;padding:16px;text-align:left;min-width:0}
+.part-card:hover{background:#f3f3f3;border-color:#c9c9c9}
+.part-number{color:#999;font-size:12px;align-self:flex-start;padding-top:2px}
+.part-label{flex:1;font-size:13px;min-width:0;font-weight:500}
+.part-label small{display:block;color:#888;font-size:10px;font-weight:400;margin-top:5px}
+.subtasks{margin:0;border-bottom:1px solid #eee}
+.subtasks>summary{display:flex;align-items:center;padding:10px 16px;font-size:12px;background:#fcfcfc;list-style:none}
+.subtasks>summary::before{content:'›';color:#999;margin-right:10px;transform:rotate(0deg)}
+.subtasks[open]>summary::before{transform:rotate(90deg)}
+.subtasks>summary span{margin-left:auto;color:#999;font-size:10px}
+.subtasks .taskrow{padding-left:22px}
+.part-card:focus-visible{outline:2px solid #696969}
+@media(max-width:650px){.part-grid{grid-template-columns:1fr}.lot-count{display:block}.part-card{padding:13px}}
+</style>
+</head>
+<body>
+<section class="file-entry"><h1>Plan OpenLeague</h1><p>Pour retrouver ton suivi local :</p><a class="button primary" href="http://127.0.0.1:10427/">Ouvrir le plan</a><p class="small-text" style="margin-top:16px">Si le service est arrêté, lance « Ouvrir le plan OpenLeague.cmd » sur le Bureau.</p></section>
+<main class="app">
+  <header class="header">
+    <button id="back" class="icon" aria-label="Retour" title="Retour à la vue précédente" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 5-7 7 7 7M5 12h14"></path></svg></button>
+    <h1>Plan OpenLeague</h1>
+    <span id="save-state" class="saved" role="status">Connexion…</span>
+    <div class="more">
+      <button id="more-toggle" class="icon" aria-label="Options" aria-expanded="false" aria-controls="more-menu" title="Options"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1"></circle><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle></svg></button>
+      <div id="more-menu" class="more-list" hidden>
+        <a href="/api/export" download="OpenLeague_suivi.json">Exporter le suivi</a>
+        <button id="restore-button">Importer un suivi</button>
+        <button id="database-button">Base et sauvegarde</button>
+        <a href="/api/audit" download="OpenLeague_AUDIT_DU_PLAN.md">Audit du plan</a>
+      </div>
+    </div>
+  </header>
+  <section class="project-progress" aria-label="Progression du projet">
+    <div class="progress-caption"><label for="project-progress">Progression globale</label><span id="progress-count" class="progress-count"></span><output id="progress-percent" aria-live="polite">—</output></div>
+    <progress id="project-progress" max="100" value="0" aria-valuetext="Chargement de la progression"></progress>
+  </section>
+  <div class="toolbar">
+    <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m16 16 4 4"></path></svg><input id="search" type="search" placeholder="Rechercher une tâche…" aria-label="Rechercher dans le plan"></label>
+    <select id="phase" aria-label="Partie du plan"><option value="">Toutes les parties</option></select>
+    <select id="status" aria-label="État des tâches"><option value="all">Toutes</option><option value="todo">À faire</option><option value="done">Terminées</option></select>
+  </div>
+  <div class="context"><h2 id="section-title">Tout le plan</h2><span class="count" id="results" aria-live="polite">Chargement…</span><button class="icon" id="copy-phase" title="Copier la partie" aria-label="Copier les instructions de cette partie" hidden></button></div>
+  <div id="part-grid" class="part-grid" hidden></div>
+  <div id="lots" aria-busy="true"><div class="empty">Chargement des tâches…</div></div>
+  <nav id="pager" class="pager" aria-label="Pages de tâches" hidden><button id="prev" class="button">Précédent</button><span id="page-label"></span><button id="next" class="button">Suivant</button></nav>
+</main>
+<input type="file" id="restore-file" accept=".json,application/json" hidden>
+<dialog id="task-dialog" aria-labelledby="task-dialog-title">
+  <header class="dialog-head"><div><small id="task-dialog-id"></small><h2 id="task-dialog-title"></h2></div><button class="icon close-dialog" aria-label="Fermer les consignes" title="Fermer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></header>
+  <div class="dialog-body"><pre id="instructions" class="instruction"></pre><details id="notes-section"><summary>Notes</summary><label for="task-notes" class="sr-only">Mes notes pour cette tâche</label><textarea id="task-notes" class="notes" maxlength="20000" placeholder="Ajouter une note…"></textarea><button class="button" id="save-notes" disabled>Enregistrer les notes</button></details></div>
+  <footer class="dialog-actions"><button class="button close-dialog left">Fermer</button><button class="button primary" id="copy-dialog">Copier les consignes</button></footer>
+</dialog>
+<dialog id="database-dialog" aria-labelledby="db-title">
+  <header class="dialog-head"><h2 id="db-title">Sauvegarde locale</h2><button class="icon close-dialog" aria-label="Fermer la sauvegarde" title="Fermer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></header>
+  <div class="dialog-body"><p class="small-text">Les coches et les notes sont conservées sur ce PC, même après fermeture du navigateur.</p><details><summary>Emplacement de la base</summary><pre class="instruction db-path" id="database-path"></pre></details></div>
+  <footer class="dialog-actions"><button class="button close-dialog left">Fermer</button><a class="button primary" href="/api/backup" download="OpenLeague_plan_sauvegarde.sqlite3">Sauvegarder la base</a></footer>
+</dialog>
+<div id="toast" class="toast" role="status" hidden><span id="toast-message"></span><button id="undo" hidden>Annuler</button></div>
+<div id="announce" class="sr-only" aria-live="polite"></div>
+<script>
+(()=>{'use strict';
+if(location.protocol==='file:'){
+  document.body.classList.add('filemode');
+  fetch('http://127.0.0.1:10427/api/health',{mode:'no-cors',signal:AbortSignal.timeout(1800)})
+    .then(()=>location.replace('http://127.0.0.1:10427/')).catch(()=>{});
+  return;
+}
+const $=s=>document.querySelector(s),nf=new Intl.NumberFormat('fr-FR');
+const copySVG='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg>';
+const checkSVG='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"></path></svg>';
+const arrowSVG='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"></path></svg>';
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const oldPhaseNames={P01:'Cadre du projet',P02:'Ressources',P03:'Moteur',P04:'Garen',P05:'Forêt torturée',P06:'Partie 3v3',P07:'Objets et configurations',P08:'Champions et contenus',P09:'Cartes et modes',P10:'Client et services',P11:'Validation',P12:'Livraison'};
+const lotNames={'01.1':'Fonctions du jeu','01.2':'Sources et références','01.3':'Contenu de la version 4.20','01.4':'Critères de validation','03.1':'Versions et dépendances','03.2':'Règles du moteur','03.3':'Architecture','03.4':'Outils et suivi'};
+const params=new URLSearchParams(location.search);
+let phase=params.get('phase')||'',status=params.get('status')||'all',page=Math.max(1,Number(params.get('page'))||1);
+if(!['all','todo','done'].includes(status))status='all';
+let summary=null,listing=null,request=0,saveBusy=false,dialogTask=null,lastChange=null,toastTimer=null,searchTimer=null;
+const tasks=new Map(),expanded=new Set(),openGroups=new Set();
+let viewReady=false;
+if(history.state?.openleaguePlan!==1)history.replaceState({openleaguePlan:1,depth:0},'',location.href);
+$('#search').value=params.get('q')||'';$('#status').value=status;
+
+const native=!!window.__TAURI__?.core?.invoke;
+const invoke=(command,args)=>window.__TAURI__.core.invoke(command,args);
+async function api(path,options){
+  if(native){
+    try{return await invoke('plan_request',{path,method:options?.method||'GET',body:options?.body?JSON.parse(options.body):null});}
+    catch(e){throw new Error(typeof e==='string'?e:'Le plan ne répond pas.');}
+  }
+  const r=await fetch(path,{...options,headers:{'Content-Type':'application/json',...(options?.headers||{})}});
+  let data;try{data=await r.json();}catch{throw new Error('Réponse locale illisible.');}
+  if(!r.ok)throw new Error(data.error||'Le service local ne répond pas.');
+  return data;
+}
+function saving(text,error=false){$('#save-state').textContent=text;$('#save-state').classList.toggle('error',error);}
+function toast(message,change=null){
+  clearTimeout(toastTimer);$('#toast-message').textContent=message;$('#toast').hidden=false;
+  $('#undo').hidden=!change;lastChange=change;
+  toastTimer=setTimeout(()=>{$('#toast').hidden=true;},change?9000:5000);
+}
+function closeMenu(restoreFocus=false){$('#more-menu').hidden=true;$('#more-toggle').setAttribute('aria-expanded','false');if(restoreFocus)$('#more-toggle').focus();}
+function rememberView(){
+  const p=new URLSearchParams();if(phase)p.set('phase',phase);if(status!=='all')p.set('status',status);
+  if($('#search').value)p.set('q',$('#search').value);if(page>1)p.set('page',page);
+  const url=location.pathname+(p.size?'?'+p:'');
+  if(url!==location.pathname+location.search){
+    const depth=history.state?.depth||0;
+    if(viewReady)history.pushState({openleaguePlan:1,depth:depth+1},'',url);
+    else history.replaceState({openleaguePlan:1,depth},'',url);
+  }
+  viewReady=true;
+  $('#back').disabled=!(history.state?.depth>0||phase||status!=='all'||$('#search').value||page>1);
+}
+const phaseNames={};
+function renderSummary(){
+  const oldValue=phase;
+  summary.phases.forEach(p=>phaseNames[p.id]=p.title);
+  $('#phase').innerHTML='<option value="">Toutes les parties</option>'+summary.phases.map(p=>`<option value="${esc(p.id)}">${esc(p.id.slice(1))} · ${esc(phaseNames[p.id]||p.title)}</option>`).join('');
+  $('#phase').value=oldValue;
+  $('#section-title').textContent=phase?(phase.slice(1)+' · '+(phaseNames[phase]||phase)):'Tout le plan';
+  $('#copy-phase').hidden=!phase;$('#copy-phase').innerHTML=copySVG;
+  $('#database-path').textContent=summary.database_path;
+  const total=summary.total,done=summary.done;
+  const percent=total?(done===total?100:Math.min(99.999,done/total*100)):0;
+  const formatted=new Intl.NumberFormat('fr-FR',{maximumFractionDigits:3}).format(percent)+' %';
+  const bar=$('#project-progress');bar.max=Math.max(1,total);bar.value=done;
+  bar.setAttribute('aria-valuetext',formatted+' — '+nf.format(done)+' tâches cochées sur '+nf.format(total));
+  $('#progress-percent').textContent=formatted;
+  $('#progress-count').textContent=nf.format(done)+' / '+nf.format(total);
+}
+function lotTitle(p){
+  let title=lotNames[p.key?.replace(/^LEGACY:/,'')]||p.title;
+  title=title.replace(/^item /i,'Objet ').replace(/^rune /i,'Rune ').replace(/^mastery /i,'Maîtrise ').replace(/^summoner /i,'Sort invocateur ');
+  if(title.length>94)title=title.slice(0,91).trimEnd()+'…';
+  return (phase?'':p.phase.slice(1)+' · ')+title;
+}
+function taskRow(t){
+  tasks.set(t.id,t);
+  return `<div class="taskrow ${t.done?'done':''}" data-task-row="${esc(t.id)}"><label class="check-target"><input type="checkbox" class="check task-check" data-task="${esc(t.id)}" ${t.done?'checked':''} aria-label="Terminer ${esc(t.id)}"></label><button class="task-title" data-detail="${esc(t.id)}" title="Afficher les consignes de ${esc(t.id)}">${esc(t.title)}</button><button class="icon" data-copy-task="${esc(t.id)}" title="Copier les consignes" aria-label="Copier les instructions de ${esc(t.id)}">${copySVG}</button></div>`;
+}
+function renderGroups(p){
+  const groups=new Map();
+  for(const t of p.tasks){const key=t.task_group||'Travail';if(!groups.has(key))groups.set(key,[]);groups.get(key).push(t);}
+  if(groups.size===1)return p.tasks.map(taskRow).join('');
+  return [...groups].map(([name,ts])=>{const key=p.id+'|'+name;return `<details class="subtasks" data-group="${esc(key)}" ${openGroups.has(key)?'open':''}><summary>${esc(name)}<span>${ts.filter(t=>t.done).length}/${ts.length}</span></summary><div>${ts.map(taskRow).join('')}</div></details>`;}).join('');
+}
+function render(){
+  tasks.clear();
+  const home=!phase&&!$('#search').value.trim()&&status==='all';
+  $('#part-grid').hidden=!home;$('#lots').hidden=home;
+  if(home){
+    $('#results').textContent='24 parties';
+    $('#part-grid').innerHTML=summary.phases.map(p=>`<button class="part-card" data-open-part="${esc(p.id)}"><span class="part-number">${esc(p.id.slice(1))}</span><span class="part-label">${esc(p.title)}<small>${nf.format(p.package_ids.length)} fiche${p.package_ids.length>1?'s':''} · ${nf.format(p.total)} sous-tâches</small></span><span aria-hidden="true">›</span></button>`).join('');
+    $('#lots').setAttribute('aria-busy','false');$('#pager').hidden=true;return;
+  }
+  const n=listing.matched_tasks;$('#results').textContent=nf.format(listing.matched_packages)+' fiche'+(listing.matched_packages===1?'':'s')+' · '+nf.format(n)+' sous-tâches';
+  $('#lots').setAttribute('aria-busy','false');
+  $('#lots').innerHTML=listing.packages.length?listing.packages.map(p=>{
+    const done=p.tasks.filter(t=>t.done).length,n=p.tasks.length,isOpen=expanded.has(p.id);
+    const label='Cocher les '+n+' sous-tâches affichées de '+p.title;
+    return `<article class="lot ${isOpen?'':'collapsed'}" data-lot="${esc(p.id)}"><header class="lot-header"><label class="check-target"><input type="checkbox" class="check lot-check" data-lot-check="${esc(p.id)}" ${done===n?'checked':''} aria-label="${esc(label)}"></label><button class="lot-toggle" data-collapse="${esc(p.id)}" aria-label="Afficher ou réduire ${esc(p.title)}" aria-expanded="${isOpen}" title="${esc(p.title)}">${arrowSVG}<h3>${esc(lotTitle(p))}</h3></button><span class="lot-count">${done}/${n}</span><button class="icon" data-copy-lot="${esc(p.id)}" title="Copier toute la fiche" aria-label="Copier la fiche ${esc(p.title)}">${copySVG}</button></header><div class="tasklist">${renderGroups(p)}</div></article>`;
+  }).join(''):'<div class="empty"><p>Aucune tâche.</p><button class="button" id="clear-filters">Effacer les filtres</button></div>';
+  for(const p of listing.packages){
+    const n=p.tasks.filter(t=>t.done).length,c=document.querySelector(`[data-lot-check="${CSS.escape(p.id)}"]`);
+    c.indeterminate=n>0&&n<p.tasks.length;
+  }
+  $('#pager').hidden=listing.pages<=1;$('#page-label').textContent=listing.page+' / '+listing.pages;
+  $('#prev').disabled=listing.page<=1;$('#next').disabled=listing.page>=listing.pages;
+}
+async function load(refresh=true){
+  const ticket=++request;$('#lots').setAttribute('aria-busy','true');
+  try{
+    const s=refresh||!summary?await api('/api/bootstrap'):summary;
+    if(phase&&!s.phases.some(p=>p.id===phase))phase='';
+    const q=new URLSearchParams({phase,status,page:String(page),q:$('#search').value});
+    const l=await api('/api/tasks?'+q);if(ticket!==request)return;
+    summary=s;listing=l;page=l.page;renderSummary();render();rememberView();saving('Enregistré');
+  }catch(e){if(ticket!==request)return;saving('Hors connexion',true);toast(e.message);$('#lots').setAttribute('aria-busy','false');$('#lots').innerHTML='<p class="error-text">Le plan ne peut pas être chargé. Ferme puis rouvre l’application. Les données sont conservées.</p>';}
+}
+async function change(ids,done){
+  if(saveBusy){render();return;}saveBusy=true;saving('Enregistrement…');
+  document.querySelectorAll('.check').forEach(e=>e.disabled=true);
+  try{
+    const result=await api('/api/status',{method:'POST',body:JSON.stringify({updates:ids.map(id=>({id,revision:tasks.get(id).revision,done}))})});
+    await load();toast(ids.length===1?(done?'Tâche terminée':'Tâche remise à faire'):ids.length+' tâches mises à jour',result.change_id);
+  }catch(e){toast(e.message);await load();}
+  finally{saveBusy=false;document.querySelectorAll('.check').forEach(e=>e.disabled=false);}
+}
+async function copy(kind,id,button){
+  if(button)button.disabled=true;
+  try{
+    if(native)await invoke('copy_instructions',{kind,id});
+    else{
+    const d=await api('/api/copy?'+new URLSearchParams({kind,id}));
+    const previous=document.activeElement,a=document.createElement('textarea');
+    a.value=d.text;a.readOnly=true;a.style.position='fixed';a.style.left='-10000px';
+    (document.querySelector('dialog[open]')||document.body).appendChild(a);
+    a.focus();a.select();a.setSelectionRange(0,a.value.length);
+    let copied=false;try{copied=document.execCommand('copy');}finally{a.remove();if(previous?.focus)previous.focus({preventScroll:true});}
+    if(!copied){if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(d.text);else throw new Error('Ouvre les consignes pour sélectionner le texte.');}
+    }
+    $('#announce').textContent='Consignes complètes copiées.';
+    if(button&&button.classList.contains('icon')){
+      const old=button.innerHTML;button.innerHTML=checkSVG;
+      setTimeout(()=>{button.innerHTML=old;},1400);
+    }else toast('Consignes copiées');
+  }catch(e){toast('Copie impossible : '+e.message);}
+  finally{if(button)button.disabled=false;}
+}
+async function details(id){
+  try{
+    dialogTask=await api('/api/task/'+encodeURIComponent(id));
+    $('#task-dialog-id').textContent=id;$('#task-dialog-title').textContent=dialogTask.title;
+    $('#instructions').textContent=dialogTask.instructions;$('#task-notes').value=dialogTask.notes;
+    $('#notes-section').open=!!dialogTask.notes;$('#save-notes').disabled=true;
+    $('#task-dialog').showModal();$('#task-dialog .dialog-body').scrollTop=0;
+  }catch(e){toast(e.message);}
+}
+function clearFilters(){phase='';status='all';page=1;$('#status').value='all';$('#search').value='';load(false);}
+document.addEventListener('click',e=>{
+  const download=e.target.closest('a[href^="/api/"]');
+  if(native&&download){
+    e.preventDefault();closeMenu();
+    const kind=download.getAttribute('href').slice(5);
+    invoke('save_plan',{kind}).then(r=>{if(r.saved)toast('Fichier enregistré');}).catch(e=>toast('Sauvegarde impossible : '+e));
+    return;
+  }
+  const b=e.target.closest('button');
+  if(b){
+    if(b.dataset.copyTask)copy('task',b.dataset.copyTask,b);
+    else if(b.dataset.copyLot)copy('package',b.dataset.copyLot,b);
+    else if(b.dataset.detail)details(b.dataset.detail);
+    else if(b.dataset.openPart){phase=b.dataset.openPart;page=1;load(false);}
+    else if(b.dataset.collapse){const id=b.dataset.collapse;if(expanded.has(id))expanded.delete(id);else expanded.add(id);b.closest('.lot').classList.toggle('collapsed',!expanded.has(id));b.setAttribute('aria-expanded',String(expanded.has(id)));}
+    else if(b.matches('.close-dialog'))b.closest('dialog').close();
+    else if(b.id==='clear-filters')clearFilters();
+  }
+  if(!e.target.closest('.more'))closeMenu();
+});
+document.addEventListener('change',e=>{
+  if(e.target.matches('.task-check'))change([e.target.dataset.task],e.target.checked);
+  else if(e.target.matches('.lot-check')){const p=listing.packages.find(p=>p.id===e.target.dataset.lotCheck);change(p.tasks.map(t=>t.id),e.target.checked);}
+});
+document.addEventListener('toggle',e=>{if(e.target.matches('details.subtasks')){const key=e.target.dataset.group;if(e.target.open)openGroups.add(key);else openGroups.delete(key);}},true);
+$('#back').onclick=()=>{
+  clearTimeout(searchTimer);
+  if(history.state?.depth>0)history.back();
+  else{
+    history.replaceState({openleaguePlan:1,depth:0},'',location.pathname);
+    clearFilters();
+  }
+};
+window.addEventListener('popstate',()=>{
+  clearTimeout(searchTimer);
+  const p=new URLSearchParams(location.search);
+  phase=p.get('phase')||'';status=p.get('status')||'all';
+  if(!['all','todo','done'].includes(status))status='all';
+  page=Math.max(1,Number(p.get('page'))||1);
+  $('#search').value=p.get('q')||'';$('#status').value=status;
+  load(false);
+});
+$('#search').addEventListener('input',()=>{clearTimeout(searchTimer);searchTimer=setTimeout(()=>{page=1;load(false);},230);});
+$('#phase').onchange=e=>{phase=e.target.value;page=1;load(false);};
+$('#status').onchange=e=>{status=e.target.value;page=1;load(false);};
+$('#prev').onclick=()=>{page--;load(false);window.scrollTo({top:0,behavior:'smooth'});};
+$('#next').onclick=()=>{page++;load(false);window.scrollTo({top:0,behavior:'smooth'});};
+$('#copy-phase').onclick=e=>copy('phase',phase,e.currentTarget);
+$('#copy-dialog').onclick=e=>copy('task',dialogTask.id,e.currentTarget);
+$('#task-notes').oninput=()=>{$('#save-notes').disabled=$('#task-notes').value===dialogTask.notes;};
+$('#save-notes').onclick=async e=>{
+  const button=e.currentTarget;button.disabled=true;saving('Enregistrement…');
+  try{
+    const result=await api('/api/status',{method:'POST',body:JSON.stringify({updates:[{id:dialogTask.id,revision:dialogTask.revision,notes:$('#task-notes').value}]})});
+    dialogTask.revision=result.updated[0].revision;dialogTask.notes=result.updated[0].notes;await load();toast('Notes enregistrées',result.change_id);
+  }catch(err){toast(err.message);button.disabled=false;}
+};
+$('#undo').onclick=async()=>{
+  if(!lastChange)return;
+  try{
+    await api('/api/undo',{method:'POST',body:JSON.stringify({change_id:lastChange})});await load();
+    if($('#task-dialog').open&&dialogTask){dialogTask=await api('/api/task/'+encodeURIComponent(dialogTask.id));$('#task-notes').value=dialogTask.notes;$('#save-notes').disabled=true;}
+    toast('Modification annulée');
+  }catch(e){toast(e.message);}
+};
+$('#more-toggle').onclick=()=>{
+  const open=$('#more-menu').hidden;$('#more-menu').hidden=!open;$('#more-toggle').setAttribute('aria-expanded',String(open));
+  if(open)$('#more-menu a').focus();
+};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#more-menu').hidden)closeMenu(true);});
+$('#restore-button').onclick=()=>{closeMenu();$('#restore-file').click();};
+$('#restore-file').onchange=async e=>{
+  const f=e.target.files[0];if(!f)return;
+  try{
+    if(f.size>16*1024*1024)throw new Error('Sauvegarde trop volumineuse.');
+    const result=await api('/api/import',{method:'POST',body:JSON.stringify(JSON.parse(await f.text()))});await load();toast('Suivi importé',result.change_id);
+  }catch(err){toast('Import impossible : '+err.message);}finally{e.target.value='';}
+};
+$('#database-button').onclick=()=>{closeMenu();$('#database-dialog').showModal();};
+document.querySelectorAll('dialog').forEach(d=>d.addEventListener('click',e=>{
+  if(e.target!==d)return;const r=d.getBoundingClientRect();
+  if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close();
+}));
+load();
+})();
+</script>
+</body>
+</html>

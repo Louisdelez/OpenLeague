@@ -33,6 +33,15 @@ impl Simulation {
   let p=self.players.get(&id).ok_or("unknown player")?;
   if trundle_e::champion_forced(p,self.tick) {return Err("champion in forced movement".into());}
   if p.health<=0. {return Err("champion dead".into());}
+  if p.champion=="ezreal" {
+   if self.ezreal_e_casting(id) || self.ezreal_r_casting(id) {return Err("skill blocked during cast".into());}
+   if slot==3 {return self.cast_ezreal_r_at(id,point);}
+   if slot==2 {return self.cast_ezreal_e_at(id,point);}
+   if slot==1 {return self.cast_ezreal_w_at(id,point);}
+   if slot!=0 {return Err("invalid Ezreal skill slot".into());}
+   if p.effects.ezreal_w.is_some() {return Err("skill blocked during cast".into());}
+   return self.cast_ezreal_q_at(id,point);
+  }
   if p.champion=="trundle" && slot==1 {return self.cast_trundle_w_at(id,point);}
   if p.champion=="trundle" && slot==2 {return self.cast_trundle_e_at(id,point);}
   if p.champion=="annie" && slot==3 {return self.cast_tibbers(id,point);}

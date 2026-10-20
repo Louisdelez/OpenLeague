@@ -108,9 +108,15 @@ impl Simulation {
         for captured in affected {
             self.cancel_captured_attack_presentation(Some(captured), attack_presentation::CancelReason::Departure);
         }
+        self.remove_ezreal_q_owner(id);
+        self.remove_ezreal_w_owner(id);
+        self.remove_ezreal_e_owner(id);
+        self.remove_ezreal_r_owner(id);
+        self.remove_ezreal_passive_owner(id);
         self.clear_trundle_r_for(id);
         self.remove_trundle_e_owner(id);
         self.accepted_casts.remove_owner(id);
+        self.death_recap.remove(id);
         self.players.remove(&id)
     }
     pub(crate) fn finish_attack_presentations(&mut self) {
@@ -168,7 +174,7 @@ impl Simulation {
         let ids: Vec<_> = self.players.keys().copied().collect();
         for id in ids {
             let p = &self.players[&id];
-            if p.health <= 0. || stuns::active(p,self.tick) || trundle_e::champion_forced(p,self.tick) || p.effects.ultimate.is_some() || p.effects.annie_q.is_some() || p.effects.annie_w.is_some() || p.effects.annie_r.is_some() || self.tick < p.effects.spin_until {
+            if p.health <= 0. || stuns::active(p,self.tick) || trundle_e::champion_forced(p,self.tick) || p.effects.ultimate.is_some() || p.effects.annie_q.is_some() || p.effects.annie_w.is_some() || p.effects.annie_r.is_some() || p.effects.ezreal_q.is_some() || p.effects.ezreal_w.is_some() || self.ezreal_e_casting(id) || self.ezreal_r_casting(id) || self.tick < p.effects.spin_until {
                 let reason = if p.health <= 0. { attack_presentation::CancelReason::Death }
                     else if stuns::active(p, self.tick) || trundle_e::champion_forced(p,self.tick) { attack_presentation::CancelReason::Control }
                     else { attack_presentation::CancelReason::OtherCast };

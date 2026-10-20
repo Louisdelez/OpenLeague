@@ -139,6 +139,13 @@ impl Simulation {
         let mut snapshot = self.snapshot();
         snapshot.accepted_casts = Some(self.accepted_casts.project(self.session,team,self.tick,|owner|self.visible_to(team,owner)));
         snapshot.trundle_e_pillars = self.trundle_e_projection(Some(team));
+        snapshot.ezreal_q_projectiles = self.ezreal_q_projection(Some(team));
+        snapshot.ezreal_r_projectiles = self.ezreal_r_projection(viewer);
+        snapshot.ezreal_r_casts = self.ezreal_r_cast_projection(viewer);
+        snapshot.ezreal_w_casts = self.ezreal_w_cast_projection(viewer);
+        snapshot.ezreal_e_casts = self.ezreal_e_cast_projection(viewer);
+        snapshot.ezreal_passive_self = self.ezreal_passive_self_projection(viewer);
+        snapshot.ezreal_q_accepted_impacts = Some(self.ezreal_q_accepted_impact_projection(team));
         snapshot.spell_projectiles.retain(|m|self.visible_to(team,m.source)&&self.visible_to(team,m.target));
         snapshot.players.retain(|p| self.visible_to(team, p.id));
         snapshot.attack_events = match self.attack_presentation.events_for(team, |source| self.visible_to(team, source)) {
@@ -193,6 +200,21 @@ impl Simulation {
                 map.relic_pickup_tick = None;
             }
         }
+        Some(snapshot)
+    }
+    /// Only the resumed OLSR route may transport these complete current samples.
+    /// Legacy snapshot_for remains unchanged. Both projections borrow this same
+    /// immutable Simulation; no advancement occurs between XZ and current Y.
+    pub fn snapshot_for_atomic(&self, viewer: u32) -> Option<Snapshot> {
+        let mut snapshot = self.snapshot_for(viewer)?;
+        snapshot.ezreal_r_current_heights = self.ezreal_r_current_height_projection(viewer, &snapshot.ezreal_r_projectiles);
+        snapshot.ezreal_w_current_missiles = self.ezreal_w_current_projection(viewer);
+        snapshot.ezreal_e_current_bolts = self.ezreal_e_current_projection(viewer);
+        snapshot.ezreal_e_accepted_releases = Some(self.ezreal_e_accepted_release_projection(self.players.get(&viewer)?.team));
+        // Dedicated accepted contacts are an optional OLSR channel. OLST stays unchanged.
+        snapshot.ezreal_r_accepted_impacts = Some(self.ezreal_r_accepted_impact_projection(self.players.get(&viewer)?.team));
+        snapshot.ezreal_r_accepted_casts = Some(self.ezreal_r_accepted_cast_projection(self.players.get(&viewer)?.team));
+        snapshot.death_recap = self.death_recap_projection(viewer);
         Some(snapshot)
     }
 }

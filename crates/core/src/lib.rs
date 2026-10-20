@@ -1,5 +1,9 @@
 //! New deterministic simulation. Coordinates are native LoL units; ticks are 30 Hz.
 pub mod camera_pan;
+pub mod dense_height_grid;
+pub mod map10_dense_height;
+pub(crate) mod line_missile_height;
+pub(crate) mod ezreal_r_vertical_local;
 pub mod native_projected_receivers;
 pub mod native_scalar_curve;
 pub mod native_probability_curve;
@@ -28,6 +32,17 @@ pub mod altars;
 pub mod annie;
 pub mod missile_lifecycle;
 pub mod linear_skillshot;
+pub mod ezreal_q;
+pub mod ezreal_w;
+pub mod ezreal_w_projectile_view;
+pub mod ezreal_e;
+pub mod ezreal_e_accepted_releases;
+pub mod ezreal_e_projectile_view;
+pub mod ezreal_r;
+pub mod ezreal_passive;
+pub mod ezreal_q_accepted_impacts;
+pub mod ezreal_r_accepted_impacts;
+pub mod ezreal_r_accepted_casts;
 pub mod welcome_history;
 pub mod session_transport;
 pub mod session_wire;
@@ -77,6 +92,7 @@ pub mod cooldown;
 pub mod champion_kills;
 pub mod critical;
 pub mod damage;
+pub mod death_recap;
 pub mod garen_passive;
 pub mod healing;
 pub mod interactions;
@@ -191,9 +207,21 @@ pub struct Champion {
 }
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Snapshot {
+    /// Persistent own-death recap; only authenticated atomic OLSR projection.
+    #[serde(default, skip_serializing_if="Option::is_none")]
+    pub death_recap: Option<serde_json::Value>,
     /// Optional local cast facts; malformed contents disable only their consumer.
     #[serde(default,skip_serializing_if="Option::is_none")]
     pub accepted_casts: Option<serde_json::Value>,
+    /// Optional bounded Q impact facts; independent of Trundle accepted_casts.
+    #[serde(default,skip_serializing_if="Option::is_none")]
+    pub ezreal_q_accepted_impacts: Option<serde_json::Value>,
+    /// Optional local accepted R contacts; never inferred from current missiles.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub ezreal_r_accepted_impacts: Option<serde_json::Value>,
+    /// Optional accepted OnCast facts, supplied only by atomic OLSR projection.
+    #[serde(default, skip_serializing_if="Option::is_none")]
+    pub ezreal_r_accepted_casts: Option<serde_json::Value>,
     #[serde(default, skip_serializing_if="Vec::is_empty")]
     pub trundle_e_pillars: Vec<trundle_e::VisiblePillar>,
     pub roster: Vec<vision::RosterEntry>,
@@ -218,6 +246,34 @@ pub struct Snapshot {
     pub projectiles: Vec<attacks::Projectile>,
     #[serde(default)]
     pub spell_projectiles: Vec<annie::Missile>,
+    /// Local partial Ezreal Q projection, independent of targeted/homing missiles.
+    #[serde(default, skip_serializing_if="Vec::is_empty")]
+    pub ezreal_q_projectiles: Vec<ezreal_q::VisibleMissile>,
+    /// Current authorized R sample, without hidden launch/travel/contact history.
+    #[serde(default, skip_serializing_if="Vec::is_empty")]
+    pub ezreal_r_projectiles: Vec<ezreal_r::VisibleMissile>,
+    /// Optional current Y; consumed only from the same complete OLSR frame as XZ.
+    #[serde(default, skip_serializing_if="Option::is_none")]
+    pub ezreal_r_current_heights: Option<serde_json::Value>,
+    /// Optional complete W XYZ, only from one accepted OLSR frame.
+    #[serde(default, skip_serializing_if="Option::is_none")]
+    pub ezreal_w_current_missiles: Option<serde_json::Value>,
+    /// Independent successful blink phases, authenticated atomic OLSR only.
+    #[serde(default, skip_serializing_if="Option::is_none")]
+    pub ezreal_e_accepted_releases: Option<serde_json::Value>,
+    /// Current private Bolt XYZ and last authoritative segment direction only.
+    #[serde(default, skip_serializing_if="Option::is_none")]
+    pub ezreal_e_current_bolts: Option<serde_json::Value>,
+    /// Current visible caster windup; no launch origin, target or damage data.
+    #[serde(default, skip_serializing_if="Vec::is_empty")]
+    pub ezreal_r_casts: Vec<ezreal_r::VisibleCast>,
+    #[serde(default, skip_serializing_if="Vec::is_empty")]
+    pub ezreal_w_casts: Vec<ezreal_w::VisibleCast>,
+    #[serde(default, skip_serializing_if="Vec::is_empty")]
+    pub ezreal_e_casts: Vec<ezreal_e::VisibleCast>,
+    /// Only the actual viewing Ezreal receives its own stack count.
+    #[serde(default, skip_serializing_if="Option::is_none")]
+    pub ezreal_passive_self: Option<ezreal_passive::OwnerPassive>,
     pub map10: Option<interactions::MapState>,
 }
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -402,9 +458,15 @@ pub struct Simulation {
     growth: BTreeMap<String, progression::Growth>,
     pub(crate) projectiles: Vec<attacks::Projectile>,
     pub(crate) spell_projectiles: Vec<annie::Missile>,
+    pub(crate) ezreal_q: ezreal_q::State,
+    pub(crate) ezreal_w: ezreal_w::State,
+    pub(crate) ezreal_e: ezreal_e::State,
+    pub(crate) ezreal_r: ezreal_r::State,
+    pub(crate) ezreal_passive: ezreal_passive::State,
     pub(crate) next_projectile: u64,
     pub(crate) critical_rng: u64,
     pub(crate) kill_rewards: champion_kills::State,
+    pub(crate) death_recap: death_recap::State,
     pub(crate) attack_presentation: attack_presentation::State,
     pub(crate) accepted_casts: accepted_cast_presentation::State,
     pub(crate) ally_occupancy: ally_occupancy::State,
@@ -412,15 +474,23 @@ pub struct Simulation {
     pub(crate) vilemaw_attacks: vilemaw_attacks::State,
     // Validated data binding; mechanics remain their explicitly existing policy.
     pub(crate) garen_q_resource: &'static garen_q_resource::Binding,
+    // Explicit local Map10 presentation context; generic simulations leave it off.
+    pub(crate) map10_cast_ground: Option<&'static map10_dense_height::Binding>,
 }
 impl Simulation {
     pub fn new(navigation: Navigation) -> Result<Self, String> {
         Ok(Self {
             projectiles: Vec::new(),
             spell_projectiles: Vec::new(),
+            ezreal_q: Default::default(),
+            ezreal_w: Default::default(),
+            ezreal_e: Default::default(),
+            ezreal_r: Default::default(),
+            ezreal_passive: Default::default(),
             next_projectile: 1,
             critical_rng: 0,
             kill_rewards: Default::default(),
+            death_recap: Default::default(),
             accepted_casts: Default::default(),
             ally_occupancy: Default::default(),
             // Local session limit, matching join's six-player policy.
@@ -429,6 +499,7 @@ impl Simulation {
             attack_presentation_error: None,
             vilemaw_attacks: vilemaw_attacks::State::default(),
             garen_q_resource: garen_q_resource::binding().map_err(str::to_owned)?,
+            map10_cast_ground: None,
             session: 0,
             tick: 0,
             players: BTreeMap::new(),
@@ -446,6 +517,18 @@ impl Simulation {
             ))
             .map_err(|e| e.to_string())?,
         })
+    }
+    /// Select the local Map10 cast-ground policy explicitly during startup.
+    /// This does not infer a map from navigation dimensions or attach it to
+    /// generic simulations. It supplies no native bone/delta or missile Y.
+    pub fn enable_map10_cast_ground(&mut self) -> Result<(), String> {
+        if self.world.is_none() { return Err("Map10 world must be enabled before cast-ground context".into()); }
+        if self.tick != 0 { return Err("Map10 cast-ground context must be selected at startup".into()); }
+        if self.map10_cast_ground.is_some() { return Err("Map10 cast-ground context already enabled".into()); }
+        let binding = map10_dense_height::binding()
+            .map_err(|error| format!("Map10 cast-ground context: {error}"))?;
+        self.map10_cast_ground = Some(binding);
+        Ok(())
     }
     pub fn join(&mut self, name: &str) -> Result<u32, String> {
         if self.winner.is_some() {return Err("match finished".into());}
@@ -506,6 +589,10 @@ impl Simulation {
             },
         );
         self.accepted_casts.register_owner(self.session,id);
+        self.register_ezreal_q_impact_owner(id);
+        self.register_ezreal_r_impact_owner(id);
+        self.register_ezreal_r_cast_audio_owner(id);
+        self.register_ezreal_e_release_owner(id);
         Ok(id)
     }
     pub fn command(&mut self, id: u32, action: Action) -> Result<(), String> {
@@ -518,6 +605,7 @@ impl Simulation {
         }
         if stuns::active(player,self.tick) && matches!(&action,Action::Move{..}|Action::Attack{..}) {return Err("champion stunned".into());}
         if trundle_e::champion_forced(player,self.tick) && matches!(&action,Action::Move{..}|Action::Attack{..}|Action::Stop|Action::Cast{..}|Action::CastAt{..}|Action::Summoner{..}|Action::SummonerTarget{..}|Action::UseItem{..}) {return Err("champion in forced movement".into());}
+        if (self.ezreal_e_casting(id) || self.ezreal_r_casting(id)) && matches!(&action,Action::Move{..}|Action::Attack{..}|Action::Stop|Action::Cast{..}|Action::CastAt{..}) {return Err("skill blocked during cast".into());}
         let resets_cached_completion = matches!(&action, Action::Stop | Action::Cast { .. }
             | Action::CastAt { .. } | Action::Summoner { .. } | Action::SummonerTarget { .. }
             | Action::UseItem { .. });
@@ -596,6 +684,11 @@ impl Simulation {
     }
     pub fn advance(&mut self) {
         if self.winner.is_some() {
+            self.clear_ezreal_q();
+            self.clear_ezreal_w();
+            self.clear_ezreal_e();
+            self.clear_ezreal_r();
+            self.clear_ezreal_passive();
             self.clear_trundle_r_terminal();
             self.clear_trundle_e();
             self.capture_final_results();
@@ -603,6 +696,9 @@ impl Simulation {
         }
         self.tick += 1;
         self.accepted_casts.prune(self.tick);
+        self.ezreal_q.impacts.prune(self.session,self.tick);
+        self.ezreal_r.impacts.prune(self.session,self.tick);
+        self.ezreal_r.cast_audio.prune(self.session,self.tick);
         // Visual phase follows the authoritative tick even when advance_world
         // ends the match before the remaining interaction systems run.
         if let Some(i) = &mut self.interactions { i.state.nexus_crystal.advance(self.tick); }
@@ -613,6 +709,11 @@ impl Simulation {
         self.advance_pet_orders();
         self.advance_world();
         if self.winner.is_some() {
+            self.clear_ezreal_q();
+            self.clear_ezreal_w();
+            self.clear_ezreal_e();
+            self.clear_ezreal_r();
+            self.clear_ezreal_passive();
             self.clear_trundle_r_terminal();
             self.clear_trundle_e();
             self.capture_final_results();
@@ -629,6 +730,11 @@ impl Simulation {
         self.advance_annie();
         self.advance_annie_w();
         self.advance_annie_r();
+        self.prune_ezreal_passive(); // Expire before accepted ability hits of this tick.
+        self.advance_ezreal_q();
+        self.advance_ezreal_w();
+        self.advance_ezreal_e();
+        self.advance_ezreal_r();
         self.advance_pet_aura();
         self.advance_regeneration();
         self.advance_pursuit();
@@ -637,10 +743,24 @@ impl Simulation {
     }
     pub fn snapshot(&self) -> Snapshot {
         Snapshot {
+            death_recap: None, // no authenticated victim in generic/legacy snapshots
             accepted_casts: None, // no authenticated viewing team in the internal snapshot
+            ezreal_q_accepted_impacts: None,
+            ezreal_r_accepted_impacts: None,
+            ezreal_r_accepted_casts: None,
             trundle_e_pillars: self.trundle_e_projection(None),
             projectiles: self.projectiles.clone(),
             spell_projectiles: self.spell_projectiles.clone(),
+            ezreal_q_projectiles: self.ezreal_q_projection(None),
+            ezreal_r_projectiles: Vec::new(), // no authenticated audience here
+            ezreal_r_current_heights: None, // only snapshot_for_atomic supplies current Y
+            ezreal_w_current_missiles: None, // OLSR current W only
+            ezreal_e_accepted_releases: None, // no authenticated atomic audience
+            ezreal_e_current_bolts: None,
+            ezreal_r_casts: Vec::new(), // no authenticated caster audience here
+            ezreal_w_casts: Vec::new(),
+            ezreal_e_casts: Vec::new(), // W pending has the same body-visible audience
+            ezreal_passive_self: None,
             roster: self
                 .players
                 .values()

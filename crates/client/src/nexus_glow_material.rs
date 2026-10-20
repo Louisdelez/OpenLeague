@@ -118,6 +118,14 @@ impl GlowMaterial {
     /// prepares the pipeline independently; this bit is NOT a GPU-ready report.
     pub fn set_admitted(&mut self,admitted:bool) {self.params.control.x=u32::from(admitted);}
     pub fn is_admitted(&self)->bool {self.params.control.x==1}
+    /// Read-only shader/pipeline identity for the private R sparks strict guard.
+    /// This does not grant admission or retain GPU resources.
+    pub(crate) fn strict_source_identity(&self)
+        -> ([AssetId<Image>;4], [u32;4], [u32;4], Cull)
+    {
+        ([self.image.id(), self.color.id(), self.visibility.id(), self.overlay.id()],
+            self.params.fog.to_array().map(f32::to_bits), self.params.control.to_array(), self.cull)
+    }
 }
 impl Material for GlowMaterial {
     fn fragment_shader()->ShaderRef {SHADER.into()}

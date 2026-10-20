@@ -1,5 +1,6 @@
 """Regression checks for inputs that must not silently pass repository policy."""
 import json
+import hashlib
 import unittest
 from unittest.mock import patch
 
@@ -85,6 +86,24 @@ class PolicyTests(unittest.TestCase):
     def test_modified_large_file_is_rejected(self):
         with patch.object(check_repo, "diff_paths", side_effect=[[], ["docs/capture.png"]]), patch.object(check_repo, "git", return_value=b"x" * (check_repo.MAX_FILE_BYTES + 1)):
             self.assertIn("5 MiB", check_repo.file_errors(None, True)[0])
+
+    def test_reviewed_dataset_requires_exact_identity(self):
+        data = b"native archived cases"
+        entry = {"bytes": len(data), "sha256": hashlib.sha256(data).hexdigest(), "reason": "Fixed native comparison archive"}
+        with patch.object(check_repo, "git", return_value=json.dumps({"data/cases.json": entry}).encode()):
+            self.assertTrue(check_repo.reviewed_large_file("data/cases.json", data, True))
+            self.assertFalse(check_repo.reviewed_large_file("data/cases.json", data + b"changed", True))
+            self.assertFalse(check_repo.reviewed_large_file("data/unlisted.json", data, True))
+
+    def test_reviewed_dataset_cannot_allow_private_paths(self):
+        data = b"private"
+        entry = {"bytes": len(data), "sha256": hashlib.sha256(data).hexdigest(), "reason": "Not sufficient"}
+        with patch.object(check_repo, "git", return_value=json.dumps({"runtime/private.json": entry}).encode()):
+            self.assertFalse(check_repo.reviewed_large_file("runtime/private.json", data, True))
+
+    def test_invalid_exception_manifest_is_rejected(self):
+        with patch.object(check_repo, "git", return_value=b"not json"):
+            self.assertFalse(check_repo.reviewed_large_file("data/cases.json", b"cases", True))
 
     def test_corrupt_utf8_document_is_rejected(self):
         with patch.object(check_repo, "diff_paths", side_effect=[[], ["docs/workflow.md"]]), patch.object(check_repo, "git", return_value="Probl\ufffdme".encode()):

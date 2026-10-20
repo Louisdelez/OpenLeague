@@ -9,7 +9,7 @@ impl Simulation {
             .collect();
         for (id, target) in orders {
             let p = &self.players[&id];
-            if p.health <= 0. || stuns::active(p,self.tick) || trundle_e::champion_forced(p,self.tick) || p.effects.ultimate.is_some() || p.effects.annie_q.is_some() || p.effects.annie_w.is_some() || p.effects.annie_r.is_some() || p.windup.is_some() {
+            if p.health <= 0. || stuns::active(p,self.tick) || trundle_e::champion_forced(p,self.tick) || p.effects.ultimate.is_some() || p.effects.annie_q.is_some() || p.effects.annie_w.is_some() || p.effects.annie_r.is_some() || p.effects.ezreal_q.is_some() || p.effects.ezreal_w.is_some() || self.ezreal_e_casting(id) || self.ezreal_r_casting(id) || p.windup.is_some() {
                 continue;
             }
             let Some(enemy) = self.target_info(target).filter(|enemy| {

@@ -419,7 +419,7 @@ pub fn update(
     for (role,mut text) in &mut ui.texts {
         **text=match *role {
             NativeText::Search=>if f.query.is_empty()&&!f.focused {"Rechercher un objet...".into()}else{format!("{}{}",f.query,if f.focused {" |"}else{""})},
-            NativeText::Gold=>player.map(|p|p.gold.to_string()).unwrap_or_default(),
+            NativeText::Gold=>player.map(|p|format!("{:.0}",p.gold.floor())).unwrap_or_default(),
             NativeText::SelectedName=>selected.map(|i|i.name.clone()).unwrap_or_else(||"Sélectionnez un objet".into()),
             NativeText::SelectedPrice=>selected.map(|i|format!("{:.0} PO",player.and_then(|p|openleague_core::shop::quote_with_counts(&p.inventory,&p.inventory_counts,i.id).ok()).map(|q|q.cost).unwrap_or(i.price))).unwrap_or_default(),
             NativeText::Detail=>selected.map(|i|{

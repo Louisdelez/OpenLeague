@@ -4,7 +4,7 @@ use crate::{native_hud_panels::Panel,native_hud_element_storage::ElementStorage,
 #[derive(Resource,Default)] struct Live {sources:Vec<Panel>,entities:Vec<Entity>,materials:Vec<Handle<IconMaterial>>,signature:Option<String>,error:Option<String>}
 pub struct Plugin;
 impl bevy::app::Plugin for Plugin {fn build(&self,app:&mut App) {app.init_resource::<Live>().add_systems(Startup,setup).add_systems(Update,update.after(crate::receive).before(crate::render_probe::capture));}}
-pub(crate) fn maxima(champion:&str)->Result<[Option<u8>;4],String> {match champion {"annie"|"garen"=>Ok([Some(5),Some(5),Some(5),Some(3)]),"trundle"=>Ok([Some(5),Some(5),Some(5),Some(3)]),_=>Err("native champion rank table not yet integrated".into())}}
+pub(crate) fn maxima(champion:&str)->Result<[Option<u8>;4],String> {match champion {"ezreal"=>Ok([Some(5),Some(5),Some(5),Some(3)]),"annie"|"garen"=>Ok([Some(5),Some(5),Some(5),Some(3)]),"trundle"=>Ok([Some(5),Some(5),Some(5),Some(3)]),_=>Err("native champion rank table not yet integrated".into())}}
 fn fraction(rank:u8,maximum:u8,width:f32,gap:f32)->Result<Option<f32>,String> {
  if maximum==0 || !width.is_finite() || !gap.is_finite() || gap<0.0 || width<=gap*(maximum.saturating_sub(1)) as f32 {return Err("native pip geometry invalid".into());}
  if rank==0 {return Ok(None);}
@@ -96,3 +96,114 @@ fn update(mut commands:Commands,game:Res<crate::Match>,connection:Res<crate::Con
  }
 }
 
+
+
+#[cfg(test)]
+mod ezreal_q_hud_tests {
+    use super::*;
+    #[test]
+    fn real_ezreal_q_learning_fills_five_native_pips_without_supporting_other_slots() {
+        let root=std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+        let nav=openleague_core::Navigation::load(include_str!("../../../assets/maps/tt_navigation_grid.json"),include_bytes!("../../../assets/maps/tt_navigation_grid.cells.bin")).unwrap();
+        let mut game=openleague_core::Simulation::new(nav).unwrap();let id=game.join("ezreal").unwrap();
+        let mut provider=crate::native_zip_provider::Provider::from_catalog(&root).unwrap();let hud=provider.startup_hud(&root).unwrap();let sources=source(&hud).unwrap();
+        let original=sources.iter().map(|p|p.storage.bytes().to_vec()).collect::<Vec<_>>();
+        assert_eq!(maxima("ezreal").unwrap(),[Some(5),Some(5),Some(5),Some(3)]);
+        let unlearned=panels(&sources,"ezreal",game.players[&id].ranks).unwrap();assert_eq!(unlearned.len(),18);
+        assert_eq!(unlearned.iter().filter(|(p,_)|p.name.starts_with("SpellHotKeyBG")).count(),4);
+        for rank in 1..=5 {
+            game.players.get_mut(&id).unwrap().level=2*rank-1;
+            game.command(id,openleague_core::Action::Learn{slot:0}).unwrap();
+            let current=panels(&sources,"ezreal",game.players[&id].ranks).unwrap();assert_eq!(current.len(),19);
+            let bar=current.iter().find(|(p,_)|p.name=="PipBar0").unwrap();
+            assert!(field(&bar.0,0x1d0)>0.);if rank==5 {assert_eq!(field(&bar.0,0x1d0),1.);}
+            assert!(!current.iter().any(|(p,_)|matches!(p.name.as_str(),"PipBar1"|"PipBar2"|"PipBar3")));
+            let eligibility=crate::native_hud_learning::eligible(&game.players[&id]).unwrap();assert!(!eligibility[0]);assert_eq!(eligibility[3],game.players[&id].level>=6);
+        }
+        let mut bad=game.players[&id].ranks;bad[0]=6;assert!(panels(&sources,"ezreal",bad).is_err());
+        for slot in 3..=3 {let mut bad=game.players[&id].ranks;bad[slot]=4;assert!(panels(&sources,"ezreal",bad).is_err());}
+        for (panel,bytes) in sources.iter().zip(original) {assert_eq!(panel.storage.bytes(),bytes);}
+    }
+}
+
+#[cfg(test)]
+mod ezreal_w_hud_tests {
+    use super::*;
+    #[test]
+    fn real_ezreal_w_learning_fills_native_pips_with_q_preserved_and_e_r_unsupported() {
+        let root=std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+        let nav=openleague_core::Navigation::load(include_str!("../../../assets/maps/tt_navigation_grid.json"),include_bytes!("../../../assets/maps/tt_navigation_grid.cells.bin")).unwrap();
+        let mut game=openleague_core::Simulation::new(nav).unwrap();let id=game.join("ezreal").unwrap();
+        let mut provider=crate::native_zip_provider::Provider::from_catalog(&root).unwrap();let hud=provider.startup_hud(&root).unwrap();let sources=source(&hud).unwrap();
+        let original=sources.iter().map(|panel|panel.storage.bytes().to_vec()).collect::<Vec<_>>();
+        assert_eq!(maxima("ezreal").unwrap(),[Some(5),Some(5),Some(5),Some(3)]);
+        for rank in 1..=5 {
+            game.players.get_mut(&id).unwrap().level=2*rank-1;game.command(id,openleague_core::Action::Learn{slot:1}).unwrap();
+            let current=panels(&sources,"ezreal",game.players[&id].ranks).unwrap();
+            let bar=current.iter().find(|(panel,_)|panel.name=="PipBar1").unwrap();assert!(field(&bar.0,0x1d0)>0.);
+            if rank==5 {assert_eq!(field(&bar.0,0x1d0),1.);}
+            assert!(!current.iter().any(|(panel,_)|matches!(panel.name.as_str(),"PipBar0"|"PipBar2"|"PipBar3")));
+        }
+        for slot in [3] {let mut bad=game.players[&id].ranks;bad[slot]=4;assert!(panels(&sources,"ezreal",bad).is_err());}
+        for(panel,raw)in sources.iter().zip(original) {assert_eq!(panel.storage.bytes(),raw);}
+    }
+}
+
+#[cfg(test)]
+mod ezreal_e_hud_tests {
+    use super::*;
+    #[test]
+    fn real_ezreal_e_learning_fills_native_pips_with_q_w_preserved_and_r_unsupported() {
+        let root=std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+        let nav=openleague_core::Navigation::load(include_str!("../../../assets/maps/tt_navigation_grid.json"),include_bytes!("../../../assets/maps/tt_navigation_grid.cells.bin")).unwrap();
+        let mut game=openleague_core::Simulation::new(nav).unwrap();let id=game.join("ezreal").unwrap();
+        let mut provider=crate::native_zip_provider::Provider::from_catalog(&root).unwrap();let hud=provider.startup_hud(&root).unwrap();let sources=source(&hud).unwrap();
+        let original=sources.iter().map(|panel|panel.storage.bytes().to_vec()).collect::<Vec<_>>();
+        assert_eq!(maxima("ezreal").unwrap(),[Some(5),Some(5),Some(5),Some(3)]);
+        for rank in 1..=5 {
+            game.players.get_mut(&id).unwrap().level=2*rank-1;game.command(id,openleague_core::Action::Learn{slot:2}).unwrap();
+            let current=panels(&sources,"ezreal",game.players[&id].ranks).unwrap();
+            let bar=current.iter().find(|(panel,_)|panel.name=="PipBar2").unwrap();assert!(field(&bar.0,0x1d0)>0.);
+            if rank==5 {assert_eq!(field(&bar.0,0x1d0),1.);}
+            assert!(!current.iter().any(|(panel,_)|matches!(panel.name.as_str(),"PipBar0"|"PipBar1"|"PipBar3")));
+        }
+        for slot in [3] {let mut bad=game.players[&id].ranks;bad[slot]=4;assert!(panels(&sources,"ezreal",bad).is_err());}
+        for(panel,raw)in sources.iter().zip(original) {assert_eq!(panel.storage.bytes(),raw);}
+    }
+}
+
+
+#[cfg(test)]
+mod ezreal_r_hud_tests {
+    use super::*;
+    #[test]
+    fn real_ezreal_r_learning_fills_three_native_pips_and_preserves_q_w_e() {
+        let root=std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+        let nav=openleague_core::Navigation::load(include_str!("../../../assets/maps/tt_navigation_grid.json"),include_bytes!("../../../assets/maps/tt_navigation_grid.cells.bin")).unwrap();
+        let mut game=openleague_core::Simulation::new(nav).unwrap();let id=game.join("ezreal").unwrap();
+        let mut provider=crate::native_zip_provider::Provider::from_catalog(&root).unwrap();let hud=provider.startup_hud(&root).unwrap();let sources=source(&hud).unwrap();
+        let original=sources.iter().map(|panel|panel.storage.bytes().to_vec()).collect::<Vec<_>>();
+        assert_eq!(maxima("ezreal").unwrap(),[Some(5),Some(5),Some(5),Some(3)]);
+        assert_eq!(panels(&sources,"ezreal",game.players[&id].ranks).unwrap().len(),18);
+        game.players.get_mut(&id).unwrap().level=6;
+        for slot in 0..3 {game.command(id,openleague_core::Action::Learn{slot}).unwrap();}
+        let before=panels(&sources,"ezreal",game.players[&id].ranks).unwrap();
+        let qwe=(0..3).map(|slot|field(&before.iter().find(|(p,_)|p.name==format!("PipBar{slot}")).unwrap().0,0x1d0)).collect::<Vec<_>>();
+        let mut previous=0.;
+        for (rank,level) in [(1,6),(2,11),(3,16)] {
+            game.players.get_mut(&id).unwrap().level=level;
+            game.command(id,openleague_core::Action::Learn{slot:3}).unwrap();assert_eq!(game.players[&id].ranks,[1,1,1,rank]);
+            let current=panels(&sources,"ezreal",game.players[&id].ranks).unwrap();assert_eq!(current.len(),22);
+            let r=current.iter().find(|(p,_)|p.name=="PipBar3").unwrap();let fill=field(&r.0,0x1d0);
+            assert!(fill>previous&&fill<=1.);previous=fill;if rank==3 {assert_eq!(fill,1.);}
+            assert_eq!(current.iter().filter(|(p,slot)|*slot==Some(3)&&p.name.starts_with("PipDivider")).count(),2);
+            for slot in 0..3 {
+                assert_eq!(field(&current.iter().find(|(p,_)|p.name==format!("PipBar{slot}")).unwrap().0,0x1d0),qwe[slot]);
+                assert_eq!(current.iter().filter(|(p,s)|*s==Some(slot as u8)&&p.name.starts_with("PipDivider")).count(),4);
+            }
+        }
+        assert!(game.command(id,openleague_core::Action::Learn{slot:3}).is_err());
+        let mut corrupt=game.players[&id].ranks;corrupt[3]=4;assert!(panels(&sources,"ezreal",corrupt).is_err());
+        for(panel,bytes)in sources.iter().zip(original){assert_eq!(panel.storage.bytes(),bytes);}
+    }
+}

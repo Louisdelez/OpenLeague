@@ -62,6 +62,12 @@ impl Simulation {
                     || s.eq_ignore_ascii_case("Wind")
             });
             self.cancel_attack_presentation(id, attack_presentation::CancelReason::Respawn);
+            self.clear_ezreal_w_target(id);
+            self.clear_ezreal_e_pending(id);
+            self.clear_ezreal_e_target(id);
+            self.clear_ezreal_r_pending(id);
+            self.remove_ezreal_passive_owner(id);
+            self.death_recap.respawn(self.session, id);
             let p = self.players.get_mut(&id).unwrap();
             p.position = position;
             p.facing = None; // Native initial spawn direction is not qualified.

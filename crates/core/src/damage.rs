@@ -75,6 +75,7 @@ impl Simulation {
         }
         // Capture before health, shields, reveal/effects or either actor can change.
         let death_presentation = self.capture_attack_presentation(target);
+        let recap_capture = self.capture_death_recap(source, target);
         let outgoing = raw * self.exhaust_damage_multiplier(source, kind);
         let before = info.health;
         let mut shield_absorbed = 0.;
@@ -134,7 +135,7 @@ impl Simulation {
             self.trundle_passive_damage_death(target);
             self.reward_champion_death(source.and_then(|id|self.combat_owner(id)),target);
         }
-        Ok(DamageOutcome {
+        let outcome = DamageOutcome {
             source,
             target,
             kind,
@@ -143,7 +144,9 @@ impl Simulation {
             shield_absorbed,
             post_mitigation,
             lethal: after == 0.,
-        })
+        };
+        self.commit_death_recap(recap_capture, &outcome);
+        Ok(outcome)
     }
 }
 #[cfg(test)]

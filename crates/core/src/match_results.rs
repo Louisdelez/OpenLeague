@@ -15,6 +15,11 @@ impl Simulation {
  pub(crate) fn capture_final_results(&mut self) {
   if self.final_result.is_some(){return;}
   let Some(winner)=self.winner.filter(|team|*team<2) else {return;};
+  self.clear_ezreal_q();
+  self.clear_ezreal_w();
+  self.clear_ezreal_e();
+  self.clear_ezreal_r();
+  self.clear_ezreal_passive();
   self.finish_attack_presentations();
   self.finish_vilemaw_attacks();
   self.final_result=Some(MatchResult {session:self.session,ended_tick:self.tick,winner,

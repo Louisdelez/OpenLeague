@@ -245,3 +245,202 @@ fn ipv6_loopback_roundtrip_uses_candidate_source_choice() {
     server.send_to(b"reply",source).unwrap();let n=client.recv(&mut bytes).unwrap();
     assert_eq!(&bytes[..n],b"reply");
 }
+
+#[test]
+fn precommit_observation_gate_preserves_link_context_and_explicit_legacy_boundaries() {
+    let(mut connection,_server,snapshot,w)=fixture(true);let mut state=crate::Match::default();welcome(&mut connection,&w,&mut state);
+    let mut sender=session_wire::Sender::new(w.context).unwrap();frame(&mut connection,&mut sender,&snapshot,0);
+    assert!(!connection.observation_ready(Some((w.context,1))));
+    let batch=connection.take_ready_states();assert_eq!(batch.len(),1);assert!(!connection.ready());
+    assert!(connection.observation_ready(Some((w.context,1))));assert!(!connection.observation_ready(None));
+    connection.link.closed=true;assert!(!connection.observation_ready(Some((w.context,1))));connection.link.closed=false;
+    connection.link.fatal=Some("controlled error");assert!(!connection.observation_ready(Some((w.context,1))));connection.link.fatal=None;
+    connection.network_interrupted();assert!(!connection.observation_ready(Some((w.context,1))));connection.link.recover_socket=false;
+    connection.id=Some(w.context.player+1);assert!(!connection.observation_ready(Some((w.context,1))));connection.id=Some(w.context.player);
+    connection.session=Some(w.context.session+1);assert!(!connection.observation_ready(Some((w.context,1))));connection.session=Some(w.context.session);
+    commit(&mut connection,&mut state,batch.into_iter().next().unwrap(),0.);assert!(connection.ready());
+    assert!(!connection.observation_ready(Some((w.context,1))));
+    let(mut legacy,_server,_s,w)=fixture(false);assert!(!legacy.observation_ready(None));
+    legacy.id=Some(w.context.player);legacy.session=Some(w.context.session);assert!(legacy.observation_ready(None));
+    assert!(!legacy.observation_ready(Some((w.context,1))));legacy.link.closed=true;assert!(!legacy.observation_ready(None));
+}
+fn oncast_fixture()->(Connection,UdpSocket,openleague_core::Simulation,u32,t::Welcome,crate::Match,crate::ezreal_r_cast_audio_state::State){
+    let(connection,server,_snapshot,w)=fixture(true);
+    let mut cells=Vec::new();for _ in 0..6400{cells.extend(0f32.to_le_bytes());cells.extend(0u16.to_le_bytes());cells.extend(0u32.to_le_bytes());cells.push(1);}
+    let nav=openleague_core::Navigation::load(r#"{"min":[0,0,0],"cellSize":50,"width":80,"height":80}"#,&cells).unwrap();
+    let mut game=openleague_core::Simulation::new(nav).unwrap();game.session=w.context.session;let owner=game.join("ezreal").unwrap();assert_eq!(owner,w.context.player);
+    let actor=game.players.get_mut(&owner).unwrap();actor.position=openleague_core::Point{x:200.,z:300.};actor.level=6;actor.ranks[3]=1;actor.mana=2000.;
+    let mut state=crate::Match::default();let mut connection=connection;welcome(&mut connection,&w,&mut state);
+    let mut audio=crate::ezreal_r_cast_audio_state::State::default();audio.begin_epoch(w.context.session,w.context.epoch,owner);
+    (connection,server,game,owner,w,state,audio)
+}
+#[test]
+fn actual_olsr_empty_baselines_then_first_authoritative_r_cast_admit_before_commit_without_unlocking_input() {
+    let(mut connection,_server,mut game,owner,w,mut state,mut audio)=oncast_fixture();
+    let mut sender=session_wire::Sender::new(w.context).unwrap();
+    // Controlled late session ticks exercise a first R after long empty history.
+    // This is not a wall-clock sixteen-minute runtime or an audio playback test.
+    for(tick,now)in [(0,0.),(16_000,500.),(28_800,960.)]{
+        game.tick=tick;let snapshot=game.snapshot_for_atomic(owner).unwrap();assert_eq!(snapshot.ezreal_r_accepted_casts.as_ref().unwrap()["events"].as_array().unwrap().len(),0);
+        frame(&mut connection,&mut sender,&snapshot,0);let incoming=connection.take_ready_states().pop().unwrap();
+        let Incoming::State{snapshot,delivery}= &incoming else{panic!("state")};
+        assert!(!connection.ready());assert!(connection.observation_ready(*delivery));
+        audio.observe_accepted_frame(snapshot,now,connection.observation_ready(*delivery),false,*delivery).unwrap();
+        assert!(audio.presentation_ready(now));assert!(audio.take(now,true,false).is_empty());
+        commit(&mut connection,&mut state,incoming,now);assert!(connection.ready());
+    }
+    game.tick=28_801;game.command(owner,Action::CastAt{slot:3,point:openleague_core::Point{x:3000.,z:300.}}).unwrap();
+    let snapshot=game.snapshot_for_atomic(owner).unwrap();frame(&mut connection,&mut sender,&snapshot,0);
+    let incoming=connection.take_ready_states().pop().unwrap();let Incoming::State{snapshot,delivery}=&incoming else{panic!("state")};
+    assert!(!connection.ready());assert!(connection.send_action(Action::Stop).is_err());
+    let codes=crate::ezreal_r_cast_audio_diagnostics::captured(||{
+        audio.observe_accepted_frame(snapshot,960.01,connection.observation_ready(*delivery),false,*delivery).unwrap();
+    });
+    assert_eq!(codes,vec![crate::ezreal_r_cast_audio_diagnostics::Code::EventAdmitted]);assert!(audio.has_pending());
+    commit(&mut connection,&mut state,incoming,960.01);assert!(connection.ready());
+    let requests=audio.take(960.01,connection.ready(),false);assert_eq!(requests.len(),1);assert_eq!(requests[0].identity.owner,owner);
+    frame(&mut connection,&mut sender,&game.snapshot_for_atomic(owner).unwrap(),0);
+    let incoming=connection.take_ready_states().pop().unwrap();let Incoming::State{snapshot,delivery}=&incoming else{panic!("state")};
+    audio.observe_accepted_frame(snapshot,960.02,connection.observation_ready(*delivery),false,*delivery).unwrap();
+    commit(&mut connection,&mut state,incoming,960.02);assert!(audio.take(960.02,connection.ready(),false).is_empty());
+}
+#[test]
+fn all_delivered_oncast_frames_observe_revocation_before_coalescence_and_never_replay() {
+    let(mut connection,_server,mut game,owner,w,mut state,mut audio)=oncast_fixture();let mut sender=session_wire::Sender::new(w.context).unwrap();
+    frame(&mut connection,&mut sender,&game.snapshot_for_atomic(owner).unwrap(),0);
+    let incoming=connection.take_ready_states().pop().unwrap();let Incoming::State{snapshot,delivery}=&incoming else{panic!("state")};
+    audio.observe_accepted_frame(snapshot,1.,connection.observation_ready(*delivery),false,*delivery).unwrap();commit(&mut connection,&mut state,incoming,1.);
+    game.command(owner,Action::CastAt{slot:3,point:openleague_core::Point{x:3000.,z:300.}}).unwrap();let snapshot=game.snapshot_for_atomic(owner).unwrap();
+    let mut absent=snapshot.clone();absent.ezreal_r_accepted_casts=None;
+    for snapshot in [&snapshot,&absent,&snapshot]{frame(&mut connection,&mut sender,snapshot,0);}
+    let batch=connection.take_ready_states();assert_eq!(batch.len(),3);
+    for(index,incoming)in batch.into_iter().enumerate(){
+        let Incoming::State{snapshot,delivery}=&incoming else{panic!("state")};assert!(connection.observation_ready(*delivery));assert!(!connection.ready());
+        audio.observe_accepted_frame(snapshot,1.01,connection.observation_ready(*delivery),false,*delivery).unwrap();
+        if index==0{assert!(audio.has_pending());}else{assert!(!audio.has_pending());}
+        commit(&mut connection,&mut state,incoming,1.01);
+    }
+    assert!(connection.ready());assert!(audio.take(1.01,connection.ready(),false).is_empty());
+    // A true loss of connection still closes playback immediately and can never
+    // be bypassed by retaining an exact old delivery tuple.
+    connection.network_interrupted();assert!(!connection.ready());assert!(!connection.observation_ready(Some((w.context,4))));
+    assert!(audio.take(1.02,connection.ready(),false).is_empty());
+}
+
+
+#[test]
+fn ordinary_pause_correlates_real_secure_request_refusal_and_full_width_sequence() {
+    let(mut c,server,s,mut w)=fixture(true);
+    let mut state=crate::Match::default();welcome(&mut c,&w,&mut state);
+    let mut initial_sender=session_wire::Sender::new(w.context).unwrap();frame(&mut c,&mut initial_sender,&s,0);
+    let incoming=c.take_ready_states().pop().unwrap();commit(&mut c,&mut state,incoming,0.);
+    // A first Join requires epoch1; exercise full-width values through a real resume handshake.
+    c.network_interrupted();c.maintain_session();
+    let t::ClientMessage::ContextQuery(query)=serde_json::from_slice(&receive(&server)).unwrap() else{panic!("recovery query")};
+    assert_eq!(query.expected_session,Some(s.session));
+    w.context.epoch=(1u64<<53)+31;w.next_sequence=(1u64<<53)+41;
+    let previous=t::Context{epoch:w.context.epoch-1,..w.context};
+    let response=t::ContextResponse{request_nonce:query.request_nonce,context:previous,availability:t::Availability::Detached};
+    c.decode_datagram(&serde_json::to_vec(&t::ServerMessage::SessionContext(response)).unwrap()).unwrap();
+    c.maintain_session();
+    let t::ClientMessage::Resume(resume)=serde_json::from_slice(&receive(&server)).unwrap() else{panic!("resume request")};
+    assert_eq!(resume.expected,previous);assert!(!c.ready());
+    w.request_nonce=resume.request_nonce;
+    welcome(&mut c,&w,&mut state);
+    let mut sender=session_wire::Sender::new(w.context).unwrap();frame(&mut c,&mut sender,&s,0);
+    let incoming=c.take_ready_states().pop().unwrap();commit(&mut c,&mut state,incoming,0.);
+    let mut pause=crate::ordinary_pause::State::default();pause.update(c.inventory_input_identity(),true,(0,false,false),10.);
+    assert!(pause.request(&mut c,10.));assert!(!pause.request(&mut c,10.01),"one in-flight request only");
+    let t::ClientMessage::Session(input)=serde_json::from_slice(&receive(&server)).unwrap() else{panic!("secure pause")};
+    assert_eq!(input.context,w.context);assert_eq!(input.sequence,w.next_sequence);
+    assert!(matches!(input.input,t::Input::PauseRequest{paused:true}));
+    let rejection=t::GameplayRejection{context:w.context,sequence:input.sequence,reason:"pause disabled by local match host".into()};
+    let Some(Incoming::GameplayRejected{context,sequence,reason})=c.decode_datagram(
+        &serde_json::to_vec(&t::ServerMessage::SessionGameplayRejected(rejection)).unwrap()).unwrap() else{panic!("correlated refusal")};
+    assert_eq!(sequence,input.sequence);pause.rejected(Some(context),Some(sequence),&reason);
+    assert!(pause.request(&mut c,10.1),"refused request is resolved but only a new gesture sends again");
+    let t::ClientMessage::Session(second)=serde_json::from_slice(&receive(&server)).unwrap() else{panic!("new request")};
+    assert_eq!(second.sequence,input.sequence+1);assert!(matches!(second.input,t::Input::PauseRequest{paused:true}));
+    pause.update(c.inventory_input_identity(),true,(1,true,false),10.2);
+    assert!(pause.request(&mut c,10.3));
+    let t::ClientMessage::Session(resume)=serde_json::from_slice(&receive(&server)).unwrap() else{panic!("resume")};
+    assert!(matches!(resume.input,t::Input::PauseRequest{paused:false}));
+    c.network_interrupted();pause.update(c.inventory_input_identity(),false,(1,true,false),10.4);
+    assert!(!pause.request(&mut c,10.5));assert!(server.recv(&mut[0;16384]).is_err());
+}
+#[test]
+fn ordinary_pause_legacy_sequence_and_refusal_keep_the_existing_packet_shape() {
+    let(mut c,server,s,w)=fixture(false);c.id=Some(w.context.player);c.session=Some(s.session);c.sequence=(1u64<<53)+11;
+    let mut pause=crate::ordinary_pause::State::default();pause.update(c.inventory_input_identity(),true,(0,false,false),10.);
+    assert!(pause.request(&mut c,10.));
+    let ClientPacket::PauseRequest{sequence,paused}=serde_json::from_slice(&receive(&server)).unwrap() else{panic!("legacy pause")};
+    assert_eq!(sequence,(1u64<<53)+12);assert!(paused);
+    let bytes=serde_json::to_vec(&ServerPacket::Rejected{reason:"pause disabled by local match host".into()}).unwrap();
+    let Some(Incoming::Rejected(reason))=c.decode_datagram(&bytes).unwrap() else{panic!("legacy refusal")};
+    pause.rejected(None,None,&reason);assert!(pause.request(&mut c,10.1));
+    let ClientPacket::PauseRequest{sequence,paused}=serde_json::from_slice(&receive(&server)).unwrap() else{panic!("new legacy request")};
+    assert_eq!(sequence,(1u64<<53)+13);assert!(paused);
+}
+
+#[cfg(windows)]
+#[test]
+fn ordinary_pause_tracks_real_applied_clock_ack_and_waits_for_authoritative_final_resume() {
+    use bevy::prelude::*;
+    let(mut c,server,s,w)=fixture(true);let mut state=crate::Match::default();welcome(&mut c,&w,&mut state);
+    let mut sender=session_wire::Sender::new(w.context).unwrap();frame(&mut c,&mut sender,&s,0);
+    let incoming=c.take_ready_states().pop().unwrap();commit(&mut c,&mut state,incoming,0.);
+    let owner=openleague_core::audio_replay_windows_application::Application::new().unwrap();
+    let mut app=App::new();app.insert_resource(crate::native_effect_clock::EffectClock::with_process_clock(
+        owner.transport().unwrap().clock_handle().unwrap()));
+    app.add_plugins(crate::native_effect_clock::Plugin);app.update();app.update();
+    let mut clock=app.world_mut().resource_mut::<crate::native_effect_clock::EffectClock>();
+    let mut pause=crate::ordinary_pause::State::default();pause.update(c.inventory_input_identity(),true,clock.pause_ui_status(),10.);
+    assert!(pause.request(&mut c,10.));
+    let t::ClientMessage::Session(request)=serde_json::from_slice(&receive(&server)).unwrap() else{panic!("pause")};
+    assert!(matches!(request.input,t::Input::PauseRequest{paused:true}));assert!(!clock.paused());
+    let mut packet=vec![0;14];packet[9..13].copy_from_slice(&30i32.to_le_bytes());packet[13]=1;
+    apply_clock(&mut c,&mut clock,Some(w.context),s.session,1,0xa1,&packet).unwrap();
+    let t::ClientMessage::Session(ack)=serde_json::from_slice(&receive(&server)).unwrap() else{panic!("ACK")};
+    assert!(matches!(ack.input,t::Input::ClockAck{ordinal:1}));assert!(clock.paused());
+    pause.update(c.inventory_input_identity(),true,clock.pause_ui_status(),10.1);
+    assert!(pause.request(&mut c,10.2));
+    let t::ClientMessage::Session(resume)=serde_json::from_slice(&receive(&server)).unwrap() else{panic!("resume")};
+    assert!(matches!(resume.input,t::Input::PauseRequest{paused:false}));
+    let mut delayed=vec![0;10];delayed[9]=1;
+    apply_clock(&mut c,&mut clock,Some(w.context),s.session,2,0x0a,&delayed).unwrap();
+    let t::ClientMessage::Session(ack)=serde_json::from_slice(&receive(&server)).unwrap() else{panic!("ACK")};
+    assert!(matches!(ack.input,t::Input::ClockAck{ordinal:2}));
+    pause.update(c.inventory_input_identity(),true,clock.pause_ui_status(),10.3);
+    assert!(!pause.request(&mut c,10.4),"countdown does not send another request");
+    apply_clock(&mut c,&mut clock,Some(w.context),s.session,3,0x0a,&[0;10]).unwrap();
+    let t::ClientMessage::Session(ack)=serde_json::from_slice(&receive(&server)).unwrap() else{panic!("ACK")};
+    assert!(matches!(ack.input,t::Input::ClockAck{ordinal:3}));assert!(!clock.paused());
+    pause.update(c.inventory_input_identity(),true,clock.pause_ui_status(),10.5);
+    assert!(pause.request(&mut c,10.6));
+    let t::ClientMessage::Session(next)=serde_json::from_slice(&receive(&server)).unwrap() else{panic!("next pause")};
+    assert!(matches!(next.input,t::Input::PauseRequest{paused:true}));assert!(next.sequence>resume.sequence);
+}
+
+#[test]
+fn actual_olsr_arrival_audio_observes_precommit_then_consumes_without_unlocking_inputs(){
+    let(mut connection,_server,mut game,owner,w,mut state,_r_audio)=oncast_fixture();
+    game.players.get_mut(&owner).unwrap().ranks=[0,0,1,0];
+    let mut audio=crate::ezreal_e_return_audio_state::State::default();audio.begin_epoch(w.context.session,w.context.epoch,owner);
+    let mut sender=session_wire::Sender::new(w.context).unwrap();
+    frame(&mut connection,&mut sender,&game.snapshot_for_atomic(owner).unwrap(),0);
+    let incoming=connection.take_ready_states().pop().unwrap();let Incoming::State{snapshot,delivery}=&incoming else{panic!("state")};
+    assert!(!connection.ready());assert!(connection.observation_ready(*delivery));
+    audio.observe_accepted_frame(snapshot,1.,connection.observation_ready(*delivery),false,*delivery).unwrap();commit(&mut connection,&mut state,incoming,1.);
+    assert!(connection.ready());assert!(audio.take(1.,true,false).is_empty());
+    game.command(owner,Action::CastAt{slot:2,point:openleague_core::Point{x:500.,z:300.}}).unwrap();for _ in 0..8{game.advance();}
+    let snapshot=game.snapshot_for_atomic(owner).unwrap();frame(&mut connection,&mut sender,&snapshot,0);
+    let incoming=connection.take_ready_states().pop().unwrap();let Incoming::State{snapshot,delivery}=&incoming else{panic!("state")};
+    assert!(!connection.ready());assert!(connection.send_action(Action::Stop).is_err());assert!(connection.observation_ready(*delivery));
+    let mut wrong=delivery.unwrap();wrong.1+=1;assert!(!connection.observation_ready(Some(wrong)));
+    audio.observe_accepted_frame(snapshot,1.01,connection.observation_ready(*delivery),false,*delivery).unwrap();commit(&mut connection,&mut state,incoming,1.01);
+    assert!(connection.ready());let requests=audio.take(1.01,true,false);assert_eq!(requests.len(),1);assert_eq!(requests[0].position,game.players[&owner].position);
+    let mut absent=game.snapshot_for_atomic(owner).unwrap();absent.ezreal_e_accepted_releases=None;
+    for s in [&absent,&game.snapshot_for_atomic(owner).unwrap()] {frame(&mut connection,&mut sender,s,0);}
+    for incoming in connection.take_ready_states(){let Incoming::State{snapshot,delivery}=&incoming else{panic!("state")};audio.observe_accepted_frame(snapshot,1.02,connection.observation_ready(*delivery),false,*delivery).unwrap();commit(&mut connection,&mut state,incoming,1.02);}
+    assert!(!audio.authorizes(&requests[0]));assert!(audio.take(1.02,connection.ready(),false).is_empty());
+}

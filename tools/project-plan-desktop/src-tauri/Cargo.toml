@@ -1,0 +1,35 @@
+[package]
+name = "openleague-plan"
+version = "1.0.0"
+edition = "2021"
+description = "Plan de travail local OpenLeague"
+
+[workspace]
+
+[dependencies]
+tauri = { version = "=2.11.5", features = ["image-png"] }
+# Keep the Tauri family compatible; newer runtime/macros break the 2.11 API.
+tauri-runtime = "=2.11.3"
+tauri-runtime-wry = "=2.11.4"
+tauri-macros = "=2.6.3"
+serde_json = "1"
+rusqlite = { version = "=0.40.1", features = ["bundled", "backup"] }
+chrono = "0.4"
+uuid = { version = "1", features = ["v4"] }
+unicode-normalization = "0.1"
+url = "2"
+flate2 = "1"
+rfd = "=0.16.0"
+arboard = "3"
+
+[build-dependencies]
+tauri-build = "=2.6.3"
+tauri-codegen = "=2.6.3"
+tauri-utils = "=2.9.3"
+
+[dev-dependencies]
+tempfile = "3"
+
+[profile.release]
+strip = true
+

@@ -4,6 +4,10 @@ Reconstruction locale du périmètre historique de League of Legends 4.20, avec 
 
 **En développement — ce dépôt ne constitue pas un jeu terminé.** Les modèles importés et les tests de composants ne prouvent pas que les 122 champions sont intégralement jouables.
 
+## Derniers changements
+
+[Snapshot du 20 octobre 2026 : jeu, plan détaillé et application Windows de suivi](docs/DEVELOPMENT_SNAPSHOT-2026-10-20.md).
+
 ## Contenu
 
 - Moteur, simulation, client graphique et serveur local.

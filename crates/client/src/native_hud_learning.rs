@@ -125,3 +125,125 @@ mod trundle_e_learning_tests {
         assert!(matches!(decoded,openleague_core::ClientPacket::Command{sequence:42,action:openleague_core::Action::CastAt{slot:2,point}}if point==target));
     }
 }
+
+
+#[cfg(test)]
+mod ezreal_q_learning_tests {
+    use super::*;
+    #[test]
+    fn original_q_arrow_obeys_five_server_level_gates_and_never_enables_unsupported_slots() {
+        let root=std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+        let nav=openleague_core::Navigation::load(include_str!("../../../assets/maps/tt_navigation_grid.json"),include_bytes!("../../../assets/maps/tt_navigation_grid.cells.bin")).unwrap();
+        let mut game=openleague_core::Simulation::new(nav).unwrap();let id=game.join("ezreal").unwrap();
+        let mut provider=crate::native_zip_provider::Provider::from_catalog(&root).unwrap();let hud=provider.startup_hud(&root).unwrap();let frames=source(&hud).unwrap();
+        let mut bounds=Vec::new();
+        for slot in 0..4 {
+            let frame=frames.iter().find(|p|p.name==format!("EvolutionArrowFrame{slot}")).unwrap();
+            let(node,_)=crate::native_hud_panels::payload(frame,[1280,800],1.,1.,Handle::default()).unwrap();
+            let(Val::Px(x),Val::Px(y),Val::Px(w),Val::Px(h))=(node.left,node.top,node.width,node.height)else{panic!("native frame pixels");};
+            bounds.push(Bounds{slot,rect:[x,y,x+w,y+h]});
+        }
+        let q=&bounds[0];let center=Vec2::new((q.rect[0]+q.rect[2])*0.5,(q.rect[1]+q.rect[3])*0.5);
+        for rank in 1..=5 {
+            let required=2*rank-1;
+            if rank>1 {game.players.get_mut(&id).unwrap().level=required-1;let eligibility=eligible(&game.players[&id]).unwrap();assert!(!eligibility[0]);assert_eq!(eligibility[3],required-1>=6);assert!(action_at(&game.snapshot(),id,&bounds,center).is_none());}
+            game.players.get_mut(&id).unwrap().level=required;
+            assert_eq!(eligible(&game.players[&id]).unwrap(),[true,true,true,required>=6]);
+            let action=action_at(&game.snapshot(),id,&bounds,center).unwrap();assert!(matches!(&action,openleague_core::Action::Learn{slot:0}));
+            game.command(id,action).unwrap();assert_eq!(game.players[&id].ranks,[rank,0,0,0]);
+            assert!(action_at(&game.snapshot(),id,&bounds,center).is_none());
+        }
+        game.players.get_mut(&id).unwrap().level=18;let eligibility=eligible(&game.players[&id]).unwrap();assert!(!eligibility[0]&&eligibility[3]);
+        for b in bounds.iter().skip(3) {
+            let p=Vec2::new((b.rect[0]+b.rect[2])*0.5,(b.rect[1]+b.rect[3])*0.5);
+            let action=action_at(&game.snapshot(),id,&bounds,p).unwrap();assert!(matches!(&action,openleague_core::Action::Learn{slot:3}));game.command(id,action).unwrap();assert_eq!(game.players[&id].ranks[3],1);
+        }
+        assert!(action_at(&game.snapshot(),999,&bounds,center).is_none());assert!(action_at(&game.snapshot(),id,&bounds,Vec2::splat(f32::NAN)).is_none());
+        assert_eq!(crate::spell_input::hud_labels()[0],"q");assert!(crate::spell_input::ground_target("ezreal",0));
+    }
+}
+
+#[cfg(test)]
+mod ezreal_w_learning_tests {
+    use super::*;
+    #[test]
+    fn original_w_arrow_obeys_five_server_gates_without_enabling_e_r() {
+        let root=std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+        let nav=openleague_core::Navigation::load(include_str!("../../../assets/maps/tt_navigation_grid.json"),include_bytes!("../../../assets/maps/tt_navigation_grid.cells.bin")).unwrap();
+        let mut game=openleague_core::Simulation::new(nav).unwrap();let id=game.join("ezreal").unwrap();
+        let mut provider=crate::native_zip_provider::Provider::from_catalog(&root).unwrap();let hud=provider.startup_hud(&root).unwrap();let frames=source(&hud).unwrap();
+        let frame=frames.iter().find(|panel|panel.name=="EvolutionArrowFrame1").unwrap();
+        let(node,_)=crate::native_hud_panels::payload(frame,[1280,800],1.,1.,Handle::default()).unwrap();
+        let(Val::Px(x),Val::Px(y),Val::Px(w),Val::Px(h))=(node.left,node.top,node.width,node.height)else{panic!("native frame pixels");};
+        let bounds=[Bounds{slot:1,rect:[x,y,x+w,y+h]}];let point=Vec2::new(x+w/2.,y+h/2.);
+        for rank in 1..=5 {
+            let required=2*rank-1;
+            if rank>1 {game.players.get_mut(&id).unwrap().level=required-1;assert!(!eligible(&game.players[&id]).unwrap()[1]);assert!(action_at(&game.snapshot(),id,&bounds,point).is_none());}
+            game.players.get_mut(&id).unwrap().level=required;assert!(eligible(&game.players[&id]).unwrap()[1]);
+            let action=action_at(&game.snapshot(),id,&bounds,point).unwrap();assert!(matches!(&action,openleague_core::Action::Learn{slot:1}));
+            game.command(id,action).unwrap();assert_eq!(game.players[&id].ranks,[0,rank,0,0]);assert!(action_at(&game.snapshot(),id,&bounds,point).is_none());
+            assert_eq!(eligible(&game.players[&id]).unwrap()[3],required>=6);
+        }
+        assert!(crate::spell_input::ground_target("ezreal",1));assert!(crate::spell_input::ground_target("ezreal",2));assert!(crate::spell_input::ground_target("ezreal",3));
+    }
+}
+
+#[cfg(test)]
+mod ezreal_e_learning_tests {
+    use super::*;
+    #[test]
+    fn original_e_arrow_obeys_five_server_gates_with_r_still_unsupported() {
+        let root=std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+        let nav=openleague_core::Navigation::load(include_str!("../../../assets/maps/tt_navigation_grid.json"),include_bytes!("../../../assets/maps/tt_navigation_grid.cells.bin")).unwrap();
+        let mut game=openleague_core::Simulation::new(nav).unwrap();let id=game.join("ezreal").unwrap();
+        let mut provider=crate::native_zip_provider::Provider::from_catalog(&root).unwrap();let hud=provider.startup_hud(&root).unwrap();let frames=source(&hud).unwrap();
+        let frame=frames.iter().find(|panel|panel.name=="EvolutionArrowFrame2").unwrap();
+        let(node,_)=crate::native_hud_panels::payload(frame,[1280,800],1.,1.,Handle::default()).unwrap();
+        let(Val::Px(x),Val::Px(y),Val::Px(w),Val::Px(h))=(node.left,node.top,node.width,node.height)else{panic!("native frame pixels");};
+        let bounds=[Bounds{slot:2,rect:[x,y,x+w,y+h]}];let point=Vec2::new(x+w/2.,y+h/2.);
+        for rank in 1..=5 {
+            let required=2*rank-1;
+            if rank>1 {game.players.get_mut(&id).unwrap().level=required-1;assert!(!eligible(&game.players[&id]).unwrap()[2]);assert!(action_at(&game.snapshot(),id,&bounds,point).is_none());}
+            game.players.get_mut(&id).unwrap().level=required;assert!(eligible(&game.players[&id]).unwrap()[2]);
+            let action=action_at(&game.snapshot(),id,&bounds,point).unwrap();assert!(matches!(&action,openleague_core::Action::Learn{slot:2}));
+            game.command(id,action).unwrap();assert_eq!(game.players[&id].ranks,[0,0,rank,0]);assert!(action_at(&game.snapshot(),id,&bounds,point).is_none());
+            assert_eq!(eligible(&game.players[&id]).unwrap()[3],required>=6);
+        }
+        assert!(crate::spell_input::ground_target("ezreal",1));assert!(crate::spell_input::ground_target("ezreal",2));assert!(crate::spell_input::ground_target("ezreal",3));
+    }
+}
+
+
+#[cfg(test)]
+mod ezreal_r_learning_tests {
+    use super::*;
+    #[test]
+    fn original_r_arrow_obeys_levels_six_eleven_sixteen_maxrank_and_points() {
+        let root=std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+        let nav=openleague_core::Navigation::load(include_str!("../../../assets/maps/tt_navigation_grid.json"),include_bytes!("../../../assets/maps/tt_navigation_grid.cells.bin")).unwrap();
+        let mut game=openleague_core::Simulation::new(nav.clone()).unwrap();let id=game.join("ezreal").unwrap();
+        let mut provider=crate::native_zip_provider::Provider::from_catalog(&root).unwrap();let hud=provider.startup_hud(&root).unwrap();let frames=source(&hud).unwrap();
+        let frame=frames.iter().find(|panel|panel.name=="EvolutionArrowFrame3").unwrap();let original=frame.storage.bytes().to_vec();
+        let(node,_)=crate::native_hud_panels::payload(frame,[1280,800],1.,1.,Handle::default()).unwrap();
+        let(Val::Px(x),Val::Px(y),Val::Px(w),Val::Px(h))=(node.left,node.top,node.width,node.height)else{panic!("native R frame pixels");};
+        let bounds=[Bounds{slot:3,rect:[x,y,x+w,y+h]}];let point=Vec2::new(x+w/2.,y+h/2.);
+        for (rank,required) in [(1,6),(2,11),(3,16)] {
+            game.players.get_mut(&id).unwrap().level=required-1;
+            assert!(!eligible(&game.players[&id]).unwrap()[3]);assert!(action_at(&game.snapshot(),id,&bounds,point).is_none());
+            assert!(game.command(id,openleague_core::Action::Learn{slot:3}).is_err());
+            game.players.get_mut(&id).unwrap().level=required;assert!(eligible(&game.players[&id]).unwrap()[3]);
+            let action=action_at(&game.snapshot(),id,&bounds,point).unwrap();assert!(matches!(&action,openleague_core::Action::Learn{slot:3}));
+            game.command(id,action).unwrap();assert_eq!(game.players[&id].ranks,[0,0,0,rank]);
+            assert!(!eligible(&game.players[&id]).unwrap()[3]);assert!(action_at(&game.snapshot(),id,&bounds,point).is_none());
+        }
+        game.players.get_mut(&id).unwrap().level=18;assert!(!eligible(&game.players[&id]).unwrap()[3]);
+        assert!(game.command(id,openleague_core::Action::Learn{slot:3}).is_err());
+        assert!(action_at(&game.snapshot(),999,&bounds,point).is_none());assert!(action_at(&game.snapshot(),id,&bounds,Vec2::splat(f32::NAN)).is_none());
+        assert!(action_at(&game.snapshot(),id,&bounds,Vec2::new(x+w,y)).is_none());
+        let mut spent=openleague_core::Simulation::new(nav).unwrap();let spender=spent.join("ezreal").unwrap();spent.players.get_mut(&spender).unwrap().level=6;
+        for slot in 0..3 {for _ in 0..2 {spent.command(spender,openleague_core::Action::Learn{slot}).unwrap();}}
+        assert_eq!(spent.players[&spender].ranks,[2,2,2,0]);assert!(!eligible(&spent.players[&spender]).unwrap()[3]);
+        assert!(action_at(&spent.snapshot(),spender,&bounds,point).is_none());assert!(spent.command(spender,openleague_core::Action::Learn{slot:3}).is_err());
+        assert_eq!(frame.storage.bytes(),original);assert!(crate::spell_input::ground_target("ezreal",3));
+    }
+}

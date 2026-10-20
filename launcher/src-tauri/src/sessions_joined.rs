@@ -93,11 +93,12 @@ impl<P:Process> JoinedRun<P> {
             "can_play":retired,"can_join":retired,"can_resume":self.can_resume(),"can_abandon":false,
             "generation":self.generation,"address":ADDRESS,"drain_requested":false,
             "server_pid":null,"server_exit":null,"client_pid":self.client.process.id(),"client_exit":self.client.exit.map(exit),
+            "client_diagnostics":self.client.process.diagnostics(),
             "retired_clients":self.retired_clients.iter().map(|(pid,value)|serde_json::json!({"pid":pid,"code":value.code,"success":value.success})).collect::<Vec<_>>(),
             "errors":self.errors,"current_errors":current_errors})
     }
 }
-impl JoinedRun<Child> {
+impl JoinedRun<LoggedChild> {
     pub(super) fn bootstrap(&mut self,bytes:&[u8])->Result<(),String> {
         let result=bootstrap_child(&mut self.client.process,bytes);
         self.complete_bootstrap(result)
@@ -105,10 +106,11 @@ impl JoinedRun<Child> {
     pub(super) fn resume(&mut self)->Result<String,String> {
         // Retain the old observed exit until a replacement actually exists;
         // immediately adopt the new Child before private bootstrap I/O.
-        self.restart_with(|launch|launch.command().spawn().map_err(|error|format!("Redémarrage du client impossible : {error}")),bootstrap_child)
+        let generation=self.generation;
+        self.restart_with(|launch|launch.spawn(generation).map_err(|error|format!("Redémarrage du client impossible : {error}")),bootstrap_child)
     }
 }
-fn bootstrap_child(client:&mut Child,bytes:&[u8])->Result<(),String> {
+fn bootstrap_child(client:&mut LoggedChild,bytes:&[u8])->Result<(),String> {
     let pipe=client.stdin.take();
     pipe.ok_or_else(||"Canal privé du client absent".to_string()).and_then(|pipe|write_bootstrap(pipe,bytes))
 }

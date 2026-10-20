@@ -91,3 +91,44 @@ fn input_sequence(message:t::ClientMessage)->u64 {match message{t::ClientMessage
     assert!(c.validate_clock(&t::ClockEnvelope{context:t::Context{epoch:2,..w.context},ordinal:1,opcode:0xa1,payload:vec![]}).is_err());
     assert!(!c.ready());
 }
+
+#[test]
+fn exact_delivered_observation_batch_keeps_inputs_closed_and_rejects_holes_replays_and_empty_poll() {
+    let state=snapshot();let w=welcome(state.players[0].id);let mut client=Client::new(request(),false,nonce(7)).unwrap();
+    client.welcome(w.clone()).unwrap();let mut sender=session_wire::Sender::new(w.context).unwrap();
+    for packet in sender.encode(&state,0).unwrap(){client.frame(&packet).unwrap();}
+    let _undelivered=sender.encode(&state,0).unwrap(); // ordinal2 never reaches the receiver
+    for packet in sender.encode(&state,0).unwrap(){client.frame(&packet).unwrap();}
+    assert!(!client.observation_ready(w.context,1));
+    let batch=client.take_ready_states();assert_eq!(batch.iter().map(|f|f.frame_ordinal).collect::<Vec<_>>(),vec![1,3]);
+    assert!(!client.ready());assert!(client.input(t::Input::Command(openleague_core::Action::Stop)).is_err());
+    for id in [1,3]{assert!(client.observation_ready(w.context,id));}
+    for id in [0,2,4,u64::MAX]{assert!(!client.observation_ready(w.context,id));}
+    for context in [t::Context{epoch:2,..w.context},t::Context{player:w.context.player+1,..w.context},t::Context{session:u64::MAX,..w.context}]{
+        assert!(!client.observation_ready(context,1));
+    }
+    client.presented(w.context,1).unwrap();assert!(!client.observation_ready(w.context,1));
+    assert!(client.observation_ready(w.context,3));assert!(!client.ready());
+    client.presented(w.context,3).unwrap();assert!(client.ready());assert!(!client.observation_ready(w.context,3));
+    for packet in sender.encode(&state,0).unwrap(){client.frame(&packet).unwrap();}
+    assert_eq!(client.take_ready_states().len(),1);assert!(client.observation_ready(w.context,4));
+    assert!(client.take_ready_states().is_empty());assert!(!client.observation_ready(w.context,4));assert!(!client.ready());
+    for packet in sender.encode(&state,0).unwrap(){client.frame(&packet).unwrap();}
+    assert_eq!(client.take_ready_states().len(),1);assert!(client.observation_ready(w.context,5));assert!(!client.observation_ready(w.context,4));
+}
+#[test]
+fn observation_admission_waits_for_applied_clock_and_is_revoked_by_recovery_or_failure() {
+    let state=snapshot();let mut client=Client::new(request(),false,nonce(7)).unwrap();
+    let w=t::Welcome{bootstrap:t::ClockBootstrap::Paused{through_ordinal:1},..welcome(state.players[0].id)};
+    client.welcome(w.clone()).unwrap();let mut sender=session_wire::Sender::new(w.context).unwrap();
+    for packet in sender.encode(&state,1).unwrap(){client.frame(&packet).unwrap();}
+    assert!(client.take_ready_states().is_empty());assert!(!client.observation_ready(w.context,1));
+    client.clock_applied(w.context,1).unwrap();assert_eq!(client.take_ready_states().len(),1);
+    assert!(client.observation_ready(w.context,1));assert!(!client.ready());
+    client.failed=Some("controlled transport failure");assert!(!client.observation_ready(w.context,1));
+    assert!(client.take_ready_states().is_empty());assert!(client.observation_batch.is_empty());
+    client.failed=None;assert!(!client.observation_ready(w.context,1));
+    for packet in sender.encode(&state,1).unwrap(){client.frame(&packet).unwrap();}
+    assert_eq!(client.take_ready_states().len(),1);assert!(client.observation_ready(w.context,2));
+    client.recover(nonce(8)).unwrap();assert!(client.observation_batch.is_empty());assert!(!client.observation_ready(w.context,2));
+}
