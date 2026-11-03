@@ -1,0 +1,1529 @@
+{
+  "schema": "openleague_spectator_session_links/v1",
+  "passed": true,
+  "utc": "2026-10-23T08:51:48.282954+00:00",
+  "full_task_scope_complete": false,
+  "native_or_game_executed": false,
+  "historical_server_policy_qualified": false,
+  "facts": {
+    "candidates": {
+      "producer": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision143\\prepare_spectator_session_reader.py",
+        "bytes": 2045,
+        "sha256": "e1c044be73e8899f09b6ec76ad07e4dc34ecacde6b59ff6c9e97ff4092713837"
+      },
+      "associations": [
+        {
+          "task_id": "SYS-21.2-01",
+          "finding": "Join creates a Simulation champion player;no read-only observer in this branch.",
+          "remaining": "Define distinct observer subscription and permissions without creating a playable champion.",
+          "anchors": [
+            {
+              "path": "crates/server/src/session_host.rs",
+              "line": 82,
+              "needle": "let player = match game.join_with_summoners",
+              "role": "spectator_session_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-051e7803-7b2e-5716-ad7a-537683f6dbbc"
+        },
+        {
+          "task_id": "SYS-21.2-02",
+          "finding": "States publish a current player-specific snapshot;this branch has no spectator delay buffer.",
+          "remaining": "Enforce server-side delay on every observer path including reconnect.",
+          "anchors": [
+            {
+              "path": "crates/server/src/session_host.rs",
+              "line": 161,
+              "needle": "let snapshot = game.snapshot_for_atomic(route.context.player)",
+              "role": "spectator_session_2"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-3f6880b9-0c39-5878-a601-2e0840cd3a97"
+        },
+        {
+          "task_id": "SYS-21.2-03",
+          "finding": "First snapshot initializes local player focus;not a spectator target selection control.",
+          "remaining": "Connect authorized followed-player selection to camera and HUD.",
+          "anchors": [
+            {
+              "path": "crates/client/src/main.rs",
+              "line": 1243,
+              "needle": "focus.0 = camera_native::initialize_snapshot_focus(p.id",
+              "role": "spectator_session_3"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-fe637ee4-61b1-501e-b40b-f5b2bbbfd82c"
+        },
+        {
+          "task_id": "SYS-21.2-04",
+          "finding": "Team vision depends on an existing player;not spectator permission selection.",
+          "remaining": "Qualify selected team view without exposing unauthorized state.",
+          "anchors": [
+            {
+              "path": "crates/core/src/vision.rs",
+              "line": 138,
+              "needle": "let team = self.players.get(&viewer)?.team;",
+              "role": "spectator_session_4"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-f8f4f36b-c784-5639-a2d3-ff672a65a553"
+        },
+        {
+          "task_id": "SYS-21.2-05",
+          "finding": "Terminal result panel is gated by final results,not a live spectator scoreboard.",
+          "remaining": "Implement and qualify live observer scoreboard separately from end results.",
+          "anchors": [
+            {
+              "path": "crates/client/src/match_results_ui.rs",
+              "line": 37,
+              "needle": "let result=state.snapshot.as_ref().and_then",
+              "role": "spectator_session_5"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-ca4b2376-923d-509a-ba49-8ed8c0a571ba"
+        },
+        {
+          "task_id": "SYS-21.2-06",
+          "finding": "Authenticated player command dispatch;no observer role represented in this branch.",
+          "remaining": "Reject combat inputs based on observer authority;not just malformed packets.",
+          "anchors": [
+            {
+              "path": "crates/server/src/session_host.rs",
+              "line": 143,
+              "needle": "else { game.command(accepted.context.player, action) }",
+              "role": "spectator_session_6"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-c44090f6-b2e0-5851-8063-102d6e44f40b"
+        },
+        {
+          "task_id": "SYS-21.2-07",
+          "finding": "Resume prepares clock delivery for expected player;does not preserve spectator delay/audience cursor.",
+          "remaining": "Resume observer with preserved delayed cursor and audience constraints.",
+          "anchors": [
+            {
+              "path": "crates/server/src/session_host.rs",
+              "line": 110,
+              "needle": "let clock = delivery.prepare_recipient(request.expected.player, pause, now)?;",
+              "role": "spectator_session_7"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-cea47534-3f97-52ec-99a1-5f765e7c74bd"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision143\\spectator-session-research.json",
+          "bytes": 23406,
+          "sha256": "07596a8c831b8887a3d08b521ad7dea4188b3a05c1f54757b4cc07ddb23a813f"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision142\\spectator-release-membership.json",
+          "bytes": 10704,
+          "sha256": "e713d2cc5d07acce9c3cdc1b4ec497496ce04980b8a744605fbc4bf1a4e6fea6"
+        }
+      ],
+      "current_sources": [
+        {
+          "path": "F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+          "bytes": 33360,
+          "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+          "bytes": 33360,
+          "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+          "bytes": 141376,
+          "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\vision.rs",
+          "bytes": 10267,
+          "sha256": "1b13d6ee8dbd0561a79cb12bc8a622e1d47890c54231b745d4bedf55f28ac9fe"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\match_results_ui.rs",
+          "bytes": 6200,
+          "sha256": "ce96ed7771c5ee6f3823386ecbb61b73875cd2b78088ec83695a81d9ef621cb2"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+          "bytes": 33360,
+          "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+          "bytes": 33360,
+          "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+        }
+      ],
+      "scope": "Seven player-path boundaries;not implemented spectator subscription or recovered server policies."
+    },
+    "receipts": {
+      "spectator-session-research.json": {
+        "utc": "2026-10-23T08:51:15.201190+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision143\\research_spectator_session.py",
+          "bytes": 5283,
+          "sha256": "b0e6789d7d582ed7b22eb5a7de336246bd562e3eeb042cee346e7205c0f419d2"
+        },
+        "prior_research": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision142\\spectator-history-research.json",
+          "bytes": 15517,
+          "sha256": "8efe3ac2838c23c566ec37162d1e6d53dede77e0a5ee1c8d19ca5912738ce984"
+        },
+        "membership": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision142\\spectator-release-membership.json",
+          "bytes": 10704,
+          "sha256": "e713d2cc5d07acce9c3cdc1b4ec497496ce04980b8a744605fbc4bf1a4e6fea6"
+        },
+        "sources": [
+          {
+            "id": "air.UpdateSpectatorsCommand",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\commands\\UpdateSpectatorsCommand.as",
+              "bytes": 1755,
+              "sha256": "7f37601a5260f0598f2c3a2516bc0b1036de9970d2e2db5dea9914d7c53216f5"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\commands\\UpdateSpectatorsCommand.as",
+              "bytes": 1755,
+              "sha256": "7f37601a5260f0598f2c3a2516bc0b1036de9970d2e2db5dea9914d7c53216f5"
+            }
+          },
+          {
+            "id": "air.SpectatorDelayManager",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\controllers\\SpectatorDelayManager.as",
+              "bytes": 3871,
+              "sha256": "4df9c4a75a7af132bd78b8c5402bb7a4cfcfc3673931f25e67e356fde72821fe"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\controllers\\SpectatorDelayManager.as",
+              "bytes": 3871,
+              "sha256": "4df9c4a75a7af132bd78b8c5402bb7a4cfcfc3673931f25e67e356fde72821fe"
+            }
+          },
+          {
+            "id": "air.ISpectatorProvider",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibCommon_dat\\scripts\\com\\riotgames\\platform\\common\\provider\\ISpectatorProvider.as",
+              "bytes": 632,
+              "sha256": "9ac1f939378effbd63b04931f7d4aad617c9e459c47934abb02598a3186866f9"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibCommon_dat\\scripts\\com\\riotgames\\platform\\common\\provider\\ISpectatorProvider.as",
+              "bytes": 632,
+              "sha256": "9ac1f939378effbd63b04931f7d4aad617c9e459c47934abb02598a3186866f9"
+            }
+          },
+          {
+            "id": "air.AllowSpectators",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibDomain_dat\\scripts\\com\\riotgames\\platform\\gameclient\\domain\\game\\AllowSpectators.as",
+              "bytes": 704,
+              "sha256": "31d1e8e32e0b27ebd67c17b94c905e02e6d8197cafe6052fa62d204bc7981ffe"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibDomain_dat\\scripts\\com\\riotgames\\platform\\gameclient\\domain\\game\\AllowSpectators.as",
+              "bytes": 704,
+              "sha256": "31d1e8e32e0b27ebd67c17b94c905e02e6d8197cafe6052fa62d204bc7981ffe"
+            }
+          },
+          {
+            "id": "air.ServiceProxy",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+              "bytes": 15297,
+              "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+              "bytes": 15297,
+              "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+            }
+          },
+          {
+            "id": "air.GameService",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+              "bytes": 4720,
+              "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+              "bytes": 4720,
+              "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+            }
+          },
+          {
+            "id": "air.GameServiceImpl",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+              "bytes": 19283,
+              "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+              "bytes": 19283,
+              "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+            }
+          },
+          {
+            "id": "current.launcher/src-tauri/src/main.rs",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\launcher\\src-tauri\\src\\main.rs",
+              "bytes": 3491,
+              "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+              "bytes": 3491,
+              "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+            }
+          },
+          {
+            "id": "current.crates/server/src/main.rs",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\server\\src\\main.rs",
+              "bytes": 13628,
+              "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\crates\\server\\src\\main.rs",
+              "bytes": 13628,
+              "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+            }
+          }
+        ],
+        "release_members": [
+          {
+            "review": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\commands\\UpdateSpectatorsCommand.as",
+              "bytes": 1755,
+              "sha256": "7f37601a5260f0598f2c3a2516bc0b1036de9970d2e2db5dea9914d7c53216f5"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibChampionSelectionCore.dat",
+              "bytes": 201868,
+              "sha256": "e757c10e659493bf6fc280dae70c2e2f46d18152ffa5d85046b772de30910be5"
+            },
+            "manifest_entry": {
+              "release": "0.0.1.119",
+              "md5": "f3fc61c6f4ea808ad33ceba46fceb4c7",
+              "bytes": 201868,
+              "compressed_bytes": 0
+            },
+            "observed_md5": "f3fc61c6f4ea808ad33ceba46fceb4c7"
+          },
+          {
+            "review": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\controllers\\SpectatorDelayManager.as",
+              "bytes": 3871,
+              "sha256": "4df9c4a75a7af132bd78b8c5402bb7a4cfcfc3673931f25e67e356fde72821fe"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibChampionSelectionCore.dat",
+              "bytes": 201868,
+              "sha256": "e757c10e659493bf6fc280dae70c2e2f46d18152ffa5d85046b772de30910be5"
+            },
+            "manifest_entry": {
+              "release": "0.0.1.119",
+              "md5": "f3fc61c6f4ea808ad33ceba46fceb4c7",
+              "bytes": 201868,
+              "compressed_bytes": 0
+            },
+            "observed_md5": "f3fc61c6f4ea808ad33ceba46fceb4c7"
+          },
+          {
+            "review": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibCommon_dat\\scripts\\com\\riotgames\\platform\\common\\provider\\ISpectatorProvider.as",
+              "bytes": 632,
+              "sha256": "9ac1f939378effbd63b04931f7d4aad617c9e459c47934abb02598a3186866f9"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibCommon.dat",
+              "bytes": 78498,
+              "sha256": "f5915bfc68556608cb6aba924b9773862c09dd9e52414dc488aa01621efee638"
+            },
+            "manifest_entry": {
+              "release": "0.0.1.119",
+              "md5": "18e2488befd98ec98ab3a2fa459e2178",
+              "bytes": 78498,
+              "compressed_bytes": 0
+            },
+            "observed_md5": "18e2488befd98ec98ab3a2fa459e2178"
+          },
+          {
+            "review": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibDomain_dat\\scripts\\com\\riotgames\\platform\\gameclient\\domain\\game\\AllowSpectators.as",
+              "bytes": 704,
+              "sha256": "31d1e8e32e0b27ebd67c17b94c905e02e6d8197cafe6052fa62d204bc7981ffe"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibDomain.dat",
+              "bytes": 169947,
+              "sha256": "31d7fc4597de774fa643a2789fbdc9202a48f4cd8c01449a3c642bbd5b27336e"
+            },
+            "manifest_entry": {
+              "release": "0.0.1.119",
+              "md5": "f6e01c5197997de5028c425dff316363",
+              "bytes": 169947,
+              "compressed_bytes": 0
+            },
+            "observed_md5": "f6e01c5197997de5028c425dff316363"
+          },
+          {
+            "review": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+              "bytes": 15297,
+              "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibServices.dat",
+              "bytes": 48811,
+              "sha256": "70cf96c9f36d842d9b56d152951211b5afdc5ae7c3cf26c30a04b4a546ac468b"
+            },
+            "manifest_entry": {
+              "release": "0.0.1.119",
+              "md5": "2e8639c651d2a00c5799247ea51221ff",
+              "bytes": 48811,
+              "compressed_bytes": 0
+            },
+            "observed_md5": "2e8639c651d2a00c5799247ea51221ff"
+          },
+          {
+            "review": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+              "bytes": 4720,
+              "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibServices.dat",
+              "bytes": 48811,
+              "sha256": "70cf96c9f36d842d9b56d152951211b5afdc5ae7c3cf26c30a04b4a546ac468b"
+            },
+            "manifest_entry": {
+              "release": "0.0.1.119",
+              "md5": "2e8639c651d2a00c5799247ea51221ff",
+              "bytes": 48811,
+              "compressed_bytes": 0
+            },
+            "observed_md5": "2e8639c651d2a00c5799247ea51221ff"
+          },
+          {
+            "review": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__cs__mod_cs_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\views\\SpectatorChampionSelectionView.as",
+              "bytes": 55490,
+              "sha256": "5169c204a31cb19d293052932e1b103293f644af0ef9c3c10874f4db16b4b1d1"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\cs\\mod_cs.dat",
+              "bytes": 570586,
+              "sha256": "7b584e725f20cc567e8cadc49e7de1b8bd3e9cfa6544c712b202431817623cd8"
+            },
+            "manifest_entry": {
+              "release": "0.0.1.119",
+              "md5": "eb3588822cca4fcc086351e35430782f",
+              "bytes": 570586,
+              "compressed_bytes": 0
+            },
+            "observed_md5": "eb3588822cca4fcc086351e35430782f"
+          },
+          {
+            "review": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__cs__mod_cs_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\views\\SpectatorWaitBar.as",
+              "bytes": 14319,
+              "sha256": "7b9805e6bf0d5ccfe98b23cc583879263d1f0295a730f1644103e1b8d92fd2d6"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\cs\\mod_cs.dat",
+              "bytes": 570586,
+              "sha256": "7b584e725f20cc567e8cadc49e7de1b8bd3e9cfa6544c712b202431817623cd8"
+            },
+            "manifest_entry": {
+              "release": "0.0.1.119",
+              "md5": "eb3588822cca4fcc086351e35430782f",
+              "bytes": 570586,
+              "compressed_bytes": 0
+            },
+            "observed_md5": "eb3588822cca4fcc086351e35430782f"
+          },
+          {
+            "review": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+              "bytes": 19283,
+              "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\ser\\mod_ser.dat",
+              "bytes": 125764,
+              "sha256": "8628abec247eb498752ad6314c65a25d0b6174c69fcad6390c94d3d09bff6206"
+            },
+            "manifest_entry": {
+              "release": "0.0.1.119",
+              "md5": "d991f5fb1b31b08c081b1b7d47623701",
+              "bytes": 125764,
+              "compressed_bytes": 0
+            },
+            "observed_md5": "d991f5fb1b31b08c081b1b7d47623701"
+          }
+        ],
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+              "bytes": 33360,
+              "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+            },
+            "path": "crates/server/src/session_host.rs",
+            "line": 82,
+            "needle": "let player = match game.join_with_summoners",
+            "finding": "Join creates a Simulation champion player;no read-only observer in this branch."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+              "bytes": 33360,
+              "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+            },
+            "path": "crates/server/src/session_host.rs",
+            "line": 161,
+            "needle": "let snapshot = game.snapshot_for_atomic(route.context.player)",
+            "finding": "States publish a current player-specific snapshot;this branch has no spectator delay buffer."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+              "bytes": 141376,
+              "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+            },
+            "path": "crates/client/src/main.rs",
+            "line": 1243,
+            "needle": "focus.0 = camera_native::initialize_snapshot_focus(p.id",
+            "finding": "First snapshot initializes local player focus;not a spectator target selection control."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\vision.rs",
+              "bytes": 10267,
+              "sha256": "1b13d6ee8dbd0561a79cb12bc8a622e1d47890c54231b745d4bedf55f28ac9fe"
+            },
+            "path": "crates/core/src/vision.rs",
+            "line": 138,
+            "needle": "let team = self.players.get(&viewer)?.team;",
+            "finding": "Team vision depends on an existing player;not spectator permission selection."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\match_results_ui.rs",
+              "bytes": 6200,
+              "sha256": "ce96ed7771c5ee6f3823386ecbb61b73875cd2b78088ec83695a81d9ef621cb2"
+            },
+            "path": "crates/client/src/match_results_ui.rs",
+            "line": 37,
+            "needle": "let result=state.snapshot.as_ref().and_then",
+            "finding": "Terminal result panel is gated by final results,not a live spectator scoreboard."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+              "bytes": 33360,
+              "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+            },
+            "path": "crates/server/src/session_host.rs",
+            "line": 143,
+            "needle": "else { game.command(accepted.context.player, action) }",
+            "finding": "Authenticated player command dispatch;no observer role represented in this branch."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+              "bytes": 33360,
+              "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+            },
+            "path": "crates/server/src/session_host.rs",
+            "line": 110,
+            "needle": "let clock = delivery.prepare_recipient(request.expected.player, pause, now)?;",
+            "finding": "Resume prepares clock delivery for expected player;does not preserve spectator delay/audience cursor."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+              "bytes": 13206,
+              "sha256": "139a7ce15ac5261dee15fe0aa60716fb1bb6993ecd9acb0d41c34acb84ab00bc"
+            },
+            "path": "crates/core/src/session_transport.rs",
+            "line": 50,
+            "needle": "pub struct JoinRequest",
+            "finding": "Current request carries champion and summoner spells,not observer role."
+          }
+        ],
+        "associations": [
+          {
+            "task_id": "SYS-21.2-01",
+            "finding": "Join creates a Simulation champion player;no read-only observer in this branch.",
+            "remaining": "Define distinct observer subscription and permissions without creating a playable champion.",
+            "anchors": [
+              {
+                "path": "crates/server/src/session_host.rs",
+                "line": 82,
+                "needle": "let player = match game.join_with_summoners",
+                "role": "spectator_session_1"
+              }
+            ],
+            "native_bindings": [],
+            "entry_boundary_only": true,
+            "full_task_scope_complete": false,
+            "existing_unknown_id": "OLU-051e7803-7b2e-5716-ad7a-537683f6dbbc"
+          },
+          {
+            "task_id": "SYS-21.2-02",
+            "finding": "States publish a current player-specific snapshot;this branch has no spectator delay buffer.",
+            "remaining": "Enforce server-side delay on every observer path including reconnect.",
+            "anchors": [
+              {
+                "path": "crates/server/src/session_host.rs",
+                "line": 161,
+                "needle": "let snapshot = game.snapshot_for_atomic(route.context.player)",
+                "role": "spectator_session_2"
+              }
+            ],
+            "native_bindings": [],
+            "entry_boundary_only": true,
+            "full_task_scope_complete": false,
+            "existing_unknown_id": "OLU-3f6880b9-0c39-5878-a601-2e0840cd3a97"
+          },
+          {
+            "task_id": "SYS-21.2-03",
+            "finding": "First snapshot initializes local player focus;not a spectator target selection control.",
+            "remaining": "Connect authorized followed-player selection to camera and HUD.",
+            "anchors": [
+              {
+                "path": "crates/client/src/main.rs",
+                "line": 1243,
+                "needle": "focus.0 = camera_native::initialize_snapshot_focus(p.id",
+                "role": "spectator_session_3"
+              }
+            ],
+            "native_bindings": [],
+            "entry_boundary_only": true,
+            "full_task_scope_complete": false,
+            "existing_unknown_id": "OLU-fe637ee4-61b1-501e-b40b-f5b2bbbfd82c"
+          },
+          {
+            "task_id": "SYS-21.2-04",
+            "finding": "Team vision depends on an existing player;not spectator permission selection.",
+            "remaining": "Qualify selected team view without exposing unauthorized state.",
+            "anchors": [
+              {
+                "path": "crates/core/src/vision.rs",
+                "line": 138,
+                "needle": "let team = self.players.get(&viewer)?.team;",
+                "role": "spectator_session_4"
+              }
+            ],
+            "native_bindings": [],
+            "entry_boundary_only": true,
+            "full_task_scope_complete": false,
+            "existing_unknown_id": "OLU-f8f4f36b-c784-5639-a2d3-ff672a65a553"
+          },
+          {
+            "task_id": "SYS-21.2-05",
+            "finding": "Terminal result panel is gated by final results,not a live spectator scoreboard.",
+            "remaining": "Implement and qualify live observer scoreboard separately from end results.",
+            "anchors": [
+              {
+                "path": "crates/client/src/match_results_ui.rs",
+                "line": 37,
+                "needle": "let result=state.snapshot.as_ref().and_then",
+                "role": "spectator_session_5"
+              }
+            ],
+            "native_bindings": [],
+            "entry_boundary_only": true,
+            "full_task_scope_complete": false,
+            "existing_unknown_id": "OLU-ca4b2376-923d-509a-ba49-8ed8c0a571ba"
+          },
+          {
+            "task_id": "SYS-21.2-06",
+            "finding": "Authenticated player command dispatch;no observer role represented in this branch.",
+            "remaining": "Reject combat inputs based on observer authority;not just malformed packets.",
+            "anchors": [
+              {
+                "path": "crates/server/src/session_host.rs",
+                "line": 143,
+                "needle": "else { game.command(accepted.context.player, action) }",
+                "role": "spectator_session_6"
+              }
+            ],
+            "native_bindings": [],
+            "entry_boundary_only": true,
+            "full_task_scope_complete": false,
+            "existing_unknown_id": "OLU-c44090f6-b2e0-5851-8063-102d6e44f40b"
+          },
+          {
+            "task_id": "SYS-21.2-07",
+            "finding": "Resume prepares clock delivery for expected player;does not preserve spectator delay/audience cursor.",
+            "remaining": "Resume observer with preserved delayed cursor and audience constraints.",
+            "anchors": [
+              {
+                "path": "crates/server/src/session_host.rs",
+                "line": 110,
+                "needle": "let clock = delivery.prepare_recipient(request.expected.player, pause, now)?;",
+                "role": "spectator_session_7"
+              }
+            ],
+            "native_bindings": [],
+            "entry_boundary_only": true,
+            "full_task_scope_complete": false,
+            "existing_unknown_id": "OLU-cea47534-3f97-52ec-99a1-5f765e7c74bd"
+          }
+        ],
+        "native_runtime_executed": false,
+        "rust_tests_executed": false,
+        "full_scope_complete": false,
+        "scope": "Source trace only;absence statements limited to inspected branches. Historical AIR declarations do not establish recovered Riot server policy.",
+        "remaining": [
+          "Qualify candidate associations with mutation refusals.",
+          "Integrate seven boundary roles and preserve open questions;no feature completion."
+        ]
+      },
+      "spectator-release-membership.json": {
+        "utc": "2026-10-23T08:45:42.221783+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision142\\verify_spectator_membership.py",
+          "bytes": 3242,
+          "sha256": "10c4e4ce6db48d047ea094ec1c5c5f08b972b3071ee78943ff7dd768e0f25837"
+        },
+        "air_inventory": {
+          "path": "F:\\OpenLeague\\docs\\reference_air_routes_4_20.json",
+          "bytes": 11465788,
+          "sha256": "6219091152d3fd95cc207aa85126eceb532b20fa822a694d1c2f6f0545223623"
+        },
+        "inherited_inventory_verification": {
+          "path": "F:\\OpenLeague\\docs\\reference_air_routes_4_20_verification.json",
+          "bytes": 20862,
+          "sha256": "233bc189672046293ef6ac94230074a69f6889668d96d3413c24ca8d3ef02be4"
+        },
+        "research": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision142\\spectator-history-research.json",
+          "bytes": 15517,
+          "sha256": "8efe3ac2838c23c566ec37162d1e6d53dede77e0a5ee1c8d19ca5912738ce984"
+        },
+        "release": "0.0.1.119",
+        "air_build": "4.20.14_11_18_18_52",
+        "members": [
+          {
+            "review": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\commands\\UpdateSpectatorsCommand.as",
+              "bytes": 1755,
+              "sha256": "7f37601a5260f0598f2c3a2516bc0b1036de9970d2e2db5dea9914d7c53216f5"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibChampionSelectionCore.dat",
+              "bytes": 201868,
+              "sha256": "e757c10e659493bf6fc280dae70c2e2f46d18152ffa5d85046b772de30910be5"
+            },
+            "manifest_entry": {
+              "release": "0.0.1.119",
+              "md5": "f3fc61c6f4ea808ad33ceba46fceb4c7",
+              "bytes": 201868,
+              "compressed_bytes": 0
+            },
+            "observed_md5": "f3fc61c6f4ea808ad33ceba46fceb4c7"
+          },
+          {
+            "review": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\controllers\\SpectatorDelayManager.as",
+              "bytes": 3871,
+              "sha256": "4df9c4a75a7af132bd78b8c5402bb7a4cfcfc3673931f25e67e356fde72821fe"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibChampionSelectionCore.dat",
+              "bytes": 201868,
+              "sha256": "e757c10e659493bf6fc280dae70c2e2f46d18152ffa5d85046b772de30910be5"
+            },
+            "manifest_entry": {
+              "release": "0.0.1.119",
+              "md5": "f3fc61c6f4ea808ad33ceba46fceb4c7",
+              "bytes": 201868,
+              "compressed_bytes": 0
+            },
+            "observed_md5": "f3fc61c6f4ea808ad33ceba46fceb4c7"
+          },
+          {
+            "review": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibCommon_dat\\scripts\\com\\riotgames\\platform\\common\\provider\\ISpectatorProvider.as",
+              "bytes": 632,
+              "sha256": "9ac1f939378effbd63b04931f7d4aad617c9e459c47934abb02598a3186866f9"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibCommon.dat",
+              "bytes": 78498,
+              "sha256": "f5915bfc68556608cb6aba924b9773862c09dd9e52414dc488aa01621efee638"
+            },
+            "manifest_entry": {
+              "release": "0.0.1.119",
+              "md5": "18e2488befd98ec98ab3a2fa459e2178",
+              "bytes": 78498,
+              "compressed_bytes": 0
+            },
+            "observed_md5": "18e2488befd98ec98ab3a2fa459e2178"
+          },
+          {
+            "review": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibDomain_dat\\scripts\\com\\riotgames\\platform\\gameclient\\domain\\game\\AllowSpectators.as",
+              "bytes": 704,
+              "sha256": "31d1e8e32e0b27ebd67c17b94c905e02e6d8197cafe6052fa62d204bc7981ffe"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibDomain.dat",
+              "bytes": 169947,
+              "sha256": "31d7fc4597de774fa643a2789fbdc9202a48f4cd8c01449a3c642bbd5b27336e"
+            },
+            "manifest_entry": {
+              "release": "0.0.1.119",
+              "md5": "f6e01c5197997de5028c425dff316363",
+              "bytes": 169947,
+              "compressed_bytes": 0
+            },
+            "observed_md5": "f6e01c5197997de5028c425dff316363"
+          },
+          {
+            "review": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+              "bytes": 15297,
+              "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibServices.dat",
+              "bytes": 48811,
+              "sha256": "70cf96c9f36d842d9b56d152951211b5afdc5ae7c3cf26c30a04b4a546ac468b"
+            },
+            "manifest_entry": {
+              "release": "0.0.1.119",
+              "md5": "2e8639c651d2a00c5799247ea51221ff",
+              "bytes": 48811,
+              "compressed_bytes": 0
+            },
+            "observed_md5": "2e8639c651d2a00c5799247ea51221ff"
+          },
+          {
+            "review": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+              "bytes": 4720,
+              "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibServices.dat",
+              "bytes": 48811,
+              "sha256": "70cf96c9f36d842d9b56d152951211b5afdc5ae7c3cf26c30a04b4a546ac468b"
+            },
+            "manifest_entry": {
+              "release": "0.0.1.119",
+              "md5": "2e8639c651d2a00c5799247ea51221ff",
+              "bytes": 48811,
+              "compressed_bytes": 0
+            },
+            "observed_md5": "2e8639c651d2a00c5799247ea51221ff"
+          },
+          {
+            "review": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__cs__mod_cs_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\views\\SpectatorChampionSelectionView.as",
+              "bytes": 55490,
+              "sha256": "5169c204a31cb19d293052932e1b103293f644af0ef9c3c10874f4db16b4b1d1"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\cs\\mod_cs.dat",
+              "bytes": 570586,
+              "sha256": "7b584e725f20cc567e8cadc49e7de1b8bd3e9cfa6544c712b202431817623cd8"
+            },
+            "manifest_entry": {
+              "release": "0.0.1.119",
+              "md5": "eb3588822cca4fcc086351e35430782f",
+              "bytes": 570586,
+              "compressed_bytes": 0
+            },
+            "observed_md5": "eb3588822cca4fcc086351e35430782f"
+          },
+          {
+            "review": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__cs__mod_cs_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\views\\SpectatorWaitBar.as",
+              "bytes": 14319,
+              "sha256": "7b9805e6bf0d5ccfe98b23cc583879263d1f0295a730f1644103e1b8d92fd2d6"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\cs\\mod_cs.dat",
+              "bytes": 570586,
+              "sha256": "7b584e725f20cc567e8cadc49e7de1b8bd3e9cfa6544c712b202431817623cd8"
+            },
+            "manifest_entry": {
+              "release": "0.0.1.119",
+              "md5": "eb3588822cca4fcc086351e35430782f",
+              "bytes": 570586,
+              "compressed_bytes": 0
+            },
+            "observed_md5": "eb3588822cca4fcc086351e35430782f"
+          },
+          {
+            "review": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+              "bytes": 19283,
+              "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\ser\\mod_ser.dat",
+              "bytes": 125764,
+              "sha256": "8628abec247eb498752ad6314c65a25d0b6174c69fcad6390c94d3d09bff6206"
+            },
+            "manifest_entry": {
+              "release": "0.0.1.119",
+              "md5": "d991f5fb1b31b08c081b1b7d47623701",
+              "bytes": 125764,
+              "compressed_bytes": 0
+            },
+            "observed_md5": "d991f5fb1b31b08c081b1b7d47623701"
+          }
+        ],
+        "screen": {
+          "id": "spectate-select",
+          "label": "Sélection et délai spectateur",
+          "sources": [
+            "review/mod__cs__mod_cs_dat/scripts/com/riotgames/platform/gameclient/controllers/game/views/SpectatorChampionSelectionView.as",
+            "review/mod__cs__mod_cs_dat/scripts/com/riotgames/platform/gameclient/controllers/game/views/SpectatorWaitBar.as"
+          ],
+          "availability": "service_dependent",
+          "availability_note": "Définition présente dans la release ; affichage natif non observé.",
+          "observed_native": false
+        },
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\camera_native.rs",
+              "bytes": 14467,
+              "sha256": "dc52fb69c32430d1b1164d8cf3def95ce6988b8f5f5dcac5045a5e6f1058084b"
+            },
+            "line": 40,
+            "needle": "let context=Context{active_raw:0",
+            "finding": "Normal camera adapter supplies inactive native service flags;not historical spectator camera selection."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\camera_native.rs",
+              "bytes": 14467,
+              "sha256": "dc52fb69c32430d1b1164d8cf3def95ce6988b8f5f5dcac5045a5e6f1058084b"
+            },
+            "line": 44,
+            "needle": "camera_sequence::step_without_auto_follow",
+            "finding": "Current normal-camera pose explicitly excludes native auto-follow."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\tools\\project-plan\\air_reference.py",
+              "bytes": 16399,
+              "sha256": "4421bb1b6215b11371e137bc292dd891eda498e16aaeea2955d84f1997eed33e"
+            },
+            "line": 93,
+            "needle": "def verify(doc,root,verify_sources=True):",
+            "finding": "Current static inventory consumer;not deployed spectator service."
+          }
+        ],
+        "full_task_scope_complete": false,
+        "native_display_observed": false,
+        "limits": [
+          "Exact release membership and retained decompilation identity rechecked;not a fresh decompilation.",
+          "AIR build identity is distinct from game executable build;EUW deployment date and actual service availability not inferred.",
+          "Camera subset and selection filter do not prove all historical camera modes."
+        ]
+      }
+    },
+    "source_checks": [
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision143\\spectator_session-associations.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision143\\prepare_spectator_session_reader.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision143\\spectator-session-research.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision142\\spectator-release-membership.json",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\vision.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\match_results_ui.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision143\\research_spectator_session.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision142\\spectator-history-research.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision142\\spectator-release-membership.json",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\commands\\UpdateSpectatorsCommand.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\commands\\UpdateSpectatorsCommand.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\controllers\\SpectatorDelayManager.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\controllers\\SpectatorDelayManager.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibCommon_dat\\scripts\\com\\riotgames\\platform\\common\\provider\\ISpectatorProvider.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibCommon_dat\\scripts\\com\\riotgames\\platform\\common\\provider\\ISpectatorProvider.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibDomain_dat\\scripts\\com\\riotgames\\platform\\gameclient\\domain\\game\\AllowSpectators.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibDomain_dat\\scripts\\com\\riotgames\\platform\\gameclient\\domain\\game\\AllowSpectators.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\server\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\main.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\commands\\UpdateSpectatorsCommand.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibChampionSelectionCore.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\controllers\\SpectatorDelayManager.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibChampionSelectionCore.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibCommon_dat\\scripts\\com\\riotgames\\platform\\common\\provider\\ISpectatorProvider.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibCommon.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibDomain_dat\\scripts\\com\\riotgames\\platform\\gameclient\\domain\\game\\AllowSpectators.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibDomain.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibServices.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibServices.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__cs__mod_cs_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\views\\SpectatorChampionSelectionView.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\cs\\mod_cs.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__cs__mod_cs_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\views\\SpectatorWaitBar.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\cs\\mod_cs.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\ser\\mod_ser.dat",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\vision.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\match_results_ui.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision142\\verify_spectator_membership.py",
+      "pin_F:\\OpenLeague\\docs\\reference_air_routes_4_20.json",
+      "pin_F:\\OpenLeague\\docs\\reference_air_routes_4_20_verification.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision142\\spectator-history-research.json",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\commands\\UpdateSpectatorsCommand.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibChampionSelectionCore.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\controllers\\SpectatorDelayManager.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibChampionSelectionCore.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibCommon_dat\\scripts\\com\\riotgames\\platform\\common\\provider\\ISpectatorProvider.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibCommon.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibDomain_dat\\scripts\\com\\riotgames\\platform\\gameclient\\domain\\game\\AllowSpectators.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibDomain.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibServices.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibServices.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__cs__mod_cs_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\views\\SpectatorChampionSelectionView.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\cs\\mod_cs.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__cs__mod_cs_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\views\\SpectatorWaitBar.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\cs\\mod_cs.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\ser\\mod_ser.dat",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\camera_native.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\camera_native.rs",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\air_reference.py",
+      "seven_associations",
+      "research_scope",
+      "release_membership",
+      "member_md5",
+      "member_md5",
+      "member_md5",
+      "member_md5",
+      "member_md5",
+      "member_md5",
+      "member_md5",
+      "member_md5",
+      "member_md5",
+      "no_runtime_claim",
+      "seven_boundaries",
+      "task_SYS-21.2-01",
+      "anchor_spectator_session_1",
+      "task_SYS-21.2-02",
+      "anchor_spectator_session_2",
+      "task_SYS-21.2-03",
+      "anchor_spectator_session_3",
+      "task_SYS-21.2-04",
+      "anchor_spectator_session_4",
+      "task_SYS-21.2-05",
+      "anchor_spectator_session_5",
+      "task_SYS-21.2-06",
+      "anchor_spectator_session_6",
+      "task_SYS-21.2-07",
+      "anchor_spectator_session_7"
+    ],
+    "all_spectator_sessions_qualified": false,
+    "all_required_effects_covered": false
+  },
+  "source_identities": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision143\\spectator_session-associations.json",
+      "bytes": 7056,
+      "sha256": "66242f330881e6fd16566f8e3a6a50e65fd8726358172cb251c46e873a664e11"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision143\\prepare_spectator_session_reader.py",
+      "bytes": 2045,
+      "sha256": "e1c044be73e8899f09b6ec76ad07e4dc34ecacde6b59ff6c9e97ff4092713837"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision143\\spectator-session-research.json",
+      "bytes": 23406,
+      "sha256": "07596a8c831b8887a3d08b521ad7dea4188b3a05c1f54757b4cc07ddb23a813f"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision142\\spectator-release-membership.json",
+      "bytes": 10704,
+      "sha256": "e713d2cc5d07acce9c3cdc1b4ec497496ce04980b8a744605fbc4bf1a4e6fea6"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+      "bytes": 33360,
+      "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "bytes": 141376,
+      "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\vision.rs",
+      "bytes": 10267,
+      "sha256": "1b13d6ee8dbd0561a79cb12bc8a622e1d47890c54231b745d4bedf55f28ac9fe"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\match_results_ui.rs",
+      "bytes": 6200,
+      "sha256": "ce96ed7771c5ee6f3823386ecbb61b73875cd2b78088ec83695a81d9ef621cb2"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision143\\research_spectator_session.py",
+      "bytes": 5283,
+      "sha256": "b0e6789d7d582ed7b22eb5a7de336246bd562e3eeb042cee346e7205c0f419d2"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision142\\spectator-history-research.json",
+      "bytes": 15517,
+      "sha256": "8efe3ac2838c23c566ec37162d1e6d53dede77e0a5ee1c8d19ca5912738ce984"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\commands\\UpdateSpectatorsCommand.as",
+      "bytes": 1755,
+      "sha256": "7f37601a5260f0598f2c3a2516bc0b1036de9970d2e2db5dea9914d7c53216f5"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\commands\\UpdateSpectatorsCommand.as",
+      "bytes": 1755,
+      "sha256": "7f37601a5260f0598f2c3a2516bc0b1036de9970d2e2db5dea9914d7c53216f5"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\controllers\\SpectatorDelayManager.as",
+      "bytes": 3871,
+      "sha256": "4df9c4a75a7af132bd78b8c5402bb7a4cfcfc3673931f25e67e356fde72821fe"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\controllers\\SpectatorDelayManager.as",
+      "bytes": 3871,
+      "sha256": "4df9c4a75a7af132bd78b8c5402bb7a4cfcfc3673931f25e67e356fde72821fe"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibCommon_dat\\scripts\\com\\riotgames\\platform\\common\\provider\\ISpectatorProvider.as",
+      "bytes": 632,
+      "sha256": "9ac1f939378effbd63b04931f7d4aad617c9e459c47934abb02598a3186866f9"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibCommon_dat\\scripts\\com\\riotgames\\platform\\common\\provider\\ISpectatorProvider.as",
+      "bytes": 632,
+      "sha256": "9ac1f939378effbd63b04931f7d4aad617c9e459c47934abb02598a3186866f9"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibDomain_dat\\scripts\\com\\riotgames\\platform\\gameclient\\domain\\game\\AllowSpectators.as",
+      "bytes": 704,
+      "sha256": "31d1e8e32e0b27ebd67c17b94c905e02e6d8197cafe6052fa62d204bc7981ffe"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibDomain_dat\\scripts\\com\\riotgames\\platform\\gameclient\\domain\\game\\AllowSpectators.as",
+      "bytes": 704,
+      "sha256": "31d1e8e32e0b27ebd67c17b94c905e02e6d8197cafe6052fa62d204bc7981ffe"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "bytes": 15297,
+      "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "bytes": 15297,
+      "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+      "bytes": 4720,
+      "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+      "bytes": 4720,
+      "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+      "bytes": 19283,
+      "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+      "bytes": 19283,
+      "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\launcher\\src-tauri\\src\\main.rs",
+      "bytes": 3491,
+      "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+    },
+    {
+      "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "bytes": 3491,
+      "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\server\\src\\main.rs",
+      "bytes": 13628,
+      "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\server\\src\\main.rs",
+      "bytes": 13628,
+      "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibChampionSelectionCore.dat",
+      "bytes": 201868,
+      "sha256": "e757c10e659493bf6fc280dae70c2e2f46d18152ffa5d85046b772de30910be5"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibCommon.dat",
+      "bytes": 78498,
+      "sha256": "f5915bfc68556608cb6aba924b9773862c09dd9e52414dc488aa01621efee638"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibDomain.dat",
+      "bytes": 169947,
+      "sha256": "31d7fc4597de774fa643a2789fbdc9202a48f4cd8c01449a3c642bbd5b27336e"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibServices.dat",
+      "bytes": 48811,
+      "sha256": "70cf96c9f36d842d9b56d152951211b5afdc5ae7c3cf26c30a04b4a546ac468b"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__cs__mod_cs_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\views\\SpectatorChampionSelectionView.as",
+      "bytes": 55490,
+      "sha256": "5169c204a31cb19d293052932e1b103293f644af0ef9c3c10874f4db16b4b1d1"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\cs\\mod_cs.dat",
+      "bytes": 570586,
+      "sha256": "7b584e725f20cc567e8cadc49e7de1b8bd3e9cfa6544c712b202431817623cd8"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__cs__mod_cs_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\views\\SpectatorWaitBar.as",
+      "bytes": 14319,
+      "sha256": "7b9805e6bf0d5ccfe98b23cc583879263d1f0295a730f1644103e1b8d92fd2d6"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\ser\\mod_ser.dat",
+      "bytes": 125764,
+      "sha256": "8628abec247eb498752ad6314c65a25d0b6174c69fcad6390c94d3d09bff6206"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+      "bytes": 13206,
+      "sha256": "139a7ce15ac5261dee15fe0aa60716fb1bb6993ecd9acb0d41c34acb84ab00bc"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision142\\verify_spectator_membership.py",
+      "bytes": 3242,
+      "sha256": "10c4e4ce6db48d047ea094ec1c5c5f08b972b3071ee78943ff7dd768e0f25837"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_routes_4_20.json",
+      "bytes": 11465788,
+      "sha256": "6219091152d3fd95cc207aa85126eceb532b20fa822a694d1c2f6f0545223623"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_routes_4_20_verification.json",
+      "bytes": 20862,
+      "sha256": "233bc189672046293ef6ac94230074a69f6889668d96d3413c24ca8d3ef02be4"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\camera_native.rs",
+      "bytes": 14467,
+      "sha256": "dc52fb69c32430d1b1164d8cf3def95ce6988b8f5f5dcac5045a5e6f1058084b"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\air_reference.py",
+      "bytes": 16399,
+      "sha256": "4421bb1b6215b11371e137bc292dd891eda498e16aaeea2955d84f1997eed33e"
+    }
+  ],
+  "checks": [
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision143\\spectator_session-associations.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision143\\prepare_spectator_session_reader.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision143\\spectator-session-research.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision142\\spectator-release-membership.json",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\vision.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\match_results_ui.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision143\\research_spectator_session.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision142\\spectator-history-research.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision142\\spectator-release-membership.json",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\commands\\UpdateSpectatorsCommand.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\commands\\UpdateSpectatorsCommand.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\controllers\\SpectatorDelayManager.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\controllers\\SpectatorDelayManager.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibCommon_dat\\scripts\\com\\riotgames\\platform\\common\\provider\\ISpectatorProvider.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibCommon_dat\\scripts\\com\\riotgames\\platform\\common\\provider\\ISpectatorProvider.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibDomain_dat\\scripts\\com\\riotgames\\platform\\gameclient\\domain\\game\\AllowSpectators.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibDomain_dat\\scripts\\com\\riotgames\\platform\\gameclient\\domain\\game\\AllowSpectators.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\server\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\main.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\commands\\UpdateSpectatorsCommand.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibChampionSelectionCore.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\controllers\\SpectatorDelayManager.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibChampionSelectionCore.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibCommon_dat\\scripts\\com\\riotgames\\platform\\common\\provider\\ISpectatorProvider.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibCommon.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibDomain_dat\\scripts\\com\\riotgames\\platform\\gameclient\\domain\\game\\AllowSpectators.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibDomain.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibServices.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibServices.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__cs__mod_cs_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\views\\SpectatorChampionSelectionView.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\cs\\mod_cs.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__cs__mod_cs_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\views\\SpectatorWaitBar.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\cs\\mod_cs.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\ser\\mod_ser.dat",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\vision.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\match_results_ui.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision142\\verify_spectator_membership.py",
+    "pin_F:\\OpenLeague\\docs\\reference_air_routes_4_20.json",
+    "pin_F:\\OpenLeague\\docs\\reference_air_routes_4_20_verification.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision142\\spectator-history-research.json",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\commands\\UpdateSpectatorsCommand.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibChampionSelectionCore.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\controllers\\SpectatorDelayManager.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibChampionSelectionCore.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibCommon_dat\\scripts\\com\\riotgames\\platform\\common\\provider\\ISpectatorProvider.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibCommon.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibDomain_dat\\scripts\\com\\riotgames\\platform\\gameclient\\domain\\game\\AllowSpectators.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibDomain.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibServices.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibServices.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__cs__mod_cs_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\views\\SpectatorChampionSelectionView.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\cs\\mod_cs.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__cs__mod_cs_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\views\\SpectatorWaitBar.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\cs\\mod_cs.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\ser\\mod_ser.dat",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\camera_native.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\camera_native.rs",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\air_reference.py",
+    "seven_associations",
+    "research_scope",
+    "release_membership",
+    "member_md5",
+    "member_md5",
+    "member_md5",
+    "member_md5",
+    "member_md5",
+    "member_md5",
+    "member_md5",
+    "member_md5",
+    "member_md5",
+    "no_runtime_claim",
+    "seven_boundaries",
+    "task_SYS-21.2-01",
+    "anchor_spectator_session_1",
+    "task_SYS-21.2-02",
+    "anchor_spectator_session_2",
+    "task_SYS-21.2-03",
+    "anchor_spectator_session_3",
+    "task_SYS-21.2-04",
+    "anchor_spectator_session_4",
+    "task_SYS-21.2-05",
+    "anchor_spectator_session_5",
+    "task_SYS-21.2-06",
+    "anchor_spectator_session_6",
+    "task_SYS-21.2-07",
+    "anchor_spectator_session_7"
+  ],
+  "checks_count": 111,
+  "associations": [
+    {
+      "task_id": "SYS-21.2-01",
+      "finding": "Join creates a Simulation champion player;no read-only observer in this branch.",
+      "remaining": "Define distinct observer subscription and permissions without creating a playable champion.",
+      "anchors": [
+        {
+          "path": "crates/server/src/session_host.rs",
+          "line": 82,
+          "needle": "let player = match game.join_with_summoners",
+          "role": "spectator_session_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-051e7803-7b2e-5716-ad7a-537683f6dbbc"
+    },
+    {
+      "task_id": "SYS-21.2-02",
+      "finding": "States publish a current player-specific snapshot;this branch has no spectator delay buffer.",
+      "remaining": "Enforce server-side delay on every observer path including reconnect.",
+      "anchors": [
+        {
+          "path": "crates/server/src/session_host.rs",
+          "line": 161,
+          "needle": "let snapshot = game.snapshot_for_atomic(route.context.player)",
+          "role": "spectator_session_2"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-3f6880b9-0c39-5878-a601-2e0840cd3a97"
+    },
+    {
+      "task_id": "SYS-21.2-03",
+      "finding": "First snapshot initializes local player focus;not a spectator target selection control.",
+      "remaining": "Connect authorized followed-player selection to camera and HUD.",
+      "anchors": [
+        {
+          "path": "crates/client/src/main.rs",
+          "line": 1243,
+          "needle": "focus.0 = camera_native::initialize_snapshot_focus(p.id",
+          "role": "spectator_session_3"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-fe637ee4-61b1-501e-b40b-f5b2bbbfd82c"
+    },
+    {
+      "task_id": "SYS-21.2-04",
+      "finding": "Team vision depends on an existing player;not spectator permission selection.",
+      "remaining": "Qualify selected team view without exposing unauthorized state.",
+      "anchors": [
+        {
+          "path": "crates/core/src/vision.rs",
+          "line": 138,
+          "needle": "let team = self.players.get(&viewer)?.team;",
+          "role": "spectator_session_4"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-f8f4f36b-c784-5639-a2d3-ff672a65a553"
+    },
+    {
+      "task_id": "SYS-21.2-05",
+      "finding": "Terminal result panel is gated by final results,not a live spectator scoreboard.",
+      "remaining": "Implement and qualify live observer scoreboard separately from end results.",
+      "anchors": [
+        {
+          "path": "crates/client/src/match_results_ui.rs",
+          "line": 37,
+          "needle": "let result=state.snapshot.as_ref().and_then",
+          "role": "spectator_session_5"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-ca4b2376-923d-509a-ba49-8ed8c0a571ba"
+    },
+    {
+      "task_id": "SYS-21.2-06",
+      "finding": "Authenticated player command dispatch;no observer role represented in this branch.",
+      "remaining": "Reject combat inputs based on observer authority;not just malformed packets.",
+      "anchors": [
+        {
+          "path": "crates/server/src/session_host.rs",
+          "line": 143,
+          "needle": "else { game.command(accepted.context.player, action) }",
+          "role": "spectator_session_6"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-c44090f6-b2e0-5851-8063-102d6e44f40b"
+    },
+    {
+      "task_id": "SYS-21.2-07",
+      "finding": "Resume prepares clock delivery for expected player;does not preserve spectator delay/audience cursor.",
+      "remaining": "Resume observer with preserved delayed cursor and audience constraints.",
+      "anchors": [
+        {
+          "path": "crates/server/src/session_host.rs",
+          "line": 110,
+          "needle": "let clock = delivery.prepare_recipient(request.expected.player, pause, now)?;",
+          "role": "spectator_session_7"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-cea47534-3f97-52ec-99a1-5f765e7c74bd"
+    }
+  ]
+}

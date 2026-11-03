@@ -4,9 +4,24 @@ use std::{io::{self,Write}, path::{Path,PathBuf}, process::{Child, ChildStdin, C
 
 pub const ADDRESS: &str = "127.0.0.1:5896";
 const POLL: Duration = Duration::from_millis(250);
+fn owned_server_command(root:&Path)->Command {
+    let mut server_command=Command::new(root.join("target/debug/openleague-server.exe"));
+        server_command.current_dir(root).env("OPENLEAGUE_SERVER",ADDRESS)
+            .env("OPENLEAGUE_OWNED_STDIN","1").env("OPENLEAGUE_ALLOW_PAUSE","1").stdin(Stdio::piped());
+        #[cfg(windows)] {
+            use std::os::windows::process::CommandExt;
+            server_command.creation_flags(0x08000000);
+        }
+    server_command
+}
+
+
 #[path="sessions_joined.rs"]
 mod joined;
 use joined::JoinedRun;
+#[path="sessions_output.rs"]
+mod output;
+use output::LoggedChild;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 struct Exit { code: Option<i32>, success: bool }
@@ -16,10 +31,16 @@ impl From<ExitStatus> for Exit {
 trait Process {
     fn id(&self) -> u32;
     fn observe(&mut self) -> io::Result<Option<Exit>>;
+    fn diagnostics(&self)->serde_json::Value {serde_json::Value::Null}
 }
 impl Process for Child {
     fn id(&self) -> u32 { Child::id(self) }
     fn observe(&mut self) -> io::Result<Option<Exit>> { self.try_wait().map(|value| value.map(Into::into)) }
+}
+impl Process for LoggedChild {
+    fn id(&self)->u32 {std::ops::Deref::deref(self).id()}
+    fn observe(&mut self)->io::Result<Option<Exit>> {LoggedChild::observe(self).map(|v|v.map(Into::into))}
+    fn diagnostics(&self)->serde_json::Value {LoggedChild::diagnostics(self)}
 }
 struct Owned<P> { process: P, exit: Option<Exit>, observed_live:bool, observation_error:Option<String> }
 impl<P: Process> Owned<P> {
@@ -65,6 +86,11 @@ impl LaunchSpec {
             .stdin(Stdio::piped());
         #[cfg(windows)] {use std::os::windows::process::CommandExt;command.creation_flags(0x08000000);}
         command
+    }
+}
+impl LaunchSpec {
+    fn spawn(&self,generation:u64)->io::Result<LoggedChild> {
+        LoggedChild::spawn(&mut self.command(),&self.root,output::Role::Client,generation)
     }
 }
 fn write_bootstrap(mut pipe:impl Write,bytes:&[u8])->Result<(),String>{
@@ -168,6 +194,7 @@ impl<P: Process, D> Run<P, D> {
         serde_json::json!({"state":state,"message":message,"can_play":retired,"can_resume":self.can_resume(),"can_abandon":self.can_abandon(),
             "generation":self.generation,"address":ADDRESS,"drain_requested":self.drain_requested,
             "server_pid":self.server.process.id(),"client_pid":self.client.as_ref().map(|c|c.process.id()),
+            "server_diagnostics":self.server.process.diagnostics(),"client_diagnostics":self.client.as_ref().map(|c|c.process.diagnostics()),
             "server_exit":exit(self.server.exit),"client_exit":exit(self.client.as_ref().and_then(|c|c.exit)),
             "retired_clients":self.retired_clients.iter().map(|(pid,value)|serde_json::json!({"pid":pid,"code":value.code,"success":value.success})).collect::<Vec<_>>(),
             "errors":self.errors,"current_errors":current_errors})
@@ -175,8 +202,8 @@ impl<P: Process, D> Run<P, D> {
 }
 struct State {
     next_generation: u64,
-    run: Option<Run<Child, ChildStdin>>,
-    joined: Option<JoinedRun<Child>>,
+    run: Option<Run<LoggedChild, ChildStdin>>,
+    joined: Option<JoinedRun<LoggedChild>>,
     last: serde_json::Value,
 }
 impl State {
@@ -186,6 +213,7 @@ impl State {
             "generation":0,"address":ADDRESS,"errors":[],"current_errors":[]}) }
     }
     fn observe(&mut self) {
+        output::reap_finished();
         if let Some(joined) = &mut self.joined {
             joined.observe();
             if joined.retired() { self.last = joined.status(); self.joined = None; }
@@ -264,7 +292,7 @@ impl Sessions {
         let bytes=launch.payload(true)?;
         // Retain the old Child and all errors if spawn fails. It has already
         // been reaped by try_wait; no PID may be reopened or replaced blindly.
-        let client=match launch.command().spawn(){Ok(client)=>client,Err(error)=>{
+        let client=match launch.spawn(run.generation){Ok(client)=>client,Err(error)=>{
             let message=format!("Redémarrage du client impossible : {error}");run.record_launch_error(message.clone());return Err(message);
         }};
         run.replace_client(client);
@@ -295,7 +323,7 @@ impl Sessions {
         let generation=state.next_generation;
         state.next_generation=state.next_generation.checked_add(1).ok_or("Compteur de sessions épuisé")?;
         // No server spawn, address probe, process discovery or server pipe.
-        let client=launch.command().spawn().map_err(|error|format!("Démarrage du client impossible : {error}"))?;
+        let client=launch.spawn(generation).map_err(|error|format!("Démarrage du client impossible : {error}"))?;
         state.joined=Some(JoinedRun::new(generation,launch,client));
         // Adopt immediately, before touching the private pipe or writing it.
         state.joined.as_mut().expect("joined client just adopted").bootstrap(&bootstrap)?;
@@ -317,15 +345,9 @@ impl Sessions {
         let port=std::net::UdpSocket::bind(ADDRESS).map_err(|error|format!("Le port local est indisponible ({ADDRESS}) : {error}"))?;
         let generation=state.next_generation;
         state.next_generation=state.next_generation.checked_add(1).ok_or("Compteur de sessions épuisé")?;
-        let mut server_command=Command::new(server_path);
-        server_command.current_dir(root).env("OPENLEAGUE_SERVER",ADDRESS)
-            .env("OPENLEAGUE_OWNED_STDIN","1").stdin(Stdio::piped());
-        #[cfg(windows)] {
-            use std::os::windows::process::CommandExt;
-            server_command.creation_flags(0x08000000);
-        }
+        let mut server_command=owned_server_command(root);
         drop(port);
-        let server=server_command.spawn().map_err(|error|format!("Démarrage du serveur impossible : {error}"))?;
+        let server=LoggedChild::spawn(&mut server_command,root,output::Role::Server,generation).map_err(|error|format!("Démarrage du serveur impossible : {error}"))?;
         // Adopt before extracting the pipe or attempting the client spawn.
         state.run=Some(Run { generation,server:Owned {process:server,exit:None,observed_live:false,observation_error:None},client:None,
             server_stdin:None,drain_requested:false,early_server_reported:false,launch:Some(launch),retired_clients:Vec::new(),errors:Vec::new(),launch_error:None,supervisor_interrupted:false });
@@ -335,7 +357,7 @@ impl Sessions {
             let error="Le serveur enfant ne possède pas le canal de fermeture attendu.".to_string();
             run.record_launch_error(error.clone());run.drain();return Err(error);
         }
-        let result=run.launch.as_ref().expect("owned launch spec").command().spawn();
+        let result=run.launch.as_ref().expect("owned launch spec").spawn(generation);
         match result {
             Ok(client) => {
                 run.client=Some(Owned {process:client,exit:None,observed_live:false,observation_error:None});
@@ -474,3 +496,18 @@ mod recovery_tests;
 #[cfg(test)]
 #[path="session_status_tests.rs"]
 mod status_tests;
+
+#[cfg(test)] mod pause_policy_tests {
+ use super::*;
+ #[test] fn only_the_owned_local_server_command_explicitly_enables_ordinary_pause() {
+  let root=Path::new("C:/controlled-pause-source-fixture");let command=owned_server_command(root);
+  assert_eq!(Path::new(command.get_program()),root.join("target/debug/openleague-server.exe"));
+  assert_eq!(command.get_current_dir(),Some(root));assert_eq!(command.get_args().count(),0);
+  let vars=command.get_envs().map(|(k,v)|(k.to_str().unwrap(),v.and_then(|s|s.to_str()))).collect::<std::collections::BTreeMap<_,_>>();
+  assert_eq!(vars.len(),3);assert_eq!(vars["OPENLEAGUE_ALLOW_PAUSE"],Some("1"));
+  assert_eq!(vars["OPENLEAGUE_SERVER"],Some(ADDRESS));assert_eq!(vars["OPENLEAGUE_OWNED_STDIN"],Some("1"));
+  // Merely constructing this Command starts no process and changes no process-wide environment.
+  let standalone=Command::new(root.join("target/debug/openleague-server.exe"));
+  assert_eq!(standalone.get_envs().count(),0);
+ }
+}

@@ -1,0 +1,608 @@
+{
+  "schema": "openleague_wave_entry_links/v1",
+  "passed": true,
+  "full_task_scope_complete": false,
+  "native_or_game_executed": false,
+  "historical_server_policy_qualified": false,
+  "facts": {
+    "actual_method": "Simulation::enable_map10",
+    "prior_claim": "INITIAL_TIME_TO_SPAWN=75 correspond à initial_wave_seconds ; enable_world arme next_slot et advance_world déclenche quand tick>=next_slot. Le callback GetInitSpawnInfo fournit le contrat de cadence natif.",
+    "prior_anchors": [
+      {
+        "path": "crates/core/src/world.rs",
+        "line": 203,
+        "needle": "next_slot: spells::seconds(config.initial_wave_seconds),",
+        "role": "waves_SYS_10_5_01_0"
+      },
+      {
+        "path": "crates/core/src/world.rs",
+        "line": 542,
+        "needle": "if self.tick >= world.next_slot {",
+        "role": "waves_SYS_10_5_01_1"
+      }
+    ],
+    "prior_native_bindings": [
+      {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\Scripts\\LevelScript.luaobj",
+        "role": "native_Map10_wave_and_reward_tables_not_engine_scheduler",
+        "selector": "INITIAL_TIME_TO_SPAWN/SpawnTable/GetInitSpawnInfo/GetMinionSpawnInfo/UpgradeMinionTimer/IncreaseCannonMinionSpawnRate; named function bytes and limits retained"
+      }
+    ],
+    "native_initial_delay": {
+      "native_field": "INITIAL_TIME_TO_SPAWN",
+      "native": 75,
+      "current_field": "initial_wave_seconds",
+      "current": 75.0,
+      "divisor": 1
+    },
+    "method_line": 185,
+    "initializer_line": 203,
+    "old_proof_preserved": true,
+    "gameplay_changed": false,
+    "native_or_game_executed": false
+  },
+  "source_identities": [
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\recovered_rads_manifests.json",
+      "bytes": 3216,
+      "sha256": "8dfd48645040526d5a3e7b91cb9438418078f2d617c236d9834a31dfdcb5d2da"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\solutionmanifest",
+      "bytes": 1792,
+      "sha256": "4926fe4cfdb8641c918c5ad69b891a9c7e48ba37939e4258e2b4b181accc9243"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\configurationmanifest",
+      "bytes": 88,
+      "sha256": "f601219e81fe20e4c805c5faaa7af664c0c6adcdd43d591c7a4f22ebbd7601f3"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\rads_manifests\\lol_game_client\\releases\\0.0.1.7\\releasemanifest",
+      "bytes": 4905302,
+      "sha256": "88b09959b24053c422e209343083d549cdfe6380828b583710d7f9343c1aba09"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\rads_manifests\\lol_game_client_en_gb\\releases\\0.0.0.235\\releasemanifest",
+      "bytes": 49251,
+      "sha256": "c06c83f829dd18cf587098529aa83459c8356dc2fe5ee82d7203c7a9ee3662f0"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_rads_resource_search\\legacy_patch\\recovery_receipt.json",
+      "bytes": 10959,
+      "sha256": "2496761ccbbbbeb367dbe88ae001c4eb4010598d1365234c9e20d3df3a6d7549"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_rads_legacy_recovery_review\\manifest.json",
+      "bytes": 1779,
+      "sha256": "5b08736040b739b04e3db1a4ce7de124bc343df5d78f76bd188a898ebdd6c7af"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_rads_resource_search\\legacy_patch\\recovery_package_manifest.json",
+      "bytes": 99218,
+      "sha256": "4cadb6b02ea6f8208e8ba6a031774b27401918f054ee211e674e57af20d30125"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\Scripts\\LevelScript.luaobj",
+      "bytes": 18862,
+      "sha256": "68956214c129a010eaf161bdf6a45ed2623523eb69ce28cf6e187f0a41061ebb"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Blue_Minion_Basic\\Blue_Minion_Basic.inibin",
+      "bytes": 1253,
+      "sha256": "6cf6d6d131063a913cd3cbf2351062d3b914be1ad6fe39c30459af3113a60b1c"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Blue_Minion_Wizard\\Blue_Minion_Wizard.inibin",
+      "bytes": 1184,
+      "sha256": "326efb9341655e14e80bd7570cbd6fc3ba50029cdc7e26f1dfda3252909e62ca"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Blue_Minion_MechCannon\\Blue_Minion_MechCannon.inibin",
+      "bytes": 1033,
+      "sha256": "0d2deb2393f68b80bed6e98126b1b61967226271f52d04534d774961e16a0b2d"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Blue_Minion_MechMelee\\Blue_Minion_MechMelee.inibin",
+      "bytes": 1154,
+      "sha256": "d2a55eeb924216e9aef27c9fca4ba44a12f61073644b5d98739a1049cdd25f14"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Red_Minion_Basic\\Red_Minion_Basic.inibin",
+      "bytes": 1021,
+      "sha256": "0556be248c69628b476e2381af90a528fad2dd8166a4e4c6056e984ad8e3882a"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Red_Minion_Wizard\\Red_Minion_Wizard.inibin",
+      "bytes": 1129,
+      "sha256": "61908fac78fd608759001fcc83ef123cbb71ab1cad0860adc7110f3f2bbbfc2b"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Red_Minion_MechCannon\\Red_Minion_MechCannon.inibin",
+      "bytes": 1057,
+      "sha256": "4cd0e33f27bfd0c91f777cdec318746c43d0466458a1aa17530274491109e191"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Red_Minion_MechMelee\\Red_Minion_MechMelee.inibin",
+      "bytes": 1132,
+      "sha256": "9ff9f6236806eb74bf5b4fb2d82ef2bf6bb8a850f815053ed993f654d5ac6731"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__P_Order_Spawn_Barracks__L01.sco",
+      "bytes": 1907,
+      "sha256": "6d7f5ff5d1adaf3f4bdb8c3981c207a12746f7893572ec599c846a67068629c5"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_L02.sco",
+      "bytes": 1887,
+      "sha256": "ce0141a0d3487bf3b22c01b6b0772c8a25c1bd427545c4c184ee66b6134e3acf"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_L03.sco",
+      "bytes": 1887,
+      "sha256": "0b0f8359e7bebd62f7767844f7b870924d00a347b8fadf4709ef4dd5aa28b7d1"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_L04.sco",
+      "bytes": 1891,
+      "sha256": "910cade2cd73209ee2c5a0cbb898e9cd96fddce0c58299e28c534fedf32054ba"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_L05.sco",
+      "bytes": 1905,
+      "sha256": "570c212c785b418c1a7a630438dfacf4d09f1a5e0e3df95f8edadade370ea0d7"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_L06.sco",
+      "bytes": 1904,
+      "sha256": "e0a1129b594675e4d489dddd946916b1f6a95fc94a50a28b0e86793be224ef6e"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_L07.sco",
+      "bytes": 1904,
+      "sha256": "1148289482fe6616fc7c59b2e4cf14b4f9471ce323b615f98350a4add649bb14"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_L08.sco",
+      "bytes": 1904,
+      "sha256": "90fafe3dbddc3360bdd11dac42f7a0b018577443500b5b3185d8d53109d89e85"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_L09.sco",
+      "bytes": 1904,
+      "sha256": "56b4b3d4dd26dec40c050f764c609e0f2a9273af3642a38b12ef6695860029ab"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_L010.sco",
+      "bytes": 1905,
+      "sha256": "e745863d5c1846921e7073fb3af966f2b8f1e3b8f0af581321dd5b4536cb5795"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_L011.sco",
+      "bytes": 1905,
+      "sha256": "81db265a27edfb60be30f26823f7a5e53c64af9cf7b4ef2b9691a51b35b06e70"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_L012.sco",
+      "bytes": 1905,
+      "sha256": "d54cbf2dae086d0a0650284df4e85c90128b666428c4effff8e838f35575d983"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_L013.sco",
+      "bytes": 1905,
+      "sha256": "ec1f7d3b4fab158357afef6af576df2d6061f38ce9631402c362dbb477da7cd6"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_L014.sco",
+      "bytes": 1905,
+      "sha256": "84bde0ad938eb6e243213dbc08bc6aa231a7b69a8bf39d4f859a1a37969fafe7"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_L015.sco",
+      "bytes": 1905,
+      "sha256": "c86350035a5ec4f018e1c479fe5c8cce676077e722ae11033cf588ad6371bfa7"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_L016.sco",
+      "bytes": 1905,
+      "sha256": "4e446b1f42e17a3f3267ba56fb67dcba0eb52bb8cbce726dfa9ab125be31d001"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_L017.sco",
+      "bytes": 1910,
+      "sha256": "6d23dd8eecdc68765f5ad697dd35f0621d9f499ed64746af03b760475a8d99f4"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_L018.sco",
+      "bytes": 1914,
+      "sha256": "b4f8bbd8e8ad166632c841c3224e93076b8cb54953ced73c3466d152287462b6"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_L019.sco",
+      "bytes": 1914,
+      "sha256": "ec5717ffd9e60496db191756b3466a2970547a0b9cac8f8cd8ae6823c2756455"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_L020.sco",
+      "bytes": 1914,
+      "sha256": "8bff73e77680310816d7eff76617a4dab07429d68f0017cecd47642c42d2357c"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_L021.sco",
+      "bytes": 1914,
+      "sha256": "5a060aff7aeb60255c0d4ba7f4e882515ac11df0f5e84df1521e82a6e34b8739"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_L022.sco",
+      "bytes": 1897,
+      "sha256": "06bce52dd99b41cbeedacc9ac76d14bce39a44189986926a245685ac110fc73f"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_L023.sco",
+      "bytes": 1901,
+      "sha256": "c422169d91beca75c4e11fb4efd241323850687649973db4f740f77df9e2f4a7"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_L024.sco",
+      "bytes": 1901,
+      "sha256": "77c9d523cfa706688da274d296c219cc7d5f739b327929d193e29c5d40b32720"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__P_Chaos_Spawn_Barracks__L01.sco",
+      "bytes": 1916,
+      "sha256": "33bfa7525206c50c066ac75d84e64f9f1d6cd954fc14c3f5289a9575ea854af4"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__P_Order_Spawn_Barracks__R01.sco",
+      "bytes": 1907,
+      "sha256": "51d2c413e3a2ebcac430c894559b048801f5a2c6dcb030780517568b93408307"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_R02.sco",
+      "bytes": 1887,
+      "sha256": "46001e374771c4dcbb5bdf4f624d5b2fb0e723abfb098cd3b2820a53c1963bd3"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_R03.sco",
+      "bytes": 1891,
+      "sha256": "03d02066d386da0a68b8bfba5838066218ebbbd9ff7da7611f47f6c3bb157c82"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_R04.sco",
+      "bytes": 1891,
+      "sha256": "b9ae398597f17fd2324b5089f3dab7697b7e7e73469c0413e3f4db732103bf91"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_R05.sco",
+      "bytes": 1896,
+      "sha256": "7053e1e69424be6273da569201dd8d8abf6dbae17164be04f73e6f0e6a7c8af0"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_R06.sco",
+      "bytes": 1904,
+      "sha256": "4281291a36e596d35099caba94968c1fd0d5f36d6f21044ba8aa09f3afa70b39"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_R07.sco",
+      "bytes": 1904,
+      "sha256": "8ce765aebfb7cca1d41c3dfaaae372000bd6ec6dabe21040b4635822ba88d9a0"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_R08.sco",
+      "bytes": 1904,
+      "sha256": "62eea964c096b145f894fdf520a0cc2cb456d7e24ef24b2909bdb960bab60bd4"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_R09.sco",
+      "bytes": 1904,
+      "sha256": "9c50c87d5875c6536293f023d1762f0ad8daec35a936514c8e1048344ab29080"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_R010.sco",
+      "bytes": 1905,
+      "sha256": "5c36f88560e8d4eca3ab4efe76425243dcece59284432963fd6aa509a2de91ef"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_R011.sco",
+      "bytes": 1905,
+      "sha256": "11204fe11a71b9878f0b165c6a0f6e215f914e477da741e67eaf050b62719030"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_R012.sco",
+      "bytes": 1914,
+      "sha256": "4e9d47bfbcb34292fcd20398ac0ffe39c94732a567a7b94289df1a514b87c9b2"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_R013.sco",
+      "bytes": 1914,
+      "sha256": "48f953b53662ec504cf03e0297c88c4914cbe84db8fc79c7226861916cc459d2"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_R014.sco",
+      "bytes": 1910,
+      "sha256": "4b1059529b7a4bcf60070a5dded158673ffe817c5181334c95e16fbd66da4edb"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_R015.sco",
+      "bytes": 1901,
+      "sha256": "bc9e93203069b85c53c0a84d302cb81458a8dd51cc1c120a22d3e5ff289e4845"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_R016.sco",
+      "bytes": 1901,
+      "sha256": "a36debdd4f05418d6cd3d2dd9907244f3fdc7a1051ead7a2c5358677f859322d"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__NAV_R017.sco",
+      "bytes": 1901,
+      "sha256": "1d92dea5360fa1d76c435fcb08f8561ea292dc22468f58bb702592567a10d336"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\__P_Chaos_Spawn_Barracks__R01.sco",
+      "bytes": 1916,
+      "sha256": "1a98623cf4dac734dab0092502b18121e3f50185ae64fbd400371917d0034686"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\League of Legends.exe",
+      "bytes": 15973880,
+      "sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\Constants.var",
+      "bytes": 19433,
+      "sha256": "178d86117826819d02af09477083eae625d418ee4b0b8bff4763a1a56c7b2be2"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Announcements_CLASSIC.ini",
+      "bytes": 90140,
+      "sha256": "34165f547988b7dd0608bde1b4a4de8194f73300353bf9cb0566b5e805b9b2a4"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\announcer_audio_graph.json",
+      "bytes": 682695,
+      "sha256": "0453172a6d62ca7de58aebbc32d98ccc826216eaff81995a851bc23d7ded63f8"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\VO\\en_US\\Shared\\Announcer_Global_Female1_VO_events.bnk",
+      "bytes": 48107,
+      "sha256": "75c584d7da1732840e96ca8c9712e4565fa72dd67d7c10ac902daae5c0def3ff"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\VO\\en_US\\Shared\\Announcer_Map8_Female1_VO_events.bnk",
+      "bytes": 13645,
+      "sha256": "c3438cc3ea411f095c792c896d7ed4dd1d0c28ddeadb8e57cbe4a7286121b596"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\VO\\en_US\\Shared\\Announcer_Tutorial2_events.bnk",
+      "bytes": 20508,
+      "sha256": "fc7254a4e095a703609005962359bbf3a50d42c6326814656de50bccb65197bf"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\VO\\en_US\\Shared\\Announcer_Tutorial_events.bnk",
+      "bytes": 24540,
+      "sha256": "cde45833e46fb33800117c781c40b3ce01f6467903f20b4473dbcdce66d685a4"
+    },
+    {
+      "path": "E:\\OpenLeague\\assets\\audio\\map10\\altar_capture.wav",
+      "bytes": 1543544,
+      "sha256": "637f55066b39fcb1764f2486f200c08a2959b796af5e5164fc0e8a00e55e7d64"
+    },
+    {
+      "path": "E:\\OpenLeague\\assets\\audio\\map10\\altar_unlock.wav",
+      "bytes": 1138372,
+      "sha256": "72cc9a24319297a844072e14a06b23d910ecf46da8be2b8493c76041672e5219"
+    },
+    {
+      "path": "E:\\OpenLeague\\assets\\audio\\map10\\relic_pickup.wav",
+      "bytes": 926144,
+      "sha256": "4c0b1341c6949315115c3776e2fd5891c86fb85bf86d89126c123a0d61f71b06"
+    },
+    {
+      "path": "E:\\OpenLeague\\docs\\passive_gold_integration_progress.json",
+      "bytes": 3269,
+      "sha256": "bb0aecd218034e85d63d28e43ca50703bc46ca96fc2442e8bb1a1f593de58031"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\passive_gold.rs",
+      "bytes": 3250,
+      "sha256": "91e227659b546b81e53b2f5ed6e6eeada290a18f5a3639d24fa664ddc12d4b65"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "bytes": 52808,
+      "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\altars\\tests.rs",
+      "bytes": 3817,
+      "sha256": "fea39c0405a90601834a98afd0b45d83996233ac19f321a3cddf5a9dc031d065"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\world_tests.rs",
+      "bytes": 7973,
+      "sha256": "9a3018347c3cd8fb21c5832925f76461bb71314abd3745574f2e50a9370d5e44"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\passive_gold_rules.json",
+      "bytes": 1047,
+      "sha256": "3f9de83fa968d3cd26e7dddaa43391fb6d99854877e9e008c92e61a5f8eddb4e"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\passive_gold_native_contract.json",
+      "bytes": 3874,
+      "sha256": "e65de1cb5335ab14e0515b11a065147eea7ab684cb2efa413715a001ae8dbd90"
+    },
+    {
+      "path": "E:\\OpenLeague\\tools\\qualify_native_passive_gold_defaults.py",
+      "bytes": 4018,
+      "sha256": "76b4f65999a35195cf283463e75c782d4f90689aaa72b5a5188c7756aa486e32"
+    },
+    {
+      "path": "E:\\OpenLeague\\tools\\verify_passive_gold_network.py",
+      "bytes": 3220,
+      "sha256": "b2eba36ee93c49d1f64ab5813f4885c85db437a53f753693967bccd7cdc577a3"
+    },
+    {
+      "path": "E:\\OpenLeague\\logs\\passive-gold-tests.log",
+      "bytes": 38412,
+      "sha256": "59464cfc6ae6c17c8a7b5d8d51f620963c0dc8feaa9bb5d9dc5474b51324c879"
+    },
+    {
+      "path": "E:\\OpenLeague\\logs\\passive-gold-build.log",
+      "bytes": 1369,
+      "sha256": "325a11744ad0bbda48af3bc663e1a521fc79305838b4192bcbb0773ec97b5eef"
+    },
+    {
+      "path": "E:\\OpenLeague\\docs\\passive_gold_network_validation.json",
+      "bytes": 40507,
+      "sha256": "1573944d2fe5cc41076a1b0f808795278858986341b918f32825b4367684bf1f"
+    },
+    {
+      "path": "E:\\OpenLeague\\docs\\announcement_definitions_validation.json",
+      "bytes": 1044,
+      "sha256": "7d5336e5a9765e42756ff359fb777ec23958e848e2e83afd2087032deb49b37c"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\announcement_definitions.json",
+      "bytes": 1700427,
+      "sha256": "10de8e09bdcdd83e45e068b34afbfd8d04668440110152a0ebd493be72f10d78"
+    },
+    {
+      "path": "E:\\OpenLeague\\docs\\announcer_audio_graph_progress.json",
+      "bytes": 2132,
+      "sha256": "50cc1f911c5131e328905558409e5182ee67f9ca3e88c0e12ad3cb4f5752f91b"
+    },
+    {
+      "path": "E:\\OpenLeague\\tools\\recover_announcer_graph.py",
+      "bytes": 6264,
+      "sha256": "e9859f0929eacb70b93006bc572670fdd116265a8985d862d29524c39b35e6d6"
+    },
+    {
+      "path": "E:\\OpenLeague\\docs\\announcer_banks.xml",
+      "bytes": 6516759,
+      "sha256": "c2c1a9c5ad5088d2b3d275d526a4b536678eb08a2d44d70f8041cc43d54f4e36"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\audio_announcer_catalog.rs",
+      "bytes": 4776,
+      "sha256": "5d343dcae579bc88c6e588f8fd82f26b7402b8b5054b8f808ba7c30423a21606"
+    },
+    {
+      "path": "E:\\OpenLeague\\logs\\announcer-audio-graph-recovery.log",
+      "bytes": 256,
+      "sha256": "f7dd84cb97eb48663eda7abdab2a3d3c46a7fe7d81cadb33bf83c5150122f425"
+    },
+    {
+      "path": "E:\\OpenLeague\\logs\\native-audio-announcer-catalog-core-tests.log",
+      "bytes": 26592,
+      "sha256": "9160410a15dd926bc048cf018b650837e542c17fecb62b3f09b20bbec78fad6a"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\world.rs",
+      "bytes": 32878,
+      "sha256": "407c75f77e8e4e06e6bea352f77ee3b4f90eb3357dd74cddc05a22e219651c54"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\progression.rs",
+      "bytes": 8632,
+      "sha256": "eab515371edafb139b439028ad9f2828ed31cbfc90bb6d8ad54441fcc903f766"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\annie_r.rs",
+      "bytes": 11054,
+      "sha256": "508b096ee103dcc4d96dcf8f283a830e40d93c8a6339f6e49f5c5f83dcc2008e"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\client\\src\\map_audio.rs",
+      "bytes": 19866,
+      "sha256": "1eae20253092fb669e4fe3fe5e3e25e8a3c6971c98b02189a90f9ee7395bb714"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "bytes": 141376,
+      "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\map10_world.json",
+      "bytes": 39251,
+      "sha256": "a91d21133e45d79ae0dbf3a1237e4c8a43299a4d898f1cad172a406816c7c8c3"
+    },
+    {
+      "path": "E:\\OpenLeague\\docs\\reference_client_4_20.json",
+      "bytes": 3684,
+      "sha256": "efdf40252574a98f439829d43c6b29606d3c12d631c4a64c89ef15637e859d02"
+    },
+    {
+      "path": "E:\\OpenLeague\\tools\\project-plan\\audit_structures_reference.py",
+      "bytes": 20909,
+      "sha256": "55f1349b566bb36ace040ea5bdeedc7adc50ad9f1343170d8f8b6b3fc336ca27"
+    },
+    {
+      "path": "E:\\OpenLeague\\tools\\project-plan\\reference_inibin.py",
+      "bytes": 1848,
+      "sha256": "8649d9775feaa9a8a549e07e8a8b6f57a4d4bf91e68841094fa5ccec383a5da5"
+    },
+    {
+      "path": "E:\\OpenLeague\\tools\\project-plan\\rads_reference_membership.py",
+      "bytes": 15059,
+      "sha256": "533002c4d63f749a0658a1ddf00175c2a294aead63dba7a69a55895731a73de6"
+    },
+    {
+      "path": "E:\\OpenLeague\\tools\\project-plan\\audit_navigation_reference.py",
+      "bytes": 17619,
+      "sha256": "88a0d3df5db633985bb31c1936315cf684ad1bbf6862885af798ab188905c65f"
+    },
+    {
+      "path": "E:\\OpenLeague\\tools\\native_lua.py",
+      "bytes": 4026,
+      "sha256": "1141cc188f41e6a026e922beea0e53e5abc75a1f4d48742f4432538f370c5d60"
+    },
+    {
+      "path": "E:\\OpenLeague\\tools\\project-plan\\audit_waves_reference.py",
+      "bytes": 22544,
+      "sha256": "e27e3326e787cd70f2a54edec912ed4e1e8250b89eb39cb57e3ca1e49ff5c288"
+    },
+    {
+      "path": "E:\\OpenLeague\\docs\\reference_waves_sources\\waves-links.json",
+      "bytes": 488905,
+      "sha256": "729161f54a1a4d22720377405f475290abca57caa546ff20c59549394d73c457"
+    }
+  ],
+  "checks": [
+    "V88_source_reader_894_checks",
+    "actual_method_and_body",
+    "prior_anchors_unchanged"
+  ],
+  "checks_count": 3,
+  "associations": [
+    {
+      "task_id": "SYS-10.5-01",
+      "finding": "Correction explicite de la mention enable_world dans V88 : la méthode réelle est Simulation::enable_map10, qui initialise next_slot depuis initial_wave_seconds. Les deux ancres V88 pointaient déjà sur les bonnes lignes ; leur identité est conservée. advance_world déclenche ensuite au tick prévu. Aucune méthode enable_world n’est appelée par ce chemin.",
+      "remaining": "Qualifier l’origine d’horloge et les frontières de scheduler moteur ; la concordance du champ75 ne démontre pas à elle seule l’exécution historique.",
+      "anchors": [
+        {
+          "path": "crates/core/src/world.rs",
+          "line": 185,
+          "needle": "pub fn enable_map10(&mut self) -> Result<(), String>",
+          "role": "wave_entry_actual_method"
+        },
+        {
+          "path": "crates/core/src/world.rs",
+          "line": 203,
+          "needle": "next_slot: spells::seconds(config.initial_wave_seconds),",
+          "role": "wave_entry_initial_scheduler"
+        }
+      ],
+      "native_bindings": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\Scripts\\LevelScript.luaobj",
+          "role": "native_Map10_wave_and_reward_tables_not_engine_scheduler",
+          "selector": "INITIAL_TIME_TO_SPAWN/SpawnTable/GetInitSpawnInfo/GetMinionSpawnInfo/UpgradeMinionTimer/IncreaseCannonMinionSpawnRate; named function bytes and limits retained"
+        }
+      ],
+      "existing_unknown_id": "OLU-70012333-932a-512f-ab3c-1a1bad910914",
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false
+    }
+  ]
+}

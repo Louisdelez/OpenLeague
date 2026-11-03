@@ -1,0 +1,28 @@
+# ShadowQuality — audit de l’option20
+
+## 1. Source et périmètre
+Unité `AUD-17.5-01-OPTIONS-SHADOW-QUALITY-01`, SYS-17.5-01 dans SYS-01.2-02. XML47 `OPT-SRC-d23e7d6d6401439c`, Off0 puis Low/Medium/High/VeryHigh1..4, lookup0,0,1,1,2,3,4 et savecfg hérités. Sources4.20 PE SHA402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862, XML/movie/export épinglés. Dropdown/Preset/Save réutilisés; pas audit de tout le renderer/PCF, de toutes les ombres ou du jeu.
+
+## 2. Contrat natif résolu et frontières
+**ID20**, nom836d21→ShadowQuality; table sélecteur9→837428. Init lit Quality argument1 puis **ShadowsEnabled argument1**: Enabled0 force initial20à0, sinon rawQuality préservé. Callback837a70 écrit raw20 sans clamp et sans écriture Enabled démontrée. Dispatcher20 incrémente2d78fc0 et stocke raw12258f4 à chaque passage; le setter de cache peut indépendamment éviter le dispatch sur valeur identique. Défauts cfgQuality1/Enabled1; user/deploy4/1, pas provider réel déduit.
+Helper95e920 requiert service2d79078/membre14, appelvirtuelF0 **avant** test de qualité; cap=min unsigned des deux mots retournés. Table:0→0;1→min(cap,512);2→min(cap,1024);3et4→min(cap,2048);5→4096 **sans clamp de cap dans cette branche**; autre unsigned, y compris negative raw→min(cap,512). Niveaux3/4 identiques pour ce seul helper, pas pour tout le rendu. Pas refus natif horsUI inventé.
+Macro/source9593d1: raw0 ajoute DISABLE_SHADOWS="1"; cache nonzero suit révision. Consumer73d9c7 distingue revision/zero et dimensionhelper, puis lifecycle partiel non qualifié. Autresreaders, capacités effectivement disponibles et résultats de création restent ouverts.
+
+## 3. Ressources et consommateurs actuels conservés
+Deux sources HLS présentes et identiques à leurs copies: ParticleSystem/ComputeShadowMapValue.hls et ShadowMap/pcf1.hls. Sampling/packing24bits et branchePCF_MODE sont sourcés. Le commentaire daté affirmant PCFoff ne prouve ni variante4.20active ni rendu actuel; aucune reconstruction manquante inventée.
+Startup charge la scène GLTF Map10. Des entités VFX AnnieReady/EzrealQ excluent explicitement casting/receiving Bevy; leurs schedules ordinaires sont identifiés. La projection de projected_render est **un diagnostic gardé**, pas une ombre ordinaire prouvée. Aucun constat d’absence globale d’ombres, de lighting ou d’ombres baked déduit. La requête nommée vide sur1168 borne seulement le raccord20 non retrouvé; ne pas changer globalement les flagsVFX.
+
+## 4. Attendu / observé et vérifications
+Six cas statiques dans la preuve: UI, init/raw, helper/caps/horsUI, macro/cache, ressources/acquis actuels et runtime. Huit nouveaux spans natifs bornés; le switchcase20 est marqué partiel, le helper dimension complet. Portée corrigée du switchcase19 précédent conservée explicitement dans la chaîne de preuves. Aucun original/AS/Rust/jeu/GPU/UI/OS/réseau ou émulation, ancien test/lecteur/export, nouveau rendu, loader de settings ou migration exécuté.
+
+## 5. Manques et reprise discriminante
+- **SHADOW-NATIVE-SERVICE** — Service et capacités effectifs, ownership/création des ressources et autres readers20 non qualifiés. Impact: Dimension-helper et macro/cache sont établis; dimensions physiques, rendu complet et sécurité du branchement5 non prouvés. Reprise: Service2d79078+14 virtualF0, consumers de son résultat et lifecycle après73da27; ne pas appeler la fonction native hors contexte.
+- **SHADOW-INIT-TRANSACTION** — Ordre effectif Quality/Enabled/Savecfg, provider/overlays et rechargement durable non qualifiés. Impact: Initgated et callbackraw sont des clauses distinctes; cases cfg1/4 et Enabled1 ne prouvent valeur active. Reprise: Receiver/stratégie de transaction, source/provider réels et trace Save/default/cancel/reload autorisée.
+- **SHADOW-CURRENT** — Raccord actuel nommé du réglage20 et renderer shadow/PCF équivalent non démontré. Impact: CarteGLTF et exclusionsVFX existent; absence globale d’ombres non établie, diagnostics projetés non assimilés au jeu. Reprise: HUD-OPTIONS-SHADOW-QUALITY-20-01 avec mappingbackend explicite; conserver flags parVFX et distinguer baked/native/Bevy.
+- **SHADOW-RUNTIME** — Entrées et effets de rendu/PCF/caps réels, comparaison visuelle et acceptation non exécutés. Impact: Audit statique clos possible; fonctionnalité20/parent/goal restent ouverts et3/4 non déclarés identiques. Reprise: Après raccord et autorisation, capturer cases/niveaux/contexte et contrôler chaque catégorie d’ombre; commentaire PCFdaté n’est pas preuve runtime.
+
+## 6. Correction proposée, non appliquée
+HUD-OPTIONS-ENTRY-01 et HUD-OPTIONS-GRAPHICS-PRESET-01 conservées. **HUD-OPTIONS-SHADOW-QUALITY-20-01**: provider/Enabled/UI/Save, mapping backend et capacités/ressources/PCF qualifiés, refus explicites; préserver exclusionsVFX spécifiques et distinguer baked/native/Bevy. Sources, dépendances, critères et reprise dans la preuve. Aucune correction produit ni registre normatif modifié; acceptation visuelle séparée.
+
+## 7. Livraison et clôture limitée
+252 contrôles producteurs passés; lecteur distinct requis pour clore ce seul audit. Preuve `F:\OpenLeague-work\audit-units\AUD-17.5-01-OPTIONS-SHADOW-QUALITY-01\shadow-quality-proof.json`, script `F:\OpenLeague-work\audit-units\AUD-17.5-01-OPTIONS-SHADOW-QUALITY-01\audit_shadow_quality.py`. HEAD `8c19026eb8fdc2d9e47960b0110c5f9175f4d1ca`,76modifications suivies antérieures,25fichiers protégés,cinqregistres et corpus1168/contexte inchangés. Nouveaux artefacts documentaires seulement; goal/texte/critères,Plan/UI/bases,code/assets et anciennespreuves conservés; aucuneinstallation/migration. Fonctionnalité20,parent etgoal restent ouverts. Suite: CharacterInking54, avec réutilisation de la clause50 de CharacterQuality.

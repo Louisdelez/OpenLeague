@@ -1,0 +1,523 @@
+{
+  "schema": "openleague_acceptance_evidence_links/v1",
+  "passed": true,
+  "utc": "2026-10-23T09:32:59.420153+00:00",
+  "full_task_scope_complete": false,
+  "native_or_game_executed": false,
+  "historical_server_policy_qualified": false,
+  "facts": {
+    "candidates": {
+      "producer": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision150\\prepare_acceptance_evidence_reader.py",
+        "bytes": 2511,
+        "sha256": "435fa0fbd4a8a9c00296406758b8ee8e8968c3d4211818b3d5f5eb6b49c73b6c"
+      },
+      "associations": [
+        {
+          "task_id": "SYS-23.1-01",
+          "finding": "Le copieur expose le critère de fin et les preuves demandées pour chaque tâche ; il ne crée pas un scénario nommé avec résultats exécutés.",
+          "remaining": "Établir une correspondance exhaustive entre tâches obligatoires et scénarios reproductibles avec attendus, entrées et résultats.",
+          "anchors": [
+            {
+              "path": "tools/project-plan/instructions.py",
+              "line": 159,
+              "needle": "for v in task['evidence_required']",
+              "role": "acceptance_evidence_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-89f15b32-54ca-50eb-8fe9-392c2f28bc9a"
+        },
+        {
+          "task_id": "SYS-23.1-02",
+          "finding": "Le validateur compare taille et SHA des sources quand verify_files est activé. Cela ne relie pas automatiquement chaque résultat à tous les exécutables et ressources employés.",
+          "remaining": "Relier chaque résultat exécuté aux identités exactes des binaires et ressources ; conserver les versions historiques.",
+          "anchors": [
+            {
+              "path": "tools/project-plan/requirement_trace.py",
+              "line": 119,
+              "needle": "if p.stat().st_size!=s['bytes']",
+              "role": "acceptance_evidence_2"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-d0c9af32-22af-530e-ad70-05ebc699bd93"
+        },
+        {
+          "task_id": "SYS-23.1-03",
+          "finding": "done est un état manuel séparé du catalogue. Une case cochée ne constitue pas un résultat de scénario exécuté.",
+          "remaining": "Recenser explicitement les scénarios non exécutés et leur état non vérifié, indépendamment des cases utilisateur.",
+          "anchors": [
+            {
+              "path": "tools/project-plan/store.py",
+              "line": 39,
+              "needle": "CREATE TABLE IF NOT EXISTS task_state",
+              "role": "acceptance_evidence_3"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-38a9769e-012c-57d7-b9be-ebc027e27bc2"
+        },
+        {
+          "task_id": "SYS-23.1-04",
+          "finding": "La validation de versions conserve les archives et refuse une dérive non enregistrée ; elle ne réouvre pas les scénarios dépendants.",
+          "remaining": "Calculer les scénarios affectés par chaque changement et invalider leur qualification avec conservation des résultats antérieurs.",
+          "anchors": [
+            {
+              "path": "tools/project-plan/source_versions.py",
+              "line": 99,
+              "needle": "def validate_history(source, root, verify_files=False):",
+              "role": "acceptance_evidence_4"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-40b1c666-5cf7-5c51-b2fb-9f6033ceb8e8"
+        },
+        {
+          "task_id": "SYS-23.1-05",
+          "finding": "resolve expose les inconnues par exigence. Les inconnues techniques ne sont pas à elles seules un inventaire exhaustif des anomalies de recette finale.",
+          "remaining": "Consolider les anomalies par scénario, gravité, reproduction et condition de fermeture ; prouver la couverture de la recette finale.",
+          "anchors": [
+            {
+              "path": "tools/project-plan/requirement_trace.py",
+              "line": 45,
+              "needle": "'unknowns':[bundle['unknowns'][x] for x in row['unknown_ids']]",
+              "role": "acceptance_evidence_5"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-e5c998c9-0e29-5972-be2a-40c03dba79bf"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision150\\acceptance-evidence-research.json",
+          "bytes": 7359,
+          "sha256": "ffd42cc4f631e42bef020f9a36e6163a28e7b40f54453f681cef0bba1b698ab8"
+        }
+      ],
+      "current_sources": [
+        {
+          "path": "F:\\OpenLeague\\tools\\project-plan\\instructions.py",
+          "bytes": 15352,
+          "sha256": "ae016a0bd3a5f69e4413083486de322bd657e62d4484039e7001a469f1813965"
+        },
+        {
+          "path": "F:\\OpenLeague\\tools\\project-plan\\requirement_trace.py",
+          "bytes": 13062,
+          "sha256": "d68c7aa541d7c14020acd663934d46ac8d7ec24cf63604f88c3ab7526454b370"
+        },
+        {
+          "path": "F:\\OpenLeague\\tools\\project-plan\\store.py",
+          "bytes": 17975,
+          "sha256": "603e84c19f1e927d9beff2ac66a14d885af8961eaceae19c584d3d42ea1ef656"
+        },
+        {
+          "path": "F:\\OpenLeague\\tools\\project-plan\\source_versions.py",
+          "bytes": 10209,
+          "sha256": "13bc73001e7dd2d09360537b98c0c0567a48cc7659322340bb133ff3322fd7fe"
+        },
+        {
+          "path": "F:\\OpenLeague\\tools\\project-plan\\requirement_trace.py",
+          "bytes": 13062,
+          "sha256": "d68c7aa541d7c14020acd663934d46ac8d7ec24cf63604f88c3ab7526454b370"
+        }
+      ],
+      "scope": "Local acceptance evidence boundaries. Source identity validation is not scenario execution or human acceptance."
+    },
+    "receipts": {
+      "acceptance-evidence-research.json": {
+        "schema": "openleague_acceptance_evidence_research/v1",
+        "utc": "2026-10-23T09:32:59.255193+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision150\\research_acceptance_evidence.py",
+          "bytes": 4215,
+          "sha256": "3031382965a077d359059acac897d08524dd99fd0ac7a6a0f690c94b4da46a17"
+        },
+        "anchors": [
+          {
+            "path": "tools/project-plan/instructions.py",
+            "line": 159,
+            "needle": "for v in task['evidence_required']",
+            "finding": "Le copieur expose le critère de fin et les preuves demandées pour chaque tâche ; il ne crée pas un scénario nommé avec résultats exécutés.",
+            "remaining": "Établir une correspondance exhaustive entre tâches obligatoires et scénarios reproductibles avec attendus, entrées et résultats.",
+            "source": {
+              "path": "F:\\OpenLeague\\tools\\project-plan\\instructions.py",
+              "bytes": 15352,
+              "sha256": "ae016a0bd3a5f69e4413083486de322bd657e62d4484039e7001a469f1813965"
+            }
+          },
+          {
+            "path": "tools/project-plan/requirement_trace.py",
+            "line": 119,
+            "needle": "if p.stat().st_size!=s['bytes']",
+            "finding": "Le validateur compare taille et SHA des sources quand verify_files est activé. Cela ne relie pas automatiquement chaque résultat à tous les exécutables et ressources employés.",
+            "remaining": "Relier chaque résultat exécuté aux identités exactes des binaires et ressources ; conserver les versions historiques.",
+            "source": {
+              "path": "F:\\OpenLeague\\tools\\project-plan\\requirement_trace.py",
+              "bytes": 13062,
+              "sha256": "d68c7aa541d7c14020acd663934d46ac8d7ec24cf63604f88c3ab7526454b370"
+            }
+          },
+          {
+            "path": "tools/project-plan/store.py",
+            "line": 39,
+            "needle": "CREATE TABLE IF NOT EXISTS task_state",
+            "finding": "done est un état manuel séparé du catalogue. Une case cochée ne constitue pas un résultat de scénario exécuté.",
+            "remaining": "Recenser explicitement les scénarios non exécutés et leur état non vérifié, indépendamment des cases utilisateur.",
+            "source": {
+              "path": "F:\\OpenLeague\\tools\\project-plan\\store.py",
+              "bytes": 17975,
+              "sha256": "603e84c19f1e927d9beff2ac66a14d885af8961eaceae19c584d3d42ea1ef656"
+            }
+          },
+          {
+            "path": "tools/project-plan/source_versions.py",
+            "line": 99,
+            "needle": "def validate_history(source, root, verify_files=False):",
+            "finding": "La validation de versions conserve les archives et refuse une dérive non enregistrée ; elle ne réouvre pas les scénarios dépendants.",
+            "remaining": "Calculer les scénarios affectés par chaque changement et invalider leur qualification avec conservation des résultats antérieurs.",
+            "source": {
+              "path": "F:\\OpenLeague\\tools\\project-plan\\source_versions.py",
+              "bytes": 10209,
+              "sha256": "13bc73001e7dd2d09360537b98c0c0567a48cc7659322340bb133ff3322fd7fe"
+            }
+          },
+          {
+            "path": "tools/project-plan/requirement_trace.py",
+            "line": 45,
+            "needle": "'unknowns':[bundle['unknowns'][x] for x in row['unknown_ids']]",
+            "finding": "resolve expose les inconnues par exigence. Les inconnues techniques ne sont pas à elles seules un inventaire exhaustif des anomalies de recette finale.",
+            "remaining": "Consolider les anomalies par scénario, gravité, reproduction et condition de fermeture ; prouver la couverture de la recette finale.",
+            "source": {
+              "path": "F:\\OpenLeague\\tools\\project-plan\\requirement_trace.py",
+              "bytes": 13062,
+              "sha256": "d68c7aa541d7c14020acd663934d46ac8d7ec24cf63604f88c3ab7526454b370"
+            }
+          }
+        ],
+        "full_scope_complete": false,
+        "native_or_game_executed": false,
+        "scope": "Local evidence contracts only, not historical Riot QA policy or acceptance execution.",
+        "source_version_tests": {
+          "passed": true,
+          "exit_code": 0,
+          "command": [
+            "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+            "-X",
+            "utf8",
+            "-E",
+            "-u",
+            "-B",
+            "-m",
+            "unittest",
+            "-v",
+            "test_source_versions",
+            "test_source_versions_relocation"
+          ],
+          "tests": [
+            "test_01_old_full_record_and_bytes_remain_resolvable",
+            "test_02_two_versions_preserve_full_prefix_without_recursive_copies",
+            "test_03_unrecorded_current_drift_refused",
+            "test_04_missing_and_divergent_archives_refused",
+            "test_05_changed_previous_metadata_refused",
+            "test_06_path_escape_and_rebound_identity_refused",
+            "test_07_changed_evidence_refused",
+            "test_08_native_and_proof_sources_cannot_be_adopted",
+            "test_09_wrong_old_bytes_or_concurrent_drift_refused",
+            "test_10_missing_reason_timezone_and_duplicate_identity_refused",
+            "test_11_unknown_historical_sha_and_truncated_prefix_refused",
+            "test_12_no_history_is_backward_compatible",
+            "test_active_copy_drift_is_not_certified_by_archived_validation",
+            "test_archived_history_validates_without_rebinding",
+            "test_archived_record_cannot_adopt_new_version",
+            "test_changed_old_archive_refused",
+            "test_changed_old_receipt_refused",
+            "test_missing_declaration_refused",
+            "test_overlapping_roots_refused",
+            "test_undeclared_historical_source_refused",
+            "test_unpreserved_history_refused",
+            "test_wrong_active_root_refused"
+          ],
+          "log": {
+            "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision150\\source-version-tests.log",
+            "bytes": 3344,
+            "sha256": "e14c3ce1e80cd7bd97280b6e6087265aeabb4a4b16c9d6784babe82c9bf31d93"
+          },
+          "sources": [
+            {
+              "path": "F:\\OpenLeague\\tools\\project-plan\\source_versions.py",
+              "bytes": 10209,
+              "sha256": "13bc73001e7dd2d09360537b98c0c0567a48cc7659322340bb133ff3322fd7fe"
+            },
+            {
+              "path": "F:\\OpenLeague\\tools\\project-plan\\test_source_versions.py",
+              "bytes": 6853,
+              "sha256": "8ec9cf731b90d7d99e01ca0c3d0bbfb99ac21585b02f12c538da718435c6da9b"
+            },
+            {
+              "path": "F:\\OpenLeague\\tools\\project-plan\\test_source_versions_relocation.py",
+              "bytes": 3228,
+              "sha256": "a5aa3cb70833f63ce1a9597c1a2e861f66d73aa8a837eb22e4121b0400e1b840"
+            }
+          ],
+          "python": {
+            "path": "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+            "bytes": 107312,
+            "sha256": "7a4102b91959bb234507850ea584e1d31d300a6831b171e4aadc59ff592f0234"
+          },
+          "scope": "Temporary local source-version fixtures, not real game scenario reopening."
+        },
+        "extra_sources": [
+          {
+            "path": "F:\\OpenLeague\\tools\\project-plan\\test_requirement_trace.py",
+            "bytes": 7972,
+            "sha256": "46c6fad749a5499b4414606819e9adeb8aff803f83ab1a72ef5bb6a8cb6a63cf"
+          }
+        ],
+        "limits": [
+          "test_requirement_trace.py retains an E:/OpenLeague registry constant; not executed as an F: current-state qualification.",
+          "No scenario execution, hardware, installation or game execution.",
+          "No manual completion flags changed."
+        ]
+      }
+    },
+    "source_checks": [
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision150\\acceptance_evidence-associations.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision150\\prepare_acceptance_evidence_reader.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision150\\acceptance-evidence-research.json",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\instructions.py",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\requirement_trace.py",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\store.py",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\source_versions.py",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\requirement_trace.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision150\\research_acceptance_evidence.py",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\instructions.py",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\requirement_trace.py",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\store.py",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\source_versions.py",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\requirement_trace.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision150\\source-version-tests.log",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\source_versions.py",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\test_source_versions.py",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\test_source_versions_relocation.py",
+      "pin_C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\test_requirement_trace.py",
+      "five_associations",
+      "research_scope",
+      "source_version_tests",
+      "task_SYS-23.1-01",
+      "anchor_acceptance_evidence_1",
+      "task_SYS-23.1-02",
+      "anchor_acceptance_evidence_2",
+      "task_SYS-23.1-03",
+      "anchor_acceptance_evidence_3",
+      "task_SYS-23.1-04",
+      "anchor_acceptance_evidence_4",
+      "task_SYS-23.1-05",
+      "anchor_acceptance_evidence_5"
+    ],
+    "all_acceptance_evidences_qualified": false,
+    "all_required_effects_covered": false
+  },
+  "source_identities": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision150\\acceptance_evidence-associations.json",
+      "bytes": 5655,
+      "sha256": "8a362a6e376260b6bb734cd14c5afddffb992b1acdfc46552f0477085d35a420"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision150\\prepare_acceptance_evidence_reader.py",
+      "bytes": 2511,
+      "sha256": "435fa0fbd4a8a9c00296406758b8ee8e8968c3d4211818b3d5f5eb6b49c73b6c"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision150\\acceptance-evidence-research.json",
+      "bytes": 7359,
+      "sha256": "ffd42cc4f631e42bef020f9a36e6163a28e7b40f54453f681cef0bba1b698ab8"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\instructions.py",
+      "bytes": 15352,
+      "sha256": "ae016a0bd3a5f69e4413083486de322bd657e62d4484039e7001a469f1813965"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\requirement_trace.py",
+      "bytes": 13062,
+      "sha256": "d68c7aa541d7c14020acd663934d46ac8d7ec24cf63604f88c3ab7526454b370"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\store.py",
+      "bytes": 17975,
+      "sha256": "603e84c19f1e927d9beff2ac66a14d885af8961eaceae19c584d3d42ea1ef656"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\source_versions.py",
+      "bytes": 10209,
+      "sha256": "13bc73001e7dd2d09360537b98c0c0567a48cc7659322340bb133ff3322fd7fe"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision150\\research_acceptance_evidence.py",
+      "bytes": 4215,
+      "sha256": "3031382965a077d359059acac897d08524dd99fd0ac7a6a0f690c94b4da46a17"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision150\\source-version-tests.log",
+      "bytes": 3344,
+      "sha256": "e14c3ce1e80cd7bd97280b6e6087265aeabb4a4b16c9d6784babe82c9bf31d93"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\test_source_versions.py",
+      "bytes": 6853,
+      "sha256": "8ec9cf731b90d7d99e01ca0c3d0bbfb99ac21585b02f12c538da718435c6da9b"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\test_source_versions_relocation.py",
+      "bytes": 3228,
+      "sha256": "a5aa3cb70833f63ce1a9597c1a2e861f66d73aa8a837eb22e4121b0400e1b840"
+    },
+    {
+      "path": "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "bytes": 107312,
+      "sha256": "7a4102b91959bb234507850ea584e1d31d300a6831b171e4aadc59ff592f0234"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\test_requirement_trace.py",
+      "bytes": 7972,
+      "sha256": "46c6fad749a5499b4414606819e9adeb8aff803f83ab1a72ef5bb6a8cb6a63cf"
+    }
+  ],
+  "checks": [
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision150\\acceptance_evidence-associations.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision150\\prepare_acceptance_evidence_reader.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision150\\acceptance-evidence-research.json",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\instructions.py",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\requirement_trace.py",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\store.py",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\source_versions.py",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\requirement_trace.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision150\\research_acceptance_evidence.py",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\instructions.py",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\requirement_trace.py",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\store.py",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\source_versions.py",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\requirement_trace.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision150\\source-version-tests.log",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\source_versions.py",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\test_source_versions.py",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\test_source_versions_relocation.py",
+    "pin_C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\test_requirement_trace.py",
+    "five_associations",
+    "research_scope",
+    "source_version_tests",
+    "task_SYS-23.1-01",
+    "anchor_acceptance_evidence_1",
+    "task_SYS-23.1-02",
+    "anchor_acceptance_evidence_2",
+    "task_SYS-23.1-03",
+    "anchor_acceptance_evidence_3",
+    "task_SYS-23.1-04",
+    "anchor_acceptance_evidence_4",
+    "task_SYS-23.1-05",
+    "anchor_acceptance_evidence_5"
+  ],
+  "checks_count": 33,
+  "associations": [
+    {
+      "task_id": "SYS-23.1-01",
+      "finding": "Le copieur expose le critère de fin et les preuves demandées pour chaque tâche ; il ne crée pas un scénario nommé avec résultats exécutés.",
+      "remaining": "Établir une correspondance exhaustive entre tâches obligatoires et scénarios reproductibles avec attendus, entrées et résultats.",
+      "anchors": [
+        {
+          "path": "tools/project-plan/instructions.py",
+          "line": 159,
+          "needle": "for v in task['evidence_required']",
+          "role": "acceptance_evidence_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-89f15b32-54ca-50eb-8fe9-392c2f28bc9a"
+    },
+    {
+      "task_id": "SYS-23.1-02",
+      "finding": "Le validateur compare taille et SHA des sources quand verify_files est activé. Cela ne relie pas automatiquement chaque résultat à tous les exécutables et ressources employés.",
+      "remaining": "Relier chaque résultat exécuté aux identités exactes des binaires et ressources ; conserver les versions historiques.",
+      "anchors": [
+        {
+          "path": "tools/project-plan/requirement_trace.py",
+          "line": 119,
+          "needle": "if p.stat().st_size!=s['bytes']",
+          "role": "acceptance_evidence_2"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-d0c9af32-22af-530e-ad70-05ebc699bd93"
+    },
+    {
+      "task_id": "SYS-23.1-03",
+      "finding": "done est un état manuel séparé du catalogue. Une case cochée ne constitue pas un résultat de scénario exécuté.",
+      "remaining": "Recenser explicitement les scénarios non exécutés et leur état non vérifié, indépendamment des cases utilisateur.",
+      "anchors": [
+        {
+          "path": "tools/project-plan/store.py",
+          "line": 39,
+          "needle": "CREATE TABLE IF NOT EXISTS task_state",
+          "role": "acceptance_evidence_3"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-38a9769e-012c-57d7-b9be-ebc027e27bc2"
+    },
+    {
+      "task_id": "SYS-23.1-04",
+      "finding": "La validation de versions conserve les archives et refuse une dérive non enregistrée ; elle ne réouvre pas les scénarios dépendants.",
+      "remaining": "Calculer les scénarios affectés par chaque changement et invalider leur qualification avec conservation des résultats antérieurs.",
+      "anchors": [
+        {
+          "path": "tools/project-plan/source_versions.py",
+          "line": 99,
+          "needle": "def validate_history(source, root, verify_files=False):",
+          "role": "acceptance_evidence_4"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-40b1c666-5cf7-5c51-b2fb-9f6033ceb8e8"
+    },
+    {
+      "task_id": "SYS-23.1-05",
+      "finding": "resolve expose les inconnues par exigence. Les inconnues techniques ne sont pas à elles seules un inventaire exhaustif des anomalies de recette finale.",
+      "remaining": "Consolider les anomalies par scénario, gravité, reproduction et condition de fermeture ; prouver la couverture de la recette finale.",
+      "anchors": [
+        {
+          "path": "tools/project-plan/requirement_trace.py",
+          "line": 45,
+          "needle": "'unknowns':[bundle['unknowns'][x] for x in row['unknown_ids']]",
+          "role": "acceptance_evidence_5"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-e5c998c9-0e29-5972-be2a-40c03dba79bf"
+    }
+  ]
+}

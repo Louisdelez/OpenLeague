@@ -1,0 +1,1313 @@
+{
+  "schema": "openleague_partial_common_combat_consumer_links/v1",
+  "utc": "2026-10-22T11:14:46.206924+00:00",
+  "source_observation": {
+    "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision63\\combat-consumer-link-inputs.json",
+    "bytes": 100496,
+    "sha256": "ea2c88032d71a68a0d5c113f749672eef5e229796cf61c3bcd066642e9f4578e"
+  },
+  "qualification": {
+    "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision63\\combat-consumer-link-qualification.json",
+    "bytes": 4364,
+    "sha256": "bd8b9f3f4852cfaedae6a11e0000f7166b194a4cbc7cfb0d8e6a879c94ba5da6"
+  },
+  "links": [
+    {
+      "task_id": "SYS-04.3-01",
+      "title": "Calculer les dégâts physiques après armure",
+      "anchors": [
+        {
+          "path": "crates/core/src/damage.rs",
+          "line": 38,
+          "needle": "pub fn mitigate(",
+          "role": "common_damage_mitigation_consumer",
+          "scope": "Actual current physical/magical/true branch;native server formula/exceptions unqualified.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\damage.rs",
+            "bytes": 14316,
+            "sha256": "0d579a7b4e7a3941df7e70f78d62029c9f34df0c345749c2adc17153f9624387"
+          }
+        },
+        {
+          "path": "crates/core/src/damage.rs",
+          "line": 53,
+          "needle": "pub fn apply_damage(",
+          "role": "common_authoritative_damage_event_consumer",
+          "scope": "Current event API used by abilities/attacks;not direct client damage authority.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\damage.rs",
+            "bytes": 14316,
+            "sha256": "0d579a7b4e7a3941df7e70f78d62029c9f34df0c345749c2adc17153f9624387"
+          }
+        },
+        {
+          "path": "crates/core/src/penetration.rs",
+          "line": 9,
+          "needle": "pub(crate) fn penetrated_defenses(",
+          "role": "source_owned_penetration_consumer",
+          "scope": "Selects attacker item modifiers separately for damage types;not all debuff/rune/mastery policies.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\penetration.rs",
+            "bytes": 6084,
+            "sha256": "7a4e2b53c0f8bbcdd0c0047a880e393d2dfcfaa6e6496ddff6bc83acdc87fd41"
+          }
+        },
+        {
+          "path": "crates/core/src/progression.rs",
+          "line": 68,
+          "needle": "pub fn stats(&self, id: u32)",
+          "role": "common_defense_statistics_consumer",
+          "scope": "Current native/base growth,item,Exhaust and Trundle R data path;ordering not original-server qualified.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\progression.rs",
+            "bytes": 8632,
+            "sha256": "eab515371edafb139b439028ad9f2828ed31cbfc90bb6d8ad54441fcc903f766"
+          }
+        }
+      ],
+      "native_inputs": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Garen.inibin",
+          "bytes": 1065,
+          "sha256": "17268558d84561f9b59e89a312dfdf2888971c9202a7abc0a7a6f1c97b0105d5"
+        }
+      ],
+      "remaining_question": "Recover original physical mitigation formula and every exception;native armor input plus current implementation is not original server algorithm.",
+      "full_feature_scope_qualified": false,
+      "native_common_server_algorithm_qualified": false,
+      "source_role": "Native authored input/example or description only;not common original server body.",
+      "entry_boundary_only": false
+    },
+    {
+      "task_id": "SYS-04.3-02",
+      "title": "Calculer les dégâts magiques après résistance magique",
+      "anchors": [
+        {
+          "path": "crates/core/src/damage.rs",
+          "line": 38,
+          "needle": "pub fn mitigate(",
+          "role": "common_damage_mitigation_consumer",
+          "scope": "Actual current physical/magical/true branch;native server formula/exceptions unqualified.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\damage.rs",
+            "bytes": 14316,
+            "sha256": "0d579a7b4e7a3941df7e70f78d62029c9f34df0c345749c2adc17153f9624387"
+          }
+        },
+        {
+          "path": "crates/core/src/damage.rs",
+          "line": 53,
+          "needle": "pub fn apply_damage(",
+          "role": "common_authoritative_damage_event_consumer",
+          "scope": "Current event API used by abilities/attacks;not direct client damage authority.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\damage.rs",
+            "bytes": 14316,
+            "sha256": "0d579a7b4e7a3941df7e70f78d62029c9f34df0c345749c2adc17153f9624387"
+          }
+        },
+        {
+          "path": "crates/core/src/penetration.rs",
+          "line": 9,
+          "needle": "pub(crate) fn penetrated_defenses(",
+          "role": "source_owned_penetration_consumer",
+          "scope": "Selects attacker item modifiers separately for damage types;not all debuff/rune/mastery policies.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\penetration.rs",
+            "bytes": 6084,
+            "sha256": "7a4e2b53c0f8bbcdd0c0047a880e393d2dfcfaa6e6496ddff6bc83acdc87fd41"
+          }
+        },
+        {
+          "path": "crates/core/src/progression.rs",
+          "line": 68,
+          "needle": "pub fn stats(&self, id: u32)",
+          "role": "common_defense_statistics_consumer",
+          "scope": "Current native/base growth,item,Exhaust and Trundle R data path;ordering not original-server qualified.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\progression.rs",
+            "bytes": 8632,
+            "sha256": "eab515371edafb139b439028ad9f2828ed31cbfc90bb6d8ad54441fcc903f766"
+          }
+        }
+      ],
+      "native_inputs": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Garen.inibin",
+          "bytes": 1065,
+          "sha256": "17268558d84561f9b59e89a312dfdf2888971c9202a7abc0a7a6f1c97b0105d5"
+        }
+      ],
+      "remaining_question": "Recover original magical mitigation formula and exceptions;current MR path and native input are separate evidence.",
+      "full_feature_scope_qualified": false,
+      "native_common_server_algorithm_qualified": false,
+      "source_role": "Native authored input/example or description only;not common original server body.",
+      "entry_boundary_only": false
+    },
+    {
+      "task_id": "SYS-04.3-03",
+      "title": "Calculer les dégâts bruts et leurs exceptions vérifiées",
+      "anchors": [
+        {
+          "path": "crates/core/src/damage.rs",
+          "line": 38,
+          "needle": "pub fn mitigate(",
+          "role": "common_damage_mitigation_consumer",
+          "scope": "Actual current physical/magical/true branch;native server formula/exceptions unqualified.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\damage.rs",
+            "bytes": 14316,
+            "sha256": "0d579a7b4e7a3941df7e70f78d62029c9f34df0c345749c2adc17153f9624387"
+          }
+        },
+        {
+          "path": "crates/core/src/damage.rs",
+          "line": 53,
+          "needle": "pub fn apply_damage(",
+          "role": "common_authoritative_damage_event_consumer",
+          "scope": "Current event API used by abilities/attacks;not direct client damage authority.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\damage.rs",
+            "bytes": 14316,
+            "sha256": "0d579a7b4e7a3941df7e70f78d62029c9f34df0c345749c2adc17153f9624387"
+          }
+        }
+      ],
+      "native_inputs": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerDot.inibin",
+          "bytes": 1746,
+          "sha256": "da501486c705554143541a7ba767f8e8258521a8d3d525519d10b99a9d65ce66"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      ],
+      "remaining_question": "Qualify all true-damage exceptions,protection and shield interactions from original authority;Ignite text only establishes an example category.",
+      "full_feature_scope_qualified": false,
+      "native_common_server_algorithm_qualified": false,
+      "source_role": "Native authored input/example or description only;not common original server body.",
+      "entry_boundary_only": false
+    },
+    {
+      "task_id": "SYS-04.3-04",
+      "title": "Appliquer la réduction de résistance fixe",
+      "anchors": [
+        {
+          "path": "crates/core/src/progression.rs",
+          "line": 68,
+          "needle": "pub fn stats(&self, id: u32)",
+          "role": "common_defense_statistics_consumer",
+          "scope": "Current native/base growth,item,Exhaust and Trundle R data path;ordering not original-server qualified.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\progression.rs",
+            "bytes": 8632,
+            "sha256": "eab515371edafb139b439028ad9f2828ed31cbfc90bb6d8ad54441fcc903f766"
+          }
+        },
+        {
+          "path": "crates/core/src/summoner_exhaust.rs",
+          "line": 23,
+          "needle": "pub fn defense_reduction(",
+          "role": "exhaust_flat_defense_reduction_consumer",
+          "scope": "Example flat armor/MR reduction;not every native reduction category.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\summoner_exhaust.rs",
+            "bytes": 10853,
+            "sha256": "d7d790a218b22053e22d60803e2d5090c119211c05c84147b6f2827e5e9865ed"
+          }
+        }
+      ],
+      "native_inputs": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerExhaust.inibin",
+          "bytes": 1030,
+          "sha256": "6a5abea4267a826834be6789b34d340db6839275c4cc580a8ff8d7111a0a4175"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      ],
+      "remaining_question": "Qualify generic flat resistance reduction,its precedence and overlapping effects beyond the current Exhaust example.",
+      "full_feature_scope_qualified": false,
+      "native_common_server_algorithm_qualified": false,
+      "source_role": "Native authored input/example or description only;not common original server body.",
+      "entry_boundary_only": false
+    },
+    {
+      "task_id": "SYS-04.3-05",
+      "title": "Appliquer la réduction de résistance en pourcentage",
+      "anchors": [
+        {
+          "path": "crates/core/src/progression.rs",
+          "line": 68,
+          "needle": "pub fn stats(&self, id: u32)",
+          "role": "common_defense_statistics_consumer",
+          "scope": "Current native/base growth,item,Exhaust and Trundle R data path;ordering not original-server qualified.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\progression.rs",
+            "bytes": 8632,
+            "sha256": "eab515371edafb139b439028ad9f2828ed31cbfc90bb6d8ad54441fcc903f766"
+          }
+        },
+        {
+          "path": "crates/core/src/trundle_r.rs",
+          "line": 103,
+          "needle": "pub(crate) fn trundle_r_defense_adjustment(",
+          "role": "trundle_percent_defense_transfer_consumer",
+          "scope": "Example native fraction bound to reconstructed snapshot/pulse/order policy.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\trundle_r.rs",
+            "bytes": 27948,
+            "sha256": "74a0d2bde22c067a1d34ef87c1be0d6d11f6104d4d4f8544d4907cf6f980e6ba"
+          }
+        }
+      ],
+      "native_inputs": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Trundle\\Spells\\TrundlePain.inibin",
+          "bytes": 1238,
+          "sha256": "4d9670b43927dc1ebbc9fba3097bbb8a426d9768593a393714e0b424b292a716"
+        }
+      ],
+      "remaining_question": "Qualify generic percentage resistance reduction and composition;Trundle R snapshot/pulse policy remains reconstructed.",
+      "full_feature_scope_qualified": false,
+      "native_common_server_algorithm_qualified": false,
+      "source_role": "Native authored input/example or description only;not common original server body.",
+      "entry_boundary_only": false
+    },
+    {
+      "task_id": "SYS-04.3-06",
+      "title": "Appliquer la pénétration fixe",
+      "anchors": [
+        {
+          "path": "crates/core/src/penetration.rs",
+          "line": 4,
+          "needle": "pub fn effective(",
+          "role": "common_penetration_numeric_consumer",
+          "scope": "Percentage before flat;nonpositive and zero floor remain explicitly reconstructed.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\penetration.rs",
+            "bytes": 6084,
+            "sha256": "7a4e2b53c0f8bbcdd0c0047a880e393d2dfcfaa6e6496ddff6bc83acdc87fd41"
+          }
+        },
+        {
+          "path": "crates/core/src/penetration.rs",
+          "line": 9,
+          "needle": "pub(crate) fn penetrated_defenses(",
+          "role": "source_owned_penetration_consumer",
+          "scope": "Selects attacker item modifiers separately for damage types;not all debuff/rune/mastery policies.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\penetration.rs",
+            "bytes": 6084,
+            "sha256": "7a4e2b53c0f8bbcdd0c0047a880e393d2dfcfaa6e6496ddff6bc83acdc87fd41"
+          }
+        },
+        {
+          "path": "crates/core/src/shop.rs",
+          "line": 215,
+          "needle": "pub(crate) fn bonuses(",
+          "role": "common_item_modifier_aggregation_consumer",
+          "scope": "Current inventory item modifier aggregation and deduplication;full stacking authority remains open.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\shop.rs",
+            "bytes": 30601,
+            "sha256": "3db7b79f20d15e95b6b92affe0087e730c9110d876ea41cc36416435159a2cd0"
+          }
+        }
+      ],
+      "native_inputs": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Items\\3134.inibin",
+          "bytes": 564,
+          "sha256": "3c9076c0f152da74ecbc7d593f27984bf8c3b3ad07b2deafaa79a534d5a4ba77"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Items\\3035.inibin",
+          "bytes": 513,
+          "sha256": "c84453eb7de3c9511c71ccc131d0fdfd866e9f79cd43f8230f04e86aa82974db"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Items\\3135.inibin",
+          "bytes": 518,
+          "sha256": "8602a39fc505a71a1892309675cc7a25a6bcd485706509a9aded8c7cd8985b94"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Items\\3136.inibin",
+          "bytes": 527,
+          "sha256": "719b06c4442d2a105ee4304b9ffebdf9b59afc6ffc96f1b56ef1a55f21933858"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      ],
+      "remaining_question": "Qualify all flat-penetration sources,owner/category selection and stack rules;current item-only path is partial.",
+      "full_feature_scope_qualified": false,
+      "native_common_server_algorithm_qualified": false,
+      "source_role": "Native authored input/example or description only;not common original server body.",
+      "entry_boundary_only": false
+    },
+    {
+      "task_id": "SYS-04.3-07",
+      "title": "Appliquer la pénétration en pourcentage",
+      "anchors": [
+        {
+          "path": "crates/core/src/penetration.rs",
+          "line": 4,
+          "needle": "pub fn effective(",
+          "role": "common_penetration_numeric_consumer",
+          "scope": "Percentage before flat;nonpositive and zero floor remain explicitly reconstructed.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\penetration.rs",
+            "bytes": 6084,
+            "sha256": "7a4e2b53c0f8bbcdd0c0047a880e393d2dfcfaa6e6496ddff6bc83acdc87fd41"
+          }
+        },
+        {
+          "path": "crates/core/src/penetration.rs",
+          "line": 9,
+          "needle": "pub(crate) fn penetrated_defenses(",
+          "role": "source_owned_penetration_consumer",
+          "scope": "Selects attacker item modifiers separately for damage types;not all debuff/rune/mastery policies.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\penetration.rs",
+            "bytes": 6084,
+            "sha256": "7a4e2b53c0f8bbcdd0c0047a880e393d2dfcfaa6e6496ddff6bc83acdc87fd41"
+          }
+        },
+        {
+          "path": "crates/core/src/shop.rs",
+          "line": 215,
+          "needle": "pub(crate) fn bonuses(",
+          "role": "common_item_modifier_aggregation_consumer",
+          "scope": "Current inventory item modifier aggregation and deduplication;full stacking authority remains open.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\shop.rs",
+            "bytes": 30601,
+            "sha256": "3db7b79f20d15e95b6b92affe0087e730c9110d876ea41cc36416435159a2cd0"
+          }
+        }
+      ],
+      "native_inputs": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Items\\3134.inibin",
+          "bytes": 564,
+          "sha256": "3c9076c0f152da74ecbc7d593f27984bf8c3b3ad07b2deafaa79a534d5a4ba77"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Items\\3035.inibin",
+          "bytes": 513,
+          "sha256": "c84453eb7de3c9511c71ccc131d0fdfd866e9f79cd43f8230f04e86aa82974db"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Items\\3135.inibin",
+          "bytes": 518,
+          "sha256": "8602a39fc505a71a1892309675cc7a25a6bcd485706509a9aded8c7cd8985b94"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Items\\3136.inibin",
+          "bytes": 527,
+          "sha256": "719b06c4442d2a105ee4304b9ffebdf9b59afc6ffc96f1b56ef1a55f21933858"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      ],
+      "remaining_question": "Qualify percentage penetration and all source stacking/order rules;current item path and descriptive native evidence are partial.",
+      "full_feature_scope_qualified": false,
+      "native_common_server_algorithm_qualified": false,
+      "source_role": "Native authored input/example or description only;not common original server body.",
+      "entry_boundary_only": false
+    },
+    {
+      "task_id": "SYS-04.3-08",
+      "title": "Calculer les dégâts contre une résistance négative",
+      "anchors": [
+        {
+          "path": "crates/core/src/damage.rs",
+          "line": 38,
+          "needle": "pub fn mitigate(",
+          "role": "common_damage_mitigation_consumer",
+          "scope": "Actual current physical/magical/true branch;native server formula/exceptions unqualified.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\damage.rs",
+            "bytes": 14316,
+            "sha256": "0d579a7b4e7a3941df7e70f78d62029c9f34df0c345749c2adc17153f9624387"
+          }
+        },
+        {
+          "path": "crates/core/src/penetration.rs",
+          "line": 4,
+          "needle": "pub fn effective(",
+          "role": "common_penetration_numeric_consumer",
+          "scope": "Percentage before flat;nonpositive and zero floor remain explicitly reconstructed.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\penetration.rs",
+            "bytes": 6084,
+            "sha256": "7a4e2b53c0f8bbcdd0c0047a880e393d2dfcfaa6e6496ddff6bc83acdc87fd41"
+          }
+        },
+        {
+          "path": "crates/core/src/penetration.rs",
+          "line": 9,
+          "needle": "pub(crate) fn penetrated_defenses(",
+          "role": "source_owned_penetration_consumer",
+          "scope": "Selects attacker item modifiers separately for damage types;not all debuff/rune/mastery policies.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\penetration.rs",
+            "bytes": 6084,
+            "sha256": "7a4e2b53c0f8bbcdd0c0047a880e393d2dfcfaa6e6496ddff6bc83acdc87fd41"
+          }
+        }
+      ],
+      "native_inputs": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Garen.inibin",
+          "bytes": 1065,
+          "sha256": "17268558d84561f9b59e89a312dfdf2888971c9202a7abc0a7a6f1c97b0105d5"
+        }
+      ],
+      "remaining_question": "Recover native negative-resistance,penetration bypass and zero-floor authority;current numeric cases prove only current local behavior.",
+      "full_feature_scope_qualified": false,
+      "native_common_server_algorithm_qualified": false,
+      "source_role": "Native authored input/example or description only;not common original server body.",
+      "entry_boundary_only": false
+    },
+    {
+      "task_id": "SYS-04.3-09",
+      "title": "Appliquer les réductions et amplifications de dégâts dans l’ordre natif",
+      "anchors": [
+        {
+          "path": "crates/core/src/damage.rs",
+          "line": 38,
+          "needle": "pub fn mitigate(",
+          "role": "common_damage_mitigation_consumer",
+          "scope": "Actual current physical/magical/true branch;native server formula/exceptions unqualified.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\damage.rs",
+            "bytes": 14316,
+            "sha256": "0d579a7b4e7a3941df7e70f78d62029c9f34df0c345749c2adc17153f9624387"
+          }
+        },
+        {
+          "path": "crates/core/src/damage.rs",
+          "line": 53,
+          "needle": "pub fn apply_damage(",
+          "role": "common_authoritative_damage_event_consumer",
+          "scope": "Current event API used by abilities/attacks;not direct client damage authority.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\damage.rs",
+            "bytes": 14316,
+            "sha256": "0d579a7b4e7a3941df7e70f78d62029c9f34df0c345749c2adc17153f9624387"
+          }
+        },
+        {
+          "path": "crates/core/src/summoner_exhaust.rs",
+          "line": 38,
+          "needle": "pub(crate) fn exhaust_damage_multiplier(",
+          "role": "outgoing_damage_reduction_consumer",
+          "scope": "Current true-damage exemption and impact-time source lookup;original modifier order open.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\summoner_exhaust.rs",
+            "bytes": 10853,
+            "sha256": "d7d790a218b22053e22d60803e2d5090c119211c05c84147b6f2827e5e9865ed"
+          }
+        }
+      ],
+      "native_inputs": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerExhaust.inibin",
+          "bytes": 1030,
+          "sha256": "6a5abea4267a826834be6789b34d340db6839275c4cc580a8ff8d7111a0a4175"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      ],
+      "remaining_question": "Qualify the original complete modifier pipeline and contextual true-damage exemptions;one outgoing reduction and one incoming reduction are insufficient.",
+      "full_feature_scope_qualified": false,
+      "native_common_server_algorithm_qualified": false,
+      "source_role": "Native authored input/example or description only;not common original server body.",
+      "entry_boundary_only": false
+    },
+    {
+      "task_id": "SYS-04.3-10",
+      "title": "Appliquer les dégâts périodiques aux ticks corrects",
+      "anchors": [
+        {
+          "path": "crates/core/src/summoner_ignite.rs",
+          "line": 25,
+          "needle": "fn apply_ignite_tick(",
+          "role": "ignite_periodic_damage_consumer",
+          "scope": "One reconstructed periodic consumer;cadence and replacement not original-server proof.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\summoner_ignite.rs",
+            "bytes": 10818,
+            "sha256": "ce9b89c07afdc016fc908c92498f567e42bae2237224d6f9cf0c729838d1580d"
+          }
+        },
+        {
+          "path": "crates/core/src/lib.rs",
+          "line": 685,
+          "needle": "pub fn advance(&mut self)",
+          "role": "common_simulation_tick_schedule_consumer",
+          "scope": "Current explicit subsystem order;all same-tick sources and native global order unqualified.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\lib.rs",
+            "bytes": 52808,
+            "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+          }
+        },
+        {
+          "path": "crates/server/src/main.rs",
+          "line": 206,
+          "needle": "            game.advance();",
+          "role": "ordinary_server_simulation_tick_caller",
+          "scope": "Existing server loop invokes Simulation::advance;no server launched by this audit.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\server\\src\\main.rs",
+            "bytes": 13628,
+            "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+          }
+        }
+      ],
+      "native_inputs": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerDot.inibin",
+          "bytes": 1746,
+          "sha256": "da501486c705554143541a7ba767f8e8258521a8d3d525519d10b99a9d65ce66"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      ],
+      "remaining_question": "Recover native periodic cadence,snapshot/replacement/overlap and time origin beyond current reconstructed Ignite ticks.",
+      "full_feature_scope_qualified": false,
+      "native_common_server_algorithm_qualified": false,
+      "source_role": "Native authored input/example or description only;not common original server body.",
+      "entry_boundary_only": false
+    },
+    {
+      "task_id": "SYS-04.3-11",
+      "title": "Calculer les soins et leurs plafonds de vie",
+      "anchors": [
+        {
+          "path": "crates/core/src/healing.rs",
+          "line": 16,
+          "needle": "pub fn heal(",
+          "role": "common_healing_event_consumer",
+          "scope": "Current champion heal checks and health cap;all categories and overflow/negative health states remain open.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\healing.rs",
+            "bytes": 1603,
+            "sha256": "85da0fbe7551106c4a3f8ab170a9112eee95246524893b56affb824e54ed6185"
+          }
+        },
+        {
+          "path": "crates/core/src/summoner_heal.rs",
+          "line": 77,
+          "needle": "            self.heal(Some(id), target, amount)?;",
+          "role": "summoner_to_common_heal_caller",
+          "scope": "Actual accepted summoner-heal path calls shared heal;whole spell fidelity remains separate.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\summoner_heal.rs",
+            "bytes": 6629,
+            "sha256": "e7d80ecc10f4a119efaf1b7581e2ef4cf66d50b0b606dd9ddb406e65e6d68ac5"
+          }
+        }
+      ],
+      "native_inputs": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerHeal.inibin",
+          "bytes": 1567,
+          "sha256": "ef988a5b19ad8fc4db3e210fb76fae4c826562f21c82128c891dd0332e5bb8c5"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Garen.inibin",
+          "bytes": 1065,
+          "sha256": "17268558d84561f9b59e89a312dfdf2888971c9202a7abc0a7a6f1c97b0105d5"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      ],
+      "remaining_question": "Qualify original healing categories,caps,overflow/refusal and all recipients;common current champion clamp is partial.",
+      "full_feature_scope_qualified": false,
+      "native_common_server_algorithm_qualified": false,
+      "source_role": "Native authored input/example or description only;not common original server body.",
+      "entry_boundary_only": false
+    },
+    {
+      "task_id": "SYS-04.3-12",
+      "title": "Appliquer les réductions et amplifications de soins",
+      "anchors": [
+        {
+          "path": "crates/core/src/healing.rs",
+          "line": 9,
+          "needle": "pub fn received_multiplier(",
+          "role": "common_received_healing_modifier_consumer",
+          "scope": "Composes Ignite and Trundle W;not an exhaustive historical healing modifier stack.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\healing.rs",
+            "bytes": 1603,
+            "sha256": "85da0fbe7551106c4a3f8ab170a9112eee95246524893b56affb824e54ed6185"
+          }
+        },
+        {
+          "path": "crates/core/src/trundle_w.rs",
+          "line": 90,
+          "needle": "pub fn healing_multiplier(",
+          "role": "trundle_received_healing_amplification_consumer",
+          "scope": "Native rank values,explicitly reconstructed zone eligibility and current multiplier.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\trundle_w.rs",
+            "bytes": 19256,
+            "sha256": "60b6f715269242c6e1eeb493a3b9390f3d49f58002be10081e33ea260d7aca8b"
+          }
+        }
+      ],
+      "native_inputs": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerDot.inibin",
+          "bytes": 1746,
+          "sha256": "da501486c705554143541a7ba767f8e8258521a8d3d525519d10b99a9d65ce66"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Trundle\\Spells\\trundledesecrate.inibin",
+          "bytes": 1509,
+          "sha256": "bbaac07f48418c39f5de5d0a73095aabb940b9f14e69f884ef61aad085370027"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      ],
+      "remaining_question": "Qualify original complete received-healing stack and source/target policies beyond Ignite plus Trundle W.",
+      "full_feature_scope_qualified": false,
+      "native_common_server_algorithm_qualified": false,
+      "source_role": "Native authored input/example or description only;not common original server body.",
+      "entry_boundary_only": false
+    },
+    {
+      "task_id": "SYS-04.3-13",
+      "title": "Consommer les boucliers génériques dans l’ordre vérifié",
+      "anchors": [
+        {
+          "path": "crates/core/src/shields.rs",
+          "line": 47,
+          "needle": "pub(crate) fn absorb_shields(",
+          "role": "common_generic_shield_absorption_consumer",
+          "scope": "Current sooner-expiring-first policy;exact native spell priority not qualified.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\shields.rs",
+            "bytes": 4875,
+            "sha256": "e26cf459029a0ae771fcaf0dcadf684f9898aec20fec5d6a21371515d9d348cf"
+          }
+        },
+        {
+          "path": "crates/core/src/shields.rs",
+          "line": 41,
+          "needle": "pub(crate) fn advance_shields(",
+          "role": "common_shield_expiry_consumer",
+          "scope": "Current expiry/death cleanup;all native category policies remain open.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\shields.rs",
+            "bytes": 4875,
+            "sha256": "e26cf459029a0ae771fcaf0dcadf684f9898aec20fec5d6a21371515d9d348cf"
+          }
+        },
+        {
+          "path": "crates/core/src/damage.rs",
+          "line": 53,
+          "needle": "pub fn apply_damage(",
+          "role": "common_authoritative_damage_event_consumer",
+          "scope": "Current event API used by abilities/attacks;not direct client damage authority.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\damage.rs",
+            "bytes": 14316,
+            "sha256": "0d579a7b4e7a3941df7e70f78d62029c9f34df0c345749c2adc17153f9624387"
+          }
+        }
+      ],
+      "native_inputs": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerBarrier.inibin",
+          "bytes": 842,
+          "sha256": "eb5286b0753b762e074120b579012660db7ea2df08039203e091554fc6fac940"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      ],
+      "remaining_question": "Recover native generic shield priority and per-spell refresh/stacking rules;current earliest-expiry order is reconstructed.",
+      "full_feature_scope_qualified": false,
+      "native_common_server_algorithm_qualified": false,
+      "source_role": "Native authored input/example or description only;not common original server body.",
+      "entry_boundary_only": false
+    },
+    {
+      "task_id": "SYS-04.3-14",
+      "title": "Consommer les boucliers limités à un type de dégâts",
+      "anchors": [
+        {
+          "path": "crates/core/src/shields.rs",
+          "line": 4,
+          "needle": "pub struct Shield {",
+          "role": "type_specific_shield_untyped_storage_boundary",
+          "scope": "Current struct holds tag/remaining/expiry and absorption API receives amount without DamageKind;type-specific feature not identified.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\shields.rs",
+            "bytes": 4875,
+            "sha256": "e26cf459029a0ae771fcaf0dcadf684f9898aec20fec5d6a21371515d9d348cf"
+          },
+          "qualification_kind": "entry_boundary_only",
+          "provides_feature_consumer": false
+        }
+      ],
+      "native_inputs": [],
+      "remaining_question": "Identify and qualify a real type-specific shield feature consumer with damage-category filtering. Current untyped storage/absorption is an entry boundary only.",
+      "full_feature_scope_qualified": false,
+      "native_common_server_algorithm_qualified": false,
+      "source_role": "Local partial scheduling/type boundary contract;no native authority invented.",
+      "entry_boundary_only": true
+    },
+    {
+      "task_id": "SYS-04.3-15",
+      "title": "Traiter les dégâts simultanés avec un ordre déterministe",
+      "anchors": [
+        {
+          "path": "crates/core/src/lib.rs",
+          "line": 685,
+          "needle": "pub fn advance(&mut self)",
+          "role": "common_simulation_tick_schedule_consumer",
+          "scope": "Current explicit subsystem order;all same-tick sources and native global order unqualified.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\core\\src\\lib.rs",
+            "bytes": 52808,
+            "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+          }
+        },
+        {
+          "path": "crates/server/src/main.rs",
+          "line": 206,
+          "needle": "            game.advance();",
+          "role": "ordinary_server_simulation_tick_caller",
+          "scope": "Existing server loop invokes Simulation::advance;no server launched by this audit.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\server\\src\\main.rs",
+            "bytes": 13628,
+            "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+          }
+        }
+      ],
+      "native_inputs": [],
+      "remaining_question": "Recover/define qualified total ordering for all simultaneous damage events and compare with original authority;current fixed subsystem order is only partial.",
+      "full_feature_scope_qualified": false,
+      "native_common_server_algorithm_qualified": false,
+      "source_role": "Local partial scheduling/type boundary contract;no native authority invented.",
+      "entry_boundary_only": false
+    }
+  ],
+  "native_field_observations": [
+    {
+      "label": "Garen",
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Garen.inibin",
+        "bytes": 1065,
+        "sha256": "17268558d84561f9b59e89a312dfdf2888971c9202a7abc0a7a6f1c97b0105d5"
+      },
+      "section_fields": [
+        [
+          "Data",
+          "BaseHP"
+        ],
+        [
+          "Data",
+          "Armor"
+        ],
+        [
+          "Data",
+          "SpellBlock"
+        ]
+      ],
+      "observed": {
+        "BaseHP": 616.280029296875,
+        "Armor": 27.535999298095703,
+        "SpellBlock": 32.099998474121094
+      },
+      "role": "Native authored values or descriptive resource;not original common server algorithm."
+    },
+    {
+      "label": "Dot",
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerDot.inibin",
+        "bytes": 1746,
+        "sha256": "da501486c705554143541a7ba767f8e8258521a8d3d525519d10b99a9d65ce66"
+      },
+      "section_fields": [
+        [
+          "SpellData",
+          "Cooldown"
+        ],
+        [
+          "SpellData",
+          "CastRange"
+        ]
+      ],
+      "observed": {
+        "Cooldown": "180.0000",
+        "CastRange": "600.0000"
+      },
+      "role": "Native authored values or descriptive resource;not original common server algorithm."
+    },
+    {
+      "label": "Exhaust",
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerExhaust.inibin",
+        "bytes": 1030,
+        "sha256": "6a5abea4267a826834be6789b34d340db6839275c4cc580a8ff8d7111a0a4175"
+      },
+      "section_fields": [
+        [
+          "SpellData",
+          "Cooldown"
+        ],
+        [
+          "SpellData",
+          "CastRange"
+        ]
+      ],
+      "observed": {
+        "Cooldown": "210.0000",
+        "CastRange": "650.0000"
+      },
+      "role": "Native authored values or descriptive resource;not original common server algorithm."
+    },
+    {
+      "label": "Heal",
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerHeal.inibin",
+        "bytes": 1567,
+        "sha256": "ef988a5b19ad8fc4db3e210fb76fae4c826562f21c82128c891dd0332e5bb8c5"
+      },
+      "section_fields": [
+        [
+          "SpellData",
+          "Cooldown"
+        ],
+        [
+          "SpellData",
+          "CastRangeDisplayOverride"
+        ]
+      ],
+      "observed": {
+        "Cooldown": "300.0000",
+        "CastRangeDisplayOverride": "850.0000"
+      },
+      "role": "Native authored values or descriptive resource;not original common server algorithm."
+    },
+    {
+      "label": "Barrier",
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerBarrier.inibin",
+        "bytes": 842,
+        "sha256": "eb5286b0753b762e074120b579012660db7ea2df08039203e091554fc6fac940"
+      },
+      "section_fields": [
+        [
+          "SpellData",
+          "Cooldown"
+        ]
+      ],
+      "observed": {
+        "Cooldown": "210.0000"
+      },
+      "role": "Native authored values or descriptive resource;not original common server algorithm."
+    },
+    {
+      "label": "TrundleR",
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Trundle\\Spells\\TrundlePain.inibin",
+        "bytes": 1238,
+        "sha256": "4d9670b43927dc1ebbc9fba3097bbb8a426d9768593a393714e0b424b292a716"
+      },
+      "section_fields": [
+        [
+          "SpellData",
+          "Effect2Level1Amount"
+        ]
+      ],
+      "observed": {
+        "Effect2Level1Amount": "40.0000"
+      },
+      "role": "Native authored values or descriptive resource;not original common server algorithm."
+    },
+    {
+      "label": "TrundleW",
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Trundle\\Spells\\trundledesecrate.inibin",
+        "bytes": 1509,
+        "sha256": "bbaac07f48418c39f5de5d0a73095aabb940b9f14e69f884ef61aad085370027"
+      },
+      "section_fields": [
+        [
+          "SpellData",
+          "Effect3Level1Amount"
+        ]
+      ],
+      "observed": {
+        "Effect3Level1Amount": "8.0000"
+      },
+      "role": "Native authored values or descriptive resource;not original common server algorithm."
+    }
+  ],
+  "native_text_descriptions": {
+    "game_spell_description_SummonerDot": "tr \"game_spell_description_SummonerDot\" = \"Ignites target enemy champion, dealing 70-410 true damage (depending on champion level) over 5 seconds, grants you vision of the target, and reduces healing effects on them for the duration.\"",
+    "game_spell_description_SummonerExhaust": "tr \"game_spell_description_SummonerExhaust\" = \"Exhausts target enemy champion, reducing their Movement Speed and Attack Speed by 30%, their Armor and Magic Resist by 10, and their damage dealt by 40% for 2.5 seconds.\"",
+    "game_spell_description_SummonerHeal": "tr \"game_spell_description_SummonerHeal\" = \"Restores 90-345 Health (depending on champion level) and grants 30% Movement Speed for 1 second to you and target allied champion. This healing is halved for units recently affected by Summoner Heal.\"",
+    "game_spell_description_SummonerBarrier": "tr \"game_spell_description_SummonerBarrier\" = \"Shields your champion for 115-455 (depending on champion level) for 2 seconds.\""
+  },
+  "numeric_probe": {
+    "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision63\\current-damage-function-probe.json",
+    "bytes": 12189,
+    "sha256": "fa66bba9de2ab9dd41af3ff45ee995cd826345125030a0547e924d6580764084"
+  },
+  "numeric_probe_toolchain": {
+    "compiler": {
+      "path": "C:\\Users\\loicd\\.rustup\\toolchains\\stable-x86_64-pc-windows-msvc\\bin\\rustc.exe",
+      "bytes": 110592,
+      "sha256": "16890077e256905165c66d49016eb318d6e5ca76a477e92007038cd259474697"
+    },
+    "version": "rustc 1.96.1 (31fca3adb 2026-06-26)\nbinary: rustc\ncommit-hash: 31fca3adb283cc9dfd56b49cdee9a96eb9c96ffd\ncommit-date: 2026-06-26\nhost: x86_64-pc-windows-msvc\nrelease: 1.96.1\nLLVM version: 22.1.2\n",
+    "scope": "Current compiler as host tool;not a 2014 source or game runtime."
+  },
+  "source_identities": [
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Garen.inibin",
+      "bytes": 1065,
+      "sha256": "17268558d84561f9b59e89a312dfdf2888971c9202a7abc0a7a6f1c97b0105d5"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerDot.inibin",
+      "bytes": 1746,
+      "sha256": "da501486c705554143541a7ba767f8e8258521a8d3d525519d10b99a9d65ce66"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerExhaust.inibin",
+      "bytes": 1030,
+      "sha256": "6a5abea4267a826834be6789b34d340db6839275c4cc580a8ff8d7111a0a4175"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerHeal.inibin",
+      "bytes": 1567,
+      "sha256": "ef988a5b19ad8fc4db3e210fb76fae4c826562f21c82128c891dd0332e5bb8c5"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerBarrier.inibin",
+      "bytes": 842,
+      "sha256": "eb5286b0753b762e074120b579012660db7ea2df08039203e091554fc6fac940"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Trundle\\Spells\\TrundlePain.inibin",
+      "bytes": 1238,
+      "sha256": "4d9670b43927dc1ebbc9fba3097bbb8a426d9768593a393714e0b424b292a716"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Trundle\\Spells\\trundledesecrate.inibin",
+      "bytes": 1509,
+      "sha256": "bbaac07f48418c39f5de5d0a73095aabb940b9f14e69f884ef61aad085370027"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Items\\3134.inibin",
+      "bytes": 564,
+      "sha256": "3c9076c0f152da74ecbc7d593f27984bf8c3b3ad07b2deafaa79a534d5a4ba77"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Items\\3035.inibin",
+      "bytes": 513,
+      "sha256": "c84453eb7de3c9511c71ccc131d0fdfd866e9f79cd43f8230f04e86aa82974db"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Items\\3135.inibin",
+      "bytes": 518,
+      "sha256": "8602a39fc505a71a1892309675cc7a25a6bcd485706509a9aded8c7cd8985b94"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Items\\3136.inibin",
+      "bytes": 527,
+      "sha256": "719b06c4442d2a105ee4304b9ffebdf9b59afc6ffc96f1b56ef1a55f21933858"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+      "bytes": 2220957,
+      "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\champions.json",
+      "bytes": 32052,
+      "sha256": "7cc80048c9460419041134232345d9b4da6d8f4e6795f7236720bef39e99de88"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\shop_foundation.json",
+      "bytes": 30123,
+      "sha256": "504ad86b20157b91b4aee8c174dbee43a5689dcb2cdee3975e8dbbdf804852ae"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\native_spells_420.json",
+      "bytes": 2710444,
+      "sha256": "0cae6f5c167aa852e8f86e7f3298d7c797727d5cc92616dcb856ac15c8af5d14"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\ignite_rules.json",
+      "bytes": 751,
+      "sha256": "dde3020d391ef828b4935972cbea4349cf983714ccfaf9c85180768e6149db13"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\exhaust_rules.json",
+      "bytes": 862,
+      "sha256": "53a9665721937deec13d2d55b1ab49f0d4be9f1fd589987f4996845925550c9d"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\damage.rs",
+      "bytes": 14316,
+      "sha256": "0d579a7b4e7a3941df7e70f78d62029c9f34df0c345749c2adc17153f9624387"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\penetration.rs",
+      "bytes": 6084,
+      "sha256": "7a4e2b53c0f8bbcdd0c0047a880e393d2dfcfaa6e6496ddff6bc83acdc87fd41"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\progression.rs",
+      "bytes": 8632,
+      "sha256": "eab515371edafb139b439028ad9f2828ed31cbfc90bb6d8ad54441fcc903f766"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\summoner_exhaust.rs",
+      "bytes": 10853,
+      "sha256": "d7d790a218b22053e22d60803e2d5090c119211c05c84147b6f2827e5e9865ed"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\trundle_r.rs",
+      "bytes": 27948,
+      "sha256": "74a0d2bde22c067a1d34ef87c1be0d6d11f6104d4d4f8544d4907cf6f980e6ba"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\shop.rs",
+      "bytes": 30601,
+      "sha256": "3db7b79f20d15e95b6b92affe0087e730c9110d876ea41cc36416435159a2cd0"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\summoner_ignite.rs",
+      "bytes": 10818,
+      "sha256": "ce9b89c07afdc016fc908c92498f567e42bae2237224d6f9cf0c729838d1580d"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\healing.rs",
+      "bytes": 1603,
+      "sha256": "85da0fbe7551106c4a3f8ab170a9112eee95246524893b56affb824e54ed6185"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\trundle_w.rs",
+      "bytes": 19256,
+      "sha256": "60b6f715269242c6e1eeb493a3b9390f3d49f58002be10081e33ea260d7aca8b"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\shields.rs",
+      "bytes": 4875,
+      "sha256": "e26cf459029a0ae771fcaf0dcadf684f9898aec20fec5d6a21371515d9d348cf"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "bytes": 52808,
+      "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\server\\src\\main.rs",
+      "bytes": 13628,
+      "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\summoner_heal.rs",
+      "bytes": 6629,
+      "sha256": "e7d80ecc10f4a119efaf1b7581e2ef4cf66d50b0b606dd9ddb406e65e6d68ac5"
+    },
+    {
+      "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision63\\current-damage-function-probe.json",
+      "bytes": 12189,
+      "sha256": "fa66bba9de2ab9dd41af3ff45ee995cd826345125030a0547e924d6580764084"
+    },
+    {
+      "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision63\\probe_current_damage_functions.py",
+      "bytes": 5122,
+      "sha256": "22f4c3359cea51fab46309120901eb7c4a9a41f62edf5d51bc0c8a828c1b91fc"
+    },
+    {
+      "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision63\\current_damage_functions.rs",
+      "bytes": 2926,
+      "sha256": "0c8f4f989f75916d39c4ece8f270ac856795fa7a0dbbeae6cfb33c264e350e85"
+    },
+    {
+      "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision63\\current_damage_functions.exe",
+      "bytes": 135168,
+      "sha256": "78da8475717fe51ceb4f5021f7cdf0d5f5fb0310926a00af66f22d29c8a312bb"
+    },
+    {
+      "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision63\\pure-functions-build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision63\\pure-functions-build.json",
+      "bytes": 666,
+      "sha256": "b87129b2186e63b1cff31e5b1b73d4f00d3323b86b2e01d6b3689de3d1936cc9"
+    },
+    {
+      "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision63\\pure-functions-run.log",
+      "bytes": 1124,
+      "sha256": "6154290699a6ced0bb726cf04bc86cbedb7c7ded5d7c2e1a43c843ec8ff5be65"
+    },
+    {
+      "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision63\\pure-functions-run.json",
+      "bytes": 375,
+      "sha256": "0a6129f74182140dc8659df7d219441ef0c6a4634811768adddbea40a2acbb01"
+    },
+    {
+      "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision63\\rustc-version.log",
+      "bytes": 194,
+      "sha256": "1b2b9a430703c432184c302d2f87a5eedc0200137c25a7772271465440f58262"
+    },
+    {
+      "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision63\\rustc-version.json",
+      "bytes": 370,
+      "sha256": "f6ff8fb46f1be366d6bd2ebcbd459c95fc043f52894fe35cba7f83b99f32aa71"
+    },
+    {
+      "path": "E:\\OpenLeague\\docs\\damage_progress.json",
+      "bytes": 1992,
+      "sha256": "0aed371adf57a15672c4669947d7bfad3a1128beb7beea227f4b6ae5fcb75095"
+    },
+    {
+      "path": "E:\\OpenLeague\\docs\\penetration_item_sources.json",
+      "bytes": 7999,
+      "sha256": "3751bd1990f3658495079954f2d7ea01dc015ca4ca76a24fa4da1bd467483986"
+    },
+    {
+      "path": "E:\\OpenLeague\\docs\\penetration_integration_progress.json",
+      "bytes": 4834,
+      "sha256": "36f8d8ea7b81be056fd1772c4e0b8b943d0c709fca3d1f8708cad012442a6eda"
+    },
+    {
+      "path": "E:\\OpenLeague\\docs\\shield_barrier_progress.json",
+      "bytes": 1818,
+      "sha256": "52acdb52088b365ad486bd3bae015991f8315e329eab109131e0087eeae0e7a6"
+    },
+    {
+      "path": "E:\\OpenLeague\\docs\\exhaust_source_validation.json",
+      "bytes": 4596,
+      "sha256": "bf53d352462d849604818d941cf5b26b1070282943583643e0acdf1ad57c814f"
+    },
+    {
+      "path": "E:\\OpenLeague\\docs\\ignite_source_validation.json",
+      "bytes": 2167,
+      "sha256": "fd75cda1fb78e55fb0d89d1069db4a7f0eae1fcd6b5c0757afd03652ff2d67a4"
+    },
+    {
+      "path": "E:\\OpenLeague\\docs\\heal_source_validation.json",
+      "bytes": 2215,
+      "sha256": "e6976bbbb1cdbebac9ce56ccf0b13cb0d8d2a684f172727125cf7f1147ce3be9"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\recovered_rads_manifests.json",
+      "bytes": 3216,
+      "sha256": "8dfd48645040526d5a3e7b91cb9438418078f2d617c236d9834a31dfdcb5d2da"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\solutionmanifest",
+      "bytes": 1792,
+      "sha256": "4926fe4cfdb8641c918c5ad69b891a9c7e48ba37939e4258e2b4b181accc9243"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\configurationmanifest",
+      "bytes": 88,
+      "sha256": "f601219e81fe20e4c805c5faaa7af664c0c6adcdd43d591c7a4f22ebbd7601f3"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\rads_manifests\\lol_game_client\\releases\\0.0.1.7\\releasemanifest",
+      "bytes": 4905302,
+      "sha256": "88b09959b24053c422e209343083d549cdfe6380828b583710d7f9343c1aba09"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\rads_manifests\\lol_game_client_en_gb\\releases\\0.0.0.235\\releasemanifest",
+      "bytes": 49251,
+      "sha256": "c06c83f829dd18cf587098529aa83459c8356dc2fe5ee82d7203c7a9ee3662f0"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_rads_resource_search\\legacy_patch\\recovery_receipt.json",
+      "bytes": 10959,
+      "sha256": "2496761ccbbbbeb367dbe88ae001c4eb4010598d1365234c9e20d3df3a6d7549"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_rads_legacy_recovery_review\\manifest.json",
+      "bytes": 1779,
+      "sha256": "5b08736040b739b04e3db1a4ce7de124bc343df5d78f76bd188a898ebdd6c7af"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_rads_resource_search\\legacy_patch\\recovery_package_manifest.json",
+      "bytes": 99218,
+      "sha256": "4cadb6b02ea6f8208e8ba6a031774b27401918f054ee211e674e57af20d30125"
+    },
+    {
+      "path": "E:\\OpenLeague\\tools\\project-plan\\reference_inibin.py",
+      "bytes": 1848,
+      "sha256": "8649d9775feaa9a8a549e07e8a8b6f57a4d4bf91e68841094fa5ccec383a5da5"
+    },
+    {
+      "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision63\\collect_combat_consumer_links.py",
+      "bytes": 15124,
+      "sha256": "1b28c28a101c4da36adc61d96942dfbce5b3f551625489dafeb116ff7816596d"
+    },
+    {
+      "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision63\\collect_combat_consumer_links_initial_wrong_path.py",
+      "bytes": 14973,
+      "sha256": "d977f5933484172e72618190133067fb0344fac42e72f035011f4909606b73a9"
+    },
+    {
+      "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision63\\source-collection-initial-wrong-path.log",
+      "bytes": 1556,
+      "sha256": "39614d196ff3f665b4d8b72213865e08d689ad01e9857ce8a5f906f4ad1216e3"
+    },
+    {
+      "path": "E:\\OpenLeague\\docs\\reference_client_4_20.json",
+      "bytes": 3684,
+      "sha256": "efdf40252574a98f439829d43c6b29606d3c12d631c4a64c89ef15637e859d02"
+    },
+    {
+      "path": "E:\\OpenLeague\\docs\\fidelity_registry_map_restoration_links_revision_4_20.json",
+      "bytes": 27183,
+      "sha256": "75badaf2543d824248b052f83300de9ad1c6c3c37c19a8fabe705213e12ad827"
+    }
+  ],
+  "full_native_common_algorithm_qualified": false,
+  "current_or_historical_game_executed": false,
+  "manual_state_mutated": false,
+  "human_acceptance": "not_given"
+}

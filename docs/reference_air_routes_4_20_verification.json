@@ -1,0 +1,391 @@
+{
+  "schema": "openleague_air_routes_verification/v1",
+  "task": "SYS-01.1-05",
+  "updated_utc": "2026-10-20T18:24:08.369175+00:00",
+  "status": "a_valider",
+  "technical_verification_complete": true,
+  "implementation_complete": true,
+  "acceptance_complete": false,
+  "human_acceptance": "not_given",
+  "scope": "Recensement des écrans, composants et parcours d’AIR4.20 ; ni reconstruction du launcher ni qualification du runtime historique.",
+  "facts": {
+    "task": "SYS-01.1-05",
+    "verified": true,
+    "verification_kind": "static_original_source_inventory",
+    "air_build": "4.20.14_11_18_18_52",
+    "release": "0.0.1.119",
+    "code_files": 109,
+    "modules": 31,
+    "original_sources": 186,
+    "review_sources": 9139,
+    "screens": 51,
+    "journeys": 47,
+    "guards": 18,
+    "anchors": 198,
+    "ui_components": 788,
+    "dependency_target_gaps": [
+      {
+        "id": "lib.extension-Windows-x86",
+        "path": "lib/extension-Windows-x86.dat",
+        "fragment": "lib/dependencies.properties",
+        "line": 376,
+        "referenced_by": [],
+        "classification": "declared_but_absent_from_release_manifest",
+        "native_loading_verified": false
+      },
+      {
+        "id": "lib.external.dat.flex3.airglobal",
+        "path": "lib/external/swc/flex3/airglobal.dat",
+        "fragment": "lib/external/swc/flex3/dependencies.properties",
+        "line": 5,
+        "referenced_by": [],
+        "classification": "declared_but_absent_from_release_manifest",
+        "native_loading_verified": false
+      }
+    ],
+    "decompilation_errors": [
+      "review/mod__win__ClientWindow_dat/scripts/_ClientWindow_FlexInit.as",
+      "review/lib__external__swc__flex4__mx_dat/scripts/mx/containers/utilityClasses/CanvasLayout.as",
+      "review/lib__external__swc__flex3__framework_dat/scripts/mx/containers/utilityClasses/CanvasLayout.as"
+    ],
+    "native_executed": false,
+    "human_acceptance": "not_given",
+    "manual_state_mutated": false
+  },
+  "contract_sha256": "6219091152d3fd95cc207aa85126eceb532b20fa822a694d1c2f6f0545223623",
+  "prerequisites": {
+    "task_dependencies": [],
+    "package_dependencies": [],
+    "phase_dependencies": [],
+    "necessary_inventory_inputs_available": true,
+    "record": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\prerequisites-current.json"
+  },
+  "tests": {
+    "python": {
+      "command": [
+        "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "-E",
+        "-u",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/project-plan",
+        "-p",
+        "test_air_reference.py",
+        "-v"
+      ],
+      "cwd": "E:\\OpenLeague",
+      "started_utc": "2026-10-20T18:21:49.091503+00:00",
+      "ended_utc": "2026-10-20T18:22:03.417797+00:00",
+      "exit_code": 0,
+      "log": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\air-tests.log",
+      "passed": 16,
+      "failed": 0
+    },
+    "original_html_vm": {
+      "command": [
+        "node",
+        "--test",
+        "tools/project-plan/test_air_frames.cjs"
+      ],
+      "cwd": "E:\\OpenLeague",
+      "started_utc": "2026-10-20T18:21:49.099004+00:00",
+      "ended_utc": "2026-10-20T18:21:49.262514+00:00",
+      "exit_code": 0,
+      "log": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\air-frames.log",
+      "passed": 6,
+      "failed": 0,
+      "host": "Explicit simulated DOM/timers/AIR bridge; no network/native AIR"
+    },
+    "read_only_cli": {
+      "command": [
+        "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "-E",
+        "-u",
+        "-B",
+        "tools/project-plan/air_reference.py",
+        "--root",
+        "E:\\OpenLeague",
+        "--output",
+        "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\verified-inventory.json"
+      ],
+      "cwd": "E:\\OpenLeague",
+      "started_utc": "2026-10-20T18:21:49.101002+00:00",
+      "ended_utc": "2026-10-20T18:22:00.444597+00:00",
+      "exit_code": 0,
+      "log": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\air-cli.log"
+    }
+  },
+  "integration": {
+    "utc": "2026-10-20T18:24:08.369175+00:00",
+    "task": "SYS-01.1-05",
+    "source_status": "a_valider",
+    "all_manual_states_identical": 42606,
+    "task_state_write_performed": false,
+    "notes_preserved": true,
+    "manual_done": 0,
+    "manual_revision": 0,
+    "stored_instruction_verified": true,
+    "live_http_consumer_verified": true,
+    "catalog_tasks": 42214,
+    "instruction_sha256": "eea0df7d1b6b17997bcd4db1ad5e9646bd1848f97b4136e2d08f48f94eb29e9b"
+  },
+  "expected_observed": [
+    {
+      "case": "Version/release",
+      "expected": "AIR4.20.14_11_18_18_52, lol_air_client0.0.1.119, référence de partie inchangée",
+      "observed": "Manifestes, bibliothèque ABC et empreintes du contrat antérieur relus ; aucun build pris dans un dossier maximum",
+      "result": "pass"
+    },
+    {
+      "case": "Recensement complet des entrées de code",
+      "expected": "Tout .dat du manifeste et bootstrap, tous les descripteurs, fragments et cadres locaux",
+      "observed": "109 fichiers de code,31 modules,38 fragments,5 HTML ;186 originaux vérifiés et9139 exports recensés",
+      "result": "pass"
+    },
+    {
+      "case": "Vues et parcours",
+      "expected": "Consommateurs, états, branches et gardes traçables dans les sources",
+      "observed": "51 familles,47 parcours,18 gardes,198 ancres,788 composants,320 constantes,707 instructions d’état/navigation",
+      "result": "pass"
+    },
+    {
+      "case": "Entrée manquante, altérée ou fausse preuve",
+      "expected": "Refus explicite et inconnue non masquée",
+      "observed": "Tests de fichier de code/descriptor manquant, octets modifiés, faux écran/ancre, méthode vide, export erroné, promotion de mock et fausse observation passent",
+      "result": "pass"
+    },
+    {
+      "case": "Cadre web nominal",
+      "expected": "Créer un iframe lié au bridge, afficher après loaded, conserver la destination au reload",
+      "observed": "Fonctions originales exécutées dans la VM Node ; trois scénarios passent avec hôte simulé",
+      "result": "pass"
+    },
+    {
+      "case": "Cadre web et limites",
+      "expected": "Repli local sur délai sans chargement, refus du type d’événement invalide, texte de boutique fermée depuis le bridge",
+      "observed": "Trois autres scénarios originaux passent ; aucune requête distante ou ouverture native",
+      "result": "pass"
+    },
+    {
+      "case": "Suivi utilisateur",
+      "expected": "Toutes cases, notes, révisions et acceptations préservées",
+      "observed": {
+        "utc": "2026-10-20T18:24:08.369175+00:00",
+        "task": "SYS-01.1-05",
+        "source_status": "a_valider",
+        "all_manual_states_identical": 42606,
+        "task_state_write_performed": false,
+        "notes_preserved": true,
+        "manual_done": 0,
+        "manual_revision": 0,
+        "stored_instruction_verified": true,
+        "live_http_consumer_verified": true,
+        "catalog_tasks": 42214,
+        "instruction_sha256": "eea0df7d1b6b17997bcd4db1ad5e9646bd1848f97b4136e2d08f48f94eb29e9b"
+      },
+      "result": "pass"
+    }
+  ],
+  "source_provenance": {
+    "archive": "Riot Archive Project, preserved Riot RADS resources",
+    "manifest_sha256": "df8c52f34537e9c0d13a6ba1d88f089afa4067a4b5a6b87668e64edf08036463",
+    "preserved_receipts_directory": "docs/reference_air_sources/",
+    "manifest_members": 7886,
+    "code_inputs": 109,
+    "jpexs_archive": {
+      "source": "https://github.com/jindrapetrik/jpexs-decompiler/releases/tag/version26.4.0",
+      "tag": "version26.4.0",
+      "asset": "https://github.com/jindrapetrik/jpexs-decompiler/releases/download/version26.4.0/ffdec_26.4.0.zip",
+      "bytes": 21917740,
+      "sha256": "56ce960aeafc7caf034e2052ba49f878a883f7c7ca690da6eeffca9587b5e4b9",
+      "official_digest": "sha256:56ce960aeafc7caf034e2052ba49f878a883f7c7ca690da6eeffca9587b5e4b9",
+      "installed_locally": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec",
+      "purpose": "Decompile source only; no Flash/AIR execution"
+    },
+    "jpexs_executions_exit0": 109,
+    "selected_namespace_export_replaced_by_full_export": true,
+    "new_web_and_dependency_files_recovered": 12,
+    "bytes": 26156,
+    "all_original_member_paths_sizes_md5_verified": true,
+    "native_binaries_executed": false
+  },
+  "current_game_launcher": {
+    "path": "launcher/web/index.html",
+    "sha256": "b530673509af41a6708988e0524cd7a69541d228eb80f14ee5e636eb1635dcc1",
+    "observed_source_title": "OpenLeague — Préparer la partie",
+    "not_modified": true,
+    "scope": "The current preparation UI is distinct from the original AIR client; this source inventory does not implement its historical screens."
+  },
+  "modified_files": [
+    "docs/reference_air_routes_4_20.json",
+    "docs/REFERENCE_AIR_ROUTES_4_20.md",
+    "docs/REFERENCE_AIR_COMPONENTS_4_20.md",
+    "docs/reference_air_routes_4_20_verification.json",
+    "docs/reference_air_sources/ (originals, decompiled review files, receipts and manifest index)",
+    "tools/project-plan/air_reference.py",
+    "tools/project-plan/test_air_reference.py",
+    "tools/project-plan/test_air_frames.cjs",
+    "docs/completion_tasks_2026-10-20.json",
+    "docs/coverage.json",
+    "docs/completion_plan.json",
+    "docs/resume_checkpoint.json",
+    "docs/ai/CURRENT.md",
+    "docs/ai/HANDOFF.md",
+    "docs/ai/DECISIONS.md",
+    "runtime/project-plan/plan.sqlite3 (catalog only)"
+  ],
+  "full_published_file_list": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\publication.json",
+  "initial_attempts": [
+    "Filtered exports missed unprefixed document classes; superseded as inventory basis by full exports of all109 manifest code files.",
+    "Archive union retained five obsolete module descriptors, stale root configs and a divergent AIR descriptor; exact release manifest used before promotion.",
+    "First catalog refused the ambiguous ManageTeamView name shared by a Blix proxy and the Riot implementation; selection now requires an unambiguous application implementation.",
+    "One PowerShell quoting attempt failed before executing external export; corrected by a script argument. A curation helper initially lacked the project import path; corrected before publication."
+  ],
+  "limits": [
+    "Parcours relus statiquement dans les contrôleurs originaux, non exécutés dans Adobe AIR ; aucune observation visuelle, authentification, transaction ni envoi de journaux.",
+    "Activation des files, contenus d’accueil et pages de boutique dépend de services/configurations distants ; leur disponibilité historique EUW et actuelle ne se déduit pas des classes présentes.",
+    "Les classes et constantes annexes incluent composants, points d’entrée hérités et fonctions internes ; leur présence ne prouve pas un écran public.",
+    "Trois fonctions décompilées de styles/framework comportent une erreur : leurs SWF originaux restent conservés. Elles ne servent pas d’ancre de parcours.",
+    "Les graphismes de timelines et les milliers de médias du manifeste ne sont pas rendus ni qualifiés par cet inventaire ; le manifeste complet est conservé.",
+    "Le fuseau du build AIR et la date de déploiement EUW restent inconnus ; le client de partie et le catalogue4.20.1 sont des identités distinctes.",
+    "Le launcher Rust actuel reste un consommateur différent : cet inventaire alimente le référentiel et le plan, sans prétendre implémenter les écrans historiques.",
+    "Deux entrées déclarées dans les fragments (extension-Windows-x86.dat et flex3/airglobal.dat) sont absentes du manifeste et ne sont référencées par aucune autre entrée ; aucune disponibilité ou exemption de chargement n’est inventée. Elles sont recensées explicitement, sans qualifier un démarrage AIR complet."
+  ],
+  "dependency_target_gaps": [
+    {
+      "id": "lib.extension-Windows-x86",
+      "path": "lib/extension-Windows-x86.dat",
+      "fragment": "lib/dependencies.properties",
+      "line": 376,
+      "referenced_by": [],
+      "classification": "declared_but_absent_from_release_manifest",
+      "native_loading_verified": false
+    },
+    {
+      "id": "lib.external.dat.flex3.airglobal",
+      "path": "lib/external/swc/flex3/airglobal.dat",
+      "fragment": "lib/external/swc/flex3/dependencies.properties",
+      "line": 5,
+      "referenced_by": [],
+      "classification": "declared_but_absent_from_release_manifest",
+      "native_loading_verified": false
+    }
+  ],
+  "decompilation_errors": [
+    "review/mod__win__ClientWindow_dat/scripts/_ClientWindow_FlexInit.as",
+    "review/lib__external__swc__flex4__mx_dat/scripts/mx/containers/utilityClasses/CanvasLayout.as",
+    "review/lib__external__swc__flex3__framework_dat/scripts/mx/containers/utilityClasses/CanvasLayout.as"
+  ],
+  "git": {
+    "head": "8c19026eb8fdc2d9e47960b0110c5f9175f4d1ca",
+    "branch": "main",
+    "status": " M AGENTS.md\n M Cargo.lock\n M Cargo.toml\n M assets-manifest.json\n M crates/client/src/animation.rs\n M crates/client/src/attack_animation.rs\n M crates/client/src/fow_champion_sources.rs\n M crates/client/src/fow_gpu.rs\n M crates/client/src/fow_visibility_texture.rs\n M crates/client/src/main.rs\n M crates/client/src/map_fog.rs\n M crates/client/src/native_effect_clock.rs\n M crates/client/src/native_endgame_ui.rs\n M crates/client/src/native_hud_inventory_tests.rs\n M crates/client/src/native_hud_learning.rs\n M crates/client/src/native_hud_ranks.rs\n M crates/client/src/native_hud_widgets.rs\n M crates/client/src/native_minimap_input.rs\n M crates/client/src/native_minimap_input_tests.rs\n M crates/client/src/nexus_complex_material.rs\n M crates/client/src/nexus_complex_mesh.rs\n M crates/client/src/nexus_complex_mesh_tests.rs\n M crates/client/src/nexus_glow_material.rs\n M crates/client/src/ordinary_camera_input.rs\n M crates/client/src/projected_pixel_pair.rs\n M crates/client/src/session_client.rs\n M crates/client/src/session_client_tests.rs\n M crates/client/src/session_connection.rs\n M crates/client/src/session_connection_tests.rs\n M crates/client/src/shop_ui.rs\n M crates/client/src/spell_input.rs\n M crates/client/src/terrain_material.rs\n M crates/core/src/annie.rs\n M crates/core/src/annie_r.rs\n M crates/core/src/annie_r_tests.rs\n M crates/core/src/annie_w.rs\n M crates/core/src/attack_presentation.rs\n M crates/core/src/attack_presentation_server_tests.rs\n M crates/core/src/attacks.rs\n M crates/core/src/audio_dynamic_input_owner_selector.rs\n M crates/core/src/audio_replay_windows_receive.rs\n M crates/core/src/audio_replay_windows_receive_tests.rs\n M crates/core/src/collision.rs\n M crates/core/src/combat.rs\n M crates/core/src/consumables.rs\n M crates/core/src/cooldown.rs\n M crates/core/src/damage.rs\n M crates/core/src/entity_facing.rs\n M crates/core/src/entity_facing_tests.rs\n M crates/core/src/healing.rs\n M crates/core/src/lib.rs\n M crates/core/src/lifecycle.rs\n M crates/core/src/match_results.rs\n M crates/core/src/movement.rs\n M crates/core/src/native_simple_type0_quad.rs\n M crates/core/src/progression.rs\n M crates/core/src/shop.rs\n M crates/core/src/slows.rs\n M crates/core/src/spells.rs\n M crates/core/src/summoners.rs\n M crates/core/src/vision.rs\n M crates/core/src/world.rs\n M crates/server/src/main.rs\n M crates/server/src/session_host.rs\n M data/4.20/animation_manifest.json\n M data/4.20/native_inventory_icons.json\n M data/4.20/shop_foundation.json\n M data/4.20/tibbers_definition.json\n M docs/BUILDING.md\n M docs/completion_plan.html\n M launcher/src-tauri/src/sessions.rs\n M launcher/src-tauri/src/sessions_joined.rs\n M tools/download_assets.py",
+    "note": "Prior dirty checkout preserved; no staging/reset/commit"
+  },
+  "game_code_changed": false,
+  "game_builds_or_tests_executed": false,
+  "native_air_or_game_executed": false,
+  "first_install_tauri_seed_refreshed": false,
+  "seed_limit": "Existing installed application uses the shared updated database. The previous first-install seed is unchanged.",
+  "backup": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\before",
+  "final_audit_pending": false,
+  "final_audit": {
+    "passed": true,
+    "checks": 46,
+    "proof": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\FINAL_AUDIT.json",
+    "only_catalog_rows_changed": [
+      "SYS-01.1-05"
+    ],
+    "all_manual_states_preserved": 42606
+  },
+  "completion_audit_requirements": [
+    {
+      "requirement": "Lire les consignes, le contexte et les prérequis",
+      "status": "proven",
+      "evidence": [
+        "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\resume-current.log",
+        "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\prerequisites-current.json",
+        "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\before\\git.json"
+      ]
+    },
+    {
+      "requirement": "1. Recenser les écrans et parcours AIR historique",
+      "status": "proven",
+      "evidence": [
+        "docs/reference_air_routes_4_20.json",
+        "docs/REFERENCE_AIR_ROUTES_4_20.md",
+        "docs/REFERENCE_AIR_COMPONENTS_4_20.md"
+      ],
+      "scope": "All109 manifest code files,31 descriptors,38 dependency fragments and5 local HTML accounted for; definitions,51 view/state groups,47 source-reviewed journeys and788 UI classes/components, including conditional/obsolete/internal distinctions."
+    },
+    {
+      "requirement": "2. Relever le contrat exact dans les sources et le code courant",
+      "status": "proven",
+      "evidence": [
+        "docs/reference_air_sources/releasemanifest",
+        "docs/reference_air_sources/manifest-index.json",
+        "docs/reference_air_sources/original/",
+        "docs/reference_air_sources/review/",
+        "198 anchors with exact source lines and excerpt hashes"
+      ],
+      "scope": "Original AIR release119 tied to the rechecked game/AIR build references, actual providers and controllers; current Rust launcher separately identified and preserved."
+    },
+    {
+      "requirement": "3. Intégrer le résultat dans son consommateur réel",
+      "status": "proven",
+      "evidence": [
+        "docs/completion_tasks_2026-10-20.json#SYS-01.1-05",
+        "tools/project-plan/instructions.py",
+        "runtime/project-plan/plan.sqlite3",
+        "http://127.0.0.1:10427/api/task/SYS-01.1-05",
+        "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\integration.json"
+      ]
+    },
+    {
+      "requirement": "4. Vérifier nominal, limites et refus",
+      "status": "proven",
+      "evidence": [
+        "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\air-tests.log",
+        "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\air-frames.log",
+        "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\air-cli.log"
+      ],
+      "scope": "16 Python inventory/source/refusal tests;6 executions of original HTML scripts with explicit simulated host. No native AIR execution or historical service success claimed."
+    },
+    {
+      "requirement": "5. Relier sources, livrable et preuves au registre en conservant les inconnues",
+      "status": "proven",
+      "evidence": [
+        "docs/completion_tasks_2026-10-20.json#SYS-01.1-05",
+        "docs/reference_air_routes_4_20_verification.json",
+        "docs/coverage.json",
+        "docs/completion_plan.json",
+        "docs/resume_checkpoint.json"
+      ],
+      "open_limits": [
+        "2 declared dependency paths absent from exact manifest",
+        "3 style/framework function decompilation errors outside journey anchors",
+        "native visual/runtime/service availability and build/deployment timezone not qualified"
+      ]
+    },
+    {
+      "requirement": "Préserver les acquis et les états manuels ; rapport et reprise factuels",
+      "status": "proven",
+      "evidence": [
+        "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\before\\plan.sqlite3",
+        "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\publication.json",
+        "docs/ai/CURRENT.md",
+        "docs/ai/HANDOFF.md",
+        "docs/ai/DECISIONS.md"
+      ],
+      "scope": "Only SYS-01.1-05 catalog data changes. All42606 states/notes/revisions and manual history identical; other42213 task records, reference SYS02 receipts and all73 preexisting tracked modifications preserved. No task accepted/checked automatically; no game completion claim."
+    }
+  ],
+  "verified_utc": "2026-10-20T18:26:36.828984+00:00"
+}

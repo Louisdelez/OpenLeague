@@ -1,0 +1,574 @@
+{
+  "schema": "openleague_final_comparison_links/v1",
+  "passed": true,
+  "utc": "2026-10-23T09:56:51.714144+00:00",
+  "full_task_scope_complete": false,
+  "native_or_game_executed": false,
+  "historical_server_policy_qualified": false,
+  "facts": {
+    "candidates": {
+      "producer": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision155\\prepare_final_comparison_reader.py",
+        "bytes": 2032,
+        "sha256": "82e41cce27d2543096c74de32d4b6ee92666422487c7f89f53072c3c50b5480a"
+      },
+      "associations": [
+        {
+          "task_id": "SYS-23.6-01",
+          "finding": "Le comparateur distingue représentations numériques et écarts sémantiques ; ses tests ne comparent pas une séquence complète de gameplay.",
+          "remaining": "Comparer les événements ordinaires aux règles natives, avec chronologie, entrées et exceptions explicites.",
+          "anchors": [
+            {
+              "path": "tools/project-plan/fidelity_compare.py",
+              "line": 22,
+              "needle": "def mirror_relation(",
+              "role": "final_comparison_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-fe63103b-b4bc-5897-a929-5887f2c79498"
+        },
+        {
+          "task_id": "SYS-23.6-02",
+          "finding": "Le script compare 18 images de ligne entre Vulkan et DX12, depuis une racine E: historique ; il ne compare pas des scènes au framebuffer original daté.",
+          "remaining": "Comparer les mêmes scènes au même cadrage à des références historiques datées, sans confondre accord inter-backends et original.",
+          "anchors": [
+            {
+              "path": "tools/compare_recharge_line_backends.py",
+              "line": 4,
+              "needle": "for i in range(18):",
+              "role": "final_comparison_2"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-80453cd4-7a8c-5581-98a6-283ab1125d2a"
+        },
+        {
+          "task_id": "SYS-23.6-03",
+          "finding": "La sélection utilise la durée du clip chargé et l’âge de l’événement ; les tests associés sont des snapshots contrôlés, pas la comparaison de toutes les animations natives.",
+          "remaining": "Comparer clips, transitions et temps d’événements des séquences requises, avec source et rendu identifiés.",
+          "anchors": [
+            {
+              "path": "crates/client/src/vilemaw_attack_animation.rs",
+              "line": 117,
+              "needle": "pub fn selection(&self, source:",
+              "role": "final_comparison_3"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-65fb53b6-2ed5-5e2e-b937-906fddc8a144"
+        },
+        {
+          "task_id": "SYS-23.6-04",
+          "finding": "Le vérificateur compare positions et bases de l’écouteur au code original ; ses entrées imposent ambient_playback_enabled=false. Cela ne constitue pas une écoute comparative du mixage.",
+          "remaining": "Écouter et comparer les mêmes séquences audio natives/locales avec niveaux, routage et captures documentés.",
+          "anchors": [
+            {
+              "path": "tools/verify_audio_listener_runtime.py",
+              "line": 25,
+              "needle": "for i,s in enumerate(trace):",
+              "role": "final_comparison_4"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-ace293e8-fab9-512e-b82c-1f17bd4c292f"
+        },
+        {
+          "task_id": "SYS-23.6-05",
+          "finding": "Le plan conserve cases, notes et historique manuel ; ces données ne constituent pas une acceptation humaine explicite de tous les parcours et de la fidélité.",
+          "remaining": "Recueillir une décision humaine explicite rattachée aux parcours, preuves et réserves, sans la déduire des tests ou des cases.",
+          "anchors": [
+            {
+              "path": "tools/project-plan/store.py",
+              "line": 134,
+              "needle": "def change(self,updates,allow_archived=False):",
+              "role": "final_comparison_5"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-085f566b-ceaf-50f0-b87f-eb12c70ebcb5"
+        },
+        {
+          "task_id": "SYS-23.6-06",
+          "finding": "La documentation donne une commande de tests workspace ; elle ne constitue pas une régression exécutée sur le paquet final après la dernière correction.",
+          "remaining": "Identifier le paquet final et rejouer les scénarios de régression requis sur ses binaires et ressources exacts.",
+          "anchors": [
+            {
+              "path": "docs/BUILDING.md",
+              "line": 14,
+              "needle": "cargo test --locked --workspace",
+              "role": "final_comparison_6"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-9239caf5-733a-5626-8973-4994eeec9fba"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision155\\final-comparison-research.json",
+          "bytes": 6910,
+          "sha256": "6c9734d2339eefe12adfbca0b3a2eee29954ee7b9cf7fa41d20f35665d05b5e0"
+        }
+      ],
+      "current_sources": [
+        {
+          "path": "F:\\OpenLeague\\tools\\project-plan\\fidelity_compare.py",
+          "bytes": 4023,
+          "sha256": "91531e2cb10a7d8cd3c9d4ce900d6e8ef96b1aad1a23dc5b4f722fd834ac57ac"
+        },
+        {
+          "path": "F:\\OpenLeague\\tools\\compare_recharge_line_backends.py",
+          "bytes": 969,
+          "sha256": "db244e0cb087bf1253b103d023c998ce2168c0eda47365a6a944cdcb49c7a2c1"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\vilemaw_attack_animation.rs",
+          "bytes": 7169,
+          "sha256": "78c1336fa1b30a6eb1b54d906444c59e9b857f822caf004846ea2becf1bdd32a"
+        },
+        {
+          "path": "F:\\OpenLeague\\tools\\verify_audio_listener_runtime.py",
+          "bytes": 5030,
+          "sha256": "68a87972d0f83e8e8495276627bf918305827a0b058905df58aa07c50a64451c"
+        },
+        {
+          "path": "F:\\OpenLeague\\tools\\project-plan\\store.py",
+          "bytes": 17975,
+          "sha256": "603e84c19f1e927d9beff2ac66a14d885af8961eaceae19c584d3d42ea1ef656"
+        },
+        {
+          "path": "F:\\OpenLeague\\docs\\BUILDING.md",
+          "bytes": 6216,
+          "sha256": "3923d04694f67d823bb154b37e9db7f8d9a9e1aed29d3817d04f6e6611366060"
+        }
+      ],
+      "scope": "Partial final comparison boundaries; no human acceptance or complete audiovisual comparison."
+    },
+    "receipts": {
+      "final-comparison-research.json": {
+        "schema": "openleague_final_comparison_research/v1",
+        "utc": "2026-10-23T09:56:33.057705+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision155\\research_final_comparison.py",
+          "bytes": 4230,
+          "sha256": "7081d18a8d2615af3b5ca44567ec982c7fc182ca7d846c219b727dada9fc4608"
+        },
+        "anchors": [
+          {
+            "path": "tools/project-plan/fidelity_compare.py",
+            "line": 22,
+            "needle": "def mirror_relation(",
+            "finding": "Le comparateur distingue représentations numériques et écarts sémantiques ; ses tests ne comparent pas une séquence complète de gameplay.",
+            "remaining": "Comparer les événements ordinaires aux règles natives, avec chronologie, entrées et exceptions explicites.",
+            "source": {
+              "path": "F:\\OpenLeague\\tools\\project-plan\\fidelity_compare.py",
+              "bytes": 4023,
+              "sha256": "91531e2cb10a7d8cd3c9d4ce900d6e8ef96b1aad1a23dc5b4f722fd834ac57ac"
+            }
+          },
+          {
+            "path": "tools/compare_recharge_line_backends.py",
+            "line": 4,
+            "needle": "for i in range(18):",
+            "finding": "Le script compare 18 images de ligne entre Vulkan et DX12, depuis une racine E: historique ; il ne compare pas des scènes au framebuffer original daté.",
+            "remaining": "Comparer les mêmes scènes au même cadrage à des références historiques datées, sans confondre accord inter-backends et original.",
+            "source": {
+              "path": "F:\\OpenLeague\\tools\\compare_recharge_line_backends.py",
+              "bytes": 969,
+              "sha256": "db244e0cb087bf1253b103d023c998ce2168c0eda47365a6a944cdcb49c7a2c1"
+            }
+          },
+          {
+            "path": "crates/client/src/vilemaw_attack_animation.rs",
+            "line": 117,
+            "needle": "pub fn selection(&self, source:",
+            "finding": "La sélection utilise la durée du clip chargé et l’âge de l’événement ; les tests associés sont des snapshots contrôlés, pas la comparaison de toutes les animations natives.",
+            "remaining": "Comparer clips, transitions et temps d’événements des séquences requises, avec source et rendu identifiés.",
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\vilemaw_attack_animation.rs",
+              "bytes": 7169,
+              "sha256": "78c1336fa1b30a6eb1b54d906444c59e9b857f822caf004846ea2becf1bdd32a"
+            }
+          },
+          {
+            "path": "tools/verify_audio_listener_runtime.py",
+            "line": 25,
+            "needle": "for i,s in enumerate(trace):",
+            "finding": "Le vérificateur compare positions et bases de l’écouteur au code original ; ses entrées imposent ambient_playback_enabled=false. Cela ne constitue pas une écoute comparative du mixage.",
+            "remaining": "Écouter et comparer les mêmes séquences audio natives/locales avec niveaux, routage et captures documentés.",
+            "source": {
+              "path": "F:\\OpenLeague\\tools\\verify_audio_listener_runtime.py",
+              "bytes": 5030,
+              "sha256": "68a87972d0f83e8e8495276627bf918305827a0b058905df58aa07c50a64451c"
+            }
+          },
+          {
+            "path": "tools/project-plan/store.py",
+            "line": 134,
+            "needle": "def change(self,updates,allow_archived=False):",
+            "finding": "Le plan conserve cases, notes et historique manuel ; ces données ne constituent pas une acceptation humaine explicite de tous les parcours et de la fidélité.",
+            "remaining": "Recueillir une décision humaine explicite rattachée aux parcours, preuves et réserves, sans la déduire des tests ou des cases.",
+            "source": {
+              "path": "F:\\OpenLeague\\tools\\project-plan\\store.py",
+              "bytes": 17975,
+              "sha256": "603e84c19f1e927d9beff2ac66a14d885af8961eaceae19c584d3d42ea1ef656"
+            }
+          },
+          {
+            "path": "docs/BUILDING.md",
+            "line": 14,
+            "needle": "cargo test --locked --workspace",
+            "finding": "La documentation donne une commande de tests workspace ; elle ne constitue pas une régression exécutée sur le paquet final après la dernière correction.",
+            "remaining": "Identifier le paquet final et rejouer les scénarios de régression requis sur ses binaires et ressources exacts.",
+            "source": {
+              "path": "F:\\OpenLeague\\docs\\BUILDING.md",
+              "bytes": 6216,
+              "sha256": "3923d04694f67d823bb154b37e9db7f8d9a9e1aed29d3817d04f6e6611366060"
+            }
+          }
+        ],
+        "extra_sources": [
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\vilemaw_attack_animation_tests.rs",
+            "bytes": 11377,
+            "sha256": "bc70ba7065fe8ce46add27039b8f0b2bb02ed921ff4c38b1d22a510c5931bac6"
+          },
+          {
+            "path": "F:\\OpenLeague\\tools\\project-plan\\audit_visual_comparison_reference.py",
+            "bytes": 3421,
+            "sha256": "771c3d83cc7c40901c261a99115738a6481e60911c2606722db1cfc25b1b36b6"
+          }
+        ],
+        "comparison_tests": {
+          "passed": true,
+          "exit_code": 0,
+          "tests": [
+            "test_boolean_lexeme_equivalence",
+            "test_different_vector_not_equal",
+            "test_flags_signedness_only_for_flags",
+            "test_missing_rank_not_zero_or_scalar_default",
+            "test_non_shop_link_not_generic_recipe",
+            "test_numeric_strings_and_float_error",
+            "test_percent_conversion_limited_to_known_field_subjects",
+            "test_raw_range_sentinel_never_server_reach",
+            "test_regen_requires_current_actual_value",
+            "test_vector_representation"
+          ],
+          "command": [
+            "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+            "-X",
+            "utf8",
+            "-E",
+            "-u",
+            "-B",
+            "-m",
+            "unittest",
+            "-v",
+            "test_fidelity_compare"
+          ],
+          "log": {
+            "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision155\\comparison-tests.log",
+            "bytes": 1330,
+            "sha256": "7138ef22673227c5f5bd4c3c9c546812f0267d592ba1655a635afcec6f2fd93a"
+          },
+          "sources": [
+            {
+              "path": "F:\\OpenLeague\\tools\\project-plan\\fidelity_compare.py",
+              "bytes": 4023,
+              "sha256": "91531e2cb10a7d8cd3c9d4ce900d6e8ef96b1aad1a23dc5b4f722fd834ac57ac"
+            },
+            {
+              "path": "F:\\OpenLeague\\tools\\project-plan\\test_fidelity_compare.py",
+              "bytes": 2442,
+              "sha256": "720729997ac56ddc38079c11ff576e86a19b0d8b6742a4cad54641ec8f853f3f"
+            }
+          ],
+          "python": {
+            "path": "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+            "bytes": 107312,
+            "sha256": "7a4102b91959bb234507850ea584e1d31d300a6831b171e4aadc59ff592f0234"
+          }
+        },
+        "full_scope_complete": false,
+        "native_or_game_executed": false,
+        "human_acceptance": "not_given",
+        "scope": "Partial comparison consumers. No new native execution,image rendering,audio listening or final-package regression."
+      }
+    },
+    "source_checks": [
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision155\\final_comparison-associations.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision155\\prepare_final_comparison_reader.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision155\\final-comparison-research.json",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\fidelity_compare.py",
+      "pin_F:\\OpenLeague\\tools\\compare_recharge_line_backends.py",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\vilemaw_attack_animation.rs",
+      "pin_F:\\OpenLeague\\tools\\verify_audio_listener_runtime.py",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\store.py",
+      "pin_F:\\OpenLeague\\docs\\BUILDING.md",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision155\\research_final_comparison.py",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\fidelity_compare.py",
+      "pin_F:\\OpenLeague\\tools\\compare_recharge_line_backends.py",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\vilemaw_attack_animation.rs",
+      "pin_F:\\OpenLeague\\tools\\verify_audio_listener_runtime.py",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\store.py",
+      "pin_F:\\OpenLeague\\docs\\BUILDING.md",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\vilemaw_attack_animation_tests.rs",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\audit_visual_comparison_reference.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision155\\comparison-tests.log",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\fidelity_compare.py",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\test_fidelity_compare.py",
+      "pin_C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "six_associations",
+      "research_scope",
+      "comparison_tests",
+      "task_SYS-23.6-01",
+      "anchor_final_comparison_1",
+      "task_SYS-23.6-02",
+      "anchor_final_comparison_2",
+      "task_SYS-23.6-03",
+      "anchor_final_comparison_3",
+      "task_SYS-23.6-04",
+      "anchor_final_comparison_4",
+      "task_SYS-23.6-05",
+      "anchor_final_comparison_5",
+      "task_SYS-23.6-06",
+      "anchor_final_comparison_6"
+    ],
+    "all_final_comparisons_qualified": false,
+    "all_required_effects_covered": false
+  },
+  "source_identities": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision155\\final_comparison-associations.json",
+      "bytes": 6537,
+      "sha256": "3fdc750908319eef9c2cc49f093962ab44e0516566f79a78070381b0777cf4cd"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision155\\prepare_final_comparison_reader.py",
+      "bytes": 2032,
+      "sha256": "82e41cce27d2543096c74de32d4b6ee92666422487c7f89f53072c3c50b5480a"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision155\\final-comparison-research.json",
+      "bytes": 6910,
+      "sha256": "6c9734d2339eefe12adfbca0b3a2eee29954ee7b9cf7fa41d20f35665d05b5e0"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\fidelity_compare.py",
+      "bytes": 4023,
+      "sha256": "91531e2cb10a7d8cd3c9d4ce900d6e8ef96b1aad1a23dc5b4f722fd834ac57ac"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\compare_recharge_line_backends.py",
+      "bytes": 969,
+      "sha256": "db244e0cb087bf1253b103d023c998ce2168c0eda47365a6a944cdcb49c7a2c1"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\vilemaw_attack_animation.rs",
+      "bytes": 7169,
+      "sha256": "78c1336fa1b30a6eb1b54d906444c59e9b857f822caf004846ea2becf1bdd32a"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\verify_audio_listener_runtime.py",
+      "bytes": 5030,
+      "sha256": "68a87972d0f83e8e8495276627bf918305827a0b058905df58aa07c50a64451c"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\store.py",
+      "bytes": 17975,
+      "sha256": "603e84c19f1e927d9beff2ac66a14d885af8961eaceae19c584d3d42ea1ef656"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\BUILDING.md",
+      "bytes": 6216,
+      "sha256": "3923d04694f67d823bb154b37e9db7f8d9a9e1aed29d3817d04f6e6611366060"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision155\\research_final_comparison.py",
+      "bytes": 4230,
+      "sha256": "7081d18a8d2615af3b5ca44567ec982c7fc182ca7d846c219b727dada9fc4608"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\vilemaw_attack_animation_tests.rs",
+      "bytes": 11377,
+      "sha256": "bc70ba7065fe8ce46add27039b8f0b2bb02ed921ff4c38b1d22a510c5931bac6"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\audit_visual_comparison_reference.py",
+      "bytes": 3421,
+      "sha256": "771c3d83cc7c40901c261a99115738a6481e60911c2606722db1cfc25b1b36b6"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision155\\comparison-tests.log",
+      "bytes": 1330,
+      "sha256": "7138ef22673227c5f5bd4c3c9c546812f0267d592ba1655a635afcec6f2fd93a"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\test_fidelity_compare.py",
+      "bytes": 2442,
+      "sha256": "720729997ac56ddc38079c11ff576e86a19b0d8b6742a4cad54641ec8f853f3f"
+    },
+    {
+      "path": "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "bytes": 107312,
+      "sha256": "7a4102b91959bb234507850ea584e1d31d300a6831b171e4aadc59ff592f0234"
+    }
+  ],
+  "checks": [
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision155\\final_comparison-associations.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision155\\prepare_final_comparison_reader.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision155\\final-comparison-research.json",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\fidelity_compare.py",
+    "pin_F:\\OpenLeague\\tools\\compare_recharge_line_backends.py",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\vilemaw_attack_animation.rs",
+    "pin_F:\\OpenLeague\\tools\\verify_audio_listener_runtime.py",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\store.py",
+    "pin_F:\\OpenLeague\\docs\\BUILDING.md",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision155\\research_final_comparison.py",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\fidelity_compare.py",
+    "pin_F:\\OpenLeague\\tools\\compare_recharge_line_backends.py",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\vilemaw_attack_animation.rs",
+    "pin_F:\\OpenLeague\\tools\\verify_audio_listener_runtime.py",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\store.py",
+    "pin_F:\\OpenLeague\\docs\\BUILDING.md",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\vilemaw_attack_animation_tests.rs",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\audit_visual_comparison_reference.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision155\\comparison-tests.log",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\fidelity_compare.py",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\test_fidelity_compare.py",
+    "pin_C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "six_associations",
+    "research_scope",
+    "comparison_tests",
+    "task_SYS-23.6-01",
+    "anchor_final_comparison_1",
+    "task_SYS-23.6-02",
+    "anchor_final_comparison_2",
+    "task_SYS-23.6-03",
+    "anchor_final_comparison_3",
+    "task_SYS-23.6-04",
+    "anchor_final_comparison_4",
+    "task_SYS-23.6-05",
+    "anchor_final_comparison_5",
+    "task_SYS-23.6-06",
+    "anchor_final_comparison_6"
+  ],
+  "checks_count": 37,
+  "associations": [
+    {
+      "task_id": "SYS-23.6-01",
+      "finding": "Le comparateur distingue représentations numériques et écarts sémantiques ; ses tests ne comparent pas une séquence complète de gameplay.",
+      "remaining": "Comparer les événements ordinaires aux règles natives, avec chronologie, entrées et exceptions explicites.",
+      "anchors": [
+        {
+          "path": "tools/project-plan/fidelity_compare.py",
+          "line": 22,
+          "needle": "def mirror_relation(",
+          "role": "final_comparison_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-fe63103b-b4bc-5897-a929-5887f2c79498"
+    },
+    {
+      "task_id": "SYS-23.6-02",
+      "finding": "Le script compare 18 images de ligne entre Vulkan et DX12, depuis une racine E: historique ; il ne compare pas des scènes au framebuffer original daté.",
+      "remaining": "Comparer les mêmes scènes au même cadrage à des références historiques datées, sans confondre accord inter-backends et original.",
+      "anchors": [
+        {
+          "path": "tools/compare_recharge_line_backends.py",
+          "line": 4,
+          "needle": "for i in range(18):",
+          "role": "final_comparison_2"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-80453cd4-7a8c-5581-98a6-283ab1125d2a"
+    },
+    {
+      "task_id": "SYS-23.6-03",
+      "finding": "La sélection utilise la durée du clip chargé et l’âge de l’événement ; les tests associés sont des snapshots contrôlés, pas la comparaison de toutes les animations natives.",
+      "remaining": "Comparer clips, transitions et temps d’événements des séquences requises, avec source et rendu identifiés.",
+      "anchors": [
+        {
+          "path": "crates/client/src/vilemaw_attack_animation.rs",
+          "line": 117,
+          "needle": "pub fn selection(&self, source:",
+          "role": "final_comparison_3"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-65fb53b6-2ed5-5e2e-b937-906fddc8a144"
+    },
+    {
+      "task_id": "SYS-23.6-04",
+      "finding": "Le vérificateur compare positions et bases de l’écouteur au code original ; ses entrées imposent ambient_playback_enabled=false. Cela ne constitue pas une écoute comparative du mixage.",
+      "remaining": "Écouter et comparer les mêmes séquences audio natives/locales avec niveaux, routage et captures documentés.",
+      "anchors": [
+        {
+          "path": "tools/verify_audio_listener_runtime.py",
+          "line": 25,
+          "needle": "for i,s in enumerate(trace):",
+          "role": "final_comparison_4"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-ace293e8-fab9-512e-b82c-1f17bd4c292f"
+    },
+    {
+      "task_id": "SYS-23.6-05",
+      "finding": "Le plan conserve cases, notes et historique manuel ; ces données ne constituent pas une acceptation humaine explicite de tous les parcours et de la fidélité.",
+      "remaining": "Recueillir une décision humaine explicite rattachée aux parcours, preuves et réserves, sans la déduire des tests ou des cases.",
+      "anchors": [
+        {
+          "path": "tools/project-plan/store.py",
+          "line": 134,
+          "needle": "def change(self,updates,allow_archived=False):",
+          "role": "final_comparison_5"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-085f566b-ceaf-50f0-b87f-eb12c70ebcb5"
+    },
+    {
+      "task_id": "SYS-23.6-06",
+      "finding": "La documentation donne une commande de tests workspace ; elle ne constitue pas une régression exécutée sur le paquet final après la dernière correction.",
+      "remaining": "Identifier le paquet final et rejouer les scénarios de régression requis sur ses binaires et ressources exacts.",
+      "anchors": [
+        {
+          "path": "docs/BUILDING.md",
+          "line": 14,
+          "needle": "cargo test --locked --workspace",
+          "role": "final_comparison_6"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-9239caf5-733a-5626-8973-4994eeec9fba"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+include "Object.as";
+include "Class.as";
+include "Function.as";
+include "Namespace.as";
+include "Boolean.as";
+include "Number.as";
+include "int.as";
+include "uint.as";
+include "String.as";
+include "Array.as";
+include "bugzilla.as";
+include "decodeURI.as";
+include "decodeURIComponent.as";
+include "encodeURI.as";
+include "encodeURIComponent.as";
+include "isNaN.as";
+include "isFinite.as";
+include "parseInt.as";
+include "parseFloat.as";
+include "escape.as";
+include "unescape.as";
+include "isXMLName.as";
+include "__AS3__/vec/Vector.as";
+include "__AS3__/vec/Vector$object.as";
+include "__AS3__/vec/Vector$int.as";
+include "__AS3__/vec/Vector$uint.as";
+include "__AS3__/vec/Vector$double.as";
+include "avmplus/describeTypeJSON.as";
+include "avmplus/describeParams.as";
+include "avmplus/describeMetadata.as";
+include "avmplus/finish.as";
+include "avmplus/describeTraits.as";
+include "avmplus/describeType.as";
+include "avmplus/getQualifiedClassName.as";
+include "avmplus/getQualifiedSuperclassName.as";
+
+Object._init();
+

@@ -37,10 +37,13 @@ impl Simulation {
   if self.navigation.ground(point).is_none() {return Err("summon point blocked".into());}
   let cost=value(&format!("cost{rank}"));if p.mana<cost {return Err("insufficient mana".into());}
   let stats=self.stats(id);let raw=value(&format!("damage{rank}"))+value("coefficient")*stats.ability_power;let cd=cooldown::ticks(value(&format!("cooldown{rank}")),stats.cooldown_reduction);
+  // Only a validated initial cast closes the current presentation identity.
+  self.cancel_attack_presentation(id,attack_presentation::CancelReason::OtherCast);
   let p=self.players.get_mut(&id).unwrap();p.mana-=cost;p.cooldowns[3]=self.tick+cd;p.cooldown_totals[3]=Some(cd);p.windup=None;p.effects.annie_r=Some(Pending{point,releases:self.tick+spells::seconds(value("cast_seconds")),rank,raw});Ok(())
  }
  fn guide_tibbers(&mut self,owner:u32,pet:u32,point:Point)->Result<(),String> {
   let p=&self.players[&owner];
+  if trundle_e::unit_forced(&self.units[&pet],self.tick) {return Err("pet in forced movement".into());}
   // Guide has native CanCastWhileDisabled=true. Silence policy remains separately scoped.
   if self.tick<p.effects.silence_until {return Err("champion silenced".into());}
   if p.position.distance(point)>value("guide_range") {return Err("pet point out of range".into());}
@@ -49,7 +52,7 @@ impl Simulation {
    (id!=pet&&t.team!=p.team&&t.health>0.&&!self.protected(id)&&d<=value("guide_pick_radius")&&self.visible_to(p.team,id)).then_some((id,d))
   }).min_by(|a,b|a.1.total_cmp(&b.1).then(a.0.cmp(&b.0))).map(|t|t.0);
   let order=if let Some(target)=target {Order::Attack{target}} else {
-   self.navigation.path(self.units[&pet].position,point).ok_or("pet destination unreachable")?;
+   self.dynamic_path(self.units[&pet].position,point).ok_or("pet destination unreachable")?;
    Order::Move{point}
   };
   // Native TibbersBasicAttack permits cancelling a windup; keep attack recovery deadline.
@@ -82,13 +85,13 @@ impl Simulation {
   for id in ids {
    let u=self.units[&id].clone();let pet=u.pet.as_ref().unwrap();
    if self.tick>=pet.expires||!self.players.contains_key(&pet.owner) {
-    let u=self.units.get_mut(&id).unwrap();u.health=0.;u.stuns.clear();u.target=None;u.destination=None;u.path.clear();u.remove_at=Some(self.tick+3*TICK_RATE);self.cancel_pet_attack(id);continue;
+    let u=self.units.get_mut(&id).unwrap();u.health=0.;u.stuns.clear();u.slows.clear();u.target=None;u.destination=None;u.path.clear();u.remove_at=Some(self.tick+3*TICK_RATE);self.cancel_pet_attack(id);continue;
    }
    let owner=self.players[&pet.owner].position;
    self.units.get_mut(&id).unwrap().health=(u.health+value("pet_regeneration")/TICK_RATE as f32).min(u.max_health);
-   if stuns::unit_active(&u,self.tick) {continue;}
+   if stuns::unit_active(&u,self.tick) || trundle_e::unit_forced(&u,self.tick) {continue;}
    if u.position.distance(owner)>value("teleport_distance") {
-    if let Some(point)=self.navigation.nearest_walkable(owner) {self.cancel_pet_attack(id);let u=self.units.get_mut(&id).unwrap();u.position=point;u.height=self.navigation.ground(point).unwrap_or(u.height);u.pet.as_mut().unwrap().order=Order::Follow;u.target=None;u.path.clear();u.destination=None;u.next_ai=0;}
+    if let Some(point)=self.dynamic_nearest(owner) {self.cancel_pet_attack(id);let u=self.units.get_mut(&id).unwrap();u.position=point;u.height=self.navigation.ground(point).unwrap_or(u.height);u.pet.as_mut().unwrap().order=Order::Follow;u.target=None;u.path.clear();u.destination=None;u.next_ai=0;}
    }
    if self.tick<self.units[&id].next_ai {continue;}
    let u=self.units[&id].clone();let def=&self.world.as_ref().unwrap().config.definitions[&u.definition];
@@ -102,9 +105,14 @@ impl Simulation {
    if matches!(order,Order::Follow) {
     target=u.target.filter(|t|valid(*t).is_some_and(|ti|u.position.distance(ti.position)<=def.attack_range+ti.radius));
     if target.is_none() {target=self.players.keys().chain(self.units.keys()).copied().filter(|t|*t!=id).filter_map(|t| {let ti=valid(t)?;let d=u.position.distance(ti.position);(d<=def.acquisition+ti.radius).then_some((t,d))}).min_by(|a,b|a.1.total_cmp(&b.1).then(a.0.cmp(&b.0))).map(|t|t.0);}
+    // Follow uses the same existing attack-range/body rule as an explicit Attack.
+    // Acquiring a visible enemy must also create its ordinary pursuit path.
+    if let Some(ti)=target.and_then(|target|valid(target)) {
+     if u.position.distance(ti.position)>def.attack_range+ti.radius {goal=Some(ti.position);}
+    }
     if target.is_none()&&u.position.distance(owner)>value("return_radius") {goal=Some(owner);}
    }
-   let path=goal.and_then(|point|self.navigation.path(u.position,point));
+   let path=goal.and_then(|point|self.dynamic_path(u.position,point));
    let u=self.units.get_mut(&id).unwrap();u.pet.as_mut().unwrap().order=order;u.target=target;u.path=path.unwrap_or_default();u.destination=goal.filter(|_|!u.path.is_empty());u.next_ai=self.tick+8;
   }
  }

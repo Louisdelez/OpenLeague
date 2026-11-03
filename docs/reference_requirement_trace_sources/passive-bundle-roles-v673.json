@@ -1,0 +1,699 @@
+{
+  "schema": "openleague_passive_bundle_role_links/v673",
+  "utc": "2026-10-27T11:09:44.106231+00:00",
+  "summary": {
+    "notice": "V673 :DravenPassive et LuxIlluminationPassive correspondent aux déclarations natives et BuffName. Neuf requêtes de preload distinguent passif, rappels et attaques ;sept chunks clients sans fonction enfant. Classes communautaires Draven/Lux vides ;appel audio Lux dans Ascension seulement, non promu en passif. Activation serveur, priorités et écoute restent ouverts.",
+    "community_crossmode_chain": [
+      {
+        "identity": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\GameServer\\Content\\LeagueSandbox-Scripts\\Buffs\\Ascension\\AscBuff.cs",
+          "bytes": 3468,
+          "sha256": "9e87c847e5d9ea802bfdcc312b490cdc12cbfc81c39e6f3fc58a338a309cffef"
+        },
+        "line": 40,
+        "needle": "Play_sfx_Lux_LuxIlluminationPassive_hit",
+        "excerpt": [
+          "",
+          "            PlaySound(\"Stop_sfx_ZhonyasRingShield_OnBuffActivate\", unit);",
+          "            PlaySound(\"Play_sfx_Leona_LeonaSolarFlare_hit\", unit);",
+          "            PlaySound(\"Play_sfx_Lux_LuxIlluminationPassive_hit\", unit);",
+          "",
+          "            p1 = AddParticle(unit, unit, \"Global_Asc_Avatar\", unit.Position, -1);",
+          "            p2 = AddParticle(unit, unit, \"Global_Asc_Aura\", unit.Position, -1);",
+          "            AddParticleTarget(unit, unit, \"AscForceBubble\", unit, size: 3.3f);",
+          "",
+          "            ApiEventManager.OnDeath.AddListener(unit, unit, OnDeath, true);",
+          "",
+          "            //Unit Perception bubbles seems to be broken",
+          "            r1 = AddUnitPerceptionBubble(unit, 0.0f, 25000f, TeamId.TEAM_BLUE, true, unit);",
+          "            r2 = AddUnitPerceptionBubble(unit, 0.0f, 25000f, TeamId.TEAM_PURPLE, true, unit);",
+          ""
+        ],
+        "execution": "static_only_not_original_Riot_or_current_Rust"
+      },
+      {
+        "identity": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\GameServer\\GameServerLib\\API\\ApiFunctionManager.cs",
+          "bytes": 56751,
+          "sha256": "f7f75406c103870f5076a4477e4c892503e324d1132e7d09d93fdbdf06cf3706"
+        },
+        "line": 1110,
+        "needle": "public static void PlaySound",
+        "excerpt": [
+          "            return _game.ItemManager.SafeGetItemType(Id);",
+          "        }",
+          "",
+          "        public static void PlaySound(string soundName, AttackableUnit soundOwner)",
+          "        {",
+          "            _game.PacketNotifier.NotifyS2C_PlaySound(soundName, soundOwner);",
+          "        }",
+          "",
+          "        public static void StopTargetingUnit(AttackableUnit unit)",
+          "        {",
+          "            _game.ObjectManager.StopTargeting(unit);",
+          "        }",
+          "",
+          "        public static Pet CreatePet",
+          "        ("
+        ],
+        "execution": "static_only_not_original_Riot_or_current_Rust"
+      },
+      {
+        "identity": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\GameServer\\GameServerLib\\Packets\\PacketNotifier.cs",
+          "bytes": 198538,
+          "sha256": "8d7bdd5b28dba57755f37c6084645997207ca3645f0d3e3e03d808f5716491d0"
+        },
+        "line": 3103,
+        "needle": "public void NotifyS2C_PlaySound",
+        "excerpt": [
+          "            _packetHandlerManager.BroadcastPacket(packet.GetBytes(), Channel.CHL_S2C);",
+          "        }",
+          "",
+          "        public void NotifyS2C_PlaySound(string soundName, AttackableUnit soundOwner)",
+          "        {",
+          "            var packet = new S2C_PlaySound",
+          "            {",
+          "                SoundName = soundName,",
+          "                OwnerNetID = soundOwner.NetId",
+          "            };",
+          "",
+          "            _packetHandlerManager.BroadcastPacket(packet.GetBytes(), Channel.CHL_S2C);",
+          "        }",
+          "",
+          "        /// <summary>"
+        ],
+        "execution": "static_only_not_original_Riot_or_current_Rust"
+      },
+      {
+        "identity": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\GameServer\\LeaguePackets\\LeaguePackets\\Game\\067_S2C_PlaySound.cs",
+          "bytes": 803,
+          "sha256": "6fa8a5bfd527f40971745854b8641434baede4182e7c3bb1eb21aea89a19f39c"
+        },
+        "line": 23,
+        "needle": "protected override void WriteBody",
+        "excerpt": [
+          "            this.SoundName = reader.ReadFixedString(1024);",
+          "            this.OwnerNetID = reader.ReadUInt32();",
+          "        }",
+          "        protected override void WriteBody(ByteWriter writer)",
+          "        {",
+          "            writer.WriteFixedString(SoundName, 1024);",
+          "            writer.WriteUInt32(OwnerNetID);",
+          "        }",
+          "    }",
+          "}"
+        ],
+        "execution": "static_only_not_original_Riot_or_current_Rust"
+      }
+    ],
+    "counts": {
+      "champions": 2,
+      "declared_bundle_names_verified": 2,
+      "native_sources": 37,
+      "native_memberships": {
+        "matches_selected_project_manifest": 37
+      },
+      "complete_preload_entries": 9,
+      "spell_preload_requests": 4,
+      "particle_preload_requests": 5,
+      "Lua_records": 7,
+      "Lua_child_functions": 0,
+      "controls": 10,
+      "refusals": 8,
+      "empty_community_character_scripts": 2,
+      "community_crossmode_audio_call": 1
+    },
+    "report": "docs/FIDELITY_PASSIVE_BUNDLE_ROLES_V673.md",
+    "complete": false,
+    "goal_complete": false
+  },
+  "associations": [
+    {
+      "task_id": "CH-Draven-PASSIF-PRESENTATION-AUDIO",
+      "requirement_id": "OLF-6bdf5d7c-611e-507a-8ace-efd5d0bfe10f",
+      "native_inputs": [
+        {
+          "source_id": "OLS-de854af7-8098-58e8-9090-8d859ab32b6b",
+          "relation": "native_declared_passive_identity_not_event_alias_proof",
+          "selector": "/rows/0/declaration"
+        },
+        {
+          "source_id": "OLS-1923b9dc-b798-521a-aab8-9f4737b4885a",
+          "relation": "native_audio_field_candidate_not_confirmed_passive_ownership",
+          "selector": "/rows/0/particles/0"
+        },
+        {
+          "source_id": "OLS-73d7dcca-e358-55b2-9f54-44bd491cc809",
+          "relation": "native_audio_field_candidate_not_confirmed_passive_ownership",
+          "selector": "/rows/0/particles/1"
+        },
+        {
+          "source_id": "OLS-0221c286-d348-5f7d-9412-e4fade243fc3",
+          "relation": "native_audio_field_candidate_not_confirmed_passive_ownership",
+          "selector": "/rows/0/particles/2"
+        },
+        {
+          "source_id": "OLS-3a75e1db-8766-5dc3-951c-0519c86985b0",
+          "relation": "native_audio_field_candidate_not_confirmed_passive_ownership",
+          "selector": "/rows/0/particles/3"
+        },
+        {
+          "source_id": "OLS-2d54e26e-9849-5226-ae68-822667fa654f",
+          "relation": "native_audio_field_candidate_not_confirmed_passive_ownership",
+          "selector": "/rows/0/particles/4"
+        },
+        {
+          "source_id": "OLS-56b8c9e2-161c-5216-b11d-182716b07805",
+          "relation": "native_audio_field_candidate_not_confirmed_passive_ownership",
+          "selector": "/rows/0/particles/5"
+        },
+        {
+          "source_id": "OLS-740a2319-9f7c-5c98-a65e-886d8e2820b3",
+          "relation": "native_audio_field_candidate_not_confirmed_passive_ownership",
+          "selector": "/rows/0/particles/6"
+        },
+        {
+          "source_id": "OLS-23770daa-07af-58b9-80fe-ff31073df603",
+          "relation": "native_audio_field_candidate_not_confirmed_passive_ownership",
+          "selector": "/rows/0/particles/7"
+        },
+        {
+          "source_id": "OLS-450455f7-55c9-5c89-bbfd-f878c70d21d1",
+          "relation": "exact_particle_preload_reference_not_activation_or_alias",
+          "selector": "/rows/0/exact_preloads/0"
+        },
+        {
+          "source_id": "OLS-9301f1cc-9ece-55ab-9fc2-da07df032b6f",
+          "relation": "native_named_event_hash_and_dependency_candidates_not_priority",
+          "selector": "/rows/0/events/0/bank_occurrences/0"
+        },
+        {
+          "source_id": "OLS-0c4879ed-fb1f-5053-b52c-550913ed3c6d",
+          "relation": "native_embedded_media_candidate_DIDX_ranges_not_selection",
+          "selector": "/rows/0/events/0/media_id:515652354"
+        },
+        {
+          "source_id": "OLS-2b4cede4-872e-5dbe-970b-b0f720a6aab8",
+          "relation": "declared_passive_root_chunk",
+          "selector": "/rows/0/bundle_qualification/related_native_links/0"
+        },
+        {
+          "source_id": "OLS-e25b6e7c-cb0f-58a0-af35-919377e4e75e",
+          "relation": "declared_passive_metadata",
+          "selector": "/rows/0/bundle_qualification/related_native_links/1"
+        },
+        {
+          "source_id": "OLS-450455f7-55c9-5c89-bbfd-f878c70d21d1",
+          "relation": "complete_declared_passive_preload_table_including_nonpassive_requests",
+          "selector": "/rows/0/bundle_qualification/related_native_links/2"
+        },
+        {
+          "source_id": "OLS-16451c34-7292-5f3a-8345-ab3073b4c3a4",
+          "relation": "direct_preloaded_spell_metadata_not_passive_callback",
+          "selector": "/rows/0/bundle_qualification/related_native_links/3"
+        },
+        {
+          "source_id": "OLS-579ab8aa-141d-55d2-b7ed-2073152a10e6",
+          "relation": "direct_preloaded_spell_metadata_not_passive_callback",
+          "selector": "/rows/0/bundle_qualification/related_native_links/4"
+        },
+        {
+          "source_id": "OLS-ee0a1a3f-acd9-5dfc-9634-bd3dbf737db5",
+          "relation": "direct_preloaded_spell_metadata_not_passive_callback",
+          "selector": "/rows/0/bundle_qualification/related_native_links/5"
+        },
+        {
+          "source_id": "OLS-e86f03f5-9f50-5660-b0af-dcb340b0a8f9",
+          "relation": "direct_preloaded_spell_metadata_not_passive_callback",
+          "selector": "/rows/0/bundle_qualification/related_native_links/6"
+        },
+        {
+          "source_id": "OLS-fc2bb945-fa65-5686-9a68-dec3bb6b0752",
+          "relation": "direct_preloaded_spell_metadata_not_passive_callback",
+          "selector": "/rows/0/bundle_qualification/related_native_links/7"
+        },
+        {
+          "source_id": "OLS-fa24170b-9c53-5837-b9ce-f3fdfa5978ee",
+          "relation": "direct_preload_resource_candidate",
+          "selector": "/rows/0/bundle_qualification/related_native_links/8"
+        },
+        {
+          "source_id": "OLS-64d55df8-f051-532e-b53b-5eed3e43d288",
+          "relation": "direct_preloaded_spell_metadata_not_passive_callback",
+          "selector": "/rows/0/bundle_qualification/related_native_links/9"
+        },
+        {
+          "source_id": "OLS-d20c926f-c225-5eda-8678-1e388d043334",
+          "relation": "direct_preloaded_spell_metadata_not_passive_callback",
+          "selector": "/rows/0/bundle_qualification/related_native_links/10"
+        },
+        {
+          "source_id": "OLS-942b726e-157d-5b9e-8cc5-0f54550ae6a7",
+          "relation": "direct_preload_resource_candidate",
+          "selector": "/rows/0/bundle_qualification/related_native_links/11"
+        },
+        {
+          "source_id": "OLS-1923b9dc-b798-521a-aab8-9f4737b4885a",
+          "relation": "direct_preload_resource_candidate",
+          "selector": "/rows/0/bundle_qualification/related_native_links/12"
+        },
+        {
+          "source_id": "OLS-73d7dcca-e358-55b2-9f54-44bd491cc809",
+          "relation": "direct_preload_resource_candidate",
+          "selector": "/rows/0/bundle_qualification/related_native_links/13"
+        }
+      ],
+      "reference_inputs": [
+        {
+          "source_id": "OLS-c6d34234-2b07-5a1e-819c-5a4e0df12b52",
+          "relation": "bounded_native_named_audio_chains_with_ownership_limits",
+          "selector": "/rows/0"
+        },
+        {
+          "source_id": "OLS-1d1fc2ba-b3d0-5543-aad9-7b38f04eb7cb",
+          "relation": "candidate_audio_association_and_remaining_work",
+          "selector": "/associations/0"
+        }
+      ],
+      "context": {
+        "champion": "Draven",
+        "report": "docs/FIDELITY_PASSIVE_BUNDLE_ROLES_V673.md",
+        "receipt": "docs/reference_requirement_trace_sources/passive-bundle-roles-v673.json",
+        "observation": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision673_passive_bundle_audit\\OBSERVATIONS.json#/rows/0",
+        "declared_passive": {
+          "hash": "3706924793",
+          "present": true,
+          "value": "DravenPassive"
+        },
+        "particle_count": 8,
+        "events": [
+          {
+            "name": "Play_sfx_Draven_DravenNewPassive_buffactivate",
+            "id": 2999338411,
+            "bank_occurrences": 1
+          }
+        ],
+        "preloads": [
+          {
+            "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Draven\\Spells\\DravenPassive.preload",
+            "hits": [
+              {
+                "line": 8,
+                "particle": "draven_base_p.troy",
+                "text": "{Function=BBPreloadParticle, Params={Name=\"draven_base_p.troy\"}},"
+              },
+              {
+                "line": 9,
+                "particle": "draven_base_p_lesser.troy",
+                "text": "{Function=BBPreloadParticle, Params={Name=\"draven_base_p_lesser.troy\"}},"
+              }
+            ]
+          }
+        ],
+        "event_names_without_SFX_bank": [],
+        "exact_native_link_count": 26,
+        "current_route": {
+          "source": "crates/client/src/map_audio_requests.rs",
+          "all_candidates_skipped_by_ambient_guard": true,
+          "lookup_rejects_all_candidates": true,
+          "scope": "Isolated exact fragments; not full client"
+        },
+        "own_questions_preserved": [
+          "OLU-387a875d-13f8-51ec-897d-1ff5034a0b1c"
+        ],
+        "dependencies_preserved": [
+          "CH-Draven-PASSIF-NETWORK"
+        ],
+        "package_id": "D06-CH-Draven",
+        "requires_packages": [
+          "D04-SYS-04-1",
+          "D04-SYS-04-6",
+          "D05-SYS-05-2",
+          "D05-SYS-05-4",
+          "D14-SYS-14-2",
+          "D20-SYS-20-1"
+        ],
+        "instructions": "Pour Draven : partir du bundle déclaré et des chemins natifs exacts. Le BuffName identique est vérifié, mais ne prouve pas le callback serveur. Examiner les neuf requêtes du lot dans leurs contextes :Draven charge aussi des rappels et des attaques ;ces références ne deviennent pas des déclenchements de son passif. LuxIlluminatingFraulein et son AutoBuffActivateEffect LuxDebuff sont un buff distinct de LuxIlluminationPassive. Les sept chunks clients inspectés ont zéro fonction enfant ;les deux classes communautaires sont vides. L’appel PlaySound Lux dans AscBuff concerne Ascension communautaire, pas le passif natif ni Rust. Qualifier le callback, les conditions, les liens de buffs, les priorités de skin et le routage effectif avant toute intégration ou acceptation audio. Le contrôle Rust ambiant V672 est hérité après revalidation des sources inchangées, pas réexécuté. Aucun événement absent, délai, règle de stack ou média ne doit être inventé.",
+        "passive_assignment_qualified": false,
+        "bank_priority_qualified": false,
+        "playback_or_listening_executed": false,
+        "complete": false,
+        "bundle_identity": {
+          "declared_name": "DravenPassive",
+          "root_path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Draven\\Spells\\DravenPassive.luaobj",
+          "matching_BuffName_proven": true,
+          "root_callback_count": 0,
+          "root_globals": {
+            "BuffTextureName": "Draven_passive.dds",
+            "BuffName": "DravenPassive",
+            "PersistsThroughDeath": true,
+            "NonDispellable": true
+          },
+          "preload_path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Draven\\Spells\\DravenPassive.preload",
+          "preload_requests": [
+            {
+              "function": "BBPreloadSpell",
+              "name": "dravenpassivestacks",
+              "candidates": [
+                "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Draven\\Spells\\DravenPassiveStacks.luaobj",
+                "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Draven\\Spells\\DravenPassiveStacks.inibin"
+              ]
+            },
+            {
+              "function": "BBPreloadParticle",
+              "name": "draven_recall_sound.troy",
+              "candidates": []
+            },
+            {
+              "function": "BBPreloadParticle",
+              "name": "draven_recall_sound_reaper.troy",
+              "candidates": []
+            },
+            {
+              "function": "BBPreloadSpell",
+              "name": "dravenrecalloverride",
+              "candidates": [
+                "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Draven\\Spells\\DravenRecallOverride.luaobj"
+              ]
+            },
+            {
+              "function": "BBPreloadSpell",
+              "name": "dravenspinningattack2",
+              "candidates": [
+                "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Draven\\Spells\\DravenSpinningAttack2.luaobj",
+                "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Draven\\Spells\\DravenSpinningAttack2.inibin",
+                "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Draven\\Spells\\DravenSpinningAttack2.preload"
+              ]
+            },
+            {
+              "function": "BBPreloadSpell",
+              "name": "dravenspinningattack2crit",
+              "candidates": [
+                "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Draven\\Spells\\DravenSpinningAttack2Crit.luaobj",
+                "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Draven\\Spells\\DravenSpinningAttack2Crit.inibin",
+                "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Draven\\Spells\\DravenSpinningAttack2Crit.preload"
+              ]
+            },
+            {
+              "function": "BBPreloadParticle",
+              "name": "draven_base_p.troy",
+              "candidates": [
+                "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Draven\\Skins\\Base\\Particles\\Draven_Base_P.troybin"
+              ]
+            },
+            {
+              "function": "BBPreloadParticle",
+              "name": "draven_base_p_lesser.troy",
+              "candidates": [
+                "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Draven\\Skins\\Base\\Particles\\Draven_Base_P_lesser.troybin"
+              ]
+            }
+          ],
+          "separate_buff": [],
+          "community_character_script": {
+            "identity": {
+              "path": "D:\\LeagueOfLegendsV2\\4.20\\GameServer\\Content\\LeagueSandbox-Scripts\\Characters\\Draven\\CharScriptDraven.cs",
+              "bytes": 126,
+              "sha256": "2e893723e277e0e47def51611fa576c12dbb0a26b3ef14a1bb948943989af3c2"
+            },
+            "empty_class": true
+          },
+          "activation_proven": false
+        },
+        "inherited_probe": {
+          "revision": 672,
+          "rerun": false,
+          "current_inputs_revalidated": true
+        }
+      },
+      "retained_consumers": [
+        "OLC-93924678-ea15-5516-8f55-08616c5450cc"
+      ],
+      "retained_questions": [
+        "OLU-387a875d-13f8-51ec-897d-1ff5034a0b1c"
+      ]
+    },
+    {
+      "task_id": "CH-Lux-PASSIF-PRESENTATION-AUDIO",
+      "requirement_id": "OLF-b2874d80-2c62-560f-ba22-0a94d2534bce",
+      "native_inputs": [
+        {
+          "source_id": "OLS-da8db83e-36d0-564c-b35d-556912f7b4c4",
+          "relation": "native_declared_passive_identity_not_event_alias_proof",
+          "selector": "/rows/1/declaration"
+        },
+        {
+          "source_id": "OLS-8c053bd3-0de5-566d-9d3d-509b40556d38",
+          "relation": "native_audio_field_candidate_not_confirmed_passive_ownership",
+          "selector": "/rows/1/particles/0"
+        },
+        {
+          "source_id": "OLS-68226367-4f27-5c3b-b1e4-5fdea07840e2",
+          "relation": "native_audio_field_candidate_not_confirmed_passive_ownership",
+          "selector": "/rows/1/particles/1"
+        },
+        {
+          "source_id": "OLS-93bf1097-1d51-557d-b945-74a289a8900d",
+          "relation": "exact_particle_preload_reference_not_activation_or_alias",
+          "selector": "/rows/1/exact_preloads/0"
+        },
+        {
+          "source_id": "OLS-e8afd03d-e813-5015-b7a1-baa17e6115e3",
+          "relation": "exact_particle_preload_reference_not_activation_or_alias",
+          "selector": "/rows/1/exact_preloads/1"
+        },
+        {
+          "source_id": "OLS-2be100e0-31bf-5e4e-9c68-6380a55d703c",
+          "relation": "exact_particle_preload_reference_not_activation_or_alias",
+          "selector": "/rows/1/exact_preloads/2"
+        },
+        {
+          "source_id": "OLS-b32a185b-3c22-58c0-a90a-00e84a8af636",
+          "relation": "exact_particle_preload_reference_not_activation_or_alias",
+          "selector": "/rows/1/exact_preloads/3"
+        },
+        {
+          "source_id": "OLS-4ec84804-73a5-54ac-a885-eb9cb722d2b9",
+          "relation": "native_named_event_hash_and_dependency_candidates_not_priority",
+          "selector": "/rows/1/events/0/bank_occurrences/0"
+        },
+        {
+          "source_id": "OLS-0fee258d-612f-5a52-8558-4cff839918ea",
+          "relation": "native_embedded_media_candidate_DIDX_ranges_not_selection",
+          "selector": "/rows/1/events/0/media_id:295508404"
+        },
+        {
+          "source_id": "OLS-40c8dd4d-1a95-5b58-b0d7-1cc062fda990",
+          "relation": "declared_passive_root_chunk",
+          "selector": "/rows/1/bundle_qualification/related_native_links/0"
+        },
+        {
+          "source_id": "OLS-8cbc0350-1fcc-51ec-8c6f-07671770a080",
+          "relation": "declared_passive_metadata",
+          "selector": "/rows/1/bundle_qualification/related_native_links/1"
+        },
+        {
+          "source_id": "OLS-c64b5689-482f-5c08-9d97-8dd4d20993aa",
+          "relation": "separate_named_buff_not_an_alias_of_declared_passive",
+          "selector": "/rows/1/bundle_qualification/related_native_links/2"
+        },
+        {
+          "source_id": "OLS-b7400af4-a6e2-5405-916a-cbbc989f64ed",
+          "relation": "separate_named_buff_not_an_alias_of_declared_passive",
+          "selector": "/rows/1/bundle_qualification/related_native_links/3"
+        },
+        {
+          "source_id": "OLS-b3e91cd1-7f39-5e9d-acd8-746985ad41e7",
+          "relation": "separate_buff_AutoBuffActivateEffect_candidate",
+          "selector": "/rows/1/bundle_qualification/related_native_links/4"
+        },
+        {
+          "source_id": "OLS-e8afd03d-e813-5015-b7a1-baa17e6115e3",
+          "relation": "complete_declared_passive_preload_table_including_nonpassive_requests",
+          "selector": "/rows/1/bundle_qualification/related_native_links/5"
+        },
+        {
+          "source_id": "OLS-68226367-4f27-5c3b-b1e4-5fdea07840e2",
+          "relation": "direct_preload_resource_candidate",
+          "selector": "/rows/1/bundle_qualification/related_native_links/6"
+        }
+      ],
+      "reference_inputs": [
+        {
+          "source_id": "OLS-c6d34234-2b07-5a1e-819c-5a4e0df12b52",
+          "relation": "bounded_native_named_audio_chains_with_ownership_limits",
+          "selector": "/rows/1"
+        },
+        {
+          "source_id": "OLS-1d1fc2ba-b3d0-5543-aad9-7b38f04eb7cb",
+          "relation": "candidate_audio_association_and_remaining_work",
+          "selector": "/associations/1"
+        }
+      ],
+      "context": {
+        "champion": "Lux",
+        "report": "docs/FIDELITY_PASSIVE_BUNDLE_ROLES_V673.md",
+        "receipt": "docs/reference_requirement_trace_sources/passive-bundle-roles-v673.json",
+        "observation": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision673_passive_bundle_audit\\OBSERVATIONS.json#/rows/1",
+        "declared_passive": {
+          "hash": "3706924793",
+          "present": true,
+          "value": "LuxIlluminationPassive"
+        },
+        "particle_count": 2,
+        "events": [
+          {
+            "name": "Play_sfx_Lux_LuxIlluminationPassive_hit",
+            "id": 2823890895,
+            "bank_occurrences": 1
+          }
+        ],
+        "preloads": [
+          {
+            "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Skarner\\Spells\\SkarnerFractureMissile.preload",
+            "hits": [
+              {
+                "line": 7,
+                "particle": "luxpassive_tar.troy",
+                "text": "{Function=BBPreloadParticle, Params={Name=\"luxpassive_tar.troy\"}},"
+              }
+            ]
+          },
+          {
+            "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\LuxIlluminationPassive.preload",
+            "hits": [
+              {
+                "line": 2,
+                "particle": "luxpassive_tar.troy",
+                "text": "{Function=BBPreloadParticle, Params={Name=\"luxpassive_tar.troy\"}},"
+              }
+            ]
+          },
+          {
+            "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\LuxMaliceCannonMis.preload",
+            "hits": [
+              {
+                "line": 2,
+                "particle": "luxpassive_tar.troy",
+                "text": "{Function=BBPreloadParticle, Params={Name=\"luxpassive_tar.troy\"}},"
+              }
+            ]
+          },
+          {
+            "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\NightmareBotLuxRCannonMis.preload",
+            "hits": [
+              {
+                "line": 2,
+                "particle": "luxpassive_tar.troy",
+                "text": "{Function=BBPreloadParticle, Params={Name=\"luxpassive_tar.troy\"}},"
+              }
+            ]
+          }
+        ],
+        "event_names_without_SFX_bank": [],
+        "exact_native_link_count": 16,
+        "current_route": {
+          "source": "crates/client/src/map_audio_requests.rs",
+          "all_candidates_skipped_by_ambient_guard": true,
+          "lookup_rejects_all_candidates": true,
+          "scope": "Isolated exact fragments; not full client"
+        },
+        "own_questions_preserved": [
+          "OLU-6d5ea8db-3472-578f-a6e3-c3254614e801"
+        ],
+        "dependencies_preserved": [
+          "CH-Lux-PASSIF-NETWORK"
+        ],
+        "package_id": "D06-CH-Lux",
+        "requires_packages": [
+          "D04-SYS-04-1",
+          "D04-SYS-04-6",
+          "D05-SYS-05-2",
+          "D05-SYS-05-4",
+          "D14-SYS-14-2",
+          "D20-SYS-20-1"
+        ],
+        "instructions": "Pour Lux : partir du bundle déclaré et des chemins natifs exacts. Le BuffName identique est vérifié, mais ne prouve pas le callback serveur. Examiner les neuf requêtes du lot dans leurs contextes :Draven charge aussi des rappels et des attaques ;ces références ne deviennent pas des déclenchements de son passif. LuxIlluminatingFraulein et son AutoBuffActivateEffect LuxDebuff sont un buff distinct de LuxIlluminationPassive. Les sept chunks clients inspectés ont zéro fonction enfant ;les deux classes communautaires sont vides. L’appel PlaySound Lux dans AscBuff concerne Ascension communautaire, pas le passif natif ni Rust. Qualifier le callback, les conditions, les liens de buffs, les priorités de skin et le routage effectif avant toute intégration ou acceptation audio. Le contrôle Rust ambiant V672 est hérité après revalidation des sources inchangées, pas réexécuté. Aucun événement absent, délai, règle de stack ou média ne doit être inventé.",
+        "passive_assignment_qualified": false,
+        "bank_priority_qualified": false,
+        "playback_or_listening_executed": false,
+        "complete": false,
+        "bundle_identity": {
+          "declared_name": "LuxIlluminationPassive",
+          "root_path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\LuxIlluminationPassive.luaobj",
+          "matching_BuffName_proven": true,
+          "root_callback_count": 0,
+          "root_globals": {
+            "DoesntBreakShields": false,
+            "DoesntTriggerSpellCasts": true,
+            "BuffTextureName": "LuxIlluminatingFraulein.dds",
+            "BuffName": "LuxIlluminationPassive",
+            "PersistsThroughDeath": true,
+            "NonDispellable": true
+          },
+          "preload_path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\LuxIlluminationPassive.preload",
+          "preload_requests": [
+            {
+              "function": "BBPreloadParticle",
+              "name": "luxpassive_tar.troy",
+              "candidates": [
+                "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Particles\\LuxPassive_tar.troybin"
+              ]
+            }
+          ],
+          "separate_buff": [
+            {
+              "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\LuxIlluminatingFraulein.luaobj",
+              "globals": {
+                "BuffTextureName": "LuxIlluminatingFraulein.dds",
+                "BuffName": "LuxIlluminatingFraulein",
+                "AutoBuffActivateEffect": "LuxDebuff.troy",
+                "AutoBuffActivateAttachBoneName": "C_Buffbone_GLb_Head_Loc",
+                "SpellFXOverrideSkins": {
+                  "1": "SteelLegionLux"
+                }
+              }
+            },
+            {
+              "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\LuxIlluminatingFraulein.inibin",
+              "globals": null
+            },
+            {
+              "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Particles\\LuxDebuff.troybin",
+              "globals": null
+            }
+          ],
+          "community_character_script": {
+            "identity": {
+              "path": "D:\\LeagueOfLegendsV2\\4.20\\GameServer\\Content\\LeagueSandbox-Scripts\\Characters\\Lux\\CharScriptLux.cs",
+              "bytes": 123,
+              "sha256": "9a65550911121c8433eb6f65618bfcb48e4df390cdff36f72a611c1b427d9a08"
+            },
+            "empty_class": true
+          },
+          "activation_proven": false
+        },
+        "inherited_probe": {
+          "revision": 672,
+          "rerun": false,
+          "current_inputs_revalidated": true
+        }
+      },
+      "retained_consumers": [
+        "OLC-93924678-ea15-5516-8f55-08616c5450cc"
+      ],
+      "retained_questions": [
+        "OLU-6d5ea8db-3472-578f-a6e3-c3254614e801"
+      ]
+    }
+  ],
+  "source_audit": {
+    "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision673_passive_bundle_audit\\OBSERVATIONS.json",
+    "bytes": 299929,
+    "sha256": "793f99857698565904881d83672b46cf23ca51003060743bcbee7d19c3546646"
+  },
+  "new_game_consumers": [],
+  "goal_complete": false
+}

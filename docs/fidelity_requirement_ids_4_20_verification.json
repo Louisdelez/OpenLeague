@@ -1,0 +1,129 @@
+{
+  "schema": "openleague_fidelity_ids_verification/v1",
+  "task": "SYS-01.2-01",
+  "status": "a_valider",
+  "implementation_complete": true,
+  "technical_verification_complete": true,
+  "acceptance_complete": false,
+  "human_acceptance": "not_given",
+  "updated_utc": "2026-10-20T20:04:04.434960+00:00",
+  "local_contract": "Toutes les exigences du registre actif, les parents historiques et les anciennes tâches archivées reçoivent une identité distincte et stable, consommée dans les instructions et recherches du plan.",
+  "reference": "PUBLIC4.20.0.315 EUW/en_GB, build2014-11-17/17:46:45 sans fuseau ; catalogue4.20.1 distinct.",
+  "counts": {
+    "verified": true,
+    "active_requirements": 42214,
+    "historical_requirements": 151,
+    "archived_requirements": 392,
+    "unique_identities": 42757,
+    "manual_state_mutated": false
+  },
+  "namespace_uuid": "ca018cd0-36bd-56d9-8515-f616cb194d4a",
+  "identity_contract_sha256": "ab7d36ae84bb91aa10016eadb9b54e396b8355cc8efd88e40ba0b81e2fc535fd",
+  "tests": {
+    "identity": {
+      "command": [
+        "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "-E",
+        "-u",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/project-plan",
+        "-p",
+        "test_fidelity_ids.py",
+        "-v"
+      ],
+      "cwd": "E:\\OpenLeague",
+      "started_utc": "2026-10-20T19:53:32.943500+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 9.297,
+      "log": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\installed-identity-tests.log",
+      "log_sha256": "cf767afab8991c0c5d8100507a1cdc57431804738929133d412f505dec799314"
+    },
+    "isolated_plan_and_manual_state": {
+      "command": [
+        "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "-E",
+        "-u",
+        "-B",
+        "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\run_isolated_plan_regression.py"
+      ],
+      "cwd": "E:\\OpenLeague",
+      "started_utc": "2026-10-20T19:53:42.250270+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 66.563,
+      "log": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\identity-plan-regression.log",
+      "log_sha256": "f2188c47e7fb55f8ac3d408e7170867c7784d42c42c626528474e294e2c2a0fb"
+    }
+  },
+  "expected_observed": [
+    {
+      "case": "coverage",
+      "expected": "42214 active +151 historical +392 archived unique stable IDs",
+      "observed": {
+        "verified": true,
+        "active_requirements": 42214,
+        "historical_requirements": 151,
+        "archived_requirements": 392,
+        "unique_identities": 42757,
+        "manual_state_mutated": false
+      },
+      "result": "pass"
+    },
+    {
+      "case": "stability and refusal",
+      "expected": "Title/order/status/reindex stability; reject missing, duplicate, rebound, changed namespace, unsafe resource and lost archived identity",
+      "observed": "15 tests on actual installed module pass; all 42757 initial IDs preserved after780 semantic aliases",
+      "result": "pass"
+    },
+    {
+      "case": "actual plan consumer",
+      "expected": "ID in copied instruction and searchable by that ID, manual progress independent",
+      "observed": "16 isolated plan/manual tests pass; live catalog integration verified separately below",
+      "result": "pass"
+    }
+  ],
+  "prior_attempts": [
+    {
+      "scope": "Isolated HTTP regression under sandbox",
+      "result": "2 socket-bind WinError10013; preserved in attempts/before-semantic-aliases; required-access rerun passed all16."
+    },
+    {
+      "scope": "Positional semantic alias correction",
+      "result": "780 aliases added without changing any initially minted OLF value; semantic reindex tests pass."
+    }
+  ],
+  "implementation_files": [
+    "tools/project-plan/fidelity_ids.py",
+    "tools/project-plan/fidelity_identity_aliases_4_20.json",
+    "tools/project-plan/instructions.py",
+    "tools/project-plan/store.py",
+    "tools/project-plan/test_fidelity_ids.py",
+    "tools/project-plan/test_plan.py"
+  ],
+  "native_executed": false,
+  "game_code_changed": false,
+  "manual_state_mutated": false,
+  "unknowns": [
+    "Semantic renames that change subject identity need an explicit alias/tombstone decision; matching titles alone never merges requirements."
+  ],
+  "evidence_workspace": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20",
+  "integration_pending": false,
+  "integration": {
+    "all_42214_active_instructions_and_search_ids_verified": true,
+    "live_task_and_search_verified": true,
+    "catalog_data_changed_tasks": [
+      "SYS-01.2-01"
+    ],
+    "manual_states_preserved": 42606,
+    "manual_history_preserved": true,
+    "unrelated_metadata_preserved": true,
+    "all_tasks_regenerated_for_identity": true
+  }
+}

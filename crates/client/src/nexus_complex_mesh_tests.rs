@@ -98,3 +98,16 @@ fn custom_nexus_culling_obeys_the_actual_reflected_camera_pipeline_key() {
         assert_eq!(material::view_cull(Cull::None,key),None);
     }
 }
+
+#[test] fn pickup_geometry_matches_every_word_from_original_scb_reader() {
+ let proof:serde_json::Value=serde_json::from_str(include_str!("../../../data/4.20/relic_pickup/scb_reader_contract.json")).unwrap();assert_eq!(proof["passed"],true);
+ let capture=&proof["geometry_capture"];let g=Geometry::decode(PICKUP_SOURCE).unwrap();assert_eq!(g.corners.len(),240);
+ assert_eq!(g.centre.map(f32::to_bits),std::array::from_fn(|i|capture["center_words"][i].as_u64().unwrap() as u32));
+ for (index,c) in g.corners.iter().enumerate() {
+  let face=&capture["faces"][index/3];let corner=index%3;let vertex=face["indices"][corner].as_u64().unwrap() as usize;
+  assert_eq!(c.position.map(f32::to_bits),std::array::from_fn(|i|capture["vertex_words"][vertex*3+i].as_u64().unwrap() as u32));
+  assert_eq!(c.uv.map(f32::to_bits),[face["uv_words"][corner].as_u64().unwrap() as u32,face["uv_words"][3+corner].as_u64().unwrap() as u32]);
+  let bgra=(face["corner_BGRA"][corner].as_u64().unwrap() as u32).to_le_bytes();assert_eq!(c.rgb,[bgra[2],bgra[1],bgra[0]]);
+ }
+ let mut changed=PICKUP_SOURCE.to_vec();changed[200]^=1;assert!(Geometry::decode(&changed).is_err());
+}

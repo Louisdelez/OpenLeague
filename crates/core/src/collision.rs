@@ -7,12 +7,21 @@ pub struct Profile {
     pub selection_radius: f32,
     pub gameplay_radius: Option<f32>,
 }
-pub fn profile(champion: &str) -> &'static Profile {
+fn profiles() -> &'static BTreeMap<String, Profile> {
     static DATA: OnceLock<BTreeMap<String, Profile>> = OnceLock::new();
-    &DATA.get_or_init(|| {
+    DATA.get_or_init(|| {
         serde_json::from_str(include_str!("../../../data/4.20/collision_profiles.json"))
             .expect("native collision profiles")
-    })[champion]
+    })
+}
+pub fn profile(champion: &str) -> &'static Profile {
+    &profiles()[champion]
+}
+
+/// No fallback radius is invented for an unknown or invalid native profile.
+pub(crate) fn pathfinding_radius(champion: &str) -> Option<f32> {
+    profiles().get(champion).map(|p| p.pathfinding_radius)
+        .filter(|radius| radius.is_finite() && *radius > 0. && *radius <= 50.)
 }
 
 /// Community loader defaults; the original optional native field remains unchanged.

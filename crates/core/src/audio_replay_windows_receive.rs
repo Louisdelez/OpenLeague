@@ -57,6 +57,18 @@ impl<N: startup::Network + Send + 'static> receive::Boundary for Backend<N> {
         let target = receive::packet_target(self, event)?;
         match target {
             receive::PACKET_DEFAULT => Ok(0),
+            // Original588290's event0x5F fallback calls5F9FF0, discards the
+            // service+B0 getter result, then returnsAL1. No payload is read.
+            // Earlier72B2F0 listener interception retains its existing priority.
+            0x58bb2e => {
+                let service = self.word(callbacks::SERVICE_GLOBAL)?;
+                let table = self.word(service)?;
+                let slot = table.checked_add(0xb0).ok_or(callbacks::Error::AddressOverflow)?;
+                let method = self.word(slot)?;
+                let _ignored = consumers::ConsumerBoundary::service_gate(self, service, method)
+                    .map_err(callbacks::Error::Boundary)?;
+                Ok(1)
+            },
             0x58a6f2 => self
                 .event_temporary(8, |b, s| {
                     packet95::consume_packet(b, packet, s)

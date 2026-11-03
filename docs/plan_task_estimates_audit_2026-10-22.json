@@ -1,0 +1,209 @@
+{
+  "schema": "openleague-task-estimates/v2",
+  "date": "2026-10-22",
+  "sources": {
+    "completion_tasks_2026-10-20.json": "80cdd69ae8750dfe76877b8e853167d72e0f7402d842d5d9de22cfd54f39f2b2",
+    "execution_plan_A_Z.json": "91c52fe828ed1aee3432e85ef312e4b29349ca08401063608d64136be7f88556",
+    "fidelity_unknowns_4_20.json": "3ef5cd08f2e68d5bbd91e23bf6d706c6227f6d8092bf0bd3c7104b42a80b22ab"
+  },
+  "task_count": 42214,
+  "profiles": 83,
+  "counts": {
+    "difficulty": {
+      "Standard": 25829,
+      "Recherche": 524,
+      "Avancée": 9639,
+      "Simple": 6222
+    },
+    "model_effort": {
+      "6.1 Sol / Moyen": 26806,
+      "Astra / Élevé": 520,
+      "6.1 Sol / Très élevé": 2,
+      "6.1 Sol / Élevé": 9638,
+      "Luna / Faible": 2871,
+      "Luna / Moyen": 2377
+    },
+    "scope": {
+      "review": 10,
+      "first_pass": 8,
+      "task": 42196
+    }
+  },
+  "basis": "AI agent cycles + tools; no human-hour conversion",
+  "no_model_inference_benchmark_claimed": true,
+  "manual_states_mutated": false,
+  "full_completion_time_open_for_first_pass": true,
+  "research": {
+    "schema": "openleague-ai-planning-research/v2",
+    "reviewed_at": "2026-10-22",
+    "sources": [
+      {
+        "id": "selection",
+        "title": "OpenAI — Model selection",
+        "url": "https://developers.openai.com/api/docs/guides/model-selection",
+        "supports": "Luna pour les tâches ciblées ; Sol pour le travail complexe courant ; Astra pour les problèmes ambigus et exigeants. Comparaison sur le travail réel recommandée."
+      },
+      {
+        "id": "reasoning",
+        "title": "OpenAI — Reasoning models",
+        "url": "https://developers.openai.com/api/docs/guides/reasoning",
+        "supports": "Faible, moyen, élevé, très élevé et max ont des usages distincts. Un effort plus élevé peut augmenter la latence. Max et très élevé nécessitent une évaluation de leur bénéfice."
+      },
+      {
+        "id": "latency",
+        "title": "OpenAI — Latency optimization",
+        "url": "https://developers.openai.com/api/docs/guides/latency-optimization",
+        "supports": "Le temps dépend des générations, appels d’outils et allers-retours. Les scripts déterministes et les opérations indépendantes groupées réduisent le travail répétitif."
+      },
+      {
+        "id": "sol",
+        "title": "OpenAI — GPT-6.1 Sol",
+        "url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+        "supports": "Code complexe, usage d’outils et travail professionnel ; low, medium, high, xhigh, max. Les modes de service rapides sont distincts de l’effort."
+      },
+      {
+        "id": "astra",
+        "title": "OpenAI — GPT-6 Astra",
+        "url": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+        "supports": "Raisonnement et tâches complexes avec outils ; choix à comparer au travail réel, sans délai garanti déduit du nom du modèle."
+      },
+      {
+        "id": "luna",
+        "title": "OpenAI — GPT-6 Luna",
+        "url": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+        "supports": "Tâches ciblées à fort volume ; ne remplace pas une expertise sur des sources historiques contradictoires."
+      },
+      {
+        "id": "agent-loop",
+        "title": "OpenAI — Run long horizon tasks with Codex",
+        "url": "https://developers.openai.com/blog/run-long-horizon-tasks-with-codex",
+        "supports": "L’agent alterne plan, modifications, outils, vérifications et corrections. Une tâche ne se réduit pas à un appel au modèle."
+      },
+      {
+        "id": "field-comparison",
+        "title": "OpenAI — Maintaining software with the GPT-6 family",
+        "url": "https://developers.openai.com/blog/maintaining-software-with-the-gpt-6-family",
+        "supports": "Une comparaison publiée trouve des compromis entre configurations sur un audit réel ; ses coûts, résultats et durées ne sont pas transférables directement à OpenLeague."
+      },
+      {
+        "id": "metr-method",
+        "title": "METR — Task-Completion Time Horizons",
+        "url": "https://metr.org/time-horizons/",
+        "supports": "Les horizons de capacité sont exprimés en durée humaine de référence ; ils ne donnent pas le temps mural que met un agent IA. Cette page, arrêtée au 8 septembre 2026, ne classe pas les modèles actuels pour ce projet."
+      }
+    ],
+    "supported_api_efforts": [
+      "low",
+      "medium",
+      "high",
+      "xhigh",
+      "max"
+    ],
+    "codex_specific_modes": "Ultra dans Codex et Ultrafast/Fast de l’API ne sont pas interchangeables avec reasoning.effort. Aucun gain de temps chiffré ni parallélisme automatique supposé ici.",
+    "model_timing_benchmark": "Aucun benchmark comparatif d’inférence de ces modèles sur ce compte. Aucun coefficient de vitesse fictif par modèle.",
+    "timing_assumptions": {
+      "basis": "Boucles d’un agent IA qui lit, modifie, appelle ses outils et vérifie le résultat ; ce ne sont pas des heures de travail humain.",
+      "cycle_seconds_low": 35,
+      "cycle_seconds_high": 120,
+      "cycle_time_status": "Hypothèse de planification explicite, pas cadence publiée par OpenAI ni mesure d’inférence.",
+      "single_agent": true,
+      "service_tier": "standard ou offre interactive courante ; aucun abonnement rapide ni accès spécialisé présumé",
+      "tool_allowance_minutes": [
+        1,
+        5
+      ],
+      "missing_source_policy": "Pour un périmètre transversal ou une recherche non bornée, estimer un premier lot d’investigation et laisser la durée totale ouverte.",
+      "excluded": [
+        "attente de validation humaine",
+        "prérequis non réalisés",
+        "file d’attente inconnue du fournisseur",
+        "téléchargement important non mesuré",
+        "nouvelle compilation complète à cache froid non mesurée"
+      ]
+    },
+    "local_tool_evidence": [
+      {
+        "tool": "Compilation incrémentale de l’application Tauri",
+        "seconds": 22.4,
+        "source": "E:/mapslol3v3/Plan_Tauri_2026-10-20/release-final.log",
+        "kind": "historical tool time, not AI task time"
+      },
+      {
+        "tool": "Préparation et compilation des tests Tauri",
+        "seconds": 7.23,
+        "source": "E:/mapslol3v3/Plan_Tauri_2026-10-20/tests-final.log",
+        "kind": "historical tool time, not AI task time"
+      },
+      {
+        "tool": "Exécution de 10 tests de stockage Rust",
+        "seconds": 0.42,
+        "source": "E:/mapslol3v3/Plan_Tauri_2026-10-20/tests-final.log",
+        "kind": "historical tool time, not AI task time"
+      }
+    ],
+    "local_ai_workflow_anchor": {
+      "workflow": "Ajout des badges, du générateur, tests, compilation et vérification installée de la version 1.1.0",
+      "observed_interval_start_utc": "2026-10-22T13:48:22.860480+00:00",
+      "observed_interval_end_utc": "2026-10-22T14:12:59.921530+00:00",
+      "elapsed_minutes": 24.62,
+      "scope": "Intervalle entre la préparation matérialisée et la validation finale ; pas le début exact de la demande.",
+      "sample_size": 1,
+      "model_exposed": false,
+      "statistical_calibration": false,
+      "inference_latency_measured": false,
+      "source_artifacts": [
+        "E:/mapslol3v3/Plan_badges_2026-10-22/before.json",
+        "E:/mapslol3v3/Plan_badges_2026-10-22/FINAL_VERIFICATION.json"
+      ]
+    }
+  },
+  "checks": {
+    "python_passed": 10,
+    "browser_paths_passed": 13,
+    "rust_backend_changed": false,
+    "native_window": "observed in installed Windows 1.2.0; custom card and details verified"
+  },
+  "data_verification": {
+    "manual_state_unchanged": true,
+    "manual_state": {
+      "count": 42606,
+      "sha256": "c330169d366a4c828221e44b2827be968c3271c8cf34a07537fa1c8982d0710e"
+    },
+    "history_count": 22,
+    "stale_or_missing": [],
+    "sqlite_quick_check": "ok",
+    "card_text_contrast": {
+      "666f7d": 5.08,
+      "646d7a": 5.24,
+      "606774": 5.69,
+      "30343b": 12.5
+    },
+    "all_tasks": 42214
+  },
+  "installed_verification": {
+    "date_utc": "2026-10-22T14:50:51.376161+00:00",
+    "version": "1.2.0",
+    "installed_executable_sha256": "dc35b08641bd6f2403c558e42e1c5fb0242f51e5ed44ed51839193cdea5e30eb",
+    "native_custom_hover_observed": true,
+    "native_estimate_details_observed": true,
+    "native_observation": "Computer Use: actual installed OpenLeague Plan window, D01 registry open, custom three-row colored IA tooltip visible; detailed dialog displays first-pass scope, agent cycles, model recommendation and timing limits; dialog then closed.",
+    "native_window_count_after_removing_duplicate_launch": 1,
+    "native_launch_note": "App discovery initially lagged; explicit second launch caused a duplicate; the untouched home window was closed normally and one visible instance kept.",
+    "manual_state_after": {
+      "count": 42606,
+      "sha256": "c330169d366a4c828221e44b2827be968c3271c8cf34a07537fa1c8982d0710e"
+    },
+    "manual_state_unchanged": true,
+    "history_after": 22,
+    "checks": {
+      "python": 10,
+      "browser": 13
+    },
+    "rust_backend_changed": false,
+    "source_research_count": 9,
+    "ai_task_profiles": 42214,
+    "comparative_model_latency_benchmark_performed": false,
+    "model_selection_changed_automatically": false,
+    "game_qualification_claimed": false
+  }
+}

@@ -34,7 +34,8 @@ pub fn soft_cap(raw: f32) -> f32 {
     }
     raw
 }
-pub fn effective_speed(p: &Champion, flat: f32, tick: u64) -> f32 {
+pub fn effective_speed(p: &Champion, flat: f32, tick: u64) -> f32 { effective_speed_with_slow(p,flat,tick,0.) }
+fn effective_speed_with_slow(p: &Champion, flat: f32, tick: u64, extra_slow:f32) -> f32 {
     let q = if p.champion == "garen" && p.ranks[0] > 0 && tick < p.effects.speed_until {
         spells::garen_value(0, "Effect2", p.ranks[0]) / 100.
     } else {
@@ -42,8 +43,8 @@ pub fn effective_speed(p: &Champion, flat: f32, tick: u64) -> f32 {
     };
     let heal = summoner_heal::speed_fraction(p, tick);
     soft_cap(
-        flat * (1. + q + heal + interactions::relic_haste(p, tick))
-            * (1. - slows::strongest(p, tick)),
+        flat * (1. + q + heal + interactions::relic_haste(p, tick) + trundle_w::movement_bonus(p, tick))
+            * (1. - slows::strongest(p, tick).max(extra_slow)),
     )
 }
 
@@ -52,7 +53,7 @@ impl Simulation {
     pub fn movement_speed(&self, id: u32) -> f32 {
         let p = &self.players[&id];
         let flat = self.definitions[&p.champion].move_speed + shop::bonuses(p).move_speed;
-        effective_speed(p, flat, self.tick) * self.spin_crossing_multiplier(id)
+        effective_speed_with_slow(p, flat, self.tick, self.trundle_e_slow(id)) * self.spin_crossing_multiplier(id)
     }
     pub(crate) fn spin_crossing_multiplier(&self, id: u32) -> f32 {
         let p = &self.players[&id];

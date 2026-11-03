@@ -1,4 +1,4 @@
-//! Timed champion slows and native Garen Q purge. Ordering/stacking still require historical qualification.
+//! Shared timed slows. NPC admission is a bounded local reconstruction, not native immunity data.
 use crate::*;
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Slow {
@@ -6,53 +6,78 @@ pub struct Slow {
     pub fraction: f32,
     pub expires_at: u64,
 }
-pub fn strongest(p: &Champion, tick: u64) -> f32 {
-    if p.health <= 0. {
-        return 0.;
-    }
-    p.slows
-        .iter()
-        .filter(|s| s.expires_at > tick)
-        .map(|s| s.fraction)
-        .fold(0., f32::max)
+fn strongest_entries(entries: &[Slow], tick: u64) -> f32 {
+    entries.iter().filter(|s| s.expires_at > tick).map(|s| s.fraction).fold(0., f32::max)
 }
+pub fn strongest(p: &Champion, tick: u64) -> f32 {
+    if p.health <= 0. { return 0.; }
+    strongest_entries(&p.slows,tick)
+}
+pub fn unit_strongest(u: &world::Unit, tick: u64) -> f32 {
+    if !u.health.is_finite() || u.health <= 0. { return 0.; }
+    strongest_entries(&u.slows,tick)
+}
+fn refresh(entries: &mut Vec<Slow>, slow: Slow, tick: u64) {
+    entries.retain(|s| s.tag != slow.tag && s.expires_at > tick);
+    entries.push(slow);
+}
+enum Store {
+    Champion(u32),
+    Unit { id:u32, definition:String, kind:world::Kind },
+}
+/// Private server event preflight, never serialized or accepted from a client.
+pub(crate) struct PreparedSlow { store:Store, slow:Slow }
 impl Simulation {
-    pub fn grant_slow(
-        &mut self,
-        target: u32,
-        tag: &str,
-        fraction: f32,
-        duration: u64,
-    ) -> Result<(), String> {
-        if self.winner.is_some() {
-            return Err("match ended".into());
-        }
-        if tag.is_empty()
-            || !fraction.is_finite()
-            || fraction <= 0.
-            || fraction > 1.
-            || duration == 0
-        {
+    /// Local support boundary only: configured Map10 lane/Monster definitions,
+    /// plus the identified Tibbers definition. A refusal does not mean native immunity.
+    pub(crate) fn npc_slow_supported(&self, target:u32) -> bool {
+        let Some(u)=self.units.get(&target) else {return false;};
+        let Some(def)=self.world.as_ref().and_then(|w|w.config.definitions.get(&u.definition)) else {return false;};
+        def.id==u.definition && def.kind==u.kind
+            && (u.kind.lane() || u.kind==world::Kind::Monster
+                || (u.kind==world::Kind::Pet && u.definition=="annietibbers"))
+    }
+    /// Read-only preflight before a producer commits damage or any other effect.
+    pub(crate) fn prepare_slow(&self,target:u32,tag:&str,fraction:f32,duration:u64)
+        -> Result<PreparedSlow,String> {
+        if self.winner.is_some() {return Err("match ended".into());}
+        if tag.is_empty() || !fraction.is_finite() || fraction<=0. || fraction>1. || duration==0 {
             return Err("invalid slow".into());
         }
-        let p = self.players.get_mut(&target).ok_or("unknown slow target")?;
-        if p.health <= 0. {
-            return Err("slow target dead".into());
+        let (store,duration)=if let Some(p)=self.players.get(&target) {
+            // Preserve the existing Champion admission and captured Courage duration.
+            if p.health<=0. {return Err("slow target dead".into());}
+            (Store::Champion(target),spells::control_duration(p,self.tick,duration))
+        } else {
+            let u=self.units.get(&target).ok_or("unknown slow target")?;
+            if !u.health.is_finite() || u.health<=0. {return Err("slow target dead or nonfinite".into());}
+            if !self.npc_slow_supported(target) {return Err("NPC slow policy not qualified for this definition".into());}
+            (Store::Unit{id:target,definition:u.definition.clone(),kind:u.kind},duration)
+        };
+        Ok(PreparedSlow{store,slow:Slow{tag:tag.into(),fraction,expires_at:self.tick.saturating_add(duration)}})
+    }
+    /// An accepted hit may kill its target; then the preflighted effect is omitted.
+    /// Identity checks also avoid applying an event to any departed/replaced entity.
+    /// No fallible operation, target admission lookup, or panic occurs after damage.
+    pub(crate) fn commit_slow_for_surviving_target(&mut self,event:PreparedSlow) {
+        match event.store {
+            Store::Champion(id)=>if let Some(p)=self.players.get_mut(&id).filter(|p|!(p.health<=0.)) {
+                refresh(&mut p.slows,event.slow,self.tick);
+            },
+            Store::Unit{id,definition,kind}=>if let Some(u)=self.units.get_mut(&id)
+                .filter(|u|u.definition==definition && u.kind==kind && u.health.is_finite() && u.health>0.) {
+                refresh(&mut u.slows,event.slow,self.tick);
+            },
         }
-        let duration = spells::control_duration(p, self.tick, duration);
-        p.slows.retain(|s| s.tag != tag && s.expires_at > self.tick);
-        p.slows.push(Slow {
-            tag: tag.into(),
-            fraction,
-            expires_at: self.tick.saturating_add(duration),
-        });
-        Ok(())
+    }
+    /// Server event API only. No network command can grant an arbitrary slow.
+    pub fn grant_slow(&mut self,target:u32,tag:&str,fraction:f32,duration:u64) -> Result<(),String> {
+        let event=self.prepare_slow(target,tag,fraction,duration)?;
+        self.commit_slow_for_surviving_target(event);Ok(())
     }
     pub(crate) fn advance_slows(&mut self) {
-        for p in self.players.values_mut() {
-            p.slows
-                .retain(|s| p.health > 0. && s.expires_at > self.tick);
-        }
+        for p in self.players.values_mut() {p.slows.retain(|s|p.health>0. && s.expires_at>self.tick);}
+        for u in self.units.values_mut() {u.slows.retain(|s|u.health.is_finite() && u.health>0. && s.expires_at>self.tick);}
     }
 }
 
@@ -163,3 +188,7 @@ mod tests {
         assert!(s.players[&a].slows.is_empty());
     }
 }
+
+#[cfg(test)]
+#[path="unit_slow_tests.rs"]
+mod unit_tests;

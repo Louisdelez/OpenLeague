@@ -1,0 +1,1893 @@
+{
+  "schema": "openleague_render_material_links/v1",
+  "passed": true,
+  "utc": "2026-10-23T05:20:56.380856+00:00",
+  "full_task_scope_complete": false,
+  "native_or_game_executed": false,
+  "historical_server_policy_qualified": false,
+  "facts": {
+    "candidates": {
+      "producer": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\prepare_render_associations.py",
+        "bytes": 3665,
+        "sha256": "41c31c0e2b1fe0949664ae28caf60bef7be8c883ccc89463348fa6548a6cab37"
+      },
+      "associations": [
+        {
+          "task_id": "SYS-15.3-01",
+          "finding": "Textures de ce consommateur chargées en linéaire ;pas politique générale de toutes textures couleur. Encodage de sortie explicitement fourni ;équivalence cible native non qualifiée.",
+          "remaining": "Native color-space policy must be qualified per content and shader;linear source channels plus final conversion are not universal sRGB loading.",
+          "anchors": [
+            {
+              "path": "crates/client/src/nexus_complex_material.rs",
+              "line": 115,
+              "needle": "s.is_srgb = false;",
+              "role": "render_material_1_0"
+            },
+            {
+              "path": "crates/client/src/nexus_complex_material.rs",
+              "line": 25,
+              "needle": "pub enum OutputEncoding",
+              "role": "render_material_1_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-3cde1e8f-c76d-593d-9287-acf620f7ecdd"
+        },
+        {
+          "task_id": "SYS-15.3-02",
+          "finding": "Terrain :canaux bruts linéaires,Repeat ou Clamp selon usage ;conversion finale dans shader. Éclairage colormap multiplié par4 ;chaîne ombres complète non qualifiée.",
+          "remaining": "All numeric textures,alpha and conversion stages still require coverage.",
+          "anchors": [
+            {
+              "path": "crates/client/src/terrain_material.rs",
+              "line": 107,
+              "needle": "fn configure_image(",
+              "role": "render_material_2_0"
+            },
+            {
+              "path": "assets/shaders/terrain_height_blend.wgsl",
+              "line": 63,
+              "needle": "let lighting = textureSample(colormap",
+              "role": "render_material_2_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-a0eda14e-0f01-5d04-9c26-db5c86be7d5a"
+        },
+        {
+          "task_id": "SYS-15.3-03",
+          "finding": "Validation dimensions,format,payload complet,mips,sampler et associations de cinq DDS ;lookup blanc local distinct. Sampler linéaire/clamp local nommé,non récupéré du runtime natif.",
+          "remaining": "Five exact DDS payloads are checked;all required formats and GPU channel decoding remain unqualified.",
+          "anchors": [
+            {
+              "path": "crates/client/src/ezreal_e_bolt_images.rs",
+              "line": 35,
+              "needle": "pub(crate) fn validate(&self,images:",
+              "role": "render_material_3_0"
+            },
+            {
+              "path": "crates/client/src/ezreal_e_bolt_images.rs",
+              "line": 15,
+              "needle": "pub(crate) fn sampler()",
+              "role": "render_material_3_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-76a6942c-6929-53c8-ab1e-f10e1b38c9cd"
+        },
+        {
+          "task_id": "SYS-15.3-04",
+          "finding": "Validation dimensions,format,payload complet,mips,sampler et associations de cinq DDS ;lookup blanc local distinct. Projections :LOD min et max zéro ;adaptation explicite de MIPFILTER NONE.",
+          "remaining": "Mip retention and projected LOD0 are distinct;native effective mip selection remains open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/ezreal_e_bolt_images.rs",
+              "line": 35,
+              "needle": "pub(crate) fn validate(&self,images:",
+              "role": "render_material_4_0"
+            },
+            {
+              "path": "crates/client/src/terrain_material.rs",
+              "line": 136,
+              "needle": "fn configure_projected_image(",
+              "role": "render_material_4_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-76557522-7944-5c17-ad81-7d1ad514094e"
+        },
+        {
+          "task_id": "SYS-15.3-05",
+          "finding": "Sampler linéaire/clamp local nommé,non récupéré du runtime natif. Terrain :canaux bruts linéaires,Repeat ou Clamp selon usage ;conversion finale dans shader.",
+          "remaining": "E linear/clamp is explicitly local;native sampler policy for every effect remains open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/ezreal_e_bolt_images.rs",
+              "line": 15,
+              "needle": "pub(crate) fn sampler()",
+              "role": "render_material_5_0"
+            },
+            {
+              "path": "crates/client/src/terrain_material.rs",
+              "line": 107,
+              "needle": "fn configure_image(",
+              "role": "render_material_5_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-e5ddd08b-2540-5289-97b9-8d07d19d0dc4"
+        },
+        {
+          "task_id": "SYS-15.3-06",
+          "finding": "Mélange additif RGB et alpha ONE/ONE ;périmètre projection Simple. Sous-ensemble de mélanges Nexus ;variantes non prises en charge restent refusées.",
+          "remaining": "Bounded projected and Nexus blends only;all native modes/flags remain open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/particle_render_state.rs",
+              "line": 19,
+              "needle": "pub fn base_projected_blend()",
+              "role": "render_material_6_0"
+            },
+            {
+              "path": "crates/client/src/nexus_complex_material.rs",
+              "line": 225,
+              "needle": "pub fn supported_blend(",
+              "role": "render_material_6_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-3d7aea97-9b4a-51fe-9c85-7a1fc457a633"
+        },
+        {
+          "task_id": "SYS-15.3-07",
+          "finding": "Modes0..4 et flags routés ;modes supérieurs refusés. GreaterEqual traduit la profondeur inversée ;écriture désactivée séparément.",
+          "remaining": "Current reversed-depth translation is bounded;all interleaved transparency states remain open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/particle_render_state.rs",
+              "line": 5,
+              "needle": "pub fn route(",
+              "role": "render_material_7_0"
+            },
+            {
+              "path": "crates/client/src/particle_render_state.rs",
+              "line": 15,
+              "needle": "pub fn base_projected_depth_compare()",
+              "role": "render_material_7_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-9dcbf7a0-1be7-5727-9d5d-8e9e3b84c1f0"
+        },
+        {
+          "task_id": "SYS-15.3-08",
+          "finding": "Tri local des ReadyQuad à distance identique par identité ;ordre natif explicitement non qualifié.",
+          "remaining": "Ready tie-breaking is local,not native particle ordering;overlapping effects need reference comparison.",
+          "anchors": [
+            {
+              "path": "crates/client/src/annie_ready/phase_order.rs",
+              "line": 11,
+              "needle": "fn stabilize(",
+              "role": "render_material_8_0"
+            },
+            {
+              "path": "crates/client/src/annie_ready/phase_order.rs",
+              "line": 8,
+              "needle": "app.sub_app_mut(RenderApp).add_systems",
+              "role": "render_material_8_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-cbc3ad97-20c7-51f5-b2d1-2fd654121c20"
+        },
+        {
+          "task_id": "SYS-15.3-09",
+          "finding": "Lecture/état environnement et révision shadow_dynamic_only ;ne prouve pas une passe ombres. Éclairage colormap multiplié par4 ;chaîne ombres complète non qualifiée.",
+          "remaining": "ShadowDynamicOnly configuration and colormap arithmetic do not prove a complete shadow renderer.",
+          "anchors": [
+            {
+              "path": "crates/client/src/environment_render_config.rs",
+              "line": 36,
+              "needle": "pub fn apply(",
+              "role": "render_material_9_0"
+            },
+            {
+              "path": "assets/shaders/terrain_height_blend.wgsl",
+              "line": 63,
+              "needle": "let lighting = textureSample(colormap",
+              "role": "render_material_9_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-ce072427-1cd4-5622-aebb-9b980eec077f"
+        },
+        {
+          "task_id": "SYS-15.3-10",
+          "finding": "FoW render prepare consumes GaussianKernel::native and prepares fade plus horizontal/vertical blur bindings; CPU blur arithmetic remains separately identifiable.",
+          "remaining": "FoW has a concrete render consumer;whole native postprocess inventory and visual equivalence remain open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/fow_gpu.rs",
+              "line": 246,
+              "needle": "let Ok(kernel)=crate::fow_postprocess::GaussianKernel::native",
+              "role": "render_material_10_0"
+            },
+            {
+              "path": "crates/client/src/fow_postprocess.rs",
+              "line": 36,
+              "needle": "pub fn blur(",
+              "role": "render_material_10_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-d2c1536d-5cba-5233-a0be-f0c075910a43"
+        },
+        {
+          "task_id": "SYS-15.3-11",
+          "finding": "Libération CPU et retrait des IDs liés ;aucune destruction GPU exécutée ici. Résidents et références restantes nettoyés ;effets réels GPU à qualifier séparément.",
+          "remaining": "CPU reference cleanup does not prove GPU destruction or particle budgets.",
+          "anchors": [
+            {
+              "path": "crates/client/src/relic_texture_reference_cache.rs",
+              "line": 37,
+              "needle": "pub fn release(",
+              "role": "render_material_11_0"
+            },
+            {
+              "path": "crates/client/src/relic_texture_reference_cache.rs",
+              "line": 49,
+              "needle": "pub fn cleanup_renderer(",
+              "role": "render_material_11_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-d1da54d3-17da-54f2-a124-8f0a92a7d50f"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\render-state-research.json",
+          "bytes": 2749,
+          "sha256": "11588cf945b50533b1185db80f012c9770fce5a8eb54ec5820d309a311d6c906"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\dds-sampler-cache-research.json",
+          "bytes": 3062,
+          "sha256": "368024b788046be6f89d30fbbb96f849a9360b4627a3edbb3b5fdca28147a779"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\environment-order-research.json",
+          "bytes": 2755,
+          "sha256": "739a5e2b6d25674a17347c9c515df6d44b4ae64e9e00a037472ee6eb5bb16c96"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\render-state-test-receipt.json",
+          "bytes": 2442,
+          "sha256": "26f6152dc201c6dfcffbb3b741710477957a037c3c4a0ff7277e6be64adf0bad"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\dds-image-test-receipt.json",
+          "bytes": 3000,
+          "sha256": "4c6f218ef1e28c5c458c7eeafa7902b90787f5e01703a3685212b27ff285821c"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\sampler-cache-test-receipt.json",
+          "bytes": 4620,
+          "sha256": "8a93771e26b9e2a419e2fe30a8f21773e4ccc32dad7f14929d99afa7ab92dac5"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\environment-test-receipt.json",
+          "bytes": 2603,
+          "sha256": "8f2a195ee203875eac56f019474bfdc41da54e759230ba900a6b33a1313d5dbe"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\fow-render-test-receipt.json",
+          "bytes": 4682,
+          "sha256": "5e7f5182c64fa28f3bb5111392bed776500e97de7dfbf4c86556cccb807f04ac"
+        }
+      ],
+      "current_sources": [
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\nexus_complex_material.rs",
+          "bytes": 14302,
+          "sha256": "a40bfdea200353b1f87f851442a8073ba716a982d140fe70a4f10931bd4ab84d"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\nexus_complex_material.rs",
+          "bytes": 14302,
+          "sha256": "a40bfdea200353b1f87f851442a8073ba716a982d140fe70a4f10931bd4ab84d"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+          "bytes": 15628,
+          "sha256": "bebddf49191627dc78c52286b69d8086a517e1d6eeac647eca32a190e8b5faa1"
+        },
+        {
+          "path": "F:\\OpenLeague\\assets\\shaders\\terrain_height_blend.wgsl",
+          "bytes": 7088,
+          "sha256": "4f73f3f66707982f457a0f4126a6e220ad9329cb7a00f0febc47c331b623e917"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_e_bolt_images.rs",
+          "bytes": 7622,
+          "sha256": "80daacf4673cb924fd500ab2ee38677243a8e76d55ff58187f28fa8282ae86c1"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_e_bolt_images.rs",
+          "bytes": 7622,
+          "sha256": "80daacf4673cb924fd500ab2ee38677243a8e76d55ff58187f28fa8282ae86c1"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_e_bolt_images.rs",
+          "bytes": 7622,
+          "sha256": "80daacf4673cb924fd500ab2ee38677243a8e76d55ff58187f28fa8282ae86c1"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+          "bytes": 15628,
+          "sha256": "bebddf49191627dc78c52286b69d8086a517e1d6eeac647eca32a190e8b5faa1"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_e_bolt_images.rs",
+          "bytes": 7622,
+          "sha256": "80daacf4673cb924fd500ab2ee38677243a8e76d55ff58187f28fa8282ae86c1"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+          "bytes": 15628,
+          "sha256": "bebddf49191627dc78c52286b69d8086a517e1d6eeac647eca32a190e8b5faa1"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\particle_render_state.rs",
+          "bytes": 4331,
+          "sha256": "4371f6ab73293544822035731815a79fee00e72e0dbd46d4358f76c24b1ee469"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\nexus_complex_material.rs",
+          "bytes": 14302,
+          "sha256": "a40bfdea200353b1f87f851442a8073ba716a982d140fe70a4f10931bd4ab84d"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\particle_render_state.rs",
+          "bytes": 4331,
+          "sha256": "4371f6ab73293544822035731815a79fee00e72e0dbd46d4358f76c24b1ee469"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\particle_render_state.rs",
+          "bytes": 4331,
+          "sha256": "4371f6ab73293544822035731815a79fee00e72e0dbd46d4358f76c24b1ee469"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\annie_ready\\phase_order.rs",
+          "bytes": 1573,
+          "sha256": "8b95054ae7cc2ff5f6237449d636471b5ee09d2ea8f4de5278fca91465712a5d"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\annie_ready\\phase_order.rs",
+          "bytes": 1573,
+          "sha256": "8b95054ae7cc2ff5f6237449d636471b5ee09d2ea8f4de5278fca91465712a5d"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\environment_render_config.rs",
+          "bytes": 7497,
+          "sha256": "9ad5c4452f753e71f2135d09de562b3221830bcf75a79d86f9befc46290b1475"
+        },
+        {
+          "path": "F:\\OpenLeague\\assets\\shaders\\terrain_height_blend.wgsl",
+          "bytes": 7088,
+          "sha256": "4f73f3f66707982f457a0f4126a6e220ad9329cb7a00f0febc47c331b623e917"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\fow_gpu.rs",
+          "bytes": 55932,
+          "sha256": "2270d70e7f081c6a45967f1f8ae3dc15411d1b7282871d357047f7668fa3bad8"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\fow_postprocess.rs",
+          "bytes": 3674,
+          "sha256": "0b5962e4f7f403bd076a774c767e1da247c8dadd18b8045c4bd982107ef4ee43"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\relic_texture_reference_cache.rs",
+          "bytes": 3384,
+          "sha256": "04f3f1c8830bd49bf9df808f26e2b6f515331e2140ab2ff3b356a2f8f32c45c2"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\relic_texture_reference_cache.rs",
+          "bytes": 3384,
+          "sha256": "04f3f1c8830bd49bf9df808f26e2b6f515331e2140ab2ff3b356a2f8f32c45c2"
+        }
+      ],
+      "scope": "Eleven partial source/current consumer links;26 Rust CPU tests in V114,not GPU/native runtime qualification."
+    },
+    "receipts": {
+      "render-state-research.json": {
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\particle_render_state.rs",
+              "bytes": 4331,
+              "sha256": "4371f6ab73293544822035731815a79fee00e72e0dbd46d4358f76c24b1ee469"
+            },
+            "line": 5,
+            "needle": "pub fn route(",
+            "finding": "Modes0..4 et flags routés ;modes supérieurs refusés."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\particle_render_state.rs",
+              "bytes": 4331,
+              "sha256": "4371f6ab73293544822035731815a79fee00e72e0dbd46d4358f76c24b1ee469"
+            },
+            "line": 19,
+            "needle": "pub fn base_projected_blend()",
+            "finding": "Mélange additif RGB et alpha ONE/ONE ;périmètre projection Simple."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\particle_render_state.rs",
+              "bytes": 4331,
+              "sha256": "4371f6ab73293544822035731815a79fee00e72e0dbd46d4358f76c24b1ee469"
+            },
+            "line": 15,
+            "needle": "pub fn base_projected_depth_compare()",
+            "finding": "GreaterEqual traduit la profondeur inversée ;écriture désactivée séparément."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\nexus_complex_material.rs",
+              "bytes": 14302,
+              "sha256": "a40bfdea200353b1f87f851442a8073ba716a982d140fe70a4f10931bd4ab84d"
+            },
+            "line": 115,
+            "needle": "s.is_srgb = false;",
+            "finding": "Textures de ce consommateur chargées en linéaire ;pas politique générale de toutes textures couleur."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\nexus_complex_material.rs",
+              "bytes": 14302,
+              "sha256": "a40bfdea200353b1f87f851442a8073ba716a982d140fe70a4f10931bd4ab84d"
+            },
+            "line": 25,
+            "needle": "pub enum OutputEncoding",
+            "finding": "Encodage de sortie explicitement fourni ;équivalence cible native non qualifiée."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\nexus_complex_material.rs",
+              "bytes": 14302,
+              "sha256": "a40bfdea200353b1f87f851442a8073ba716a982d140fe70a4f10931bd4ab84d"
+            },
+            "line": 225,
+            "needle": "pub fn supported_blend(",
+            "finding": "Sous-ensemble de mélanges Nexus ;variantes non prises en charge restent refusées."
+          }
+        ],
+        "tests": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\render-state-test-receipt.json",
+          "bytes": 2442,
+          "sha256": "26f6152dc201c6dfcffbb3b741710477957a037c3c4a0ff7277e6be64adf0bad"
+        },
+        "native_or_gpu_executed": false,
+        "full_task_scope_complete": false
+      },
+      "dds-sampler-cache-research.json": {
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_e_bolt_images.rs",
+              "bytes": 7622,
+              "sha256": "80daacf4673cb924fd500ab2ee38677243a8e76d55ff58187f28fa8282ae86c1"
+            },
+            "line": 15,
+            "needle": "pub(crate) fn sampler()",
+            "finding": "Sampler linéaire/clamp local nommé,non récupéré du runtime natif."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_e_bolt_images.rs",
+              "bytes": 7622,
+              "sha256": "80daacf4673cb924fd500ab2ee38677243a8e76d55ff58187f28fa8282ae86c1"
+            },
+            "line": 35,
+            "needle": "pub(crate) fn validate(&self,images:",
+            "finding": "Validation dimensions,format,payload complet,mips,sampler et associations de cinq DDS ;lookup blanc local distinct."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+              "bytes": 15628,
+              "sha256": "bebddf49191627dc78c52286b69d8086a517e1d6eeac647eca32a190e8b5faa1"
+            },
+            "line": 107,
+            "needle": "fn configure_image(",
+            "finding": "Terrain :canaux bruts linéaires,Repeat ou Clamp selon usage ;conversion finale dans shader."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+              "bytes": 15628,
+              "sha256": "bebddf49191627dc78c52286b69d8086a517e1d6eeac647eca32a190e8b5faa1"
+            },
+            "line": 136,
+            "needle": "fn configure_projected_image(",
+            "finding": "Projections :LOD min et max zéro ;adaptation explicite de MIPFILTER NONE."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\relic_texture_reference_cache.rs",
+              "bytes": 3384,
+              "sha256": "04f3f1c8830bd49bf9df808f26e2b6f515331e2140ab2ff3b356a2f8f32c45c2"
+            },
+            "line": 37,
+            "needle": "pub fn release(",
+            "finding": "Libération CPU et retrait des IDs liés ;aucune destruction GPU exécutée ici."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\relic_texture_reference_cache.rs",
+              "bytes": 3384,
+              "sha256": "04f3f1c8830bd49bf9df808f26e2b6f515331e2140ab2ff3b356a2f8f32c45c2"
+            },
+            "line": 49,
+            "needle": "pub fn cleanup_renderer(",
+            "finding": "Résidents et références restantes nettoyés ;effets réels GPU à qualifier séparément."
+          }
+        ],
+        "tests": [
+          {
+            "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\dds-image-test-receipt.json",
+            "bytes": 3000,
+            "sha256": "4c6f218ef1e28c5c458c7eeafa7902b90787f5e01703a3685212b27ff285821c"
+          },
+          {
+            "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\sampler-cache-test-receipt.json",
+            "bytes": 4620,
+            "sha256": "8a93771e26b9e2a419e2fe30a8f21773e4ccc32dad7f14929d99afa7ab92dac5"
+          }
+        ],
+        "native_or_gpu_executed": false,
+        "full_task_scope_complete": false
+      },
+      "environment-order-research.json": {
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\annie_ready\\phase_order.rs",
+              "bytes": 1573,
+              "sha256": "8b95054ae7cc2ff5f6237449d636471b5ee09d2ea8f4de5278fca91465712a5d"
+            },
+            "line": 11,
+            "needle": "fn stabilize(",
+            "finding": "Tri local des ReadyQuad à distance identique par identité ;ordre natif explicitement non qualifié."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\environment_render_config.rs",
+              "bytes": 7497,
+              "sha256": "9ad5c4452f753e71f2135d09de562b3221830bcf75a79d86f9befc46290b1475"
+            },
+            "line": 36,
+            "needle": "pub fn apply(",
+            "finding": "Lecture/état environnement et révision shadow_dynamic_only ;ne prouve pas une passe ombres."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\environment_render_config.rs",
+              "bytes": 7497,
+              "sha256": "9ad5c4452f753e71f2135d09de562b3221830bcf75a79d86f9befc46290b1475"
+            },
+            "line": 53,
+            "needle": "pub fn require_current_material_profile(",
+            "finding": "Refuse renderer alternatif et profils sans height-blend/colormap."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\assets\\shaders\\terrain_height_blend.wgsl",
+              "bytes": 7088,
+              "sha256": "4f73f3f66707982f457a0f4126a6e220ad9329cb7a00f0febc47c331b623e917"
+            },
+            "line": 63,
+            "needle": "let lighting = textureSample(colormap",
+            "finding": "Éclairage colormap multiplié par4 ;chaîne ombres complète non qualifiée."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+              "bytes": 141376,
+              "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+            },
+            "line": 931,
+            "needle": "Tonemapping::None,",
+            "finding": "Caméra courante sans tonemapping ;pas inventaire des post-traitements natifs."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\fow_postprocess.rs",
+              "bytes": 3674,
+              "sha256": "0b5962e4f7f403bd076a774c767e1da247c8dadd18b8045c4bd982107ef4ee43"
+            },
+            "line": 36,
+            "needle": "pub fn blur(",
+            "finding": "Calcul de flou FoW existant ;producteurs et intégration distincts,non testés dans cette étape."
+          }
+        ],
+        "tests": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\environment-test-receipt.json",
+          "bytes": 2603,
+          "sha256": "8f2a195ee203875eac56f019474bfdc41da54e759230ba900a6b33a1313d5dbe"
+        },
+        "native_or_gpu_executed": false,
+        "full_task_scope_complete": false
+      },
+      "render-state-test-receipt.json": {
+        "utc": "2026-10-23T05:16:17.750589+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\run_render_state_tests.py",
+          "bytes": 1604,
+          "sha256": "3c004100840466af866daa246387871674a84ed7b2698a2840fa69c7828edeeb"
+        },
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-client",
+              "particle_render_state::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "particle_render_state::baseline_tests::original_reset_and_projected_helpers_match_production_baseline",
+              "particle_render_state::tests::all_original_modes_flags_and_cache_prerequisites_match_routing",
+              "particle_render_state::tests::base_projected_material_matches_actual_separate_alpha_state_calls"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\particle_render_state-tests.log",
+              "bytes": 80238,
+              "sha256": "4fdebaf5363b6ae8e91da682c589843b195ae10a92c9a94f39fe216359c01125"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+                "bytes": 352612864,
+                "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "path": "F:\\OpenLeague\\Cargo.lock",
+            "bytes": 153304,
+            "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\particle_render_state.rs",
+            "bytes": 4331,
+            "sha256": "4371f6ab73293544822035731815a79fee00e72e0dbd46d4358f76c24b1ee469"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\projected_baseline_contract.json",
+            "bytes": 3700,
+            "sha256": "a6f2ca21a8bcd592ecbfcd955bcca07d77e8df1d7f168bf568fea2869a0665de"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\projected_render_state_contract.json",
+            "bytes": 1401080,
+            "sha256": "a243cefb61c79eaceae7f54438dac54293991779963cc44e836702fb72f978f8"
+          }
+        ],
+        "scope": "Fresh current Rust tests for bounded particle render routing/blend/depth;retained native vectors,no original process or GPU execution.",
+        "native_or_gpu_executed": false
+      },
+      "dds-image-test-receipt.json": {
+        "utc": "2026-10-23T05:17:12.146645+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\run_dds_image_tests.py",
+          "bytes": 1625,
+          "sha256": "9b5e5589c6fd89b7b70d9c7849083839378cbf28e224c65c0ac0290f28c178ea"
+        },
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-client",
+              "ezreal_e_bolt_images::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "ezreal_e_bolt_images::tests::missing_resource_or_changed_sampler_or_group_alias_retires_draws",
+              "ezreal_e_bolt_images::tests::every_original_mip_payload_and_the_neutral_lookup_are_checked"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\ezreal_e_bolt_images-tests.log",
+              "bytes": 80120,
+              "sha256": "6bf0317f2664cb517dd4783ad7693f60fb352a7add13d2d49abb906150574816"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+                "bytes": 352612864,
+                "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "path": "F:\\OpenLeague\\assets\\particles\\ezreal\\e_missile\\ball01.dds",
+            "bytes": 22000,
+            "sha256": "9971cfd18a57f515b02f8425faf57d6ac052b30a40b676638a68408d556bd23f"
+          },
+          {
+            "path": "F:\\OpenLeague\\assets\\particles\\ezreal\\e_missile\\color-beacontrail.dds",
+            "bytes": 8320,
+            "sha256": "d07652721520b47363a1766b7bb852d05b9c9362f367110d51383962c4571ad6"
+          },
+          {
+            "path": "F:\\OpenLeague\\assets\\particles\\ezreal\\e_missile\\color-sorakabasicattack.dds",
+            "bytes": 5616,
+            "sha256": "7dd0f9ea029ea2c6f7ac5695223ef84e59fc46727f85f0db7ac8c22e89cf6dea"
+          },
+          {
+            "path": "F:\\OpenLeague\\assets\\particles\\ezreal\\e_missile\\MultiLightning4.dds",
+            "bytes": 349680,
+            "sha256": "0d34360ddfb7b160311d353e25e4910faa71d4a284155dc3bd5c58b92be84125"
+          },
+          {
+            "path": "F:\\OpenLeague\\assets\\particles\\ezreal\\e_missile\\SorakaBasicAttack04.dds",
+            "bytes": 131232,
+            "sha256": "6a601063035b495ef8068570e9fab8c51461f9c14f368a14c9debbf22efe71b8"
+          },
+          {
+            "path": "F:\\OpenLeague\\Cargo.lock",
+            "bytes": 153304,
+            "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_e_bolt_images.rs",
+            "bytes": 7622,
+            "sha256": "80daacf4673cb924fd500ab2ee38677243a8e76d55ff58187f28fa8282ae86c1"
+          }
+        ],
+        "scope": "Fresh current Rust tests for bounded DDS payload, mip count and local sampler bindings;retained native vectors,no original process or GPU execution.",
+        "native_or_gpu_executed": false
+      },
+      "sampler-cache-test-receipt.json": {
+        "utc": "2026-10-23T05:17:29.925563+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\run_sampler_cache_tests.py",
+          "bytes": 1754,
+          "sha256": "b699f8f34d39549f3cb5dccd19d5aaa07d917b873d47b3e39563f2cc808dfa4d"
+        },
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-client",
+              "terrain_material::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "terrain_material::projected_filter_tests::projected_loader_matches_original_linear_filters_and_disables_mip_selection",
+              "terrain_material::projected_sampler_tests::production_projected_image_addressing_matches_original_dispatch_and_cache_cases",
+              "terrain_material::native_terrain_transform_tests::production_c233_matches_native_upload_bits_and_rejects_degenerate_bounds",
+              "terrain_material::native_world_texture_coordinates_tests::map_root_inverse_and_fog_lighting_coordinates_follow_actual_startup_and_native_shader"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\terrain_material-tests.log",
+              "bytes": 80467,
+              "sha256": "c55fd367503aa5ffb8160bb2524df89c22062e40d2eeb08d79e3a2916ba86c83"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+                "bytes": 352612864,
+                "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+              }
+            ]
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-client",
+              "relic_texture_reference_cache::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "relic_texture_reference_cache::tests::destroyed_resource_ids_are_unlinked_during_100000_balanced_lifetimes"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\relic_texture_reference_cache-tests.log",
+              "bytes": 80029,
+              "sha256": "64e9f7b2783badb0ffcb42545576e5dfbb77380d2fe1834d791f466dc708874e"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+                "bytes": 352612864,
+                "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "path": "F:\\OpenLeague\\Cargo.lock",
+            "bytes": 153304,
+            "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\relic_texture_reference_cache.rs",
+            "bytes": 3384,
+            "sha256": "04f3f1c8830bd49bf9df808f26e2b6f515331e2140ab2ff3b356a2f8f32c45c2"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\relic_texture_reference_cache_tests.rs",
+            "bytes": 437,
+            "sha256": "899c2fbfcf86b7ac63a3e5ef387d8d249c47b4fd374a9a3a3336abe0e0c03211"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+            "bytes": 15628,
+            "sha256": "bebddf49191627dc78c52286b69d8086a517e1d6eeac647eca32a190e8b5faa1"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\map_fog_settings.json",
+            "bytes": 68164,
+            "sha256": "5b23bc870c39a6dcb3331b5eb62b53a56a379735cb6690ac30d20068cdb04970"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\particle_filter_contract.json",
+            "bytes": 2735,
+            "sha256": "ea8ef937b15fc37398f07d3d4bf0c65d82f72dd66b1f2cb0e28c0b9104ca9269"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\projected_sampler_contract.json",
+            "bytes": 2491,
+            "sha256": "6c4f5f1d135d8587115a7638c89e3282796f87a707fc770065d6997d6edfef4e"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\terrain_materials.json",
+            "bytes": 1470,
+            "sha256": "3b3ee9c3b32a1dcc20adacaebe5be3e2a8c4df11758fee50223a8dfdd398fd07"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\terrain_transform_contract.json",
+            "bytes": 5555,
+            "sha256": "41b5063e3c804dd8c7144e04eedfc000b59966f287d8be817a21ea66604b241b"
+          }
+        ],
+        "scope": "Fresh current Rust tests for terrain image sampling and CPU reference-cache ownership;retained native vectors,no original process or GPU execution.",
+        "native_or_gpu_executed": false
+      },
+      "environment-test-receipt.json": {
+        "utc": "2026-10-23T05:18:37.021370+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\run_environment_tests.py",
+          "bytes": 1626,
+          "sha256": "4dfdca46527e5fc6d835e93859dfdfc5395a6249df76079f88fc4dd83fa82142"
+        },
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-client",
+              "environment_render_config::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "environment_render_config::tests::real_binary_configuration_drives_current_material_profile_and_rejects_unimplemented_variants",
+              "environment_render_config::tests::original_consumer_branches_defaults_revisions_and_alpha_bits_match_every_recorded_case"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\environment_render_config-tests.log",
+              "bytes": 80183,
+              "sha256": "676d3c7d4887d316414aa991bc357c0b3fa7ccbf57a1e918452f770757e3ef1a"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+                "bytes": 352612864,
+                "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "path": "F:\\OpenLeague\\Cargo.lock",
+            "bytes": 153304,
+            "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\environment_render_config.rs",
+            "bytes": 7497,
+            "sha256": "9ad5c4452f753e71f2135d09de562b3221830bcf75a79d86f9befc46290b1475"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\environment_render_config_contract.json",
+            "bytes": 5074183,
+            "sha256": "9d3520ec3ddba8e465a2fd6b75787b7a6490b6f3ba3fe074b8a6415023028a7b"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\environment_render_defaults.json",
+            "bytes": 543,
+            "sha256": "e70d8f812d9b0ca21bb0e4577586b44f8cd638f1015210ba6930da9fb1f55721"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\terrain_materials.json",
+            "bytes": 1470,
+            "sha256": "3b3ee9c3b32a1dcc20adacaebe5be3e2a8c4df11758fee50223a8dfdd398fd07"
+          }
+        ],
+        "scope": "Fresh current Rust tests for environment configuration and supported material profile;retained native vectors,no original process or GPU execution.",
+        "native_or_gpu_executed": false
+      },
+      "fow-render-test-receipt.json": {
+        "utc": "2026-10-23T05:19:40.455520+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\run_fow_render_tests.py",
+          "bytes": 1655,
+          "sha256": "e26df388623b9cfc6696dc71df612a6db4b5d92472e18458a1a389c09eb9327f"
+        },
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-client",
+              "fow_postprocess::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "fow_postprocess::tests::fade_hits_target_without_overshoot_and_respects_instant_threshold",
+              "fow_postprocess::tests::gaussian_kernel_matches_original_constructor_in_both_resolution_modes"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\fow_postprocess-tests.log",
+              "bytes": 80119,
+              "sha256": "3a1a82c3a2a739da234c825b2fbff5b395c78fa6efcad4693bdd3d6793ec9641"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+                "bytes": 352612864,
+                "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+              }
+            ]
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-client",
+              "fow_gpu::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "fow_gpu::transport_extraction_tests::all_four_destination_allocations_reset_history_but_upload_identity_is_not_a_reset_input",
+              "fow_gpu::transport_extraction_tests::device_recovery_replays_the_real_current_image_once_without_restarting_ordinary_retry",
+              "fow_gpu::view_identity_tests::view_only_replacement_needs_a_new_legal_encode_record_and_does_not_force_fade",
+              "fow_gpu::transport_extraction_tests::recovery_epoch_exhaustion_and_missing_bytes_fail_closed_without_foreign_cleanup",
+              "fow_gpu::view_identity_tests::source_and_all_four_destination_view_changes_reject_work_and_ready_without_history_reset",
+              "fow_gpu::transport_extraction_tests::readiness_identity_and_work_rechecks_reject_stale_publication_recovery_clock_and_history",
+              "fow_gpu::transport_extraction_tests::absence_invalidity_and_explicit_main_teardown_revoke_fresh_and_retained_owner",
+              "fow_gpu::view_identity_tests::opaque_output_proof_keeps_exact_audience_source_incarnation_and_full_binding_identity",
+              "fow_gpu::transport_extraction_tests::actual_assets_extraction_purges_queued_owner_before_fresh_replacement_and_preserves_foreign",
+              "fow_gpu::view_identity_tests::readonly_output_api_refuses_real_cpu_assets_without_prepared_render_images_or_encodes",
+              "fow_gpu::preparation_context_tests::first_frame_replacement_publications_and_recovery_supply_context_without_encoded_readiness",
+              "fow_gpu::transport_extraction_tests::real_extract_schedule_keeps_one_slot_and_remembers_queued_owner_until_render_handoff"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\fow_gpu-tests.log",
+              "bytes": 81500,
+              "sha256": "8b2a17467422e13bb06deafa8f2a5332c4afb71b3bd28e4fcc14c1f4a7f4bb7c"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+                "bytes": 352612864,
+                "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "path": "F:\\OpenLeague\\Cargo.lock",
+            "bytes": 153304,
+            "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\fow_gpu.rs",
+            "bytes": 55932,
+            "sha256": "2270d70e7f081c6a45967f1f8ae3dc15411d1b7282871d357047f7668fa3bad8"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\fow_postprocess.rs",
+            "bytes": 3674,
+            "sha256": "0b5962e4f7f403bd076a774c767e1da247c8dadd18b8045c4bd982107ef4ee43"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\fow_gaussian_contract.json",
+            "bytes": 6648,
+            "sha256": "cbac7e28c199f59755c162bd60ef5809d0d46cfc7d49271659d21581ad3d8c94"
+          }
+        ],
+        "scope": "Fresh current Rust tests for FoW arithmetic and render ownership; CPU tests do not execute GPU;retained native vectors,no original process or GPU execution.",
+        "native_or_gpu_executed": false
+      }
+    },
+    "source_checks": [
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\render-material-associations.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\prepare_render_associations.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\render-state-research.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\dds-sampler-cache-research.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\environment-order-research.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\render-state-test-receipt.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\dds-image-test-receipt.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\sampler-cache-test-receipt.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\environment-test-receipt.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\fow-render-test-receipt.json",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\nexus_complex_material.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\nexus_complex_material.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+      "pin_F:\\OpenLeague\\assets\\shaders\\terrain_height_blend.wgsl",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_bolt_images.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_bolt_images.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_bolt_images.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_bolt_images.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\particle_render_state.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\nexus_complex_material.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\particle_render_state.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\particle_render_state.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\annie_ready\\phase_order.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\annie_ready\\phase_order.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\environment_render_config.rs",
+      "pin_F:\\OpenLeague\\assets\\shaders\\terrain_height_blend.wgsl",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\fow_gpu.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\fow_postprocess.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\relic_texture_reference_cache.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\relic_texture_reference_cache.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\particle_render_state.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\particle_render_state.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\particle_render_state.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\nexus_complex_material.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\nexus_complex_material.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\nexus_complex_material.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\render-state-test-receipt.json",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_bolt_images.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_bolt_images.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\relic_texture_reference_cache.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\relic_texture_reference_cache.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\dds-image-test-receipt.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\sampler-cache-test-receipt.json",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\annie_ready\\phase_order.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\environment_render_config.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\environment_render_config.rs",
+      "pin_F:\\OpenLeague\\assets\\shaders\\terrain_height_blend.wgsl",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\fow_postprocess.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\environment-test-receipt.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\run_render_state_tests.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\particle_render_state-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague\\Cargo.lock",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\particle_render_state.rs",
+      "pin_F:\\OpenLeague\\data\\4.20\\projected_baseline_contract.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\projected_render_state_contract.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\run_dds_image_tests.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\ezreal_e_bolt_images-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague\\assets\\particles\\ezreal\\e_missile\\ball01.dds",
+      "pin_F:\\OpenLeague\\assets\\particles\\ezreal\\e_missile\\color-beacontrail.dds",
+      "pin_F:\\OpenLeague\\assets\\particles\\ezreal\\e_missile\\color-sorakabasicattack.dds",
+      "pin_F:\\OpenLeague\\assets\\particles\\ezreal\\e_missile\\MultiLightning4.dds",
+      "pin_F:\\OpenLeague\\assets\\particles\\ezreal\\e_missile\\SorakaBasicAttack04.dds",
+      "pin_F:\\OpenLeague\\Cargo.lock",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_bolt_images.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\run_sampler_cache_tests.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\terrain_material-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\relic_texture_reference_cache-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague\\Cargo.lock",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\relic_texture_reference_cache.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\relic_texture_reference_cache_tests.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+      "pin_F:\\OpenLeague\\data\\4.20\\map_fog_settings.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\particle_filter_contract.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\projected_sampler_contract.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\terrain_materials.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\terrain_transform_contract.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\run_environment_tests.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\environment_render_config-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague\\Cargo.lock",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\environment_render_config.rs",
+      "pin_F:\\OpenLeague\\data\\4.20\\environment_render_config_contract.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\environment_render_defaults.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\terrain_materials.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\run_fow_render_tests.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\fow_postprocess-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\fow_gpu-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague\\Cargo.lock",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\fow_gpu.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\fow_postprocess.rs",
+      "pin_F:\\OpenLeague\\data\\4.20\\fow_gaussian_contract.json",
+      "tests_0",
+      "tests_3",
+      "tests_5",
+      "tests_9",
+      "tests_10",
+      "tests_12",
+      "tests_14",
+      "26_rust_tests",
+      "eleven_associations",
+      "task_SYS-15.3-01",
+      "anchor_render_material_1_0",
+      "anchor_render_material_1_1",
+      "task_SYS-15.3-02",
+      "anchor_render_material_2_0",
+      "anchor_render_material_2_1",
+      "task_SYS-15.3-03",
+      "anchor_render_material_3_0",
+      "anchor_render_material_3_1",
+      "task_SYS-15.3-04",
+      "anchor_render_material_4_0",
+      "anchor_render_material_4_1",
+      "task_SYS-15.3-05",
+      "anchor_render_material_5_0",
+      "anchor_render_material_5_1",
+      "task_SYS-15.3-06",
+      "anchor_render_material_6_0",
+      "anchor_render_material_6_1",
+      "task_SYS-15.3-07",
+      "anchor_render_material_7_0",
+      "anchor_render_material_7_1",
+      "task_SYS-15.3-08",
+      "anchor_render_material_8_0",
+      "anchor_render_material_8_1",
+      "task_SYS-15.3-09",
+      "anchor_render_material_9_0",
+      "anchor_render_material_9_1",
+      "task_SYS-15.3-10",
+      "anchor_render_material_10_0",
+      "anchor_render_material_10_1",
+      "task_SYS-15.3-11",
+      "anchor_render_material_11_0",
+      "anchor_render_material_11_1"
+    ],
+    "all_material_consumers_qualified": false,
+    "all_required_effects_covered": false
+  },
+  "source_identities": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\render-material-associations.json",
+      "bytes": 17451,
+      "sha256": "dff3b7733ee8a1d761acd6be9b22599ebbfd52f0149d573d5093f64d528bffb4"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\prepare_render_associations.py",
+      "bytes": 3665,
+      "sha256": "41c31c0e2b1fe0949664ae28caf60bef7be8c883ccc89463348fa6548a6cab37"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\render-state-research.json",
+      "bytes": 2749,
+      "sha256": "11588cf945b50533b1185db80f012c9770fce5a8eb54ec5820d309a311d6c906"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\dds-sampler-cache-research.json",
+      "bytes": 3062,
+      "sha256": "368024b788046be6f89d30fbbb96f849a9360b4627a3edbb3b5fdca28147a779"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\environment-order-research.json",
+      "bytes": 2755,
+      "sha256": "739a5e2b6d25674a17347c9c515df6d44b4ae64e9e00a037472ee6eb5bb16c96"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\render-state-test-receipt.json",
+      "bytes": 2442,
+      "sha256": "26f6152dc201c6dfcffbb3b741710477957a037c3c4a0ff7277e6be64adf0bad"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\dds-image-test-receipt.json",
+      "bytes": 3000,
+      "sha256": "4c6f218ef1e28c5c458c7eeafa7902b90787f5e01703a3685212b27ff285821c"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\sampler-cache-test-receipt.json",
+      "bytes": 4620,
+      "sha256": "8a93771e26b9e2a419e2fe30a8f21773e4ccc32dad7f14929d99afa7ab92dac5"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\environment-test-receipt.json",
+      "bytes": 2603,
+      "sha256": "8f2a195ee203875eac56f019474bfdc41da54e759230ba900a6b33a1313d5dbe"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\fow-render-test-receipt.json",
+      "bytes": 4682,
+      "sha256": "5e7f5182c64fa28f3bb5111392bed776500e97de7dfbf4c86556cccb807f04ac"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\nexus_complex_material.rs",
+      "bytes": 14302,
+      "sha256": "a40bfdea200353b1f87f851442a8073ba716a982d140fe70a4f10931bd4ab84d"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+      "bytes": 15628,
+      "sha256": "bebddf49191627dc78c52286b69d8086a517e1d6eeac647eca32a190e8b5faa1"
+    },
+    {
+      "path": "F:\\OpenLeague\\assets\\shaders\\terrain_height_blend.wgsl",
+      "bytes": 7088,
+      "sha256": "4f73f3f66707982f457a0f4126a6e220ad9329cb7a00f0febc47c331b623e917"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_e_bolt_images.rs",
+      "bytes": 7622,
+      "sha256": "80daacf4673cb924fd500ab2ee38677243a8e76d55ff58187f28fa8282ae86c1"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\particle_render_state.rs",
+      "bytes": 4331,
+      "sha256": "4371f6ab73293544822035731815a79fee00e72e0dbd46d4358f76c24b1ee469"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\annie_ready\\phase_order.rs",
+      "bytes": 1573,
+      "sha256": "8b95054ae7cc2ff5f6237449d636471b5ee09d2ea8f4de5278fca91465712a5d"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\environment_render_config.rs",
+      "bytes": 7497,
+      "sha256": "9ad5c4452f753e71f2135d09de562b3221830bcf75a79d86f9befc46290b1475"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\fow_gpu.rs",
+      "bytes": 55932,
+      "sha256": "2270d70e7f081c6a45967f1f8ae3dc15411d1b7282871d357047f7668fa3bad8"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\fow_postprocess.rs",
+      "bytes": 3674,
+      "sha256": "0b5962e4f7f403bd076a774c767e1da247c8dadd18b8045c4bd982107ef4ee43"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\relic_texture_reference_cache.rs",
+      "bytes": 3384,
+      "sha256": "04f3f1c8830bd49bf9df808f26e2b6f515331e2140ab2ff3b356a2f8f32c45c2"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "bytes": 141376,
+      "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\run_render_state_tests.py",
+      "bytes": 1604,
+      "sha256": "3c004100840466af866daa246387871674a84ed7b2698a2840fa69c7828edeeb"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\particle_render_state-tests.log",
+      "bytes": 80238,
+      "sha256": "4fdebaf5363b6ae8e91da682c589843b195ae10a92c9a94f39fe216359c01125"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "bytes": 352612864,
+      "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+    },
+    {
+      "path": "F:\\OpenLeague\\Cargo.lock",
+      "bytes": 153304,
+      "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\projected_baseline_contract.json",
+      "bytes": 3700,
+      "sha256": "a6f2ca21a8bcd592ecbfcd955bcca07d77e8df1d7f168bf568fea2869a0665de"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\projected_render_state_contract.json",
+      "bytes": 1401080,
+      "sha256": "a243cefb61c79eaceae7f54438dac54293991779963cc44e836702fb72f978f8"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\run_dds_image_tests.py",
+      "bytes": 1625,
+      "sha256": "9b5e5589c6fd89b7b70d9c7849083839378cbf28e224c65c0ac0290f28c178ea"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\ezreal_e_bolt_images-tests.log",
+      "bytes": 80120,
+      "sha256": "6bf0317f2664cb517dd4783ad7693f60fb352a7add13d2d49abb906150574816"
+    },
+    {
+      "path": "F:\\OpenLeague\\assets\\particles\\ezreal\\e_missile\\ball01.dds",
+      "bytes": 22000,
+      "sha256": "9971cfd18a57f515b02f8425faf57d6ac052b30a40b676638a68408d556bd23f"
+    },
+    {
+      "path": "F:\\OpenLeague\\assets\\particles\\ezreal\\e_missile\\color-beacontrail.dds",
+      "bytes": 8320,
+      "sha256": "d07652721520b47363a1766b7bb852d05b9c9362f367110d51383962c4571ad6"
+    },
+    {
+      "path": "F:\\OpenLeague\\assets\\particles\\ezreal\\e_missile\\color-sorakabasicattack.dds",
+      "bytes": 5616,
+      "sha256": "7dd0f9ea029ea2c6f7ac5695223ef84e59fc46727f85f0db7ac8c22e89cf6dea"
+    },
+    {
+      "path": "F:\\OpenLeague\\assets\\particles\\ezreal\\e_missile\\MultiLightning4.dds",
+      "bytes": 349680,
+      "sha256": "0d34360ddfb7b160311d353e25e4910faa71d4a284155dc3bd5c58b92be84125"
+    },
+    {
+      "path": "F:\\OpenLeague\\assets\\particles\\ezreal\\e_missile\\SorakaBasicAttack04.dds",
+      "bytes": 131232,
+      "sha256": "6a601063035b495ef8068570e9fab8c51461f9c14f368a14c9debbf22efe71b8"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\run_sampler_cache_tests.py",
+      "bytes": 1754,
+      "sha256": "b699f8f34d39549f3cb5dccd19d5aaa07d917b873d47b3e39563f2cc808dfa4d"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\terrain_material-tests.log",
+      "bytes": 80467,
+      "sha256": "c55fd367503aa5ffb8160bb2524df89c22062e40d2eeb08d79e3a2916ba86c83"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\relic_texture_reference_cache-tests.log",
+      "bytes": 80029,
+      "sha256": "64e9f7b2783badb0ffcb42545576e5dfbb77380d2fe1834d791f466dc708874e"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\relic_texture_reference_cache_tests.rs",
+      "bytes": 437,
+      "sha256": "899c2fbfcf86b7ac63a3e5ef387d8d249c47b4fd374a9a3a3336abe0e0c03211"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\map_fog_settings.json",
+      "bytes": 68164,
+      "sha256": "5b23bc870c39a6dcb3331b5eb62b53a56a379735cb6690ac30d20068cdb04970"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\particle_filter_contract.json",
+      "bytes": 2735,
+      "sha256": "ea8ef937b15fc37398f07d3d4bf0c65d82f72dd66b1f2cb0e28c0b9104ca9269"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\projected_sampler_contract.json",
+      "bytes": 2491,
+      "sha256": "6c4f5f1d135d8587115a7638c89e3282796f87a707fc770065d6997d6edfef4e"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\terrain_materials.json",
+      "bytes": 1470,
+      "sha256": "3b3ee9c3b32a1dcc20adacaebe5be3e2a8c4df11758fee50223a8dfdd398fd07"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\terrain_transform_contract.json",
+      "bytes": 5555,
+      "sha256": "41b5063e3c804dd8c7144e04eedfc000b59966f287d8be817a21ea66604b241b"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\run_environment_tests.py",
+      "bytes": 1626,
+      "sha256": "4dfdca46527e5fc6d835e93859dfdfc5395a6249df76079f88fc4dd83fa82142"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\environment_render_config-tests.log",
+      "bytes": 80183,
+      "sha256": "676d3c7d4887d316414aa991bc357c0b3fa7ccbf57a1e918452f770757e3ef1a"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\environment_render_config_contract.json",
+      "bytes": 5074183,
+      "sha256": "9d3520ec3ddba8e465a2fd6b75787b7a6490b6f3ba3fe074b8a6415023028a7b"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\environment_render_defaults.json",
+      "bytes": 543,
+      "sha256": "e70d8f812d9b0ca21bb0e4577586b44f8cd638f1015210ba6930da9fb1f55721"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\run_fow_render_tests.py",
+      "bytes": 1655,
+      "sha256": "e26df388623b9cfc6696dc71df612a6db4b5d92472e18458a1a389c09eb9327f"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\fow_postprocess-tests.log",
+      "bytes": 80119,
+      "sha256": "3a1a82c3a2a739da234c825b2fbff5b395c78fa6efcad4693bdd3d6793ec9641"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\fow_gpu-tests.log",
+      "bytes": 81500,
+      "sha256": "8b2a17467422e13bb06deafa8f2a5332c4afb71b3bd28e4fcc14c1f4a7f4bb7c"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\fow_gaussian_contract.json",
+      "bytes": 6648,
+      "sha256": "cbac7e28c199f59755c162bd60ef5809d0d46cfc7d49271659d21581ad3d8c94"
+    }
+  ],
+  "checks": [
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\render-material-associations.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\prepare_render_associations.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\render-state-research.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\dds-sampler-cache-research.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\environment-order-research.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\render-state-test-receipt.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\dds-image-test-receipt.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\sampler-cache-test-receipt.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\environment-test-receipt.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\fow-render-test-receipt.json",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\nexus_complex_material.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\nexus_complex_material.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+    "pin_F:\\OpenLeague\\assets\\shaders\\terrain_height_blend.wgsl",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_bolt_images.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_bolt_images.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_bolt_images.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_bolt_images.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\particle_render_state.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\nexus_complex_material.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\particle_render_state.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\particle_render_state.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\annie_ready\\phase_order.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\annie_ready\\phase_order.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\environment_render_config.rs",
+    "pin_F:\\OpenLeague\\assets\\shaders\\terrain_height_blend.wgsl",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\fow_gpu.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\fow_postprocess.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\relic_texture_reference_cache.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\relic_texture_reference_cache.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\particle_render_state.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\particle_render_state.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\particle_render_state.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\nexus_complex_material.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\nexus_complex_material.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\nexus_complex_material.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\render-state-test-receipt.json",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_bolt_images.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_bolt_images.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\relic_texture_reference_cache.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\relic_texture_reference_cache.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\dds-image-test-receipt.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\sampler-cache-test-receipt.json",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\annie_ready\\phase_order.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\environment_render_config.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\environment_render_config.rs",
+    "pin_F:\\OpenLeague\\assets\\shaders\\terrain_height_blend.wgsl",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\fow_postprocess.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\environment-test-receipt.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\run_render_state_tests.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\particle_render_state-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague\\Cargo.lock",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\particle_render_state.rs",
+    "pin_F:\\OpenLeague\\data\\4.20\\projected_baseline_contract.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\projected_render_state_contract.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\run_dds_image_tests.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\ezreal_e_bolt_images-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague\\assets\\particles\\ezreal\\e_missile\\ball01.dds",
+    "pin_F:\\OpenLeague\\assets\\particles\\ezreal\\e_missile\\color-beacontrail.dds",
+    "pin_F:\\OpenLeague\\assets\\particles\\ezreal\\e_missile\\color-sorakabasicattack.dds",
+    "pin_F:\\OpenLeague\\assets\\particles\\ezreal\\e_missile\\MultiLightning4.dds",
+    "pin_F:\\OpenLeague\\assets\\particles\\ezreal\\e_missile\\SorakaBasicAttack04.dds",
+    "pin_F:\\OpenLeague\\Cargo.lock",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_bolt_images.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\run_sampler_cache_tests.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\terrain_material-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\relic_texture_reference_cache-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague\\Cargo.lock",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\relic_texture_reference_cache.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\relic_texture_reference_cache_tests.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+    "pin_F:\\OpenLeague\\data\\4.20\\map_fog_settings.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\particle_filter_contract.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\projected_sampler_contract.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\terrain_materials.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\terrain_transform_contract.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\run_environment_tests.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\environment_render_config-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague\\Cargo.lock",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\environment_render_config.rs",
+    "pin_F:\\OpenLeague\\data\\4.20\\environment_render_config_contract.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\environment_render_defaults.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\terrain_materials.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\run_fow_render_tests.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\fow_postprocess-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision114\\fow_gpu-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague\\Cargo.lock",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\fow_gpu.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\fow_postprocess.rs",
+    "pin_F:\\OpenLeague\\data\\4.20\\fow_gaussian_contract.json",
+    "tests_0",
+    "tests_3",
+    "tests_5",
+    "tests_9",
+    "tests_10",
+    "tests_12",
+    "tests_14",
+    "26_rust_tests",
+    "eleven_associations",
+    "task_SYS-15.3-01",
+    "anchor_render_material_1_0",
+    "anchor_render_material_1_1",
+    "task_SYS-15.3-02",
+    "anchor_render_material_2_0",
+    "anchor_render_material_2_1",
+    "task_SYS-15.3-03",
+    "anchor_render_material_3_0",
+    "anchor_render_material_3_1",
+    "task_SYS-15.3-04",
+    "anchor_render_material_4_0",
+    "anchor_render_material_4_1",
+    "task_SYS-15.3-05",
+    "anchor_render_material_5_0",
+    "anchor_render_material_5_1",
+    "task_SYS-15.3-06",
+    "anchor_render_material_6_0",
+    "anchor_render_material_6_1",
+    "task_SYS-15.3-07",
+    "anchor_render_material_7_0",
+    "anchor_render_material_7_1",
+    "task_SYS-15.3-08",
+    "anchor_render_material_8_0",
+    "anchor_render_material_8_1",
+    "task_SYS-15.3-09",
+    "anchor_render_material_9_0",
+    "anchor_render_material_9_1",
+    "task_SYS-15.3-10",
+    "anchor_render_material_10_0",
+    "anchor_render_material_10_1",
+    "task_SYS-15.3-11",
+    "anchor_render_material_11_0",
+    "anchor_render_material_11_1"
+  ],
+  "checks_count": 144,
+  "associations": [
+    {
+      "task_id": "SYS-15.3-01",
+      "finding": "Textures de ce consommateur chargées en linéaire ;pas politique générale de toutes textures couleur. Encodage de sortie explicitement fourni ;équivalence cible native non qualifiée.",
+      "remaining": "Native color-space policy must be qualified per content and shader;linear source channels plus final conversion are not universal sRGB loading.",
+      "anchors": [
+        {
+          "path": "crates/client/src/nexus_complex_material.rs",
+          "line": 115,
+          "needle": "s.is_srgb = false;",
+          "role": "render_material_1_0"
+        },
+        {
+          "path": "crates/client/src/nexus_complex_material.rs",
+          "line": 25,
+          "needle": "pub enum OutputEncoding",
+          "role": "render_material_1_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-3cde1e8f-c76d-593d-9287-acf620f7ecdd"
+    },
+    {
+      "task_id": "SYS-15.3-02",
+      "finding": "Terrain :canaux bruts linéaires,Repeat ou Clamp selon usage ;conversion finale dans shader. Éclairage colormap multiplié par4 ;chaîne ombres complète non qualifiée.",
+      "remaining": "All numeric textures,alpha and conversion stages still require coverage.",
+      "anchors": [
+        {
+          "path": "crates/client/src/terrain_material.rs",
+          "line": 107,
+          "needle": "fn configure_image(",
+          "role": "render_material_2_0"
+        },
+        {
+          "path": "assets/shaders/terrain_height_blend.wgsl",
+          "line": 63,
+          "needle": "let lighting = textureSample(colormap",
+          "role": "render_material_2_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-a0eda14e-0f01-5d04-9c26-db5c86be7d5a"
+    },
+    {
+      "task_id": "SYS-15.3-03",
+      "finding": "Validation dimensions,format,payload complet,mips,sampler et associations de cinq DDS ;lookup blanc local distinct. Sampler linéaire/clamp local nommé,non récupéré du runtime natif.",
+      "remaining": "Five exact DDS payloads are checked;all required formats and GPU channel decoding remain unqualified.",
+      "anchors": [
+        {
+          "path": "crates/client/src/ezreal_e_bolt_images.rs",
+          "line": 35,
+          "needle": "pub(crate) fn validate(&self,images:",
+          "role": "render_material_3_0"
+        },
+        {
+          "path": "crates/client/src/ezreal_e_bolt_images.rs",
+          "line": 15,
+          "needle": "pub(crate) fn sampler()",
+          "role": "render_material_3_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-76a6942c-6929-53c8-ab1e-f10e1b38c9cd"
+    },
+    {
+      "task_id": "SYS-15.3-04",
+      "finding": "Validation dimensions,format,payload complet,mips,sampler et associations de cinq DDS ;lookup blanc local distinct. Projections :LOD min et max zéro ;adaptation explicite de MIPFILTER NONE.",
+      "remaining": "Mip retention and projected LOD0 are distinct;native effective mip selection remains open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/ezreal_e_bolt_images.rs",
+          "line": 35,
+          "needle": "pub(crate) fn validate(&self,images:",
+          "role": "render_material_4_0"
+        },
+        {
+          "path": "crates/client/src/terrain_material.rs",
+          "line": 136,
+          "needle": "fn configure_projected_image(",
+          "role": "render_material_4_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-76557522-7944-5c17-ad81-7d1ad514094e"
+    },
+    {
+      "task_id": "SYS-15.3-05",
+      "finding": "Sampler linéaire/clamp local nommé,non récupéré du runtime natif. Terrain :canaux bruts linéaires,Repeat ou Clamp selon usage ;conversion finale dans shader.",
+      "remaining": "E linear/clamp is explicitly local;native sampler policy for every effect remains open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/ezreal_e_bolt_images.rs",
+          "line": 15,
+          "needle": "pub(crate) fn sampler()",
+          "role": "render_material_5_0"
+        },
+        {
+          "path": "crates/client/src/terrain_material.rs",
+          "line": 107,
+          "needle": "fn configure_image(",
+          "role": "render_material_5_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-e5ddd08b-2540-5289-97b9-8d07d19d0dc4"
+    },
+    {
+      "task_id": "SYS-15.3-06",
+      "finding": "Mélange additif RGB et alpha ONE/ONE ;périmètre projection Simple. Sous-ensemble de mélanges Nexus ;variantes non prises en charge restent refusées.",
+      "remaining": "Bounded projected and Nexus blends only;all native modes/flags remain open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/particle_render_state.rs",
+          "line": 19,
+          "needle": "pub fn base_projected_blend()",
+          "role": "render_material_6_0"
+        },
+        {
+          "path": "crates/client/src/nexus_complex_material.rs",
+          "line": 225,
+          "needle": "pub fn supported_blend(",
+          "role": "render_material_6_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-3d7aea97-9b4a-51fe-9c85-7a1fc457a633"
+    },
+    {
+      "task_id": "SYS-15.3-07",
+      "finding": "Modes0..4 et flags routés ;modes supérieurs refusés. GreaterEqual traduit la profondeur inversée ;écriture désactivée séparément.",
+      "remaining": "Current reversed-depth translation is bounded;all interleaved transparency states remain open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/particle_render_state.rs",
+          "line": 5,
+          "needle": "pub fn route(",
+          "role": "render_material_7_0"
+        },
+        {
+          "path": "crates/client/src/particle_render_state.rs",
+          "line": 15,
+          "needle": "pub fn base_projected_depth_compare()",
+          "role": "render_material_7_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-9dcbf7a0-1be7-5727-9d5d-8e9e3b84c1f0"
+    },
+    {
+      "task_id": "SYS-15.3-08",
+      "finding": "Tri local des ReadyQuad à distance identique par identité ;ordre natif explicitement non qualifié.",
+      "remaining": "Ready tie-breaking is local,not native particle ordering;overlapping effects need reference comparison.",
+      "anchors": [
+        {
+          "path": "crates/client/src/annie_ready/phase_order.rs",
+          "line": 11,
+          "needle": "fn stabilize(",
+          "role": "render_material_8_0"
+        },
+        {
+          "path": "crates/client/src/annie_ready/phase_order.rs",
+          "line": 8,
+          "needle": "app.sub_app_mut(RenderApp).add_systems",
+          "role": "render_material_8_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-cbc3ad97-20c7-51f5-b2d1-2fd654121c20"
+    },
+    {
+      "task_id": "SYS-15.3-09",
+      "finding": "Lecture/état environnement et révision shadow_dynamic_only ;ne prouve pas une passe ombres. Éclairage colormap multiplié par4 ;chaîne ombres complète non qualifiée.",
+      "remaining": "ShadowDynamicOnly configuration and colormap arithmetic do not prove a complete shadow renderer.",
+      "anchors": [
+        {
+          "path": "crates/client/src/environment_render_config.rs",
+          "line": 36,
+          "needle": "pub fn apply(",
+          "role": "render_material_9_0"
+        },
+        {
+          "path": "assets/shaders/terrain_height_blend.wgsl",
+          "line": 63,
+          "needle": "let lighting = textureSample(colormap",
+          "role": "render_material_9_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-ce072427-1cd4-5622-aebb-9b980eec077f"
+    },
+    {
+      "task_id": "SYS-15.3-10",
+      "finding": "FoW render prepare consumes GaussianKernel::native and prepares fade plus horizontal/vertical blur bindings; CPU blur arithmetic remains separately identifiable.",
+      "remaining": "FoW has a concrete render consumer;whole native postprocess inventory and visual equivalence remain open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/fow_gpu.rs",
+          "line": 246,
+          "needle": "let Ok(kernel)=crate::fow_postprocess::GaussianKernel::native",
+          "role": "render_material_10_0"
+        },
+        {
+          "path": "crates/client/src/fow_postprocess.rs",
+          "line": 36,
+          "needle": "pub fn blur(",
+          "role": "render_material_10_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-d2c1536d-5cba-5233-a0be-f0c075910a43"
+    },
+    {
+      "task_id": "SYS-15.3-11",
+      "finding": "Libération CPU et retrait des IDs liés ;aucune destruction GPU exécutée ici. Résidents et références restantes nettoyés ;effets réels GPU à qualifier séparément.",
+      "remaining": "CPU reference cleanup does not prove GPU destruction or particle budgets.",
+      "anchors": [
+        {
+          "path": "crates/client/src/relic_texture_reference_cache.rs",
+          "line": 37,
+          "needle": "pub fn release(",
+          "role": "render_material_11_0"
+        },
+        {
+          "path": "crates/client/src/relic_texture_reference_cache.rs",
+          "line": 49,
+          "needle": "pub fn cleanup_renderer(",
+          "role": "render_material_11_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-d1da54d3-17da-54f2-a124-8f0a92a7d50f"
+    }
+  ]
+}

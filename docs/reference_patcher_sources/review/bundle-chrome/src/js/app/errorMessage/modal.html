@@ -1,0 +1,80 @@
+<div class="modal">
+    <style>
+        #modal-main {
+            position: relative;
+            width: 454px;
+            max-height: 569px;
+            z-index: 2000;
+            background-image: url('images/bgOptionsMenu.jpg');
+            padding-bottom: 20px;
+        }
+
+        .modal-content {
+            display: inline-block;
+            width: 100%;
+            height: auto;
+            margin-top: 5px;
+        }
+
+        .modal-header {
+            width: 100%;
+            text-align: center;
+        }
+
+        .clip-text {
+            color: transparent;
+            -webkit-background-clip: text;
+        }
+
+        .error-message {
+            display: block;
+            width: 80%;
+            margin-right: auto;
+            margin-left: auto;
+            margin-bottom: 30px;
+            vertical-align: middle;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 70%;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        h1 {
+            font-size: 16px;
+            font-weight: 500;
+            font-style: italic;
+            background-color: #e2e7eb;
+            text-align: center;
+        }
+
+        p {
+            font-size: 14px;
+            font-weight: normal;
+            font-style: normal;
+            background-color: #e2e7eb;
+        }
+
+    </style>
+    <div id="modal-main" class="modal-default">
+        <div class="modal-button-group pull-right">
+            <button id="buttonSettingsClose" class="button button-chrome button-modal" ng-click="close()"><i class="icon-close chrome-text-gradient"></i></button>
+        </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="clip-text font-lol">{{title}}</h1>
+                <div><img src="images/artSettingsSeparator.png"></div>
+            </div>
+            <div class="error-message">
+                <p class="clip-text font-spiegel">{{message}}</p>
+            </div>
+            <div class="modal-buttons">
+                <button class="button-primary" ng-click="close();"><p class="button-primary-text">{{continue}}</p></button>
+                <button class="button-primary" ng-click="close(); savelogsClick()"><p class="button-primary-text">{{savelogs}}</p></button>
+            </div>
+        </div>
+    </div>
+</div>

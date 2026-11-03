@@ -3,14 +3,42 @@
 //! Host handles/pointers remain full-width; logical32-bit references are explicit.
 use std::{collections::{BTreeMap,BTreeSet},ffi::c_void,sync::{Arc,Mutex,atomic::{AtomicU32,Ordering}}};
 use crate::{audio_bus_bank::Error,audio_plugin_factory::Memory,audio_global_float_default_power::Windows};
-#[link(name="kernel32")]unsafe extern "system"{fn GetProcessHeap()->*mut c_void;fn HeapAlloc(h:*mut c_void,flags:u32,size:usize)->*mut c_void;fn HeapFree(h:*mut c_void,flags:u32,p:*mut c_void)->i32;fn GetLastError()->u32;fn Sleep(milliseconds:u32);}
+#[link(name="kernel32")]unsafe extern "system"{fn GetProcessHeap()->*mut c_void;fn HeapAlloc(h:*mut c_void,flags:u32,size:usize)->*mut c_void;fn HeapFree(h:*mut c_void,flags:u32,p:*mut c_void)->i32;fn GetCurrentProcess()->*mut c_void;fn ReadProcessMemory(process:*mut c_void,source:*const c_void,out:*mut c_void,size:usize,copied:*mut usize)->i32;fn GetLastError()->u32;fn SetLastError(value:u32);fn Sleep(milliseconds:u32);}
 #[derive(Debug,Clone,PartialEq,Eq)]pub enum Failure{Uninitialized,InvalidReference,UnsupportedFlags,AddressSpace,UnknownReference(u32),WrongSize,MirrorAllocation,RetirementConflict(u32),Windows{operation:&'static str,code:u32}}
-#[derive(Default)]pub struct Report{failures:Mutex<Vec<Failure>>,allocations:AtomicU32,frees:AtomicU32}
-impl Report{fn record(&self,e:Failure){self.failures.lock().unwrap_or_else(|p|p.into_inner()).push(e);}pub fn allocations(&self)->u32{self.allocations.load(Ordering::Acquire)}pub fn frees(&self)->u32{self.frees.load(Ordering::Acquire)}pub fn failures(&self)->Vec<Failure>{self.failures.lock().unwrap_or_else(|p|p.into_inner()).clone()}}
+#[derive(Default)]pub struct Report{failures:Mutex<Vec<Failure>>,allocations:AtomicU32,frees:AtomicU32,raw_snapshots:AtomicU32}
+impl Report{fn record(&self,e:Failure){self.failures.lock().unwrap_or_else(|p|p.into_inner()).push(e);}pub fn allocations(&self)->u32{self.allocations.load(Ordering::Acquire)}pub fn frees(&self)->u32{self.frees.load(Ordering::Acquire)}pub fn raw_snapshots(&self)->u32{self.raw_snapshots.load(Ordering::Acquire)}pub fn failures(&self)->Vec<Failure>{self.failures.lock().unwrap_or_else(|p|p.into_inner()).clone()}}
+struct SnapshotErrorState(u32);impl Drop for SnapshotErrorState{fn drop(&mut self){unsafe{SetLastError(self.0)}}}
+// The source is an exclusive newly owned allocation in this process.
+// The output Vec is initialized before FFI; partial reads are never exposed.
+fn observe_owned_bytes(pointer:usize,size:usize)->Result<Vec<u8>,Failure>{
+ let _saved_error=SnapshotErrorState(unsafe{GetLastError()});
+ let mut bytes=Vec::new();bytes.try_reserve_exact(size).map_err(|_|Failure::MirrorAllocation)?;bytes.resize(size,0);
+ if size!=0{let mut copied=0usize;let ok=unsafe{ReadProcessMemory(GetCurrentProcess(),pointer as*const c_void,bytes.as_mut_ptr().cast(),size,&mut copied)};
+  if ok==0{return Err(Failure::Windows{operation:"ReadProcessMemory",code:unsafe{GetLastError()}});}
+  if copied!=size{return Err(Failure::WrongSize);}
+ }Ok(bytes)
+}
 struct Block{pointer:Option<usize>,heap:usize,size:usize,report:Arc<Report>}
 impl Block{
- fn new(heap:usize,size:usize,report:Arc<Report>)->Option<Self>{let pointer=unsafe{HeapAlloc(heap as*mut c_void,8,size)};if pointer.is_null(){None}else{{report.allocations.fetch_add(1,Ordering::AcqRel);Some(Self{pointer:Some(pointer as usize),heap,size,report})}}}
- // Only zero-initialized HeapAlloc blocks are exposed as byte slices.
+ fn new(heap:usize,size:usize,flags:u32,report:Arc<Report>)->Result<Option<Self>,Failure>{
+  Self::new_observed(heap,size,flags,report,observe_owned_bytes)
+ }
+ fn new_observed(heap:usize,size:usize,flags:u32,report:Arc<Report>,observe:impl FnOnce(usize,usize)->Result<Vec<u8>,Failure>)->Result<Option<Self>,Failure>{
+  let pointer=unsafe{HeapAlloc(heap as*mut c_void,flags,size)};
+  if pointer.is_null(){return Ok(None);}
+  report.allocations.fetch_add(1,Ordering::AcqRel);
+  let mut block=Self{pointer:Some(pointer as usize),heap,size,report};
+  if flags==0&&size!=0{
+   // This owned block has not escaped. The OS copies its physical bytes to
+   // initialized output storage; do not first create a Rust slice of it.
+   let observed=observe(pointer as usize,size)?;
+   block.write(&observed)?;
+   block.report.raw_snapshots.fetch_add(1,Ordering::AcqRel);
+  }
+  Ok(Some(block))
+ }
+ // Bytes are initialized either by HEAP_ZERO_MEMORY or by writing the
+ // exact fully observed self-process snapshot back before slice exposure.
  fn bytes(&self)->&[u8]{unsafe{std::slice::from_raw_parts(self.pointer.unwrap()as*const u8,self.size)}}
  fn write(&mut self,raw:&[u8])->Result<(),Failure>{if raw.len()!=self.size{return Err(Failure::WrongSize);}unsafe{std::ptr::copy_nonoverlapping(raw.as_ptr(),self.pointer.unwrap()as*mut u8,self.size)};Ok(())}
  fn free(&mut self)->Result<(),Failure>{if let Some(pointer)=self.pointer{if unsafe{HeapFree(self.heap as*mut c_void,0,pointer as*mut c_void)}==0{return Err(Failure::Windows{operation:"HeapFree",code:unsafe{GetLastError()}});}self.pointer=None;self.report.frees.fetch_add(1,Ordering::AcqRel);}Ok(())}
@@ -38,7 +66,8 @@ impl Heap{
  }
  pub fn retained_mirrors(&self)->usize{self.retired.len()}
 
- fn allocate_block(&self,size:usize)->Result<Option<Block>,Failure>{Ok(Block::new(self.host.ok_or(Failure::Uninitialized)?,size,self.report.clone()))}
+ fn allocate_block(&self,size:usize)->Result<Option<Block>,Failure>{self.allocate_block_flags(size,8)}
+ fn allocate_block_flags(&self,size:usize,flags:u32)->Result<Option<Block>,Failure>{Block::new(self.host.ok_or(Failure::Uninitialized)?,size,flags,self.report.clone())}
  /// Restore a captured canonical allocation into a distinct owned physical block.
  /// This is an explicit restoration step, not original calloc/startup execution.
  pub fn adopt(&mut self,reference:u32,m:&BTreeMap<u32,Memory>)->Result<(),Failure>{if reference==0||self.blocks.contains_key(&reference)||self.retired.contains_key(&reference){return Err(Failure::InvalidReference);}let raw=&m.get(&reference).ok_or(Failure::UnknownReference(reference))?.raw;
@@ -46,12 +75,12 @@ impl Heap{
  if self.blocks.iter().map(|(&a,b)|(a,b.size)).chain(self.retired.iter().map(|(&a,&size)|(a,size))).any(|(a,size)|(a as u64)<end&&(reference as u64)<a as u64+size.max(1)as u64){return Err(Failure::InvalidReference);}
  let mut block=self.allocate_block(raw.len())?.ok_or(Failure::Windows{operation:"HeapAlloc",code:unsafe{GetLastError()}})?;block.write(raw)?;self.blocks.insert(reference,block);Ok(())}
  pub fn allocate(&mut self,heap:u32,flags:u32,size:u32,m:&mut BTreeMap<u32,Memory>,d:&mut BTreeSet<u32>)->Result<u32,Failure>{
-  if heap!=self.label{return Err(Failure::InvalidReference);}if flags!=8{return Err(Failure::UnsupportedFlags);}let mut reference=self.next;let span=size.max(1).checked_add(15).ok_or(Failure::AddressSpace)?&!15;
+  if heap!=self.label{return Err(Failure::InvalidReference);}if flags!=0&&flags!=8{return Err(Failure::UnsupportedFlags);}let mut reference=self.next;let span=size.max(1).checked_add(15).ok_or(Failure::AddressSpace)?&!15;
   loop{let end=reference.checked_add(span).ok_or(Failure::AddressSpace)?;
    let occupied=m.iter().map(|(&a,v)|(a,v.raw.len())).chain(self.blocks.iter().map(|(&a,b)|(a,b.size))).chain(self.retired.iter().map(|(&a,&size)|(a,size)));
    if let Some((a,size))=occupied.filter(|(a,size)|(reference as u64)<*a as u64+(*size).max(1)as u64&&(*a as u64)<end as u64).next(){reference=(a as u64+size.max(1)as u64+15).try_into().map_err(|_|Failure::AddressSpace)?;reference&=!15;}else{break;}
   }
-  let Some(block)=self.allocate_block(size as usize)?else{return Ok(0);};let mut raw=Vec::new();raw.try_reserve_exact(size as usize).map_err(|_|Failure::MirrorAllocation)?;raw.extend_from_slice(block.bytes());self.next=reference.checked_add(span).ok_or(Failure::AddressSpace)?;m.insert(reference,Memory{reference,raw});d.remove(&reference);self.blocks.insert(reference,block);Ok(reference)
+  let Some(block)=self.allocate_block_flags(size as usize,flags)?else{return Ok(0);};let mut raw=Vec::new();raw.try_reserve_exact(size as usize).map_err(|_|Failure::MirrorAllocation)?;raw.extend_from_slice(block.bytes());self.next=reference.checked_add(span).ok_or(Failure::AddressSpace)?;m.insert(reference,Memory{reference,raw});d.remove(&reference);self.blocks.insert(reference,block);Ok(reference)
  }
  /// Logical writes are flushed at the native free/read boundary. The canonical
  /// mirror is retained for forensic snapshots after physical retirement.
@@ -171,3 +200,7 @@ impl<S:crate::audio_crt_worker_com_startup::Services> crate::audio_crt_worker_co
 impl<S:crate::audio_crt_worker_body::CallbackServices> crate::audio_crt_worker_body::CallbackServices for Provider<S>{
  fn worker_callback(&mut self,r:u32,a:u32,m:&mut BTreeMap<u32,Memory>,d:&mut BTreeSet<u32>)->Result<u32,Error>{self.inner.worker_callback(r,a,m,d)}
 }
+
+#[cfg(test)]
+#[path="audio_crt_windows_process_heap_raw_tests.rs"]
+mod raw_allocation_tests;

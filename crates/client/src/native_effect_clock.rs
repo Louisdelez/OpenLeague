@@ -46,9 +46,18 @@ impl EffectClock {
   let now=openleague_core::native_troy_clock::Clock{origin:0.,scale:1.,offset:0.}.sample(Some(game.sample()))? as f64;
   self.game=game;self.control=control;self.start=Some(next_start);self.now=now;Ok(())
  }
+ /// Presentation must not treat the frozen last value of a failed clock as a live sample.
+ pub fn presentation_ready(&self)->bool {
+  #[cfg(windows)] {self.source.is_some() && self.start.is_some() && !self.failed}
+  #[cfg(not(windows))] {false}
+ }
  pub fn diagnostic(&self)->serde_json::Value{serde_json::json!({"time":self.now,"time_bits":self.game.time.to_bits(),"delta_bits":self.game.delta.to_bits(),"paused":self.control.paused,"resume_pending":self.control.resume_pending,"remaining":self.control.remaining,"ordinal":self.last_ordinal,"failed":self.failed})}
  pub fn paused(&self)->bool{self.control.paused}
  pub fn acknowledged_ordinal(&self)->u64{self.last_ordinal}
+ /// Ordinary HUD observes applied server-clock state without changing the clock.
+ pub(crate) fn pause_ui_status(&self)->(u64,bool,bool){
+  (self.last_ordinal,self.control.paused,self.control.resume_pending)
+ }
  /// A new Welcome identity discards queued directives and a previous pause.
  /// Keep process-local time monotonic; consumers already retire session effects.
  pub fn reset_session(&mut self){self.control=PauseControl::default();self.adjustment=0.;self.last_ordinal=0;self.pending.clear();self.game.scale=1.;}
@@ -107,6 +116,12 @@ mod tests {
   clock.advance_frame().unwrap();(owner,clock)
  }
  fn pause()->Vec<u8>{let mut p=vec![0;14];p[9..13].copy_from_slice(&30i32.to_le_bytes());p[13]=1;p}
+ #[test] fn presentation_ready_rejects_unattached_uninitialized_and_failed_clock(){
+  assert!(!EffectClock::default().presentation_ready());
+  let (_owner,mut clock)=initialized();assert!(clock.presentation_ready());
+  let held=clock.now;clock.failed=true;assert!(!clock.presentation_ready());assert_eq!(clock.now,held);
+  clock.failed=false;clock.start=None;assert!(!clock.presentation_ready());
+ }
  #[test] fn reordered_and_duplicate_messages_preserve_pause_then_resume(){
   let (_owner,mut clock)=initialized();let resume=vec![0;10];
   clock.receive(3,0x0a,&resume).unwrap();assert!(!clock.control.paused);

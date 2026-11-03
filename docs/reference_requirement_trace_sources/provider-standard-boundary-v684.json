@@ -1,0 +1,312 @@
+{
+  "schema": "openleague_provider_standard_boundary_links/v684",
+  "utc": "2026-10-27T15:35:12.706369+00:00",
+  "summary": {
+    "notice": "V684 : consommateur Standard Rust et refus manager/hit/miss identifiés. Les deux arrêts historiques HeapReAlloc restent distincts de la recherche ultérieure à tas virtuel : DLL attach réussie, RadsInitialize retourne0x80004005, core1.7 non raccordé. Preuves rehashées, aucune nouvelle exécution native ni chargement complet accepté.",
+    "counts": {
+      "frozen_files_verified": 55,
+      "historical_profiles_reviewed": 2,
+      "native_factory_anchors": 8,
+      "evidence_refusals": 4,
+      "current_boundary_descriptors": 1,
+      "fresh_native_executions": 0,
+      "later_managed_trace_reviewed": 1,
+      "later_archive_successes_inherited": 68,
+      "later_archive_misses_inherited": 3
+    },
+    "report": "docs/FIDELITY_PROVIDER_STANDARD_BOUNDARY_V684.md",
+    "complete": false,
+    "goal_complete": false
+  },
+  "association": {
+    "task_id": "SYS-17.3-01",
+    "requirement_id": "OLF-2ffda321-9b6c-5cac-85ee-b5bd79d30ba7",
+    "native_inputs": [
+      {
+        "source_id": "OLS-0d51b5dc-fb9b-51dc-b32f-f9afdb925d39",
+        "relation": "pinned_original_provider_factory_and_DLL_dependency_not_complete_load",
+        "selector": "90B520; historical traces: Ahri/base, HeapReAlloc128to256 stop"
+      },
+      {
+        "source_id": "OLS-12a43ffb-296d-5fdd-bbe2-73a0069a68d6",
+        "relation": "pinned_original_provider_factory_and_DLL_dependency_not_complete_load",
+        "selector": "90B520; historical traces: Ahri/base, HeapReAlloc128to256 stop"
+      }
+    ],
+    "reference_inputs": [
+      {
+        "source_id": "OLS-2f674cff-c5a8-5ed6-b8f1-81a21e01ce75",
+        "relation": "reverified_historical_provider_boundary_and_current_loading_caller",
+        "selector": "/"
+      },
+      {
+        "source_id": "OLS-f79bd583-b2a1-5c3d-b437-9ed382df020f",
+        "relation": "source_current_consumer_link_with_explicit_limits",
+        "selector": "/association"
+      },
+      {
+        "source_id": "OLS-dcf60a6c-2226-52f8-a3a4-625d11561061",
+        "relation": "actual_standard_loading_call_and_refusals_source_inspected",
+        "selector": "initialize_standard_record_owned"
+      }
+    ],
+    "context": {
+      "report": "docs/FIDELITY_PROVIDER_STANDARD_BOUNDARY_V684.md",
+      "receipt": "docs/reference_requirement_trace_sources/provider-standard-boundary-v684.json",
+      "source_observation": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision684_provider_boundary_reconciliation\\OBSERVATIONS.json",
+      "counts": {
+        "frozen_files_verified": 55,
+        "historical_profiles_reviewed": 2,
+        "native_factory_anchors": 8,
+        "evidence_refusals": 4,
+        "current_boundary_descriptors": 1,
+        "fresh_native_executions": 0,
+        "later_managed_trace_reviewed": 1,
+        "later_archive_successes_inherited": 68,
+        "later_archive_misses_inherited": 3
+      },
+      "historical_profiles": [
+        {
+          "profile": "empty",
+          "stop": {
+            "kind": "unimplemented_import",
+            "import": {
+              "dll": "KERNEL32.dll",
+              "name": "HeapReAlloc",
+              "iat": 269685272,
+              "iat_rva": 1249816,
+              "module": "RiotRadsIO.dll",
+              "module_base": 268435456
+            },
+            "args": [
+              1895825408,
+              0,
+              855824320,
+              256,
+              855824320,
+              0,
+              822177508
+            ]
+          },
+          "ini": {
+            "stage": "entry",
+            "section": "Package",
+            "key": "FallbackPackage",
+            "default": "",
+            "out": 47738264,
+            "count": 5024,
+            "path": "DATA/Characters/Ahri/Ahri.ini",
+            "argument5": 0,
+            "return_pc": 9483996
+          },
+          "native_cache_publication_reached": true,
+          "ini_returned": false,
+          "provider_returned": false,
+          "dll_attached": false,
+          "old_heap_bytes": 128,
+          "requested_heap_bytes": 256,
+          "cleanup_passed": true,
+          "emulated_remaining": 959,
+          "identity": {
+            "path": "F:\\OpenLeague\\docs\\loading_rads_process_preparation\\rads_provider_oracle.json",
+            "bytes": 1056071,
+            "sha256": "41d77b85aeccb9ba0afc1a89b4e9659d93768cce772010925c1f5185f274e8b3"
+          }
+        },
+        {
+          "profile": "controlled",
+          "stop": {
+            "kind": "unimplemented_import",
+            "import": {
+              "dll": "KERNEL32.dll",
+              "name": "HeapReAlloc",
+              "iat": 269685272,
+              "iat_rva": 1249816,
+              "module": "RiotRadsIO.dll",
+              "module_base": 268435456
+            },
+            "args": [
+              1895825408,
+              0,
+              855824480,
+              256,
+              855824480,
+              0,
+              822177508
+            ]
+          },
+          "ini": {
+            "stage": "entry",
+            "section": "Package",
+            "key": "FallbackPackage",
+            "default": "",
+            "out": 47738264,
+            "count": 5024,
+            "path": "DATA/Characters/Ahri/Ahri.ini",
+            "argument5": 0,
+            "return_pc": 9483996
+          },
+          "native_cache_publication_reached": true,
+          "ini_returned": false,
+          "provider_returned": false,
+          "dll_attached": false,
+          "old_heap_bytes": 128,
+          "requested_heap_bytes": 256,
+          "cleanup_passed": true,
+          "emulated_remaining": 962,
+          "identity": {
+            "path": "F:\\OpenLeague\\docs\\loading_rads_process_preparation\\rads_provider_controlled_oracle.json",
+            "bytes": 1059366,
+            "sha256": "108200ff17bfdcb590ae4f94b635859ad61890835eedd6a077908a8716f790e1"
+          }
+        }
+      ],
+      "current_boundary": {
+        "method": "initialize_standard_record_owned",
+        "line": 44,
+        "required_source_anchors": [
+          "standard_prefix::prepare(self,recipient,retained_service,payload,name,pair)?",
+          "if manager==0",
+          "resource_cache::initialize_key(self,address)?",
+          "resource_cache::resolve(self,manager,name24,skin,key)?",
+          "resource_cache::Outcome::HitBorrowed {provider:_}=>Err",
+          "resource_cache::Outcome::MissFactory {..}=>Err",
+          "loading resource is borrowed; standard UI continuation after90AD00 is unavailable",
+          "loading resource factory90B520 is unavailable",
+          "resource provider90AD00 manager is not published"
+        ],
+        "manager_absence": "explicit refusal before cache lookup",
+        "cache_hit": "explicit unavailable UI continuation",
+        "cache_miss": "explicit unavailable factory90B520",
+        "branch": "Standard",
+        "fresh_runtime_execution": false
+      },
+      "new_boundary_consumer": {
+        "consumer_id": "OLC-6e68f4b7-37a4-57e1-a122-2a8986c845a1",
+        "source_id": "OLS-dcf60a6c-2226-52f8-a3a4-625d11561061",
+        "path": "crates/core/src/audio_replay_windows_loading_packets.rs",
+        "line": 44,
+        "needle": "    fn initialize_standard_record_owned(",
+        "role": "current_standard_loading_provider_boundary",
+        "scope": "Existing Standard loading caller: absent manager, borrowed cache hit and factory miss are explicit errors. Source inspection only; no full loading UI or historical provider accepted.",
+        "provides_feature_consumer": false,
+        "qualification_kind": "entry_boundary_only",
+        "feature_scope_complete": false,
+        "gameplay_accepted": false,
+        "executed_in_current_probe": false
+      },
+      "changed_external_dependencies": [
+        {
+          "path": "C:\\Windows\\SysWOW64\\kernel32.dll",
+          "expected": {
+            "sha256": "bafd9e061964642802d62f1eb694e7e4af60de739a8df1a492f90006dc5680f3"
+          },
+          "observed": {
+            "path": "C:\\Windows\\SysWOW64\\kernel32.dll",
+            "bytes": 707744,
+            "sha256": "7f04765684de5ecb702afb5c4cfbfde12a4e61a125389ee23166aa66430e62f0"
+          },
+          "status": "changed_or_missing"
+        },
+        {
+          "path": "C:\\Windows\\SysWOW64\\ntdll.dll",
+          "expected": {
+            "sha256": "7e15bd30890e9bf93b47fc894a68b2445618ee7528eb39584a263b21e112f9df"
+          },
+          "observed": {
+            "path": "C:\\Windows\\SysWOW64\\ntdll.dll",
+            "bytes": 1850232,
+            "sha256": "23d7772221e7a763ccf3f3fe39592086eb3091603554c4981f0ab430fa2ca686"
+          },
+          "status": "changed_or_missing"
+        }
+      ],
+      "own_questions_preserved": [
+        "OLU-ac85c18c-d131-517e-83a7-d0987d643c48"
+      ],
+      "dependencies_preserved": [],
+      "package_id": "D17-SYS-17-3",
+      "requires_packages": [
+        "D20-SYS-20-3"
+      ],
+      "instructions": "Pour le chargement Standard : conserver initialize_standard_record_owned et son appel réel à audio_loading_resource_cache::resolve. Manager absent, hit emprunté et miss ont actuellement trois refus distincts ; aucun ne prouve la fin du chargement. Relier la création manquante à90B520 : publication du cache avant retour INI, FallbackPackage, parent et visite synchrone90B270 doivent conserver leurs ordres et durées de vie. Réconcilier deux environnements distincts : les sondes anciennes à mémoire hôte réelle s’arrêtent sur HeapReAlloc128→256 ; la recherche ultérieure à tas virtuel a déjà réussi DLL attach puis obtenu RadsInitialize0x80004005, avec core1.7 non raccordé. Conserver cette avancée et ses lectures de563membres, ainsi que68hits/3misses d’index reconstruit, sans prétendre un montage historique ou une création90B520 terminée. Priorité : inspecter les adaptateurs et contextes qualifiés les plus avancés avant de choisir la composition de90B520 à poursuivre ; ne pas recommencer automatiquement la sonde ancienne. Les lectures plus récentes utilisent des flux Python et handles virtuels, pas Win32 ReadFile. kernel32.dll et ntdll.dll ont changé depuis la sonde ancienne : toute reprise de ses feuilles exige une nouvelle qualification. La branche Tutorial et la création d’acteur V683 sont des chemins séparés. Ne pas inventer une texture absente ni un résultat INI pour franchir une limite. Conserver critères, inconnues, cases et preuves ; aucune nouvelle exécution native dans cette revue.",
+      "limits": [
+        "Historical Ahri/base-skin traces are rehashed and reviewed, not re-executed or extended to other champions. The inherited300 checks are not a fresh test run.",
+        "Factory publication precedes INI return: a cached pointer alone does not establish complete provider initialization.",
+        "No DLL attached or provider returned in the inherited traces. HeapReAlloc is an unavailable adapter dependency, not evidence of absent champion assets.",
+        "Actual Standard loading caller inspected statically only; manager, hit and miss all keep explicit incomplete boundaries. Tutorial is a separate branch.",
+        "The creator63D7A0 chain fromV683 and the older90AD00(Ahri,0) traces are different runs; no same-machine composition is claimed.",
+        "No game code, assets, GPU/audio/gameplay acceptance or native provider completion. Earlier12 unresolved resource names remain open.",
+        "The older real-host-backed pipeline stops at HeapReAlloc, but later isolated virtual-heap research already attaches the DLL and returns a real RadsInitialize failure0x80004005 with core1.7 unmapped. These distinct boundary profiles are not interchangeable; HeapReAlloc is not asserted to block all project RADS research.",
+        "Later reconstructed archive68hit/3miss research remains inherited, with Python readonly streams and virtual handles. It does not establish provider90B520 completion, historical archives, native OS IO, teardown or current Rust mounting."
+      ],
+      "fresh_native_execution": false,
+      "fresh_Rust_execution": false,
+      "feature_scope_complete": false,
+      "gameplay_accepted": false,
+      "complete": false,
+      "later_research": {
+        "managed_receipt": {
+          "path": "F:\\OpenLeague\\docs\\reference_native_skin_loader_sources\\original-rads-recovered-managed-layout.json",
+          "bytes": 9559895,
+          "sha256": "e75eb94a175c0ba35f6189ef2395a2ace5e5fa480bce52326c9c698e202a4380"
+        },
+        "native_attempt31": {
+          "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision24\\native-recovered-locale-manifest-attempt31.json",
+          "bytes": 8713366,
+          "sha256": "88dc3859a20dd9c7b1acc579871a3f6a2443d5aaa761b137d4e38a44a85eb881"
+        },
+        "isolated_DLL_attach_return": 1,
+        "RadsInitialize_return": "0x80004005",
+        "managed_alias_members": 563,
+        "core_1_7_mapped": false,
+        "full_mount_qualified": false,
+        "archive_receipt": {
+          "path": "F:\\OpenLeague\\docs\\reference_native_skin_loader_sources\\native-rads-archive-factory-reference.json",
+          "bytes": 5522,
+          "sha256": "308fc4052dd3de502f33ec8df3ab20b234ca3078683508499194cec7730c26bf"
+        },
+        "inherited_archive_lookup_successes": 68,
+        "inherited_archive_lookup_misses": 3,
+        "container_provenance": "reconstructed source-backed index/dat, not historical container bytes",
+        "io_provenance_receipt": {
+          "path": "F:\\OpenLeague\\docs\\reference_native_skin_loader_sources\\original-rads-archive-leaf-provenance.json",
+          "bytes": 8637,
+          "sha256": "c2e5264597cdcebac31515ce6dd322c9e7a13a39f7c49191cf26be7bdb8821f1"
+        },
+        "read_leaf": "Python readonly streams and virtual handles; find uses current Windows API",
+        "fresh_execution": false
+      }
+    },
+    "retained_consumers": [
+      "OLC-27883219-c832-5aea-b7b0-1370e3839391",
+      "OLC-d2a747cf-c6d6-5fa7-ad1b-b4d4d180b223"
+    ],
+    "retained_questions": [
+      "OLU-ac85c18c-d131-517e-83a7-d0987d643c48"
+    ]
+  },
+  "source_audit": {
+    "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision684_provider_boundary_reconciliation\\OBSERVATIONS.json",
+    "bytes": 93505,
+    "sha256": "c19bd1b344974ba6b9d2f5ba187a7c06c7647ef64dbdb50bf4b95275ee1fed9d"
+  },
+  "new_game_consumers": [],
+  "new_boundary_consumers": [
+    {
+      "consumer_id": "OLC-6e68f4b7-37a4-57e1-a122-2a8986c845a1",
+      "source_id": "OLS-dcf60a6c-2226-52f8-a3a4-625d11561061",
+      "path": "crates/core/src/audio_replay_windows_loading_packets.rs",
+      "line": 44,
+      "needle": "    fn initialize_standard_record_owned(",
+      "role": "current_standard_loading_provider_boundary",
+      "scope": "Existing Standard loading caller: absent manager, borrowed cache hit and factory miss are explicit errors. Source inspection only; no full loading UI or historical provider accepted.",
+      "provides_feature_consumer": false,
+      "qualification_kind": "entry_boundary_only",
+      "feature_scope_complete": false,
+      "gameplay_accepted": false,
+      "executed_in_current_probe": false
+    }
+  ],
+  "goal_complete": false
+}

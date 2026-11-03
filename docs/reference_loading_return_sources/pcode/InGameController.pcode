@@ -1,0 +1,1476 @@
+package com.riotgames.pvpnet.game.controllers
+{
+   import com.riotgames.platform.common.AppConfig;
+   import com.riotgames.platform.common.IAppController;
+   import com.riotgames.platform.common.error.ServerError;
+   import com.riotgames.platform.common.event.GameCrashedEvent;
+   import com.riotgames.platform.common.services.ServiceProxy;
+   import com.riotgames.platform.common.utils.MessageDictionary;
+   import com.riotgames.platform.gameclient.domain.game.GameReconnectionInfo;
+   import com.riotgames.pvpnet.system.config.ClientConfig;
+   import com.riotgames.pvpnet.system.maestro.MaestroController;
+   import com.riotgames.pvpnet.system.messaging.ShellDispatcher;
+   import com.riotgames.pvpnet.tracking.Dradis;
+   import com.riotgames.util.json.jsonDecode;
+   import flash.events.Event;
+   import flash.events.EventDispatcher;
+   import flash.events.IEventDispatcher;
+   import flash.filesystem.File;
+   import flash.filesystem.FileMode;
+   import flash.filesystem.FileStream;
+   import flash.system.Capabilities;
+   import flash.utils.getQualifiedClassName;
+   import mx.events.PropertyChangeEvent;
+   import mx.logging.ILogger;
+   import mx.logging.Log;
+   import mx.rpc.events.ResultEvent;
+   
+   public class InGameController implements ICycleViewController, IEventDispatcher
+   {
+      
+      public static const PLAYING_CONNECTED:String = "connected";
+      
+      public static const PLAYING_DISCONNECTED:String = "disconnected";
+      
+      public static const PLAYING_CRASHED:String = "crash";
+      
+      public static const PLAYING_SPECTATOR_DISCONNECT:String = "spectatorDisconnected";
+      
+      method
+         name ""
+         returns null
+         
+         body
+            maxstack 2
+            localcount 1
+            initscopedepth 3
+            maxscopedepth 4
+            
+            code
+               getlocal0
+               pushscope
+               findproperty QName(PackageNamespace(""),"PLAYING_CONNECTED")
+               pushstring "connected"
+               initproperty QName(PackageNamespace(""),"PLAYING_CONNECTED")
+               findproperty QName(PackageNamespace(""),"PLAYING_DISCONNECTED")
+               pushstring "disconnected"
+               initproperty QName(PackageNamespace(""),"PLAYING_DISCONNECTED")
+               findproperty QName(PackageNamespace(""),"PLAYING_CRASHED")
+               pushstring "crash"
+               initproperty QName(PackageNamespace(""),"PLAYING_CRASHED")
+               findproperty QName(PackageNamespace(""),"PLAYING_SPECTATOR_DISCONNECT")
+               pushstring "spectatorDisconnected"
+               initproperty QName(PackageNamespace(""),"PLAYING_SPECTATOR_DISCONNECT")
+               returnvoid
+            end ; code
+         end ; body
+      end ; method
+      
+      [Inject]
+      public var spectatorController:SpectatorController;
+      
+      public var applicationController:IAppController;
+      
+      public var masterGameController:MasterGameController;
+      
+      public var serviceProxy:ServiceProxy;
+      
+      public var shellDispatcher:ShellDispatcher;
+      
+      private var _1457822360currentState:String = "connected";
+      
+      private var _1180619197isBusy:Boolean = false;
+      
+      private var isInitialized:Boolean;
+      
+      private var proxiedOnError:Function;
+      
+      private var logger:ILogger;
+      
+      private var reconnectInfo:GameReconnectionInfo = null;
+      
+      private var _bindingEventDispatcher:EventDispatcher;
+      
+      public function InGameController()
+      {
+         method
+            name ""
+            returns null
+            
+            body
+               maxstack 5
+               localcount 1
+               initscopedepth 4
+               maxscopedepth 5
+               
+               code
+                  getlocal0
+                  pushscope
+                  getlocal0
+                  findpropstrict QName(PackageNamespace("com.riotgames.platform.common.services"),"ServiceProxy")
+                  getproperty QName(PackageNamespace("com.riotgames.platform.common.services"),"ServiceProxy")
+                  getproperty QName(PackageNamespace(""),"instance")
+                  initproperty QName(PackageNamespace(""),"serviceProxy")
+                  getlocal0
+                  findpropstrict QName(PackageNamespace("com.riotgames.pvpnet.system.messaging"),"ShellDispatcher")
+                  getproperty QName(PackageNamespace("com.riotgames.pvpnet.system.messaging"),"ShellDispatcher")
+                  getproperty QName(PackageNamespace(""),"instance")
+                  initproperty QName(PackageNamespace(""),"shellDispatcher")
+                  getlocal0
+                  findpropstrict QName(PackageNamespace("mx.logging"),"Log")
+                  getproperty QName(PackageNamespace("mx.logging"),"Log")
+                  findpropstrict QName(PackageNamespace("flash.utils"),"getQualifiedClassName")
+                  getlocal0
+                  callproperty QName(PackageNamespace("flash.utils"),"getQualifiedClassName"), 1
+                  findpropstrict QName(PackageNamespace(""),"RegExp")
+                  getproperty QName(PackageNamespace(""),"RegExp")
+                  pushstring "::"
+                  construct 1
+                  pushstring "."
+                  callproperty QName(Namespace("http://adobe.com/AS3/2006/builtin"),"replace"), 2
+                  callproperty QName(PackageNamespace(""),"getLogger"), 1
+                  initproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"logger")
+                  getlocal0
+                  findpropstrict QName(PackageNamespace("flash.events"),"EventDispatcher")
+                  findpropstrict QName(PackageNamespace("flash.events"),"IEventDispatcher")
+                  getlocal0
+                  callproperty QName(PackageNamespace("flash.events"),"IEventDispatcher"), 1
+                  constructprop QName(PackageNamespace("flash.events"),"EventDispatcher"), 1
+                  initproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"_bindingEventDispatcher")
+                  getlocal0
+                  constructsuper 0
+                  returnvoid
+               end ; code
+            end ; body
+         end ; method
+      }
+      
+      public function initialize() : void
+      {
+         trait method QName(PackageNamespace(""),"initialize")
+            dispid 0
+            method
+               name ""
+               returns QName(PackageNamespace(""),"void")
+               
+               body
+                  maxstack 2
+                  localcount 1
+                  initscopedepth 4
+                  maxscopedepth 5
+                  
+                  code
+                     getlocal0
+                     pushscope
+                     getlocal0
+                     getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"isInitialized")
+                     iffalse ofs000a
+                     returnvoid
+            ofs000a:
+                     getlocal0
+                     pushtrue
+                     setproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"isInitialized")
+                     returnvoid
+                  end ; code
+               end ; body
+            end ; method
+         }
+         
+         public function initializeCycle() : void
+         {
+            trait method QName(PackageNamespace(""),"initializeCycle")
+               dispid 0
+               method
+                  name ""
+                  returns QName(PackageNamespace(""),"void")
+                  
+                  body
+                     maxstack 1
+                     localcount 1
+                     initscopedepth 4
+                     maxscopedepth 5
+                     
+                     code
+                        getlocal0
+                        pushscope
+                        returnvoid
+                     end ; code
+                  end ; body
+               end ; method
+            }
+            
+            public function abortCycle() : void
+            {
+               trait method QName(PackageNamespace(""),"abortCycle")
+                  dispid 0
+                  method
+                     name ""
+                     returns QName(PackageNamespace(""),"void")
+                     
+                     body
+                        maxstack 1
+                        localcount 1
+                        initscopedepth 4
+                        maxscopedepth 5
+                        
+                        code
+                           getlocal0
+                           pushscope
+                           returnvoid
+                        end ; code
+                     end ; body
+                  end ; method
+               }
+               
+               public function cleanup() : void
+               {
+                  trait method QName(PackageNamespace(""),"cleanup")
+                     dispid 0
+                     method
+                        name ""
+                        returns QName(PackageNamespace(""),"void")
+                        
+                        body
+                           maxstack 1
+                           localcount 1
+                           initscopedepth 4
+                           maxscopedepth 5
+                           
+                           code
+                              getlocal0
+                              pushscope
+                              returnvoid
+                           end ; code
+                        end ; body
+                     end ; method
+                  }
+                  
+                  public function cleanupCycle() : void
+                  {
+                     trait method QName(PackageNamespace(""),"cleanupCycle")
+                        dispid 0
+                        method
+                           name ""
+                           returns QName(PackageNamespace(""),"void")
+                           
+                           body
+                              maxstack 1
+                              localcount 1
+                              initscopedepth 4
+                              maxscopedepth 5
+                              
+                              code
+                                 getlocal0
+                                 pushscope
+                                 returnvoid
+                              end ; code
+                           end ; body
+                        end ; method
+                     }
+                     
+                     public function activate() : void
+                     {
+                        trait method QName(PackageNamespace(""),"activate")
+                           dispid 0
+                           method
+                              name ""
+                              returns QName(PackageNamespace(""),"void")
+                              
+                              body
+                                 maxstack 3
+                                 localcount 1
+                                 initscopedepth 4
+                                 maxscopedepth 5
+                                 
+                                 code
+                                    getlocal0
+                                    pushscope
+                                    findpropstrict QName(PackageNamespace("com.riotgames.platform.common"),"AppConfig")
+                                    getproperty QName(PackageNamespace("com.riotgames.platform.common"),"AppConfig")
+                                    getproperty QName(PackageNamespace(""),"instance")
+                                    pushfalse
+                                    setproperty QName(PackageNamespace(""),"isNavigatorVisible")
+                                    getlocal0
+                                    getproperty QName(PackageNamespace(""),"shellDispatcher")
+                                    findpropstrict QName(PackageNamespace("com.riotgames.pvpnet.system.maestro"),"MaestroController")
+                                    getproperty QName(PackageNamespace("com.riotgames.pvpnet.system.maestro"),"MaestroController")
+                                    getproperty QName(PackageNamespace(""),"GAME_STARTED")
+                                    getlocal0
+                                    getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"onGameStarted")
+                                    callproperty QName(PackageNamespace(""),"addEventListener"), 2
+                                    pop
+                                    getlocal0
+                                    getproperty QName(PackageNamespace(""),"shellDispatcher")
+                                    findpropstrict QName(PackageNamespace("com.riotgames.platform.common.event"),"GameCrashedEvent")
+                                    getproperty QName(PackageNamespace("com.riotgames.platform.common.event"),"GameCrashedEvent")
+                                    getproperty QName(PackageNamespace(""),"CRASHED_EVENT_FROM_GAME")
+                                    getlocal0
+                                    getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"onGameCrashed")
+                                    callproperty QName(PackageNamespace(""),"addEventListener"), 2
+                                    pop
+                                    getlocal0
+                                    getproperty QName(PackageNamespace(""),"shellDispatcher")
+                                    findpropstrict QName(PackageNamespace("com.riotgames.pvpnet.system.maestro"),"MaestroController")
+                                    getproperty QName(PackageNamespace("com.riotgames.pvpnet.system.maestro"),"MaestroController")
+                                    getproperty QName(PackageNamespace(""),"GAME_ABANDONED")
+                                    getlocal0
+                                    getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"onGameAbandoned")
+                                    callproperty QName(PackageNamespace(""),"addEventListener"), 2
+                                    pop
+                                    returnvoid
+                                 end ; code
+                              end ; body
+                           end ; method
+                        }
+                        
+                        public function deactivate() : void
+                        {
+                           trait method QName(PackageNamespace(""),"deactivate")
+                              dispid 0
+                              method
+                                 name ""
+                                 returns QName(PackageNamespace(""),"void")
+                                 
+                                 body
+                                    maxstack 3
+                                    localcount 1
+                                    initscopedepth 4
+                                    maxscopedepth 5
+                                    
+                                    code
+                                       getlocal0
+                                       pushscope
+                                       getlocal0
+                                       getproperty QName(PackageNamespace(""),"currentState")
+                                       findpropstrict QName(PackageNamespace("com.riotgames.pvpnet.game.controllers"),"InGameController")
+                                       getproperty QName(PackageNamespace("com.riotgames.pvpnet.game.controllers"),"InGameController")
+                                       getproperty QName(PackageNamespace(""),"PLAYING_CONNECTED")
+                                       equals
+                                       pop
+                                       getlocal0
+                                       pushfalse
+                                       setproperty QName(PackageNamespace(""),"isBusy")
+                                       getlocal0
+                                       pushnull
+                                       setproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"proxiedOnError")
+                                       getlocal0
+                                       getproperty QName(PackageNamespace(""),"shellDispatcher")
+                                       findpropstrict QName(PackageNamespace("com.riotgames.pvpnet.system.maestro"),"MaestroController")
+                                       getproperty QName(PackageNamespace("com.riotgames.pvpnet.system.maestro"),"MaestroController")
+                                       getproperty QName(PackageNamespace(""),"GAME_STARTED")
+                                       getlocal0
+                                       getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"onGameStarted")
+                                       callproperty QName(PackageNamespace(""),"removeEventListener"), 2
+                                       pop
+                                       getlocal0
+                                       getproperty QName(PackageNamespace(""),"shellDispatcher")
+                                       findpropstrict QName(PackageNamespace("com.riotgames.platform.common.event"),"GameCrashedEvent")
+                                       getproperty QName(PackageNamespace("com.riotgames.platform.common.event"),"GameCrashedEvent")
+                                       getproperty QName(PackageNamespace(""),"CRASHED_EVENT_FROM_GAME")
+                                       getlocal0
+                                       getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"onGameCrashed")
+                                       callproperty QName(PackageNamespace(""),"removeEventListener"), 2
+                                       pop
+                                       getlocal0
+                                       getproperty QName(PackageNamespace(""),"shellDispatcher")
+                                       findpropstrict QName(PackageNamespace("com.riotgames.pvpnet.system.maestro"),"MaestroController")
+                                       getproperty QName(PackageNamespace("com.riotgames.pvpnet.system.maestro"),"MaestroController")
+                                       getproperty QName(PackageNamespace(""),"GAME_ABANDONED")
+                                       getlocal0
+                                       getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"onGameAbandoned")
+                                       callproperty QName(PackageNamespace(""),"removeEventListener"), 2
+                                       pop
+                                       returnvoid
+                                    end ; code
+                                 end ; body
+                              end ; method
+                           }
+                           
+                           public function setDisconnected() : void
+                           {
+                              trait method QName(PackageNamespace(""),"setDisconnected")
+                                 dispid 0
+                                 method
+                                    name ""
+                                    returns QName(PackageNamespace(""),"void")
+                                    
+                                    body
+                                       maxstack 2
+                                       localcount 1
+                                       initscopedepth 4
+                                       maxscopedepth 5
+                                       
+                                       code
+                                          getlocal0
+                                          pushscope
+                                          getlocal0
+                                          getlocal0
+                                          getproperty QName(PackageNamespace(""),"masterGameController")
+                                          getproperty QName(PackageNamespace(""),"isSpectating")
+                                          iffalse ofs0015
+                                          findpropstrict QName(PackageNamespace(""),"PLAYING_SPECTATOR_DISCONNECT")
+                                          getproperty QName(PackageNamespace(""),"PLAYING_SPECTATOR_DISCONNECT")
+                                          coerce_s
+                                          jump ofs001a
+                                 ofs0015:
+                                          findpropstrict QName(PackageNamespace(""),"PLAYING_DISCONNECTED")
+                                          getproperty QName(PackageNamespace(""),"PLAYING_DISCONNECTED")
+                                          coerce_s
+                                 ofs001a:
+                                          setproperty QName(PackageNamespace(""),"currentState")
+                                          returnvoid
+                                       end ; code
+                                    end ; body
+                                 end ; method
+                              }
+                              
+                              public function reconnectToGame(param1:Function) : void
+                              {
+                                 trait method QName(PackageNamespace(""),"reconnectToGame")
+                                    dispid 0
+                                    method
+                                       name ""
+                                       param QName(PackageNamespace(""),"Function")
+                                       returns QName(PackageNamespace(""),"void")
+                                       
+                                       body
+                                          maxstack 4
+                                          localcount 2
+                                          initscopedepth 4
+                                          maxscopedepth 5
+                                          
+                                          code
+                                             getlocal0
+                                             pushscope
+                                             getlocal0
+                                             getlocal1
+                                             setproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"proxiedOnError")
+                                             getlocal0
+                                             getproperty QName(PackageNamespace(""),"masterGameController")
+                                             getproperty QName(PackageNamespace(""),"isSpectating")
+                                             iffalse ofs0018
+                                             getlocal0
+                                             getlocal0
+                                             getproperty QName(PackageNamespace(""),"spectatorController")
+                                             callproperty QName(PackageNamespace(""),"getReconnectInfo"), 0
+                                             initproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"reconnectInfo")
+                                    ofs0018:
+                                             getlocal0
+                                             getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"reconnectInfo")
+                                             pushnull
+                                             ifne ofs0029
+                                             getlocal0
+                                             callproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"getReconnectionInfo"), 0
+                                             pop
+                                             jump ofs003c
+                                    ofs0029:
+                                             getlocal0
+                                             getproperty QName(PackageNamespace(""),"masterGameController")
+                                             getlocal0
+                                             getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"reconnectInfo")
+                                             getproperty QName(PackageNamespace(""),"game")
+                                             getlocal0
+                                             getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"reconnectInfo")
+                                             getproperty QName(PackageNamespace(""),"playerCredentials")
+                                             pushbyte 0
+                                             callproperty QName(PackageNamespace(""),"reconnectToGame"), 3
+                                             pop
+                                    ofs003c:
+                                             returnvoid
+                                          end ; code
+                                       end ; body
+                                    end ; method
+                                 }
+                                 
+                                 private function getReconnectionInfo() : void
+                                 {
+                                    trait method QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"getReconnectionInfo")
+                                       dispid 0
+                                       method
+                                          name ""
+                                          returns QName(PackageNamespace(""),"void")
+                                          
+                                          body
+                                             maxstack 4
+                                             localcount 1
+                                             initscopedepth 4
+                                             maxscopedepth 5
+                                             
+                                             code
+                                                getlocal0
+                                                pushscope
+                                                getlocal0
+                                                pushtrue
+                                                setproperty QName(PackageNamespace(""),"isBusy")
+                                                getlocal0
+                                                getproperty QName(PackageNamespace(""),"serviceProxy")
+                                                getproperty QName(PackageNamespace(""),"gameService")
+                                                getlocal0
+                                                getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"onGetGameReconnectionInfoSuccess")
+                                                getlocal0
+                                                getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"onServiceRequestComplete")
+                                                getlocal0
+                                                getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"onServiceRequestError")
+                                                callproperty QName(Namespace("com.riotgames.platform.gameclient.services:GameService"),"getGameReconnectionInfo"), 3
+                                                pop
+                                                returnvoid
+                                             end ; code
+                                          end ; body
+                                       end ; method
+                                    }
+                                    
+                                    public function cancelGameFlow() : void
+                                    {
+                                       trait method QName(PackageNamespace(""),"cancelGameFlow")
+                                          dispid 0
+                                          method
+                                             name ""
+                                             returns QName(PackageNamespace(""),"void")
+                                             
+                                             body
+                                                maxstack 2
+                                                localcount 1
+                                                initscopedepth 4
+                                                maxscopedepth 5
+                                                
+                                                code
+                                                   getlocal0
+                                                   pushscope
+                                                   getlocal0
+                                                   pushnull
+                                                   setproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"reconnectInfo")
+                                                   getlocal0
+                                                   getproperty QName(PackageNamespace(""),"masterGameController")
+                                                   callproperty QName(PackageNamespace(""),"cancelGameFlow"), 0
+                                                   pop
+                                                   returnvoid
+                                                end ; code
+                                             end ; body
+                                          end ; method
+                                       }
+                                       
+                                       public function stopSpectating() : void
+                                       {
+                                          trait method QName(PackageNamespace(""),"stopSpectating")
+                                             dispid 0
+                                             method
+                                                name ""
+                                                returns QName(PackageNamespace(""),"void")
+                                                
+                                                body
+                                                   maxstack 4
+                                                   localcount 1
+                                                   initscopedepth 4
+                                                   maxscopedepth 5
+                                                   
+                                                   code
+                                                      getlocal0
+                                                      pushscope
+                                                      getlocal0
+                                                      getproperty QName(PackageNamespace(""),"serviceProxy")
+                                                      getproperty QName(PackageNamespace(""),"gameService")
+                                                      pushnull
+                                                      getlocal0
+                                                      getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"onServiceRequestComplete")
+                                                      getlocal0
+                                                      getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"onServiceRequestError")
+                                                      callproperty QName(Namespace("com.riotgames.platform.gameclient.services:GameService"),"declineObserverReconnect"), 3
+                                                      pop
+                                                      getlocal0
+                                                      callproperty QName(PackageNamespace(""),"cancelGameFlow"), 0
+                                                      pop
+                                                      returnvoid
+                                                   end ; code
+                                                end ; body
+                                             end ; method
+                                          }
+                                          
+                                          private function onGetGameReconnectionInfoSuccess(param1:ResultEvent) : void
+                                          {
+                                             trait method QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"onGetGameReconnectionInfoSuccess")
+                                                dispid 0
+                                                method
+                                                   name ""
+                                                   param QName(PackageNamespace("mx.rpc.events"),"ResultEvent")
+                                                   returns QName(PackageNamespace(""),"void")
+                                                   
+                                                   body
+                                                      maxstack 4
+                                                      localcount 3
+                                                      initscopedepth 4
+                                                      maxscopedepth 5
+                                                      
+                                                      code
+                                                         getlocal0
+                                                         pushscope
+                                                         pushnull
+                                                         coerce QName(PackageNamespace("com.riotgames.platform.common.error"),"ServerError")
+                                                         setlocal2
+                                                         getlocal0
+                                                         getlocal1
+                                                         getproperty QName(PackageNamespace(""),"result")
+                                                         findpropstrict QName(PackageNamespace("com.riotgames.platform.gameclient.domain.game"),"GameReconnectionInfo")
+                                                         getproperty QName(PackageNamespace("com.riotgames.platform.gameclient.domain.game"),"GameReconnectionInfo")
+                                                         astypelate
+                                                         setproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"reconnectInfo")
+                                                         getlocal0
+                                                         getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"reconnectInfo")
+                                                         pushnull
+                                                         ifne ofs003f
+                                                         getlocal0
+                                                         getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"proxiedOnError")
+                                                         pushnull
+                                                         ifeq ofs003f
+                                                         findpropstrict QName(PackageNamespace("com.riotgames.platform.common.error"),"ServerError")
+                                                         pushnull
+                                                         constructprop QName(PackageNamespace("com.riotgames.platform.common.error"),"ServerError"), 1
+                                                         coerce QName(PackageNamespace("com.riotgames.platform.common.error"),"ServerError")
+                                                         setlocal2
+                                                         getlocal2
+                                                         findpropstrict QName(PackageNamespace("com.riotgames.platform.common.utils"),"MessageDictionary")
+                                                         getproperty QName(PackageNamespace("com.riotgames.platform.common.utils"),"MessageDictionary")
+                                                         getproperty QName(PackageNamespace(""),"GAME_NO_LONGER_IN_PROGRESS")
+                                                         setproperty QName(PackageNamespace(""),"errorCode")
+                                                         getlocal2
+                                                         newarray 0
+                                                         setproperty QName(PackageNamespace(""),"messageArguments")
+                                                         getlocal0
+                                                         getlocal2
+                                                         callproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"onServiceRequestError"), 1
+                                                         pop
+                                                         returnvoid
+                                                ofs003f:
+                                                         getlocal0
+                                                         getproperty QName(PackageNamespace(""),"masterGameController")
+                                                         getlocal0
+                                                         getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"reconnectInfo")
+                                                         getproperty QName(PackageNamespace(""),"game")
+                                                         getlocal0
+                                                         getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"reconnectInfo")
+                                                         getproperty QName(PackageNamespace(""),"playerCredentials")
+                                                         pushbyte 0
+                                                         callproperty QName(PackageNamespace(""),"reconnectToGame"), 3
+                                                         pop
+                                                         returnvoid
+                                                      end ; code
+                                                   end ; body
+                                                end ; method
+                                             }
+                                             
+                                             private function onServiceRequestComplete(param1:Boolean) : void
+                                             {
+                                                trait method QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"onServiceRequestComplete")
+                                                   dispid 0
+                                                   method
+                                                      name ""
+                                                      param QName(PackageNamespace(""),"Boolean")
+                                                      returns QName(PackageNamespace(""),"void")
+                                                      
+                                                      body
+                                                         maxstack 2
+                                                         localcount 2
+                                                         initscopedepth 4
+                                                         maxscopedepth 5
+                                                         
+                                                         code
+                                                            getlocal0
+                                                            pushscope
+                                                            getlocal0
+                                                            pushfalse
+                                                            setproperty QName(PackageNamespace(""),"isBusy")
+                                                            getlocal0
+                                                            pushnull
+                                                            setproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"proxiedOnError")
+                                                            returnvoid
+                                                         end ; code
+                                                      end ; body
+                                                   end ; method
+                                                }
+                                                
+                                                private function onServiceRequestError(param1:ServerError) : void
+                                                {
+                                                   trait method QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"onServiceRequestError")
+                                                      dispid 0
+                                                      method
+                                                         name ""
+                                                         param QName(PackageNamespace("com.riotgames.platform.common.error"),"ServerError")
+                                                         returns QName(PackageNamespace(""),"void")
+                                                         
+                                                         body
+                                                            maxstack 3
+                                                            localcount 2
+                                                            initscopedepth 4
+                                                            maxscopedepth 5
+                                                            
+                                                            code
+                                                               getlocal0
+                                                               pushscope
+                                                               getlocal0
+                                                               getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"proxiedOnError")
+                                                               pushnull
+                                                               ifeq ofs0015
+                                                               getlocal0
+                                                               getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"proxiedOnError")
+                                                               pushnull
+                                                               getlocal1
+                                                               newarray 1
+                                                               callproperty QName(Namespace("http://adobe.com/AS3/2006/builtin"),"apply"), 2
+                                                               pop
+                                                      ofs0015:
+                                                               getlocal0
+                                                               pushnull
+                                                               setproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"proxiedOnError")
+                                                               returnvoid
+                                                            end ; code
+                                                         end ; body
+                                                      end ; method
+                                                   }
+                                                   
+                                                   private function onGameStarted(param1:Event) : void
+                                                   {
+                                                      trait method QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"onGameStarted")
+                                                         dispid 0
+                                                         method
+                                                            name ""
+                                                            param QName(PackageNamespace("flash.events"),"Event")
+                                                            returns QName(PackageNamespace(""),"void")
+                                                            
+                                                            body
+                                                               maxstack 2
+                                                               localcount 2
+                                                               initscopedepth 4
+                                                               maxscopedepth 5
+                                                               
+                                                               code
+                                                                  getlocal0
+                                                                  pushscope
+                                                                  getlocal0
+                                                                  pushnull
+                                                                  setproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"reconnectInfo")
+                                                                  getlocal0
+                                                                  findpropstrict QName(PackageNamespace("com.riotgames.pvpnet.game.controllers"),"InGameController")
+                                                                  getproperty QName(PackageNamespace("com.riotgames.pvpnet.game.controllers"),"InGameController")
+                                                                  getproperty QName(PackageNamespace(""),"PLAYING_CONNECTED")
+                                                                  setproperty QName(PackageNamespace(""),"currentState")
+                                                                  returnvoid
+                                                               end ; code
+                                                            end ; body
+                                                         end ; method
+                                                      }
+                                                      
+                                                      private function onGameCrashed(param1:GameCrashedEvent) : void
+                                                      {
+                                                         trait method QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"onGameCrashed")
+                                                            dispid 0
+                                                            method
+                                                               name ""
+                                                               flag NEED_ACTIVATION
+                                                               param QName(PackageNamespace("com.riotgames.platform.common.event"),"GameCrashedEvent")
+                                                               returns QName(PackageNamespace(""),"void")
+                                                               
+                                                               body
+                                                                  maxstack 4
+                                                                  localcount 4
+                                                                  initscopedepth 5
+                                                                  maxscopedepth 12
+                                                                  trait slot QName(PackageInternalNs("com.riotgames.pvpnet.game.controllers"),"event")
+                                                                     slotid 1
+                                                                     type QName(PackageNamespace("com.riotgames.platform.common.event"),"GameCrashedEvent")
+                                                                  end ; trait
+                                                                  trait slot QName(PackageInternalNs("com.riotgames.pvpnet.game.controllers"),"gameId")
+                                                                     slotid 2
+                                                                     type QName(PackageNamespace(""),"String")
+                                                                  end ; trait
+                                                                  trait slot QName(PackageInternalNs("com.riotgames.pvpnet.game.controllers"),"reportObj")
+                                                                     slotid 3
+                                                                     type QName(PackageNamespace(""),"Object")
+                                                                  end ; trait
+                                                                  trait slot QName(PackageInternalNs("com.riotgames.pvpnet.game.controllers"),"filePath")
+                                                                     slotid 4
+                                                                     type QName(PackageNamespace(""),"String")
+                                                                  end ; trait
+                                                                  trait slot QName(PackageInternalNs("com.riotgames.pvpnet.game.controllers"),"file")
+                                                                     slotid 5
+                                                                     type QName(PackageNamespace("flash.filesystem"),"File")
+                                                                  end ; trait
+                                                                  trait slot QName(PackageInternalNs("com.riotgames.pvpnet.game.controllers"),"fileStream")
+                                                                     slotid 6
+                                                                     type QName(PackageNamespace("flash.filesystem"),"FileStream")
+                                                                  end ; trait
+                                                                  
+                                                                  code
+                                                                     getlocal0
+                                                                     pushscope
+                                                                     newactivation
+                                                                     dup
+                                                                     setlocal2
+                                                                     pushscope
+                                                                     getscopeobject 1
+                                                                     pushnull
+                                                                     coerce_s
+                                                                     setslot 4
+                                                                     getscopeobject 1
+                                                                     pushnull
+                                                                     coerce QName(PackageNamespace("flash.filesystem"),"File")
+                                                                     setslot 5
+                                                                     getscopeobject 1
+                                                                     pushnull
+                                                                     coerce QName(PackageNamespace("flash.filesystem"),"FileStream")
+                                                                     setslot 6
+                                                                     getscopeobject 1
+                                                                     getlocal1
+                                                                     setslot 1
+                                                                     getscopeobject 1
+                                                                     getlocal0
+                                                                     getproperty QName(PackageNamespace(""),"masterGameController")
+                                                                     getproperty QName(PackageNamespace(""),"currentGame")
+                                                                     getproperty QName(PackageNamespace(""),"id")
+                                                                     callproperty QName(Namespace("http://adobe.com/AS3/2006/builtin"),"toString"), 0
+                                                                     coerce_s
+                                                                     setslot 2
+                                                                     jump ofs003f
+                                                            ofs0032:
+                                                                     label
+                                                                     getscopeobject 1
+                                                                     pushstring "0"
+                                                                     getscopeobject 1
+                                                                     getslot 2
+                                                                     add
+                                                                     coerce_s
+                                                                     setslot 2
+                                                            ofs003f:
+                                                                     getscopeobject 1
+                                                                     getslot 2
+                                                                     getproperty QName(PackageNamespace(""),"length")
+                                                                     pushbyte 16
+                                                                     iflt ofs0032
+                                                                     getscopeobject 1
+                                                                     pushnull
+                                                                     coerce QName(PackageNamespace(""),"Object")
+                                                                     setslot 3
+                                                                     getscopeobject 1
+                                                                     getscopeobject 1
+                                                                     getslot 1
+                                                                     getproperty QName(PackageNamespace(""),"gamePath")
+                                                                     getscopeobject 1
+                                                                     getslot 2
+                                                                     add
+                                                                     pushstring "_crash.json"
+                                                                     add
+                                                                     coerce_s
+                                                                     setslot 4
+                                                                     getlocal0
+                                                                     getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"logger")
+                                                                     pushstring "onGameCrashed: Trying to read crash data from: "
+                                                                     getscopeobject 1
+                                                                     getslot 4
+                                                                     add
+                                                                     callproperty QName(Namespace("mx.logging:ILogger"),"debug"), 1
+                                                                     pop
+                                                            ofs0073:
+                                                                     getscopeobject 1
+                                                                     findpropstrict QName(PackageNamespace("flash.filesystem"),"File")
+                                                                     getscopeobject 1
+                                                                     getslot 4
+                                                                     constructprop QName(PackageNamespace("flash.filesystem"),"File"), 1
+                                                                     coerce QName(PackageNamespace("flash.filesystem"),"File")
+                                                                     setslot 5
+                                                            ofs0082:
+                                                                     jump ofs00af
+                                                            ofs0086:
+                                                                     getlocal0
+                                                                     pushscope
+                                                                     getlocal2
+                                                                     pushscope
+                                                                     newcatch 0
+                                                                     dup
+                                                                     setlocal3
+                                                                     dup
+                                                                     pushscope
+                                                                     swap
+                                                                     setslot 1
+                                                                     findpropstrict QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"logger")
+                                                                     getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"logger")
+                                                                     pushstring "onGameCrashed: Error when reading file: "
+                                                                     getscopeobject 1
+                                                                     getslot 4
+                                                                     add
+                                                                     pushstring " - "
+                                                                     add
+                                                                     getscopeobject 2
+                                                                     getslot 1
+                                                                     getproperty QName(PackageNamespace(""),"message")
+                                                                     add
+                                                                     callproperty QName(Namespace("mx.logging:ILogger"),"error"), 1
+                                                                     pop
+                                                                     popscope
+                                                                     kill 3
+                                                            ofs00af:
+                                                                     getscopeobject 1
+                                                                     getslot 5
+                                                                     convert_b
+                                                                     dup
+                                                                     convert_b
+                                                                     iffalse ofs00c2
+                                                                     pop
+                                                                     getscopeobject 1
+                                                                     getslot 5
+                                                                     getproperty QName(PackageNamespace(""),"exists")
+                                                                     convert_b
+                                                            ofs00c2:
+                                                                     iffalse ofs0129
+                                                            ofs00c6:
+                                                                     getscopeobject 1
+                                                                     findpropstrict QName(PackageNamespace("flash.filesystem"),"FileStream")
+                                                                     constructprop QName(PackageNamespace("flash.filesystem"),"FileStream"), 0
+                                                                     coerce QName(PackageNamespace("flash.filesystem"),"FileStream")
+                                                                     setslot 6
+                                                                     getscopeobject 1
+                                                                     getslot 6
+                                                                     getscopeobject 1
+                                                                     getslot 5
+                                                                     findpropstrict QName(PackageNamespace("flash.filesystem"),"FileMode")
+                                                                     getproperty QName(PackageNamespace("flash.filesystem"),"FileMode")
+                                                                     getproperty QName(PackageNamespace(""),"READ")
+                                                                     callproperty QName(PackageNamespace(""),"open"), 2
+                                                                     pop
+                                                                     getscopeobject 1
+                                                                     findpropstrict QName(PackageNamespace("com.riotgames.util.json"),"jsonDecode")
+                                                                     getscopeobject 1
+                                                                     getslot 6
+                                                                     getscopeobject 1
+                                                                     getslot 5
+                                                                     getproperty QName(PackageNamespace(""),"size")
+                                                                     callproperty QName(PackageNamespace(""),"readUTFBytes"), 1
+                                                                     callproperty QName(PackageNamespace("com.riotgames.util.json"),"jsonDecode"), 1
+                                                                     coerce QName(PackageNamespace(""),"Object")
+                                                                     setslot 3
+                                                                     getscopeobject 1
+                                                                     getslot 6
+                                                                     callproperty QName(PackageNamespace(""),"close"), 0
+                                                                     pop
+                                                            ofs0103:
+                                                                     jump ofs0121
+                                                            ofs0107:
+                                                                     getlocal0
+                                                                     pushscope
+                                                                     getlocal2
+                                                                     pushscope
+                                                                     newcatch 1
+                                                                     dup
+                                                                     setlocal3
+                                                                     dup
+                                                                     pushscope
+                                                                     swap
+                                                                     setslot 1
+                                                                     findpropstrict QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"logger")
+                                                                     getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"logger")
+                                                                     pushstring "Failed to read detailed crash information."
+                                                                     callproperty QName(Namespace("mx.logging:ILogger"),"error"), 1
+                                                                     pop
+                                                                     popscope
+                                                                     kill 3
+                                                            ofs0121:
+                                                                     getscopeobject 1
+                                                                     getslot 5
+                                                                     callproperty QName(PackageNamespace(""),"deleteFileAsync"), 0
+                                                                     pop
+                                                            ofs0129:
+                                                                     getscopeobject 1
+                                                                     getslot 3
+                                                                     not
+                                                                     iffalse ofs013d
+                                                                     getscopeobject 1
+                                                                     findpropstrict QName(PackageNamespace(""),"Object")
+                                                                     constructprop QName(PackageNamespace(""),"Object"), 0
+                                                                     coerce QName(PackageNamespace(""),"Object")
+                                                                     setslot 3
+                                                            ofs013d:
+                                                                     getscopeobject 1
+                                                                     getslot 3
+                                                                     pushstring "locale_country"
+                                                                     findpropstrict QName(PackageNamespace("com.riotgames.pvpnet.system.config"),"ClientConfig")
+                                                                     getproperty QName(PackageNamespace("com.riotgames.pvpnet.system.config"),"ClientConfig")
+                                                                     getproperty QName(PackageNamespace(""),"instance")
+                                                                     getproperty QName(PackageNamespace(""),"currentLocale")
+                                                                     getproperty QName(PackageNamespace(""),"country")
+                                                                     setproperty MultinameL([PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),PackageNamespace(""),Namespace("http://adobe.com/AS3/2006/builtin"),PackageNamespace("com.riotgames.pvpnet.game.controllers"),PrivateNamespace("InGameController.as$64"),PackageInternalNs("com.riotgames.pvpnet.game.controllers"),ProtectedNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),StaticProtectedNs("com.riotgames.pvpnet.game.controllers:InGameController")])
+                                                                     getscopeobject 1
+                                                                     getslot 3
+                                                                     pushstring "locale_language"
+                                                                     findpropstrict QName(PackageNamespace("com.riotgames.pvpnet.system.config"),"ClientConfig")
+                                                                     getproperty QName(PackageNamespace("com.riotgames.pvpnet.system.config"),"ClientConfig")
+                                                                     getproperty QName(PackageNamespace(""),"instance")
+                                                                     getproperty QName(PackageNamespace(""),"currentLocale")
+                                                                     getproperty QName(PackageNamespace(""),"language")
+                                                                     setproperty MultinameL([PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),PackageNamespace(""),Namespace("http://adobe.com/AS3/2006/builtin"),PackageNamespace("com.riotgames.pvpnet.game.controllers"),PrivateNamespace("InGameController.as$64"),PackageInternalNs("com.riotgames.pvpnet.game.controllers"),ProtectedNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),StaticProtectedNs("com.riotgames.pvpnet.game.controllers:InGameController")])
+                                                                     getscopeobject 1
+                                                                     getslot 3
+                                                                     pushstring "region_tag"
+                                                                     findpropstrict QName(PackageNamespace("com.riotgames.pvpnet.system.config"),"ClientConfig")
+                                                                     getproperty QName(PackageNamespace("com.riotgames.pvpnet.system.config"),"ClientConfig")
+                                                                     getproperty QName(PackageNamespace(""),"instance")
+                                                                     getproperty QName(PackageNamespace(""),"regionTag")
+                                                                     setproperty MultinameL([PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),PackageNamespace(""),Namespace("http://adobe.com/AS3/2006/builtin"),PackageNamespace("com.riotgames.pvpnet.game.controllers"),PrivateNamespace("InGameController.as$64"),PackageInternalNs("com.riotgames.pvpnet.game.controllers"),ProtectedNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),StaticProtectedNs("com.riotgames.pvpnet.game.controllers:InGameController")])
+                                                                     getscopeobject 1
+                                                                     getslot 3
+                                                                     pushstring "client_os"
+                                                                     findpropstrict QName(PackageNamespace("flash.system"),"Capabilities")
+                                                                     getproperty QName(PackageNamespace("flash.system"),"Capabilities")
+                                                                     getproperty QName(PackageNamespace(""),"os")
+                                                                     setproperty MultinameL([PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),PackageNamespace(""),Namespace("http://adobe.com/AS3/2006/builtin"),PackageNamespace("com.riotgames.pvpnet.game.controllers"),PrivateNamespace("InGameController.as$64"),PackageInternalNs("com.riotgames.pvpnet.game.controllers"),ProtectedNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),StaticProtectedNs("com.riotgames.pvpnet.game.controllers:InGameController")])
+                                                                     findpropstrict QName(PackageNamespace("com.riotgames.pvpnet.tracking"),"Dradis")
+                                                                     getproperty QName(PackageNamespace("com.riotgames.pvpnet.tracking"),"Dradis")
+                                                                     pushstring "event_gameCrashed"
+                                                                     getscopeobject 1
+                                                                     getslot 3
+                                                                     callproperty QName(PackageNamespace(""),"track"), 2
+                                                                     pop
+                                                                     getlocal0
+                                                                     getscopeobject 1
+                                                                     getslot 1
+                                                                     callproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"handleGameEarlyTermination"), 1
+                                                                     pop
+                                                                     returnvoid
+                                                                  end ; code
+                                                                  try from ofs0073 to ofs0082 target ofs0086 type QName(PackageNamespace(""),"Error") name QName(PackageNamespace(""),"e") end
+                                                                  try from ofs00c6 to ofs0103 target ofs0107 type QName(PackageNamespace(""),"Error") name QName(PackageNamespace(""),"e") end
+                                                               end ; body
+                                                            end ; method
+                                                         }
+                                                         
+                                                         private function onGameAbandoned(param1:Event) : void
+                                                         {
+                                                            trait method QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"onGameAbandoned")
+                                                               dispid 0
+                                                               method
+                                                                  name ""
+                                                                  param QName(PackageNamespace("flash.events"),"Event")
+                                                                  returns QName(PackageNamespace(""),"void")
+                                                                  
+                                                                  body
+                                                                     maxstack 2
+                                                                     localcount 2
+                                                                     initscopedepth 4
+                                                                     maxscopedepth 5
+                                                                     
+                                                                     code
+                                                                        getlocal0
+                                                                        pushscope
+                                                                        getlocal0
+                                                                        getlocal1
+                                                                        callproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"handleGameEarlyTermination"), 1
+                                                                        pop
+                                                                        returnvoid
+                                                                     end ; code
+                                                                  end ; body
+                                                               end ; method
+                                                            }
+                                                            
+                                                            private function handleGameEarlyTermination(param1:Event) : void
+                                                            {
+                                                               trait method QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"handleGameEarlyTermination")
+                                                                  dispid 0
+                                                                  method
+                                                                     name ""
+                                                                     param QName(PackageNamespace("flash.events"),"Event")
+                                                                     returns QName(PackageNamespace(""),"void")
+                                                                     
+                                                                     body
+                                                                        maxstack 2
+                                                                        localcount 2
+                                                                        initscopedepth 4
+                                                                        maxscopedepth 5
+                                                                        
+                                                                        code
+                                                                           getlocal0
+                                                                           pushscope
+                                                                           getlocal0
+                                                                           getproperty QName(PackageNamespace(""),"masterGameController")
+                                                                           getproperty QName(PackageNamespace(""),"isLastPlayedGameTypeTutorial")
+                                                                           iffalse ofs0014
+                                                                           getlocal0
+                                                                           callproperty QName(PackageNamespace(""),"cancelGameFlow"), 0
+                                                                           pop
+                                                                           jump ofs0047
+                                                                  ofs0014:
+                                                                           getlocal0
+                                                                           getproperty QName(PackageNamespace(""),"masterGameController")
+                                                                           getproperty QName(PackageNamespace(""),"isSpectating")
+                                                                           iffalse ofs0028
+                                                                           getlocal0
+                                                                           findpropstrict QName(PackageNamespace(""),"PLAYING_SPECTATOR_DISCONNECT")
+                                                                           getproperty QName(PackageNamespace(""),"PLAYING_SPECTATOR_DISCONNECT")
+                                                                           initproperty QName(PackageNamespace(""),"currentState")
+                                                                           jump ofs0047
+                                                                  ofs0028:
+                                                                           getlocal1
+                                                                           getproperty QName(PackageNamespace(""),"type")
+                                                                           findpropstrict QName(PackageNamespace("com.riotgames.platform.common.event"),"GameCrashedEvent")
+                                                                           getproperty QName(PackageNamespace("com.riotgames.platform.common.event"),"GameCrashedEvent")
+                                                                           getproperty QName(PackageNamespace(""),"CRASHED_EVENT_FROM_GAME")
+                                                                           ifne ofs0040
+                                                                           getlocal0
+                                                                           findpropstrict QName(PackageNamespace(""),"PLAYING_CRASHED")
+                                                                           getproperty QName(PackageNamespace(""),"PLAYING_CRASHED")
+                                                                           initproperty QName(PackageNamespace(""),"currentState")
+                                                                           jump ofs0047
+                                                                  ofs0040:
+                                                                           getlocal0
+                                                                           findpropstrict QName(PackageNamespace(""),"PLAYING_DISCONNECTED")
+                                                                           getproperty QName(PackageNamespace(""),"PLAYING_DISCONNECTED")
+                                                                           initproperty QName(PackageNamespace(""),"currentState")
+                                                                  ofs0047:
+                                                                           returnvoid
+                                                                        end ; code
+                                                                     end ; body
+                                                                  end ; method
+                                                               }
+                                                               
+                                                               [Bindable(event="propertyChange")]
+                                                               public function get currentState() : String
+                                                               {
+                                                                  trait getter QName(PackageNamespace(""),"currentState")
+                                                                     flag METADATA
+                                                                     metadata "Bindable"
+                                                                        item "event" "propertyChange"
+                                                                     end ; metadata
+                                                                     dispid 0
+                                                                     method
+                                                                        name ""
+                                                                        returns QName(PackageNamespace(""),"String")
+                                                                        
+                                                                        body
+                                                                           maxstack 1
+                                                                           localcount 1
+                                                                           initscopedepth 4
+                                                                           maxscopedepth 5
+                                                                           
+                                                                           code
+                                                                              getlocal0
+                                                                              pushscope
+                                                                              getlocal0
+                                                                              getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"_1457822360currentState")
+                                                                              returnvalue
+                                                                           end ; code
+                                                                        end ; body
+                                                                     end ; method
+                                                                  }
+                                                                  
+                                                                  public function set currentState(param1:String) : void
+                                                                  {
+                                                                     trait setter QName(PackageNamespace(""),"currentState")
+                                                                        dispid 0
+                                                                        method
+                                                                           name ""
+                                                                           param QName(PackageNamespace(""),"String")
+                                                                           returns QName(PackageNamespace(""),"void")
+                                                                           
+                                                                           body
+                                                                              maxstack 6
+                                                                              localcount 3
+                                                                              initscopedepth 4
+                                                                              maxscopedepth 5
+                                                                              
+                                                                              code
+                                                                                 getlocal0
+                                                                                 pushscope
+                                                                                 getlocal0
+                                                                                 getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"_1457822360currentState")
+                                                                                 coerce QName(PackageNamespace(""),"Object")
+                                                                                 setlocal2
+                                                                                 getlocal2
+                                                                                 getlocal1
+                                                                                 ifstricteq ofs002e
+                                                                                 getlocal0
+                                                                                 getlocal1
+                                                                                 setproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"_1457822360currentState")
+                                                                                 getlocal0
+                                                                                 pushstring "propertyChange"
+                                                                                 callproperty QName(PackageNamespace(""),"hasEventListener"), 1
+                                                                                 iffalse ofs002e
+                                                                                 getlocal0
+                                                                                 findpropstrict QName(PackageNamespace("mx.events"),"PropertyChangeEvent")
+                                                                                 getproperty QName(PackageNamespace("mx.events"),"PropertyChangeEvent")
+                                                                                 getlocal0
+                                                                                 pushstring "currentState"
+                                                                                 getlocal2
+                                                                                 getlocal1
+                                                                                 callproperty QName(PackageNamespace(""),"createUpdateEvent"), 4
+                                                                                 callproperty QName(PackageNamespace(""),"dispatchEvent"), 1
+                                                                                 pop
+                                                                        ofs002e:
+                                                                                 returnvoid
+                                                                              end ; code
+                                                                           end ; body
+                                                                        end ; method
+                                                                     }
+                                                                     
+                                                                     [Bindable(event="propertyChange")]
+                                                                     public function get isBusy() : Boolean
+                                                                     {
+                                                                        trait getter QName(PackageNamespace(""),"isBusy")
+                                                                           flag METADATA
+                                                                           metadata "Bindable"
+                                                                              item "event" "propertyChange"
+                                                                           end ; metadata
+                                                                           dispid 0
+                                                                           method
+                                                                              name ""
+                                                                              returns QName(PackageNamespace(""),"Boolean")
+                                                                              
+                                                                              body
+                                                                                 maxstack 1
+                                                                                 localcount 1
+                                                                                 initscopedepth 4
+                                                                                 maxscopedepth 5
+                                                                                 
+                                                                                 code
+                                                                                    getlocal0
+                                                                                    pushscope
+                                                                                    getlocal0
+                                                                                    getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"_1180619197isBusy")
+                                                                                    returnvalue
+                                                                                 end ; code
+                                                                              end ; body
+                                                                           end ; method
+                                                                        }
+                                                                        
+                                                                        public function set isBusy(param1:Boolean) : void
+                                                                        {
+                                                                           trait setter QName(PackageNamespace(""),"isBusy")
+                                                                              dispid 0
+                                                                              method
+                                                                                 name ""
+                                                                                 param QName(PackageNamespace(""),"Boolean")
+                                                                                 returns QName(PackageNamespace(""),"void")
+                                                                                 
+                                                                                 body
+                                                                                    maxstack 6
+                                                                                    localcount 3
+                                                                                    initscopedepth 4
+                                                                                    maxscopedepth 5
+                                                                                    
+                                                                                    code
+                                                                                       getlocal0
+                                                                                       pushscope
+                                                                                       getlocal0
+                                                                                       getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"_1180619197isBusy")
+                                                                                       coerce QName(PackageNamespace(""),"Object")
+                                                                                       setlocal2
+                                                                                       getlocal2
+                                                                                       getlocal1
+                                                                                       ifstricteq ofs002e
+                                                                                       getlocal0
+                                                                                       getlocal1
+                                                                                       setproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"_1180619197isBusy")
+                                                                                       getlocal0
+                                                                                       pushstring "propertyChange"
+                                                                                       callproperty QName(PackageNamespace(""),"hasEventListener"), 1
+                                                                                       iffalse ofs002e
+                                                                                       getlocal0
+                                                                                       findpropstrict QName(PackageNamespace("mx.events"),"PropertyChangeEvent")
+                                                                                       getproperty QName(PackageNamespace("mx.events"),"PropertyChangeEvent")
+                                                                                       getlocal0
+                                                                                       pushstring "isBusy"
+                                                                                       getlocal2
+                                                                                       getlocal1
+                                                                                       callproperty QName(PackageNamespace(""),"createUpdateEvent"), 4
+                                                                                       callproperty QName(PackageNamespace(""),"dispatchEvent"), 1
+                                                                                       pop
+                                                                              ofs002e:
+                                                                                       returnvoid
+                                                                                    end ; code
+                                                                                 end ; body
+                                                                              end ; method
+                                                                           }
+                                                                           
+                                                                           public function addEventListener(param1:String, param2:Function, param3:Boolean = false, param4:int = 0, param5:Boolean = false) : void
+                                                                           {
+                                                                              trait method QName(PackageNamespace(""),"addEventListener")
+                                                                                 dispid 0
+                                                                                 method
+                                                                                    name ""
+                                                                                    flag HAS_OPTIONAL
+                                                                                    param QName(PackageNamespace(""),"String")
+                                                                                    param QName(PackageNamespace(""),"Function")
+                                                                                    param QName(PackageNamespace(""),"Boolean")
+                                                                                    param QName(PackageNamespace(""),"int")
+                                                                                    param QName(PackageNamespace(""),"Boolean")
+                                                                                    optional False()
+                                                                                    optional Integer(0)
+                                                                                    optional False()
+                                                                                    returns QName(PackageNamespace(""),"void")
+                                                                                    
+                                                                                    body
+                                                                                       maxstack 6
+                                                                                       localcount 6
+                                                                                       initscopedepth 4
+                                                                                       maxscopedepth 5
+                                                                                       
+                                                                                       code
+                                                                                          getlocal0
+                                                                                          pushscope
+                                                                                          getlocal0
+                                                                                          getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"_bindingEventDispatcher")
+                                                                                          getlocal1
+                                                                                          getlocal2
+                                                                                          getlocal3
+                                                                                          getlocal 4
+                                                                                          getlocal 5
+                                                                                          callproperty QName(PackageNamespace(""),"addEventListener"), 5
+                                                                                          pop
+                                                                                          returnvoid
+                                                                                       end ; code
+                                                                                    end ; body
+                                                                                 end ; method
+                                                                              }
+                                                                              
+                                                                              public function dispatchEvent(param1:Event) : Boolean
+                                                                              {
+                                                                                 trait method QName(PackageNamespace(""),"dispatchEvent")
+                                                                                    dispid 0
+                                                                                    method
+                                                                                       name ""
+                                                                                       param QName(PackageNamespace("flash.events"),"Event")
+                                                                                       returns QName(PackageNamespace(""),"Boolean")
+                                                                                       
+                                                                                       body
+                                                                                          maxstack 2
+                                                                                          localcount 2
+                                                                                          initscopedepth 4
+                                                                                          maxscopedepth 5
+                                                                                          
+                                                                                          code
+                                                                                             getlocal0
+                                                                                             pushscope
+                                                                                             getlocal0
+                                                                                             getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"_bindingEventDispatcher")
+                                                                                             getlocal1
+                                                                                             callproperty QName(PackageNamespace(""),"dispatchEvent"), 1
+                                                                                             returnvalue
+                                                                                          end ; code
+                                                                                       end ; body
+                                                                                    end ; method
+                                                                                 }
+                                                                                 
+                                                                                 public function hasEventListener(param1:String) : Boolean
+                                                                                 {
+                                                                                    trait method QName(PackageNamespace(""),"hasEventListener")
+                                                                                       dispid 0
+                                                                                       method
+                                                                                          name ""
+                                                                                          param QName(PackageNamespace(""),"String")
+                                                                                          returns QName(PackageNamespace(""),"Boolean")
+                                                                                          
+                                                                                          body
+                                                                                             maxstack 2
+                                                                                             localcount 2
+                                                                                             initscopedepth 4
+                                                                                             maxscopedepth 5
+                                                                                             
+                                                                                             code
+                                                                                                getlocal0
+                                                                                                pushscope
+                                                                                                getlocal0
+                                                                                                getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"_bindingEventDispatcher")
+                                                                                                getlocal1
+                                                                                                callproperty QName(PackageNamespace(""),"hasEventListener"), 1
+                                                                                                returnvalue
+                                                                                             end ; code
+                                                                                          end ; body
+                                                                                       end ; method
+                                                                                    }
+                                                                                    
+                                                                                    public function removeEventListener(param1:String, param2:Function, param3:Boolean = false) : void
+                                                                                    {
+                                                                                       trait method QName(PackageNamespace(""),"removeEventListener")
+                                                                                          dispid 0
+                                                                                          method
+                                                                                             name ""
+                                                                                             flag HAS_OPTIONAL
+                                                                                             param QName(PackageNamespace(""),"String")
+                                                                                             param QName(PackageNamespace(""),"Function")
+                                                                                             param QName(PackageNamespace(""),"Boolean")
+                                                                                             optional False()
+                                                                                             returns QName(PackageNamespace(""),"void")
+                                                                                             
+                                                                                             body
+                                                                                                maxstack 4
+                                                                                                localcount 4
+                                                                                                initscopedepth 4
+                                                                                                maxscopedepth 5
+                                                                                                
+                                                                                                code
+                                                                                                   getlocal0
+                                                                                                   pushscope
+                                                                                                   getlocal0
+                                                                                                   getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"_bindingEventDispatcher")
+                                                                                                   getlocal1
+                                                                                                   getlocal2
+                                                                                                   getlocal3
+                                                                                                   callproperty QName(PackageNamespace(""),"removeEventListener"), 3
+                                                                                                   pop
+                                                                                                   returnvoid
+                                                                                                end ; code
+                                                                                             end ; body
+                                                                                          end ; method
+                                                                                       }
+                                                                                       
+                                                                                       public function willTrigger(param1:String) : Boolean
+                                                                                       {
+                                                                                          trait method QName(PackageNamespace(""),"willTrigger")
+                                                                                             dispid 0
+                                                                                             method
+                                                                                                name ""
+                                                                                                param QName(PackageNamespace(""),"String")
+                                                                                                returns QName(PackageNamespace(""),"Boolean")
+                                                                                                
+                                                                                                body
+                                                                                                   maxstack 2
+                                                                                                   localcount 2
+                                                                                                   initscopedepth 4
+                                                                                                   maxscopedepth 5
+                                                                                                   
+                                                                                                   code
+                                                                                                      getlocal0
+                                                                                                      pushscope
+                                                                                                      getlocal0
+                                                                                                      getproperty QName(PrivateNamespace("com.riotgames.pvpnet.game.controllers:InGameController"),"_bindingEventDispatcher")
+                                                                                                      getlocal1
+                                                                                                      callproperty QName(PackageNamespace(""),"willTrigger"), 1
+                                                                                                      returnvalue
+                                                                                                   end ; code
+                                                                                                end ; body
+                                                                                             end ; method
+                                                                                          }
+                                                                                       }
+                                                                                    }
+                                                                                    
+                                                                                    method
+                                                                                       name ""
+                                                                                       returns null
+                                                                                       
+                                                                                       body
+                                                                                          maxstack 2
+                                                                                          localcount 1
+                                                                                          initscopedepth 1
+                                                                                          maxscopedepth 3
+                                                                                          
+                                                                                          code
+                                                                                             getlocal0
+                                                                                             pushscope
+                                                                                             findpropstrict Multiname("InGameController",[PackageNamespace("com.riotgames.pvpnet.game.controllers")])
+                                                                                             findpropstrict QName(PackageNamespace(""),"Object")
+                                                                                             getproperty QName(PackageNamespace(""),"Object")
+                                                                                             pushscope
+                                                                                             findpropstrict QName(PackageNamespace(""),"Object")
+                                                                                             getproperty QName(PackageNamespace(""),"Object")
+                                                                                             newclass 0
+                                                                                             popscope
+                                                                                             initproperty QName(PackageNamespace("com.riotgames.pvpnet.game.controllers"),"InGameController")
+                                                                                             returnvoid
+                                                                                          end ; code
+                                                                                       end ; body
+                                                                                    end ; method
+                                                                                    

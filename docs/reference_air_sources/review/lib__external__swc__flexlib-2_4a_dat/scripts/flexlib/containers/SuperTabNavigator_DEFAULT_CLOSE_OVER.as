@@ -1,0 +1,17 @@
+package flexlib.containers
+{
+   import mx.core.SpriteAsset;
+   
+   [Embed(_resolvedSource="C:/dev/flexlib/flexlib/src/flexlib/assets/assets.swf",_column="4",symbol="firefox_close_over",source="../assets/assets.swf",_line="215",_pathsep="true",_file="C:/dev/flexlib/flexlib/src/flexlib/containers/SuperTabNavigator.as")]
+   [ExcludeClass]
+   [Embed(source="/_assets/assets.swf", symbol="symbol10")]
+   public class SuperTabNavigator_DEFAULT_CLOSE_OVER extends SpriteAsset
+   {
+      
+      public function SuperTabNavigator_DEFAULT_CLOSE_OVER()
+      {
+         super();
+      }
+   }
+}
+

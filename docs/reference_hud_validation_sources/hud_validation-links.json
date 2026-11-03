@@ -1,0 +1,1376 @@
+{
+  "schema": "openleague_hud_validation_links/v1",
+  "passed": true,
+  "utc": "2026-10-23T06:54:34.527402+00:00",
+  "full_task_scope_complete": false,
+  "native_or_game_executed": false,
+  "historical_server_policy_qualified": false,
+  "facts": {
+    "candidates": {
+      "producer": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\prepare_hud_validation_reader.py",
+        "bytes": 3735,
+        "sha256": "18ad6a28ff8cdfcbc87a15427903fd466a0b89de71c69cd93750739950db31c4"
+      },
+      "associations": [
+        {
+          "task_id": "SYS-17.5-01",
+          "finding": "Native slot state arithmetic,not all HUD controls. Current rank eligibility for supported champion rank tables.",
+          "remaining": "Slot and learning states only;every control and rendered native comparison remain open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/native_hud_spells.rs",
+              "line": 16,
+              "needle": "pub(crate) fn state(",
+              "role": "hud_validation_1_0"
+            },
+            {
+              "path": "crates/client/src/native_hud_learning.rs",
+              "line": 9,
+              "needle": "pub(crate) fn eligible(",
+              "role": "hud_validation_1_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-7f169cfb-24b6-5bf1-86bc-6862d9a6c5dd"
+        },
+        {
+          "task_id": "SYS-17.5-02",
+          "finding": "Native rectangle arithmetic;not full HUD visible-state acceptance.",
+          "remaining": "Fixture dimensions are not a declared minimum supported resolution;full HUD rendering at minimum remains open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/native_hud_layout.rs",
+              "line": 8,
+              "needle": "pub fn transform(",
+              "role": "hud_validation_2_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-daa69c3d-2986-5598-ba74-9bfd0290a7d5"
+        },
+        {
+          "task_id": "SYS-17.5-03",
+          "finding": "Native rectangle arithmetic;not full HUD visible-state acceptance. CPU ECS window resize1280x800 to1920x1080;not fresh rendered screenshot.",
+          "remaining": "1920x1080 geometry and CPU resize tested;pixel/layout acceptance remains open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/native_hud_layout.rs",
+              "line": 8,
+              "needle": "pub fn transform(",
+              "role": "hud_validation_3_0"
+            },
+            {
+              "path": "crates/client/src/native_hud_viewport.rs",
+              "line": 42,
+              "needle": "fn actual_window_change_refreshes_source_groups_then_reuses_bounds()",
+              "role": "hud_validation_3_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-745d3d99-9d61-508e-b918-5a84a2b977b0"
+        },
+        {
+          "task_id": "SYS-17.5-04",
+          "finding": "Bevy physical window supplies dimensions;original full resize lifecycle open. CPU ECS window resize1280x800 to1920x1080;not fresh rendered screenshot.",
+          "remaining": "Bevy resize bridge tested;native full lifecycle and rendered resize acceptance remain open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/native_hud_viewport.rs",
+              "line": 13,
+              "needle": "fn refresh(",
+              "role": "hud_validation_4_0"
+            },
+            {
+              "path": "crates/client/src/native_hud_viewport.rs",
+              "line": 42,
+              "needle": "fn actual_window_change_refreshes_source_groups_then_reuses_bounds()",
+              "role": "hud_validation_4_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-04197c74-e8d5-5a78-a68b-5872bac3afd8"
+        },
+        {
+          "task_id": "SYS-17.5-05",
+          "finding": "Session context and512byte rejection guard;not privacy proof of every message. Gameplay error forwarded from authoritative command/pause outcome;all payload privacy needs separate audit. Current diagnostic text includes command rejection;public-state confidentiality and complete legibility need dedicated qualification.",
+          "remaining": "Context and512byte guard plus displayed authoritative reasons;exhaustive privacy audit remains open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/session_connection.rs",
+              "line": 245,
+              "needle": "if client.context()!=Some(rejection.context) || rejection.reason.len()>512",
+              "role": "hud_validation_5_0"
+            },
+            {
+              "path": "crates/server/src/session_host.rs",
+              "line": 147,
+              "needle": "Ok(outcome.err().map(|reason|",
+              "role": "hud_validation_5_1"
+            },
+            {
+              "path": "crates/client/src/main.rs",
+              "line": 1685,
+              "needle": "**text=format!(\"OpenLeague 4.20",
+              "role": "hud_validation_5_2"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-086ae02d-f48a-5e99-80b8-9ae1f645f5fe"
+        },
+        {
+          "task_id": "SYS-17.5-06",
+          "finding": "Current diagnostic text includes command rejection;public-state confidentiality and complete legibility need dedicated qualification.",
+          "remaining": "Diagnostic text entry only;readability,keyboard focus and overflow verification remain open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/main.rs",
+              "line": 1685,
+              "needle": "**text=format!(\"OpenLeague 4.20",
+              "role": "hud_validation_6_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-e5c74f2f-6127-562f-a401-f7567f02edf7"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\hud-validation-research.json",
+          "bytes": 4446,
+          "sha256": "26092f340038dbb16c0290a907a6b315e9241128a92a4fe07c64aeeafaa988e0"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\hud-control-research.json",
+          "bytes": 2414,
+          "sha256": "8677d8af27b7e4c6dc78dc9d256b89253977c2c73c23d3edcf5d46103ca325db"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\hud-validation-test-receipt.json",
+          "bytes": 7116,
+          "sha256": "648d6024401865e97e4c4618a2261c67c74ae362fe4da93afb44c2b83a9ada6b"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\hud-control-states-test-receipt.json",
+          "bytes": 7583,
+          "sha256": "e6281c82c510e282a5fd0e94c7a705295956b6ceb80a54ed50dddd9371eeeee2"
+        }
+      ],
+      "current_sources": [
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_spells.rs",
+          "bytes": 15015,
+          "sha256": "c9af91d89a4c014ee3a844378e61579f3b01efbe682c89d8fbf83b40050ede4d"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_learning.rs",
+          "bytes": 31416,
+          "sha256": "9ae494663305220318cb31c736fb25b80ea8b18706544b0e28d4fa703f3135aa"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_layout.rs",
+          "bytes": 3508,
+          "sha256": "eddfb0c2a1727e6301ed6f9ee0b1dead68e9a4e969698fe77c7a0e978bc99448"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_layout.rs",
+          "bytes": 3508,
+          "sha256": "eddfb0c2a1727e6301ed6f9ee0b1dead68e9a4e969698fe77c7a0e978bc99448"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_viewport.rs",
+          "bytes": 4258,
+          "sha256": "4696aac89229a6150b3744d13df20b274689e3ad461048b30afc13618ed4d5b0"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_viewport.rs",
+          "bytes": 4258,
+          "sha256": "4696aac89229a6150b3744d13df20b274689e3ad461048b30afc13618ed4d5b0"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_viewport.rs",
+          "bytes": 4258,
+          "sha256": "4696aac89229a6150b3744d13df20b274689e3ad461048b30afc13618ed4d5b0"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+          "bytes": 17469,
+          "sha256": "fdd81b790bca52dd4e20ca5d34e81d78136f3958ab7028f5ca193d078fb9acd1"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+          "bytes": 33360,
+          "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+          "bytes": 141376,
+          "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+          "bytes": 141376,
+          "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+        }
+      ],
+      "scope": "HUD math,current state and rejection consumers;minimum resolution and accessibility remain boundaries. No fresh visual acceptance."
+    },
+    "receipts": {
+      "hud-validation-research.json": {
+        "utc": "2026-10-23T06:52:38.803927+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\research_hud_validation.py",
+          "bytes": 2429,
+          "sha256": "34e49a8eecce4e785a8d9c08c4664a15ef277ee92fd4ab14b4a365583e94d638"
+        },
+        "contracts": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\data\\4.20\\native_hud_layout_math_contract.json",
+              "bytes": 423750,
+              "sha256": "2889d921e3158bfe5900c44b75d99480f01097250886fdcae628f36b02063d8e"
+            },
+            "case_count": 576,
+            "dimensions": [
+              [
+                1024,
+                768
+              ],
+              [
+                1280,
+                800
+              ],
+              [
+                1920,
+                1080
+              ],
+              [
+                2560,
+                1440
+              ]
+            ],
+            "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+            "complete": false,
+            "scope": "Retained native fixture;fresh CPU tests do not prove pixel fidelity."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\data\\4.20\\native_hud_viewport_transfer_contract.json",
+              "bytes": 6576,
+              "sha256": "99f119e98a101eeb5af222c54d21bb7379801a66063261aedca072d792d2c3e5"
+            },
+            "case_count": 12,
+            "dimensions": [
+              [
+                1280,
+                800
+              ],
+              [
+                1280,
+                1080
+              ],
+              [
+                1920,
+                800
+              ],
+              [
+                1920,
+                1080
+              ]
+            ],
+            "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+            "complete": false,
+            "scope": "Retained native fixture;fresh CPU tests do not prove pixel fidelity."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\data\\4.20\\native_hud_group_bounds_contract.json",
+              "bytes": 1413793,
+              "sha256": "1aae93138163d136c9d2710c46f6c3005ca5aaf11dbf9044fb62aa968cb47856"
+            },
+            "case_count": 1152,
+            "dimensions": [
+              [
+                1280,
+                800
+              ],
+              [
+                1920,
+                1080
+              ]
+            ],
+            "native_sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+            "complete": false,
+            "scope": "Retained native fixture;fresh CPU tests do not prove pixel fidelity."
+          }
+        ],
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_layout.rs",
+              "bytes": 3508,
+              "sha256": "eddfb0c2a1727e6301ed6f9ee0b1dead68e9a4e969698fe77c7a0e978bc99448"
+            },
+            "line": 8,
+            "needle": "pub fn transform(",
+            "finding": "Native rectangle arithmetic;not full HUD visible-state acceptance."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_viewport.rs",
+              "bytes": 4258,
+              "sha256": "4696aac89229a6150b3744d13df20b274689e3ad461048b30afc13618ed4d5b0"
+            },
+            "line": 13,
+            "needle": "fn refresh(",
+            "finding": "Bevy physical window supplies dimensions;original full resize lifecycle open."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_viewport.rs",
+              "bytes": 4258,
+              "sha256": "4696aac89229a6150b3744d13df20b274689e3ad461048b30afc13618ed4d5b0"
+            },
+            "line": 42,
+            "needle": "fn actual_window_change_refreshes_source_groups_then_reuses_bounds()",
+            "finding": "CPU ECS window resize1280x800 to1920x1080;not fresh rendered screenshot."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+              "bytes": 141376,
+              "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+            },
+            "line": 1685,
+            "needle": "**text=format!(\"OpenLeague 4.20",
+            "finding": "Current diagnostic text includes command rejection;public-state confidentiality and complete legibility need dedicated qualification."
+          }
+        ],
+        "limitations": [
+          "Minimum supported resolution not established by fixture dimensions.",
+          "Native state active/disabled/refused comparison for every control remains open.",
+          "Keyboard focus,overflow and rejection privacy are not proven by geometry tests.",
+          "No GPU/screenshot executed this turn;dynamic startup assets are not exhaustively pinned by this test receipt."
+        ]
+      },
+      "hud-control-research.json": {
+        "utc": "2026-10-23T06:53:52.109344+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\research_hud_controls.py",
+          "bytes": 2531,
+          "sha256": "c7c308c3609b4b24fa6921c72c7d101d6d1cb431ff62eafe01ca5afeb747cb87"
+        },
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_spells.rs",
+              "bytes": 15015,
+              "sha256": "c9af91d89a4c014ee3a844378e61579f3b01efbe682c89d8fbf83b40050ede4d"
+            },
+            "line": 16,
+            "needle": "pub(crate) fn state(",
+            "finding": "Native slot state arithmetic,not all HUD controls."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_learning.rs",
+              "bytes": 31416,
+              "sha256": "9ae494663305220318cb31c736fb25b80ea8b18706544b0e28d4fa703f3135aa"
+            },
+            "line": 9,
+            "needle": "pub(crate) fn eligible(",
+            "finding": "Current rank eligibility for supported champion rank tables."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+              "bytes": 17469,
+              "sha256": "fdd81b790bca52dd4e20ca5d34e81d78136f3958ab7028f5ca193d078fb9acd1"
+            },
+            "line": 245,
+            "needle": "if client.context()!=Some(rejection.context) || rejection.reason.len()>512",
+            "finding": "Session context and512byte rejection guard;not privacy proof of every message."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+              "bytes": 33360,
+              "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+            },
+            "line": 147,
+            "needle": "Ok(outcome.err().map(|reason|",
+            "finding": "Gameplay error forwarded from authoritative command/pause outcome;all payload privacy needs separate audit."
+          }
+        ],
+        "contract": {
+          "path": "F:\\OpenLeague\\data\\4.20\\native_hud_spell_states_contract.json",
+          "bytes": 104619,
+          "sha256": "4e249c6ac849c7d2c718a3fbcb3e863b5c585fe7bff2f63fb4a6845ed94ae9c8"
+        },
+        "state_cases": 384,
+        "color_cases": 192,
+        "limits": [
+          "All HUD controls not qualified by slot/rank subset.",
+          "Context and byte cap are not a privacy or historical text equivalence proof.",
+          "No fresh rendered UI or keyboard accessibility acceptance."
+        ]
+      },
+      "hud-validation-test-receipt.json": {
+        "utc": "2026-10-23T06:52:09.966485+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\run_hud_validation_tests.py",
+          "bytes": 1946,
+          "sha256": "652fe1a8546adbb20b61e4dccc3ae427191618e7b65a4b853601fdeae38be06f"
+        },
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-client",
+              "native_hud_layout::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "native_hud_layout::tests::normalized_rectangles_match_every_native_scale_anchor_aspect_and_snap_case"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\native_hud_layout-tests.log",
+              "bytes": 80023,
+              "sha256": "85db9a6d716bb7cd68851e78c41829ee9ee2d355eb079a42f777d17245304095"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+                "bytes": 352612864,
+                "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+              }
+            ]
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-client",
+              "native_hud_viewport::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "native_hud_viewport::tests::native_owner_scalar_and_twelve_dimension_transfers_match",
+              "native_hud_viewport::tests::actual_window_change_refreshes_source_groups_then_reuses_bounds"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\native_hud_viewport-tests.log",
+              "bytes": 80343,
+              "sha256": "0dfe6110e4d1836f43335a667a9f312a53d4d265efa40f99d2327578939bd4df"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+                "bytes": 352612864,
+                "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+              }
+            ]
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-client",
+              "native_hud_anchor::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "native_hud_anchor::tests::original_anchor_partial_reads_and_successful_copy_match"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\native_hud_anchor-tests.log",
+              "bytes": 80004,
+              "sha256": "a4a0927090af5924b08f57dfe4a3d784d162d3433f5d004b6d55bb4bc6ecd0f9"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+                "bytes": 352612864,
+                "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "path": "F:\\OpenLeague\\Cargo.lock",
+            "bytes": 153304,
+            "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\death_recap_panel.rs",
+            "bytes": 8998,
+            "sha256": "c27ddf93d34af73e50deb501764ff47f0b26279d65890956477895308845e199"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\death_recap_panel_tests.rs",
+            "bytes": 14256,
+            "sha256": "e6de06fa868831914a84a96fad9db6285cb78793e098c0547b7589204b50bddc"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\native_endgame_ui.rs",
+            "bytes": 12985,
+            "sha256": "99290ade51f68a84cb8e680a2778f1d6dfb0d393f258a490726e431bcd941149"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_anchor.rs",
+            "bytes": 1494,
+            "sha256": "1031dca818284a9cd7675331b8d94198bfd52ac7f5d1ab6b93d241feda44d629"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_layout.rs",
+            "bytes": 3508,
+            "sha256": "eddfb0c2a1727e6301ed6f9ee0b1dead68e9a4e969698fe77c7a0e978bc99448"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_viewport.rs",
+            "bytes": 4258,
+            "sha256": "4696aac89229a6150b3744d13df20b274689e3ad461048b30afc13618ed4d5b0"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\ordinary_pause.rs",
+            "bytes": 12837,
+            "sha256": "cfa090d97b6016f1fa1a39d2c288b2bae831ed6d6d0eb2a6d38f3441430937d2"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\ordinary_pause_tests.rs",
+            "bytes": 17637,
+            "sha256": "1d014f7fb805da040bf75df77d35197d3c6d607c4afb2f7c43f85bd2bc5b8a82"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\session_bootstrap.rs",
+            "bytes": 3822,
+            "sha256": "3ef5a2b25285d2e4b63d45b5354d7f30273c03ba96a81538f98effc2e80a8d77"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\session_client.rs",
+            "bytes": 12507,
+            "sha256": "4df6dc629e5a428bb7d7bc258ec83ce763d999da34587228ea76208de06b76e4"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\session_client_tests.rs",
+            "bytes": 11271,
+            "sha256": "53bbf4b025694a3f7b0569e350bfbe5a148952077c508a4765eeba0fe6d1560f"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+            "bytes": 17469,
+            "sha256": "fdd81b790bca52dd4e20ca5d34e81d78136f3958ab7028f5ca193d078fb9acd1"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\session_connection_tests.rs",
+            "bytes": 36396,
+            "sha256": "6c8d8d63845db752a943a311fd0c6fbeb2678c2fa1d6cb0f772bf70a4b441165"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\session_departure.rs",
+            "bytes": 9218,
+            "sha256": "6cc8e1889fec2d6d2af8ae5f334126410ed5af2ef48b32f005c419617a3fdfe9"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\native_hud_anchor_contract.json",
+            "bytes": 33906,
+            "sha256": "ce78b41621859b67ca1239e49626b14f97b0f23d2311530537cf3a335479b23d"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\native_hud_group_bounds_contract.json",
+            "bytes": 1413793,
+            "sha256": "1aae93138163d136c9d2710c46f6c3005ca5aaf11dbf9044fb62aa968cb47856"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\native_hud_layout_math_contract.json",
+            "bytes": 423750,
+            "sha256": "2889d921e3158bfe5900c44b75d99480f01097250886fdcae628f36b02063d8e"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\native_hud_viewport_transfer_contract.json",
+            "bytes": 6576,
+            "sha256": "99f119e98a101eeb5af222c54d21bb7379801a66063261aedca072d792d2c3e5"
+          }
+        ],
+        "scope": "Fresh current HUD geometry CPU tests;retained native fixtures;no GPU or historical process execution.",
+        "native_or_gpu_executed": false
+      },
+      "hud-control-states-test-receipt.json": {
+        "utc": "2026-10-23T06:53:23.811264+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\run_hud_control_tests.py",
+          "bytes": 1917,
+          "sha256": "4f4337e754b135fc8a230060be486a0b89cd8418ffd8d7a0c1b7c46ee0305276"
+        },
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-client",
+              "native_hud_spells::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "native_hud_spells::summoner_signature_tests::session_and_loadout_changes_invalidate_icons_even_when_state_is_ready",
+              "native_hud_spells::tests::every_executed_native_state_and_palette_case_matches",
+              "native_hud_spells::tests::authoritative_annie_learning_cast_and_cooldown_change_hud_state",
+              "native_hud_spells::tests::all486_source_primary_icon_payloads_and_fourteen_widgets_are_preserved"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\native_hud_spells-tests.log",
+              "bytes": 80340,
+              "sha256": "bd224f7a046daef1daf2c82699d64ba6fbd590f4019ce40aca7b3a225c5cda38"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+                "bytes": 352612864,
+                "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+              }
+            ]
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-client",
+              "native_hud_learning::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "native_hud_learning::tests::all32_native_enable_branch_cases_match",
+              "native_hud_learning::tests::ordinary_learning_datagram_has_sequence_and_server_revalidates",
+              "native_hud_learning::ezreal_w_learning_tests::original_w_arrow_obeys_five_server_gates_without_enabling_e_r",
+              "native_hud_learning::ezreal_r_learning_tests::original_r_arrow_obeys_levels_six_eleven_sixteen_maxrank_and_points",
+              "native_hud_learning::tests::reconstructed_trundle_w_native_frame_routes_ordinary_learning_and_rejects_disabled_slots",
+              "native_hud_learning::tests::reconstructed_trundle_r_pointer_obeys_levels_and_ordinary_learn_validation",
+              "native_hud_learning::ezreal_q_learning_tests::original_q_arrow_obeys_five_server_level_gates_and_never_enables_unsupported_slots",
+              "native_hud_learning::tests::original_button_geometry_and_real_learning_gate_pointer_actions",
+              "native_hud_learning::ezreal_e_learning_tests::original_e_arrow_obeys_five_server_gates_with_r_still_unsupported",
+              "native_hud_learning::trundle_e_learning_tests::native_e_frame_learns_five_ranks_and_physical_key_routes_ordinary_ground_command",
+              "native_hud_learning::tests::reconstructed_trundle_q_pointer_sends_only_eligible_ordinary_learning"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\native_hud_learning-tests.log",
+              "bytes": 81204,
+              "sha256": "cf562e2b9243ae7267b688018b58459cf81c7cbb2cd30c01060fdcbeddabae17"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+                "bytes": 352612864,
+                "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "path": "F:\\OpenLeague\\assets\\maps\\tt_navigation_grid.json",
+            "bytes": 1361,
+            "sha256": "98903341b52e204145eafc92a949394712257abc352bc3dad5e5fe204f1c1321"
+          },
+          {
+            "path": "F:\\OpenLeague\\Cargo.lock",
+            "bytes": 153304,
+            "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\death_recap_panel.rs",
+            "bytes": 8998,
+            "sha256": "c27ddf93d34af73e50deb501764ff47f0b26279d65890956477895308845e199"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\death_recap_panel_tests.rs",
+            "bytes": 14256,
+            "sha256": "e6de06fa868831914a84a96fad9db6285cb78793e098c0547b7589204b50bddc"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\native_endgame_ui.rs",
+            "bytes": 12985,
+            "sha256": "99290ade51f68a84cb8e680a2778f1d6dfb0d393f258a490726e431bcd941149"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_learning.rs",
+            "bytes": 31416,
+            "sha256": "9ae494663305220318cb31c736fb25b80ea8b18706544b0e28d4fa703f3135aa"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_spells.rs",
+            "bytes": 15015,
+            "sha256": "c9af91d89a4c014ee3a844378e61579f3b01efbe682c89d8fbf83b40050ede4d"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\ordinary_pause.rs",
+            "bytes": 12837,
+            "sha256": "cfa090d97b6016f1fa1a39d2c288b2bae831ed6d6d0eb2a6d38f3441430937d2"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\ordinary_pause_tests.rs",
+            "bytes": 17637,
+            "sha256": "1d014f7fb805da040bf75df77d35197d3c6d607c4afb2f7c43f85bd2bc5b8a82"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\session_bootstrap.rs",
+            "bytes": 3822,
+            "sha256": "3ef5a2b25285d2e4b63d45b5354d7f30273c03ba96a81538f98effc2e80a8d77"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\session_client.rs",
+            "bytes": 12507,
+            "sha256": "4df6dc629e5a428bb7d7bc258ec83ce763d999da34587228ea76208de06b76e4"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\session_client_tests.rs",
+            "bytes": 11271,
+            "sha256": "53bbf4b025694a3f7b0569e350bfbe5a148952077c508a4765eeba0fe6d1560f"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+            "bytes": 17469,
+            "sha256": "fdd81b790bca52dd4e20ca5d34e81d78136f3958ab7028f5ca193d078fb9acd1"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\session_connection_tests.rs",
+            "bytes": 36396,
+            "sha256": "6c8d8d63845db752a943a311fd0c6fbeb2678c2fa1d6cb0f772bf70a4b441165"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\session_departure.rs",
+            "bytes": 9218,
+            "sha256": "6cc8e1889fec2d6d2af8ae5f334126410ed5af2ef48b32f005c419617a3fdfe9"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\native_hud_learning_contract.json",
+            "bytes": 8447,
+            "sha256": "0a078d42a4111900b8b709747955c094af6091b062dd4940a3be3aadb4c58ddd"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\native_hud_spell_states_contract.json",
+            "bytes": 104619,
+            "sha256": "4e249c6ac849c7d2c718a3fbcb3e863b5c585fe7bff2f63fb4a6845ed94ae9c8"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\native_spell_icons.json",
+            "bytes": 863310,
+            "sha256": "b01e4be9036ced09958319b1d347e26207d84f547468ccd4f7e7d6cc82fe3f5e"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\native_spells_420.json",
+            "bytes": 2710444,
+            "sha256": "0cae6f5c167aa852e8f86e7f3298d7c797727d5cc92616dcb856ac15c8af5d14"
+          }
+        ],
+        "scope": "Fresh current HUD control-state CPU tests;retained native fixtures;no GPU or historical process execution.",
+        "native_or_gpu_executed": false
+      }
+    },
+    "source_checks": [
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\hud-validation-associations.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\prepare_hud_validation_reader.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\hud-validation-research.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\hud-control-research.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\hud-validation-test-receipt.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\hud-control-states-test-receipt.json",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_spells.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_learning.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_layout.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_layout.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_viewport.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_viewport.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_viewport.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\research_hud_validation.py",
+      "pin_F:\\OpenLeague\\data\\4.20\\native_hud_layout_math_contract.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\native_hud_viewport_transfer_contract.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\native_hud_group_bounds_contract.json",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_layout.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_viewport.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_viewport.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\research_hud_controls.py",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_spells.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_learning.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+      "pin_F:\\OpenLeague\\data\\4.20\\native_hud_spell_states_contract.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\run_hud_validation_tests.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\native_hud_layout-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\native_hud_viewport-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\native_hud_anchor-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague\\Cargo.lock",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\death_recap_panel.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\death_recap_panel_tests.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_endgame_ui.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_anchor.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_layout.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_viewport.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ordinary_pause.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ordinary_pause_tests.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\session_bootstrap.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\session_client.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\session_client_tests.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\session_connection_tests.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\session_departure.rs",
+      "pin_F:\\OpenLeague\\data\\4.20\\native_hud_anchor_contract.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\native_hud_group_bounds_contract.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\native_hud_layout_math_contract.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\native_hud_viewport_transfer_contract.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\run_hud_control_tests.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\native_hud_spells-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\native_hud_learning-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague\\assets\\maps\\tt_navigation_grid.json",
+      "pin_F:\\OpenLeague\\Cargo.lock",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\death_recap_panel.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\death_recap_panel_tests.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_endgame_ui.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_learning.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_spells.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ordinary_pause.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ordinary_pause_tests.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\session_bootstrap.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\session_client.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\session_client_tests.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\session_connection_tests.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\session_departure.rs",
+      "pin_F:\\OpenLeague\\data\\4.20\\native_hud_learning_contract.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\native_hud_spell_states_contract.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\native_spell_icons.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\native_spells_420.json",
+      "six_associations",
+      "nineteen_tests",
+      "state_cases",
+      "geometry_cases",
+      "task_SYS-17.5-01",
+      "anchor_hud_validation_1_0",
+      "anchor_hud_validation_1_1",
+      "task_SYS-17.5-02",
+      "anchor_hud_validation_2_0",
+      "task_SYS-17.5-03",
+      "anchor_hud_validation_3_0",
+      "anchor_hud_validation_3_1",
+      "task_SYS-17.5-04",
+      "anchor_hud_validation_4_0",
+      "anchor_hud_validation_4_1",
+      "task_SYS-17.5-05",
+      "anchor_hud_validation_5_0",
+      "anchor_hud_validation_5_1",
+      "anchor_hud_validation_5_2",
+      "task_SYS-17.5-06",
+      "anchor_hud_validation_6_0"
+    ],
+    "all_hud_validations_qualified": false,
+    "all_required_effects_covered": false
+  },
+  "source_identities": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\hud-validation-associations.json",
+      "bytes": 9170,
+      "sha256": "d66863214ce057e00fffd9b3d5c139e6599bbd2fd81e75b3681ad1e2e7930142"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\prepare_hud_validation_reader.py",
+      "bytes": 3735,
+      "sha256": "18ad6a28ff8cdfcbc87a15427903fd466a0b89de71c69cd93750739950db31c4"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\hud-validation-research.json",
+      "bytes": 4446,
+      "sha256": "26092f340038dbb16c0290a907a6b315e9241128a92a4fe07c64aeeafaa988e0"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\hud-control-research.json",
+      "bytes": 2414,
+      "sha256": "8677d8af27b7e4c6dc78dc9d256b89253977c2c73c23d3edcf5d46103ca325db"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\hud-validation-test-receipt.json",
+      "bytes": 7116,
+      "sha256": "648d6024401865e97e4c4618a2261c67c74ae362fe4da93afb44c2b83a9ada6b"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\hud-control-states-test-receipt.json",
+      "bytes": 7583,
+      "sha256": "e6281c82c510e282a5fd0e94c7a705295956b6ceb80a54ed50dddd9371eeeee2"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_spells.rs",
+      "bytes": 15015,
+      "sha256": "c9af91d89a4c014ee3a844378e61579f3b01efbe682c89d8fbf83b40050ede4d"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_learning.rs",
+      "bytes": 31416,
+      "sha256": "9ae494663305220318cb31c736fb25b80ea8b18706544b0e28d4fa703f3135aa"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_layout.rs",
+      "bytes": 3508,
+      "sha256": "eddfb0c2a1727e6301ed6f9ee0b1dead68e9a4e969698fe77c7a0e978bc99448"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_viewport.rs",
+      "bytes": 4258,
+      "sha256": "4696aac89229a6150b3744d13df20b274689e3ad461048b30afc13618ed4d5b0"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+      "bytes": 17469,
+      "sha256": "fdd81b790bca52dd4e20ca5d34e81d78136f3958ab7028f5ca193d078fb9acd1"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+      "bytes": 33360,
+      "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "bytes": 141376,
+      "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\research_hud_validation.py",
+      "bytes": 2429,
+      "sha256": "34e49a8eecce4e785a8d9c08c4664a15ef277ee92fd4ab14b4a365583e94d638"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\native_hud_layout_math_contract.json",
+      "bytes": 423750,
+      "sha256": "2889d921e3158bfe5900c44b75d99480f01097250886fdcae628f36b02063d8e"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\native_hud_viewport_transfer_contract.json",
+      "bytes": 6576,
+      "sha256": "99f119e98a101eeb5af222c54d21bb7379801a66063261aedca072d792d2c3e5"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\native_hud_group_bounds_contract.json",
+      "bytes": 1413793,
+      "sha256": "1aae93138163d136c9d2710c46f6c3005ca5aaf11dbf9044fb62aa968cb47856"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\research_hud_controls.py",
+      "bytes": 2531,
+      "sha256": "c7c308c3609b4b24fa6921c72c7d101d6d1cb431ff62eafe01ca5afeb747cb87"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\native_hud_spell_states_contract.json",
+      "bytes": 104619,
+      "sha256": "4e249c6ac849c7d2c718a3fbcb3e863b5c585fe7bff2f63fb4a6845ed94ae9c8"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\run_hud_validation_tests.py",
+      "bytes": 1946,
+      "sha256": "652fe1a8546adbb20b61e4dccc3ae427191618e7b65a4b853601fdeae38be06f"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\native_hud_layout-tests.log",
+      "bytes": 80023,
+      "sha256": "85db9a6d716bb7cd68851e78c41829ee9ee2d355eb079a42f777d17245304095"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "bytes": 352612864,
+      "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\native_hud_viewport-tests.log",
+      "bytes": 80343,
+      "sha256": "0dfe6110e4d1836f43335a667a9f312a53d4d265efa40f99d2327578939bd4df"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\native_hud_anchor-tests.log",
+      "bytes": 80004,
+      "sha256": "a4a0927090af5924b08f57dfe4a3d784d162d3433f5d004b6d55bb4bc6ecd0f9"
+    },
+    {
+      "path": "F:\\OpenLeague\\Cargo.lock",
+      "bytes": 153304,
+      "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\death_recap_panel.rs",
+      "bytes": 8998,
+      "sha256": "c27ddf93d34af73e50deb501764ff47f0b26279d65890956477895308845e199"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\death_recap_panel_tests.rs",
+      "bytes": 14256,
+      "sha256": "e6de06fa868831914a84a96fad9db6285cb78793e098c0547b7589204b50bddc"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\native_endgame_ui.rs",
+      "bytes": 12985,
+      "sha256": "99290ade51f68a84cb8e680a2778f1d6dfb0d393f258a490726e431bcd941149"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_anchor.rs",
+      "bytes": 1494,
+      "sha256": "1031dca818284a9cd7675331b8d94198bfd52ac7f5d1ab6b93d241feda44d629"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\ordinary_pause.rs",
+      "bytes": 12837,
+      "sha256": "cfa090d97b6016f1fa1a39d2c288b2bae831ed6d6d0eb2a6d38f3441430937d2"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\ordinary_pause_tests.rs",
+      "bytes": 17637,
+      "sha256": "1d014f7fb805da040bf75df77d35197d3c6d607c4afb2f7c43f85bd2bc5b8a82"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\session_bootstrap.rs",
+      "bytes": 3822,
+      "sha256": "3ef5a2b25285d2e4b63d45b5354d7f30273c03ba96a81538f98effc2e80a8d77"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\session_client.rs",
+      "bytes": 12507,
+      "sha256": "4df6dc629e5a428bb7d7bc258ec83ce763d999da34587228ea76208de06b76e4"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\session_client_tests.rs",
+      "bytes": 11271,
+      "sha256": "53bbf4b025694a3f7b0569e350bfbe5a148952077c508a4765eeba0fe6d1560f"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\session_connection_tests.rs",
+      "bytes": 36396,
+      "sha256": "6c8d8d63845db752a943a311fd0c6fbeb2678c2fa1d6cb0f772bf70a4b441165"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\session_departure.rs",
+      "bytes": 9218,
+      "sha256": "6cc8e1889fec2d6d2af8ae5f334126410ed5af2ef48b32f005c419617a3fdfe9"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\native_hud_anchor_contract.json",
+      "bytes": 33906,
+      "sha256": "ce78b41621859b67ca1239e49626b14f97b0f23d2311530537cf3a335479b23d"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\run_hud_control_tests.py",
+      "bytes": 1917,
+      "sha256": "4f4337e754b135fc8a230060be486a0b89cd8418ffd8d7a0c1b7c46ee0305276"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\native_hud_spells-tests.log",
+      "bytes": 80340,
+      "sha256": "bd224f7a046daef1daf2c82699d64ba6fbd590f4019ce40aca7b3a225c5cda38"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\native_hud_learning-tests.log",
+      "bytes": 81204,
+      "sha256": "cf562e2b9243ae7267b688018b58459cf81c7cbb2cd30c01060fdcbeddabae17"
+    },
+    {
+      "path": "F:\\OpenLeague\\assets\\maps\\tt_navigation_grid.json",
+      "bytes": 1361,
+      "sha256": "98903341b52e204145eafc92a949394712257abc352bc3dad5e5fe204f1c1321"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\native_hud_learning_contract.json",
+      "bytes": 8447,
+      "sha256": "0a078d42a4111900b8b709747955c094af6091b062dd4940a3be3aadb4c58ddd"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\native_spell_icons.json",
+      "bytes": 863310,
+      "sha256": "b01e4be9036ced09958319b1d347e26207d84f547468ccd4f7e7d6cc82fe3f5e"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\native_spells_420.json",
+      "bytes": 2710444,
+      "sha256": "0cae6f5c167aa852e8f86e7f3298d7c797727d5cc92616dcb856ac15c8af5d14"
+    }
+  ],
+  "checks": [
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\hud-validation-associations.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\prepare_hud_validation_reader.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\hud-validation-research.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\hud-control-research.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\hud-validation-test-receipt.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\hud-control-states-test-receipt.json",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_spells.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_learning.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_layout.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_layout.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_viewport.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_viewport.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_viewport.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\research_hud_validation.py",
+    "pin_F:\\OpenLeague\\data\\4.20\\native_hud_layout_math_contract.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\native_hud_viewport_transfer_contract.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\native_hud_group_bounds_contract.json",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_layout.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_viewport.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_viewport.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\research_hud_controls.py",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_spells.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_learning.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+    "pin_F:\\OpenLeague\\data\\4.20\\native_hud_spell_states_contract.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\run_hud_validation_tests.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\native_hud_layout-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\native_hud_viewport-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\native_hud_anchor-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague\\Cargo.lock",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\death_recap_panel.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\death_recap_panel_tests.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_endgame_ui.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_anchor.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_layout.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_viewport.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ordinary_pause.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ordinary_pause_tests.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\session_bootstrap.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\session_client.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\session_client_tests.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\session_connection_tests.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\session_departure.rs",
+    "pin_F:\\OpenLeague\\data\\4.20\\native_hud_anchor_contract.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\native_hud_group_bounds_contract.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\native_hud_layout_math_contract.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\native_hud_viewport_transfer_contract.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\run_hud_control_tests.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\native_hud_spells-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision125\\native_hud_learning-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague\\assets\\maps\\tt_navigation_grid.json",
+    "pin_F:\\OpenLeague\\Cargo.lock",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\death_recap_panel.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\death_recap_panel_tests.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_endgame_ui.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_learning.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_spells.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ordinary_pause.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ordinary_pause_tests.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\session_bootstrap.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\session_client.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\session_client_tests.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\session_connection_tests.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\session_departure.rs",
+    "pin_F:\\OpenLeague\\data\\4.20\\native_hud_learning_contract.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\native_hud_spell_states_contract.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\native_spell_icons.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\native_spells_420.json",
+    "six_associations",
+    "nineteen_tests",
+    "state_cases",
+    "geometry_cases",
+    "task_SYS-17.5-01",
+    "anchor_hud_validation_1_0",
+    "anchor_hud_validation_1_1",
+    "task_SYS-17.5-02",
+    "anchor_hud_validation_2_0",
+    "task_SYS-17.5-03",
+    "anchor_hud_validation_3_0",
+    "anchor_hud_validation_3_1",
+    "task_SYS-17.5-04",
+    "anchor_hud_validation_4_0",
+    "anchor_hud_validation_4_1",
+    "task_SYS-17.5-05",
+    "anchor_hud_validation_5_0",
+    "anchor_hud_validation_5_1",
+    "anchor_hud_validation_5_2",
+    "task_SYS-17.5-06",
+    "anchor_hud_validation_6_0"
+  ],
+  "checks_count": 102,
+  "associations": [
+    {
+      "task_id": "SYS-17.5-01",
+      "finding": "Native slot state arithmetic,not all HUD controls. Current rank eligibility for supported champion rank tables.",
+      "remaining": "Slot and learning states only;every control and rendered native comparison remain open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/native_hud_spells.rs",
+          "line": 16,
+          "needle": "pub(crate) fn state(",
+          "role": "hud_validation_1_0"
+        },
+        {
+          "path": "crates/client/src/native_hud_learning.rs",
+          "line": 9,
+          "needle": "pub(crate) fn eligible(",
+          "role": "hud_validation_1_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-7f169cfb-24b6-5bf1-86bc-6862d9a6c5dd"
+    },
+    {
+      "task_id": "SYS-17.5-02",
+      "finding": "Native rectangle arithmetic;not full HUD visible-state acceptance.",
+      "remaining": "Fixture dimensions are not a declared minimum supported resolution;full HUD rendering at minimum remains open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/native_hud_layout.rs",
+          "line": 8,
+          "needle": "pub fn transform(",
+          "role": "hud_validation_2_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-daa69c3d-2986-5598-ba74-9bfd0290a7d5"
+    },
+    {
+      "task_id": "SYS-17.5-03",
+      "finding": "Native rectangle arithmetic;not full HUD visible-state acceptance. CPU ECS window resize1280x800 to1920x1080;not fresh rendered screenshot.",
+      "remaining": "1920x1080 geometry and CPU resize tested;pixel/layout acceptance remains open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/native_hud_layout.rs",
+          "line": 8,
+          "needle": "pub fn transform(",
+          "role": "hud_validation_3_0"
+        },
+        {
+          "path": "crates/client/src/native_hud_viewport.rs",
+          "line": 42,
+          "needle": "fn actual_window_change_refreshes_source_groups_then_reuses_bounds()",
+          "role": "hud_validation_3_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-745d3d99-9d61-508e-b918-5a84a2b977b0"
+    },
+    {
+      "task_id": "SYS-17.5-04",
+      "finding": "Bevy physical window supplies dimensions;original full resize lifecycle open. CPU ECS window resize1280x800 to1920x1080;not fresh rendered screenshot.",
+      "remaining": "Bevy resize bridge tested;native full lifecycle and rendered resize acceptance remain open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/native_hud_viewport.rs",
+          "line": 13,
+          "needle": "fn refresh(",
+          "role": "hud_validation_4_0"
+        },
+        {
+          "path": "crates/client/src/native_hud_viewport.rs",
+          "line": 42,
+          "needle": "fn actual_window_change_refreshes_source_groups_then_reuses_bounds()",
+          "role": "hud_validation_4_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-04197c74-e8d5-5a78-a68b-5872bac3afd8"
+    },
+    {
+      "task_id": "SYS-17.5-05",
+      "finding": "Session context and512byte rejection guard;not privacy proof of every message. Gameplay error forwarded from authoritative command/pause outcome;all payload privacy needs separate audit. Current diagnostic text includes command rejection;public-state confidentiality and complete legibility need dedicated qualification.",
+      "remaining": "Context and512byte guard plus displayed authoritative reasons;exhaustive privacy audit remains open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/session_connection.rs",
+          "line": 245,
+          "needle": "if client.context()!=Some(rejection.context) || rejection.reason.len()>512",
+          "role": "hud_validation_5_0"
+        },
+        {
+          "path": "crates/server/src/session_host.rs",
+          "line": 147,
+          "needle": "Ok(outcome.err().map(|reason|",
+          "role": "hud_validation_5_1"
+        },
+        {
+          "path": "crates/client/src/main.rs",
+          "line": 1685,
+          "needle": "**text=format!(\"OpenLeague 4.20",
+          "role": "hud_validation_5_2"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-086ae02d-f48a-5e99-80b8-9ae1f645f5fe"
+    },
+    {
+      "task_id": "SYS-17.5-06",
+      "finding": "Current diagnostic text includes command rejection;public-state confidentiality and complete legibility need dedicated qualification.",
+      "remaining": "Diagnostic text entry only;readability,keyboard focus and overflow verification remain open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/main.rs",
+          "line": 1685,
+          "needle": "**text=format!(\"OpenLeague 4.20",
+          "role": "hud_validation_6_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-e5c74f2f-6127-562f-a401-f7567f02edf7"
+    }
+  ]
+}

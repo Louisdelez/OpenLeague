@@ -1,0 +1,48 @@
+# V95 — Identités et disponibilité des contenus
+
+Périmètre : SYS-01.2-02, liens des six exigences SYS-01.3 vers les sources natives et les consommateurs actuels. Ce lot fournit une comparaison exacte des identités et délimite les politiques encore inconnues. Il ne termine pas les six fonctionnalités de classification ni le jeu.
+
+## Résultats vérifiés
+
+Les 122 entrées de ChampionGeneratedData correspondent une à une aux identifiants numériques et noms de code du catalogue officiel Data Dragon 4.20.1. La jointure explicite des noms de code insensibles à la casse retrouve exactement les 122 identifiants locaux : aucun doublon, manque ou ajout. Le catalogue local ne possède pas de champ numérique Riot ; le reçu conserve la table complète de correspondance sans modifier les identifiants existants. Il ne déduit pas une disponibilité historique de cette égalité.
+
+Le véritable consommateur Rust champion_catalog charge data/4.20/champions.json. Le roster du launcher utilise le même fichier. Le test existant tests::catalog_contains_native_roster a été exécuté avec cargo test --locked --offline -p openleague-core --lib tests::catalog_contains_native_roster -- --exact --nocapture : code0, un test réussi. Il vérifie le nombre et des statistiques positives ; la comparaison exacte AIR/officiel/local est une vérification distincte. Commande, binaire, log, sources et Cargo.lock sont identifiés dans rust-catalogue-test.json. Aucun processus de jeu ni rendu GPU n’est revendiqué.
+
+Deux classes, ChampionGeneratedData et MapGeneratedData, ont été exportées avec JPEXS26.4.0 depuis le SWF AIR119 récupéré en V94. Le SWF de63377octets est vérifié par le manifeste lol_air_client0.0.1.119, MD5fd8778eedf8d83e22f34660ac37fc166. L’export a renvoyé0 ; Java, JAR, entrée et sorties sont épinglés. Il s’agit d’analyse, pas d’exécution AIR. Les autres exports AIR relus sont antérieurs ; leur identité et leurs bibliothèques sont vérifiées, sans prétendre les avoir redécompilés.
+
+## Cartes candidates et données des services
+
+MapGeneratedData contient les IDs1,2,4,7,8,10,11,12,13,90. Les noms OldTwistedTreeline, SummonersRiftUpdatePerf et DebugMap5 sont conservés. La carte2 porte le code SummonersRiftWinter et un libellé contenant Autumn : ce décalage textuel n’est pas corrigé artificiellement. Dix entrées générées ne signifient pas dix cartes disponibles.
+
+PlatformConfigController utilise gameMapEnabledDTOList ou récupère getGameMapList. Une liste GameMap reçue peut être conservée directement ; sinon les IDs reçus filtrent les données générées et fournissent minCustomPlayers. GameQueueManager appelle getAvailableQueues, reçoit allGameQueues et remplace la liste par une collection vide sur échec. Aucun payload régional daté n’a été récupéré dans ce lot. Les frontières locales reference_client et local_services_reference ne prouvent donc pas une matrice carte/région/file historique.
+
+## Dates et événements
+
+Les cinq sources du client original sont relues avec reference_client.validate(verify_native=True). Le build littéral2014-11-17 à17:46:45, son fuseau inconnu, le timestamp PE et la date de déploiement inconnue restent distincts. ChampionGeneratedData ne donne pas de dates de sortie.
+
+Les recherches web ciblées sur Kalista et les notes4.20 ont remonté des sources communautaires et secondaires. Aucune date primaire régionale n’est adoptée. Les liens et requêtes sont dans web-search-notes.json. Une date américaine communautaire ne remplace pas une preuve EUW. La présence de Kalista dans les122 identités ne tranche pas sa disponibilité à la date littérale du build.
+
+Le lecteur V94 et ses sources sont revérifiés. Neuf définitions générées et neuf clés factory forment dix candidats ;sr6 et ppp restent distincts. L’activation dépend d’une configuration dynamique non retrouvée. Aucun calendrier début/fin régional n’est inventé.
+
+## Classification et exclusion : portée exacte
+
+excluded_union_candidate distingue membre absent, contenu divergent et contenu correspondant au manifeste sélectionné. Ce résultat qualifie une appartenance de fichier, pas les statuts sorti/interne/obsolète d’un contenu. L’inventaire courant indique explicitement que la présence des fichiers ne prouve pas la disponibilité. Le nom DebugMap5 ne suffit pas à classer définitivement une carte comme interne.
+
+Le consommateur choose de native_skin_reference conserve les liaisons non résolues ou ambiguës et ne qualifie pas la sélection runtime. Sa source est inspectée et épinglée ; ce module conserve une ancienne insertion de chemin E et n’est pas importé ni exécuté par ce lot. Le refus manifest_member porte sur le manifeste sélectionné. Ces gardes ne constituent pas une politique globale interdisant toute exclusion abusive. La taxonomie complète et l’ensemble des chemins d’exclusion restent à définir et qualifier dans leurs tâches propres.
+
+## Contrôles et conservation
+
+Le lecteur revalide105 sources et315 contrôles source, avec11 ancres de consommateurs. Les37 cas de qualification incluent33 refus attendus : altérations du reçu, doublons et collisions de casse, champion manquant ou ajouté, incohérences numériques AIR/officiel, dates et région inventées, mauvaise release de manifeste. Les copies de données négatives n’altèrent pas les originaux. Le test Rust est une exécution séparée, identifiée ; aucune exécution du jeu, d’AIR ou des services historiques.
+
+La livraison vise uniquement sept fiches par base : six SYS-01.3 et le Goal SYS-01.2-02. Les états manuels, notes, historique, indicateurs d’acceptation et preuves antérieures sont conservés. Une exigence a un consommateur partiel réel de catalogue ; les cinq autres ont des frontières identifiées avec leurs manques explicites. Aucune inconnue n’est fermée. Le détail tâche par tâche suit.
+
+| Tâche | Source et consommateur | Travail restant |
+|---|---|---|
+| SYS-01.3-01 | Les122 identifiants numériques et noms de code AIR correspondent au catalogue officiel4.20.1 ;la jointure explicite par nom de code insensible à la casse retrouve les122 identifiants locaux sans doublon,manque ni ajout. champion_catalog et le roster du launcher lisent le catalogue local. Le test Rust existant passe,mais contrôle le nombre/statistiques et non cette jointure exacte. | Conserver la comparaison au changement de catalogue ;qualifier disponibilité historique,skins et kits séparément. Le catalogue local ne contient pas de champ numérique Riot :la jointure est documentée,aucune nouvelle politique globale d’identité imposée. |
+| SYS-01.3-02 | Le binaire et cinq sources de référence sont revérifiés par reference_client.validate. Le build du17novembre,le timestamp PE,la version du catalogue et la date de sortie sont distincts. ChampionGeneratedData ne contient aucune date de sortie. Les recherches ciblées ne fournissent pas de preuve primaire EUW adoptée. | Retrouver les annonces et activations primaires datées pour les contenus proches de la référence,dont Kalista,sans transformer le build ni une date communautaire US en déploiement EUW ;garder les dates non prouvées inconnues. |
+| SYS-01.3-03 | MapGeneratedData contient dix cartes candidates. PlatformConfigController filtre les cartes générées par gameMapEnabledDTOList ou prend une liste reçue du service ;GameQueueManager demande getAvailableQueues et vide la liste sur échec. Les lecteurs locaux de région et de services ne reproduisent pas ces payloads historiques. | Qualifier la matrice carte/région/file/date à partir de données serveur ou annonces primaires et relier ses consommateurs ordinaires. Les cartes anciennes,performance et DebugMap5 ne sont pas déclarées disponibles sur leur seule présence. |
+| SYS-01.3-04 | Le lecteur V94 est relu et ses sources vérifiées :neuf clés générées et neuf clés factory forment dix candidats,mais leur activation dépend de configuration dynamique. Son rôle actuel est la traçabilité ;reference_label conserve la date de build distincte du déploiement. | Retrouver les fenêtres primaires début/fin,régions et files de chaque événement retenu. Aucun calendrier actif ni date événementielle établi ;conserver sr6/ppp distincts et ne pas prendre la présence AIR pour une activation. |
+| SYS-01.3-05 | Les noms OldTwistedTreeline et DebugMap5 sont des indices textuels natifs,non des décisions de statut. excluded_union_candidate classe l’appartenance exacte à un manifeste ;l’inventaire courant indique explicitement que présence et disponibilité sont distinctes. Aucun de ces consommateurs ne définit la taxonomie complète sorti/interne/obsolète/inconnu. | Définir le contrat des quatre statuts,leur preuve datée et leur consommateur d’affichage/filtrage ;qualifier chaque contenu sans utiliser le nom de fichier ou l’absence au catalogue comme preuve suffisante. Aucune taxonomie globale implémentée dans ce lot. |
+| SYS-01.3-06 | manifest_member refuse un fichier absent ou divergent du manifeste sélectionné ;choose conserve une liaison de skin non résolue ou ambiguë sans conclure à une indisponibilité. Les sources AIR générées montrent elles-mêmes des candidats distincts des listes actives. Ces gardes sont des frontières locales,non une politique globale d’exclusion. | Relier et tester tous les chemins de décision d’exclusion ;une absence dans un export doit rester une observation limitée avec recherche de variantes/sources et inconnue ouverte. Ne pas assimiler absence de membre RADS,liaison non résolue et contenu historiquement non sorti. |
+
+Reçu : docs/reference_content_classification_sources/content_classification-links.json. Livraison : docs/fidelity_registry_content_classification_links_revision_4_20.json. Les six tâches et le Goal restent ouverts.

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+	<head>
+		<title>Child Title</title>
+		<style>
+			body { 
+				background-color: #000000;
+				font-family: Georgia, "Times New Roman", Times, serif; font-weight: bold; color: #ffffff;
+			}
+		</style>
+	</head>
+	
+	<script>
+	
+		var childInterface = {};
+		childInterface.childId = "abc" 
+		window.childSandboxBridge = childInterface;
+		
+		childInterface.childSetupBridge = function() {
+			var log = document.getElementById("log"); 
+			log.innerHTML += window.parentSandboxBridge.testProperty + "<br/>";			
+		}
+		
+		childInterface.updateStatus = function() {
+				setAJAXHttpStatus(25);
+			}
+
+			childInterface.setChildProperty = function(text) {
+				var log = document.getElementById("log"); 
+				log.innerHTML += text + "<br/>";			
+			}
+
+		function openInventoryBrowser(fullItemId) {
+			window.parentSandboxBridge.openInventoryBrowser(fullItemId);			
+		}
+			
+		function setAJAXHttpStatus(value) {
+			window.parentSandboxBridge.setAJAXHttpStatus(value);			
+		}
+		
+		function playChooseMe(skinName) {
+			window.parentSandboxBridge.playChooseMe(skinName);			
+		}
+		
+		 		
+	</script>
+	
+	<body>
+		<h2>
+			Test Sandbox Take 178
+		</h2>
+		<button type="button" onclick="setAJAXHttpStatus(52);">set ajax status</button>
+		<button type="button" onclick="openInventoryBrowser(22);">open inventory browser</button>
+		<button type="button" onclick="playChooseMe('Bowmaster');">play sound</button>
+		<p>
+		<div id="log" style="width: 450px; height: 400px; overflow-y: scroll;" /> 
+		</p>
+		<p>
+			<img src="/img/content/champions/Bowmaster.png" alt="">
+		</p>
+	</body>
+</html>

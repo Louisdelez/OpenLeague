@@ -1,0 +1,43 @@
+
+#include "IOParam/IODefine_VS.hls"
+
+float4   kColorFactor               : register(c17);    // R3D_SHADER_VS_CONSTANT_PARTICLE_COLOR_FACTOR
+column_major float4x3 BONES[68]     : register(c24);
+
+struct VS_IN
+{
+    float4      position        : X3D_VSIN_POSITION;
+    float2      texcoord0       : X3D_VSIN_TEXCOORD0;
+    blendindex4 blendIndices    : X3D_VSIN_BLENDINDICES;
+    float4      blendWeight     : X3D_VSIN_BLENDWEIGHT;
+};
+
+struct VS_OUT
+{
+    float4  position    : POSITION;
+    float4  color0      : COLOR0;
+    float3  uv0_depth   : TEXCOORD0;    // xy = uv0, z = depth
+};
+
+void main( in VS_IN input, out VS_OUT output )
+{
+    // Compute skinned local position
+    float3 skinnedPosition = float3(0,0,0);
+    for (int i = 0; i < 4; ++i)
+    {
+        blendindex boneIndex = input.blendIndices[i];
+        float weight = input.blendWeight[i];
+        skinnedPosition += (mul(input.position, BONES[boneIndex]) * weight);
+    }
+
+    // Output homogeneous position
+    output.position = mul(float4(skinnedPosition, 1.0f), mProj ); 
+
+    output.color0 = kColorFactor;
+
+    // Send the diffuse map texture coordinate so the pixel shader can do per texel
+    // alpha testing
+    output.uv0_depth.xy = input.texcoord0 * vUVTransform.xy + vUVTransform.zw; 
+    
+    output.uv0_depth.z = output.position.z;   // distance from light view
+}

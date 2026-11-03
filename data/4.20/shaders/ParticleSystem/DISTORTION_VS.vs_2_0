@@ -1,0 +1,56 @@
+#include "IOParam/IODefine_VS.hls"
+#include "../Fog/Fog.hls"
+#include "../FogOfWar/FogOfWar_VS.hls"
+#include "common.hls"
+
+// x = num frames along x, y = 1 / num frames along x, z = 1 / num frames along y
+float4 TEXTURE_INFO : register(c235);
+
+struct VS_IN
+{
+    float4  position        : X3D_VSIN_POSITION;
+    float4  color0          : X3D_VSIN_COLOR0;
+    float3  texcoord0       : X3D_VSIN_TEXCOORD0;   // xy = uv0, z = Frame number (why not a constant?)
+    float2  texcoord1       : X3D_VSIN_TEXCOORD1;
+};
+
+struct VS_OUT
+{
+    float4  position    : POSITION;
+    float4  color0      : TEXCOORD0;    // N.B. colors can be > 1 (e.g. mod2x), so use a full interpolator and not COLOR0 which saturates on ps_2_0
+    float4  uv0_uv1     : TEXCOORD1;
+    float2  uvDistort   : TEXCOORD2;
+
+#if defined(VERTEX_FOG)
+    float   fog             : FOG;
+#endif
+};
+
+void main( in VS_IN input, out VS_OUT output )
+{
+    // Position
+    output.position = mul( input.position, mProj ); 
+
+    // Color
+    output.color0 = input.color0.VCOLORSWIZZLE;
+
+    // UV coordinates
+    float frameNumber = input.texcoord0.z; // current flip book frame number @todo why isn't this in a constant?
+    float2 uv0 = CalculateTexDivUV(input.texcoord0.xy, frameNumber, TEXTURE_INFO);
+
+    // Particle color texture lookup
+    float2 uv1 = input.texcoord1;
+    output.uv0_uv1 = float4(uv0,uv1);
+    
+    // Distortion
+    float2 uvDistort = output.position.xy/output.position.w;    // clip space uv
+    uvDistort   = uvDistort/2 + 0.5;    // convert to distortion buffer tex coords
+    uvDistort.y = 1 - uvDistort.y;
+    output.uvDistort = uvDistort;
+    
+    // Vertex fog
+    // @todo no FOG_PIXELSHADER_BLEND support?
+#if defined(VERTEX_FOG)
+    output.fog = ComputeFogValue( output.position, input.position.xyz );
+#endif
+}

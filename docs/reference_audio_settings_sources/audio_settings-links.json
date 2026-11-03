@@ -1,0 +1,684 @@
+{
+  "schema": "openleague_audio_settings_links/v1",
+  "passed": true,
+  "utc": "2026-10-23T06:14:43.148455+00:00",
+  "full_task_scope_complete": false,
+  "native_or_game_executed": false,
+  "historical_server_policy_qualified": false,
+  "facts": {
+    "candidates": {
+      "associations": [
+        {
+          "task_id": "SYS-16.4-01",
+          "finding": "LanguageLocaleRegion match belongs to HUD font selection,not audio language selection.",
+          "remaining": "HUD font locale is not audio language choice;selection among actual audio packages unqualified.",
+          "anchors": [
+            {
+              "path": "crates/client/src/native_hud_font_configuration.rs",
+              "line": 41,
+              "needle": "let locale=locale.entries.iter().find(",
+              "role": "audio_settings_1_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-1c255ea3-aaa5-5d4f-9892-c20201a5559f"
+        },
+        {
+          "task_id": "SYS-16.4-02",
+          "finding": "Reads and merges native user/default Game.cfg; may migrate existing source;not executed on user configuration during this audit.",
+          "remaining": "General config reader exists;user volume persistence and category routing not identified.",
+          "anchors": [
+            {
+              "path": "crates/client/src/native_user_settings.rs",
+              "line": 54,
+              "needle": "pub fn load_using(",
+              "role": "audio_settings_2_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-10c83478-5341-5407-9850-13d9faf3902d"
+        },
+        {
+          "task_id": "SYS-16.4-03",
+          "finding": "Local R gain constant;does not consume MasterVolume/MusicVolume categories.",
+          "remaining": "Fixed R gain is an entry boundary;mute control independent of game state not identified.",
+          "anchors": [
+            {
+              "path": "crates/client/src/ezreal_r_cast_audio.rs",
+              "line": 14,
+              "needle": "const LOCAL_GAIN:f32=0.20;",
+              "role": "audio_settings_3_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-2619aa1b-8688-58e5-b225-7569a8cc1b81"
+        },
+        {
+          "task_id": "SYS-16.4-04",
+          "finding": "Classifies child output diagnostic;does not switch/recover output device.",
+          "remaining": "Unavailable output diagnostic is not device switching/recovery implementation.",
+          "anchors": [
+            {
+              "path": "launcher/src-tauri/src/sessions_output.rs",
+              "line": 93,
+              "needle": "(b\"No audio device found.\",\"audio_output_unavailable\")",
+              "role": "audio_settings_4_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-08011d34-c008-5bce-bc02-f29f16e7bf86"
+        },
+        {
+          "task_id": "SYS-16.4-05",
+          "finding": "Reads and merges native user/default Game.cfg; may migrate existing source;not executed on user configuration during this audit. Normal startup reads configuration through zip resource provider;not proof of category volume application.",
+          "remaining": "Startup configuration loading verified on temporary files;audio category restoration and actual process restart not qualified.",
+          "anchors": [
+            {
+              "path": "crates/client/src/native_user_settings.rs",
+              "line": 54,
+              "needle": "pub fn load_using(",
+              "role": "audio_settings_5_0"
+            },
+            {
+              "path": "crates/client/src/main.rs",
+              "line": 607,
+              "needle": "let settings=native_user_settings::load_using(",
+              "role": "audio_settings_5_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-6dddad3c-2dc8-5795-8223-fe795fd4983a"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\audio-settings-research.json",
+          "bytes": 4022,
+          "sha256": "4964b23e216a52817ccb4d3d30d5209240bd0525a6f962623e2cc258cb9f5796"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\settings-consumer-research.json",
+          "bytes": 1917,
+          "sha256": "6c467b3fb82f684956b034e46babcbeb57a48f4698dfda847bef9fd7ffef6186"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\settings-test-receipt.json",
+          "bytes": 2727,
+          "sha256": "f9b0ff45ced49b11c000685d987964841b785d008e6891f7b09623d9c61ff9d5"
+        }
+      ],
+      "current_sources": [
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_font_configuration.rs",
+          "bytes": 5807,
+          "sha256": "500ea12ef4fffd40ccf856169d59b2a9c17194620c22bacbe7c7422fc329bf14"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\native_user_settings.rs",
+          "bytes": 11622,
+          "sha256": "f13aa64b4349d6bb250a888e147e2bec8f0422b98a4e61a3dd22c2837b6f7e1c"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+          "bytes": 28867,
+          "sha256": "4eaa5aa28d6b720055d2221cec692ce740d73558ce12d74f2b4b94ca583385e4"
+        },
+        {
+          "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions_output.rs",
+          "bytes": 20465,
+          "sha256": "771407092830a4e780427b3dc89bc63e4b699eef06c5aee6aa00dd29bb8de011"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\native_user_settings.rs",
+          "bytes": 11622,
+          "sha256": "f13aa64b4349d6bb250a888e147e2bec8f0422b98a4e61a3dd22c2837b6f7e1c"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+          "bytes": 141376,
+          "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+        }
+      ],
+      "scope": "Exact native default configuration and current loader/diagnostic boundaries;audio settings functions remain unqualified."
+    },
+    "receipts": {
+      "audio-settings-research.json": {
+        "configurations": [
+          {
+            "source": {
+              "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\CFG\\defaults\\Game.cfg",
+              "bytes": 14789,
+              "sha256": "02c41cb9a5068f8bc993435557fd7b159bddbcda1f022605d284d9ea51d72b0e"
+            },
+            "values": [
+              {
+                "line": 11,
+                "section": "General",
+                "raw": "LanguageLocaleRegion=en_US"
+              },
+              {
+                "line": 153,
+                "section": "Volume",
+                "raw": "MasterVolume = 1.0"
+              },
+              {
+                "line": 154,
+                "section": "Volume",
+                "raw": "MusicVolume=0.5"
+              },
+              {
+                "line": 155,
+                "section": "Volume",
+                "raw": "SfxVolume=1.0"
+              },
+              {
+                "line": 156,
+                "section": "Volume",
+                "raw": "VoiceVolume=0.5"
+              },
+              {
+                "line": 157,
+                "section": "Volume",
+                "raw": "AnnouncerVolume=0.5"
+              },
+              {
+                "line": 158,
+                "section": "Volume",
+                "raw": "AmbienceVolume=1.0"
+              },
+              {
+                "line": 159,
+                "section": "Volume",
+                "raw": "PingsVolume=1.0"
+              }
+            ]
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\data\\4.20\\configuration\\defaults\\Game.cfg",
+              "bytes": 14789,
+              "sha256": "02c41cb9a5068f8bc993435557fd7b159bddbcda1f022605d284d9ea51d72b0e"
+            },
+            "values": [
+              {
+                "line": 11,
+                "section": "General",
+                "raw": "LanguageLocaleRegion=en_US"
+              },
+              {
+                "line": 153,
+                "section": "Volume",
+                "raw": "MasterVolume = 1.0"
+              },
+              {
+                "line": 154,
+                "section": "Volume",
+                "raw": "MusicVolume=0.5"
+              },
+              {
+                "line": 155,
+                "section": "Volume",
+                "raw": "SfxVolume=1.0"
+              },
+              {
+                "line": 156,
+                "section": "Volume",
+                "raw": "VoiceVolume=0.5"
+              },
+              {
+                "line": 157,
+                "section": "Volume",
+                "raw": "AnnouncerVolume=0.5"
+              },
+              {
+                "line": 158,
+                "section": "Volume",
+                "raw": "AmbienceVolume=1.0"
+              },
+              {
+                "line": 159,
+                "section": "Volume",
+                "raw": "PingsVolume=1.0"
+              }
+            ]
+          }
+        ],
+        "exact_native_copy": true,
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\native_user_settings.rs",
+              "bytes": 11622,
+              "sha256": "f13aa64b4349d6bb250a888e147e2bec8f0422b98a4e61a3dd22c2837b6f7e1c"
+            },
+            "line": 54,
+            "needle": "pub fn load_using(",
+            "finding": "Reads and merges native user/default Game.cfg; may migrate existing source;not executed on user configuration during this audit."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions_output.rs",
+              "bytes": 20465,
+              "sha256": "771407092830a4e780427b3dc89bc63e4b699eef06c5aee6aa00dd29bb8de011"
+            },
+            "line": 93,
+            "needle": "(b\"No audio device found.\",\"audio_output_unavailable\")",
+            "finding": "Classifies child output diagnostic;does not switch/recover output device."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+              "bytes": 28867,
+              "sha256": "4eaa5aa28d6b720055d2221cec692ce740d73558ce12d74f2b4b94ca583385e4"
+            },
+            "line": 14,
+            "needle": "const LOCAL_GAIN:f32=0.20;",
+            "finding": "Local R gain constant;does not consume MasterVolume/MusicVolume categories."
+          }
+        ],
+        "scope": "Read-only configuration/source audit;no user setting migration,write,device change or restart executed.",
+        "complete": false
+      },
+      "settings-consumer-research.json": {
+        "search": {
+          "command": [
+            "rg",
+            "-n",
+            "-i",
+            "MasterVolume|MusicVolume|VoiceVolume|SfxVolume|LanguageLocaleRegion|GlobalVolume|\\.mute\\(",
+            "F:\\OpenLeague\\crates\\client\\src",
+            "F:\\OpenLeague\\launcher\\src-tauri\\src",
+            "-g",
+            "*.rs"
+          ],
+          "exit_code": 0,
+          "output": "F:\\OpenLeague\\crates\\client\\src\\native_hud_font_configuration.rs:41:    let locale=locale.entries.iter().find(|e|e.section.eq_ignore_ascii_case(b\"General\") && e.key.eq_ignore_ascii_case(b\"LanguageLocaleRegion\")).ok_or_else(||io::Error::other(\"source language missing\"))?;\n"
+        },
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_font_configuration.rs",
+              "bytes": 5807,
+              "sha256": "500ea12ef4fffd40ccf856169d59b2a9c17194620c22bacbe7c7422fc329bf14"
+            },
+            "line": 41,
+            "needle": "let locale=locale.entries.iter().find(",
+            "finding": "LanguageLocaleRegion match belongs to HUD font selection,not audio language selection."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+              "bytes": 141376,
+              "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+            },
+            "line": 607,
+            "needle": "let settings=native_user_settings::load_using(",
+            "finding": "Normal startup reads configuration through zip resource provider;not proof of category volume application."
+          }
+        ],
+        "tests": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\settings-test-receipt.json",
+          "bytes": 2727,
+          "sha256": "f9b0ff45ced49b11c000685d987964841b785d008e6891f7b09623d9c61ff9d5"
+        },
+        "scope": "Bounded current source search;four temporary-file loader tests;no audio category persistence,device recovery or actual restart acceptance."
+      },
+      "settings-test-receipt.json": {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-p",
+          "openleague-client",
+          "native_user_settings::",
+          "--",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "tests": [
+          "native_user_settings::tests::native_directory_choices_match_all_recorded_cases",
+          "native_user_settings::effects_tests::effects_quality_configuration_reaches_native_rate_without_clamping",
+          "native_user_settings::tests::native_default_language_initialization_and_migration_match_all_cases",
+          "native_user_settings::tests::files_on_disk_override_defaults_migrate_and_report_invalid_input"
+        ],
+        "binaries": [
+          {
+            "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+            "bytes": 352612864,
+            "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+          }
+        ],
+        "sources": [
+          {
+            "path": "F:\\OpenLeague\\Cargo.lock",
+            "bytes": 153304,
+            "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\native_user_settings.rs",
+            "bytes": 11622,
+            "sha256": "f13aa64b4349d6bb250a888e147e2bec8f0422b98a4e61a3dd22c2837b6f7e1c"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\audio_effects_quality_contract.json",
+            "bytes": 3412,
+            "sha256": "15d3253aa46869a9e14099f96b03be20db9c30dbe38548bef957077def71a5b3"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\configuration\\defaults\\Game.cfg",
+            "bytes": 14789,
+            "sha256": "02c41cb9a5068f8bc993435557fd7b159bddbcda1f022605d284d9ea51d72b0e"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\native_user_config_directory_contract.json",
+            "bytes": 14165,
+            "sha256": "4749b19dde631e779cf136229204498c17512509245ca2d9409ae940227668c5"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\native_user_config_initializer_contract.json",
+            "bytes": 333371,
+            "sha256": "36c2d8d073920af9fc6c635c9147c6e0d1d211bb90bc3a024c0eed4ec1787a09"
+          }
+        ],
+        "log": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\settings-tests.log",
+          "bytes": 80334,
+          "sha256": "d3ecd105103d34c8309298c106d14a766e732c36fa8c838b9a93e0d1f3a1f982"
+        },
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\run_settings_tests.py",
+          "bytes": 1511,
+          "sha256": "c6a6dee02c9dff08fad0f3da5b9438cf5cdff86c5fab001f41000f955855edc6"
+        },
+        "scope": "Fresh configuration loading tests; temporary files under revision120/test-tmp;no user settings modified;not audio gain persistence or hardware playback."
+      }
+    },
+    "source_checks": [
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\audio-settings-associations.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\audio-settings-research.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\settings-consumer-research.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\settings-test-receipt.json",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_font_configuration.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_user_settings.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions_output.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_user_settings.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\CFG\\defaults\\Game.cfg",
+      "pin_F:\\OpenLeague\\data\\4.20\\configuration\\defaults\\Game.cfg",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_user_settings.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions_output.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_font_configuration.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\settings-test-receipt.json",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague\\Cargo.lock",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_user_settings.rs",
+      "pin_F:\\OpenLeague\\data\\4.20\\audio_effects_quality_contract.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\configuration\\defaults\\Game.cfg",
+      "pin_F:\\OpenLeague\\data\\4.20\\native_user_config_directory_contract.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\native_user_config_initializer_contract.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\settings-tests.log",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\run_settings_tests.py",
+      "five_associations",
+      "four_tests",
+      "native_copy",
+      "all_explicit_boundaries",
+      "task_SYS-16.4-01",
+      "anchor_audio_settings_1_0",
+      "task_SYS-16.4-02",
+      "anchor_audio_settings_2_0",
+      "task_SYS-16.4-03",
+      "anchor_audio_settings_3_0",
+      "task_SYS-16.4-04",
+      "anchor_audio_settings_4_0",
+      "task_SYS-16.4-05",
+      "anchor_audio_settings_5_0",
+      "anchor_audio_settings_5_1"
+    ],
+    "all_audio_settingss_qualified": false,
+    "all_required_effects_covered": false
+  },
+  "source_identities": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\audio-settings-associations.json",
+      "bytes": 5980,
+      "sha256": "570dcea03f64986336c23f97446dfd7958da9e2bec3657067cd108ebc2a30843"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\audio-settings-research.json",
+      "bytes": 4022,
+      "sha256": "4964b23e216a52817ccb4d3d30d5209240bd0525a6f962623e2cc258cb9f5796"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\settings-consumer-research.json",
+      "bytes": 1917,
+      "sha256": "6c467b3fb82f684956b034e46babcbeb57a48f4698dfda847bef9fd7ffef6186"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\settings-test-receipt.json",
+      "bytes": 2727,
+      "sha256": "f9b0ff45ced49b11c000685d987964841b785d008e6891f7b09623d9c61ff9d5"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\native_hud_font_configuration.rs",
+      "bytes": 5807,
+      "sha256": "500ea12ef4fffd40ccf856169d59b2a9c17194620c22bacbe7c7422fc329bf14"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\native_user_settings.rs",
+      "bytes": 11622,
+      "sha256": "f13aa64b4349d6bb250a888e147e2bec8f0422b98a4e61a3dd22c2837b6f7e1c"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+      "bytes": 28867,
+      "sha256": "4eaa5aa28d6b720055d2221cec692ce740d73558ce12d74f2b4b94ca583385e4"
+    },
+    {
+      "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions_output.rs",
+      "bytes": 20465,
+      "sha256": "771407092830a4e780427b3dc89bc63e4b699eef06c5aee6aa00dd29bb8de011"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "bytes": 141376,
+      "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Game.cfg",
+      "bytes": 14789,
+      "sha256": "02c41cb9a5068f8bc993435557fd7b159bddbcda1f022605d284d9ea51d72b0e"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\configuration\\defaults\\Game.cfg",
+      "bytes": 14789,
+      "sha256": "02c41cb9a5068f8bc993435557fd7b159bddbcda1f022605d284d9ea51d72b0e"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "bytes": 352612864,
+      "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+    },
+    {
+      "path": "F:\\OpenLeague\\Cargo.lock",
+      "bytes": 153304,
+      "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\audio_effects_quality_contract.json",
+      "bytes": 3412,
+      "sha256": "15d3253aa46869a9e14099f96b03be20db9c30dbe38548bef957077def71a5b3"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\native_user_config_directory_contract.json",
+      "bytes": 14165,
+      "sha256": "4749b19dde631e779cf136229204498c17512509245ca2d9409ae940227668c5"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\native_user_config_initializer_contract.json",
+      "bytes": 333371,
+      "sha256": "36c2d8d073920af9fc6c635c9147c6e0d1d211bb90bc3a024c0eed4ec1787a09"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\settings-tests.log",
+      "bytes": 80334,
+      "sha256": "d3ecd105103d34c8309298c106d14a766e732c36fa8c838b9a93e0d1f3a1f982"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\run_settings_tests.py",
+      "bytes": 1511,
+      "sha256": "c6a6dee02c9dff08fad0f3da5b9438cf5cdff86c5fab001f41000f955855edc6"
+    }
+  ],
+  "checks": [
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\audio-settings-associations.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\audio-settings-research.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\settings-consumer-research.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\settings-test-receipt.json",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_font_configuration.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_user_settings.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions_output.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_user_settings.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+    "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\CFG\\defaults\\Game.cfg",
+    "pin_F:\\OpenLeague\\data\\4.20\\configuration\\defaults\\Game.cfg",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_user_settings.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions_output.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_hud_font_configuration.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\settings-test-receipt.json",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague\\Cargo.lock",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_user_settings.rs",
+    "pin_F:\\OpenLeague\\data\\4.20\\audio_effects_quality_contract.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\configuration\\defaults\\Game.cfg",
+    "pin_F:\\OpenLeague\\data\\4.20\\native_user_config_directory_contract.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\native_user_config_initializer_contract.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\settings-tests.log",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision120\\run_settings_tests.py",
+    "five_associations",
+    "four_tests",
+    "native_copy",
+    "all_explicit_boundaries",
+    "task_SYS-16.4-01",
+    "anchor_audio_settings_1_0",
+    "task_SYS-16.4-02",
+    "anchor_audio_settings_2_0",
+    "task_SYS-16.4-03",
+    "anchor_audio_settings_3_0",
+    "task_SYS-16.4-04",
+    "anchor_audio_settings_4_0",
+    "task_SYS-16.4-05",
+    "anchor_audio_settings_5_0",
+    "anchor_audio_settings_5_1"
+  ],
+  "checks_count": 42,
+  "associations": [
+    {
+      "task_id": "SYS-16.4-01",
+      "finding": "LanguageLocaleRegion match belongs to HUD font selection,not audio language selection.",
+      "remaining": "HUD font locale is not audio language choice;selection among actual audio packages unqualified.",
+      "anchors": [
+        {
+          "path": "crates/client/src/native_hud_font_configuration.rs",
+          "line": 41,
+          "needle": "let locale=locale.entries.iter().find(",
+          "role": "audio_settings_1_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-1c255ea3-aaa5-5d4f-9892-c20201a5559f"
+    },
+    {
+      "task_id": "SYS-16.4-02",
+      "finding": "Reads and merges native user/default Game.cfg; may migrate existing source;not executed on user configuration during this audit.",
+      "remaining": "General config reader exists;user volume persistence and category routing not identified.",
+      "anchors": [
+        {
+          "path": "crates/client/src/native_user_settings.rs",
+          "line": 54,
+          "needle": "pub fn load_using(",
+          "role": "audio_settings_2_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-10c83478-5341-5407-9850-13d9faf3902d"
+    },
+    {
+      "task_id": "SYS-16.4-03",
+      "finding": "Local R gain constant;does not consume MasterVolume/MusicVolume categories.",
+      "remaining": "Fixed R gain is an entry boundary;mute control independent of game state not identified.",
+      "anchors": [
+        {
+          "path": "crates/client/src/ezreal_r_cast_audio.rs",
+          "line": 14,
+          "needle": "const LOCAL_GAIN:f32=0.20;",
+          "role": "audio_settings_3_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-2619aa1b-8688-58e5-b225-7569a8cc1b81"
+    },
+    {
+      "task_id": "SYS-16.4-04",
+      "finding": "Classifies child output diagnostic;does not switch/recover output device.",
+      "remaining": "Unavailable output diagnostic is not device switching/recovery implementation.",
+      "anchors": [
+        {
+          "path": "launcher/src-tauri/src/sessions_output.rs",
+          "line": 93,
+          "needle": "(b\"No audio device found.\",\"audio_output_unavailable\")",
+          "role": "audio_settings_4_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-08011d34-c008-5bce-bc02-f29f16e7bf86"
+    },
+    {
+      "task_id": "SYS-16.4-05",
+      "finding": "Reads and merges native user/default Game.cfg; may migrate existing source;not executed on user configuration during this audit. Normal startup reads configuration through zip resource provider;not proof of category volume application.",
+      "remaining": "Startup configuration loading verified on temporary files;audio category restoration and actual process restart not qualified.",
+      "anchors": [
+        {
+          "path": "crates/client/src/native_user_settings.rs",
+          "line": 54,
+          "needle": "pub fn load_using(",
+          "role": "audio_settings_5_0"
+        },
+        {
+          "path": "crates/client/src/main.rs",
+          "line": 607,
+          "needle": "let settings=native_user_settings::load_using(",
+          "role": "audio_settings_5_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-6dddad3c-2dc8-5795-8223-fe795fd4983a"
+    }
+  ]
+}

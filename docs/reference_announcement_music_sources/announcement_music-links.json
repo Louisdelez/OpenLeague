@@ -1,0 +1,1519 @@
+{
+  "schema": "openleague_announcement_music_links/v1",
+  "passed": true,
+  "utc": "2026-10-23T06:06:51.787951+00:00",
+  "full_task_scope_complete": false,
+  "native_or_game_executed": false,
+  "historical_server_policy_qualified": false,
+  "facts": {
+    "candidates": {
+      "producer": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\prepare_announcement_music_reader.py",
+        "bytes": 4504,
+        "sha256": "275f27696de5e86e82fd3d13b16cddf4df4bfabe683e337a9df6e3208319933b"
+      },
+      "associations": [
+        {
+          "task_id": "SYS-16.3-01",
+          "finding": "Native service storage exists with explicit disconnected frame/replay scope. Original bounded name composition;name output not trigger/voice dispatch.",
+          "remaining": "Start announcement definition and naming exist;simulation-to-voice trigger unqualified.",
+          "anchors": [
+            {
+              "path": "crates/client/src/native_replay_service.rs",
+              "line": 2,
+              "needle": "//! Frame dispatch and replay streams are not yet connected to the simulation.",
+              "role": "announcement_music_1_0"
+            },
+            {
+              "path": "crates/core/src/audio_announcer_names.rs",
+              "line": 15,
+              "needle": "pub fn compose(",
+              "role": "announcement_music_1_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-5f21579f-fd20-51f8-a475-d00ec66cc96f"
+        },
+        {
+          "task_id": "SYS-16.3-02",
+          "finding": "Kill event exposes sequence,tick,victim,killer,assists,first_blood,gold;not an announcement dispatch. Snapshot copies kill events;does not prove client audio consumption.",
+          "remaining": "Kill/assist snapshot data exists;announcer event dispatch and playback unqualified.",
+          "anchors": [
+            {
+              "path": "crates/core/src/champion_kills.rs",
+              "line": 7,
+              "needle": "pub struct Event {",
+              "role": "announcement_music_2_0"
+            },
+            {
+              "path": "crates/core/src/lib.rs",
+              "line": 784,
+              "needle": "kill_events: self.kill_rewards.events.iter().cloned().collect(),",
+              "role": "announcement_music_2_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-2013153a-86af-5e6a-87f9-33a7f8b322d7"
+        },
+        {
+          "task_id": "SYS-16.3-03",
+          "finding": "Kill event exposes sequence,tick,victim,killer,assists,first_blood,gold;not an announcement dispatch.",
+          "remaining": "Kill/death streak counters do not qualify native streak/shutdown announcements.",
+          "anchors": [
+            {
+              "path": "crates/core/src/champion_kills.rs",
+              "line": 7,
+              "needle": "pub struct Event {",
+              "role": "announcement_music_3_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-33f9b3c4-39b7-505f-97b2-45339334328d"
+        },
+        {
+          "task_id": "SYS-16.3-04",
+          "finding": "Shared unit damage/death branch handles structures; no turret announcement dispatch established.",
+          "remaining": "Structure state transition is an entry boundary;turret destruction announcement consumer not identified.",
+          "anchors": [
+            {
+              "path": "crates/core/src/world.rs",
+              "line": 397,
+              "needle": "if self.units[&target].health > 0.",
+              "role": "announcement_music_4_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-42ccc2e1-440a-5bf2-b05b-98d3d3fa84de"
+        },
+        {
+          "task_id": "SYS-16.3-05",
+          "finding": "Inhibitor respawn scheduling exists;announcement producer/receiver not established.",
+          "remaining": "Inhibitor death/respawn state exists;destroyed/respawned voice dispatch not identified.",
+          "anchors": [
+            {
+              "path": "crates/core/src/world.rs",
+              "line": 410,
+              "needle": "unit.respawn_at = Some(self.tick + 240 * TICK_RATE);",
+              "role": "announcement_music_5_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-2172cc1e-e75a-5bc7-baf7-8d2ca6bca851"
+        },
+        {
+          "task_id": "SYS-16.3-06",
+          "finding": "Altar cues have current playback consumer;local trigger cannot qualify all map objective announcements.",
+          "remaining": "Altar cues cover a local subset;all per-map objective announcement semantics remain open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/map_audio.rs",
+              "line": 41,
+              "needle": "pub fn altar_events(",
+              "role": "announcement_music_6_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-341cc530-9a44-599c-bc9f-2eb7370d212e"
+        },
+        {
+          "task_id": "SYS-16.3-07",
+          "finding": "Nexus death sets winner;victory/defeat voice not established.",
+          "remaining": "Winner state does not prove victory/defeat audio delivery.",
+          "anchors": [
+            {
+              "path": "crates/core/src/world.rs",
+              "line": 415,
+              "needle": "self.winner = Some(1 - team);",
+              "role": "announcement_music_7_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-e54168c2-abda-52a4-8001-42cb6628b5dd"
+        },
+        {
+          "task_id": "SYS-16.3-08",
+          "finding": "Registers custom PCM and loads ambient catalogue; no music scheduling or music/announcement transition consumer identified.",
+          "remaining": "MUS banks exist;required loading/in-game music mapping and actual playback consumer remain open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/pcm_audio.rs",
+              "line": 170,
+              "needle": "fn build(&self,app:&mut App)",
+              "role": "announcement_music_8_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-36765e2d-b233-51eb-b200-23b70eea2faf"
+        },
+        {
+          "task_id": "SYS-16.3-09",
+          "finding": "Registers custom PCM and loads ambient catalogue; no music scheduling or music/announcement transition consumer identified.",
+          "remaining": "Native music transition/ducking/priority graph not decoded;PCM registration not a transition implementation.",
+          "anchors": [
+            {
+              "path": "crates/client/src/pcm_audio.rs",
+              "line": 170,
+              "needle": "fn build(&self,app:&mut App)",
+              "role": "announcement_music_9_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-85ecf06c-6fd7-514a-bcca-91cb8e43aef6"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\announcement-definitions-research.json",
+          "bytes": 3830,
+          "sha256": "26a111e2350231ada6ff89c7e81e0f063a47dedd40ec3f401af214f50bb9e2b7"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\announcement-consumer-research.json",
+          "bytes": 4716,
+          "sha256": "f626fdf6d1cb5cca65c17eb4009967d8f252538ead96dc7f454c122d0871dd4e"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\announcement-consumer-test-receipt.json",
+          "bytes": 9411,
+          "sha256": "d3aafb7dbb6ac9486d1de3e39c6e29c7ec6a9786f4de7988290dd27e1741f6cb"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\music-source-research.json",
+          "bytes": 6793,
+          "sha256": "5118cf24c8cb940f269c5fd16ed1de65478953c37292e581a6800dc2c9e5ee3b"
+        }
+      ],
+      "current_sources": [
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\native_replay_service.rs",
+          "bytes": 12275,
+          "sha256": "00b3379e4936f45595f9df62b75914d6a916ed2a8cb0b01f3b12af9040720908"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\audio_announcer_names.rs",
+          "bytes": 5971,
+          "sha256": "15094ccfbb7fd9bd2b47641c2b4cf09cdf9371e2ff037419faeb4407158df673"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\champion_kills.rs",
+          "bytes": 10228,
+          "sha256": "b76edcb97eaf222e32bda215592a950807bd1923394d7e2aedf62e3ed4c27859"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+          "bytes": 52808,
+          "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\champion_kills.rs",
+          "bytes": 10228,
+          "sha256": "b76edcb97eaf222e32bda215592a950807bd1923394d7e2aedf62e3ed4c27859"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\world.rs",
+          "bytes": 32878,
+          "sha256": "407c75f77e8e4e06e6bea352f77ee3b4f90eb3357dd74cddc05a22e219651c54"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\world.rs",
+          "bytes": 32878,
+          "sha256": "407c75f77e8e4e06e6bea352f77ee3b4f90eb3357dd74cddc05a22e219651c54"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\map_audio.rs",
+          "bytes": 19866,
+          "sha256": "1eae20253092fb669e4fe3fe5e3e25e8a3c6971c98b02189a90f9ee7395bb714"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\world.rs",
+          "bytes": 32878,
+          "sha256": "407c75f77e8e4e06e6bea352f77ee3b4f90eb3357dd74cddc05a22e219651c54"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\pcm_audio.rs",
+          "bytes": 31297,
+          "sha256": "3768843fe3e68dce5f186679a556035d5bce3dea11ef8acd2460e3acbf9027de"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\pcm_audio.rs",
+          "bytes": 31297,
+          "sha256": "3768843fe3e68dce5f186679a556035d5bce3dea11ef8acd2460e3acbf9027de"
+        }
+      ],
+      "scope": "Native definitions/music source inventory and exact current entry boundaries;not complete announcement/music playback."
+    },
+    "receipts": {
+      "announcement-definitions-research.json": {
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\audit_announcement_definitions.py",
+          "bytes": 1597,
+          "sha256": "e117963f13f4ef7cd390cc7714cf0283f7a281073e42182879ae1de2d89a0fea"
+        },
+        "sources": [
+          {
+            "path": "F:\\OpenLeague\\tools\\recover_announcement_definitions.py",
+            "bytes": 6342,
+            "sha256": "d95b12e053c28e4241f3aaa031823c938b3683c6b33b38d03ec93e45757dd3ae"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\announcement_definitions.json",
+            "bytes": 1700427,
+            "sha256": "10de8e09bdcdd83e45e068b34afbfd8d04668440110152a0ebd493be72f10d78"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\announcer_audio_graph.json",
+            "bytes": 682695,
+            "sha256": "0453172a6d62ca7de58aebbc32d98ccc826216eaff81995a851bc23d7ded63f8"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\audio_initialized_announcer_namespace_contract.json",
+            "bytes": 10365,
+            "sha256": "3eeef4c975ec86576a7317aa24f41ef7ae43ecc00714cd33775c02fe89cda02e"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\audio_announcer_team_binding_contract.json",
+            "bytes": 62897,
+            "sha256": "0f4eca606e9a5d172fc0fe431aca56f35c0c86caea6afbdd667ac1c523497c6c"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\audio_announcer_actor_binding_contract.json",
+            "bytes": 2346289,
+            "sha256": "7a8d24c7a5520989e9a88c3a9de17ffd5a52edf14aa163345516b0dcc83ea523"
+          },
+          {
+            "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Announcements_ARAM.ini",
+            "bytes": 79603,
+            "sha256": "d7aa28817aa1be61e8416bb49e3d5d4caff9c3eb31c92afa4e5e0587f50f9f48"
+          },
+          {
+            "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Announcements_ASCENSION.ini",
+            "bytes": 58970,
+            "sha256": "32ee43fd4b9a1d8106ac6adac9aa6b86b9cb596bf6fa21673c9a2f545fb20abd"
+          },
+          {
+            "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Announcements_CLASSIC.ini",
+            "bytes": 90140,
+            "sha256": "34165f547988b7dd0608bde1b4a4de8194f73300353bf9cb0566b5e805b9b2a4"
+          },
+          {
+            "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Announcements_FIRSTBLOOD.ini",
+            "bytes": 60727,
+            "sha256": "a1a7d85f8496ae53c60437d3a9cb7b0a0b377c6bcff40ea3ffc735e0a7643252"
+          },
+          {
+            "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Announcements_ODIN.ini",
+            "bytes": 70692,
+            "sha256": "9b899becb6a9d00c4c1772c070f6ea0f644e3ab2137b8120984826e0dd569626"
+          }
+        ],
+        "fields_compared": [
+          "sources",
+          "graph_sha256",
+          "voice",
+          "voice_proof_sha256",
+          "team_binding_proof_sha256",
+          "actor_binding_proof_sha256",
+          "definitions",
+          "confirmed_event_names",
+          "unresolved",
+          "complete",
+          "limits"
+        ],
+        "native_files": 5,
+        "sections": 369,
+        "confirmed": 274,
+        "unique_events": 69,
+        "unresolved": 524,
+        "scope": "Fresh read-only reconstruction and exact installed metadata comparison; event candidates not runtime scheduling; en_US enumeration does not qualify en_GB.",
+        "runtime_executed": false,
+        "complete": false
+      },
+      "announcement-consumer-research.json": {
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\champion_kills.rs",
+              "bytes": 10228,
+              "sha256": "b76edcb97eaf222e32bda215592a950807bd1923394d7e2aedf62e3ed4c27859"
+            },
+            "line": 7,
+            "needle": "pub struct Event {",
+            "finding": "Kill event exposes sequence,tick,victim,killer,assists,first_blood,gold;not an announcement dispatch."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+              "bytes": 52808,
+              "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+            },
+            "line": 784,
+            "needle": "kill_events: self.kill_rewards.events.iter().cloned().collect(),",
+            "finding": "Snapshot copies kill events;does not prove client audio consumption."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\world.rs",
+              "bytes": 32878,
+              "sha256": "407c75f77e8e4e06e6bea352f77ee3b4f90eb3357dd74cddc05a22e219651c54"
+            },
+            "line": 410,
+            "needle": "unit.respawn_at = Some(self.tick + 240 * TICK_RATE);",
+            "finding": "Inhibitor respawn scheduling exists;announcement producer/receiver not established."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\world.rs",
+              "bytes": 32878,
+              "sha256": "407c75f77e8e4e06e6bea352f77ee3b4f90eb3357dd74cddc05a22e219651c54"
+            },
+            "line": 415,
+            "needle": "self.winner = Some(1 - team);",
+            "finding": "Nexus death sets winner;victory/defeat voice not established."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\map_audio.rs",
+              "bytes": 19866,
+              "sha256": "1eae20253092fb669e4fe3fe5e3e25e8a3c6971c98b02189a90f9ee7395bb714"
+            },
+            "line": 41,
+            "needle": "pub fn altar_events(",
+            "finding": "Altar cues have current playback consumer;local trigger cannot qualify all map objective announcements."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\native_replay_service.rs",
+              "bytes": 12275,
+              "sha256": "00b3379e4936f45595f9df62b75914d6a916ed2a8cb0b01f3b12af9040720908"
+            },
+            "line": 2,
+            "needle": "//! Frame dispatch and replay streams are not yet connected to the simulation.",
+            "finding": "Native service storage exists with explicit disconnected frame/replay scope."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\audio_announcer_names.rs",
+              "bytes": 5971,
+              "sha256": "15094ccfbb7fd9bd2b47641c2b4cf09cdf9371e2ff037419faeb4407158df673"
+            },
+            "line": 15,
+            "needle": "pub fn compose(",
+            "finding": "Original bounded name composition;name output not trigger/voice dispatch."
+          }
+        ],
+        "searches": [
+          {
+            "command": [
+              "rg",
+              "-n",
+              "announcement_definitions|Announcements_CLASSIC|ExecutionBufferSize",
+              "F:\\OpenLeague\\crates\\client\\src",
+              "-g",
+              "*.rs"
+            ],
+            "exit_code": 1,
+            "output": ""
+          },
+          {
+            "command": [
+              "rg",
+              "-n",
+              "music|Music|announc|Announc",
+              "F:\\OpenLeague\\crates\\client\\src",
+              "-g",
+              "*.rs"
+            ],
+            "exit_code": 0,
+            "output": "F:\\OpenLeague\\crates\\client\\src\\native_replay_service.rs:3:use openleague_core::{audio_game_service_lifecycle as service, audio_announcer_owner_metadata as metadata,\nF:\\OpenLeague\\crates\\client\\src\\native_replay_service.rs:4:    audio_announcer_registry_init::{self as init, Storage, OwnedMemory},\nF:\\OpenLeague\\crates\\client\\src\\native_replay_service.rs:5:    audio_announcer_object_lookup::{self as lookup, Memory},\nF:\\OpenLeague\\crates\\client\\src\\native_replay_service.rs:6:    audio_announcer_registry_remove::{self as remove, Backend as RemovalBackend, Deallocator},\nF:\\OpenLeague\\crates\\client\\src\\native_replay_service.rs:7:    audio_announcer_owner_component_destructor::ControlBoundary,\nF:\\OpenLeague\\crates\\client\\src\\native_replay_service.rs:8:    audio_announcer_owner_control::{self as control, ObjectBoundary}};\n"
+          }
+        ],
+        "tests": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\announcement-consumer-test-receipt.json",
+          "bytes": 9411,
+          "sha256": "d3aafb7dbb6ac9486d1de3e39c6e29c7ec6a9786f4de7988290dd27e1741f6cb"
+        },
+        "fresh_tests": 13,
+        "scope": "Current source search and CPU tests; absence of matching strings is bounded search evidence,not complete implementation absence proof.",
+        "complete": false
+      },
+      "announcement-consumer-test-receipt.json": {
+        "utc": "2026-10-23T06:04:28.393773+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\run_announcement_tests.py",
+          "bytes": 1774,
+          "sha256": "34fbd09ba2007502df753a2d165ab3b8a5948f6dbd6e3aa4059c8a3a83222d9a"
+        },
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-core",
+              "audio_announcer_names::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "audio_announcer_names::tests::service_resolver_composes_with_wrapper_and_cache_precedence",
+              "audio_announcer_names::tests::modes_and_unqualified_strings_are_explicit",
+              "audio_announcer_names::tests::matches_72_original_service_and_eight_path_integrations",
+              "audio_announcer_names::tests::initialized_voice_namespace_resolves_native_bank_events_and_cache_still_wins"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\audio_announcer_names-tests.log",
+              "bytes": 15381,
+              "sha256": "156198a4efa9c52a4ccc16950b50635da1bee20c11d92f9a51723a634016da84"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+                "bytes": 787789824,
+                "sha256": "46d3732181601e8bfdc1923857d66192fd2a18fba13fe7aa3bd2f80876f74e6d"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+                "bytes": 6285312,
+                "sha256": "d9edcf79a66d1ac56e78b7b41c3b0b1fb58b80233ed41c2338a6fb9f5e696702"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+                "bytes": 6056960,
+                "sha256": "7791975eff9f583c94791b54664393dd05447aeef7c504d705b623b74bd4a80a"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+                "bytes": 922624,
+                "sha256": "e291d277c0fa15af20b32df3a64c06a093135f9f2d8d2293e9198ef70eadc0e4"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+                "bytes": 6248448,
+                "sha256": "e4124365733329f6e095d0b67fc20e57940d2496de1c2401b0bd0a8439cd42e0"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+                "bytes": 5990912,
+                "sha256": "20f86f1140ab38925ee9fb8cd07da4a12e28c6cfa2d71da169d79ea73873073b"
+              }
+            ]
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-core",
+              "audio_announcer_kill_roles::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "audio_announcer_kill_roles::tests::audio_kill_roles_match12096_original_dispatch_frames_flags_identity_and_independent_team_getters"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\audio_announcer_kill_roles-tests.log",
+              "bytes": 15120,
+              "sha256": "119ed4dc975bef07e7b287e7243ac13e6f8a57b979e5a850de98b5fa50278e40"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+                "bytes": 787789824,
+                "sha256": "46d3732181601e8bfdc1923857d66192fd2a18fba13fe7aa3bd2f80876f74e6d"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+                "bytes": 6285312,
+                "sha256": "d9edcf79a66d1ac56e78b7b41c3b0b1fb58b80233ed41c2338a6fb9f5e696702"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+                "bytes": 6056960,
+                "sha256": "7791975eff9f583c94791b54664393dd05447aeef7c504d705b623b74bd4a80a"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+                "bytes": 922624,
+                "sha256": "e291d277c0fa15af20b32df3a64c06a093135f9f2d8d2293e9198ef70eadc0e4"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+                "bytes": 6248448,
+                "sha256": "e4124365733329f6e095d0b67fc20e57940d2496de1c2401b0bd0a8439cd42e0"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+                "bytes": 5990912,
+                "sha256": "20f86f1140ab38925ee9fb8cd07da4a12e28c6cfa2d71da169d79ea73873073b"
+              }
+            ]
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-core",
+              "champion_kills::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "champion_kills::tests::native_xp_increment_values_and_inferred_level_modifiers_remain_separate",
+              "champion_kills::tests::execution_credit_uses_hit_order_within_same_tick_instead_of_network_id_order",
+              "champion_kills::tests::recent_damage_assistant_receives_native_field_pool_without_firstblood_bonus",
+              "champion_kills::tests::control_only_assistance_and_shielded_hits_participate_in_credit",
+              "champion_kills::tests::expired_assistant_disconnected_source_and_self_damage_cannot_receive_kill_credit",
+              "champion_kills::tests::direct_death_awards_firstblood_once_and_updates_public_score_without_duplicate_rewards",
+              "champion_kills::tests::environmental_execution_uses_recent_enemy_then_later_execution_stays_uncredited",
+              "champion_kills::tests::score_survives_respawn_and_global_event_ring_is_bounded"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\champion_kills-tests.log",
+              "bytes": 15850,
+              "sha256": "f6f2f2319fc9a64723dc296fe925ddda762fb2638657913f14f5f02ccc7e73c8"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+                "bytes": 787789824,
+                "sha256": "46d3732181601e8bfdc1923857d66192fd2a18fba13fe7aa3bd2f80876f74e6d"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+                "bytes": 6285312,
+                "sha256": "d9edcf79a66d1ac56e78b7b41c3b0b1fb58b80233ed41c2338a6fb9f5e696702"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+                "bytes": 6056960,
+                "sha256": "7791975eff9f583c94791b54664393dd05447aeef7c504d705b623b74bd4a80a"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+                "bytes": 922624,
+                "sha256": "e291d277c0fa15af20b32df3a64c06a093135f9f2d8d2293e9198ef70eadc0e4"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+                "bytes": 6248448,
+                "sha256": "e4124365733329f6e095d0b67fc20e57940d2496de1c2401b0bd0a8439cd42e0"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+                "bytes": 5990912,
+                "sha256": "20f86f1140ab38925ee9fb8cd07da4a12e28c6cfa2d71da169d79ea73873073b"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "path": "F:\\OpenLeague\\assets\\maps\\tt_navigation_grid.json",
+            "bytes": 1361,
+            "sha256": "98903341b52e204145eafc92a949394712257abc352bc3dad5e5fe204f1c1321"
+          },
+          {
+            "path": "F:\\OpenLeague\\Cargo.lock",
+            "bytes": 153304,
+            "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\core\\src\\audio_announcer_kill_roles.rs",
+            "bytes": 3350,
+            "sha256": "96723b07324e8b3181b6867e6a03158f9ee5789dedda837223cfa9b4ace0e35b"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\core\\src\\audio_announcer_names.rs",
+            "bytes": 5971,
+            "sha256": "15094ccfbb7fd9bd2b47641c2b4cf09cdf9371e2ff037419faeb4407158df673"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\core\\src\\champion_kills.rs",
+            "bytes": 10228,
+            "sha256": "b76edcb97eaf222e32bda215592a950807bd1923394d7e2aedf62e3ed4c27859"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\audio_announcer_names_contract.json",
+            "bytes": 24238,
+            "sha256": "6143d224770b0ee33d184969c3f8b385bb431c8a2787b92da9d02ebb5bfa9447"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\champion_kill_rules.json",
+            "bytes": 2457,
+            "sha256": "a0f7876db8e7f565dc23f2ff5606b72dc6d5d4ef423be8909625ae639fb8969c"
+          }
+        ],
+        "scope": "Fresh current Rust tests for ambient selection and priority transition;no device playback;retained native vectors,no original process or GPU execution.",
+        "native_or_gpu_executed": false
+      },
+      "music-source-research.json": {
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\audit_music_sources.py",
+          "bytes": 1933,
+          "sha256": "7c9278a629eaec4293a9508e242d19acecadf2ed61628e35230155ded3195c06"
+        },
+        "native_resources": [
+          {
+            "source": {
+              "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Global.bnk",
+              "bytes": 1833,
+              "sha256": "1389c9b4c0213922a0a44814eddf6d8b8ccd514d4c6279bf7489101c9b7383c5"
+            },
+            "chunks": [
+              {
+                "tag": "BKHD",
+                "offset": 8,
+                "bytes": 24,
+                "version": 88
+              },
+              {
+                "tag": "HIRC",
+                "offset": 40,
+                "bytes": 1762,
+                "objects": 20
+              },
+              {
+                "tag": "STID",
+                "offset": 1810,
+                "bytes": 23
+              }
+            ]
+          },
+          {
+            "source": {
+              "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Global.wpk",
+              "bytes": 929056,
+              "sha256": "8038b8e3c1d2e541636ef855b158731f0b2b319e44f827370e863861cf508a13"
+            }
+          },
+          {
+            "source": {
+              "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map1.bnk",
+              "bytes": 3078,
+              "sha256": "9bbf671bf725a65bf0a6d7e004a43b6d5a96c80b64b758d5ed452a5a04d4537e"
+            },
+            "chunks": [
+              {
+                "tag": "BKHD",
+                "offset": 8,
+                "bytes": 24,
+                "version": 88
+              },
+              {
+                "tag": "HIRC",
+                "offset": 40,
+                "bytes": 3009,
+                "objects": 24
+              },
+              {
+                "tag": "STID",
+                "offset": 3057,
+                "bytes": 21
+              }
+            ]
+          },
+          {
+            "source": {
+              "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map1.wpk",
+              "bytes": 10064074,
+              "sha256": "0e21afb6ff369002b4d770285dfa568fff4d8ffcc1ce66ae0150c1735c3eb1a1"
+            }
+          },
+          {
+            "source": {
+              "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map10.bnk",
+              "bytes": 7594,
+              "sha256": "1ce1813acffb450fd3ec2f3a8ae637252378d384a7d671586165e199ff03c25e"
+            },
+            "chunks": [
+              {
+                "tag": "BKHD",
+                "offset": 8,
+                "bytes": 24,
+                "version": 88
+              },
+              {
+                "tag": "HIRC",
+                "offset": 40,
+                "bytes": 7524,
+                "objects": 59
+              },
+              {
+                "tag": "STID",
+                "offset": 7572,
+                "bytes": 22
+              }
+            ]
+          },
+          {
+            "source": {
+              "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map10.wpk",
+              "bytes": 17216574,
+              "sha256": "e2444571ec53f1b4a3071530547c4706013a8db3232b59b55499fa2d426d624c"
+            }
+          },
+          {
+            "source": {
+              "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map12.bnk",
+              "bytes": 8667,
+              "sha256": "27c21735005b5330081f9eca48a9d67bc85c4206601b95c7a72a1687dff678c9"
+            },
+            "chunks": [
+              {
+                "tag": "BKHD",
+                "offset": 8,
+                "bytes": 24,
+                "version": 88
+              },
+              {
+                "tag": "HIRC",
+                "offset": 40,
+                "bytes": 8597,
+                "objects": 53
+              },
+              {
+                "tag": "STID",
+                "offset": 8645,
+                "bytes": 22
+              }
+            ]
+          },
+          {
+            "source": {
+              "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map12.wpk",
+              "bytes": 12471491,
+              "sha256": "7e8e0600ed4bee8f5db1c71af76463f0f73a3dda639d8dc1cc6a4c14c1429575"
+            }
+          },
+          {
+            "source": {
+              "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map8.bnk",
+              "bytes": 1066355,
+              "sha256": "735757c27ec9a4ccc7829f19850ab44f8d94b4688990e87b65bf1ef4481d13a1"
+            },
+            "chunks": [
+              {
+                "tag": "BKHD",
+                "offset": 8,
+                "bytes": 28,
+                "version": 88
+              },
+              {
+                "tag": "DIDX",
+                "offset": 44,
+                "bytes": 12
+              },
+              {
+                "tag": "DATA",
+                "offset": 64,
+                "bytes": 1057773
+              },
+              {
+                "tag": "HIRC",
+                "offset": 1057845,
+                "bytes": 8481,
+                "objects": 52
+              },
+              {
+                "tag": "STID",
+                "offset": 1066334,
+                "bytes": 21
+              }
+            ]
+          },
+          {
+            "source": {
+              "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map8.wpk",
+              "bytes": 16369811,
+              "sha256": "3c1564b85ac2b3478b563062689b5d2b29bbd8e192f42b263bfe516c8910293c"
+            }
+          }
+        ],
+        "current_consumer_search": {
+          "command": [
+            "rg",
+            "-n",
+            "-i",
+            "music|duck|MUS_Map|MUS_Global",
+            "F:\\OpenLeague\\crates",
+            "-g",
+            "*.rs"
+          ],
+          "exit_code": 1,
+          "output": ""
+        },
+        "limits": [
+          "Loose native MUS files identified; package membership and playback required-list not qualified here.",
+          "BNK chunk integrity and counts only; HIRC music transitions, ducking, priorities and loading music not decoded.",
+          "No matching Rust strings is bounded evidence,not proof all dynamic consumers absent.",
+          "No native game process or hardware audio executed."
+        ],
+        "complete": false
+      }
+    },
+    "source_checks": [
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\announcement-music-associations.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\prepare_announcement_music_reader.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\announcement-definitions-research.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\announcement-consumer-research.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\announcement-consumer-test-receipt.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\music-source-research.json",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_replay_service.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_announcer_names.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\champion_kills.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\champion_kills.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\world.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\world.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\map_audio.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\world.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\pcm_audio.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\pcm_audio.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\audit_announcement_definitions.py",
+      "pin_F:\\OpenLeague\\tools\\recover_announcement_definitions.py",
+      "pin_F:\\OpenLeague\\data\\4.20\\announcement_definitions.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\announcer_audio_graph.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\audio_initialized_announcer_namespace_contract.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\audio_announcer_team_binding_contract.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\audio_announcer_actor_binding_contract.json",
+      "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Announcements_ARAM.ini",
+      "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Announcements_ASCENSION.ini",
+      "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Announcements_CLASSIC.ini",
+      "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Announcements_FIRSTBLOOD.ini",
+      "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Announcements_ODIN.ini",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\champion_kills.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\world.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\world.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\map_audio.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_replay_service.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_announcer_names.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\announcement-consumer-test-receipt.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\run_announcement_tests.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\audio_announcer_names-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\audio_announcer_kill_roles-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\champion_kills-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+      "pin_F:\\OpenLeague\\assets\\maps\\tt_navigation_grid.json",
+      "pin_F:\\OpenLeague\\Cargo.lock",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_announcer_kill_roles.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_announcer_names.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\champion_kills.rs",
+      "pin_F:\\OpenLeague\\data\\4.20\\audio_announcer_names_contract.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\champion_kill_rules.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\audit_music_sources.py",
+      "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Global.bnk",
+      "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Global.wpk",
+      "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map1.bnk",
+      "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map1.wpk",
+      "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map10.bnk",
+      "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map10.wpk",
+      "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map12.bnk",
+      "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map12.wpk",
+      "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map8.bnk",
+      "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map8.wpk",
+      "nine_associations",
+      "thirteen_tests",
+      "native_definitions",
+      "music_resources",
+      "no_runtime_claim",
+      "task_SYS-16.3-01",
+      "anchor_announcement_music_1_0",
+      "anchor_announcement_music_1_1",
+      "task_SYS-16.3-02",
+      "anchor_announcement_music_2_0",
+      "anchor_announcement_music_2_1",
+      "task_SYS-16.3-03",
+      "anchor_announcement_music_3_0",
+      "task_SYS-16.3-04",
+      "anchor_announcement_music_4_0",
+      "task_SYS-16.3-05",
+      "anchor_announcement_music_5_0",
+      "task_SYS-16.3-06",
+      "anchor_announcement_music_6_0",
+      "task_SYS-16.3-07",
+      "anchor_announcement_music_7_0",
+      "task_SYS-16.3-08",
+      "anchor_announcement_music_8_0",
+      "task_SYS-16.3-09",
+      "anchor_announcement_music_9_0"
+    ],
+    "all_announcement_musics_qualified": false,
+    "all_required_effects_covered": false
+  },
+  "source_identities": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\announcement-music-associations.json",
+      "bytes": 10323,
+      "sha256": "e47b6c59b1afb3fae3e44759cd70dc2258644b75abd83a631b0e71d78b06a21f"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\prepare_announcement_music_reader.py",
+      "bytes": 4504,
+      "sha256": "275f27696de5e86e82fd3d13b16cddf4df4bfabe683e337a9df6e3208319933b"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\announcement-definitions-research.json",
+      "bytes": 3830,
+      "sha256": "26a111e2350231ada6ff89c7e81e0f063a47dedd40ec3f401af214f50bb9e2b7"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\announcement-consumer-research.json",
+      "bytes": 4716,
+      "sha256": "f626fdf6d1cb5cca65c17eb4009967d8f252538ead96dc7f454c122d0871dd4e"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\announcement-consumer-test-receipt.json",
+      "bytes": 9411,
+      "sha256": "d3aafb7dbb6ac9486d1de3e39c6e29c7ec6a9786f4de7988290dd27e1741f6cb"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\music-source-research.json",
+      "bytes": 6793,
+      "sha256": "5118cf24c8cb940f269c5fd16ed1de65478953c37292e581a6800dc2c9e5ee3b"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\native_replay_service.rs",
+      "bytes": 12275,
+      "sha256": "00b3379e4936f45595f9df62b75914d6a916ed2a8cb0b01f3b12af9040720908"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\audio_announcer_names.rs",
+      "bytes": 5971,
+      "sha256": "15094ccfbb7fd9bd2b47641c2b4cf09cdf9371e2ff037419faeb4407158df673"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\champion_kills.rs",
+      "bytes": 10228,
+      "sha256": "b76edcb97eaf222e32bda215592a950807bd1923394d7e2aedf62e3ed4c27859"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "bytes": 52808,
+      "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\world.rs",
+      "bytes": 32878,
+      "sha256": "407c75f77e8e4e06e6bea352f77ee3b4f90eb3357dd74cddc05a22e219651c54"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\map_audio.rs",
+      "bytes": 19866,
+      "sha256": "1eae20253092fb669e4fe3fe5e3e25e8a3c6971c98b02189a90f9ee7395bb714"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\pcm_audio.rs",
+      "bytes": 31297,
+      "sha256": "3768843fe3e68dce5f186679a556035d5bce3dea11ef8acd2460e3acbf9027de"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\audit_announcement_definitions.py",
+      "bytes": 1597,
+      "sha256": "e117963f13f4ef7cd390cc7714cf0283f7a281073e42182879ae1de2d89a0fea"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\recover_announcement_definitions.py",
+      "bytes": 6342,
+      "sha256": "d95b12e053c28e4241f3aaa031823c938b3683c6b33b38d03ec93e45757dd3ae"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\announcement_definitions.json",
+      "bytes": 1700427,
+      "sha256": "10de8e09bdcdd83e45e068b34afbfd8d04668440110152a0ebd493be72f10d78"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\announcer_audio_graph.json",
+      "bytes": 682695,
+      "sha256": "0453172a6d62ca7de58aebbc32d98ccc826216eaff81995a851bc23d7ded63f8"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\audio_initialized_announcer_namespace_contract.json",
+      "bytes": 10365,
+      "sha256": "3eeef4c975ec86576a7317aa24f41ef7ae43ecc00714cd33775c02fe89cda02e"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\audio_announcer_team_binding_contract.json",
+      "bytes": 62897,
+      "sha256": "0f4eca606e9a5d172fc0fe431aca56f35c0c86caea6afbdd667ac1c523497c6c"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\audio_announcer_actor_binding_contract.json",
+      "bytes": 2346289,
+      "sha256": "7a8d24c7a5520989e9a88c3a9de17ffd5a52edf14aa163345516b0dcc83ea523"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Announcements_ARAM.ini",
+      "bytes": 79603,
+      "sha256": "d7aa28817aa1be61e8416bb49e3d5d4caff9c3eb31c92afa4e5e0587f50f9f48"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Announcements_ASCENSION.ini",
+      "bytes": 58970,
+      "sha256": "32ee43fd4b9a1d8106ac6adac9aa6b86b9cb596bf6fa21673c9a2f545fb20abd"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Announcements_CLASSIC.ini",
+      "bytes": 90140,
+      "sha256": "34165f547988b7dd0608bde1b4a4de8194f73300353bf9cb0566b5e805b9b2a4"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Announcements_FIRSTBLOOD.ini",
+      "bytes": 60727,
+      "sha256": "a1a7d85f8496ae53c60437d3a9cb7b0a0b377c6bcff40ea3ffc735e0a7643252"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Announcements_ODIN.ini",
+      "bytes": 70692,
+      "sha256": "9b899becb6a9d00c4c1772c070f6ea0f644e3ab2137b8120984826e0dd569626"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\run_announcement_tests.py",
+      "bytes": 1774,
+      "sha256": "34fbd09ba2007502df753a2d165ab3b8a5948f6dbd6e3aa4059c8a3a83222d9a"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\audio_announcer_names-tests.log",
+      "bytes": 15381,
+      "sha256": "156198a4efa9c52a4ccc16950b50635da1bee20c11d92f9a51723a634016da84"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+      "bytes": 787789824,
+      "sha256": "46d3732181601e8bfdc1923857d66192fd2a18fba13fe7aa3bd2f80876f74e6d"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+      "bytes": 6285312,
+      "sha256": "d9edcf79a66d1ac56e78b7b41c3b0b1fb58b80233ed41c2338a6fb9f5e696702"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+      "bytes": 6056960,
+      "sha256": "7791975eff9f583c94791b54664393dd05447aeef7c504d705b623b74bd4a80a"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+      "bytes": 922624,
+      "sha256": "e291d277c0fa15af20b32df3a64c06a093135f9f2d8d2293e9198ef70eadc0e4"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+      "bytes": 6248448,
+      "sha256": "e4124365733329f6e095d0b67fc20e57940d2496de1c2401b0bd0a8439cd42e0"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+      "bytes": 5990912,
+      "sha256": "20f86f1140ab38925ee9fb8cd07da4a12e28c6cfa2d71da169d79ea73873073b"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\audio_announcer_kill_roles-tests.log",
+      "bytes": 15120,
+      "sha256": "119ed4dc975bef07e7b287e7243ac13e6f8a57b979e5a850de98b5fa50278e40"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\champion_kills-tests.log",
+      "bytes": 15850,
+      "sha256": "f6f2f2319fc9a64723dc296fe925ddda762fb2638657913f14f5f02ccc7e73c8"
+    },
+    {
+      "path": "F:\\OpenLeague\\assets\\maps\\tt_navigation_grid.json",
+      "bytes": 1361,
+      "sha256": "98903341b52e204145eafc92a949394712257abc352bc3dad5e5fe204f1c1321"
+    },
+    {
+      "path": "F:\\OpenLeague\\Cargo.lock",
+      "bytes": 153304,
+      "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\audio_announcer_kill_roles.rs",
+      "bytes": 3350,
+      "sha256": "96723b07324e8b3181b6867e6a03158f9ee5789dedda837223cfa9b4ace0e35b"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\audio_announcer_names_contract.json",
+      "bytes": 24238,
+      "sha256": "6143d224770b0ee33d184969c3f8b385bb431c8a2787b92da9d02ebb5bfa9447"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\champion_kill_rules.json",
+      "bytes": 2457,
+      "sha256": "a0f7876db8e7f565dc23f2ff5606b72dc6d5d4ef423be8909625ae639fb8969c"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\audit_music_sources.py",
+      "bytes": 1933,
+      "sha256": "7c9278a629eaec4293a9508e242d19acecadf2ed61628e35230155ded3195c06"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Global.bnk",
+      "bytes": 1833,
+      "sha256": "1389c9b4c0213922a0a44814eddf6d8b8ccd514d4c6279bf7489101c9b7383c5"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Global.wpk",
+      "bytes": 929056,
+      "sha256": "8038b8e3c1d2e541636ef855b158731f0b2b319e44f827370e863861cf508a13"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map1.bnk",
+      "bytes": 3078,
+      "sha256": "9bbf671bf725a65bf0a6d7e004a43b6d5a96c80b64b758d5ed452a5a04d4537e"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map1.wpk",
+      "bytes": 10064074,
+      "sha256": "0e21afb6ff369002b4d770285dfa568fff4d8ffcc1ce66ae0150c1735c3eb1a1"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map10.bnk",
+      "bytes": 7594,
+      "sha256": "1ce1813acffb450fd3ec2f3a8ae637252378d384a7d671586165e199ff03c25e"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map10.wpk",
+      "bytes": 17216574,
+      "sha256": "e2444571ec53f1b4a3071530547c4706013a8db3232b59b55499fa2d426d624c"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map12.bnk",
+      "bytes": 8667,
+      "sha256": "27c21735005b5330081f9eca48a9d67bc85c4206601b95c7a72a1687dff678c9"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map12.wpk",
+      "bytes": 12471491,
+      "sha256": "7e8e0600ed4bee8f5db1c71af76463f0f73a3dda639d8dc1cc6a4c14c1429575"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map8.bnk",
+      "bytes": 1066355,
+      "sha256": "735757c27ec9a4ccc7829f19850ab44f8d94b4688990e87b65bf1ef4481d13a1"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map8.wpk",
+      "bytes": 16369811,
+      "sha256": "3c1564b85ac2b3478b563062689b5d2b29bbd8e192f42b263bfe516c8910293c"
+    }
+  ],
+  "checks": [
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\announcement-music-associations.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\prepare_announcement_music_reader.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\announcement-definitions-research.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\announcement-consumer-research.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\announcement-consumer-test-receipt.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\music-source-research.json",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_replay_service.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_announcer_names.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\champion_kills.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\champion_kills.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\world.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\world.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\map_audio.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\world.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\pcm_audio.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\pcm_audio.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\audit_announcement_definitions.py",
+    "pin_F:\\OpenLeague\\tools\\recover_announcement_definitions.py",
+    "pin_F:\\OpenLeague\\data\\4.20\\announcement_definitions.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\announcer_audio_graph.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\audio_initialized_announcer_namespace_contract.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\audio_announcer_team_binding_contract.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\audio_announcer_actor_binding_contract.json",
+    "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Announcements_ARAM.ini",
+    "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Announcements_ASCENSION.ini",
+    "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Announcements_CLASSIC.ini",
+    "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Announcements_FIRSTBLOOD.ini",
+    "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Announcements_ODIN.ini",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\champion_kills.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\world.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\world.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\map_audio.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_replay_service.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_announcer_names.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\announcement-consumer-test-receipt.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\run_announcement_tests.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\audio_announcer_names-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\audio_announcer_kill_roles-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\champion_kills-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+    "pin_F:\\OpenLeague\\assets\\maps\\tt_navigation_grid.json",
+    "pin_F:\\OpenLeague\\Cargo.lock",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_announcer_kill_roles.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_announcer_names.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\champion_kills.rs",
+    "pin_F:\\OpenLeague\\data\\4.20\\audio_announcer_names_contract.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\champion_kill_rules.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision119\\audit_music_sources.py",
+    "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Global.bnk",
+    "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Global.wpk",
+    "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map1.bnk",
+    "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map1.wpk",
+    "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map10.bnk",
+    "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map10.wpk",
+    "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map12.bnk",
+    "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map12.wpk",
+    "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map8.bnk",
+    "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Sounds\\Wwise\\SFX\\Shared\\MUS_Map8.wpk",
+    "nine_associations",
+    "thirteen_tests",
+    "native_definitions",
+    "music_resources",
+    "no_runtime_claim",
+    "task_SYS-16.3-01",
+    "anchor_announcement_music_1_0",
+    "anchor_announcement_music_1_1",
+    "task_SYS-16.3-02",
+    "anchor_announcement_music_2_0",
+    "anchor_announcement_music_2_1",
+    "task_SYS-16.3-03",
+    "anchor_announcement_music_3_0",
+    "task_SYS-16.3-04",
+    "anchor_announcement_music_4_0",
+    "task_SYS-16.3-05",
+    "anchor_announcement_music_5_0",
+    "task_SYS-16.3-06",
+    "anchor_announcement_music_6_0",
+    "task_SYS-16.3-07",
+    "anchor_announcement_music_7_0",
+    "task_SYS-16.3-08",
+    "anchor_announcement_music_8_0",
+    "task_SYS-16.3-09",
+    "anchor_announcement_music_9_0"
+  ],
+  "checks_count": 102,
+  "associations": [
+    {
+      "task_id": "SYS-16.3-01",
+      "finding": "Native service storage exists with explicit disconnected frame/replay scope. Original bounded name composition;name output not trigger/voice dispatch.",
+      "remaining": "Start announcement definition and naming exist;simulation-to-voice trigger unqualified.",
+      "anchors": [
+        {
+          "path": "crates/client/src/native_replay_service.rs",
+          "line": 2,
+          "needle": "//! Frame dispatch and replay streams are not yet connected to the simulation.",
+          "role": "announcement_music_1_0"
+        },
+        {
+          "path": "crates/core/src/audio_announcer_names.rs",
+          "line": 15,
+          "needle": "pub fn compose(",
+          "role": "announcement_music_1_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-5f21579f-fd20-51f8-a475-d00ec66cc96f"
+    },
+    {
+      "task_id": "SYS-16.3-02",
+      "finding": "Kill event exposes sequence,tick,victim,killer,assists,first_blood,gold;not an announcement dispatch. Snapshot copies kill events;does not prove client audio consumption.",
+      "remaining": "Kill/assist snapshot data exists;announcer event dispatch and playback unqualified.",
+      "anchors": [
+        {
+          "path": "crates/core/src/champion_kills.rs",
+          "line": 7,
+          "needle": "pub struct Event {",
+          "role": "announcement_music_2_0"
+        },
+        {
+          "path": "crates/core/src/lib.rs",
+          "line": 784,
+          "needle": "kill_events: self.kill_rewards.events.iter().cloned().collect(),",
+          "role": "announcement_music_2_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-2013153a-86af-5e6a-87f9-33a7f8b322d7"
+    },
+    {
+      "task_id": "SYS-16.3-03",
+      "finding": "Kill event exposes sequence,tick,victim,killer,assists,first_blood,gold;not an announcement dispatch.",
+      "remaining": "Kill/death streak counters do not qualify native streak/shutdown announcements.",
+      "anchors": [
+        {
+          "path": "crates/core/src/champion_kills.rs",
+          "line": 7,
+          "needle": "pub struct Event {",
+          "role": "announcement_music_3_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-33f9b3c4-39b7-505f-97b2-45339334328d"
+    },
+    {
+      "task_id": "SYS-16.3-04",
+      "finding": "Shared unit damage/death branch handles structures; no turret announcement dispatch established.",
+      "remaining": "Structure state transition is an entry boundary;turret destruction announcement consumer not identified.",
+      "anchors": [
+        {
+          "path": "crates/core/src/world.rs",
+          "line": 397,
+          "needle": "if self.units[&target].health > 0.",
+          "role": "announcement_music_4_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-42ccc2e1-440a-5bf2-b05b-98d3d3fa84de"
+    },
+    {
+      "task_id": "SYS-16.3-05",
+      "finding": "Inhibitor respawn scheduling exists;announcement producer/receiver not established.",
+      "remaining": "Inhibitor death/respawn state exists;destroyed/respawned voice dispatch not identified.",
+      "anchors": [
+        {
+          "path": "crates/core/src/world.rs",
+          "line": 410,
+          "needle": "unit.respawn_at = Some(self.tick + 240 * TICK_RATE);",
+          "role": "announcement_music_5_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-2172cc1e-e75a-5bc7-baf7-8d2ca6bca851"
+    },
+    {
+      "task_id": "SYS-16.3-06",
+      "finding": "Altar cues have current playback consumer;local trigger cannot qualify all map objective announcements.",
+      "remaining": "Altar cues cover a local subset;all per-map objective announcement semantics remain open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/map_audio.rs",
+          "line": 41,
+          "needle": "pub fn altar_events(",
+          "role": "announcement_music_6_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-341cc530-9a44-599c-bc9f-2eb7370d212e"
+    },
+    {
+      "task_id": "SYS-16.3-07",
+      "finding": "Nexus death sets winner;victory/defeat voice not established.",
+      "remaining": "Winner state does not prove victory/defeat audio delivery.",
+      "anchors": [
+        {
+          "path": "crates/core/src/world.rs",
+          "line": 415,
+          "needle": "self.winner = Some(1 - team);",
+          "role": "announcement_music_7_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-e54168c2-abda-52a4-8001-42cb6628b5dd"
+    },
+    {
+      "task_id": "SYS-16.3-08",
+      "finding": "Registers custom PCM and loads ambient catalogue; no music scheduling or music/announcement transition consumer identified.",
+      "remaining": "MUS banks exist;required loading/in-game music mapping and actual playback consumer remain open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/pcm_audio.rs",
+          "line": 170,
+          "needle": "fn build(&self,app:&mut App)",
+          "role": "announcement_music_8_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-36765e2d-b233-51eb-b200-23b70eea2faf"
+    },
+    {
+      "task_id": "SYS-16.3-09",
+      "finding": "Registers custom PCM and loads ambient catalogue; no music scheduling or music/announcement transition consumer identified.",
+      "remaining": "Native music transition/ducking/priority graph not decoded;PCM registration not a transition implementation.",
+      "anchors": [
+        {
+          "path": "crates/client/src/pcm_audio.rs",
+          "line": 170,
+          "needle": "fn build(&self,app:&mut App)",
+          "role": "announcement_music_9_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-85ecf06c-6fd7-514a-bcca-91cb8e43aef6"
+    }
+  ]
+}

@@ -1,0 +1,2014 @@
+{
+  "schema": "openleague_lifecycle_links/v1",
+  "utc": "2026-10-22T17:43:47.472281+00:00",
+  "passed": true,
+  "checks_count": 67,
+  "checks": [
+    "member DATA/Spells/JudicatorIntervention.inibin",
+    "member DATA/Spells/FizzJump.inibin",
+    "member DATA/Characters/Olaf/Spells/OlafRagnarok.inibin",
+    "member DATA/Characters/Sivir/Spells/SivirE.inibin",
+    "member DATA/Characters/Garen/Spells/GarenQ.inibin",
+    "member DATA/Spells/ChronoShift.inibin",
+    "member DATA/Characters/Elise/Spells/EliseR.inibin",
+    "member DATA/Spells/SummonerBoost.inibin",
+    "member LEVELS/Map10/DeathTimes.inibin",
+    "death authored binary32 TimeDeadPerLevel.Level01",
+    "death authored binary32 TimeDeadPerLevel.Level02",
+    "death authored binary32 TimeDeadPerLevel.Level03",
+    "death authored binary32 TimeDeadPerLevel.Level04",
+    "death authored binary32 TimeDeadPerLevel.Level05",
+    "death authored binary32 TimeDeadPerLevel.Level06",
+    "death authored binary32 TimeDeadPerLevel.Level07",
+    "death authored binary32 TimeDeadPerLevel.Level08",
+    "death authored binary32 TimeDeadPerLevel.Level09",
+    "death authored binary32 TimeDeadPerLevel.Level10",
+    "death authored binary32 TimeDeadPerLevel.Level11",
+    "death authored binary32 TimeDeadPerLevel.Level12",
+    "death authored binary32 TimeDeadPerLevel.Level13",
+    "death authored binary32 TimeDeadPerLevel.Level14",
+    "death authored binary32 TimeDeadPerLevel.Level15",
+    "death authored binary32 TimeDeadPerLevel.Level16",
+    "death authored binary32 TimeDeadPerLevel.Level17",
+    "death authored binary32 TimeDeadPerLevel.Level18",
+    "death authored binary32 TimeDeadPerLevel.Level19",
+    "death authored binary32 TimeDeadPerLevel.Level20",
+    "death authored binary32 DeathTimeScaling.IncrementTime",
+    "death authored binary32 DeathTimeScaling.PercentCap",
+    "death authored binary32 DeathTimeScaling.PercentIncrease",
+    "death authored binary32 DeathTimeScaling.StartTime",
+    "en_GB membership",
+    "16 exact native description hooks",
+    "SYS-04.5-01/cast_boundary/anchor",
+    "SYS-04.5-01/damage_admission_boundary/anchor",
+    "SYS-04.5-01/structure_protection_boundary/anchor",
+    "SYS-04.5-01/existing unknown",
+    "SYS-04.5-02/ground_cast_boundary/anchor",
+    "SYS-04.5-02/basic_flight_boundary/anchor",
+    "SYS-04.5-02/existing unknown",
+    "SYS-04.5-03/cast_boundary/anchor",
+    "SYS-04.5-03/stun_support_boundary/anchor",
+    "SYS-04.5-03/existing unknown",
+    "SYS-04.5-04/cast_boundary/anchor",
+    "SYS-04.5-04/general_shield_boundary/anchor",
+    "SYS-04.5-04/existing unknown",
+    "SYS-04.5-05/Garen_Q_slow_clear/anchor",
+    "SYS-04.5-05/summoner_catalogue_limit/anchor",
+    "SYS-04.5-05/Exhaust_separate_states/anchor",
+    "SYS-04.5-05/existing unknown",
+    "SYS-04.5-06/lethal_effect_reset/anchor",
+    "SYS-04.5-06/stun_expiry/anchor",
+    "SYS-04.5-06/slow_expiry/anchor",
+    "SYS-04.5-06/existing unknown",
+    "SYS-04.5-07/normal_respawn_reset/anchor",
+    "SYS-04.5-07/special_spell_boundary/anchor",
+    "SYS-04.5-07/existing unknown",
+    "SYS-04.5-08/legacy_timeout/anchor",
+    "SYS-04.5-08/resumable_silence_poll/anchor",
+    "SYS-04.5-08/host_detach/anchor",
+    "SYS-04.5-08/host_retire/anchor",
+    "SYS-04.5-08/actor_retirement/anchor",
+    "SYS-04.5-08/simulation_control_tick/anchor",
+    "SYS-04.5-08/existing unknown",
+    "8tasks4boundaries"
+  ],
+  "associations": [
+    {
+      "task_id": "SYS-04.5-01",
+      "title": "Qualifier invulnérabilité et catégories de dégâts bloquées",
+      "finding": "Kayle Intervention authored input/text identifies an invulnerability example. Current targeted-cast dispatch rejects unsupported champion spells. Damage admission calls protected(),but that function handles fountains/structure dependencies,not a general champion invulnerability policy.",
+      "remaining": "Identify the actual invulnerability state and all damage-category gates,original side-effect/order policy and ability/item producers. Structure protection is not evidence of champion invulnerability.",
+      "anchors": [
+        {
+          "path": "crates/core/src/spells.rs",
+          "line": 120,
+          "needle": "return Err(\"champion spell not implemented\".into());",
+          "role": "lifecycle_reference_01_cast_boundary"
+        },
+        {
+          "path": "crates/core/src/damage.rs",
+          "line": 74,
+          "needle": "return Err(\"damage target protected\".into());",
+          "role": "lifecycle_reference_01_damage_admission_boundary"
+        },
+        {
+          "path": "crates/core/src/world.rs",
+          "line": 244,
+          "needle": "pub fn protected(&self",
+          "role": "lifecycle_reference_01_structure_protection_boundary"
+        }
+      ],
+      "native_bindings": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\JudicatorIntervention.inibin",
+          "selector": "SpellData description/tooltip hook and recorded fields;native example,not recovered server policy or proof of current implementation",
+          "role": "native_authoring_input_not_server_policy"
+        }
+      ],
+      "existing_unknown_id": "OLU-86b482dc-d875-566a-85d8-57f323b00036",
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "native_server_policy_qualified": false
+    },
+    {
+      "task_id": "SYS-04.5-02",
+      "title": "Qualifier inciblabilité et projectiles déjà lancés",
+      "finding": "Fizz Jump authoring/text is identified. Current ground-cast dispatch rejects unsupported spells; basic flight checks target existence/health and tracks position after launch. Those gates do not qualify an untargetable state or its projectile policy.",
+      "remaining": "Identify untargetability state,acquisition,already-launched missiles,ground/AoE damage and all original exceptions;do not treat missing/dead/hidden as untargetable.",
+      "anchors": [
+        {
+          "path": "crates/core/src/annie_w.rs",
+          "line": 49,
+          "needle": "return Err(\"champion ground spell not implemented\".into());",
+          "role": "lifecycle_reference_02_ground_cast_boundary"
+        },
+        {
+          "path": "crates/core/src/attacks.rs",
+          "line": 159,
+          "needle": "let flights = std::mem::take(&mut self.projectiles);",
+          "role": "lifecycle_reference_02_basic_flight_boundary"
+        }
+      ],
+      "native_bindings": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\FizzJump.inibin",
+          "selector": "SpellData description/tooltip hook and recorded fields;native example,not recovered server policy or proof of current implementation",
+          "role": "native_authoring_input_not_server_policy"
+        }
+      ],
+      "existing_unknown_id": "OLU-e797fee0-3ed0-5dc5-8d81-b07aad41b321",
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "native_server_policy_qualified": false
+    },
+    {
+      "task_id": "SYS-04.5-03",
+      "title": "Qualifier immunité aux contrôles et effets secondaires conservés",
+      "finding": "Olaf Ragnarok authoring/text is identified. Current cast dispatch has no qualified Olaf implementation; stun admission refuses Boss/structures as unsupported local targets. Neither refusal establishes native CC immunity or preservation of secondary effects.",
+      "remaining": "Identify immunity flags and per-control admission/secondary effects,cleanse-vs-immunity ordering,duration and all original producers;retain support refusals separately.",
+      "anchors": [
+        {
+          "path": "crates/core/src/spells.rs",
+          "line": 120,
+          "needle": "return Err(\"champion spell not implemented\".into());",
+          "role": "lifecycle_reference_03_cast_boundary"
+        },
+        {
+          "path": "crates/core/src/stuns.rs",
+          "line": 23,
+          "needle": "boss stun policy not qualified",
+          "role": "lifecycle_reference_03_stun_support_boundary"
+        }
+      ],
+      "native_bindings": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Olaf\\Spells\\OlafRagnarok.inibin",
+          "selector": "SpellData description/tooltip hook and recorded fields;native example,not recovered server policy or proof of current implementation",
+          "role": "native_authoring_input_not_server_policy"
+        }
+      ],
+      "existing_unknown_id": "OLU-489c16ce-288d-586e-82fc-7ab20be8d743",
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "native_server_policy_qualified": false
+    },
+    {
+      "task_id": "SYS-04.5-04",
+      "title": "Qualifier boucliers antisorts et ordre de consommation",
+      "finding": "Sivir E authoring/text identifies a spell-shield example. Current generic Shield absorbs damage after mitigation and orders by expiry;its structure carries amount/tag/deadline,not a qualified hostile-spell consumption event. Sivir cast remains behind the unsupported-spell boundary.",
+      "remaining": "Identify spell-shield trigger/consumption order,non-damaging spells,multi-hit/secondary effects,recasts and original exemptions. General damage absorption must not count as spell-shield implementation.",
+      "anchors": [
+        {
+          "path": "crates/core/src/spells.rs",
+          "line": 120,
+          "needle": "return Err(\"champion spell not implemented\".into());",
+          "role": "lifecycle_reference_04_cast_boundary"
+        },
+        {
+          "path": "crates/core/src/shields.rs",
+          "line": 47,
+          "needle": "pub(crate) fn absorb_shields",
+          "role": "lifecycle_reference_04_general_shield_boundary"
+        }
+      ],
+      "native_bindings": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Sivir\\Spells\\SivirE.inibin",
+          "selector": "SpellData description/tooltip hook and recorded fields;native example,not recovered server policy or proof of current implementation",
+          "role": "native_authoring_input_not_server_policy"
+        }
+      ],
+      "existing_unknown_id": "OLU-30b94d84-5e7f-589e-9984-6f022ef9e339",
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "native_server_policy_qualified": false
+    },
+    {
+      "task_id": "SYS-04.5-05",
+      "title": "Qualifier purification et contrôles non dissipables",
+      "finding": "Garen Q has an actual accepted-cast path clearing timed slows. Exhaust non-slow debuffs and pillar area reapplication are separate. SummonerBoost authoring/text is present,but current summoner enum/dispatch supports Barrier,Heal,Exhaust,Ignite,Smite only;this does not implement Cleanse or QSS.",
+      "remaining": "Qualify every dispellable/non-dispellable state,cleanse vs suppression/airborne,area reapplication and immunity window;implement/identify Cleanse and item consumers with original rules.",
+      "anchors": [
+        {
+          "path": "crates/core/src/spells.rs",
+          "line": 163,
+          "needle": "p.slows.clear();",
+          "role": "lifecycle_reference_05_Garen_Q_slow_clear"
+        },
+        {
+          "path": "crates/core/src/summoners.rs",
+          "line": 6,
+          "needle": "pub enum Spell {",
+          "role": "lifecycle_reference_05_summoner_catalogue_limit"
+        },
+        {
+          "path": "crates/core/src/summoner_exhaust.rs",
+          "line": 77,
+          "needle": "// Slow can be purged independently",
+          "role": "lifecycle_reference_05_Exhaust_separate_states"
+        }
+      ],
+      "native_bindings": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenQ.inibin",
+          "selector": "SpellData description/tooltip hook and recorded fields;native example,not recovered server policy or proof of current implementation",
+          "role": "native_authoring_input_not_server_policy"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerBoost.inibin",
+          "selector": "SpellData description/tooltip hook and recorded fields;native example,not recovered server policy or proof of current implementation",
+          "role": "native_authoring_input_not_server_policy"
+        }
+      ],
+      "existing_unknown_id": "OLU-38de4545-7b3d-5487-97fb-9aa4cc7d06b2",
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "native_server_policy_qualified": false
+    },
+    {
+      "task_id": "SYS-04.5-06",
+      "title": "Nettoyer les contrôles à la mort selon leurs règles de persistance",
+      "finding": "Lethal champion damage clears local Effects,shields,slows,stuns,orders and windup,then schedules baseline death time. Stun/slow update also removes dead entries. This is concrete broad cleanup,not qualified per-effect persistence.",
+      "remaining": "Qualify death-persistent passives/buffs,deferred projectiles,owner-bound entities,revival and all original cleanup ordering;native DeathTimes authoring validates timer inputs only.",
+      "anchors": [
+        {
+          "path": "crates/core/src/damage.rs",
+          "line": 111,
+          "needle": "p.effects = spells::Effects::default();",
+          "role": "lifecycle_reference_06_lethal_effect_reset"
+        },
+        {
+          "path": "crates/core/src/stuns.rs",
+          "line": 37,
+          "needle": "pub(crate) fn advance_stuns",
+          "role": "lifecycle_reference_06_stun_expiry"
+        },
+        {
+          "path": "crates/core/src/slows.rs",
+          "line": 78,
+          "needle": "pub(crate) fn advance_slows",
+          "role": "lifecycle_reference_06_slow_expiry"
+        }
+      ],
+      "native_bindings": [],
+      "existing_unknown_id": "OLU-907c2a36-4f10-54d9-b96c-ba8011323faf",
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "native_server_policy_qualified": false
+    },
+    {
+      "task_id": "SYS-04.5-07",
+      "title": "Nettoyer les états après résurrection et transformation",
+      "finding": "advance_respawns resets local effect/order/control state for normal timed fountain respawn and clears specific owner effects. Zilean revival and Elise transformation authoring exist as native examples,but their special gameplay paths are not supplied by this baseline respawn consumer.",
+      "remaining": "Qualify special revival/transform state transfer,form identity,resources,protected windows and persistent effects. Normal respawn cleanup and native description hooks do not prove these mechanisms complete.",
+      "anchors": [
+        {
+          "path": "crates/core/src/lifecycle.rs",
+          "line": 33,
+          "needle": "pub(crate) fn advance_respawns",
+          "role": "lifecycle_reference_07_normal_respawn_reset"
+        },
+        {
+          "path": "crates/core/src/spells.rs",
+          "line": 120,
+          "needle": "return Err(\"champion spell not implemented\".into());",
+          "role": "lifecycle_reference_07_special_spell_boundary"
+        }
+      ],
+      "native_bindings": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\ChronoShift.inibin",
+          "selector": "SpellData description/tooltip hook and recorded fields;native example,not recovered server policy or proof of current implementation",
+          "role": "native_authoring_input_not_server_policy"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Elise\\Spells\\EliseR.inibin",
+          "selector": "SpellData description/tooltip hook and recorded fields;native example,not recovered server policy or proof of current implementation",
+          "role": "native_authoring_input_not_server_policy"
+        }
+      ],
+      "existing_unknown_id": "OLU-2e0900e8-0d61-5d31-a5ff-0013470e9964",
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "native_server_policy_qualified": false
+    },
+    {
+      "task_id": "SYS-04.5-08",
+      "title": "Conserver ou expirer correctement les états pendant une déconnexion",
+      "finding": "Two live code paths differ: legacy peer silence>30s removes the actor;resumable Registry emits Detached and Host removes route/clock delivery while retaining Simulation player. Resume rebinds the same player with a new context;Retired/owner drain uses remove_player. Simulation control deadlines continue on ticks while unpaused;silence timeout uses host elapsed time.",
+      "remaining": "Qualify every control/deferred effect during offline retention,death,owner drain,reconnect and pause;verify real transport behavior and original server policy. Legacy removal must not be generalized to resumable sessions.",
+      "anchors": [
+        {
+          "path": "crates/server/src/main.rs",
+          "line": 182,
+          "needle": "if now.duration_since(*last) > Duration::from_secs(30)",
+          "role": "lifecycle_reference_08_legacy_timeout"
+        },
+        {
+          "path": "crates/server/src/reconnect.rs",
+          "line": 189,
+          "needle": "pub fn poll(&mut self,now:Duration)",
+          "role": "lifecycle_reference_08_resumable_silence_poll"
+        },
+        {
+          "path": "crates/server/src/session_host.rs",
+          "line": 40,
+          "needle": "r::Transition::Detached(endpoint) => {",
+          "role": "lifecycle_reference_08_host_detach"
+        },
+        {
+          "path": "crates/server/src/session_host.rs",
+          "line": 43,
+          "needle": "r::Transition::Retired { player, endpoint, .. } => {",
+          "role": "lifecycle_reference_08_host_retire"
+        },
+        {
+          "path": "crates/core/src/attacks.rs",
+          "line": 103,
+          "needle": "pub fn remove_player",
+          "role": "lifecycle_reference_08_actor_retirement"
+        },
+        {
+          "path": "crates/core/src/lib.rs",
+          "line": 707,
+          "needle": "self.advance_stuns();",
+          "role": "lifecycle_reference_08_simulation_control_tick"
+        }
+      ],
+      "native_bindings": [],
+      "existing_unknown_id": "OLU-4eb1c5ea-7216-54e7-8cfc-0510eb5eb4f9",
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "native_server_policy_qualified": false
+    }
+  ],
+  "native_resources": [
+    {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\JudicatorIntervention.inibin",
+        "bytes": 1029,
+        "sha256": "ab6c2508e927a2b97b219c2fbc7a79634b36cf23f7a54d8141de0db5b79722e8"
+      },
+      "relative": "DATA/Spells/JudicatorIntervention.inibin",
+      "membership": {
+        "logical_path": "DATA/Spells/JudicatorIntervention.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\JudicatorIntervention.inibin",
+          "bytes": 1029,
+          "sha256": "ab6c2508e927a2b97b219c2fbc7a79634b36cf23f7a54d8141de0db5b79722e8",
+          "md5": "47cf6cb42da8d1bf5999f16a7168f46f"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/JudicatorIntervention.inibin",
+            "release": "0.0.1.2",
+            "md5": "47cf6cb42da8d1bf5999f16a7168f46f",
+            "bytes": 1029,
+            "compressed_bytes": 767,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/JudicatorIntervention.inibin",
+            "release": "0.0.1.2",
+            "md5": "47cf6cb42da8d1bf5999f16a7168f46f",
+            "bytes": 1029,
+            "compressed_bytes": 767,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_JudicatorIntervention",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_JudicatorIntervention",
+        "SpellData.CanCastWhileDisabled": "0",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.CastRange": "900.0000",
+        "SpellData.Effect1Level1Amount": "2.0000",
+        "SpellData.Effect2Level1Amount": null,
+        "SpellData.Effect3Level1Amount": null
+      }
+    },
+    {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\FizzJump.inibin",
+        "bytes": 1611,
+        "sha256": "f112dfcef6c929d2f18f42c90d09af51a5c7bfa9f9c5c012727ba7f5a99b1611"
+      },
+      "relative": "DATA/Spells/FizzJump.inibin",
+      "membership": {
+        "logical_path": "DATA/Spells/FizzJump.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\FizzJump.inibin",
+          "bytes": 1611,
+          "sha256": "f112dfcef6c929d2f18f42c90d09af51a5c7bfa9f9c5c012727ba7f5a99b1611",
+          "md5": "3a4b87cca96a3511601a585bd867033b"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/FizzJump.inibin",
+            "release": "0.0.0.243",
+            "md5": "3a4b87cca96a3511601a585bd867033b",
+            "bytes": 1611,
+            "compressed_bytes": 1232,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/FizzJump.inibin",
+            "release": "0.0.0.243",
+            "md5": "3a4b87cca96a3511601a585bd867033b",
+            "bytes": 1611,
+            "compressed_bytes": 1232,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_FizzJump",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_FizzJump",
+        "SpellData.CanCastWhileDisabled": "0",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.CastRange": "25000.0000",
+        "SpellData.Effect1Level1Amount": "70.0000",
+        "SpellData.Effect2Level1Amount": "40.0000",
+        "SpellData.Effect3Level1Amount": 0
+      }
+    },
+    {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Olaf\\Spells\\OlafRagnarok.inibin",
+        "bytes": 1199,
+        "sha256": "009ad1a4c361068abfda7a7a4e50b2d50e3acc292c977367fc2ae6c4599c4c38"
+      },
+      "relative": "DATA/Characters/Olaf/Spells/OlafRagnarok.inibin",
+      "membership": {
+        "logical_path": "DATA/Characters/Olaf/Spells/OlafRagnarok.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Olaf\\Spells\\OlafRagnarok.inibin",
+          "bytes": 1199,
+          "sha256": "009ad1a4c361068abfda7a7a4e50b2d50e3acc292c977367fc2ae6c4599c4c38",
+          "md5": "58026b6385bffc0e4b08e91e274b3194"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Olaf/Spells/OlafRagnarok.inibin",
+            "release": "0.0.1.2",
+            "md5": "58026b6385bffc0e4b08e91e274b3194",
+            "bytes": 1199,
+            "compressed_bytes": 914,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Olaf/Spells/OlafRagnarok.inibin",
+            "release": "0.0.1.2",
+            "md5": "58026b6385bffc0e4b08e91e274b3194",
+            "bytes": 1199,
+            "compressed_bytes": 914,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_OlafRagnarok",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_OlafRagnarok",
+        "SpellData.CanCastWhileDisabled": 1,
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.CastRange": "400.0000",
+        "SpellData.Effect1Level1Amount": "10.0000",
+        "SpellData.Effect2Level1Amount": "6.0000",
+        "SpellData.Effect3Level1Amount": "40.0000"
+      }
+    },
+    {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Sivir\\Spells\\SivirE.inibin",
+        "bytes": 864,
+        "sha256": "5f1c2073b387d3768341fd0519bfe1e4a3ba283ce7c6054fae11475b3f267add"
+      },
+      "relative": "DATA/Characters/Sivir/Spells/SivirE.inibin",
+      "membership": {
+        "logical_path": "DATA/Characters/Sivir/Spells/SivirE.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Sivir\\Spells\\SivirE.inibin",
+          "bytes": 864,
+          "sha256": "5f1c2073b387d3768341fd0519bfe1e4a3ba283ce7c6054fae11475b3f267add",
+          "md5": "38c75b8e03d40d941f77befb9d4899ae"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Sivir/Spells/SivirE.inibin",
+            "release": "0.0.0.204",
+            "md5": "38c75b8e03d40d941f77befb9d4899ae",
+            "bytes": 864,
+            "compressed_bytes": 704,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Sivir/Spells/SivirE.inibin",
+            "release": "0.0.0.204",
+            "md5": "38c75b8e03d40d941f77befb9d4899ae",
+            "bytes": 864,
+            "compressed_bytes": 704,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_SivirE",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_SivirE",
+        "SpellData.CanCastWhileDisabled": null,
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.CastRange": "20.0000",
+        "SpellData.Effect1Level1Amount": 1.5,
+        "SpellData.Effect2Level1Amount": "80",
+        "SpellData.Effect3Level1Amount": 0
+      }
+    },
+    {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenQ.inibin",
+        "bytes": 1177,
+        "sha256": "97c650f7f55ca4474fa05724d76678802c379343545c80b82988b59ca1a0d656"
+      },
+      "relative": "DATA/Characters/Garen/Spells/GarenQ.inibin",
+      "membership": {
+        "logical_path": "DATA/Characters/Garen/Spells/GarenQ.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenQ.inibin",
+          "bytes": 1177,
+          "sha256": "97c650f7f55ca4474fa05724d76678802c379343545c80b82988b59ca1a0d656",
+          "md5": "4a5a1386e4e79564ce40e033fe28a63a"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Garen/Spells/GarenQ.inibin",
+            "release": "0.0.0.181",
+            "md5": "4a5a1386e4e79564ce40e033fe28a63a",
+            "bytes": 1177,
+            "compressed_bytes": 933,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Garen/Spells/GarenQ.inibin",
+            "release": "0.0.0.181",
+            "md5": "4a5a1386e4e79564ce40e033fe28a63a",
+            "bytes": 1177,
+            "compressed_bytes": 933,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_GarenQ",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_GarenQ",
+        "SpellData.CanCastWhileDisabled": "0",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": 1,
+        "SpellData.CastRange": "300.0000",
+        "SpellData.Effect1Level1Amount": "30.0000",
+        "SpellData.Effect2Level1Amount": "35.000",
+        "SpellData.Effect3Level1Amount": 1.5
+      }
+    },
+    {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\ChronoShift.inibin",
+        "bytes": 1760,
+        "sha256": "39721fb68bc3edbf981ed3a94e9446fcd7ff88e477601d4109866c247d6fe7bf"
+      },
+      "relative": "DATA/Spells/ChronoShift.inibin",
+      "membership": {
+        "logical_path": "DATA/Spells/ChronoShift.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\ChronoShift.inibin",
+          "bytes": 1760,
+          "sha256": "39721fb68bc3edbf981ed3a94e9446fcd7ff88e477601d4109866c247d6fe7bf",
+          "md5": "b7bf818a05a5e53a8eb5021ccd03b6e3"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/ChronoShift.inibin",
+            "release": "0.0.0.195",
+            "md5": "b7bf818a05a5e53a8eb5021ccd03b6e3",
+            "bytes": 1760,
+            "compressed_bytes": 1367,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/ChronoShift.inibin",
+            "release": "0.0.0.195",
+            "md5": "b7bf818a05a5e53a8eb5021ccd03b6e3",
+            "bytes": 1760,
+            "compressed_bytes": 1367,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_ChronoShift",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_ChronoShift",
+        "SpellData.CanCastWhileDisabled": "0",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.CastRange": "900.0000",
+        "SpellData.Effect1Level1Amount": "600.0000",
+        "SpellData.Effect2Level1Amount": "7.0000",
+        "SpellData.Effect3Level1Amount": 0
+      }
+    },
+    {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Elise\\Spells\\EliseR.inibin",
+        "bytes": 1771,
+        "sha256": "606e0b3a0b094d43ced79249dceb84aa35857e3a9c10d800621d73fd68466bc8"
+      },
+      "relative": "DATA/Characters/Elise/Spells/EliseR.inibin",
+      "membership": {
+        "logical_path": "DATA/Characters/Elise/Spells/EliseR.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Elise\\Spells\\EliseR.inibin",
+          "bytes": 1771,
+          "sha256": "606e0b3a0b094d43ced79249dceb84aa35857e3a9c10d800621d73fd68466bc8",
+          "md5": "bc85e0f09243fc617ddbbbf9ca4ad5a5"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Elise/Spells/EliseR.inibin",
+            "release": "0.0.0.172",
+            "md5": "bc85e0f09243fc617ddbbbf9ca4ad5a5",
+            "bytes": 1771,
+            "compressed_bytes": 1379,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Elise/Spells/EliseR.inibin",
+            "release": "0.0.0.172",
+            "md5": "bc85e0f09243fc617ddbbbf9ca4ad5a5",
+            "bytes": 1771,
+            "compressed_bytes": 1379,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_EliseR",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_EliseR",
+        "SpellData.CanCastWhileDisabled": "0",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.CastRange": "20.0000",
+        "SpellData.Effect1Level1Amount": "10.0000",
+        "SpellData.Effect2Level1Amount": "10.0000",
+        "SpellData.Effect3Level1Amount": "10.0000"
+      }
+    },
+    {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerBoost.inibin",
+        "bytes": 699,
+        "sha256": "282f624c129929a2fa5785673642d71cacb780c0b40ba41cd453d00539b1e59e"
+      },
+      "relative": "DATA/Spells/SummonerBoost.inibin",
+      "membership": {
+        "logical_path": "DATA/Spells/SummonerBoost.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerBoost.inibin",
+          "bytes": 699,
+          "sha256": "282f624c129929a2fa5785673642d71cacb780c0b40ba41cd453d00539b1e59e",
+          "md5": "854f2e1f37ded410b9b3d505b9e84a7a"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/SummonerBoost.inibin",
+            "release": "0.0.1.7",
+            "md5": "854f2e1f37ded410b9b3d505b9e84a7a",
+            "bytes": 699,
+            "compressed_bytes": 586,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/SummonerBoost.inibin",
+            "release": "0.0.1.7",
+            "md5": "854f2e1f37ded410b9b3d505b9e84a7a",
+            "bytes": 699,
+            "compressed_bytes": 586,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_SummonerBoost",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_SummonerBoost",
+        "SpellData.CanCastWhileDisabled": 1,
+        "SpellData.CantCancelWhileWindingUp": "0",
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.CastRange": "200.0000",
+        "SpellData.Effect1Level1Amount": null,
+        "SpellData.Effect2Level1Amount": null,
+        "SpellData.Effect3Level1Amount": null
+      }
+    },
+    {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\DeathTimes.inibin",
+        "bytes": 158,
+        "sha256": "d7a2e54334ebe553b6f2020e527f4a37c3771d0f92b363b238da9b3a891e12ed"
+      },
+      "relative": "LEVELS/Map10/DeathTimes.inibin",
+      "membership": {
+        "logical_path": "LEVELS/Map10/DeathTimes.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\DeathTimes.inibin",
+          "bytes": 158,
+          "sha256": "d7a2e54334ebe553b6f2020e527f4a37c3771d0f92b363b238da9b3a891e12ed",
+          "md5": "4418b8fbf75b26526e6d7ac15485fded"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "LEVELS/Map10/DeathTimes.inibin",
+            "release": "0.0.0.172",
+            "md5": "4418b8fbf75b26526e6d7ac15485fded",
+            "bytes": 158,
+            "compressed_bytes": 139,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "LEVELS/Map10/DeathTimes.inibin",
+            "release": "0.0.0.172",
+            "md5": "4418b8fbf75b26526e6d7ac15485fded",
+            "bytes": 158,
+            "compressed_bytes": 139,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "TimeDeadPerLevel.Level01": 16,
+        "TimeDeadPerLevel.Level02": 17,
+        "TimeDeadPerLevel.Level03": 18,
+        "TimeDeadPerLevel.Level04": 19,
+        "TimeDeadPerLevel.Level05": "20",
+        "TimeDeadPerLevel.Level06": 21,
+        "TimeDeadPerLevel.Level07": 22,
+        "TimeDeadPerLevel.Level08": 23,
+        "TimeDeadPerLevel.Level09": 25,
+        "TimeDeadPerLevel.Level10": 27,
+        "TimeDeadPerLevel.Level11": 29,
+        "TimeDeadPerLevel.Level12": 31,
+        "TimeDeadPerLevel.Level13": 32,
+        "TimeDeadPerLevel.Level14": 33,
+        "TimeDeadPerLevel.Level15": 34,
+        "TimeDeadPerLevel.Level16": 35,
+        "TimeDeadPerLevel.Level17": 36,
+        "TimeDeadPerLevel.Level18": 37,
+        "TimeDeadPerLevel.Level19": "40",
+        "TimeDeadPerLevel.Level20": "40",
+        "DeathTimeScaling.IncrementTime": "60",
+        "DeathTimeScaling.PercentCap": 1.5,
+        "DeathTimeScaling.PercentIncrease": 0.03999999910593033,
+        "DeathTimeScaling.StartTime": "1020"
+      }
+    }
+  ],
+  "native_text": {
+    "source": {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+      "bytes": 2220957,
+      "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+    },
+    "relative": "DATA/Menu/fontconfig_en_GB.txt",
+    "membership": {
+      "logical_path": "DATA/Menu/fontconfig_en_GB.txt",
+      "observed": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Menu\\fontconfig_en_GB.txt",
+        "bytes": 2220957,
+        "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3",
+        "md5": "a5cebda5ff38fc64ccd4eb5a79c126a8"
+      },
+      "status": "matches_selected_project_manifest",
+      "candidates": [
+        {
+          "project": "lol_game_client",
+          "project_release": "0.0.1.7",
+          "member_path": "DATA/Menu/fontconfig_en_GB.txt",
+          "release": "0.0.1.7",
+          "md5": "a5cebda5ff38fc64ccd4eb5a79c126a8",
+          "bytes": 2220957,
+          "compressed_bytes": 415553,
+          "bytes_match": true,
+          "md5_match": true
+        }
+      ],
+      "matching_members": [
+        {
+          "project": "lol_game_client",
+          "project_release": "0.0.1.7",
+          "member_path": "DATA/Menu/fontconfig_en_GB.txt",
+          "release": "0.0.1.7",
+          "md5": "a5cebda5ff38fc64ccd4eb5a79c126a8",
+          "bytes": 2220957,
+          "compressed_bytes": 415553,
+          "bytes_match": true,
+          "md5_match": true
+        }
+      ],
+      "effective_runtime_precedence_qualified": false
+    },
+    "entries": {
+      "invulnerable/Description": {
+        "key": "game_spell_description_JudicatorIntervention",
+        "text": "Shields Kayle or an ally for a short time, causing them to be immune to damage.",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "invulnerable/DynamicTooltip": {
+        "key": "game_spell_tooltip_JudicatorIntervention",
+        "text": "<titleLeft>Intervention (@Level@)</titleLeft><titleRight>[@Hotkey@]</titleRight><subtitleLeft>No Cost</subtitleLeft><subtitleRight>@Cooldown@ sec Cooldown</subtitleRight><mainText>Bathes Kayle's target in a holy light, rendering them immune to all damage for @Effect1Amount@ seconds.</mainText>",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "untargetable/Description": {
+        "key": "game_spell_description_FizzJump",
+        "text": "Fizz hops into the air, landing gracefully upon his spear and becoming untargetable. From this position, Fizz can either slam the ground or choose to jump again before smashing back down.",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "untargetable/DynamicTooltip": {
+        "key": "game_spell_tooltip_FizzJump",
+        "text": "<titleLeft>Playful / Trickster (@Level@)</titleLeft><titleRight>[@Hotkey@]</titleRight><subtitleLeft>@Cost@ Mana</subtitleLeft><subtitleRight>@Cooldown@ sec Cooldown</subtitleRight><mainText>Fizz hops toward your cursor onto his spear, becoming untargetable, and then slams the ground dealing @Effect1Amount@ <font color='#99FF99'>(+@CharAbilityPower@)</font> magic damage to nearby enemies and slowing them by @Effect2Amount@% for 2 seconds.<br><br>Reactivating this ability while Fizz is on top of his spear causes Fizz to jump again towards your cursor and deal @Effect1Amount@ <font color='#99FF99'>(+@CharAbilityPower@)</font> magic damage in a smaller area to enemies nearby, instead of slamming the ground.</mainText>",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "CC_immunity/Description": {
+        "key": "game_spell_description_OlafRagnarok",
+        "text": "Olaf temporarily becomes immune to disables.",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "CC_immunity/DynamicTooltip": {
+        "key": "game_spell_tooltip_OlafRagnarok",
+        "text": "<titleLeft>Ragnarok (@Level@)</titleLeft><titleRight>[@Hotkey@]</titleRight><subtitleLeft>No Cost</subtitleLeft><subtitleRight>@Cooldown@ sec Cooldown</subtitleRight><mainText><font color='#FF9900'>Passive: </font>Olaf gains @Effect1Amount@ Armor and @Effect1Amount@ Magic Resist.<br><br><font color='#FF9900'>Active: </font>Olaf removes all disables from himself and becomes immune to them for the next @Effect2Amount@ seconds. During this time, Olaf loses the passive portion of Ragnarok and gains @Effect3Amount@ Attack Damage.</mainText>",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "spell_shield/Description": {
+        "key": "game_spell_description_SivirE",
+        "text": "Creates a magical barrier that blocks a single enemy ability cast on Sivir. She receives Mana back if a spell is blocked.",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "spell_shield/DynamicTooltip": {
+        "key": "game_spell_tooltip_SivirE",
+        "text": "<titleLeft>Spell Shield (@Level@)</titleLeft><titleRight>[@Hotkey@]</titleRight><subtitleLeft>No Cost</subtitleLeft><subtitleRight>@Cooldown@ sec Cooldown</subtitleRight><mainText>Sivir creates a magical barrier for @Effect1Amount@ seconds that blocks the next incoming enemy ability.<br><br>If an ability is blocked by the shield, Sivir regains @Effect2Amount@ Mana.</mainText>",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "slow_cleanse/Description": {
+        "key": "game_spell_description_GarenQ",
+        "text": "Garen gains a burst of Movement Speed, breaking free of all slows affecting him and his next attack strikes a vital area of his foe, dealing bonus damage and silencing them.",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "slow_cleanse/DynamicTooltip": {
+        "key": "game_spell_tooltip_GarenQ",
+        "text": "<titleLeft>Decisive Strike (@Level@)</titleLeft><titleRight>[@Hotkey@]</titleRight><subtitleLeft>No Cost</subtitleLeft><subtitleRight>@Cooldown@ sec Cooldown</subtitleRight><mainText>Garen breaks free from all slows affecting him and gains @Effect2Amount@% Movement Speed for @Effect5Amount@ seconds.<br><br>His next basic attack within @Effect6Amount@ seconds deals @Effect1Amount@ <font color='#FF8C00'>(+@CharTotalPhysical@)</font> physical damage and silences his target for @Effect3Amount@ seconds.</mainText>",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "revival/Description": {
+        "key": "game_spell_description_ChronoShift",
+        "text": "Zilean places a protective time rune on an allied champion, teleporting the champion back in time if they take lethal damage.",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "revival/DynamicTooltip": {
+        "key": "game_spell_tooltip_ChronoShift",
+        "text": "<titleLeft>Chronoshift (@Level@)</titleLeft><titleRight>[@Hotkey@]</titleRight><subtitleLeft>@Cost@ Mana</subtitleLeft><subtitleRight>@Cooldown@ sec Cooldown</subtitleRight><mainText>Zilean marks himself or an allied champion with a protective time rune for @Effect2Amount@ seconds. If the target would take lethal damage, they are instead transported back in time, regaining @Effect1Amount@ <font color='#99FF99'>(+@CharAbilityPower@)</font> Health.</mainText>",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "transformation/Description": {
+        "key": "game_spell_description_EliseR",
+        "text": "Transforms into a menacing spider with new abilities. While in Spider Form, Elise deals bonus Magic Damage on attack and has increased Movement Speed.",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "transformation/DynamicTooltip": {
+        "key": "game_spell_tooltip_EliseR",
+        "text": "<titleLeft>Spider Form (@Level@)</titleLeft><titleRight>[@Hotkey@]</titleRight><subtitleLeft>No Cost</subtitleLeft><subtitleRight>@Cooldown@ sec Cooldown</subtitleRight><mainText>Elise transforms into a menacing spider, granting access to arachnid abilities.<br><br><font color='#FF9900' >Spider Form: </font>Elise deals @Effect1Amount@ <font color='#99FF99'>(+@CharAbilityPower@)</font> bonus Magic Damage per attack and gains @Effect3Amount@ Movement Speed.<br><br><font color='#FF3300' >Spiderlings: </font>Spiderlings deal @Effect1Amount@ <font color='#99FF99'>(+@CharAbilityPower2@)</font> damage and take @Effect4Amount@% reduced damage from multi-target abilities. Max @Effect5Amount@ Spiderlings.</mainText>",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "cleanse/Description": {
+        "key": "game_spell_description_SummonerBoost",
+        "text": "Removes all disables and summoner spell debuffs affecting your champion and lowers the duration of incoming disables by 65% for 3 seconds.",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "cleanse/DynamicTooltip": {
+        "key": "game_spell_tooltip_SummonerBoost",
+        "text": "<titleLeft>Cleanse</titleLeft><titleRight>[@Hotkey@]</titleRight><subtitleLeft>No Cost</subtitleLeft><subtitleRight>@f2@ second Cooldown</subtitleRight><mainText>Removes all disables and summoner spell debuffs affecting your champion and reduces the duration of disables by 65% for the next @f1@ seconds.</mainText>",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      }
+    }
+  },
+  "death_comparisons": [
+    {
+      "field": "TimeDeadPerLevel.Level01",
+      "native": 16,
+      "current": 16,
+      "numeric_equal": true,
+      "binary32_equal": true,
+      "native_binary32_hex": "00008041",
+      "current_binary32_hex": "00008041",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    },
+    {
+      "field": "TimeDeadPerLevel.Level02",
+      "native": 17,
+      "current": 17,
+      "numeric_equal": true,
+      "binary32_equal": true,
+      "native_binary32_hex": "00008841",
+      "current_binary32_hex": "00008841",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    },
+    {
+      "field": "TimeDeadPerLevel.Level03",
+      "native": 18,
+      "current": 18,
+      "numeric_equal": true,
+      "binary32_equal": true,
+      "native_binary32_hex": "00009041",
+      "current_binary32_hex": "00009041",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    },
+    {
+      "field": "TimeDeadPerLevel.Level04",
+      "native": 19,
+      "current": 19,
+      "numeric_equal": true,
+      "binary32_equal": true,
+      "native_binary32_hex": "00009841",
+      "current_binary32_hex": "00009841",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    },
+    {
+      "field": "TimeDeadPerLevel.Level05",
+      "native": "20",
+      "current": "20",
+      "numeric_equal": true,
+      "binary32_equal": true,
+      "native_binary32_hex": "0000a041",
+      "current_binary32_hex": "0000a041",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    },
+    {
+      "field": "TimeDeadPerLevel.Level06",
+      "native": 21,
+      "current": 21,
+      "numeric_equal": true,
+      "binary32_equal": true,
+      "native_binary32_hex": "0000a841",
+      "current_binary32_hex": "0000a841",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    },
+    {
+      "field": "TimeDeadPerLevel.Level07",
+      "native": 22,
+      "current": 22,
+      "numeric_equal": true,
+      "binary32_equal": true,
+      "native_binary32_hex": "0000b041",
+      "current_binary32_hex": "0000b041",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    },
+    {
+      "field": "TimeDeadPerLevel.Level08",
+      "native": 23,
+      "current": 23,
+      "numeric_equal": true,
+      "binary32_equal": true,
+      "native_binary32_hex": "0000b841",
+      "current_binary32_hex": "0000b841",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    },
+    {
+      "field": "TimeDeadPerLevel.Level09",
+      "native": 25,
+      "current": 25,
+      "numeric_equal": true,
+      "binary32_equal": true,
+      "native_binary32_hex": "0000c841",
+      "current_binary32_hex": "0000c841",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    },
+    {
+      "field": "TimeDeadPerLevel.Level10",
+      "native": 27,
+      "current": 27,
+      "numeric_equal": true,
+      "binary32_equal": true,
+      "native_binary32_hex": "0000d841",
+      "current_binary32_hex": "0000d841",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    },
+    {
+      "field": "TimeDeadPerLevel.Level11",
+      "native": 29,
+      "current": 29,
+      "numeric_equal": true,
+      "binary32_equal": true,
+      "native_binary32_hex": "0000e841",
+      "current_binary32_hex": "0000e841",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    },
+    {
+      "field": "TimeDeadPerLevel.Level12",
+      "native": 31,
+      "current": 31,
+      "numeric_equal": true,
+      "binary32_equal": true,
+      "native_binary32_hex": "0000f841",
+      "current_binary32_hex": "0000f841",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    },
+    {
+      "field": "TimeDeadPerLevel.Level13",
+      "native": 32,
+      "current": 32,
+      "numeric_equal": true,
+      "binary32_equal": true,
+      "native_binary32_hex": "00000042",
+      "current_binary32_hex": "00000042",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    },
+    {
+      "field": "TimeDeadPerLevel.Level14",
+      "native": 33,
+      "current": 33,
+      "numeric_equal": true,
+      "binary32_equal": true,
+      "native_binary32_hex": "00000442",
+      "current_binary32_hex": "00000442",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    },
+    {
+      "field": "TimeDeadPerLevel.Level15",
+      "native": 34,
+      "current": 34,
+      "numeric_equal": true,
+      "binary32_equal": true,
+      "native_binary32_hex": "00000842",
+      "current_binary32_hex": "00000842",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    },
+    {
+      "field": "TimeDeadPerLevel.Level16",
+      "native": 35,
+      "current": 35,
+      "numeric_equal": true,
+      "binary32_equal": true,
+      "native_binary32_hex": "00000c42",
+      "current_binary32_hex": "00000c42",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    },
+    {
+      "field": "TimeDeadPerLevel.Level17",
+      "native": 36,
+      "current": 36,
+      "numeric_equal": true,
+      "binary32_equal": true,
+      "native_binary32_hex": "00001042",
+      "current_binary32_hex": "00001042",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    },
+    {
+      "field": "TimeDeadPerLevel.Level18",
+      "native": 37,
+      "current": 37,
+      "numeric_equal": true,
+      "binary32_equal": true,
+      "native_binary32_hex": "00001442",
+      "current_binary32_hex": "00001442",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    },
+    {
+      "field": "TimeDeadPerLevel.Level19",
+      "native": "40",
+      "current": "40",
+      "numeric_equal": true,
+      "binary32_equal": true,
+      "native_binary32_hex": "00002042",
+      "current_binary32_hex": "00002042",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    },
+    {
+      "field": "TimeDeadPerLevel.Level20",
+      "native": "40",
+      "current": "40",
+      "numeric_equal": true,
+      "binary32_equal": true,
+      "native_binary32_hex": "00002042",
+      "current_binary32_hex": "00002042",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    },
+    {
+      "field": "DeathTimeScaling.IncrementTime",
+      "native": "60",
+      "current": "60",
+      "numeric_equal": true,
+      "binary32_equal": true,
+      "native_binary32_hex": "00007042",
+      "current_binary32_hex": "00007042",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    },
+    {
+      "field": "DeathTimeScaling.PercentCap",
+      "native": 1.5,
+      "current": 1.5,
+      "numeric_equal": true,
+      "binary32_equal": true,
+      "native_binary32_hex": "0000c03f",
+      "current_binary32_hex": "0000c03f",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    },
+    {
+      "field": "DeathTimeScaling.PercentIncrease",
+      "native": 0.03999999910593033,
+      "current": 0.04,
+      "numeric_equal": false,
+      "binary32_equal": true,
+      "native_binary32_hex": "0ad7233d",
+      "current_binary32_hex": "0ad7233d",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    },
+    {
+      "field": "DeathTimeScaling.StartTime",
+      "native": "1020",
+      "current": "1020",
+      "numeric_equal": true,
+      "binary32_equal": true,
+      "native_binary32_hex": "00007f44",
+      "current_binary32_hex": "00007f44",
+      "comparison_scope": "Authored scalar projected to binary32; not a runtime f64 or death-scaling parity claim"
+    }
+  ],
+  "selected_inputs": {
+    "invulnerable": {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\JudicatorIntervention.inibin",
+        "bytes": 1029,
+        "sha256": "ab6c2508e927a2b97b219c2fbc7a79634b36cf23f7a54d8141de0db5b79722e8"
+      },
+      "relative": "DATA/Spells/JudicatorIntervention.inibin",
+      "membership": {
+        "logical_path": "DATA/Spells/JudicatorIntervention.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\JudicatorIntervention.inibin",
+          "bytes": 1029,
+          "sha256": "ab6c2508e927a2b97b219c2fbc7a79634b36cf23f7a54d8141de0db5b79722e8",
+          "md5": "47cf6cb42da8d1bf5999f16a7168f46f"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/JudicatorIntervention.inibin",
+            "release": "0.0.1.2",
+            "md5": "47cf6cb42da8d1bf5999f16a7168f46f",
+            "bytes": 1029,
+            "compressed_bytes": 767,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/JudicatorIntervention.inibin",
+            "release": "0.0.1.2",
+            "md5": "47cf6cb42da8d1bf5999f16a7168f46f",
+            "bytes": 1029,
+            "compressed_bytes": 767,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_JudicatorIntervention",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_JudicatorIntervention",
+        "SpellData.CanCastWhileDisabled": "0",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.CastRange": "900.0000",
+        "SpellData.Effect1Level1Amount": "2.0000",
+        "SpellData.Effect2Level1Amount": null,
+        "SpellData.Effect3Level1Amount": null
+      },
+      "champion": "kayle",
+      "slot": 3,
+      "spell": "JudicatorIntervention"
+    },
+    "untargetable": {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\FizzJump.inibin",
+        "bytes": 1611,
+        "sha256": "f112dfcef6c929d2f18f42c90d09af51a5c7bfa9f9c5c012727ba7f5a99b1611"
+      },
+      "relative": "DATA/Spells/FizzJump.inibin",
+      "membership": {
+        "logical_path": "DATA/Spells/FizzJump.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\FizzJump.inibin",
+          "bytes": 1611,
+          "sha256": "f112dfcef6c929d2f18f42c90d09af51a5c7bfa9f9c5c012727ba7f5a99b1611",
+          "md5": "3a4b87cca96a3511601a585bd867033b"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/FizzJump.inibin",
+            "release": "0.0.0.243",
+            "md5": "3a4b87cca96a3511601a585bd867033b",
+            "bytes": 1611,
+            "compressed_bytes": 1232,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/FizzJump.inibin",
+            "release": "0.0.0.243",
+            "md5": "3a4b87cca96a3511601a585bd867033b",
+            "bytes": 1611,
+            "compressed_bytes": 1232,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_FizzJump",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_FizzJump",
+        "SpellData.CanCastWhileDisabled": "0",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.CastRange": "25000.0000",
+        "SpellData.Effect1Level1Amount": "70.0000",
+        "SpellData.Effect2Level1Amount": "40.0000",
+        "SpellData.Effect3Level1Amount": 0
+      },
+      "champion": "fizz",
+      "slot": 2,
+      "spell": "FizzJump"
+    },
+    "CC_immunity": {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Olaf\\Spells\\OlafRagnarok.inibin",
+        "bytes": 1199,
+        "sha256": "009ad1a4c361068abfda7a7a4e50b2d50e3acc292c977367fc2ae6c4599c4c38"
+      },
+      "relative": "DATA/Characters/Olaf/Spells/OlafRagnarok.inibin",
+      "membership": {
+        "logical_path": "DATA/Characters/Olaf/Spells/OlafRagnarok.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Olaf\\Spells\\OlafRagnarok.inibin",
+          "bytes": 1199,
+          "sha256": "009ad1a4c361068abfda7a7a4e50b2d50e3acc292c977367fc2ae6c4599c4c38",
+          "md5": "58026b6385bffc0e4b08e91e274b3194"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Olaf/Spells/OlafRagnarok.inibin",
+            "release": "0.0.1.2",
+            "md5": "58026b6385bffc0e4b08e91e274b3194",
+            "bytes": 1199,
+            "compressed_bytes": 914,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Olaf/Spells/OlafRagnarok.inibin",
+            "release": "0.0.1.2",
+            "md5": "58026b6385bffc0e4b08e91e274b3194",
+            "bytes": 1199,
+            "compressed_bytes": 914,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_OlafRagnarok",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_OlafRagnarok",
+        "SpellData.CanCastWhileDisabled": 1,
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.CastRange": "400.0000",
+        "SpellData.Effect1Level1Amount": "10.0000",
+        "SpellData.Effect2Level1Amount": "6.0000",
+        "SpellData.Effect3Level1Amount": "40.0000"
+      },
+      "champion": "olaf",
+      "slot": 3,
+      "spell": "OlafRagnarok"
+    },
+    "spell_shield": {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Sivir\\Spells\\SivirE.inibin",
+        "bytes": 864,
+        "sha256": "5f1c2073b387d3768341fd0519bfe1e4a3ba283ce7c6054fae11475b3f267add"
+      },
+      "relative": "DATA/Characters/Sivir/Spells/SivirE.inibin",
+      "membership": {
+        "logical_path": "DATA/Characters/Sivir/Spells/SivirE.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Sivir\\Spells\\SivirE.inibin",
+          "bytes": 864,
+          "sha256": "5f1c2073b387d3768341fd0519bfe1e4a3ba283ce7c6054fae11475b3f267add",
+          "md5": "38c75b8e03d40d941f77befb9d4899ae"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Sivir/Spells/SivirE.inibin",
+            "release": "0.0.0.204",
+            "md5": "38c75b8e03d40d941f77befb9d4899ae",
+            "bytes": 864,
+            "compressed_bytes": 704,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Sivir/Spells/SivirE.inibin",
+            "release": "0.0.0.204",
+            "md5": "38c75b8e03d40d941f77befb9d4899ae",
+            "bytes": 864,
+            "compressed_bytes": 704,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_SivirE",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_SivirE",
+        "SpellData.CanCastWhileDisabled": null,
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.CastRange": "20.0000",
+        "SpellData.Effect1Level1Amount": 1.5,
+        "SpellData.Effect2Level1Amount": "80",
+        "SpellData.Effect3Level1Amount": 0
+      },
+      "champion": "sivir",
+      "slot": 2,
+      "spell": "SivirE"
+    },
+    "slow_cleanse": {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenQ.inibin",
+        "bytes": 1177,
+        "sha256": "97c650f7f55ca4474fa05724d76678802c379343545c80b82988b59ca1a0d656"
+      },
+      "relative": "DATA/Characters/Garen/Spells/GarenQ.inibin",
+      "membership": {
+        "logical_path": "DATA/Characters/Garen/Spells/GarenQ.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenQ.inibin",
+          "bytes": 1177,
+          "sha256": "97c650f7f55ca4474fa05724d76678802c379343545c80b82988b59ca1a0d656",
+          "md5": "4a5a1386e4e79564ce40e033fe28a63a"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Garen/Spells/GarenQ.inibin",
+            "release": "0.0.0.181",
+            "md5": "4a5a1386e4e79564ce40e033fe28a63a",
+            "bytes": 1177,
+            "compressed_bytes": 933,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Garen/Spells/GarenQ.inibin",
+            "release": "0.0.0.181",
+            "md5": "4a5a1386e4e79564ce40e033fe28a63a",
+            "bytes": 1177,
+            "compressed_bytes": 933,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_GarenQ",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_GarenQ",
+        "SpellData.CanCastWhileDisabled": "0",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": 1,
+        "SpellData.CastRange": "300.0000",
+        "SpellData.Effect1Level1Amount": "30.0000",
+        "SpellData.Effect2Level1Amount": "35.000",
+        "SpellData.Effect3Level1Amount": 1.5
+      },
+      "champion": "garen",
+      "slot": 0,
+      "spell": "GarenQ"
+    },
+    "revival": {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\ChronoShift.inibin",
+        "bytes": 1760,
+        "sha256": "39721fb68bc3edbf981ed3a94e9446fcd7ff88e477601d4109866c247d6fe7bf"
+      },
+      "relative": "DATA/Spells/ChronoShift.inibin",
+      "membership": {
+        "logical_path": "DATA/Spells/ChronoShift.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\ChronoShift.inibin",
+          "bytes": 1760,
+          "sha256": "39721fb68bc3edbf981ed3a94e9446fcd7ff88e477601d4109866c247d6fe7bf",
+          "md5": "b7bf818a05a5e53a8eb5021ccd03b6e3"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/ChronoShift.inibin",
+            "release": "0.0.0.195",
+            "md5": "b7bf818a05a5e53a8eb5021ccd03b6e3",
+            "bytes": 1760,
+            "compressed_bytes": 1367,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/ChronoShift.inibin",
+            "release": "0.0.0.195",
+            "md5": "b7bf818a05a5e53a8eb5021ccd03b6e3",
+            "bytes": 1760,
+            "compressed_bytes": 1367,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_ChronoShift",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_ChronoShift",
+        "SpellData.CanCastWhileDisabled": "0",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.CastRange": "900.0000",
+        "SpellData.Effect1Level1Amount": "600.0000",
+        "SpellData.Effect2Level1Amount": "7.0000",
+        "SpellData.Effect3Level1Amount": 0
+      },
+      "champion": "zilean",
+      "slot": 3,
+      "spell": "ChronoShift"
+    },
+    "transformation": {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Elise\\Spells\\EliseR.inibin",
+        "bytes": 1771,
+        "sha256": "606e0b3a0b094d43ced79249dceb84aa35857e3a9c10d800621d73fd68466bc8"
+      },
+      "relative": "DATA/Characters/Elise/Spells/EliseR.inibin",
+      "membership": {
+        "logical_path": "DATA/Characters/Elise/Spells/EliseR.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Elise\\Spells\\EliseR.inibin",
+          "bytes": 1771,
+          "sha256": "606e0b3a0b094d43ced79249dceb84aa35857e3a9c10d800621d73fd68466bc8",
+          "md5": "bc85e0f09243fc617ddbbbf9ca4ad5a5"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Elise/Spells/EliseR.inibin",
+            "release": "0.0.0.172",
+            "md5": "bc85e0f09243fc617ddbbbf9ca4ad5a5",
+            "bytes": 1771,
+            "compressed_bytes": 1379,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Elise/Spells/EliseR.inibin",
+            "release": "0.0.0.172",
+            "md5": "bc85e0f09243fc617ddbbbf9ca4ad5a5",
+            "bytes": 1771,
+            "compressed_bytes": 1379,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_EliseR",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_EliseR",
+        "SpellData.CanCastWhileDisabled": "0",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.CastRange": "20.0000",
+        "SpellData.Effect1Level1Amount": "10.0000",
+        "SpellData.Effect2Level1Amount": "10.0000",
+        "SpellData.Effect3Level1Amount": "10.0000"
+      },
+      "champion": "elise",
+      "slot": 3,
+      "spell": "EliseR"
+    },
+    "cleanse": {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerBoost.inibin",
+        "bytes": 699,
+        "sha256": "282f624c129929a2fa5785673642d71cacb780c0b40ba41cd453d00539b1e59e"
+      },
+      "relative": "DATA/Spells/SummonerBoost.inibin",
+      "membership": {
+        "logical_path": "DATA/Spells/SummonerBoost.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerBoost.inibin",
+          "bytes": 699,
+          "sha256": "282f624c129929a2fa5785673642d71cacb780c0b40ba41cd453d00539b1e59e",
+          "md5": "854f2e1f37ded410b9b3d505b9e84a7a"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/SummonerBoost.inibin",
+            "release": "0.0.1.7",
+            "md5": "854f2e1f37ded410b9b3d505b9e84a7a",
+            "bytes": 699,
+            "compressed_bytes": 586,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/SummonerBoost.inibin",
+            "release": "0.0.1.7",
+            "md5": "854f2e1f37ded410b9b3d505b9e84a7a",
+            "bytes": 699,
+            "compressed_bytes": 586,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_SummonerBoost",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_SummonerBoost",
+        "SpellData.CanCastWhileDisabled": 1,
+        "SpellData.CantCancelWhileWindingUp": "0",
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.CastRange": "200.0000",
+        "SpellData.Effect1Level1Amount": null,
+        "SpellData.Effect2Level1Amount": null,
+        "SpellData.Effect3Level1Amount": null
+      }
+    }
+  },
+  "source_identities": [
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\JudicatorIntervention.inibin",
+      "bytes": 1029,
+      "sha256": "ab6c2508e927a2b97b219c2fbc7a79634b36cf23f7a54d8141de0db5b79722e8"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\FizzJump.inibin",
+      "bytes": 1611,
+      "sha256": "f112dfcef6c929d2f18f42c90d09af51a5c7bfa9f9c5c012727ba7f5a99b1611"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Olaf\\Spells\\OlafRagnarok.inibin",
+      "bytes": 1199,
+      "sha256": "009ad1a4c361068abfda7a7a4e50b2d50e3acc292c977367fc2ae6c4599c4c38"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Sivir\\Spells\\SivirE.inibin",
+      "bytes": 864,
+      "sha256": "5f1c2073b387d3768341fd0519bfe1e4a3ba283ce7c6054fae11475b3f267add"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenQ.inibin",
+      "bytes": 1177,
+      "sha256": "97c650f7f55ca4474fa05724d76678802c379343545c80b82988b59ca1a0d656"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\ChronoShift.inibin",
+      "bytes": 1760,
+      "sha256": "39721fb68bc3edbf981ed3a94e9446fcd7ff88e477601d4109866c247d6fe7bf"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Elise\\Spells\\EliseR.inibin",
+      "bytes": 1771,
+      "sha256": "606e0b3a0b094d43ced79249dceb84aa35857e3a9c10d800621d73fd68466bc8"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerBoost.inibin",
+      "bytes": 699,
+      "sha256": "282f624c129929a2fa5785673642d71cacb780c0b40ba41cd453d00539b1e59e"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\DeathTimes.inibin",
+      "bytes": 158,
+      "sha256": "d7a2e54334ebe553b6f2020e527f4a37c3771d0f92b363b238da9b3a891e12ed"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+      "bytes": 2220957,
+      "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\spells.rs",
+      "bytes": 11510,
+      "sha256": "26fc5175f41325935b7e7ad91d6aba72cf4560b1be97f69f69d70e0dfe0680a5"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\damage.rs",
+      "bytes": 14316,
+      "sha256": "0d579a7b4e7a3941df7e70f78d62029c9f34df0c345749c2adc17153f9624387"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\world.rs",
+      "bytes": 32878,
+      "sha256": "407c75f77e8e4e06e6bea352f77ee3b4f90eb3357dd74cddc05a22e219651c54"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\annie_w.rs",
+      "bytes": 13293,
+      "sha256": "b15cfe63f6bd51560917af5e6270ebc4b2b7d73fd63fd5fc5061145de9f74553"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\attacks.rs",
+      "bytes": 24623,
+      "sha256": "f6532eebe422900006c2af22a3fab2f0618f38938f8e24fc012fba340f1325bc"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\stuns.rs",
+      "bytes": 7937,
+      "sha256": "d139282e8265d52a90319b5da49a6f147faf2a0d678f32a9d8099111bf85d3c6"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\shields.rs",
+      "bytes": 4875,
+      "sha256": "e26cf459029a0ae771fcaf0dcadf684f9898aec20fec5d6a21371515d9d348cf"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\summoners.rs",
+      "bytes": 5147,
+      "sha256": "7af19297380715624cb37f70ab62dfa9a65f7c8665e49b7699ee495d7a0d56a3"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\summoner_exhaust.rs",
+      "bytes": 10853,
+      "sha256": "d7d790a218b22053e22d60803e2d5090c119211c05c84147b6f2827e5e9865ed"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\slows.rs",
+      "bytes": 8722,
+      "sha256": "bfeaf0395052ef4a1ef20d507cfc37eabe7185baaefbc03fe072e161dfe4bf24"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\lifecycle.rs",
+      "bytes": 6109,
+      "sha256": "06be09d79a6b96cbe5822a5f6e91d85013f82c2ed6e2135671b4441d0a705f30"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\server\\src\\main.rs",
+      "bytes": 13628,
+      "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\server\\src\\reconnect.rs",
+      "bytes": 18879,
+      "sha256": "60fe14f416cf800688b0353d5499738302bb1ad4e40e09a3b0eb6549a90328e1"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+      "bytes": 33360,
+      "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "bytes": 52808,
+      "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\native_spells_420.json",
+      "bytes": 2710444,
+      "sha256": "0cae6f5c167aa852e8f86e7f3298d7c797727d5cc92616dcb856ac15c8af5d14"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\death_times_map10.json",
+      "bytes": 1014,
+      "sha256": "08cccad8bc9cfcec4c5e40139e103e1a4045c8040eddb08eb3684054fb7f2e60"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\champion_resources.json",
+      "bytes": 23018,
+      "sha256": "364f3e74285c6339c54db16a6e46cb433f0e72f88d39e825900ebf41746ef285"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\champion_spawns_map10.json",
+      "bytes": 503,
+      "sha256": "c11e94e16ff18e1b1c490b9c63ae3530951d78d22ec816e5dc86bf28c5e85b5d"
+    },
+    {
+      "path": "E:\\OpenLeague\\docs\\reference_client_4_20.json",
+      "bytes": 3684,
+      "sha256": "efdf40252574a98f439829d43c6b29606d3c12d631c4a64c89ef15637e859d02"
+    },
+    {
+      "path": "E:\\OpenLeague\\tools\\project-plan\\reference_inibin.py",
+      "bytes": 1848,
+      "sha256": "8649d9775feaa9a8a549e07e8a8b6f57a4d4bf91e68841094fa5ccec383a5da5"
+    },
+    {
+      "path": "E:\\OpenLeague\\tools\\project-plan\\rads_reference_membership.py",
+      "bytes": 15059,
+      "sha256": "533002c4d63f749a0658a1ddf00175c2a294aead63dba7a69a55895731a73de6"
+    },
+    {
+      "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision74\\collect_lifecycle_links.py",
+      "bytes": 12622,
+      "sha256": "d29646e352bec907ef68a4879e5cc6719f70b3200a2c9fc4f3b24a8a550ac9c4"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\recovered_rads_manifests.json",
+      "bytes": 3216,
+      "sha256": "8dfd48645040526d5a3e7b91cb9438418078f2d617c236d9834a31dfdcb5d2da"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\solutionmanifest",
+      "bytes": 1792,
+      "sha256": "4926fe4cfdb8641c918c5ad69b891a9c7e48ba37939e4258e2b4b181accc9243"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\configurationmanifest",
+      "bytes": 88,
+      "sha256": "f601219e81fe20e4c805c5faaa7af664c0c6adcdd43d591c7a4f22ebbd7601f3"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\rads_manifests\\lol_game_client\\releases\\0.0.1.7\\releasemanifest",
+      "bytes": 4905302,
+      "sha256": "88b09959b24053c422e209343083d549cdfe6380828b583710d7f9343c1aba09"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\rads_manifests\\lol_game_client_en_gb\\releases\\0.0.0.235\\releasemanifest",
+      "bytes": 49251,
+      "sha256": "c06c83f829dd18cf587098529aa83459c8356dc2fe5ee82d7203c7a9ee3662f0"
+    },
+    {
+      "role": "recovery_receipt",
+      "path": "E:\\mapslol3v3\\loading_rads_resource_search\\legacy_patch\\recovery_receipt.json",
+      "bytes": 10959,
+      "sha256": "2496761ccbbbbeb367dbe88ae001c4eb4010598d1365234c9e20d3df3a6d7549"
+    },
+    {
+      "role": "review_manifest",
+      "path": "E:\\mapslol3v3\\loading_rads_legacy_recovery_review\\manifest.json",
+      "bytes": 1779,
+      "sha256": "5b08736040b739b04e3db1a4ce7de124bc343df5d78f76bd188a898ebdd6c7af"
+    },
+    {
+      "role": "recovery_package_manifest",
+      "path": "E:\\mapslol3v3\\loading_rads_resource_search\\legacy_patch\\recovery_package_manifest.json",
+      "bytes": 99218,
+      "sha256": "4cadb6b02ea6f8208e8ba6a031774b27401918f054ee211e674e57af20d30125"
+    }
+  ],
+  "local_disconnect_contract": {
+    "legacy": "remove_actor_after_30s",
+    "resumable": "detach_endpoint_keep_actor_while_open",
+    "retirement": "remove_actor_on_leave_abandon_or_owner_drain",
+    "control_clock": "simulation_ticks_while_unpaused",
+    "silence_clock": "host_elapsed_time",
+    "original_server_policy_qualified": false
+  },
+  "native_death_scaling_consumed_by_baseline": false,
+  "global_feature_absence_proven": false,
+  "current_application_executed": false,
+  "native_binary_executed": false,
+  "full_task_scopes_closed": 0,
+  "questions_closed": 0
+}

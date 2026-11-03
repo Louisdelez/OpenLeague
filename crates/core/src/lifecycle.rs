@@ -46,15 +46,13 @@ impl Simulation {
                 .unwrap()
         });
         for id in due {
+            self.clear_trundle_r_for(id);
             let max_mana = self.stats(id).max_mana;
             let p = &self.players[&id];
             let seed: Point =
                 serde_json::from_value(spawns[p.team as usize]["point"].clone()).unwrap();
-            let Some(position) = self
-                .navigation
-                .ground(seed)
-                .map(|_| seed)
-                .or_else(|| self.navigation.nearest_walkable(seed))
+            let Some(position) = ally_occupancy::placement(
+                self, &p.champion, p.team, seed, Some(id))
             else {
                 continue;
             };
@@ -64,6 +62,12 @@ impl Simulation {
                     || s.eq_ignore_ascii_case("Wind")
             });
             self.cancel_attack_presentation(id, attack_presentation::CancelReason::Respawn);
+            self.clear_ezreal_w_target(id);
+            self.clear_ezreal_e_pending(id);
+            self.clear_ezreal_e_target(id);
+            self.clear_ezreal_r_pending(id);
+            self.remove_ezreal_passive_owner(id);
+            self.death_recap.respawn(self.session, id);
             let p = self.players.get_mut(&id).unwrap();
             p.position = position;
             p.facing = None; // Native initial spawn direction is not qualified.
@@ -81,6 +85,7 @@ impl Simulation {
             p.stuns.clear();
             p.next_repath = 0;
             p.next_attack = self.tick;
+            self.ally_occupancy.remove_actor(id);
         }
     }
 }

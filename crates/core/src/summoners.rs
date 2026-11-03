@@ -57,6 +57,7 @@ impl Simulation {
             return Err("invalid summoner slot".into());
         }
         let p = self.players.get(&id).ok_or("unknown player")?;
+        if trundle_e::champion_forced(p,self.tick) {return Err("champion in forced movement".into());}
         if p.health <= 0. {
             return Err("champion dead".into());
         }

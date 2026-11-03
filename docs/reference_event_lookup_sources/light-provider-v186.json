@@ -1,0 +1,103 @@
+{
+  "tasks": [
+    "EMPTY-063-CLASSIFY",
+    "EMPTY-063-RESOLVE"
+  ],
+  "binary": {
+    "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\League of Legends.exe",
+    "bytes": 15973880,
+    "sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862"
+  },
+  "qualification": {
+    "cache_cases": 4,
+    "wrapper_cases": 2,
+    "static_regions": 7
+  },
+  "evidence": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision184\\LIGHT_PROVIDER_CACHE.json",
+      "bytes": 30093,
+      "sha256": "8639649c8381a0c5515ac8c4c18a1ae43a1dabdb4d7f8026c734f936789d85a5"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision185\\LIGHT_PROVIDER_PREDICATE.json",
+      "bytes": 31550,
+      "sha256": "05f4a8d59df16d5cbaf48894724287f72c365c501a8268ce2fa3a61db958f090"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\map_resource_lookup_contract.json",
+      "bytes": 8050,
+      "sha256": "7be4bec9b63c64b82beb30d974006ef170018ad427b872f5e8f23a4b8af61be5"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\map_resource_provider.rs",
+      "bytes": 19449,
+      "sha256": "4c81457bf6b5d7122f0d0e0cee228d3bd9c92fe1de72ab6d5512f6569955ca74"
+    }
+  ],
+  "associations": [
+    {
+      "task_id": "EMPTY-063-CLASSIFY",
+      "family": "EMPTY-063",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\map11\\Light.dat",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "binary": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\League of Legends.exe",
+        "bytes": 15973880,
+        "sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862"
+      },
+      "selector": "575460→90AEF0→573DD0→867DF0;90ADE0→90A1B0/vtable10D6380/+28=90A4A0→905D80;4cache cases and2wrapper cases, declared synthetic inputs and delegated-result adapter",
+      "current_consumer_role": "Resource-name contains/resolve methods only; no Light_Env parser or rendering consumer claimed."
+    },
+    {
+      "task_id": "EMPTY-063-RESOLVE",
+      "family": "EMPTY-063",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\map11\\Light.dat",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "binary": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\League of Legends.exe",
+        "bytes": 15973880,
+        "sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862"
+      },
+      "selector": "575460→90AEF0→573DD0→867DF0;90ADE0→90A1B0/vtable10D6380/+28=90A4A0→905D80;4cache cases and2wrapper cases, declared synthetic inputs and delegated-result adapter",
+      "current_consumer_role": "Resource-name contains/resolve methods only; no Light_Env parser or rendering consumer claimed."
+    }
+  ],
+  "limits": [
+    "Wrapper arguments and return verified with explicit delegated-result adapter;905D80 not freshly executed.",
+    "Factory/constructor/predicate are static complete regions; historical table population remains open.",
+    "Existing Rust consumer is present; this research does not prove Light_Env rendering integration.",
+    "Caller prefixes statically decoded, not executed.",
+    "Cache function executed on explicit synthetic tree records; no historical manager or map selection claimed.",
+    "Miss stops before factory call; factory constructor, concrete vtable+28 and full lighting remain unqualified."
+  ],
+  "current_consumer": {
+    "path": "F:\\OpenLeague\\crates\\client\\src\\map_resource_provider.rs",
+    "bytes": 19449,
+    "sha256": "4c81457bf6b5d7122f0d0e0cee228d3bd9c92fe1de72ab6d5512f6569955ca74",
+    "anchors": [
+      {
+        "line": 56,
+        "text": "pub fn resolve(&self,key:&str)->Result<Option<&str>,&'static str> {"
+      },
+      {
+        "line": 61,
+        "text": "pub fn contains(&self,key:&str)->Result<bool,&'static str> {"
+      },
+      {
+        "line": 90,
+        "text": "pub fn resolve(&self,key:&str)->Result<Option<&str>,&'static str> {"
+      },
+      {
+        "line": 97,
+        "text": "pub fn contains(&self,key:&str)->Result<bool,&'static str> {"
+      }
+    ]
+  }
+}

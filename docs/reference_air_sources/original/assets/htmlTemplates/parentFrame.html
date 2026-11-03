@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+	<head>
+		<title></title>
+		<style>
+			body { 
+				background-color: #000000;
+				font-family: Georgia, "Times New Roman", Times, serif; font-weight: bold; color: #ffffff;
+			}
+		</style>
+		<script type="text/javascript" src="app:/assets/htmlTemplates/AIRAliases.js"></script> 
+		<script>
+			// http://help.adobe.com/en_US/AIR/1.5/devappshtml/WS5b3ccc516d4fbf351e63e3d118666ade46-7f11.html
+		
+			var childInterface;
+			
+			var parentInterface = {}; 
+			
+			function handleDomInit(){ 
+			    document.getElementById("sandbox").contentWindow.parentSandboxBridge = parentInterface; 
+				air.trace("handleDomInit finished");
+			}
+				
+			function handleOnLoad() {
+				childInterface = document.getElementById("sandbox").contentWindow.childSandboxBridge;
+				childInterface.childSetupBridge();
+				air.trace("handleOnLoad finished");
+			} 
+			
+			function navigate(location) {
+				var sandboxRoot;
+				var host = parseHost(location);
+				sandboxRoot = host + "img/"
+				
+				var sandbox = document.getElementById("sandbox");
+				
+				air.trace("navigate, sandboxRoot: " + sandboxRoot + " location: " +  location);
+				sandbox.setAttribute("sandboxRoot", sandboxRoot);
+				sandbox.setAttribute("src", location);
+			}
+			
+			function handleCdpEntitlement(data) {
+				childInterface.markCdpPurchase(data);
+			}
+
+			function handleCdpBalance(data) {
+				childInterface.updateCdpBalance(data);
+			}
+			
+			function parseHost(url) {
+				if (!url) return "";
+				var host;
+				var index = url.indexOf("?");
+				if (index == -1) {
+					host = url;
+				} else {
+					host = url.substring(0, index);
+				}
+				index = host.indexOf("/", 9);
+				if (index != -1) {
+					host = host.substring(0, index + 1);
+				}
+				if (host.charAt(host.length - 1) != "/")  host += "/";
+				return host;
+			}
+	
+		</script>
+		
+		<style type="text/css">
+			body {
+				text-align: center;
+			}
+			
+			body > iframe {
+				border: none;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<iframe id="sandbox" documentRoot="app:/assets/storeImages/" ondominitialize="handleDomInit()" onload="handleOnLoad()" width="1262" height="670">
+	</body>
+</html>

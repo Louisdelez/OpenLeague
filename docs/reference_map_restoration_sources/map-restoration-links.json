@@ -1,0 +1,876 @@
+{
+  "schema": "openleague_partial_map_restoration_links/v1",
+  "utc": "2026-10-22T10:52:27.887184+00:00",
+  "source_observation": {
+    "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision62\\map-restoration-link-inputs.json",
+    "bytes": 85024,
+    "sha256": "19d8e640f87d48d400466eed7b6e0f005aed3107867a381eedc9f47ff4eb47e5"
+  },
+  "qualification": {
+    "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision62\\map-restoration-link-qualification.json",
+    "bytes": 4482,
+    "sha256": "97b81deb66dd55c141d7552b9f389b5dbccffe558ef191719c1137fa91dbacba"
+  },
+  "links": [
+    {
+      "task_id": "SYS-10.1-01",
+      "anchors": [
+        {
+          "path": "crates/client/src/main.rs",
+          "line": 909,
+          "needle": "commands.insert_resource(MapHandle(assets.load(\"maps/twisted_treeline.glb\")))",
+          "role": "ordinary_map_asset_path_consumer",
+          "scope": "Existing loader selects the installed GLB; source linkage only. Blender-to-game re-export, startup digest enforcement and visual equivalence are not established.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\client\\src\\main.rs",
+            "bytes": 141376,
+            "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+          }
+        },
+        {
+          "path": "tools/create_map_blender_source.py",
+          "line": 6,
+          "needle": "bpy.ops.import_scene.gltf(filepath=str(source))",
+          "role": "editable_map_GLB_import_consumer",
+          "scope": "Actual producer imports installed GLB into Blender; no reverse export proved.",
+          "source": {
+            "path": "E:\\OpenLeague\\tools\\create_map_blender_source.py",
+            "bytes": 2697,
+            "sha256": "311988552fb38e3243529a7db8ea5a395cd3780b3efa3c29a0b4f0f973c39937"
+          }
+        }
+      ],
+      "remaining_question": "Establish the intended direction of editing/export and qualify any .blend-to-installed-GLB producer; imported scene metadata alone proves GLB-to-Blender only.",
+      "full_feature_scope_qualified": false,
+      "native_inputs": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\room.nvr",
+          "bytes": 60132968,
+          "sha256": "89e873ec32356312b53628c9773c803b0e6e864a206ac2aafc6a584c8ae27082"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\Textures\\tile_lanetile_crackedstone_01.dds",
+          "bytes": 262272,
+          "sha256": "345454fdfe05ce075c99d387657443a40fe0726331330be6998732cd65b530bf"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\Textures\\tile_roots_nastycurling_01.dds",
+          "bytes": 262272,
+          "sha256": "063cfc7e88f52e5dffe5b7cc7198313df85b9bc937f0c7331bb57807e431db8e"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\Textures\\tile_mud_cracked_01.dds",
+          "bytes": 262272,
+          "sha256": "a5312f9b39400f100880f7e8eb83d7ab92ed64bc29c102a97746c9f787ecc6a6"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\Textures\\tile_lanetile_crackedrubble_01.dds",
+          "bytes": 131200,
+          "sha256": "80b717d6ae9c51b868c59939ff438f3688f8cbd7589758fe789b4aa748db683a"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\terrainHeightScale.dds",
+          "bytes": 16777344,
+          "sha256": "b84ec5b7a58fec4bb2951a23a1c16ca474f955c88e65591fb99d3d5b5bab4e6b"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\compositeColorMap.dds",
+          "bytes": 4194432,
+          "sha256": "e7955c18b97cefd85e0e85fd89cd758a0d6457cc0c4ca1c0d1bcb0e35e6fc507"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shaders\\HLSL\\HeightBlending\\HeightBlending.hls",
+          "bytes": 1321,
+          "sha256": "7b9354f7ed5e23b9259bae1883c02d7a8ad91f694ecbac5c0001721aa00812fb"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shaders\\HLSL\\Environment\\LIT_PS.ps_2_0",
+          "bytes": 13310,
+          "sha256": "d59435b2f2255afd73672da397f464b890923bfdd9b0e9ffacccb01c7b4395f3"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shaders\\HLSL\\Environment\\LIT_VS.vs_2_0",
+          "bytes": 7825,
+          "sha256": "b7631de1e9c88a91111bf566f4097403a5de2e2bb173ebd6145df6d6c1eb01e5"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\terrain.inibin",
+          "bytes": 366,
+          "sha256": "1a82e51b6be12e6091fb50859b93e8ac13de86f4e38e162570388d88ede9fba1"
+        }
+      ],
+      "local_contract_kind": null
+    },
+    {
+      "task_id": "SYS-10.1-02",
+      "anchors": [
+        {
+          "path": "tools/download_assets.py",
+          "line": 44,
+          "needle": "if digest(target) == row['sha256']:",
+          "role": "distribution_existing_asset_digest_consumer",
+          "scope": "Optional restoration checks bytes; not a client startup integrity guard.",
+          "source": {
+            "path": "E:\\OpenLeague\\tools\\download_assets.py",
+            "bytes": 5228,
+            "sha256": "6d2519fda28f5d8a34a78693faa7526cc4855eb3109a87e99e89ce47df35bb9c"
+          }
+        },
+        {
+          "path": "tools/download_assets.py",
+          "line": 59,
+          "needle": "if h.hexdigest() != row['sha256']:",
+          "role": "distribution_extracted_asset_digest_consumer",
+          "scope": "Actual restore() refuses extracted checksum mismatch before atomic replacement.",
+          "source": {
+            "path": "E:\\OpenLeague\\tools\\download_assets.py",
+            "bytes": 5228,
+            "sha256": "6d2519fda28f5d8a34a78693faa7526cc4855eb3109a87e99e89ce47df35bb9c"
+          }
+        }
+      ],
+      "remaining_question": "Installed GLB SHA matches the exact distribution member. Cached ZIP bytes/member extraction, clean install and remote availability are not qualified here.",
+      "full_feature_scope_qualified": false,
+      "native_inputs": [],
+      "local_contract_kind": "Distribution and anti-stale-export policy is local; no historical native build rule invented."
+    },
+    {
+      "task_id": "SYS-10.1-03",
+      "anchors": [
+        {
+          "path": "crates/client/src/main.rs",
+          "line": 909,
+          "needle": "commands.insert_resource(MapHandle(assets.load(\"maps/twisted_treeline.glb\")))",
+          "role": "ordinary_map_asset_path_consumer",
+          "scope": "Existing loader selects the installed GLB; source linkage only. Blender-to-game re-export, startup digest enforcement and visual equivalence are not established.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\client\\src\\main.rs",
+            "bytes": 141376,
+            "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+          }
+        },
+        {
+          "path": "tools/download_assets.py",
+          "line": 44,
+          "needle": "if digest(target) == row['sha256']:",
+          "role": "distribution_existing_asset_digest_consumer",
+          "scope": "Optional restoration checks bytes; not a client startup integrity guard.",
+          "source": {
+            "path": "E:\\OpenLeague\\tools\\download_assets.py",
+            "bytes": 5228,
+            "sha256": "6d2519fda28f5d8a34a78693faa7526cc4855eb3109a87e99e89ce47df35bb9c"
+          }
+        },
+        {
+          "path": "tools/download_assets.py",
+          "line": 59,
+          "needle": "if h.hexdigest() != row['sha256']:",
+          "role": "distribution_extracted_asset_digest_consumer",
+          "scope": "Actual restore() refuses extracted checksum mismatch before atomic replacement.",
+          "source": {
+            "path": "E:\\OpenLeague\\tools\\download_assets.py",
+            "bytes": 5228,
+            "sha256": "6d2519fda28f5d8a34a78693faa7526cc4855eb3109a87e99e89ce47df35bb9c"
+          }
+        }
+      ],
+      "remaining_question": "Locate or implement and qualify startup refusal of a stale replacement at the same asset path; optional restore() checks and a constant path do not prove this guard.",
+      "full_feature_scope_qualified": false,
+      "native_inputs": [],
+      "local_contract_kind": "Distribution and anti-stale-export policy is local; no historical native build rule invented."
+    },
+    {
+      "task_id": "SYS-10.1-04",
+      "anchors": [
+        {
+          "path": "crates/client/src/terrain_material.rs",
+          "line": 171,
+          "needle": "for entry in data[\"terrain_materials\"].as_array().unwrap()",
+          "role": "ordinary_terrain_layer_configuration_consumer",
+          "scope": "Loads four authored layer paths for each material; independent from embedded GLB composite comparison.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+            "bytes": 15628,
+            "sha256": "bebddf49191627dc78c52286b69d8086a517e1d6eeac647eca32a190e8b5faa1"
+          }
+        },
+        {
+          "path": "crates/client/src/terrain_material.rs",
+          "line": 218,
+          "needle": ".remove::<MeshMaterial3d<StandardMaterial>>()",
+          "role": "ordinary_terrain_material_replacement_consumer",
+          "scope": "Name-matched material replaces StandardMaterial after loading; all scene/shader/raster fidelity not qualified.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+            "bytes": 15628,
+            "sha256": "bebddf49191627dc78c52286b69d8086a517e1d6eeac647eca32a190e8b5faa1"
+          }
+        },
+        {
+          "path": "tools/audit_current_map_textures.py",
+          "line": 38,
+          "needle": "if not entry['pixels_equal']:",
+          "role": "map_diffuse_difference_diagnostic_consumer",
+          "scope": "Current diagnostic lists differences; stable named-anomaly workflow remains unqualified.",
+          "source": {
+            "path": "E:\\OpenLeague\\tools\\audit_current_map_textures.py",
+            "bytes": 5063,
+            "sha256": "f6f94d85c0decc33a06c985e243009a48d07cdfac8584a2ba34438758afbf51e"
+          }
+        },
+        {
+          "path": "crates/client/src/main.rs",
+          "line": 812,
+          "needle": "terrain_material::setup,",
+          "role": "ordinary_terrain_setup_registration",
+          "scope": "Startup registration of actual terrain configuration consumer.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\client\\src\\main.rs",
+            "bytes": 141376,
+            "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+          }
+        }
+      ],
+      "remaining_question": "Compare TT_Lanes composite restoration provenance and the active four-layer shader result against native inputs; slot0 pixel inequality alone is not corruption.",
+      "full_feature_scope_qualified": false,
+      "native_inputs": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\room.nvr",
+          "bytes": 60132968,
+          "sha256": "89e873ec32356312b53628c9773c803b0e6e864a206ac2aafc6a584c8ae27082"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\Textures\\tile_lanetile_crackedstone_01.dds",
+          "bytes": 262272,
+          "sha256": "345454fdfe05ce075c99d387657443a40fe0726331330be6998732cd65b530bf"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\Textures\\tile_roots_nastycurling_01.dds",
+          "bytes": 262272,
+          "sha256": "063cfc7e88f52e5dffe5b7cc7198313df85b9bc937f0c7331bb57807e431db8e"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\Textures\\tile_mud_cracked_01.dds",
+          "bytes": 262272,
+          "sha256": "a5312f9b39400f100880f7e8eb83d7ab92ed64bc29c102a97746c9f787ecc6a6"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\Textures\\tile_lanetile_crackedrubble_01.dds",
+          "bytes": 131200,
+          "sha256": "80b717d6ae9c51b868c59939ff438f3688f8cbd7589758fe789b4aa748db683a"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\terrainHeightScale.dds",
+          "bytes": 16777344,
+          "sha256": "b84ec5b7a58fec4bb2951a23a1c16ca474f955c88e65591fb99d3d5b5bab4e6b"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\compositeColorMap.dds",
+          "bytes": 4194432,
+          "sha256": "e7955c18b97cefd85e0e85fd89cd758a0d6457cc0c4ca1c0d1bcb0e35e6fc507"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shaders\\HLSL\\HeightBlending\\HeightBlending.hls",
+          "bytes": 1321,
+          "sha256": "7b9354f7ed5e23b9259bae1883c02d7a8ad91f694ecbac5c0001721aa00812fb"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shaders\\HLSL\\Environment\\LIT_PS.ps_2_0",
+          "bytes": 13310,
+          "sha256": "d59435b2f2255afd73672da397f464b890923bfdd9b0e9ffacccb01c7b4395f3"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shaders\\HLSL\\Environment\\LIT_VS.vs_2_0",
+          "bytes": 7825,
+          "sha256": "b7631de1e9c88a91111bf566f4097403a5de2e2bb173ebd6145df6d6c1eb01e5"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\terrain.inibin",
+          "bytes": 366,
+          "sha256": "1a82e51b6be12e6091fb50859b93e8ac13de86f4e38e162570388d88ede9fba1"
+        }
+      ],
+      "local_contract_kind": null
+    },
+    {
+      "task_id": "SYS-10.1-05",
+      "anchors": [
+        {
+          "path": "crates/client/src/terrain_material.rs",
+          "line": 171,
+          "needle": "for entry in data[\"terrain_materials\"].as_array().unwrap()",
+          "role": "ordinary_terrain_layer_configuration_consumer",
+          "scope": "Loads four authored layer paths for each material; independent from embedded GLB composite comparison.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+            "bytes": 15628,
+            "sha256": "bebddf49191627dc78c52286b69d8086a517e1d6eeac647eca32a190e8b5faa1"
+          }
+        },
+        {
+          "path": "crates/client/src/terrain_material.rs",
+          "line": 218,
+          "needle": ".remove::<MeshMaterial3d<StandardMaterial>>()",
+          "role": "ordinary_terrain_material_replacement_consumer",
+          "scope": "Name-matched material replaces StandardMaterial after loading; all scene/shader/raster fidelity not qualified.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+            "bytes": 15628,
+            "sha256": "bebddf49191627dc78c52286b69d8086a517e1d6eeac647eca32a190e8b5faa1"
+          }
+        },
+        {
+          "path": "tools/audit_current_map_textures.py",
+          "line": 38,
+          "needle": "if not entry['pixels_equal']:",
+          "role": "map_diffuse_difference_diagnostic_consumer",
+          "scope": "Current diagnostic lists differences; stable named-anomaly workflow remains unqualified.",
+          "source": {
+            "path": "E:\\OpenLeague\\tools\\audit_current_map_textures.py",
+            "bytes": 5063,
+            "sha256": "f6f94d85c0decc33a06c985e243009a48d07cdfac8584a2ba34438758afbf51e"
+          }
+        },
+        {
+          "path": "crates/client/src/main.rs",
+          "line": 812,
+          "needle": "terrain_material::setup,",
+          "role": "ordinary_terrain_setup_registration",
+          "scope": "Startup registration of actual terrain configuration consumer.",
+          "source": {
+            "path": "E:\\OpenLeague\\crates\\client\\src\\main.rs",
+            "bytes": 141376,
+            "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+          }
+        }
+      ],
+      "remaining_question": "Compare TT_Jungle composite restoration provenance and the active four-layer shader result against native inputs; slot0 pixel inequality alone is not corruption.",
+      "full_feature_scope_qualified": false,
+      "native_inputs": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\room.nvr",
+          "bytes": 60132968,
+          "sha256": "89e873ec32356312b53628c9773c803b0e6e864a206ac2aafc6a584c8ae27082"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\Textures\\tile_lanetile_crackedstone_01.dds",
+          "bytes": 262272,
+          "sha256": "345454fdfe05ce075c99d387657443a40fe0726331330be6998732cd65b530bf"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\Textures\\tile_roots_nastycurling_01.dds",
+          "bytes": 262272,
+          "sha256": "063cfc7e88f52e5dffe5b7cc7198313df85b9bc937f0c7331bb57807e431db8e"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\Textures\\tile_mud_cracked_01.dds",
+          "bytes": 262272,
+          "sha256": "a5312f9b39400f100880f7e8eb83d7ab92ed64bc29c102a97746c9f787ecc6a6"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\Textures\\tile_lanetile_crackedrubble_01.dds",
+          "bytes": 131200,
+          "sha256": "80b717d6ae9c51b868c59939ff438f3688f8cbd7589758fe789b4aa748db683a"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\terrainHeightScale.dds",
+          "bytes": 16777344,
+          "sha256": "b84ec5b7a58fec4bb2951a23a1c16ca474f955c88e65591fb99d3d5b5bab4e6b"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\compositeColorMap.dds",
+          "bytes": 4194432,
+          "sha256": "e7955c18b97cefd85e0e85fd89cd758a0d6457cc0c4ca1c0d1bcb0e35e6fc507"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shaders\\HLSL\\HeightBlending\\HeightBlending.hls",
+          "bytes": 1321,
+          "sha256": "7b9354f7ed5e23b9259bae1883c02d7a8ad91f694ecbac5c0001721aa00812fb"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shaders\\HLSL\\Environment\\LIT_PS.ps_2_0",
+          "bytes": 13310,
+          "sha256": "d59435b2f2255afd73672da397f464b890923bfdd9b0e9ffacccb01c7b4395f3"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shaders\\HLSL\\Environment\\LIT_VS.vs_2_0",
+          "bytes": 7825,
+          "sha256": "b7631de1e9c88a91111bf566f4097403a5de2e2bb173ebd6145df6d6c1eb01e5"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\terrain.inibin",
+          "bytes": 366,
+          "sha256": "1a82e51b6be12e6091fb50859b93e8ac13de86f4e38e162570388d88ede9fba1"
+        }
+      ],
+      "local_contract_kind": null
+    },
+    {
+      "task_id": "SYS-10.1-06",
+      "anchors": [
+        {
+          "path": "tools/audit_current_map_textures.py",
+          "line": 38,
+          "needle": "if not entry['pixels_equal']:",
+          "role": "map_diffuse_difference_diagnostic_consumer",
+          "scope": "Current diagnostic lists differences; stable named-anomaly workflow remains unqualified.",
+          "source": {
+            "path": "E:\\OpenLeague\\tools\\audit_current_map_textures.py",
+            "bytes": 5063,
+            "sha256": "f6f94d85c0decc33a06c985e243009a48d07cdfac8584a2ba34438758afbf51e"
+          }
+        }
+      ],
+      "remaining_question": "Connect each material difference to a stable named anomaly and its disposition; existing diagnostic difference rows are not a complete anomaly workflow.",
+      "full_feature_scope_qualified": false,
+      "native_inputs": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\room.nvr",
+          "bytes": 60132968,
+          "sha256": "89e873ec32356312b53628c9773c803b0e6e864a206ac2aafc6a584c8ae27082"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\Textures\\tile_lanetile_crackedstone_01.dds",
+          "bytes": 262272,
+          "sha256": "345454fdfe05ce075c99d387657443a40fe0726331330be6998732cd65b530bf"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\Textures\\tile_roots_nastycurling_01.dds",
+          "bytes": 262272,
+          "sha256": "063cfc7e88f52e5dffe5b7cc7198313df85b9bc937f0c7331bb57807e431db8e"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\Textures\\tile_mud_cracked_01.dds",
+          "bytes": 262272,
+          "sha256": "a5312f9b39400f100880f7e8eb83d7ab92ed64bc29c102a97746c9f787ecc6a6"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\Textures\\tile_lanetile_crackedrubble_01.dds",
+          "bytes": 131200,
+          "sha256": "80b717d6ae9c51b868c59939ff438f3688f8cbd7589758fe789b4aa748db683a"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\terrainHeightScale.dds",
+          "bytes": 16777344,
+          "sha256": "b84ec5b7a58fec4bb2951a23a1c16ca474f955c88e65591fb99d3d5b5bab4e6b"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\compositeColorMap.dds",
+          "bytes": 4194432,
+          "sha256": "e7955c18b97cefd85e0e85fd89cd758a0d6457cc0c4ca1c0d1bcb0e35e6fc507"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shaders\\HLSL\\HeightBlending\\HeightBlending.hls",
+          "bytes": 1321,
+          "sha256": "7b9354f7ed5e23b9259bae1883c02d7a8ad91f694ecbac5c0001721aa00812fb"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shaders\\HLSL\\Environment\\LIT_PS.ps_2_0",
+          "bytes": 13310,
+          "sha256": "d59435b2f2255afd73672da397f464b890923bfdd9b0e9ffacccb01c7b4395f3"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shaders\\HLSL\\Environment\\LIT_VS.vs_2_0",
+          "bytes": 7825,
+          "sha256": "b7631de1e9c88a91111bf566f4097403a5de2e2bb173ebd6145df6d6c1eb01e5"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\terrain.inibin",
+          "bytes": 366,
+          "sha256": "1a82e51b6be12e6091fb50859b93e8ac13de86f4e38e162570388d88ede9fba1"
+        }
+      ],
+      "local_contract_kind": null
+    }
+  ],
+  "map_GLb": {
+    "path": "E:\\OpenLeague\\assets\\maps\\twisted_treeline.glb",
+    "bytes": 222680548,
+    "sha256": "909513a80e01ae67ee6b15783177a2891363efc640ca47d727f189bcaa429c1a"
+  },
+  "distribution_member": {
+    "path": "assets/maps/twisted_treeline.glb",
+    "pack": "openleague-assets-04.zip",
+    "bytes": 222680548,
+    "sha256": "909513a80e01ae67ee6b15783177a2891363efc640ca47d727f189bcaa429c1a"
+  },
+  "native_terrain_authoring": [
+    {
+      "material": "NVRMaterial_TT_Jungle1",
+      "native": {
+        "index": 1,
+        "type": 3,
+        "flags": 17,
+        "channels": [
+          "Tile_LaneTile_CrackedStone_01.dds",
+          "null_black_null_black_null_black.dds",
+          "Tile_Roots_NastyCurling_01.dds",
+          "",
+          "Tile_Mud_Cracked_01.dds",
+          "",
+          "Tile_Mud_Cracked_01.dds",
+          ""
+        ]
+      },
+      "layers": [
+        "maps/terrain_native/Tile_LaneTile_CrackedStone_01.png",
+        "maps/terrain_native/Tile_Roots_NastyCurling_01.png",
+        "maps/terrain_native/Tile_Mud_Cracked_01.png",
+        "maps/terrain_native/Tile_Mud_Cracked_01.png"
+      ],
+      "GLB_material_index": 23,
+      "composite_is_native_slot0_byte_identity": false
+    },
+    {
+      "material": "NVRMaterial_TT_Lanes1",
+      "native": {
+        "index": 2,
+        "type": 3,
+        "flags": 17,
+        "channels": [
+          "Tile_LaneTile_CrackedStone_01.dds",
+          "null_black_null_black_null_black.dds",
+          "Tile_Roots_NastyCurling_01.dds",
+          "",
+          "Tile_Mud_Cracked_01.dds",
+          "",
+          "Tile_LaneTile_CrackedRubble_01.dds",
+          ""
+        ]
+      },
+      "layers": [
+        "maps/terrain_native/Tile_LaneTile_CrackedStone_01.png",
+        "maps/terrain_native/Tile_Roots_NastyCurling_01.png",
+        "maps/terrain_native/Tile_Mud_Cracked_01.png",
+        "maps/terrain_native/Tile_LaneTile_CrackedRubble_01.png"
+      ],
+      "GLB_material_index": 32,
+      "composite_is_native_slot0_byte_identity": false
+    }
+  ],
+  "inherited_Blender_observation": {
+    "identity": {
+      "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision49\\blender-readonly-observation.json",
+      "bytes": 10035,
+      "sha256": "ff373bff666fc303a3e1360f99a90084a66958ab5b77b261d6af974e4aa5df04"
+    },
+    "not_reexecuted": true,
+    "all_current_files_rehashed": true
+  },
+  "inherited_diffuse_audit": {
+    "identity": {
+      "path": "E:\\OpenLeague\\docs\\current_map_texture_audit.json",
+      "bytes": 151724,
+      "sha256": "6a72d7a06a73883f93f828908544a774f028e7c13581b429e6fe2a96422471cb"
+    },
+    "composite_differences": [
+      {
+        "index": 23,
+        "name": "NVRMaterial_TT_Jungle1",
+        "alpha_mode": "MASK",
+        "image": 147,
+        "mapping_method": "native_mesh_material_reference",
+        "native_nvr_material": true,
+        "native_type": 3,
+        "native_flags": 17,
+        "source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\Textures\\Tile_LaneTile_CrackedStone_01.dds",
+        "source_sha256": "345454fdfe05ce075c99d387657443a40fe0726331330be6998732cd65b530bf",
+        "source_size": [
+          512,
+          512
+        ],
+        "size": [
+          4096,
+          4096
+        ],
+        "pixels_equal": false,
+        "changed_pixels": null
+      },
+      {
+        "index": 32,
+        "name": "NVRMaterial_TT_Lanes1",
+        "alpha_mode": "MASK",
+        "image": 156,
+        "mapping_method": "native_mesh_material_reference",
+        "native_nvr_material": true,
+        "native_type": 3,
+        "native_flags": 17,
+        "source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\Textures\\Tile_LaneTile_CrackedStone_01.dds",
+        "source_sha256": "345454fdfe05ce075c99d387657443a40fe0726331330be6998732cd65b530bf",
+        "source_size": [
+          512,
+          512
+        ],
+        "size": [
+          4096,
+          4096
+        ],
+        "pixels_equal": false,
+        "changed_pixels": null
+      }
+    ],
+    "pixels_redecoded_this_turn": false
+  },
+  "new_restore_cases": [
+    {
+      "case": "exact_synthetic_payload",
+      "expected": "successful exact restore",
+      "observed_error": null,
+      "observed": "exact payload installed only in stage"
+    },
+    {
+      "case": "preserve_divergent_existing_asset",
+      "expected": "ValueError: Local file differs",
+      "observed_error": "Local file differs; preserve it or use --force: assets/example.bin",
+      "observed": null
+    },
+    {
+      "case": "wrong_extracted_digest",
+      "expected": "ValueError: checksum mismatch",
+      "observed_error": "Extracted file checksum mismatch: assets/example.bin",
+      "observed": null
+    },
+    {
+      "case": "path_traversal_refused",
+      "expected": "ValueError: Unsafe archive path",
+      "observed_error": "Unsafe archive path: ../escape",
+      "observed": null
+    }
+  ],
+  "source_identities": [
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\room.nvr",
+      "bytes": 60132968,
+      "sha256": "89e873ec32356312b53628c9773c803b0e6e864a206ac2aafc6a584c8ae27082"
+    },
+    {
+      "path": "E:\\OpenLeague\\assets-manifest.json",
+      "bytes": 1807879,
+      "sha256": "b08a8f9ac6709a78878b3fdf99044b9e8ef8fd81e0f7d9928aa706bb736097a2"
+    },
+    {
+      "path": "E:\\OpenLeague\\assets\\maps\\twisted_treeline.glb",
+      "bytes": 222680548,
+      "sha256": "909513a80e01ae67ee6b15783177a2891363efc640ca47d727f189bcaa429c1a"
+    },
+    {
+      "path": "E:\\OpenLeague\\docs\\current_map_texture_audit.json",
+      "bytes": 151724,
+      "sha256": "6a72d7a06a73883f93f828908544a774f028e7c13581b429e6fe2a96422471cb"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\terrain_materials.json",
+      "bytes": 1470,
+      "sha256": "3b3ee9c3b32a1dcc20adacaebe5be3e2a8c4df11758fee50223a8dfdd398fd07"
+    },
+    {
+      "path": "E:\\OpenLeague\\docs\\terrain_native_source_validation.json",
+      "bytes": 17612,
+      "sha256": "9310775c49f84de6970f70f3d3bf80f4d8d4fd56e10ef8465a5fa7a0c9af1992"
+    },
+    {
+      "path": "E:\\OpenLeague\\assets\\maps\\terrain_native\\Tile_LaneTile_CrackedStone_01.png",
+      "bytes": 231016,
+      "sha256": "733e5e928d8c9ed8f629e7fb4bc1ab7790b9084bd40449a3ad7ff0f3ebbd69c7"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\Textures\\tile_lanetile_crackedstone_01.dds",
+      "bytes": 262272,
+      "sha256": "345454fdfe05ce075c99d387657443a40fe0726331330be6998732cd65b530bf"
+    },
+    {
+      "path": "E:\\OpenLeague\\assets\\maps\\terrain_native\\Tile_Roots_NastyCurling_01.png",
+      "bytes": 385225,
+      "sha256": "e73edec872a4760606ff44907ad5a95eca41be5c9dbf531f4b49f100b6ed0b70"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\Textures\\tile_roots_nastycurling_01.dds",
+      "bytes": 262272,
+      "sha256": "063cfc7e88f52e5dffe5b7cc7198313df85b9bc937f0c7331bb57807e431db8e"
+    },
+    {
+      "path": "E:\\OpenLeague\\assets\\maps\\terrain_native\\Tile_Mud_Cracked_01.png",
+      "bytes": 329699,
+      "sha256": "a08f7a1473f5f4f0ec5ffe0682ca6a3f50748f9f688b4c3aafa37462fea09963"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\Textures\\tile_mud_cracked_01.dds",
+      "bytes": 262272,
+      "sha256": "a5312f9b39400f100880f7e8eb83d7ab92ed64bc29c102a97746c9f787ecc6a6"
+    },
+    {
+      "path": "E:\\OpenLeague\\assets\\maps\\terrain_native\\Tile_LaneTile_CrackedRubble_01.png",
+      "bytes": 180046,
+      "sha256": "87c70986c1a4dbbacd778ea66042719de2793acfb8f8f4df8909b236d3a17536"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\scene\\Textures\\tile_lanetile_crackedrubble_01.dds",
+      "bytes": 131200,
+      "sha256": "80b717d6ae9c51b868c59939ff438f3688f8cbd7589758fe789b4aa748db683a"
+    },
+    {
+      "path": "E:\\OpenLeague\\assets\\maps\\terrain_native\\terrainHeightScale.png",
+      "bytes": 1552220,
+      "sha256": "23e25e91da2dddc7e3a3d5ea1f39d5684d1cc62811e8bde2302637e4d5db6c33"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\terrainHeightScale.dds",
+      "bytes": 16777344,
+      "sha256": "b84ec5b7a58fec4bb2951a23a1c16ca474f955c88e65591fb99d3d5b5bab4e6b"
+    },
+    {
+      "path": "E:\\OpenLeague\\assets\\maps\\terrain_native\\compositeColorMap.png",
+      "bytes": 746681,
+      "sha256": "e237b63585e70d2b25002835a09cee16e62b38f4a3a9a0698153536c3b7e6849"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\compositeColorMap.dds",
+      "bytes": 4194432,
+      "sha256": "e7955c18b97cefd85e0e85fd89cd758a0d6457cc0c4ca1c0d1bcb0e35e6fc507"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shaders\\HLSL\\HeightBlending\\HeightBlending.hls",
+      "bytes": 1321,
+      "sha256": "7b9354f7ed5e23b9259bae1883c02d7a8ad91f694ecbac5c0001721aa00812fb"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shaders\\HLSL\\Environment\\LIT_PS.ps_2_0",
+      "bytes": 13310,
+      "sha256": "d59435b2f2255afd73672da397f464b890923bfdd9b0e9ffacccb01c7b4395f3"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Shaders\\HLSL\\Environment\\LIT_VS.vs_2_0",
+      "bytes": 7825,
+      "sha256": "b7631de1e9c88a91111bf566f4097403a5de2e2bb173ebd6145df6d6c1eb01e5"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\LEVELS\\Map10\\terrain.inibin",
+      "bytes": 366,
+      "sha256": "1a82e51b6be12e6091fb50859b93e8ac13de86f4e38e162570388d88ede9fba1"
+    },
+    {
+      "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision49\\blender-readonly-observation.json",
+      "bytes": 10035,
+      "sha256": "ff373bff666fc303a3e1360f99a90084a66958ab5b77b261d6af974e4aa5df04"
+    },
+    {
+      "path": "E:\\OpenLeague\\docs\\reference_script_blender_sources\\script-blender-links.json",
+      "bytes": 274400,
+      "sha256": "f7294c4eab94c2408ab40985b2517d6f7b9e9efdfaf98a3ba7d01f3eddbb5abf"
+    },
+    {
+      "path": "E:\\OpenLeague\\artwork\\maps\\TwistedTreeline_OpenLeague.blend",
+      "bytes": 116235142,
+      "sha256": "33ca3eb569c99d13a7751a14addb703627075b6b1a4b84359b490d96bc88ad9b"
+    },
+    {
+      "path": "E:\\OpenLeague\\artwork\\maps\\TwistedTreeline_OpenLeague_Animated.blend",
+      "bytes": 126508529,
+      "sha256": "ede771cb79127c64aed88177b30402ecdee6e4e3070a32c1db7337ae1fed0962"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "bytes": 141376,
+      "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+    },
+    {
+      "path": "E:\\OpenLeague\\tools\\create_map_blender_source.py",
+      "bytes": 2697,
+      "sha256": "311988552fb38e3243529a7db8ea5a395cd3780b3efa3c29a0b4f0f973c39937"
+    },
+    {
+      "path": "E:\\OpenLeague\\tools\\download_assets.py",
+      "bytes": 5228,
+      "sha256": "6d2519fda28f5d8a34a78693faa7526cc4855eb3109a87e99e89ce47df35bb9c"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\client\\src\\terrain_material.rs",
+      "bytes": 15628,
+      "sha256": "bebddf49191627dc78c52286b69d8086a517e1d6eeac647eca32a190e8b5faa1"
+    },
+    {
+      "path": "E:\\OpenLeague\\tools\\audit_current_map_textures.py",
+      "bytes": 5063,
+      "sha256": "f6f94d85c0decc33a06c985e243009a48d07cdfac8584a2ba34438758afbf51e"
+    },
+    {
+      "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision62\\collect_map_restoration_links.py",
+      "bytes": 12559,
+      "sha256": "ca87ff0c8dfe8b9b570983df3d592b5a3bb829486649d54da432b690ae9f4fe4"
+    },
+    {
+      "path": "E:\\OpenLeague\\tools\\create_animated_map_blender_source.py",
+      "bytes": 5050,
+      "sha256": "3c691263923d17b3dc0eabb9428af6b7f67c271077b54fb4fe2c17af30350307"
+    },
+    {
+      "path": "E:\\OpenLeague\\tools\\update_blender_high_fog.py",
+      "bytes": 8588,
+      "sha256": "cd512281b258f0fec6324a69027ddd31bffa4a4c3ffa82617e37689512d77c7e"
+    },
+    {
+      "path": "E:\\OpenLeague\\tools\\recover_native_terrain.py",
+      "bytes": 8494,
+      "sha256": "866e11efb42d9dc4bead9966ff443a1053940ca36c731e4d73ad94a00fba8c6a"
+    },
+    {
+      "path": "E:\\OpenLeague\\assets\\shaders\\terrain_height_blend.wgsl",
+      "bytes": 7088,
+      "sha256": "4f73f3f66707982f457a0f4126a6e220ad9329cb7a00f0febc47c331b623e917"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\recovered_rads_manifests.json",
+      "bytes": 3216,
+      "sha256": "8dfd48645040526d5a3e7b91cb9438418078f2d617c236d9834a31dfdcb5d2da"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\solutionmanifest",
+      "bytes": 1792,
+      "sha256": "4926fe4cfdb8641c918c5ad69b891a9c7e48ba37939e4258e2b4b181accc9243"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\configurationmanifest",
+      "bytes": 88,
+      "sha256": "f601219e81fe20e4c805c5faaa7af664c0c6adcdd43d591c7a4f22ebbd7601f3"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\rads_manifests\\lol_game_client\\releases\\0.0.1.7\\releasemanifest",
+      "bytes": 4905302,
+      "sha256": "88b09959b24053c422e209343083d549cdfe6380828b583710d7f9343c1aba09"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\rads_manifests\\lol_game_client_en_gb\\releases\\0.0.0.235\\releasemanifest",
+      "bytes": 49251,
+      "sha256": "c06c83f829dd18cf587098529aa83459c8356dc2fe5ee82d7203c7a9ee3662f0"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_rads_resource_search\\legacy_patch\\recovery_receipt.json",
+      "bytes": 10959,
+      "sha256": "2496761ccbbbbeb367dbe88ae001c4eb4010598d1365234c9e20d3df3a6d7549"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_rads_legacy_recovery_review\\manifest.json",
+      "bytes": 1779,
+      "sha256": "5b08736040b739b04e3db1a4ce7de124bc343df5d78f76bd188a898ebdd6c7af"
+    },
+    {
+      "path": "E:\\mapslol3v3\\loading_rads_resource_search\\legacy_patch\\recovery_package_manifest.json",
+      "bytes": 99218,
+      "sha256": "4cadb6b02ea6f8208e8ba6a031774b27401918f054ee211e674e57af20d30125"
+    },
+    {
+      "path": "E:\\OpenLeague\\docs\\reference_client_4_20.json",
+      "bytes": 3684,
+      "sha256": "efdf40252574a98f439829d43c6b29606d3c12d631c4a64c89ef15637e859d02"
+    },
+    {
+      "path": "E:\\OpenLeague\\docs\\fidelity_registry_parent_launcher_revision_4_20.json",
+      "bytes": 28462,
+      "sha256": "6c5aaad975a4c2b7dd4c509f3fd8da8ace28c1440373173362ac1bf16c12379a"
+    }
+  ],
+  "full_gameplay_or_visual_scopes_qualified": false,
+  "current_or_historical_game_executed": false,
+  "manual_state_mutated": false,
+  "human_acceptance": "not_given"
+}

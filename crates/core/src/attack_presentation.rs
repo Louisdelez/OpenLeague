@@ -41,6 +41,8 @@ pub enum Kind {
     Basic,
     Critical,
     GarenQ,
+    /// Local reconstructed partial Q fact, not native timing or full kit parity.
+    TrundleQ,
 }
 
 /// The identity and facts recorded at the beginning of one attack.

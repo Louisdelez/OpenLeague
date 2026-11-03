@@ -1,6 +1,6 @@
 $ErrorActionPreference='Stop'
 $root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
-if($root -ne 'E:\OpenLeague'){throw 'Unexpected project root'}
+if($root -ne 'F:\OpenLeague'){throw 'Unexpected project root'}
 $serverPath=Join-Path $root 'target\debug\openleague-server.exe'
 $clientPath=Join-Path $root 'target\debug\openleague-client.exe'
 if(!(Test-Path -LiteralPath $serverPath) -or !(Test-Path -LiteralPath $clientPath)){throw 'Build OpenLeague first'}

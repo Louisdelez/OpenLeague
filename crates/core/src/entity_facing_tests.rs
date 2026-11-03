@@ -118,3 +118,62 @@ fn q_consumption_and_control_cancellation_do_not_erase_heading_or_extend_produce
     assert!(game.players[&a].windup.is_none());assert_eq!(game.players[&a].facing,expected);
     let c=game.join("annie").unwrap();game.players.get_mut(&c).unwrap().capture_facing([1.,0.,0.]);assert_eq!(game.players[&c].facing,None);
 }
+
+
+// Explicit simulation fixtures for the reconstructed Trundle-only producer.
+// They do not qualify native cast timing, graphics, or any Trundle spell.
+fn trundle_facing_game() -> (Simulation,u32,u32) {
+    let mut cells=Vec::new();
+    for _ in 0..6400 {cells.extend(0_f32.to_le_bytes());cells.extend(0_u16.to_le_bytes());cells.extend(0_u32.to_le_bytes());cells.push(1);}
+    let nav=Navigation::load(r#"{"min":[0,0,0],"cellSize":50,"width":80,"height":80}"#,&cells).unwrap();
+    let mut game=Simulation::new(nav).unwrap();game.session=12;
+    let a=game.join("trundle").unwrap();let b=game.join("garen").unwrap();
+    game.players.get_mut(&a).unwrap().position=Point{x:200.,z:200.};
+    game.players.get_mut(&b).unwrap().position=Point{x:250.,z:200.};
+    (game,a,b)
+}
+
+#[test]
+fn reconstructed_trundle_real_movement_stop_invalid_delta_and_respawn_follow_public_heading_policy() {
+    let (mut game,a,_)=trundle_facing_game();assert!(game.players[&a].facing.is_none());
+    game.command(a,Action::Move{point:Point{x:200.,z:350.}}).unwrap();
+    assert!(game.players[&a].facing.is_none()); // Intent alone is not a displacement.
+    let before=game.players[&a].position;game.advance();let after=game.players[&a].position;
+    assert_ne!(before,after);
+    assert_eq!(game.players[&a].facing,Some(facing([after.x-before.x,0.,after.z-before.z])));
+    let saved=game.players[&a].facing;
+    game.command(a,Action::Stop).unwrap();game.advance();
+    assert_eq!(game.players[&a].position,after);assert_eq!(game.players[&a].facing,saved);
+    game.players.get_mut(&a).unwrap().capture_facing([0.,0.,0.]);
+    game.players.get_mut(&a).unwrap().capture_facing([f32::NAN,0.,1.]);
+    assert_eq!(game.players[&a].facing,saved);
+    assert_eq!(game.snapshot_for(a).unwrap().players.iter().find(|p|p.id==a).unwrap().facing,saved);
+    let respawn=game.tick+1;
+    let player=game.players.get_mut(&a).unwrap();player.health=0.;player.respawn_at=Some(respawn);
+    game.advance();assert!(game.players[&a].health>0.);assert!(game.players[&a].facing.is_none());
+}
+
+#[test]
+fn reconstructed_trundle_stationary_attack_tracks_valid_windup_and_retains_yaw_after_hit_or_invalid_target() {
+    let (mut game,a,b)=trundle_facing_game();let origin=game.players[&a].position;
+    let initial=Some(facing([-1.,0.,0.]));game.players.get_mut(&a).unwrap().facing=initial;
+    let hp=game.players[&b].health;
+    game.command(a,Action::Attack{target:b}).unwrap();assert_eq!(game.players[&a].facing,initial);
+    game.advance();assert_eq!(game.players[&a].position,origin);
+    assert_eq!(game.players[&a].facing,Some(facing([50.,0.,0.])));
+    let release=game.players[&a].windup.as_ref().unwrap().release;
+    // Controlled target relocation is a simulation fixture, not native evidence.
+    game.players.get_mut(&b).unwrap().position=Point{x:200.,z:150.};game.advance();
+    let tracked=Some(facing([0.,0.,-50.]));assert_eq!(game.players[&a].facing,tracked);
+    while game.tick<release {game.advance();}
+    assert!(game.players[&a].windup.is_none());assert!(game.players[&b].health<hp);
+    assert_eq!(game.players[&a].position,origin);assert_eq!(game.players[&a].facing,tracked);
+    let snapshot=game.snapshot_for(a).unwrap();
+    assert_eq!(snapshot.players.iter().find(|p|p.id==a).unwrap().facing,tracked);
+    let wire=serde_json::to_value(tracked.unwrap()).unwrap();
+    assert_eq!(wire.as_object().unwrap().len(),1);assert!(wire.get("yaw_degrees").is_some());
+    game.tick=game.players[&a].next_attack;game.advance();assert!(game.players[&a].windup.is_some());
+    let retained=game.players[&a].facing;
+    game.players.get_mut(&b).unwrap().position=Point{x:3700.,z:3700.};game.advance();
+    assert!(game.players[&a].windup.is_none());assert_eq!(game.players[&a].facing,retained);
+}

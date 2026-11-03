@@ -1,0 +1,63 @@
+package mx.utils
+{
+   [ExcludeClass]
+   public class HashUtil
+   {
+      
+      public function HashUtil()
+      {
+         super();
+      }
+      
+      public static function dbjHash(value:String) : Number
+      {
+         var result:Number = 5381;
+         for(var i:int = 0; i < value.length; i++)
+         {
+            result = (result << 5) + result + value.charCodeAt(i);
+         }
+         return result & 0x7FFFFFFF;
+      }
+      
+      public static function apHash(value:String) : Number
+      {
+         var result:int = 0;
+         for(var i:int = 0; i < value.length; i++)
+         {
+            if((i & 1) == 0)
+            {
+               result ^= result << 7 ^ value.charCodeAt(i) ^ result >> 3;
+            }
+            else
+            {
+               result ^= ~(result << 11 ^ value.charCodeAt(i) ^ result >> 5);
+            }
+         }
+         return result & 0x7FFFFFFF;
+      }
+      
+      public static function jsHash(value:String) : Number
+      {
+         var result:Number = 1315423911;
+         for(var i:int = 0; i < value.length; i++)
+         {
+            result ^= (result << 5) + value.charCodeAt(i) + (result >> 2);
+         }
+         return result & 0x7FFFFFFF;
+      }
+      
+      public static function rsHash(value:String) : Number
+      {
+         var result:Number = NaN;
+         var a:int = 63689;
+         var b:int = 378551;
+         for(var i:int = 0; i < value.length; i++)
+         {
+            result = result * a + value.charCodeAt(i);
+            a *= b;
+         }
+         return result & 0x7FFFFFFF;
+      }
+   }
+}
+

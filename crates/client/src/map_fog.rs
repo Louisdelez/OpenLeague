@@ -63,6 +63,10 @@ pub struct FogCatalog {
     draw_modes:HashMap<String,u32>,
     pub selector7_names:HashSet<String>,
 }
+impl FogCatalog {
+    /// Readonly current native Fog conversion expectation, not resource readiness.
+    pub(crate) fn expects(&self,name:&str)->bool {self.allowed.contains(name)}
+}
 #[derive(Component)]
 pub struct NativeFogBound {pub source:Handle<StandardMaterial>}
 #[derive(Resource,Default)] pub struct Cache {

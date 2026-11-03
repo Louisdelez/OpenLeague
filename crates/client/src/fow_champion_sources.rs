@@ -4,14 +4,87 @@ use bevy::prelude::*;
 use std::{collections::BTreeMap,sync::{Mutex,Weak,OnceLock}};
 use openleague_core::Snapshot;
 use crate::{fow_source_factory::{CircleFactory,CircleSource,Inputs},fow_source_update::ActorParameters,map10_vision_view::Map10VisionView};
+// Local transport provenance, not a complete-snapshot or GPU certificate.
+#[derive(Clone,Debug)]
+pub(crate) struct MaskSourceStamp {
+    pub session:u64,
+    pub team:u8,
+    pub episode:u64,
+    pub represented_tick:u64,
+    instance:Weak<()>,
+    view:Weak<Mutex<crate::fow_view_registry::RegisteredView>>,
+}
+impl MaskSourceStamp {
+    pub(crate) fn same_episode(&self,other:&Self)->bool {
+        self.session==other.session && self.team==other.team && self.episode==other.episode
+            && self.instance.ptr_eq(&other.instance) && self.view.ptr_eq(&other.view)
+    }
+}
+#[derive(Default)]
+struct MaskSourceStatus {
+    identity:std::sync::Arc<()>,
+    view:Option<Weak<Mutex<crate::fow_view_registry::RegisteredView>>>,
+    episode:u64,
+    current:Option<MaskSourceStamp>,
+}
+impl MaskSourceStatus {
+    fn invalidate(&mut self) {self.current=None;}
+    fn bind(&mut self,map:&Map10VisionView)->Result<(),&'static str> {
+        let actual=std::sync::Arc::downgrade(&map.view);
+        if self.view.as_ref().is_some_and(|bound|!bound.ptr_eq(&actual)) {
+            self.invalidate();
+            // Do not relabel caches owned by another view. Coherent recreation
+            // of Sources and Map10VisionView is a separate explicit operation.
+            return Err("vision view replaced; coherent source/view reset required");
+        }
+        if self.view.is_none() {self.view=Some(actual);}
+        Ok(())
+    }
+    fn publish(&mut self,session:u64,team:u8,tick:u64)->Result<(),&'static str> {
+        let new_episode=self.current.as_ref().is_none_or(|s|s.session!=session || s.team!=team);
+        let episode=if new_episode {self.episode.checked_add(1).ok_or("vision mask episode exhausted")?}else{self.episode};
+        let view=self.view.as_ref().ok_or("vision mask has no bound view")?.clone();
+        self.episode=episode;
+        self.current=Some(MaskSourceStamp {session,team,episode,represented_tick:tick,
+            instance:std::sync::Arc::downgrade(&self.identity),view});
+        Ok(())
+    }
+}
+
 #[derive(Resource,Default)]
 pub struct Sources {
     pub factory:CircleFactory,
     pub active:BTreeMap<u32,Weak<Mutex<CircleSource>>>,
     session:Option<u64>,team:Option<u8>,last_snapshot:Option<u64>,last_error:Option<String>,
+    mask_status:MaskSourceStatus,
 }
 impl Sources {
+    pub(crate) fn invalidate_mask(&mut self) {self.mask_status.invalidate();}
+    pub(crate) fn mask_stamp(&self,map:&Map10VisionView,session:u64,team:u8)->Option<MaskSourceStamp> {
+        let stamp=self.mask_status.current.as_ref()?;
+        if team>1 || stamp.session!=session || stamp.team!=team
+            || self.session!=Some(session) || self.team!=Some(team)
+            || self.last_snapshot!=Some(stamp.represented_tick)
+            || !stamp.view.ptr_eq(&std::sync::Arc::downgrade(&map.view)) {return None;}
+        Some(stamp.clone())
+    }
+    /// Success certifies one healthy, possibly budgeted processing cycle.
+    /// It never asserts that the entire current snapshot has regenerated.
+    pub(crate) fn process_snapshot_cycle(&mut self,state:&Snapshot,viewer:u32,map:&mut Map10VisionView,camera:[f32;2],now:f32,delta:f32)->Result<usize,&'static str> {
+        let result=self.synchronize(state,viewer,map).and_then(|_|self.process(map,camera,now,delta))
+            .and_then(|count| {
+                let team=self.team.ok_or("vision cycle has no represented team")?;
+                let tick=self.last_snapshot.ok_or("vision cycle has no represented tick")?;
+                self.mask_status.publish(state.session,team,tick)?;
+                Ok(count)
+            });
+        if result.is_err() {self.invalidate_mask();}
+        result
+    }
+
     pub fn synchronize(&mut self,state:&Snapshot,viewer:u32,map:&mut Map10VisionView)->Result<(),&'static str> {
+        self.mask_status.bind(map)?;
+        let result=(|| {
         let team=state.roster.iter().find(|p|p.id==viewer).ok_or("missing vision viewer roster")?.team;
         if team>1 {return Err("unsupported vision viewer team");}
         if self.session==Some(state.session) && self.team==Some(team) && self.last_snapshot==Some(state.tick) {return Ok(());}
@@ -45,8 +118,13 @@ impl Sources {
             if !((center[0]-source.position.center[0]).abs()<=epsilon && (center[1]-source.position.center[1]).abs()<=epsilon) {source.position.center=center;source.parameters.generation_dirty=true;}
         }
         self.session=Some(state.session);self.team=Some(team);self.last_snapshot=Some(state.tick);Ok(())
+        })();
+        if result.is_err() {self.invalidate_mask();}
+        result
     }
     pub fn process(&mut self,map:&Map10VisionView,camera:[f32;2],now:f32,delta:f32)->Result<usize,&'static str> {
+        self.mask_status.bind(map)?;
+        let result=(|| {
         #[derive(serde::Deserialize)] struct Metadata {min:[f32;3],#[serde(rename="cellSize")]cell_size:f32,width:usize,height:usize}
         struct Terrain {metadata:Metadata,flags:Vec<u16>}
         static TERRAIN:OnceLock<Terrain>=OnceLock::new();let data=TERRAIN.get_or_init(||Terrain {
@@ -57,11 +135,14 @@ impl Sources {
         let mut view=map.view.lock().map_err(|_|"poisoned Map10 vision view")?;
         for reference in self.active.values() {let strong=reference.upgrade().ok_or("expired champion vision source")?;let mut source=strong.lock().map_err(|_|"poisoned champion vision source")?;view.circle.enqueue_update(reference,&mut source,false,0,camera,map.geometry.extent,now,&[])?;}
         view.circle.process_frame(&self.factory,delta,|source,layer| {source.regenerate_cached(layer,map.geometry.extent,&terrain,&[])?;Ok(())})
+        })();
+        if result.is_err() {self.invalidate_mask();}
+        result
     }
 }
 pub fn update(state:Res<crate::Match>,connection:Res<crate::Connection>,mut sources:ResMut<Sources>,mut map:ResMut<Map10VisionView>,time:Res<Time>,focus:Res<crate::CameraFocus>) {
-    let (Some(snapshot),Some(viewer))=(&state.snapshot,connection.id) else {return;};
-    let result=sources.synchronize(snapshot,viewer,&mut map).and_then(|_|sources.process(&map,[focus.0.x*20.,focus.0.z*20.],snapshot.tick as f32/openleague_core::TICK_RATE as f32,time.delta_secs()));
+    let (Some(snapshot),Some(viewer))=(&state.snapshot,connection.id) else {sources.invalidate_mask();return;};
+    let result=sources.process_snapshot_cycle(snapshot,viewer,&mut map,[focus.0.x*20.,focus.0.z*20.],snapshot.tick as f32/openleague_core::TICK_RATE as f32,time.delta_secs());
     let error=result.err().map(str::to_owned);if error!=sources.last_error {if let Some(error)=&error {eprintln!("OpenLeague champion vision: {error}");}sources.last_error=error;}
     if let Ok(path)=std::env::var("OPENLEAGUE_CHAMPION_VISION_PROBE") {
         if let Ok(view)=map.view.lock() {let report=serde_json::json!({"complete":false,"session":snapshot.session,"tick":snapshot.tick,"sources":sources.factory.source_count(),"pending":view.circle.pending.entries().len(),"visible_cells":view.circle.layer.pixels.iter().filter(|v|**v!=0).count(),"source_ids":sources.active.keys().collect::<Vec<_>>(),"error":sources.last_error,"gpu_bound":false,"limits":["Snapshot adapter; native actor descriptor/provider and filter producers remain open.","Allied champions/lane/pet/turret/fountain sources only; altar, ward, stealth and spectator vision missing.","CPU masks only; server filtering remains authoritative and GPU fog is not bound."]});let _=std::fs::write(path,serde_json::to_vec_pretty(&report).unwrap());}
@@ -107,3 +188,78 @@ fn unit_gives_vision(kind:openleague_core::world::Kind)->bool {
         snapshot.tick+=1;snapshot.units.clear();sources.synchronize(&snapshot,viewer,&mut map).unwrap();assert_eq!(sources.factory.source_count(),1);assert!(map.view.lock().unwrap().circle.pending.entries().iter().all(|e|e.source==sources.active[&viewer].as_ptr() as usize));
     }
 }
+#[cfg(test)]
+pub(crate) mod mask_provenance_tests {
+    use super::*;
+    pub(crate) fn native_fixture()->(Snapshot,u32,Map10VisionView,Sources) {
+        let nav=openleague_core::Navigation::load(include_str!("../../../assets/maps/tt_navigation_grid.json"),include_bytes!("../../../assets/maps/tt_navigation_grid.cells.bin")).unwrap();
+        let mut simulation=openleague_core::Simulation::new(nav).unwrap();
+        let viewer=simulation.join("garen").unwrap();let ally=simulation.join("annie").unwrap();
+        let team=simulation.players[&viewer].team;
+        simulation.players.get_mut(&viewer).unwrap().position=openleague_core::Point {x:7684.,z:6934.};
+        let a=simulation.players.get_mut(&ally).unwrap();a.team=team;a.position=openleague_core::Point {x:7900.,z:6934.};
+        let mut snapshot=simulation.snapshot();snapshot.session=901;
+        (snapshot,viewer,Map10VisionView::native_map10().unwrap(),Sources::default())
+    }
+    pub(crate) fn cycle(sources:&mut Sources,snapshot:&Snapshot,viewer:u32,map:&mut Map10VisionView)->Result<usize,&'static str> {
+        sources.process_snapshot_cycle(snapshot,viewer,map,[7684.,6934.],snapshot.tick as f32/openleague_core::TICK_RATE as f32,1./30.)
+    }
+    #[test]
+    fn healthy_native_sources_keep_episode_and_represented_tick_with_budgeted_work() {
+        let (mut snapshot,viewer,mut map,mut sources)=native_fixture();
+        cycle(&mut sources,&snapshot,viewer,&mut map).unwrap();
+        let team=snapshot.roster.iter().find(|p|p.id==viewer).unwrap().team;
+        let first=sources.mask_stamp(&map,snapshot.session,team).unwrap();
+        assert!(!map.view.lock().unwrap().circle.pending.entries().is_empty(),"healthy does not mean a fully drained mask");
+        cycle(&mut sources,&snapshot,viewer,&mut map).unwrap();
+        let repeated=sources.mask_stamp(&map,snapshot.session,team).unwrap();
+        assert!(first.same_episode(&repeated));assert_eq!(first.represented_tick,repeated.represented_tick);
+        snapshot.tick+=1;snapshot.players.iter_mut().find(|p|p.id==viewer).unwrap().position.x+=100.;
+        cycle(&mut sources,&snapshot,viewer,&mut map).unwrap();
+        let moved=sources.mask_stamp(&map,snapshot.session,team).unwrap();
+        assert!(first.same_episode(&moved));assert_eq!(moved.represented_tick,snapshot.tick);
+        assert!(map.view.lock().unwrap().circle.layer.pixels.iter().any(|p|*p!=0));
+    }
+    #[test]
+    fn native_source_error_and_view_replacement_revoke_then_recover_without_relabel() {
+        let (mut snapshot,viewer,mut map,mut sources)=native_fixture();
+        cycle(&mut sources,&snapshot,viewer,&mut map).unwrap();
+        let team=snapshot.roster.iter().find(|p|p.id==viewer).unwrap().team;
+        let first=sources.mask_stamp(&map,snapshot.session,team).unwrap();
+        snapshot.tick+=1;snapshot.players.iter_mut().find(|p|p.id==viewer).unwrap().position.x+=30.;
+        assert!(std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+            let _guard=map.view.lock().unwrap();panic!("intentional view-lock poison in CPU fixture");
+        })).is_err());
+        assert_eq!(cycle(&mut sources,&snapshot,viewer,&mut map),Err("poisoned Map10 vision view"));
+        assert_eq!(sources.last_snapshot,Some(snapshot.tick),"synchronize committed before the real process failure");
+        assert!(sources.mask_stamp(&map,snapshot.session,team).is_none());
+        map.view.clear_poison();cycle(&mut sources,&snapshot,viewer,&mut map).unwrap();
+        let after_process_error=sources.mask_stamp(&map,snapshot.session,team).unwrap();
+        assert_eq!(after_process_error.episode,first.episode+1);
+        snapshot.tick+=1;let saved=snapshot.players.iter().find(|p|p.id==viewer).unwrap().position;
+        snapshot.players.iter_mut().find(|p|p.id==viewer).unwrap().position.x=f32::NAN;
+        assert!(cycle(&mut sources,&snapshot,viewer,&mut map).is_err());
+        assert!(sources.mask_stamp(&map,snapshot.session,team).is_none());
+        assert!(cycle(&mut sources,&snapshot,viewer,&mut map).is_err());
+        snapshot.players.iter_mut().find(|p|p.id==viewer).unwrap().position=saved;
+        cycle(&mut sources,&snapshot,viewer,&mut map).unwrap();
+        let recovered=sources.mask_stamp(&map,snapshot.session,team).unwrap();
+        assert_eq!(recovered.episode,after_process_error.episode+1);assert!(!first.same_episode(&recovered));
+        let mut replacement=Map10VisionView::native_map10().unwrap();
+        assert_eq!(cycle(&mut sources,&snapshot,viewer,&mut replacement),Err("vision view replaced; coherent source/view reset required"));
+        assert!(sources.mask_stamp(&map,snapshot.session,team).is_none());
+        assert!(sources.mask_stamp(&replacement,snapshot.session,team).is_none());
+        cycle(&mut sources,&snapshot,viewer,&mut map).unwrap();
+        assert_eq!(sources.mask_stamp(&map,snapshot.session,team).unwrap().episode,recovered.episode+1);
+    }
+    #[test]
+    fn source_episode_exhaustion_fails_closed_without_wrap() {
+        let (snapshot,viewer,mut map,mut sources)=native_fixture();
+        cycle(&mut sources,&snapshot,viewer,&mut map).unwrap();sources.invalidate_mask();
+        sources.mask_status.episode=u64::MAX;
+        assert_eq!(cycle(&mut sources,&snapshot,viewer,&mut map),Err("vision mask episode exhausted"));
+        let team=snapshot.roster.iter().find(|p|p.id==viewer).unwrap().team;
+        assert!(sources.mask_stamp(&map,snapshot.session,team).is_none());assert_eq!(sources.mask_status.episode,u64::MAX);
+    }
+}
+

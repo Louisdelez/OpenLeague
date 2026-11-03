@@ -24,7 +24,7 @@ fn original_six_slots_counts_and_all_playable_dds_are_used_without_replacement()
         assert_eq!(std::array::from_fn::<_,4,_>(|n|f32::from_bits(panel.storage.word(0x204+n*4))),[0.,0.,1.,1.]);
     }
     let catalog:serde_json::Value=serde_json::from_str(include_str!("../../../data/4.20/native_inventory_icons.json")).unwrap();
-    let entries=catalog["entries"].as_array().unwrap();assert_eq!(entries.len(),openleague_core::shop::catalog().len());assert_eq!(entries.len(),32);
+    let entries=catalog["entries"].as_array().unwrap();assert_eq!(entries.len(),openleague_core::shop::catalog().len());assert_eq!(entries.len(),33);
     for item in openleague_core::shop::catalog() {
         let matching=entries.iter().filter(|entry|entry["id"]==item.id).collect::<Vec<_>>();assert_eq!(matching.len(),1);let entry=matching[0];
         let bytes=std::fs::read(root().join("assets").join(entry["asset"].as_str().unwrap())).unwrap();assert_eq!(bytes.len() as u64,entry["bytes"].as_u64().unwrap());

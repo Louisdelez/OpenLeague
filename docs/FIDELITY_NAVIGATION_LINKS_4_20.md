@@ -1,0 +1,47 @@
+# Navigation et alignement Map10 — SYS-01.2-02, V83
+
+Treize exigences SYS-09.1/09.2 sont reliées à36 consommateurs précis. Onze périmètres sont partiels ; deux sont des frontières seules (procédure pour les autres cartes, blocage ennemi). Aucun comportement du jeu ni asset modifié. Aucun programme historique, jeu, test Rust ou rendu exécuté dans ce lot : il s’agit de qualification des sources et des liens, pas d’acceptation du gameplay.
+
+## Ressources et provenance
+
+AIPath.aimesh_ngrid et __LevelSize_.SCB sont conformes aux manifestes exacts sélectionnés pour la référence4.20. Les39474 hauteurs centrales et flags consommés dans la grille compacte sont identiques octet par octet aux champs natifs : header39 octets,cellules56 octets,hauteur@0,flags@50. La grille est306×129,pas50 ; le lecteur courant utilise hauteur finie et bit2 absent. Les champs region et open supplémentaires de la grille compacte ne décident pas de la praticabilité dans ce lecteur.
+
+Les635068 octets de la grille dense613×259 sont présents exactement une fois dans le fichier natif après les cellules. Ceci prouve l’identité du payload ; ce lot ne qualifie pas le décodeur complet de son format natif. Les métadonnées denses et de navigation sont identiques. Les bornes SCB sont relues à152 et leur copie installée est identique : X/Z de0 à15398.671875. Le fichier GLB courant est identifié et ses racines de scène relues ; ni sa présence ni son header ne démontrent l’alignement triangle par triangle avec la navigation.
+
+Les122 INIBIN de champions et leurs rayons Data.PathfindingCollisionRadius sont relus et confrontés aux profils locaux. Les sources de certaines valeurs sont des chaînes numériques : elles restent stockées comme telles, avec leur type et la conversion numérique explicite. Les122 valeurs numériques correspondent ; aucun rayon gameplay par défaut n’est substitué à ce champ.
+
+## Consommateurs et limites
+
+Le serveur et le picking utilisent la même grille Map10. Le terrain rendu et les acteurs utilisent XYZ/20 ; le mouvement ordinaire affecte la hauteur centrale de la cellule, tandis que la grille dense reste une API distincte,explicitement liée à Map10. Aucun alignement visuel complet ni interpolation de pose n’est déduit.
+
+La projection de minimap utilise les bornes LevelSize,un pan central et zoom1. Le clic droit doit passer les gardes focus/session/interface et une cellule praticable avant Action::Move. Ce contrôleur souris est local ; le port des callbacks historiques reste ouvert. Les points d’entrée nomment Map10 et ne constituent pas une procédure pour toutes les cartes.
+
+Navigation.path est un BFS à quatre voisins. Le chemin dynamique ajoute les cercles TrundleE et des tests de segments ; les corps alliés utilisent un solveur reconstruit avec rayons,arrivées réservées et trajectoires balayées. Les ennemis sont exclus du filtre et les réservations séparées par équipe. Le terrain est traité comme navigation d’un point : on ne peut pas conclure à une érosion générale des passages selon le rayon du champion.
+
+Les recherches de conflit allié sont espacées de10 ticks. Un obstacle de terrain/pilier sur un Move efface chemin et destination ; un nouveau Move est nécessaire,ou la poursuite attaque recalculera à son échéance. La poursuite s’arrête à portée attaque plus rayon cible,avec gardes de vie/visibilité/cast. La stabilité sans oscillation reste à qualifier en comportement réel.
+
+Un Move impossible est refusé avant cancel_windup et conserve donc l’ordre précédent. Une attaque non annulable refuse ; l’annulation d’une windup remet next_attack au tick courant. Ces politiques locales ne sont pas le code serveur historique. Les gardes des solveurs ne doivent pas masquer les limites du lecteur de base : min non fini n’est pas vérifié dans Navigation.load et nearest_walkable sans cercles n’a pas de garde explicite de finitude.
+
+## Vérification et intégration
+
+442 contrôles de collecte ; 40 cas du lecteur dont 39 refus attendus. Les refus couvrent notamment sources/empreintes,cellules,rayons et types natifs,bornes,association des rôles,fausses règles ennemies,A*,recalcul automatique,hauteur dense généralisée et clôture injustifiée.
+
+Le premier contrôle des rayons a révélé la représentation texte des valeurs ; le lecteur a été corrigé pour conserver le brut et comparer la conversion explicite. Deux ancrages ont été ajustés aux lignes réelles avant la qualification. Aucune preuve antérieure modifiée.
+
+| Tâche | Consommateur constaté | Travail ouvert |
+|---|---|---|
+| SYS-09.1-01 | Le serveur et le picking chargent la même grille Map10 ; le modèle visible utilise le repère natif XYZ/20. Les hauteurs et flags des39474 cellules sont identiques aux octets natifs. | Qualifier l’alignement géométrique et visuel complet entre triangles rendus et navigation ; l’identité des cellules et le transform commun ne prouvent pas cet alignement. |
+| SYS-09.1-02 | Le mouvement ordinaire donne au champion la hauteur centrale de la cellule praticable, puis le client divise XYZ par20. Une grille dense séparée existe pour les usages explicitement liés à Map10. | Comparer poses,contacts et interpolations au terrain visible ; ne pas attribuer automatiquement la grille dense à la hauteur de tous les acteurs ou aux déplacements spéciaux. |
+| SYS-09.1-03 | Projection Map10 utilise les bornes du LevelSize SCB,pan central etzoom1 ; inverse retourne X/Z. Le clic droit émet Move seulement sur une cellule praticable et après les gardes de session/focus/UI. | Qualifier précision et comportement dans toutes les tailles de fenêtre,bords et zones ; callbacks souris historiques non portés,aucun test visuel/natif actuel. |
+| SYS-09.1-04 | Les points d’entrée inspectés choisissent explicitement Map10 ; Projection::map10 refuse des minima X/Z non nuls. Une procédure multi-cartes n’est pas réalisée par ces points d’entrée. | Établir pour chaque autre carte requise les ressources,axes,unités,bornes et contrôles d’alignement ; aucun élargissement silencieux des constantes Map10. |
+| SYS-09.2-01 | Navigation.path utilise une recherche en largeur à4 voisins sur cellules praticables ; dynamic_path ajoute les cercles TrundleE et des contrôles de segments. Ce code est local,reconstruit. | Qualifier tracé,lissage,coûts et contraintes historiques ; ne pas présenter ce BFS comme A* ou comme algorithme serveur Riot récupéré. |
+| SYS-09.2-02 | Les conflits alliés déclenchent une recherche espacée de10 ticks. Une obstruction terrain/pilier annule le chemin Move ; un nouvel ordre ou la poursuite normale peut recalculer. | Qualifier et couvrir les recalculs attendus selon chaque obstacle ; arrêt Move et replanification alliée ne prouvent pas un recalcul automatique universel. |
+| SYS-09.2-03 | Les122 rayons PathfindingCollisionRadius sont relus ; le calcul allié compare sommes de rayons. La navigation terrain/pilier reste celle d’un point, sans érosion générale du terrain par rayon. | Qualifier et intégrer la largeur corporelle pour tous passages et catégories ; rayon de sélection,rayon gameplay et rayon de pathfinding restent distincts. |
+| SYS-09.2-04 | Le solveur local filtre les champions vivants de la même équipe,au plus deux autres alliés. Il réserve des trajectoires balayées et des arrivées distinctes avant engagement du mouvement. | Qualifier règles historiques,priorités et autres catégories d’unités ; le solveur reconstruit et les rayons natifs ne prouvent pas les règles serveur. |
+| SYS-09.2-05 | Le filtre allies exclut les autres équipes et les réservations sont séparées par équipe. Ces frontières n’implémentent pas le blocage par unités ennemies. | Qualifier puis relier le blocage ennemi réel pour champions,sbires,mobs et effets ; aucune absence globale déduite au-delà de ce chemin inspecté. |
+| SYS-09.2-06 | La poursuite vérifie vie,équipe,visibilité et casts,arrête à portée attaque plus rayon cible,et utilise un délai10 ticks. Le cache conserve une arrivée encore à portée de la cible mobile. | Qualifier stabilité et absence d’oscillation sur trajectoires mobiles,obstacles et changements de visibilité ; les gardes sources ne suffisent pas à une recette comportementale. |
+| SYS-09.2-07 | Move valide d’abord son chemin puis appelle cancel_windup ; une attaque non annulable refuse,une windup annulée remet next_attack au tick courant. La cible est ensuite effacée et le nouveau chemin conservé. | Qualifier reprise,cadence et priorités par attaque/champion ; Stop et attaque annulée ne signifient pas restauration automatique d’un ancien trajet. |
+| SYS-09.2-08 | Un nouveau Move inaccessible est refusé avant annulation de l’ordre antérieur. Le solveur allié choisit une arrivée libre atteignable ; les segments ordinaires sont revérifiés avant avance. | Qualifier la politique historique de refus/arrivée alternative et toutes les zones ; ne pas promettre qu’un ordre rejeté arrête automatiquement l’ancien mouvement. |
+| SYS-09.2-09 | Index refuse coordonnées non finies/hors dimensions ; le solveur dynamique ajoute des gardes de grille et de segments. Placement recherche une position libre depuis un seed ou une cellule praticable. | Qualifier toutes les positions invalides et limites ; Navigation.load seul ne valide pas min fini,nearest_walkable sans cercles n’a pas de garde de finitude explicite. Ne pas confondre spawn,ordre et déplacement forcé. |
+
+Reçu : docs/reference_navigation_sources/navigation-links.json. Livraison : docs/fidelity_registry_navigation_links_revision_4_20.json. Les13 périmètres et le Goal restent ouverts.

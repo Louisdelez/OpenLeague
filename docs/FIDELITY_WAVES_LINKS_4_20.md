@@ -1,0 +1,109 @@
+# Vagues, économie et annonces de Map10 — SYS-01.2-02, V88
+
+Les dix exigences SYS-10.5 sont reliées à 28 rôles actuels et à leurs sources historiques. Les dix périmètres restent partiels : l'identification précise d'un consommateur ne constitue ni une recette de gameplay ni une équivalence avec le serveur historique. Aucun code ou asset du jeu changé, aucune case cochée.
+
+## Sources et vérifications
+
+103 fichiers identifiés par taille et SHA-256 ; 894 contrôles source ; 45 cas de qualification du lecteur, dont 44 refus attendus. Le script natif LevelScript.luaobj est parsé et sept fonctions sont identifiées par CLOSURE/SETGLOBAL, constantes et empreinte des instructions. L'initialisation statique s'arrête à pc277/opcode28 : les callbacks et API du moteur ne sont pas exécutés. Les fichiers natifs sont confrontés aux manifestes RADS sélectionnés ; leur identité ne démontre pas l'ordre de montage effectif.
+
+## Vagues et améliorations
+
+INITIAL_TIME_TO_SPAWN=75 correspond au premier next_slot local. Le code construit au slot0 la séquence super(s), trois mêlées, canon conditionnel, trois casters. Il applique 0.8 seconde entre unités et 30 secondes entre vagues, interprétation des champs natifs 800 et 30000 qui ne qualifie pas l'API du scheduler. La fréquence du canon passe localement de trois à deux à 720 secondes ; le script natif porte la constante3 et un callback affectant2. L'ancrage du timer, le numéro de vague et les cas de bascule restent ouverts.
+
+MAX_MINIONS_EVER=180 et GetTotalTeamMinionsSpawned ne prouvent pas que le compteur historique est celui des unités vivantes utilisé actuellement. Les branches natives de barracks et modes spéciaux sont conservées dans les fonctions parsées, sans assimilation à la politique locale.
+
+Huit définitions de sbires donnent 64 observations INIBIN : 36 égalités numériques, 22 différences et six champs absents. Les absences restent des absences. Les 80 comparaisons des dix champs par définition avec les tables de Map10 concordent : armures, progression et récompenses de carte sont des overrides distincts des valeurs de base INIBIN. Exemple : le mêlée utilise XP64/or18.8 sur Map10, contre77/20 dans son INIBIN. Au spawn, le code applique floor(tick/(TICK_RATE*90)), plafonne le bonus d'or et garde l'XP constant. Le callback natif UpgradeMinionTimer modifie les tables de barracks ; son effet sur les unités déjà présentes et ses arrondis ne sont pas déduits.
+
+## Deux voies
+
+43 marqueurs SCO sont relus : 25 pour la voie haute et18 pour la voie basse. CentralPoint et les écarts décimaux inférieurs à0.001 unité sont conservés. L'équipe0 suit l'ordre, l'équipe1 le renverse ; la route ignore ensuite le premier point. Le spawn prend l'extrémité correspondante, utilise nearest_walkable si nécessaire, puis garde le seed si ce repli échoue. Ces coordonnées ne qualifient ni la projection nav historique ni les collisions ou un parcours complet en partie.
+
+## Crédit d'XP et d'or
+
+Le rayon1250 est lié à SpawnTable.ExpRadius. Pour les sbires, damage_unit sélectionne les alliés vivants à distance<=rayon et partage experience/eligible.len(). Pour monstres et boss, il crédite seulement combat_owner. award_experience refuse les montants non finis ou non positifs et les joueurs absents ; ses filtres d'équipe et de vie appartiennent à l'appelant. La formule native complète de partage et les bonus restent à qualifier.
+
+L'or du dernier coup est attribué au joueur source ou au propriétaire présent du pet. La garde de cible déjà morte empêche une deuxième récompense sur ce chemin. L'or d'autel et les récompenses globales suivent des branches distinctes. Le helper combat_owner ne prouve ni l'hostilité de toutes les attaques ni la parité des récompenses de champions.
+
+Pour l'or passif, Constants.var de Map10 indique délai75, intervalle5, désactivation au décès0 et FirstBloodmode30 ; aucune affectation ai_AmbientGoldAmount n'y est présente. Deux fenêtres de code du PE original, aux entrées0x4fe3f0 et0x4fe710, contiennent les stores des defaults8 et5. Les anciens cas d'exécution adaptée des initialiseurs sont comparés comme preuves héritées, sans réexécution. Le consommateur local verse8 aux frontières globales, sans rattrapage des arrivées tardives ; il ne remplace pas le délai CLASSIC75 par30 après le premier sang. Montage CVA, scheduler serveur et modificateurs restent ouverts.
+
+## Annonces
+
+Six sections et61 champs d'Announcements_CLASSIC.ini sont relus avec leurs numéros de ligne : sbires, tourelles, Vilemaw et autels, variantes ordinaires et spectateur séparées. Le graphe courant comporte quatre banques,470 événements et545 sons. Les fichiers de banques sont hachés et les relations événements/actions/conteneurs/playlists sont contrôlées. Ce lot ne réexécute pas le parseur des14482 champs binaires de l'ancienne preuve. Les banques Map8/tutorial et leur locale en_US ne deviennent ni des annonces Map10 effectives ni une modification de la référence EUW/en_GB.
+
+Le client enregistre les cues autel/relique : baseline sans rejeu à la connexion, unlock lors du passage de5400ticks, capture lors du changement de captured_tick et pickup récent pour la relique. Les trois WAV sont identifiés, sans qualification d'écoute ni de provenance sémantique dans ce lot. Le catalogue Rust peut résoudre une banque/événement et refuse UnknownBank, UnknownEvent ou InvalidGraph ; cela ne fournit pas la chaîne de déclenchement gameplay, priorité, texte/chat et mixer demandée. Aucune écoute n'a été observée.
+
+## Preuves héritées et livraison
+
+Les anciens reçus d'or réseau, de définition d'annonces et de graphe audio restent hérités. Leurs fichiers déclarés sont comparés au contenu actuel ; les différences de lib.rs et de l'artifact announcement_definitions sont conservées, sans promouvoir les anciens essais en recette actuelle. Aucun jeu, Rust, Blender ou binaire historique lancé.
+
+Le lecteur refuse notamment source omise/altérée, champ absent inventé, changement de callback, mauvais trajet, substitution9.5, confusion FirstBloodmode/CLASSIC, ancien essai présenté comme neuf, lecture audible inventée et clôture de périmètre injustifiée. Le contrôle de livraison revalide le lecteur installé et les liens du registre.
+
+Seules les consignes/métadonnées des dix tâches et du Goal sont actualisées dans les deux bases. Les42606 états manuels par base, les notes, l'historique et les preuves précédentes sont conservés. Les inconnues sont précisées, aucune n'est fermée par ce lot.
+
+| Tâche | Consommateur constaté | Travail ouvert |
+|---|---|---|
+| SYS-10.5-01 | INITIAL_TIME_TO_SPAWN=75 correspond à initial_wave_seconds ; enable_world arme next_slot et advance_world déclenche quand tick>=next_slot. Le callback GetInitSpawnInfo fournit le contrat de cadence natif. | Qualifier l’origine d’horloge et les frontières de scheduler moteur ; la concordance du champ75 ne démontre pas à elle seule l’exécution historique. |
+| SYS-10.5-02 | Le code produit super(s),3mêlée,canon conditionnel,puis3casters. Le plan est figé au slot0,les unités espacées de0.8seconde et les vagues de30secondes ; le cap local compte180sbires vivants par équipe. | Qualifier GetMinionSpawnInfo et GetTotalTeamMinionsSpawned,cap par barracks,destructions et modes spéciaux ; un cap vivant local ne vaut pas preuve de la sémantique native du compteur. |
+| SYS-10.5-03 | Le script déclare fréquence3,timer720 et callback fixant2. Le consommateur prend3 avant720secondes,puis2 par modulo du numéro de vague,et supprime le canon si un super est prévu. | Qualifier alignement du numéro de vague,ancrage du callback et changements en milieu de séquence ; la nouvelle fréquence est lue seulement lors de construction du plan. |
+| SYS-10.5-04 | La voie haute contient25points correspondants aux marqueursSCO ; équipe0 suit l’ordre et équipe1 l’inverse. Le spawn prend la première/dernière position,avec nearest_walkable si le seed est hors sol. | Qualifier barracks actifs,projection nav et cheminement moteur historique ; les coordonnées ne prouvent pas les collisions,blocages ou parcours complet en partie. |
+| SYS-10.5-05 | La voie basse contient18points correspondants aux marqueursSCO et suit les mêmes règles d’inversion pour équipe1 et de placement valide. | Qualifier chaque sens de parcours,liaisons nav et replis quand aucune cellule valide n’existe ; ne pas promouvoir une liste de points en recette de déplacement. |
+| SYS-10.5-06 | Les huit définitions réutilisent les tables de Map10 pour stats et récompenses. Au spawn,les améliorations sont floor(tick/(30*90)),avec or bonus plafonné ; l’XP reste constant. UpgradeMinionTimer natif modifie les tables de barracks. | Qualifier ancrage du timer,arrondis,effet sur les unités déjà présentes et bonus d’inhibiteur ; distinguer les valeurs INIBIN de base et les overrides de carte. |
+| SYS-10.5-07 | Le rayon1250 vient de SpawnTable.ExpRadius ; les sbires partagent leur XP entre joueurs alliés vivants à distance<=rayon. Les monstres/boss créditent seulement combat_owner. award_experience refuse montant invalide ou joueur absent. | Qualifier formule complète de partage,bonus,rayon effectif et règles natives de crédit ; le helper ne porte pas à lui seul les filtres d’équipe/vie qui sont dans son appelant. |
+| SYS-10.5-08 | damage_unit crédite le joueur source ou le propriétaire présent du pet,via combat_owner. Une cible déjà morte ne redonne pas la récompense. Le bonus autel et les récompenses globales sont des branches séparées. | Qualifier admissibilité native complète et tous les producteurs de dégâts ; le helper de récompense ne prouve pas l’hostilité à lui seul ni la parité des récompenses de champions. |
+| SYS-10.5-09 | Le default natif de montant est8 et d’intervalle5 ; Map10 fournit délai75 et versement permis aux morts. Le code paie aux frontières globales inclusives,sans rattrapage des arrivées tardives et sans basculer après firstblood CLASSIC. | Qualifier le scheduler serveur,le montage des variables et les modificateurs objets/maîtrises/champions ; FirstBloodmode30 est une configuration distincte,non un déclencheur CLASSIC. |
+| SYS-10.5-10 | Des cues autel/relique sont enregistrés dans le client ; capture compare captured_tick et unlock traverse5400ticks. Le catalogue Rust des annonces charge quatre banques et conserve leurs alternatives. Les déclarations CLASSIC nomment tourelles,sbires,Vilemaw et autels. | Relier les événements gameplay à la sélection native d’annonce,au chat/texte,à la priorité et au mixer ; les cues locaux et les playlists disponibles ne prouvent pas la chaîne complète ou son écoute. |
+
+Reçu : docs/reference_waves_sources/waves-links.json. Livraison : docs/fidelity_registry_waves_links_revision_4_20.json. Les dix périmètres et le Goal restent ouverts.
+
+## Complément V1097 — plafond partagé et résultat de création (2026-11-03)
+
+Unité AUD-SYS-01.2-02-MAP10-WAVE-SPAWN-LIMIT-01, exigence SYS-10.5-02 / OLF-2fe46b73-d86d-5db3-a936-b5cc11c0b7d8. Ce sous-audit couvre le passage du plan de vague à la tentative de création sous plafond local et les limites de son test d'inhibiteur; il ne qualifie ni le scheduler Riot, ni une partie complète, ni l'ensemble de la carte.
+
+Source et preuve héritées V88 : LEVELS/Map10/Scripts/LevelScript.luaobj de la référence PUBLIC 4.20.0.315 EUW/en_GB, 18 862 octets, SHA-256 68956214c129a010eaf161bdf6a45ed2623523eb69ce28cf6e187f0a41061ebb; reçu docs/reference_waves_sources/waves-links.json du 2026-10-22, appartenance au projet lol_game_client 0.0.1.7, membre 0.0.0.254. La constante native MAX_MINIONS_EVER=180 et le nom GetTotalTeamMinionsSpawned ne prouvent pas un décompte des unités vivantes ni la politique d'échec historique. Relecture de la trace SYS-10.5-02 avec l'interpréteur .ai-tools/.venv, code 0; l'inconnue et la tâche restent ouvertes. Aucun hash ni test antérieur rejoué.
+
+Le lien V88 établissait déjà le plafond local 180 et V470 l'ordre planification puis réapparition. Complément par lecture de crates/core/src/world.rs:542–617 : l'ordonnanceur parcourt les équipes puis les voies, et compte avant chaque tentative les sbires de voie vivants de toute l'équipe, toutes voies réunies. Avec deux voies ayant chacune un candidat dans le même créneau, 179 sbires vivants au départ, et une création réussie sur la première voie, le code prédit que le candidat de la seconde sera sauté au seuil de 180. Le cas est conditionnel et n'a pas été exécuté; il ne prouve pas une inégalité historique ou un dysfonctionnement observé en partie.
+
+world.rs:265–283 peut refuser spawn_unit, par exemple pour une définition NPC absente. Au point :594–603 l'appelant ignore le Result; :607 avance le créneau après la boucle. Le code lu ne montre ni relance de cette tentative ni signalement dans ce chemin. En cas de refus sur ce chemin, une unité prévue n'est donc pas une unité démontrée apparue. Ceci reste une prédiction conditionnelle sans injection d'erreur ni exécution; d'autres mécanismes de diagnostic extérieurs ne sont pas exclus.
+
+world_tests.rs:98–120 compte un super-sbire de l'équipe à un instant, puis vérifie santé et protection après réapparition. Malgré le nom du test, ces assertions ne vérifient pas explicitement la voie du super, la suite des créneaux ou l'absence d'un nouveau super à la vague suivante. V470/V474 ont déjà exercé une version historique identifiée de ce test; ces exécutions ne sont ni rejouées ici ni preuve du build courant.
+
+Contrôle Python en lecture seule exécuté, code 0 : présence des boucles équipe/voie, seuil 180, Result ignoré et avancement du créneau; map10_world.json contient deux voies. Ce contrôle inspecte le texte et les données, sans exécuter Rust, le cas 179/180, un refus ou le client historique.
+
+Audit statique de ces frontières terminé; implémentation/équivalence historique, exécution courante et acceptation restent ouvertes. SYS-10.5-02, WORLD-TT_ChaosInhibitor-AI-SUPER et WORLD-TT_OrderInhibitor-AI-SUPER restent a_faire. Réutiliser ces tâches pour vérifier chaque équipe et voie, seuils 179/180, échec de définition et résultat observable, simultanéité de réapparition et début de vague, plan déjà figé puis prochaine vague. Qualifier séparément le compteur et le traitement des erreurs natifs à partir du scheduler/serveur 4.20 attribuable ou d'une observation fiable. Aucune modification de code, registre, goal, application de suivi ou base; aucune installation ni migration.
+
+## Complément V1103 — plafond des vagues exécuté en fixture (2026-11-03)
+
+Unité AUD-SYS-01.2-02-MAP10-WAVE-SPAWN-LIMIT-01, suite de V1097; tâche SYS-10.5-02 / OLF-2fe46b73-d86d-5db3-a936-b5cc11c0b7d8. Question : que produit effectivement le cœur local au premier créneau avec 178, 179 ou 180 sbires vivants d'une équipe ? V88/V1097 restent les sources historiques et les limites de comparaison : MAX_MINIONS_EVER=180 et GetTotalTeamMinionsSpawned sont présents dans le script natif, mais le callback et la signification du compteur historique ne sont pas établis.
+
+Programme externe E:/mapslol3v3/wave_cap_audit_probe/src/main.rs compilé et exécuté contre openleague-core par cargo run --offline avec CARGO_TARGET_DIR isolé sur E:, code 0; cargo/rustc 1.96.1 x86_64-pc-windows-msvc. Aucune installation ni connexion réseau. Le lockfile isolé utilise serde_json 1.0.151 comme celui du dépôt mais quatre paquets diffèrent par couple nom/version : find-msvc-tools 0.1.15, libc 0.2.191, syn 3.0.9 et unicode-ident 1.0.27. La compilation a émis 24 avertissements du cœur; ce n'est pas une qualification du build officiel.
+
+Fixture : le programme charge la grille Map10 et obtient d'abord un modèle de sbire créé par le moteur à 75 s. Chaque cas repart d'une nouvelle simulation Map10; des copies de ce sbire sont insérées avec IDs élevés, chemin et cible effacés, et next_ai/next_attack très éloignés pour isoler le comptage. Le nombre de sbires vivants équipe 0 est vérifié avant l'avance de tick 2249 à 2250. Les noms des nouvelles unités sont contrôlés par équipe et voie immédiatement après ce premier créneau.
+
+Attendu et observé, code 0 :
+- 178 vivants équipe 0 : apparition sur les deux voies, total 180.
+- 179 vivants équipe 0 : apparition voie 0, aucune voie 1, total 180.
+- 180 vivants équipe 0 : aucune apparition sur ses deux voies, total 180.
+- 180 copies dont une morte, soit 179 vivantes : apparition voie 0, aucune voie 1, total 180.
+- Dans les quatre cas, les deux voies de l'équipe 1 produisent chacune une unité.
+
+Ces résultats confirment la politique locale et la prédiction conditionnelle V1097 dans cette fixture artificielle; ils ne prouvent ni une partie ordinaire ni la politique du serveur Riot. Aucun cas d'échec de spawn_unit, de report à une vague ultérieure, de réapparition d'inhibiteur, de réseau ou de rendu n'a été exécuté.
+
+Preuves conservées sous E:/mapslol3v3/wave_cap_audit_probe : source, manifeste, lockfile, RESULT.txt et exécutable openleague-wave-cap-probe.exe, 18 163 200 octets. SHA-256 source 823a63ef5756a0d3d5ade14abd39df55c470518adee3f138a83bb32159a289cc; lockfile e30e1333f8056b090dad22e15eb5da4dc6bc84238d9ed20018a50756a258773d; résultat 0c0f26bc75b663f20762f9201754ca9ec63c6792adc6639830d5c411bbddfbb7; exécutable d080a43bfc62f02252b5b33b3921d42e9f5aa67063d05ba2b907e669a2269d54. Ancres projet relevées après compilation : world.rs 407c75f77e8e4e06e6bea352f77ee3b4f90eb3357dd74cddc05a22e219651c54; lib.rs cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d; map10_world.json a91d21133e45d79ae0dbf3a1237e4c8a43299a4d898f1cad172a406816c7c8c3. Ces empreintes partielles ne constituent pas une recette hermétique. Les intermédiaires du répertoire target créé pour ce programme ont été retirés après copie et vérification du binaire conservé.
+
+Vérification locale réussie aux quatre frontières décrites; SYS-10.5-02 et acceptation restent ouverts. Reprendre séparément sur un scheduler/serveur 4.20 attribuable ou observation fiable, puis tester monde non synthétique, évolution des vagues et refus de création selon contrat. Aucun code F:/OpenLeague, registre, goal, application de suivi ou base modifié.
+
+## Complément V1104 — place libérée après un créneau sauté (2026-11-03)
+
+Unité AUD-SYS-01.2-02-MAP10-WAVE-SPAWN-LIMIT-01, suite de V1097/V1103; tâche SYS-10.5-02 / OLF-2fe46b73-d86d-5db3-a936-b5cc11c0b7d8. Question : lorsqu'une place se libère après un saut au plafond local, le créneau initial est-il repris au créneau suivant ? La source native LEVELS/Map10/Scripts/LevelScript.luaobj et ses limites sont identifiées dans V88/V1103; le callback serveur historique n'a pas été exécuté et aucune règle Riot de rattrapage n'est inférée.
+
+Programme externe E:/mapslol3v3/wave_retry_audit_probe/src/main.rs compilé et exécuté avec cargo run --offline, CARGO_TARGET_DIR isolé sur E:, code 0; cargo/rustc 1.96.1 x86_64-pc-windows-msvc. Aucune installation ni connexion réseau. Le lockfile isolé retient serde_json 1.0.151 comme le dépôt, mais diffère en couple nom/version sur find-msvc-tools 0.1.15, libc 0.2.191, syn 3.0.9 et unicode-ident 1.0.27; 24 avertissements du cœur. Ce n'est pas une qualification du build officiel.
+
+Fixture : vraie grille Map10 et modèle de sbire généré par le cœur; nouvelle simulation avec clones synthétiques équipe 0 aux IDs élevés, sans ordre d'IA. Un saut de temps positionne le test au tick 2249. Premier cas : 179 sbires vivants avant le premier créneau. Au tick 2250, la voie 0 apparaît, la voie 1 est sautée et l'équipe atteint 180. Deux clones injectés sont ensuite retirés explicitement, ramenant le nombre à 178. Au tick 2273, aucun sbire du créneau 1 n'est encore présent. Au tick 2274, les deux voies des deux équipes produisent leur créneau 1; le nom du sbire sauté au créneau 0 de la voie 1 reste absent, et l'équipe 0 revient à 180.
+
+Deux témoins ont aussi passé : avec 180 vivants au premier créneau, les deux voies équipe 0 sont sautées; après retrait de deux clones, les deux voies du créneau 1 apparaissent alors que les deux noms du créneau 0 restent absents. Sans clones et sans plafond, les deux voies de l'équipe 0 apparaissent aux créneaux 0 et 1. Le résultat exact est conservé dans E:/mapslol3v3/wave_retry_audit_probe/RESULT.txt.
+
+Conclusion bornée : dans ces scénarios locaux, le créneau sauté n'est pas repris au créneau suivant, même si de la place a été libérée; le créneau suivant produit ses propres unités. Ceci ne prouve pas ce qui se passe plus tard dans la vague ou dans une partie normale, ni les règles du serveur Riot. Aucun échec de spawn_unit, paquet, rendu ou serveur historique n'a été exécuté.
+
+Preuves conservées : E:/mapslol3v3/wave_retry_audit_probe source, Cargo.toml/Cargo.lock, RESULT.txt et exécutable openleague-wave-retry-probe.exe de 18 162 176 octets. SHA-256 source 9b4d9bdf3ad6fca9c8d2d1f1a6d41396f83303958698f11472005d82a58b094b; lockfile 91b23d596c00d6be2bceccaad39dcd57e09ecdc9ad2a4375a9d909aebd8ea97b; résultat 40c297955c5f934ee23a7fd20cb16961ccd001290fce638a11e1a6c46c4d2e38; exécutable 1d61b2197347559b2ae8d9b403b059b51485393a62bf664a3354257548574733. Ancres projet relevées après compilation : world.rs 407c75f77e8e4e06e6bea352f77ee3b4f90eb3357dd74cddc05a22e219651c54; lib.rs cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d; map10_world.json a91d21133e45d79ae0dbf3a1237e4c8a43299a4d898f1cad172a406816c7c8c3. Empreintes partielles, sans prétention de build hermétique. Les intermédiaires du seul répertoire target du programme ont été retirés après copie et vérification du binaire conservé.
+
+Contrôle local de la frontière immédiate réussi; SYS-10.5-02 et acceptation restent ouverts. Reprendre sur la sémantique native du compteur et de la reprise, puis qualifier séparément la suite de la vague et les échecs de création. Aucun code F:/OpenLeague, registre, goal, application de suivi ou base modifié.

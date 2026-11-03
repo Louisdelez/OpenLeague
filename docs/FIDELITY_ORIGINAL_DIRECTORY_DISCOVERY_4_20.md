@@ -1,0 +1,11 @@
+# Découverte native des répertoires de skins — 4.20
+
+Les 546 skins non-base officiels sont parcourus par les scanners originaux 0x902ad0/0x905a00/0x905620, sur un itérateur explicite en lecture seule du système de fichiers actuel. Le code original filtre fichiers/dossiers, choisit le premier dossier dans son arbre trié, enregistre noms physiques et alias, puis interroge ses maps. La routine ASCII originale0xc98074 traite la casse des suffixes sous son drapeau initial inchangé0 ; une surcharge de locale est refusée.
+
+Résultats : {"dedicated_config_discovered_and_original_id_verified": 267, "no_dedicated_config_in_non_base_scan_base_legacy_context_open": 279}. Les configurations dédiées effectivement lues ont SHA-256 et ID explicite vérifiés par le parser/getters originaux. Les noms/tailles des autres entrées sont un instantané de répertoire, pas une preuve de contenu ou de déploiement historique de chaque asset.
+
+Frontières : itérateur/factory os.scandir et format littéral du chemin Sounds adaptés, allocation/stockageSSO bornés, provider externe fourni. Le bootstrap complet, les maps base/legacy, fallback/overlays, cache/defaults/overrides, contexte historique de locale et dispatch courant restent ouverts. Les 112 questions Renekton restent ouvertes ; 96 non-base reçoivent ces recherches, les 16 de base restent inchangées. Aucune donnée du jeu, métadonnée/caseSKIN ni acceptation humaine modifiée.
+
+Le premier corpus a rencontré un budget de sonde trop court sur Aatrox1, puis le garde-fou ancien des suffixes lowercase. Les journaux et versions initiales restent conservés. Les limites sont explicites : 512 entrées par répertoire, 2000 nœuds vérifiés, dix millions d’instructions par appel, arènes natives1MiB/SSO2MiB. Quinze tests couvrent nominal, dossiers multiples, absence, traversée, limites, casse mixte et les128valeursASCII.
+
+Reproduction : `python -B tools/project-plan/exercise_original_directory.py --root E:/OpenLeague --output CHEMIN_NEUF.json`. Aucun programme historique, build/test du jeu, rendu ou audio n’est lancé. [Reçu](reference_native_skin_loader_sources/original-directory-execution.json) ; [vérification](fidelity_registry_directory_revision_4_20.json).

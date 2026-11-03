@@ -1,0 +1,167 @@
+{
+  "schema": "openleague_work_assessment/v1",
+  "version": 1,
+  "dimensions": {
+    "audit": {
+      "a_examiner": "À examiner",
+      "en_cours": "En cours",
+      "termine_avec_preuves": "Terminé avec preuves",
+      "bloque": "Bloqué par une entrée identifiée"
+    },
+    "implementation": {
+      "non_evaluee": "Non évaluée",
+      "absente": "Absente",
+      "partielle": "Partielle",
+      "implementee": "Implémentée"
+    },
+    "verification": {
+      "non_executee": "Non exécutée",
+      "partielle": "Partielle",
+      "echec": "Échec",
+      "reussie": "Réussie pour un périmètre explicite"
+    },
+    "acceptance": {
+      "non_demandee": "Non demandée",
+      "a_valider": "À valider",
+      "acceptee": "Acceptée",
+      "refusee": "Refusée",
+      "non_applicable": "Non applicable avec justification"
+    }
+  },
+  "defaults": {
+    "audit": "a_examiner",
+    "implementation": "non_evaluee",
+    "verification": "non_executee",
+    "acceptance": "non_demandee"
+  },
+  "audit_fields": {
+    "scope": "Exigence et périmètre",
+    "sources_research": "Sources,provenance,limites ou recherches",
+    "consumers": "Consommateurs ou recherche établissant une absence",
+    "observations": "Comportements et contrôles réellement observés",
+    "gaps_limits": "Écarts,limites et conclusions indéterminées",
+    "corrections_criteria": "Corrections liées et critères de fin",
+    "evidence": "Preuves identifiées et datées"
+  },
+  "blocker_kinds": [
+    "source",
+    "entree_technique",
+    "environnement",
+    "decision"
+  ],
+  "audit_exclusions": [
+    "SYS-01.2-02"
+  ],
+  "journeys": [
+    {
+      "id": "J01",
+      "title": "Sélection",
+      "scope": "Choix du champion et des sorts dans le launcher local",
+      "prerequisites": [
+        "Launcher et client identifiés",
+        "Catalogue de référence disponible"
+      ],
+      "criteria": [
+        "choix_persistant",
+        "refus_choix_invalide",
+        "commande_transmise"
+      ],
+      "required_execution": "real_client"
+    },
+    {
+      "id": "J02",
+      "title": "Chargement",
+      "scope": "Chargement de Map10 et des ressources du champion",
+      "prerequisites": [
+        "Serveur local disponible",
+        "Versions des binaires et assets identifiées"
+      ],
+      "criteria": [
+        "carte_chargee",
+        "champion_charge",
+        "erreur_asset_signalee"
+      ],
+      "required_execution": "real_client"
+    },
+    {
+      "id": "J03",
+      "title": "Entrée en partie",
+      "scope": "Admission de deux clients et affichage de la session",
+      "prerequisites": [
+        "Deux clients et serveur local",
+        "Carte chargée"
+      ],
+      "criteria": [
+        "admission_unique",
+        "equipes_correctes",
+        "etat_partage_visible"
+      ],
+      "required_execution": "real_client"
+    },
+    {
+      "id": "J04",
+      "title": "Déplacement et combat",
+      "scope": "Déplacement,collision,ciblage et échange de dégâts visibles",
+      "prerequisites": [
+        "Deux clients admis",
+        "Champion et capacité nommés"
+      ],
+      "criteria": [
+        "deplacement",
+        "collision",
+        "attaque",
+        "sort",
+        "synchronisation"
+      ],
+      "required_execution": "real_client"
+    },
+    {
+      "id": "J05",
+      "title": "Mort et réapparition",
+      "scope": "Cycle visible dans deux clients",
+      "prerequisites": [
+        "Combat opérationnel",
+        "Règle de réapparition explicite"
+      ],
+      "criteria": [
+        "mort_observee",
+        "commandes_mort_refusees",
+        "delai_verifie",
+        "reapparition_synchronisee"
+      ],
+      "required_execution": "real_client"
+    },
+    {
+      "id": "J06",
+      "title": "Déconnexion et reconnexion",
+      "scope": "Perte puis reprise de la même session",
+      "prerequisites": [
+        "Deux clients admis",
+        "Identifiants de session observés"
+      ],
+      "criteria": [
+        "deconnexion",
+        "reconnexion",
+        "pas_double_admission",
+        "etat_reconcilie"
+      ],
+      "required_execution": "real_client"
+    },
+    {
+      "id": "J07",
+      "title": "Fin de partie",
+      "scope": "Victoire,résultat et retour du launcher",
+      "prerequisites": [
+        "Condition de victoire définie",
+        "Client et launcher en session"
+      ],
+      "criteria": [
+        "victoire",
+        "resultat_visible",
+        "commandes_fin_refusees",
+        "retour_launcher"
+      ],
+      "required_execution": "real_client"
+    }
+  ]
+}

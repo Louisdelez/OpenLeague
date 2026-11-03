@@ -1,0 +1,78 @@
+<div class="dropdown">
+  <style scoped>
+    .options {
+      max-height: 0;
+      transition: max-height .2s;
+      transition-timing-function: linear;
+      overflow: hidden;
+      border-width: 0 0 1px 0;
+      border-image: -webkit-radial-gradient(50% 50%, hsl(33, 38%, 77%) 20%, hsl(42, 28%, 0%) 76%) 21% stretch
+    }
+
+    .options.scrollbar dropdown-item {
+      margin-left: 14px;
+    }
+
+    .long .options.open {
+      height: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+      max-height: 195px;
+      overflow: auto;
+    }
+
+    .short .options.open {
+      height: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+      max-height: 117px;
+      overflow: auto;
+    }
+
+    dropdown-item {
+      display: block;
+      padding: 10px;
+      font-weight: 500;
+      color: #e5bd7d;
+      text-align: center;
+      border-width: 0 0 1px 0;
+      border-image: -webkit-radial-gradient(50% 50%, hsl(33, 38%, 77%) 10%, hsl(42, 28%, 0%) 76%) 10% stretch
+    }
+
+    dropdown-item:last-child {
+      border: 0;
+    }
+
+    .dropdown-button {
+      display: block;
+      width: 100%;
+      border: solid #5c6362;
+      border-width: 1px;
+      padding: 5px;
+      text-align: center;
+      font-weight: 500;
+      font-size: 18px;
+      color: #bab8ae;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-width: 1px;
+      border-image: linear-gradient(to bottom right, hsla(33, 38%, 77%, 0.7), hsla(42, 28%, 27%, 0.7)) 10% stretch;
+      background: -webkit-radial-gradient(39% -31px, hsl(0, 0%, 27%) 0%, hsl(0, 0%, 0%) 65%);
+      cursor: pointer;
+    }
+
+    .dropdown-button:hover {
+        -webkit-filter: brightness(1.25);
+    }
+
+    .dropdown-container.active button {
+      border-image: linear-gradient(to bottom right, hsla(33, 48%, 77%, 1), hsla(42, 38%, 27%, 1)) 10% stretch;
+      color: #e5bd7d;
+      outline: 0;
+    }
+
+  </style>
+  <div class="dropdown-container">
+    <button class="dropdown-value dropdown-button font-lol">{{label}}</button>
+    <div class="options" ng-transclude>
+
+    </div>
+  </div>
+</div>

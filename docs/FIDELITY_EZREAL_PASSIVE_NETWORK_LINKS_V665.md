@@ -1,0 +1,67 @@
+# SYS-01.2-02 — Ezreal : sources et consommateurs du passif réseau, V665
+
+Date UTC : 2026-10-27T07:05:06.357025+00:00. Référence PUBLIC4.20.0.315,EUW/en_GB ;build littéral2014-11-17 17:46:45,fuseau et déploiement non établis ;catalogue4.20.1 distinct.
+
+## Résultat intégré
+
+V665 Ezreal / Rising Spell Force :7 sources natives et36points reliés, dont23 consommateurs partiels réels et13frontières communes. 77 états UDP exacts,8215 ticks,5contacts Q/W/E/R,4reconnexions au cumul1,expiration180ticks,mort active et20DTOmalformés refusés. Trois RUN101 privés conservés ;arrivée E corrigée par les contrôles réels. Sources divergentes,protocole natif et rendu restent ouverts. Cases,notes et questions conservées.
+
+La fiche CH-Ezreal-PASSIF-NETWORK et la synthèse SYS-01.2-02 sont mises à jour dans le registre et les deux bases. Les instructions copiables décrivent les sources,les comportements observés,les vrais consommateurs et les limites. Le statut partiel,les critères,la question propre et la dépendance sont conservés ;aucune case acceptée automatiquement. Les six packages prérequis restent présents. Le rapport préparatoire docs/FIDELITY_EZREAL_PASSIVE_NETWORK_PREPARATION_V665.md reste une preuve historique datée ;la présente publication résout son étape « associations non publiées »,sans réécrire ce rapport.
+
+Les23points d’implémentation partielle sont distingués des13frontières communes. Le producteur local,les contacts Q/W/E/R,le compteur privé,la projection et la présentation existent. Le HUD graphique et main.receive sont inspectés seulement. clear_ezreal_passive n’est pas qualifié comme exécuté ;la correction scope est conservée avec la première inspection.
+
+## Contrat complet livré à la fiche
+
+OBJECTIF SYS-01.2-02 : relier CH-Ezreal-PASSIF-NETWORK aux sources natives et à ses consommateurs réels. Conserver la fiche, ses critères, sa question et sa dépendance CH-Ezreal-PASSIF-SIMULATION. Ne pas déclarer le passif, le réseau ou le jeu terminés à partir de ces liens.
+
+Référence PUBLIC4.20.0.315 EUW/en_GB ; build littéral2014-11-17 17:46:45, fuseau et déploiement non établis ; catalogue4.20.1 distinct. Sept sources natives sélectionnées : Ezreal.inibin, CharScriptEzreal.luaobj/preload, EzrealRisingSpellForce.inibin/luaobj/preload et fontconfig_en_GB.txt. Identités et appartenance aux manifests sélectionnés revérifiées. PassLev1Desc1 lie la description10% de vitesse d’attaque pendant6secondes,max5 ; cette description correspond au catalogue. Passive1Desc parle d’Ashe et n’est pas adopté. Passive1LuaName=EzrealRisingSpellForceBuff diffère du nom EzrealRisingSpellForce du chunk disponible ; le texte de l’alias Buff indique15%/75%. Conserver ces divergences et la question de priorité/résolution native. Les recherches de neuf chemins loose de l’alias ne constituent pas une absence globale. CharScript natif n’a pas de callback,le chunk du buff fournit des noms de texture et de buff sans fonction enfant ;la classe communautaire inspectée est vide. Ne pas inventer le protocole ou le producteur serveur original.
+
+Le moteur possède réellement une reconstruction locale partielle. accepted_ezreal_ability_contact reçoit les contacts consommés Q/W/E/R, prune les états invalides et alimente la réserve privée ;ezreal_passive_stacks et le bonus de vitesse contribuent aux statistiques ;ezreal_passive_self_projection donne uniquement session,owner,stacks au propriétaire via snapshot_for. Les compteurs des autres champions ne sont pas dévoilés. Le catalogue et le code déclarent une politique locale distincte du code serveur natif non récupéré.
+
+36points actuels sont liés :23 consommateurs partiels réels (producteur,contacts,projection,présentation et HUD existant),13frontières communes de session/transport/réception. Ne pas les réduire tous à entry_boundary_only. Le HUD graphique et main.receive sont inspectés mais non exécutés dans ce lot. clear_ezreal_passive et remove_ezreal_passive_owner sont conservés comme points statiques,leur passage n’étant pas démontré par ce diagnostic. La première inspection privée marquait clear exécuté à tort ;la version inspection_scope corrige ce marqueur et préserve l’ancienne preuve.
+
+Diagnostic public_arrival : vrai core et six modules actuels inclus sans réécriture (reconnect,clock_delivery,pause,session_host,session_client,ezreal_r_passive_presentation). BUILD/RUN0,binaire non-test,Cargo.lock/checksums alignés,1164entrées inchangées. Quatre scénarios séparés, chacun avec trois sockets clientes UDP sur127.0.0.1. Huit appels explicites à award_experience(2525) placent propriétaire/cible au niveau6 ;cette API serveur n’est pas une commande cliente ni une preuve d’XP gagnée en partie. Move,Learn et CastAt authentifiés sont employés,aucune injection directe de position,rang,PV,buff ou tick. Session77 et temps Host monotone déclarés,distincts du tick de simulation ;clés OS non journalisées.
+
+77 états projetés exacts,903datagrammes,51requêtes,8215 ticks. Cumul0 au lancement puis1 au contact réel Q/W/E/R ;secondQ pour contrôler une mort active,soit5contacts. La cadence d’attaque passe43→40ticks au cumul1 puis revient43 à expiration. L’allié Ezreal reçoit son propre0,le Garen adverse aucun DTO de ce passif ;roster public et état visible restent distincts. Les fragments inversés/dupliqués sont consommés une seule fois,la répétition d’une commande ne relance pas le sort,une seconde trame du même tick ne donne aucun cumul. Quatre reconnexions après60s de temps Host conservent le joueur et son cumul1 sans faire avancer la simulation ;epoch+1 et anciennes trames refusées. Les autres routes restent détachées dans ces scénarios. À179ticks après contact le cumul reste1,à180 il vaut0. Après un secondQ,la mort imposée par l’API serveur de dégâts vrais retire le DTO ;ce n’est pas une autorité de dégâts donnée au client.
+
+Vingt copies synthétiques de DTO testent la présentation réelle :mauvais propriétaire,mauvaise session,cumul6,joueur mort,mauvais champion. Elles sont refusées sans affichage de compteur et ne modifient pas le serveur. Mauvaise époque,canal malsain et échantillon périmé sont masqués ;un doublon au même tick en pause ne rafraîchit pas la fenêtre locale0,2s. Cette fenêtre n’est pas l’expiration native du passif. Aucun rendu GPU,icône effective,police,audio ou boucle client graphique complète n’est exécuté.
+
+Trois RUN101 privés sont conservés :deux essais utilisaient un point E identique à la position courante,le suivant un cercle d’arrivée bloqué. Les refus sont ceux du moteur,non une corruption. La version public_arrival enregistre les deux motifs,exige le snapshot inchangé,puis choisit une arrivée réellement admise ;elle réussit sans modifier le jeu.
+
+À compléter dans la portée de cette fiche :qualifier les événements/champs/audiences natifs ou documenter précisément les équivalents locaux ;lever les divergences d’alias sans supprimer les sources ;vérifier cumul2à5,rafraîchissement au plafond,contacts multiples,W allié/soi,boucliers et dégâts refusés avec les consommateurs effectifs ;vérifier perte de vision après cumul actif,changement d’époque et rétablissement de tous les clients ;exécuter le main/rendu normal et le provider d’icône/police dans une recette dédiée. Les anciens tests restent utilisables uniquement après contrôle de leur portée et de leur identité. Préserver les six packages prérequis et les inconnues,notes,cases,historiques ;les présentes preuves de liens ne valent pas acceptation complète.
+
+
+## Contrôles de publication
+
+| Étape | Code | SHA-256 du journal |
+|---|---:|---|
+| BUILD | 0 | 10c0f263a93edd4cec0ff89eeddac73f539870141641f77aaaed814373c41597 |
+| RUN | 0 | 72196be00b831d13fa69f38afaa7c6a442129300a77054ed0d9e3f2aff49658d |
+| prepare | 0 | c182fe745436f01a00d315a50e6542723e1dfff8dabcfef4bc6d73a1d55bcf1b |
+| check | 0 | ea1dcfb7c3fe00aab0da81d6f33ab780b4906d95814188f1777158b98744af43 |
+| publish | 0 | cf1cb5a983996ff55e8df6c02c75c43f0a7ee88d2d4d56822073813a513d9ee7 |
+| audit | 0 | 95b4454da713f96990ad83e8b89ee30273b609375d7b338e8992a36181226bee |
+
+Préparation,contrôle candidat,publication et audit réussis.20associations falsifiées et4graphes invalides sont refusés. Un fragment d’instructions change,42214restent identiques. Dans chacune des deux bases,42605autres lignes de catalogue,42607états manuels et23historiques sont conservés. Store.task,copy_text,dépendances,rt.resolve,intégrité et synchronisation normale idempotente sont vérifiés.
+
+Les sauvegardes desktop et projet privées ont été compressées après vérification de leur SHA décompressé. Le contrôle candidat restaure les octets exacts de la sauvegarde projet dans un nouveau chemin SQLite et compare son contenu au relevé initial avant de tester les changements. L’adaptateur n’assouplit pas les assertions de publication. Les neuf copies temporaires sont désormais archivées ;gain logique 2612481708octets. Bases actives et preuves enregistrées conservées. Restauration explicite :revision665_network_restore_validation_snapshots_v2.py.
+
+La revue globale constate5557ancres et empreintes courantes exactes,aucun problème. Le graphe contient99335sources,42215exigences actives,26189questions ouvertes et5517résolues avec historique. Ce contrôle ne rehache pas toutes les sources historiques et ne mesure pas l’achèvement du jeu.
+
+## Binaire et limites
+
+Binaire : F:\OpenLeague-work\Requirements_registry_4_20_2026-10-20\revision536_yasuo_crit_probe_aligned\cargo-target\debug\openleague-ezreal-network-probe-public-arrival.exe, 7862272octets,SHA-256 ce4d088bbf1fa83a800bac93fdaa817e9c5fefcf1c1860dc8952dcd0d2257000. Les1164entrées sont inchangées. Les trois RUN101 privés antérieurs restent conservés ;ils résultent des choix d’arrivée E du diagnostic. Le scénario réussi contient les deux refus légitimes et une arrivée admise par le moteur.
+
+Le protocole et les callbacks serveur natifs ne sont pas récupérés. La description liée10%/6s/max5,le texte alias15%/75% et le champ ancien parlant d’Ashe restent distincts. Pas de validation fraîche du plafond5,des rafraîchissements,des W allié/soi,de toutes les variantes de boucliers,de la perte de vision après cumul actif ou du rendu GPU. Les contrôles de DTO synthétiques portent sur la présentation,les dégâts et XP imposés sont des API serveur explicites. Ces preuves ne constituent pas une partie complète ni une acceptation humaine.
+
+## Fichiers et preuves
+
+Modifiés :docs/completion_tasks_2026-10-20.json,docs/fidelity_requirement_trace_4_20.json,docs/fidelity_sources_4_20.json ;deux lignes dans chacune des bases projet et desktop. Couverture,plan,reprise et notes courtes actualisés avec sauvegarde. IDs,hiérarchie et registre des inconnues conservés en octets. Aucun code de jeu ni asset modifié.
+
+Reçu :F:\OpenLeague\docs\reference_requirement_trace_sources\ezreal-passive-network-links-v665.json. Preuve :F:\OpenLeague\docs\fidelity_ezreal_passive_network_links_v665.json. Inspection :F:\OpenLeague-work\Requirements_registry_4_20_2026-10-20/revision665_Ezreal_network_inspection_scope/OBSERVATIONS.json. Runtime :F:\OpenLeague-work\Requirements_registry_4_20_2026-10-20\revision665_Ezreal_network_probe_public_arrival\OBSERVATIONS.json. Audit :F:\OpenLeague-work\Requirements_registry_4_20_2026-10-20\revision665_Ezreal_network/DELIVERY_AUDIT.json. Adaptateur :F:\OpenLeague-work\Requirements_registry_4_20_2026-10-20\revision665_Ezreal_network/STORAGE_CHECK_ADAPTER.json. Archives :F:\OpenLeague-work\Requirements_registry_4_20_2026-10-20\revision665_Ezreal_network/snapshot-archives/VERIFIED.json. Revue :F:\OpenLeague-work\Requirements_registry_4_20_2026-10-20\revision666_trace_review\REVIEW.json.
+
+## Suite
+
+Continuer SYS-01.2-02 à partir de revision666_trace_review/REVIEW.json et revision666_passive_network_matrix/OBSERVATIONS.json. V665 Ezreal est publié/audité dans les deux bases :7sources,36points dont23consommateurs partiels réels et13frontières ;5557ancres exactes,aucun problème,graphe99335/5557. La matrice regroupe les120PASSIF-NETWORK encore au chargeur partagé avec leurs360fiches SOURCE/CONTRAT/SIMULATION et leurs vrais prérequis. Réutiliser les preuves de transport commun en conservant les producteurs/états particuliers ;ne pas créer120copies de contrôles identiques ni déclarer leur absence depuis un simple nom. Prochaine qualification : distinguer dans la matrice les producteurs réellement présents et les écarts déjà documentés pour Annie/Garen/Trundle/Ashe/Tryndamere/Yasuo ; identifier les champs projetés, puis séparer les autres frontières génériques des événements absents. Lire leurs sources et preuves propres avant de lier chaque fiche. Préserver les questions et les statuts ;qualification technique de liens différente de l’acceptation gameplay. Pour V665,cap5/rafraîchissement,W allié/soi,perte de vision avec cumul actif et main/GPU restent hors contrôle frais ;aliasBuff15pct/75pct et ancien texteAshe restent ouverts. Les sauvegardes privées V665 sont archivées et restaurables ;l’adaptateur storage ne change que la copie candidate,restaurée exactement depuis gzip. Réutiliser ce mécanisme contrôlé si F manque d’espace, sans supprimer bases actives ni preuves enregistrées. Goal actif.
+
+Matrice préparatoire :F:\OpenLeague-work\Requirements_registry_4_20_2026-10-20\revision666_passive_network_matrix\OBSERVATIONS.json. Cette matrice conserve les360fiches amont et leurs sources/consommateurs existants ;elle ne qualifie pas automatiquement les120réseaux de passifs.

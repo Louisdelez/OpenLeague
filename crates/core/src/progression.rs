@@ -32,6 +32,17 @@ pub struct Stats {
     pub move_speed: f32,
     pub attack_cooldown_ticks: u64,
 }
+// LOCAL decomposition: total preserves the previous expression/branch exactly.
+// Base comes from the actual champion/growth, not a constant; signed bonus also
+// includes temporary altar changes. Stats total0 implies bonus=-level_base.
+#[derive(Debug, Clone, Copy)]
+pub(crate) struct AttackDamageComponents { pub level_base: f32, pub total: f32, pub bonus: f32 }
+pub(crate) fn ad_components(base: f32, growth: f32, factor: f32, item: f32, altar: f32, adjustment: f32) -> AttackDamageComponents {
+    let level_base = base + growth * factor;
+    let existing = (base + growth * factor + item) * altar;
+    let total = if adjustment == 0. { existing } else { (existing + adjustment).max(0.) };
+    AttackDamageComponents { level_base, total, bonus: total - level_base }
+}
 pub fn growth_total(level: u8) -> f32 {
     let n = level.clamp(1, 18) as f32 - 1.;
     0.685 * n + 0.035 * n * (n + 1.) / 2.
@@ -47,6 +58,13 @@ pub(crate) fn threshold(level: u8) -> f32 {
         .unwrap_or_else(|| v.as_str().unwrap().parse().unwrap())
 }
 impl Simulation {
+    pub(crate) fn attack_damage_components(&self, id: u32) -> Result<AttackDamageComponents, String> {
+        let p = self.players.get(&id).ok_or("unknown AD owner")?;
+        let base = self.definitions.get(&p.champion).ok_or("AD definition missing")?;
+        let g = self.growth.get(&p.champion).ok_or("AD growth missing")?;
+        Ok(ad_components(base.attack_damage,g.damage,growth_total(p.level),shop::bonuses(p).damage,
+            self.altar_damage_multiplier(p.team),self.trundle_q_ad_adjustment(id)))
+    }
     pub fn stats(&self, id: u32) -> Stats {
         let p = &self.players[&id];
         let base = &self.definitions[&p.champion];
@@ -58,6 +76,8 @@ impl Simulation {
         } else {
             1.
         };
+        // Pure R lookup; no stats() recursion or persistent base/item mutation.
+        let r_defense = self.trundle_r_defense_adjustment(id);
         // Garen W amplifies bonus defenses only; level growth is part of base defenses.
         Stats {
             armor_penetration: items.armor_penetration,
@@ -66,8 +86,9 @@ impl Simulation {
             magic_penetration_percent: items.magic_penetration_percent,
             ability_power: items.ability_power * self.altar_damage_multiplier(p.team),
             cooldown_reduction: items.cooldown_reduction.clamp(0., cooldown::maximum_reduction()),
-            damage: (base.attack_damage + g.damage * factor + items.damage)
-                * self.altar_damage_multiplier(p.team),
+            // Same totalAD arithmetic; the independent signed component serves R.
+            damage: ad_components(base.attack_damage,g.damage,factor,items.damage,
+                self.altar_damage_multiplier(p.team),self.trundle_q_ad_adjustment(id)).total,
             critical_chance: (critical::profile(&p.champion).chance
                 + critical::profile(&p.champion).chance_growth * factor
                 + items.critical_chance)
@@ -76,10 +97,16 @@ impl Simulation {
                 + items.critical_damage)
                 .max(1.),
             life_steal: items.life_steal.max(0.),
-            armor: base.armor + g.armor * factor + items.armor * bonus_defense + annie::defense(p,self.tick)
-                - summoner_exhaust::defense_reduction(p, self.tick),
-            magic_resist: base.magic_resist + g.mr * factor + items.magic_resist * bonus_defense + annie::defense(p,self.tick)
-                - summoner_exhaust::defense_reduction(p, self.tick),
+            armor: {
+                let existing=base.armor + g.armor * factor + items.armor * bonus_defense + annie::defense(p,self.tick)
+                    - summoner_exhaust::defense_reduction(p, self.tick);
+                if r_defense.0==0. {existing} else {existing+r_defense.0}
+            },
+            magic_resist: {
+                let existing=base.magic_resist + g.mr * factor + items.magic_resist * bonus_defense + annie::defense(p,self.tick)
+                    - summoner_exhaust::defense_reduction(p, self.tick);
+                if r_defense.1==0. {existing} else {existing+r_defense.1}
+            },
             max_mana: base.mana
                 + g.mana * factor
                 + if lifecycle::uses_mana(&p.champion) {
@@ -91,6 +118,9 @@ impl Simulation {
             move_speed: self.movement_speed(id),
             attack_cooldown_ticks: ((base.attack_cooldown_ticks as f32
                 / (1. + g.attack_speed_percent / 100. * factor + items.attack_speed
+                    + trundle_w::attack_speed_bonus(p, self.tick)
+                    + self.ezreal_w_attack_speed_bonus(id)
+                    + self.ezreal_passive_attack_speed_bonus(id)
                     - summoner_exhaust::attack_speed_bonus_penalty(p, self.tick))
                 .max(0.05))
             .round() as u64)
@@ -129,7 +159,8 @@ impl Simulation {
 pub fn next_rank(p:&Champion,slot:u8)->Result<u8,String> {
     if slot>3 {return Err("invalid skill slot".into());}
         // Special ranking schemes need dedicated native contracts, never a fabricated fallback.
-        if p.champion != "garen" && p.champion != "annie" {
+        // Ezreal R now uses the existing level6/11/16 three-rank contract below.
+        if p.champion != "garen" && p.champion != "annie" && p.champion != "trundle" && p.champion != "ezreal" {
             return Err("champion skill progression not implemented".into());
         }
         if p.ranks.iter().map(|n| *n as u16).sum::<u16>() >= p.level as u16 {

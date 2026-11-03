@@ -1,0 +1,68 @@
+{
+  "utc": "2026-10-23T10:53:29.297884+00:00",
+  "objective": "SYS-01.2-02",
+  "tasks": [
+    "EMPTY-035-CLASSIFY",
+    "EMPTY-035-RESOLVE"
+  ],
+  "binary": {
+    "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\projects\\lol_patcher\\releases\\0.0.0.11\\deploy\\LoLPatcher.exe",
+    "bytes": 4247544,
+    "sha256": "fd4a4edcd45694e08779373286afdaa6870cd86f9847e4fc9db1d0bd556914cb"
+  },
+  "facts": {
+    "path": "data/config.prop",
+    "mode": "rb",
+    "missing": "%s: Could not open optional config file \"%s\".",
+    "empty": "%s: Skipping read of zero sided optional config file \"%s\"."
+  },
+  "region_checks": 4,
+  "anchor_checks": 7,
+  "cases": [
+    {
+      "name": "exact_native_contract",
+      "passed": true
+    },
+    {
+      "name": "reject_path",
+      "passed": true
+    },
+    {
+      "name": "reject_mode",
+      "passed": true
+    },
+    {
+      "name": "reject_missing",
+      "passed": true
+    },
+    {
+      "name": "reject_empty",
+      "passed": true
+    }
+  ],
+  "findings": [
+    "ParseConfigFile names data/config.prop optional in missing and zero-length diagnostics.",
+    "Zero-length branch exits before allocation/read/parse block; missing branch also exits.",
+    "Static observation supports optional empty configuration classification, not historical file provenance or a current runtime implementation."
+  ],
+  "limits": [
+    "Full parser and defaults not qualified; no original process executed.",
+    "Current literal search found user.cfg only in filesystem tests/adapters, not a demonstrated RADS settings consumer.",
+    "Fresh static source qualification only; graph association delivered separately; current ordinary feature consumer remains unqualified."
+  ],
+  "full_objective_complete": false,
+  "evidence": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision156\\PATCHER_CONFIG_FULL_STRINGS.json",
+      "sha256": "cad99d31ffe101cb877f40f6066c5f4844c9c171ddc77bf71c88fecc02f558bb"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision156\\PATCHER_CONFIG_READ_REGIONS.json",
+      "sha256": "6d018e9c82cf9a72ef33215863f75e163c3023fab2f1d82fe20ec90c84d50f68"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision156\\PATCHER_CONFIG_EXIT_REGIONS.json",
+      "sha256": "4c7ec40d59f6390b2252564bcc6d4a998c980247a60c53e498e8a1bcc5b0f75a"
+    }
+  ]
+}

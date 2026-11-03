@@ -1,0 +1,103 @@
+<div class="modal">
+    <style scoped>
+        #modal-main {
+            position: relative;
+            width: 454px;
+            max-height: 569px;
+            z-index: 2000;
+            background-image: url('images/bgOptionsMenu.jpg');
+            padding-bottom: 20px;
+        }
+
+        .modal-default {
+            color: white;
+        }
+
+        .modal-button-close {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+
+        .modal-content {
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            margin-top: 5px;
+        }
+
+        .modal-header {
+            width: 100%;
+            text-align: center;
+        }
+
+        #modal-frame {
+            display: block;
+            width: 80%;
+            height: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #modal-body {
+            display: inline-block;
+            justify-content: center;
+            overflow-y:auto;
+            margin-top: 15px;
+            max-height: 385px;
+            width: 100%;
+            background-color: rgba(0,0,0,0.5);
+            border-image: linear-gradient(to bottom right, hsl(33, 38%, 77%), hsl(42, 28%, 27%)) 10% stretch;
+        }
+
+        .clip-text {
+            color: transparent;
+            -webkit-background-clip: text;
+        }
+
+        h1 {
+            font-size: 16px;
+            font-weight: 500;
+            font-style: normal;
+            text-align: center;
+            text-transform: uppercase;
+            background-color: #e2e7eb;
+        }
+
+        #modal-text {
+            font-size: 14px;
+            font-weight: 400;
+            color: transparent;
+            margin: 10px;
+            background-color: #fff;
+            -webkit-background-clip: text;
+            word-wrap: break-word;
+        }
+
+        #modal-buttons {
+            display: inline-flex;
+            flex-direction: row;
+            justify-content: center;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+    </style>
+    <div id="modal-main">
+        <div class="modal-button-group pull-right">
+            <button id="buttonSettingsClose" class="button button-chrome button-modal" ng-click="close()"><i class="icon-close chrome-text-gradient"></i></button>
+        </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="clip-text font-lol">{{title}}</h1>
+                <div><img src="images/artSettingsSeparator.png"></div>
+            </div>
+            <div id="modal-frame">
+                <div id="modal-body"><p id="modal-text" class="font-lol" ng-bind-html="text"></p></div>
+                <div id="modal-buttons">
+                    <button class="button-primary" ng-click="close(); acceptClick()"><p class="button-primary-text">{{btnLabel}}</p></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

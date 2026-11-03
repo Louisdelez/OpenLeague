@@ -1,0 +1,30 @@
+# SYS-18.1-06 — noyau de layout et ancrages
+
+2026-11-02T03:11:50.344052+00:00
+
+Lot documentaire fini sous réserve de sélection du lecteur indépendant. Le parent reste ouvert pour les contrats propres aux familles/composants/états et leur comparaison effective. Aucun layout rendu ou fonctionnalité complète validé.
+
+## Résultat établi
+Le noyau étudié comprend 33 sources natives dans 29 classes et 110 fenêtres exactes. Les deux variantes Flex sont conservées distinctes. 26 contrats statiques relient les propriétés aux véritables méthodes,avec leurs gardes et l’ordre des branches.
+Blix CanvasLayout calcule la taille,conserve le résultat effectif retourné par l’élément,puis calcule la position ; sans données de position il demande (0,0). CanvasLayoutData donne la priorité X à pourcentage,gauche,centre,droite,puis x/défaut ; Y suit pourcentage,haut,centre,bas,puis y/défaut. Le centre utilise le décalage >>1 présent dans la source,qui n’est pas remplacé par une formule de division flottante.
+Pour largeur/hauteur,deux bords opposés précèdent la valeur en pourcentage,puis la valeur explicite. ElementSizeUtil borne les demandes avec les contraintes de taille disponible. Size déclare les refus de min/max NaN ; ces refus n’ont pas été exécutés.
+View valide disponible/layout/position et passe par son comportement de transformation. DisplayObjectProxy peut arrêter layout/position si l’asset est absent ou hors scène sans validateOffStage ; ses bounds proviennent de l’asset getBounds(null). Un bitmap ou une valeur littérale ne suffit donc pas à mesurer un composant. Scale9 et scrollRect restent des propriétés de l’asset/proxy.
+StatefulView ne possède pas de updateLayout local : la chaîne déclarée StatefulView→MovieClipProxy→SpriteProxy→DisplayObjectContainerProxy→InteractiveObjectProxy→DisplayObjectProxy mène au consommateur de bounds qualifié. Cette résolution de source ne prouve aucun frame/asset/domain actif. Les appels de timeline déclarent aussi une garde de frame et une mise en attente hors scène.
+Flex Canvas délègue à son CanvasLayout. Les contraintes,centres,pourcentages,exceptions de contraintes et setActualSize sont identifiés dans les deux variantes ; aucun alignement de sémantique Blix/Flex ou de provider historique n’est supposé.
+
+## Couverture et limites
+Les 798 sources du recensement sont toutes liées à leurs références littérales au noyau étudié. Les 51 familles et 788 composants gardent leurs identifiants,disponibilités et liens de sources. 545 composants ont un import explicite vers ce noyau ; les autres ne sont ni absents ni réputés sans layout. Les imports et constructions restent des indices de source,avec les éventuels candidats wildcard/base explicitement non résolus par le compilateur.
+Chaque composant garde une reprise propre : override et algorithme actifs,skin/timeline/état,ressource,thème/locale/font et espace transformé avant comparaison. Aucun composant ou écran n’est déclaré mesuré à partir de ces liens.
+La nouvelle recherche ciblée des API du noyau dans 12 fichiers du launcher courant ne produit aucun match. Sa portée est limitée au launcher ;le consommateur réel actuel reste le menu HTML/CSS et ses 80 règles déclarées. Aucun résultat de rendu ou équivalence avec un layout natif n’est déduit.
+
+## Contrôles et écritures
+Identités et carriers natifs,catalogues de méthodes et fenêtres,termes et priorités des 26 cas,chaîne héritée,données de toutes les familles/composants et requête actuelle sont vérifiés. Une relecture séparée doit confirmer ces liens et les limites avant sélection. Les tests/exécutions/rendus historiques ne sont pas rejoués.
+Ajouts immuables uniquement dans F:\OpenLeague-work\audit-units\AUD-18.1-06-LAYOUT-AND-ANCHOR-CONSUMER-01 et ce rapport,avec préparations E. Goal,critères,registres,produit,Plan,base,cases et historiques inchangés. Aucune installation,migration,relance,décompilation,récupération HTTP,simulation native,pixel décodé ou média joué.
+
+## Restes et reprise
+- **AIR-GEO-WINDOW-PROVIDER-AND-SCALE** : Native root source chain is now qualified,including explicit ClientWindow→Flex3 AIR dependency and both framework variants. Effective historical domain/provider,descriptor/nativeWindow resizability,DPI and host events remain unobserved. Reprise : For runtime fidelity work,identify exact AIR executable,applicationDirectory,38qualified fragments and actual load/domain/NativeWindow stage chain plus viewport/DPI and events. Do not choose a provider from filename or direct dependency alone.
+- **AIR-GEO-COMPONENT-LAYOUT-AND-ASSET-PLACEMENT** : Named core Blix/Flex layout,anchor and asset-bound consumers are now audited statically and all798census source records/51families/788components have literal-core reference mappings. Effective per-component overrides,active algorithm,skin/timeline/scale9/clipping,theme/state/font/locale and captures remain unqualified. Reprise : Use per-source literal imports/constructions and per-family/component indices;never treat an import or a shared base-class contract as final component geometry. Select family-specific expressions/skin/state before matched-coordinate comparison.
+- **AIR-GEO-CURRENT-COMPARISON-AND-CAPTURE** : Current Tauri config declares1200×760 and responsive CSS with a preparation menu. No native/current reference capture at matched viewport/DPI/state exists in this audit. Seven raster headers/native export candidates do not prove full-screen geometry. Reprise : Retain current CSS/HTML/config/image identities. In separately authorized visual work,identify native/actual executable,viewport/DPI,locale/theme/state and reference before comparing bounds. Do not change CSS to match bitmap height by assumption.
+
+Les corrections réutilisent SYS-18.1-06 et OLU-5383e436-013f-575c-bf97-03f832c95163 ;leurs objectifs,critères de fin et conditions de reprise sont dans les qualifications. Aucun registre du plan modifié.
+Prochain lot : AUD-18.1-06-FAMILY-LAYOUT-STATE-COVERAGE-01, couverture des contrats propres aux familles/composants/états à partir des indices présents.

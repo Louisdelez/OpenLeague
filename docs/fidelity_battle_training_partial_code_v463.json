@@ -1,0 +1,145 @@
+{
+  "schema": "openleague_battle_training_unresolved_research_link_delivery/v463",
+  "passed": true,
+  "utc": "2026-10-24T16:11:34.161663+00:00",
+  "receipt": {
+    "path": "F:\\OpenLeague\\docs\\reference_battle_training_research\\battle-training-partial-code-v463.json",
+    "bytes": 303774,
+    "sha256": "0cd0cab0afc3148b46116075ed1fe281ae96cae41b0cb631e7fd376ac1ff881e"
+  },
+  "script": {
+    "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision463_continue_partial.py",
+    "bytes": 8534,
+    "sha256": "e04236e13ba97f50665be6c882c97e3d6c9913bed0876e62d11734efbe088126"
+  },
+  "preparation": {
+    "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision463\\PREPARATION.json",
+    "bytes": 5200,
+    "sha256": "37846f0497532d1af536ca04e3e6a635c7d7da59443b4aa4ccfab1021bdc6f0a"
+  },
+  "targets": [
+    "MODE-BATTLE-TRAINING-SCOPE",
+    "MODE-BATTLE-TRAINING-SELECT",
+    "MODE-BATTLE-TRAINING-STEPS",
+    "MODE-BATTLE-TRAINING-RULES",
+    "MODE-BATTLE-TRAINING-RESULT",
+    "SYS-01.2-02"
+  ],
+  "delta": {
+    "added_source_ids": [
+      "OLS-9031b8ad-ef37-5c78-bdf0-d99092178b4d"
+    ],
+    "new_consumer_ids": [],
+    "added_existing_boundary_links": {
+      "MODE-BATTLE-TRAINING-SCOPE": [],
+      "MODE-BATTLE-TRAINING-SELECT": [],
+      "MODE-BATTLE-TRAINING-STEPS": [],
+      "MODE-BATTLE-TRAINING-RULES": [],
+      "MODE-BATTLE-TRAINING-RESULT": [],
+      "SYS-01.2-02": []
+    },
+    "new_links_count": 0,
+    "old_source_consumer_records_exact": true,
+    "old_task_flags_statuses_unknowns_exact": true,
+    "non_target_active_rows": 42208,
+    "graph_validation": {
+      "verified": true,
+      "active_requirements": 42214,
+      "sources": 98598,
+      "consumers": 2412,
+      "open_unknowns": 25321,
+      "resolved_unknowns": 5517,
+      "source_hashes_verified": 0,
+      "gameplay_accepted": false,
+      "manual_state_mutated": false
+    },
+    "direct_code_reference_edges": {
+      "MODE-BATTLE-TRAINING-SCOPE": [
+        {
+          "source_id": "OLS-d2eceac3-303d-5b80-b9c0-0c51557317b4",
+          "relation": "derived_AIR_configuration_request_not_effective_server_values",
+          "selector": "BattleTrainingConfig.getEnabledConfig; getUseSRUConfiguration; defaults false/true"
+        },
+        {
+          "source_id": "OLS-a6e7388d-5c0a-535f-adc2-d8596b1837d4",
+          "relation": "derived_AIR_tutorial_selection_request_not_historical_scenario_binding",
+          "selector": "chooseTutorialType; public isBasicTutorial change guard; private setter; createGame argument0/1"
+        },
+        {
+          "source_id": "OLS-eaa56a75-f805-570f-85ed-628d7dbb2d52",
+          "relation": "derived_AIR_basic_layout_only_not_BattleTraining_availability",
+          "selector": "ChooseGameViewLayoutTutorial; data=basic_tutorial"
+        }
+      ],
+      "MODE-BATTLE-TRAINING-SELECT": [
+        {
+          "source_id": "OLS-a6e7388d-5c0a-535f-adc2-d8596b1837d4",
+          "relation": "derived_AIR_tutorial_selection_request_not_historical_scenario_binding",
+          "selector": "chooseTutorialType; public isBasicTutorial change guard; private setter; createGame argument0/1"
+        }
+      ],
+      "MODE-BATTLE-TRAINING-STEPS": [],
+      "MODE-BATTLE-TRAINING-RULES": [],
+      "MODE-BATTLE-TRAINING-RESULT": [
+        {
+          "source_id": "OLS-a6e7388d-5c0a-535f-adc2-d8596b1837d4",
+          "relation": "derived_AIR_request_cancel_and_error_callbacks_not_game_success_failure",
+          "selector": "cancelGame -> playAnotherGame; onServiceRequestError; onGameCreated"
+        }
+      ],
+      "SYS-01.2-02": [
+        {
+          "source_id": "OLS-d2eceac3-303d-5b80-b9c0-0c51557317b4",
+          "relation": "derived_AIR_configuration_request_not_effective_server_values",
+          "selector": "BattleTrainingConfig.getEnabledConfig; getUseSRUConfiguration; defaults false/true"
+        },
+        {
+          "source_id": "OLS-a6e7388d-5c0a-535f-adc2-d8596b1837d4",
+          "relation": "derived_AIR_tutorial_selection_request_not_historical_scenario_binding",
+          "selector": "chooseTutorialType; public isBasicTutorial change guard; private setter; createGame argument0/1"
+        },
+        {
+          "source_id": "OLS-eaa56a75-f805-570f-85ed-628d7dbb2d52",
+          "relation": "derived_AIR_basic_layout_only_not_BattleTraining_availability",
+          "selector": "ChooseGameViewLayoutTutorial; data=basic_tutorial"
+        },
+        {
+          "source_id": "OLS-a6e7388d-5c0a-535f-adc2-d8596b1837d4",
+          "relation": "derived_AIR_request_cancel_and_error_callbacks_not_game_success_failure",
+          "selector": "cancelGame -> playAnotherGame; onServiceRequestError; onGameCreated"
+        }
+      ]
+    },
+    "direct_code_reference_count": 9
+  },
+  "databases": [
+    {
+      "database": "project",
+      "ordinary_task_copy_trace_verified": 6,
+      "catalogue_rows": 42606,
+      "unchanged_catalogue_rows": 42600,
+      "manual_rows_preserved": 42606,
+      "history_rows_preserved": 23,
+      "notes_and_history_exact": true,
+      "integrity": "ok",
+      "reader": "actual Store.task/copy_text,rt.resolve,instructions;URI mode=ro/query_only"
+    },
+    {
+      "database": "desktop",
+      "ordinary_task_copy_trace_verified": 6,
+      "catalogue_rows": 42606,
+      "unchanged_catalogue_rows": 42600,
+      "manual_rows_preserved": 42606,
+      "history_rows_preserved": 23,
+      "notes_and_history_exact": true,
+      "integrity": "ok",
+      "reader": "actual Store.task/copy_text,rt.resolve,instructions;URI mode=ro/query_only"
+    }
+  ],
+  "source_and_current_boundary_only": true,
+  "no_historical_scenario_qualified": true,
+  "game_tests": 0,
+  "full_scope": false,
+  "gameplay_accepted": false,
+  "goal_complete": false
+}

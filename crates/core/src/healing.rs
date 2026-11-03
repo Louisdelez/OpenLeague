@@ -6,7 +6,12 @@ pub struct Outcome {
     pub restored: f32,
 }
 /// Shared received-healing policy. Additional native debuffs/modifiers remain unimplemented.
-pub fn received_multiplier(p: &Champion, tick: u64) -> f32 {summoner_ignite::healing_multiplier(p,tick)}
+pub fn received_multiplier(p: &Champion, tick: u64) -> f32 {
+    let existing=summoner_ignite::healing_multiplier(p,tick);
+    let domain=trundle_w::healing_multiplier(p,tick);
+    // Preserve the existing non-W arithmetic exactly; amplify received healing once.
+    if domain==1. {existing} else {existing*domain}
+}
 impl Simulation {
     pub fn heal(
         &mut self,

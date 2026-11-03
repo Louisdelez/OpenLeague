@@ -1,0 +1,23 @@
+# SYS-01.2-02 — Sélection native Level19 et calcul actuel d’XP (V258)
+
+SYS-04.7-01 reçoit un raccordement précis supplémentaire : le champ natif EXP.Level19, atteint lorsque le calcul actuel de killXP traite une victime de niveau 18. La fiche objectif reçoit l’association complète. Les autres liens, l’inconnue de la tâche, ses états et son acceptation restent inchangés. Le recensement V255 des quatre tables d’économie/progression a d’abord retrouvé les acquis ; il ne publie pas un nouveau lot en double.
+
+La ressource native est `LEVELS/Map10/ExpCurve.inibin`,200 octets, SHA-256 `88c26d8999f8e95a6b2bc8e453a5a4186229ea4ef88f3e8e37e8c1dde8a22561`. Elle correspond au membre du projet lol_game_client 0.0.1.7 retenu par les manifestes RADS, MD5 `855ba80470b478d61fddec62235c7cbf`. Sa présence ne qualifie pas l’ordre de montage effectif du client historique.
+
+Level19 est stocké comme chaîne «22800». La valeur numérique correspondante est 22 800. Le JSON local d’XP provient d’un décodage communautaire distinct, avec sa propre taille et son propre SHA ; l’identité de ce JSON n’est pas attribuée à l’INIBIN. La filiation de son producteur n’est pas inventée.
+
+Le lecteur courant progression::threshold, ligne 50, lit EXP.LevelN et prévoit une conversion numérique directe ou une conversion en f32 pour les chaînes. champion_kills::base_experience, lignes 13 à 17, borne la victime à18 puis lit threshold(level+1) : cette branche atteintLevel19 pour une victime 18. La route de récompense létale vers ce helper est inspectée statiquement à la ligne 46. Les multiplicateurs, la différence de niveaux et les règles d’attribution restent des politiques locales distinctes de ce champ natif stocké.
+
+Un test Rust existant est réellement exécuté depuis le binaire préservé V235/V239, sans Cargo ni nouveau build : champion_kills::tests::native_xp_increment_values_and_inferred_level_modifiers_remain_separate. Code 0, un succès, 1 926 autres tests filtrés. Il appelle directement le helper et vérifie notamment victime 18/récipiendaire 18=1955,25, avec d’autres assertions de niveaux et de pool local. Ce cas ne simule pas une mort complète et ne prouve pas une formule du serveur d’origine.
+
+Les deux JSON d’XP et de règles de kill correspondent exactement chacun à une occurrence dans des sections PE lisibles, non modifiables et non exécutables du binaire. Les identités des sources/données et du binaire sont conservées avant/après. Cette présence ne constitue ni une trace du pointeur chargé ni une recette complète du build.
+
+Le premier collecteur V256 attendait à tort un entier natif et a refusé avant toute exécution Rust ou lecture PE. Le type natif réel est str, conformément au chemin de conversion déjà présent en Rust. Le script initial et son refus sont conservés ; V2 garde la chaîne brute et la comparaison numérique séparément. Aucun helper natif ni code du jeu n’est modifié pour obtenir le succès. La qualification indépendante V257 vérifie les ancres, le stockage, les identités et les refus de provenance sans rejouer Rust.
+
+La publication met à jour deux fiches dans les deux bases du plan. L’audit contrôle deux sélecteurs et quatre refus, toutes les ancres ajoutées et les identités ciblées, les anciennes sources/consommateurs/liaisons, ainsi que l’égalité du registre d’inconnues. Chaque base garde 42 606 états manuels et23 historiques ; integrity_check=ok. Les fichiers sont préparés puis remplacés séparément ; aucune transaction globale entre les JSON et les deux bases n’est revendiquée.
+
+Graphe à cette publication : 98188 sources, 2384 consommateurs, 25320 inconnues ouvertes et 5517 résolues. Ces totaux ne constituent pas un pourcentage d’achèvement. Aucun gameplay complet, getter original, scheduler/serveur historique, GPU, audio, réseau ou acceptation humaine n’est qualifié par ce lot. SYS-01.2-02 et le goal restent ouverts.
+
+Livrables : `docs/reference_kill_xp_Level19_sources/kill-xp-Level19-v258.json`, `docs/fidelity_kill_xp_Level19_graph_v258.json`, les registres de sources/trace/tâches et les deux bases. Preuves : `revision255_map10_progression_source_review`, les deux tentatives `revision256_kill_xp_Level19_checks*`, `revision257_kill_xp_Level19_qualification` et `revision258` sous `F:/OpenLeague-work/Requirements_registry_4_20_2026-10-20`.
+
+Suite : examiner la revue V259 des quatre chargeurs audio dont la route ordinaire reste à qualifier, distinguer les appels de tests, les corps simplement compilés et les chemins PCM effectifs ; conserver les preuves antérieures. Les questions de bootstrap/locale, les PV des inhibiteurs et le candidat d’archives non identifié restent ouverts.

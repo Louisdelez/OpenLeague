@@ -1,0 +1,15 @@
+# Lanceurs parents et chemin first_time — sources intégrées V61
+
+Les deux exigences EMPTY-032-CLASSIFY/RESOLVE reçoivent les identités et relations natives des lanceurs parents,les champs exacts de configuration du mini-lanceur et un contrat API séparé. Leurs consommateurs actuels dédiés restent non identifiés ;les deux lacunes génériques et les inconnues restent ouvertes.
+
+Le préfixe original de lol.launcher.admin.exe est exécuté dans Unicorn sur six chemins ASCII synthétiques. Sous les contrats modélisés MSVCP80/MSVCR80/WinAPI,il prépare module_directory+RADS et la commande user-kernel updateandrun lol_launcher LoLLauncher.exe. Les DLL et API originales ne sont pas exécutées ;aucun processus,dossier ou fichier réel créé. Erreurs/troncatures de GetModuleFileNameA,Unicode et branche de registre/config du lanceur non-admin restent hors qualification.
+
+Treize contrôles statiques relient EDX à la case[ebp-8078] et à l'argument8 de CreateProcessA dans le mini-lanceur. Deux appelants directs mettent EDX à zéro ;le lancement projet sélectionne une chaîne produite avec le suffixe/deploy. Les helpers de composition,leurs entrées et le dispatch complet restent à qualifier. Les champs du membre exact data/config.prop sélectionnent lol_patcher et LoLPatcher.exe,sans prouver leur consommation effective. Une première erreur du vérificateur sur une adresse IAT devinée est conservée ;la version corrigée lit l'import réel5B00A4.
+
+La documentation officielle Microsoft précise qu'un lpCurrentDirectory nul fait hériter le répertoire du parent immédiat. Ce contrat actuel,distinct du code historique Riot,est conservé par commit583cf7bf91dc3743d56c52afef2c934081bbcad9,Gitblob9068828978a97f39410a64b5178d1beef56f52f0 et SHA-256. Source :https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessa. Deux GET publics qualifiés,sans credentials ;aucun contenu amont exécuté.
+
+Les cinq identités,les cinq blocs d'arguments,trois pointeurs de pile et les cinq fenêtres partielles V60 sont hérités,pas rejoués. La copie fournie n'établit pas une VERSIONINFO pour les deux racines ou jpatch ;aucune version n'est inventée. Kernel0.0.0.0,mini-lanceur2.22.0.237 et projet0.0.0.227 restent des espaces distincts des builds patcher/AIR/jeu.
+
+27contrôles de source/portée précèdent la publication. Les deux tâches portent un contexte copiable qui distingue ces observations et les limites. Restent :chaîne updateandrun réelle,composition/entrées du chemin,changements CWD au démarrage du patcher,IO/erreurs/exception,pont popup et consommateur actuel. Aucune ressource vide remplie/supprimée ni tâche acceptée. Les deux questions gardent leurs textes,recherches et conditions antérieurs avec un complément précis.
+
+Reçu :docs/reference_parent_launcher_sources/parent-launcher-reference.json. Livraison :docs/fidelity_registry_parent_launcher_revision_4_20.json. Les six objectifs et toutes les preuves antérieures sont conservés ;918lacunes génériques+1469frontières seules=2387lacunes spécifiques visibles. Goal actif.

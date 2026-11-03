@@ -1,0 +1,42 @@
+<link rel="import" href="template-article-large.html">
+<link rel="import" href="template-article-small.html">
+<link rel="import" href="template-article-patch.html">
+<link rel="import" href="template-champion-profile.html">
+
+<link rel="import" href="/bundle-vendor-lib/public/bower_components/polymer/polymer.html">
+<polymer-element name='hub-main' attributes="champions articles">
+    <template id="hub-template">
+      <link href='../styles/hub-small.css' rel='stylesheet' media='screen and (max-width: 1250px)'/>
+      <link href='../styles/hub.css' rel='stylesheet' media='screen and (min-width: 1251px)'/>
+      <link href="/bundle-assets/src/style/fonts.css" rel="stylesheet">
+      <link href="/role/assets/locales.css" rel="stylesheet"/>
+      <div class="close-button" id="close-button" on-click="{{navigateTo}}" data-target="/role/landing"></div>
+
+      <!--<video id="" src="../video/hub_bg_loop_01.webm" autoplay="autoplay" loop="loop" class="hub-video {{data.loaded}}"></video>-->
+      <!--<div class="hub-background opacity-fade {{data.loaded}}"></div>-->
+      <div id="container-hub">
+        <div id="content-hub" class="flex-default">
+          <div class="flex-column">
+            <div class="flex-row flex-large">
+              <div class="flex-large overflow-hidden">
+                <article-large class="article" article="{{data.articles.article_large[0]}}" locale={{data.locale}} index="1" on-click="{{navigateTo}}" data-target="news1"></article-large>
+              </div>
+              <div class="flex-column flex-default overflow-hidden">
+                <article-small class="article" article={{data.articles.article_small[0]}} locale={{data.locale}} index="2" on-click="{{navigateTo}}" data-target="news2"></article-small>
+                <article-small class="article" article={{data.articles.article_small[1]}} locale={{data.locale}} index="3" on-click="{{navigateTo}}" data-target="news3"></article-small>
+              </div>
+            </div>
+            <div class="flex-row flex-default">
+              <div class="flex-large overflow-hidden">
+                <champions-profile class="article" champions="{{data.champions}}" locale={{data.locale}} loaded={{data.loaded}}></champions-profile>
+              </div>
+              <div class="flex-default overflow-hidden">
+                <article-patch class="article" article={{data.articles.patch[0]}} locale={{data.locale}} loaded={{data.loaded}} on-click="{{navigateTo}}" data-target="patch_notes"></article-patch>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </template>
+</polymer-element>
