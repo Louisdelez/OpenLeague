@@ -1,0 +1,145 @@
+{
+  "schema": "openleague_portrait_argb_mathematical_comparison_preliminary/v694",
+  "passed": true,
+  "summary": {
+    "updated_utc": "2026-10-27T21:50:15.919998+00:00",
+    "report": "docs/FIDELITY_PORTRAIT_ARGB_MODEL_V694_PRELIMINARY.md",
+    "proof": "docs/fidelity_portrait_argb_model_v694_preliminary.json",
+    "evidence_stage": "executed_mathematical_proof_pending_canonical_source_links",
+    "observations": {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision694_argb_linear_wrap_comparison\\OBSERVATIONS.json",
+      "bytes": 16184,
+      "sha256": "495f4650ea3362725077a4a87efd6be934e698bf075262301c42a7f59b8f2cab"
+    },
+    "previous_refuted_model": {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision694_argb_linear_comparison\\OBSERVATIONS.json",
+      "bytes": 14333,
+      "sha256": "5d9f5786860149dff6c1187ecec6f1384e3bd715d4f6cf02677580fcb9a1919d"
+    },
+    "independent_review": {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision694_wrap_scalar_review\\REVIEW.json",
+      "bytes": 3538,
+      "sha256": "80f5403811a1bbac7202344a7ff3eea833a212a3730bcf8b649bf8aefa175eb4"
+    },
+    "cases": 5,
+    "pixels_compared": 2621440,
+    "channels_compared": 10485760,
+    "maximum_error_channel_level": 0.5,
+    "scalar_pixels_reviewed": 17900,
+    "canonical_registry_integration_complete": false,
+    "canonical_plan_database_update_performed": false,
+    "source_assets_modified": false,
+    "actual_game_or_API_reexecuted": false,
+    "complete": false,
+    "gameplay_accepted": false,
+    "goal_complete": false
+  },
+  "commands": [
+    {
+      "stage": "V694_ARGB_LINEAR_COMPARISON",
+      "intended_nominal_exit_code": 0,
+      "command": [
+        "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "-E",
+        "-u",
+        "-B",
+        "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision694_argb_linear_comparison.py"
+      ],
+      "exit_code": 2,
+      "log": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision669_V694_ARGB_LINEAR_COMPARISON.log",
+        "bytes": 574,
+        "sha256": "12300f0c45c9e9344d0988a01ba9841ae8f765a0cca697d889ca5bd0cd79ded8"
+      }
+    },
+    {
+      "stage": "V694_ARGB_WRAP_COMPARISON",
+      "intended_nominal_exit_code": 0,
+      "command": [
+        "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "-E",
+        "-u",
+        "-B",
+        "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision694_argb_linear_wrap_comparison.py"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision669_V694_ARGB_WRAP_COMPARISON.log",
+        "bytes": 536,
+        "sha256": "54c4e80959aac22e34ea4d70ccc6f86c5439ae8d91146d6f0d40199bd777b47c"
+      }
+    },
+    {
+      "stage": "V694_WRAP_SCALAR_REVIEW",
+      "intended_nominal_exit_code": 0,
+      "command": [
+        "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "-E",
+        "-u",
+        "-B",
+        "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision694_wrap_scalar_review.py"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision669_V694_WRAP_SCALAR_REVIEW.log",
+        "bytes": 54,
+        "sha256": "4e6807612c50d3656a3b853cd47ea606838f01ea0000472841534b406eb3abbe"
+      }
+    }
+  ],
+  "source_observations": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision694_argb_linear_comparison\\OBSERVATIONS.json",
+      "bytes": 14333,
+      "sha256": "5d9f5786860149dff6c1187ecec6f1384e3bd715d4f6cf02677580fcb9a1919d"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision694_argb_linear_wrap_comparison\\OBSERVATIONS.json",
+      "bytes": 16184,
+      "sha256": "495f4650ea3362725077a4a87efd6be934e698bf075262301c42a7f59b8f2cab"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision694_wrap_scalar_review\\REVIEW.json",
+      "bytes": 3538,
+      "sha256": "80f5403811a1bbac7202344a7ff3eea833a212a3730bcf8b649bf8aefa175eb4"
+    }
+  ],
+  "model": {
+    "source_extent": [
+      308,
+      560
+    ],
+    "destination_extent": [
+      512,
+      1024
+    ],
+    "coordinates": "u=((2*x+1)*77-128)/256;v=((2*y+1)*35-64)/128;floor/ceil indices wrapped modulo308/560",
+    "kernel": "Independent bilinear interpolation of each BGRA channel; source-edge periodic wrapping; exact int64 weights; denominator32768.",
+    "criterion": "Every observed channel is within1/255of the exact interpolated 8bit-channel reference; this numerical tolerance is explicit, not a historical acceptance criterion."
+  },
+  "documented_basis": {
+    "header": {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision692_sdk_contract_catalog\\d3dx9tex.h",
+      "bytes": 61840,
+      "sha256": "64dfa1f26d6df792f6cf261c79f737e6e5c7670787ba6abfe0f76aba348e9422"
+    },
+    "url": "https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dx-filter",
+    "page_last_updated": "2021-06-19",
+    "checked_utc": "2026-10-27T21:47:40.173056+00:00",
+    "paraphrase": "The optional MIRROR flags replace wrapping at image edges; captured Filter3 contains none of those flags.",
+    "historical_runtime_identity_proven": false
+  },
+  "limits": [
+    "This is a mathematical comparison of current local API readbacks,not a captured2014frame or normal-game rendering.",
+    "The model interprets bytes as linear channel values. It does not qualify historical colorspace,sRGB,alpha blending,UVs,sampler,mode or UIcontinuation.",
+    "The seven DXT1/DXT5 compressed outputs are outside this calculation and still require independent decoding/comparison.",
+    "No API,binary,game,GPU or new image conversion is executed by this read-only comparison; original bytes are unchanged.",
+    "ThisV694proof is not yet associated in the canonical source registry or two plan task/database rows. Latest canonical audit isV693; no new completion or consumer is claimed."
+  ]
+}

@@ -1,0 +1,1869 @@
+{
+  "schema": "openleague_vfx_binding_links/v1",
+  "passed": true,
+  "utc": "2026-10-23T05:30:51.852068+00:00",
+  "full_task_scope_complete": false,
+  "native_or_game_executed": false,
+  "historical_server_policy_qualified": false,
+  "facts": {
+    "candidates": {
+      "producer": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\prepare_vfx_reader.py",
+        "bytes": 3814,
+        "sha256": "e3043afa34ea46a00c447d1287b015e47954ef389a32692c8d7c55d554162d80"
+      },
+      "associations": [
+        {
+          "task_id": "SYS-15.2-01",
+          "finding": "Observation de chaque cast accepté avant regroupement ;conflits Q/W/R retirés. Consommation réelle du cast W par sélection animation ;âge1x local.",
+          "remaining": "Bounded W cast selection only;all spell launch effects and native timing remain open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/ezreal_w_cast_animation.rs",
+              "line": 48,
+              "needle": "pub fn observe_with_other_casts(",
+              "role": "vfx_binding_1_0"
+            },
+            {
+              "path": "crates/client/src/animation.rs",
+              "line": 750,
+              "needle": "state.ezreal_w_cast_visuals.select(actor.playback.id,",
+              "role": "vfx_binding_1_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-f5f20268-690b-55fa-bb3d-96e061f1998a"
+        },
+        {
+          "task_id": "SYS-15.2-02",
+          "finding": "Position/direction/hauteur provenant de trame OLSR acceptée ;époque et identité vérifiées. Échantillons serveur consommés par effet vivant ;pause et fraîcheur locales distinctes.",
+          "remaining": "W exact current server position only;all projectile trajectories/native interpolation remain open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/ezreal_w_missile_presentation.rs",
+              "line": 28,
+              "needle": "pub fn observe_accepted_frame(",
+              "role": "vfx_binding_2_0"
+            },
+            {
+              "path": "crates/client/src/ezreal_w_missile_live.rs",
+              "line": 205,
+              "needle": "let samples=state.ezreal_w_missiles.samples(",
+              "role": "vfx_binding_2_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-9cf1f299-b103-5cb9-8d7b-4d533ca3a35b"
+        },
+        {
+          "task_id": "SYS-15.2-03",
+          "finding": "Admission uniquement depuis contexte accepté OLSR ;pas de hit inféré de la mort ou disparition. Consommation réelle par adaptateur visuel ;contrôle FoW du dessin indépendant.",
+          "remaining": "Q accepted impact presentation only;all impact effects and native visibility remain open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/ezreal_q_flash_events.rs",
+              "line": 67,
+              "needle": "pub fn observe_accepted_frame(",
+              "role": "vfx_binding_3_0"
+            },
+            {
+              "path": "crates/client/src/ezreal_q_flash_live.rs",
+              "line": 168,
+              "needle": "let requests=state.ezreal_q_flash_events.take(",
+              "role": "vfx_binding_3_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-778cc388-8a4b-5e2d-a627-8e0c292af384"
+        },
+        {
+          "task_id": "SYS-15.2-04",
+          "finding": "Observation ordonnée par session,époque et trame ;contrat serveur local Courage. Consommateur vivant du buff soutenu ;appelant natif des six effets non reconstitué.",
+          "remaining": "Sustained Courage only;native six-effect caller and all buff lifecycles remain open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/garen_w_state.rs",
+              "line": 84,
+              "needle": "pub fn observe_frame(",
+              "role": "vfx_binding_4_0"
+            },
+            {
+              "path": "crates/client/src/garen_w_live.rs",
+              "line": 132,
+              "needle": "let Some(sustained)=state.w_visuals.0.sustained(",
+              "role": "vfx_binding_4_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-772dcf01-f51e-5195-8804-fd02ee6c1c83"
+        },
+        {
+          "task_id": "SYS-15.2-05",
+          "finding": "Zone gameplay propriétaire/centre/début/fin ;rayon1000 reconstruction communautaire explicite. Consommateur animation du lancement/identité de zone ;pas preuve de rendu persistant de surface.",
+          "remaining": "Gameplay zone and cast animation do not identify the complete persistent surface renderer.",
+          "anchors": [
+            {
+              "path": "crates/core/src/trundle_w.rs",
+              "line": 93,
+              "needle": "pub(crate) fn cast_trundle_w_at(",
+              "role": "vfx_binding_5_0"
+            },
+            {
+              "path": "crates/client/src/trundle_w_animation.rs",
+              "line": 97,
+              "needle": "let Some(zone)=champion.effects.trundle_w.as_ref()",
+              "role": "vfx_binding_5_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-17d743e1-6f3d-5768-9ac4-e7b20808187c"
+        },
+        {
+          "task_id": "SYS-15.2-06",
+          "finding": "Alias _SkinNN conditionné au propriétaire et disponibilité fournie ;360 cas natifs hérités vérifiés. Descripteur visuel Garen limité au skin de base ;autres variantes non qualifiées.",
+          "remaining": "Native alias resolver exists but active visual dispatch and form selection are not identified;Garen descriptor is base-only.",
+          "anchors": [
+            {
+              "path": "crates/core/src/native_effect_resource_skin_alias.rs",
+              "line": 7,
+              "needle": "pub fn resolve(",
+              "role": "vfx_binding_6_0"
+            },
+            {
+              "path": "crates/client/src/garen_w_profile.rs",
+              "line": 14,
+              "needle": "pub const BASE_OVERRIDE:",
+              "role": "vfx_binding_6_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-3cd65154-3de3-5c7e-9ab3-752c1808d554"
+        },
+        {
+          "task_id": "SYS-15.2-07",
+          "finding": "ArrivalHeads déjà intégré au client courant ;ne pas traiter comme absent. Flash Q déjà intégré ;tests CPU ne prouvent pas rendu GPU.",
+          "remaining": "ArrivalHeads and Q plugins already installed;CPU host tests do not qualify current GPU/native visual fidelity or human acceptance.",
+          "anchors": [
+            {
+              "path": "crates/client/src/main.rs",
+              "line": 743,
+              "needle": ".add_plugins(ezreal_e_arrival_heads_live::Plugin)",
+              "role": "vfx_binding_7_0"
+            },
+            {
+              "path": "crates/client/src/main.rs",
+              "line": 738,
+              "needle": ".add_plugins(ezreal_q_flash_live::Plugin)",
+              "role": "vfx_binding_7_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-a9731bc7-f349-5bbc-bed6-277d66954d1c"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\q-flash-event-research.json",
+          "bytes": 2010,
+          "sha256": "7bbe27472eb8d4f1499cf8efd6dcbd27d3a385c5e8a6adcc6b351a6839d29d4a"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\w-cast-projectile-research.json",
+          "bytes": 2034,
+          "sha256": "3fa2ee9d1db05abb963ed9c308e2df9c28b34d383dbf5a1f477654e3f29dad62"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\garen-buff-research.json",
+          "bytes": 1919,
+          "sha256": "5cece384fac229bffa8e55925d540bf277920f2e66a179edfb67a31f252685b3"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\zone-skin-research.json",
+          "bytes": 2020,
+          "sha256": "fa11513e504d1cac19558bc65b064e4b3d644a3b6ce44c5ca6b5770ff5e93eee"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\arrival-q-host-research.json",
+          "bytes": 1964,
+          "sha256": "700eb3384a4be165bbe709235a713e60801f2aa2caaa0d39c341cc68fddda98f"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\q-flash-event-test-receipt.json",
+          "bytes": 2630,
+          "sha256": "9c54416632fef3b542696deb6a6ae86c368343d0355c89d31ea06a1bbb95e5fe"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\w-cast-projectile-test-receipt.json",
+          "bytes": 3971,
+          "sha256": "6b81172a545960b84e3b8b01d15c71039e8765536a2ef99aa46e20a554c72248"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\garen-buff-test-receipt.json",
+          "bytes": 3227,
+          "sha256": "07789434ec33ae6e62700741eb493599c5ae9ce8f486bb76bf67416f4a02f960"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\zone-skin-test-receipt.json",
+          "bytes": 6658,
+          "sha256": "934dc8a5ab60d01a4e9c4ea55e18472266b21c6621c8d4dac67d33c39a8373b6"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\arrival-q-host-test-receipt.json",
+          "bytes": 7176,
+          "sha256": "e5d5e542f46ac3fd4ddfe57969cb3b952f0a523f1e6e4cbc68d6ba7be8ae13cb"
+        }
+      ],
+      "current_sources": [
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_w_cast_animation.rs",
+          "bytes": 19555,
+          "sha256": "293c126cfc573f6385ad6634aea385129eb180fe43fde9b3718cd5a5085ebb88"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\animation.rs",
+          "bytes": 116564,
+          "sha256": "af685f610a3185e8d845a8398c420c54346b32c980b0a7af3952e00ebfff7d32"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_w_missile_presentation.rs",
+          "bytes": 10897,
+          "sha256": "c8083e7bd3caecb1d6d0d7f20b6d72c5540cfdafe7ef0e0b4dfeec5db2c977bc"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_w_missile_live.rs",
+          "bytes": 15559,
+          "sha256": "5a7cc68311235e9fad3218c1a02cefed050258bda2443602f1b8059d4f020498"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_events.rs",
+          "bytes": 29854,
+          "sha256": "0a2455d44b45425d26d6516f0a06a40330f0cb89a3e2729f133eb2b501d70143"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_live.rs",
+          "bytes": 14751,
+          "sha256": "b8fd036d8e18f15264b713c185dcfd8db7f9283ed5e972626f58279741959323"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\garen_w_state.rs",
+          "bytes": 8651,
+          "sha256": "1996f7bcc34d14f9dd78a3b8b937547c4ca9188ef4613fbe7f5bf10bf9c1fa1c"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\garen_w_live.rs",
+          "bytes": 9038,
+          "sha256": "a205a1a74b18be569c10a2656fee44d11bbcffaeb9c0fc1ea453864e51527f69"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\trundle_w.rs",
+          "bytes": 19256,
+          "sha256": "60b6f715269242c6e1eeb493a3b9390f3d49f58002be10081e33ea260d7aca8b"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\trundle_w_animation.rs",
+          "bytes": 17893,
+          "sha256": "87a6824b00d88ef0658cbde42318e20511fe851fbd4cf25bbed2cb9f4f08294f"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\native_effect_resource_skin_alias.rs",
+          "bytes": 2609,
+          "sha256": "8a8a5a076b478e061520310927cef938b3ae4833b7e1b714a7e041d029a153b6"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\garen_w_profile.rs",
+          "bytes": 1094,
+          "sha256": "f4f6ba3148ad6079f60c8806148a42377b4a99492125597030359da0dd7293a2"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+          "bytes": 141376,
+          "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+          "bytes": 141376,
+          "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+        }
+      ],
+      "scope": "Bounded gameplay-to-VFX consumers,56 CPU Rust tests;no native or GPU process executed."
+    },
+    "receipts": {
+      "q-flash-event-research.json": {
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_events.rs",
+              "bytes": 29854,
+              "sha256": "0a2455d44b45425d26d6516f0a06a40330f0cb89a3e2729f133eb2b501d70143"
+            },
+            "line": 67,
+            "needle": "pub fn observe_accepted_frame(",
+            "finding": "Admission uniquement depuis contexte accepté OLSR ;pas de hit inféré de la mort ou disparition."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_events.rs",
+              "bytes": 29854,
+              "sha256": "0a2455d44b45425d26d6516f0a06a40330f0cb89a3e2729f133eb2b501d70143"
+            },
+            "line": 174,
+            "needle": "pub fn take(",
+            "finding": "Consommation bornée32 événements,6 propriétaires,délai3 ticks local ;naissances en pause écartées."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+              "bytes": 141376,
+              "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+            },
+            "line": 1181,
+            "needle": "let _ = state.ezreal_q_flash_events.observe_accepted_frame(",
+            "finding": "Appel réel depuis réception snapshot avant regroupement."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_live.rs",
+              "bytes": 14751,
+              "sha256": "b8fd036d8e18f15264b713c185dcfd8db7f9283ed5e972626f58279741959323"
+            },
+            "line": 168,
+            "needle": "let requests=state.ezreal_q_flash_events.take(",
+            "finding": "Consommation réelle par adaptateur visuel ;contrôle FoW du dessin indépendant."
+          }
+        ],
+        "tests": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\q-flash-event-test-receipt.json",
+          "bytes": 2630,
+          "sha256": "9c54416632fef3b542696deb6a6ae86c368343d0355c89d31ea06a1bbb95e5fe"
+        },
+        "native_or_gpu_executed": false,
+        "full_task_scope_complete": false
+      },
+      "w-cast-projectile-research.json": {
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_w_cast_animation.rs",
+              "bytes": 19555,
+              "sha256": "293c126cfc573f6385ad6634aea385129eb180fe43fde9b3718cd5a5085ebb88"
+            },
+            "line": 48,
+            "needle": "pub fn observe_with_other_casts(",
+            "finding": "Observation de chaque cast accepté avant regroupement ;conflits Q/W/R retirés."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\animation.rs",
+              "bytes": 116564,
+              "sha256": "af685f610a3185e8d845a8398c420c54346b32c980b0a7af3952e00ebfff7d32"
+            },
+            "line": 750,
+            "needle": "state.ezreal_w_cast_visuals.select(actor.playback.id,",
+            "finding": "Consommation réelle du cast W par sélection animation ;âge1x local."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_w_missile_presentation.rs",
+              "bytes": 10897,
+              "sha256": "c8083e7bd3caecb1d6d0d7f20b6d72c5540cfdafe7ef0e0b4dfeec5db2c977bc"
+            },
+            "line": 28,
+            "needle": "pub fn observe_accepted_frame(",
+            "finding": "Position/direction/hauteur provenant de trame OLSR acceptée ;époque et identité vérifiées."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_w_missile_live.rs",
+              "bytes": 15559,
+              "sha256": "5a7cc68311235e9fad3218c1a02cefed050258bda2443602f1b8059d4f020498"
+            },
+            "line": 205,
+            "needle": "let samples=state.ezreal_w_missiles.samples(",
+            "finding": "Échantillons serveur consommés par effet vivant ;pause et fraîcheur locales distinctes."
+          }
+        ],
+        "tests": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\w-cast-projectile-test-receipt.json",
+          "bytes": 3971,
+          "sha256": "6b81172a545960b84e3b8b01d15c71039e8765536a2ef99aa46e20a554c72248"
+        },
+        "native_or_gpu_executed": false,
+        "full_task_scope_complete": false
+      },
+      "garen-buff-research.json": {
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\garen_w_state.rs",
+              "bytes": 8651,
+              "sha256": "1996f7bcc34d14f9dd78a3b8b937547c4ca9188ef4613fbe7f5bf10bf9c1fa1c"
+            },
+            "line": 84,
+            "needle": "pub fn observe_frame(",
+            "finding": "Observation ordonnée par session,époque et trame ;contrat serveur local Courage."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\garen_w_state.rs",
+              "bytes": 8651,
+              "sha256": "1996f7bcc34d14f9dd78a3b8b937547c4ca9188ef4613fbe7f5bf10bf9c1fa1c"
+            },
+            "line": 153,
+            "needle": "pub fn sustained(",
+            "finding": "Âge visible et durée depuis identité started/end ;retiré après expiration."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\garen_w_state.rs",
+              "bytes": 8651,
+              "sha256": "1996f7bcc34d14f9dd78a3b8b937547c4ca9188ef4613fbe7f5bf10bf9c1fa1c"
+            },
+            "line": 166,
+            "needle": "if player.health <= 0.",
+            "finding": "Mort,respawn et courage_until expiré refusent une identité active."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\garen_w_live.rs",
+              "bytes": 9038,
+              "sha256": "a205a1a74b18be569c10a2656fee44d11bbcffaeb9c0fc1ea453864e51527f69"
+            },
+            "line": 132,
+            "needle": "let Some(sustained)=state.w_visuals.0.sustained(",
+            "finding": "Consommateur vivant du buff soutenu ;appelant natif des six effets non reconstitué."
+          }
+        ],
+        "tests": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\garen-buff-test-receipt.json",
+          "bytes": 3227,
+          "sha256": "07789434ec33ae6e62700741eb493599c5ae9ce8f486bb76bf67416f4a02f960"
+        },
+        "native_or_gpu_executed": false,
+        "full_task_scope_complete": false
+      },
+      "zone-skin-research.json": {
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\trundle_w.rs",
+              "bytes": 19256,
+              "sha256": "60b6f715269242c6e1eeb493a3b9390f3d49f58002be10081e33ea260d7aca8b"
+            },
+            "line": 93,
+            "needle": "pub(crate) fn cast_trundle_w_at(",
+            "finding": "Zone gameplay propriétaire/centre/début/fin ;rayon1000 reconstruction communautaire explicite."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\trundle_w_animation.rs",
+              "bytes": 17893,
+              "sha256": "87a6824b00d88ef0658cbde42318e20511fe851fbd4cf25bbed2cb9f4f08294f"
+            },
+            "line": 97,
+            "needle": "let Some(zone)=champion.effects.trundle_w.as_ref()",
+            "finding": "Consommateur animation du lancement/identité de zone ;pas preuve de rendu persistant de surface."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\native_effect_resource_skin_alias.rs",
+              "bytes": 2609,
+              "sha256": "8a8a5a076b478e061520310927cef938b3ae4833b7e1b714a7e041d029a153b6"
+            },
+            "line": 7,
+            "needle": "pub fn resolve(",
+            "finding": "Alias _SkinNN conditionné au propriétaire et disponibilité fournie ;360 cas natifs hérités vérifiés."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\garen_w_profile.rs",
+              "bytes": 1094,
+              "sha256": "f4f6ba3148ad6079f60c8806148a42377b4a99492125597030359da0dd7293a2"
+            },
+            "line": 14,
+            "needle": "pub const BASE_OVERRIDE:",
+            "finding": "Descripteur visuel Garen limité au skin de base ;autres variantes non qualifiées."
+          }
+        ],
+        "tests": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\zone-skin-test-receipt.json",
+          "bytes": 6658,
+          "sha256": "934dc8a5ab60d01a4e9c4ea55e18472266b21c6621c8d4dac67d33c39a8373b6"
+        },
+        "native_or_gpu_executed": false,
+        "full_task_scope_complete": false
+      },
+      "arrival-q-host-research.json": {
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_e_arrival_heads_profile.rs",
+              "bytes": 7457,
+              "sha256": "214f2163a81b3a7d9b1527cbc87c48ada77733274eb49883e6f66385c9ddd7e7"
+            },
+            "line": 30,
+            "needle": "pub(crate) fn load()",
+            "finding": "Deux groupes ArrivalHeads lus avec contrôle des octets originaux ;attachement et départ locaux."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+              "bytes": 141376,
+              "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+            },
+            "line": 743,
+            "needle": ".add_plugins(ezreal_e_arrival_heads_live::Plugin)",
+            "finding": "ArrivalHeads déjà intégré au client courant ;ne pas traiter comme absent."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+              "bytes": 141376,
+              "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+            },
+            "line": 738,
+            "needle": ".add_plugins(ezreal_q_flash_live::Plugin)",
+            "finding": "Flash Q déjà intégré ;tests CPU ne prouvent pas rendu GPU."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_e_arrival_heads_profile.rs",
+              "bytes": 7457,
+              "sha256": "214f2163a81b3a7d9b1527cbc87c48ada77733274eb49883e6f66385c9ddd7e7"
+            },
+            "line": 8,
+            "needle": "pub(crate) const POLICY:",
+            "finding": "Politique locale nommée map10_e_committed_arrival_heads_ground_local_v1."
+          }
+        ],
+        "tests": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\arrival-q-host-test-receipt.json",
+          "bytes": 7176,
+          "sha256": "e5d5e542f46ac3fd4ddfe57969cb3b952f0a523f1e6e4cbc68d6ba7be8ae13cb"
+        },
+        "native_or_gpu_executed": false,
+        "full_task_scope_complete": false
+      },
+      "q-flash-event-test-receipt.json": {
+        "utc": "2026-10-23T05:25:15.346829+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\run_q_flash_tests.py",
+          "bytes": 1609,
+          "sha256": "966d92b4500bff3c91984670c5b5b79469d4af7810fc31769613fda16e7f029d"
+        },
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-client",
+              "ezreal_q_flash_events::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "ezreal_q_flash_events::tests::invalid_optional_body_consumes_frame_and_cannot_be_repaired_at_same_ordinal",
+              "ezreal_q_flash_events::tests::malformed_or_conflicting_extensions_are_atomic_and_missing_extension_is_silent",
+              "ezreal_q_flash_events::tests::join_epoch_fow_pause_and_clock_failure_consume_without_deferred_flash",
+              "ezreal_q_flash_events::tests::accepted_packets_coalesce_without_losing_hits_and_duplicates_never_replay",
+              "ezreal_q_flash_events::tests::only_exact_olsr_delivery_authorizes_and_legacy_gaps_revoke_before_coalescing",
+              "ezreal_q_flash_events::tests::full_u64_context_orders_and_frames_survive_and_reconnection_baselines_old_hits",
+              "ezreal_q_flash_events::tests::queue_freshness_and_owner_budgets_bound_optional_presentation",
+              "ezreal_q_flash_events::tests::real_q_acceptance_shield_lethal_and_miss_drive_only_their_frozen_facts"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_q_flash_events-tests.log",
+              "bytes": 80835,
+              "sha256": "2da5325acc015df3e742c8af1b1dff1abfe8421e15169a353381b62eac66bb52"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+                "bytes": 352612864,
+                "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "path": "F:\\OpenLeague\\Cargo.lock",
+            "bytes": 153304,
+            "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_events.rs",
+            "bytes": 29854,
+            "sha256": "0a2455d44b45425d26d6516f0a06a40330f0cb89a3e2729f133eb2b501d70143"
+          }
+        ],
+        "scope": "Fresh current Rust tests for bounded authoritative Q flash event admission;retained native vectors,no original process or GPU execution.",
+        "native_or_gpu_executed": false
+      },
+      "w-cast-projectile-test-receipt.json": {
+        "utc": "2026-10-23T05:26:27.184230+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\run_w_cast_projectile_tests.py",
+          "bytes": 1718,
+          "sha256": "3435336374288a47b21755c0b23dba2868ed72b7738e180448ae609360d3fb2e"
+        },
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-client",
+              "ezreal_w_cast_animation::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "ezreal_w_cast_animation::tests::w_real_pending_uses_unscaled_age_freezes_on_pause_and_ends_at_release",
+              "ezreal_w_cast_animation::tests::w_baseline_epoch_late_discovery_stale_packets_and_new_cast_have_distinct_lifetimes",
+              "ezreal_w_cast_animation::tests::w_committed_stun_silence_and_forced_motion_do_not_rewrite_gameplay_or_clip_time",
+              "ezreal_w_cast_animation::tests::w_absence_death_fog_end_and_connection_gap_consume_same_ordinal_in_one_batch",
+              "ezreal_w_cast_animation::tests::w_invalid_row_clock_missing_clip_or_replaced_player_never_rearms",
+              "ezreal_w_cast_animation::tests::w_contradictory_real_q_or_r_cast_retires_all_channels_before_coalescing"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_w_cast_animation-tests.log",
+              "bytes": 80622,
+              "sha256": "d12a4bdfca2de520c91f9ce87a3cea57005aae60d8fccd47fc8dd92b64763917"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+                "bytes": 352612864,
+                "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+              }
+            ]
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-client",
+              "ezreal_w_missile_presentation::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "ezreal_w_missile_presentation::tests::atomic_xyz_hidden_owner_full_identity_and_no_extrapolation",
+              "ezreal_w_missile_presentation::tests::pause_keeps_atomic_pose_but_never_permission_and_legacy_or_bad_data_retires",
+              "ezreal_w_missile_presentation::tests::same_batch_loss_and_reveal_replace_episode_and_same_tick_replays_do_not_refresh",
+              "ezreal_w_missile_presentation::tests::session_epoch_direction_roster_time_and_counter_fail_closed"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_w_missile_presentation-tests.log",
+              "bytes": 80386,
+              "sha256": "8f7ea40cf15a9e21564c74a3d4898a0ce1478c174acd99cb7e1f5af2cf49e29f"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+                "bytes": 352612864,
+                "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "path": "F:\\OpenLeague\\Cargo.lock",
+            "bytes": 153304,
+            "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_w_cast_animation.rs",
+            "bytes": 19555,
+            "sha256": "293c126cfc573f6385ad6634aea385129eb180fe43fde9b3718cd5a5085ebb88"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_w_missile_presentation.rs",
+            "bytes": 10897,
+            "sha256": "c8083e7bd3caecb1d6d0d7f20b6d72c5540cfdafe7ef0e0b4dfeec5db2c977bc"
+          }
+        ],
+        "scope": "Fresh current Rust tests for W cast selection and current server projectile presentation;retained native vectors,no original process or GPU execution.",
+        "native_or_gpu_executed": false
+      },
+      "garen-buff-test-receipt.json": {
+        "utc": "2026-10-23T05:27:28.196574+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\run_garen_buff_tests.py",
+          "bytes": 1637,
+          "sha256": "ecbf23d705b3f79e8115cea1a2008ecee716b2db412407cedeb27a610c514f91"
+        },
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-client",
+              "garen_w_state::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "garen_w_state::tests::same_tick_frame_visibility_clear_and_departure_retire_courage_without_age_restart",
+              "garen_w_state::tests::w_no_spell_clip_movement_spin_or_attack_state_is_changed_by_observation",
+              "garen_w_state::tests::w_delayed_first_sight_is_sustained_at_network_age_not_a_new_burst",
+              "garen_w_state::tests::same_session_epoch_preserves_courage_anchor_and_rejects_replayed_frames",
+              "garen_w_state::tests::w_same_cast_snapshots_rank_change_and_clock_pause_never_restart_age",
+              "garen_w_state::tests::w_hidden_intermediate_snapshot_removes_output_and_keeps_only_age",
+              "garen_w_state::tests::w_fog_return_does_not_revive_expired_age_but_next_cast_has_its_own_anchor",
+              "garen_w_state::tests::w_duplicate_unknown_sources_and_capacity_overflow_are_rejected_before_commit",
+              "garen_w_state::tests::w_two_actors_have_independent_identities_and_visibility",
+              "garen_w_state::tests::w_departure_completion_and_session_reset_retire_local_contexts",
+              "garen_w_state::tests::w_explicit_clear_death_and_respawn_do_not_resume_the_same_identity",
+              "garen_w_state::tests::w_bad_committed_state_is_transactional_and_inactive_legacy_is_unknown",
+              "garen_w_state::tests::w_real_casts_commit_identity_for_all_ranks_cdr_and_during_judgment"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\garen_w_state-tests.log",
+              "bytes": 81254,
+              "sha256": "99b60bd145c9fb5d42579b515a25c820334ac02a6db2f1d304a2c94f70b1df6b"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+                "bytes": 352612864,
+                "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "path": "F:\\OpenLeague\\Cargo.lock",
+            "bytes": 153304,
+            "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\garen_w_state.rs",
+            "bytes": 8651,
+            "sha256": "1996f7bcc34d14f9dd78a3b8b937547c4ca9188ef4613fbe7f5bf10bf9c1fa1c"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\garen_w_state_tests.rs",
+            "bytes": 12009,
+            "sha256": "d56720e90a197c9718bd5d5ca90c6780e875a5dad41f63ab5561892864564001"
+          }
+        ],
+        "scope": "Fresh current Rust tests for bounded sustained Courage identity and lifetime;retained native vectors,no original process or GPU execution.",
+        "native_or_gpu_executed": false
+      },
+      "zone-skin-test-receipt.json": {
+        "utc": "2026-10-23T05:28:38.981326+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\run_zone_skin_tests.py",
+          "bytes": 1689,
+          "sha256": "138fe1b6cf1d2469cfe89060a564a2b68a9e45255a23ac88c0336812d47d96f4"
+        },
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-core",
+              "trundle_w::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "trundle_w::tests::zone_boundary_entry_exit_and_half_open_duration_use_current_position",
+              "trundle_w::tests::membership_is_owner_only_and_bad_serialized_state_never_grants_modifiers",
+              "trundle_w::tests::ranked_target_range_is_closed_and_invalid_ground_is_never_clamped",
+              "trundle_w::tests::ordinary_cast_commits_once_preserving_windup_path_q_and_cached_roll",
+              "trundle_w::tests::shared_heal_regeneration_potion_and_ignite_order_are_not_double_amplified",
+              "trundle_w::tests::six_owners_keep_separate_domains_and_shared_stats_caps_do_not_change",
+              "trundle_w::tests::lifesteal_and_installed_death_passive_use_the_same_received_healing_once",
+              "trundle_w::tests::captured_rank_death_respawn_and_terminal_guards_leave_no_sticky_buff",
+              "trundle_w::tests::rejected_commands_do_not_spend_reset_cancel_or_replace_a_zone",
+              "trundle_w::tests::verified_rank_values_and_missing_duplicate_nonfinite_rows_are_strict"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\trundle_w-tests.log",
+              "bytes": 15971,
+              "sha256": "e3ee32411c3639465d5475d1f71a30d6b038a0babd703ce35f3dc95f64c58daa"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+                "bytes": 787789824,
+                "sha256": "46d3732181601e8bfdc1923857d66192fd2a18fba13fe7aa3bd2f80876f74e6d"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+                "bytes": 6285312,
+                "sha256": "d9edcf79a66d1ac56e78b7b41c3b0b1fb58b80233ed41c2338a6fb9f5e696702"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+                "bytes": 6056960,
+                "sha256": "7791975eff9f583c94791b54664393dd05447aeef7c504d705b623b74bd4a80a"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+                "bytes": 922624,
+                "sha256": "e291d277c0fa15af20b32df3a64c06a093135f9f2d8d2293e9198ef70eadc0e4"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+                "bytes": 6248448,
+                "sha256": "e4124365733329f6e095d0b67fc20e57940d2496de1c2401b0bd0a8439cd42e0"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+                "bytes": 5990912,
+                "sha256": "20f86f1140ab38925ee9fb8cd07da4a12e28c6cfa2d71da169d79ea73873073b"
+              }
+            ]
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-core",
+              "native_effect_resource_skin_alias::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "native_effect_resource_skin_alias::tests::matches360_original_alias_executions"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\native_effect_resource_skin_alias-tests.log",
+              "bytes": 15067,
+              "sha256": "c648e85dd89b2ce0b0059091703e023604c955c2889b3c07b98a57e81a282da3"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+                "bytes": 787789824,
+                "sha256": "46d3732181601e8bfdc1923857d66192fd2a18fba13fe7aa3bd2f80876f74e6d"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+                "bytes": 6285312,
+                "sha256": "d9edcf79a66d1ac56e78b7b41c3b0b1fb58b80233ed41c2338a6fb9f5e696702"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+                "bytes": 6056960,
+                "sha256": "7791975eff9f583c94791b54664393dd05447aeef7c504d705b623b74bd4a80a"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+                "bytes": 922624,
+                "sha256": "e291d277c0fa15af20b32df3a64c06a093135f9f2d8d2293e9198ef70eadc0e4"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+                "bytes": 6248448,
+                "sha256": "e4124365733329f6e095d0b67fc20e57940d2496de1c2401b0bd0a8439cd42e0"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+                "bytes": 5990912,
+                "sha256": "20f86f1140ab38925ee9fb8cd07da4a12e28c6cfa2d71da169d79ea73873073b"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "path": "F:\\OpenLeague\\Cargo.lock",
+            "bytes": 153304,
+            "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\core\\src\\native_effect_resource_skin_alias.rs",
+            "bytes": 2609,
+            "sha256": "8a8a5a076b478e061520310927cef938b3ae4833b7e1b714a7e041d029a153b6"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\core\\src\\trundle_w.rs",
+            "bytes": 19256,
+            "sha256": "60b6f715269242c6e1eeb493a3b9390f3d49f58002be10081e33ea260d7aca8b"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\effect_resource_skin_alias_contract.json",
+            "bytes": 94289,
+            "sha256": "5735a61a100974b1bb6a69e617356046d13093a75d8b5a41dd7918e94523fc1f"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\native_spells_420.json",
+            "bytes": 2710444,
+            "sha256": "0cae6f5c167aa852e8f86e7f3298d7c797727d5cc92616dcb856ac15c8af5d14"
+          }
+        ],
+        "scope": "Fresh current Rust tests for zone gameplay and native resource alias; no full visual dispatch;retained native vectors,no original process or GPU execution.",
+        "native_or_gpu_executed": false
+      },
+      "arrival-q-host-test-receipt.json": {
+        "utc": "2026-10-23T05:29:41.109139+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\run_arrival_q_host_tests.py",
+          "bytes": 1915,
+          "sha256": "117107fe9bf4c5accd24fcc18df24d02d42f1446237ac1a358f3bbe6dc446005"
+        },
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-client",
+              "ezreal_e_arrival_heads_profile::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "ezreal_e_arrival_heads_profile::tests::same_sense_authored_rotations_keep_half_turn_offset_and_probability_inclusive_bound",
+              "ezreal_e_arrival_heads_profile::tests::head_pair_checks_original_fields_and_rejects_resource_or_metadata_tampering"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_e_arrival_heads_profile-tests.log",
+              "bytes": 80173,
+              "sha256": "576a7f88c3fa1e05937277d445e35549d35d38bf5fc8537a33c4fa0439021c57"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+                "bytes": 352612864,
+                "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+              }
+            ]
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-client",
+              "ezreal_e_arrival_heads_live::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "ezreal_e_arrival_heads_live::tests::connection_or_asset_failure_clears_only_this_host_and_consumes_birth",
+              "ezreal_e_arrival_heads_live::tests::arrival_image_and_palette_require_exact_dds_bytes_layout_and_sampler",
+              "ezreal_e_arrival_heads_live::tests::paired_emission_generates_type0_quads_from_public_ground_without_actor",
+              "ezreal_e_arrival_heads_live::tests::pause_keeps_mesh_but_changed_camera_rebuilds_only_geometry_before_strict_submission",
+              "ezreal_e_arrival_heads_live::tests::same_batch_permission_loss_and_epoch_change_retire_without_retry"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_e_arrival_heads_live-tests.log",
+              "bytes": 80509,
+              "sha256": "c52f882e247c00df108d591772e34f75173cac7524256573b0d47b3e12403cfc"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+                "bytes": 352612864,
+                "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+              }
+            ]
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-client",
+              "ezreal_q_flash_live::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "ezreal_q_flash_live::tests::failed_first_resource_admission_consumes_birth_without_late_loading_retry",
+              "ezreal_q_flash_live::tests::ground_quad_has_four_vertices_one_degree_and_one_native_unit_conversion_without_actor",
+              "ezreal_q_flash_live::tests::exact_two_dds_formats_mips_bytes_and_local_sampler_are_required",
+              "ezreal_q_flash_live::tests::same_batch_missing_and_reveal_with_visible_owner_retires_without_rebirth",
+              "ezreal_q_flash_live::tests::independent_flash_queue_does_not_consume_audio_and_rejects_cross_epoch_frontier",
+              "ezreal_q_flash_live::tests::pause_freezes_current_geometry_but_expiry_and_revocation_do_not_resume",
+              "ezreal_q_flash_live::tests::connection_loss_or_changed_base_model_clears_only_owned_flash_and_never_retries"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_q_flash_live-tests.log",
+              "bytes": 80719,
+              "sha256": "d6babf9505f3c2551feb07a0ebef125eea598f316a6ab6477736caa42678bb5f"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+                "bytes": 352612864,
+                "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "path": "F:\\OpenLeague\\assets\\particles\\ezreal\\e_release_flashes\\color-hold.dds",
+            "bytes": 160,
+            "sha256": "0fcb3d98976985436701a1289b9739d16c126543b49d6c4e1a7efac1034fe1b5"
+          },
+          {
+            "path": "F:\\OpenLeague\\assets\\particles\\ezreal\\e_release_flashes\\flare-sun.dds",
+            "bytes": 87536,
+            "sha256": "a74e4785ba65a425cf729bf1aa6abdb1d62aff02a184118acdefacadb31a76f1"
+          },
+          {
+            "path": "F:\\OpenLeague\\assets\\particles\\ezreal\\r_flash\\color-hit-physical.dds",
+            "bytes": 640,
+            "sha256": "c424dcfe60bc7369871ae0632c6832ad596ef4f8526e91dbc3380eb8bacfecde"
+          },
+          {
+            "path": "F:\\OpenLeague\\assets\\particles\\ezreal\\r_flash\\flare-sun.dds",
+            "bytes": 87536,
+            "sha256": "a74e4785ba65a425cf729bf1aa6abdb1d62aff02a184118acdefacadb31a76f1"
+          },
+          {
+            "path": "F:\\OpenLeague\\Cargo.lock",
+            "bytes": 153304,
+            "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_e_arrival_heads_live.rs",
+            "bytes": 13766,
+            "sha256": "0ce4fdb551ec12d82252fa204190980d211bd43372f1239a9e6f680d82a71741"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_e_arrival_heads_live_tests.rs",
+            "bytes": 8752,
+            "sha256": "2ba5f95194433e53c539f40b35d97f3cd2722581e0c405a62246c02a4a345ff3"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_e_arrival_heads_profile.rs",
+            "bytes": 7457,
+            "sha256": "214f2163a81b3a7d9b1527cbc87c48ada77733274eb49883e6f66385c9ddd7e7"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_live.rs",
+            "bytes": 14751,
+            "sha256": "b8fd036d8e18f15264b713c185dcfd8db7f9283ed5e972626f58279741959323"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_live_tests.rs",
+            "bytes": 10426,
+            "sha256": "1d637dc8918c8f86303673b6eda89cebc2fa1097bf0eab34a1faa6f6a5c9b6ac"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\ezreal_e_arrival_heads.json",
+            "bytes": 15969,
+            "sha256": "cd1c6358c95ce94509a572dca2257328ce772ef62ba0eff129fd64fcd7421b02"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\particles\\ezreal\\Ezreal_arcaneshift_flash.troybin",
+            "bytes": 2809,
+            "sha256": "f53eea714128b429eff546e70c860c34954705c54afe8f9adb14cd62dc890899"
+          }
+        ],
+        "scope": "Fresh current Rust tests for ArrivalHeads profile and two VFX CPU host adapters;not GPU execution;retained native vectors,no original process or GPU execution.",
+        "native_or_gpu_executed": false
+      }
+    },
+    "source_checks": [
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\vfx-binding-associations.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\prepare_vfx_reader.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\q-flash-event-research.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\w-cast-projectile-research.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\garen-buff-research.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\zone-skin-research.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\arrival-q-host-research.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\q-flash-event-test-receipt.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\w-cast-projectile-test-receipt.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\garen-buff-test-receipt.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\zone-skin-test-receipt.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\arrival-q-host-test-receipt.json",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_w_cast_animation.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\animation.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_w_missile_presentation.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_w_missile_live.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_events.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_live.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\garen_w_state.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\garen_w_live.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\trundle_w.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\trundle_w_animation.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\native_effect_resource_skin_alias.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\garen_w_profile.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_events.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_events.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_live.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\q-flash-event-test-receipt.json",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_w_cast_animation.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\animation.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_w_missile_presentation.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_w_missile_live.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\w-cast-projectile-test-receipt.json",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\garen_w_state.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\garen_w_state.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\garen_w_state.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\garen_w_live.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\garen-buff-test-receipt.json",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\trundle_w.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\trundle_w_animation.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\native_effect_resource_skin_alias.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\garen_w_profile.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\zone-skin-test-receipt.json",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_arrival_heads_profile.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_arrival_heads_profile.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\arrival-q-host-test-receipt.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\run_q_flash_tests.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_q_flash_events-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague\\Cargo.lock",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_events.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\run_w_cast_projectile_tests.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_w_cast_animation-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_w_missile_presentation-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague\\Cargo.lock",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_w_cast_animation.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_w_missile_presentation.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\run_garen_buff_tests.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\garen_w_state-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague\\Cargo.lock",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\garen_w_state.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\garen_w_state_tests.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\run_zone_skin_tests.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\trundle_w-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\native_effect_resource_skin_alias-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+      "pin_F:\\OpenLeague\\Cargo.lock",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\native_effect_resource_skin_alias.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\trundle_w.rs",
+      "pin_F:\\OpenLeague\\data\\4.20\\effect_resource_skin_alias_contract.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\native_spells_420.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\run_arrival_q_host_tests.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_e_arrival_heads_profile-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_e_arrival_heads_live-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_q_flash_live-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague\\assets\\particles\\ezreal\\e_release_flashes\\color-hold.dds",
+      "pin_F:\\OpenLeague\\assets\\particles\\ezreal\\e_release_flashes\\flare-sun.dds",
+      "pin_F:\\OpenLeague\\assets\\particles\\ezreal\\r_flash\\color-hit-physical.dds",
+      "pin_F:\\OpenLeague\\assets\\particles\\ezreal\\r_flash\\flare-sun.dds",
+      "pin_F:\\OpenLeague\\Cargo.lock",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_arrival_heads_live.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_arrival_heads_live_tests.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_arrival_heads_profile.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_live.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_live_tests.rs",
+      "pin_F:\\OpenLeague\\data\\4.20\\ezreal_e_arrival_heads.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\particles\\ezreal\\Ezreal_arcaneshift_flash.troybin",
+      "tests_0",
+      "tests_8",
+      "tests_14",
+      "tests_18",
+      "tests_31",
+      "tests_41",
+      "tests_42",
+      "tests_44",
+      "tests_49",
+      "56_rust_tests",
+      "seven_associations",
+      "task_SYS-15.2-01",
+      "anchor_vfx_binding_1_0",
+      "anchor_vfx_binding_1_1",
+      "task_SYS-15.2-02",
+      "anchor_vfx_binding_2_0",
+      "anchor_vfx_binding_2_1",
+      "task_SYS-15.2-03",
+      "anchor_vfx_binding_3_0",
+      "anchor_vfx_binding_3_1",
+      "task_SYS-15.2-04",
+      "anchor_vfx_binding_4_0",
+      "anchor_vfx_binding_4_1",
+      "task_SYS-15.2-05",
+      "anchor_vfx_binding_5_0",
+      "anchor_vfx_binding_5_1",
+      "task_SYS-15.2-06",
+      "anchor_vfx_binding_6_0",
+      "anchor_vfx_binding_6_1",
+      "task_SYS-15.2-07",
+      "anchor_vfx_binding_7_0",
+      "anchor_vfx_binding_7_1"
+    ],
+    "all_vfx_bindings_qualified": false,
+    "all_required_effects_covered": false
+  },
+  "source_identities": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\vfx-binding-associations.json",
+      "bytes": 12513,
+      "sha256": "7718173757b4b547b7528ac60d075899679b342aef04c7062088e097c0e4ed93"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\prepare_vfx_reader.py",
+      "bytes": 3814,
+      "sha256": "e3043afa34ea46a00c447d1287b015e47954ef389a32692c8d7c55d554162d80"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\q-flash-event-research.json",
+      "bytes": 2010,
+      "sha256": "7bbe27472eb8d4f1499cf8efd6dcbd27d3a385c5e8a6adcc6b351a6839d29d4a"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\w-cast-projectile-research.json",
+      "bytes": 2034,
+      "sha256": "3fa2ee9d1db05abb963ed9c308e2df9c28b34d383dbf5a1f477654e3f29dad62"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\garen-buff-research.json",
+      "bytes": 1919,
+      "sha256": "5cece384fac229bffa8e55925d540bf277920f2e66a179edfb67a31f252685b3"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\zone-skin-research.json",
+      "bytes": 2020,
+      "sha256": "fa11513e504d1cac19558bc65b064e4b3d644a3b6ce44c5ca6b5770ff5e93eee"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\arrival-q-host-research.json",
+      "bytes": 1964,
+      "sha256": "700eb3384a4be165bbe709235a713e60801f2aa2caaa0d39c341cc68fddda98f"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\q-flash-event-test-receipt.json",
+      "bytes": 2630,
+      "sha256": "9c54416632fef3b542696deb6a6ae86c368343d0355c89d31ea06a1bbb95e5fe"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\w-cast-projectile-test-receipt.json",
+      "bytes": 3971,
+      "sha256": "6b81172a545960b84e3b8b01d15c71039e8765536a2ef99aa46e20a554c72248"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\garen-buff-test-receipt.json",
+      "bytes": 3227,
+      "sha256": "07789434ec33ae6e62700741eb493599c5ae9ce8f486bb76bf67416f4a02f960"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\zone-skin-test-receipt.json",
+      "bytes": 6658,
+      "sha256": "934dc8a5ab60d01a4e9c4ea55e18472266b21c6621c8d4dac67d33c39a8373b6"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\arrival-q-host-test-receipt.json",
+      "bytes": 7176,
+      "sha256": "e5d5e542f46ac3fd4ddfe57969cb3b952f0a523f1e6e4cbc68d6ba7be8ae13cb"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_w_cast_animation.rs",
+      "bytes": 19555,
+      "sha256": "293c126cfc573f6385ad6634aea385129eb180fe43fde9b3718cd5a5085ebb88"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\animation.rs",
+      "bytes": 116564,
+      "sha256": "af685f610a3185e8d845a8398c420c54346b32c980b0a7af3952e00ebfff7d32"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_w_missile_presentation.rs",
+      "bytes": 10897,
+      "sha256": "c8083e7bd3caecb1d6d0d7f20b6d72c5540cfdafe7ef0e0b4dfeec5db2c977bc"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_w_missile_live.rs",
+      "bytes": 15559,
+      "sha256": "5a7cc68311235e9fad3218c1a02cefed050258bda2443602f1b8059d4f020498"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_events.rs",
+      "bytes": 29854,
+      "sha256": "0a2455d44b45425d26d6516f0a06a40330f0cb89a3e2729f133eb2b501d70143"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_live.rs",
+      "bytes": 14751,
+      "sha256": "b8fd036d8e18f15264b713c185dcfd8db7f9283ed5e972626f58279741959323"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\garen_w_state.rs",
+      "bytes": 8651,
+      "sha256": "1996f7bcc34d14f9dd78a3b8b937547c4ca9188ef4613fbe7f5bf10bf9c1fa1c"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\garen_w_live.rs",
+      "bytes": 9038,
+      "sha256": "a205a1a74b18be569c10a2656fee44d11bbcffaeb9c0fc1ea453864e51527f69"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\trundle_w.rs",
+      "bytes": 19256,
+      "sha256": "60b6f715269242c6e1eeb493a3b9390f3d49f58002be10081e33ea260d7aca8b"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\trundle_w_animation.rs",
+      "bytes": 17893,
+      "sha256": "87a6824b00d88ef0658cbde42318e20511fe851fbd4cf25bbed2cb9f4f08294f"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\native_effect_resource_skin_alias.rs",
+      "bytes": 2609,
+      "sha256": "8a8a5a076b478e061520310927cef938b3ae4833b7e1b714a7e041d029a153b6"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\garen_w_profile.rs",
+      "bytes": 1094,
+      "sha256": "f4f6ba3148ad6079f60c8806148a42377b4a99492125597030359da0dd7293a2"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "bytes": 141376,
+      "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_e_arrival_heads_profile.rs",
+      "bytes": 7457,
+      "sha256": "214f2163a81b3a7d9b1527cbc87c48ada77733274eb49883e6f66385c9ddd7e7"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\run_q_flash_tests.py",
+      "bytes": 1609,
+      "sha256": "966d92b4500bff3c91984670c5b5b79469d4af7810fc31769613fda16e7f029d"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_q_flash_events-tests.log",
+      "bytes": 80835,
+      "sha256": "2da5325acc015df3e742c8af1b1dff1abfe8421e15169a353381b62eac66bb52"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "bytes": 352612864,
+      "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+    },
+    {
+      "path": "F:\\OpenLeague\\Cargo.lock",
+      "bytes": 153304,
+      "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\run_w_cast_projectile_tests.py",
+      "bytes": 1718,
+      "sha256": "3435336374288a47b21755c0b23dba2868ed72b7738e180448ae609360d3fb2e"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_w_cast_animation-tests.log",
+      "bytes": 80622,
+      "sha256": "d12a4bdfca2de520c91f9ce87a3cea57005aae60d8fccd47fc8dd92b64763917"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_w_missile_presentation-tests.log",
+      "bytes": 80386,
+      "sha256": "8f7ea40cf15a9e21564c74a3d4898a0ce1478c174acd99cb7e1f5af2cf49e29f"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\run_garen_buff_tests.py",
+      "bytes": 1637,
+      "sha256": "ecbf23d705b3f79e8115cea1a2008ecee716b2db412407cedeb27a610c514f91"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\garen_w_state-tests.log",
+      "bytes": 81254,
+      "sha256": "99b60bd145c9fb5d42579b515a25c820334ac02a6db2f1d304a2c94f70b1df6b"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\garen_w_state_tests.rs",
+      "bytes": 12009,
+      "sha256": "d56720e90a197c9718bd5d5ca90c6780e875a5dad41f63ab5561892864564001"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\run_zone_skin_tests.py",
+      "bytes": 1689,
+      "sha256": "138fe1b6cf1d2469cfe89060a564a2b68a9e45255a23ac88c0336812d47d96f4"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\trundle_w-tests.log",
+      "bytes": 15971,
+      "sha256": "e3ee32411c3639465d5475d1f71a30d6b038a0babd703ce35f3dc95f64c58daa"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+      "bytes": 787789824,
+      "sha256": "46d3732181601e8bfdc1923857d66192fd2a18fba13fe7aa3bd2f80876f74e6d"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+      "bytes": 6285312,
+      "sha256": "d9edcf79a66d1ac56e78b7b41c3b0b1fb58b80233ed41c2338a6fb9f5e696702"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+      "bytes": 6056960,
+      "sha256": "7791975eff9f583c94791b54664393dd05447aeef7c504d705b623b74bd4a80a"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+      "bytes": 922624,
+      "sha256": "e291d277c0fa15af20b32df3a64c06a093135f9f2d8d2293e9198ef70eadc0e4"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+      "bytes": 6248448,
+      "sha256": "e4124365733329f6e095d0b67fc20e57940d2496de1c2401b0bd0a8439cd42e0"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+      "bytes": 5990912,
+      "sha256": "20f86f1140ab38925ee9fb8cd07da4a12e28c6cfa2d71da169d79ea73873073b"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\native_effect_resource_skin_alias-tests.log",
+      "bytes": 15067,
+      "sha256": "c648e85dd89b2ce0b0059091703e023604c955c2889b3c07b98a57e81a282da3"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\effect_resource_skin_alias_contract.json",
+      "bytes": 94289,
+      "sha256": "5735a61a100974b1bb6a69e617356046d13093a75d8b5a41dd7918e94523fc1f"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\native_spells_420.json",
+      "bytes": 2710444,
+      "sha256": "0cae6f5c167aa852e8f86e7f3298d7c797727d5cc92616dcb856ac15c8af5d14"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\run_arrival_q_host_tests.py",
+      "bytes": 1915,
+      "sha256": "117107fe9bf4c5accd24fcc18df24d02d42f1446237ac1a358f3bbe6dc446005"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_e_arrival_heads_profile-tests.log",
+      "bytes": 80173,
+      "sha256": "576a7f88c3fa1e05937277d445e35549d35d38bf5fc8537a33c4fa0439021c57"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_e_arrival_heads_live-tests.log",
+      "bytes": 80509,
+      "sha256": "c52f882e247c00df108d591772e34f75173cac7524256573b0d47b3e12403cfc"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_q_flash_live-tests.log",
+      "bytes": 80719,
+      "sha256": "d6babf9505f3c2551feb07a0ebef125eea598f316a6ab6477736caa42678bb5f"
+    },
+    {
+      "path": "F:\\OpenLeague\\assets\\particles\\ezreal\\e_release_flashes\\color-hold.dds",
+      "bytes": 160,
+      "sha256": "0fcb3d98976985436701a1289b9739d16c126543b49d6c4e1a7efac1034fe1b5"
+    },
+    {
+      "path": "F:\\OpenLeague\\assets\\particles\\ezreal\\e_release_flashes\\flare-sun.dds",
+      "bytes": 87536,
+      "sha256": "a74e4785ba65a425cf729bf1aa6abdb1d62aff02a184118acdefacadb31a76f1"
+    },
+    {
+      "path": "F:\\OpenLeague\\assets\\particles\\ezreal\\r_flash\\color-hit-physical.dds",
+      "bytes": 640,
+      "sha256": "c424dcfe60bc7369871ae0632c6832ad596ef4f8526e91dbc3380eb8bacfecde"
+    },
+    {
+      "path": "F:\\OpenLeague\\assets\\particles\\ezreal\\r_flash\\flare-sun.dds",
+      "bytes": 87536,
+      "sha256": "a74e4785ba65a425cf729bf1aa6abdb1d62aff02a184118acdefacadb31a76f1"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_e_arrival_heads_live.rs",
+      "bytes": 13766,
+      "sha256": "0ce4fdb551ec12d82252fa204190980d211bd43372f1239a9e6f680d82a71741"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_e_arrival_heads_live_tests.rs",
+      "bytes": 8752,
+      "sha256": "2ba5f95194433e53c539f40b35d97f3cd2722581e0c405a62246c02a4a345ff3"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_live_tests.rs",
+      "bytes": 10426,
+      "sha256": "1d637dc8918c8f86303673b6eda89cebc2fa1097bf0eab34a1faa6f6a5c9b6ac"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\ezreal_e_arrival_heads.json",
+      "bytes": 15969,
+      "sha256": "cd1c6358c95ce94509a572dca2257328ce772ef62ba0eff129fd64fcd7421b02"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\particles\\ezreal\\Ezreal_arcaneshift_flash.troybin",
+      "bytes": 2809,
+      "sha256": "f53eea714128b429eff546e70c860c34954705c54afe8f9adb14cd62dc890899"
+    }
+  ],
+  "checks": [
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\vfx-binding-associations.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\prepare_vfx_reader.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\q-flash-event-research.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\w-cast-projectile-research.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\garen-buff-research.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\zone-skin-research.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\arrival-q-host-research.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\q-flash-event-test-receipt.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\w-cast-projectile-test-receipt.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\garen-buff-test-receipt.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\zone-skin-test-receipt.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\arrival-q-host-test-receipt.json",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_w_cast_animation.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\animation.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_w_missile_presentation.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_w_missile_live.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_events.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_live.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\garen_w_state.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\garen_w_live.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\trundle_w.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\trundle_w_animation.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\native_effect_resource_skin_alias.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\garen_w_profile.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_events.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_events.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_live.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\q-flash-event-test-receipt.json",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_w_cast_animation.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\animation.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_w_missile_presentation.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_w_missile_live.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\w-cast-projectile-test-receipt.json",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\garen_w_state.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\garen_w_state.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\garen_w_state.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\garen_w_live.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\garen-buff-test-receipt.json",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\trundle_w.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\trundle_w_animation.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\native_effect_resource_skin_alias.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\garen_w_profile.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\zone-skin-test-receipt.json",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_arrival_heads_profile.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_arrival_heads_profile.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\arrival-q-host-test-receipt.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\run_q_flash_tests.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_q_flash_events-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague\\Cargo.lock",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_events.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\run_w_cast_projectile_tests.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_w_cast_animation-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_w_missile_presentation-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague\\Cargo.lock",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_w_cast_animation.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_w_missile_presentation.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\run_garen_buff_tests.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\garen_w_state-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague\\Cargo.lock",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\garen_w_state.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\garen_w_state_tests.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\run_zone_skin_tests.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\trundle_w-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\native_effect_resource_skin_alias-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+    "pin_F:\\OpenLeague\\Cargo.lock",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\native_effect_resource_skin_alias.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\trundle_w.rs",
+    "pin_F:\\OpenLeague\\data\\4.20\\effect_resource_skin_alias_contract.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\native_spells_420.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\run_arrival_q_host_tests.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_e_arrival_heads_profile-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_e_arrival_heads_live-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision115\\ezreal_q_flash_live-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague\\assets\\particles\\ezreal\\e_release_flashes\\color-hold.dds",
+    "pin_F:\\OpenLeague\\assets\\particles\\ezreal\\e_release_flashes\\flare-sun.dds",
+    "pin_F:\\OpenLeague\\assets\\particles\\ezreal\\r_flash\\color-hit-physical.dds",
+    "pin_F:\\OpenLeague\\assets\\particles\\ezreal\\r_flash\\flare-sun.dds",
+    "pin_F:\\OpenLeague\\Cargo.lock",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_arrival_heads_live.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_arrival_heads_live_tests.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_e_arrival_heads_profile.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_live.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_q_flash_live_tests.rs",
+    "pin_F:\\OpenLeague\\data\\4.20\\ezreal_e_arrival_heads.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\particles\\ezreal\\Ezreal_arcaneshift_flash.troybin",
+    "tests_0",
+    "tests_8",
+    "tests_14",
+    "tests_18",
+    "tests_31",
+    "tests_41",
+    "tests_42",
+    "tests_44",
+    "tests_49",
+    "56_rust_tests",
+    "seven_associations",
+    "task_SYS-15.2-01",
+    "anchor_vfx_binding_1_0",
+    "anchor_vfx_binding_1_1",
+    "task_SYS-15.2-02",
+    "anchor_vfx_binding_2_0",
+    "anchor_vfx_binding_2_1",
+    "task_SYS-15.2-03",
+    "anchor_vfx_binding_3_0",
+    "anchor_vfx_binding_3_1",
+    "task_SYS-15.2-04",
+    "anchor_vfx_binding_4_0",
+    "anchor_vfx_binding_4_1",
+    "task_SYS-15.2-05",
+    "anchor_vfx_binding_5_0",
+    "anchor_vfx_binding_5_1",
+    "task_SYS-15.2-06",
+    "anchor_vfx_binding_6_0",
+    "anchor_vfx_binding_6_1",
+    "task_SYS-15.2-07",
+    "anchor_vfx_binding_7_0",
+    "anchor_vfx_binding_7_1"
+  ],
+  "checks_count": 141,
+  "associations": [
+    {
+      "task_id": "SYS-15.2-01",
+      "finding": "Observation de chaque cast accepté avant regroupement ;conflits Q/W/R retirés. Consommation réelle du cast W par sélection animation ;âge1x local.",
+      "remaining": "Bounded W cast selection only;all spell launch effects and native timing remain open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/ezreal_w_cast_animation.rs",
+          "line": 48,
+          "needle": "pub fn observe_with_other_casts(",
+          "role": "vfx_binding_1_0"
+        },
+        {
+          "path": "crates/client/src/animation.rs",
+          "line": 750,
+          "needle": "state.ezreal_w_cast_visuals.select(actor.playback.id,",
+          "role": "vfx_binding_1_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-f5f20268-690b-55fa-bb3d-96e061f1998a"
+    },
+    {
+      "task_id": "SYS-15.2-02",
+      "finding": "Position/direction/hauteur provenant de trame OLSR acceptée ;époque et identité vérifiées. Échantillons serveur consommés par effet vivant ;pause et fraîcheur locales distinctes.",
+      "remaining": "W exact current server position only;all projectile trajectories/native interpolation remain open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/ezreal_w_missile_presentation.rs",
+          "line": 28,
+          "needle": "pub fn observe_accepted_frame(",
+          "role": "vfx_binding_2_0"
+        },
+        {
+          "path": "crates/client/src/ezreal_w_missile_live.rs",
+          "line": 205,
+          "needle": "let samples=state.ezreal_w_missiles.samples(",
+          "role": "vfx_binding_2_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-9cf1f299-b103-5cb9-8d7b-4d533ca3a35b"
+    },
+    {
+      "task_id": "SYS-15.2-03",
+      "finding": "Admission uniquement depuis contexte accepté OLSR ;pas de hit inféré de la mort ou disparition. Consommation réelle par adaptateur visuel ;contrôle FoW du dessin indépendant.",
+      "remaining": "Q accepted impact presentation only;all impact effects and native visibility remain open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/ezreal_q_flash_events.rs",
+          "line": 67,
+          "needle": "pub fn observe_accepted_frame(",
+          "role": "vfx_binding_3_0"
+        },
+        {
+          "path": "crates/client/src/ezreal_q_flash_live.rs",
+          "line": 168,
+          "needle": "let requests=state.ezreal_q_flash_events.take(",
+          "role": "vfx_binding_3_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-778cc388-8a4b-5e2d-a627-8e0c292af384"
+    },
+    {
+      "task_id": "SYS-15.2-04",
+      "finding": "Observation ordonnée par session,époque et trame ;contrat serveur local Courage. Consommateur vivant du buff soutenu ;appelant natif des six effets non reconstitué.",
+      "remaining": "Sustained Courage only;native six-effect caller and all buff lifecycles remain open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/garen_w_state.rs",
+          "line": 84,
+          "needle": "pub fn observe_frame(",
+          "role": "vfx_binding_4_0"
+        },
+        {
+          "path": "crates/client/src/garen_w_live.rs",
+          "line": 132,
+          "needle": "let Some(sustained)=state.w_visuals.0.sustained(",
+          "role": "vfx_binding_4_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-772dcf01-f51e-5195-8804-fd02ee6c1c83"
+    },
+    {
+      "task_id": "SYS-15.2-05",
+      "finding": "Zone gameplay propriétaire/centre/début/fin ;rayon1000 reconstruction communautaire explicite. Consommateur animation du lancement/identité de zone ;pas preuve de rendu persistant de surface.",
+      "remaining": "Gameplay zone and cast animation do not identify the complete persistent surface renderer.",
+      "anchors": [
+        {
+          "path": "crates/core/src/trundle_w.rs",
+          "line": 93,
+          "needle": "pub(crate) fn cast_trundle_w_at(",
+          "role": "vfx_binding_5_0"
+        },
+        {
+          "path": "crates/client/src/trundle_w_animation.rs",
+          "line": 97,
+          "needle": "let Some(zone)=champion.effects.trundle_w.as_ref()",
+          "role": "vfx_binding_5_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-17d743e1-6f3d-5768-9ac4-e7b20808187c"
+    },
+    {
+      "task_id": "SYS-15.2-06",
+      "finding": "Alias _SkinNN conditionné au propriétaire et disponibilité fournie ;360 cas natifs hérités vérifiés. Descripteur visuel Garen limité au skin de base ;autres variantes non qualifiées.",
+      "remaining": "Native alias resolver exists but active visual dispatch and form selection are not identified;Garen descriptor is base-only.",
+      "anchors": [
+        {
+          "path": "crates/core/src/native_effect_resource_skin_alias.rs",
+          "line": 7,
+          "needle": "pub fn resolve(",
+          "role": "vfx_binding_6_0"
+        },
+        {
+          "path": "crates/client/src/garen_w_profile.rs",
+          "line": 14,
+          "needle": "pub const BASE_OVERRIDE:",
+          "role": "vfx_binding_6_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-3cd65154-3de3-5c7e-9ab3-752c1808d554"
+    },
+    {
+      "task_id": "SYS-15.2-07",
+      "finding": "ArrivalHeads déjà intégré au client courant ;ne pas traiter comme absent. Flash Q déjà intégré ;tests CPU ne prouvent pas rendu GPU.",
+      "remaining": "ArrivalHeads and Q plugins already installed;CPU host tests do not qualify current GPU/native visual fidelity or human acceptance.",
+      "anchors": [
+        {
+          "path": "crates/client/src/main.rs",
+          "line": 743,
+          "needle": ".add_plugins(ezreal_e_arrival_heads_live::Plugin)",
+          "role": "vfx_binding_7_0"
+        },
+        {
+          "path": "crates/client/src/main.rs",
+          "line": 738,
+          "needle": ".add_plugins(ezreal_q_flash_live::Plugin)",
+          "role": "vfx_binding_7_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-a9731bc7-f349-5bbc-bed6-277d66954d1c"
+    }
+  ]
+}

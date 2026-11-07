@@ -1,0 +1,1332 @@
+{
+  "schema": "openleague_social_backend_links/v1",
+  "passed": true,
+  "utc": "2026-10-23T07:56:49.449071+00:00",
+  "full_task_scope_complete": false,
+  "native_or_game_executed": false,
+  "historical_server_policy_qualified": false,
+  "facts": {
+    "candidates": {
+      "producer": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision134\\prepare_social_backend_reader.py",
+        "bytes": 3155,
+        "sha256": "fcbd702b92176035fcdcd7dbfd0bfd612defc31f6f6224200099ee4a525871c0"
+      },
+      "associations": [
+        {
+          "task_id": "SYS-19.3-01",
+          "finding": "No friendship request or relation persistence command.",
+          "remaining": "Implement and qualify social persistence,permissions and delivery;historical backend policy remains unknown. No friendship request or relation persistence command.",
+          "anchors": [
+            {
+              "path": "launcher/src-tauri/src/main.rs",
+              "line": 72,
+              "needle": ".invoke_handler(",
+              "role": "social_backend_1"
+            }
+          ],
+          "native_bindings": [
+            {
+              "service_family": "social",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+                "bytes": 15297,
+                "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+              }
+            },
+            {
+              "service_family": "social",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+                "bytes": 2780,
+                "sha256": "45680629260587bc89bf06b11fba7ed933e84f8f51c2edac42f06f53c27ed6ee"
+              }
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-ffacacca-84be-5ec2-9996-0e9db32c7f02"
+        },
+        {
+          "task_id": "SYS-19.3-02",
+          "finding": "Match availability does not publish authorized account presence.",
+          "remaining": "Implement and qualify social persistence,permissions and delivery;historical backend policy remains unknown. Match availability does not publish authorized account presence.",
+          "anchors": [
+            {
+              "path": "crates/core/src/session_transport.rs",
+              "line": 71,
+              "needle": "pub enum Availability",
+              "role": "social_backend_2"
+            }
+          ],
+          "native_bindings": [
+            {
+              "service_family": "social",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+                "bytes": 15297,
+                "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+              }
+            },
+            {
+              "service_family": "social",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+                "bytes": 2780,
+                "sha256": "45680629260587bc89bf06b11fba7ed933e84f8f51c2edac42f06f53c27ed6ee"
+              }
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-9ed3e4ce-fa49-5395-9278-b8e900266a5d"
+        },
+        {
+          "task_id": "SYS-19.3-03",
+          "finding": "Match join is not a persistent owned lobby lifecycle.",
+          "remaining": "Implement and qualify social persistence,permissions and delivery;historical backend policy remains unknown. Match join is not a persistent owned lobby lifecycle.",
+          "anchors": [
+            {
+              "path": "crates/core/src/lib.rs",
+              "line": 303,
+              "needle": "pub enum ClientPacket {",
+              "role": "social_backend_3"
+            }
+          ],
+          "native_bindings": [
+            {
+              "service_family": "party",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+                "bytes": 15297,
+                "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+              }
+            },
+            {
+              "service_family": "party",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+                "bytes": 4720,
+                "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+              }
+            },
+            {
+              "service_family": "party",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\GameInviteService.as",
+                "bytes": 2179,
+                "sha256": "ce0480859289e5e16251f3ccd4843de5b2359e4ea415c932f6366948d5944a68"
+              }
+            },
+            {
+              "service_family": "party",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameInviteServiceImpl.as",
+                "bytes": 11388,
+                "sha256": "ce0df31bd7c2b95e4bbd6dd9ca3271c2fd63526ce703f44b01dd0615174f0a17"
+              }
+            },
+            {
+              "service_family": "party",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+                "bytes": 19283,
+                "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+              }
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-1229a09d-0b5f-5055-9b21-5140c51c3c8e"
+        },
+        {
+          "task_id": "SYS-19.3-04",
+          "finding": "No lobby invitation/exclusion command or account permission consumer.",
+          "remaining": "Implement and qualify social persistence,permissions and delivery;historical backend policy remains unknown. No lobby invitation/exclusion command or account permission consumer.",
+          "anchors": [
+            {
+              "path": "launcher/src-tauri/src/main.rs",
+              "line": 72,
+              "needle": ".invoke_handler(",
+              "role": "social_backend_4"
+            }
+          ],
+          "native_bindings": [
+            {
+              "service_family": "party",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+                "bytes": 15297,
+                "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+              }
+            },
+            {
+              "service_family": "party",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+                "bytes": 4720,
+                "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+              }
+            },
+            {
+              "service_family": "party",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\GameInviteService.as",
+                "bytes": 2179,
+                "sha256": "ce0480859289e5e16251f3ccd4843de5b2359e4ea415c932f6366948d5944a68"
+              }
+            },
+            {
+              "service_family": "party",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameInviteServiceImpl.as",
+                "bytes": 11388,
+                "sha256": "ce0df31bd7c2b95e4bbd6dd9ca3271c2fd63526ce703f44b01dd0615174f0a17"
+              }
+            },
+            {
+              "service_family": "party",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+                "bytes": 19283,
+                "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+              }
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-e150b67b-1bf7-599f-a1df-d2adc83237f7"
+        },
+        {
+          "task_id": "SYS-19.3-05",
+          "finding": "Gameplay actions provide no private message routing.",
+          "remaining": "Implement and qualify social persistence,permissions and delivery;historical backend policy remains unknown. Gameplay actions provide no private message routing.",
+          "anchors": [
+            {
+              "path": "crates/core/src/lib.rs",
+              "line": 280,
+              "needle": "pub enum Action {",
+              "role": "social_backend_5"
+            }
+          ],
+          "native_bindings": [
+            {
+              "service_family": "chat",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+                "bytes": 15297,
+                "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+              }
+            },
+            {
+              "service_family": "chat",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+                "bytes": 2780,
+                "sha256": "45680629260587bc89bf06b11fba7ed933e84f8f51c2edac42f06f53c27ed6ee"
+              }
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-0debac4f-37e1-5508-b286-7c3e1e3eb361"
+        },
+        {
+          "task_id": "SYS-19.3-06",
+          "finding": "Session input provides no team/lobby chat routing.",
+          "remaining": "Implement and qualify social persistence,permissions and delivery;historical backend policy remains unknown. Session input provides no team/lobby chat routing.",
+          "anchors": [
+            {
+              "path": "crates/core/src/session_transport.rs",
+              "line": 80,
+              "needle": "pub enum Input {",
+              "role": "social_backend_6"
+            }
+          ],
+          "native_bindings": [
+            {
+              "service_family": "chat",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+                "bytes": 15297,
+                "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+              }
+            },
+            {
+              "service_family": "chat",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+                "bytes": 2780,
+                "sha256": "45680629260587bc89bf06b11fba7ed933e84f8f51c2edac42f06f53c27ed6ee"
+              }
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-04bc1bf0-26d1-575c-b562-d4cc74fa9b84"
+        },
+        {
+          "task_id": "SYS-19.3-07",
+          "finding": "No chat payload/history exists here;packet bounds are not message policy.",
+          "remaining": "Implement and qualify social persistence,permissions and delivery;historical backend policy remains unknown. No chat payload/history exists here;packet bounds are not message policy.",
+          "anchors": [
+            {
+              "path": "crates/core/src/session_transport.rs",
+              "line": 80,
+              "needle": "pub enum Input {",
+              "role": "social_backend_7"
+            }
+          ],
+          "native_bindings": [
+            {
+              "service_family": "chat",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+                "bytes": 15297,
+                "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+              }
+            },
+            {
+              "service_family": "chat",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+                "bytes": 2780,
+                "sha256": "45680629260587bc89bf06b11fba7ed933e84f8f51c2edac42f06f53c27ed6ee"
+              }
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-e2258914-554a-5b17-bf82-0b270d164ffe"
+        },
+        {
+          "task_id": "SYS-19.3-08",
+          "finding": "Match recovery does not restore account presence or lobbies.",
+          "remaining": "Implement and qualify social persistence,permissions and delivery;historical backend policy remains unknown. Match recovery does not restore account presence or lobbies.",
+          "anchors": [
+            {
+              "path": "crates/server/src/reconnect.rs",
+              "line": 122,
+              "needle": "pub fn prepare_join<'a>",
+              "role": "social_backend_8"
+            }
+          ],
+          "native_bindings": [
+            {
+              "service_family": "social",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+                "bytes": 15297,
+                "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+              }
+            },
+            {
+              "service_family": "social",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+                "bytes": 2780,
+                "sha256": "45680629260587bc89bf06b11fba7ed933e84f8f51c2edac42f06f53c27ed6ee"
+              }
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-e4529fd9-7f97-5987-92dd-eb405343fb65"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision134\\social-backend-research.json",
+          "bytes": 14662,
+          "sha256": "bd592c1278ca838c8937d458e6bec1c4be818546b06fb22691dc24bee25d93c9"
+        }
+      ],
+      "current_sources": [
+        {
+          "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+          "bytes": 3491,
+          "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+          "bytes": 13206,
+          "sha256": "139a7ce15ac5261dee15fe0aa60716fb1bb6993ecd9acb0d41c34acb84ab00bc"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+          "bytes": 52808,
+          "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+        },
+        {
+          "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+          "bytes": 3491,
+          "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+          "bytes": 52808,
+          "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+          "bytes": 13206,
+          "sha256": "139a7ce15ac5261dee15fe0aa60716fb1bb6993ecd9acb0d41c34acb84ab00bc"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+          "bytes": 13206,
+          "sha256": "139a7ce15ac5261dee15fe0aa60716fb1bb6993ecd9acb0d41c34acb84ab00bc"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\server\\src\\reconnect.rs",
+          "bytes": 18879,
+          "sha256": "60fe14f416cf800688b0353d5499738302bb1ad4e40e09a3b0eb6549a90328e1"
+        }
+      ],
+      "scope": "Social backend boundaries only;no messaging or social runtime executed."
+    },
+    "receipts": {
+      "social-backend-research.json": {
+        "utc": "2026-10-23T07:56:22.611523+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision134\\research_social_backend.py",
+          "bytes": 3083,
+          "sha256": "264cde8620ab4fbfe6103a46d59b2e2b1cfdd3ab07e451ab82b49559eba27932"
+        },
+        "contract": {
+          "path": "F:\\OpenLeague\\docs\\reference_local_services_4_20.json",
+          "bytes": 317028,
+          "sha256": "8a6afdc263b5c0959212425feb9e437b3a2264ea1d3a3590f825cb52ef406efb"
+        },
+        "families": [
+          {
+            "id": "social",
+            "title": "Amis, blocages et présence",
+            "scope_decision": "replace_locally",
+            "current_state": "not_implemented",
+            "riot_server_implementation_recovered": false,
+            "runtime_qualified_in_this_task": false,
+            "historical_proxy_properties": [
+              "chatService"
+            ],
+            "local_contract": "Relations d’amitié, invitations, blocages et présence locale, avec audiences autorisées.",
+            "authority": "Chaque compte contrôle ses relations ; aucune présence d’un compte bloqué/non autorisé divulguée.",
+            "persistence": "Demandes, relations, blocages ; présence éphémère avec expiration.",
+            "nominal_acceptance": "Deux comptes locaux échangent et restaurent une relation et les changements autorisés de présence.",
+            "refusal_acceptance": "Auto-invitation, relation bloquée, compte inconnu, audience interdite : refus sans fuite.",
+            "current_evidence": "ChatService/XMPP décrit le contrat client historique ; aucun service social de compte actuel n’est exposé.",
+            "source_ids": [
+              "air.ServiceProxy",
+              "air.ChatService",
+              "current.launcher/src-tauri/src/main.rs",
+              "current.crates/server/src/main.rs"
+            ],
+            "backlog_task_ids": [
+              "SYS-19.3-01",
+              "SYS-19.3-02",
+              "SYS-19.3-03",
+              "SYS-19.3-04",
+              "SYS-19.3-05",
+              "SYS-19.3-06",
+              "SYS-19.3-07",
+              "SYS-19.3-08"
+            ],
+            "depends_on": [
+              "identity"
+            ],
+            "remaining_work": "Implémenter et qualifier ce contrat dans les tâches liées ; conserver les acquis listés, sans déduire la disponibilité du service de ce périmètre."
+          },
+          {
+            "id": "chat",
+            "title": "Messages privés, d’équipe et salons",
+            "scope_decision": "replace_locally",
+            "current_state": "not_implemented",
+            "riot_server_implementation_recovered": false,
+            "runtime_qualified_in_this_task": false,
+            "historical_proxy_properties": [
+              "chatService"
+            ],
+            "local_contract": "Messages locaux routés selon destinataires, appartenance, blocages et limites de taille/fréquence/historique.",
+            "authority": "Serveur de messages local ; aucune confiance dans une audience ou identité choisie librement par le client.",
+            "persistence": "Rétention locale documentée ; historique privé soumis aux permissions.",
+            "nominal_acceptance": "Message reçu uniquement par les destinataires autorisés, y compris après reprise du salon.",
+            "refusal_acceptance": "Salon privé inaccessible, débit/taille dépassés, expéditeur usurpé : refus ; pas d’envoi Riot/XMPP distant.",
+            "current_evidence": "Aucune commande de chat dans le launcher ou les variantes du transport de jeu inspectées.",
+            "source_ids": [
+              "air.ServiceProxy",
+              "air.ChatService",
+              "current.launcher/src-tauri/src/main.rs",
+              "current.crates/server/src/main.rs"
+            ],
+            "backlog_task_ids": [
+              "SYS-19.3-01",
+              "SYS-19.3-02",
+              "SYS-19.3-03",
+              "SYS-19.3-04",
+              "SYS-19.3-05",
+              "SYS-19.3-06",
+              "SYS-19.3-07",
+              "SYS-19.3-08"
+            ],
+            "depends_on": [
+              "social"
+            ],
+            "remaining_work": "Implémenter et qualifier ce contrat dans les tâches liées ; conserver les acquis listés, sans déduire la disponibilité du service de ce périmètre."
+          },
+          {
+            "id": "party",
+            "title": "Groupes, salons de préparation et invitations",
+            "scope_decision": "replace_locally",
+            "current_state": "not_implemented",
+            "riot_server_implementation_recovered": false,
+            "runtime_qualified_in_this_task": false,
+            "historical_proxy_properties": [
+              "gameService",
+              "gameInviteService"
+            ],
+            "local_contract": "Salons possédés, invitations/exclusions, équipes et places, mode/carte, fermeture et reprise.",
+            "authority": "Propriétaire/participants selon permissions ; version monotone du salon.",
+            "persistence": "Salons/invitations nécessaires à la reprise, expiration et clôture des orphelins.",
+            "nominal_acceptance": "Invitation acceptée une fois, joueur placé dans un seul salon compatible et état commun aux participants.",
+            "refusal_acceptance": "Salon plein, invitation expirée, propriétaire absent, mauvais compte ou doubles appartenances : refus.",
+            "current_evidence": "Lancement de processus direct présent ; aucun salon multi-compte persistant exposé.",
+            "source_ids": [
+              "air.ServiceProxy",
+              "air.GameService",
+              "air.GameInviteService",
+              "air.GameInviteServiceImpl",
+              "air.GameServiceImpl",
+              "current.launcher/src-tauri/src/main.rs",
+              "current.crates/server/src/main.rs"
+            ],
+            "backlog_task_ids": [
+              "SYS-19.3-01",
+              "SYS-19.3-02",
+              "SYS-19.3-03",
+              "SYS-19.3-04",
+              "SYS-19.3-05",
+              "SYS-19.3-06",
+              "SYS-19.3-07",
+              "SYS-19.3-08"
+            ],
+            "depends_on": [
+              "identity",
+              "social",
+              "catalogue"
+            ],
+            "remaining_work": "Implémenter et qualifier ce contrat dans les tâches liées ; conserver les acquis listés, sans déduire la disponibilité du service de ce périmètre."
+          }
+        ],
+        "sources": [
+          {
+            "id": "air.ChatService",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+              "bytes": 2780,
+              "sha256": "45680629260587bc89bf06b11fba7ed933e84f8f51c2edac42f06f53c27ed6ee"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+              "bytes": 2780,
+              "sha256": "45680629260587bc89bf06b11fba7ed933e84f8f51c2edac42f06f53c27ed6ee"
+            }
+          },
+          {
+            "id": "air.GameInviteService",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\GameInviteService.as",
+              "bytes": 2179,
+              "sha256": "ce0480859289e5e16251f3ccd4843de5b2359e4ea415c932f6366948d5944a68"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\GameInviteService.as",
+              "bytes": 2179,
+              "sha256": "ce0480859289e5e16251f3ccd4843de5b2359e4ea415c932f6366948d5944a68"
+            }
+          },
+          {
+            "id": "air.ServiceProxy",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+              "bytes": 15297,
+              "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+              "bytes": 15297,
+              "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+            }
+          },
+          {
+            "id": "air.GameService",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+              "bytes": 4720,
+              "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+              "bytes": 4720,
+              "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+            }
+          },
+          {
+            "id": "air.GameInviteServiceImpl",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameInviteServiceImpl.as",
+              "bytes": 11388,
+              "sha256": "ce0df31bd7c2b95e4bbd6dd9ca3271c2fd63526ce703f44b01dd0615174f0a17"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameInviteServiceImpl.as",
+              "bytes": 11388,
+              "sha256": "ce0df31bd7c2b95e4bbd6dd9ca3271c2fd63526ce703f44b01dd0615174f0a17"
+            }
+          },
+          {
+            "id": "air.GameServiceImpl",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+              "bytes": 19283,
+              "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+              "bytes": 19283,
+              "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+            }
+          },
+          {
+            "id": "current.launcher/src-tauri/src/main.rs",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\launcher\\src-tauri\\src\\main.rs",
+              "bytes": 3491,
+              "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+              "bytes": 3491,
+              "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+            }
+          },
+          {
+            "id": "current.crates/server/src/main.rs",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\server\\src\\main.rs",
+              "bytes": 13628,
+              "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\crates\\server\\src\\main.rs",
+              "bytes": 13628,
+              "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+            }
+          }
+        ],
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+              "bytes": 3491,
+              "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+            },
+            "path": "launcher/src-tauri/src/main.rs",
+            "line": 72,
+            "needle": ".invoke_handler(",
+            "finding": "Six launcher commands without friendship,lobby or chat operations."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+              "bytes": 13206,
+              "sha256": "139a7ce15ac5261dee15fe0aa60716fb1bb6993ecd9acb0d41c34acb84ab00bc"
+            },
+            "path": "crates/core/src/session_transport.rs",
+            "line": 71,
+            "needle": "pub enum Availability",
+            "finding": "Match recovery availability is not social presence."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+              "bytes": 52808,
+              "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+            },
+            "path": "crates/core/src/lib.rs",
+            "line": 303,
+            "needle": "pub enum ClientPacket {",
+            "finding": "Local match packets do not define lobby invitation or chat messages."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+              "bytes": 52808,
+              "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+            },
+            "path": "crates/core/src/lib.rs",
+            "line": 280,
+            "needle": "pub enum Action {",
+            "finding": "Gameplay actions do not define private/team chat routing."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+              "bytes": 13206,
+              "sha256": "139a7ce15ac5261dee15fe0aa60716fb1bb6993ecd9acb0d41c34acb84ab00bc"
+            },
+            "path": "crates/core/src/session_transport.rs",
+            "line": 80,
+            "needle": "pub enum Input {",
+            "finding": "Session input carries gameplay,clock,heartbeat and leave;no message content."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\server\\src\\reconnect.rs",
+              "bytes": 18879,
+              "sha256": "60fe14f416cf800688b0353d5499738302bb1ad4e40e09a3b0eb6549a90328e1"
+            },
+            "path": "crates/server/src/reconnect.rs",
+            "line": 122,
+            "needle": "pub fn prepare_join<'a>",
+            "finding": "Match recovery registration is not restoring social presence or lobbies."
+          }
+        ],
+        "search": {
+          "command": [
+            "rg",
+            "-n",
+            "chat|friend|presence|invite|lobby",
+            "launcher/web/app.js",
+            "launcher/web/index.html",
+            "launcher/src-tauri/src/main.rs",
+            "crates/server/src/main.rs",
+            "crates/core/src/session_transport.rs"
+          ],
+          "exit_code": 1,
+          "log": {
+            "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision134\\social-entry-search.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "limits": [
+          "Bounded source inspection;no universal absence claim.",
+          "AIR interfaces do not establish recovered social backend policy.",
+          "Match capabilities and availability are not account social permissions or presence.",
+          "No message sent,no friendship or lobby state changed,no social runtime executed."
+        ],
+        "full_scope_complete": false
+      }
+    },
+    "source_checks": [
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision134\\social_backend-associations.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision134\\prepare_social_backend_reader.py",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\GameInviteService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameInviteServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\GameInviteService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameInviteServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision134\\social-backend-research.json",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\reconnect.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision134\\research_social_backend.py",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_4_20.json",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\GameInviteService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\GameInviteService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameInviteServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameInviteServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\server\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\main.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\reconnect.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision134\\social-entry-search.log",
+      "eight_associations",
+      "families_and_sources",
+      "current_sources_match",
+      "task_SYS-19.3-01",
+      "anchor_social_backend_1",
+      "task_SYS-19.3-02",
+      "anchor_social_backend_2",
+      "task_SYS-19.3-03",
+      "anchor_social_backend_3",
+      "task_SYS-19.3-04",
+      "anchor_social_backend_4",
+      "task_SYS-19.3-05",
+      "anchor_social_backend_5",
+      "task_SYS-19.3-06",
+      "anchor_social_backend_6",
+      "task_SYS-19.3-07",
+      "anchor_social_backend_7",
+      "task_SYS-19.3-08",
+      "anchor_social_backend_8"
+    ],
+    "all_social_backends_qualified": false,
+    "all_required_effects_covered": false
+  },
+  "source_identities": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision134\\social_backend-associations.json",
+      "bytes": 16769,
+      "sha256": "5f9c74dde988dc8ca5d38fb93c75020e1f45a654ed91b0385338b87bed94cb94"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision134\\prepare_social_backend_reader.py",
+      "bytes": 3155,
+      "sha256": "fcbd702b92176035fcdcd7dbfd0bfd612defc31f6f6224200099ee4a525871c0"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "bytes": 15297,
+      "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+      "bytes": 2780,
+      "sha256": "45680629260587bc89bf06b11fba7ed933e84f8f51c2edac42f06f53c27ed6ee"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+      "bytes": 4720,
+      "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\GameInviteService.as",
+      "bytes": 2179,
+      "sha256": "ce0480859289e5e16251f3ccd4843de5b2359e4ea415c932f6366948d5944a68"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameInviteServiceImpl.as",
+      "bytes": 11388,
+      "sha256": "ce0df31bd7c2b95e4bbd6dd9ca3271c2fd63526ce703f44b01dd0615174f0a17"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+      "bytes": 19283,
+      "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision134\\social-backend-research.json",
+      "bytes": 14662,
+      "sha256": "bd592c1278ca838c8937d458e6bec1c4be818546b06fb22691dc24bee25d93c9"
+    },
+    {
+      "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "bytes": 3491,
+      "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+      "bytes": 13206,
+      "sha256": "139a7ce15ac5261dee15fe0aa60716fb1bb6993ecd9acb0d41c34acb84ab00bc"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "bytes": 52808,
+      "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\server\\src\\reconnect.rs",
+      "bytes": 18879,
+      "sha256": "60fe14f416cf800688b0353d5499738302bb1ad4e40e09a3b0eb6549a90328e1"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision134\\research_social_backend.py",
+      "bytes": 3083,
+      "sha256": "264cde8620ab4fbfe6103a46d59b2e2b1cfdd3ab07e451ab82b49559eba27932"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_4_20.json",
+      "bytes": 317028,
+      "sha256": "8a6afdc263b5c0959212425feb9e437b3a2264ea1d3a3590f825cb52ef406efb"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+      "bytes": 2780,
+      "sha256": "45680629260587bc89bf06b11fba7ed933e84f8f51c2edac42f06f53c27ed6ee"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\GameInviteService.as",
+      "bytes": 2179,
+      "sha256": "ce0480859289e5e16251f3ccd4843de5b2359e4ea415c932f6366948d5944a68"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "bytes": 15297,
+      "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+      "bytes": 4720,
+      "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameInviteServiceImpl.as",
+      "bytes": 11388,
+      "sha256": "ce0df31bd7c2b95e4bbd6dd9ca3271c2fd63526ce703f44b01dd0615174f0a17"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+      "bytes": 19283,
+      "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\launcher\\src-tauri\\src\\main.rs",
+      "bytes": 3491,
+      "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\server\\src\\main.rs",
+      "bytes": 13628,
+      "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\server\\src\\main.rs",
+      "bytes": 13628,
+      "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision134\\social-entry-search.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "checks": [
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision134\\social_backend-associations.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision134\\prepare_social_backend_reader.py",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\GameInviteService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameInviteServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\GameInviteService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameInviteServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision134\\social-backend-research.json",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\reconnect.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision134\\research_social_backend.py",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_4_20.json",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\GameInviteService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\GameInviteService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameInviteServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameInviteServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\server\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\main.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\reconnect.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision134\\social-entry-search.log",
+    "eight_associations",
+    "families_and_sources",
+    "current_sources_match",
+    "task_SYS-19.3-01",
+    "anchor_social_backend_1",
+    "task_SYS-19.3-02",
+    "anchor_social_backend_2",
+    "task_SYS-19.3-03",
+    "anchor_social_backend_3",
+    "task_SYS-19.3-04",
+    "anchor_social_backend_4",
+    "task_SYS-19.3-05",
+    "anchor_social_backend_5",
+    "task_SYS-19.3-06",
+    "anchor_social_backend_6",
+    "task_SYS-19.3-07",
+    "anchor_social_backend_7",
+    "task_SYS-19.3-08",
+    "anchor_social_backend_8"
+  ],
+  "checks_count": 77,
+  "associations": [
+    {
+      "task_id": "SYS-19.3-01",
+      "finding": "No friendship request or relation persistence command.",
+      "remaining": "Implement and qualify social persistence,permissions and delivery;historical backend policy remains unknown. No friendship request or relation persistence command.",
+      "anchors": [
+        {
+          "path": "launcher/src-tauri/src/main.rs",
+          "line": 72,
+          "needle": ".invoke_handler(",
+          "role": "social_backend_1"
+        }
+      ],
+      "native_bindings": [
+        {
+          "service_family": "social",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+            "bytes": 15297,
+            "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+          }
+        },
+        {
+          "service_family": "social",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+            "bytes": 2780,
+            "sha256": "45680629260587bc89bf06b11fba7ed933e84f8f51c2edac42f06f53c27ed6ee"
+          }
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-ffacacca-84be-5ec2-9996-0e9db32c7f02"
+    },
+    {
+      "task_id": "SYS-19.3-02",
+      "finding": "Match availability does not publish authorized account presence.",
+      "remaining": "Implement and qualify social persistence,permissions and delivery;historical backend policy remains unknown. Match availability does not publish authorized account presence.",
+      "anchors": [
+        {
+          "path": "crates/core/src/session_transport.rs",
+          "line": 71,
+          "needle": "pub enum Availability",
+          "role": "social_backend_2"
+        }
+      ],
+      "native_bindings": [
+        {
+          "service_family": "social",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+            "bytes": 15297,
+            "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+          }
+        },
+        {
+          "service_family": "social",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+            "bytes": 2780,
+            "sha256": "45680629260587bc89bf06b11fba7ed933e84f8f51c2edac42f06f53c27ed6ee"
+          }
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-9ed3e4ce-fa49-5395-9278-b8e900266a5d"
+    },
+    {
+      "task_id": "SYS-19.3-03",
+      "finding": "Match join is not a persistent owned lobby lifecycle.",
+      "remaining": "Implement and qualify social persistence,permissions and delivery;historical backend policy remains unknown. Match join is not a persistent owned lobby lifecycle.",
+      "anchors": [
+        {
+          "path": "crates/core/src/lib.rs",
+          "line": 303,
+          "needle": "pub enum ClientPacket {",
+          "role": "social_backend_3"
+        }
+      ],
+      "native_bindings": [
+        {
+          "service_family": "party",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+            "bytes": 15297,
+            "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+          }
+        },
+        {
+          "service_family": "party",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+            "bytes": 4720,
+            "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+          }
+        },
+        {
+          "service_family": "party",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\GameInviteService.as",
+            "bytes": 2179,
+            "sha256": "ce0480859289e5e16251f3ccd4843de5b2359e4ea415c932f6366948d5944a68"
+          }
+        },
+        {
+          "service_family": "party",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameInviteServiceImpl.as",
+            "bytes": 11388,
+            "sha256": "ce0df31bd7c2b95e4bbd6dd9ca3271c2fd63526ce703f44b01dd0615174f0a17"
+          }
+        },
+        {
+          "service_family": "party",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+            "bytes": 19283,
+            "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+          }
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-1229a09d-0b5f-5055-9b21-5140c51c3c8e"
+    },
+    {
+      "task_id": "SYS-19.3-04",
+      "finding": "No lobby invitation/exclusion command or account permission consumer.",
+      "remaining": "Implement and qualify social persistence,permissions and delivery;historical backend policy remains unknown. No lobby invitation/exclusion command or account permission consumer.",
+      "anchors": [
+        {
+          "path": "launcher/src-tauri/src/main.rs",
+          "line": 72,
+          "needle": ".invoke_handler(",
+          "role": "social_backend_4"
+        }
+      ],
+      "native_bindings": [
+        {
+          "service_family": "party",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+            "bytes": 15297,
+            "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+          }
+        },
+        {
+          "service_family": "party",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+            "bytes": 4720,
+            "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+          }
+        },
+        {
+          "service_family": "party",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\GameInviteService.as",
+            "bytes": 2179,
+            "sha256": "ce0480859289e5e16251f3ccd4843de5b2359e4ea415c932f6366948d5944a68"
+          }
+        },
+        {
+          "service_family": "party",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameInviteServiceImpl.as",
+            "bytes": 11388,
+            "sha256": "ce0df31bd7c2b95e4bbd6dd9ca3271c2fd63526ce703f44b01dd0615174f0a17"
+          }
+        },
+        {
+          "service_family": "party",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+            "bytes": 19283,
+            "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+          }
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-e150b67b-1bf7-599f-a1df-d2adc83237f7"
+    },
+    {
+      "task_id": "SYS-19.3-05",
+      "finding": "Gameplay actions provide no private message routing.",
+      "remaining": "Implement and qualify social persistence,permissions and delivery;historical backend policy remains unknown. Gameplay actions provide no private message routing.",
+      "anchors": [
+        {
+          "path": "crates/core/src/lib.rs",
+          "line": 280,
+          "needle": "pub enum Action {",
+          "role": "social_backend_5"
+        }
+      ],
+      "native_bindings": [
+        {
+          "service_family": "chat",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+            "bytes": 15297,
+            "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+          }
+        },
+        {
+          "service_family": "chat",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+            "bytes": 2780,
+            "sha256": "45680629260587bc89bf06b11fba7ed933e84f8f51c2edac42f06f53c27ed6ee"
+          }
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-0debac4f-37e1-5508-b286-7c3e1e3eb361"
+    },
+    {
+      "task_id": "SYS-19.3-06",
+      "finding": "Session input provides no team/lobby chat routing.",
+      "remaining": "Implement and qualify social persistence,permissions and delivery;historical backend policy remains unknown. Session input provides no team/lobby chat routing.",
+      "anchors": [
+        {
+          "path": "crates/core/src/session_transport.rs",
+          "line": 80,
+          "needle": "pub enum Input {",
+          "role": "social_backend_6"
+        }
+      ],
+      "native_bindings": [
+        {
+          "service_family": "chat",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+            "bytes": 15297,
+            "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+          }
+        },
+        {
+          "service_family": "chat",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+            "bytes": 2780,
+            "sha256": "45680629260587bc89bf06b11fba7ed933e84f8f51c2edac42f06f53c27ed6ee"
+          }
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-04bc1bf0-26d1-575c-b562-d4cc74fa9b84"
+    },
+    {
+      "task_id": "SYS-19.3-07",
+      "finding": "No chat payload/history exists here;packet bounds are not message policy.",
+      "remaining": "Implement and qualify social persistence,permissions and delivery;historical backend policy remains unknown. No chat payload/history exists here;packet bounds are not message policy.",
+      "anchors": [
+        {
+          "path": "crates/core/src/session_transport.rs",
+          "line": 80,
+          "needle": "pub enum Input {",
+          "role": "social_backend_7"
+        }
+      ],
+      "native_bindings": [
+        {
+          "service_family": "chat",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+            "bytes": 15297,
+            "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+          }
+        },
+        {
+          "service_family": "chat",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+            "bytes": 2780,
+            "sha256": "45680629260587bc89bf06b11fba7ed933e84f8f51c2edac42f06f53c27ed6ee"
+          }
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-e2258914-554a-5b17-bf82-0b270d164ffe"
+    },
+    {
+      "task_id": "SYS-19.3-08",
+      "finding": "Match recovery does not restore account presence or lobbies.",
+      "remaining": "Implement and qualify social persistence,permissions and delivery;historical backend policy remains unknown. Match recovery does not restore account presence or lobbies.",
+      "anchors": [
+        {
+          "path": "crates/server/src/reconnect.rs",
+          "line": 122,
+          "needle": "pub fn prepare_join<'a>",
+          "role": "social_backend_8"
+        }
+      ],
+      "native_bindings": [
+        {
+          "service_family": "social",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+            "bytes": 15297,
+            "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+          }
+        },
+        {
+          "service_family": "social",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ChatService.as",
+            "bytes": 2780,
+            "sha256": "45680629260587bc89bf06b11fba7ed933e84f8f51c2edac42f06f53c27ed6ee"
+          }
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-e4529fd9-7f97-5987-92dd-eb405343fb65"
+    }
+  ]
+}

@@ -1,0 +1,229 @@
+<div class="modal">
+    <style scoped>
+        #modal-main {
+            position: relative;
+            width: 454px;
+            height: auto;
+            z-index: 2000;
+            background-image: url('images/bgOptionsMenu.jpg');
+        }
+        .modal-default {
+            color:white;
+        }
+        .modal-content {
+            display: inline-block;
+            width: 100%;
+            height: auto;
+            margin-top: 5px;
+        }
+
+        .modal-header {
+            width: 100%;
+            text-align: center;
+        }
+
+        .modal-options {
+            width: 90%;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .troubleshoot-content {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .buttons-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .warning-arrow {
+            display: block;
+            margin-top: 8px;
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-right: 10px solid #6f6f6f;
+        }
+
+        .warning-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-width:2px;
+            border-image: linear-gradient(to bottom right, #6f6f6f , #3a3a3a ) 10% stretch;
+            background-color: rgba(0,0,0, 0.5);
+            width: 260px;
+            height: 74px;
+        }
+
+        .warning-content {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            width: auto;
+            height: auto;
+        }
+
+        .warning-header {
+            display: block;
+            font-size: 16px;
+            font-weight: 500;
+            font-style: normal;
+            text-align: center;
+            text-transform: uppercase;
+            background-color: #d53a3a;
+        }
+
+        .warning-text {
+            display: block;
+            font-size: 14px;
+            font-weight: normal;
+            font-style: normal;
+            text-align: center;
+            background-color: #e2e7eb;
+        }
+
+        .clip-text {
+            color: transparent;
+            -webkit-background-clip: text;
+        }
+
+        .save-logs-display {
+            display: block;
+            width: 100%;
+            height: 20px;
+            margin-top: 15px;
+        }
+
+        .audio-display {
+          display: none;
+          font-size: 14px;
+          font-weight: normal;
+          font-style: normal;
+          color:#e2e7eb;
+          text-align: center;
+        }
+
+        .audio-icon[muted=true]
+        {
+          background-image: url("images/iconVolumeControl_muted.png") !important;
+          background-size: cover;
+        }
+
+        .audio-icon[value] {
+          display: block;
+          position: relative;
+          width: 28px;
+          height: 20px;
+          margin-right: 10px;
+        }
+
+        .audio-icon[value="mute"] {
+          background-image: url("images/iconVolumeControl_mute.png");
+          background-size: cover;
+        }
+
+        .audio-icon[value="low"] {
+          background-image: url("images/iconVolumeControl_low.png");
+          background-size: cover;
+        }
+
+        .audio-icon[value="mid"] {
+          background-image: url("images/iconVolumeControl_mid.png");
+          background-size: cover;
+        }
+
+        .audio-icon[value="full"] {
+          background-image: url("images/iconVolumeControl_full.png");
+          background-size: cover;
+        }
+
+        .audio-bar {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          margin: 10px 0px;
+        }
+
+        h1 {
+            font-size: 16px;
+            font-weight: 500;
+            font-style: normal;
+            text-align: center;
+            text-transform: uppercase;
+            background-color: #e2e7eb;
+        }
+
+        h2 {
+            font-size: 16px;
+            font-weight: normal;
+            font-style: normal;
+            text-align: center;
+            text-transform: uppercase;
+            background-color: #e2e7eb;
+        }
+
+        h3 {
+            font-size: 15px;
+            font-weight: normal;
+            font-style: normal;
+            text-transform: uppercase;
+            text-align: left;
+            background-color: #747f86;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+    </style>
+    <div id="modal-main" class="modal-default">
+        <div class="modal-button-group pull-right">
+            <button id="buttonSettingsClose" class="button button-chrome button-modal" ng-click="close()"><i class="icon-close chrome-text-gradient"></i></button>
+        </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="clip-text font-spiegel">{{optionsHeader}}</h1>
+                <div><img src="images/artSettingsSeparator.png"></div>
+            </div>
+            <div class="modal-options">
+                <h3 class="clip-text font-spiegel">{{p2pHeader}}</h3>
+
+                <input type="checkbox" id="chkP2P" ng-model="chkP2P" ng-true-value='1' ng-false-value='0'  ng-change="p2pChange()">
+                <label class="font-spiegel" for="chkP2P">{{p2pCheckbox}}</label>
+
+                <h3 class="clip-text font-spiegel">{{sfxControlHeader}}</h3>
+                <div class="audio-bar">
+                  <div class="audio-icon" value={{audioValue}} muted={{sfxMuted}} ng-click="sfxToggleMute()"></div>
+                  <input class="progress-slider" type="range" min="0" max="100" ng-model="sfxRange" ng-change="sfxChange()" ng-mouseup="sfxRelease()">
+                </div>
+                <div class="audio-display font-spiegel">{{sfxRangeHeader}} {{sfxRange}}%</div>
+                <audio id='audio-sound-tick' src="audio/sfx_patcher_volume_settings_tick.ogg"></audio>
+
+                <h3 class="clip-text font-spiegel">{{troubleHeader}}</h3>
+                <div class="troubleshoot-content">
+                    <div class="buttons-content">
+                        <button id="buttonSettingsRepair" ng-click="close(); repair()" class="button-primary" ng-disabled="repairEnabled"><p class="button-primary-text">{{repairLabel}}</p></button>
+                        <button id="buttonSettingsLogs" ng-click="saveLogs()" class="button-primary" ng-disabled="saveLogsDisabled"><p class="button-primary-text">{{saveLogsLabel}}</p></button>
+                    </div>
+                    <div class="warning-content">
+                        <div ng-hide="repairEnabled" class="warning-arrow"></div>
+                        <div class="warning-box">
+                            <p ng-hide="repairEnabled" class="warning-header clip-text font-lol">{{optionsWarningHeader}}</p>
+                            <p ng-hide="repairEnabled" class="warning-text clip-text font-spiegel">{{optionsWarningText}}</p>
+                            <p ng-show="repairEnabled" class="warning-text clip-text font-spiegel">{{optionsButtonDisabled}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="save-logs-display"><p>{{saveStatus}}</p></div>
+                <button id="buttonCEFCopyright" ng-click="close(); displayCopyright()" class="button-primary"><p class="button-primary-text">{{cefLabel}}</p></button>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
+</div>

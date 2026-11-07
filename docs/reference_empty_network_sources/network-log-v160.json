@@ -1,0 +1,984 @@
+{
+  "utc": "2026-10-23T10:56:10.938519+00:00",
+  "objective": "SYS-01.2-02",
+  "original_binary": {
+    "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\League of Legends.exe",
+    "bytes": 15973880,
+    "sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862"
+  },
+  "evidence": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision156\\network-owner-constructor.json",
+      "bytes": 38978,
+      "sha256": "035774da9f319615bd34c3d909cdf34056dd2b4684c641a41af4b2f11f2cd72e"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision156\\network-log-virtual-target.json",
+      "bytes": 54314,
+      "sha256": "8e450bb40a72789142968c67b6da980fb68be917b732d0a0cfbebbcd90c35cd8"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision156\\network-log-delegate.json",
+      "bytes": 89647,
+      "sha256": "d2b2a2f6204b094e894a2b6897c0f8a1f7247f474aed293b2a09edbe9cf54908"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision156\\network-log-transport-init.json",
+      "bytes": 62385,
+      "sha256": "7b9d8c6a3690405810a8d23e77e2bcdf34f3b54a16668732be1bbc2e5add5361"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision156\\network-log-file-init.json",
+      "bytes": 14805,
+      "sha256": "a168bc2b390a4b6adc4df1361a390e5691cd851c30cdf72886efbc40f8882a21"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision156\\network-log-open-leaves.json",
+      "bytes": 24839,
+      "sha256": "42b1d7781e05d50b03f70e4c5117dfab0da8e20cbe8682a1770832489f9d92ae"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision156\\network-log-crt.json",
+      "bytes": 10973,
+      "sha256": "47803b6da6d65eca016f3f5bb5641d304ea4aea7d2f55c685a57b9a4039c43f5"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision160\\verify_network_log_chain.py",
+      "bytes": 3896,
+      "sha256": "0cd02d95a9aa5e7eea142a0b2766d7be314c2341a97ff70c1208f9816a8fd60f"
+    }
+  ],
+  "region_checks": [
+    {
+      "name": "network-owner-constructor.json",
+      "start": "0x72a3b0",
+      "instructions": 100,
+      "passed": true
+    },
+    {
+      "name": "network-log-virtual-target.json",
+      "start": "0x72a780",
+      "instructions": 389,
+      "passed": true
+    },
+    {
+      "name": "network-log-delegate.json",
+      "start": "0x7297e0",
+      "instructions": 646,
+      "passed": true
+    },
+    {
+      "name": "network-log-transport-init.json",
+      "start": "0x8f68d0",
+      "instructions": 192,
+      "passed": true
+    },
+    {
+      "name": "network-log-transport-init.json",
+      "start": "0x8f6af0",
+      "instructions": 256,
+      "passed": true
+    },
+    {
+      "name": "network-log-file-init.json",
+      "start": "0x8fb650",
+      "instructions": 100,
+      "passed": true
+    },
+    {
+      "name": "network-log-open-leaves.json",
+      "start": "0x8f8f10",
+      "instructions": 103,
+      "passed": true
+    },
+    {
+      "name": "network-log-open-leaves.json",
+      "start": "0x8c5e90",
+      "instructions": 72,
+      "passed": true
+    },
+    {
+      "name": "network-log-crt.json",
+      "start": "0xc9951e",
+      "instructions": 30,
+      "passed": true
+    },
+    {
+      "name": "network-log-crt.json",
+      "start": "0xc99855",
+      "instructions": 43,
+      "passed": true
+    }
+  ],
+  "anchor_checks": 11,
+  "cases": [
+    {
+      "name": "native_target_and_modes",
+      "passed": true
+    },
+    {
+      "name": "reject_virtual_target",
+      "passed": true
+    },
+    {
+      "name": "reject_first_mode",
+      "passed": true
+    },
+    {
+      "name": "reject_second_mode",
+      "passed": true
+    }
+  ],
+  "facts": {
+    "virtual_target": 7513984,
+    "first_mode": "wc\u0000",
+    "second_mode": "ac\u0000"
+  },
+  "parameter_path": [
+    "caller591484 arg9(netlog)",
+    "72A780 arg9 ->7297E0 arg11",
+    "7297E0 arg11 ->8F68D0 arg10",
+    "8F68D0 arg10 ->8FB650 arg1",
+    "8FB650 arg1 ->8F8F10 arg1"
+  ],
+  "findings": [
+    "Primary owner vtable slot+0xC is 72A780.",
+    "8FB650 gates log initialization on second argument, service gate result and nonnull path.",
+    "8F8F10 requests wc, then on nonnull handle calls C99855 and requests ac; initialized flag set only for nonnull second handle.",
+    "C9951E forwards path, mode and share flag0x40 to C9945A."
+  ],
+  "limits": [
+    "Static flow only; original code not executed.",
+    "wc/ac are original string bytes; complete CRT IO semantics and all callees not newly qualified.",
+    "A native output-creation path does not establish why any specific archived file is zero bytes.",
+    "Current Rust producer equivalence, registration and complete task scope remain open.",
+    "34 zero-byte files matched to 68 exact task entities; shared native producer is a family-level source, not proof it generated these archived files."
+  ],
+  "full_objective_complete": false,
+  "registry_not_integrated": true,
+  "associations": [
+    {
+      "task_id": "EMPTY-001-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-06T02-13-19_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-06T02-13-19_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-001-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-06T02-13-19_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-06T02-13-19_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-002-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-14T00-48-54_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-14T00-48-54_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-002-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-14T00-48-54_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-14T00-48-54_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-003-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-15T01-35-35_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-15T01-35-35_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-003-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-15T01-35-35_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-15T01-35-35_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-004-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-15T01-36-01_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-15T01-36-01_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-004-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-15T01-36-01_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-15T01-36-01_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-005-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-15T01-38-49_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-15T01-38-49_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-005-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-15T01-38-49_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-15T01-38-49_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-006-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-15T01-39-44_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-15T01-39-44_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-006-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-15T01-39-44_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-15T01-39-44_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-007-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-15T01-41-33_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-15T01-41-33_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-007-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-15T01-41-33_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-15T01-41-33_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-008-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-15T01-49-08_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-15T01-49-08_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-008-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-15T01-49-08_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-15T01-49-08_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-009-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-15T01-49-36_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-15T01-49-36_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-009-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-15T01-49-36_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-15T01-49-36_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-010-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-15T02-08-27_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-15T02-08-27_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-010-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-15T02-08-27_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-15T02-08-27_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-011-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-15T02-20-31_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-15T02-20-31_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-011-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-15T02-20-31_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-15T02-20-31_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-012-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-15T02-30-51_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-15T02-30-51_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-012-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-15T02-30-51_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-15T02-30-51_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-013-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-15T02-33-41_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-15T02-33-41_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-013-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-15T02-33-41_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-15T02-33-41_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-014-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-26T01-06-48_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-26T01-06-48_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-014-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-26T01-06-48_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-26T01-06-48_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-015-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-26T01-24-01_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-26T01-24-01_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-015-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-26T01-24-01_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-26T01-24-01_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-016-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-26T01-24-59_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-26T01-24-59_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-016-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2016-04-26T01-24-59_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2016-04-26T01-24-59_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-017-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2018-07-07T21-34-59_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2018-07-07T21-34-59_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-017-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2018-07-07T21-34-59_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2018-07-07T21-34-59_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-018-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2018-07-07T21-46-49_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2018-07-07T21-46-49_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-018-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2018-07-07T21-46-49_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2018-07-07T21-46-49_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-019-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2018-07-07T22-14-06_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2018-07-07T22-14-06_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-019-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2018-07-07T22-14-06_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2018-07-07T22-14-06_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-020-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2018-07-08T01-48-38_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2018-07-08T01-48-38_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-020-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2018-07-08T01-48-38_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2018-07-08T01-48-38_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-021-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2020-02-24T18-03-37_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2020-02-24T18-03-37_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-021-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2020-02-24T18-03-37_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2020-02-24T18-03-37_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-022-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2020-02-24T18-05-59_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2020-02-24T18-05-59_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-022-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2020-02-24T18-05-59_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2020-02-24T18-05-59_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-023-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2020-02-24T20-07-23_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2020-02-24T20-07-23_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-023-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2020-02-24T20-07-23_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2020-02-24T20-07-23_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-024-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2026-04-18T12-45-40_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2026-04-18T12-45-40_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-024-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2026-04-18T12-45-40_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2026-04-18T12-45-40_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-025-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2026-04-18T12-58-46_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2026-04-18T12-58-46_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-025-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2026-04-18T12-58-46_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2026-04-18T12-58-46_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-026-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2026-04-25T15-32-30_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2026-04-25T15-32-30_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-026-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2026-04-25T15-32-30_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2026-04-25T15-32-30_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-027-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2026-04-25T16-12-34_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2026-04-25T16-12-34_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-027-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2026-04-25T16-12-34_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2026-04-25T16-12-34_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-028-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2026-04-25T16-17-47_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2026-04-25T16-17-47_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-028-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2026-04-25T16-17-47_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2026-04-25T16-17-47_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-029-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2026-04-25T21-19-23_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2026-04-25T21-19-23_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-029-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2026-04-25T21-19-23_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2026-04-25T21-19-23_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-030-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2026-04-25T21-23-48_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2026-04-25T21-23-48_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-030-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2026-04-25T21-23-48_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2026-04-25T21-23-48_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-031-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2026-04-26T15-47-54_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2026-04-26T15-47-54_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-031-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Logs\\Network Logs\\2026-04-26T15-47-54_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "Logs\\Network Logs\\2026-04-26T15-47-54_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-064-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\Logs\\Network Logs\\2018-07-03T09-58-49_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\Logs\\Network Logs\\2018-07-03T09-58-49_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-064-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\Logs\\Network Logs\\2018-07-03T09-58-49_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\Logs\\Network Logs\\2018-07-03T09-58-49_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-065-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\Logs\\Network Logs\\2018-07-03T09-59-16_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\Logs\\Network Logs\\2018-07-03T09-59-16_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-065-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\Logs\\Network Logs\\2018-07-03T09-59-16_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\Logs\\Network Logs\\2018-07-03T09-59-16_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-066-CLASSIFY",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\Logs\\Network Logs\\2018-07-03T10-00-03_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\Logs\\Network Logs\\2018-07-03T10-00-03_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    },
+    {
+      "task_id": "EMPTY-066-RESOLVE",
+      "native_file": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\Logs\\Network Logs\\2018-07-03T10-00-03_netlog.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "relative_path": "RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\Logs\\Network Logs\\2018-07-03T10-00-03_netlog.txt",
+      "native_producer_role": "Common netlog producer candidate; archived file execution/origin not established.",
+      "current_feature_consumer_identified": false
+    }
+  ],
+  "tasks": [
+    "EMPTY-001-CLASSIFY",
+    "EMPTY-001-RESOLVE",
+    "EMPTY-002-CLASSIFY",
+    "EMPTY-002-RESOLVE",
+    "EMPTY-003-CLASSIFY",
+    "EMPTY-003-RESOLVE",
+    "EMPTY-004-CLASSIFY",
+    "EMPTY-004-RESOLVE",
+    "EMPTY-005-CLASSIFY",
+    "EMPTY-005-RESOLVE",
+    "EMPTY-006-CLASSIFY",
+    "EMPTY-006-RESOLVE",
+    "EMPTY-007-CLASSIFY",
+    "EMPTY-007-RESOLVE",
+    "EMPTY-008-CLASSIFY",
+    "EMPTY-008-RESOLVE",
+    "EMPTY-009-CLASSIFY",
+    "EMPTY-009-RESOLVE",
+    "EMPTY-010-CLASSIFY",
+    "EMPTY-010-RESOLVE",
+    "EMPTY-011-CLASSIFY",
+    "EMPTY-011-RESOLVE",
+    "EMPTY-012-CLASSIFY",
+    "EMPTY-012-RESOLVE",
+    "EMPTY-013-CLASSIFY",
+    "EMPTY-013-RESOLVE",
+    "EMPTY-014-CLASSIFY",
+    "EMPTY-014-RESOLVE",
+    "EMPTY-015-CLASSIFY",
+    "EMPTY-015-RESOLVE",
+    "EMPTY-016-CLASSIFY",
+    "EMPTY-016-RESOLVE",
+    "EMPTY-017-CLASSIFY",
+    "EMPTY-017-RESOLVE",
+    "EMPTY-018-CLASSIFY",
+    "EMPTY-018-RESOLVE",
+    "EMPTY-019-CLASSIFY",
+    "EMPTY-019-RESOLVE",
+    "EMPTY-020-CLASSIFY",
+    "EMPTY-020-RESOLVE",
+    "EMPTY-021-CLASSIFY",
+    "EMPTY-021-RESOLVE",
+    "EMPTY-022-CLASSIFY",
+    "EMPTY-022-RESOLVE",
+    "EMPTY-023-CLASSIFY",
+    "EMPTY-023-RESOLVE",
+    "EMPTY-024-CLASSIFY",
+    "EMPTY-024-RESOLVE",
+    "EMPTY-025-CLASSIFY",
+    "EMPTY-025-RESOLVE",
+    "EMPTY-026-CLASSIFY",
+    "EMPTY-026-RESOLVE",
+    "EMPTY-027-CLASSIFY",
+    "EMPTY-027-RESOLVE",
+    "EMPTY-028-CLASSIFY",
+    "EMPTY-028-RESOLVE",
+    "EMPTY-029-CLASSIFY",
+    "EMPTY-029-RESOLVE",
+    "EMPTY-030-CLASSIFY",
+    "EMPTY-030-RESOLVE",
+    "EMPTY-031-CLASSIFY",
+    "EMPTY-031-RESOLVE",
+    "EMPTY-064-CLASSIFY",
+    "EMPTY-064-RESOLVE",
+    "EMPTY-065-CLASSIFY",
+    "EMPTY-065-RESOLVE",
+    "EMPTY-066-CLASSIFY",
+    "EMPTY-066-RESOLVE"
+  ],
+  "binary": {
+    "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\League of Legends.exe",
+    "bytes": 15973880,
+    "sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862"
+  }
+}

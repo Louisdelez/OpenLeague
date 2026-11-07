@@ -46,6 +46,26 @@ pub fn starting_gold() -> f32 {
 pub fn catalog() -> &'static [Item] {
     &config().items
 }
+/// Source-data admission for the only currently implemented world, Map10.
+/// Unknown metadata stays unknown; global definitions and legacy inventory remain intact.
+pub fn map10_available(item_id: u32) -> Option<bool> {
+    #[derive(Deserialize)]
+    struct Entry { id: u32, allowed: bool }
+    #[derive(Deserialize)]
+    struct Admission { schema: u8, map_id: u8, items: Vec<Entry> }
+    static ADMISSION: OnceLock<std::collections::BTreeMap<u32, bool>> = OnceLock::new();
+    ADMISSION.get_or_init(|| {
+        let data: Admission = serde_json::from_str(include_str!("../../../data/4.20/map10_shop_admission.json"))
+            .expect("verified Map10 item admission");
+        assert_eq!(data.schema, 1, "unsupported item admission schema");
+        assert_eq!(data.map_id, 10, "item admission belongs to a different map");
+        let count = data.items.len();
+        let entries: std::collections::BTreeMap<_, _> = data.items.into_iter()
+            .map(|entry| (entry.id, entry.allowed)).collect();
+        assert_eq!(entries.len(), count, "duplicate Map10 item admission");
+        entries
+    }).get(&item_id).copied()
+}
 fn item(id: u32) -> Option<&'static Item> {
     catalog().iter().find(|i| i.id == id)
 }
@@ -241,6 +261,15 @@ impl Simulation {
     pub fn buy_item(&mut self, id: u32, item_id: u32) -> Result<(), String> {
         self.shop_guard(id)?;
         let data = item(item_id).ok_or("item behavior not implemented")?;
+        // world is populated only by enable_map10 in the current Simulation.
+        // New maps must select their own explicit admission policy.
+        if self.world.is_some() {
+            match map10_available(item_id) {
+                Some(true) => {},
+                Some(false) => return Err("item unavailable on Map10".into()),
+                None => return Err("item map availability not qualified".into()),
+            }
+        }
         if !data.group.is_empty()
             && self.players[&id]
                 .inventory

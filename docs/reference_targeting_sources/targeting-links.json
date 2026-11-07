@@ -1,0 +1,2851 @@
+{
+  "schema": "openleague_targeting_links/v1",
+  "utc": "2026-10-22T17:53:41.650174+00:00",
+  "passed": true,
+  "checks_count": 59,
+  "checks": [
+    "member DATA/Characters/Garen/Spells/GarenE.inibin",
+    "member DATA/Characters/Garen/Spells/GarenR.inibin",
+    "member DATA/Characters/Annie/Spells/Incinerate.inibin",
+    "member DATA/Characters/Annie/Spells/InfernalGuardian.inibin",
+    "member DATA/Spells/EzrealMysticShot.inibin",
+    "member DATA/Spells/EzrealEssenceFlux.inibin",
+    "member DATA/Spells/EzrealTrueshotBarrage.inibin",
+    "member DATA/Characters/Trundle/Spells/TrundleCircle.inibin",
+    "member DATA/Spells/BantamTrap.inibin",
+    "member DATA/Spells/KatarinaR.inibin",
+    "member DATA/Spells/SummonerHeal.inibin",
+    "member DATA/Spells/SummonerSmite.inibin",
+    "member DATA/Characters/Garen/Spells/GarenECancel.inibin",
+    "locale member",
+    "SYS-04.6-01/heal_recipients",
+    "SYS-04.6-01/W_relations_and_self",
+    "SYS-04.6-01/Q_enemy_and_neutral",
+    "SYS-04.6-01/unknown",
+    "SYS-04.6-02/Q_exact_types",
+    "SYS-04.6-02/smite_kind_tag_filter",
+    "SYS-04.6-02/unknown",
+    "SYS-04.6-03/circle_query",
+    "SYS-04.6-03/summon_circle_consumer",
+    "SYS-04.6-03/unknown",
+    "SYS-04.6-04/sector_geometry",
+    "SYS-04.6-04/cone_consumer",
+    "SYS-04.6-04/unknown",
+    "SYS-04.6-05/swept_contact",
+    "SYS-04.6-05/Q_line_consumer",
+    "SYS-04.6-05/unknown",
+    "SYS-04.6-06/Garen_R_range",
+    "SYS-04.6-06/Trundle_E_range",
+    "SYS-04.6-06/Tibbers_range",
+    "SYS-04.6-06/unknown",
+    "SYS-04.6-07/channel_admission_boundary",
+    "SYS-04.6-07/windup_only_boundary",
+    "SYS-04.6-07/unknown",
+    "SYS-04.6-08/charge_admission_boundary",
+    "SYS-04.6-08/single_cooldown_boundary",
+    "SYS-04.6-08/unknown",
+    "SYS-04.6-09/Garen_cancel",
+    "SYS-04.6-09/Tibbers_recast",
+    "SYS-04.6-09/unknown",
+    "SYS-04.6-10/contact_order",
+    "SYS-04.6-10/Q_first_contact",
+    "SYS-04.6-10/R_accepted_contact_count",
+    "SYS-04.6-10/unknown",
+    "SYS-04.6-11/sequence_gate",
+    "SYS-04.6-11/accepted_input_commit",
+    "SYS-04.6-11/shot_tick_gate",
+    "SYS-04.6-11/unknown",
+    "SYS-04.6-12/push_preflight",
+    "SYS-04.6-12/terrain_and_pillar_segment",
+    "SYS-04.6-12/unknown",
+    "annieW/range/binary32",
+    "annieW/half_angle/binary32",
+    "annieR/range/binary32",
+    "annieR/radius/binary32",
+    "12 tasks 2 boundaries"
+  ],
+  "associations": [
+    {
+      "task_id": "SYS-04.6-01",
+      "title": "Valider les filtres allié, ennemi, neutre et soi-même",
+      "finding": "Heal selects owner plus one living ally;Ezreal W handles allied/enemy champions and arms self contact separately;Ezreal Q filters enemy/neutral eligible actors. These are concrete per-spell filters,not one universal interpretation of native flags.",
+      "remaining": "Qualify all spells,ally/enemy/neutral/self predicates,visibility and original exceptions. Raw Flags/TextFlags do not prove the server policy.",
+      "anchors": [
+        {
+          "path": "crates/core/src/summoner_heal.rs",
+          "line": 33,
+          "needle": "pub(crate) fn cast_heal(",
+          "role": "targeting_reference_01_heal_recipients"
+        },
+        {
+          "path": "crates/core/src/ezreal_w.rs",
+          "line": 165,
+          "needle": "fn ezreal_w_circles(",
+          "role": "targeting_reference_01_W_relations_and_self"
+        },
+        {
+          "path": "crates/core/src/ezreal_q.rs",
+          "line": 166,
+          "needle": "fn ezreal_q_circles(",
+          "role": "targeting_reference_01_Q_enemy_and_neutral"
+        }
+      ],
+      "native_bindings": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerHeal.inibin",
+          "selector": "SpellData authored fields/text hooks;flags not decoded into universal server targeting policy",
+          "role": "native_authoring_input_not_server_policy"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\EzrealEssenceFlux.inibin",
+          "selector": "SpellData authored fields/text hooks;flags not decoded into universal server targeting policy",
+          "role": "native_authoring_input_not_server_policy"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\EzrealMysticShot.inibin",
+          "selector": "SpellData authored fields/text hooks;flags not decoded into universal server targeting policy",
+          "role": "native_authoring_input_not_server_policy"
+        }
+      ],
+      "existing_unknown_id": "OLU-9ab9c209-1ae2-5664-8aaa-87f3e77d8c72",
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "native_server_policy_qualified": false
+    },
+    {
+      "task_id": "SYS-04.6-02",
+      "title": "Valider les cibles champion, sbire, monstre, structure et invocation",
+      "finding": "Ezreal Q admits champions,configured lane units/monsters and exact live Tibbers;Smite validates known resource profiles/kinds/tags and refuses champion targets. Structures and arbitrary pets are not silently generalized as eligible.",
+      "remaining": "Qualify full type matrix,all summons and structure exceptions for every ability;support exclusions are not evidence of native immunity.",
+      "anchors": [
+        {
+          "path": "crates/core/src/ezreal_q.rs",
+          "line": 166,
+          "needle": "fn ezreal_q_circles(",
+          "role": "targeting_reference_02_Q_exact_types"
+        },
+        {
+          "path": "crates/core/src/summoner_smite.rs",
+          "line": 38,
+          "needle": "pub fn validate_target(",
+          "role": "targeting_reference_02_smite_kind_tag_filter"
+        }
+      ],
+      "native_bindings": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\EzrealMysticShot.inibin",
+          "selector": "SpellData authored fields/text hooks;flags not decoded into universal server targeting policy",
+          "role": "native_authoring_input_not_server_policy"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerSmite.inibin",
+          "selector": "SpellData authored fields/text hooks;flags not decoded into universal server targeting policy",
+          "role": "native_authoring_input_not_server_policy"
+        }
+      ],
+      "existing_unknown_id": "OLU-c56d1041-1771-5de6-83f3-7c227daef2a4",
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "native_server_policy_qualified": false
+    },
+    {
+      "task_id": "SYS-04.6-03",
+      "title": "Résoudre les intersections des zones circulaires",
+      "finding": "Tibbers summon/aura select targets with center distance <= zone radius + target body radius;structure protection and team/life filters apply. Native CastRadius supplies a scalar;closed-circle geometry is current reconstruction.",
+      "remaining": "Qualify complete circular-zone families,body radii,boundaries,terrain/height and native timing/order;do not infer all circle behavior from Tibbers.",
+      "anchors": [
+        {
+          "path": "crates/core/src/annie_r.rs",
+          "line": 76,
+          "needle": "fn tibbers_area(",
+          "role": "targeting_reference_03_circle_query"
+        },
+        {
+          "path": "crates/core/src/annie_r.rs",
+          "line": 73,
+          "needle": "for target in self.tibbers_area(team,r.point",
+          "role": "targeting_reference_03_summon_circle_consumer"
+        }
+      ],
+      "native_bindings": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Annie\\Spells\\InfernalGuardian.inibin",
+          "selector": "SpellData authored fields/text hooks;flags not decoded into universal server targeting policy",
+          "role": "native_authoring_input_not_server_policy"
+        }
+      ],
+      "existing_unknown_id": "OLU-9d1fd52e-7d07-5ef9-9d57-90516c37c0c1",
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "native_server_policy_qualified": false
+    },
+    {
+      "task_id": "SYS-04.6-04",
+      "title": "Résoudre les intersections des cônes",
+      "finding": "Annie W calls a finite closed-sector/circle intersection helper;native CastConeAngle is consumed as current half_angle,range625. Helper checks finite inputs,unit direction,caps and rays;the interpretation is explicitly reconstructed.",
+      "remaining": "Qualify angle interpretation,all cone abilities,radius defaults,moving targets,precision and original hit order.",
+      "anchors": [
+        {
+          "path": "crates/core/src/annie_w.rs",
+          "line": 12,
+          "needle": "pub fn intersects(",
+          "role": "targeting_reference_04_sector_geometry"
+        },
+        {
+          "path": "crates/core/src/annie_w.rs",
+          "line": 64,
+          "needle": "pub(crate) fn advance_annie_w(",
+          "role": "targeting_reference_04_cone_consumer"
+        }
+      ],
+      "native_bindings": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Annie\\Spells\\Incinerate.inibin",
+          "selector": "SpellData authored fields/text hooks;flags not decoded into universal server targeting policy",
+          "role": "native_authoring_input_not_server_policy"
+        }
+      ],
+      "existing_unknown_id": "OLU-d8af9884-d7a6-5530-b4c9-ac1d8b660675",
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "native_server_policy_qualified": false
+    },
+    {
+      "task_id": "SYS-04.6-05",
+      "title": "Résoudre les intersections des lignes et projectiles",
+      "finding": "linear_skillshot contact_distance computes earliest closed segment/circle contact using the original ray and f64 predicates;Ezreal Q advances this current helper against fixed centers per tick. No terrain/continuous moving-target or original server geometry qualification.",
+      "remaining": "Qualify continuous target motion,terrain,3D heights,precision/boundaries and every line ability. Q primary width80 and display range1150 differ from chosen radius60/range1200.",
+      "anchors": [
+        {
+          "path": "crates/core/src/linear_skillshot.rs",
+          "line": 221,
+          "needle": "fn contact_distance(",
+          "role": "targeting_reference_05_swept_contact"
+        },
+        {
+          "path": "crates/core/src/ezreal_q.rs",
+          "line": 231,
+          "needle": "let step = match f.shot.advance(",
+          "role": "targeting_reference_05_Q_line_consumer"
+        }
+      ],
+      "native_bindings": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\EzrealMysticShot.inibin",
+          "selector": "SpellData authored fields/text hooks;flags not decoded into universal server targeting policy",
+          "role": "native_authoring_input_not_server_policy"
+        }
+      ],
+      "existing_unknown_id": "OLU-5a5f84fa-d8c0-5459-8c02-dfed92bf4cfa",
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "native_server_policy_qualified": false
+    },
+    {
+      "task_id": "SYS-04.6-06",
+      "title": "Appliquer les limites de portée au lancement",
+      "finding": "Garen R validates champion center range;Trundle E validates a ground center and terrain;Tibbers validates ground point range. Directional casts separate input aim point from traveled distance. There is no universal range formula.",
+      "remaining": "Qualify center/bounding-box/edge conventions,clamping vs rejection,range overrides and all spell-specific behavior.",
+      "anchors": [
+        {
+          "path": "crates/core/src/spells.rs",
+          "line": 153,
+          "needle": "p.position.distance(enemy.position) > garen_value",
+          "role": "targeting_reference_06_Garen_R_range"
+        },
+        {
+          "path": "crates/core/src/trundle_e.rs",
+          "line": 131,
+          "needle": "invalid Trundle E map center/range",
+          "role": "targeting_reference_06_Trundle_E_range"
+        },
+        {
+          "path": "crates/core/src/annie_r.rs",
+          "line": 35,
+          "needle": "return Err(\"spell point out of range\".into());",
+          "role": "targeting_reference_06_Tibbers_range"
+        }
+      ],
+      "native_bindings": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenR.inibin",
+          "selector": "SpellData authored fields/text hooks;flags not decoded into universal server targeting policy",
+          "role": "native_authoring_input_not_server_policy"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Trundle\\Spells\\TrundleCircle.inibin",
+          "selector": "SpellData authored fields/text hooks;flags not decoded into universal server targeting policy",
+          "role": "native_authoring_input_not_server_policy"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Annie\\Spells\\InfernalGuardian.inibin",
+          "selector": "SpellData authored fields/text hooks;flags not decoded into universal server targeting policy",
+          "role": "native_authoring_input_not_server_policy"
+        }
+      ],
+      "existing_unknown_id": "OLU-bc3fe094-1650-503d-8a14-08dc8e128108",
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "native_server_policy_qualified": false
+    },
+    {
+      "task_id": "SYS-04.6-07",
+      "title": "Gérer les canalisations et leur interruption",
+      "finding": "Katarina R native authoring/text provides a channel example. Current unsupported champion dispatch is a boundary;Ezreal R pending cast lock is an implemented windup,not evidence of a generalized channel/interruption lifecycle.",
+      "remaining": "Identify real channel state,ticks,completion,interrupt masks,cost/cooldown policy and all channel producers. Do not promote a cast lock or raw CantCancel flag to channel implementation.",
+      "anchors": [
+        {
+          "path": "crates/core/src/spells.rs",
+          "line": 120,
+          "needle": "return Err(\"champion spell not implemented\".into());",
+          "role": "targeting_reference_07_channel_admission_boundary"
+        },
+        {
+          "path": "crates/core/src/ezreal_r.rs",
+          "line": 133,
+          "needle": "pub(crate) fn ezreal_r_casting(",
+          "role": "targeting_reference_07_windup_only_boundary"
+        }
+      ],
+      "native_bindings": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\KatarinaR.inibin",
+          "selector": "SpellData authored fields/text hooks;flags not decoded into universal server targeting policy",
+          "role": "native_authoring_input_not_server_policy"
+        }
+      ],
+      "existing_unknown_id": "OLU-ca46c076-0690-5a15-9783-16759f90dd5b",
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "native_server_policy_qualified": false
+    },
+    {
+      "task_id": "SYS-04.6-08",
+      "title": "Gérer les charges et leur récupération indépendante",
+      "finding": "Teemo BantamTrap authoring includes MaxAmmo;current unsupported champion cast is a boundary. cooldown::ticks only calculates a duration and does not prove an ammo reservoir or independent charge recovery.",
+      "remaining": "Identify ammo state,recharge queue/per-charge deadlines,initial/max charges,CDR interactions and producers;keep single cooldown timing distinct.",
+      "anchors": [
+        {
+          "path": "crates/core/src/spells.rs",
+          "line": 120,
+          "needle": "return Err(\"champion spell not implemented\".into());",
+          "role": "targeting_reference_08_charge_admission_boundary"
+        },
+        {
+          "path": "crates/core/src/cooldown.rs",
+          "line": 11,
+          "needle": "pub fn ticks(base_seconds",
+          "role": "targeting_reference_08_single_cooldown_boundary"
+        }
+      ],
+      "native_bindings": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\BantamTrap.inibin",
+          "selector": "SpellData authored fields/text hooks;flags not decoded into universal server targeting policy",
+          "role": "native_authoring_input_not_server_policy"
+        }
+      ],
+      "existing_unknown_id": "OLU-a4635c1f-3a93-5596-b21f-a2a8a5e06927",
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "native_server_policy_qualified": false
+    },
+    {
+      "task_id": "SYS-04.6-09",
+      "title": "Gérer les recasts et leur expiration",
+      "finding": "Garen E cancels active Judgment before checking cooldown and retains its original cooldown;Tibbers R redirects to guide_tibbers while a living unexpired pet exists. Concrete recast subsets do not qualify all recasts or historical minimum windows.",
+      "remaining": "Qualify minimum/maximum recast times,expiration,charge vs recast,cost/cooldown transitions and all original ability exceptions.",
+      "anchors": [
+        {
+          "path": "crates/core/src/spells.rs",
+          "line": 131,
+          "needle": "if slot == 2 && self.tick < p.effects.spin_until",
+          "role": "targeting_reference_09_Garen_cancel"
+        },
+        {
+          "path": "crates/core/src/annie_r.rs",
+          "line": 29,
+          "needle": "if let Some(pet)=self.tibbers(id)",
+          "role": "targeting_reference_09_Tibbers_recast"
+        }
+      ],
+      "native_bindings": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenE.inibin",
+          "selector": "SpellData authored fields/text hooks;flags not decoded into universal server targeting policy",
+          "role": "native_authoring_input_not_server_policy"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenECancel.inibin",
+          "selector": "SpellData authored fields/text hooks;flags not decoded into universal server targeting policy",
+          "role": "native_authoring_input_not_server_policy"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Annie\\Spells\\InfernalGuardian.inibin",
+          "selector": "SpellData authored fields/text hooks;flags not decoded into universal server targeting policy",
+          "role": "native_authoring_input_not_server_policy"
+        }
+      ],
+      "existing_unknown_id": "OLU-57c732d3-e156-5174-a4aa-f75183c59acd",
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "native_server_policy_qualified": false
+    },
+    {
+      "task_id": "SYS-04.6-10",
+      "title": "Résoudre les collisions et cibles multiples des projectiles",
+      "finding": "Shot orders contacts by distance then entity ID,remembers hits and supports FirstContact/Pierce. Q uses first contact;R pierces and increments attenuation count after accepted damage. These deterministic local choices are not the native server callback order.",
+      "remaining": "Qualify all collision shapes,target motion/multiplicity,terrain,bounces,returning missiles,failed-contact policy and native tie order.",
+      "anchors": [
+        {
+          "path": "crates/core/src/linear_skillshot.rs",
+          "line": 154,
+          "needle": "pub fn advance(&mut self, identity: Identity",
+          "role": "targeting_reference_10_contact_order"
+        },
+        {
+          "path": "crates/core/src/ezreal_q.rs",
+          "line": 143,
+          "needle": "mode: Mode::FirstContact",
+          "role": "targeting_reference_10_Q_first_contact"
+        },
+        {
+          "path": "crates/core/src/ezreal_r.rs",
+          "line": 278,
+          "needle": "flight.accepted_hits += 1;",
+          "role": "targeting_reference_10_R_accepted_contact_count"
+        }
+      ],
+      "native_bindings": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\EzrealMysticShot.inibin",
+          "selector": "SpellData authored fields/text hooks;flags not decoded into universal server targeting policy",
+          "role": "native_authoring_input_not_server_policy"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\EzrealTrueshotBarrage.inibin",
+          "selector": "SpellData authored fields/text hooks;flags not decoded into universal server targeting policy",
+          "role": "native_authoring_input_not_server_policy"
+        }
+      ],
+      "existing_unknown_id": "OLU-01d94d7b-c08b-526f-8d48-1d7a0c1b98f7",
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "native_server_policy_qualified": false
+    },
+    {
+      "task_id": "SYS-04.6-11",
+      "title": "Appliquer une seule fois les effets d’un événement rejoué",
+      "finding": "Resumable input checks authenticated sequence before commit;host commits then dispatches game.command. Shot rejects repeated/skipped ticks and remembers hit IDs. These prevent selected replays locally,not a universal exactly-once guarantee across all events or crashes.",
+      "remaining": "Qualify all replay paths,legacy inputs,persistence/restarts,session boundaries and side effects;no native deduplication protocol is inferred from local transport.",
+      "anchors": [
+        {
+          "path": "crates/server/src/reconnect.rs",
+          "line": 182,
+          "needle": "if r.sequence<=l.last_sequence",
+          "role": "targeting_reference_11_sequence_gate"
+        },
+        {
+          "path": "crates/server/src/session_host.rs",
+          "line": 131,
+          "needle": "let accepted = prepared.commit(ack)",
+          "role": "targeting_reference_11_accepted_input_commit"
+        },
+        {
+          "path": "crates/core/src/linear_skillshot.rs",
+          "line": 157,
+          "needle": "if self.last_tick.checked_add(1) != Some(tick)",
+          "role": "targeting_reference_11_shot_tick_gate"
+        }
+      ],
+      "native_bindings": [],
+      "existing_unknown_id": "OLU-34314ac0-c286-5e88-ac22-4c6e7f380503",
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "native_server_policy_qualified": false
+    },
+    {
+      "task_id": "SYS-04.6-12",
+      "title": "Gérer les déplacements forcés bloqués par un obstacle",
+      "finding": "Trundle E preflights the complete push segment against terrain/other pillars and rechecks each movement step. Blocked motion does not teleport through the obstacle;late intrusion is separately retried. This remains point-agent geometry without actor footprint parity.",
+      "remaining": "Qualify all forced movement,actor footprints,wall interactions,landing selection,interrupt ordering and original obstacle collision semantics.",
+      "anchors": [
+        {
+          "path": "crates/core/src/trundle_e.rs",
+          "line": 87,
+          "needle": "fn plan_trundle_e_push(",
+          "role": "targeting_reference_12_push_preflight"
+        },
+        {
+          "path": "crates/core/src/pillar_navigation.rs",
+          "line": 166,
+          "needle": "pub(crate) fn segment_allowed(",
+          "role": "targeting_reference_12_terrain_and_pillar_segment"
+        }
+      ],
+      "native_bindings": [
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Trundle\\Spells\\TrundleCircle.inibin",
+          "selector": "SpellData authored fields/text hooks;flags not decoded into universal server targeting policy",
+          "role": "native_authoring_input_not_server_policy"
+        }
+      ],
+      "existing_unknown_id": "OLU-db76efe7-f56c-5b77-bbd8-61f920322be7",
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "native_server_policy_qualified": false
+    }
+  ],
+  "native_resources": [
+    {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenE.inibin",
+        "bytes": 1125,
+        "sha256": "a8c5bafd2314176333a3efee067abfe4acd0538c534fee05eb7860c6b7c49dc3"
+      },
+      "relative": "DATA/Characters/Garen/Spells/GarenE.inibin",
+      "membership": {
+        "logical_path": "DATA/Characters/Garen/Spells/GarenE.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenE.inibin",
+          "bytes": 1125,
+          "sha256": "a8c5bafd2314176333a3efee067abfe4acd0538c534fee05eb7860c6b7c49dc3",
+          "md5": "bf2e9b4547529208fcf4e2b1fb01f811"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Garen/Spells/GarenE.inibin",
+            "release": "0.0.0.181",
+            "md5": "bf2e9b4547529208fcf4e2b1fb01f811",
+            "bytes": 1125,
+            "compressed_bytes": 888,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Garen/Spells/GarenE.inibin",
+            "release": "0.0.0.181",
+            "md5": "bf2e9b4547529208fcf4e2b1fb01f811",
+            "bytes": 1125,
+            "compressed_bytes": 888,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_GarenE",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_GarenE",
+        "SpellData.Flags": 115716,
+        "SpellData.TextFlags": "Instacast | AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+        "SpellData.TargettingType": 4,
+        "SpellData.CastRange": "660.0000",
+        "SpellData.CastRange1": null,
+        "SpellData.CastRangeDisplayOverride": "325.0000",
+        "SpellData.CastRadius": "35.0000",
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": "160.0000",
+        "SpellData.MissileSpeed": "700.0000",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": null,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": "20",
+        "SpellData.Effect2Level1Amount": 3,
+        "SpellData.Effect3Level1Amount": "70"
+      }
+    },
+    {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenR.inibin",
+        "bytes": 1565,
+        "sha256": "d60ea2a2b8dd6aa432a8b49a5e9ceaaff5d43dbc2a35414bebd8a126a354cc1c"
+      },
+      "relative": "DATA/Characters/Garen/Spells/GarenR.inibin",
+      "membership": {
+        "logical_path": "DATA/Characters/Garen/Spells/GarenR.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenR.inibin",
+          "bytes": 1565,
+          "sha256": "d60ea2a2b8dd6aa432a8b49a5e9ceaaff5d43dbc2a35414bebd8a126a354cc1c",
+          "md5": "60991c2a1158b56099969d142055c7a4"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Garen/Spells/GarenR.inibin",
+            "release": "0.0.0.181",
+            "md5": "60991c2a1158b56099969d142055c7a4",
+            "bytes": 1565,
+            "compressed_bytes": 1235,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Garen/Spells/GarenR.inibin",
+            "release": "0.0.0.181",
+            "md5": "60991c2a1158b56099969d142055c7a4",
+            "bytes": 1565,
+            "compressed_bytes": 1235,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_GarenR",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_GarenR",
+        "SpellData.Flags": "66560",
+        "SpellData.TextFlags": "AffectEnemies | AffectHeroes",
+        "SpellData.TargettingType": 1,
+        "SpellData.CastRange": "400.0000",
+        "SpellData.CastRange1": "400.0000",
+        "SpellData.CastRangeDisplayOverride": 0,
+        "SpellData.CastRadius": "100.0000",
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": 0,
+        "SpellData.MissileSpeed": "900.0000",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": 1,
+        "SpellData.ChannelDuration": 0,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": "175.0000",
+        "SpellData.Effect2Level1Amount": 3.5,
+        "SpellData.Effect3Level1Amount": 0
+      }
+    },
+    {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Annie\\Spells\\Incinerate.inibin",
+        "bytes": 1413,
+        "sha256": "3a54e9e52c540b493474d8729f5f84ef391dc479e7f85a37aeb063637522bfdf"
+      },
+      "relative": "DATA/Characters/Annie/Spells/Incinerate.inibin",
+      "membership": {
+        "logical_path": "DATA/Characters/Annie/Spells/Incinerate.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Annie\\Spells\\Incinerate.inibin",
+          "bytes": 1413,
+          "sha256": "3a54e9e52c540b493474d8729f5f84ef391dc479e7f85a37aeb063637522bfdf",
+          "md5": "036dbff46d2d2f004090e7ba15d32d0b"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Annie/Spells/Incinerate.inibin",
+            "release": "0.0.0.204",
+            "md5": "036dbff46d2d2f004090e7ba15d32d0b",
+            "bytes": 1413,
+            "compressed_bytes": 1107,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Annie/Spells/Incinerate.inibin",
+            "release": "0.0.0.204",
+            "md5": "036dbff46d2d2f004090e7ba15d32d0b",
+            "bytes": 1413,
+            "compressed_bytes": 1107,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_Incinerate",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_Incinerate",
+        "SpellData.Flags": 115712,
+        "SpellData.TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+        "SpellData.TargettingType": 3,
+        "SpellData.CastRange": "625.0000",
+        "SpellData.CastRange1": "625.0000",
+        "SpellData.CastRangeDisplayOverride": 0,
+        "SpellData.CastRadius": "210.0000",
+        "SpellData.CastConeAngle": 24.760000228881836,
+        "SpellData.CastConeDistance": "625.0000",
+        "SpellData.LineWidth": 0,
+        "SpellData.MissileSpeed": 0,
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": null,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": "70.0000",
+        "SpellData.Effect2Level1Amount": 0,
+        "SpellData.Effect3Level1Amount": 0
+      }
+    },
+    {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Annie\\Spells\\InfernalGuardian.inibin",
+        "bytes": 1069,
+        "sha256": "3c9b0fc6a59413fa0ad86a4e33f5d7138041c01ec6e9b52c33ab6425541184ac"
+      },
+      "relative": "DATA/Characters/Annie/Spells/InfernalGuardian.inibin",
+      "membership": {
+        "logical_path": "DATA/Characters/Annie/Spells/InfernalGuardian.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Annie\\Spells\\InfernalGuardian.inibin",
+          "bytes": 1069,
+          "sha256": "3c9b0fc6a59413fa0ad86a4e33f5d7138041c01ec6e9b52c33ab6425541184ac",
+          "md5": "9a8d30afdd086683247326f04ff72885"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Annie/Spells/InfernalGuardian.inibin",
+            "release": "0.0.0.207",
+            "md5": "9a8d30afdd086683247326f04ff72885",
+            "bytes": 1069,
+            "compressed_bytes": 866,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Annie/Spells/InfernalGuardian.inibin",
+            "release": "0.0.0.207",
+            "md5": "9a8d30afdd086683247326f04ff72885",
+            "bytes": 1069,
+            "compressed_bytes": 866,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_InfernalGuardian",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_InfernalGuardian",
+        "SpellData.Flags": 115712,
+        "SpellData.TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+        "SpellData.TargettingType": 2,
+        "SpellData.CastRange": "600",
+        "SpellData.CastRange1": null,
+        "SpellData.CastRangeDisplayOverride": 0,
+        "SpellData.CastRadius": 250.3000030517578,
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": 0,
+        "SpellData.MissileSpeed": 0,
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": null,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": 175,
+        "SpellData.Effect2Level1Amount": "1200",
+        "SpellData.Effect3Level1Amount": "80"
+      }
+    },
+    {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\EzrealMysticShot.inibin",
+        "bytes": 1154,
+        "sha256": "b48b65bc067f42a1086ce579985cbb060c75fd5802b07c33451d756617cfe217"
+      },
+      "relative": "DATA/Spells/EzrealMysticShot.inibin",
+      "membership": {
+        "logical_path": "DATA/Spells/EzrealMysticShot.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\EzrealMysticShot.inibin",
+          "bytes": 1154,
+          "sha256": "b48b65bc067f42a1086ce579985cbb060c75fd5802b07c33451d756617cfe217",
+          "md5": "597e99df93f42cc91a4c5ba7456cefd7"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/EzrealMysticShot.inibin",
+            "release": "0.0.0.254",
+            "md5": "597e99df93f42cc91a4c5ba7456cefd7",
+            "bytes": 1154,
+            "compressed_bytes": 861,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/EzrealMysticShot.inibin",
+            "release": "0.0.0.254",
+            "md5": "597e99df93f42cc91a4c5ba7456cefd7",
+            "bytes": 1154,
+            "compressed_bytes": 861,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_EzrealMysticShot",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_EzrealMysticShot",
+        "SpellData.Flags": 347136,
+        "SpellData.TextFlags": "Instacast | AffectEnemies | AffectFriends | AffectNeutral | AffectHeroes | AlwaysSelf",
+        "SpellData.TargettingType": 6,
+        "SpellData.CastRange": "10000.0000",
+        "SpellData.CastRange1": null,
+        "SpellData.CastRangeDisplayOverride": "1150.0000",
+        "SpellData.CastRadius": "210.0000",
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": "80.0000",
+        "SpellData.MissileSpeed": "1200.0000",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": null,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": "35.0000",
+        "SpellData.Effect2Level1Amount": 0,
+        "SpellData.Effect3Level1Amount": 0
+      }
+    },
+    {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\EzrealEssenceFlux.inibin",
+        "bytes": 1136,
+        "sha256": "33529cd18a2ce80f41c48f22bbec124831a01a00c6845f455e60efa1650ef115"
+      },
+      "relative": "DATA/Spells/EzrealEssenceFlux.inibin",
+      "membership": {
+        "logical_path": "DATA/Spells/EzrealEssenceFlux.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\EzrealEssenceFlux.inibin",
+          "bytes": 1136,
+          "sha256": "33529cd18a2ce80f41c48f22bbec124831a01a00c6845f455e60efa1650ef115",
+          "md5": "31b9edf3eafbd25fef50af8f7caa7bca"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/EzrealEssenceFlux.inibin",
+            "release": "0.0.0.183",
+            "md5": "31b9edf3eafbd25fef50af8f7caa7bca",
+            "bytes": 1136,
+            "compressed_bytes": 822,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/EzrealEssenceFlux.inibin",
+            "release": "0.0.0.183",
+            "md5": "31b9edf3eafbd25fef50af8f7caa7bca",
+            "bytes": 1136,
+            "compressed_bytes": 822,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_EzrealEssenceFlux",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_EzrealEssenceFlux",
+        "SpellData.Flags": 347136,
+        "SpellData.TextFlags": "Instacast | AffectEnemies | AffectFriends | AffectNeutral | AffectHeroes | AlwaysSelf",
+        "SpellData.TargettingType": 6,
+        "SpellData.CastRange": "10000.0000",
+        "SpellData.CastRange1": null,
+        "SpellData.CastRangeDisplayOverride": "1000.0000",
+        "SpellData.CastRadius": "210.0000",
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": "80.0000",
+        "SpellData.MissileSpeed": "1200.0000",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": null,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": "70.0000",
+        "SpellData.Effect2Level1Amount": "20.0000",
+        "SpellData.Effect3Level1Amount": 0
+      }
+    },
+    {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\EzrealTrueshotBarrage.inibin",
+        "bytes": 1720,
+        "sha256": "383462537a2dbe1ebad65db47c324ec6db5be0032413af2a2d0991910bfddaf6"
+      },
+      "relative": "DATA/Spells/EzrealTrueshotBarrage.inibin",
+      "membership": {
+        "logical_path": "DATA/Spells/EzrealTrueshotBarrage.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\EzrealTrueshotBarrage.inibin",
+          "bytes": 1720,
+          "sha256": "383462537a2dbe1ebad65db47c324ec6db5be0032413af2a2d0991910bfddaf6",
+          "md5": "7797c68e8977fb62dbe5a77ab2fceea7"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/EzrealTrueshotBarrage.inibin",
+            "release": "0.0.0.172",
+            "md5": "7797c68e8977fb62dbe5a77ab2fceea7",
+            "bytes": 1720,
+            "compressed_bytes": 1253,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/EzrealTrueshotBarrage.inibin",
+            "release": "0.0.0.172",
+            "md5": "7797c68e8977fb62dbe5a77ab2fceea7",
+            "bytes": 1720,
+            "compressed_bytes": 1253,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_EzrealTrueshotBarrage",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_EzrealTrueshotBarrage",
+        "SpellData.Flags": 4310016,
+        "SpellData.TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+        "SpellData.TargettingType": 6,
+        "SpellData.CastRange": "20000.0000",
+        "SpellData.CastRange1": "20000.0000",
+        "SpellData.CastRangeDisplayOverride": 0,
+        "SpellData.CastRadius": 299.29998779296875,
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": "160.0000",
+        "SpellData.MissileSpeed": "2000.0000",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": 0,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": "350.0000",
+        "SpellData.Effect2Level1Amount": "10.0000",
+        "SpellData.Effect3Level1Amount": "30.0000"
+      }
+    },
+    {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Trundle\\Spells\\TrundleCircle.inibin",
+        "bytes": 1536,
+        "sha256": "f853d71bfeaf83ad8a4bd6d8848b0ff98509cec2f24a618e51ce5e59e394d1f9"
+      },
+      "relative": "DATA/Characters/Trundle/Spells/TrundleCircle.inibin",
+      "membership": {
+        "logical_path": "DATA/Characters/Trundle/Spells/TrundleCircle.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Trundle\\Spells\\TrundleCircle.inibin",
+          "bytes": 1536,
+          "sha256": "f853d71bfeaf83ad8a4bd6d8848b0ff98509cec2f24a618e51ce5e59e394d1f9",
+          "md5": "e8625f0485f21a75c3b4cf61796142e8"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Trundle/Spells/TrundleCircle.inibin",
+            "release": "0.0.0.169",
+            "md5": "e8625f0485f21a75c3b4cf61796142e8",
+            "bytes": 1536,
+            "compressed_bytes": 1097,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Trundle/Spells/TrundleCircle.inibin",
+            "release": "0.0.0.169",
+            "md5": "e8625f0485f21a75c3b4cf61796142e8",
+            "bytes": 1536,
+            "compressed_bytes": 1097,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_TrundleCircle",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_TrundleCircle",
+        "SpellData.Flags": 510976,
+        "SpellData.TextFlags": "AffectEnemies | AffectFriends | AffectNeutral | AffectMinions | AffectHeroes | AffectTurrets | AlwaysSelf",
+        "SpellData.TargettingType": 2,
+        "SpellData.CastRange": "1000.0000",
+        "SpellData.CastRange1": "1000.0000",
+        "SpellData.CastRangeDisplayOverride": 0,
+        "SpellData.CastRadius": "125.0000",
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": 0,
+        "SpellData.MissileSpeed": "1600.0000",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": null,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": "6.0000",
+        "SpellData.Effect2Level1Amount": "25.0000",
+        "SpellData.Effect3Level1Amount": null
+      }
+    },
+    {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\BantamTrap.inibin",
+        "bytes": 1056,
+        "sha256": "d4ba11147ab1931195df14337afa47f9e238697865c18339872fd1527f73dcc2"
+      },
+      "relative": "DATA/Spells/BantamTrap.inibin",
+      "membership": {
+        "logical_path": "DATA/Spells/BantamTrap.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\BantamTrap.inibin",
+          "bytes": 1056,
+          "sha256": "d4ba11147ab1931195df14337afa47f9e238697865c18339872fd1527f73dcc2",
+          "md5": "09baaa428f118b093f1416b0a868aca2"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/BantamTrap.inibin",
+            "release": "0.0.0.200",
+            "md5": "09baaa428f118b093f1416b0a868aca2",
+            "bytes": 1056,
+            "compressed_bytes": 853,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/BantamTrap.inibin",
+            "release": "0.0.0.200",
+            "md5": "09baaa428f118b093f1416b0a868aca2",
+            "bytes": 1056,
+            "compressed_bytes": 853,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_BantamTrap",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_BantamTrap",
+        "SpellData.Flags": 248832,
+        "SpellData.TextFlags": "AffectEnemies | AffectFriends | AffectNeutral | AffectMinions | AffectHeroes | AffectTurrets",
+        "SpellData.TargettingType": 2,
+        "SpellData.CastRange": "230.0000",
+        "SpellData.CastRange1": null,
+        "SpellData.CastRangeDisplayOverride": null,
+        "SpellData.CastRadius": "135.0000",
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": 0,
+        "SpellData.MissileSpeed": "1450.0000",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": null,
+        "SpellData.MaxAmmo": 3,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": 35,
+        "SpellData.Effect1Level1Amount": "200.0000",
+        "SpellData.Effect2Level1Amount": "30",
+        "SpellData.Effect3Level1Amount": 75
+      }
+    },
+    {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\KatarinaR.inibin",
+        "bytes": 1101,
+        "sha256": "61d485caca95ec3ef4a878750fda5546e31c7a6a97cdda5dd7cde15d680b1757"
+      },
+      "relative": "DATA/Spells/KatarinaR.inibin",
+      "membership": {
+        "logical_path": "DATA/Spells/KatarinaR.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\KatarinaR.inibin",
+          "bytes": 1101,
+          "sha256": "61d485caca95ec3ef4a878750fda5546e31c7a6a97cdda5dd7cde15d680b1757",
+          "md5": "ce000fd165f5cc3530dbba78e4159e2a"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/KatarinaR.inibin",
+            "release": "0.0.1.7",
+            "md5": "ce000fd165f5cc3530dbba78e4159e2a",
+            "bytes": 1101,
+            "compressed_bytes": 861,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/KatarinaR.inibin",
+            "release": "0.0.1.7",
+            "md5": "ce000fd165f5cc3530dbba78e4159e2a",
+            "bytes": 1101,
+            "compressed_bytes": 861,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_KatarinaR",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_KatarinaR",
+        "SpellData.Flags": 115712,
+        "SpellData.TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+        "SpellData.TargettingType": 4,
+        "SpellData.CastRange": "550.0000",
+        "SpellData.CastRange1": null,
+        "SpellData.CastRangeDisplayOverride": 0,
+        "SpellData.CastRadius": "325.0000",
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": 0,
+        "SpellData.MissileSpeed": "1450.0000",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": null,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": "35.0000",
+        "SpellData.Effect2Level1Amount": "3.0000",
+        "SpellData.Effect3Level1Amount": 2.5
+      }
+    },
+    {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerHeal.inibin",
+        "bytes": 1567,
+        "sha256": "ef988a5b19ad8fc4db3e210fb76fae4c826562f21c82128c891dd0332e5bb8c5"
+      },
+      "relative": "DATA/Spells/SummonerHeal.inibin",
+      "membership": {
+        "logical_path": "DATA/Spells/SummonerHeal.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerHeal.inibin",
+          "bytes": 1567,
+          "sha256": "ef988a5b19ad8fc4db3e210fb76fae4c826562f21c82128c891dd0332e5bb8c5",
+          "md5": "449abf0e36630d2730d80cfa258d89dd"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/SummonerHeal.inibin",
+            "release": "0.0.0.249",
+            "md5": "449abf0e36630d2730d80cfa258d89dd",
+            "bytes": 1567,
+            "compressed_bytes": 1239,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/SummonerHeal.inibin",
+            "release": "0.0.0.249",
+            "md5": "449abf0e36630d2730d80cfa258d89dd",
+            "bytes": 1567,
+            "compressed_bytes": 1239,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_SummonerHeal",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_SummonerHeal",
+        "SpellData.Flags": "67620",
+        "SpellData.TextFlags": "Instacast | AffectFriends | AffectHeroes",
+        "SpellData.TargettingType": 5,
+        "SpellData.CastRange": "25000.0000",
+        "SpellData.CastRange1": "25000.0000",
+        "SpellData.CastRangeDisplayOverride": "850.0000",
+        "SpellData.CastRadius": 0,
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": 0,
+        "SpellData.MissileSpeed": 0,
+        "SpellData.CantCancelWhileWindingUp": "0",
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": 0,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": 0,
+        "SpellData.Effect2Level1Amount": 0,
+        "SpellData.Effect3Level1Amount": 0
+      }
+    },
+    {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerSmite.inibin",
+        "bytes": 817,
+        "sha256": "aa0fda30f20711dc422e9ab73133cb491e6c9d158aacfbe4cd8735a085dacc1d"
+      },
+      "relative": "DATA/Spells/SummonerSmite.inibin",
+      "membership": {
+        "logical_path": "DATA/Spells/SummonerSmite.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerSmite.inibin",
+          "bytes": 817,
+          "sha256": "aa0fda30f20711dc422e9ab73133cb491e6c9d158aacfbe4cd8735a085dacc1d",
+          "md5": "1a891f8e7e2cc66ed62b2b98c23edbc6"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/SummonerSmite.inibin",
+            "release": "0.0.1.7",
+            "md5": "1a891f8e7e2cc66ed62b2b98c23edbc6",
+            "bytes": 817,
+            "compressed_bytes": 664,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/SummonerSmite.inibin",
+            "release": "0.0.1.7",
+            "md5": "1a891f8e7e2cc66ed62b2b98c23edbc6",
+            "bytes": 817,
+            "compressed_bytes": 664,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_SummonerSmite",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_SummonerSmite",
+        "SpellData.Flags": 58388,
+        "SpellData.TextFlags": "Instacast | NonDispellable | AffectEnemies | AffectNeutral | AffectMinions | NotAffectSelf",
+        "SpellData.TargettingType": 1,
+        "SpellData.CastRange": "760.0000",
+        "SpellData.CastRange1": null,
+        "SpellData.CastRangeDisplayOverride": null,
+        "SpellData.CastRadius": "210.0000",
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": 0,
+        "SpellData.MissileSpeed": "20.0000",
+        "SpellData.CantCancelWhileWindingUp": "0",
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": null,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": null,
+        "SpellData.Effect2Level1Amount": null,
+        "SpellData.Effect3Level1Amount": null
+      }
+    },
+    {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenECancel.inibin",
+        "bytes": 968,
+        "sha256": "8c0348037eaa4f332b71c10abc1aa5fcf93576156020307f5ab6664aef52f334"
+      },
+      "relative": "DATA/Characters/Garen/Spells/GarenECancel.inibin",
+      "membership": {
+        "logical_path": "DATA/Characters/Garen/Spells/GarenECancel.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenECancel.inibin",
+          "bytes": 968,
+          "sha256": "8c0348037eaa4f332b71c10abc1aa5fcf93576156020307f5ab6664aef52f334",
+          "md5": "36e880cd2240b74601d9a88ecb589664"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Garen/Spells/GarenECancel.inibin",
+            "release": "0.0.0.181",
+            "md5": "36e880cd2240b74601d9a88ecb589664",
+            "bytes": 968,
+            "compressed_bytes": 771,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Garen/Spells/GarenECancel.inibin",
+            "release": "0.0.0.181",
+            "md5": "36e880cd2240b74601d9a88ecb589664",
+            "bytes": 968,
+            "compressed_bytes": 771,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_GarenECancel",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_GarenECancel",
+        "SpellData.Flags": 67588,
+        "SpellData.TextFlags": "Instacast | AffectFriends | AffectHeroes",
+        "SpellData.TargettingType": "0",
+        "SpellData.CastRange": "700.0000",
+        "SpellData.CastRange1": null,
+        "SpellData.CastRangeDisplayOverride": 0,
+        "SpellData.CastRadius": "100.0000",
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": 0,
+        "SpellData.MissileSpeed": 0,
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": null,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": "40.0000",
+        "SpellData.Effect2Level1Amount": "10.0000",
+        "SpellData.Effect3Level1Amount": 0
+      }
+    }
+  ],
+  "selected_inputs": {
+    "garenE": {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenE.inibin",
+        "bytes": 1125,
+        "sha256": "a8c5bafd2314176333a3efee067abfe4acd0538c534fee05eb7860c6b7c49dc3"
+      },
+      "relative": "DATA/Characters/Garen/Spells/GarenE.inibin",
+      "membership": {
+        "logical_path": "DATA/Characters/Garen/Spells/GarenE.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenE.inibin",
+          "bytes": 1125,
+          "sha256": "a8c5bafd2314176333a3efee067abfe4acd0538c534fee05eb7860c6b7c49dc3",
+          "md5": "bf2e9b4547529208fcf4e2b1fb01f811"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Garen/Spells/GarenE.inibin",
+            "release": "0.0.0.181",
+            "md5": "bf2e9b4547529208fcf4e2b1fb01f811",
+            "bytes": 1125,
+            "compressed_bytes": 888,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Garen/Spells/GarenE.inibin",
+            "release": "0.0.0.181",
+            "md5": "bf2e9b4547529208fcf4e2b1fb01f811",
+            "bytes": 1125,
+            "compressed_bytes": 888,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_GarenE",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_GarenE",
+        "SpellData.Flags": 115716,
+        "SpellData.TextFlags": "Instacast | AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+        "SpellData.TargettingType": 4,
+        "SpellData.CastRange": "660.0000",
+        "SpellData.CastRange1": null,
+        "SpellData.CastRangeDisplayOverride": "325.0000",
+        "SpellData.CastRadius": "35.0000",
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": "160.0000",
+        "SpellData.MissileSpeed": "700.0000",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": null,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": "20",
+        "SpellData.Effect2Level1Amount": 3,
+        "SpellData.Effect3Level1Amount": "70"
+      }
+    },
+    "garenR": {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenR.inibin",
+        "bytes": 1565,
+        "sha256": "d60ea2a2b8dd6aa432a8b49a5e9ceaaff5d43dbc2a35414bebd8a126a354cc1c"
+      },
+      "relative": "DATA/Characters/Garen/Spells/GarenR.inibin",
+      "membership": {
+        "logical_path": "DATA/Characters/Garen/Spells/GarenR.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenR.inibin",
+          "bytes": 1565,
+          "sha256": "d60ea2a2b8dd6aa432a8b49a5e9ceaaff5d43dbc2a35414bebd8a126a354cc1c",
+          "md5": "60991c2a1158b56099969d142055c7a4"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Garen/Spells/GarenR.inibin",
+            "release": "0.0.0.181",
+            "md5": "60991c2a1158b56099969d142055c7a4",
+            "bytes": 1565,
+            "compressed_bytes": 1235,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Garen/Spells/GarenR.inibin",
+            "release": "0.0.0.181",
+            "md5": "60991c2a1158b56099969d142055c7a4",
+            "bytes": 1565,
+            "compressed_bytes": 1235,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_GarenR",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_GarenR",
+        "SpellData.Flags": "66560",
+        "SpellData.TextFlags": "AffectEnemies | AffectHeroes",
+        "SpellData.TargettingType": 1,
+        "SpellData.CastRange": "400.0000",
+        "SpellData.CastRange1": "400.0000",
+        "SpellData.CastRangeDisplayOverride": 0,
+        "SpellData.CastRadius": "100.0000",
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": 0,
+        "SpellData.MissileSpeed": "900.0000",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": 1,
+        "SpellData.ChannelDuration": 0,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": "175.0000",
+        "SpellData.Effect2Level1Amount": 3.5,
+        "SpellData.Effect3Level1Amount": 0
+      }
+    },
+    "annieW": {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Annie\\Spells\\Incinerate.inibin",
+        "bytes": 1413,
+        "sha256": "3a54e9e52c540b493474d8729f5f84ef391dc479e7f85a37aeb063637522bfdf"
+      },
+      "relative": "DATA/Characters/Annie/Spells/Incinerate.inibin",
+      "membership": {
+        "logical_path": "DATA/Characters/Annie/Spells/Incinerate.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Annie\\Spells\\Incinerate.inibin",
+          "bytes": 1413,
+          "sha256": "3a54e9e52c540b493474d8729f5f84ef391dc479e7f85a37aeb063637522bfdf",
+          "md5": "036dbff46d2d2f004090e7ba15d32d0b"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Annie/Spells/Incinerate.inibin",
+            "release": "0.0.0.204",
+            "md5": "036dbff46d2d2f004090e7ba15d32d0b",
+            "bytes": 1413,
+            "compressed_bytes": 1107,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Annie/Spells/Incinerate.inibin",
+            "release": "0.0.0.204",
+            "md5": "036dbff46d2d2f004090e7ba15d32d0b",
+            "bytes": 1413,
+            "compressed_bytes": 1107,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_Incinerate",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_Incinerate",
+        "SpellData.Flags": 115712,
+        "SpellData.TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+        "SpellData.TargettingType": 3,
+        "SpellData.CastRange": "625.0000",
+        "SpellData.CastRange1": "625.0000",
+        "SpellData.CastRangeDisplayOverride": 0,
+        "SpellData.CastRadius": "210.0000",
+        "SpellData.CastConeAngle": 24.760000228881836,
+        "SpellData.CastConeDistance": "625.0000",
+        "SpellData.LineWidth": 0,
+        "SpellData.MissileSpeed": 0,
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": null,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": "70.0000",
+        "SpellData.Effect2Level1Amount": 0,
+        "SpellData.Effect3Level1Amount": 0
+      }
+    },
+    "annieR": {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Annie\\Spells\\InfernalGuardian.inibin",
+        "bytes": 1069,
+        "sha256": "3c9b0fc6a59413fa0ad86a4e33f5d7138041c01ec6e9b52c33ab6425541184ac"
+      },
+      "relative": "DATA/Characters/Annie/Spells/InfernalGuardian.inibin",
+      "membership": {
+        "logical_path": "DATA/Characters/Annie/Spells/InfernalGuardian.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Annie\\Spells\\InfernalGuardian.inibin",
+          "bytes": 1069,
+          "sha256": "3c9b0fc6a59413fa0ad86a4e33f5d7138041c01ec6e9b52c33ab6425541184ac",
+          "md5": "9a8d30afdd086683247326f04ff72885"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Annie/Spells/InfernalGuardian.inibin",
+            "release": "0.0.0.207",
+            "md5": "9a8d30afdd086683247326f04ff72885",
+            "bytes": 1069,
+            "compressed_bytes": 866,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Annie/Spells/InfernalGuardian.inibin",
+            "release": "0.0.0.207",
+            "md5": "9a8d30afdd086683247326f04ff72885",
+            "bytes": 1069,
+            "compressed_bytes": 866,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_InfernalGuardian",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_InfernalGuardian",
+        "SpellData.Flags": 115712,
+        "SpellData.TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+        "SpellData.TargettingType": 2,
+        "SpellData.CastRange": "600",
+        "SpellData.CastRange1": null,
+        "SpellData.CastRangeDisplayOverride": 0,
+        "SpellData.CastRadius": 250.3000030517578,
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": 0,
+        "SpellData.MissileSpeed": 0,
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": null,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": 175,
+        "SpellData.Effect2Level1Amount": "1200",
+        "SpellData.Effect3Level1Amount": "80"
+      }
+    },
+    "ezrealQ": {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\EzrealMysticShot.inibin",
+        "bytes": 1154,
+        "sha256": "b48b65bc067f42a1086ce579985cbb060c75fd5802b07c33451d756617cfe217"
+      },
+      "relative": "DATA/Spells/EzrealMysticShot.inibin",
+      "membership": {
+        "logical_path": "DATA/Spells/EzrealMysticShot.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\EzrealMysticShot.inibin",
+          "bytes": 1154,
+          "sha256": "b48b65bc067f42a1086ce579985cbb060c75fd5802b07c33451d756617cfe217",
+          "md5": "597e99df93f42cc91a4c5ba7456cefd7"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/EzrealMysticShot.inibin",
+            "release": "0.0.0.254",
+            "md5": "597e99df93f42cc91a4c5ba7456cefd7",
+            "bytes": 1154,
+            "compressed_bytes": 861,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/EzrealMysticShot.inibin",
+            "release": "0.0.0.254",
+            "md5": "597e99df93f42cc91a4c5ba7456cefd7",
+            "bytes": 1154,
+            "compressed_bytes": 861,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_EzrealMysticShot",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_EzrealMysticShot",
+        "SpellData.Flags": 347136,
+        "SpellData.TextFlags": "Instacast | AffectEnemies | AffectFriends | AffectNeutral | AffectHeroes | AlwaysSelf",
+        "SpellData.TargettingType": 6,
+        "SpellData.CastRange": "10000.0000",
+        "SpellData.CastRange1": null,
+        "SpellData.CastRangeDisplayOverride": "1150.0000",
+        "SpellData.CastRadius": "210.0000",
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": "80.0000",
+        "SpellData.MissileSpeed": "1200.0000",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": null,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": "35.0000",
+        "SpellData.Effect2Level1Amount": 0,
+        "SpellData.Effect3Level1Amount": 0
+      }
+    },
+    "ezrealW": {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\EzrealEssenceFlux.inibin",
+        "bytes": 1136,
+        "sha256": "33529cd18a2ce80f41c48f22bbec124831a01a00c6845f455e60efa1650ef115"
+      },
+      "relative": "DATA/Spells/EzrealEssenceFlux.inibin",
+      "membership": {
+        "logical_path": "DATA/Spells/EzrealEssenceFlux.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\EzrealEssenceFlux.inibin",
+          "bytes": 1136,
+          "sha256": "33529cd18a2ce80f41c48f22bbec124831a01a00c6845f455e60efa1650ef115",
+          "md5": "31b9edf3eafbd25fef50af8f7caa7bca"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/EzrealEssenceFlux.inibin",
+            "release": "0.0.0.183",
+            "md5": "31b9edf3eafbd25fef50af8f7caa7bca",
+            "bytes": 1136,
+            "compressed_bytes": 822,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/EzrealEssenceFlux.inibin",
+            "release": "0.0.0.183",
+            "md5": "31b9edf3eafbd25fef50af8f7caa7bca",
+            "bytes": 1136,
+            "compressed_bytes": 822,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_EzrealEssenceFlux",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_EzrealEssenceFlux",
+        "SpellData.Flags": 347136,
+        "SpellData.TextFlags": "Instacast | AffectEnemies | AffectFriends | AffectNeutral | AffectHeroes | AlwaysSelf",
+        "SpellData.TargettingType": 6,
+        "SpellData.CastRange": "10000.0000",
+        "SpellData.CastRange1": null,
+        "SpellData.CastRangeDisplayOverride": "1000.0000",
+        "SpellData.CastRadius": "210.0000",
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": "80.0000",
+        "SpellData.MissileSpeed": "1200.0000",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": null,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": "70.0000",
+        "SpellData.Effect2Level1Amount": "20.0000",
+        "SpellData.Effect3Level1Amount": 0
+      }
+    },
+    "ezrealR": {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\EzrealTrueshotBarrage.inibin",
+        "bytes": 1720,
+        "sha256": "383462537a2dbe1ebad65db47c324ec6db5be0032413af2a2d0991910bfddaf6"
+      },
+      "relative": "DATA/Spells/EzrealTrueshotBarrage.inibin",
+      "membership": {
+        "logical_path": "DATA/Spells/EzrealTrueshotBarrage.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\EzrealTrueshotBarrage.inibin",
+          "bytes": 1720,
+          "sha256": "383462537a2dbe1ebad65db47c324ec6db5be0032413af2a2d0991910bfddaf6",
+          "md5": "7797c68e8977fb62dbe5a77ab2fceea7"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/EzrealTrueshotBarrage.inibin",
+            "release": "0.0.0.172",
+            "md5": "7797c68e8977fb62dbe5a77ab2fceea7",
+            "bytes": 1720,
+            "compressed_bytes": 1253,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/EzrealTrueshotBarrage.inibin",
+            "release": "0.0.0.172",
+            "md5": "7797c68e8977fb62dbe5a77ab2fceea7",
+            "bytes": 1720,
+            "compressed_bytes": 1253,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_EzrealTrueshotBarrage",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_EzrealTrueshotBarrage",
+        "SpellData.Flags": 4310016,
+        "SpellData.TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+        "SpellData.TargettingType": 6,
+        "SpellData.CastRange": "20000.0000",
+        "SpellData.CastRange1": "20000.0000",
+        "SpellData.CastRangeDisplayOverride": 0,
+        "SpellData.CastRadius": 299.29998779296875,
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": "160.0000",
+        "SpellData.MissileSpeed": "2000.0000",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": 0,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": "350.0000",
+        "SpellData.Effect2Level1Amount": "10.0000",
+        "SpellData.Effect3Level1Amount": "30.0000"
+      }
+    },
+    "trundleE": {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Trundle\\Spells\\TrundleCircle.inibin",
+        "bytes": 1536,
+        "sha256": "f853d71bfeaf83ad8a4bd6d8848b0ff98509cec2f24a618e51ce5e59e394d1f9"
+      },
+      "relative": "DATA/Characters/Trundle/Spells/TrundleCircle.inibin",
+      "membership": {
+        "logical_path": "DATA/Characters/Trundle/Spells/TrundleCircle.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Trundle\\Spells\\TrundleCircle.inibin",
+          "bytes": 1536,
+          "sha256": "f853d71bfeaf83ad8a4bd6d8848b0ff98509cec2f24a618e51ce5e59e394d1f9",
+          "md5": "e8625f0485f21a75c3b4cf61796142e8"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Trundle/Spells/TrundleCircle.inibin",
+            "release": "0.0.0.169",
+            "md5": "e8625f0485f21a75c3b4cf61796142e8",
+            "bytes": 1536,
+            "compressed_bytes": 1097,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Trundle/Spells/TrundleCircle.inibin",
+            "release": "0.0.0.169",
+            "md5": "e8625f0485f21a75c3b4cf61796142e8",
+            "bytes": 1536,
+            "compressed_bytes": 1097,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_TrundleCircle",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_TrundleCircle",
+        "SpellData.Flags": 510976,
+        "SpellData.TextFlags": "AffectEnemies | AffectFriends | AffectNeutral | AffectMinions | AffectHeroes | AffectTurrets | AlwaysSelf",
+        "SpellData.TargettingType": 2,
+        "SpellData.CastRange": "1000.0000",
+        "SpellData.CastRange1": "1000.0000",
+        "SpellData.CastRangeDisplayOverride": 0,
+        "SpellData.CastRadius": "125.0000",
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": 0,
+        "SpellData.MissileSpeed": "1600.0000",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": null,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": "6.0000",
+        "SpellData.Effect2Level1Amount": "25.0000",
+        "SpellData.Effect3Level1Amount": null
+      }
+    },
+    "charges": {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\BantamTrap.inibin",
+        "bytes": 1056,
+        "sha256": "d4ba11147ab1931195df14337afa47f9e238697865c18339872fd1527f73dcc2"
+      },
+      "relative": "DATA/Spells/BantamTrap.inibin",
+      "membership": {
+        "logical_path": "DATA/Spells/BantamTrap.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\BantamTrap.inibin",
+          "bytes": 1056,
+          "sha256": "d4ba11147ab1931195df14337afa47f9e238697865c18339872fd1527f73dcc2",
+          "md5": "09baaa428f118b093f1416b0a868aca2"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/BantamTrap.inibin",
+            "release": "0.0.0.200",
+            "md5": "09baaa428f118b093f1416b0a868aca2",
+            "bytes": 1056,
+            "compressed_bytes": 853,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/BantamTrap.inibin",
+            "release": "0.0.0.200",
+            "md5": "09baaa428f118b093f1416b0a868aca2",
+            "bytes": 1056,
+            "compressed_bytes": 853,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_BantamTrap",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_BantamTrap",
+        "SpellData.Flags": 248832,
+        "SpellData.TextFlags": "AffectEnemies | AffectFriends | AffectNeutral | AffectMinions | AffectHeroes | AffectTurrets",
+        "SpellData.TargettingType": 2,
+        "SpellData.CastRange": "230.0000",
+        "SpellData.CastRange1": null,
+        "SpellData.CastRangeDisplayOverride": null,
+        "SpellData.CastRadius": "135.0000",
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": 0,
+        "SpellData.MissileSpeed": "1450.0000",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": null,
+        "SpellData.MaxAmmo": 3,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": 35,
+        "SpellData.Effect1Level1Amount": "200.0000",
+        "SpellData.Effect2Level1Amount": "30",
+        "SpellData.Effect3Level1Amount": 75
+      }
+    },
+    "channel": {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\KatarinaR.inibin",
+        "bytes": 1101,
+        "sha256": "61d485caca95ec3ef4a878750fda5546e31c7a6a97cdda5dd7cde15d680b1757"
+      },
+      "relative": "DATA/Spells/KatarinaR.inibin",
+      "membership": {
+        "logical_path": "DATA/Spells/KatarinaR.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\KatarinaR.inibin",
+          "bytes": 1101,
+          "sha256": "61d485caca95ec3ef4a878750fda5546e31c7a6a97cdda5dd7cde15d680b1757",
+          "md5": "ce000fd165f5cc3530dbba78e4159e2a"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/KatarinaR.inibin",
+            "release": "0.0.1.7",
+            "md5": "ce000fd165f5cc3530dbba78e4159e2a",
+            "bytes": 1101,
+            "compressed_bytes": 861,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/KatarinaR.inibin",
+            "release": "0.0.1.7",
+            "md5": "ce000fd165f5cc3530dbba78e4159e2a",
+            "bytes": 1101,
+            "compressed_bytes": 861,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_KatarinaR",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_KatarinaR",
+        "SpellData.Flags": 115712,
+        "SpellData.TextFlags": "AffectEnemies | AffectNeutral | AffectMinions | AffectHeroes",
+        "SpellData.TargettingType": 4,
+        "SpellData.CastRange": "550.0000",
+        "SpellData.CastRange1": null,
+        "SpellData.CastRangeDisplayOverride": 0,
+        "SpellData.CastRadius": "325.0000",
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": 0,
+        "SpellData.MissileSpeed": "1450.0000",
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": null,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": "35.0000",
+        "SpellData.Effect2Level1Amount": "3.0000",
+        "SpellData.Effect3Level1Amount": 2.5
+      }
+    },
+    "heal": {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerHeal.inibin",
+        "bytes": 1567,
+        "sha256": "ef988a5b19ad8fc4db3e210fb76fae4c826562f21c82128c891dd0332e5bb8c5"
+      },
+      "relative": "DATA/Spells/SummonerHeal.inibin",
+      "membership": {
+        "logical_path": "DATA/Spells/SummonerHeal.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerHeal.inibin",
+          "bytes": 1567,
+          "sha256": "ef988a5b19ad8fc4db3e210fb76fae4c826562f21c82128c891dd0332e5bb8c5",
+          "md5": "449abf0e36630d2730d80cfa258d89dd"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/SummonerHeal.inibin",
+            "release": "0.0.0.249",
+            "md5": "449abf0e36630d2730d80cfa258d89dd",
+            "bytes": 1567,
+            "compressed_bytes": 1239,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/SummonerHeal.inibin",
+            "release": "0.0.0.249",
+            "md5": "449abf0e36630d2730d80cfa258d89dd",
+            "bytes": 1567,
+            "compressed_bytes": 1239,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_SummonerHeal",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_SummonerHeal",
+        "SpellData.Flags": "67620",
+        "SpellData.TextFlags": "Instacast | AffectFriends | AffectHeroes",
+        "SpellData.TargettingType": 5,
+        "SpellData.CastRange": "25000.0000",
+        "SpellData.CastRange1": "25000.0000",
+        "SpellData.CastRangeDisplayOverride": "850.0000",
+        "SpellData.CastRadius": 0,
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": 0,
+        "SpellData.MissileSpeed": 0,
+        "SpellData.CantCancelWhileWindingUp": "0",
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": 0,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": 0,
+        "SpellData.Effect2Level1Amount": 0,
+        "SpellData.Effect3Level1Amount": 0
+      }
+    },
+    "smite": {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerSmite.inibin",
+        "bytes": 817,
+        "sha256": "aa0fda30f20711dc422e9ab73133cb491e6c9d158aacfbe4cd8735a085dacc1d"
+      },
+      "relative": "DATA/Spells/SummonerSmite.inibin",
+      "membership": {
+        "logical_path": "DATA/Spells/SummonerSmite.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerSmite.inibin",
+          "bytes": 817,
+          "sha256": "aa0fda30f20711dc422e9ab73133cb491e6c9d158aacfbe4cd8735a085dacc1d",
+          "md5": "1a891f8e7e2cc66ed62b2b98c23edbc6"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/SummonerSmite.inibin",
+            "release": "0.0.1.7",
+            "md5": "1a891f8e7e2cc66ed62b2b98c23edbc6",
+            "bytes": 817,
+            "compressed_bytes": 664,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Spells/SummonerSmite.inibin",
+            "release": "0.0.1.7",
+            "md5": "1a891f8e7e2cc66ed62b2b98c23edbc6",
+            "bytes": 817,
+            "compressed_bytes": 664,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_SummonerSmite",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_SummonerSmite",
+        "SpellData.Flags": 58388,
+        "SpellData.TextFlags": "Instacast | NonDispellable | AffectEnemies | AffectNeutral | AffectMinions | NotAffectSelf",
+        "SpellData.TargettingType": 1,
+        "SpellData.CastRange": "760.0000",
+        "SpellData.CastRange1": null,
+        "SpellData.CastRangeDisplayOverride": null,
+        "SpellData.CastRadius": "210.0000",
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": 0,
+        "SpellData.MissileSpeed": "20.0000",
+        "SpellData.CantCancelWhileWindingUp": "0",
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": null,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": null,
+        "SpellData.Effect2Level1Amount": null,
+        "SpellData.Effect3Level1Amount": null
+      }
+    },
+    "garenCancel": {
+      "source": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenECancel.inibin",
+        "bytes": 968,
+        "sha256": "8c0348037eaa4f332b71c10abc1aa5fcf93576156020307f5ab6664aef52f334"
+      },
+      "relative": "DATA/Characters/Garen/Spells/GarenECancel.inibin",
+      "membership": {
+        "logical_path": "DATA/Characters/Garen/Spells/GarenECancel.inibin",
+        "observed": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenECancel.inibin",
+          "bytes": 968,
+          "sha256": "8c0348037eaa4f332b71c10abc1aa5fcf93576156020307f5ab6664aef52f334",
+          "md5": "36e880cd2240b74601d9a88ecb589664"
+        },
+        "status": "matches_selected_project_manifest",
+        "candidates": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Garen/Spells/GarenECancel.inibin",
+            "release": "0.0.0.181",
+            "md5": "36e880cd2240b74601d9a88ecb589664",
+            "bytes": 968,
+            "compressed_bytes": 771,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "matching_members": [
+          {
+            "project": "lol_game_client",
+            "project_release": "0.0.1.7",
+            "member_path": "DATA/Characters/Garen/Spells/GarenECancel.inibin",
+            "release": "0.0.0.181",
+            "md5": "36e880cd2240b74601d9a88ecb589664",
+            "bytes": 968,
+            "compressed_bytes": 771,
+            "bytes_match": true,
+            "md5_match": true
+          }
+        ],
+        "effective_runtime_precedence_qualified": false
+      },
+      "fields": {
+        "SpellData.Description": "game_spell_description_GarenECancel",
+        "SpellData.DynamicTooltip": "game_spell_tooltip_GarenECancel",
+        "SpellData.Flags": 67588,
+        "SpellData.TextFlags": "Instacast | AffectFriends | AffectHeroes",
+        "SpellData.TargettingType": "0",
+        "SpellData.CastRange": "700.0000",
+        "SpellData.CastRange1": null,
+        "SpellData.CastRangeDisplayOverride": 0,
+        "SpellData.CastRadius": "100.0000",
+        "SpellData.CastConeAngle": "45.0000",
+        "SpellData.CastConeDistance": "100.0000",
+        "SpellData.LineWidth": 0,
+        "SpellData.MissileSpeed": 0,
+        "SpellData.CantCancelWhileWindingUp": 1,
+        "SpellData.CantCancelWhileChanneling": "0",
+        "SpellData.ChannelDuration": null,
+        "SpellData.MaxAmmo": null,
+        "SpellData.AmmoRechargeTime": null,
+        "SpellData.AmmoRechargeTime1": null,
+        "SpellData.Effect1Level1Amount": "40.0000",
+        "SpellData.Effect2Level1Amount": "10.0000",
+        "SpellData.Effect3Level1Amount": 0
+      }
+    }
+  },
+  "native_text": {
+    "source": {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+      "bytes": 2220957,
+      "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+    },
+    "relative": "DATA/Menu/fontconfig_en_GB.txt",
+    "membership": {
+      "logical_path": "DATA/Menu/fontconfig_en_GB.txt",
+      "observed": {
+        "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Menu\\fontconfig_en_GB.txt",
+        "bytes": 2220957,
+        "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3",
+        "md5": "a5cebda5ff38fc64ccd4eb5a79c126a8"
+      },
+      "status": "matches_selected_project_manifest",
+      "candidates": [
+        {
+          "project": "lol_game_client",
+          "project_release": "0.0.1.7",
+          "member_path": "DATA/Menu/fontconfig_en_GB.txt",
+          "release": "0.0.1.7",
+          "md5": "a5cebda5ff38fc64ccd4eb5a79c126a8",
+          "bytes": 2220957,
+          "compressed_bytes": 415553,
+          "bytes_match": true,
+          "md5_match": true
+        }
+      ],
+      "matching_members": [
+        {
+          "project": "lol_game_client",
+          "project_release": "0.0.1.7",
+          "member_path": "DATA/Menu/fontconfig_en_GB.txt",
+          "release": "0.0.1.7",
+          "md5": "a5cebda5ff38fc64ccd4eb5a79c126a8",
+          "bytes": 2220957,
+          "compressed_bytes": 415553,
+          "bytes_match": true,
+          "md5_match": true
+        }
+      ],
+      "effective_runtime_precedence_qualified": false
+    },
+    "entries": {
+      "garenE/Description": {
+        "key": "game_spell_description_GarenE",
+        "text": "Garen performs a dance of death with his sword, dealing damage around him for the duration.",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "garenE/DynamicTooltip": {
+        "key": "game_spell_tooltip_GarenE",
+        "text": "<titleLeft>Judgment (@Level@)</titleLeft><titleRight>[@Hotkey@]</titleRight><subtitleLeft>No Cost</subtitleLeft><subtitleRight>@Cooldown@ sec Cooldown</subtitleRight><mainText>Garen rapidly spins his sword around his body for @Effect2Amount@ seconds, dealing @Effect1Amount@ plus @Effect3Amount@% of his attack <font color='#FF8C00'>(+@f1@)</font> as physical damage to nearby enemies every second. Garen can move through units while spinning but moves 20% slower when travelling through minions and monsters.<br><br><font color='#99FF99'>Judgment can critically strike dealing bonus damage.<br>Judgment deals 25% less damage to minions.</font></mainText>",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "garenR/Description": {
+        "key": "game_spell_description_GarenR",
+        "text": "Garen calls upon the might of Demacia to deal a finishing blow to an enemy champion that deals damage based upon how much Health his target has missing.",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "garenR/DynamicTooltip": {
+        "key": "game_spell_tooltip_GarenR",
+        "text": "<titleLeft>Demacian Justice (@Level@)</titleLeft><titleRight>[@Hotkey@]</titleRight><subtitleLeft>No Cost</subtitleLeft><subtitleRight>@Cooldown@ sec Cooldown</subtitleRight><mainText>Garen calls upon the might of Demacia to attempt to execute an enemy champion, dealing @Effect1Amount@ magic damage plus 1 damage for every @Effect2Amount@ Health the target is missing.</mainText>",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "annieW/Description": {
+        "key": "game_spell_description_Incinerate",
+        "text": "Annie casts a blazing cone of fire, dealing damage to all enemies in the area.",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "annieW/DynamicTooltip": {
+        "key": "game_spell_tooltip_Incinerate",
+        "text": "<titleLeft>Incinerate</titleLeft><titleRight>Level @Level@ [@Hotkey@]</titleRight><subtitleLeft>@Cost@ Mana</subtitleLeft><subtitleRight>@Cooldown@ sec Cooldown</subtitleRight><mainText>Casts a cone of fire dealing @Effect1Amount@ <font color='#99FF99'>(+@CharAbilityPower@)</font> magic damage to all enemies in the area.</mainText>",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "annieR/Description": {
+        "key": "game_spell_description_InfernalGuardian",
+        "text": "Annie wills her bear Tibbers to life, dealing damage to units in the area. Tibbers can attack and also burns enemies that stand near him.",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "annieR/DynamicTooltip": {
+        "key": "game_spell_tooltip_InfernalGuardian",
+        "text": "<titleLeft>Summon: Tibbers</titleLeft><titleRight>Level @Level@ [@Hotkey@]</titleRight><subtitleLeft>@Cost@ Mana</subtitleLeft><subtitleRight>@Cooldown@ sec Cooldown</subtitleRight><mainText>Tibbers appears in a burst of flame dealing @Effect1Amount@ <font color='#99FF99'>(+@CharAbilityPower@)</font> magic damage to enemies in the target area.<br><br>For the next @Effect6Amount@ seconds, Tibbers chases down enemies and deals @Effect4Amount@<font color='#99FF99'> (+@CharAbilityPower2@)</font> magic damage each second to nearby foes.<br><br><font color='#99FF99'>Tibbers can be controlled by holding the alt key and using the right mouse button or by reactivating this ability.</font></mainText>",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "ezrealQ/Description": {
+        "key": "game_spell_description_EzrealMysticShot",
+        "text": "Ezreal fires a damaging bolt of energy which reduces all of his cooldowns by 1 second if it strikes an enemy unit.",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "ezrealQ/DynamicTooltip": {
+        "key": "game_spell_tooltip_EzrealMysticShot",
+        "text": "<titleLeft>Mystic Shot (@Level@)</titleLeft><titleRight>[@Hotkey@]</titleRight><subtitleLeft>@Cost@ Mana</subtitleLeft><subtitleRight>@Cooldown@ sec Cooldown</subtitleRight><mainText>Ezreal fires a bolt of energy, dealing @Effect1Amount@ <font color='#FF8C00'>(+@f3@)</font> <font color='#99FF99'>(+@CharAbilityPower2@)</font> physical damage (applies on-hit effects). <br><br>Ezreal's cooldowns are reduced by 1 second if Mystic Shot hits a target.</mainText>",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "ezrealW/Description": {
+        "key": "game_spell_description_EzrealEssenceFlux",
+        "text": "Ezreal fires a fluctuating wave of energy, dealing magic damage to enemy champions, while increasing the Attack Speed of allied champions.",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "ezrealW/DynamicTooltip": {
+        "key": "game_spell_tooltip_EzrealEssenceFlux",
+        "text": "<titleLeft>Essence Flux (@Level@)</titleLeft><titleRight>[@Hotkey@]</titleRight><subtitleLeft>@Cost@ Mana</subtitleLeft><subtitleRight>@Cooldown@ sec Cooldown</subtitleRight><mainText>Ezreal fires a wave of energy that damages all enemy champions it passes through for @Effect1Amount@ <font color='#99FF99'>(+@CharAbilityPower@)</font> magic damage. If Ezreal or his Allied champions are hit by the wave, their Attack Speed is increased by @Effect2Amount@% for 5 seconds.</mainText>",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "ezrealR/Description": {
+        "key": "game_spell_description_EzrealTrueshotBarrage",
+        "text": "Ezreal channels for 1 second to fire a powerful barrage of energy missiles which do massive damage to each unit they pass through (deals 10% less damage to each unit it passes through).",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "ezrealR/DynamicTooltip": {
+        "key": "game_spell_tooltip_EzrealTrueshotBarrage",
+        "text": "<titleLeft>Trueshot Barrage (@Level@)</titleLeft><titleRight>[@Hotkey@]</titleRight><subtitleLeft>@Cost@ Mana</subtitleLeft><subtitleRight>@Cooldown@ sec Cooldown</subtitleRight><mainText>Ezreal channels for 1 second to fire a barrage of missiles dealing @Effect1Amount@ <font color='#FF8C00'>(+@f1@)</font> <font color='#99FF99'>(+@CharAbilityPower@)</font> magic damage to each unit it passes through. However, it deals @Effect2Amount@% less damage for each unit it hits (minimum @Effect3Amount@%).</mainText>",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "trundleE/Description": {
+        "key": "game_spell_description_TrundleCircle",
+        "text": "Trundle creates an ice pillar at target location, becoming impassable terrain and slowing all nearby enemy units.",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "trundleE/DynamicTooltip": {
+        "key": "game_spell_tooltip_TrundleCircle",
+        "text": "<titleLeft>Pillar of Ice (@Level@)</titleLeft><titleRight>[@Hotkey@]</titleRight><subtitleLeft>@Cost@ Mana</subtitleLeft><subtitleRight>@Cooldown@ sec Cooldown</subtitleRight><mainText>Trundle creates an icy pillar at target location for @Effect1Amount@ seconds, becoming impassable terrain and slowing all nearby enemy units by @Effect2Amount@%.</mainText>",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "charges/Description": {
+        "key": "game_spell_description_BantamTrap",
+        "text": "Teemo places an explosive poisonous trap using one of the mushrooms stored in his pack. If an enemy steps on the trap, it will release a poisonous cloud, slowing enemies and damaging them over time.",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "charges/DynamicTooltip": {
+        "key": "game_spell_tooltip_BantamTrap",
+        "text": "<titleLeft>Noxious Trap (@Level@)</titleLeft><titleRight>[@Hotkey@]</titleRight><subtitleLeft>@Cost@ Mana</subtitleLeft><subtitleRight>@Cooldown@ sec Cooldown</subtitleRight><mainText>Uses a stored mushroom to place a trap that detonates if an enemy steps on it, spreading poison to nearby enemies that slows Movement Speed by @Effect2Amount@% and deals @Effect1Amount@ <font color='#99FF99'>(+@CharAbilityPower@)</font> magic damage over 4 seconds. Traps last @Effect5Amount@ minutes.<br><br>Teemo forages for a mushroom every <font color='#FFFFFF'>@f1@</font> seconds, but he is only big enough to carry 3 at once.</mainText>",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "channel/Description": {
+        "key": "game_spell_description_KatarinaR",
+        "text": "Katarina becomes a flurry of blades, throwing daggers with unrivaled speed at up to three nearby Champions. Daggers deal magic damage and reduce incoming healing on targets hit.",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "channel/DynamicTooltip": {
+        "key": "game_spell_tooltip_KatarinaR",
+        "text": "<titleLeft>Death Lotus (@Level@)</titleLeft><titleRight>[@Hotkey@]</titleRight><subtitleLeft>No Cost</subtitleLeft><subtitleRight>@Cooldown@ sec Cooldown</subtitleRight><mainText>Becomes a flurry of blades, throwing daggers at the closest 3 enemy Champions dealing @Effect1Amount*10@ <font color='#FF8C00'>(+@CharBonusPhysical2@)</font> <font color='#99FF99'>(+@CharAbilityPower@)</font> magic damage over @Effect3Amount@ seconds.<br><br>Daggers apply Grievous Wounds, reducing incoming healing by 50% for 3 seconds.</mainText>",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "heal/Description": {
+        "key": "game_spell_description_SummonerHeal",
+        "text": "Restores 90-345 Health (depending on champion level) and grants 30% Movement Speed for 1 second to you and target allied champion. This healing is halved for units recently affected by Summoner Heal.",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "heal/DynamicTooltip": {
+        "key": "game_spell_tooltip_SummonerHeal",
+        "text": "<titleLeft>Heal </titleLeft><titleRight>[@Hotkey@]</titleRight><subtitleLeft>No Cost</subtitleLeft><subtitleRight>@f3@ second Cooldown</subtitleRight><mainText>Restores @f1@ Health and grants 30% Movement Speed for 1 second to your champion and target allied champion. This healing is halved for units recently affected by Summoner Heal.<br><br><font color='#FFFF00'>If this spell cannot find a target, it will cast on the most wounded allied champion in range.</font></mainText>",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "smite/Description": {
+        "key": "game_spell_description_SummonerSmite",
+        "text": "Deals 390-1000 true damage (depending on champion level) to target epic or large monster or enemy minion.",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "smite/DynamicTooltip": {
+        "key": "game_spell_tooltip_SummonerSmite",
+        "text": "<titleLeft>Smite</titleLeft><titleRight>[@Hotkey@]</titleRight><subtitleLeft>No Cost</subtitleLeft><subtitleRight>@f2@ second Cooldown</subtitleRight><mainText>Deals <font color='#FEFCFF'>@f1@</font> true damage to target epic or large monster or enemy minion.<br><br><i>Smiting Large Monsters instantly harvests additional bonuses based on the Monster. Mouse over large jungle monsters to see potential bonus rewards.</i></mainText>",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "garenCancel/Description": {
+        "key": "game_spell_description_GarenECancel",
+        "text": "Garen performs a dance of death with his sword, dealing damage around him.",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      },
+      "garenCancel/DynamicTooltip": {
+        "key": "game_spell_tooltip_GarenECancel",
+        "text": "<titleLeft>Judgment (@Level@)</titleLeft><titleRight>[@Hotkey@]</titleRight><subtitleLeft> </subtitleLeft><subtitleRight></subtitleRight><mainText>Garen stops performing Judgment.</mainText>",
+        "source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+          "bytes": 2220957,
+          "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+        }
+      }
+    }
+  },
+  "geometry_scalar_comparisons": [
+    {
+      "example": "annieW",
+      "source_field": "SpellData.CastRange",
+      "current_path": "data/4.20/annie_w_rules.json",
+      "current_key": "range",
+      "native": "625.0000",
+      "current": 625.0,
+      "binary32_equal": true,
+      "interpretation_qualified": false
+    },
+    {
+      "example": "annieW",
+      "source_field": "SpellData.CastConeAngle",
+      "current_path": "data/4.20/annie_w_rules.json",
+      "current_key": "half_angle",
+      "native": 24.760000228881836,
+      "current": 24.760000228881836,
+      "binary32_equal": true,
+      "interpretation_qualified": false
+    },
+    {
+      "example": "annieR",
+      "source_field": "SpellData.CastRange",
+      "current_path": "data/4.20/annie_r_rules.json",
+      "current_key": "range",
+      "native": "600",
+      "current": 600.0,
+      "binary32_equal": true,
+      "interpretation_qualified": false
+    },
+    {
+      "example": "annieR",
+      "source_field": "SpellData.CastRadius",
+      "current_path": "data/4.20/annie_r_rules.json",
+      "current_key": "radius",
+      "native": 250.3000030517578,
+      "current": 250.3000030517578,
+      "binary32_equal": true,
+      "interpretation_qualified": false
+    }
+  ],
+  "source_identities": [
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenE.inibin",
+      "bytes": 1125,
+      "sha256": "a8c5bafd2314176333a3efee067abfe4acd0538c534fee05eb7860c6b7c49dc3"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenR.inibin",
+      "bytes": 1565,
+      "sha256": "d60ea2a2b8dd6aa432a8b49a5e9ceaaff5d43dbc2a35414bebd8a126a354cc1c"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Annie\\Spells\\Incinerate.inibin",
+      "bytes": 1413,
+      "sha256": "3a54e9e52c540b493474d8729f5f84ef391dc479e7f85a37aeb063637522bfdf"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Annie\\Spells\\InfernalGuardian.inibin",
+      "bytes": 1069,
+      "sha256": "3c9b0fc6a59413fa0ad86a4e33f5d7138041c01ec6e9b52c33ab6425541184ac"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\EzrealMysticShot.inibin",
+      "bytes": 1154,
+      "sha256": "b48b65bc067f42a1086ce579985cbb060c75fd5802b07c33451d756617cfe217"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\EzrealEssenceFlux.inibin",
+      "bytes": 1136,
+      "sha256": "33529cd18a2ce80f41c48f22bbec124831a01a00c6845f455e60efa1650ef115"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\EzrealTrueshotBarrage.inibin",
+      "bytes": 1720,
+      "sha256": "383462537a2dbe1ebad65db47c324ec6db5be0032413af2a2d0991910bfddaf6"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Trundle\\Spells\\TrundleCircle.inibin",
+      "bytes": 1536,
+      "sha256": "f853d71bfeaf83ad8a4bd6d8848b0ff98509cec2f24a618e51ce5e59e394d1f9"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\BantamTrap.inibin",
+      "bytes": 1056,
+      "sha256": "d4ba11147ab1931195df14337afa47f9e238697865c18339872fd1527f73dcc2"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\KatarinaR.inibin",
+      "bytes": 1101,
+      "sha256": "61d485caca95ec3ef4a878750fda5546e31c7a6a97cdda5dd7cde15d680b1757"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerHeal.inibin",
+      "bytes": 1567,
+      "sha256": "ef988a5b19ad8fc4db3e210fb76fae4c826562f21c82128c891dd0332e5bb8c5"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Spells\\SummonerSmite.inibin",
+      "bytes": 817,
+      "sha256": "aa0fda30f20711dc422e9ab73133cb491e6c9d158aacfbe4cd8735a085dacc1d"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\Characters\\Garen\\Spells\\GarenECancel.inibin",
+      "bytes": 968,
+      "sha256": "8c0348037eaa4f332b71c10abc1aa5fcf93576156020307f5ab6664aef52f334"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_GB.txt",
+      "bytes": 2220957,
+      "sha256": "1dd19dfeb272790230ac2525ab83a71ca285546df21d271257ef6b5ea26941b3"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\summoner_heal.rs",
+      "bytes": 6629,
+      "sha256": "e7d80ecc10f4a119efaf1b7581e2ef4cf66d50b0b606dd9ddb406e65e6d68ac5"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\ezreal_w.rs",
+      "bytes": 24069,
+      "sha256": "d045adfdffd3cd1a44b2f7f23d10738876595bdeb218463cac9d83a5547bab9f"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\ezreal_q.rs",
+      "bytes": 16643,
+      "sha256": "5181ae36f00db4991dff6495d8c594a079c95e760c7072f3cb241888e131ed8c"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\summoner_smite.rs",
+      "bytes": 4442,
+      "sha256": "61c70144c5abf7330d7f8215c88fe98fa5614bb6c36e9b8da5be5e45099372ab"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\annie_r.rs",
+      "bytes": 11054,
+      "sha256": "508b096ee103dcc4d96dcf8f283a830e40d93c8a6339f6e49f5c5f83dcc2008e"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\annie_w.rs",
+      "bytes": 13293,
+      "sha256": "b15cfe63f6bd51560917af5e6270ebc4b2b7d73fd63fd5fc5061145de9f74553"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\linear_skillshot.rs",
+      "bytes": 11373,
+      "sha256": "ecb7499ec7fb748d1421228c2bdede8d368a63b450b25f499133657b7281a95a"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\spells.rs",
+      "bytes": 11510,
+      "sha256": "26fc5175f41325935b7e7ad91d6aba72cf4560b1be97f69f69d70e0dfe0680a5"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\trundle_e.rs",
+      "bytes": 34664,
+      "sha256": "54ba4f2e90942b8a5aab4c39d45ea0ff2d4ff041f914436e719861d6b09bc09b"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\ezreal_r.rs",
+      "bytes": 28079,
+      "sha256": "491bef497da38f99370fa176674615b1b6c3f03e0d8d6d5c6d42d40a32a0a869"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\cooldown.rs",
+      "bytes": 4213,
+      "sha256": "fa6acaedb363c33e32e345511740b7e03df80891e2f8f0e718060f17f7083c61"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\server\\src\\reconnect.rs",
+      "bytes": 18879,
+      "sha256": "60fe14f416cf800688b0353d5499738302bb1ad4e40e09a3b0eb6549a90328e1"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+      "bytes": 33360,
+      "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+    },
+    {
+      "path": "E:\\OpenLeague\\crates\\core\\src\\pillar_navigation.rs",
+      "bytes": 15305,
+      "sha256": "529e640f9cbf32473da3aaaa0fde6ada296906280de429a859da32a205c50241"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\annie_w_rules.json",
+      "bytes": 340,
+      "sha256": "ee2c591926b8037858fc9e9a4fc14b85c43304504430b431345930373ef5479b"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\annie_r_rules.json",
+      "bytes": 932,
+      "sha256": "4c555071162ee12fb958ce0d41e5093c028ad3e5b98c9d6b17a0ee2446f730a9"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\native_spells_420.json",
+      "bytes": 2710444,
+      "sha256": "0cae6f5c167aa852e8f86e7f3298d7c797727d5cc92616dcb856ac15c8af5d14"
+    },
+    {
+      "path": "E:\\OpenLeague\\docs\\reference_client_4_20.json",
+      "bytes": 3684,
+      "sha256": "efdf40252574a98f439829d43c6b29606d3c12d631c4a64c89ef15637e859d02"
+    },
+    {
+      "path": "E:\\OpenLeague\\tools\\project-plan\\reference_inibin.py",
+      "bytes": 1848,
+      "sha256": "8649d9775feaa9a8a549e07e8a8b6f57a4d4bf91e68841094fa5ccec383a5da5"
+    },
+    {
+      "path": "E:\\OpenLeague\\tools\\project-plan\\rads_reference_membership.py",
+      "bytes": 15059,
+      "sha256": "533002c4d63f749a0658a1ddf00175c2a294aead63dba7a69a55895731a73de6"
+    },
+    {
+      "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision75\\collect_targeting_links.py",
+      "bytes": 13422,
+      "sha256": "1c8d305332e78e0aa4044d5f635a4d6abae03051e5f3e49d627a3f4c0e3292c4"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\recovered_rads_manifests.json",
+      "bytes": 3216,
+      "sha256": "8dfd48645040526d5a3e7b91cb9438418078f2d617c236d9834a31dfdcb5d2da"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\solutionmanifest",
+      "bytes": 1792,
+      "sha256": "4926fe4cfdb8641c918c5ad69b891a9c7e48ba37939e4258e2b4b181accc9243"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\configurationmanifest",
+      "bytes": 88,
+      "sha256": "f601219e81fe20e4c805c5faaa7af664c0c6adcdd43d591c7a4f22ebbd7601f3"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\rads_manifests\\lol_game_client\\releases\\0.0.1.7\\releasemanifest",
+      "bytes": 4905302,
+      "sha256": "88b09959b24053c422e209343083d549cdfe6380828b583710d7f9343c1aba09"
+    },
+    {
+      "path": "E:\\OpenLeague\\data\\4.20\\rads_manifests\\lol_game_client_en_gb\\releases\\0.0.0.235\\releasemanifest",
+      "bytes": 49251,
+      "sha256": "c06c83f829dd18cf587098529aa83459c8356dc2fe5ee82d7203c7a9ee3662f0"
+    },
+    {
+      "role": "recovery_receipt",
+      "path": "E:\\mapslol3v3\\loading_rads_resource_search\\legacy_patch\\recovery_receipt.json",
+      "bytes": 10959,
+      "sha256": "2496761ccbbbbeb367dbe88ae001c4eb4010598d1365234c9e20d3df3a6d7549"
+    },
+    {
+      "role": "review_manifest",
+      "path": "E:\\mapslol3v3\\loading_rads_legacy_recovery_review\\manifest.json",
+      "bytes": 1779,
+      "sha256": "5b08736040b739b04e3db1a4ce7de124bc343df5d78f76bd188a898ebdd6c7af"
+    },
+    {
+      "role": "recovery_package_manifest",
+      "path": "E:\\mapslol3v3\\loading_rads_resource_search\\legacy_patch\\recovery_package_manifest.json",
+      "bytes": 99218,
+      "sha256": "4cadb6b02ea6f8208e8ba6a031774b27401918f054ee211e674e57af20d30125"
+    }
+  ],
+  "unresolved_text_hooks": [],
+  "native_flag_semantics_decoded": false,
+  "universal_targeting_policy_qualified": false,
+  "channel_and_charge_features_implemented": false,
+  "geometry_native_parity": false,
+  "replay_scope": "local_authenticated_sequence_and_per_shot_tick_and_hit_gates_only",
+  "global_feature_absence_proven": false,
+  "current_application_executed": false,
+  "native_binary_executed": false,
+  "full_task_scopes_closed": 0,
+  "questions_closed": 0
+}

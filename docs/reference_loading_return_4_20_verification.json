@@ -1,0 +1,991 @@
+{
+  "schema": "openleague_loading_return_verification/v1",
+  "task": "SYS-01.1-06",
+  "updated_utc": "2026-10-20T19:09:44.761014+00:00",
+  "scope": "Recensement des états de chargement et de retour de partie ; pas de reconstruction du jeu ou du launcher.",
+  "status": "a_valider",
+  "implementation_complete": true,
+  "technical_verification_complete": true,
+  "acceptance_complete": false,
+  "human_acceptance": "not_given",
+  "manual_state_mutated": false,
+  "facts": {
+    "task": "SYS-01.1-06",
+    "verified": true,
+    "states": 86,
+    "transitions": 57,
+    "sources": 104,
+    "anchors": 149,
+    "historical_logs": 91,
+    "guards": 22,
+    "historical_events": 1127,
+    "vm_methods": 22,
+    "unresolved_boundaries": 2,
+    "historical_game_executed": false,
+    "manual_state_mutated": false,
+    "human_acceptance": "not_given"
+  },
+  "contract_sha256": "ab3b20e39f96e6ca4c5bf57f85a0cfd9ad539059213be529f7e6e2a6162bc284",
+  "prerequisites": {
+    "task_dependencies": [],
+    "package_dependencies": [],
+    "phase_dependencies": [],
+    "inputs_available": true,
+    "record": "E:\\mapslol3v3\\Loading_return_reference_4_20_2026-10-20\\prerequisites.json"
+  },
+  "tests": {
+    "python": {
+      "command": [
+        "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "-E",
+        "-u",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/project-plan",
+        "-p",
+        "test_loading_return_reference.py",
+        "-v"
+      ],
+      "cwd": "E:\\OpenLeague",
+      "started_utc": "2026-10-20T19:08:24.101792+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 3.469,
+      "log": "E:\\mapslol3v3\\Loading_return_reference_4_20_2026-10-20\\installed-python-tests.log",
+      "log_sha256": "6a6c591dc8a5dfd4f41e2064c811bb8ad6a0aaf6f30ab18b308409de30b83fd0",
+      "passed": 25,
+      "failed": 0
+    },
+    "selected_original_methods_js_vm": {
+      "command": [
+        "node",
+        "--test",
+        "tools/project-plan/test_loading_return_controllers.cjs"
+      ],
+      "cwd": "E:\\OpenLeague",
+      "started_utc": "2026-10-20T19:08:27.587220+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 0.187,
+      "log": "E:\\mapslol3v3\\Loading_return_reference_4_20_2026-10-20\\installed-controller-tests.log",
+      "log_sha256": "2e1676db3a19e90db25718bd4a56500407e7ef1b91ca95799196612b10464339",
+      "passed": 16,
+      "failed": 0,
+      "methods_exercised": 22,
+      "host_api": "adapters; no original runtime"
+    },
+    "maintained_cli": {
+      "command": [
+        "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "-E",
+        "-u",
+        "-B",
+        "tools/project-plan/loading_return_reference.py",
+        "--root",
+        "E:\\OpenLeague",
+        "--output",
+        "E:\\mapslol3v3\\Loading_return_reference_4_20_2026-10-20\\installed-verification.json"
+      ],
+      "cwd": "E:\\OpenLeague",
+      "started_utc": "2026-10-20T19:08:27.780223+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 1.047,
+      "log": "E:\\mapslol3v3\\Loading_return_reference_4_20_2026-10-20\\installed-cli.log",
+      "log_sha256": "cf5f57da8ea41d9c4b3abe33623cdc3ef9513e28b971010299cfc5bab4dbbf90"
+    },
+    "lua51": {
+      "cases": 16,
+      "passed": 16,
+      "receipt": "docs/reference_loading_return_sources/probes/native_endgame_lua51_contract.json",
+      "receipt_identity": {
+        "bytes": 121173,
+        "sha256": "8a5f5afdb8c384aa934cfdf27dc340fcc14fa55de1b0c7bcc286615db80df0fd"
+      },
+      "executed_in_this_task": true,
+      "executed_again_after_resume": false,
+      "runtime_and_engine_scope": "Original instructions with string size_t adaptation; engine/champion/timer adapters; not original game embedded VM"
+    }
+  },
+  "tools": {
+    "python": {
+      "path": "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "version": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "bytes": 107312,
+      "sha256": "dea78bb78043f0d53ef4a475f85fa0312b90fa93c136a0686d17946781c60e16"
+    },
+    "node": {
+      "path": "C:\\Program Files\\nodejs\\node.EXE",
+      "version": "v24.13.0",
+      "bytes": 89953280,
+      "sha256": "d14ba95cdce1ef7dc9ad3ac74949ca5db38b27378ee30f30a23cf26f9e875a11"
+    },
+    "java": {
+      "path": "C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.10.7-hotspot\\bin\\java.exe",
+      "bytes": 50344,
+      "sha256": "bd3d87dfb44651a1c61c995e08ca4fcadb458437a373d46941381f9aeff9d6a0"
+    },
+    "ffdec": {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\ffdec.jar",
+      "version": "26.4.0",
+      "bytes": 5271501,
+      "sha256": "80f8ced0bfde98b434c28e9807e91fe5558255b2f712051a0e65221519bd392a"
+    },
+    "lua": {
+      "python_version": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "python": {
+        "path": "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "bytes": 107312,
+        "sha256": "dea78bb78043f0d53ef4a475f85fa0312b90fa93c136a0686d17946781c60e16"
+      },
+      "lua_module": {
+        "path": "E:\\OpenLeague\\tools\\pythonlibs\\lupa\\lua51.cp312-win_amd64.pyd",
+        "bytes": 476160,
+        "sha256": "29bc76a1cd9d2ac799edd84f0e6061f25324713228da9ffe9e4727570ac7f9e9"
+      },
+      "source_driver": {
+        "path": "E:\\OpenLeague\\tools\\qualify_original_endgame_lua51.py",
+        "bytes": 7994,
+        "sha256": "d3831ec0ef89010bc5c05ed32bc59d60da2ca2296da2d054024ebb1ed4a07391"
+      },
+      "adapted_driver": {
+        "path": "E:\\mapslol3v3\\Loading_return_reference_4_20_2026-10-20\\qualify_original_endgame_lua51.py",
+        "bytes": 8123,
+        "sha256": "a5a46862a43cdecabdf3f11d22d14ef2888f0d734c700ae98e2d684f48222186"
+      },
+      "only_driver_change": "Output destination moved to the current task evidence directory; original instruction adaptation and adapter scenarios unchanged.",
+      "game_executable_run": false
+    }
+  },
+  "decompiler_operations": [
+    {
+      "name": "native-endgame",
+      "source": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\EndOfGame.gfx",
+      "sha256": "3d2f17dd944ca14b66aee9177e25a5c8f4637557758734d5ced34c5f0a479954",
+      "exit_code": 0,
+      "seconds": 3.3,
+      "command": [
+        "C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.10.7-hotspot\\bin\\java.exe",
+        "-Xmx768m",
+        "-Djava.awt.headless=true",
+        "-jar",
+        "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\ffdec.jar",
+        "-onerror",
+        "abort",
+        "-export",
+        "script",
+        "E:\\mapslol3v3\\Loading_return_reference_4_20_2026-10-20\\native-endgame",
+        "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\EndOfGame.gfx"
+      ],
+      "output_files": 31
+    },
+    {
+      "name": "ingame-pcode",
+      "source": "E:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibGame.dat",
+      "sha256": "72ec60851e9ab4570d0d02587327c65fab45e9f932beb52950accd9b98dd26f9",
+      "exit_code": 0,
+      "seconds": 1.03,
+      "command": [
+        "C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.10.7-hotspot\\bin\\java.exe",
+        "-Xmx768m",
+        "-Djava.awt.headless=true",
+        "-jar",
+        "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\ffdec.jar",
+        "-onerror",
+        "abort",
+        "-selectclass",
+        "com.riotgames.pvpnet.game.controllers.InGameController",
+        "-format",
+        "script:pcode",
+        "-export",
+        "script",
+        "E:\\mapslol3v3\\Loading_return_reference_4_20_2026-10-20\\ingame-pcode",
+        "E:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibGame.dat"
+      ],
+      "output_files": 1
+    }
+  ],
+  "expected_observed": [
+    {
+      "requirement": "Sources et contrat exacts",
+      "expected": "Référence4.20 et consommateurs AIR/natif/Rust identifiés sans confondre leurs namespaces",
+      "observed": {
+        "task": "SYS-01.1-06",
+        "verified": true,
+        "states": 86,
+        "transitions": 57,
+        "sources": 104,
+        "anchors": 149,
+        "historical_logs": 91,
+        "guards": 22,
+        "historical_events": 1127,
+        "vm_methods": 22,
+        "unresolved_boundaries": 2,
+        "historical_game_executed": false,
+        "manual_state_mutated": false,
+        "human_acceptance": "not_given"
+      },
+      "result": "pass"
+    },
+    {
+      "requirement": "Chargement nominal et refus",
+      "expected": "DTO, Maestro, préchargement, ordre fenêtre/prêt, erreurs et reprise documentés avec gardes",
+      "observed": "Constantes originales exhaustives des groupes retenus,57 parcours,22 gardes ;25 tests source/refus et16 tests des méthodes originales adaptés réussis",
+      "result": "pass"
+    },
+    {
+      "requirement": "Fin, résultats et retour",
+      "expected": "Distinguer cérémonie, Continue, arrêt, statistiques, lobby/rejouer et politiques Rust",
+      "observed": "Lua16 scénarios, GFx31 scripts et test de Press_Continue ; phases/résultats/tutoriels/cleanup et consommateurs Rust recensés",
+      "result": "pass"
+    },
+    {
+      "requirement": "Inconnues maintenues",
+      "expected": "Aucune chaîne native complète fabriquée à partir de callbacks séparés",
+      "observed": "Deux frontières explicites non qualifiées et neuf limites conservées ; aucune exécution historique/rendu/audio revendiquée",
+      "result": "pass"
+    },
+    {
+      "requirement": "Consommateur réel et conservation",
+      "expected": "Registre, consigne, base partagée et HTTP concordent ; aucun état manuel ni tâche voisine modifié",
+      "observed": {
+        "catalog_changed_rows": [
+          "SYS-01.1-06"
+        ],
+        "active_catalog_tasks": 42214,
+        "manual_states_compared": 42606,
+        "manual_states_notes_revisions_unchanged": true,
+        "manual_history_unchanged": true,
+        "source_status": "a_valider",
+        "manual_done": 0,
+        "manual_revision": 0,
+        "generated_catalog_data_verified": true,
+        "live_http_consumer_verified": true,
+        "installed_tauri_uses_same_database": true,
+        "native_window_observed": false,
+        "manual_state_mutated": false,
+        "human_acceptance": "not_given",
+        "instruction_sha256": "583b2fd991870c2bba4b34ec3b836579bbfe21ff991d260ac7ba8800c6cf4098"
+      },
+      "result": "pass"
+    }
+  ],
+  "integration": {
+    "catalog_changed_rows": [
+      "SYS-01.1-06"
+    ],
+    "active_catalog_tasks": 42214,
+    "manual_states_compared": 42606,
+    "manual_states_notes_revisions_unchanged": true,
+    "manual_history_unchanged": true,
+    "source_status": "a_valider",
+    "manual_done": 0,
+    "manual_revision": 0,
+    "generated_catalog_data_verified": true,
+    "live_http_consumer_verified": true,
+    "installed_tauri_uses_same_database": true,
+    "native_window_observed": false,
+    "manual_state_mutated": false,
+    "human_acceptance": "not_given",
+    "instruction_sha256": "583b2fd991870c2bba4b34ec3b836579bbfe21ff991d260ac7ba8800c6cf4098"
+  },
+  "modified_files": [
+    "docs/reference_loading_return_4_20.json",
+    "docs/REFERENCE_LOADING_RETURN_4_20.md",
+    "docs/reference_loading_return_sources/vm-methods.json",
+    "docs/reference_loading_return_sources/air/ApplicationController.as",
+    "docs/reference_loading_return_sources/air/ClientConfig.as",
+    "docs/reference_loading_return_sources/air/EndOfGameStats.as",
+    "docs/reference_loading_return_sources/air/EndOfGameStatsController.as",
+    "docs/reference_loading_return_sources/air/EndOfGameView.as",
+    "docs/reference_loading_return_sources/air/EndOfTutorialGameView.as",
+    "docs/reference_loading_return_sources/air/GameCrashedEvent.as",
+    "docs/reference_loading_return_sources/air/GameEvent.as",
+    "docs/reference_loading_return_sources/air/GameState.as",
+    "docs/reference_loading_return_sources/air/GameType.as",
+    "docs/reference_loading_return_sources/air/GameViewState.as",
+    "docs/reference_loading_return_sources/air/HardcodedEndOfGameStats.as",
+    "docs/reference_loading_return_sources/air/IAppControllerConstants.as",
+    "docs/reference_loading_return_sources/air/IMaestroProvider.as",
+    "docs/reference_loading_return_sources/air/InGameController.as",
+    "docs/reference_loading_return_sources/air/InGameView.as",
+    "docs/reference_loading_return_sources/air/LobbyController.as",
+    "docs/reference_loading_return_sources/air/LoginMediator.as",
+    "docs/reference_loading_return_sources/air/LolGamePreloadController.as",
+    "docs/reference_loading_return_sources/air/MaestroConstants.as",
+    "docs/reference_loading_return_sources/air/MaestroController.as",
+    "docs/reference_loading_return_sources/air/MaestroMessage.as",
+    "docs/reference_loading_return_sources/air/MaestroProviderProxy.as",
+    "docs/reference_loading_return_sources/air/MaestroServiceImpl.as",
+    "docs/reference_loading_return_sources/air/MasterGameController.as",
+    "docs/reference_loading_return_sources/air/MasterGameViewController.as",
+    "docs/reference_loading_return_sources/air/NewGameViews.as",
+    "docs/reference_loading_return_sources/air/PreloadMediator.as",
+    "docs/reference_loading_return_sources/air/SpectatorController.as",
+    "docs/reference_loading_return_sources/evidence/endgame_lua_source_audit.json",
+    "docs/reference_loading_return_sources/evidence/endgame_ui_native.json",
+    "docs/reference_loading_return_sources/evidence/native_endgame_default_timing.json",
+    "docs/reference_loading_return_sources/native/EndOfGame.gfx",
+    "docs/reference_loading_return_sources/native/EndOfGame.luaobj",
+    "docs/reference_loading_return_sources/pcode/InGameController.pcode",
+    "docs/reference_loading_return_sources/probes/controller-tests.log",
+    "docs/reference_loading_return_sources/probes/filtered-log-events.json",
+    "docs/reference_loading_return_sources/probes/loading-event-trace.json",
+    "docs/reference_loading_return_sources/probes/lua-probe-runtime.json",
+    "docs/reference_loading_return_sources/probes/lua51-probe.log",
+    "docs/reference_loading_return_sources/probes/native-decompilation.json",
+    "docs/reference_loading_return_sources/probes/native_endgame_lua51_contract.json",
+    "docs/reference_loading_return_sources/probes/python-tests.log",
+    "docs/reference_loading_return_sources/current/crates/client/src/endgame_timeline.rs",
+    "docs/reference_loading_return_sources/current/crates/client/src/main.rs",
+    "docs/reference_loading_return_sources/current/crates/client/src/match_results_ui.rs",
+    "docs/reference_loading_return_sources/current/crates/client/src/native_endgame_ui.rs",
+    "docs/reference_loading_return_sources/current/crates/client/src/native_runtime_shutdown.rs",
+    "docs/reference_loading_return_sources/current/crates/client/src/session_client.rs",
+    "docs/reference_loading_return_sources/current/crates/client/src/session_connection.rs",
+    "docs/reference_loading_return_sources/current/crates/client/src/session_departure.rs",
+    "docs/reference_loading_return_sources/current/crates/core/src/match_results.rs",
+    "docs/reference_loading_return_sources/current/crates/core/src/session_transport.rs",
+    "docs/reference_loading_return_sources/current/crates/server/src/main.rs",
+    "docs/reference_loading_return_sources/current/crates/server/src/owned_session.rs",
+    "docs/reference_loading_return_sources/current/crates/server/src/session_host.rs",
+    "docs/reference_loading_return_sources/current/launcher/web/app.js",
+    "docs/reference_loading_return_sources/current/launcher/src-tauri/src/sessions.rs",
+    "docs/reference_loading_return_sources/current/launcher/src-tauri/src/sessions_joined.rs",
+    "docs/reference_loading_return_sources/current/launcher/src-tauri/src/sessions_output.rs",
+    "docs/reference_loading_return_sources/gfx-review/frame_1/DoAction.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Communication/Comm.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Components/Cursor.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Components/DefaultButton.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Components/DefaultProgressBar.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Components/DefaultTextBox.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Components/DisplayObject.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Components/DisplayObjectContainer.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Components/DrawnProgressBar.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Components/TextProgressBar.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Components/ToggleButton.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Enums/DisplayMode.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Events/Event.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Events/KeyboardEvent.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Events/MouseEvent.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Managers/ComponentFactory.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Managers/GameManager.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Managers/LayoutManager.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Managers/MouseManager.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Utils/AnimationMetric.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Utils/DrawingUtils.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Utils/Metrics.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Utils/TextMetrics.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/org/flashdevelop/utils/FlashViewer.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/Riot/EndOfGame/Main.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/Riot/EndOfGame/Communication/CommandParser.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/Riot/EndOfGame/GameComponents/DefeatSplash.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/Riot/EndOfGame/GameComponents/EndOfGame.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/Riot/EndOfGame/GameComponents/GameComponentFactory.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/Riot/EndOfGame/GameComponents/SplashScreen.as",
+    "docs/reference_loading_return_sources/gfx-review/__Packages/Riot/EndOfGame/GameComponents/VictorySplash.as",
+    "tools/project-plan/loading_return_reference.py",
+    "tools/project-plan/test_loading_return_controllers.cjs",
+    "tools/project-plan/test_loading_return_reference.py",
+    "docs/reference_loading_return_4_20_verification.json",
+    "docs/completion_tasks_2026-10-20.json",
+    "docs/coverage.json",
+    "docs/completion_plan.json",
+    "docs/resume_checkpoint.json",
+    "docs/ai/CURRENT.md",
+    "docs/ai/HANDOFF.md",
+    "docs/ai/DECISIONS.md",
+    "runtime/project-plan/plan.sqlite3 (catalogue uniquement)"
+  ],
+  "backup": "E:\\mapslol3v3\\Loading_return_reference_4_20_2026-10-20\\before-current",
+  "earlier_backup_preserved": "E:\\mapslol3v3\\Loading_return_reference_4_20_2026-10-20\\before",
+  "git": {
+    "head": "8c19026eb8fdc2d9e47960b0110c5f9175f4d1ca",
+    "branch": "main",
+    "status": " M AGENTS.md\n M Cargo.lock\n M Cargo.toml\n M assets-manifest.json\n M crates/client/src/animation.rs\n M crates/client/src/attack_animation.rs\n M crates/client/src/fow_champion_sources.rs\n M crates/client/src/fow_gpu.rs\n M crates/client/src/fow_visibility_texture.rs\n M crates/client/src/main.rs\n M crates/client/src/map_fog.rs\n M crates/client/src/native_effect_clock.rs\n M crates/client/src/native_endgame_ui.rs\n M crates/client/src/native_hud_inventory_tests.rs\n M crates/client/src/native_hud_learning.rs\n M crates/client/src/native_hud_ranks.rs\n M crates/client/src/native_hud_widgets.rs\n M crates/client/src/native_minimap_input.rs\n M crates/client/src/native_minimap_input_tests.rs\n M crates/client/src/nexus_complex_material.rs\n M crates/client/src/nexus_complex_mesh.rs\n M crates/client/src/nexus_complex_mesh_tests.rs\n M crates/client/src/nexus_glow_material.rs\n M crates/client/src/ordinary_camera_input.rs\n M crates/client/src/projected_pixel_pair.rs\n M crates/client/src/session_client.rs\n M crates/client/src/session_client_tests.rs\n M crates/client/src/session_connection.rs\n M crates/client/src/session_connection_tests.rs\n M crates/client/src/shop_ui.rs\n M crates/client/src/spell_input.rs\n M crates/client/src/terrain_material.rs\n M crates/core/src/annie.rs\n M crates/core/src/annie_r.rs\n M crates/core/src/annie_r_tests.rs\n M crates/core/src/annie_w.rs\n M crates/core/src/attack_presentation.rs\n M crates/core/src/attack_presentation_server_tests.rs\n M crates/core/src/attacks.rs\n M crates/core/src/audio_dynamic_input_owner_selector.rs\n M crates/core/src/audio_replay_windows_receive.rs\n M crates/core/src/audio_replay_windows_receive_tests.rs\n M crates/core/src/collision.rs\n M crates/core/src/combat.rs\n M crates/core/src/consumables.rs\n M crates/core/src/cooldown.rs\n M crates/core/src/damage.rs\n M crates/core/src/entity_facing.rs\n M crates/core/src/entity_facing_tests.rs\n M crates/core/src/healing.rs\n M crates/core/src/lib.rs\n M crates/core/src/lifecycle.rs\n M crates/core/src/match_results.rs\n M crates/core/src/movement.rs\n M crates/core/src/native_simple_type0_quad.rs\n M crates/core/src/progression.rs\n M crates/core/src/shop.rs\n M crates/core/src/slows.rs\n M crates/core/src/spells.rs\n M crates/core/src/summoners.rs\n M crates/core/src/vision.rs\n M crates/core/src/world.rs\n M crates/server/src/main.rs\n M crates/server/src/session_host.rs\n M data/4.20/animation_manifest.json\n M data/4.20/native_inventory_icons.json\n M data/4.20/shop_foundation.json\n M data/4.20/tibbers_definition.json\n M docs/BUILDING.md\n M docs/completion_plan.html\n M launcher/src-tauri/src/sessions.rs\n M launcher/src-tauri/src/sessions_joined.rs\n M tools/download_assets.py",
+    "staging_commit_reset": false
+  },
+  "open_questions": [
+    "GameEvent.COMPLETE_LOAD_SCREEN has only a declaration and listener add/remove in all9139 exports. The emitter and bridge from Maestro GameLoadingComplete33 to that event are not established.",
+    "preloadGameClient defaults false in ClientConfig. Actual historical remote/regional override availability is not established; unused preload branches are not promoted as default behavior.",
+    "Native GFx sends Press_Continue, but its C++ sink and exact process-exit/IPC linkage are not qualified. The AIR stopped/crashed/abandoned handlers are separate verified definitions.",
+    "Historical logs self-report build4.20 and include later filenames; they do not establish deployment date, old runtime binary SHA, a complete3v3 match, or successful AIR stats retrieval.",
+    "Native player loading progress percentages and all-player readiness sequencing are not qualified by resource-loading messages or updater install progress.",
+    "InGameController.deactivate compares currentState==connected then discards the result (AVM2 equals/pop), not a reset assignment. Preserve this original source behavior.",
+    "Original processMessageHeader checks size/version and types>40 but does not reject negative types/payload sizes. No stronger native validation is inferred or implemented by this inventory.",
+    "Current Rust process state playing is not proof of transport/asset/graphical readiness; failed-exit errors take precedence over the reconnecting label while can_resume may remain true.",
+    "Current timeline starts from first immutable result reception; original engine timers, full ceremony rendering/audio, network protocol compatibility and original AIR runtime are not qualified by this inventory."
+  ],
+  "native_game_or_air_executed": false,
+  "game_code_changed": false,
+  "game_builds_or_tests_run": false,
+  "first_install_tauri_seed_refreshed": false,
+  "resources_reconstructed": false,
+  "failed_approaches_preserved": [
+    "Initial preparation referenced owned_session under core; actual consumer is crates/server/src/owned_session.rs.",
+    "Interface IMaestroProvider excluded by an application-class-only filter; its real source is now included.",
+    "The first scratch CLI lacked the module import path, corrected by a wrapper. Initial p-code span bound was too short, replaced by a bound check within the actual method body."
+  ],
+  "final_audit_pending": false,
+  "final_audit": {
+    "task": "SYS-01.1-06",
+    "passed": true,
+    "checks_count": 46,
+    "checks": {
+      "exact_task_and_original_acceptance_contract_preserved": true,
+      "phase_and_package_prerequisites_checked": true,
+      "42213_other_registry_tasks_unchanged": true,
+      "registry_metadata_and_task_count_preserved": true,
+      "phase_and_package_order_unchanged": true,
+      "technical_ready_does_not_accept_for_user": true,
+      "all_origins_snapshots_anchors_and_sources_verified": true,
+      "reference_client_and_native_binary_sources_reverified": true,
+      "original_states_and_local_namespaces_complete_in_declared_source_sets": true,
+      "loading_failure_reconnect_result_return_paths_and_guards_present": true,
+      "two_unresolved_boundaries_remain_open": true,
+      "all_historical_logs_filtered_and_bound": true,
+      "public_snapshots_do_not_copy_raw_player_logs": true,
+      "all_native_loading_asset_presence_is_distinct_from_rendering": true,
+      "python_25_tests_ran_on_installed_consumer": true,
+      "node_16_tests_exercised_22_original_method_bodies": true,
+      "maintained_cli_ran_on_installed_paths": true,
+      "sixteen_lua_cases_and_original_instruction_identity_preserved": true,
+      "both_original_asset_decompilations_completed": true,
+      "executed_runtime_and_decompiler_identities_available": true,
+      "lua_vm_identity_available": true,
+      "tested_helper_and_tests_unchanged_after_publication": true,
+      "all_published_artifacts_unchanged": true,
+      "all_previous_reference_contracts_receipts_and_seeds_unchanged": true,
+      "all_73_preexisting_tracked_changes_unchanged": true,
+      "docs/OpenLeague_PLAN_DETAILS/D01.md_unchanged": true,
+      "docs/OpenLeague_PLAN_COMPLET_DETAILLE_A_Z.md_unchanged": true,
+      "tools/project-plan/instructions.py_unchanged": true,
+      "tools/project-plan/store.py_unchanged": true,
+      "coverage.json_all_prior_evidence_preserved": true,
+      "completion_plan.json_all_prior_evidence_preserved": true,
+      "resume_checkpoint.json_all_prior_evidence_preserved": true,
+      "docs/ai/CURRENT.md_prior_history_preserved": true,
+      "docs/ai/HANDOFF.md_prior_history_preserved": true,
+      "docs/ai/DECISIONS.md_prior_history_preserved": true,
+      "42606_manual_states_notes_revisions_unchanged": true,
+      "manual_history_unchanged": true,
+      "sqlite_integrity_ok": true,
+      "only_requested_catalog_row_changed": true,
+      "registry_generated_instruction_and_stored_consumer_match": true,
+      "contract_hash_and_proofs_linked_to_task": true,
+      "live_http_reader_matches_catalog_and_manual_state": true,
+      "installed_tauri_reads_same_real_database": true,
+      "no_unproven_native_execution_game_test_or_acceptance": true,
+      "human_readable_report_covers_every_inventoried_state_transition_guard": true,
+      "expected_and_observed_success_refusal_limits_are_documented": true
+    },
+    "requirements": {
+      "1_exact_objective_and_prerequisites": {
+        "evidence": [
+          "AGENTS.md",
+          "docs/completion_tasks_2026-10-20.json",
+          "docs/execution_plan_A_Z.json",
+          "E:\\mapslol3v3\\Loading_return_reference_4_20_2026-10-20\\prerequisites.json"
+        ],
+        "proven": true
+      },
+      "2_original_reference_and_current_consumers": {
+        "evidence": [
+          "docs/reference_loading_return_4_20.json",
+          "docs/reference_client_4_20.json",
+          "docs/reference_air_routes_4_20.json",
+          "docs/reference_loading_return_sources/"
+        ],
+        "proven": true
+      },
+      "3_integrated_result_in_actual_plan_consumer": {
+        "evidence": [
+          "tools/project-plan/instructions.py",
+          "runtime/project-plan/plan.sqlite3",
+          "http://127.0.0.1:10427/api/task/SYS-01.1-06"
+        ],
+        "proven": true
+      },
+      "4_nominal_refusals_limits_and_execution_identities": {
+        "evidence": [
+          "tests",
+          "tools",
+          "decompiler_operations",
+          "expected_observed",
+          "open_questions"
+        ],
+        "proven": true
+      },
+      "5_registry_coverage_resume_and_previous_evidence": {
+        "evidence": [
+          "docs/coverage.json",
+          "docs/completion_plan.json",
+          "docs/resume_checkpoint.json",
+          "docs/ai/CURRENT.md",
+          "docs/ai/HANDOFF.md",
+          "docs/ai/DECISIONS.md"
+        ],
+        "proven": true
+      },
+      "6_delivery_report_and_no_global_completion": {
+        "evidence": [
+          "docs/REFERENCE_LOADING_RETURN_4_20.md",
+          "docs/reference_loading_return_4_20_verification.json"
+        ],
+        "proven": true
+      }
+    },
+    "verified_utc": "2026-10-20T19:11:21.948544+00:00",
+    "facts": {
+      "task": "SYS-01.1-06",
+      "verified": true,
+      "states": 86,
+      "transitions": 57,
+      "sources": 104,
+      "anchors": 149,
+      "historical_logs": 91,
+      "guards": 22,
+      "historical_events": 1127,
+      "vm_methods": 22,
+      "unresolved_boundaries": 2,
+      "historical_game_executed": false,
+      "manual_state_mutated": false,
+      "human_acceptance": "not_given"
+    },
+    "manual_states_preserved": 42606,
+    "catalog_changed_rows": [
+      "SYS-01.1-06"
+    ],
+    "manual_state_mutated": false,
+    "human_acceptance": "not_given",
+    "native_game_or_air_executed": false
+  },
+  "verified_utc": "2026-10-20T19:11:21.948544+00:00",
+  "test_log_outputs": {
+    "installed-python-tests": "test_01_original_sources_and_nominal_lifecycle_inventory (test_loading_return_reference.LoadingReturnTests.test_01_original_sources_and_nominal_lifecycle_inventory) ... ok\ntest_02_wrong_region_refused (test_loading_return_reference.LoadingReturnTests.test_02_wrong_region_refused) ... ok\ntest_03_missing_source_refused (test_loading_return_reference.LoadingReturnTests.test_03_missing_source_refused) ... ok\ntest_04_duplicate_source_or_anchor_refused (test_loading_return_reference.LoadingReturnTests.test_04_duplicate_source_or_anchor_refused) ... ok\ntest_05_source_content_change_refused (test_loading_return_reference.LoadingReturnTests.test_05_source_content_change_refused) ... ok\ntest_06_snapshot_cannot_escape_project_root (test_loading_return_reference.LoadingReturnTests.test_06_snapshot_cannot_escape_project_root) ... ok\ntest_07_transition_requires_known_endpoints (test_loading_return_reference.LoadingReturnTests.test_07_transition_requires_known_endpoints) ... ok\ntest_08_every_original_state_constant_is_inventoried (test_loading_return_reference.LoadingReturnTests.test_08_every_original_state_constant_is_inventoried) ... ok\ntest_09_unresolved_bridges_cannot_be_promoted_or_hidden (test_loading_return_reference.LoadingReturnTests.test_09_unresolved_bridges_cannot_be_promoted_or_hidden) ... ok\ntest_10_recovery_guard_cannot_be_omitted (test_loading_return_reference.LoadingReturnTests.test_10_recovery_guard_cannot_be_omitted) ... ok\ntest_11_private_log_fields_are_refused (test_loading_return_reference.LoadingReturnTests.test_11_private_log_fields_are_refused) ... ok\ntest_12_startup_and_texture_warnings_do_not_become_loading_or_completion (test_loading_return_reference.LoadingReturnTests.test_12_startup_and_texture_warnings_do_not_become_loading_or_completion) ... ok\ntest_13_log_classifier_exports_only_safe_labels (test_loading_return_reference.LoadingReturnTests.test_13_log_classifier_exports_only_safe_labels) ... ok\ntest_14_no_human_acceptance_or_native_execution_inferred (test_loading_return_reference.LoadingReturnTests.test_14_no_human_acceptance_or_native_execution_inferred) ... ok\ntest_15_local_states_cannot_claim_native_observation (test_loading_return_reference.LoadingReturnTests.test_15_local_states_cannot_claim_native_observation) ... ok\ntest_16_vm_erases_types_but_preserves_operators (test_loading_return_reference.LoadingReturnTests.test_16_vm_erases_types_but_preserves_operators) ... ok\ntest_17_method_binding_refuses_empty_missing_and_ambiguous (test_loading_return_reference.LoadingReturnTests.test_17_method_binding_refuses_empty_missing_and_ambiguous) ... ok\ntest_18_historical_exits_and_incomplete_logs_remain_distinct (test_loading_return_reference.LoadingReturnTests.test_18_historical_exits_and_incomplete_logs_remain_distinct) ... ok\ntest_19_lua_receipt_records_exact_sixteen_adapter_cases (test_loading_return_reference.LoadingReturnTests.test_19_lua_receipt_records_exact_sixteen_adapter_cases) ... ok\ntest_20_changed_vm_corpus_identity_refused (test_loading_return_reference.LoadingReturnTests.test_20_changed_vm_corpus_identity_refused) ... ok\ntest_21_air_review_must_bind_to_exact_frozen_release_export (test_loading_return_reference.LoadingReturnTests.test_21_air_review_must_bind_to_exact_frozen_release_export) ... ok\ntest_22_duplicate_historical_trace_refused (test_loading_return_reference.LoadingReturnTests.test_22_duplicate_historical_trace_refused) ... ok\ntest_23_loading_milestones_require_all_observed_labels (test_loading_return_reference.LoadingReturnTests.test_23_loading_milestones_require_all_observed_labels) ... ok\ntest_24_reference_set_cannot_hide_game_identity (test_loading_return_reference.LoadingReturnTests.test_24_reference_set_cannot_hide_game_identity) ... ok\ntest_25_shape_only_mode_does_not_claim_source_verification (test_loading_return_reference.LoadingReturnTests.test_25_shape_only_mode_does_not_claim_source_verification) ... ok\n\n----------------------------------------------------------------------\nRan 25 tests in 3.282s\n\nOK\n",
+    "installed-controller-tests": "✔ preload availability requires every original predicate (3.1243ms)\n✔ ready-before-minimize and minimize-before-ready issue one adapted play (5.989ms)\n✔ crash disables preload; halt has the active/ready guard and only calls an adapter (3.978ms)\n✔ all three champion-selection DTOs map to CHAMP_SELECT, not START_REQUESTED (5.7611ms)\n✔ successful game completion changes only the two permitted AIR states (7.5134ms)\n✔ AIR normal completion restores window; replay leaves lifecycle and window untouched (1.1976ms)\n✔ AIR crash returns to lobby only outside a live match; replay is excluded (2.6218ms)\n✔ early termination separates tutorial, spectator, crash and abandonment (2.0135ms)\n✔ original deactivate comparison does not assign connected, and removes listeners (0.6188ms)\n✔ results use only same-game cache, otherwise wait for platform validation (2.8952ms)\n✔ normal and every tutorial results branch retain their original states (4.2517ms)\n✔ return cleans gifts and tutorial queue; normal flow completes once (2.7172ms)\n✔ Maestro messages 1,2,7,8,9,10,33 differ and initial preload30 is no-op (5.6548ms)\n✔ Maestro header waits for16 bytes, validates size/version and preserves payload branch (4.6624ms)\n✔ GFx send preserves Press_Continue and rejects empty rollover/release messages (3.6726ms)\n✔ Continue release requires active cursor, parent, enabled communication and no drag (4.2413ms)\nℹ tests 16\nℹ suites 0\nℹ pass 16\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 139.2124\n",
+    "installed-cli": "{\n  \"task\": \"SYS-01.1-06\",\n  \"verified\": true,\n  \"states\": 86,\n  \"transitions\": 57,\n  \"sources\": 104,\n  \"anchors\": 149,\n  \"historical_logs\": 91,\n  \"guards\": 22,\n  \"historical_events\": 1127,\n  \"vm_methods\": 22,\n  \"unresolved_boundaries\": 2,\n  \"historical_game_executed\": false,\n  \"manual_state_mutated\": false,\n  \"human_acceptance\": \"not_given\"\n}\n"
+  },
+  "final_file_identities": {
+    "docs/reference_loading_return_4_20.json": {
+      "bytes": 491497,
+      "sha256": "ab3b20e39f96e6ca4c5bf57f85a0cfd9ad539059213be529f7e6e2a6162bc284"
+    },
+    "docs/REFERENCE_LOADING_RETURN_4_20.md": {
+      "bytes": 55005,
+      "sha256": "c1db31c19282807ad30583f2ddb0f89efd9a39adeda053af8eb38f560960698a"
+    },
+    "docs/reference_loading_return_sources/vm-methods.json": {
+      "bytes": 64057,
+      "sha256": "4ecdea8caf5470b516d26e3f06eb966e7cc549c9b18e3265633d19769c774be1"
+    },
+    "docs/reference_loading_return_sources/air/ApplicationController.as": {
+      "bytes": 60553,
+      "sha256": "14614012a94c79933e7af2f6ec50334d33d6ae2cb88c99873d480862dd7649b9"
+    },
+    "docs/reference_loading_return_sources/air/ClientConfig.as": {
+      "bytes": 93171,
+      "sha256": "dedc99b1d3067c5a9fb96dbf5659625e43919db0e5cb8c5c33701beead67b65c"
+    },
+    "docs/reference_loading_return_sources/air/EndOfGameStats.as": {
+      "bytes": 34514,
+      "sha256": "d2fe98ca97ef64353848f4ca27327fc21fcce2a7e5081a686352faed047414bd"
+    },
+    "docs/reference_loading_return_sources/air/EndOfGameStatsController.as": {
+      "bytes": 78440,
+      "sha256": "d96ecebfd9d763c59dfa84f0f3778cba5db3cc0144de9862978d7429315eee1a"
+    },
+    "docs/reference_loading_return_sources/air/EndOfGameView.as": {
+      "bytes": 21325,
+      "sha256": "5f2a7df983c4204c2cf646141404f268ae47f1ea804e62ba558a759315b5de75"
+    },
+    "docs/reference_loading_return_sources/air/EndOfTutorialGameView.as": {
+      "bytes": 27109,
+      "sha256": "b39a647e04d774f0cbfd8a97871e5e1d05034007b04ab5eeff895d975796412f"
+    },
+    "docs/reference_loading_return_sources/air/GameCrashedEvent.as": {
+      "bytes": 450,
+      "sha256": "49e42a0b06aec389ca260880011b575346d3e3066249119419b5fe329317f7fd"
+    },
+    "docs/reference_loading_return_sources/air/GameEvent.as": {
+      "bytes": 1359,
+      "sha256": "9f914a305cfe639fff055e752840a226b610edaf051d9129d5a1f2988a924a35"
+    },
+    "docs/reference_loading_return_sources/air/GameState.as": {
+      "bytes": 1868,
+      "sha256": "65fb2589cd3100adf292ca9f5812d9330e9bf2d1045ef21b2badd28bbb36a84b"
+    },
+    "docs/reference_loading_return_sources/air/GameType.as": {
+      "bytes": 1223,
+      "sha256": "16ba10046e2467ad73f09298ac607edb3ba2c9328297ada099d913faddcf3c74"
+    },
+    "docs/reference_loading_return_sources/air/GameViewState.as": {
+      "bytes": 1395,
+      "sha256": "6ca78f107598b613a54415248a8ef2b70453ebd5cec8030c6bb9341cecd1b368"
+    },
+    "docs/reference_loading_return_sources/air/HardcodedEndOfGameStats.as": {
+      "bytes": 22365,
+      "sha256": "254ed17a954e2c1fb471b1ad57e25dbf0c9cda173f434b69818a1d14ab3c0644"
+    },
+    "docs/reference_loading_return_sources/air/IAppControllerConstants.as": {
+      "bytes": 1307,
+      "sha256": "00e6b3f108ba3dddf434f29714756cf349e684ab20c913dfee179078966a1630"
+    },
+    "docs/reference_loading_return_sources/air/IMaestroProvider.as": {
+      "bytes": 3127,
+      "sha256": "e02de758955a7b77b0160b588d78535a07fe9f5aa950b765c3d52528213e7dae"
+    },
+    "docs/reference_loading_return_sources/air/InGameController.as": {
+      "bytes": 11615,
+      "sha256": "c71c817a60b579370febf6cf1352090ad1f3a44b98741581e8209103a3d45bf6"
+    },
+    "docs/reference_loading_return_sources/air/InGameView.as": {
+      "bytes": 36323,
+      "sha256": "c492e173a93cab7f42c72d97a45c7ec9e80a45cc26db78a974aec42a3a9b563e"
+    },
+    "docs/reference_loading_return_sources/air/LobbyController.as": {
+      "bytes": 26022,
+      "sha256": "d1f61b672a2872ea7e9644d3e17d8277ab3939fd8e6b76fda146688d967dd9f0"
+    },
+    "docs/reference_loading_return_sources/air/LoginMediator.as": {
+      "bytes": 29670,
+      "sha256": "21481600f0167ae7dc9fd58b9d4d4e9b8df7c14b288c769d031d2dcbf87011a1"
+    },
+    "docs/reference_loading_return_sources/air/LolGamePreloadController.as": {
+      "bytes": 6856,
+      "sha256": "77802043e559e443cb5bb61de1c14d1242e1da9a7b2e7d292bb10884b7a528a9"
+    },
+    "docs/reference_loading_return_sources/air/MaestroConstants.as": {
+      "bytes": 2313,
+      "sha256": "efb31da7d10fad736d40b038555609f2718dc2595d63a461e4ee4de009e06bb8"
+    },
+    "docs/reference_loading_return_sources/air/MaestroController.as": {
+      "bytes": 25208,
+      "sha256": "68d93de952531962b04f5cbca79f9feb3e48a2ba9b0b5c2ff0c2b0c9c51eea36"
+    },
+    "docs/reference_loading_return_sources/air/MaestroMessage.as": {
+      "bytes": 2333,
+      "sha256": "200262de829bde0efa6fc616edddfd041dbdff510763ace6eba3723b55945ed5"
+    },
+    "docs/reference_loading_return_sources/air/MaestroProviderProxy.as": {
+      "bytes": 7440,
+      "sha256": "95420569f729d578e20263c4d27529b508970e07d76d2d510cda4343b2bb455a"
+    },
+    "docs/reference_loading_return_sources/air/MaestroServiceImpl.as": {
+      "bytes": 26464,
+      "sha256": "768839d5028fb4764ba2f2832fe3ca574fa06f3dcf2d80d6a11770a2fe953a88"
+    },
+    "docs/reference_loading_return_sources/air/MasterGameController.as": {
+      "bytes": 124421,
+      "sha256": "6cee283b81ad29909c1dd700b4896effcd0d63a36ed648358f70428139d9d348"
+    },
+    "docs/reference_loading_return_sources/air/MasterGameViewController.as": {
+      "bytes": 46735,
+      "sha256": "a804982133e0fcb3ce5365cae564c56c2a7aaf6887bd533c2cdd0610abad9e72"
+    },
+    "docs/reference_loading_return_sources/air/NewGameViews.as": {
+      "bytes": 29417,
+      "sha256": "cf9629bdea6f8f5437919eb61e7e643e23fd25a58040e4ae37329940d1d4f574"
+    },
+    "docs/reference_loading_return_sources/air/PreloadMediator.as": {
+      "bytes": 1093,
+      "sha256": "952e9b0a5d32dc142cf32e468552682919a1b7c1e9cb24d1c4ca5026f0c0fed1"
+    },
+    "docs/reference_loading_return_sources/air/SpectatorController.as": {
+      "bytes": 20561,
+      "sha256": "290f8baf89d9f1263c0811867edee71003b313f29112aeb1971a047f40ffd18d"
+    },
+    "docs/reference_loading_return_sources/evidence/endgame_lua_source_audit.json": {
+      "bytes": 9955,
+      "sha256": "de95b91fbc18a93582ed5bea57aaba830ada1eb083d0c76dafa61cb4335a7ae2"
+    },
+    "docs/reference_loading_return_sources/evidence/endgame_ui_native.json": {
+      "bytes": 31448,
+      "sha256": "79ef17ad69ef3660a5493cf034fe737d919be1a8a8a33e1be0266340d2c65ee0"
+    },
+    "docs/reference_loading_return_sources/evidence/native_endgame_default_timing.json": {
+      "bytes": 1282,
+      "sha256": "d490c13cab7da6197ec82b257717db56a699f56b5edfa6c9e2d60040bcfaf25c"
+    },
+    "docs/reference_loading_return_sources/native/EndOfGame.gfx": {
+      "bytes": 20387,
+      "sha256": "3d2f17dd944ca14b66aee9177e25a5c8f4637557758734d5ced34c5f0a479954"
+    },
+    "docs/reference_loading_return_sources/native/EndOfGame.luaobj": {
+      "bytes": 2899,
+      "sha256": "5548ca1ce30a6bc2740d787b2bc224c5d11f06d89ca9b2dcd8659e1e4a263379"
+    },
+    "docs/reference_loading_return_sources/pcode/InGameController.pcode": {
+      "bytes": 123726,
+      "sha256": "da4d70220fffba21637e497dfab415ac88eaa535dac869418d2ed3c9b800e038"
+    },
+    "docs/reference_loading_return_sources/probes/controller-tests.log": {
+      "bytes": 1539,
+      "sha256": "f1f2f70939bf503c22ab0514383f612f424d21d4a528fc6114bc5054f48d0581"
+    },
+    "docs/reference_loading_return_sources/probes/filtered-log-events.json": {
+      "bytes": 302146,
+      "sha256": "eec1907020060c0cf539e74a436b9a5e9487bae580e584abd68a1321e6281f94"
+    },
+    "docs/reference_loading_return_sources/probes/loading-event-trace.json": {
+      "bytes": 3700,
+      "sha256": "d3f3ef266127be0d76c85d4fbe1f9ac6f9ce711d6bcf4cf78a61c4ccc310c67a"
+    },
+    "docs/reference_loading_return_sources/probes/lua-probe-runtime.json": {
+      "bytes": 1177,
+      "sha256": "4ace89a658b6825692a5e1d6f0c9ed4cf9f64ada276d94a15aa691c23120180a"
+    },
+    "docs/reference_loading_return_sources/probes/lua51-probe.log": {
+      "bytes": 130,
+      "sha256": "bd96d0cd406989a0d0664a22d760f16bf744cbdb126e4e012f6631d870818ad9"
+    },
+    "docs/reference_loading_return_sources/probes/native-decompilation.json": {
+      "bytes": 1900,
+      "sha256": "dfa4a8f2323d4bb669de35b6b5d8cf6224d7c224a3002129428ce267e214bc0c"
+    },
+    "docs/reference_loading_return_sources/probes/native_endgame_lua51_contract.json": {
+      "bytes": 121173,
+      "sha256": "8a5f5afdb8c384aa934cfdf27dc340fcc14fa55de1b0c7bcc286615db80df0fd"
+    },
+    "docs/reference_loading_return_sources/probes/python-tests.log": {
+      "bytes": 4055,
+      "sha256": "c28dde40c25a9f29e761a73528b3e40015227bc6af5b758c82794ac518efe5d4"
+    },
+    "docs/reference_loading_return_sources/current/crates/client/src/endgame_timeline.rs": {
+      "bytes": 4954,
+      "sha256": "4741f27b81f7aff4e9940755c1bb1a9bcac6e35113fd3ace8624b07e3b82714c"
+    },
+    "docs/reference_loading_return_sources/current/crates/client/src/main.rs": {
+      "bytes": 141376,
+      "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+    },
+    "docs/reference_loading_return_sources/current/crates/client/src/match_results_ui.rs": {
+      "bytes": 6200,
+      "sha256": "ce96ed7771c5ee6f3823386ecbb61b73875cd2b78088ec83695a81d9ef621cb2"
+    },
+    "docs/reference_loading_return_sources/current/crates/client/src/native_endgame_ui.rs": {
+      "bytes": 12985,
+      "sha256": "99290ade51f68a84cb8e680a2778f1d6dfb0d393f258a490726e431bcd941149"
+    },
+    "docs/reference_loading_return_sources/current/crates/client/src/native_runtime_shutdown.rs": {
+      "bytes": 11275,
+      "sha256": "3e21c3f74afd883e1c7ab512c52d081907e8425750a8da3cd8f4c31983c687b3"
+    },
+    "docs/reference_loading_return_sources/current/crates/client/src/session_client.rs": {
+      "bytes": 12507,
+      "sha256": "4df6dc629e5a428bb7d7bc258ec83ce763d999da34587228ea76208de06b76e4"
+    },
+    "docs/reference_loading_return_sources/current/crates/client/src/session_connection.rs": {
+      "bytes": 17469,
+      "sha256": "fdd81b790bca52dd4e20ca5d34e81d78136f3958ab7028f5ca193d078fb9acd1"
+    },
+    "docs/reference_loading_return_sources/current/crates/client/src/session_departure.rs": {
+      "bytes": 9218,
+      "sha256": "6cc8e1889fec2d6d2af8ae5f334126410ed5af2ef48b32f005c419617a3fdfe9"
+    },
+    "docs/reference_loading_return_sources/current/crates/core/src/match_results.rs": {
+      "bytes": 4021,
+      "sha256": "48c15c370a316084296c8a1e356fddf30730ca10223d37fbe71ee6cacec37be7"
+    },
+    "docs/reference_loading_return_sources/current/crates/core/src/session_transport.rs": {
+      "bytes": 13206,
+      "sha256": "139a7ce15ac5261dee15fe0aa60716fb1bb6993ecd9acb0d41c34acb84ab00bc"
+    },
+    "docs/reference_loading_return_sources/current/crates/server/src/main.rs": {
+      "bytes": 13628,
+      "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+    },
+    "docs/reference_loading_return_sources/current/crates/server/src/owned_session.rs": {
+      "bytes": 6304,
+      "sha256": "f8166aac8cd04e02fd35d981f859883e18e462f00a066e683efb12ed29304415"
+    },
+    "docs/reference_loading_return_sources/current/crates/server/src/session_host.rs": {
+      "bytes": 33360,
+      "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+    },
+    "docs/reference_loading_return_sources/current/launcher/web/app.js": {
+      "bytes": 2960,
+      "sha256": "f4f58340d72d2bedbf94b88a847a537c2ea7d76594f053d6a5dc4eba1cf64ad6"
+    },
+    "docs/reference_loading_return_sources/current/launcher/src-tauri/src/sessions.rs": {
+      "bytes": 30278,
+      "sha256": "54bc7a2a66296cdf2cededcca19d1846287c5108974efda2a0151b17503da7f6"
+    },
+    "docs/reference_loading_return_sources/current/launcher/src-tauri/src/sessions_joined.rs": {
+      "bytes": 6559,
+      "sha256": "b7c44064076cab4a4ec3274e07a6fe28fe5f33477ac088a4eb82f24d2a89b60c"
+    },
+    "docs/reference_loading_return_sources/current/launcher/src-tauri/src/sessions_output.rs": {
+      "bytes": 20465,
+      "sha256": "771407092830a4e780427b3dc89bc63e4b699eef06c5aee6aa00dd29bb8de011"
+    },
+    "docs/reference_loading_return_sources/gfx-review/frame_1/DoAction.as": {
+      "bytes": 61,
+      "sha256": "149f89d6898fa46ace749c4397852407475cb44e36e1828117e6da1beda8dae6"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Communication/Comm.as": {
+      "bytes": 1005,
+      "sha256": "dc5c5ca0096c2c4db4a922a6fc6d9de555388f407d0df58b8b54ff3737e9700f"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Components/Cursor.as": {
+      "bytes": 1204,
+      "sha256": "5fdf6235ffe94fdad9ac71dd762a2076cc169875d4c4519c6984fd49b4f25b5b"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Components/DefaultButton.as": {
+      "bytes": 8861,
+      "sha256": "ad54600c6fb3f5fcb62f38740cf07d4af90bf1fac950270a4f812c1f2cef80a9"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Components/DefaultProgressBar.as": {
+      "bytes": 2362,
+      "sha256": "0bdc310ca74cac253bcd5b90c9daa5f9bd420de88af9667b08ae8ac0c9377df6"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Components/DefaultTextBox.as": {
+      "bytes": 6359,
+      "sha256": "806f90f8adcbc661df2d43981c6f5c1c464b019a1b9ab41394db64ec485cae6f"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Components/DisplayObject.as": {
+      "bytes": 30572,
+      "sha256": "d695536705f9343a6afb142eeb33a539b6e5473a71b424b682215425d0b830e5"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Components/DisplayObjectContainer.as": {
+      "bytes": 12049,
+      "sha256": "1b217633f96080bcf77e77471f1cc41dc106469d720ed7c7866da8fcec4b9c71"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Components/DrawnProgressBar.as": {
+      "bytes": 940,
+      "sha256": "48f5dec5c9a4cf6cc256374a3acbd8b3ffaec9a0c0ba860c0f098482b9e63710"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Components/TextProgressBar.as": {
+      "bytes": 755,
+      "sha256": "7504fc3536cfeb652c992d3ef734204eb4bd770ba8256a42887b4c4d32e15463"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Components/ToggleButton.as": {
+      "bytes": 1574,
+      "sha256": "795fb494f611573f900b737a0e00eca3585ec67e4196715137c560901efbfbdb"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Enums/DisplayMode.as": {
+      "bytes": 164,
+      "sha256": "9243cf95b20ac4d41a779b78b0407b11f1597558e0730594fc58608d8a0d55d5"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Events/Event.as": {
+      "bytes": 665,
+      "sha256": "9e9e8093cdacc1a99c204b14ef57779bcfe95cc38e51c081feed02ebf1adab22"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Events/KeyboardEvent.as": {
+      "bytes": 507,
+      "sha256": "9587e37795c6dbdb05cc7f331958fc27e7947cdfa304061c360304ffba528f47"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Events/MouseEvent.as": {
+      "bytes": 1290,
+      "sha256": "8e2617d21b0b5f6c928794e0da15957d4af39720d408ff9e035c3f192cacf63f"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Managers/ComponentFactory.as": {
+      "bytes": 2103,
+      "sha256": "fb22b4628b1c99687a1f02eac430946c64f4c3101f967725c3fbd835e50a6f83"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Managers/GameManager.as": {
+      "bytes": 2185,
+      "sha256": "f9c7eaf81b71e7fb6441c16c81df81ede81b4d83ab0838ca2a0576d18c9c8f43"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Managers/LayoutManager.as": {
+      "bytes": 2215,
+      "sha256": "21faee000890f76020227eb27579b0b51d3e7906e61217f9c960f8f1374932e4"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Managers/MouseManager.as": {
+      "bytes": 692,
+      "sha256": "1414d0f915b56d25c3bea813eb0fdd60828f0357cd2c6b86db56a43c0406de4b"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Utils/AnimationMetric.as": {
+      "bytes": 3452,
+      "sha256": "1343b003137d676114b51ab11014d862028b4593a261940742317c9afff03f88"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Utils/DrawingUtils.as": {
+      "bytes": 6344,
+      "sha256": "0e6393695fcca587d329e0b825362ba4b52bb5896d18fd779502df9d1e0a9440"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Utils/Metrics.as": {
+      "bytes": 710,
+      "sha256": "3d35ade54e57933e343ffa1e76b721c900baff844c06a6367451c6b73a7c3387"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/DDW/Utils/TextMetrics.as": {
+      "bytes": 778,
+      "sha256": "b3632545e6595dc8741c1f5d831003c6b97eea128ce41b3fdd9fa2477c09d5b2"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/org/flashdevelop/utils/FlashViewer.as": {
+      "bytes": 957,
+      "sha256": "9ea5cc92ac2bcde3579ffc7b25cc01ffc1fa01c8ba2fa16b9ccee19e2ddaf8df"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/Riot/EndOfGame/Main.as": {
+      "bytes": 745,
+      "sha256": "13db93fb0197140b22c0291d20388559170acc8424cf6200ca3b91420624f792"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/Riot/EndOfGame/Communication/CommandParser.as": {
+      "bytes": 2167,
+      "sha256": "a1f8bb30eadfe57a94d7da703eab25683de95ee8f120222f073591ec04d3a6ca"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/Riot/EndOfGame/GameComponents/DefeatSplash.as": {
+      "bytes": 1711,
+      "sha256": "1eb45194571a3ddba25880d69b0c81cbf75fb66e84e0fd0f0b4f1a132b376eb0"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/Riot/EndOfGame/GameComponents/EndOfGame.as": {
+      "bytes": 2308,
+      "sha256": "756f0731bd62f9b5dc73250737551a87f64ca37a9f8a52d483b805f5c9b542d9"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/Riot/EndOfGame/GameComponents/GameComponentFactory.as": {
+      "bytes": 1111,
+      "sha256": "8e9c1a73378b1904c7613ee4c307d5a4ae5648a3d3205b24eff12b64a208a7a6"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/Riot/EndOfGame/GameComponents/SplashScreen.as": {
+      "bytes": 312,
+      "sha256": "8746e52aabbbaed5bd4f803ab9318ddac9e5e09e2783739cce63004ece5e01a8"
+    },
+    "docs/reference_loading_return_sources/gfx-review/__Packages/Riot/EndOfGame/GameComponents/VictorySplash.as": {
+      "bytes": 1722,
+      "sha256": "50be906603253e06c9a4a641d59e792d1954a2de2ec7dcc2027fb9822b8f44fe"
+    },
+    "tools/project-plan/loading_return_reference.py": {
+      "bytes": 16843,
+      "sha256": "51180f7dc8fb86a18c322de2f07413683c4c2d0953feef9429aad24402b2758e"
+    },
+    "tools/project-plan/test_loading_return_controllers.cjs": {
+      "bytes": 13965,
+      "sha256": "f71b5fe2696cf1e4b97b77a66528c40167b5e5364396dd8c1196639974b35c35"
+    },
+    "tools/project-plan/test_loading_return_reference.py": {
+      "bytes": 8582,
+      "sha256": "9c31e485588045c592cb63bce622755ebd407756f70fb03bf8b53c855fe0c375"
+    },
+    "docs/completion_tasks_2026-10-20.json": {
+      "bytes": 122573569,
+      "sha256": "239e1485e99beaf426477d5143cd7cac45ceda88e0e717ef7683574aac98dc4b"
+    },
+    "docs/coverage.json": {
+      "bytes": 5140587,
+      "sha256": "8a7993e0f087344d3c31b543c09eef8b377c491842269fe043e17864bc77b0eb"
+    },
+    "docs/completion_plan.json": {
+      "bytes": 4250869,
+      "sha256": "de3e3a1f3135ced6a8f6076d79258db7b13b23d35282ec12f57320236093fde3"
+    },
+    "docs/resume_checkpoint.json": {
+      "bytes": 4821003,
+      "sha256": "0c2be9034879e4ccfafacb6a98449d3cdb6c9b456695e41c9e366fdeb29a5185"
+    },
+    "docs/ai/CURRENT.md": {
+      "bytes": 26793,
+      "sha256": "609df507bcb39f79b82a204568f92825f799f325382e5ecb40c549d82d2b3865"
+    },
+    "docs/ai/HANDOFF.md": {
+      "bytes": 25901,
+      "sha256": "c8cc8a24d3459ce8ec84e632e572ab8dabdbd4a330a2b5e8e79fe7c1dc6f3784"
+    },
+    "docs/ai/DECISIONS.md": {
+      "bytes": 31334,
+      "sha256": "68cae4f7cea856dc29c2aa690fe7797b378cf97c47b95c4eb9fdf360acbf1ab2"
+    }
+  }
+}

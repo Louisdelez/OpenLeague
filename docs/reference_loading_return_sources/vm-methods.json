@@ -1,0 +1,1181 @@
+{
+  "methods": [
+    {
+      "id": "preload_ready",
+      "source": "air.LolGamePreloadController",
+      "name": "getPreloadingReady",
+      "accessor": null,
+      "line": 158,
+      "end_line": 161,
+      "arguments": "",
+      "body": "\n         return this._shouldPreload && this._maestro != null && this._maestroStarted;\n      ",
+      "body_sha256": "bf3998eb02695cd1defa8cb6a7c2d6613faae198f66f4d2118b15947a7fb3a2e",
+      "javascript": "function() {\n\n         return this._shouldPreload && this._maestro != null && this._maestroStarted;\n      \n}",
+      "execution_scope": "Selected original method body; AS3 types erased only. JS VM host adapters; no AVM2/GFx runtime or native game execution."
+    },
+    {
+      "id": "preload_complete",
+      "source": "air.LolGamePreloadController",
+      "name": "completePreload",
+      "accessor": null,
+      "line": 94,
+      "end_line": 104,
+      "arguments": "",
+      "body": "\n         if(this._receivedMinimizeEvent && this.getPreloadingReady())\n         {\n            this.playPreloadedGame();\n         }\n         else\n         {\n            this._readyToPlay = true;\n         }\n      ",
+      "body_sha256": "b57dc5546abf1739f3e7fd3c184a99fc72f4e0e198b6dcc3ba1586cf39e380a4",
+      "javascript": "function() {\n\n         if(this._receivedMinimizeEvent && this.getPreloadingReady())\n         {\n            this.playPreloadedGame();\n         }\n         else\n         {\n            this._readyToPlay = true;\n         }\n      \n}",
+      "execution_scope": "Selected original method body; AS3 types erased only. JS VM host adapters; no AVM2/GFx runtime or native game execution."
+    },
+    {
+      "id": "preload_minimize",
+      "source": "air.LolGamePreloadController",
+      "name": "handleShellMinimize",
+      "accessor": null,
+      "line": 117,
+      "end_line": 124,
+      "arguments": "param1:ShellEvent",
+      "body": "\n         if(this._readyToPlay && this.getPreloadingReady())\n         {\n            this.playPreloadedGame();\n         }\n         this._receivedMinimizeEvent = true;\n      ",
+      "body_sha256": "d2896b64447b2942729aa30bf857deab14e25c49fe1786430ab354e7ffb0bf21",
+      "javascript": "function(param1) {\n\n         if(this._readyToPlay && this.getPreloadingReady())\n         {\n            this.playPreloadedGame();\n         }\n         this._receivedMinimizeEvent = true;\n      \n}",
+      "execution_scope": "Selected original method body; AS3 types erased only. JS VM host adapters; no AVM2/GFx runtime or native game execution."
+    },
+    {
+      "id": "preload_crash",
+      "source": "air.LolGamePreloadController",
+      "name": "onPreloadedGameCrashedOrAbandoned",
+      "accessor": null,
+      "line": 126,
+      "end_line": 131,
+      "arguments": "param1:Event",
+      "body": "\n         this._shouldPreload = false;\n         this._currentlyPreloading = false;\n         this.removeCrashHandlers();\n      ",
+      "body_sha256": "0f833c2f1ea1bf5cb1458a834bda865c23924e9903aedec58fa2896f099dd67d",
+      "javascript": "function(param1) {\n\n         this._shouldPreload = false;\n         this._currentlyPreloading = false;\n         this.removeCrashHandlers();\n      \n}",
+      "execution_scope": "Selected original method body; AS3 types erased only. JS VM host adapters; no AVM2/GFx runtime or native game execution."
+    },
+    {
+      "id": "preload_halt",
+      "source": "air.LolGamePreloadController",
+      "name": "haltPreload",
+      "accessor": null,
+      "line": 133,
+      "end_line": 140,
+      "arguments": "",
+      "body": "\n         if(this.getPreloadingReady() && this._currentlyPreloading)\n         {\n            this.removeCrashHandlers();\n            this._maestro.killGameClientProcess();\n         }\n      ",
+      "body_sha256": "7ab15563d8dc07b8f8ad5e7955ff1576e774cec8fc15958dafaf380cc34c549c",
+      "javascript": "function() {\n\n         if(this.getPreloadingReady() && this._currentlyPreloading)\n         {\n            this.removeCrashHandlers();\n            this._maestro.killGameClientProcess();\n         }\n      \n}",
+      "execution_scope": "Selected original method body; AS3 types erased only. JS VM host adapters; no AVM2/GFx runtime or native game execution."
+    },
+    {
+      "id": "preload_play",
+      "source": "air.LolGamePreloadController",
+      "name": "playPreloadedGame",
+      "accessor": null,
+      "line": 142,
+      "end_line": 148,
+      "arguments": "",
+      "body": "\n         this._maestro.playPreloadedGame();\n         this._readyToPlay = false;\n         this._currentlyPreloading = false;\n         this.removeCrashHandlers();\n      ",
+      "body_sha256": "0cfa66c20bb0271c703576b521f3739e7400e6dd85e953ffbfa98423fcd1bb89",
+      "javascript": "function() {\n\n         this._maestro.playPreloadedGame();\n         this._readyToPlay = false;\n         this._currentlyPreloading = false;\n         this.removeCrashHandlers();\n      \n}",
+      "execution_scope": "Selected original method body; AS3 types erased only. JS VM host adapters; no AVM2/GFx runtime or native game execution."
+    },
+    {
+      "id": "dto_map",
+      "source": "air.GameState",
+      "name": "GameStateToGameViewState",
+      "accessor": null,
+      "line": 34,
+      "end_line": 41,
+      "arguments": "param1:String",
+      "body": "\n         if(isInChampionSelectionState(param1))\n         {\n            return GameViewState.CHAMPION_SELECTION;\n         }\n         return param1;\n      ",
+      "body_sha256": "83829cacda88ee4cd0c5912104903dcce53e76d2780d7f07b9fdcd4814f5736e",
+      "javascript": "function(param1) {\n\n         if(isInChampionSelectionState(param1))\n         {\n            return GameViewState.CHAMPION_SELECTION;\n         }\n         return param1;\n      \n}",
+      "execution_scope": "Selected original method body; AS3 types erased only. JS VM host adapters; no AVM2/GFx runtime or native game execution."
+    },
+    {
+      "id": "dto_champion_selection",
+      "source": "air.GameState",
+      "name": "isInChampionSelectionState",
+      "accessor": null,
+      "line": 48,
+      "end_line": 51,
+      "arguments": "param1:String",
+      "body": "\n         return param1 == GameState.PRE_CHAMPION_SELECTION || param1 == GameState.CHAMPION_SELECTION || param1 == GameState.POST_CHAMPION_SELECTION;\n      ",
+      "body_sha256": "48958be555a5757ce59ebabce24950e649edc47b65078c68122068305e20514c",
+      "javascript": "function(param1) {\n\n         return param1 == GameState.PRE_CHAMPION_SELECTION || param1 == GameState.CHAMPION_SELECTION || param1 == GameState.POST_CHAMPION_SELECTION;\n      \n}",
+      "execution_scope": "Selected original method body; AS3 types erased only. JS VM host adapters; no AVM2/GFx runtime or native game execution."
+    },
+    {
+      "id": "game_completed",
+      "source": "air.MasterGameController",
+      "name": "gameCompleted",
+      "accessor": null,
+      "line": 1825,
+      "end_line": 1831,
+      "arguments": "",
+      "body": "\n         if(this.currentState == GameViewState.PLAYING_GAME || this.currentState == GameViewState.IN_PROGRESS)\n         {\n            this.currentState = GameViewState.GAME_OVER;\n         }\n      ",
+      "body_sha256": "ea7e2144808e7bc7404b80cdf3ae323c6bfd35c09ab9ec902f38bd49642af84a",
+      "javascript": "function() {\n\n         if(this.currentState == GameViewState.PLAYING_GAME || this.currentState == GameViewState.IN_PROGRESS)\n         {\n            this.currentState = GameViewState.GAME_OVER;\n         }\n      \n}",
+      "execution_scope": "Selected original method body; AS3 types erased only. JS VM host adapters; no AVM2/GFx runtime or native game execution."
+    },
+    {
+      "id": "air_game_completed",
+      "source": "air.ApplicationController",
+      "name": "onGameCompleted",
+      "accessor": null,
+      "line": 552,
+      "end_line": 562,
+      "arguments": "param1:Event",
+      "body": "\n         this._lastInterestingMaestroMessage = param1.type;\n         if(Boolean(WatchTabProviderProxy.instance.isEnabled()) && Boolean(WatchTabProviderProxy.instance.isReplayMode()))\n         {\n            return;\n         }\n         AppConfig.instance.minimized = false;\n         this.masterGameController.gameCompleted();\n         this.viewMediator.maximizeClient();\n      ",
+      "body_sha256": "6849cf33f282fff39a22dea31bceef45c8542ae6e867b2516fe58e3b10bee6e6",
+      "javascript": "function(param1) {\n\n         this._lastInterestingMaestroMessage = param1.type;\n         if(Boolean(WatchTabProviderProxy.instance.isEnabled()) && Boolean(WatchTabProviderProxy.instance.isReplayMode()))\n         {\n            return;\n         }\n         AppConfig.instance.minimized = false;\n         this.masterGameController.gameCompleted();\n         this.viewMediator.maximizeClient();\n      \n}",
+      "execution_scope": "Selected original method body; AS3 types erased only. JS VM host adapters; no AVM2/GFx runtime or native game execution."
+    },
+    {
+      "id": "air_crash",
+      "source": "air.ApplicationController",
+      "name": "onGameCrashedOrAbandoned",
+      "accessor": null,
+      "line": 937,
+      "end_line": 954,
+      "arguments": "param1:Event",
+      "body": "\n         this._lastInterestingMaestroMessage = param1.type;\n         if(Boolean(WatchTabProviderProxy.instance.isEnabled()) && Boolean(WatchTabProviderProxy.instance.isReplayMode()))\n         {\n            return;\n         }\n         AppConfig.instance.minimized = false;\n         this.viewMediator.maximizeClient();\n         if(this.masterGameController.currentState == GameViewState.NO_GAME || this.masterGameController.currentState == GameViewState.GAME_OVER)\n         {\n            AppConfig.instance.currentAppState = IAppControllerConstants.LOBBY;\n         }\n         else\n         {\n            AppConfig.instance.currentAppState = IAppControllerConstants.RECONNECT;\n         }\n      ",
+      "body_sha256": "70583999bd26ff1b662127d75e44062c59c390471880c36b8c8d75d3e0013e18",
+      "javascript": "function(param1) {\n\n         this._lastInterestingMaestroMessage = param1.type;\n         if(Boolean(WatchTabProviderProxy.instance.isEnabled()) && Boolean(WatchTabProviderProxy.instance.isReplayMode()))\n         {\n            return;\n         }\n         AppConfig.instance.minimized = false;\n         this.viewMediator.maximizeClient();\n         if(this.masterGameController.currentState == GameViewState.NO_GAME || this.masterGameController.currentState == GameViewState.GAME_OVER)\n         {\n            AppConfig.instance.currentAppState = IAppControllerConstants.LOBBY;\n         }\n         else\n         {\n            AppConfig.instance.currentAppState = IAppControllerConstants.RECONNECT;\n         }\n      \n}",
+      "execution_scope": "Selected original method body; AS3 types erased only. JS VM host adapters; no AVM2/GFx runtime or native game execution."
+    },
+    {
+      "id": "ingame_early",
+      "source": "air.InGameController",
+      "name": "handleGameEarlyTermination",
+      "accessor": null,
+      "line": 246,
+      "end_line": 264,
+      "arguments": "param1:Event",
+      "body": "\n         if(this.masterGameController.isLastPlayedGameTypeTutorial)\n         {\n            this.cancelGameFlow();\n         }\n         else if(this.masterGameController.isSpectating)\n         {\n            this.currentState = PLAYING_SPECTATOR_DISCONNECT;\n         }\n         else if(param1.type == GameCrashedEvent.CRASHED_EVENT_FROM_GAME)\n         {\n            this.currentState = PLAYING_CRASHED;\n         }\n         else\n         {\n            this.currentState = PLAYING_DISCONNECTED;\n         }\n      ",
+      "body_sha256": "fda090a97bc568ca30cff06cf1d6014a8edf22f3d57fdc75e1690f119d476e0a",
+      "javascript": "function(param1) {\n\n         if(this.masterGameController.isLastPlayedGameTypeTutorial)\n         {\n            this.cancelGameFlow();\n         }\n         else if(this.masterGameController.isSpectating)\n         {\n            this.currentState = PLAYING_SPECTATOR_DISCONNECT;\n         }\n         else if(param1.type == GameCrashedEvent.CRASHED_EVENT_FROM_GAME)\n         {\n            this.currentState = PLAYING_CRASHED;\n         }\n         else\n         {\n            this.currentState = PLAYING_DISCONNECTED;\n         }\n      \n}",
+      "execution_scope": "Selected original method body; AS3 types erased only. JS VM host adapters; no AVM2/GFx runtime or native game execution."
+    },
+    {
+      "id": "ingame_deactivate",
+      "source": "air.InGameController",
+      "name": "deactivate",
+      "accessor": null,
+      "line": 102,
+      "end_line": 110,
+      "arguments": "",
+      "body": "\n         this.currentState == InGameController.PLAYING_CONNECTED;\n         this.isBusy = false;\n         this.proxiedOnError = null;\n         this.shellDispatcher.removeEventListener(MaestroController.GAME_STARTED,this.onGameStarted);\n         this.shellDispatcher.removeEventListener(GameCrashedEvent.CRASHED_EVENT_FROM_GAME,this.onGameCrashed);\n         this.shellDispatcher.removeEventListener(MaestroController.GAME_ABANDONED,this.onGameAbandoned);\n      ",
+      "body_sha256": "11a40c06a140b0fdedfbaff8a8ba93c4d3bc4937bd362672d0082aa0ea34e04a",
+      "javascript": "function() {\n\n         this.currentState == InGameController.PLAYING_CONNECTED;\n         this.isBusy = false;\n         this.proxiedOnError = null;\n         this.shellDispatcher.removeEventListener(MaestroController.GAME_STARTED,this.onGameStarted);\n         this.shellDispatcher.removeEventListener(GameCrashedEvent.CRASHED_EVENT_FROM_GAME,this.onGameCrashed);\n         this.shellDispatcher.removeEventListener(MaestroController.GAME_ABANDONED,this.onGameAbandoned);\n      \n}",
+      "execution_scope": "Selected original method body; AS3 types erased only. JS VM host adapters; no AVM2/GFx runtime or native game execution."
+    },
+    {
+      "id": "results_activate",
+      "source": "air.EndOfGameStatsController",
+      "name": "activate",
+      "accessor": null,
+      "line": 612,
+      "end_line": 625,
+      "arguments": "",
+      "body": "\n         if(Boolean(this.endOfGameStats) && this.endOfGameStats.gameId == this.currrentGameId)\n         {\n            this.showStatsIfApplicable();\n         }\n         else\n         {\n            this.setCurrentEndOfGameState(EndOfGameStatsController.WAITING_FOR_STATS);\n            this.lcdsHeartBeatController.validatePlatformConnection(this.handlePlatformConnectionSuccess,this.handlePlatformConnectionComplete,this.handlePlatformConnectionError);\n         }\n         this.resetReports();\n         this.isActive = true;\n      ",
+      "body_sha256": "5fa3124f40761663625d3fe2ff0c21880fe7d3211926ea3066ffa5c2642b179a",
+      "javascript": "function() {\n\n         if(Boolean(this.endOfGameStats) && this.endOfGameStats.gameId == this.currrentGameId)\n         {\n            this.showStatsIfApplicable();\n         }\n         else\n         {\n            this.setCurrentEndOfGameState(EndOfGameStatsController.WAITING_FOR_STATS);\n            this.lcdsHeartBeatController.validatePlatformConnection(this.handlePlatformConnectionSuccess,this.handlePlatformConnectionComplete,this.handlePlatformConnectionError);\n         }\n         this.resetReports();\n         this.isActive = true;\n      \n}",
+      "execution_scope": "Selected original method body; AS3 types erased only. JS VM host adapters; no AVM2/GFx runtime or native game execution."
+    },
+    {
+      "id": "results_choose",
+      "source": "air.EndOfGameStatsController",
+      "name": "showStatsIfApplicable",
+      "accessor": null,
+      "line": 646,
+      "end_line": 672,
+      "arguments": "",
+      "body": "\n         if(this.gameType == GameType.TUTORIAL_GAME)\n         {\n            if(this.createTutorialGameController.isBasicTutorial)\n            {\n               if(this.clientConfig.advancedTutorialEnabled)\n               {\n                  this.setCurrentEndOfGameState(TUTORIAL_GAME_WRAPUP);\n               }\n               else\n               {\n                  this.gameFlowComplete.dispatch();\n               }\n            }\n            else\n            {\n               this.initializeEoGTutorial();\n               this.setCurrentEndOfGameState(EndOfGameStatsController.SHOW_STATS);\n            }\n            this._tutorialGameComplete.dispatch(this.createTutorialGameController.isBasicTutorial);\n         }\n         else\n         {\n            this.setCurrentEndOfGameState(EndOfGameStatsController.SHOW_STATS);\n         }\n      ",
+      "body_sha256": "9c28fcd34448f71feafafceaa61548cb489389a162cbb126e67d619b01b9cc5d",
+      "javascript": "function() {\n\n         if(this.gameType == GameType.TUTORIAL_GAME)\n         {\n            if(this.createTutorialGameController.isBasicTutorial)\n            {\n               if(this.clientConfig.advancedTutorialEnabled)\n               {\n                  this.setCurrentEndOfGameState(TUTORIAL_GAME_WRAPUP);\n               }\n               else\n               {\n                  this.gameFlowComplete.dispatch();\n               }\n            }\n            else\n            {\n               this.initializeEoGTutorial();\n               this.setCurrentEndOfGameState(EndOfGameStatsController.SHOW_STATS);\n            }\n            this._tutorialGameComplete.dispatch(this.createTutorialGameController.isBasicTutorial);\n         }\n         else\n         {\n            this.setCurrentEndOfGameState(EndOfGameStatsController.SHOW_STATS);\n         }\n      \n}",
+      "execution_scope": "Selected original method body; AS3 types erased only. JS VM host adapters; no AVM2/GFx runtime or native game execution."
+    },
+    {
+      "id": "results_state",
+      "source": "air.EndOfGameStatsController",
+      "name": "setCurrentEndOfGameState",
+      "accessor": null,
+      "line": 674,
+      "end_line": 678,
+      "arguments": "param1:String",
+      "body": "\n         this.currentEndOfGameState = param1;\n         this._currentStateUpdated.dispatch();\n      ",
+      "body_sha256": "22ce9fdf88d40ba6d62fc4f3a40f6a935461658fddcfb7460161ee368e83551c",
+      "javascript": "function(param1) {\n\n         this.currentEndOfGameState = param1;\n         this._currentStateUpdated.dispatch();\n      \n}",
+      "execution_scope": "Selected original method body; AS3 types erased only. JS VM host adapters; no AVM2/GFx runtime or native game execution."
+    },
+    {
+      "id": "results_return",
+      "source": "air.EndOfGameStatsController",
+      "name": "returnToLobby",
+      "accessor": null,
+      "line": 851,
+      "end_line": 876,
+      "arguments": "",
+      "body": "\n         if(this._endOfGameGiftEnabled && Boolean(this._endOfGameGiftController))\n         {\n            this._endOfGameGiftController.cleanSessionData();\n         }\n         if(this.currentEndOfGameState == SHOW_STATS && this.gameType == GameType.TUTORIAL_GAME)\n         {\n            if(this.tutorialEventQueue != null)\n            {\n               this.tutorialEventQueue.clear();\n            }\n            if(this.clientConfig.advancedTutorialEnabled)\n            {\n               this.setCurrentEndOfGameState(TUTORIAL_GAME_WRAPUP);\n            }\n            else\n            {\n               this.gameFlowComplete.dispatch();\n            }\n         }\n         else\n         {\n            this.gameFlowComplete.dispatch();\n         }\n      ",
+      "body_sha256": "79b575a9577b679c0195940bb4640e944fb8127a94002fe6352a155e822f828a",
+      "javascript": "function() {\n\n         if(this._endOfGameGiftEnabled && Boolean(this._endOfGameGiftController))\n         {\n            this._endOfGameGiftController.cleanSessionData();\n         }\n         if(this.currentEndOfGameState == SHOW_STATS && this.gameType == GameType.TUTORIAL_GAME)\n         {\n            if(this.tutorialEventQueue != null)\n            {\n               this.tutorialEventQueue.clear();\n            }\n            if(this.clientConfig.advancedTutorialEnabled)\n            {\n               this.setCurrentEndOfGameState(TUTORIAL_GAME_WRAPUP);\n            }\n            else\n            {\n               this.gameFlowComplete.dispatch();\n            }\n         }\n         else\n         {\n            this.gameFlowComplete.dispatch();\n         }\n      \n}",
+      "execution_scope": "Selected original method body; AS3 types erased only. JS VM host adapters; no AVM2/GFx runtime or native game execution."
+    },
+    {
+      "id": "maestro_dispatch",
+      "source": "air.MaestroServiceImpl",
+      "name": "fireMaestroMessage",
+      "accessor": null,
+      "line": 411,
+      "end_line": 516,
+      "arguments": "param1:MaestroMessage",
+      "body": "\n         var _loc2_:Event = null;\n         var _loc3_:Event = null;\n         var _loc4_:Event = null;\n         var _loc5_:Event = null;\n         var _loc6_:Event = null;\n         var _loc7_:MaestroProgressUpdateEvent = null;\n         var _loc8_:MaestroProgressUpdateEvent = null;\n         var _loc9_:MaestroProgressUpdateEvent = null;\n         var _loc10_:MaestroProgressUpdateEvent = null;\n         var _loc11_:MaestroProgressUpdateEvent = null;\n         var _loc12_:MaestroEnumerateClientVersionEvent = null;\n         var _loc13_:Event = null;\n         var _loc14_:Event = null;\n         var _loc15_:MaestroEnumerateClientVersionEvent = null;\n         var _loc16_:MaestroGetLatestClientVersionsEvent = null;\n         switch(param1.getType())\n         {\n            case MAESTROMESSAGETYPE_GAMECLIENT_STOPPED:\n               ServiceLogger.responseMaestro(\"gameClientStopped\",[param1]);\n               _loc2_ = new Event(MaestroConstants.GAMECLIENTSTOPPED_EVENT);\n               dispatchEvent(_loc2_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_CRASHED:\n               ServiceLogger.responseMaestro(\"gameClientCrashed\",[param1]);\n               dispatchEvent(new GameCrashedEvent(param1.getPayloadString()));\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_ABANDONED:\n               ServiceLogger.responseMaestro(\"gameClientAbandoned\",[param1]);\n               _loc3_ = new Event(MaestroConstants.GAME_CLIENT_ABANDONED);\n               dispatchEvent(_loc3_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_LAUNCHED:\n               ServiceLogger.responseMaestro(\"gameClientLaunched\",[param1]);\n               _loc4_ = new Event(MaestroConstants.GAME_CLIENT_LAUNCHED);\n               dispatchEvent(_loc4_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_VERSION_MISMATCH:\n               ServiceLogger.responseMaestro(\"gameClientVersionMismatch\",[param1]);\n               _loc5_ = new Event(MaestroConstants.GAME_CLIENT_VERSION_MISMATCH);\n               dispatchEvent(_loc5_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_CONNECTED_TO_SERVER:\n               ServiceLogger.responseMaestro(\"gameClientConnectedToServer\",[param1]);\n               _loc6_ = new Event(MaestroConstants.GAME_CLIENT_CONNECTED_TO_SERVER);\n               dispatchEvent(_loc6_);\n               break;\n            case MAESTROMESSAGETYPE_HEARTBEAT:\n               this.onMaestroHeartbeatReceived();\n               break;\n            case MAESTROMESSAGETYPE_CHATMESSAGE_FROM_GAME:\n               ServiceLogger.responseMaestro(\"chatMessageFromGame\",[param1]);\n               dispatchEvent(new GameChatEvent(param1.getPayloadString()));\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_INSTALL_PROGRESS:\n               _loc7_ = new MaestroProgressUpdateEvent(MaestroConstants.INSTALL_PROGRESS_UPDATE,param1.getPayloadString());\n               dispatchEvent(_loc7_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_UNINSTALL_PROGRESS:\n               _loc8_ = new MaestroProgressUpdateEvent(MaestroConstants.UNINSTALL_PROGRESS_UPDATE,param1.getPayloadString());\n               dispatchEvent(_loc8_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_PREVIEW_PROGRESS:\n               _loc9_ = new MaestroProgressUpdateEvent(MaestroConstants.PREVIEW_PROGRESS_UPDATE,param1.getPayloadString());\n               dispatchEvent(_loc9_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_INSTALLED_VERSIONS_SIZES_PROGRESS:\n               _loc10_ = new MaestroProgressUpdateEvent(MaestroConstants.GET_INSTALLED_GAME_CLIENT_VERSIONS_SIZES_PROGRESS,param1.getPayloadString());\n               dispatchEvent(_loc10_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_PREVIEW_UNINSTALL_PROGRESS:\n               _loc11_ = new MaestroProgressUpdateEvent(MaestroConstants.PREVIEW_UNINSTALL_PROGRESS_UPDATE,param1.getPayloadString());\n               dispatchEvent(_loc11_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_ENUMERATE_VERSIONS:\n               ServiceLogger.responseMaestro(\"enumerateGameClientVersions\",[param1]);\n               _loc12_ = new MaestroEnumerateClientVersionEvent(MaestroConstants.ENUMERATE_GAME_CLIENT_VERSIONS,param1.getPayloadString());\n               dispatchEvent(_loc12_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_INITIAL_PRELOAD_COMPLETE:\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_UPDATE_PLAYER_CONNECTION:\n               ServiceLogger.responseMaestro(\"updatePlayerConnection\",[param1]);\n               _loc13_ = new MaestroUpdatePlayerConnectionEvent(MaestroConstants.UPDATE_PLAYER_CONNECTION,param1.getPayloadString());\n               dispatchEvent(_loc13_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_GAME_LOADING_COMPLETE:\n               ServiceLogger.responseMaestro(\"gameLoadingComplete\",[param1]);\n               _loc14_ = new Event(MaestroConstants.GAME_LOADING_COMPLETE);\n               dispatchEvent(_loc14_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_ENUMERATE_UNINSTALLABLE_VERSIONS:\n               ServiceLogger.responseMaestro(\"enumerateUninstallableGameClientVersions\",[param1]);\n               _loc15_ = new MaestroEnumerateClientVersionEvent(MaestroConstants.ENUMERATE_UNINSTALLABLE_GAME_CLIENT_VERSIONS,param1.getPayloadString());\n               dispatchEvent(_loc15_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_ENUMERATE_LATEST_VERSIONS:\n               ServiceLogger.responseMaestro(\"enumerateLatestGameClientVersions\",[param1]);\n               _loc16_ = new MaestroGetLatestClientVersionsEvent(MaestroConstants.ENUMERATE_LATEST_GAME_CLIENT_VERSIONS,param1.getPayloadString());\n               dispatchEvent(_loc16_);\n               break;\n            case MAESTROMESSAGETYPE_INVALID:\n               throw \"Invalid message received.\";\n         }\n      ",
+      "body_sha256": "bc072eb2b14902e621f3823312837926f3f58df267181499cd1b0e7ff1b95ee6",
+      "javascript": "function(param1) {\n\n         var _loc2_ = null;\n         var _loc3_ = null;\n         var _loc4_ = null;\n         var _loc5_ = null;\n         var _loc6_ = null;\n         var _loc7_ = null;\n         var _loc8_ = null;\n         var _loc9_ = null;\n         var _loc10_ = null;\n         var _loc11_ = null;\n         var _loc12_ = null;\n         var _loc13_ = null;\n         var _loc14_ = null;\n         var _loc15_ = null;\n         var _loc16_ = null;\n         switch(param1.getType())\n         {\n            case MAESTROMESSAGETYPE_GAMECLIENT_STOPPED:\n               ServiceLogger.responseMaestro(\"gameClientStopped\",[param1]);\n               _loc2_ = new Event(MaestroConstants.GAMECLIENTSTOPPED_EVENT);\n               dispatchEvent(_loc2_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_CRASHED:\n               ServiceLogger.responseMaestro(\"gameClientCrashed\",[param1]);\n               dispatchEvent(new GameCrashedEvent(param1.getPayloadString()));\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_ABANDONED:\n               ServiceLogger.responseMaestro(\"gameClientAbandoned\",[param1]);\n               _loc3_ = new Event(MaestroConstants.GAME_CLIENT_ABANDONED);\n               dispatchEvent(_loc3_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_LAUNCHED:\n               ServiceLogger.responseMaestro(\"gameClientLaunched\",[param1]);\n               _loc4_ = new Event(MaestroConstants.GAME_CLIENT_LAUNCHED);\n               dispatchEvent(_loc4_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_VERSION_MISMATCH:\n               ServiceLogger.responseMaestro(\"gameClientVersionMismatch\",[param1]);\n               _loc5_ = new Event(MaestroConstants.GAME_CLIENT_VERSION_MISMATCH);\n               dispatchEvent(_loc5_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_CONNECTED_TO_SERVER:\n               ServiceLogger.responseMaestro(\"gameClientConnectedToServer\",[param1]);\n               _loc6_ = new Event(MaestroConstants.GAME_CLIENT_CONNECTED_TO_SERVER);\n               dispatchEvent(_loc6_);\n               break;\n            case MAESTROMESSAGETYPE_HEARTBEAT:\n               this.onMaestroHeartbeatReceived();\n               break;\n            case MAESTROMESSAGETYPE_CHATMESSAGE_FROM_GAME:\n               ServiceLogger.responseMaestro(\"chatMessageFromGame\",[param1]);\n               dispatchEvent(new GameChatEvent(param1.getPayloadString()));\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_INSTALL_PROGRESS:\n               _loc7_ = new MaestroProgressUpdateEvent(MaestroConstants.INSTALL_PROGRESS_UPDATE,param1.getPayloadString());\n               dispatchEvent(_loc7_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_UNINSTALL_PROGRESS:\n               _loc8_ = new MaestroProgressUpdateEvent(MaestroConstants.UNINSTALL_PROGRESS_UPDATE,param1.getPayloadString());\n               dispatchEvent(_loc8_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_PREVIEW_PROGRESS:\n               _loc9_ = new MaestroProgressUpdateEvent(MaestroConstants.PREVIEW_PROGRESS_UPDATE,param1.getPayloadString());\n               dispatchEvent(_loc9_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_INSTALLED_VERSIONS_SIZES_PROGRESS:\n               _loc10_ = new MaestroProgressUpdateEvent(MaestroConstants.GET_INSTALLED_GAME_CLIENT_VERSIONS_SIZES_PROGRESS,param1.getPayloadString());\n               dispatchEvent(_loc10_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_PREVIEW_UNINSTALL_PROGRESS:\n               _loc11_ = new MaestroProgressUpdateEvent(MaestroConstants.PREVIEW_UNINSTALL_PROGRESS_UPDATE,param1.getPayloadString());\n               dispatchEvent(_loc11_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_ENUMERATE_VERSIONS:\n               ServiceLogger.responseMaestro(\"enumerateGameClientVersions\",[param1]);\n               _loc12_ = new MaestroEnumerateClientVersionEvent(MaestroConstants.ENUMERATE_GAME_CLIENT_VERSIONS,param1.getPayloadString());\n               dispatchEvent(_loc12_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_INITIAL_PRELOAD_COMPLETE:\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_UPDATE_PLAYER_CONNECTION:\n               ServiceLogger.responseMaestro(\"updatePlayerConnection\",[param1]);\n               _loc13_ = new MaestroUpdatePlayerConnectionEvent(MaestroConstants.UPDATE_PLAYER_CONNECTION,param1.getPayloadString());\n               dispatchEvent(_loc13_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_GAME_LOADING_COMPLETE:\n               ServiceLogger.responseMaestro(\"gameLoadingComplete\",[param1]);\n               _loc14_ = new Event(MaestroConstants.GAME_LOADING_COMPLETE);\n               dispatchEvent(_loc14_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_ENUMERATE_UNINSTALLABLE_VERSIONS:\n               ServiceLogger.responseMaestro(\"enumerateUninstallableGameClientVersions\",[param1]);\n               _loc15_ = new MaestroEnumerateClientVersionEvent(MaestroConstants.ENUMERATE_UNINSTALLABLE_GAME_CLIENT_VERSIONS,param1.getPayloadString());\n               dispatchEvent(_loc15_);\n               break;\n            case MAESTROMESSAGETYPE_GAMECLIENT_ENUMERATE_LATEST_VERSIONS:\n               ServiceLogger.responseMaestro(\"enumerateLatestGameClientVersions\",[param1]);\n               _loc16_ = new MaestroGetLatestClientVersionsEvent(MaestroConstants.ENUMERATE_LATEST_GAME_CLIENT_VERSIONS,param1.getPayloadString());\n               dispatchEvent(_loc16_);\n               break;\n            case MAESTROMESSAGETYPE_INVALID:\n               throw \"Invalid message received.\";\n         }\n      \n}",
+      "execution_scope": "Selected original method body; AS3 types erased only. JS VM host adapters; no AVM2/GFx runtime or native game execution."
+    },
+    {
+      "id": "maestro_header",
+      "source": "air.MaestroServiceImpl",
+      "name": "processMessageHeader",
+      "accessor": null,
+      "line": 320,
+      "end_line": 354,
+      "arguments": "",
+      "body": "\n         if(this.socket.bytesAvailable < MaestroMessage.MESSAGE_HEADERSIZE)\n         {\n            return false;\n         }\n         var _loc1_:int = this.socket.readInt();\n         var _loc2_:int = this.socket.readInt();\n         var _loc3_:int = this.socket.readInt();\n         var _loc4_:int = this.socket.readInt();\n         if(_loc1_ != MaestroMessage.MESSAGE_HEADERSIZE)\n         {\n            throw \"Unexpected message size. Expected: \" + MaestroMessage.MESSAGE_HEADERSIZE + \" Actual: \" + _loc1_;\n         }\n         if(_loc2_ != MaestroMessage.MESSAGE_VERSION)\n         {\n            throw \"Unexpected message version. Expected: \" + MaestroMessage.MESSAGE_VERSION + \" Actual: \" + _loc2_;\n         }\n         if(_loc3_ > MAESTROMESSAGETYPE_INVALID)\n         {\n            _loc3_ = MAESTROMESSAGETYPE_INVALID;\n         }\n         var _loc5_:MaestroMessage = new MaestroMessage();\n         _loc5_.setType(_loc3_);\n         _loc5_.setPayloadSize(_loc4_);\n         if(_loc5_.getPayloadSize() == 0)\n         {\n            this.fireMaestroMessage(_loc5_);\n         }\n         else\n         {\n            this.currentMessage = _loc5_;\n         }\n         return true;\n      ",
+      "body_sha256": "f63946d9c8091ae222e73e5672d2d78ad076aa4fa3ca8ec50086e6bad803504e",
+      "javascript": "function() {\n\n         if(this.socket.bytesAvailable < MaestroMessage.MESSAGE_HEADERSIZE)\n         {\n            return false;\n         }\n         var _loc1_ = this.socket.readInt();\n         var _loc2_ = this.socket.readInt();\n         var _loc3_ = this.socket.readInt();\n         var _loc4_ = this.socket.readInt();\n         if(_loc1_ != MaestroMessage.MESSAGE_HEADERSIZE)\n         {\n            throw \"Unexpected message size. Expected: \" + MaestroMessage.MESSAGE_HEADERSIZE + \" Actual: \" + _loc1_;\n         }\n         if(_loc2_ != MaestroMessage.MESSAGE_VERSION)\n         {\n            throw \"Unexpected message version. Expected: \" + MaestroMessage.MESSAGE_VERSION + \" Actual: \" + _loc2_;\n         }\n         if(_loc3_ > MAESTROMESSAGETYPE_INVALID)\n         {\n            _loc3_ = MAESTROMESSAGETYPE_INVALID;\n         }\n         var _loc5_ = new MaestroMessage();\n         _loc5_.setType(_loc3_);\n         _loc5_.setPayloadSize(_loc4_);\n         if(_loc5_.getPayloadSize() == 0)\n         {\n            this.fireMaestroMessage(_loc5_);\n         }\n         else\n         {\n            this.currentMessage = _loc5_;\n         }\n         return true;\n      \n}",
+      "execution_scope": "Selected original method body; AS3 types erased only. JS VM host adapters; no AVM2/GFx runtime or native game execution."
+    },
+    {
+      "id": "gfx_send",
+      "source": "gfx.__Packages/DDW/Communication/Comm.as",
+      "name": "send",
+      "accessor": null,
+      "line": 6,
+      "end_line": 41,
+      "arguments": "msg, arg",
+      "body": "\n      var _loc4_;\n      if(msg != null && (msg != \"Release_\" && (msg != \"RollOver_\" && msg != \"RollOut_\")))\n      {\n         _loc4_ = msg.indexOf(\"#\");\n         if(_loc4_ > -1 && (arg == null || arg == \"\"))\n         {\n            arg = msg.substring(_loc4_ + 1);\n            msg = msg.substring(0,_loc4_);\n         }\n         if(msg == \"\" || msg == \"Press_\")\n         {\n            msg = \"backgroundClick\";\n         }\n         if(DDW.Managers.GameManager.getInstance().isGfx)\n         {\n            if(arg != null)\n            {\n               fscommand(msg,arg);\n            }\n            else\n            {\n               fscommand(msg,\"\");\n            }\n         }\n         else if(arg != null)\n         {\n            trace(\"\\'\" + msg + \"\\', \\'\" + arg + \"\\'\");\n         }\n         else\n         {\n            trace(\"\\'\" + msg + \"\\'\");\n         }\n      }\n   ",
+      "body_sha256": "3514bdd7374d914e514ee39a1fb7d3d8b75d6c5de74087bf456dc73779f6bbcb",
+      "javascript": "function(msg, arg) {\n\n      var _loc4_;\n      if(msg != null && (msg != \"Release_\" && (msg != \"RollOver_\" && msg != \"RollOut_\")))\n      {\n         _loc4_ = msg.indexOf(\"#\");\n         if(_loc4_ > -1 && (arg == null || arg == \"\"))\n         {\n            arg = msg.substring(_loc4_ + 1);\n            msg = msg.substring(0,_loc4_);\n         }\n         if(msg == \"\" || msg == \"Press_\")\n         {\n            msg = \"backgroundClick\";\n         }\n         if(DDW.Managers.GameManager.getInstance().isGfx)\n         {\n            if(arg != null)\n            {\n               fscommand(msg,arg);\n            }\n            else\n            {\n               fscommand(msg,\"\");\n            }\n         }\n         else if(arg != null)\n         {\n            trace(\"\\'\" + msg + \"\\', \\'\" + arg + \"\\'\");\n         }\n         else\n         {\n            trace(\"\\'\" + msg + \"\\'\");\n         }\n      }\n   \n}",
+      "execution_scope": "Selected original method body; AS3 types erased only. JS VM host adapters; no AVM2/GFx runtime or native game execution."
+    },
+    {
+      "id": "gfx_click",
+      "source": "gfx.__Packages/DDW/Components/DefaultButton.as",
+      "name": "sendClickMessage",
+      "accessor": null,
+      "line": 288,
+      "end_line": 294,
+      "arguments": "",
+      "body": "\n      if(this.commEnabled && !this._wasDragging)\n      {\n         DDW.Communication.Comm.send(this.pressPrefix + this.pressMsg);\n      }\n   ",
+      "body_sha256": "61afa5391e2a592bf906ce44513dba90ee9337ea0623075da8b161bd8722b573",
+      "javascript": "function() {\n\n      if(this.commEnabled && !this._wasDragging)\n      {\n         DDW.Communication.Comm.send(this.pressPrefix + this.pressMsg);\n      }\n   \n}",
+      "execution_scope": "Selected original method body; AS3 types erased only. JS VM host adapters; no AVM2/GFx runtime or native game execution."
+    },
+    {
+      "id": "gfx_release",
+      "source": "gfx.__Packages/DDW/Components/DefaultButton.as",
+      "name": "releaseButton",
+      "accessor": null,
+      "line": 272,
+      "end_line": 287,
+      "arguments": "",
+      "body": "\n      if(this.isCursorActive() && this.parent != null)\n      {\n         this.sendClickMessage();\n         if(!this.isTransformHover && this.totalFrames > 1)\n         {\n            this.gotoAndStop(1);\n         }\n         else\n         {\n            this.graphics.transform.colorTransform = null;\n         }\n         this.isDown = false;\n      }\n   ",
+      "body_sha256": "19b2fd163c36cb924509b8faae728e28b2e8fa21985354b960d456a02e282658",
+      "javascript": "function() {\n\n      if(this.isCursorActive() && this.parent != null)\n      {\n         this.sendClickMessage();\n         if(!this.isTransformHover && this.totalFrames > 1)\n         {\n            this.gotoAndStop(1);\n         }\n         else\n         {\n            this.graphics.transform.colorTransform = null;\n         }\n         this.isDown = false;\n      }\n   \n}",
+      "execution_scope": "Selected original method body; AS3 types erased only. JS VM host adapters; no AVM2/GFx runtime or native game execution."
+    }
+  ],
+  "constant_sets": [
+    {
+      "source": "air.GameViewState",
+      "entries": [
+        {
+          "name": "TUTORIAL_GAME",
+          "type": "String",
+          "value": "TUTORIAL_GAME",
+          "line": 6
+        },
+        {
+          "name": "JOIN_GAME",
+          "type": "String",
+          "value": "JOIN_GAME",
+          "line": 8
+        },
+        {
+          "name": "CAP_STATE",
+          "type": "String",
+          "value": "CAP_STATE",
+          "line": 10
+        },
+        {
+          "name": "TEAM_SELECTION",
+          "type": "String",
+          "value": "TEAM_SELECT",
+          "line": 12
+        },
+        {
+          "name": "CHAMPION_SELECTION",
+          "type": "String",
+          "value": "CHAMP_SELECT",
+          "line": 14
+        },
+        {
+          "name": "START_REQUESTED",
+          "type": "String",
+          "value": "START_REQUESTED",
+          "line": 16
+        },
+        {
+          "name": "CREATE_GAME",
+          "type": "String",
+          "value": "CREATE_GAME",
+          "line": 18
+        },
+        {
+          "name": "IN_PROGRESS",
+          "type": "String",
+          "value": "IN_PROGRESS",
+          "line": 20
+        },
+        {
+          "name": "PLAYING_GAME",
+          "type": "String",
+          "value": "PLAYING_GAME",
+          "line": 22
+        },
+        {
+          "name": "GAME_OVER",
+          "type": "String",
+          "value": "GAME_OVER",
+          "line": 24
+        },
+        {
+          "name": "NO_GAME",
+          "type": "String",
+          "value": "",
+          "line": 26
+        },
+        {
+          "name": "JOIN_QUEUE",
+          "type": "String",
+          "value": "NORMAL_JOIN_QUEUE",
+          "line": 28
+        },
+        {
+          "name": "WAIT_FOR_GAME",
+          "type": "String",
+          "value": "NORMAL_WAIT_FOR_GAME",
+          "line": 30
+        },
+        {
+          "name": "WAIT_FOR_GAME_AFTER_MATCH",
+          "type": "String",
+          "value": "NORMAL_WAIT_FOR_GAME_AFTER_MATCH",
+          "line": 32
+        },
+        {
+          "name": "WAIT_FOR_JOINING_GAME",
+          "type": "String",
+          "value": "WAIT_FOR_JOINING_GAME",
+          "line": 34
+        }
+      ]
+    },
+    {
+      "source": "air.GameState",
+      "entries": [
+        {
+          "name": "TEAM_SELECTION",
+          "type": "String",
+          "value": "TEAM_SELECT",
+          "line": 6
+        },
+        {
+          "name": "PRE_CHAMPION_SELECTION",
+          "type": "String",
+          "value": "PRE_CHAMP_SELECT",
+          "line": 8
+        },
+        {
+          "name": "CHAMPION_SELECTION",
+          "type": "String",
+          "value": "CHAMP_SELECT",
+          "line": 10
+        },
+        {
+          "name": "POST_CHAMPION_SELECTION",
+          "type": "String",
+          "value": "POST_CHAMP_SELECT",
+          "line": 12
+        },
+        {
+          "name": "START_REQUESTED",
+          "type": "String",
+          "value": "START_REQUESTED",
+          "line": 14
+        },
+        {
+          "name": "IN_PROGRESS",
+          "type": "String",
+          "value": "IN_PROGRESS",
+          "line": 16
+        },
+        {
+          "name": "TERMINATED",
+          "type": "String",
+          "value": "TERMINATED",
+          "line": 18
+        },
+        {
+          "name": "TERMINATED_IN_ERROR",
+          "type": "String",
+          "value": "TERMINATED_IN_ERROR",
+          "line": 20
+        },
+        {
+          "name": "FAILED_TO_START",
+          "type": "String",
+          "value": "FAILED_TO_START",
+          "line": 22
+        },
+        {
+          "name": "JOINING_CHAMP_SELECT",
+          "type": "String",
+          "value": "JOINING_CHAMP_SELECT",
+          "line": 24
+        },
+        {
+          "name": "CHAMP_SELECT_AFK_CLEANUP",
+          "type": "String",
+          "value": "CHAMP_SELECT_AFK_CLEANUP",
+          "line": 26
+        }
+      ]
+    },
+    {
+      "source": "air.InGameController",
+      "entries": [
+        {
+          "name": "PLAYING_CONNECTED",
+          "type": "String",
+          "value": "connected",
+          "line": 31
+        },
+        {
+          "name": "PLAYING_DISCONNECTED",
+          "type": "String",
+          "value": "disconnected",
+          "line": 33
+        },
+        {
+          "name": "PLAYING_CRASHED",
+          "type": "String",
+          "value": "crash",
+          "line": 35
+        },
+        {
+          "name": "PLAYING_SPECTATOR_DISCONNECT",
+          "type": "String",
+          "value": "spectatorDisconnected",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "source": "air.EndOfGameStatsController",
+      "entries": [
+        {
+          "name": "WAITING_FOR_STATS",
+          "type": "String",
+          "value": "waitingForStats",
+          "line": 101
+        },
+        {
+          "name": "SHOW_STATS",
+          "type": "String",
+          "value": "showStats",
+          "line": 103
+        },
+        {
+          "name": "TUTORIAL_GAME_WRAPUP",
+          "type": "String",
+          "value": "showTutorialGame",
+          "line": 105
+        },
+        {
+          "name": "defaultXpBoostBonus",
+          "type": "int",
+          "value": 50,
+          "line": 107
+        }
+      ]
+    },
+    {
+      "source": "air.IAppControllerConstants",
+      "entries": [
+        {
+          "name": "LOGIN",
+          "type": "String",
+          "value": "login",
+          "line": 6
+        },
+        {
+          "name": "LOBBY",
+          "type": "String",
+          "value": "lobby",
+          "line": 8
+        },
+        {
+          "name": "CREATE_SUMMONER",
+          "type": "String",
+          "value": "createSummoner",
+          "line": 10
+        },
+        {
+          "name": "RENAME_SUMMONER",
+          "type": "String",
+          "value": "renameSummoner",
+          "line": 12
+        },
+        {
+          "name": "CHOOSE_SUMMONER_ICON",
+          "type": "String",
+          "value": "chooseSummonerIcon",
+          "line": 14
+        },
+        {
+          "name": "PLAY_TUTORIAL",
+          "type": "String",
+          "value": "playTutorial",
+          "line": 16
+        },
+        {
+          "name": "PARTNER_BETA_BLOCKED",
+          "type": "String",
+          "value": "partnerBetaBlocked",
+          "line": 18
+        },
+        {
+          "name": "RECONNECT",
+          "type": "String",
+          "value": "reconnect",
+          "line": 20
+        },
+        {
+          "name": "ELO_QUESTIONAIRE",
+          "type": "String",
+          "value": "eloQuestionaire",
+          "line": 22
+        },
+        {
+          "name": "CHOOSE_GAME_FLOW",
+          "type": "String",
+          "value": "chooseGameFlow",
+          "line": 24
+        },
+        {
+          "name": "LOGOUT_REASON_SESSION_EXPIRED",
+          "type": "String",
+          "value": "sessionExpired",
+          "line": 26
+        },
+        {
+          "name": "LOGOUT_REASON_AUTHENTICATION_ERROR",
+          "type": "String",
+          "value": "authenticationError",
+          "line": 28
+        },
+        {
+          "name": "LOGOUT_REASON_MAESTRO_HEARTBEAT",
+          "type": "String",
+          "value": "maestroHeartbeat",
+          "line": 30
+        },
+        {
+          "name": "LOGOUT_REASON_NORMAL",
+          "type": "String",
+          "value": "normal",
+          "line": 32
+        }
+      ]
+    },
+    {
+      "source": "air.MaestroConstants",
+      "entries": [
+        {
+          "name": "GAMECLIENTSTOPPED_EVENT",
+          "type": "String",
+          "value": "GAMECLIENTSTOPPED_EVENT",
+          "line": 6
+        },
+        {
+          "name": "HEARTBEATFAILED_EVENT",
+          "type": "String",
+          "value": "HEARTBEATFAILED_EVENT",
+          "line": 8
+        },
+        {
+          "name": "MAESTROCONNECTED_EVENT",
+          "type": "String",
+          "value": "MAESTROCONNECTED_EVENT",
+          "line": 10
+        },
+        {
+          "name": "MAESTROCONNECTIONFAILED_EVENT",
+          "type": "String",
+          "value": "MAESTROCONNECTIONFAILED_EVENT",
+          "line": 12
+        },
+        {
+          "name": "GAME_CLIENT_LAUNCHED",
+          "type": "String",
+          "value": "GameClientLaunched",
+          "line": 14
+        },
+        {
+          "name": "GAME_CLIENT_ABANDONED",
+          "type": "String",
+          "value": "GameClientAbandoned",
+          "line": 16
+        },
+        {
+          "name": "GAME_CLIENT_VERSION_MISMATCH",
+          "type": "String",
+          "value": "GameClientVersionMismatch",
+          "line": 18
+        },
+        {
+          "name": "GAME_CLIENT_CONNECTED_TO_SERVER",
+          "type": "String",
+          "value": "GameClientConnectedToServer",
+          "line": 20
+        },
+        {
+          "name": "INSTALL_PROGRESS_UPDATE",
+          "type": "String",
+          "value": "InstallProgressUpdate",
+          "line": 22
+        },
+        {
+          "name": "UNINSTALL_PROGRESS_UPDATE",
+          "type": "String",
+          "value": "UninstallProgressUpdate",
+          "line": 24
+        },
+        {
+          "name": "PREVIEW_PROGRESS_UPDATE",
+          "type": "String",
+          "value": "InstallPreviewProgressUpdate",
+          "line": 26
+        },
+        {
+          "name": "PREVIEW_UNINSTALL_PROGRESS_UPDATE",
+          "type": "String",
+          "value": "UninstallPreviewProgressUpdate",
+          "line": 28
+        },
+        {
+          "name": "ENUMERATE_GAME_CLIENT_VERSIONS",
+          "type": "String",
+          "value": "EnumerateGameClientVersions",
+          "line": 30
+        },
+        {
+          "name": "UPDATE_PLAYER_CONNECTION",
+          "type": "String",
+          "value": "UpdatePlayerConnection",
+          "line": 32
+        },
+        {
+          "name": "GAME_LOADING_COMPLETE",
+          "type": "String",
+          "value": "GameLoadingComplete",
+          "line": 34
+        },
+        {
+          "name": "ENUMERATE_UNINSTALLABLE_GAME_CLIENT_VERSIONS",
+          "type": "String",
+          "value": "EnumerateUninstallableGameClientVersions",
+          "line": 36
+        },
+        {
+          "name": "ENUMERATE_LATEST_GAME_CLIENT_VERSIONS",
+          "type": "String",
+          "value": "EnumerateLatestGameClientVersions",
+          "line": 38
+        },
+        {
+          "name": "GET_GAME_CLIENT_INSTALLED_VERSIONS_SIZES",
+          "type": "String",
+          "value": "GetInstalledGameClientVersionsSizes",
+          "line": 40
+        },
+        {
+          "name": "GET_INSTALLED_GAME_CLIENT_VERSIONS_SIZES_PROGRESS",
+          "type": "String",
+          "value": "GetInstalledGameClientVersionsSizesProgress",
+          "line": 42
+        },
+        {
+          "name": "CANCEL_INSTALLED_GAME_VERSIONS_VERSIONS_SIZES",
+          "type": "String",
+          "value": "CancelInstalledGameClientVersionsSizes",
+          "line": 44
+        }
+      ]
+    },
+    {
+      "source": "air.MaestroController",
+      "entries": [
+        {
+          "name": "MAESTRO_CONNECTED",
+          "type": "String",
+          "value": "MaestroConnected",
+          "line": 25
+        },
+        {
+          "name": "MAESTRO_CONNECTION_ERROR",
+          "type": "String",
+          "value": "MaestroConnectionError",
+          "line": 27
+        },
+        {
+          "name": "GAME_STARTED",
+          "type": "String",
+          "value": "GameStarted",
+          "line": 29
+        },
+        {
+          "name": "GAME_COMPLETED",
+          "type": "String",
+          "value": "GameCompleted",
+          "line": 31
+        },
+        {
+          "name": "GAME_ABANDONED",
+          "type": "String",
+          "value": "GameAbandoned",
+          "line": 33
+        },
+        {
+          "name": "MAESTRO_HEARTBEAT_ERROR",
+          "type": "String",
+          "value": "HeartbeatError",
+          "line": 35
+        },
+        {
+          "name": "GAME_CLIENT_VERSION_MISMATCH",
+          "type": "String",
+          "value": "GameClientVersionMismatch",
+          "line": 37
+        },
+        {
+          "name": "GAME_CLIENT_CONNECTED_TO_SERVER",
+          "type": "String",
+          "value": "GameClientConnectedToServer",
+          "line": 39
+        },
+        {
+          "name": "INSTALL_PROGRESS_UPDATE",
+          "type": "String",
+          "value": "InstallProgressUpdate",
+          "line": 41
+        },
+        {
+          "name": "UNINSTALL_PROGRESS_UPDATE",
+          "type": "String",
+          "value": "UninstallProgressUpdate",
+          "line": 43
+        },
+        {
+          "name": "PREVIEW_PROGRESS_UPDATE",
+          "type": "String",
+          "value": "PreviewProgressUpdate",
+          "line": 45
+        },
+        {
+          "name": "PREVIEW_UNINSTALL_PROGRESS_UPDATE",
+          "type": "String",
+          "value": "PreviewUninstallProgressUpdate",
+          "line": 47
+        },
+        {
+          "name": "ENUMERATE_GAME_CLIENT_VERSIONS",
+          "type": "String",
+          "value": "EnumerateGameClientVersions",
+          "line": 49
+        },
+        {
+          "name": "ENUMERATE_UNINSTALLABLE_GAME_CLIENT_VERSIONS",
+          "type": "String",
+          "value": "EnumerateUninstallableGameClientVersions",
+          "line": 51
+        },
+        {
+          "name": "UPDATE_PLAYER_CONNECTION",
+          "type": "String",
+          "value": "UpdatePlayerConnection",
+          "line": 53
+        },
+        {
+          "name": "ENUMERATE_LATEST_GAME_CLIENT_VERSIONS",
+          "type": "String",
+          "value": "EnumerateLatestGameClientVersions",
+          "line": 55
+        },
+        {
+          "name": "GET_INSTALLED_GAME_CLIENT_VERSIONS_SIZES",
+          "type": "String",
+          "value": "GetInstalledGameClientVersionsSizes",
+          "line": 57
+        },
+        {
+          "name": "INSTALLED_GAME_CLIENT_VERSIONS_SIZES_PROGRESS_UPDATE",
+          "type": "String",
+          "value": "InstalledGameClientVersionsSizesProgressUpdate",
+          "line": 59
+        }
+      ]
+    },
+    {
+      "source": "air.MaestroServiceImpl",
+      "entries": [
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_CREATE",
+          "type": "int",
+          "value": 0,
+          "line": 29
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_STOPPED",
+          "type": "int",
+          "value": 1,
+          "line": 31
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_CRASHED",
+          "type": "int",
+          "value": 2,
+          "line": 33
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_CLOSE",
+          "type": "int",
+          "value": 3,
+          "line": 35
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_HEARTBEAT",
+          "type": "int",
+          "value": 4,
+          "line": 37
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_REPLY",
+          "type": "int",
+          "value": 5,
+          "line": 39
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_LAUNCHERCLIENT",
+          "type": "int",
+          "value": 6,
+          "line": 41
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_ABANDONED",
+          "type": "int",
+          "value": 7,
+          "line": 43
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_LAUNCHED",
+          "type": "int",
+          "value": 8,
+          "line": 45
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_VERSION_MISMATCH",
+          "type": "int",
+          "value": 9,
+          "line": 47
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_CONNECTED_TO_SERVER",
+          "type": "int",
+          "value": 10,
+          "line": 49
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_CHATMESSAGE_TO_GAME",
+          "type": "int",
+          "value": 11,
+          "line": 51
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_CHATMESSAGE_FROM_GAME",
+          "type": "int",
+          "value": 12,
+          "line": 53
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_CREATE_VERSION",
+          "type": "int",
+          "value": 13,
+          "line": 55
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_INSTALL_VERSION",
+          "type": "int",
+          "value": 14,
+          "line": 57
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_CANCEL_INSTALL",
+          "type": "int",
+          "value": 15,
+          "line": 59
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_INSTALL_PROGRESS",
+          "type": "int",
+          "value": 16,
+          "line": 61
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_INSTALL_PREVIEW",
+          "type": "int",
+          "value": 17,
+          "line": 63
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_CANCEL_PREVIEW",
+          "type": "int",
+          "value": 18,
+          "line": 65
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_PREVIEW_PROGRESS",
+          "type": "int",
+          "value": 19,
+          "line": 67
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_PLAY_REPLAY",
+          "type": "int",
+          "value": 20,
+          "line": 69
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_UNINSTALL_VERSION",
+          "type": "int",
+          "value": 21,
+          "line": 71
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_CANCEL_UNINSTALL",
+          "type": "int",
+          "value": 22,
+          "line": 73
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_UNINSTALL_PROGRESS",
+          "type": "int",
+          "value": 23,
+          "line": 75
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_UNINSTALL_PREVIEW",
+          "type": "int",
+          "value": 24,
+          "line": 77
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_CANCEL_UNINSTALL_PREVIEW",
+          "type": "int",
+          "value": 25,
+          "line": 79
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_PREVIEW_UNINSTALL_PROGRESS",
+          "type": "int",
+          "value": 26,
+          "line": 81
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_ENUMERATE_VERSIONS",
+          "type": "int",
+          "value": 27,
+          "line": 83
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_CREATE_CLIENT_AND_PRELOAD",
+          "type": "int",
+          "value": 28,
+          "line": 85
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_UPDATE_PRELOADED_GAME_WITH_CREDENTIALS",
+          "type": "int",
+          "value": 29,
+          "line": 87
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_INITIAL_PRELOAD_COMPLETE",
+          "type": "int",
+          "value": 30,
+          "line": 89
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_UPDATE_PLAYER_CONNECTION",
+          "type": "int",
+          "value": 31,
+          "line": 91
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_PLAY_PRELOADED_GAME",
+          "type": "int",
+          "value": 32,
+          "line": 93
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_GAME_LOADING_COMPLETE",
+          "type": "int",
+          "value": 33,
+          "line": 95
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_KILL_GAMECLIENT_PROCESS",
+          "type": "int",
+          "value": 34,
+          "line": 97
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_ENUMERATE_UNINSTALLABLE_VERSIONS",
+          "type": "int",
+          "value": 35,
+          "line": 99
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_ENUMERATE_LATEST_VERSIONS",
+          "type": "int",
+          "value": 36,
+          "line": 101
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_INSTALLED_VERSIONS_SIZES",
+          "type": "int",
+          "value": 37,
+          "line": 103
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_INSTALLED_VERSIONS_SIZES_PROGRESS",
+          "type": "int",
+          "value": 38,
+          "line": 105
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_GAMECLIENT_CANCEL_INSTALLED_VERSIONS_SIZES",
+          "type": "int",
+          "value": 39,
+          "line": 107
+        },
+        {
+          "name": "MAESTROMESSAGETYPE_INVALID",
+          "type": "int",
+          "value": 40,
+          "line": 109
+        }
+      ]
+    },
+    {
+      "source": "air.MaestroMessage",
+      "entries": [
+        {
+          "name": "MESSAGE_HEADERSIZE",
+          "type": "int",
+          "value": 16,
+          "line": 12
+        },
+        {
+          "name": "MESSAGE_VERSION",
+          "type": "int",
+          "value": 1,
+          "line": 14
+        }
+      ]
+    },
+    {
+      "source": "air.GameCrashedEvent",
+      "entries": [
+        {
+          "name": "CRASHED_EVENT_FROM_GAME",
+          "type": "String",
+          "value": "gameClientCrashed",
+          "line": 8
+        }
+      ]
+    },
+    {
+      "source": "air.GameType",
+      "entries": [
+        {
+          "name": "TUTORIAL_GAME",
+          "type": "String",
+          "value": "TUTORIAL_GAME",
+          "line": 6
+        },
+        {
+          "name": "PRACTICE_GAME",
+          "type": "String",
+          "value": "PRACTICE_GAME",
+          "line": 8
+        },
+        {
+          "name": "NORMAL_GAME",
+          "type": "String",
+          "value": "NORMAL_GAME",
+          "line": 10
+        },
+        {
+          "name": "RANKED_GAME",
+          "type": "String",
+          "value": "RANKED_GAME",
+          "line": 12
+        },
+        {
+          "name": "RANKED_TEAM_GAME",
+          "type": "String",
+          "value": "RANKED_TEAM_GAME",
+          "line": 14
+        },
+        {
+          "name": "RANKED_GAME_SOLO",
+          "type": "String",
+          "value": "RANKED_GAME_SOLO",
+          "line": 16
+        },
+        {
+          "name": "RANKED_GAME_PREMADE",
+          "type": "String",
+          "value": "RANKED_GAME_PREMADE",
+          "line": 18
+        },
+        {
+          "name": "COOP_VS_AI",
+          "type": "String",
+          "value": "COOP_VS_AI_GAME",
+          "line": 20
+        },
+        {
+          "name": "CUSTOM_GAME",
+          "type": "String",
+          "value": "CUSTOM_GAME",
+          "line": 22
+        }
+      ]
+    }
+  ]
+}

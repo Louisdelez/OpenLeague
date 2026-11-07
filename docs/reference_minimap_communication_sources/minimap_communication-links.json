@@ -1,0 +1,1419 @@
+{
+  "schema": "openleague_minimap_communication_links/v1",
+  "passed": true,
+  "utc": "2026-10-23T06:30:49.380144+00:00",
+  "full_task_scope_complete": false,
+  "native_or_game_executed": false,
+  "historical_server_policy_qualified": false,
+  "facts": {
+    "candidates": {
+      "producer": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\prepare_minimap_communication_reader.py",
+        "bytes": 3596,
+        "sha256": "2b53443f8b0be08b7388da78ee0e7a469698a0ffc5deeb545074c8a1e70d3834"
+      },
+      "associations": [
+        {
+          "task_id": "SYS-17.2-01",
+          "finding": "Visible snapshot markers plus locally bound visible relic;not hidden-state cache.",
+          "remaining": "Current visible marker subset and local relic mapping;complete icon/structure fidelity open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/native_minimap.rs",
+              "line": 115,
+              "needle": "fn markers(snapshot:",
+              "role": "minimap_communication_1_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-38bd6f3f-57b8-56fa-834c-83a69535cf50"
+        },
+        {
+          "task_id": "SYS-17.2-02",
+          "finding": "Current FoW texture on native rectangle;local Bevy draw bridge,not GPU equivalence.",
+          "remaining": "Current FoW bridge exists;native framebuffer and all team/session contexts unqualified.",
+          "anchors": [
+            {
+              "path": "crates/client/src/native_minimap_fow.rs",
+              "line": 45,
+              "needle": "fn update(mut commands:",
+              "role": "minimap_communication_2_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-c0b22951-bc81-5434-82d4-cadec1fa0366"
+        },
+        {
+          "task_id": "SYS-17.2-03",
+          "finding": "Move/camera input exists;ping explicitly unported.",
+          "remaining": "Input explicitly sends Move/camera only;ping command not ported.",
+          "anchors": [
+            {
+              "path": "crates/client/src/native_minimap_input.rs",
+              "line": 2,
+              "needle": "//! Original minimap mouse callbacks, attack/ping/targeted spells remain unported.",
+              "role": "minimap_communication_3_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-c526fa62-b709-5dfc-bc87-0c36b65f0354"
+        },
+        {
+          "task_id": "SYS-17.2-04",
+          "finding": "Move/camera input exists;ping explicitly unported.",
+          "remaining": "Native ping labels exist;historical visual/audio variants and delivery unqualified.",
+          "anchors": [
+            {
+              "path": "crates/client/src/native_minimap_input.rs",
+              "line": 2,
+              "needle": "//! Original minimap mouse callbacks, attack/ping/targeted spells remain unported.",
+              "role": "minimap_communication_4_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-f9d658a7-0c9a-5fba-b500-af7140e1e4aa"
+        },
+        {
+          "task_id": "SYS-17.2-05",
+          "finding": "Immutable terminal results display;not live public scoreboard.",
+          "remaining": "Terminal result summary is entry boundary;live objective/kill notification consumer not identified.",
+          "anchors": [
+            {
+              "path": "crates/client/src/match_results_ui.rs",
+              "line": 24,
+              "needle": "fn summary(result:",
+              "role": "minimap_communication_5_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-607f028f-1117-51ab-82f8-6f0266e95baf"
+        },
+        {
+          "task_id": "SYS-17.2-06",
+          "finding": "Immutable terminal results display;not live public scoreboard.",
+          "remaining": "Terminal immutable results are not live public scoreboard;full scope open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/match_results_ui.rs",
+              "line": 24,
+              "needle": "fn summary(result:",
+              "role": "minimap_communication_6_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-275fd9bf-dedc-56fc-84e7-ed13167aac19"
+        },
+        {
+          "task_id": "SYS-17.2-07",
+          "finding": "Current item description and local regeneration formatting;not complete localized capability/item tooltips.",
+          "remaining": "Current shop descriptions/regeneration formatting do not qualify all localized ability/item tooltips.",
+          "anchors": [
+            {
+              "path": "crates/client/src/shop_ui.rs",
+              "line": 427,
+              "needle": "i.description.replace(\"{regen_5s}\"",
+              "role": "minimap_communication_7_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-df7c97bd-60a2-5094-a3a0-9a93877e24c0"
+        },
+        {
+          "task_id": "SYS-17.2-08",
+          "finding": "Loads HUD/defaults/Chat.ini bytes;not chat permissions,delivery or history.",
+          "remaining": "Chat.ini bytes loaded;team/global permission and message delivery consumer not identified.",
+          "anchors": [
+            {
+              "path": "crates/client/src/native_zip_provider.rs",
+              "line": 74,
+              "needle": "let chat=required(",
+              "role": "minimap_communication_8_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-5abd1f66-bc04-5d6c-a130-33387ecf2888"
+        },
+        {
+          "task_id": "SYS-17.2-09",
+          "finding": "Loads HUD/defaults/Chat.ini bytes;not chat permissions,delivery or history.",
+          "remaining": "Chat configuration loading is not bounded message history;capacity and eviction policy unqualified.",
+          "anchors": [
+            {
+              "path": "crates/client/src/native_zip_provider.rs",
+              "line": 74,
+              "needle": "let chat=required(",
+              "role": "minimap_communication_9_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-83a927ae-fc5f-5c43-bb2a-cdeee4a6114b"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\communication-consumer-research.json",
+          "bytes": 13840,
+          "sha256": "37e5aa2b3ab8b314eb81ca8b6ccfa42cab87a0a7992f390fce08616f17913916"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\communication-native-research.json",
+          "bytes": 15577,
+          "sha256": "81ab361ae665b70a3af8056494950564dc80f3832132400385ed9905e0b9edc4"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\minimap-test-receipt.json",
+          "bytes": 5486,
+          "sha256": "bd3cefbd0ed1f56e3d3357b8cfced29700c7371384f1cba3bae738fa50ba18fc"
+        }
+      ],
+      "current_sources": [
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap.rs",
+          "bytes": 17331,
+          "sha256": "72359625c522957a9b55b58a7c0043eb18c48d4c0e1f6c3f11ebfeb11ef17ac1"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap_fow.rs",
+          "bytes": 8386,
+          "sha256": "269c1b544edc59ac9f32ceb9f0b603c0be722cb8e50c90b90b962627d71ccfd3"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap_input.rs",
+          "bytes": 7730,
+          "sha256": "cd1b0e19e3741ddd843282caeca2eff4c54a96482dbed9891680b51b45d087cc"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap_input.rs",
+          "bytes": 7730,
+          "sha256": "cd1b0e19e3741ddd843282caeca2eff4c54a96482dbed9891680b51b45d087cc"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\match_results_ui.rs",
+          "bytes": 6200,
+          "sha256": "ce96ed7771c5ee6f3823386ecbb61b73875cd2b78088ec83695a81d9ef621cb2"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\match_results_ui.rs",
+          "bytes": 6200,
+          "sha256": "ce96ed7771c5ee6f3823386ecbb61b73875cd2b78088ec83695a81d9ef621cb2"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+          "bytes": 36049,
+          "sha256": "cf7405045e6541866543c447b31aef33730ef6c11d2eb6b275387fbb27adcfc1"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\native_zip_provider.rs",
+          "bytes": 19264,
+          "sha256": "84f31115bf4413eb2617aa7eedf353d0fd36ee18d8afd2b5d4b35475eceacb6c"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\native_zip_provider.rs",
+          "bytes": 19264,
+          "sha256": "84f31115bf4413eb2617aa7eedf353d0fd36ee18d8afd2b5d4b35475eceacb6c"
+        }
+      ],
+      "scope": "Native configuration and localized source evidence,current minimap/shop consumers and explicit communication boundaries;no full runtime acceptance."
+    },
+    "receipts": {
+      "communication-consumer-research.json": {
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap.rs",
+              "bytes": 17331,
+              "sha256": "72359625c522957a9b55b58a7c0043eb18c48d4c0e1f6c3f11ebfeb11ef17ac1"
+            },
+            "line": 115,
+            "needle": "fn markers(snapshot:",
+            "finding": "Visible snapshot markers plus locally bound visible relic;not hidden-state cache."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap_fow.rs",
+              "bytes": 8386,
+              "sha256": "269c1b544edc59ac9f32ceb9f0b603c0be722cb8e50c90b90b962627d71ccfd3"
+            },
+            "line": 45,
+            "needle": "fn update(mut commands:",
+            "finding": "Current FoW texture on native rectangle;local Bevy draw bridge,not GPU equivalence."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap_input.rs",
+              "bytes": 7730,
+              "sha256": "cd1b0e19e3741ddd843282caeca2eff4c54a96482dbed9891680b51b45d087cc"
+            },
+            "line": 2,
+            "needle": "//! Original minimap mouse callbacks, attack/ping/targeted spells remain unported.",
+            "finding": "Move/camera input exists;ping explicitly unported."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\native_zip_provider.rs",
+              "bytes": 19264,
+              "sha256": "84f31115bf4413eb2617aa7eedf353d0fd36ee18d8afd2b5d4b35475eceacb6c"
+            },
+            "line": 74,
+            "needle": "let chat=required(",
+            "finding": "Loads HUD/defaults/Chat.ini bytes;not chat permissions,delivery or history."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\match_results_ui.rs",
+              "bytes": 6200,
+              "sha256": "ce96ed7771c5ee6f3823386ecbb61b73875cd2b78088ec83695a81d9ef621cb2"
+            },
+            "line": 24,
+            "needle": "fn summary(result:",
+            "finding": "Immutable terminal results display;not live public scoreboard."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+              "bytes": 36049,
+              "sha256": "cf7405045e6541866543c447b31aef33730ef6c11d2eb6b275387fbb27adcfc1"
+            },
+            "line": 427,
+            "needle": "i.description.replace(\"{regen_5s}\"",
+            "finding": "Current item description and local regeneration formatting;not complete localized capability/item tooltips."
+          }
+        ],
+        "search": {
+          "command": [
+            "rg",
+            "-n",
+            "-i",
+            "\\bping\\b|\\bchat\\b|tooltip|scoreboard",
+            "F:\\OpenLeague\\crates\\client\\src",
+            "F:\\OpenLeague\\crates\\core\\src",
+            "F:\\OpenLeague\\crates\\server\\src",
+            "-g",
+            "*.rs"
+          ],
+          "exit_code": 0,
+          "output": "F:\\OpenLeague\\crates\\client\\src\\endgame_timeline.rs:4:#[derive(Debug)] pub struct Schedule {pub pan:f64,pub skin:f64,pub main_sfx_delay:f64,pub main_sfx_fade:f64,pub minion_fade:f64,pub scoreboard_delay:f64}\r\nF:\\OpenLeague\\crates\\client\\src\\endgame_timeline.rs:5:impl Schedule {pub fn scoreboard(&self)->f64{self.skin+self.scoreboard_delay}}\r\nF:\\OpenLeague\\crates\\client\\src\\endgame_timeline.rs:13:  let s=Schedule{pan:getter(\"pan\"),skin:getter(\"nexus_skin\"),main_sfx_delay:literal(\"EOG_MAIN_SFX_FADE_DELAY_TIME\"),main_sfx_fade:literal(\"EOG_MAIN_SFX_FADE_DURATION\"),minion_fade:literal(\"EOG_MINION_FADE_TIME\"),scoreboard_delay:literal(\"EOG_SCOREBOARD_PHASE_DELAY_TIME\")};\r\nF:\\OpenLeague\\crates\\client\\src\\endgame_timeline.rs:14:  assert!([s.pan,s.skin,s.main_sfx_delay,s.main_sfx_fade,s.minion_fade,s.scoreboard_delay].iter().all(|v|v.is_finite()&&*v>=0.));s\r\nF:\\OpenLeague\\crates\\client\\src\\endgame_timeline.rs:22: pub fn scoreboard_due(&self,now:f64)->bool{self.age(now).is_some_and(|age|age>=schedule().scoreboard())}\r\nF:\\OpenLeague\\crates\\client\\src\\endgame_timeline.rs:27: #[test] fn phase_boundary_uses_native_skin_time_plus_original_scoreboard_timer(){\r\nF:\\OpenLeague\\crates\\client\\src\\endgame_timeline.rs:28:  let mut c=Clock::default();assert!(!c.scoreboard_due(100.));c.observe(Some((42,123)),100.);assert!(!c.scoreboard_due(105.499999));assert!(c.scoreboard_due(105.5));c.observe(Some((42,123)),106.);assert_eq!(c.age(106.),Some(6.));\r\nF:\\OpenLeague\\crates\\client\\src\\endgame_timeline.rs:30: #[test] fn different_match_and_absent_result_reset_the_local_phase_clock(){let mut c=Clock::default();c.observe(Some((1,3)),10.);assert!(c.scoreboard_due(20.));c.observe(None,20.);assert_eq!(c.age(20.),None);c.observe(Some((2,3)),30.);assert!(!c.scoreboard_due(30.));assert!(c.scoreboard_due(35.5));}\r\nF:\\OpenLeague\\crates\\client\\src\\endgame_timeline.rs:50:   assert_eq!(call(\"EndGame\")[\"time\"].as_f64().unwrap(),schedule().scoreboard());assert_eq!(call(\"EndGame\")[\"args\"][0],case[\"winner\"]);\r\nF:\\OpenLeague\\crates\\client\\src\\endgame_ui_observation.rs:135:  Stage::SplashWait if age>=crate::endgame_timeline::schedule().scoreboard()&&splash&&nexus_loaded=>host.stage=Stage::SplashCapture,\nF:\\OpenLeague\\crates\\core\\src\\audio_game_service_lifecycle.rs:150:    let ping = b.integer(\"Reconnect\", \"PingTimeForReconnectMessage\", 5000).map_err(Error::Boundary)?;\nF:\\OpenLeague\\crates\\core\\src\\audio_game_service_lifecycle.rs:151:    write(b, service, 0x17c, ping)?;\nF:\\OpenLeague\\crates\\client\\src\\match_results_ui.rs:1://! Terminal scoreboard consumes immutable authoritative results, never the live roster.\nF:\\OpenLeague\\crates\\client\\src\\match_results_ui.rs:45: #[test] fn scoreboard_uses_frozen_roster_when_live_players_have_disconnected() {\nF:\\OpenLeague\\crates\\client\\src\\main.rs:601:    eprintln!(\"Native ZIP archives={} entries={} unique_names={} FastHUD_bytes={} Chat_bytes={}\",zip_resources.archive_count(),zip_resources.entry_count,zip_resources.unique_names,native_hud.fast_hud.len(),native_hud.chat.len());\r\nF:\\OpenLeague\\crates\\client\\src\\native_endgame_ui.rs:23: let visible=victory.is_some()&&!view.dismissed&&clock.scoreboard_due(time.elapsed_secs_f64());\r\nF:\\OpenLeague\\crates\\client\\src\\native_endgame_ui.rs:58:  // concurrent tests must not advance the native scoreboard phase deadline.\r\nF:\\OpenLeague\\crates\\client\\src\\native_endgame_ui.rs:111: let record=serde_json::json!({\"session\":result.session,\"ended_tick\":result.ended_tick,\"local_time\":now,\"age\":clock.age(now),\"native_scoreboard_deadline\":crate::endgame_timeline::schedule().scoreboard(),\"due\":clock.scoreboard_due(now),\"dismissed\":view.dismissed,\"splash_visible\":roots.iter().any(|n|n.display==Display::Flex),\"pan_initial\":pan.initial,\"pan_started\":pan.started,\"pan_now\":time.elapsed_secs(),\"pan_target\":result.destroyed_nexus.as_ref().map(|n|n.position),\"pan_current\":pan.pan.as_ref().map(|p|p.current),\"pan_finished\":pan.pan.as_ref().map(|p|p.finished),\"native_render_focus\":camera.native_focus(),\"render_camera_position\":poses.iter().next().map(|t|t.translation.to_array())});\r\nF:\\OpenLeague\\crates\\client\\src\\native_hud_experience.rs:45: if let Ok(path)=std::env::var(\"OPENLEAGUE_NATIVE_HUD_XP_TRACE\") {let report=serde_json::json!({\"complete\":false,\"fraction\":v,\"player\":connection.id,\"entities\":live.entities.len(),\"elements\":records,\"limits\":[\"Native ordinary clamp/division and maximum-level fraction qualified; server map10 curve drives progression. Original accessor/cap producer and whole framebuffer identity remain open.\",\"Highlight/level-up effects, XP tooltip/input, graphical gains and transitions still require qualification.\"]});if let Err(e)=std::fs::write(path,serde_json::to_vec_pretty(&report).unwrap()) {eprintln!(\"Native XP HUD trace failed: {e}\");}}\r\nF:\\OpenLeague\\crates\\client\\src\\native_hud_learning.rs:32: live.report=Some(serde_json::json!({\"complete\":false,\"champion\":player.champion,\"player\":connection.id,\"eligible\":allowed,\"entities\":live.entities.len(),\"sources\":live.sources.len(),\"elements\":records,\"bounds\":live.bounds.iter().map(|b|serde_json::json!({\"slot\":b.slot,\"rect\":b.rect})).collect::<Vec<_>>(),\"limits\":[\"Native enable/disable selection32cases qualified; current open state derived from supported authoritative progression. Native actor mask producer, expanded panel/fade/glow and original mouse callbacks unqualified.\",\"Annie/Garen plus reconstructed Trundle Q/W/E/R ordinary learning. E terrain/callback and native R presentation parity remain open. Pointer hit boxes use rendered frame rectangles with inclusive left/top and exclusive right/bottom. Native hit semantics/tooltip/rebinding/OS input equivalence remain open.\",\"Ordinary Learn command only; server revalidates progression. Graphical probe clicks are synthetic logical cursor requests, not OS mouse automation.\"]}));persist(&live);\r\nF:\\OpenLeague\\crates\\client\\src\\native_hud_spells.rs:53: if let Ok(path)=std::env::var(\"OPENLEAGUE_NATIVE_HUD_SPELLS_TRACE\") {let report=serde_json::json!({\"complete\":false,\"champion\":player.champion,\"player\":connection.id,\"session\":snapshot.session,\"loaded_primary_icons\":live.icons.len(),\"loaded_summoner_icons\":live.summoners.len(),\"summoners\":crate::native_hud_summoners::trace(player,snapshot.tick),\"entities\":live.entities.len(),\"states\":states,\"elements\":records,\"limits\":[\"Primary icons only; original texture lookup, dynamic spell variants/recasts/forms and whole framebuffer identity remain unqualified. Missing/ambiguous textures are omitted, never substituted.\",\"Native state ordering and palette selector qualified. Actor availability/masks, cost modifiers, toggle/recast readiness and control special cases remain partial; current authoritative rank/cooldown/health/stun and native base mana cost used.\",\"D/F use current core loadout/ready_at/disabled-cast flags. Summoner cooldown totals use current unmodified core rules, Smite90 provisional and Heal240. Tooltip/hover/flash, upgraded summoners and original framebuffer equivalence remain open.\"]});if let Err(e)=std::fs::write(path,serde_json::to_vec_pretty(&report).unwrap()) {eprintln!(\"Native QWER HUD trace failed: {e}\");}}\nF:\\OpenLeague\\crates\\client\\src\\native_minion_fade_material.rs:41: if !clock.skin_due_for(result,now)||!clock.age(now).is_some_and(|age|age<crate::endgame_timeline::schedule().scoreboard()){return false;}\r\nF:\\OpenLeague\\crates\\client\\src\\native_minimap_input.rs:2://! Original minimap mouse callbacks, attack/ping/targeted spells remain unported.\r\nF:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_service.rs:201:        let ping = b\nF:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_service.rs:203:            .map_err(|e| format!(\"service ping: {e:?}\"))? as i32;\nF:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_service.rs:207:            serde_json::json!({\"float_bits\":floats,\"DisableCatchup\":disable,\"UseLookAhead\":look,\"history_mode\":history,\"PingTimeForReconnectMessage\":ping,\"live_allocations\":count,\"canonical_runtime_bank\":true,\"pointer\":p}),\nF:\\OpenLeague\\crates\\client\\src\\native_zip_provider.rs:17:pub struct StartupHud {pub fast_hud:Vec<u8>,pub chat:Vec<u8>,pub shadow_isles_atlases:Vec<HudAtlas>,pub shadow_isles_layouts:Vec<HudLayout>,pub shadow_isles_groups:crate::native_hud_groups::Registry,pub shadow_isles_textures:crate::native_hud_textures::Registry,pub shadow_isles_font_configuration:crate::native_hud_font_configuration::Loaded,pub shadow_isles_typefaces:Vec<crate::native_hud_font_assets::Typeface>}\r\nF:\\OpenLeague\\crates\\client\\src\\native_zip_provider.rs:74:        let chat=required(self.read_optional(root,Path::new(\"HUD/defaults/Chat.ini\"))?)?;\r\nF:\\OpenLeague\\crates\\client\\src\\native_zip_provider.rs:118:        Ok(StartupHud {fast_hud,chat,shadow_isles_atlases,shadow_isles_layouts,shadow_isles_groups,shadow_isles_textures,shadow_isles_font_configuration,shadow_isles_typefaces})\r\nF:\\OpenLeague\\crates\\client\\src\\native_zip_provider.rs:160:        let mut hud=provider.startup_hud(&root).unwrap();assert_eq!(hud.fast_hud.len(),1607);assert_eq!(hud.chat.len(),1773);\r\nF:\\OpenLeague\\crates\\core\\src\\garen_passive.rs:1://! Perseverance: Riot-authored 4.17 tier changes and native 4.20 dynamic tooltip.\nF:\\OpenLeague\\crates\\core\\src\\movement.rs:52:    /// Native E tooltip supplies the 20% penalty; center-in-NPC-radius contact is reconstructed.\nF:\\OpenLeague\\crates\\core\\src\\shop.rs:173:/// Base native rates for active-item tooltips; does not include item/passive sustain bonuses.\r\nF:\\OpenLeague\\crates\\core\\src\\shop.rs:174:pub fn regeneration_tooltip(champion: &str, level: u8, item_id: u32) -> Option<f32> {\r\nF:\\OpenLeague\\crates\\core\\src\\shop.rs:585:        assert_eq!(regeneration_tooltip(\"garen\", 1, 1006), Some(4.));\r\nF:\\OpenLeague\\crates\\core\\src\\shop.rs:586:        assert!(regeneration_tooltip(\"garen\", 18, 1006).unwrap() > 4.);\r\nF:\\OpenLeague\\crates\\core\\src\\shop.rs:587:        assert_eq!(regeneration_tooltip(\"akali\", 1, 1004), Some(0.));\r\nF:\\OpenLeague\\crates\\core\\src\\summoners.rs:1://! Summoner Barrier using native tooltip endpoints/duration and inibin cooldown.\r\nF:\\OpenLeague\\crates\\core\\src\\summoner_ignite.rs:1://! Official4.20.1 Ignite totals/tooltip; tick cadence and replacement reconstructed from supplied server.\r\nF:\\OpenLeague\\crates\\core\\src\\trundle_q.rs:10:pub const AD_TICKS: u64 = 8 * TICK_RATE; // Native tooltip duration; local tick conversion.\nF:\\OpenLeague\\crates\\client\\src\\shop_ui.rs:426:                let calc=player.and_then(|p|openleague_core::shop::regeneration_tooltip(&p.champion,p.level,i.id)).unwrap_or(0.);\n"
+        },
+        "scope": "Bounded source search;no UI/chat/network/GPU execution;entry resources not completed feature consumers."
+      },
+      "communication-native-research.json": {
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\audit_communication_native.py",
+          "bytes": 1779,
+          "sha256": "352c5ed12d50b68e3fef350edcd6a77fb4cababdb55b720c7231793b5cc439e1"
+        },
+        "configurations": [
+          {
+            "source": {
+              "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\hud\\ping.ini",
+              "bytes": 655,
+              "sha256": "9b87d3efbaca0b57ee2639c777302bc6a03429c7c6934991b0aed866e93adf01"
+            },
+            "fields": [
+              {
+                "section": "Offense",
+                "key": "FocusHero",
+                "value": "game_ping_[Offense]_FocusHero",
+                "line": 2
+              },
+              {
+                "section": "Offense",
+                "key": "FocusLocation",
+                "value": "game_ping_[Offense]_FocusLocation",
+                "line": 3
+              },
+              {
+                "section": "Offense",
+                "key": "DefendLocation",
+                "value": "game_ping_[Offense]_DefendLocation",
+                "line": 4
+              },
+              {
+                "section": "Danger",
+                "key": "RetreatFromHero",
+                "value": "game_ping_[Danger]_RetreatFromHero",
+                "line": 7
+              },
+              {
+                "section": "Danger",
+                "key": "FallBackGround",
+                "value": "game_ping_[Danger]_FallBackGround",
+                "line": 8
+              },
+              {
+                "section": "Danger",
+                "key": "FallBack",
+                "value": "game_ping_[Danger]_FallBack",
+                "line": 9
+              },
+              {
+                "section": "Danger",
+                "key": "RetreatFromLocation",
+                "value": "game_ping_[Danger]_RetreatFromLocation",
+                "line": 10
+              },
+              {
+                "section": "Danger",
+                "key": "AbandonLocation",
+                "value": "game_ping_[Danger]_AbandonLocation",
+                "line": 11
+              },
+              {
+                "section": "Throttled",
+                "key": "PingThrottled",
+                "value": "game_ping_[Throttled]_PingThrottled",
+                "line": 14
+              },
+              {
+                "section": "General",
+                "key": "MIA",
+                "value": "game_ping_[General]_MIA",
+                "line": 17
+              },
+              {
+                "section": "General",
+                "key": "OMW",
+                "value": "game_ping_[General]_OMW",
+                "line": 18
+              },
+              {
+                "section": "General",
+                "key": "GetBack",
+                "value": "game_ping_[General]_GetBack",
+                "line": 19
+              },
+              {
+                "section": "General",
+                "key": "ComeHere",
+                "value": "game_ping_[General]_ComeHere",
+                "line": 20
+              }
+            ]
+          },
+          {
+            "source": {
+              "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\hud\\ObjectTooltips.ini",
+              "bytes": 1005,
+              "sha256": "e7aa3ab38e5c4c822c3205e86ed671ae06c138c9960daf84f2c2625880681bae"
+            },
+            "fields": [
+              {
+                "section": "Shop",
+                "key": "FriendlyTooltip",
+                "value": "game_ObjectTooltips_[Shop]_FriendlyTooltip",
+                "line": 2
+              },
+              {
+                "section": "Minion",
+                "key": "FriendlyTooltip",
+                "value": "game_ObjectTooltips_[Minion]_FriendlyTooltip",
+                "line": 4
+              },
+              {
+                "section": "Minion",
+                "key": "EnemyTooltip",
+                "value": "game_ObjectTooltips_[Minion]_EnemyTooltip",
+                "line": 5
+              },
+              {
+                "section": "Minion",
+                "key": "NeutralTooltip",
+                "value": "game_ObjectTooltips_[Minion]_NeutralTooltip",
+                "line": 6
+              },
+              {
+                "section": "Inhibitor",
+                "key": "FriendlyTooltip",
+                "value": "game_ObjectTooltips_[Inhibitor]_FriendlyTooltip",
+                "line": 8
+              },
+              {
+                "section": "Inhibitor",
+                "key": "EnemyTooltip",
+                "value": "game_ObjectTooltips_[Inhibitor]_EnemyTooltip",
+                "line": 9
+              },
+              {
+                "section": "Inhibitor",
+                "key": "FriendlyDisabledTooltip",
+                "value": "game_ObjectTooltips_[Inhibitor]_FriendlyDisabledTooltip",
+                "line": 10
+              },
+              {
+                "section": "Inhibitor",
+                "key": "EnemyDisabledTooltip",
+                "value": "game_ObjectTooltips_[Inhibitor]_EnemyDisabledTooltip",
+                "line": 11
+              },
+              {
+                "section": "Turret",
+                "key": "FriendlyTooltip",
+                "value": "game_ObjectTooltips_[Turret]_FriendlyTooltip",
+                "line": 13
+              },
+              {
+                "section": "Turret",
+                "key": "EnemyTooltip",
+                "value": "game_ObjectTooltips_[Turret]_EnemyTooltip",
+                "line": 14
+              },
+              {
+                "section": "HQ",
+                "key": "FriendlyTooltip",
+                "value": "game_ObjectTooltips_[HQ]_FriendlyTooltip",
+                "line": 16
+              },
+              {
+                "section": "HQ",
+                "key": "EnemyTooltip",
+                "value": "game_ObjectTooltips_[HQ]_EnemyTooltip",
+                "line": 17
+              },
+              {
+                "section": "SpawnPool",
+                "key": "FriendlyTooltip",
+                "value": "game_ObjectTooltips_[SpawnPool]_FriendlyTooltip",
+                "line": 19
+              },
+              {
+                "section": "Champion",
+                "key": "FriendlyTooltip",
+                "value": "game_ObjectTooltips_[Champion]_FriendlyTooltip",
+                "line": 21
+              },
+              {
+                "section": "Champion",
+                "key": "EnemyTooltip",
+                "value": "game_ObjectTooltips_[Champion]_EnemyTooltip",
+                "line": 22
+              }
+            ]
+          },
+          {
+            "source": {
+              "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\hud\\defaults\\Chat.ini",
+              "bytes": 1773,
+              "sha256": "0d3a57325f350cbc40be289d5f8a817b2673db208f588a5e06bdc827fe5747f4"
+            },
+            "fields": [
+              {
+                "section": "General",
+                "key": "ShadowStrength",
+                "value": "4",
+                "line": 2
+              },
+              {
+                "section": "General",
+                "key": "ShadowColor",
+                "value": "0 0 0",
+                "line": 3
+              },
+              {
+                "section": "General",
+                "key": "Transparency",
+                "value": "0.25",
+                "line": 4
+              },
+              {
+                "section": "General",
+                "key": "ReplayTransparency",
+                "value": "0.0",
+                "line": 5
+              },
+              {
+                "section": "General",
+                "key": "ChatX",
+                "value": "825",
+                "line": 8
+              },
+              {
+                "section": "General",
+                "key": "ChatY",
+                "value": "-157",
+                "line": 9
+              },
+              {
+                "section": "General",
+                "key": "ChatX2",
+                "value": "0",
+                "line": 10
+              },
+              {
+                "section": "General",
+                "key": "ChatY2",
+                "value": "0",
+                "line": 11
+              },
+              {
+                "section": "Input",
+                "key": "Color",
+                "value": "255 255 255 255",
+                "line": 15
+              },
+              {
+                "section": "Input",
+                "key": "EasternSizeFont",
+                "value": "18",
+                "line": 17
+              },
+              {
+                "section": "Input",
+                "key": "NormalSizeFont",
+                "value": "20",
+                "line": 18
+              },
+              {
+                "section": "Output",
+                "key": "FriendlyColorDefault",
+                "value": "0 255 0",
+                "line": 21
+              },
+              {
+                "section": "Output",
+                "key": "AllChatColorDefault",
+                "value": "255 255 255",
+                "line": 22
+              },
+              {
+                "section": "Output",
+                "key": "EnemyColorDefault",
+                "value": "255 51 51",
+                "line": 23
+              },
+              {
+                "section": "Output",
+                "key": "NeutralColorDefault",
+                "value": "128 128 128",
+                "line": 24
+              },
+              {
+                "section": "Output",
+                "key": "PingColorDefault",
+                "value": "255 165 0",
+                "line": 25
+              },
+              {
+                "section": "Output",
+                "key": "TeamChatColorDefault",
+                "value": "255 255 255",
+                "line": 26
+              },
+              {
+                "section": "Output",
+                "key": "NetworkColorDefault",
+                "value": "255 165 0",
+                "line": 27
+              },
+              {
+                "section": "Output",
+                "key": "OrderColorDefault",
+                "value": "0 204 255",
+                "line": 28
+              },
+              {
+                "section": "Output",
+                "key": "ChaosColorDefault",
+                "value": "222 109 255",
+                "line": 29
+              },
+              {
+                "section": "Output",
+                "key": "GoldColorDefault",
+                "value": "255 255 0",
+                "line": 30
+              },
+              {
+                "section": "Output",
+                "key": "TimestampColorDefault",
+                "value": "220 220 220",
+                "line": 31
+              },
+              {
+                "section": "Output",
+                "key": "ItemCalloutBodyColorDefault",
+                "value": "238 204 204",
+                "line": 32
+              },
+              {
+                "section": "Output",
+                "key": "ItemCalloutItemColorDefault",
+                "value": "255 165 0",
+                "line": 33
+              },
+              {
+                "section": "Output",
+                "key": "WhisperColorDefault",
+                "value": "241 231 22",
+                "line": 34
+              },
+              {
+                "section": "Output",
+                "key": "FriendlyColorSpectator",
+                "value": "64 193 255",
+                "line": 36
+              },
+              {
+                "section": "Output",
+                "key": "AllChatColorSpectator",
+                "value": "255 255 255",
+                "line": 37
+              },
+              {
+                "section": "Output",
+                "key": "EnemyColorSpectator",
+                "value": "222 109 255",
+                "line": 38
+              },
+              {
+                "section": "Output",
+                "key": "NeutralColorSpectator",
+                "value": "128 128 128",
+                "line": 39
+              },
+              {
+                "section": "Output",
+                "key": "PingColorSpectator",
+                "value": "255 165 0",
+                "line": 40
+              },
+              {
+                "section": "Output",
+                "key": "TeamChatColorSpectator",
+                "value": "255 255 255",
+                "line": 41
+              },
+              {
+                "section": "Output",
+                "key": "NetworkColorSpectator",
+                "value": "255 165 0",
+                "line": 42
+              },
+              {
+                "section": "Output",
+                "key": "OrderColorSpectator",
+                "value": "64 193 255",
+                "line": 43
+              },
+              {
+                "section": "Output",
+                "key": "ChaosColorSpectator",
+                "value": "222 109 255",
+                "line": 44
+              },
+              {
+                "section": "Output",
+                "key": "GoldColorSpectator",
+                "value": "255 255 0",
+                "line": 45
+              },
+              {
+                "section": "Output",
+                "key": "TimestampColorSpectator",
+                "value": "220 220 220",
+                "line": 46
+              },
+              {
+                "section": "Output",
+                "key": "ItemCalloutBodyColorSpectator",
+                "value": "238 204 204",
+                "line": 47
+              },
+              {
+                "section": "Output",
+                "key": "ItemCalloutItemColorSpectator",
+                "value": "255 165 0",
+                "line": 48
+              },
+              {
+                "section": "Output",
+                "key": "WhisperColorSpectator",
+                "value": "241 231 22",
+                "line": 49
+              },
+              {
+                "section": "Output",
+                "key": "FriendlyColorColorblind",
+                "value": "64 193 255",
+                "line": 51
+              },
+              {
+                "section": "Output",
+                "key": "AllChatColorColorblind",
+                "value": "255 255 255",
+                "line": 52
+              },
+              {
+                "section": "Output",
+                "key": "EnemyColorColorblind",
+                "value": "255 51 51",
+                "line": 53
+              },
+              {
+                "section": "Output",
+                "key": "NeutralColorColorblind",
+                "value": "128 128 128",
+                "line": 54
+              },
+              {
+                "section": "Output",
+                "key": "PingColorColorblind",
+                "value": "255 165 0",
+                "line": 55
+              },
+              {
+                "section": "Output",
+                "key": "TeamChatColorColorblind",
+                "value": "255 255 255",
+                "line": 56
+              },
+              {
+                "section": "Output",
+                "key": "NetworkColorColorblind",
+                "value": "255 165 0",
+                "line": 57
+              },
+              {
+                "section": "Output",
+                "key": "OrderColorColorblind",
+                "value": "64 193 255",
+                "line": 58
+              },
+              {
+                "section": "Output",
+                "key": "ChaosColorColorblind",
+                "value": "255 51 51",
+                "line": 59
+              },
+              {
+                "section": "Output",
+                "key": "GoldColorColorblind",
+                "value": "255 255 0",
+                "line": 60
+              },
+              {
+                "section": "Output",
+                "key": "TimestampColorColorblind",
+                "value": "220 220 220",
+                "line": 61
+              },
+              {
+                "section": "Output",
+                "key": "ItemCalloutBodyColorColorblind",
+                "value": "238 204 204",
+                "line": 62
+              },
+              {
+                "section": "Output",
+                "key": "ItemCalloutItemColorColorblind",
+                "value": "255 165 0",
+                "line": 63
+              },
+              {
+                "section": "Output",
+                "key": "WhisperColorColorblind",
+                "value": "241 231 22",
+                "line": 64
+              },
+              {
+                "section": "Output",
+                "key": "EasternSizeFont",
+                "value": "18",
+                "line": 65
+              },
+              {
+                "section": "Output",
+                "key": "NormalSizeFont",
+                "value": "20",
+                "line": 66
+              }
+            ]
+          }
+        ],
+        "tooltip_catalog": {
+          "path": "F:\\OpenLeague\\data\\4.20\\native_tooltips_map10.json",
+          "bytes": 6316,
+          "sha256": "d75f0e30c016b87c8cccbae268d3b0ebad698d243cc18f37b25aa09ea06a7de8"
+        },
+        "tooltip_source": {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_US.txt",
+          "bytes": 2220949,
+          "sha256": "315319cfeb654fe3c404de9551c95e16ee046f5f291de9c10583ad10ab97787d"
+        },
+        "tooltip_lines_checked": [
+          1089,
+          1090,
+          1091,
+          1092,
+          1093,
+          1094,
+          1095,
+          1096,
+          1097,
+          1098,
+          2786,
+          2787,
+          2788,
+          2789,
+          2790,
+          2791,
+          2804,
+          2805,
+          2808,
+          12160,
+          12161,
+          12162
+        ],
+        "scope": "Original configuration and localized text provenance only;display,permissions,network delivery,ping sounds/history capacity not qualified.",
+        "complete": false
+      },
+      "minimap-test-receipt.json": {
+        "utc": "2026-10-23T06:28:12.289921+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\run_minimap_tests.py",
+          "bytes": 1713,
+          "sha256": "47430c34fd4a88c6777f4e9179abbd441dd5e6f734a8b919b5527df385617e84"
+        },
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-client",
+              "native_minimap::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "native_minimap::input::tests::epoch_gate_resize_and_focus_loss_cancel_drag_without_later_replay",
+              "native_minimap::fog::tests::original_minimap_alpha_and_actual_map_landmarks_share_native_fow_uvs",
+              "native_minimap::input::tests::ordered_short_clicks_have_one_intent_and_block_underlying_world_for_the_frame",
+              "native_minimap::fog::tests::draw_gate_rejects_stale_session_team_allocation_view_material_and_node",
+              "native_minimap::input::tests::native_inverse_moves_only_to_actual_walkable_cells_without_nearest_substitution",
+              "native_minimap::tests::actual_server_vision_removes_enemy_marker_even_when_roster_retains_identity",
+              "native_minimap::tests::original_icons_decode_and_team_styles_keep_source_colors_and_strip_cells",
+              "native_minimap::tests::relic_marker_follows_real_visibility_consumption_and_authoritative_respawn",
+              "native_minimap::tests::map10_native_bounds_and_three_real_hud_records_align_at_both_dpis",
+              "native_minimap::tests::real_update_retains_entities_and_handles_then_retires_missing_actors_and_session",
+              "native_minimap::fog::tests::actual_overlay_system_tracks_rectangle_handle_team_and_retires_on_session_loss",
+              "native_minimap::input::tests::actual_input_sends_one_move_keeps_self_cast_and_closes_on_connection_failure",
+              "native_minimap::tests::relic_draw_keeps_its_binding_and_retires_on_snapshot_and_session_changes",
+              "native_minimap::input::tests::ezreal_ordered_ctrl_q_then_q_emits_real_learn_and_ground_commands_without_minimap_replay",
+              "native_minimap::input::tests::ezreal_ordered_ctrl_w_then_w_emits_real_learn_and_ground_commands_without_minimap_replay",
+              "native_minimap::input::tests::ezreal_ordered_ctrl_r_then_r_emits_real_udp_and_core_pending_release_damage_without_replay",
+              "native_minimap::input::tests::ezreal_ordered_ctrl_e_then_e_emits_real_learn_and_ground_udp_and_core_blink_without_replay",
+              "native_minimap::input::tests::heal_d_and_f_over_minimap_skip_world_pick_and_preserve_optional_target_outside",
+              "native_minimap::input::tests::target_required_summoners_and_underlying_world_pointer_stay_blocked_over_minimap"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\native_minimap-tests.log",
+              "bytes": 82147,
+              "sha256": "43fd11874f1bd5805f63c4fc9a6fd898a707ba29cac648e4638a06e4ab75fd02"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+                "bytes": 352612864,
+                "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "path": "F:\\OpenLeague\\assets\\shaders\\native_minimap_fow.wgsl",
+            "bytes": 417,
+            "sha256": "d978b09dde3c13298b3636e066a36ec1dea0ca8e1440aad93eeaea6817ac3c66"
+          },
+          {
+            "path": "F:\\OpenLeague\\Cargo.lock",
+            "bytes": 153304,
+            "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap.rs",
+            "bytes": 17331,
+            "sha256": "72359625c522957a9b55b58a7c0043eb18c48d4c0e1f6c3f11ebfeb11ef17ac1"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap_fow.rs",
+            "bytes": 8386,
+            "sha256": "269c1b544edc59ac9f32ceb9f0b603c0be722cb8e50c90b90b962627d71ccfd3"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap_fow_tests.rs",
+            "bytes": 5812,
+            "sha256": "1c0df04fdf045f2781d785421b1d2874b5bde52a5d08c91228d712ec3e3ea924"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap_geometry.rs",
+            "bytes": 2528,
+            "sha256": "4cad637ef653486891382adb2e9718138ae2353390238f952c0cf5afed68faea"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap_input.rs",
+            "bytes": 7730,
+            "sha256": "cd1b0e19e3741ddd843282caeca2eff4c54a96482dbed9891680b51b45d087cc"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap_input_tests.rs",
+            "bytes": 34156,
+            "sha256": "7c88507d4add854c70f427c8f76f81ddb575aeb1c2f8a09e085863c425398458"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap_tests.rs",
+            "bytes": 15247,
+            "sha256": "3a616ba3903c86d9b3983d70e9fc406b58ae32a8e705e870e4480f8a2928b4c2"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\native_minimap_profile.json",
+            "bytes": 6756,
+            "sha256": "207d07e9edc92d9d51d8d009a7c4fa828f7cfb9466a1f541c4c7f0bb310c8b3c"
+          }
+        ],
+        "scope": "Fresh current minimap CPU CPU tests;retained native fixtures;no GPU or historical process execution.",
+        "native_or_gpu_executed": false
+      }
+    },
+    "source_checks": [
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\minimap-communication-associations.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\prepare_minimap_communication_reader.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\communication-consumer-research.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\communication-native-research.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\minimap-test-receipt.json",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap_fow.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap_input.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap_input.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\match_results_ui.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\match_results_ui.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_zip_provider.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_zip_provider.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap_fow.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap_input.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_zip_provider.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\match_results_ui.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\audit_communication_native.py",
+      "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\hud\\ping.ini",
+      "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\hud\\ObjectTooltips.ini",
+      "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\hud\\defaults\\Chat.ini",
+      "pin_F:\\OpenLeague\\data\\4.20\\native_tooltips_map10.json",
+      "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_US.txt",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\run_minimap_tests.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\native_minimap-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague\\assets\\shaders\\native_minimap_fow.wgsl",
+      "pin_F:\\OpenLeague\\Cargo.lock",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap_fow.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap_fow_tests.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap_geometry.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap_input.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap_input_tests.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap_tests.rs",
+      "pin_F:\\OpenLeague\\data\\4.20\\native_minimap_profile.json",
+      "nine_associations",
+      "nineteen_tests",
+      "native_fields",
+      "task_SYS-17.2-01",
+      "anchor_minimap_communication_1_0",
+      "task_SYS-17.2-02",
+      "anchor_minimap_communication_2_0",
+      "task_SYS-17.2-03",
+      "anchor_minimap_communication_3_0",
+      "task_SYS-17.2-04",
+      "anchor_minimap_communication_4_0",
+      "task_SYS-17.2-05",
+      "anchor_minimap_communication_5_0",
+      "task_SYS-17.2-06",
+      "anchor_minimap_communication_6_0",
+      "task_SYS-17.2-07",
+      "anchor_minimap_communication_7_0",
+      "task_SYS-17.2-08",
+      "anchor_minimap_communication_8_0",
+      "task_SYS-17.2-09",
+      "anchor_minimap_communication_9_0"
+    ],
+    "all_minimap_communications_qualified": false,
+    "all_required_effects_covered": false
+  },
+  "source_identities": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\minimap-communication-associations.json",
+      "bytes": 9103,
+      "sha256": "5c416df608e3547ba2e0dd053e5638e068c78f5bc1f4ebaa38d34389c526ecd2"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\prepare_minimap_communication_reader.py",
+      "bytes": 3596,
+      "sha256": "2b53443f8b0be08b7388da78ee0e7a469698a0ffc5deeb545074c8a1e70d3834"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\communication-consumer-research.json",
+      "bytes": 13840,
+      "sha256": "37e5aa2b3ab8b314eb81ca8b6ccfa42cab87a0a7992f390fce08616f17913916"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\communication-native-research.json",
+      "bytes": 15577,
+      "sha256": "81ab361ae665b70a3af8056494950564dc80f3832132400385ed9905e0b9edc4"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\minimap-test-receipt.json",
+      "bytes": 5486,
+      "sha256": "bd3cefbd0ed1f56e3d3357b8cfced29700c7371384f1cba3bae738fa50ba18fc"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap.rs",
+      "bytes": 17331,
+      "sha256": "72359625c522957a9b55b58a7c0043eb18c48d4c0e1f6c3f11ebfeb11ef17ac1"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap_fow.rs",
+      "bytes": 8386,
+      "sha256": "269c1b544edc59ac9f32ceb9f0b603c0be722cb8e50c90b90b962627d71ccfd3"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap_input.rs",
+      "bytes": 7730,
+      "sha256": "cd1b0e19e3741ddd843282caeca2eff4c54a96482dbed9891680b51b45d087cc"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\match_results_ui.rs",
+      "bytes": 6200,
+      "sha256": "ce96ed7771c5ee6f3823386ecbb61b73875cd2b78088ec83695a81d9ef621cb2"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+      "bytes": 36049,
+      "sha256": "cf7405045e6541866543c447b31aef33730ef6c11d2eb6b275387fbb27adcfc1"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\native_zip_provider.rs",
+      "bytes": 19264,
+      "sha256": "84f31115bf4413eb2617aa7eedf353d0fd36ee18d8afd2b5d4b35475eceacb6c"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\audit_communication_native.py",
+      "bytes": 1779,
+      "sha256": "352c5ed12d50b68e3fef350edcd6a77fb4cababdb55b720c7231793b5cc439e1"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\hud\\ping.ini",
+      "bytes": 655,
+      "sha256": "9b87d3efbaca0b57ee2639c777302bc6a03429c7c6934991b0aed866e93adf01"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\hud\\ObjectTooltips.ini",
+      "bytes": 1005,
+      "sha256": "e7aa3ab38e5c4c822c3205e86ed671ae06c138c9960daf84f2c2625880681bae"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\hud\\defaults\\Chat.ini",
+      "bytes": 1773,
+      "sha256": "0d3a57325f350cbc40be289d5f8a817b2673db208f588a5e06bdc827fe5747f4"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\native_tooltips_map10.json",
+      "bytes": 6316,
+      "sha256": "d75f0e30c016b87c8cccbae268d3b0ebad698d243cc18f37b25aa09ea06a7de8"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_US.txt",
+      "bytes": 2220949,
+      "sha256": "315319cfeb654fe3c404de9551c95e16ee046f5f291de9c10583ad10ab97787d"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\run_minimap_tests.py",
+      "bytes": 1713,
+      "sha256": "47430c34fd4a88c6777f4e9179abbd441dd5e6f734a8b919b5527df385617e84"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\native_minimap-tests.log",
+      "bytes": 82147,
+      "sha256": "43fd11874f1bd5805f63c4fc9a6fd898a707ba29cac648e4638a06e4ab75fd02"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "bytes": 352612864,
+      "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+    },
+    {
+      "path": "F:\\OpenLeague\\assets\\shaders\\native_minimap_fow.wgsl",
+      "bytes": 417,
+      "sha256": "d978b09dde3c13298b3636e066a36ec1dea0ca8e1440aad93eeaea6817ac3c66"
+    },
+    {
+      "path": "F:\\OpenLeague\\Cargo.lock",
+      "bytes": 153304,
+      "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap_fow_tests.rs",
+      "bytes": 5812,
+      "sha256": "1c0df04fdf045f2781d785421b1d2874b5bde52a5d08c91228d712ec3e3ea924"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap_geometry.rs",
+      "bytes": 2528,
+      "sha256": "4cad637ef653486891382adb2e9718138ae2353390238f952c0cf5afed68faea"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap_input_tests.rs",
+      "bytes": 34156,
+      "sha256": "7c88507d4add854c70f427c8f76f81ddb575aeb1c2f8a09e085863c425398458"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap_tests.rs",
+      "bytes": 15247,
+      "sha256": "3a616ba3903c86d9b3983d70e9fc406b58ae32a8e705e870e4480f8a2928b4c2"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\native_minimap_profile.json",
+      "bytes": 6756,
+      "sha256": "207d07e9edc92d9d51d8d009a7c4fa828f7cfb9466a1f541c4c7f0bb310c8b3c"
+    }
+  ],
+  "checks": [
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\minimap-communication-associations.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\prepare_minimap_communication_reader.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\communication-consumer-research.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\communication-native-research.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\minimap-test-receipt.json",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap_fow.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap_input.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap_input.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\match_results_ui.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\match_results_ui.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_zip_provider.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_zip_provider.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap_fow.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap_input.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_zip_provider.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\match_results_ui.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\audit_communication_native.py",
+    "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\hud\\ping.ini",
+    "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\hud\\ObjectTooltips.ini",
+    "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\hud\\defaults\\Chat.ini",
+    "pin_F:\\OpenLeague\\data\\4.20\\native_tooltips_map10.json",
+    "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\menu\\fontconfig_en_US.txt",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\run_minimap_tests.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision122\\native_minimap-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague\\assets\\shaders\\native_minimap_fow.wgsl",
+    "pin_F:\\OpenLeague\\Cargo.lock",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap_fow.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap_fow_tests.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap_geometry.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap_input.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap_input_tests.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_minimap_tests.rs",
+    "pin_F:\\OpenLeague\\data\\4.20\\native_minimap_profile.json",
+    "nine_associations",
+    "nineteen_tests",
+    "native_fields",
+    "task_SYS-17.2-01",
+    "anchor_minimap_communication_1_0",
+    "task_SYS-17.2-02",
+    "anchor_minimap_communication_2_0",
+    "task_SYS-17.2-03",
+    "anchor_minimap_communication_3_0",
+    "task_SYS-17.2-04",
+    "anchor_minimap_communication_4_0",
+    "task_SYS-17.2-05",
+    "anchor_minimap_communication_5_0",
+    "task_SYS-17.2-06",
+    "anchor_minimap_communication_6_0",
+    "task_SYS-17.2-07",
+    "anchor_minimap_communication_7_0",
+    "task_SYS-17.2-08",
+    "anchor_minimap_communication_8_0",
+    "task_SYS-17.2-09",
+    "anchor_minimap_communication_9_0"
+  ],
+  "checks_count": 60,
+  "associations": [
+    {
+      "task_id": "SYS-17.2-01",
+      "finding": "Visible snapshot markers plus locally bound visible relic;not hidden-state cache.",
+      "remaining": "Current visible marker subset and local relic mapping;complete icon/structure fidelity open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/native_minimap.rs",
+          "line": 115,
+          "needle": "fn markers(snapshot:",
+          "role": "minimap_communication_1_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-38bd6f3f-57b8-56fa-834c-83a69535cf50"
+    },
+    {
+      "task_id": "SYS-17.2-02",
+      "finding": "Current FoW texture on native rectangle;local Bevy draw bridge,not GPU equivalence.",
+      "remaining": "Current FoW bridge exists;native framebuffer and all team/session contexts unqualified.",
+      "anchors": [
+        {
+          "path": "crates/client/src/native_minimap_fow.rs",
+          "line": 45,
+          "needle": "fn update(mut commands:",
+          "role": "minimap_communication_2_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-c0b22951-bc81-5434-82d4-cadec1fa0366"
+    },
+    {
+      "task_id": "SYS-17.2-03",
+      "finding": "Move/camera input exists;ping explicitly unported.",
+      "remaining": "Input explicitly sends Move/camera only;ping command not ported.",
+      "anchors": [
+        {
+          "path": "crates/client/src/native_minimap_input.rs",
+          "line": 2,
+          "needle": "//! Original minimap mouse callbacks, attack/ping/targeted spells remain unported.",
+          "role": "minimap_communication_3_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-c526fa62-b709-5dfc-bc87-0c36b65f0354"
+    },
+    {
+      "task_id": "SYS-17.2-04",
+      "finding": "Move/camera input exists;ping explicitly unported.",
+      "remaining": "Native ping labels exist;historical visual/audio variants and delivery unqualified.",
+      "anchors": [
+        {
+          "path": "crates/client/src/native_minimap_input.rs",
+          "line": 2,
+          "needle": "//! Original minimap mouse callbacks, attack/ping/targeted spells remain unported.",
+          "role": "minimap_communication_4_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-f9d658a7-0c9a-5fba-b500-af7140e1e4aa"
+    },
+    {
+      "task_id": "SYS-17.2-05",
+      "finding": "Immutable terminal results display;not live public scoreboard.",
+      "remaining": "Terminal result summary is entry boundary;live objective/kill notification consumer not identified.",
+      "anchors": [
+        {
+          "path": "crates/client/src/match_results_ui.rs",
+          "line": 24,
+          "needle": "fn summary(result:",
+          "role": "minimap_communication_5_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-607f028f-1117-51ab-82f8-6f0266e95baf"
+    },
+    {
+      "task_id": "SYS-17.2-06",
+      "finding": "Immutable terminal results display;not live public scoreboard.",
+      "remaining": "Terminal immutable results are not live public scoreboard;full scope open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/match_results_ui.rs",
+          "line": 24,
+          "needle": "fn summary(result:",
+          "role": "minimap_communication_6_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-275fd9bf-dedc-56fc-84e7-ed13167aac19"
+    },
+    {
+      "task_id": "SYS-17.2-07",
+      "finding": "Current item description and local regeneration formatting;not complete localized capability/item tooltips.",
+      "remaining": "Current shop descriptions/regeneration formatting do not qualify all localized ability/item tooltips.",
+      "anchors": [
+        {
+          "path": "crates/client/src/shop_ui.rs",
+          "line": 427,
+          "needle": "i.description.replace(\"{regen_5s}\"",
+          "role": "minimap_communication_7_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-df7c97bd-60a2-5094-a3a0-9a93877e24c0"
+    },
+    {
+      "task_id": "SYS-17.2-08",
+      "finding": "Loads HUD/defaults/Chat.ini bytes;not chat permissions,delivery or history.",
+      "remaining": "Chat.ini bytes loaded;team/global permission and message delivery consumer not identified.",
+      "anchors": [
+        {
+          "path": "crates/client/src/native_zip_provider.rs",
+          "line": 74,
+          "needle": "let chat=required(",
+          "role": "minimap_communication_8_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-5abd1f66-bc04-5d6c-a130-33387ecf2888"
+    },
+    {
+      "task_id": "SYS-17.2-09",
+      "finding": "Loads HUD/defaults/Chat.ini bytes;not chat permissions,delivery or history.",
+      "remaining": "Chat configuration loading is not bounded message history;capacity and eviction policy unqualified.",
+      "anchors": [
+        {
+          "path": "crates/client/src/native_zip_provider.rs",
+          "line": 74,
+          "needle": "let chat=required(",
+          "role": "minimap_communication_9_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-83a927ae-fc5f-5c43-bb2a-cdeee4a6114b"
+    }
+  ]
+}

@@ -1,0 +1,1065 @@
+{
+  "schema": "openleague_game_server_reference/v1",
+  "task": "SYS-01.1-03",
+  "observed_utc": "2026-10-20T17:00:03.851604+00:00",
+  "source_roots": {
+    "native": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20",
+    "community": "D:\\LeagueOfLegendsV2\\4.20\\GameServer",
+    "legacy": "D:\\LeagueOfLegendsV2\\4.20",
+    "project": "E:\\OpenLeague"
+  },
+  "client_reference": "docs/reference_client_4_20.json",
+  "client_reference_sha256": "efdf40252574a98f439829d43c6b29606d3c12d631c4a64c89ef15637e859d02",
+  "game_client": {
+    "extracted_identity": {
+      "date": "Nov 17 2014",
+      "time": "17:46:45",
+      "version": "4.20.0.315",
+      "channel": "PUBLIC",
+      "branch": "Releases/4.20",
+      "date_iso": "2014-11-17",
+      "literal_offset": 13103356,
+      "pe_timestamp_utc": "2014-11-18T01:55:38+00:00",
+      "sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862",
+      "bytes": 15973880
+    },
+    "rads_solution_release": "0.0.1.68",
+    "date_semantics": "Embedded build date/time; timezone and regional deployment date remain unknown"
+  },
+  "sources": [
+    {
+      "id": "native_client",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/League of Legends.exe",
+      "role": "original game binary, read only",
+      "bytes": 15973880,
+      "sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862"
+    },
+    {
+      "id": "community_program",
+      "root": "community",
+      "path": "GameServerConsole/Program.cs",
+      "role": "configuration precedence and CLI consumer",
+      "bytes": 7020,
+      "sha256": "e8f8440739fd1ad1875c54c3f1e54caf57f7a3a725477ff64a59646ba80ea2dc"
+    },
+    {
+      "id": "community_config",
+      "root": "community",
+      "path": "GameServerLib/Config.cs",
+      "role": "game profile parser and declared version",
+      "bytes": 12933,
+      "sha256": "5d27a65c3cd03858c010808608ee8edb7f9ce25fb11e070b0b4eaf4cf2cfde1d"
+    },
+    {
+      "id": "community_console_config",
+      "root": "community",
+      "path": "GameServerConsole/Logic/GameServerConfig.cs",
+      "role": "debug client settings consumer",
+      "bytes": 1270,
+      "sha256": "ec2a3ee370bcf9136dc7df8ca2aa1fa05079c1b1093bc7f96fd68de67ba86a42"
+    },
+    {
+      "id": "community_resources",
+      "root": "community",
+      "path": "GameServerConsole/Properties/Resources.resx",
+      "role": "embedded template bindings",
+      "bytes": 6459,
+      "sha256": "f96d1ae165f1b3f1c241466180608d19ea1f35d8e442c0596d66ea137b9f6428"
+    },
+    {
+      "id": "community_project",
+      "root": "community",
+      "path": "GameServerConsole/GameServerConsole.csproj",
+      "role": "net6 project identity",
+      "bytes": 2683,
+      "sha256": "15a698384990b1c514ad762674fe7b384c40548a277303b2d6c0a0565751901a"
+    },
+    {
+      "id": "community_server",
+      "root": "community",
+      "path": "GameServerLib/Server.cs",
+      "role": "packet server initialization",
+      "bytes": 3833,
+      "sha256": "0d9868a01f0868c93f4ed4b78c4e1c192038711106fea51782f853923a3a25d9"
+    },
+    {
+      "id": "community_packet_server",
+      "root": "community",
+      "path": "GameServerLib/Packets/PacketServer.cs",
+      "role": "ENet Patch420 consumer",
+      "bytes": 3752,
+      "sha256": "0c36c1d9535b7e3bdf221e773d427da9521131309627112cf0ca2977becc2842"
+    },
+    {
+      "id": "community_registry",
+      "root": "community",
+      "path": "GameServerLib/MasterRegistry.cs",
+      "role": "optional master configuration consumer",
+      "bytes": 6946,
+      "sha256": "280f864c894ab573d204e426feac765b2da327ee1dddcd3464cdb7ced018d8e0"
+    },
+    {
+      "id": "community_readme",
+      "root": "community",
+      "path": "README.md",
+      "role": "community origin",
+      "bytes": 2543,
+      "sha256": "5051a4bf43eceaeafff63209224111c8c8035efe7cf6e060f3d9c51698f937ff"
+    },
+    {
+      "id": "community_runtime",
+      "root": "community",
+      "path": "GameServerConsole/bin/Debug/net6.0/GameServerConsole.runtimeconfig.json",
+      "role": "available compiled runtime declaration",
+      "bytes": 147,
+      "sha256": "f03c65b081ae722b8c7e574c583688d95ee15b246a6bf5c9a79cb496cbd27583"
+    },
+    {
+      "id": "community_binary",
+      "root": "community",
+      "path": "GameServerConsole/bin/Debug/net6.0/GameServerConsole.dll",
+      "role": "available compiled server; not executed",
+      "bytes": 15872,
+      "sha256": "4610e9dd5309da683b58f9b18421b750a4eb809c413c3cac8b645891a0f38a77"
+    },
+    {
+      "id": "master_main",
+      "root": "legacy",
+      "path": "master-server/src/main.rs",
+      "role": "HTTP registry environment and bind consumer",
+      "bytes": 10775,
+      "sha256": "8cee8bb5d2180bd3c30ffb301ef9fcbf885299f83912833134f37f631f3e50a4"
+    },
+    {
+      "id": "master_readme",
+      "root": "legacy",
+      "path": "master-server/README.md",
+      "role": "local registry origin",
+      "bytes": 1485,
+      "sha256": "aa7856688bf8fab06aee2c00307cf33c40d760cbdff4c036bb2c6a2de4f14c4c"
+    },
+    {
+      "id": "legacy_windows_wrapper",
+      "root": "legacy",
+      "path": "start-server.bat",
+      "role": "wrapper target; no execution",
+      "bytes": 102,
+      "sha256": "b02988907022c1a81f1260039b0565bdb0e8eb25ecc722ca156744b14b4da5e7"
+    },
+    {
+      "id": "legacy_posix_wrapper",
+      "root": "legacy",
+      "path": "start-server.sh",
+      "role": "wrapper target; no execution",
+      "bytes": 264,
+      "sha256": "35c3a0c350a257822427a8528abd76a326af17687ce4bd7faf6306b1482fe1db"
+    },
+    {
+      "id": "openleague_main",
+      "root": "project",
+      "path": "crates/server/src/main.rs",
+      "role": "ordinary Rust server entrypoint",
+      "bytes": 13628,
+      "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+    },
+    {
+      "id": "openleague_owner",
+      "root": "project",
+      "path": "crates/server/src/owned_session.rs",
+      "role": "ownership environment consumer",
+      "bytes": 6304,
+      "sha256": "f8166aac8cd04e02fd35d981f859883e18e462f00a066e683efb12ed29304415"
+    },
+    {
+      "id": "openleague_core",
+      "root": "project",
+      "path": "crates/core/src/lib.rs",
+      "role": "local tick rate",
+      "bytes": 52808,
+      "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+    },
+    {
+      "id": "openleague_launcher",
+      "root": "project",
+      "path": "launcher/src-tauri/src/sessions.rs",
+      "role": "ordinary launcher forced address",
+      "bytes": 30278,
+      "sha256": "54bc7a2a66296cdf2cededcca19d1846287c5108974efda2a0151b17503da7f6"
+    },
+    {
+      "id": "community_settings_1",
+      "root": "community",
+      "path": "GameServerConsole/bin/Debug/net6.0/Settings/GameInfo.json",
+      "role": "available configuration, sanitized summary only",
+      "bytes": 1763,
+      "sha256": "306909914b3f5835769deae72c82362a4c5b719cb1fbe3b78211f6354b14398c"
+    },
+    {
+      "id": "community_settings_2",
+      "root": "community",
+      "path": "GameServerConsole/bin/Debug/net6.0/Settings/GameInfo.json.template",
+      "role": "available configuration, sanitized summary only",
+      "bytes": 2381,
+      "sha256": "4780687feffd9c6cd3de155bb9b571aa48a74cc4d5551c1248585bf71837f2f6"
+    },
+    {
+      "id": "community_settings_3",
+      "root": "community",
+      "path": "GameServerConsole/bin/Debug/net6.0/Settings/GameServerSettings.json",
+      "role": "available configuration, sanitized summary only",
+      "bytes": 96,
+      "sha256": "cc743841bd21c548016405f653a3b4b7699acb5c6d0c6f13745e54d1b50a295c"
+    },
+    {
+      "id": "community_settings_4",
+      "root": "community",
+      "path": "GameServerConsole/bin/Debug/net6.0/Settings/GameServerSettings.json.template",
+      "role": "available configuration, sanitized summary only",
+      "bytes": 96,
+      "sha256": "cc743841bd21c548016405f653a3b4b7699acb5c6d0c6f13745e54d1b50a295c"
+    },
+    {
+      "id": "community_settings_5",
+      "root": "community",
+      "path": "GameServerConsole/bin/Debug/net6.0/Settings/MasterRegistry.json",
+      "role": "available configuration, sanitized summary only",
+      "bytes": 229,
+      "sha256": "0ab3d5098ddbf1800f21ec8d93865d7b6ab1e41b70b2c4a33e08152b41a157c7"
+    },
+    {
+      "id": "community_settings_6",
+      "root": "community",
+      "path": "GameServerConsole/Settings/GameInfo.json.template",
+      "role": "available configuration, sanitized summary only",
+      "bytes": 2381,
+      "sha256": "4780687feffd9c6cd3de155bb9b571aa48a74cc4d5551c1248585bf71837f2f6"
+    },
+    {
+      "id": "community_settings_7",
+      "root": "community",
+      "path": "GameServerConsole/Settings/GameServerSettings.json.template",
+      "role": "available configuration, sanitized summary only",
+      "bytes": 96,
+      "sha256": "cc743841bd21c548016405f653a3b4b7699acb5c6d0c6f13745e54d1b50a295c"
+    },
+    {
+      "id": "community_settings_8",
+      "root": "community",
+      "path": "GameServerConsole/Settings/MasterRegistry.json",
+      "role": "available configuration, sanitized summary only",
+      "bytes": 229,
+      "sha256": "0ab3d5098ddbf1800f21ec8d93865d7b6ab1e41b70b2c4a33e08152b41a157c7"
+    },
+    {
+      "id": "client_config_1",
+      "root": "native",
+      "path": "Config/game.cfg",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 1946,
+      "sha256": "64d34912ea5411b47d6da0de44da374dd0a9e396fe96dc2b1d87ca76d562110e"
+    },
+    {
+      "id": "client_config_2",
+      "root": "native",
+      "path": "Config/input.ini",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 710,
+      "sha256": "fa16e719b04249006b3ab7c77f7810e728d3743faf82e86cb259b6cc96d0a531"
+    },
+    {
+      "id": "client_config_3",
+      "root": "native",
+      "path": "RADS/system/launcher.cfg",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 138,
+      "sha256": "f3417678c2e9a39bb40c937d5b8d63265092376756514652e5a22eb6c5195379"
+    },
+    {
+      "id": "client_config_4",
+      "root": "native",
+      "path": "RADS/system/locale.cfg",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 12,
+      "sha256": "82ecb50f4bf707a35a13a6b6987df89fa6044bedac6fc8aca179890a7890d6ae"
+    },
+    {
+      "id": "client_config_5",
+      "root": "native",
+      "path": "RADS/system/system.cfg",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 72,
+      "sha256": "a99ea26414fbd7deebace37c9e2c109f818a8c394f92607cfa082bd49f35c16a"
+    },
+    {
+      "id": "client_config_6",
+      "root": "native",
+      "path": "RADS/system/user.cfg",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "client_config_7",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Announcements_ARAM.ini",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 79603,
+      "sha256": "d7aa28817aa1be61e8416bb49e3d5d4caff9c3eb31c92afa4e5e0587f50f9f48"
+    },
+    {
+      "id": "client_config_8",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Announcements_ASCENSION.ini",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 58970,
+      "sha256": "32ee43fd4b9a1d8106ac6adac9aa6b86b9cb596bf6fa21673c9a2f545fb20abd"
+    },
+    {
+      "id": "client_config_9",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Announcements_CLASSIC.ini",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 90140,
+      "sha256": "34165f547988b7dd0608bde1b4a4de8194f73300353bf9cb0566b5e805b9b2a4"
+    },
+    {
+      "id": "client_config_10",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Announcements_FIRSTBLOOD.ini",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 60727,
+      "sha256": "a1a7d85f8496ae53c60437d3a9cb7b0a0b377c6bcff40ea3ffc735e0a7643252"
+    },
+    {
+      "id": "client_config_11",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Announcements_ODIN.ini",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 70692,
+      "sha256": "9b899becb6a9d00c4c1772c070f6ea0f644e3ab2137b8120984826e0dd569626"
+    },
+    {
+      "id": "client_config_12",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Audio.ini",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 258,
+      "sha256": "d94ce3ae7defaecb25a124da0b96d7a93e6a54bb31f75b5514f36e19a0101367"
+    },
+    {
+      "id": "client_config_13",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Audio_Fenrir.ini",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 197,
+      "sha256": "ec86e5fcc163a1da3c1af60f2fb68b0f272cf037731bfd163e3a53f52bf4c0e3"
+    },
+    {
+      "id": "client_config_14",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Cheats.cfg",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 150,
+      "sha256": "7ea33682baa99c6f620d2cc54f3fcbd7f7d519d75adf5d96ce39a1744838bbbc"
+    },
+    {
+      "id": "client_config_15",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Compatibility.ini",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 1004,
+      "sha256": "8d4e57a37c392be35c798167d4d60ecdcf922c60c38bf5dddc3f9b472491b0ce"
+    },
+    {
+      "id": "client_config_16",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Cursors.ini",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 1799,
+      "sha256": "620f46a771e73ada0d5cb3d2871e3754a2f2f9f83ef7ad5554d770d938e680e2"
+    },
+    {
+      "id": "client_config_17",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/DriverIssues.ini",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 77,
+      "sha256": "f7038b291a932729bc50f21a5c8b70ee1c9f263350709f36c846bca1dd8095dd"
+    },
+    {
+      "id": "client_config_18",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Engine.cfg",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 282,
+      "sha256": "458a27ad235fcc99d9a3300668513b1927d7ef0ed47bdfe8520fb87d16c81b96"
+    },
+    {
+      "id": "client_config_19",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/EventHistorySchema.ini",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 880,
+      "sha256": "20ab6a0d5edaec9bd1c534fc876c05c46dbfe26f035e9ca6137081d987851585"
+    },
+    {
+      "id": "client_config_20",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Game.cfg",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 14789,
+      "sha256": "02c41cb9a5068f8bc993435557fd7b159bddbcda1f022605d284d9ea51d72b0e"
+    },
+    {
+      "id": "client_config_21",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/GameFeatures.cfg",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 609,
+      "sha256": "1d7bc69ab05f2112b65584ad67bbb67fe47fef29ba01c8000f1d264cfcd37751"
+    },
+    {
+      "id": "client_config_22",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/GamePermanent.cfg",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 23214,
+      "sha256": "2fac41017961dbeca9e48a473f30da1978f6187f793754beae24c9cc77941f2c"
+    },
+    {
+      "id": "client_config_23",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/GamePermanent_el_GR.cfg",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 206,
+      "sha256": "5a3ed36552e460570ef5d6bc72f781c7fb781ff6cc5fe1e29da09854e66fd940"
+    },
+    {
+      "id": "client_config_24",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/GamePermanent_ko_KR.cfg",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 14369,
+      "sha256": "5107956d627860ce5e7da743fccbbe0dbb2608d6910ac3203316da1afff381cb"
+    },
+    {
+      "id": "client_config_25",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/GamePermanent_pt_BR.cfg",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 27,
+      "sha256": "d3a3ae12774cb3d6bb51a4a435e11fc8871337761ef7b6805fff6f597cc5b7a7"
+    },
+    {
+      "id": "client_config_26",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/GamePermanent_ru_RU.cfg",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 237,
+      "sha256": "08851a7b49ccf6ea7518b8c810ca52235e7a7dc922ff9b36646aeb3045d6a1e5"
+    },
+    {
+      "id": "client_config_27",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/GamePermanent_tr_TR.cfg",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 27,
+      "sha256": "c9d16936954a5271d72471fd9075ac9e7845996dd0681eb81d15c3c16c7d6c47"
+    },
+    {
+      "id": "client_config_28",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Input.ini",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 30938,
+      "sha256": "930f1499991e9c4973e81086a26c944b7330058970c4227a614b897eae09fec1"
+    },
+    {
+      "id": "client_config_29",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/KeymapForLocale.ini",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 1885,
+      "sha256": "b76ca1e7a2b575f4a5b76a5d532a4a542a8a41f73c655327c534f6042b80d6e5"
+    },
+    {
+      "id": "client_config_30",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/LanguageDuplications.ini",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 208,
+      "sha256": "08d6a89e82ceeda8b596b933ba6cd5ded99b78f3394f1be8ab5f1bca448ec5fb"
+    },
+    {
+      "id": "client_config_31",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/LightFx.ini",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 5129,
+      "sha256": "862a385e2798cd96310676d70f4e34f22e5967d9631522237e74091ed02c5224"
+    },
+    {
+      "id": "client_config_32",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/LiteEventsSchema.ini",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 507,
+      "sha256": "974f799b22c95babfe09e2ee283c8e4cdc85a34006b17181d8f33921060c7dd7"
+    },
+    {
+      "id": "client_config_33",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/locale.cfg",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 37,
+      "sha256": "053f2ad45a7d6c808ba0b394f6a101e985099a953e5a2c7575ab44467804b42f"
+    },
+    {
+      "id": "client_config_34",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/NSEAI.cfg",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 417,
+      "sha256": "3846f6fb662130d5ea74bc8c9a82f53a90fef2d5d8e87cab238fd7daf533c57c"
+    },
+    {
+      "id": "client_config_35",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/VerboseEventsSchema.ini",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 509,
+      "sha256": "f1d5b6f6ccdb36cb24a805350d86ed58ef74a1f71b174126861a5bbfcdb68b83"
+    },
+    {
+      "id": "client_config_36",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/game.cfg",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 1814,
+      "sha256": "bdd0050b5ea9306c42b9d81111fca3a5c7b38fda962a2028a88c3dbbda61fe5d"
+    },
+    {
+      "id": "client_config_37",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/input.ini",
+      "role": "client/system or shipped defaults; not proof of a running Riot server",
+      "bytes": 305,
+      "sha256": "aead4280d339159623dbe8f39784bde4b87a6b05afc6d95f2feccec7ba99073a"
+    }
+  ],
+  "community_settings": [
+    {
+      "path": "GameServerConsole/bin/Debug/net6.0/Settings/GameInfo.json",
+      "bytes": 1763,
+      "sha256": "306909914b3f5835769deae72c82362a4c5b719cb1fbe3b78211f6354b14398c",
+      "summary": {
+        "kind": "community_game_profile",
+        "format": "Json.NET JSON with comments supported",
+        "game": {
+          "map": 11,
+          "gameMode": "CLASSIC",
+          "dataPackage": "LeagueSandbox-Scripts"
+        },
+        "game_flags": {
+          "MANACOSTS_ENABLED": true,
+          "COOLDOWNS_ENABLED": true,
+          "CHEATS_ENABLED": true,
+          "MINION_SPAWNS_ENABLED": true,
+          "IS_DAMAGE_TEXT_GLOBAL": false,
+          "TRAINING_MODE": false,
+          "TRAINING_START_LEVEL": 1,
+          "TRAINING_START_GOLD": 500,
+          "TRAINING_GOD_MODE": false
+        },
+        "players_count": 1,
+        "teams": [
+          "BLUE"
+        ],
+        "forced_start_seconds_literal": 10,
+        "sensitive_player_fields_omitted": true,
+        "player_values_exported": false
+      }
+    },
+    {
+      "path": "GameServerConsole/bin/Debug/net6.0/Settings/GameInfo.json.template",
+      "bytes": 2381,
+      "sha256": "4780687feffd9c6cd3de155bb9b571aa48a74cc4d5551c1248585bf71837f2f6",
+      "summary": {
+        "kind": "community_game_profile",
+        "format": "Json.NET JSON with comments supported",
+        "game": {
+          "map": 1,
+          "gameMode": "CLASSIC",
+          "dataPackage": "LeagueSandbox-Scripts"
+        },
+        "game_flags": {
+          "MANACOSTS_ENABLED": false,
+          "COOLDOWNS_ENABLED": false,
+          "CHEATS_ENABLED": true,
+          "MINION_SPAWNS_ENABLED": false,
+          "IS_DAMAGE_TEXT_GLOBAL": false
+        },
+        "players_count": 1,
+        "teams": [
+          "BLUE"
+        ],
+        "forced_start_seconds_literal": 60,
+        "sensitive_player_fields_omitted": true,
+        "player_values_exported": false
+      }
+    },
+    {
+      "path": "GameServerConsole/bin/Debug/net6.0/Settings/GameServerSettings.json",
+      "bytes": 96,
+      "sha256": "cc743841bd21c548016405f653a3b4b7699acb5c6d0c6f13745e54d1b50a295c",
+      "summary": {
+        "kind": "community_debug_client_autostart",
+        "auto_start_client": true,
+        "client_location_present": true,
+        "effective_only_in_debug_block": true
+      }
+    },
+    {
+      "path": "GameServerConsole/bin/Debug/net6.0/Settings/GameServerSettings.json.template",
+      "bytes": 96,
+      "sha256": "cc743841bd21c548016405f653a3b4b7699acb5c6d0c6f13745e54d1b50a295c",
+      "summary": {
+        "kind": "community_debug_client_autostart",
+        "auto_start_client": true,
+        "client_location_present": true,
+        "effective_only_in_debug_block": true
+      }
+    },
+    {
+      "path": "GameServerConsole/bin/Debug/net6.0/Settings/MasterRegistry.json",
+      "bytes": 229,
+      "sha256": "0ab3d5098ddbf1800f21ec8d93865d7b6ab1e41b70b2c4a33e08152b41a157c7",
+      "summary": {
+        "kind": "community_master_registry",
+        "master_url_configured": true,
+        "master_is_loopback": true,
+        "public": true,
+        "heartbeat_interval_seconds": 15,
+        "private_or_user_fields_omitted": true
+      }
+    },
+    {
+      "path": "GameServerConsole/Settings/GameInfo.json.template",
+      "bytes": 2381,
+      "sha256": "4780687feffd9c6cd3de155bb9b571aa48a74cc4d5551c1248585bf71837f2f6",
+      "summary": {
+        "kind": "community_game_profile",
+        "format": "Json.NET JSON with comments supported",
+        "game": {
+          "map": 1,
+          "gameMode": "CLASSIC",
+          "dataPackage": "LeagueSandbox-Scripts"
+        },
+        "game_flags": {
+          "MANACOSTS_ENABLED": false,
+          "COOLDOWNS_ENABLED": false,
+          "CHEATS_ENABLED": true,
+          "MINION_SPAWNS_ENABLED": false,
+          "IS_DAMAGE_TEXT_GLOBAL": false
+        },
+        "players_count": 1,
+        "teams": [
+          "BLUE"
+        ],
+        "forced_start_seconds_literal": 60,
+        "sensitive_player_fields_omitted": true,
+        "player_values_exported": false
+      }
+    },
+    {
+      "path": "GameServerConsole/Settings/GameServerSettings.json.template",
+      "bytes": 96,
+      "sha256": "cc743841bd21c548016405f653a3b4b7699acb5c6d0c6f13745e54d1b50a295c",
+      "summary": {
+        "kind": "community_debug_client_autostart",
+        "auto_start_client": true,
+        "client_location_present": true,
+        "effective_only_in_debug_block": true
+      }
+    },
+    {
+      "path": "GameServerConsole/Settings/MasterRegistry.json",
+      "bytes": 229,
+      "sha256": "0ab3d5098ddbf1800f21ec8d93865d7b6ab1e41b70b2c4a33e08152b41a157c7",
+      "summary": {
+        "kind": "community_master_registry",
+        "master_url_configured": true,
+        "master_is_loopback": true,
+        "public": true,
+        "heartbeat_interval_seconds": 15,
+        "private_or_user_fields_omitted": true
+      }
+    }
+  ],
+  "native_client_configs": [
+    {
+      "path": "Config/game.cfg",
+      "bytes": 1946,
+      "sha256": "64d34912ea5411b47d6da0de44da374dd0a9e396fe96dc2b1d87ca76d562110e",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "Config/input.ini",
+      "bytes": 710,
+      "sha256": "fa16e719b04249006b3ab7c77f7810e728d3743faf82e86cb259b6cc96d0a531",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/system/launcher.cfg",
+      "bytes": 138,
+      "sha256": "f3417678c2e9a39bb40c937d5b8d63265092376756514652e5a22eb6c5195379",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/system/locale.cfg",
+      "bytes": 12,
+      "sha256": "82ecb50f4bf707a35a13a6b6987df89fa6044bedac6fc8aca179890a7890d6ae",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/system/system.cfg",
+      "bytes": 72,
+      "sha256": "a99ea26414fbd7deebace37c9e2c109f818a8c394f92607cfa082bd49f35c16a",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/system/user.cfg",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Announcements_ARAM.ini",
+      "bytes": 79603,
+      "sha256": "d7aa28817aa1be61e8416bb49e3d5d4caff9c3eb31c92afa4e5e0587f50f9f48",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Announcements_ASCENSION.ini",
+      "bytes": 58970,
+      "sha256": "32ee43fd4b9a1d8106ac6adac9aa6b86b9cb596bf6fa21673c9a2f545fb20abd",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Announcements_CLASSIC.ini",
+      "bytes": 90140,
+      "sha256": "34165f547988b7dd0608bde1b4a4de8194f73300353bf9cb0566b5e805b9b2a4",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Announcements_FIRSTBLOOD.ini",
+      "bytes": 60727,
+      "sha256": "a1a7d85f8496ae53c60437d3a9cb7b0a0b377c6bcff40ea3ffc735e0a7643252",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Announcements_ODIN.ini",
+      "bytes": 70692,
+      "sha256": "9b899becb6a9d00c4c1772c070f6ea0f644e3ab2137b8120984826e0dd569626",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Audio.ini",
+      "bytes": 258,
+      "sha256": "d94ce3ae7defaecb25a124da0b96d7a93e6a54bb31f75b5514f36e19a0101367",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Audio_Fenrir.ini",
+      "bytes": 197,
+      "sha256": "ec86e5fcc163a1da3c1af60f2fb68b0f272cf037731bfd163e3a53f52bf4c0e3",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Cheats.cfg",
+      "bytes": 150,
+      "sha256": "7ea33682baa99c6f620d2cc54f3fcbd7f7d519d75adf5d96ce39a1744838bbbc",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Compatibility.ini",
+      "bytes": 1004,
+      "sha256": "8d4e57a37c392be35c798167d4d60ecdcf922c60c38bf5dddc3f9b472491b0ce",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Cursors.ini",
+      "bytes": 1799,
+      "sha256": "620f46a771e73ada0d5cb3d2871e3754a2f2f9f83ef7ad5554d770d938e680e2",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/DriverIssues.ini",
+      "bytes": 77,
+      "sha256": "f7038b291a932729bc50f21a5c8b70ee1c9f263350709f36c846bca1dd8095dd",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Engine.cfg",
+      "bytes": 282,
+      "sha256": "458a27ad235fcc99d9a3300668513b1927d7ef0ed47bdfe8520fb87d16c81b96",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/EventHistorySchema.ini",
+      "bytes": 880,
+      "sha256": "20ab6a0d5edaec9bd1c534fc876c05c46dbfe26f035e9ca6137081d987851585",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Game.cfg",
+      "bytes": 14789,
+      "sha256": "02c41cb9a5068f8bc993435557fd7b159bddbcda1f022605d284d9ea51d72b0e",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/GameFeatures.cfg",
+      "bytes": 609,
+      "sha256": "1d7bc69ab05f2112b65584ad67bbb67fe47fef29ba01c8000f1d264cfcd37751",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/GamePermanent.cfg",
+      "bytes": 23214,
+      "sha256": "2fac41017961dbeca9e48a473f30da1978f6187f793754beae24c9cc77941f2c",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/GamePermanent_el_GR.cfg",
+      "bytes": 206,
+      "sha256": "5a3ed36552e460570ef5d6bc72f781c7fb781ff6cc5fe1e29da09854e66fd940",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/GamePermanent_ko_KR.cfg",
+      "bytes": 14369,
+      "sha256": "5107956d627860ce5e7da743fccbbe0dbb2608d6910ac3203316da1afff381cb",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/GamePermanent_pt_BR.cfg",
+      "bytes": 27,
+      "sha256": "d3a3ae12774cb3d6bb51a4a435e11fc8871337761ef7b6805fff6f597cc5b7a7",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/GamePermanent_ru_RU.cfg",
+      "bytes": 237,
+      "sha256": "08851a7b49ccf6ea7518b8c810ca52235e7a7dc922ff9b36646aeb3045d6a1e5",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/GamePermanent_tr_TR.cfg",
+      "bytes": 27,
+      "sha256": "c9d16936954a5271d72471fd9075ac9e7845996dd0681eb81d15c3c16c7d6c47",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/Input.ini",
+      "bytes": 30938,
+      "sha256": "930f1499991e9c4973e81086a26c944b7330058970c4227a614b897eae09fec1",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/KeymapForLocale.ini",
+      "bytes": 1885,
+      "sha256": "b76ca1e7a2b575f4a5b76a5d532a4a542a8a41f73c655327c534f6042b80d6e5",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/LanguageDuplications.ini",
+      "bytes": 208,
+      "sha256": "08d6a89e82ceeda8b596b933ba6cd5ded99b78f3394f1be8ab5f1bca448ec5fb",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/LightFx.ini",
+      "bytes": 5129,
+      "sha256": "862a385e2798cd96310676d70f4e34f22e5967d9631522237e74091ed02c5224",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/LiteEventsSchema.ini",
+      "bytes": 507,
+      "sha256": "974f799b22c95babfe09e2ee283c8e4cdc85a34006b17181d8f33921060c7dd7",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/locale.cfg",
+      "bytes": 37,
+      "sha256": "053f2ad45a7d6c808ba0b394f6a101e985099a953e5a2c7575ab44467804b42f",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/NSEAI.cfg",
+      "bytes": 417,
+      "sha256": "3846f6fb662130d5ea74bc8c9a82f53a90fef2d5d8e87cab238fd7daf533c57c",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/defaults/VerboseEventsSchema.ini",
+      "bytes": 509,
+      "sha256": "f1d5b6f6ccdb36cb24a805350d86ed58ef74a1f71b174126861a5bbfcdb68b83",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/game.cfg",
+      "bytes": 1814,
+      "sha256": "bdd0050b5ea9306c42b9d81111fca3a5c7b38fda962a2028a88c3dbbda61fe5d",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    },
+    {
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg/input.ini",
+      "bytes": 305,
+      "sha256": "aead4280d339159623dbe8f39784bde4b87a6b05afc6d95f2feccec7ba99073a",
+      "classification": "client/system or shipped defaults; not proof of a running Riot server"
+    }
+  ],
+  "shipped_client_defaults": {
+    "Game.cfg": {
+      "Replay.ServerCompressionEnabled": "1",
+      "Reconnect.NetworkTimeOutMin": "15000",
+      "Reconnect.NetworkTimeOutMax": "15000"
+    },
+    "GamePermanent.cfg": {
+      "NetConfig.localaddr": "127.0.0.1",
+      "NetConfig.NumClients": "1",
+      "NetConfig.TeamID": "100",
+      "NetConfig.batchPackets": "1",
+      "ServerPerformanceTweaks.OverallServerFPSCap": ".033 ; 1 / Frames ; Note this doesn't update live"
+    },
+    "GameFeatures.cfg": {
+      "Features.NetworkMetrics": "1",
+      "Features.ServerIPLogging": "1"
+    }
+  },
+  "consumer_contracts": {
+    "openleague": {
+      "source_origin": "local_rust_reconstruction",
+      "transport": "UDP, local JSON session protocol",
+      "default_bind": "127.0.0.1:5896",
+      "launcher_forced_bind": "127.0.0.1:5896",
+      "map_id_enabled_in_code": 10,
+      "tick_rate_hz": 30,
+      "settings": {
+        "OPENLEAGUE_SERVER": "bind address; default above",
+        "OPENLEAGUE_ALLOW_PAUSE": "enabled only by literal 1",
+        "OPENLEAGUE_OWNED_STDIN": "absent = independent; 1 = launcher pipe ownership; other values refused"
+      },
+      "config_file_loader_for_server_settings": false
+    },
+    "community": {
+      "source_origin": "LeagueSandbox modified community source; not Riot server source",
+      "declared_client_version": "4.20.0.315",
+      "transport": "ENet Patch420 with per-player Blowfish keys; source declaration only",
+      "bind_policy": "Address.Any with CLI port",
+      "default_game_port": 5119,
+      "game_info_path_relative_to_working_directory": "Settings/GameInfo.json",
+      "debug_client_settings_path": "Settings/GameServerSettings.json",
+      "config_priority": [
+        "explicit --config-json",
+        "--config path if existing",
+        "embedded GameInfo template, written when missing"
+      ],
+      "other_cli_options": [
+        "--config-gameserver",
+        "--config-gameserver-json",
+        "--port"
+      ],
+      "master_config_priority": [
+        "LOLSBX_MASTER_URL with siblings when URL nonempty",
+        "Settings/MasterRegistry.json",
+        "defaults with empty MasterUrl"
+      ],
+      "master_environment_names": [
+        "LOLSBX_DESCRIPTION",
+        "LOLSBX_HEARTBEAT",
+        "LOLSBX_MASTER_URL",
+        "LOLSBX_PUBLIC",
+        "LOLSBX_PUBLIC_HOST",
+        "LOLSBX_REGION",
+        "LOLSBX_SERVER_NAME"
+      ]
+    },
+    "master": {
+      "source_origin": "local community HTTP registry, not Riot platform",
+      "default_bind": "0.0.0.0:8080",
+      "environment_names": [
+        "LOLSBX_PORT",
+        "LOLSBX_DB"
+      ],
+      "default_db_literal": "master.db",
+      "runtime_started": false
+    }
+  },
+  "availability": [
+    {
+      "id": "community_net8_directory",
+      "root": "community",
+      "path": "GameServerConsole/bin/Debug/net8.0",
+      "present": false,
+      "meaning": "Target referenced by the old start-server wrappers"
+    },
+    {
+      "id": "community_net6_binary",
+      "root": "community",
+      "path": "GameServerConsole/bin/Debug/net6.0/GameServerConsole.dll",
+      "present": true,
+      "meaning": "Available file, not executed"
+    },
+    {
+      "id": "source_game_info_json",
+      "root": "community",
+      "path": "GameServerConsole/Settings/GameInfo.json",
+      "present": false,
+      "meaning": "Absent beside source; embedded template is separate"
+    },
+    {
+      "id": "source_client_autostart_json",
+      "root": "community",
+      "path": "GameServerConsole/Settings/GameServerSettings.json",
+      "present": false,
+      "meaning": "Absent beside source; template is present"
+    },
+    {
+      "id": "rust_server_binary",
+      "root": "project",
+      "path": "target/debug/openleague-server.exe",
+      "present": true,
+      "meaning": "Local Rust executable presence only"
+    },
+    {
+      "id": "native_client_binary",
+      "root": "native",
+      "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/League of Legends.exe",
+      "present": true,
+      "meaning": "Original client binary identity pinned"
+    }
+  ],
+  "server_origin": {
+    "riot_server_configuration_recovered": false,
+    "riot_server_binary_identified": false,
+    "community_repository_head": "b37c75483abf66048af7c914e7fab700efaa5e21",
+    "community_worktree_modified": true,
+    "native_client_connects_to_openleague_rust": null,
+    "notice": "No Riot production server configuration identified in the supplied roots. LeagueSandbox, the local master registry and OpenLeague Rust have distinct sources/protocols. An announced 4.20 version is not proof of wire compatibility."
+  },
+  "limits": [
+    "Identification statique uniquement : ni client historique, serveur C#, registre HTTP ni serveur Rust exécuté par cette tâche.",
+    "Le template LeagueSandbox utilise Map1 et désactive mana/coûts, recharges et sbires ; la configuration net6 présente utilise Map11, un joueur et les règles correspondantes. Aucune des deux ne constitue une configuration 3v3 Map10 terminée.",
+    "Les anciens scripts start-server visent net8.0, absent ; le projet et les fichiers disponibles sont net6.0. La tâche constate cet écart sans modifier ces projets sources.",
+    "Les valeurs par défaut livrées dans le client, y compris NetConfig et ServerPerformanceTweaks, ne prouvent pas une configuration serveur Riot exécutée.",
+    "Le serveur OpenLeague active Map10 dans son code et utilise 127.0.0.1:5896 par défaut avec le protocole UDP JSON local. Sa compatibilité avec le client natif ENet 4.20 n’est pas établie.",
+    "Les secrets, clés, noms et profils de joueurs ne sont pas exportés. Les données natives et communautaires restent séparées des politiques locales.",
+    "Aucune disponibilité d’un service distant, d’un serveur Riot original ou d’un runtime complet n’est déduite de fichiers ou d’un build déclaré."
+  ],
+  "human_acceptance": "not_given",
+  "native_or_server_executed": false,
+  "manual_state_mutated": false
+}

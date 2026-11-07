@@ -1,0 +1,36 @@
+<div class="modal">
+  <style scoped media='screen and (max-width: 1250px)'>
+    @import 'style/modals/initialPopup-small.css';
+  </style>
+  <style scoped media='screen and (min-width: 1251px)'>
+    @import 'style/modals/initialPopup-large.css';
+  </style>
+  <div id="modal-initial-popup" class="modal-popup-main modal-default">
+    <div class="modal-frame"></div>
+    <div class="modal-content">
+
+        <div class="modal-header">
+          <div class="modal-text-container">
+            <div class="modal-header-text clip-text font-lol">{{popupHeader}}</div>
+          </div>
+          <div><img src="images/initialPopupSeparator.png"></div>
+        </div>
+
+        <div class="modal-message font-lol">
+          <p>{{popupBody1}}</p>
+            <br>
+          <p>{{popupBody2}}</p>
+        </div>        
+    </div>
+    <div class="modal-footer">
+      <div class="background"></div>
+      <div class="modal-buttons">
+        <button id="buttonInitialPopup" ng-click="close()" class="modal-button"><p class="modal-button-text font-lol">{{popupCloseLabel}}</p></button>
+      </div>
+      <div class="external-link-container">
+        <a href={{externalLink}} target="_blank" class="external-link link-text font-lol">{{learnMoreLabel}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+

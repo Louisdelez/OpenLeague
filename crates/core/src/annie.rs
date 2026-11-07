@@ -65,6 +65,8 @@ impl Simulation {
   let cd=cooldown::ticks(value("cooldown"),stats.cooldown_reduction);
   // Native cannot-cancel flag: preserve the committed spell through later controls.
   // Cast duration uses supplied community SpellData.GetCastTime interpretation.
+  // Only a validated initial cast closes the current presentation identity.
+  self.cancel_attack_presentation(id,attack_presentation::CancelReason::OtherCast);
   let p=self.players.get_mut(&id).unwrap();p.mana-=cost;p.cooldowns[0]=self.tick+cd;p.cooldown_totals[0]=Some(cd);
   p.windup=None;p.effects.annie_q=Some(Pending{target,releases:self.tick+spells::seconds(value("cast_seconds")),raw,cost,refund_ticks:(cd as f32*value("kill_cooldown_refund_fraction")).floor() as u64,cooldown_ready:self.tick+cd});Ok(())
  }

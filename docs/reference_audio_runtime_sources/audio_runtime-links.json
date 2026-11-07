@@ -1,0 +1,1443 @@
+{
+  "schema": "openleague_audio_runtime_links/v1",
+  "passed": true,
+  "utc": "2026-10-23T05:59:02.138823+00:00",
+  "full_task_scope_complete": false,
+  "native_or_game_executed": false,
+  "historical_server_policy_qualified": false,
+  "facts": {
+    "candidates": {
+      "producer": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\prepare_audio_runtime_reader.py",
+        "bytes": 4230,
+        "sha256": "4490f599964e6fbf984e7177b94dac3b94a598c92a172ca0b3f1487cfef2efe8"
+      },
+      "associations": [
+        {
+          "task_id": "SYS-16.2-01",
+          "finding": "Native ambient parent requests, creation-order update and deferred owner stop; pending request is not hardware playback. Queues actual Bevy PCM voice; queued spawn and sink state do not prove audible hardware output.",
+          "remaining": "Whole-game event scheduling and all champion semantics remain open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/map_audio_requests.rs",
+              "line": 122,
+              "needle": "pub fn update(time:",
+              "role": "audio_runtime_1_0"
+            },
+            {
+              "path": "crates/client/src/ezreal_r_cast_audio.rs",
+              "line": 183,
+              "needle": "commands.spawn((AudioPlayer::<PcmAudio>",
+              "role": "audio_runtime_1_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-b00e4d7e-7a49-5698-b6d4-d5a0216fc9fe"
+        },
+        {
+          "task_id": "SYS-16.2-02",
+          "finding": "Local deterministic three-media variation, not native shuffle/RNG.",
+          "remaining": "Local R variant is not native selector; actual complete native selection integration remains open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/ezreal_r_cast_audio.rs",
+              "line": 56,
+              "needle": "fn variant(identity:",
+              "role": "audio_runtime_2_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-853037d9-fd71-5289-8d49-def0f86781a2"
+        },
+        {
+          "task_id": "SYS-16.2-03",
+          "finding": "Tracks finite bone world transforms in native coordinates; position tracking does not prove spatial mixing. Selected listener mask and source modes determine native distance; metric alone not audible spatial mix.",
+          "remaining": "Finite position tracking and metric exist; native 3D panning and full audible spatial mix remain open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/map_audio.rs",
+              "line": 221,
+              "needle": "pub fn ambient_positions(",
+              "role": "audio_runtime_3_0"
+            },
+            {
+              "path": "crates/core/src/audio_distance.rs",
+              "line": 24,
+              "needle": "pub fn nearest(",
+              "role": "audio_runtime_3_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-8ca37891-c5cd-5913-b6ad-1c5303750e88"
+        },
+        {
+          "task_id": "SYS-16.2-04",
+          "finding": "Local camera-focus attenuation gain0.20 distance2400; no native pan/falloff claim. Native spatial controls and attenuation provider component; no full device mixing qualification.",
+          "remaining": "R gain is local; native attenuation component not proof of actual full device mix.",
+          "anchors": [
+            {
+              "path": "crates/client/src/ezreal_r_cast_audio.rs",
+              "line": 62,
+              "needle": "fn gain(position:",
+              "role": "audio_runtime_4_0"
+            },
+            {
+              "path": "crates/core/src/audio_spatial_controls.rs",
+              "line": 24,
+              "needle": "pub fn apply(",
+              "role": "audio_runtime_4_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-43312921-1f49-550c-b646-28cbc81d58e8"
+        },
+        {
+          "task_id": "SYS-16.2-05",
+          "finding": "Local six-voice budget is separate from native global limit setter. Native low16 input and signed priority setter; not proof of complete voice scheduling.",
+          "remaining": "Local cap6 and native setter are distinct; complete native voice admission/virtualization integration remains open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/ezreal_r_cast_audio.rs",
+              "line": 9,
+              "needle": "const MAX_VOICES:usize=6;",
+              "role": "audio_runtime_5_0"
+            },
+            {
+              "path": "crates/core/src/audio_global_voice_limit.rs",
+              "line": 6,
+              "needle": "pub fn set(",
+              "role": "audio_runtime_5_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-1471e6b0-16ab-57bb-b7e3-12501f6d625d"
+        },
+        {
+          "task_id": "SYS-16.2-06",
+          "finding": "Native ambient parent requests, creation-order update and deferred owner stop; pending request is not hardware playback. Native stop flags, sorted pending identity, configured handle release; actual caller map_audio_requests.",
+          "remaining": "Logical deferred stops and local one-shot retirement do not qualify all looping owners.",
+          "anchors": [
+            {
+              "path": "crates/client/src/map_audio_requests.rs",
+              "line": 122,
+              "needle": "pub fn update(time:",
+              "role": "audio_runtime_6_0"
+            },
+            {
+              "path": "crates/core/src/audio_emitter_stop.rs",
+              "line": 7,
+              "needle": "pub fn request(",
+              "role": "audio_runtime_6_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-089b7f26-e8d5-512d-a102-2e5c3d33e38a"
+        },
+        {
+          "task_id": "SYS-16.2-07",
+          "finding": "Paused R cast voices retire; no resume/replay of this cue.",
+          "remaining": "R pause retires voice without resume; required native pause/resume policy remains open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/ezreal_r_cast_audio.rs",
+              "line": 150,
+              "needle": "else if frame.paused {Some(Code::RetirePaused)}",
+              "role": "audio_runtime_7_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-c468bb77-f368-5964-8cc1-ef5474e5b132"
+        },
+        {
+          "task_id": "SYS-16.2-08",
+          "finding": "Rejects events whose owner is not visible in canonical snapshot; bounded local presentation policy.",
+          "remaining": "Canonical visible-owner gate is local subset; exhaustive native sound visibility semantics remain open.",
+          "anchors": [
+            {
+              "path": "crates/client/src/ezreal_r_cast_audio_state.rs",
+              "line": 127,
+              "needle": "if !visible.contains(&event.owner)",
+              "role": "audio_runtime_8_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-255327b9-b8c5-5d8d-9151-fceae36569b6"
+        },
+        {
+          "task_id": "SYS-16.2-09",
+          "finding": "Queues actual Bevy PCM voice; queued spawn and sink state do not prove audible hardware output.",
+          "remaining": "No current human listening or captured hardware audio evidence; no audible qualification.",
+          "anchors": [
+            {
+              "path": "crates/client/src/ezreal_r_cast_audio.rs",
+              "line": 183,
+              "needle": "commands.spawn((AudioPlayer::<PcmAudio>",
+              "role": "audio_runtime_9_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-f0d720d5-404a-55e0-9f1e-eb2db0fd443f"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\runtime-consumer-research.json",
+          "bytes": 4721,
+          "sha256": "799abc88273782a65fd782e69f4eb1fdd357b43d919ce8f46bd98e2382465ef6"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio-runtime-test-receipt.json",
+          "bytes": 6595,
+          "sha256": "296d79d336c67952ea409dc5a8cf29e47c458cf86aa3d731e1ea0514da01919c"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio-spatial-stop-test-receipt.json",
+          "bytes": 11286,
+          "sha256": "fc1e91e0e41f72bc5174e657261da7e167d578e711ab1b4688ec205a557e9522"
+        }
+      ],
+      "current_sources": [
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\map_audio_requests.rs",
+          "bytes": 32375,
+          "sha256": "b8c33cba2ae3b57881dc4169988ab8ada0dd7455e4e7a784beb2121530f5d3b1"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+          "bytes": 28867,
+          "sha256": "4eaa5aa28d6b720055d2221cec692ce740d73558ce12d74f2b4b94ca583385e4"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+          "bytes": 28867,
+          "sha256": "4eaa5aa28d6b720055d2221cec692ce740d73558ce12d74f2b4b94ca583385e4"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\map_audio.rs",
+          "bytes": 19866,
+          "sha256": "1eae20253092fb669e4fe3fe5e3e25e8a3c6971c98b02189a90f9ee7395bb714"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\audio_distance.rs",
+          "bytes": 3771,
+          "sha256": "c68cc18827529d99f00093ce4c495c5f615dda894394e18047096ff706714883"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+          "bytes": 28867,
+          "sha256": "4eaa5aa28d6b720055d2221cec692ce740d73558ce12d74f2b4b94ca583385e4"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\audio_spatial_controls.rs",
+          "bytes": 9714,
+          "sha256": "f7e494e4021516205c04ed7ac0c440395887b80b5ab3f925271f146f21e5f202"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+          "bytes": 28867,
+          "sha256": "4eaa5aa28d6b720055d2221cec692ce740d73558ce12d74f2b4b94ca583385e4"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\audio_global_voice_limit.rs",
+          "bytes": 1738,
+          "sha256": "d346d14673e2abdaf02bd9730d4926aec4d0fd9d5812a5fa1f3b03963e9b5326"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\map_audio_requests.rs",
+          "bytes": 32375,
+          "sha256": "b8c33cba2ae3b57881dc4169988ab8ada0dd7455e4e7a784beb2121530f5d3b1"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\audio_emitter_stop.rs",
+          "bytes": 3086,
+          "sha256": "3ab2967407e5349c669414f8859a754193d3e45efaa02b0cb0501f7ff90db243"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+          "bytes": 28867,
+          "sha256": "4eaa5aa28d6b720055d2221cec692ce740d73558ce12d74f2b4b94ca583385e4"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio_state.rs",
+          "bytes": 31155,
+          "sha256": "e08d564c0e100c96993933da7683f194a17bba61855d711bc2373b52cecb8ef5"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+          "bytes": 28867,
+          "sha256": "4eaa5aa28d6b720055d2221cec692ce740d73558ce12d74f2b4b94ca583385e4"
+        }
+      ],
+      "scope": "Native CPU component vectors and current bounded audio consumers;no hardware playback or complete native mix acceptance."
+    },
+    "receipts": {
+      "runtime-consumer-research.json": {
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\map_audio_requests.rs",
+              "bytes": 32375,
+              "sha256": "b8c33cba2ae3b57881dc4169988ab8ada0dd7455e4e7a784beb2121530f5d3b1"
+            },
+            "line": 122,
+            "needle": "pub fn update(time:",
+            "finding": "Native ambient parent requests, creation-order update and deferred owner stop; pending request is not hardware playback."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+              "bytes": 28867,
+              "sha256": "4eaa5aa28d6b720055d2221cec692ce740d73558ce12d74f2b4b94ca583385e4"
+            },
+            "line": 56,
+            "needle": "fn variant(identity:",
+            "finding": "Local deterministic three-media variation, not native shuffle/RNG."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+              "bytes": 28867,
+              "sha256": "4eaa5aa28d6b720055d2221cec692ce740d73558ce12d74f2b4b94ca583385e4"
+            },
+            "line": 62,
+            "needle": "fn gain(position:",
+            "finding": "Local camera-focus attenuation gain0.20 distance2400; no native pan/falloff claim."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+              "bytes": 28867,
+              "sha256": "4eaa5aa28d6b720055d2221cec692ce740d73558ce12d74f2b4b94ca583385e4"
+            },
+            "line": 9,
+            "needle": "const MAX_VOICES:usize=6;",
+            "finding": "Local six-voice budget is separate from native global limit setter."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+              "bytes": 28867,
+              "sha256": "4eaa5aa28d6b720055d2221cec692ce740d73558ce12d74f2b4b94ca583385e4"
+            },
+            "line": 150,
+            "needle": "else if frame.paused {Some(Code::RetirePaused)}",
+            "finding": "Paused R cast voices retire; no resume/replay of this cue."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio_state.rs",
+              "bytes": 31155,
+              "sha256": "e08d564c0e100c96993933da7683f194a17bba61855d711bc2373b52cecb8ef5"
+            },
+            "line": 127,
+            "needle": "if !visible.contains(&event.owner)",
+            "finding": "Rejects events whose owner is not visible in canonical snapshot; bounded local presentation policy."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\audio_distance.rs",
+              "bytes": 3771,
+              "sha256": "c68cc18827529d99f00093ce4c495c5f615dda894394e18047096ff706714883"
+            },
+            "line": 24,
+            "needle": "pub fn nearest(",
+            "finding": "Selected listener mask and source modes determine native distance; metric alone not audible spatial mix."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\audio_global_voice_limit.rs",
+              "bytes": 1738,
+              "sha256": "d346d14673e2abdaf02bd9730d4926aec4d0fd9d5812a5fa1f3b03963e9b5326"
+            },
+            "line": 6,
+            "needle": "pub fn set(",
+            "finding": "Native low16 input and signed priority setter; not proof of complete voice scheduling."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\audio_emitter_stop.rs",
+              "bytes": 3086,
+              "sha256": "3ab2967407e5349c669414f8859a754193d3e45efaa02b0cb0501f7ff90db243"
+            },
+            "line": 7,
+            "needle": "pub fn request(",
+            "finding": "Native stop flags, sorted pending identity, configured handle release; actual caller map_audio_requests."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\audio_spatial_controls.rs",
+              "bytes": 9714,
+              "sha256": "f7e494e4021516205c04ed7ac0c440395887b80b5ab3f925271f146f21e5f202"
+            },
+            "line": 24,
+            "needle": "pub fn apply(",
+            "finding": "Native spatial controls and attenuation provider component; no full device mixing qualification."
+          }
+        ],
+        "receipts": [
+          {
+            "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio-runtime-test-receipt.json",
+            "bytes": 6595,
+            "sha256": "296d79d336c67952ea409dc5a8cf29e47c458cf86aa3d731e1ea0514da01919c"
+          },
+          {
+            "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio-spatial-stop-test-receipt.json",
+            "bytes": 11286,
+            "sha256": "fc1e91e0e41f72bc5174e657261da7e167d578e711ab1b4688ec205a557e9522"
+          }
+        ],
+        "fresh_rust_tests": 21,
+        "native_game_process_executed": false,
+        "audio_device_executed": false,
+        "complete": false
+      },
+      "audio-runtime-test-receipt.json": {
+        "utc": "2026-10-23T05:56:40.585050+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\run_audio_runtime_tests.py",
+          "bytes": 1699,
+          "sha256": "d2f41de144dd8172f131662b31cf7810e3217f4f643d23faaa8bb2ed6f475d4d"
+        },
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-core",
+              "audio_selection::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "audio_selection::tests::native_contract_preserves_actions_sources_and_ranges",
+              "audio_selection::native_tests::global_shuffle_keeps_last_sound_excluded_after_reset",
+              "audio_selection::tests::local_scope_does_not_share_history",
+              "audio_selection::tests::invalid_draw_is_atomic_even_after_a_successful_first_layer",
+              "audio_selection::native_tests::explicit_probability_and_absence_keep_different_draw_counts",
+              "audio_selection::tests::native_standard_history_is_global_and_skipped_actions_do_not_change_it",
+              "audio_selection::tests::native_shuffle_exhausts_each_layer_independently_across_emitters",
+              "audio_selection::tests::native_brazier_actions_can_be_silent_single_or_simultaneous",
+              "audio_selection::tests::native_shop_single_source_is_a_step_not_an_infinite_voice",
+              "audio_selection::tests::unknown_and_unsupported_graphs_are_explicit_errors",
+              "audio_selection::tests::weighted_selection_uses_eligible_weight_sum"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_selection-tests.log",
+              "bytes": 15998,
+              "sha256": "67a13b4aaa5479756526cdb111ee7e9f94a184636cd0af7534508f1a5f3ab228"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+                "bytes": 787789824,
+                "sha256": "46d3732181601e8bfdc1923857d66192fd2a18fba13fe7aa3bd2f80876f74e6d"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+                "bytes": 6285312,
+                "sha256": "d9edcf79a66d1ac56e78b7b41c3b0b1fb58b80233ed41c2338a6fb9f5e696702"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+                "bytes": 6056960,
+                "sha256": "7791975eff9f583c94791b54664393dd05447aeef7c504d705b623b74bd4a80a"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+                "bytes": 922624,
+                "sha256": "e291d277c0fa15af20b32df3a64c06a093135f9f2d8d2293e9198ef70eadc0e4"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+                "bytes": 6248448,
+                "sha256": "e4124365733329f6e095d0b67fc20e57940d2496de1c2401b0bd0a8439cd42e0"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+                "bytes": 5990912,
+                "sha256": "20f86f1140ab38925ee9fb8cd07da4a12e28c6cfa2d71da169d79ea73873073b"
+              }
+            ]
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-core",
+              "audio_priority_transition::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "audio_priority_transition::tests::invalid_groups_do_not_partially_change_voice_caches",
+              "audio_priority_transition::tests::native_transition_and_ordered_consumer_match3072_cases"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_priority_transition-tests.log",
+              "bytes": 15176,
+              "sha256": "d13273a4c28c9cea0f0a0a19ba1054134f137f192f2ec6e7b31e0621ce65856b"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+                "bytes": 787789824,
+                "sha256": "46d3732181601e8bfdc1923857d66192fd2a18fba13fe7aa3bd2f80876f74e6d"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+                "bytes": 6285312,
+                "sha256": "d9edcf79a66d1ac56e78b7b41c3b0b1fb58b80233ed41c2338a6fb9f5e696702"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+                "bytes": 6056960,
+                "sha256": "7791975eff9f583c94791b54664393dd05447aeef7c504d705b623b74bd4a80a"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+                "bytes": 922624,
+                "sha256": "e291d277c0fa15af20b32df3a64c06a093135f9f2d8d2293e9198ef70eadc0e4"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+                "bytes": 6248448,
+                "sha256": "e4124365733329f6e095d0b67fc20e57940d2496de1c2401b0bd0a8439cd42e0"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+                "bytes": 5990912,
+                "sha256": "20f86f1140ab38925ee9fb8cd07da4a12e28c6cfa2d71da169d79ea73873073b"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "path": "F:\\OpenLeague\\Cargo.lock",
+            "bytes": 153304,
+            "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\core\\src\\audio_priority_transition.rs",
+            "bytes": 6332,
+            "sha256": "1dc436d8f87201da69a19e1d553db782fe014d77aa236f4aae74d14fd1acfd9b"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\core\\src\\audio_selection.rs",
+            "bytes": 18689,
+            "sha256": "f6a2438a5f6b35ebe0926e664c1204a6ff2c686f39266988306a8c645973fbb2"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\audio_priority_transition_contract.json",
+            "bytes": 7168399,
+            "sha256": "574c9028d5229ca5a65661a26cda913a8fbebd6faaef326834d0b60d32fe95ca"
+          }
+        ],
+        "scope": "Fresh current Rust tests for ambient selection and priority transition;no device playback;retained native vectors,no original process or GPU execution.",
+        "native_or_gpu_executed": false
+      },
+      "audio-spatial-stop-test-receipt.json": {
+        "utc": "2026-10-23T05:57:40.440681+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\run_spatial_stop_tests.py",
+          "bytes": 1862,
+          "sha256": "03559b9623392a26e82319829b0ab7157442e2f65496651b1002b4e76986b159"
+        },
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-core",
+              "audio_distance::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "audio_distance::tests::selected_invalid_geometry_fails_and_unused_listeners_are_not_read",
+              "audio_distance::tests::native_masks_modes_scaled_distances_and_fallback_match_exactly"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_distance-tests.log",
+              "bytes": 15176,
+              "sha256": "44e37f8845f23173b4f597b935d8a74eaf60f168e95e61d3caf446dd95ceddc5"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+                "bytes": 787789824,
+                "sha256": "46d3732181601e8bfdc1923857d66192fd2a18fba13fe7aa3bd2f80876f74e6d"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+                "bytes": 6285312,
+                "sha256": "d9edcf79a66d1ac56e78b7b41c3b0b1fb58b80233ed41c2338a6fb9f5e696702"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+                "bytes": 6056960,
+                "sha256": "7791975eff9f583c94791b54664393dd05447aeef7c504d705b623b74bd4a80a"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+                "bytes": 922624,
+                "sha256": "e291d277c0fa15af20b32df3a64c06a093135f9f2d8d2293e9198ef70eadc0e4"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+                "bytes": 6248448,
+                "sha256": "e4124365733329f6e095d0b67fc20e57940d2496de1c2401b0bd0a8439cd42e0"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+                "bytes": 5990912,
+                "sha256": "20f86f1140ab38925ee9fb8cd07da4a12e28c6cfa2d71da169d79ea73873073b"
+              }
+            ]
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-core",
+              "audio_spatial_controls::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "audio_spatial_controls::tests::invalid_spatial_inputs_and_empty_resources_fail_explicitly",
+              "audio_spatial_controls::tests::original_spatial_selection_and_controls_match1920_cases",
+              "audio_spatial_controls::tests::original_spatial_pose_and_attenuation_match9216_cases"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_spatial_controls-tests.log",
+              "bytes": 15275,
+              "sha256": "0e68f06420658c7a605256da58e71a220545a6bd90b8a2d2ca201fece8fffafa"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+                "bytes": 787789824,
+                "sha256": "46d3732181601e8bfdc1923857d66192fd2a18fba13fe7aa3bd2f80876f74e6d"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+                "bytes": 6285312,
+                "sha256": "d9edcf79a66d1ac56e78b7b41c3b0b1fb58b80233ed41c2338a6fb9f5e696702"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+                "bytes": 6056960,
+                "sha256": "7791975eff9f583c94791b54664393dd05447aeef7c504d705b623b74bd4a80a"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+                "bytes": 922624,
+                "sha256": "e291d277c0fa15af20b32df3a64c06a093135f9f2d8d2293e9198ef70eadc0e4"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+                "bytes": 6248448,
+                "sha256": "e4124365733329f6e095d0b67fc20e57940d2496de1c2401b0bd0a8439cd42e0"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+                "bytes": 5990912,
+                "sha256": "20f86f1140ab38925ee9fb8cd07da4a12e28c6cfa2d71da169d79ea73873073b"
+              }
+            ]
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-core",
+              "audio_global_voice_limit::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "audio_global_voice_limit::tests::audio_global_voice_limit_matches400_original_signed_priority_low16_zero_status_and_complete_globals"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_global_voice_limit-tests.log",
+              "bytes": 15121,
+              "sha256": "b9565812598cd6850717de772b4480456f368e3c042baf97d56bf51faa26e029"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+                "bytes": 787789824,
+                "sha256": "46d3732181601e8bfdc1923857d66192fd2a18fba13fe7aa3bd2f80876f74e6d"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+                "bytes": 6285312,
+                "sha256": "d9edcf79a66d1ac56e78b7b41c3b0b1fb58b80233ed41c2338a6fb9f5e696702"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+                "bytes": 6056960,
+                "sha256": "7791975eff9f583c94791b54664393dd05447aeef7c504d705b623b74bd4a80a"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+                "bytes": 922624,
+                "sha256": "e291d277c0fa15af20b32df3a64c06a093135f9f2d8d2293e9198ef70eadc0e4"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+                "bytes": 6248448,
+                "sha256": "e4124365733329f6e095d0b67fc20e57940d2496de1c2401b0bd0a8439cd42e0"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+                "bytes": 5990912,
+                "sha256": "20f86f1140ab38925ee9fb8cd07da4a12e28c6cfa2d71da169d79ea73873073b"
+              }
+            ]
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-core",
+              "audio_emitter_stop::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "audio_emitter_stop::tests::rejected_unsorted_queue_keeps_owner_state_and_handles",
+              "audio_emitter_stop::tests::matches_216_native_stop_cases_including_repeated_calls_and_zero_handles"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_emitter_stop-tests.log",
+              "bytes": 15181,
+              "sha256": "4df91846529aacae74527496675f5821ad3d2065dcdec5ede7181258dc8deb52"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+                "bytes": 787789824,
+                "sha256": "46d3732181601e8bfdc1923857d66192fd2a18fba13fe7aa3bd2f80876f74e6d"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+                "bytes": 6285312,
+                "sha256": "d9edcf79a66d1ac56e78b7b41c3b0b1fb58b80233ed41c2338a6fb9f5e696702"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+                "bytes": 6056960,
+                "sha256": "7791975eff9f583c94791b54664393dd05447aeef7c504d705b623b74bd4a80a"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+                "bytes": 922624,
+                "sha256": "e291d277c0fa15af20b32df3a64c06a093135f9f2d8d2293e9198ef70eadc0e4"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+                "bytes": 6248448,
+                "sha256": "e4124365733329f6e095d0b67fc20e57940d2496de1c2401b0bd0a8439cd42e0"
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+                "bytes": 5990912,
+                "sha256": "20f86f1140ab38925ee9fb8cd07da4a12e28c6cfa2d71da169d79ea73873073b"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "path": "F:\\OpenLeague\\Cargo.lock",
+            "bytes": 153304,
+            "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\core\\src\\audio_distance.rs",
+            "bytes": 3771,
+            "sha256": "c68cc18827529d99f00093ce4c495c5f615dda894394e18047096ff706714883"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\core\\src\\audio_emitter_stop.rs",
+            "bytes": 3086,
+            "sha256": "3ab2967407e5349c669414f8859a754193d3e45efaa02b0cb0501f7ff90db243"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\core\\src\\audio_global_voice_limit.rs",
+            "bytes": 1738,
+            "sha256": "d346d14673e2abdaf02bd9730d4926aec4d0fd9d5812a5fa1f3b03963e9b5326"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\core\\src\\audio_spatial_controls.rs",
+            "bytes": 9714,
+            "sha256": "f7e494e4021516205c04ed7ac0c440395887b80b5ab3f925271f146f21e5f202"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\audio_distance_contract.json",
+            "bytes": 565593,
+            "sha256": "7344d59968db3db68ef3235103a634629c3ca3c4d4fd4371bbac0dd24fb3d8d7"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\audio_emitter_stop_contract.json",
+            "bytes": 68223,
+            "sha256": "d93acc50c04d20cb5c0377c53130d579165a228a38d33c557b51dc855782b82b"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\audio_global_voice_limit_preparation.json",
+            "bytes": 173078,
+            "sha256": "4f6d247f1e3b05db81a20ce564dbf50e5f7274268a281c49334a5ee99893b05d"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\audio_spatial_controls_contract.json",
+            "bytes": 1466390,
+            "sha256": "f58ad9f416a61b1b7991160b230dc71aa80c302bcb720292aa15e17a6355154d"
+          }
+        ],
+        "scope": "Fresh current Rust tests for ambient selection and priority transition;no device playback;retained native vectors,no original process or GPU execution.",
+        "native_or_gpu_executed": false
+      }
+    },
+    "source_checks": [
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio-runtime-associations.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\prepare_audio_runtime_reader.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\runtime-consumer-research.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio-runtime-test-receipt.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio-spatial-stop-test-receipt.json",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\map_audio_requests.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\map_audio.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_distance.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_spatial_controls.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_global_voice_limit.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\map_audio_requests.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_emitter_stop.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio_state.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\map_audio_requests.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio_state.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_distance.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_global_voice_limit.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_emitter_stop.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_spatial_controls.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio-runtime-test-receipt.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio-spatial-stop-test-receipt.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\run_audio_runtime_tests.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_selection-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_priority_transition-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+      "pin_F:\\OpenLeague\\Cargo.lock",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_priority_transition.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_selection.rs",
+      "pin_F:\\OpenLeague\\data\\4.20\\audio_priority_transition_contract.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\run_spatial_stop_tests.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_distance-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_spatial_controls-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_global_voice_limit-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_emitter_stop-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+      "pin_F:\\OpenLeague\\Cargo.lock",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_distance.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_emitter_stop.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_global_voice_limit.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_spatial_controls.rs",
+      "pin_F:\\OpenLeague\\data\\4.20\\audio_distance_contract.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\audio_emitter_stop_contract.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\audio_global_voice_limit_preparation.json",
+      "pin_F:\\OpenLeague\\data\\4.20\\audio_spatial_controls_contract.json",
+      "nine_associations",
+      "twentyone_tests",
+      "no_hardware_claim",
+      "task_SYS-16.2-01",
+      "anchor_audio_runtime_1_0",
+      "anchor_audio_runtime_1_1",
+      "task_SYS-16.2-02",
+      "anchor_audio_runtime_2_0",
+      "task_SYS-16.2-03",
+      "anchor_audio_runtime_3_0",
+      "anchor_audio_runtime_3_1",
+      "task_SYS-16.2-04",
+      "anchor_audio_runtime_4_0",
+      "anchor_audio_runtime_4_1",
+      "task_SYS-16.2-05",
+      "anchor_audio_runtime_5_0",
+      "anchor_audio_runtime_5_1",
+      "task_SYS-16.2-06",
+      "anchor_audio_runtime_6_0",
+      "anchor_audio_runtime_6_1",
+      "task_SYS-16.2-07",
+      "anchor_audio_runtime_7_0",
+      "task_SYS-16.2-08",
+      "anchor_audio_runtime_8_0",
+      "task_SYS-16.2-09",
+      "anchor_audio_runtime_9_0"
+    ],
+    "all_audio_runtimes_qualified": false,
+    "all_required_effects_covered": false
+  },
+  "source_identities": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio-runtime-associations.json",
+      "bytes": 11615,
+      "sha256": "b1fadfbe5ea34dd6cbbff691086478131844105392a4912636073fe67c135e93"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\prepare_audio_runtime_reader.py",
+      "bytes": 4230,
+      "sha256": "4490f599964e6fbf984e7177b94dac3b94a598c92a172ca0b3f1487cfef2efe8"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\runtime-consumer-research.json",
+      "bytes": 4721,
+      "sha256": "799abc88273782a65fd782e69f4eb1fdd357b43d919ce8f46bd98e2382465ef6"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio-runtime-test-receipt.json",
+      "bytes": 6595,
+      "sha256": "296d79d336c67952ea409dc5a8cf29e47c458cf86aa3d731e1ea0514da01919c"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio-spatial-stop-test-receipt.json",
+      "bytes": 11286,
+      "sha256": "fc1e91e0e41f72bc5174e657261da7e167d578e711ab1b4688ec205a557e9522"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\map_audio_requests.rs",
+      "bytes": 32375,
+      "sha256": "b8c33cba2ae3b57881dc4169988ab8ada0dd7455e4e7a784beb2121530f5d3b1"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+      "bytes": 28867,
+      "sha256": "4eaa5aa28d6b720055d2221cec692ce740d73558ce12d74f2b4b94ca583385e4"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\map_audio.rs",
+      "bytes": 19866,
+      "sha256": "1eae20253092fb669e4fe3fe5e3e25e8a3c6971c98b02189a90f9ee7395bb714"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\audio_distance.rs",
+      "bytes": 3771,
+      "sha256": "c68cc18827529d99f00093ce4c495c5f615dda894394e18047096ff706714883"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\audio_spatial_controls.rs",
+      "bytes": 9714,
+      "sha256": "f7e494e4021516205c04ed7ac0c440395887b80b5ab3f925271f146f21e5f202"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\audio_global_voice_limit.rs",
+      "bytes": 1738,
+      "sha256": "d346d14673e2abdaf02bd9730d4926aec4d0fd9d5812a5fa1f3b03963e9b5326"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\audio_emitter_stop.rs",
+      "bytes": 3086,
+      "sha256": "3ab2967407e5349c669414f8859a754193d3e45efaa02b0cb0501f7ff90db243"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio_state.rs",
+      "bytes": 31155,
+      "sha256": "e08d564c0e100c96993933da7683f194a17bba61855d711bc2373b52cecb8ef5"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\run_audio_runtime_tests.py",
+      "bytes": 1699,
+      "sha256": "d2f41de144dd8172f131662b31cf7810e3217f4f643d23faaa8bb2ed6f475d4d"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_selection-tests.log",
+      "bytes": 15998,
+      "sha256": "67a13b4aaa5479756526cdb111ee7e9f94a184636cd0af7534508f1a5f3ab228"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+      "bytes": 787789824,
+      "sha256": "46d3732181601e8bfdc1923857d66192fd2a18fba13fe7aa3bd2f80876f74e6d"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+      "bytes": 6285312,
+      "sha256": "d9edcf79a66d1ac56e78b7b41c3b0b1fb58b80233ed41c2338a6fb9f5e696702"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+      "bytes": 6056960,
+      "sha256": "7791975eff9f583c94791b54664393dd05447aeef7c504d705b623b74bd4a80a"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+      "bytes": 922624,
+      "sha256": "e291d277c0fa15af20b32df3a64c06a093135f9f2d8d2293e9198ef70eadc0e4"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+      "bytes": 6248448,
+      "sha256": "e4124365733329f6e095d0b67fc20e57940d2496de1c2401b0bd0a8439cd42e0"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+      "bytes": 5990912,
+      "sha256": "20f86f1140ab38925ee9fb8cd07da4a12e28c6cfa2d71da169d79ea73873073b"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_priority_transition-tests.log",
+      "bytes": 15176,
+      "sha256": "d13273a4c28c9cea0f0a0a19ba1054134f137f192f2ec6e7b31e0621ce65856b"
+    },
+    {
+      "path": "F:\\OpenLeague\\Cargo.lock",
+      "bytes": 153304,
+      "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\audio_priority_transition.rs",
+      "bytes": 6332,
+      "sha256": "1dc436d8f87201da69a19e1d553db782fe014d77aa236f4aae74d14fd1acfd9b"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\audio_selection.rs",
+      "bytes": 18689,
+      "sha256": "f6a2438a5f6b35ebe0926e664c1204a6ff2c686f39266988306a8c645973fbb2"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\audio_priority_transition_contract.json",
+      "bytes": 7168399,
+      "sha256": "574c9028d5229ca5a65661a26cda913a8fbebd6faaef326834d0b60d32fe95ca"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\run_spatial_stop_tests.py",
+      "bytes": 1862,
+      "sha256": "03559b9623392a26e82319829b0ab7157442e2f65496651b1002b4e76986b159"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_distance-tests.log",
+      "bytes": 15176,
+      "sha256": "44e37f8845f23173b4f597b935d8a74eaf60f168e95e61d3caf446dd95ceddc5"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_spatial_controls-tests.log",
+      "bytes": 15275,
+      "sha256": "0e68f06420658c7a605256da58e71a220545a6bd90b8a2d2ca201fece8fffafa"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_global_voice_limit-tests.log",
+      "bytes": 15121,
+      "sha256": "b9565812598cd6850717de772b4480456f368e3c042baf97d56bf51faa26e029"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_emitter_stop-tests.log",
+      "bytes": 15181,
+      "sha256": "4df91846529aacae74527496675f5821ad3d2065dcdec5ede7181258dc8deb52"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\audio_distance_contract.json",
+      "bytes": 565593,
+      "sha256": "7344d59968db3db68ef3235103a634629c3ca3c4d4fd4371bbac0dd24fb3d8d7"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\audio_emitter_stop_contract.json",
+      "bytes": 68223,
+      "sha256": "d93acc50c04d20cb5c0377c53130d579165a228a38d33c557b51dc855782b82b"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\audio_global_voice_limit_preparation.json",
+      "bytes": 173078,
+      "sha256": "4f6d247f1e3b05db81a20ce564dbf50e5f7274268a281c49334a5ee99893b05d"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\audio_spatial_controls_contract.json",
+      "bytes": 1466390,
+      "sha256": "f58ad9f416a61b1b7991160b230dc71aa80c302bcb720292aa15e17a6355154d"
+    }
+  ],
+  "checks": [
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio-runtime-associations.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\prepare_audio_runtime_reader.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\runtime-consumer-research.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio-runtime-test-receipt.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio-spatial-stop-test-receipt.json",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\map_audio_requests.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\map_audio.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_distance.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_spatial_controls.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_global_voice_limit.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\map_audio_requests.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_emitter_stop.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio_state.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\map_audio_requests.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio_state.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_distance.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_global_voice_limit.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_emitter_stop.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_spatial_controls.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio-runtime-test-receipt.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio-spatial-stop-test-receipt.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\run_audio_runtime_tests.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_selection-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_priority_transition-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+    "pin_F:\\OpenLeague\\Cargo.lock",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_priority_transition.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_selection.rs",
+    "pin_F:\\OpenLeague\\data\\4.20\\audio_priority_transition_contract.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\run_spatial_stop_tests.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_distance-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_spatial_controls-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_global_voice_limit-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision118\\audio_emitter_stop-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\doran_blade-3bc6f31acf80c876.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\map10_shop_admission-a6a46c157264e4a3.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+    "pin_F:\\OpenLeague\\Cargo.lock",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_distance.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_emitter_stop.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_global_voice_limit.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_spatial_controls.rs",
+    "pin_F:\\OpenLeague\\data\\4.20\\audio_distance_contract.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\audio_emitter_stop_contract.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\audio_global_voice_limit_preparation.json",
+    "pin_F:\\OpenLeague\\data\\4.20\\audio_spatial_controls_contract.json",
+    "nine_associations",
+    "twentyone_tests",
+    "no_hardware_claim",
+    "task_SYS-16.2-01",
+    "anchor_audio_runtime_1_0",
+    "anchor_audio_runtime_1_1",
+    "task_SYS-16.2-02",
+    "anchor_audio_runtime_2_0",
+    "task_SYS-16.2-03",
+    "anchor_audio_runtime_3_0",
+    "anchor_audio_runtime_3_1",
+    "task_SYS-16.2-04",
+    "anchor_audio_runtime_4_0",
+    "anchor_audio_runtime_4_1",
+    "task_SYS-16.2-05",
+    "anchor_audio_runtime_5_0",
+    "anchor_audio_runtime_5_1",
+    "task_SYS-16.2-06",
+    "anchor_audio_runtime_6_0",
+    "anchor_audio_runtime_6_1",
+    "task_SYS-16.2-07",
+    "anchor_audio_runtime_7_0",
+    "task_SYS-16.2-08",
+    "anchor_audio_runtime_8_0",
+    "task_SYS-16.2-09",
+    "anchor_audio_runtime_9_0"
+  ],
+  "checks_count": 114,
+  "associations": [
+    {
+      "task_id": "SYS-16.2-01",
+      "finding": "Native ambient parent requests, creation-order update and deferred owner stop; pending request is not hardware playback. Queues actual Bevy PCM voice; queued spawn and sink state do not prove audible hardware output.",
+      "remaining": "Whole-game event scheduling and all champion semantics remain open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/map_audio_requests.rs",
+          "line": 122,
+          "needle": "pub fn update(time:",
+          "role": "audio_runtime_1_0"
+        },
+        {
+          "path": "crates/client/src/ezreal_r_cast_audio.rs",
+          "line": 183,
+          "needle": "commands.spawn((AudioPlayer::<PcmAudio>",
+          "role": "audio_runtime_1_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-b00e4d7e-7a49-5698-b6d4-d5a0216fc9fe"
+    },
+    {
+      "task_id": "SYS-16.2-02",
+      "finding": "Local deterministic three-media variation, not native shuffle/RNG.",
+      "remaining": "Local R variant is not native selector; actual complete native selection integration remains open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/ezreal_r_cast_audio.rs",
+          "line": 56,
+          "needle": "fn variant(identity:",
+          "role": "audio_runtime_2_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-853037d9-fd71-5289-8d49-def0f86781a2"
+    },
+    {
+      "task_id": "SYS-16.2-03",
+      "finding": "Tracks finite bone world transforms in native coordinates; position tracking does not prove spatial mixing. Selected listener mask and source modes determine native distance; metric alone not audible spatial mix.",
+      "remaining": "Finite position tracking and metric exist; native 3D panning and full audible spatial mix remain open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/map_audio.rs",
+          "line": 221,
+          "needle": "pub fn ambient_positions(",
+          "role": "audio_runtime_3_0"
+        },
+        {
+          "path": "crates/core/src/audio_distance.rs",
+          "line": 24,
+          "needle": "pub fn nearest(",
+          "role": "audio_runtime_3_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-8ca37891-c5cd-5913-b6ad-1c5303750e88"
+    },
+    {
+      "task_id": "SYS-16.2-04",
+      "finding": "Local camera-focus attenuation gain0.20 distance2400; no native pan/falloff claim. Native spatial controls and attenuation provider component; no full device mixing qualification.",
+      "remaining": "R gain is local; native attenuation component not proof of actual full device mix.",
+      "anchors": [
+        {
+          "path": "crates/client/src/ezreal_r_cast_audio.rs",
+          "line": 62,
+          "needle": "fn gain(position:",
+          "role": "audio_runtime_4_0"
+        },
+        {
+          "path": "crates/core/src/audio_spatial_controls.rs",
+          "line": 24,
+          "needle": "pub fn apply(",
+          "role": "audio_runtime_4_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-43312921-1f49-550c-b646-28cbc81d58e8"
+    },
+    {
+      "task_id": "SYS-16.2-05",
+      "finding": "Local six-voice budget is separate from native global limit setter. Native low16 input and signed priority setter; not proof of complete voice scheduling.",
+      "remaining": "Local cap6 and native setter are distinct; complete native voice admission/virtualization integration remains open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/ezreal_r_cast_audio.rs",
+          "line": 9,
+          "needle": "const MAX_VOICES:usize=6;",
+          "role": "audio_runtime_5_0"
+        },
+        {
+          "path": "crates/core/src/audio_global_voice_limit.rs",
+          "line": 6,
+          "needle": "pub fn set(",
+          "role": "audio_runtime_5_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-1471e6b0-16ab-57bb-b7e3-12501f6d625d"
+    },
+    {
+      "task_id": "SYS-16.2-06",
+      "finding": "Native ambient parent requests, creation-order update and deferred owner stop; pending request is not hardware playback. Native stop flags, sorted pending identity, configured handle release; actual caller map_audio_requests.",
+      "remaining": "Logical deferred stops and local one-shot retirement do not qualify all looping owners.",
+      "anchors": [
+        {
+          "path": "crates/client/src/map_audio_requests.rs",
+          "line": 122,
+          "needle": "pub fn update(time:",
+          "role": "audio_runtime_6_0"
+        },
+        {
+          "path": "crates/core/src/audio_emitter_stop.rs",
+          "line": 7,
+          "needle": "pub fn request(",
+          "role": "audio_runtime_6_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-089b7f26-e8d5-512d-a102-2e5c3d33e38a"
+    },
+    {
+      "task_id": "SYS-16.2-07",
+      "finding": "Paused R cast voices retire; no resume/replay of this cue.",
+      "remaining": "R pause retires voice without resume; required native pause/resume policy remains open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/ezreal_r_cast_audio.rs",
+          "line": 150,
+          "needle": "else if frame.paused {Some(Code::RetirePaused)}",
+          "role": "audio_runtime_7_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-c468bb77-f368-5964-8cc1-ef5474e5b132"
+    },
+    {
+      "task_id": "SYS-16.2-08",
+      "finding": "Rejects events whose owner is not visible in canonical snapshot; bounded local presentation policy.",
+      "remaining": "Canonical visible-owner gate is local subset; exhaustive native sound visibility semantics remain open.",
+      "anchors": [
+        {
+          "path": "crates/client/src/ezreal_r_cast_audio_state.rs",
+          "line": 127,
+          "needle": "if !visible.contains(&event.owner)",
+          "role": "audio_runtime_8_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-255327b9-b8c5-5d8d-9151-fceae36569b6"
+    },
+    {
+      "task_id": "SYS-16.2-09",
+      "finding": "Queues actual Bevy PCM voice; queued spawn and sink state do not prove audible hardware output.",
+      "remaining": "No current human listening or captured hardware audio evidence; no audible qualification.",
+      "anchors": [
+        {
+          "path": "crates/client/src/ezreal_r_cast_audio.rs",
+          "line": 183,
+          "needle": "commands.spawn((AudioPlayer::<PcmAudio>",
+          "role": "audio_runtime_9_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-f0d720d5-404a-55e0-9f1e-eb2db0fd443f"
+    }
+  ]
+}

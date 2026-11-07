@@ -19,6 +19,7 @@ pub struct Client {
     barrier: Option<t::BootstrapBarrier>,
     waiting: VecDeque<t::StateEnvelope>,
     delivered: u64,
+    observation_batch: Vec<u64>,
     presented: u64,
     failed: Option<&'static str>,
 }
@@ -36,7 +37,7 @@ impl Client {
         }
         let mut client = Self { pending: Some(t::ClientMessage::JoinResumable(original.clone())), original,
             known: None, current: None, sequence: 0, assembly: None, barrier: None,
-            waiting: VecDeque::new(), delivered: 0, presented: 0, failed: None };
+            waiting: VecDeque::new(), delivered: 0, observation_batch: Vec::new(), presented: 0, failed: None };
         if recover { client.recover(nonce)?; }
         Ok(client)
     }
@@ -53,12 +54,22 @@ impl Client {
         self.failed.is_none() && self.pending.is_none() && self.presented != 0
             && self.presented == self.delivered && self.barrier.as_ref().is_some_and(t::BootstrapBarrier::ready)
     }
+    /// Read-only admission for the exact frame currently being observed by receive.
+    /// Inputs and physical presentation still require ready() after snapshot commit.
+    /// Membership is the bounded batch actually returned by take_ready_states, not
+    /// the numeric range up to delivered (UDP can skip arbitrary frame ordinals).
+    pub fn observation_ready(&self, context: t::Context, frame: u64) -> bool {
+        self.failed.is_none() && self.pending.is_none() && self.context() == Some(context)
+            && frame != 0 && frame > self.presented
+            && self.observation_batch.contains(&frame)
+            && self.barrier.as_ref().is_some_and(t::BootstrapBarrier::ready)
+    }
     pub fn recover(&mut self, nonce: t::RequestNonce) -> Result<(), &'static str> {
         if !nonce.valid() { return Err("invalid recovery request nonce"); }
         self.pending = Some(t::ClientMessage::ContextQuery(t::ContextRequest { version: t::VERSION,
             expected_session: self.known.map(|c| c.session), recovery_key: self.original.recovery_key.clone(), request_nonce: nonce }));
         self.current = None; self.assembly = None; self.barrier = None; self.waiting.clear();
-        self.delivered = 0; self.presented = 0; self.failed = None; Ok(())
+        self.delivered = 0; self.observation_batch.clear(); self.presented = 0; self.failed = None; Ok(())
     }
     pub fn context_response(&mut self, response: &t::ContextResponse, resume_nonce: t::RequestNonce) -> Result<ContextOutcome, &'static str> {
         let Some(t::ClientMessage::ContextQuery(request)) = self.pending.as_ref() else { return Err("unsolicited session context"); };
@@ -107,7 +118,7 @@ impl Client {
         self.sequence = welcome.next_sequence - 1;
         self.known = Some(welcome.context); self.pending = None;
         self.assembly = Some(assembly); self.barrier = Some(barrier); self.waiting.clear();
-        self.delivered = 0; self.presented = 0; self.failed = None;
+        self.delivered = 0; self.observation_batch.clear(); self.presented = 0; self.failed = None;
         let context = welcome.context; self.current = Some(welcome);
         Ok(WelcomeOutcome::ResetClock(context))
     }
@@ -163,9 +174,13 @@ impl Client {
         self.input(t::Input::ClockAck { ordinal: acknowledged_ordinal }).map(Some)
     }
     pub fn take_ready_states(&mut self) -> Vec<t::StateEnvelope> {
+        // Each drain, including an empty one, retires the previous observation
+        // batch. Main drains only after its local returned-frame queue is empty.
+        self.observation_batch.clear();
         if self.failed.is_some() || !self.barrier.as_ref().is_some_and(t::BootstrapBarrier::ready) { return Vec::new(); }
         let states: Vec<_> = self.waiting.drain(..).collect();
         if let Some(last) = states.last() { self.delivered = last.frame_ordinal; }
+        self.observation_batch = states.iter().map(|state| state.frame_ordinal).collect();
         states
     }
     /// Call only after the actual main receive path accepted this state (all
@@ -174,7 +189,9 @@ impl Client {
         if self.context() != Some(context) || frame == 0 || frame > self.delivered || frame < self.presented {
             return Err("invalid presented session frame");
         }
-        self.presented = frame; Ok(())
+        self.presented = frame;
+        self.observation_batch.retain(|ordinal| *ordinal > frame);
+        Ok(())
     }
     pub fn input(&mut self, input: t::Input) -> Result<t::ClientMessage, &'static str> {
         if self.failed.is_some() { return Err("session transport is failed"); }

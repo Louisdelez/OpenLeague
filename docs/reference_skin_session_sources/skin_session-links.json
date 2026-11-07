@@ -1,0 +1,1012 @@
+{
+  "schema": "openleague_skin_session_links/v1",
+  "passed": true,
+  "utc": "2026-10-23T04:28:11.856271+00:00",
+  "full_task_scope_complete": false,
+  "native_or_game_executed": false,
+  "historical_server_policy_qualified": false,
+  "facts": {
+    "candidates": {
+      "producer": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\prepare_skin_session.py",
+        "bytes": 5831,
+        "sha256": "5e537e74a308e30d6a4c1c0307f52e31bc3d404c370c3c0a0f4c52fe7d10be71"
+      },
+      "associations": [
+        {
+          "task_id": "SYS-14.3-01",
+          "finding": "AIR selects championId/skinId;current launcher and authenticated Join have no skin selection. Two retained JSON tests distinguish strict refusal from legacy field loss.",
+          "remaining": "Qualify identity mapping and implement explicit transmission;never equate global skinId with skinIndex.",
+          "anchors": [
+            {
+              "path": "launcher/src-tauri/src/main.rs",
+              "line": 25,
+              "needle": "fn play(",
+              "role": "skin_session_1_0"
+            },
+            {
+              "path": "crates/core/src/session_transport.rs",
+              "line": 50,
+              "needle": "pub struct JoinRequest {",
+              "role": "skin_session_1_1"
+            }
+          ],
+          "native_bindings": [
+            {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\commands\\select\\SkinSelectCommand.as",
+              "role": "air_selection_client_contract",
+              "selector": "this.gameService.selectChampionSkin(this.skin,this.onResult,this.onComplete,this.onError);;decompilation identity verified,not server policy or native game execution"
+            },
+            {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+              "role": "air_selection_client_contract",
+              "selector": "this.invokeServiceWithoutSession(\"gameService\",\"selectChampionSkin\",[param1.championId,param1.skinId],param2,param3,_loc5_);;decompilation identity verified,not server policy or native game execution"
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-7b8fad73-d19e-5d56-bd19-d8b1fa5601d7"
+        },
+        {
+          "task_id": "SYS-14.3-02",
+          "finding": "AIR availability and disabled checks exist;local collections policy is distinct from gameplay item inventory and session capability.",
+          "remaining": "Persistent account ownership,grants,rental expiry and authoritative local enforcement remain unqualified.",
+          "anchors": [
+            {
+              "path": "crates/core/src/shop.rs",
+              "line": 261,
+              "needle": "pub fn buy_item",
+              "role": "skin_session_2_0"
+            },
+            {
+              "path": "launcher/src-tauri/src/sessions.rs",
+              "line": 67,
+              "needle": "struct LaunchSpec {",
+              "role": "skin_session_2_1"
+            }
+          ],
+          "native_bindings": [
+            {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibDomain_dat\\scripts\\com\\riotgames\\platform\\gameclient\\domain\\ChampionSkin.as",
+              "role": "air_selection_client_contract",
+              "selector": "return this.owned || this.isRented() || this.skinIndex == 0 || this.freeToPlayReward;;decompilation identity verified,not server policy or native game execution"
+            },
+            {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\controllers\\ChampionSkinController.as",
+              "role": "air_selection_client_contract",
+              "selector": "if(!_loc3_ || Boolean(param1.skinDisabled) || this.isSkinSelected(param1));decompilation identity verified,not server policy or native game execution"
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-a01f1dcf-785b-5185-8da6-c9a90d83bb9d"
+        },
+        {
+          "task_id": "SYS-14.3-03",
+          "finding": "Current per-player snapshot and Champion schema identify champion but have no explicit skin/form selection.",
+          "remaining": "Implement and qualify authorized skin/form replication;visibility tests alone do not establish appearance replication.",
+          "anchors": [
+            {
+              "path": "crates/server/src/session_host.rs",
+              "line": 158,
+              "needle": "pub fn states",
+              "role": "skin_session_3_0"
+            },
+            {
+              "path": "crates/core/src/lib.rs",
+              "line": 155,
+              "needle": "pub struct Champion {",
+              "role": "skin_session_3_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-dddf9f44-da13-5481-ba3d-e5bc0de52239"
+        },
+        {
+          "task_id": "SYS-14.3-04",
+          "finding": "Respawn mutates existing player and rendering requests by champion name.",
+          "remaining": "Skin persistence is unproven because the current contract carries no selected skin;all death/revival variants remain open.",
+          "anchors": [
+            {
+              "path": "crates/core/src/lifecycle.rs",
+              "line": 33,
+              "needle": "pub(crate) fn advance_respawns",
+              "role": "skin_session_4_0"
+            },
+            {
+              "path": "crates/client/src/main.rs",
+              "line": 1227,
+              "needle": "animation::request(p.id, &p.champion, &catalog, &assets);",
+              "role": "skin_session_4_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-8b7b9081-d351-52e2-9912-b5803995fe3b"
+        },
+        {
+          "task_id": "SYS-14.3-05",
+          "finding": "Resume authenticates lease and reconnects existing player/clock recipient.",
+          "remaining": "No skin/form field restoration or transformation dispatch qualified;do not count connection preservation as appearance proof.",
+          "anchors": [
+            {
+              "path": "crates/server/src/reconnect.rs",
+              "line": 147,
+              "needle": "pub fn prepare_resume",
+              "role": "skin_session_5_0"
+            },
+            {
+              "path": "crates/server/src/session_host.rs",
+              "line": 102,
+              "needle": "t::ClientMessage::Resume(request) =>",
+              "role": "skin_session_5_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-305c70cd-3ed7-55f9-961a-8a5fcab8c171"
+        },
+        {
+          "task_id": "SYS-14.3-06",
+          "finding": "Model request falls back to champions/name.glb if catalogue path absent;load_models waits when model/first scene absent.",
+          "remaining": "Explicit skin resource failure reporting and substitution policy remain unqualified;minion DDS diagnostics are separate.",
+          "anchors": [
+            {
+              "path": "crates/client/src/animation.rs",
+              "line": 410,
+              "needle": "pub fn request(",
+              "role": "skin_session_6_0"
+            },
+            {
+              "path": "crates/client/src/animation.rs",
+              "line": 430,
+              "needle": "pub fn load_models(",
+              "role": "skin_session_6_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-5aa6e9e7-caa4-5819-a50d-ffb6e80f785e"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\skin-contract-test-receipt.json",
+          "bytes": 2099,
+          "sha256": "be5e2535bb68ae96dd5fb5f6a7dc947eb3ccd86bcf6e5747f049752330046f1b"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\skin-session-consumer-research.json",
+          "bytes": 5779,
+          "sha256": "e6295fbcfdf5f74cc216aa904945325fabf1bef6436537db3b46c810c4479daf"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\skin-air-selection-research.json",
+          "bytes": 5646,
+          "sha256": "5f3e4277d3ab42f976c9c6674977d041106859a75546085636f1906937318f17"
+        }
+      ],
+      "current_sources": [
+        {
+          "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+          "bytes": 3491,
+          "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+          "bytes": 13206,
+          "sha256": "139a7ce15ac5261dee15fe0aa60716fb1bb6993ecd9acb0d41c34acb84ab00bc"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\shop.rs",
+          "bytes": 30601,
+          "sha256": "3db7b79f20d15e95b6b92affe0087e730c9110d876ea41cc36416435159a2cd0"
+        },
+        {
+          "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+          "bytes": 30278,
+          "sha256": "54bc7a2a66296cdf2cededcca19d1846287c5108974efda2a0151b17503da7f6"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+          "bytes": 33360,
+          "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+          "bytes": 52808,
+          "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\lifecycle.rs",
+          "bytes": 6109,
+          "sha256": "06be09d79a6b96cbe5822a5f6e91d85013f82c2ed6e2135671b4441d0a705f30"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+          "bytes": 141376,
+          "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\server\\src\\reconnect.rs",
+          "bytes": 18879,
+          "sha256": "60fe14f416cf800688b0353d5499738302bb1ad4e40e09a3b0eb6549a90328e1"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+          "bytes": 33360,
+          "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\animation.rs",
+          "bytes": 116564,
+          "sha256": "af685f610a3185e8d845a8398c420c54346b32c980b0a7af3952e00ebfff7d32"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\animation.rs",
+          "bytes": 116564,
+          "sha256": "af685f610a3185e8d845a8398c420c54346b32c980b0a7af3952e00ebfff7d32"
+        }
+      ],
+      "scope": "Existing entry/consumer boundaries only;no skin runtime implemented or qualified. AIR IDs and local contracts kept distinct."
+    },
+    "receipts": {
+      "skin-contract-test-receipt.json": {
+        "utc": "2026-10-23T04:20:29.900305+00:00",
+        "command": "cargo test --locked --offline -p openleague-core --test skin_contract_observation -- --nocapture",
+        "exit_code": 0,
+        "tests": [
+          "legacy_join_currently_discards_unimplemented_skin_field",
+          "authenticated_join_refuses_unimplemented_skin_field"
+        ],
+        "log": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\skin-contract-tests.log",
+          "bytes": 7852,
+          "sha256": "f59d086835eabdb8569f4f03e0e1bd2238bed3a7ed9736011705c5cb547a9903"
+        },
+        "binary": {
+          "path": "F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+          "bytes": 922624,
+          "sha256": "e291d277c0fa15af20b32df3a64c06a093135f9f2d8d2293e9198ef70eadc0e4"
+        },
+        "sources": [
+          {
+            "path": "F:\\OpenLeague\\crates\\core\\tests\\skin_contract_observation.rs",
+            "bytes": 1177,
+            "sha256": "06e062679f84ecaa1612ec4ed7d4e2c629114811c23708b0de5cb0566226ccfc"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+            "bytes": 13206,
+            "sha256": "139a7ce15ac5261dee15fe0aa60716fb1bb6993ecd9acb0d41c34acb84ab00bc"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+            "bytes": 52808,
+            "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+          },
+          {
+            "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+            "bytes": 3491,
+            "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+          },
+          {
+            "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+            "bytes": 30278,
+            "sha256": "54bc7a2a66296cdf2cededcca19d1846287c5108974efda2a0151b17503da7f6"
+          },
+          {
+            "path": "F:\\OpenLeague\\Cargo.lock",
+            "bytes": 153304,
+            "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+          }
+        ],
+        "runtime_changed": false,
+        "scope": "Current JSON type deserialization only;no actual network,launcher UI,ownership store or historical wire execution."
+      },
+      "skin-session-consumer-research.json": {
+        "utc": "2026-10-23T04:25:07.308325+00:00",
+        "anchors": [
+          {
+            "task_id": "SYS-14.3-02",
+            "path": "crates/core/src/shop.rs",
+            "line": 261,
+            "needle": "pub fn buy_item",
+            "finding": "Inventaire de six objets et achats en or ; ne constitue pas un inventaire de droits sur les apparences.",
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\shop.rs",
+              "bytes": 30601,
+              "sha256": "3db7b79f20d15e95b6b92affe0087e730c9110d876ea41cc36416435159a2cd0"
+            },
+            "scope": "static_current_local_contract",
+            "full_task_scope_complete": false
+          },
+          {
+            "task_id": "SYS-14.3-03",
+            "path": "crates/server/src/session_host.rs",
+            "line": 158,
+            "needle": "pub fn states",
+            "finding": "Projection snapshot_for_atomic par joueur puis paquets courants ; aucun skin transporté par Champion.",
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+              "bytes": 33360,
+              "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+            },
+            "scope": "static_current_local_contract",
+            "full_task_scope_complete": false
+          },
+          {
+            "task_id": "SYS-14.3-03",
+            "path": "crates/core/src/lib.rs",
+            "line": 155,
+            "needle": "pub struct Champion {",
+            "finding": "Structure sérialisée sans champ skin ni forme explicite ; champion est un identifiant de champion.",
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+              "bytes": 52808,
+              "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+            },
+            "scope": "static_current_local_contract",
+            "full_task_scope_complete": false
+          },
+          {
+            "task_id": "SYS-14.3-04",
+            "path": "crates/core/src/lifecycle.rs",
+            "line": 33,
+            "needle": "pub(crate) fn advance_respawns",
+            "finding": "Mutation du joueur existant à la réapparition ; ne prouve pas la conservation d’un skin absent du contrat.",
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\lifecycle.rs",
+              "bytes": 6109,
+              "sha256": "06be09d79a6b96cbe5822a5f6e91d85013f82c2ed6e2135671b4441d0a705f30"
+            },
+            "scope": "static_current_local_contract",
+            "full_task_scope_complete": false
+          },
+          {
+            "task_id": "SYS-14.3-05",
+            "path": "crates/server/src/reconnect.rs",
+            "line": 147,
+            "needle": "pub fn prepare_resume",
+            "finding": "Authentification du bail et conservation du player ; pas de sélection de skin dans JoinRequest.",
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\server\\src\\reconnect.rs",
+              "bytes": 18879,
+              "sha256": "60fe14f416cf800688b0353d5499738302bb1ad4e40e09a3b0eb6549a90328e1"
+            },
+            "scope": "static_current_local_contract",
+            "full_task_scope_complete": false
+          },
+          {
+            "task_id": "SYS-14.3-05",
+            "path": "crates/server/src/session_host.rs",
+            "line": 102,
+            "needle": "t::ClientMessage::Resume(request) =>",
+            "finding": "Réinstalle horloge et route du joueur existant ; aucun changement de forme qualifié.",
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+              "bytes": 33360,
+              "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+            },
+            "scope": "static_current_local_contract",
+            "full_task_scope_complete": false
+          },
+          {
+            "task_id": "SYS-14.3-06",
+            "path": "crates/client/src/animation.rs",
+            "line": 410,
+            "needle": "pub fn request(",
+            "finding": "Résout asset par nom et replie sur champions/{name}.glb si entrée absente ; aucun numéro de skin.",
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\animation.rs",
+              "bytes": 116564,
+              "sha256": "af685f610a3185e8d845a8398c420c54346b32c980b0a7af3952e00ebfff7d32"
+            },
+            "scope": "static_current_local_contract",
+            "full_task_scope_complete": false
+          },
+          {
+            "task_id": "SYS-14.3-06",
+            "path": "crates/client/src/animation.rs",
+            "line": 430,
+            "needle": "pub fn load_models(",
+            "finding": "Continue si modèle ou première scène absent ; ne publie pas une erreur de skin dans cette fonction.",
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\animation.rs",
+              "bytes": 116564,
+              "sha256": "af685f610a3185e8d845a8398c420c54346b32c980b0a7af3952e00ebfff7d32"
+            },
+            "scope": "static_current_local_contract",
+            "full_task_scope_complete": false
+          },
+          {
+            "task_id": "SYS-14.3-03",
+            "path": "crates/client/src/main.rs",
+            "line": 1227,
+            "needle": "animation::request(p.id, &p.champion, &catalog, &assets);",
+            "finding": "Consommateur joueur demande le modèle par champion uniquement.",
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+              "bytes": 141376,
+              "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+            },
+            "scope": "static_current_local_contract",
+            "full_task_scope_complete": false
+          }
+        ],
+        "checks_count": 10,
+        "checks_passed": true,
+        "scope": "Lecture statique ciblée, pas une preuve exhaustive d’absence dans tout le dépôt.",
+        "native_or_game_executed": false,
+        "tests_freshly_executed": false,
+        "registered": false,
+        "previous_protocol_tests": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\skin-contract-test-receipt.json",
+          "bytes": 2099,
+          "sha256": "be5e2535bb68ae96dd5fb5f6a7dc947eb3ccd86bcf6e5747f049752330046f1b"
+        }
+      },
+      "skin-air-selection-research.json": {
+        "utc": "2026-10-23T04:27:02.426906+00:00",
+        "rows": [
+          {
+            "task_id": "SYS-14.3-02",
+            "source": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibDomain_dat\\scripts\\com\\riotgames\\platform\\gameclient\\domain\\ChampionSkin.as",
+              "bytes": 7868,
+              "sha256": "3ed93e348504bf8c75914401cf6a8637c5d0f97ddbd025d6bcc63811b38d559e"
+            },
+            "upstream_input": "lib/ClientLibDomain.dat",
+            "line": 124,
+            "needle": "return this.owned || this.isRented() || this.skinIndex == 0 || this.freeToPlayReward;",
+            "finding": "Disponibilité AIR : owned, location, index zéro ou récompense ; pas une autorité serveur.",
+            "provenance": "Existing AIR decompilation hash reverified; bytecode not freshly decompiled or executed."
+          },
+          {
+            "task_id": "SYS-14.3-02",
+            "source": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\controllers\\ChampionSkinController.as",
+              "bytes": 6731,
+              "sha256": "83dda0305f17a5e6f1a3983fc36c7b0db5f294b4f189a355c39458b656ca4915"
+            },
+            "upstream_input": "lib/ClientLibChampionSelectionCore.dat",
+            "line": 105,
+            "needle": "if(!_loc3_ || Boolean(param1.skinDisabled) || this.isSkinSelected(param1))",
+            "finding": "Refus UI si indisponible, désactivé ou déjà sélectionné ; allSkinsRentalUnlock participe au calcul précédent.",
+            "provenance": "Existing AIR decompilation hash reverified; bytecode not freshly decompiled or executed."
+          },
+          {
+            "task_id": "SYS-14.3-01",
+            "source": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\commands\\select\\SkinSelectCommand.as",
+              "bytes": 2370,
+              "sha256": "f85db17e367038aef82a8a9ab2897284b264768617e9e255c3bc1f25cd2a3fc9"
+            },
+            "upstream_input": "lib/ClientLibChampionSelectionCore.dat",
+            "line": 60,
+            "needle": "this.gameService.selectChampionSkin(this.skin,this.onResult,this.onComplete,this.onError);",
+            "finding": "Commande AIR attend le service ; lastSelected changé dans onResult.",
+            "provenance": "Existing AIR decompilation hash reverified; bytecode not freshly decompiled or executed."
+          },
+          {
+            "task_id": "SYS-14.3-01",
+            "source": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+              "bytes": 19283,
+              "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+            },
+            "upstream_input": "mod/ser/mod_ser.dat",
+            "line": 204,
+            "needle": "this.invokeServiceWithoutSession(\"gameService\",\"selectChampionSkin\",[param1.championId,param1.skinId],param2,param3,_loc5_);",
+            "finding": "Arguments historiques championId et skinId ; ne pas les remplacer implicitement par skinIndex.",
+            "provenance": "Existing AIR decompilation hash reverified; bytecode not freshly decompiled or executed."
+          }
+        ],
+        "checks_passed": 8,
+        "source_registry": {
+          "path": "F:\\OpenLeague\\docs\\reference_air_routes_4_20.json",
+          "bytes": 11465788,
+          "sha256": "6219091152d3fd95cc207aa85126eceb532b20fa822a694d1c2f6f0545223623"
+        },
+        "local_contract_registry": {
+          "path": "F:\\OpenLeague\\docs\\reference_local_services_4_20.json",
+          "bytes": 317028,
+          "sha256": "8a6afdc263b5c0959212425feb9e437b3a2264ea1d3a3590f825cb52ef406efb"
+        },
+        "collections_contract": {
+          "id": "collections",
+          "title": "Champions, skins, pages et déblocages",
+          "scope_decision": "replace_locally",
+          "current_state": "not_implemented",
+          "riot_server_implementation_recovered": false,
+          "runtime_qualified_in_this_task": false,
+          "historical_proxy_properties": [
+            "inventoryService"
+          ],
+          "local_contract": "Collection locale persistante et politique de déblocage explicite ; disponibilité des assets séparée des droits locaux.",
+          "authority": "Service de collection ; les octets importés ne confèrent pas une propriété officielle Riot.",
+          "persistence": "Déblocages, sources d’attribution et révisions transactionnelles.",
+          "nominal_acceptance": "Déblocage conservé après restauration et consommé par la sélection du même compte.",
+          "refusal_acceptance": "Contenu absent, opération non autorisée ou attribution déjà appliquée : erreur/idempotence, aucun double gain.",
+          "current_evidence": "Catalogue de définitions présent ; aucune collection persistante de compte exposée par le launcher.",
+          "source_ids": [
+            "air.ServiceProxy",
+            "air.InventoryService",
+            "air.InventoryServiceImpl",
+            "current.launcher/src-tauri/src/main.rs",
+            "current.crates/server/src/main.rs"
+          ],
+          "backlog_task_ids": [
+            "SYS-19.2-01",
+            "SYS-19.2-02",
+            "SYS-19.2-03",
+            "SYS-19.2-04",
+            "SYS-19.2-05",
+            "SYS-19.2-06",
+            "SYS-19.2-07",
+            "SYS-19.2-08"
+          ],
+          "depends_on": [
+            "identity",
+            "catalogue"
+          ],
+          "remaining_work": "Implémenter et qualifier ce contrat dans les tâches liées ; conserver les acquis listés, sans déduire la disponibilité du service de ce périmètre."
+        },
+        "native_or_game_executed": false,
+        "server_policy_recovered": false,
+        "full_task_scope_complete": false
+      }
+    },
+    "source_checks": [
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\skin-session-associations.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\prepare_skin_session.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\skin-contract-test-receipt.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\skin-session-consumer-research.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\skin-air-selection-research.json",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\shop.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\lifecycle.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\reconnect.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\animation.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\animation.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\skin-contract-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+      "pin_F:\\OpenLeague\\crates\\core\\tests\\skin_contract_observation.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+      "pin_F:\\OpenLeague\\Cargo.lock",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\shop.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\lifecycle.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\reconnect.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\animation.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\animation.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\skin-contract-test-receipt.json",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibDomain_dat\\scripts\\com\\riotgames\\platform\\gameclient\\domain\\ChampionSkin.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\controllers\\ChampionSkinController.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\commands\\select\\SkinSelectCommand.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_routes_4_20.json",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_4_20.json",
+      "two_protocol_observations",
+      "nine_session_anchors",
+      "four_air_sources",
+      "research_anchor_SYS-14.3-02_261",
+      "research_anchor_SYS-14.3-03_158",
+      "research_anchor_SYS-14.3-03_155",
+      "research_anchor_SYS-14.3-04_33",
+      "research_anchor_SYS-14.3-05_147",
+      "research_anchor_SYS-14.3-05_102",
+      "research_anchor_SYS-14.3-06_410",
+      "research_anchor_SYS-14.3-06_430",
+      "research_anchor_SYS-14.3-03_1227",
+      "research_anchor_SYS-14.3-02_124",
+      "research_anchor_SYS-14.3-02_105",
+      "research_anchor_SYS-14.3-01_60",
+      "research_anchor_SYS-14.3-01_204",
+      "task_SYS-14.3-01",
+      "anchor_skin_session_1_0",
+      "anchor_skin_session_1_1",
+      "task_SYS-14.3-02",
+      "anchor_skin_session_2_0",
+      "anchor_skin_session_2_1",
+      "task_SYS-14.3-03",
+      "anchor_skin_session_3_0",
+      "anchor_skin_session_3_1",
+      "task_SYS-14.3-04",
+      "anchor_skin_session_4_0",
+      "anchor_skin_session_4_1",
+      "task_SYS-14.3-05",
+      "anchor_skin_session_5_0",
+      "anchor_skin_session_5_1",
+      "task_SYS-14.3-06",
+      "anchor_skin_session_6_0",
+      "anchor_skin_session_6_1"
+    ],
+    "runtime_skin_dispatch_qualified": false,
+    "all_skins_qualified": false
+  },
+  "source_identities": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\skin-session-associations.json",
+      "bytes": 10784,
+      "sha256": "93bce4fa54001241f2684dbcd00833581aa354c27b3a798f3c327098190d4f04"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\prepare_skin_session.py",
+      "bytes": 5831,
+      "sha256": "5e537e74a308e30d6a4c1c0307f52e31bc3d404c370c3c0a0f4c52fe7d10be71"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\skin-contract-test-receipt.json",
+      "bytes": 2099,
+      "sha256": "be5e2535bb68ae96dd5fb5f6a7dc947eb3ccd86bcf6e5747f049752330046f1b"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\skin-session-consumer-research.json",
+      "bytes": 5779,
+      "sha256": "e6295fbcfdf5f74cc216aa904945325fabf1bef6436537db3b46c810c4479daf"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\skin-air-selection-research.json",
+      "bytes": 5646,
+      "sha256": "5f3e4277d3ab42f976c9c6674977d041106859a75546085636f1906937318f17"
+    },
+    {
+      "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "bytes": 3491,
+      "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+      "bytes": 13206,
+      "sha256": "139a7ce15ac5261dee15fe0aa60716fb1bb6993ecd9acb0d41c34acb84ab00bc"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\shop.rs",
+      "bytes": 30601,
+      "sha256": "3db7b79f20d15e95b6b92affe0087e730c9110d876ea41cc36416435159a2cd0"
+    },
+    {
+      "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+      "bytes": 30278,
+      "sha256": "54bc7a2a66296cdf2cededcca19d1846287c5108974efda2a0151b17503da7f6"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+      "bytes": 33360,
+      "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "bytes": 52808,
+      "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\lifecycle.rs",
+      "bytes": 6109,
+      "sha256": "06be09d79a6b96cbe5822a5f6e91d85013f82c2ed6e2135671b4441d0a705f30"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "bytes": 141376,
+      "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\server\\src\\reconnect.rs",
+      "bytes": 18879,
+      "sha256": "60fe14f416cf800688b0353d5499738302bb1ad4e40e09a3b0eb6549a90328e1"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\animation.rs",
+      "bytes": 116564,
+      "sha256": "af685f610a3185e8d845a8398c420c54346b32c980b0a7af3952e00ebfff7d32"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\skin-contract-tests.log",
+      "bytes": 7852,
+      "sha256": "f59d086835eabdb8569f4f03e0e1bd2238bed3a7ed9736011705c5cb547a9903"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+      "bytes": 922624,
+      "sha256": "e291d277c0fa15af20b32df3a64c06a093135f9f2d8d2293e9198ef70eadc0e4"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\tests\\skin_contract_observation.rs",
+      "bytes": 1177,
+      "sha256": "06e062679f84ecaa1612ec4ed7d4e2c629114811c23708b0de5cb0566226ccfc"
+    },
+    {
+      "path": "F:\\OpenLeague\\Cargo.lock",
+      "bytes": 153304,
+      "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibDomain_dat\\scripts\\com\\riotgames\\platform\\gameclient\\domain\\ChampionSkin.as",
+      "bytes": 7868,
+      "sha256": "3ed93e348504bf8c75914401cf6a8637c5d0f97ddbd025d6bcc63811b38d559e"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\controllers\\ChampionSkinController.as",
+      "bytes": 6731,
+      "sha256": "83dda0305f17a5e6f1a3983fc36c7b0db5f294b4f189a355c39458b656ca4915"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\commands\\select\\SkinSelectCommand.as",
+      "bytes": 2370,
+      "sha256": "f85db17e367038aef82a8a9ab2897284b264768617e9e255c3bc1f25cd2a3fc9"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+      "bytes": 19283,
+      "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_routes_4_20.json",
+      "bytes": 11465788,
+      "sha256": "6219091152d3fd95cc207aa85126eceb532b20fa822a694d1c2f6f0545223623"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_4_20.json",
+      "bytes": 317028,
+      "sha256": "8a6afdc263b5c0959212425feb9e437b3a2264ea1d3a3590f825cb52ef406efb"
+    }
+  ],
+  "checks": [
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\skin-session-associations.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\prepare_skin_session.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\skin-contract-test-receipt.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\skin-session-consumer-research.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\skin-air-selection-research.json",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\shop.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\lifecycle.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\reconnect.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\animation.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\animation.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\skin-contract-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\skin_contract_observation-9ecfe2ded99bb45c.exe",
+    "pin_F:\\OpenLeague\\crates\\core\\tests\\skin_contract_observation.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\session_transport.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+    "pin_F:\\OpenLeague\\Cargo.lock",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\shop.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\lifecycle.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\reconnect.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\animation.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\animation.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision110\\skin-contract-test-receipt.json",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibDomain_dat\\scripts\\com\\riotgames\\platform\\gameclient\\domain\\ChampionSkin.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\controllers\\ChampionSkinController.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\commands\\select\\SkinSelectCommand.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_routes_4_20.json",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_4_20.json",
+    "two_protocol_observations",
+    "nine_session_anchors",
+    "four_air_sources",
+    "research_anchor_SYS-14.3-02_261",
+    "research_anchor_SYS-14.3-03_158",
+    "research_anchor_SYS-14.3-03_155",
+    "research_anchor_SYS-14.3-04_33",
+    "research_anchor_SYS-14.3-05_147",
+    "research_anchor_SYS-14.3-05_102",
+    "research_anchor_SYS-14.3-06_410",
+    "research_anchor_SYS-14.3-06_430",
+    "research_anchor_SYS-14.3-03_1227",
+    "research_anchor_SYS-14.3-02_124",
+    "research_anchor_SYS-14.3-02_105",
+    "research_anchor_SYS-14.3-01_60",
+    "research_anchor_SYS-14.3-01_204",
+    "task_SYS-14.3-01",
+    "anchor_skin_session_1_0",
+    "anchor_skin_session_1_1",
+    "task_SYS-14.3-02",
+    "anchor_skin_session_2_0",
+    "anchor_skin_session_2_1",
+    "task_SYS-14.3-03",
+    "anchor_skin_session_3_0",
+    "anchor_skin_session_3_1",
+    "task_SYS-14.3-04",
+    "anchor_skin_session_4_0",
+    "anchor_skin_session_4_1",
+    "task_SYS-14.3-05",
+    "anchor_skin_session_5_0",
+    "anchor_skin_session_5_1",
+    "task_SYS-14.3-06",
+    "anchor_skin_session_6_0",
+    "anchor_skin_session_6_1"
+  ],
+  "checks_count": 75,
+  "associations": [
+    {
+      "task_id": "SYS-14.3-01",
+      "finding": "AIR selects championId/skinId;current launcher and authenticated Join have no skin selection. Two retained JSON tests distinguish strict refusal from legacy field loss.",
+      "remaining": "Qualify identity mapping and implement explicit transmission;never equate global skinId with skinIndex.",
+      "anchors": [
+        {
+          "path": "launcher/src-tauri/src/main.rs",
+          "line": 25,
+          "needle": "fn play(",
+          "role": "skin_session_1_0"
+        },
+        {
+          "path": "crates/core/src/session_transport.rs",
+          "line": 50,
+          "needle": "pub struct JoinRequest {",
+          "role": "skin_session_1_1"
+        }
+      ],
+      "native_bindings": [
+        {
+          "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\commands\\select\\SkinSelectCommand.as",
+          "role": "air_selection_client_contract",
+          "selector": "this.gameService.selectChampionSkin(this.skin,this.onResult,this.onComplete,this.onError);;decompilation identity verified,not server policy or native game execution"
+        },
+        {
+          "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+          "role": "air_selection_client_contract",
+          "selector": "this.invokeServiceWithoutSession(\"gameService\",\"selectChampionSkin\",[param1.championId,param1.skinId],param2,param3,_loc5_);;decompilation identity verified,not server policy or native game execution"
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-7b8fad73-d19e-5d56-bd19-d8b1fa5601d7"
+    },
+    {
+      "task_id": "SYS-14.3-02",
+      "finding": "AIR availability and disabled checks exist;local collections policy is distinct from gameplay item inventory and session capability.",
+      "remaining": "Persistent account ownership,grants,rental expiry and authoritative local enforcement remain unqualified.",
+      "anchors": [
+        {
+          "path": "crates/core/src/shop.rs",
+          "line": 261,
+          "needle": "pub fn buy_item",
+          "role": "skin_session_2_0"
+        },
+        {
+          "path": "launcher/src-tauri/src/sessions.rs",
+          "line": 67,
+          "needle": "struct LaunchSpec {",
+          "role": "skin_session_2_1"
+        }
+      ],
+      "native_bindings": [
+        {
+          "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibDomain_dat\\scripts\\com\\riotgames\\platform\\gameclient\\domain\\ChampionSkin.as",
+          "role": "air_selection_client_contract",
+          "selector": "return this.owned || this.isRented() || this.skinIndex == 0 || this.freeToPlayReward;;decompilation identity verified,not server policy or native game execution"
+        },
+        {
+          "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibChampionSelectionCore_dat\\scripts\\com\\riotgames\\platform\\gameclient\\controllers\\game\\controllers\\ChampionSkinController.as",
+          "role": "air_selection_client_contract",
+          "selector": "if(!_loc3_ || Boolean(param1.skinDisabled) || this.isSkinSelected(param1));decompilation identity verified,not server policy or native game execution"
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-a01f1dcf-785b-5185-8da6-c9a90d83bb9d"
+    },
+    {
+      "task_id": "SYS-14.3-03",
+      "finding": "Current per-player snapshot and Champion schema identify champion but have no explicit skin/form selection.",
+      "remaining": "Implement and qualify authorized skin/form replication;visibility tests alone do not establish appearance replication.",
+      "anchors": [
+        {
+          "path": "crates/server/src/session_host.rs",
+          "line": 158,
+          "needle": "pub fn states",
+          "role": "skin_session_3_0"
+        },
+        {
+          "path": "crates/core/src/lib.rs",
+          "line": 155,
+          "needle": "pub struct Champion {",
+          "role": "skin_session_3_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-dddf9f44-da13-5481-ba3d-e5bc0de52239"
+    },
+    {
+      "task_id": "SYS-14.3-04",
+      "finding": "Respawn mutates existing player and rendering requests by champion name.",
+      "remaining": "Skin persistence is unproven because the current contract carries no selected skin;all death/revival variants remain open.",
+      "anchors": [
+        {
+          "path": "crates/core/src/lifecycle.rs",
+          "line": 33,
+          "needle": "pub(crate) fn advance_respawns",
+          "role": "skin_session_4_0"
+        },
+        {
+          "path": "crates/client/src/main.rs",
+          "line": 1227,
+          "needle": "animation::request(p.id, &p.champion, &catalog, &assets);",
+          "role": "skin_session_4_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-8b7b9081-d351-52e2-9912-b5803995fe3b"
+    },
+    {
+      "task_id": "SYS-14.3-05",
+      "finding": "Resume authenticates lease and reconnects existing player/clock recipient.",
+      "remaining": "No skin/form field restoration or transformation dispatch qualified;do not count connection preservation as appearance proof.",
+      "anchors": [
+        {
+          "path": "crates/server/src/reconnect.rs",
+          "line": 147,
+          "needle": "pub fn prepare_resume",
+          "role": "skin_session_5_0"
+        },
+        {
+          "path": "crates/server/src/session_host.rs",
+          "line": 102,
+          "needle": "t::ClientMessage::Resume(request) =>",
+          "role": "skin_session_5_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-305c70cd-3ed7-55f9-961a-8a5fcab8c171"
+    },
+    {
+      "task_id": "SYS-14.3-06",
+      "finding": "Model request falls back to champions/name.glb if catalogue path absent;load_models waits when model/first scene absent.",
+      "remaining": "Explicit skin resource failure reporting and substitution policy remain unqualified;minion DDS diagnostics are separate.",
+      "anchors": [
+        {
+          "path": "crates/client/src/animation.rs",
+          "line": 410,
+          "needle": "pub fn request(",
+          "role": "skin_session_6_0"
+        },
+        {
+          "path": "crates/client/src/animation.rs",
+          "line": 430,
+          "needle": "pub fn load_models(",
+          "role": "skin_session_6_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-5aa6e9e7-caa4-5819-a50d-ffb6e80f785e"
+    }
+  ]
+}

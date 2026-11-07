@@ -1,0 +1,1334 @@
+{
+  "schema": "openleague_hidden_state_links/v1",
+  "passed": true,
+  "utc": "2026-10-23T03:27:27.103824+00:00",
+  "full_task_scope_complete": false,
+  "native_or_game_executed": false,
+  "historical_server_policy_qualified": false,
+  "facts": {
+    "candidates": {
+      "producer": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\prepare_hidden_state_reader.py",
+        "bytes": 9482,
+        "sha256": "8040bef3a5695cb7579c3d9db87129104aa4ee1921877505125553b6a7047394"
+      },
+      "associations": [
+        {
+          "task_id": "SYS-13.3-01",
+          "finding": "Current snapshot_for removes hidden players and units before legacy serialization;atomic route begins from this projection.",
+          "remaining": "Qualify every auxiliary position/history channel and native/local policy;31 fields are a census,not complete confidentiality.",
+          "anchors": [
+            {
+              "path": "crates/core/src/vision.rs",
+              "line": 137,
+              "needle": "pub fn snapshot_for(",
+              "role": "hidden_state_SYS_13_3_01_0"
+            },
+            {
+              "path": "crates/server/src/main.rs",
+              "line": 228,
+              "needle": "let Some(snapshot) = game.snapshot_for(*player)",
+              "role": "hidden_state_SYS_13_3_01_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-769a290f-69cd-563b-afee-cc8b7e9a86e7"
+        },
+        {
+          "task_id": "SYS-13.3-02",
+          "finding": "Removing the whole hidden Champion/Unit removes their embedded buff/resource fields;separate journals are not covered by this fact.",
+          "remaining": "Audit each journal,score,result and optional channel for private resources/buffs and authorize each public field.",
+          "anchors": [
+            {
+              "path": "crates/core/src/vision.rs",
+              "line": 150,
+              "needle": "snapshot.players.retain(",
+              "role": "hidden_state_SYS_13_3_02_0"
+            },
+            {
+              "path": "crates/core/src/vision.rs",
+              "line": 167,
+              "needle": "snapshot.units.retain(",
+              "role": "hidden_state_SYS_13_3_02_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-d85bc22c-bdfd-526b-b63a-f72855328779"
+        },
+        {
+          "task_id": "SYS-13.3-03",
+          "finding": "Attack journal combines supplied historical audience and current source visibility;targeted tests verify rejection and pending-event retirement.",
+          "remaining": "Qualify audiences for every other effect family and original producer policies;local journal limits are not Riot constants.",
+          "anchors": [
+            {
+              "path": "crates/core/src/attack_presentation.rs",
+              "line": 243,
+              "needle": "pub fn events_for(",
+              "role": "hidden_state_SYS_13_3_03_0"
+            },
+            {
+              "path": "crates/core/src/vision.rs",
+              "line": 151,
+              "needle": "snapshot.attack_events = match",
+              "role": "hidden_state_SYS_13_3_03_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-1e5b45a7-c7c3-50ad-9875-4ac8ad5ffde1"
+        },
+        {
+          "task_id": "SYS-13.3-04",
+          "finding": "Ezreal R OnCast audio retires on connection/fog/death/model/authorization gaps without replay in the tested CPU path.",
+          "remaining": "Audit every positional sound family and actual playback;one voice fixture does not prove all sound confidentiality.",
+          "anchors": [
+            {
+              "path": "crates/client/src/ezreal_r_cast_audio.rs",
+              "line": 124,
+              "needle": "fn present(",
+              "role": "hidden_state_SYS_13_3_04_0"
+            },
+            {
+              "path": "crates/client/src/ezreal_r_cast_audio.rs",
+              "line": 192,
+              "needle": "pub(crate) fn update(",
+              "role": "hidden_state_SYS_13_3_04_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-bb754cc0-b666-591d-9158-dbc4eb9a8bab"
+        },
+        {
+          "task_id": "SYS-13.3-05",
+          "finding": "Minimap consumes filtered actors and its marker-removal test passes. Health bars consume filtered snapshot actors.",
+          "remaining": "Qualify health-bar cleanup on missing snapshot/camera/transform and all UI caches;no fresh GPU observation.",
+          "anchors": [
+            {
+              "path": "crates/client/src/native_minimap.rs",
+              "line": 115,
+              "needle": "fn markers(",
+              "role": "hidden_state_SYS_13_3_05_0"
+            },
+            {
+              "path": "crates/client/src/health.rs",
+              "line": 9,
+              "needle": "pub fn update(",
+              "role": "hidden_state_SYS_13_3_05_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-c0d07884-7219-5423-bd63-1c5c2d67e9d7"
+        },
+        {
+          "task_id": "SYS-13.3-06",
+          "finding": "Minimap retires owned entities/materials when sources disappear;health update despawns absent actors after its preconditions.",
+          "remaining": "Qualify all public-state caches and early returns under vision/session changes;do not equate one UI cleanup with global cleanup.",
+          "anchors": [
+            {
+              "path": "crates/client/src/native_minimap.rs",
+              "line": 157,
+              "needle": "fn retire(",
+              "role": "hidden_state_SYS_13_3_06_0"
+            },
+            {
+              "path": "crates/client/src/health.rs",
+              "line": 61,
+              "needle": "let gone: Vec<_> = bars",
+              "role": "hidden_state_SYS_13_3_06_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-4be0ae49-4a7b-5caf-b7b3-427a95ab85d6"
+        },
+        {
+          "task_id": "SYS-13.3-07",
+          "finding": "Authenticated host projects each route through snapshot_for_atomic;decode_datagram separates local session context. Tests isolate own death recap and revoke audio between received frames.",
+          "remaining": "Qualify full reconnect handshake and every restored channel with stale/foreign frames;tested recap/new sender epoch is not an ordinary full reconnect match.",
+          "anchors": [
+            {
+              "path": "crates/server/src/session_host.rs",
+              "line": 158,
+              "needle": "pub fn states(",
+              "role": "hidden_state_SYS_13_3_07_0"
+            },
+            {
+              "path": "crates/client/src/session_connection.rs",
+              "line": 205,
+              "needle": "pub fn decode_datagram(",
+              "role": "hidden_state_SYS_13_3_07_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-a0626a16-e9e1-5bd6-ab19-e0ff35f65a6d"
+        }
+      ],
+      "current_sources": [
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\vision.rs",
+          "bytes": 10267,
+          "sha256": "1b13d6ee8dbd0561a79cb12bc8a622e1d47890c54231b745d4bedf55f28ac9fe"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\server\\src\\main.rs",
+          "bytes": 13628,
+          "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\attack_presentation.rs",
+          "bytes": 39344,
+          "sha256": "778847b5698413c77aa08ae583bfc8c9577158ddb203f2d83ef11befe584ff0d"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+          "bytes": 28867,
+          "sha256": "4eaa5aa28d6b720055d2221cec692ce740d73558ce12d74f2b4b94ca583385e4"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap.rs",
+          "bytes": 17331,
+          "sha256": "72359625c522957a9b55b58a7c0043eb18c48d4c0e1f6c3f11ebfeb11ef17ac1"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\health.rs",
+          "bytes": 7239,
+          "sha256": "da63de7119eea0c363203268db5770f0b7bf020e81c5497017a60bab7f7272b9"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+          "bytes": 33360,
+          "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+          "bytes": 17469,
+          "sha256": "fdd81b790bca52dd4e20ca5d34e81d78136f3958ab7028f5ca193d078fb9acd1"
+        }
+      ],
+      "basis": "Explicit current local OpenLeague protocol,not original LoL wire;no native inputs invented."
+    },
+    "sources": {
+      "utc": "2026-10-23T03:23:27.111385+00:00",
+      "producer": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\inspect_hidden_state.py",
+        "bytes": 4201,
+        "sha256": "fa1f10215fa8deeda3ba37a56706a910fd45f7f511d6c893e263f2096a020f3b"
+      },
+      "current_sources": [
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+          "bytes": 52808,
+          "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\vision.rs",
+          "bytes": 10267,
+          "sha256": "1b13d6ee8dbd0561a79cb12bc8a622e1d47890c54231b745d4bedf55f28ac9fe"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\vision\\tests.rs",
+          "bytes": 8770,
+          "sha256": "8b0b5b5d01ad3975129d4d96ecb3822c515109cb31495cdba93de27d0def79e3"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\attack_presentation.rs",
+          "bytes": 39344,
+          "sha256": "778847b5698413c77aa08ae583bfc8c9577158ddb203f2d83ef11befe584ff0d"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\server\\src\\main.rs",
+          "bytes": 13628,
+          "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+          "bytes": 33360,
+          "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\server\\src\\session_death_recap_tests.rs",
+          "bytes": 5713,
+          "sha256": "92747adc721f6717a6b5ad6c52acf9667ea7d9cec9520546fd26ed492ee268ed"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap.rs",
+          "bytes": 17331,
+          "sha256": "72359625c522957a9b55b58a7c0043eb18c48d4c0e1f6c3f11ebfeb11ef17ac1"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap_tests.rs",
+          "bytes": 15247,
+          "sha256": "3a616ba3903c86d9b3983d70e9fc406b58ae32a8e705e870e4480f8a2928b4c2"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\health.rs",
+          "bytes": 7239,
+          "sha256": "da63de7119eea0c363203268db5770f0b7bf020e81c5497017a60bab7f7272b9"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+          "bytes": 28867,
+          "sha256": "4eaa5aa28d6b720055d2221cec692ce740d73558ce12d74f2b4b94ca583385e4"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio_state.rs",
+          "bytes": 31155,
+          "sha256": "e08d564c0e100c96993933da7683f194a17bba61855d711bc2373b52cecb8ef5"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+          "bytes": 17469,
+          "sha256": "fdd81b790bca52dd4e20ca5d34e81d78136f3958ab7028f5ca193d078fb9acd1"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\session_connection_tests.rs",
+          "bytes": 36396,
+          "sha256": "6c8d8d63845db752a943a311fd0c6fbeb2678c2fa1d6cb0f772bf70a4b441165"
+        },
+        {
+          "path": "F:\\OpenLeague\\Cargo.lock",
+          "bytes": 153304,
+          "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+        }
+      ],
+      "snapshot_fields": [
+        "death_recap",
+        "accepted_casts",
+        "ezreal_q_accepted_impacts",
+        "ezreal_r_accepted_impacts",
+        "ezreal_r_accepted_casts",
+        "trundle_e_pillars",
+        "roster",
+        "session",
+        "tick",
+        "players",
+        "units",
+        "winner",
+        "result",
+        "kill_events",
+        "attack_events",
+        "attack_presentation_error",
+        "vilemaw_attack_events",
+        "vilemaw_attack_presentation_error",
+        "projectiles",
+        "spell_projectiles",
+        "ezreal_q_projectiles",
+        "ezreal_r_projectiles",
+        "ezreal_r_current_heights",
+        "ezreal_w_current_missiles",
+        "ezreal_e_accepted_releases",
+        "ezreal_e_current_bolts",
+        "ezreal_r_casts",
+        "ezreal_w_casts",
+        "ezreal_e_casts",
+        "ezreal_passive_self",
+        "map10"
+      ],
+      "snapshot_projection_references": [
+        {
+          "line": 140,
+          "text": "snapshot.accepted_casts = Some(self.accepted_casts.project(self.session,team,self.tick,|owner|self.visible_to(team,owner)));"
+        },
+        {
+          "line": 141,
+          "text": "snapshot.trundle_e_pillars = self.trundle_e_projection(Some(team));"
+        },
+        {
+          "line": 142,
+          "text": "snapshot.ezreal_q_projectiles = self.ezreal_q_projection(Some(team));"
+        },
+        {
+          "line": 143,
+          "text": "snapshot.ezreal_r_projectiles = self.ezreal_r_projection(viewer);"
+        },
+        {
+          "line": 144,
+          "text": "snapshot.ezreal_r_casts = self.ezreal_r_cast_projection(viewer);"
+        },
+        {
+          "line": 145,
+          "text": "snapshot.ezreal_w_casts = self.ezreal_w_cast_projection(viewer);"
+        },
+        {
+          "line": 146,
+          "text": "snapshot.ezreal_e_casts = self.ezreal_e_cast_projection(viewer);"
+        },
+        {
+          "line": 147,
+          "text": "snapshot.ezreal_passive_self = self.ezreal_passive_self_projection(viewer);"
+        },
+        {
+          "line": 148,
+          "text": "snapshot.ezreal_q_accepted_impacts = Some(self.ezreal_q_accepted_impact_projection(team));"
+        },
+        {
+          "line": 149,
+          "text": "snapshot.spell_projectiles.retain(|m|self.visible_to(team,m.source)&&self.visible_to(team,m.target));"
+        },
+        {
+          "line": 150,
+          "text": "snapshot.players.retain(|p| self.visible_to(team, p.id));"
+        },
+        {
+          "line": 151,
+          "text": "snapshot.attack_events = match self.attack_presentation.events_for(team, |source| self.visible_to(team, source)) {"
+        },
+        {
+          "line": 154,
+          "text": "snapshot.attack_presentation_error.get_or_insert_with(|| format!(\"attack presentation export unavailable: {error:?}\"));"
+        },
+        {
+          "line": 159,
+          "text": "for player in &mut snapshot.players {"
+        },
+        {
+          "line": 161,
+          "text": "if windup.presentation.is_some_and(|attack| !snapshot.attack_events.iter().any(|event|"
+        },
+        {
+          "line": 167,
+          "text": "snapshot.units.retain(|u| self.visible_to(team, u.id));"
+        },
+        {
+          "line": 168,
+          "text": "snapshot.vilemaw_attack_events = match self.vilemaw_attacks.events_for(team, |source|"
+        },
+        {
+          "line": 172,
+          "text": "snapshot.vilemaw_attack_presentation_error.get_or_insert_with(|| format!(\"Vilemaw attack export unavailable: {error:?}\"));"
+        },
+        {
+          "line": 176,
+          "text": "for unit in &mut snapshot.units {"
+        },
+        {
+          "line": 177,
+          "text": "if unit.attack_presentation.is_some_and(|attack| !snapshot.vilemaw_attack_events.iter().any(|event|"
+        },
+        {
+          "line": 184,
+          "text": ".retain(|m| self.visible_to(team, m.source) && self.visible_to(team, m.target));"
+        },
+        {
+          "line": 185,
+          "text": "if let Some(map) = &mut snapshot.map10 {"
+        },
+        {
+          "line": 194,
+          "text": ".retain(|id| self.visible_to(team, *id));"
+        },
+        {
+          "line": 210,
+          "text": "snapshot.ezreal_r_current_heights = self.ezreal_r_current_height_projection(viewer, &snapshot.ezreal_r_projectiles);"
+        },
+        {
+          "line": 211,
+          "text": "snapshot.ezreal_w_current_missiles = self.ezreal_w_current_projection(viewer);"
+        },
+        {
+          "line": 212,
+          "text": "snapshot.ezreal_e_current_bolts = self.ezreal_e_current_projection(viewer);"
+        },
+        {
+          "line": 213,
+          "text": "snapshot.ezreal_e_accepted_releases = Some(self.ezreal_e_accepted_release_projection(self.players.get(&viewer)?.team));"
+        },
+        {
+          "line": 215,
+          "text": "snapshot.ezreal_r_accepted_impacts = Some(self.ezreal_r_accepted_impact_projection(self.players.get(&viewer)?.team));"
+        },
+        {
+          "line": 216,
+          "text": "snapshot.ezreal_r_accepted_casts = Some(self.ezreal_r_accepted_cast_projection(self.players.get(&viewer)?.team));"
+        },
+        {
+          "line": 217,
+          "text": "snapshot.death_recap = self.death_recap_projection(viewer);"
+        }
+      ],
+      "scope": "Current local protocol source census;literal field references are not automatically classified as secure. Native LoL network equivalence and all-channel confidentiality remain unqualified."
+    },
+    "scope": {
+      "utc": "2026-10-23T03:25:30.540401+00:00",
+      "sources": [
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\champion_kills.rs",
+          "bytes": 10228,
+          "sha256": "b76edcb97eaf222e32bda215592a950807bd1923394d7e2aedf62e3ed4c27859"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\match_results.rs",
+          "bytes": 4021,
+          "sha256": "48c15c370a316084296c8a1e356fddf30730ca10223d37fbe71ee6cacec37be7"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\server\\src\\reconnect.rs",
+          "bytes": 18879,
+          "sha256": "60fe14f416cf800688b0353d5499738302bb1ad4e40e09a3b0eb6549a90328e1"
+        }
+      ],
+      "fields_not_to_assume_private_or_safe": [
+        "roster",
+        "session",
+        "tick",
+        "winner",
+        "result",
+        "kill_events",
+        "attack_presentation_error",
+        "vilemaw_attack_presentation_error"
+      ],
+      "notes": [
+        "Snapshot field census is literal,not a completed privacy proof.",
+        "Champion kill events include identities,assists,first_blood and killer_gold without position;their historical public-audience policy remains to qualify.",
+        "Legacy snapshot_for omits death_recap;atomic projection attaches viewer-specific recap. Current test covers authenticated routes and separately a new framed epoch,not a full physical disconnect/reconnect scenario.",
+        "health::update removes absent actors only after snapshot,camera and camera-transform availability;earlier returns are not fresh cleanup evidence.",
+        "Audio test covers Ezreal R OnCast voice retirement and no replay,not all positional sounds or physical listening."
+      ],
+      "scope": "Explicit local-protocol review;not native wire equivalence,all-field confidentiality or visual/audio acceptance."
+    },
+    "tests": {
+      "passed": true,
+      "complete": true,
+      "cases": [
+        {
+          "name": "vision::tests::private_snapshots_keep_roster_without_exposing_hidden_champion_state",
+          "crate": "core",
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "--offline",
+            "-p",
+            "openleague-core",
+            "--lib",
+            "vision::tests::private_snapshots_keep_roster_without_exposing_hidden_champion_state",
+            "--",
+            "--exact",
+            "--nocapture"
+          ],
+          "exit_code": 0,
+          "passed": true,
+          "log": {
+            "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\privacy-test-0.log",
+            "bytes": 9249,
+            "sha256": "d7d8da9d1ada6bd0f46634c57d704e934f31afe7efcc74732804e9b8692ccdf5"
+          },
+          "binary": {
+            "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+            "bytes": 787789824,
+            "sha256": "46d3732181601e8bfdc1923857d66192fd2a18fba13fe7aa3bd2f80876f74e6d"
+          }
+        },
+        {
+          "name": "vision::tests::shared_allied_vision_reveals_then_lost_vision_cancels_pursuit",
+          "crate": "core",
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "--offline",
+            "-p",
+            "openleague-core",
+            "--lib",
+            "vision::tests::shared_allied_vision_reveals_then_lost_vision_cancels_pursuit",
+            "--",
+            "--exact",
+            "--nocapture"
+          ],
+          "exit_code": 0,
+          "passed": true,
+          "log": {
+            "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\privacy-test-1.log",
+            "bytes": 9242,
+            "sha256": "cea7f05f18f0543e81557b70eadb108c0fb787dce1f9c77524d96eefd12e1bc5"
+          },
+          "binary": {
+            "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+            "bytes": 787789824,
+            "sha256": "46d3732181601e8bfdc1923857d66192fd2a18fba13fe7aa3bd2f80876f74e6d"
+          }
+        },
+        {
+          "name": "attack_presentation::tests::historical_audience_and_current_visibility_both_gate_plain_wire_facts",
+          "crate": "core",
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "--offline",
+            "-p",
+            "openleague-core",
+            "--lib",
+            "attack_presentation::tests::historical_audience_and_current_visibility_both_gate_plain_wire_facts",
+            "--",
+            "--exact",
+            "--nocapture"
+          ],
+          "exit_code": 0,
+          "passed": true,
+          "log": {
+            "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\privacy-test-2.log",
+            "bytes": 9263,
+            "sha256": "8b9ae3a12ed00752439115a89bf5810d81067089bb46c00e813da889dc90bc90"
+          },
+          "binary": {
+            "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+            "bytes": 787789824,
+            "sha256": "46d3732181601e8bfdc1923857d66192fd2a18fba13fe7aa3bd2f80876f74e6d"
+          }
+        },
+        {
+          "name": "attack_presentation::tests::visibility_loss_culls_pending_presentation_and_pending_limit_is_transactional",
+          "crate": "core",
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "--offline",
+            "-p",
+            "openleague-core",
+            "--lib",
+            "attack_presentation::tests::visibility_loss_culls_pending_presentation_and_pending_limit_is_transactional",
+            "--",
+            "--exact",
+            "--nocapture"
+          ],
+          "exit_code": 0,
+          "passed": true,
+          "log": {
+            "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\privacy-test-3.log",
+            "bytes": 9271,
+            "sha256": "c6c2258f6d8423521daf0a2078d5d276c7ef922bf839fca9a94fe31e5f94f0c6"
+          },
+          "binary": {
+            "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+            "bytes": 787789824,
+            "sha256": "46d3732181601e8bfdc1923857d66192fd2a18fba13fe7aa3bd2f80876f74e6d"
+          }
+        },
+        {
+          "name": "native_minimap::tests::actual_server_vision_removes_enemy_marker_even_when_roster_retains_identity",
+          "crate": "client",
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "--offline",
+            "-p",
+            "openleague-client",
+            "--bin",
+            "openleague-client",
+            "native_minimap::tests::actual_server_vision_removes_enemy_marker_even_when_roster_retains_identity",
+            "--",
+            "--exact",
+            "--nocapture"
+          ],
+          "exit_code": 0,
+          "passed": true,
+          "log": {
+            "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\privacy-test-4.log",
+            "bytes": 80021,
+            "sha256": "14d3e5729948fbbf81d2319cbdfc6f4e502c764a178e7198911d177bc8fc8270"
+          },
+          "binary": {
+            "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+            "bytes": 352612864,
+            "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+          }
+        },
+        {
+          "name": "native_minimap::tests::real_update_retains_entities_and_handles_then_retires_missing_actors_and_session",
+          "crate": "client",
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "--offline",
+            "-p",
+            "openleague-client",
+            "--bin",
+            "openleague-client",
+            "native_minimap::tests::real_update_retains_entities_and_handles_then_retires_missing_actors_and_session",
+            "--",
+            "--exact",
+            "--nocapture"
+          ],
+          "exit_code": 0,
+          "passed": true,
+          "log": {
+            "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\privacy-test-5.log",
+            "bytes": 80026,
+            "sha256": "e5d7877fb064ed5df108b90795813c1b7736e9a5003235454664acc2645b880c"
+          },
+          "binary": {
+            "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+            "bytes": 352612864,
+            "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+          }
+        },
+        {
+          "name": "ezreal_r_cast_audio::tests::connection_fog_death_model_loss_or_authorization_gap_remove_only_oncast_without_replay",
+          "crate": "client",
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "--offline",
+            "-p",
+            "openleague-client",
+            "--bin",
+            "openleague-client",
+            "ezreal_r_cast_audio::tests::connection_fog_death_model_loss_or_authorization_gap_remove_only_oncast_without_replay",
+            "--",
+            "--exact",
+            "--nocapture"
+          ],
+          "exit_code": 0,
+          "passed": true,
+          "log": {
+            "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\privacy-test-6.log",
+            "bytes": 80037,
+            "sha256": "24a45aa7ac45937497bc5109abbd1b442006e17b434d935bbaf35645f05b0655"
+          },
+          "binary": {
+            "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+            "bytes": 352612864,
+            "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+          }
+        },
+        {
+          "name": "session_connection::tests::all_delivered_oncast_frames_observe_revocation_before_coalescence_and_never_replay",
+          "crate": "client",
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "--offline",
+            "-p",
+            "openleague-client",
+            "--bin",
+            "openleague-client",
+            "session_connection::tests::all_delivered_oncast_frames_observe_revocation_before_coalescence_and_never_replay",
+            "--",
+            "--exact",
+            "--nocapture"
+          ],
+          "exit_code": 0,
+          "passed": true,
+          "log": {
+            "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\privacy-test-7.log",
+            "bytes": 80032,
+            "sha256": "8fbec5d51986d9a1a1b2a6970078e64bfdd5d900b8859dfdde4ddf1876a002ba"
+          },
+          "binary": {
+            "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+            "bytes": 352612864,
+            "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+          }
+        },
+        {
+          "name": "session_host::death_recap_tests::authenticated_routes_receive_only_their_persistent_own_death_recap",
+          "crate": "server",
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "--offline",
+            "-p",
+            "openleague-server",
+            "--bin",
+            "openleague-server",
+            "session_host::death_recap_tests::authenticated_routes_receive_only_their_persistent_own_death_recap",
+            "--",
+            "--exact",
+            "--nocapture"
+          ],
+          "exit_code": 0,
+          "passed": true,
+          "log": {
+            "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\privacy-test-8.log",
+            "bytes": 7628,
+            "sha256": "8863d0cbeb77661e5803736f67798c8adf132c5ecab57fa52c5e5af1592d2594"
+          },
+          "binary": {
+            "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_server-b3ad347304d576c5.exe",
+            "bytes": 9653760,
+            "sha256": "5d0b64170bc4f39efd553bfbbf18be7964034333a973e614b7fdf75563210639"
+          }
+        },
+        {
+          "name": "session_host::death_recap_tests::valid_recap_omits_atomically_at_real_frame_limit_without_consuming_an_ordinal",
+          "crate": "server",
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "--offline",
+            "-p",
+            "openleague-server",
+            "--bin",
+            "openleague-server",
+            "session_host::death_recap_tests::valid_recap_omits_atomically_at_real_frame_limit_without_consuming_an_ordinal",
+            "--",
+            "--exact",
+            "--nocapture"
+          ],
+          "exit_code": 0,
+          "passed": true,
+          "log": {
+            "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\privacy-test-9.log",
+            "bytes": 7571,
+            "sha256": "4a6166484e26b4563769f49a55d05bf2b04b5f42e2cef919ccd51bca14b95857"
+          },
+          "binary": {
+            "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_server-b3ad347304d576c5.exe",
+            "bytes": 9653760,
+            "sha256": "5d0b64170bc4f39efd553bfbbf18be7964034333a973e614b7fdf75563210639"
+          }
+        }
+      ],
+      "scope": "Fresh targeted Rust tests. CPU UI/audio lifecycle fixtures and local protocol adapters;not physical audio listening,GPU pixels,ordinary full match,or historical network equivalence."
+    },
+    "source_checks": [
+      "fixed_candidate",
+      "producer_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\prepare_hidden_state_reader.py",
+      "producer_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\inspect_hidden_state.py",
+      "source_F:\\OpenLeague\\crates\\core\\src\\vision.rs",
+      "source_F:\\OpenLeague\\crates\\server\\src\\main.rs",
+      "source_F:\\OpenLeague\\crates\\core\\src\\attack_presentation.rs",
+      "source_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+      "source_F:\\OpenLeague\\crates\\client\\src\\native_minimap.rs",
+      "source_F:\\OpenLeague\\crates\\client\\src\\health.rs",
+      "source_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+      "source_F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+      "source_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "source_F:\\OpenLeague\\crates\\core\\src\\vision.rs",
+      "source_F:\\OpenLeague\\crates\\core\\src\\vision\\tests.rs",
+      "source_F:\\OpenLeague\\crates\\core\\src\\attack_presentation.rs",
+      "source_F:\\OpenLeague\\crates\\server\\src\\main.rs",
+      "source_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+      "source_F:\\OpenLeague\\crates\\server\\src\\session_death_recap_tests.rs",
+      "source_F:\\OpenLeague\\crates\\client\\src\\native_minimap.rs",
+      "source_F:\\OpenLeague\\crates\\client\\src\\native_minimap_tests.rs",
+      "source_F:\\OpenLeague\\crates\\client\\src\\health.rs",
+      "source_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+      "source_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio_state.rs",
+      "source_F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+      "source_F:\\OpenLeague\\crates\\client\\src\\session_connection_tests.rs",
+      "source_F:\\OpenLeague\\Cargo.lock",
+      "source_F:\\OpenLeague\\crates\\core\\src\\champion_kills.rs",
+      "source_F:\\OpenLeague\\crates\\core\\src\\match_results.rs",
+      "source_F:\\OpenLeague\\crates\\server\\src\\reconnect.rs",
+      "31fields",
+      "projection_references",
+      "explicit_local_protocol",
+      "explicit_session_mode",
+      "test_census",
+      "binary_vision::tests::private_snapshots_keep_roster_without_exposing_hidden_champion_state",
+      "log_vision::tests::private_snapshots_keep_roster_without_exposing_hidden_champion_state",
+      "test_vision::tests::private_snapshots_keep_roster_without_exposing_hidden_champion_state",
+      "binary_vision::tests::shared_allied_vision_reveals_then_lost_vision_cancels_pursuit",
+      "log_vision::tests::shared_allied_vision_reveals_then_lost_vision_cancels_pursuit",
+      "test_vision::tests::shared_allied_vision_reveals_then_lost_vision_cancels_pursuit",
+      "binary_attack_presentation::tests::historical_audience_and_current_visibility_both_gate_plain_wire_facts",
+      "log_attack_presentation::tests::historical_audience_and_current_visibility_both_gate_plain_wire_facts",
+      "test_attack_presentation::tests::historical_audience_and_current_visibility_both_gate_plain_wire_facts",
+      "binary_attack_presentation::tests::visibility_loss_culls_pending_presentation_and_pending_limit_is_transactional",
+      "log_attack_presentation::tests::visibility_loss_culls_pending_presentation_and_pending_limit_is_transactional",
+      "test_attack_presentation::tests::visibility_loss_culls_pending_presentation_and_pending_limit_is_transactional",
+      "binary_native_minimap::tests::actual_server_vision_removes_enemy_marker_even_when_roster_retains_identity",
+      "log_native_minimap::tests::actual_server_vision_removes_enemy_marker_even_when_roster_retains_identity",
+      "test_native_minimap::tests::actual_server_vision_removes_enemy_marker_even_when_roster_retains_identity",
+      "binary_native_minimap::tests::real_update_retains_entities_and_handles_then_retires_missing_actors_and_session",
+      "log_native_minimap::tests::real_update_retains_entities_and_handles_then_retires_missing_actors_and_session",
+      "test_native_minimap::tests::real_update_retains_entities_and_handles_then_retires_missing_actors_and_session",
+      "binary_ezreal_r_cast_audio::tests::connection_fog_death_model_loss_or_authorization_gap_remove_only_oncast_without_replay",
+      "log_ezreal_r_cast_audio::tests::connection_fog_death_model_loss_or_authorization_gap_remove_only_oncast_without_replay",
+      "test_ezreal_r_cast_audio::tests::connection_fog_death_model_loss_or_authorization_gap_remove_only_oncast_without_replay",
+      "binary_session_connection::tests::all_delivered_oncast_frames_observe_revocation_before_coalescence_and_never_replay",
+      "log_session_connection::tests::all_delivered_oncast_frames_observe_revocation_before_coalescence_and_never_replay",
+      "test_session_connection::tests::all_delivered_oncast_frames_observe_revocation_before_coalescence_and_never_replay",
+      "binary_session_host::death_recap_tests::authenticated_routes_receive_only_their_persistent_own_death_recap",
+      "log_session_host::death_recap_tests::authenticated_routes_receive_only_their_persistent_own_death_recap",
+      "test_session_host::death_recap_tests::authenticated_routes_receive_only_their_persistent_own_death_recap",
+      "binary_session_host::death_recap_tests::valid_recap_omits_atomically_at_real_frame_limit_without_consuming_an_ordinal",
+      "log_session_host::death_recap_tests::valid_recap_omits_atomically_at_real_frame_limit_without_consuming_an_ordinal",
+      "test_session_host::death_recap_tests::valid_recap_omits_atomically_at_real_frame_limit_without_consuming_an_ordinal",
+      "partial_local_SYS-13.3-01",
+      "anchor_hidden_state_SYS_13_3_01_0",
+      "anchor_hidden_state_SYS_13_3_01_1",
+      "partial_local_SYS-13.3-02",
+      "anchor_hidden_state_SYS_13_3_02_0",
+      "anchor_hidden_state_SYS_13_3_02_1",
+      "partial_local_SYS-13.3-03",
+      "anchor_hidden_state_SYS_13_3_03_0",
+      "anchor_hidden_state_SYS_13_3_03_1",
+      "partial_local_SYS-13.3-04",
+      "anchor_hidden_state_SYS_13_3_04_0",
+      "anchor_hidden_state_SYS_13_3_04_1",
+      "partial_local_SYS-13.3-05",
+      "anchor_hidden_state_SYS_13_3_05_0",
+      "anchor_hidden_state_SYS_13_3_05_1",
+      "partial_local_SYS-13.3-06",
+      "anchor_hidden_state_SYS_13_3_06_0",
+      "anchor_hidden_state_SYS_13_3_06_1",
+      "partial_local_SYS-13.3-07",
+      "anchor_hidden_state_SYS_13_3_07_0",
+      "anchor_hidden_state_SYS_13_3_07_1"
+    ],
+    "explicit_local_contract": true,
+    "full_confidentiality_qualified": false,
+    "historical_wire_equivalence": false,
+    "game_or_gpu_executed": false
+  },
+  "source_identities": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\hidden-state-associations.json",
+      "bytes": 8622,
+      "sha256": "ff6c02a328f148fd528d6f7ec3a872ad0dc0d0651b07f6feee858a0764094ca9"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\hidden-state-source-review.json",
+      "bytes": 8285,
+      "sha256": "ba2218dafec9c638514ac050729d1519f7ae50d423aa6e516da890738e9a6ed1"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\hidden-state-field-scope.json",
+      "bytes": 1744,
+      "sha256": "5b468849ed2e46c38de712d537e38bdb8f6a2cfd356586d158dfb9b29c02ecba"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\hidden-state-tests.json",
+      "bytes": 10755,
+      "sha256": "e260b574043194be54e71c5c7625aa2647a11978a154e53b43d49d0c5fcf5fc5"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\prepare_hidden_state_reader.py",
+      "bytes": 9482,
+      "sha256": "8040bef3a5695cb7579c3d9db87129104aa4ee1921877505125553b6a7047394"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\inspect_hidden_state.py",
+      "bytes": 4201,
+      "sha256": "fa1f10215fa8deeda3ba37a56706a910fd45f7f511d6c893e263f2096a020f3b"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\vision.rs",
+      "bytes": 10267,
+      "sha256": "1b13d6ee8dbd0561a79cb12bc8a622e1d47890c54231b745d4bedf55f28ac9fe"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\server\\src\\main.rs",
+      "bytes": 13628,
+      "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\attack_presentation.rs",
+      "bytes": 39344,
+      "sha256": "778847b5698413c77aa08ae583bfc8c9577158ddb203f2d83ef11befe584ff0d"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+      "bytes": 28867,
+      "sha256": "4eaa5aa28d6b720055d2221cec692ce740d73558ce12d74f2b4b94ca583385e4"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap.rs",
+      "bytes": 17331,
+      "sha256": "72359625c522957a9b55b58a7c0043eb18c48d4c0e1f6c3f11ebfeb11ef17ac1"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\health.rs",
+      "bytes": 7239,
+      "sha256": "da63de7119eea0c363203268db5770f0b7bf020e81c5497017a60bab7f7272b9"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+      "bytes": 33360,
+      "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+      "bytes": 17469,
+      "sha256": "fdd81b790bca52dd4e20ca5d34e81d78136f3958ab7028f5ca193d078fb9acd1"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "bytes": 52808,
+      "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\vision\\tests.rs",
+      "bytes": 8770,
+      "sha256": "8b0b5b5d01ad3975129d4d96ecb3822c515109cb31495cdba93de27d0def79e3"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\server\\src\\session_death_recap_tests.rs",
+      "bytes": 5713,
+      "sha256": "92747adc721f6717a6b5ad6c52acf9667ea7d9cec9520546fd26ed492ee268ed"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\native_minimap_tests.rs",
+      "bytes": 15247,
+      "sha256": "3a616ba3903c86d9b3983d70e9fc406b58ae32a8e705e870e4480f8a2928b4c2"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio_state.rs",
+      "bytes": 31155,
+      "sha256": "e08d564c0e100c96993933da7683f194a17bba61855d711bc2373b52cecb8ef5"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\session_connection_tests.rs",
+      "bytes": 36396,
+      "sha256": "6c8d8d63845db752a943a311fd0c6fbeb2678c2fa1d6cb0f772bf70a4b441165"
+    },
+    {
+      "path": "F:\\OpenLeague\\Cargo.lock",
+      "bytes": 153304,
+      "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\champion_kills.rs",
+      "bytes": 10228,
+      "sha256": "b76edcb97eaf222e32bda215592a950807bd1923394d7e2aedf62e3ed4c27859"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\match_results.rs",
+      "bytes": 4021,
+      "sha256": "48c15c370a316084296c8a1e356fddf30730ca10223d37fbe71ee6cacec37be7"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\server\\src\\reconnect.rs",
+      "bytes": 18879,
+      "sha256": "60fe14f416cf800688b0353d5499738302bb1ad4e40e09a3b0eb6549a90328e1"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+      "bytes": 787789824,
+      "sha256": "46d3732181601e8bfdc1923857d66192fd2a18fba13fe7aa3bd2f80876f74e6d"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\privacy-test-0.log",
+      "bytes": 9249,
+      "sha256": "d7d8da9d1ada6bd0f46634c57d704e934f31afe7efcc74732804e9b8692ccdf5"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\privacy-test-1.log",
+      "bytes": 9242,
+      "sha256": "cea7f05f18f0543e81557b70eadb108c0fb787dce1f9c77524d96eefd12e1bc5"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\privacy-test-2.log",
+      "bytes": 9263,
+      "sha256": "8b9ae3a12ed00752439115a89bf5810d81067089bb46c00e813da889dc90bc90"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\privacy-test-3.log",
+      "bytes": 9271,
+      "sha256": "c6c2258f6d8423521daf0a2078d5d276c7ef922bf839fca9a94fe31e5f94f0c6"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "bytes": 352612864,
+      "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\privacy-test-4.log",
+      "bytes": 80021,
+      "sha256": "14d3e5729948fbbf81d2319cbdfc6f4e502c764a178e7198911d177bc8fc8270"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\privacy-test-5.log",
+      "bytes": 80026,
+      "sha256": "e5d7877fb064ed5df108b90795813c1b7736e9a5003235454664acc2645b880c"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\privacy-test-6.log",
+      "bytes": 80037,
+      "sha256": "24a45aa7ac45937497bc5109abbd1b442006e17b434d935bbaf35645f05b0655"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\privacy-test-7.log",
+      "bytes": 80032,
+      "sha256": "8fbec5d51986d9a1a1b2a6970078e64bfdd5d900b8859dfdde4ddf1876a002ba"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_server-b3ad347304d576c5.exe",
+      "bytes": 9653760,
+      "sha256": "5d0b64170bc4f39efd553bfbbf18be7964034333a973e614b7fdf75563210639"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\privacy-test-8.log",
+      "bytes": 7628,
+      "sha256": "8863d0cbeb77661e5803736f67798c8adf132c5ecab57fa52c5e5af1592d2594"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\privacy-test-9.log",
+      "bytes": 7571,
+      "sha256": "4a6166484e26b4563769f49a55d05bf2b04b5f42e2cef919ccd51bca14b95857"
+    }
+  ],
+  "checks": [
+    "fixed_candidate",
+    "producer_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\prepare_hidden_state_reader.py",
+    "producer_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision106\\inspect_hidden_state.py",
+    "source_F:\\OpenLeague\\crates\\core\\src\\vision.rs",
+    "source_F:\\OpenLeague\\crates\\server\\src\\main.rs",
+    "source_F:\\OpenLeague\\crates\\core\\src\\attack_presentation.rs",
+    "source_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+    "source_F:\\OpenLeague\\crates\\client\\src\\native_minimap.rs",
+    "source_F:\\OpenLeague\\crates\\client\\src\\health.rs",
+    "source_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+    "source_F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+    "source_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+    "source_F:\\OpenLeague\\crates\\core\\src\\vision.rs",
+    "source_F:\\OpenLeague\\crates\\core\\src\\vision\\tests.rs",
+    "source_F:\\OpenLeague\\crates\\core\\src\\attack_presentation.rs",
+    "source_F:\\OpenLeague\\crates\\server\\src\\main.rs",
+    "source_F:\\OpenLeague\\crates\\server\\src\\session_host.rs",
+    "source_F:\\OpenLeague\\crates\\server\\src\\session_death_recap_tests.rs",
+    "source_F:\\OpenLeague\\crates\\client\\src\\native_minimap.rs",
+    "source_F:\\OpenLeague\\crates\\client\\src\\native_minimap_tests.rs",
+    "source_F:\\OpenLeague\\crates\\client\\src\\health.rs",
+    "source_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio.rs",
+    "source_F:\\OpenLeague\\crates\\client\\src\\ezreal_r_cast_audio_state.rs",
+    "source_F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+    "source_F:\\OpenLeague\\crates\\client\\src\\session_connection_tests.rs",
+    "source_F:\\OpenLeague\\Cargo.lock",
+    "source_F:\\OpenLeague\\crates\\core\\src\\champion_kills.rs",
+    "source_F:\\OpenLeague\\crates\\core\\src\\match_results.rs",
+    "source_F:\\OpenLeague\\crates\\server\\src\\reconnect.rs",
+    "31fields",
+    "projection_references",
+    "explicit_local_protocol",
+    "explicit_session_mode",
+    "test_census",
+    "binary_vision::tests::private_snapshots_keep_roster_without_exposing_hidden_champion_state",
+    "log_vision::tests::private_snapshots_keep_roster_without_exposing_hidden_champion_state",
+    "test_vision::tests::private_snapshots_keep_roster_without_exposing_hidden_champion_state",
+    "binary_vision::tests::shared_allied_vision_reveals_then_lost_vision_cancels_pursuit",
+    "log_vision::tests::shared_allied_vision_reveals_then_lost_vision_cancels_pursuit",
+    "test_vision::tests::shared_allied_vision_reveals_then_lost_vision_cancels_pursuit",
+    "binary_attack_presentation::tests::historical_audience_and_current_visibility_both_gate_plain_wire_facts",
+    "log_attack_presentation::tests::historical_audience_and_current_visibility_both_gate_plain_wire_facts",
+    "test_attack_presentation::tests::historical_audience_and_current_visibility_both_gate_plain_wire_facts",
+    "binary_attack_presentation::tests::visibility_loss_culls_pending_presentation_and_pending_limit_is_transactional",
+    "log_attack_presentation::tests::visibility_loss_culls_pending_presentation_and_pending_limit_is_transactional",
+    "test_attack_presentation::tests::visibility_loss_culls_pending_presentation_and_pending_limit_is_transactional",
+    "binary_native_minimap::tests::actual_server_vision_removes_enemy_marker_even_when_roster_retains_identity",
+    "log_native_minimap::tests::actual_server_vision_removes_enemy_marker_even_when_roster_retains_identity",
+    "test_native_minimap::tests::actual_server_vision_removes_enemy_marker_even_when_roster_retains_identity",
+    "binary_native_minimap::tests::real_update_retains_entities_and_handles_then_retires_missing_actors_and_session",
+    "log_native_minimap::tests::real_update_retains_entities_and_handles_then_retires_missing_actors_and_session",
+    "test_native_minimap::tests::real_update_retains_entities_and_handles_then_retires_missing_actors_and_session",
+    "binary_ezreal_r_cast_audio::tests::connection_fog_death_model_loss_or_authorization_gap_remove_only_oncast_without_replay",
+    "log_ezreal_r_cast_audio::tests::connection_fog_death_model_loss_or_authorization_gap_remove_only_oncast_without_replay",
+    "test_ezreal_r_cast_audio::tests::connection_fog_death_model_loss_or_authorization_gap_remove_only_oncast_without_replay",
+    "binary_session_connection::tests::all_delivered_oncast_frames_observe_revocation_before_coalescence_and_never_replay",
+    "log_session_connection::tests::all_delivered_oncast_frames_observe_revocation_before_coalescence_and_never_replay",
+    "test_session_connection::tests::all_delivered_oncast_frames_observe_revocation_before_coalescence_and_never_replay",
+    "binary_session_host::death_recap_tests::authenticated_routes_receive_only_their_persistent_own_death_recap",
+    "log_session_host::death_recap_tests::authenticated_routes_receive_only_their_persistent_own_death_recap",
+    "test_session_host::death_recap_tests::authenticated_routes_receive_only_their_persistent_own_death_recap",
+    "binary_session_host::death_recap_tests::valid_recap_omits_atomically_at_real_frame_limit_without_consuming_an_ordinal",
+    "log_session_host::death_recap_tests::valid_recap_omits_atomically_at_real_frame_limit_without_consuming_an_ordinal",
+    "test_session_host::death_recap_tests::valid_recap_omits_atomically_at_real_frame_limit_without_consuming_an_ordinal",
+    "partial_local_SYS-13.3-01",
+    "anchor_hidden_state_SYS_13_3_01_0",
+    "anchor_hidden_state_SYS_13_3_01_1",
+    "partial_local_SYS-13.3-02",
+    "anchor_hidden_state_SYS_13_3_02_0",
+    "anchor_hidden_state_SYS_13_3_02_1",
+    "partial_local_SYS-13.3-03",
+    "anchor_hidden_state_SYS_13_3_03_0",
+    "anchor_hidden_state_SYS_13_3_03_1",
+    "partial_local_SYS-13.3-04",
+    "anchor_hidden_state_SYS_13_3_04_0",
+    "anchor_hidden_state_SYS_13_3_04_1",
+    "partial_local_SYS-13.3-05",
+    "anchor_hidden_state_SYS_13_3_05_0",
+    "anchor_hidden_state_SYS_13_3_05_1",
+    "partial_local_SYS-13.3-06",
+    "anchor_hidden_state_SYS_13_3_06_0",
+    "anchor_hidden_state_SYS_13_3_06_1",
+    "partial_local_SYS-13.3-07",
+    "anchor_hidden_state_SYS_13_3_07_0",
+    "anchor_hidden_state_SYS_13_3_07_1"
+  ],
+  "checks_count": 85,
+  "associations": [
+    {
+      "task_id": "SYS-13.3-01",
+      "finding": "Current snapshot_for removes hidden players and units before legacy serialization;atomic route begins from this projection.",
+      "remaining": "Qualify every auxiliary position/history channel and native/local policy;31 fields are a census,not complete confidentiality.",
+      "anchors": [
+        {
+          "path": "crates/core/src/vision.rs",
+          "line": 137,
+          "needle": "pub fn snapshot_for(",
+          "role": "hidden_state_SYS_13_3_01_0"
+        },
+        {
+          "path": "crates/server/src/main.rs",
+          "line": 228,
+          "needle": "let Some(snapshot) = game.snapshot_for(*player)",
+          "role": "hidden_state_SYS_13_3_01_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-769a290f-69cd-563b-afee-cc8b7e9a86e7"
+    },
+    {
+      "task_id": "SYS-13.3-02",
+      "finding": "Removing the whole hidden Champion/Unit removes their embedded buff/resource fields;separate journals are not covered by this fact.",
+      "remaining": "Audit each journal,score,result and optional channel for private resources/buffs and authorize each public field.",
+      "anchors": [
+        {
+          "path": "crates/core/src/vision.rs",
+          "line": 150,
+          "needle": "snapshot.players.retain(",
+          "role": "hidden_state_SYS_13_3_02_0"
+        },
+        {
+          "path": "crates/core/src/vision.rs",
+          "line": 167,
+          "needle": "snapshot.units.retain(",
+          "role": "hidden_state_SYS_13_3_02_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-d85bc22c-bdfd-526b-b63a-f72855328779"
+    },
+    {
+      "task_id": "SYS-13.3-03",
+      "finding": "Attack journal combines supplied historical audience and current source visibility;targeted tests verify rejection and pending-event retirement.",
+      "remaining": "Qualify audiences for every other effect family and original producer policies;local journal limits are not Riot constants.",
+      "anchors": [
+        {
+          "path": "crates/core/src/attack_presentation.rs",
+          "line": 243,
+          "needle": "pub fn events_for(",
+          "role": "hidden_state_SYS_13_3_03_0"
+        },
+        {
+          "path": "crates/core/src/vision.rs",
+          "line": 151,
+          "needle": "snapshot.attack_events = match",
+          "role": "hidden_state_SYS_13_3_03_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-1e5b45a7-c7c3-50ad-9875-4ac8ad5ffde1"
+    },
+    {
+      "task_id": "SYS-13.3-04",
+      "finding": "Ezreal R OnCast audio retires on connection/fog/death/model/authorization gaps without replay in the tested CPU path.",
+      "remaining": "Audit every positional sound family and actual playback;one voice fixture does not prove all sound confidentiality.",
+      "anchors": [
+        {
+          "path": "crates/client/src/ezreal_r_cast_audio.rs",
+          "line": 124,
+          "needle": "fn present(",
+          "role": "hidden_state_SYS_13_3_04_0"
+        },
+        {
+          "path": "crates/client/src/ezreal_r_cast_audio.rs",
+          "line": 192,
+          "needle": "pub(crate) fn update(",
+          "role": "hidden_state_SYS_13_3_04_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-bb754cc0-b666-591d-9158-dbc4eb9a8bab"
+    },
+    {
+      "task_id": "SYS-13.3-05",
+      "finding": "Minimap consumes filtered actors and its marker-removal test passes. Health bars consume filtered snapshot actors.",
+      "remaining": "Qualify health-bar cleanup on missing snapshot/camera/transform and all UI caches;no fresh GPU observation.",
+      "anchors": [
+        {
+          "path": "crates/client/src/native_minimap.rs",
+          "line": 115,
+          "needle": "fn markers(",
+          "role": "hidden_state_SYS_13_3_05_0"
+        },
+        {
+          "path": "crates/client/src/health.rs",
+          "line": 9,
+          "needle": "pub fn update(",
+          "role": "hidden_state_SYS_13_3_05_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-c0d07884-7219-5423-bd63-1c5c2d67e9d7"
+    },
+    {
+      "task_id": "SYS-13.3-06",
+      "finding": "Minimap retires owned entities/materials when sources disappear;health update despawns absent actors after its preconditions.",
+      "remaining": "Qualify all public-state caches and early returns under vision/session changes;do not equate one UI cleanup with global cleanup.",
+      "anchors": [
+        {
+          "path": "crates/client/src/native_minimap.rs",
+          "line": 157,
+          "needle": "fn retire(",
+          "role": "hidden_state_SYS_13_3_06_0"
+        },
+        {
+          "path": "crates/client/src/health.rs",
+          "line": 61,
+          "needle": "let gone: Vec<_> = bars",
+          "role": "hidden_state_SYS_13_3_06_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-4be0ae49-4a7b-5caf-b7b3-427a95ab85d6"
+    },
+    {
+      "task_id": "SYS-13.3-07",
+      "finding": "Authenticated host projects each route through snapshot_for_atomic;decode_datagram separates local session context. Tests isolate own death recap and revoke audio between received frames.",
+      "remaining": "Qualify full reconnect handshake and every restored channel with stale/foreign frames;tested recap/new sender epoch is not an ordinary full reconnect match.",
+      "anchors": [
+        {
+          "path": "crates/server/src/session_host.rs",
+          "line": 158,
+          "needle": "pub fn states(",
+          "role": "hidden_state_SYS_13_3_07_0"
+        },
+        {
+          "path": "crates/client/src/session_connection.rs",
+          "line": 205,
+          "needle": "pub fn decode_datagram(",
+          "role": "hidden_state_SYS_13_3_07_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-a0626a16-e9e1-5bd6-ab19-e0ff35f65a6d"
+    }
+  ]
+}

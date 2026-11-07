@@ -1,0 +1,104 @@
+{
+  "schema": "openleague_DXT_decoder_comparison_preliminary/v696",
+  "passed": true,
+  "summary": {
+    "updated_utc": "2026-10-27T22:13:55.859880+00:00",
+    "report": "docs/FIDELITY_PORTRAIT_DXT_DECODE_V696_PRELIMINARY.md",
+    "proof": "docs/fidelity_portrait_dxt_decode_v696_preliminary.json",
+    "evidence_stage": "decoded_reviewed_pending_canonical_source_links",
+    "observations": {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision696_dxt_decode_compare\\OBSERVATIONS.json",
+      "bytes": 50031,
+      "sha256": "965d7aceebec0eb50fb8859390d0806857e7c3f73f4a65bce690e03584daaf26"
+    },
+    "independent_review": {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision696_dxt_decoder_review\\REVIEW.json",
+      "bytes": 7277,
+      "sha256": "8307c9effee08dae96249aacbb7fabebb3deb97cf20231a088917208618264be"
+    },
+    "DXT_cases": 7,
+    "BC1_cases": 4,
+    "BC3_cases": 3,
+    "source_and_target_images_per_decoder": 14,
+    "pixels_per_decoder": 4877376,
+    "exact_peer_decoder_agreement": true,
+    "synthetic_controls": 5,
+    "input_refusals": 5,
+    "evidence_refusals": 5,
+    "actual_inputs_all_opaque": true,
+    "peak_residual_against_uncompressed_model": 83.0,
+    "compression_quality_accepted": false,
+    "canonical_registry_integration_complete": false,
+    "canonical_plan_database_update_performed": false,
+    "source_assets_modified": false,
+    "API_or_GPU_rerun": false,
+    "complete": false,
+    "gameplay_accepted": false,
+    "goal_complete": false
+  },
+  "commands": [
+    {
+      "stage": "V696_DXT_DECODE",
+      "expected_exit_code": 0,
+      "command": [
+        "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "-E",
+        "-u",
+        "-B",
+        "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision696_dxt_decode_controlled.py"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision669_V696_DXT_DECODE.log",
+        "bytes": 1542,
+        "sha256": "ec2796e170858d5934c64a5c356c498f1c78a70a21ecf1464dc15a154c0b9422"
+      }
+    },
+    {
+      "stage": "V696_DXT_REVIEW",
+      "expected_exit_code": 0,
+      "command": [
+        "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "-E",
+        "-u",
+        "-B",
+        "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision696_dxt_decoder_review.py"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision669_V696_DXT_REVIEW.log",
+        "bytes": 206,
+        "sha256": "49bc1508b4754d85683f845228478a6946cd8fbe86d8d2181b5b8459df740aa7"
+      }
+    }
+  ],
+  "source_observations": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision696_dxt_decode_compare\\OBSERVATIONS.json",
+      "bytes": 50031,
+      "sha256": "965d7aceebec0eb50fb8859390d0806857e7c3f73f4a65bce690e03584daaf26"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision696_dxt_decoder_review\\REVIEW.json",
+      "bytes": 7277,
+      "sha256": "8307c9effee08dae96249aacbb7fabebb3deb97cf20231a088917208618264be"
+    }
+  ],
+  "decoder_criterion": "Every color channel differs by at most1level between independent RGB565/integer-floor and Pillow decoders;alpha must be exact. This criterion compares decoders,not lossy compression quality.",
+  "container_contract": "Original128byteDDSheader retained except flags0x81007,actualheight/width/linearbytes/depth0,mipcount1,capsTEXTURE0x1000/caps2-4zero;derived only in memory;raw blocks unchanged.",
+  "primary_contract_URL": "https://learn.microsoft.com/en-us/windows/win32/direct3d10/d3d10-graphics-programming-guide-resources-block-compression",
+  "limits": [
+    "Decoded diagnosticRGBAoutputs are not production assets or a historical framebuffer.",
+    "No API,GPU,game or current renderer rerun. Source/captured blocks unchanged.",
+    "Statistics against ideal periodic filtering measure the lossy residual;no compression-quality acceptance threshold is established.",
+    "Decoder agreement does not establish historical D3DXdecoder rounding,UV/color/sampler,normal caller or original cleanup.",
+    "Five synthetic block controls passed;independent review and canonical source associations remain before qualification.",
+    "Real alpha ranges are recorded per case;an opaque dataset does not qualify mixed-alpha behavior of the native API or historical blending.",
+    "This review verifies all file bytes,pins,associations and residual maxima;it does not rerun the two decoders.",
+    "V696canonical source/task/database associations remain pending. Latest canonical audit isV695."
+  ]
+}

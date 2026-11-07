@@ -125,6 +125,11 @@ pub struct Unit {
     pub pet: Option<annie_r::Pet>,
     #[serde(default)]
     pub stuns: Vec<stuns::Stun>,
+    /// Local reconstructed slow state; absence in older snapshots means no timed slow.
+    #[serde(default, skip_serializing_if="Vec::is_empty")]
+    pub slows: Vec<slows::Slow>,
+    #[serde(default, skip_serializing_if="Option::is_none")]
+    pub trundle_e_push: Option<trundle_e::ForcedMovement>,
     #[serde(default)]
     pub vision_radius_modifiers: vision::RadiusModifiers,
     #[serde(skip)]
@@ -314,6 +319,8 @@ impl Simulation {
             respawn_at: None,
             pet: None,
             stuns: Vec::new(),
+            slows: Vec::new(),
+            trundle_e_push: None,
             vision_radius_modifiers: Default::default(),
             path: VecDeque::new(),
             route: VecDeque::new(),
@@ -362,6 +369,7 @@ impl Simulation {
             return;
         }
 
+        let trundle_passive_was_alive = unit.health.is_finite() && unit.health > 0.;
         let camp = unit.camp;
         let kind = unit.kind;
         let position = unit.position;
@@ -389,9 +397,12 @@ impl Simulation {
         if self.units[&target].health > 0. {
             return;
         }
+        // V2: only a finite positive pre-damage HP state may trigger the new receiver.
+        if trundle_passive_was_alive { self.trundle_passive_damage_death(target); }
         self.cancel_captured_vilemaw_attack(death_presentation, attack_presentation::CancelReason::Death);
         let unit = self.units.get_mut(&target).unwrap();
         unit.stuns.clear();
+        unit.slows.clear();
         unit.path.clear();
         unit.destination = None;
         unit.target = None;
@@ -619,6 +630,8 @@ impl Simulation {
             if u.respawn_at.is_some_and(|at| self.tick >= at) {
                 u.health = u.max_health;
                 u.respawn_at = None;
+                u.trundle_e_push = None;
+                u.slows.clear();
             }
         }
         self.world = Some(world);
@@ -635,7 +648,7 @@ impl Simulation {
             let Some(unit) = self.units.get(&id).filter(|u| u.health > 0.) else {
                 continue;
             };
-            if stuns::unit_active(unit,self.tick) {continue;}
+            if stuns::unit_active(unit,self.tick) || trundle_e::unit_forced(unit,self.tick) {continue;}
             let def = &definitions[&unit.definition];
             if unit.kind!=Kind::Pet && self.tick >= unit.next_ai {
                 // Local reconstruction for the immobile Map10 boss only. Native
@@ -687,7 +700,7 @@ impl Simulation {
                             self.units.get_mut(&id).unwrap().next_ai = self.tick + 8;
                             continue;
                         }
-                        let path = self.navigation.path(unit.position, home);
+                        let path = self.dynamic_path(unit.position, home);
                         let p = self.units.get_mut(&id).unwrap();
                         p.target = None;
                         p.health = p.max_health;
@@ -717,10 +730,9 @@ impl Simulation {
                     None
                 };
                 let path = next.and_then(|p| {
-                    self.navigation.path(position, p).or_else(|| {
-                        self.navigation
-                            .nearest_walkable(p)
-                            .and_then(|p| self.navigation.path(position, p))
+                    self.dynamic_path(position, p).or_else(|| {
+                        self.dynamic_nearest(p)
+                            .and_then(|p| self.dynamic_path(position, p))
                     })
                 });
                 let p = self.units.get_mut(&id).unwrap();
@@ -734,10 +746,24 @@ impl Simulation {
                     p.destination = None;
                 }
             }
+            // Preserve the existing NPC linear budget; strongest timed/zone slow wins.
+            // No Champion soft cap or native NPC immunity rule is inferred.
+            let e_slow=self.trundle_e_slow(id).max(slows::unit_strongest(&self.units[&id],self.tick));
+            let e_circles=self.trundle_e_circles();
             let p = self.units.get_mut(&id).unwrap();
-            let mut remaining = def.move_speed / TICK_RATE as f32;
+            let mut remaining = if e_slow>0. {def.move_speed*(1.-e_slow)/TICK_RATE as f32} else {def.move_speed / TICK_RATE as f32};
             while let Some(goal) = p.path.front().copied() {
                 let distance = p.position.distance(goal);
+                // Empty overlay preserves the old integration exactly.
+                if !e_circles.is_empty() {
+                    let next = if distance <= remaining { goal } else { Point {
+                        x: p.position.x + (goal.x - p.position.x) * remaining / distance,
+                        z: p.position.z + (goal.z - p.position.z) * remaining / distance,
+                    }};
+                    if !pillar_navigation::segment_allowed(&self.navigation,p.position,next,&e_circles) {
+                        p.path.clear(); p.destination=None; break;
+                    }
+                }
                 if distance <= remaining {
                     p.position = goal;
                     p.path.pop_front();

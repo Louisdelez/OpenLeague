@@ -1,0 +1,15 @@
+# Tas natif et prérequis CRT — référence 4.20
+
+Le support actuel de HeapAlloc(flags=0) et flags=8 est intégré dans le véritable module Rust propriétaire du tas. Les allocations brutes sont observées via ReadProcessMemory sur ce seul processus, dans un tampon déjà initialisé, puis réécrites à l’identique avant exposition sous forme de slice Rust. Les pointeurs hôte restent privés et de largeur native ; les références invitées restent des identifiants32bits contrôlés. Les autres flags,handles incorrects,ranges libres/padding et références mortes sont refusés.
+
+Les sources primaires Microsoft HeapAlloc/ReadProcessMemory,les documents Rust installés et l’extrait SDK sont figés avec origine/version/SHA dans revision17/primary-contracts. Cette méthode est un choix d’implémentation actuel ; les octets initiaux enregistrés sont ceux du tas de l’hôte actuel,aucun contenu mémoire de2014 n’est prétendu récupéré.
+
+Les instructions originales CABB83 puis CB0378 retournent1 dans le profil déclaré et initialisent14emplacements de locks. Le malloc original atteint HeapAlloc(flags0,size140) ; calloc(flags8) utilise aussi le tas réel. Le nouvel essai9 emploie les modules installés et des helpers32/64bits compilés. L’initialiseur9063E0 ne retourne toujours pas : arrêt strict à TlsGetValue,cabcd9/IATfa43fc. Les six chaînes du contexte et le nettoyage des ressources hôte ne prouvent ni retour complet ni destruction native.
+
+Le profil missingToolsConfig/ECX0,encodageXOR13572468,moduleopaque12340000 et33exportsoptionnels déclarés absents reste conditionnel. Il ne qualifie pas l’environnement historique,l’ordre effectif des packages/base/overlays ni les réglages FP/NLS. Les composants Rust FLS/heap/worker existent ; il faut qualifier la composition exacte CA92CB,parentCRT/TLS,callback et durée de vie. L’inconnue conserve ses anciens textes,recherches et conditions et reste ouverte.
+
+Les tests du vrai module Cargo,les huit contrôles des helpers sur deux architectures et les tests du registre sont identifiés séparément dans le reçu final. L’échec initial32bits WinError740 est conservé ; les mêmes octets passent sous un nom neutre,l’explication par le nom reste une inférence. Une erreur de métadonnées NameError avant l’essai natif et toute erreur d’extraction de reçu Cargo restent distinctes des résultats exécutés. Aucun test réussi n’est relancé pour masquer un échec de préparation.
+
+Les deux anciens records de sources et leurs octets restent archivés ; cinq anciennes ancres et leurs identifiants sont conservés. Les preuvesV16 et la dernière vérification SYS-01.1-02 restent intactes. Aucune case,note,révision ou acceptation humaine n’est ajoutée. Le Goal complet reste actif.
+
+Preuves : [frontières natives](reference_native_skin_loader_sources/original-package-heap-startup-boundaries.json),[adoption des versions](reference_native_skin_loader_sources/native-heap-flags0-version-adoption.json),[intégration et audit](fidelity_registry_native_heap_revision_4_20.json).

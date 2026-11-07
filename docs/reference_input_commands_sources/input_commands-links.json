@@ -1,0 +1,3299 @@
+{
+  "schema": "openleague_input_commands_links/v1",
+  "passed": true,
+  "utc": "2026-10-23T06:48:23.820494+00:00",
+  "full_task_scope_complete": false,
+  "native_or_game_executed": false,
+  "historical_server_policy_qualified": false,
+  "facts": {
+    "candidates": {
+      "producer": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\prepare_input_commands_reader.py",
+        "bytes": 4379,
+        "sha256": "d469e9b18c5c6e37197e3087354bebe2f58fbcebed25ba5a731b17349a0b28c5"
+      },
+      "associations": [
+        {
+          "task_id": "SYS-17.4-01",
+          "finding": "Fixed QWER defaults;editable persistent ability/item bindings not qualified.",
+          "remaining": "Fixed QWER defaults;editable persistent ability/item bindings not qualified.",
+          "anchors": [
+            {
+              "path": "crates/client/src/spell_input.rs",
+              "line": 5,
+              "needle": "pub const KEYS:",
+              "role": "input_commands_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-8d1361f4-bce6-53ca-996e-fc0ddefaf2d0"
+        },
+        {
+          "task_id": "SYS-17.4-02",
+          "finding": "Supported champion ground targeting exists;normal/quick cast preference persistence absent from this consumer.",
+          "remaining": "Supported champion ground targeting exists;normal/quick cast preference persistence absent from this consumer.",
+          "anchors": [
+            {
+              "path": "crates/client/src/spell_input.rs",
+              "line": 1,
+              "needle": "pub fn ground_target(",
+              "role": "input_commands_2"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-0816f405-8a26-502a-901a-ec5c491c46ed"
+        },
+        {
+          "task_id": "SYS-17.4-03",
+          "finding": "Immediate targeted dispatch boundary;range preview before confirmation not identified.",
+          "remaining": "Immediate targeted dispatch boundary;range preview before confirmation not identified.",
+          "anchors": [
+            {
+              "path": "crates/client/src/main.rs",
+              "line": 1392,
+              "needle": "let targeted_skill=",
+              "role": "input_commands_3"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-31cba424-0e7b-5bd2-8c1d-663b9e05da34"
+        },
+        {
+          "task_id": "SYS-17.4-04",
+          "finding": "Alt-right-click Annie pet routing is present;general self-cast and modifiers remain unqualified.",
+          "remaining": "Alt-right-click Annie pet routing is present;general self-cast and modifiers remain unqualified.",
+          "anchors": [
+            {
+              "path": "crates/client/src/main.rs",
+              "line": 1390,
+              "needle": "let pet_control=",
+              "role": "input_commands_4"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-a410264e-afd4-5fd1-95f3-cdb0e636510b"
+        },
+        {
+          "task_id": "SYS-17.4-05",
+          "finding": "Ray target helper supports champions_only;attack-move and user champion-only mode not established.",
+          "remaining": "Ray target helper supports champions_only;attack-move and user champion-only mode not established.",
+          "anchors": [
+            {
+              "path": "crates/client/src/picking.rs",
+              "line": 16,
+              "needle": "pub fn target(",
+              "role": "input_commands_5"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-2ab8c64d-283b-568c-a541-48d3d9a67c92"
+        },
+        {
+          "task_id": "SYS-17.4-06",
+          "finding": "Shared in-memory camera lock setting;camera command persistence not identified.",
+          "remaining": "Shared in-memory camera lock setting;camera command persistence not identified.",
+          "anchors": [
+            {
+              "path": "crates/client/src/camera_lock.rs",
+              "line": 56,
+              "needle": "pub struct Setting {",
+              "role": "input_commands_6"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-8bb2818d-7703-5c2c-a6b1-c1aca5998a57"
+        },
+        {
+          "task_id": "SYS-17.4-07",
+          "finding": "Chat.ini resource load only;historical chat command service not identified.",
+          "remaining": "Chat.ini resource load only;historical chat command service not identified.",
+          "anchors": [
+            {
+              "path": "crates/client/src/native_zip_provider.rs",
+              "line": 74,
+              "needle": "let chat=required",
+              "role": "input_commands_7"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-2407a043-c8a9-556b-be02-b93f1f6d5b38"
+        },
+        {
+          "task_id": "SYS-17.4-08",
+          "finding": "Shop focus blocks combat;chat input is not implemented by this gate.",
+          "remaining": "Shop focus blocks combat;chat input is not implemented by this gate.",
+          "anchors": [
+            {
+              "path": "crates/client/src/main.rs",
+              "line": 1381,
+              "needle": "if inventory_capture.blocks_commands()",
+              "role": "input_commands_8"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-e87ab149-2826-528a-9bc4-4fbe77da6b15"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\input-native-consumer-research.json",
+          "bytes": 63370,
+          "sha256": "a8b37f37a535c83a799cbb0196b1fa1b0fceda49f7f35ac952d2338ca282f227"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\input-commands-test-receipt.json",
+          "bytes": 11129,
+          "sha256": "01a81d6b17c2d0cedf059e4f3a1e1d604d48c308f7d83d34b5bcd6b6e02a121d"
+        }
+      ],
+      "current_sources": [
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\spell_input.rs",
+          "bytes": 9762,
+          "sha256": "2f99cb617bfd218da8d8125fcf65fbfea34eb602391899547cf065c758eadccf"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\spell_input.rs",
+          "bytes": 9762,
+          "sha256": "2f99cb617bfd218da8d8125fcf65fbfea34eb602391899547cf065c758eadccf"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+          "bytes": 141376,
+          "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+          "bytes": 141376,
+          "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\picking.rs",
+          "bytes": 12929,
+          "sha256": "8415d4f86ca72c31484f1a9bf3df3faa94fcfb7cda4c684cc0c0bc30295bb2cb"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\camera_lock.rs",
+          "bytes": 7806,
+          "sha256": "ffe68936534a47ff685f80d0b48fc068ed6cd8db8b0f648447a916d0d04bb6d6"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\native_zip_provider.rs",
+          "bytes": 19264,
+          "sha256": "84f31115bf4413eb2617aa7eedf353d0fd36ee18d8afd2b5d4b35475eceacb6c"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+          "bytes": 141376,
+          "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+        }
+      ],
+      "search": {
+        "command": [
+          "rg",
+          "-n",
+          "-i",
+          "AttackMove|attack.move|range.indicator|cast.indicator|chat.command",
+          "F:\\OpenLeague\\crates\\client\\src",
+          "F:\\OpenLeague\\crates\\core\\src",
+          "-g",
+          "*.rs"
+        ],
+        "exit_code": 1,
+        "log": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\input-missing-consumer-search.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "scope": "Partial input consumers and explicit missing persistence/chat/preview boundaries;no full feature acceptance."
+    },
+    "receipts": {
+      "input-native-consumer-research.json": {
+        "utc": "2026-10-23T06:47:18.846456+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\audit_input_sources.py",
+          "bytes": 3214,
+          "sha256": "2ab936b84bf3be24619b1de37b5d8db84ddf2b12046f61d3084dadd627200a30"
+        },
+        "configurations": [
+          {
+            "role": "native_defaults",
+            "source": {
+              "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Input.ini",
+              "bytes": 30938,
+              "sha256": "930f1499991e9c4973e81086a26c944b7330058970c4227a614b897eae09fec1"
+            },
+            "fields": [
+              {
+                "section": "DisableKeys",
+                "key": "disableCapsLock",
+                "value": "0",
+                "line": 292
+              },
+              {
+                "section": "DisableKeys",
+                "key": "disableWinKey",
+                "value": "0",
+                "line": 293
+              },
+              {
+                "section": "DisableKeys",
+                "key": "disablNumLock",
+                "value": "0",
+                "line": 294
+              },
+              {
+                "section": "DisableKeys",
+                "key": "disableLinkedModifers",
+                "value": "0",
+                "line": 295
+              },
+              {
+                "section": "MouseSettings",
+                "key": "PointerSpeed",
+                "value": "2",
+                "line": 298
+              },
+              {
+                "section": "MouseSettings",
+                "key": "RollerButtonSpeed",
+                "value": "1",
+                "line": 299
+              },
+              {
+                "section": "ModifierEvents",
+                "key": "evtShiftL",
+                "value": "[L Shift]",
+                "line": 302
+              },
+              {
+                "section": "ModifierEvents",
+                "key": "evtShiftR",
+                "value": "[R Shift]",
+                "line": 303
+              },
+              {
+                "section": "ModifierEvents",
+                "key": "evtCtrlL",
+                "value": "[L Ctrl]",
+                "line": 304
+              },
+              {
+                "section": "ModifierEvents",
+                "key": "evtCtrlR",
+                "value": "[R Ctrl]",
+                "line": 305
+              },
+              {
+                "section": "ModifierEvents",
+                "key": "evtAltL",
+                "value": "[L Alt]",
+                "line": 306
+              },
+              {
+                "section": "ModifierEvents",
+                "key": "evtAltR",
+                "value": "[R Alt]",
+                "line": 307
+              },
+              {
+                "section": "ModifierEvents",
+                "key": "evtCmd",
+                "value": "[Cmd]",
+                "line": 308
+              },
+              {
+                "section": "ModifierEvents",
+                "key": "evtFn",
+                "value": "[Fn]",
+                "line": 309
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtCastSpell4",
+                "value": "[r]",
+                "line": 312
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtCastSpell3",
+                "value": "[e]",
+                "line": 313
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtCastSpell2",
+                "value": "[w]",
+                "line": 314
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtCastSpell1",
+                "value": "[q]",
+                "line": 315
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtCastAvatarSpell1",
+                "value": "[d]",
+                "line": 316
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtCastAvatarSpell2",
+                "value": "[f]",
+                "line": 317
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtLevelSpell4",
+                "value": "[Ctrl][r]",
+                "line": 319
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtLevelSpell3",
+                "value": "[Ctrl][e]",
+                "line": 320
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtLevelSpell2",
+                "value": "[Ctrl][w]",
+                "line": 321
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtLevelSpell1",
+                "value": "[Ctrl][q]",
+                "line": 322
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelfCastSpell1",
+                "value": "[Alt][q]",
+                "line": 324
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelfCastSpell2",
+                "value": "[Alt][w]",
+                "line": 325
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelfCastSpell3",
+                "value": "[Alt][e]",
+                "line": 326
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelfCastSpell4",
+                "value": "[Alt][r]",
+                "line": 327
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelfCastAvatarSpell1",
+                "value": "[Alt][d]",
+                "line": 328
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelfCastAvatarSpell2",
+                "value": "[Alt][f]",
+                "line": 329
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSmartCastSpell1",
+                "value": "[Shift][q]",
+                "line": 332
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSmartCastSpell2",
+                "value": "[Shift][w]",
+                "line": 333
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSmartCastSpell3",
+                "value": "[Shift][e]",
+                "line": 334
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSmartCastSpell4",
+                "value": "[Shift][r]",
+                "line": 335
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSmartCastAvatarSpell1",
+                "value": "[Shift][d]",
+                "line": 336
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSmartCastAvatarSpell2",
+                "value": "[Shift][f]",
+                "line": 337
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSmartPlusSelfCastSpell1",
+                "value": "[<Unbound>]",
+                "line": 339
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSmartPlusSelfCastSpell2",
+                "value": "[<Unbound>]",
+                "line": 340
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSmartPlusSelfCastSpell3",
+                "value": "[<Unbound>]",
+                "line": 341
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSmartPlusSelfCastSpell4",
+                "value": "[<Unbound>]",
+                "line": 342
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSmartPlusSelfCastAvatarSpell1",
+                "value": "[<Unbound>]",
+                "line": 343
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSmartPlusSelfCastAvatarSpell2",
+                "value": "[<Unbound>]",
+                "line": 344
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSmartCastItem1",
+                "value": "[Shift][1]",
+                "line": 346
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSmartCastItem2",
+                "value": "[Shift][2]",
+                "line": 347
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSmartCastItem3",
+                "value": "[Shift][3]",
+                "line": 348
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSmartCastVisionItem",
+                "value": "[Shift][4]",
+                "line": 349
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSmartCastItem4",
+                "value": "[Shift][5]",
+                "line": 350
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSmartCastItem5",
+                "value": "[Shift][6]",
+                "line": 351
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSmartCastItem6",
+                "value": "[Shift][7]",
+                "line": 352
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelfCastItem1",
+                "value": "[Alt][1]",
+                "line": 354
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelfCastItem2",
+                "value": "[Alt][2]",
+                "line": 355
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelfCastItem3",
+                "value": "[Alt][3]",
+                "line": 356
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelfCastVisionItem",
+                "value": "[Alt][4]",
+                "line": 357
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelfCastItem4",
+                "value": "[Alt][5]",
+                "line": 358
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelfCastItem5",
+                "value": "[Alt][6]",
+                "line": 359
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelfCastItem6",
+                "value": "[Alt][7]",
+                "line": 360
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtUseItem6",
+                "value": "[7]",
+                "line": 362
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtUseItem5",
+                "value": "[6]",
+                "line": 363
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtUseItem4",
+                "value": "[5]",
+                "line": 364
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtUseVisionItem",
+                "value": "[4]",
+                "line": 365
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtUseItem3",
+                "value": "[3]",
+                "line": 366
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtUseItem2",
+                "value": "[2]",
+                "line": 367
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtUseItem1",
+                "value": "[1]",
+                "line": 368
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtUseItem7",
+                "value": "[b]",
+                "line": 371
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtUseChampSwap",
+                "value": "[t]",
+                "line": 373
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtShowCharacterMenu",
+                "value": "[c]",
+                "line": 375
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtShowScoreBoard",
+                "value": "[o]",
+                "line": 376
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtOpenShop",
+                "value": "[p]",
+                "line": 377
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtChatHistory",
+                "value": "[z]",
+                "line": 379
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtCameraLockToggle",
+                "value": "[y]",
+                "line": 380
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtCameraSnap",
+                "value": "[Space]",
+                "line": 381
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelectSelf",
+                "value": "[F1]",
+                "line": 382
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelectAlly1",
+                "value": "[F2]",
+                "line": 383
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelectAlly2",
+                "value": "[F3]",
+                "line": 384
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelectAlly3",
+                "value": "[F4]",
+                "line": 385
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelectAlly4",
+                "value": "[F5]",
+                "line": 386
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelectAlly5",
+                "value": "[F6]",
+                "line": 387
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtScrollUp",
+                "value": "[Up Arrow]",
+                "line": 388
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtScrollDown",
+                "value": "[Down Arrow]",
+                "line": 389
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtScrollLeft",
+                "value": "[Left Arrow]",
+                "line": 390
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtScrollRight",
+                "value": "[Right Arrow]",
+                "line": 391
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtToggleMinionHealthBars",
+                "value": "[<Unbound>]",
+                "line": 392
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtShowHealthBars",
+                "value": "[<Unbound>]",
+                "line": 393
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtReloadScripts",
+                "value": "[Shift][p]",
+                "line": 394
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtShowSummonerNames",
+                "value": "[<Unbound>]",
+                "line": 395
+              },
+              {
+                "section": "GameEvents",
+                "key": "evntPlayerPingCursor",
+                "value": "[g]",
+                "line": 396
+              },
+              {
+                "section": "GameEvents",
+                "key": "evntPlayerPing",
+                "value": "[alt][Button 1]",
+                "line": 397
+              },
+              {
+                "section": "GameEvents",
+                "key": "evntPlayerPingDanger",
+                "value": "[ctrl][Button 1]",
+                "line": 398
+              },
+              {
+                "section": "GameEvents",
+                "key": "evntPlayerPingCursorDanger",
+                "value": "[v]",
+                "line": 399
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtPlayerPingOMW",
+                "value": "[<Unbound>]",
+                "line": 400
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtPlayerPingMIA",
+                "value": "[<Unbound>]",
+                "line": 401
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtPlayerPingRadialDanger",
+                "value": "[<Unbound>]",
+                "line": 402
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtPlayerPingComeHere",
+                "value": "[<Unbound>]",
+                "line": 403
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtPlayerSelectClick",
+                "value": "[Button 1],[Shift][Button 1]",
+                "line": 405
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtPlayerSelectHoldClick",
+                "value": "[Button 1],[Shift][Button 1]",
+                "line": 406
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtPlayerMoveClick",
+                "value": "[Button 2]",
+                "line": 407
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtPlayerReleaseMoveClick",
+                "value": "[Button 2]",
+                "line": 408
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtPlayerAttackMoveClick",
+                "value": "[Shift] [Button 2]",
+                "line": 409
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtPlayerAttackOnlyClick",
+                "value": "[<Unbound>]",
+                "line": 410
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtPlayerAttackMove",
+                "value": "[a],[x]",
+                "line": 411
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtPlayerHoldPosition",
+                "value": "[h]",
+                "line": 412
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtPlayerStopPosition",
+                "value": "[s]",
+                "line": 413
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtPetMoveClick",
+                "value": "[Alt] [Button 2], [Ctrl] [Button 2]",
+                "line": 414
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtPetReturn",
+                "value": "[Alt] [Button 1]",
+                "line": 415
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSysMenu",
+                "value": "[Esc]",
+                "line": 416
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSysMenuAlt",
+                "value": "[Backslash]",
+                "line": 417
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtEmoteJoke",
+                "value": "[Ctrl][1]",
+                "line": 418
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtEmoteTaunt",
+                "value": "[Ctrl][2]",
+                "line": 419
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtEmoteDance",
+                "value": "[Ctrl][3]",
+                "line": 420
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtEmoteLaugh",
+                "value": "[Ctrl][4]",
+                "line": 421
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtChampionOnly",
+                "value": "[`]",
+                "line": 423
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtOnUIMouse4Pan",
+                "value": "[Button 3]",
+                "line": 425
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtDragScrollLock",
+                "value": "[Ctrl] [Shift] [s]",
+                "line": 426
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelectOrderPlayer1",
+                "value": "[1]",
+                "line": 428
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelectOrderPlayer2",
+                "value": "[2]",
+                "line": 429
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelectOrderPlayer3",
+                "value": "[3]",
+                "line": 430
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelectOrderPlayer4",
+                "value": "[4]",
+                "line": 431
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelectOrderPlayer5",
+                "value": "[5]",
+                "line": 432
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelectOrderPlayer6",
+                "value": "[5]",
+                "line": 433
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelectChaosPlayer1",
+                "value": "[q]",
+                "line": 434
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelectChaosPlayer2",
+                "value": "[w]",
+                "line": 435
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelectChaosPlayer3",
+                "value": "[e]",
+                "line": 436
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelectChaosPlayer4",
+                "value": "[r]",
+                "line": 437
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelectChaosPlayer5",
+                "value": "[t]",
+                "line": 438
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelectChaosPlayer6",
+                "value": "[y]",
+                "line": 439
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSetActiveOrderPlayer1",
+                "value": "[Shift] [1]",
+                "line": 441
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSetActiveOrderPlayer2",
+                "value": "[Shift] [2]",
+                "line": 442
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSetActiveOrderPlayer3",
+                "value": "[Shift] [3]",
+                "line": 443
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSetActiveOrderPlayer4",
+                "value": "[Shift] [4]",
+                "line": 444
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSetActiveOrderPlayer5",
+                "value": "[Shift] [5]",
+                "line": 445
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSetActiveChaosPlayer1",
+                "value": "[Shift] [q]",
+                "line": 446
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSetActiveChaosPlayer2",
+                "value": "[Shift] [w]",
+                "line": 447
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSetActiveChaosPlayer3",
+                "value": "[Shift] [e]",
+                "line": 448
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSetActiveChaosPlayer4",
+                "value": "[Shift] [r]",
+                "line": 449
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSetActiveChaosPlayer5",
+                "value": "[Shift] [t]",
+                "line": 450
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSetVisibilityTeam1",
+                "value": "[F1]",
+                "line": 453
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSetVisibilityTeam2",
+                "value": "[F2]",
+                "line": 454
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSetVisibilityTeamNone",
+                "value": "[F3]",
+                "line": 455
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtToggleFogOfWar",
+                "value": "[f]",
+                "line": 456
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtToggleObserverVisibility",
+                "value": "[v]",
+                "line": 457
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtToggleReplayUI",
+                "value": "[h]",
+                "line": 458
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtToggleReplayVisibilityPanel",
+                "value": "[i]",
+                "line": 459
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtEnableDirectedCamera",
+                "value": "[d]",
+                "line": 460
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtDisableDirectedCamera",
+                "value": "[s]",
+                "line": 461
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtIncreaseReplaySpeed",
+                "value": "[=],[Num+]",
+                "line": 462
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtDecreaseReplaySpeed",
+                "value": "[-],[Num-]",
+                "line": 463
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtDefaultReplaySpeed",
+                "value": "[0],[Num0]",
+                "line": 464
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtToggleReplayPause",
+                "value": "[p]",
+                "line": 465
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtJumpBack",
+                "value": "[Back]",
+                "line": 466
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtJumpForward",
+                "value": "[j]",
+                "line": 467
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtToggleScoreboardGoldDisplay",
+                "value": "[x]",
+                "line": 468
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtShowCharacterMenuSpectator",
+                "value": "[c]",
+                "line": 470
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtShowHideTeamfightUI",
+                "value": "[a]",
+                "line": 471
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtInvokeBugSubmission",
+                "value": "[/]",
+                "line": 472
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtDebugEvent0",
+                "value": "[Alt] [Ctrl] [0]",
+                "line": 475
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtDebugEvent1",
+                "value": "[Alt] [Ctrl] [1]",
+                "line": 476
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtDebugEvent2",
+                "value": "[Alt] [Ctrl] [2]",
+                "line": 477
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtDebugEvent3",
+                "value": "[Alt] [Ctrl] [3]",
+                "line": 478
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtDebugEvent4",
+                "value": "[Alt] [Ctrl] [4]",
+                "line": 479
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtDebugEvent5",
+                "value": "[Alt] [Ctrl] [5]",
+                "line": 480
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtDebugEvent6",
+                "value": "[Alt] [Ctrl] [6]",
+                "line": 481
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtDebugEvent7",
+                "value": "[Alt] [Ctrl] [7]",
+                "line": 482
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtDebugEvent8",
+                "value": "[Alt] [Ctrl] [8]",
+                "line": 483
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtDebugEvent9",
+                "value": "[Alt] [Ctrl] [9]",
+                "line": 484
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtShowSimClockStatus",
+                "value": "[;]",
+                "line": 485
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtToggleProfiler",
+                "value": "[Alt] [;]",
+                "line": 486
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtDrawHud",
+                "value": "[<Unbound>]",
+                "line": 487
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtToggleDesignerMenuWithCheats",
+                "value": "[Alt] [c]",
+                "line": 488
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtDeleteLight",
+                "value": "[Del]",
+                "line": 489
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtKeyboardEntryBegin",
+                "value": "[Alt] [Ctrl] [F12]",
+                "line": 490
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtDisplayHudText",
+                "value": "[h]",
+                "line": 491
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtInsertLight",
+                "value": "[Ins]",
+                "line": 492
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtToggleQC",
+                "value": "[z]",
+                "line": 493
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtToggleViewTextures",
+                "value": "[Alt] [k]",
+                "line": 494
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtToggleCullingMode",
+                "value": "[Alt] [l]",
+                "line": 495
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtShowCameraSliders",
+                "value": "[Shift][m]",
+                "line": 496
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtFPSPitchDown",
+                "value": "[Num1]",
+                "line": 497
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtFPSPitchUp",
+                "value": "[Num3]",
+                "line": 498
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtFPSStrafeLeft",
+                "value": "[Num4]",
+                "line": 499
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtFPSBackwoods",
+                "value": "[Num5]",
+                "line": 500
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtFPSToggleXZConstrainedMovement",
+                "value": "[Alt] [Num5]",
+                "line": 501
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtFPSStrafeRight",
+                "value": "[Num6]",
+                "line": 502
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtFPSYawLeft",
+                "value": "[Num7]",
+                "line": 503
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtFPSForward",
+                "value": "[Num8]",
+                "line": 504
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtFPSYawRight",
+                "value": "[Num9]",
+                "line": 505
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtCheatOverdrawVisualize",
+                "value": "[Alt] [O]",
+                "line": 508
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtCycleStatsDisplay",
+                "value": "[Ctrl] [p]",
+                "line": 509
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtReloadParticleEffectsWithTogglingRepresentation",
+                "value": "[Ctrl] [Shift] [p]",
+                "line": 510
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtShowCurrentSOAParticlesState",
+                "value": "[Ctrl] [Shift] [q]",
+                "line": 511
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtHideTools",
+                "value": "[Ctrl][Shift][Tab]",
+                "line": 512
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtShowTools",
+                "value": "[Shift][Tab]",
+                "line": 513
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtToggleDeveloperGUI",
+                "value": "[Ctrl] [TAB]",
+                "line": 514
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtToggleTROYFiles",
+                "value": "[Alt] [Ctrl] [t]",
+                "line": 515
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtDrawNavGrid",
+                "value": "[Alt] [v]",
+                "line": 516
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtAIDrawDebug",
+                "value": "[]]",
+                "line": 517
+              },
+              {
+                "section": "HUDEvents",
+                "key": "evtOnUIMouse1",
+                "value": "[Button 1],[Ctrl] [Button 1]",
+                "line": 521
+              },
+              {
+                "section": "HUDEvents",
+                "key": "evtOnUIMouse2",
+                "value": "[Button 2],[Ctrl] [Button 2]",
+                "line": 522
+              },
+              {
+                "section": "HUDEvents",
+                "key": "evtOnUIMouse3",
+                "value": "[Button 3],[Ctrl] [Button 3]",
+                "line": 523
+              },
+              {
+                "section": "HUDEvents",
+                "key": "evtMakeScreenShot",
+                "value": "[F12]",
+                "line": 524
+              },
+              {
+                "section": "HUDEvents",
+                "key": "evtToggleMap",
+                "value": "[m]",
+                "line": 525
+              },
+              {
+                "section": "HUDEvents",
+                "key": "evntToggleHudMoveable",
+                "value": "[Alt][m]",
+                "line": 526
+              },
+              {
+                "section": "HUDEvents",
+                "key": "evntHudMoveableSelect",
+                "value": "[Button 1]",
+                "line": 527
+              },
+              {
+                "section": "HUDEvents",
+                "key": "evntHudScale",
+                "value": "[MouseWheel]",
+                "line": 528
+              },
+              {
+                "section": "HUDEvents",
+                "key": "evtOrbitCamera",
+                "value": "[Ctrl][Shift][Button 1]",
+                "line": 529
+              },
+              {
+                "section": "HUDEvents",
+                "key": "evtResetCamera",
+                "value": "[Ctrl][Space]",
+                "line": 530
+              },
+              {
+                "section": "HUDEvents",
+                "key": "evtHoldShowScoreBoard",
+                "value": "[Tab]",
+                "line": 531
+              },
+              {
+                "section": "HUDEvents",
+                "key": "evtHoldShowTimers",
+                "value": "[<Unbound>]",
+                "line": 532
+              },
+              {
+                "section": "HUDEvents",
+                "key": "evtToggleFPSAndLatency",
+                "value": "[Ctrl] [f]",
+                "line": 533
+              },
+              {
+                "section": "HUDEvents",
+                "key": "evntToggleFullscreen",
+                "value": "[Alt] [Return]",
+                "line": 534
+              },
+              {
+                "section": "HUDEvents",
+                "key": "evtToggleMouseClip",
+                "value": "[F9]",
+                "line": 535
+              },
+              {
+                "section": "HUDEvents",
+                "key": "evtToggleReplayDebug",
+                "value": "[Ctrl] [d]",
+                "line": 536
+              },
+              {
+                "section": "HUDEvents",
+                "key": "evtToggleDirectedCameraDebug",
+                "value": "[Alt] [d]",
+                "line": 537
+              },
+              {
+                "section": "QCEvents",
+                "key": "evtQC1",
+                "value": "[z]",
+                "line": 540
+              },
+              {
+                "section": "QCEvents",
+                "key": "evtQC2",
+                "value": "[x]",
+                "line": 541
+              },
+              {
+                "section": "QCEvents",
+                "key": "evtQC3",
+                "value": "[c]",
+                "line": 542
+              },
+              {
+                "section": "QCEvents",
+                "key": "evtQC4",
+                "value": "[v]",
+                "line": 543
+              },
+              {
+                "section": "QCEvents",
+                "key": "evtQC5",
+                "value": "[b]",
+                "line": 544
+              },
+              {
+                "section": "QCEvents",
+                "key": "evtQC6",
+                "value": "[a]",
+                "line": 545
+              },
+              {
+                "section": "QCEvents",
+                "key": "evtQC7",
+                "value": "[s]",
+                "line": 546
+              },
+              {
+                "section": "QCEvents",
+                "key": "evtQC8",
+                "value": "[<Unbound>]",
+                "line": 547
+              },
+              {
+                "section": "QCEvents",
+                "key": "evtQC9",
+                "value": "[<Unbound>]",
+                "line": 548
+              },
+              {
+                "section": "QCEvents",
+                "key": "evtQC10",
+                "value": "[<Unbound>]",
+                "line": 549
+              },
+              {
+                "section": "ShopEvents",
+                "key": "evtShopFocusSearch",
+                "value": "[Ctrl] [l], [Ctrl] [Return]",
+                "line": 552
+              },
+              {
+                "section": "ShopEvents",
+                "key": "evtShopSwitchTabs",
+                "value": "[Ctrl] [TAB]",
+                "line": 553
+              },
+              {
+                "section": "MenuEvents",
+                "key": "evtBackToGame",
+                "value": "[Esc]",
+                "line": 556
+              },
+              {
+                "section": "MenuEvents",
+                "key": "evtBackToGameAlt",
+                "value": "[Backslash]",
+                "line": 557
+              },
+              {
+                "section": "ChatEvents",
+                "key": "evtChatConsoleReturn",
+                "value": "[Return], [NumEnter]",
+                "line": 562
+              },
+              {
+                "section": "KeyMapEvents",
+                "key": "evtBackToGame",
+                "value": "[Esc]",
+                "line": 566
+              },
+              {
+                "section": "KeyMapEvents",
+                "key": "evtKeyboardEntryReturn",
+                "value": "[Return], [NumEnter]",
+                "line": 568
+              },
+              {
+                "section": "KeyMapEvents",
+                "key": "evtKeyboardEntryCommit",
+                "value": "[Shift] [F12]",
+                "line": 569
+              },
+              {
+                "section": "KeyMapEvents",
+                "key": "evtKeyboardEntryEnd",
+                "value": "[Alt] [Ctrl] [F12]",
+                "line": 570
+              },
+              {
+                "section": "KeyMapEvents",
+                "key": "evtKeyMappingWrite",
+                "value": "[Alt] [Ctrl] [s]",
+                "line": 571
+              },
+              {
+                "section": "KeyMapEvents",
+                "key": "evtKeyMappingRead",
+                "value": "[Alt] [Ctrl] [l]",
+                "line": 572
+              },
+              {
+                "section": "KeyMapEvents",
+                "key": "evtKeyMappingClear",
+                "value": "[Alt] [Ctrl] [c]",
+                "line": 573
+              },
+              {
+                "section": "KeyMapEvents",
+                "key": "evtKeyMappingNextGroup",
+                "value": "[<Unbound>]",
+                "line": 575
+              },
+              {
+                "section": "KeyMapEvents",
+                "key": "evtKeyMappingNextField",
+                "value": "[Right Arrow] , [Right Arrow]",
+                "line": 576
+              },
+              {
+                "section": "KeyMapEvents",
+                "key": "evtKeyMappingNextEvent",
+                "value": "[Down Arrow]",
+                "line": 577
+              },
+              {
+                "section": "KeyMapEvents",
+                "key": "evtKeyMappingPrevField",
+                "value": "[Left Arrow]",
+                "line": 578
+              },
+              {
+                "section": "KeyMapEvents",
+                "key": "evtKeyMappingPrevEvent",
+                "value": "[Up Arrow]",
+                "line": 579
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtShowCPDisplay",
+                "value": "[']",
+                "line": 583
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatWritePosition",
+                "value": "[*]",
+                "line": 584
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatInvulnerableAllMinions",
+                "value": "[Ctrl][-]",
+                "line": 585
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatLoseGame",
+                "value": "[Ctrl][Shift][.]",
+                "line": 586
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatTogglePARRegen",
+                "value": "[Alt][.]",
+                "line": 587
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatWinGame",
+                "value": "[Ctrl][.]",
+                "line": 588
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatToggleHealthRegen",
+                "value": "[Alt][/]",
+                "line": 589
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatNextDimension",
+                "value": "[Ctrl][a]",
+                "line": 590
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatToggleAnnouncements",
+                "value": "[Ctrl][Alt][A]",
+                "line": 591
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatToggleAudio",
+                "value": "[Alt][A]",
+                "line": 592
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatIncBot",
+                "value": "[Alt][Backslash]",
+                "line": 593
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatIncBotDifficulty",
+                "value": "[Ctrl][Alt][Backslash]",
+                "line": 594
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatNextEntityBaseBot",
+                "value": "[R Shift][Backslash]",
+                "line": 595
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatDestroyAllProps",
+                "value": "[R Shift][Alt][B]",
+                "line": 596
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatDrawBoundingInfo",
+                "value": "[Ctrl][Alt][B]",
+                "line": 597
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatDrawProximityAnimationInfo",
+                "value": "[Ctrl][Alt][R]",
+                "line": 598
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatForceSoftReconnect",
+                "value": "[Ctrl][B]",
+                "line": 599
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatEnable",
+                "value": "[Alt] [c]",
+                "line": 600
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatDisconnect",
+                "value": "[Ctrl][Alt][d]",
+                "line": 601
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatCallForHelp",
+                "value": "[Alt][End]",
+                "line": 602
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatSpawnChaos",
+                "value": "[R Shift][Alt][F10]",
+                "line": 603
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatSpawnRegularBot",
+                "value": "[Alt][F10]",
+                "line": 604
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatSpawnOrderBot",
+                "value": "[Alt][F11], [Alt][Fn][F11]",
+                "line": 605
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatCreateRunAwayBot",
+                "value": "[Ctrl][F12]",
+                "line": 606
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatSpawnImmobileBot",
+                "value": "[Alt][F12], [Alt][Fn][F12]",
+                "line": 607
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatAutoHealth",
+                "value": "[Ctrl][Shift][F1], [Ctrl][Shift][Fn][F1]",
+                "line": 608
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatGiveLevel",
+                "value": "[Alt] [F1], [Alt] [Fn] [F1]",
+                "line": 609
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatGiveLevelMax",
+                "value": "[Alt] [Shift] [F1], [Alt] [Shift] [Fn] [F1]",
+                "line": 610
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatHealth",
+                "value": "[Ctrl][F1], [Ctrl][Fn][F1]",
+                "line": 611
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatAutoCooldown",
+                "value": "[Alt][Shift][F2], [Alt][Shift][Fn][F2]",
+                "line": 612
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatAutoMana",
+                "value": "[Ctrl][Shift][F2], [Ctrl][Shift][Fn][F2]",
+                "line": 613
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatAutoRecast",
+                "value": "[Shift][F2], [Shift][Fn][F2]",
+                "line": 614
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatCooldown",
+                "value": "[Alt][F2], [Alt][Fn][F2]",
+                "line": 615
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatMana",
+                "value": "[Ctrl][F2], [Ctrl][Fn][F2]",
+                "line": 616
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatGold",
+                "value": "[Ctrl] [F3], [Ctrl] [Fn] [F3]",
+                "line": 617
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatGoldLots",
+                "value": "[Ctrl] [Shift] [F3], [Ctrl] [Shift] [Fn] [F3]",
+                "line": 618
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatInvulnerable",
+                "value": "[Alt][F3], [Alt][Fn][F3]",
+                "line": 619
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatToggleAmbientGold",
+                "value": "[Alt] [Shift] [F3], [Alt] [Shift] [Fn] [F3]",
+                "line": 620
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtStepTime",
+                "value": "[F3], [Fn][F3]",
+                "line": 621
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatFPSCamera",
+                "value": "[Ctrl][F4], [Ctrl][Fn][F4]",
+                "line": 622
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtPauseToggle",
+                "value": "[F4], [Fn][F4]",
+                "line": 623
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatNextAiTeamDifficultyLevel",
+                "value": "[R Shift][Alt][F5], [R Shift][Alt][Fn][F5]",
+                "line": 624
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatResetRespawnTimer",
+                "value": "[Alt][F5], [Alt][Fn][F5]",
+                "line": 625
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatTopDownCamera",
+                "value": "[Ctrl][F5], [Ctrl][Fn][F5]",
+                "line": 626
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatBarracksSpawnToggle",
+                "value": "[Ctrl][F6], [Ctrl][Fn][F6]",
+                "line": 627
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatKillAllTurrets",
+                "value": "[Shift][F6], [Shift][Fn][F6]",
+                "line": 628
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatNextEntitySkillLevel",
+                "value": "[R Shift][Alt][F6], [R Shift][Alt][Fn][F6]",
+                "line": 629
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatSpawnParticleSystem",
+                "value": "[Alt][F6], [Alt][Fn][F6]",
+                "line": 630
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatDamageSelf",
+                "value": "[Alt] [F7], [Alt] [Fn] [F7]",
+                "line": 631
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatDamageUnit",
+                "value": "[Ctrl] [F7], [Ctrl] [Fn] [F7]",
+                "line": 632
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatSpawnAiEntityBaseBotOrder",
+                "value": "[R Shift] [Alt] [F7], [R Shift] [Alt] [Fn] [F7]",
+                "line": 633
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatSpawnAiEntityBaseBotChaos",
+                "value": "[R Shift] [Alt] [F8], [R Shift] [Alt] [Fn] [F8]",
+                "line": 634
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatSwitchHero",
+                "value": "[Ctrl][F8], [Ctrl][Fn][F8]",
+                "line": 635
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatNextMinion",
+                "value": "[Ctrl][F9], [Ctrl][Fn][F9]",
+                "line": 636
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatSpawnImmobile",
+                "value": "[Alt][F9], [Alt][Fn][F9]",
+                "line": 637
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatSpawnOrder",
+                "value": "[R Shift] [Alt] [F9], [R Shift] [Alt] [Fn] [F9]",
+                "line": 638
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatToggleFXAA",
+                "value": "[Ctrl][Shift][F]",
+                "line": 639
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatHidden",
+                "value": "[Ctrl][Alt][H]",
+                "line": 640
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatAttachCamera",
+                "value": "[Alt][Ctrl][I]",
+                "line": 641
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatInvulnerableSelectedUnit",
+                "value": "[Ctrl][I]",
+                "line": 642
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatServerMessages",
+                "value": "[Alt][i]",
+                "line": 643
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatToggleFOW",
+                "value": "[Alt][j]",
+                "line": 644
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtDrawGridOfChamps",
+                "value": "[Ctrl][k]",
+                "line": 645
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatToggleMouse",
+                "value": "[Ctrl] [Alt] [M]",
+                "line": 646
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatToggleMusic",
+                "value": "[Alt][M]",
+                "line": 647
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatStunSelectedUnit",
+                "value": "[Ctrl][n]",
+                "line": 648
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatStunYourself",
+                "value": "[Alt][n]",
+                "line": 649
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatToggleParticlesQueueLimitNotify",
+                "value": "[Ctrl][Alt][N]",
+                "line": 650
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtDecTime",
+                "value": "[PgDn]",
+                "line": 651
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtIncTime",
+                "value": "[PgUp]",
+                "line": 652
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatSendFOWParticles",
+                "value": "[Ctrl][Alt][P]",
+                "line": 653
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatFramerateLog",
+                "value": "[Ctrl][Shift][Space]",
+                "line": 654
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatSleep",
+                "value": "[Alt] [s]",
+                "line": 655
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatTogglePixelDensity",
+                "value": "[Ctrl][Alt][T]",
+                "line": 657
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatToggleTeamSelectedUnit",
+                "value": "[Ctrl][Shift][T]",
+                "line": 659
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatToggleTeamSelf",
+                "value": "[Ctrl][T]",
+                "line": 660
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatToggleTeleport",
+                "value": "[Alt][t]",
+                "line": 661
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatFloatingTextTest",
+                "value": "[Ctrl] [Up Arrow]",
+                "line": 662
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatToggleBroadcastNetworkMessages",
+                "value": "[Ctrl][u]",
+                "line": 663
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatToggleLocalFOWCulling",
+                "value": "[Alt][u]",
+                "line": 664
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatToggleSR2FOV",
+                "value": "[Ctrl][Shift][V]",
+                "line": 665
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatVisibility",
+                "value": "[Ctrl][Alt][V]",
+                "line": 666
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatToggleTeamRosterForWhispers",
+                "value": "[Ctrl] [Alt][W]",
+                "line": 667
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatChatHack",
+                "value": "[Ctrl] [Alt] [Y]",
+                "line": 668
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatResetGame",
+                "value": "[Ctrl] [Shift][Z]",
+                "line": 669
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatShowCursorDistanceToPlayer",
+                "value": "[`]",
+                "line": 670
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatTargetCooldown",
+                "value": "[Alt][`]",
+                "line": 671
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatToggleToonInking",
+                "value": "[Ctrl] [Shift] [O]",
+                "line": 672
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatJumpToMidGame",
+                "value": "[Ctrl][[]",
+                "line": 673
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatJumpToEndGame",
+                "value": "[Ctrl][Alt][[]",
+                "line": 674
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatDisableAssertsInChat",
+                "value": "[Ctrl][Alt][Shift][A]",
+                "line": 675
+              },
+              {
+                "section": "CheatEvents",
+                "key": "evtCheatEnableAssertsInChat",
+                "value": "[Ctrl][Alt][Shift][S]",
+                "line": 676
+              }
+            ]
+          },
+          {
+            "role": "supplied_deploy_override",
+            "source": {
+              "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\input.ini",
+              "bytes": 305,
+              "sha256": "aead4280d339159623dbe8f39784bde4b87a6b05afc6d95f2feccec7ba99073a"
+            },
+            "fields": [
+              {
+                "section": "Quickbinds",
+                "key": "evtUseItem4smart",
+                "value": "1",
+                "line": 4
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtCastAvatarSpell2smart",
+                "value": "1",
+                "line": 5
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtCastAvatarSpell1smart",
+                "value": "1",
+                "line": 6
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtCastSpell1smart",
+                "value": "1",
+                "line": 7
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtCastSpell4smart",
+                "value": "1",
+                "line": 8
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtCastSpell3smart",
+                "value": "1",
+                "line": 9
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtUseItem5smart",
+                "value": "1",
+                "line": 10
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtUseVisionItemsmart",
+                "value": "1",
+                "line": 11
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtCastSpell2smart",
+                "value": "1",
+                "line": 12
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtUseItem6smart",
+                "value": "1",
+                "line": 13
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtUseItem1smart",
+                "value": "1",
+                "line": 14
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtUseItem3smart",
+                "value": "1",
+                "line": 15
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtUseItem2smart",
+                "value": "1",
+                "line": 16
+              }
+            ]
+          },
+          {
+            "role": "user_configuration_not_historical_default",
+            "source": {
+              "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Config\\input.ini",
+              "bytes": 710,
+              "sha256": "fa16e719b04249006b3ab7c77f7810e728d3743faf82e86cb259b6cc96d0a531"
+            },
+            "fields": [
+              {
+                "section": "Quickbinds",
+                "key": "evtUseItem4smart",
+                "value": "1",
+                "line": 4
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtCastAvatarSpell2smart",
+                "value": "1",
+                "line": 5
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtCastAvatarSpell1smart",
+                "value": "1",
+                "line": 6
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtCastSpell1smart",
+                "value": "1",
+                "line": 7
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtCastSpell4smart",
+                "value": "1",
+                "line": 8
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtCastSpell3smart",
+                "value": "1",
+                "line": 9
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtUseItem5smart",
+                "value": "1",
+                "line": 10
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtUseVisionItemsmart",
+                "value": "1",
+                "line": 11
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtCastSpell2smart",
+                "value": "1",
+                "line": 12
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtUseItem6smart",
+                "value": "1",
+                "line": 13
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtUseItem1smart",
+                "value": "1",
+                "line": 14
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtUseItem3smart",
+                "value": "1",
+                "line": 15
+              },
+              {
+                "section": "Quickbinds",
+                "key": "evtUseItem2smart",
+                "value": "1",
+                "line": 16
+              },
+              {
+                "section": "GameEvents",
+                "key": "evntPlayerPingDanger",
+                "value": "[ctrl][Button 1]",
+                "line": 19
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtShowCharacterMenu",
+                "value": "[c]",
+                "line": 20
+              },
+              {
+                "section": "GameEvents",
+                "key": "evntPlayerPingCursorDanger",
+                "value": "[v]",
+                "line": 21
+              },
+              {
+                "section": "GameEvents",
+                "key": "evntPlayerPing",
+                "value": "[alt][Button 1]",
+                "line": 22
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtLevelSpell1",
+                "value": "[Ctrl][q]",
+                "line": 23
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelfCastSpell3",
+                "value": "[Alt][e]",
+                "line": 24
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelfCastSpell4",
+                "value": "[Alt][r]",
+                "line": 25
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtLevelSpell3",
+                "value": "[Ctrl][e]",
+                "line": 26
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelfCastSpell1",
+                "value": "[Alt][q]",
+                "line": 27
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtSelfCastSpell2",
+                "value": "[Alt][w]",
+                "line": 28
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtLevelSpell2",
+                "value": "[Ctrl][w]",
+                "line": 29
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtUseItem7",
+                "value": "[b]",
+                "line": 30
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtLevelSpell4",
+                "value": "[Ctrl][r]",
+                "line": 31
+              },
+              {
+                "section": "GameEvents",
+                "key": "evtPlayerStopPosition",
+                "value": "[s]",
+                "line": 32
+              }
+            ]
+          }
+        ],
+        "hotkey_contract": {
+          "path": "F:\\OpenLeague\\data\\4.20\\native_hud_hotkeys_contract.json",
+          "bytes": 4385,
+          "sha256": "6aaf1b0651944aedd858646c2d7c47203c2dde840d2c3b60a3bc74eec4de9771"
+        },
+        "source_hashes_verified": 2,
+        "default_bindings_verified": 4,
+        "limits": [
+          "Short-label branch executes original instructions. String find, substring and assignment helpers adapted to SSO byte operations; original std::string implementations not executed.",
+          "Native runtime key-event initialization83ED50, remapping/localization producer6D77E0, long-label formatting and keyboard-layout translation remain open. Source default Input.ini and supplied input.ini merged with configparser; original loader equivalence not claimed.",
+          "Current client consumes four recovered default bindings. Editable bindings/options and quickcast/alternate/modifier policies remain open; no full input/HUD qualification.",
+          "User config provenance is distinct;effective historical merge not established.",
+          "Shop focus is not chat focus."
+        ],
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\spell_input.rs",
+              "bytes": 9762,
+              "sha256": "2f99cb617bfd218da8d8125fcf65fbfea34eb602391899547cf065c758eadccf"
+            },
+            "line": 5,
+            "needle": "pub const KEYS:",
+            "finding": "Fixed QWER keys;runtime rebinding open."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\spell_input.rs",
+              "bytes": 9762,
+              "sha256": "2f99cb617bfd218da8d8125fcf65fbfea34eb602391899547cf065c758eadccf"
+            },
+            "line": 1,
+            "needle": "pub fn ground_target(",
+            "finding": "Ground-target dispatch for explicit champion slots,not a persisted cast mode."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\camera_lock.rs",
+              "bytes": 7806,
+              "sha256": "ffe68936534a47ff685f80d0b48fc068ed6cd8db8b0f648447a916d0d04bb6d6"
+            },
+            "line": 56,
+            "needle": "pub struct Setting {",
+            "finding": "In-memory shared lock setting;not persisted camera bindings."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+              "bytes": 141376,
+              "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+            },
+            "line": 1381,
+            "needle": "if inventory_capture.blocks_commands()",
+            "finding": "Current shop focus gates commands;not a chat input consumer."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+              "bytes": 141376,
+              "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+            },
+            "line": 1390,
+            "needle": "let pet_control=",
+            "finding": "Alt-right-click pet command for Annie;not general self-cast policy."
+          }
+        ],
+        "search": {
+          "command": [
+            "rg",
+            "-n",
+            "-i",
+            "Input.ini|QuickCast|SmartCast|SelfCast|ChampionOnly",
+            "F:\\OpenLeague\\crates\\client\\src",
+            "-g",
+            "*.rs"
+          ],
+          "exit_code": 0,
+          "log": {
+            "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\input-consumer-search.log",
+            "bytes": 285,
+            "sha256": "4af742b67f7f3ed1e35f49d4d53bb36efd484bfa30d7bbb47fdf3d39cb0603b9"
+          }
+        },
+        "native_game_executed": false
+      },
+      "input-commands-test-receipt.json": {
+        "utc": "2026-10-23T06:45:54.741172+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\run_input_commands_tests.py",
+          "bytes": 2184,
+          "sha256": "dd2d8f6f0ada853ec2fe3e69c86695ecf13191bc08e39633bf688b57754b9c91"
+        },
+        "runs": [
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-client",
+              "spell_input::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "spell_input::hotkey_tests::shared_actual_key_press_dispatch_matches_native_hud_slots",
+              "spell_input::ordered_shortcut_tests::complete_control_e_chord_in_one_frame_keeps_keydown_modifier",
+              "spell_input::ordered_shortcut_tests::focus_reset_removes_stale_modifier_and_intent",
+              "spell_input::hotkey_tests::original_short_label_cases_and_source_defaults_match",
+              "spell_input::ordered_shortcut_tests::later_control_or_already_released_control_cannot_convert_cast_to_learn",
+              "spell_input::ordered_shortcut_tests::other_shortcuts_are_not_consumed_and_slot_precedence_is_unchanged",
+              "spell_input::ordered_shortcut_tests::repeated_keydown_and_frame_gate_do_not_replay_an_intent",
+              "spell_input::tests::only_supported_ground_slots_route_to_position_command",
+              "spell_input::ordered_shortcut_tests::held_modifier_across_frames_and_both_controls_are_preserved",
+              "spell_input::ordered_shortcut_tests::bevy_collector_keeps_message_order_without_consuming_other_readers"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\spell_input-tests.log",
+              "bytes": 80958,
+              "sha256": "8bc4e9b6c209617d248520e866c599527ac62810deec196d44d14313a1a336f3"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+                "bytes": 352612864,
+                "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+              }
+            ]
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-client",
+              "ordinary_camera_input::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "ordinary_camera_input::minimap_tests::manual_minimap_focus_releases_follow_without_inventing_actor_motion",
+              "ordinary_camera_input::tests::absent_or_nonfinite_authoritative_target_suspends_without_guessing_position",
+              "ordinary_camera_input::tests::blocked_frame_and_reopening_discard_gestures_without_replaying_os_repeats",
+              "ordinary_camera_input::tests::held_pan_preserves_existing_speed_and_does_not_add_tap_to_hold",
+              "ordinary_camera_input::tests::local_inspection_does_not_advance_or_require_game_time_or_living_state",
+              "ordinary_camera_input::tests::nonfinite_or_zero_frame_delta_never_adds_motion_or_queues_a_later_tap",
+              "ordinary_camera_input::tests::opposing_taps_cancel_and_unrelated_gameplay_keys_are_untouched",
+              "ordinary_camera_input::tests::same_session_recovery_preserves_only_follow_new_player_or_session_resets_it",
+              "ordinary_camera_input::tests::camera_keys_match_original_gameevents_default_bindings",
+              "ordinary_camera_input::tests::press_release_in_one_frame_pans_once_while_frame_end_pressed_is_false",
+              "ordinary_camera_input::tests::space_short_tap_centers_once_and_hold_follows_then_releases",
+              "ordinary_camera_input::tests::y_toggles_once_with_repeat_ignored_and_locked_follow_takes_priority_over_pan",
+              "ordinary_camera_input::tests::wheel_permission_is_primary_window_only_and_disappears_during_gate",
+              "ordinary_camera_input::tests::focus_loss_and_window_replacement_discard_taps_and_do_not_consume_other_readers",
+              "ordinary_camera_input::shared_setting_tests::ordinary_physical_y_routes_to_shared_consumer_once_and_unfocused_y_space_are_discarded",
+              "ordinary_camera_input::shared_setting_tests::ordinary_background_lock_follows_snapshot_without_altering_human_input",
+              "ordinary_camera_input::shared_setting_tests::either_winner_or_final_result_refuses_follow_without_rewriting_terminal_camera"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\ordinary_camera_input-tests.log",
+              "bytes": 81887,
+              "sha256": "a679aee16df00676ad6d1fa17ab4606d8479b313570acb81943b49bd4a0392cf"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+                "bytes": 352612864,
+                "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+              }
+            ]
+          },
+          {
+            "command": [
+              "cargo",
+              "test",
+              "--locked",
+              "--offline",
+              "-p",
+              "openleague-client",
+              "shop_ui::text_input::",
+              "--",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "shop_ui::text_input::tests::clipboard_decoder_requires_bounded_terminated_valid_utf16",
+              "shop_ui::text_input::tests::complete_control_v_chord_pastes_once_without_literal_v",
+              "shop_ui::text_input::tests::foreign_window_and_other_shortcuts_do_not_read_clipboard_or_insert_letters",
+              "shop_ui::text_input::tests::held_controls_work_across_frames_but_held_paste_does_not_repeat",
+              "shop_ui::text_input::tests::focus_loss_window_and_session_changes_drop_ambiguous_input",
+              "shop_ui::text_input::tests::later_or_released_control_does_not_rewrite_text_as_a_paste",
+              "shop_ui::text_input::tests::right_alt_text_is_not_misinterpreted_as_control_v",
+              "shop_ui::text_input::tests::unicode_text_multicharacters_backspace_and_paste_share_scalar_limit",
+              "shop_ui::text_input::tests::unavailable_clipboard_preserves_query_and_surfaces_only_generic_error",
+              "shop_ui::text_input::tests::inactive_closed_and_activation_frames_never_read_clipboard_or_replay_text",
+              "shop_ui::text_input::tests::pasted_potion_matches_real_catalogue_in_all_and_utility_categories",
+              "shop_ui::text_input::tests::actual_bevy_input_queue_keeps_modifier_order_and_independent_readers"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\shop_text_input-tests.log",
+              "bytes": 81161,
+              "sha256": "e611de63d092006b399edbd61acf5fbf8f63c68157cc2aac8831d47a0c98a64a"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+                "bytes": 352612864,
+                "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "path": "F:\\OpenLeague\\assets\\maps\\tt_navigation_grid.json",
+            "bytes": 1361,
+            "sha256": "98903341b52e204145eafc92a949394712257abc352bc3dad5e5fe204f1c1321"
+          },
+          {
+            "path": "F:\\OpenLeague\\Cargo.lock",
+            "bytes": 153304,
+            "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\death_recap_panel.rs",
+            "bytes": 8998,
+            "sha256": "c27ddf93d34af73e50deb501764ff47f0b26279d65890956477895308845e199"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\death_recap_panel_tests.rs",
+            "bytes": 14256,
+            "sha256": "e6de06fa868831914a84a96fad9db6285cb78793e098c0547b7589204b50bddc"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\native_endgame_ui.rs",
+            "bytes": 12985,
+            "sha256": "99290ade51f68a84cb8e680a2778f1d6dfb0d393f258a490726e431bcd941149"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\ordinary_camera_input.rs",
+            "bytes": 14715,
+            "sha256": "b854c04e795203cd65ec98507a0a706f36eb3eeaeb1ab6a15da3b70fb940b0a9"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\ordinary_camera_input_tests.rs",
+            "bytes": 8943,
+            "sha256": "fcacaf1808baa7f5c50957f90ab3d5e48decbc1d36b59a6ba6f16e7d910ec2c7"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\ordinary_pause.rs",
+            "bytes": 12837,
+            "sha256": "cfa090d97b6016f1fa1a39d2c288b2bae831ed6d6d0eb2a6d38f3441430937d2"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\ordinary_pause_tests.rs",
+            "bytes": 17637,
+            "sha256": "1d014f7fb805da040bf75df77d35197d3c6d607c4afb2f7c43f85bd2bc5b8a82"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\session_bootstrap.rs",
+            "bytes": 3822,
+            "sha256": "3ef5a2b25285d2e4b63d45b5354d7f30273c03ba96a81538f98effc2e80a8d77"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\session_client.rs",
+            "bytes": 12507,
+            "sha256": "4df6dc629e5a428bb7d7bc258ec83ce763d999da34587228ea76208de06b76e4"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\session_client_tests.rs",
+            "bytes": 11271,
+            "sha256": "53bbf4b025694a3f7b0569e350bfbe5a148952077c508a4765eeba0fe6d1560f"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+            "bytes": 17469,
+            "sha256": "fdd81b790bca52dd4e20ca5d34e81d78136f3958ab7028f5ca193d078fb9acd1"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\session_connection_tests.rs",
+            "bytes": 36396,
+            "sha256": "6c8d8d63845db752a943a311fd0c6fbeb2678c2fa1d6cb0f772bf70a4b441165"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\session_departure.rs",
+            "bytes": 9218,
+            "sha256": "6cc8e1889fec2d6d2af8ae5f334126410ed5af2ef48b32f005c419617a3fdfe9"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\shop_text_input.rs",
+            "bytes": 7575,
+            "sha256": "3ce5443e7bee4a33644cd9bfd4e5cf6955f5fc0424b2305497f83c7efd514f42"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\shop_text_input_tests.rs",
+            "bytes": 8966,
+            "sha256": "f60aa598effd816bf41823f07c9dd69bbaf17a0272562bdd81b2bc9b8acc7aca"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+            "bytes": 36049,
+            "sha256": "cf7405045e6541866543c447b31aef33730ef6c11d2eb6b275387fbb27adcfc1"
+          },
+          {
+            "path": "F:\\OpenLeague\\crates\\client\\src\\spell_input.rs",
+            "bytes": 9762,
+            "sha256": "2f99cb617bfd218da8d8125fcf65fbfea34eb602391899547cf065c758eadccf"
+          },
+          {
+            "path": "F:\\OpenLeague\\data\\4.20\\native_hud_hotkeys_contract.json",
+            "bytes": 4385,
+            "sha256": "6aaf1b0651944aedd858646c2d7c47203c2dde840d2c3b60a3bc74eec4de9771"
+          }
+        ],
+        "scope": "Fresh current input commands CPU tests;retained native fixtures;no GPU or historical process execution.",
+        "native_or_gpu_executed": false
+      }
+    },
+    "source_checks": [
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\input-commands-associations.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\prepare_input_commands_reader.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\input-native-consumer-research.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\input-commands-test-receipt.json",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\spell_input.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\spell_input.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\picking.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\camera_lock.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_zip_provider.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\input-missing-consumer-search.log",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\audit_input_sources.py",
+      "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Input.ini",
+      "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\input.ini",
+      "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Config\\input.ini",
+      "pin_F:\\OpenLeague\\data\\4.20\\native_hud_hotkeys_contract.json",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\spell_input.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\spell_input.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\camera_lock.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\input-consumer-search.log",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\run_input_commands_tests.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\spell_input-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\ordinary_camera_input-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\shop_text_input-tests.log",
+      "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "pin_F:\\OpenLeague\\assets\\maps\\tt_navigation_grid.json",
+      "pin_F:\\OpenLeague\\Cargo.lock",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\death_recap_panel.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\death_recap_panel_tests.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_endgame_ui.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ordinary_camera_input.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ordinary_camera_input_tests.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ordinary_pause.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\ordinary_pause_tests.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\session_bootstrap.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\session_client.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\session_client_tests.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\session_connection_tests.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\session_departure.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\shop_text_input.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\shop_text_input_tests.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\spell_input.rs",
+      "pin_F:\\OpenLeague\\data\\4.20\\native_hud_hotkeys_contract.json",
+      "eight_associations",
+      "thirtynine_tests",
+      "native_configs",
+      "task_SYS-17.4-01",
+      "anchor_input_commands_1",
+      "task_SYS-17.4-02",
+      "anchor_input_commands_2",
+      "task_SYS-17.4-03",
+      "anchor_input_commands_3",
+      "task_SYS-17.4-04",
+      "anchor_input_commands_4",
+      "task_SYS-17.4-05",
+      "anchor_input_commands_5",
+      "task_SYS-17.4-06",
+      "anchor_input_commands_6",
+      "task_SYS-17.4-07",
+      "anchor_input_commands_7",
+      "task_SYS-17.4-08",
+      "anchor_input_commands_8"
+    ],
+    "all_input_commandss_qualified": false,
+    "all_required_effects_covered": false
+  },
+  "source_identities": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\input-commands-associations.json",
+      "bytes": 8285,
+      "sha256": "1e2ace24421d91d0cf5591711ed721b74c9a1c1c6a1b5415fa6b76b4ae485d84"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\prepare_input_commands_reader.py",
+      "bytes": 4379,
+      "sha256": "d469e9b18c5c6e37197e3087354bebe2f58fbcebed25ba5a731b17349a0b28c5"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\input-native-consumer-research.json",
+      "bytes": 63370,
+      "sha256": "a8b37f37a535c83a799cbb0196b1fa1b0fceda49f7f35ac952d2338ca282f227"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\input-commands-test-receipt.json",
+      "bytes": 11129,
+      "sha256": "01a81d6b17c2d0cedf059e4f3a1e1d604d48c308f7d83d34b5bcd6b6e02a121d"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\spell_input.rs",
+      "bytes": 9762,
+      "sha256": "2f99cb617bfd218da8d8125fcf65fbfea34eb602391899547cf065c758eadccf"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "bytes": 141376,
+      "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\picking.rs",
+      "bytes": 12929,
+      "sha256": "8415d4f86ca72c31484f1a9bf3df3faa94fcfb7cda4c684cc0c0bc30295bb2cb"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\camera_lock.rs",
+      "bytes": 7806,
+      "sha256": "ffe68936534a47ff685f80d0b48fc068ed6cd8db8b0f648447a916d0d04bb6d6"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\native_zip_provider.rs",
+      "bytes": 19264,
+      "sha256": "84f31115bf4413eb2617aa7eedf353d0fd36ee18d8afd2b5d4b35475eceacb6c"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\input-missing-consumer-search.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\audit_input_sources.py",
+      "bytes": 3214,
+      "sha256": "2ab936b84bf3be24619b1de37b5d8db84ddf2b12046f61d3084dadd627200a30"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Input.ini",
+      "bytes": 30938,
+      "sha256": "930f1499991e9c4973e81086a26c944b7330058970c4227a614b897eae09fec1"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\input.ini",
+      "bytes": 305,
+      "sha256": "aead4280d339159623dbe8f39784bde4b87a6b05afc6d95f2feccec7ba99073a"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Config\\input.ini",
+      "bytes": 710,
+      "sha256": "fa16e719b04249006b3ab7c77f7810e728d3743faf82e86cb259b6cc96d0a531"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\native_hud_hotkeys_contract.json",
+      "bytes": 4385,
+      "sha256": "6aaf1b0651944aedd858646c2d7c47203c2dde840d2c3b60a3bc74eec4de9771"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\input-consumer-search.log",
+      "bytes": 285,
+      "sha256": "4af742b67f7f3ed1e35f49d4d53bb36efd484bfa30d7bbb47fdf3d39cb0603b9"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\run_input_commands_tests.py",
+      "bytes": 2184,
+      "sha256": "dd2d8f6f0ada853ec2fe3e69c86695ecf13191bc08e39633bf688b57754b9c91"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\spell_input-tests.log",
+      "bytes": 80958,
+      "sha256": "8bc4e9b6c209617d248520e866c599527ac62810deec196d44d14313a1a336f3"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "bytes": 352612864,
+      "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\ordinary_camera_input-tests.log",
+      "bytes": 81887,
+      "sha256": "a679aee16df00676ad6d1fa17ab4606d8479b313570acb81943b49bd4a0392cf"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\shop_text_input-tests.log",
+      "bytes": 81161,
+      "sha256": "e611de63d092006b399edbd61acf5fbf8f63c68157cc2aac8831d47a0c98a64a"
+    },
+    {
+      "path": "F:\\OpenLeague\\assets\\maps\\tt_navigation_grid.json",
+      "bytes": 1361,
+      "sha256": "98903341b52e204145eafc92a949394712257abc352bc3dad5e5fe204f1c1321"
+    },
+    {
+      "path": "F:\\OpenLeague\\Cargo.lock",
+      "bytes": 153304,
+      "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\death_recap_panel.rs",
+      "bytes": 8998,
+      "sha256": "c27ddf93d34af73e50deb501764ff47f0b26279d65890956477895308845e199"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\death_recap_panel_tests.rs",
+      "bytes": 14256,
+      "sha256": "e6de06fa868831914a84a96fad9db6285cb78793e098c0547b7589204b50bddc"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\native_endgame_ui.rs",
+      "bytes": 12985,
+      "sha256": "99290ade51f68a84cb8e680a2778f1d6dfb0d393f258a490726e431bcd941149"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\ordinary_camera_input.rs",
+      "bytes": 14715,
+      "sha256": "b854c04e795203cd65ec98507a0a706f36eb3eeaeb1ab6a15da3b70fb940b0a9"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\ordinary_camera_input_tests.rs",
+      "bytes": 8943,
+      "sha256": "fcacaf1808baa7f5c50957f90ab3d5e48decbc1d36b59a6ba6f16e7d910ec2c7"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\ordinary_pause.rs",
+      "bytes": 12837,
+      "sha256": "cfa090d97b6016f1fa1a39d2c288b2bae831ed6d6d0eb2a6d38f3441430937d2"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\ordinary_pause_tests.rs",
+      "bytes": 17637,
+      "sha256": "1d014f7fb805da040bf75df77d35197d3c6d607c4afb2f7c43f85bd2bc5b8a82"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\session_bootstrap.rs",
+      "bytes": 3822,
+      "sha256": "3ef5a2b25285d2e4b63d45b5354d7f30273c03ba96a81538f98effc2e80a8d77"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\session_client.rs",
+      "bytes": 12507,
+      "sha256": "4df6dc629e5a428bb7d7bc258ec83ce763d999da34587228ea76208de06b76e4"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\session_client_tests.rs",
+      "bytes": 11271,
+      "sha256": "53bbf4b025694a3f7b0569e350bfbe5a148952077c508a4765eeba0fe6d1560f"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+      "bytes": 17469,
+      "sha256": "fdd81b790bca52dd4e20ca5d34e81d78136f3958ab7028f5ca193d078fb9acd1"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\session_connection_tests.rs",
+      "bytes": 36396,
+      "sha256": "6c8d8d63845db752a943a311fd0c6fbeb2678c2fa1d6cb0f772bf70a4b441165"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\session_departure.rs",
+      "bytes": 9218,
+      "sha256": "6cc8e1889fec2d6d2af8ae5f334126410ed5af2ef48b32f005c419617a3fdfe9"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\shop_text_input.rs",
+      "bytes": 7575,
+      "sha256": "3ce5443e7bee4a33644cd9bfd4e5cf6955f5fc0424b2305497f83c7efd514f42"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\shop_text_input_tests.rs",
+      "bytes": 8966,
+      "sha256": "f60aa598effd816bf41823f07c9dd69bbaf17a0272562bdd81b2bc9b8acc7aca"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+      "bytes": 36049,
+      "sha256": "cf7405045e6541866543c447b31aef33730ef6c11d2eb6b275387fbb27adcfc1"
+    }
+  ],
+  "checks": [
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\input-commands-associations.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\prepare_input_commands_reader.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\input-native-consumer-research.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\input-commands-test-receipt.json",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\spell_input.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\spell_input.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\picking.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\camera_lock.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_zip_provider.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\input-missing-consumer-search.log",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\audit_input_sources.py",
+    "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\defaults\\Input.ini",
+    "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\cfg\\input.ini",
+    "pin_D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\Config\\input.ini",
+    "pin_F:\\OpenLeague\\data\\4.20\\native_hud_hotkeys_contract.json",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\spell_input.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\spell_input.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\camera_lock.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\input-consumer-search.log",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\run_input_commands_tests.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\spell_input-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\ordinary_camera_input-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision124\\shop_text_input-tests.log",
+    "pin_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "pin_F:\\OpenLeague\\assets\\maps\\tt_navigation_grid.json",
+    "pin_F:\\OpenLeague\\Cargo.lock",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\death_recap_panel.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\death_recap_panel_tests.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_endgame_ui.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ordinary_camera_input.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ordinary_camera_input_tests.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ordinary_pause.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\ordinary_pause_tests.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\session_bootstrap.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\session_client.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\session_client_tests.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\session_connection_tests.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\session_departure.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\shop_text_input.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\shop_text_input_tests.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\spell_input.rs",
+    "pin_F:\\OpenLeague\\data\\4.20\\native_hud_hotkeys_contract.json",
+    "eight_associations",
+    "thirtynine_tests",
+    "native_configs",
+    "task_SYS-17.4-01",
+    "anchor_input_commands_1",
+    "task_SYS-17.4-02",
+    "anchor_input_commands_2",
+    "task_SYS-17.4-03",
+    "anchor_input_commands_3",
+    "task_SYS-17.4-04",
+    "anchor_input_commands_4",
+    "task_SYS-17.4-05",
+    "anchor_input_commands_5",
+    "task_SYS-17.4-06",
+    "anchor_input_commands_6",
+    "task_SYS-17.4-07",
+    "anchor_input_commands_7",
+    "task_SYS-17.4-08",
+    "anchor_input_commands_8"
+  ],
+  "checks_count": 70,
+  "associations": [
+    {
+      "task_id": "SYS-17.4-01",
+      "finding": "Fixed QWER defaults;editable persistent ability/item bindings not qualified.",
+      "remaining": "Fixed QWER defaults;editable persistent ability/item bindings not qualified.",
+      "anchors": [
+        {
+          "path": "crates/client/src/spell_input.rs",
+          "line": 5,
+          "needle": "pub const KEYS:",
+          "role": "input_commands_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-8d1361f4-bce6-53ca-996e-fc0ddefaf2d0"
+    },
+    {
+      "task_id": "SYS-17.4-02",
+      "finding": "Supported champion ground targeting exists;normal/quick cast preference persistence absent from this consumer.",
+      "remaining": "Supported champion ground targeting exists;normal/quick cast preference persistence absent from this consumer.",
+      "anchors": [
+        {
+          "path": "crates/client/src/spell_input.rs",
+          "line": 1,
+          "needle": "pub fn ground_target(",
+          "role": "input_commands_2"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-0816f405-8a26-502a-901a-ec5c491c46ed"
+    },
+    {
+      "task_id": "SYS-17.4-03",
+      "finding": "Immediate targeted dispatch boundary;range preview before confirmation not identified.",
+      "remaining": "Immediate targeted dispatch boundary;range preview before confirmation not identified.",
+      "anchors": [
+        {
+          "path": "crates/client/src/main.rs",
+          "line": 1392,
+          "needle": "let targeted_skill=",
+          "role": "input_commands_3"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-31cba424-0e7b-5bd2-8c1d-663b9e05da34"
+    },
+    {
+      "task_id": "SYS-17.4-04",
+      "finding": "Alt-right-click Annie pet routing is present;general self-cast and modifiers remain unqualified.",
+      "remaining": "Alt-right-click Annie pet routing is present;general self-cast and modifiers remain unqualified.",
+      "anchors": [
+        {
+          "path": "crates/client/src/main.rs",
+          "line": 1390,
+          "needle": "let pet_control=",
+          "role": "input_commands_4"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-a410264e-afd4-5fd1-95f3-cdb0e636510b"
+    },
+    {
+      "task_id": "SYS-17.4-05",
+      "finding": "Ray target helper supports champions_only;attack-move and user champion-only mode not established.",
+      "remaining": "Ray target helper supports champions_only;attack-move and user champion-only mode not established.",
+      "anchors": [
+        {
+          "path": "crates/client/src/picking.rs",
+          "line": 16,
+          "needle": "pub fn target(",
+          "role": "input_commands_5"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-2ab8c64d-283b-568c-a541-48d3d9a67c92"
+    },
+    {
+      "task_id": "SYS-17.4-06",
+      "finding": "Shared in-memory camera lock setting;camera command persistence not identified.",
+      "remaining": "Shared in-memory camera lock setting;camera command persistence not identified.",
+      "anchors": [
+        {
+          "path": "crates/client/src/camera_lock.rs",
+          "line": 56,
+          "needle": "pub struct Setting {",
+          "role": "input_commands_6"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-8bb2818d-7703-5c2c-a6b1-c1aca5998a57"
+    },
+    {
+      "task_id": "SYS-17.4-07",
+      "finding": "Chat.ini resource load only;historical chat command service not identified.",
+      "remaining": "Chat.ini resource load only;historical chat command service not identified.",
+      "anchors": [
+        {
+          "path": "crates/client/src/native_zip_provider.rs",
+          "line": 74,
+          "needle": "let chat=required",
+          "role": "input_commands_7"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-2407a043-c8a9-556b-be02-b93f1f6d5b38"
+    },
+    {
+      "task_id": "SYS-17.4-08",
+      "finding": "Shop focus blocks combat;chat input is not implemented by this gate.",
+      "remaining": "Shop focus blocks combat;chat input is not implemented by this gate.",
+      "anchors": [
+        {
+          "path": "crates/client/src/main.rs",
+          "line": 1381,
+          "needle": "if inventory_capture.blocks_commands()",
+          "role": "input_commands_8"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-e87ab149-2826-528a-9bc4-4fbe77da6b15"
+    }
+  ]
+}

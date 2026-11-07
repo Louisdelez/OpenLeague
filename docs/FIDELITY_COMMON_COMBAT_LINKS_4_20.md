@@ -1,0 +1,17 @@
+# Sources et consommateurs des règles communes de combat — V63
+
+Les quinze exigences SYS-04.3-01 à15 sont reliées à dix-neuf sites actuels : dégâts physiques/magiques/bruts, statistiques défensives, pénétration, réductions, ticks, soins, boucliers et ordre de simulation. Les quinze tâches restent ouvertes et aucune acceptation n'est attribuée.
+
+Les entrées natives sont des valeurs de personnage, de sorts et d'objets, ainsi que leurs textes en_GB. Elles concordent avec les manifestes sélectionnés. Les champs défensifs de Garen et les valeurs de Trundle R/W sont reliés aux tables courantes. Les valeurs et descriptions natives illustrent ces mécanismes ; elles ne deviennent pas le corps serveur Riot manquant. Les deux exigences de bouclier typé et d'ordre global des événements gardent un contrat local explicite sans fausse source native.
+
+Trois corps de fonctions courantes sont compilés et exécutés dans un programme isolé : resistance_multiplier, mitigate et effective. Les textes des corps sont copiés exactement ; seuls les derives de sérialisation et le contexte de crate sont omis. Les35cas comparent les bits f32 attendus/observés pour catégories, résistances positives/négatives, réduction, pénétration, zéro, NaN, infinis et overflow. Cette preuve décrit les fonctions actuelles, pas le serveur historique ni une exécution complète de Simulation. L'exécutable et le compilateur sont identifiés dans le reçu.
+
+Le chemin apply_damage utilise la réduction sortante, les défenses/pénétrations, la mitigation puis les boucliers avant la vie. Les politiques de catégories et d'ordre ne sont pas toutes qualifiées nativement. Les exemples Exhaust et Trundle restent partiels. Les ticks Ignite et le placement de Trundle R dans advance sont explicitement reconstruits. Le soin courant est plafonné à max_health et combine Ignite/Trundle W, sans démonstration de tous les modificateurs historiques.
+
+Le bouclier actuel contient tag, remaining et expires_at. Son absorption reçoit un montant sans DamageKind ; le corps consomme les boucliers génériques par expiration. SYS-04.3-14 est donc lié à une frontière non typée, avec consommateur de la fonctionnalité explicitement non identifié. Cette frontière reste une lacune, même avec une ancre précise. L'ordre générique d'expiration, les règles de pile et l'ordonnancement de tous les événements restent à qualifier.
+
+18contrôles de source et16contrôles de contrat dont15refus accompagnent les35nouveaux cas numériques.61sources sont relues pour cette qualification. Le premier collecteur utilisait à tort le répertoire global pour les deux sorts de Trundle ; son source et son échec sont conservés. Les chemins corrigés viennent de native_resource dans la table existante et de la recherche du fichier réel. Le programme numérique terminé n'est pas rejoué lors de cette correction.
+
+Aucun code Rust/C du jeu, asset, binaire du jeu ou case manuelle changé. Aucun serveur, client graphique ou programme historique exécuté. Les nouvelles associations précisent les quinze questions ; aucune question sémantique ni fonctionnalité complète fermée. Les six exigences Map10 V62 restent également partielles.
+
+Preuves : docs/reference_combat_consumer_sources/combat-consumer-links.json et docs/fidelity_registry_combat_consumer_links_revision_4_20.json. Sources, cas, journaux et exécutable isolé : E:/mapslol3v3/Requirements_registry_4_20_2026-10-20/revision63. Les six objectifs du Goal restent actifs.

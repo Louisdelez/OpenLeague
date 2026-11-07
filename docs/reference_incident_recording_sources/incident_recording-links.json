@@ -1,0 +1,1127 @@
+{
+  "schema": "openleague_incident_recording_links/v1",
+  "passed": true,
+  "utc": "2026-10-23T08:56:02.097617+00:00",
+  "full_task_scope_complete": false,
+  "native_or_game_executed": false,
+  "historical_server_policy_qualified": false,
+  "facts": {
+    "candidates": {
+      "producer": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision144\\prepare_incident_recording_reader.py",
+        "bytes": 1778,
+        "sha256": "169746fcc8571349ffe3e64fb7c1ef852c21d7efbf1c62da067a43528cef3d53"
+      },
+      "associations": [
+        {
+          "task_id": "SYS-21.3-01",
+          "finding": "Command sender returns public metadata;no authoritative tick/seed/assets manifest is persisted by this branch.",
+          "remaining": "Server admission tick,seed,versions and resource manifest must be captured with actual accepted commands.",
+          "anchors": [
+            {
+              "path": "crates/client/src/session_connection.rs",
+              "line": 135,
+              "needle": "let public=message.public_log();self.send_secure",
+              "role": "incident_recording_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-18acbd62-56d2-55bb-81a7-580a9de8fcf2"
+        },
+        {
+          "task_id": "SYS-21.3-02",
+          "finding": "Fixture event journal stores elapsed wall clock and selected command/state summaries;not all deterministic inputs.",
+          "remaining": "Define incident event completeness and privacy;qualify reproduction from ordinary runtime records.",
+          "anchors": [
+            {
+              "path": "tools/capture_projected_reconnect_v67.py",
+              "line": 11,
+              "needle": "def record(kind,value):",
+              "role": "incident_recording_2"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-b4e8549f-186d-58e6-ba91-f45b637c482e"
+        },
+        {
+          "task_id": "SYS-21.3-03",
+          "finding": "Immutable result writer compares existing bytes,not replay integrity validation before playback.",
+          "remaining": "Validate format,lengths,integrity and exact dependencies before replay.",
+          "anchors": [
+            {
+              "path": "crates/server/src/result_store.rs",
+              "line": 8,
+              "needle": "if path.exists(){if fs::read(&path)?==bytes",
+              "role": "incident_recording_3"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-8a8022a5-5df3-5315-b0ef-0ee21636feb1"
+        },
+        {
+          "task_id": "SYS-21.3-04",
+          "finding": "Native service attaches ownership to audio runtime;this consumer is not a deterministic Simulation replay entry.",
+          "remaining": "Connect versioned recorded inputs to deterministic Simulation replay and compare state/events.",
+          "anchors": [
+            {
+              "path": "crates/client/src/native_replay_service.rs",
+              "line": 103,
+              "needle": "pub fn attach(&mut self, runtime:",
+              "role": "incident_recording_4"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-3785037d-328e-5c89-8575-db861c9d85b6"
+        },
+        {
+          "task_id": "SYS-21.3-05",
+          "finding": "Native diagnostic message buffer is bounded;this is not a total recording storage quota or truncated replay parser.",
+          "remaining": "Implement recording quotas and explicit truncated-file outcomes.",
+          "anchors": [
+            {
+              "path": "crates/core/src/audio_replay_logger.rs",
+              "line": 16,
+              "needle": "pub const CAPACITY: usize = 2560;",
+              "role": "incident_recording_5"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-462f1c98-efde-505f-b752-1a58074eac3a"
+        },
+        {
+          "task_id": "SYS-21.3-06",
+          "finding": "Windows diagnostic FILE closes on Drop;not a complete match recording finalization contract.",
+          "remaining": "Finalize and flush the authoritative recording with terminal status on every session exit path.",
+          "anchors": [
+            {
+              "path": "crates/core/src/audio_replay_windows_recording.rs",
+              "line": 19,
+              "needle": "(self.api.fclose)(self.pointer);",
+              "role": "incident_recording_6"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-397f54e3-72ad-5efe-848e-5c9978dffd47"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision144\\incident-recording-research.json",
+          "bytes": 23249,
+          "sha256": "820057e83365dd2c75578f39bd8341f1f66ce5e2cee5eabe7dc7ebd041ea0741"
+        }
+      ],
+      "current_sources": [
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+          "bytes": 17469,
+          "sha256": "fdd81b790bca52dd4e20ca5d34e81d78136f3958ab7028f5ca193d078fb9acd1"
+        },
+        {
+          "path": "F:\\OpenLeague\\tools\\capture_projected_reconnect_v67.py",
+          "bytes": 8766,
+          "sha256": "cbe44bec02e878bf45d5b27a34b24af870ec36747a03d1d820bf8a9aad1b0dc2"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\server\\src\\result_store.rs",
+          "bytes": 2007,
+          "sha256": "bbb88cc61148681b0edd3ebd38c5dc1ed797a86867d54db0344f34ee8d862415"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\native_replay_service.rs",
+          "bytes": 12275,
+          "sha256": "00b3379e4936f45595f9df62b75914d6a916ed2a8cb0b01f3b12af9040720908"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\audio_replay_logger.rs",
+          "bytes": 11335,
+          "sha256": "8bd2d11824a96ab3a6fe5983136826027a1283128f9a53c7bb143e38e9ade1fc"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_recording.rs",
+          "bytes": 18509,
+          "sha256": "c88aa8b65a04882fb4723c1649e6b9d7e917d78c580626a4d7cc41b187aa7514"
+        }
+      ],
+      "scope": "Six incident recording boundaries;not deterministic game replay or native server recovery."
+    },
+    "receipts": {
+      "incident-recording-research.json": {
+        "utc": "2026-10-23T08:55:29.374353+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision144\\research_incident_recording.py",
+          "bytes": 5442,
+          "sha256": "c13ead1b2b15d167f7b58c8837d8c07fe3f73c78d7555e3336d2f48d652e44e7"
+        },
+        "contract": {
+          "path": "F:\\OpenLeague\\docs\\reference_local_services_4_20.json",
+          "bytes": 317028,
+          "sha256": "8a6afdc263b5c0959212425feb9e437b3a2264ea1d3a3590f825cb52ef406efb"
+        },
+        "family": {
+          "id": "replays",
+          "title": "Enregistrements et lecture de parties",
+          "scope_decision": "replace_locally",
+          "current_state": "not_implemented",
+          "riot_server_implementation_recovered": false,
+          "runtime_qualified_in_this_task": false,
+          "historical_proxy_properties": [
+            "replayFileManagerService",
+            "replayDownloadService"
+          ],
+          "local_contract": "Enregistrement de partie versionné, index, contrôle des ressources et lecture locale avec limites de compatibilité annoncées.",
+          "authority": "Producteur de replay serveur ; lecture isolée des commandes live et données privées.",
+          "persistence": "Enregistrements, manifeste de version/assets et intégrité.",
+          "nominal_acceptance": "Replay d’une partie locale relu avec mêmes versions et fin identifiée, sans mutation de compte.",
+          "refusal_acceptance": "Format/version/ressource absent, fichier altéré ou fuite d’audience : refus explicite.",
+          "current_evidence": "Les interfacesReplay4.20 sont présentes ; native_replay_service.rs est un service audio et ne prouve pas un replay de match.",
+          "source_ids": [
+            "air.ServiceProxy",
+            "air.IReplayFileManagerService",
+            "air.IReplayDownloadService",
+            "current.launcher/src-tauri/src/main.rs",
+            "current.crates/server/src/main.rs",
+            "current.crates/client/src/native_replay_service.rs"
+          ],
+          "backlog_task_ids": [
+            "SYS-21.2-01",
+            "SYS-21.2-02",
+            "SYS-21.2-03",
+            "SYS-21.2-04",
+            "SYS-21.2-05",
+            "SYS-21.2-06",
+            "SYS-21.2-07"
+          ],
+          "depends_on": [
+            "game_authority",
+            "persistence"
+          ],
+          "remaining_work": "Implémenter et qualifier ce contrat dans les tâches liées ; conserver les acquis listés, sans déduire la disponibilité du service de ce périmètre."
+        },
+        "sources": [
+          {
+            "id": "air.ServiceProxy",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+              "bytes": 15297,
+              "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+              "bytes": 15297,
+              "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+            }
+          },
+          {
+            "id": "air.IReplayDownloadService",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\watch\\IReplayDownloadService.as",
+              "bytes": 389,
+              "sha256": "dc026fa40f536ba191475a23c9a6852187dc8a84670c0501475a174759ce9848"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\watch\\IReplayDownloadService.as",
+              "bytes": 389,
+              "sha256": "dc026fa40f536ba191475a23c9a6852187dc8a84670c0501475a174759ce9848"
+            }
+          },
+          {
+            "id": "air.IReplayFileManagerService",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\watch\\IReplayFileManagerService.as",
+              "bytes": 2343,
+              "sha256": "99c826692b79aa73478f1c2f6b5a7e478f784bb08e8fc522278b37b7841cc93f"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\watch\\IReplayFileManagerService.as",
+              "bytes": 2343,
+              "sha256": "99c826692b79aa73478f1c2f6b5a7e478f784bb08e8fc522278b37b7841cc93f"
+            }
+          },
+          {
+            "id": "current.launcher/src-tauri/src/main.rs",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\launcher\\src-tauri\\src\\main.rs",
+              "bytes": 3491,
+              "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+              "bytes": 3491,
+              "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+            }
+          },
+          {
+            "id": "current.crates/server/src/main.rs",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\server\\src\\main.rs",
+              "bytes": 13628,
+              "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\crates\\server\\src\\main.rs",
+              "bytes": 13628,
+              "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+            }
+          },
+          {
+            "id": "current.crates/client/src/native_replay_service.rs",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\client\\src\\native_replay_service.rs",
+              "bytes": 12275,
+              "sha256": "00b3379e4936f45595f9df62b75914d6a916ed2a8cb0b01f3b12af9040720908"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\native_replay_service.rs",
+              "bytes": 12275,
+              "sha256": "00b3379e4936f45595f9df62b75914d6a916ed2a8cb0b01f3b12af9040720908"
+            }
+          }
+        ],
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+              "bytes": 17469,
+              "sha256": "fdd81b790bca52dd4e20ca5d34e81d78136f3958ab7028f5ca193d078fb9acd1"
+            },
+            "path": "crates/client/src/session_connection.rs",
+            "line": 135,
+            "needle": "let public=message.public_log();self.send_secure",
+            "finding": "Command sender returns public metadata;no authoritative tick/seed/assets manifest is persisted by this branch."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\tools\\capture_projected_reconnect_v67.py",
+              "bytes": 8766,
+              "sha256": "cbe44bec02e878bf45d5b27a34b24af870ec36747a03d1d820bf8a9aad1b0dc2"
+            },
+            "path": "tools/capture_projected_reconnect_v67.py",
+            "line": 11,
+            "needle": "def record(kind,value):",
+            "finding": "Fixture event journal stores elapsed wall clock and selected command/state summaries;not all deterministic inputs."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\server\\src\\result_store.rs",
+              "bytes": 2007,
+              "sha256": "bbb88cc61148681b0edd3ebd38c5dc1ed797a86867d54db0344f34ee8d862415"
+            },
+            "path": "crates/server/src/result_store.rs",
+            "line": 8,
+            "needle": "if path.exists(){if fs::read(&path)?==bytes",
+            "finding": "Immutable result writer compares existing bytes,not replay integrity validation before playback."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\native_replay_service.rs",
+              "bytes": 12275,
+              "sha256": "00b3379e4936f45595f9df62b75914d6a916ed2a8cb0b01f3b12af9040720908"
+            },
+            "path": "crates/client/src/native_replay_service.rs",
+            "line": 103,
+            "needle": "pub fn attach(&mut self, runtime:",
+            "finding": "Native service attaches ownership to audio runtime;this consumer is not a deterministic Simulation replay entry."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\audio_replay_logger.rs",
+              "bytes": 11335,
+              "sha256": "8bd2d11824a96ab3a6fe5983136826027a1283128f9a53c7bb143e38e9ade1fc"
+            },
+            "path": "crates/core/src/audio_replay_logger.rs",
+            "line": 16,
+            "needle": "pub const CAPACITY: usize = 2560;",
+            "finding": "Native diagnostic message buffer is bounded;this is not a total recording storage quota or truncated replay parser."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_recording.rs",
+              "bytes": 18509,
+              "sha256": "c88aa8b65a04882fb4723c1649e6b9d7e917d78c580626a4d7cc41b187aa7514"
+            },
+            "path": "crates/core/src/audio_replay_windows_recording.rs",
+            "line": 19,
+            "needle": "(self.api.fclose)(self.pointer);",
+            "finding": "Windows diagnostic FILE closes on Drop;not a complete match recording finalization contract."
+          }
+        ],
+        "associations": [
+          {
+            "task_id": "SYS-21.3-01",
+            "finding": "Command sender returns public metadata;no authoritative tick/seed/assets manifest is persisted by this branch.",
+            "remaining": "Server admission tick,seed,versions and resource manifest must be captured with actual accepted commands.",
+            "anchors": [
+              {
+                "path": "crates/client/src/session_connection.rs",
+                "line": 135,
+                "needle": "let public=message.public_log();self.send_secure",
+                "role": "incident_recording_1"
+              }
+            ],
+            "native_bindings": [],
+            "entry_boundary_only": true,
+            "full_task_scope_complete": false,
+            "existing_unknown_id": "OLU-18acbd62-56d2-55bb-81a7-580a9de8fcf2"
+          },
+          {
+            "task_id": "SYS-21.3-02",
+            "finding": "Fixture event journal stores elapsed wall clock and selected command/state summaries;not all deterministic inputs.",
+            "remaining": "Define incident event completeness and privacy;qualify reproduction from ordinary runtime records.",
+            "anchors": [
+              {
+                "path": "tools/capture_projected_reconnect_v67.py",
+                "line": 11,
+                "needle": "def record(kind,value):",
+                "role": "incident_recording_2"
+              }
+            ],
+            "native_bindings": [],
+            "entry_boundary_only": true,
+            "full_task_scope_complete": false,
+            "existing_unknown_id": "OLU-b4e8549f-186d-58e6-ba91-f45b637c482e"
+          },
+          {
+            "task_id": "SYS-21.3-03",
+            "finding": "Immutable result writer compares existing bytes,not replay integrity validation before playback.",
+            "remaining": "Validate format,lengths,integrity and exact dependencies before replay.",
+            "anchors": [
+              {
+                "path": "crates/server/src/result_store.rs",
+                "line": 8,
+                "needle": "if path.exists(){if fs::read(&path)?==bytes",
+                "role": "incident_recording_3"
+              }
+            ],
+            "native_bindings": [],
+            "entry_boundary_only": true,
+            "full_task_scope_complete": false,
+            "existing_unknown_id": "OLU-8a8022a5-5df3-5315-b0ef-0ee21636feb1"
+          },
+          {
+            "task_id": "SYS-21.3-04",
+            "finding": "Native service attaches ownership to audio runtime;this consumer is not a deterministic Simulation replay entry.",
+            "remaining": "Connect versioned recorded inputs to deterministic Simulation replay and compare state/events.",
+            "anchors": [
+              {
+                "path": "crates/client/src/native_replay_service.rs",
+                "line": 103,
+                "needle": "pub fn attach(&mut self, runtime:",
+                "role": "incident_recording_4"
+              }
+            ],
+            "native_bindings": [],
+            "entry_boundary_only": true,
+            "full_task_scope_complete": false,
+            "existing_unknown_id": "OLU-3785037d-328e-5c89-8575-db861c9d85b6"
+          },
+          {
+            "task_id": "SYS-21.3-05",
+            "finding": "Native diagnostic message buffer is bounded;this is not a total recording storage quota or truncated replay parser.",
+            "remaining": "Implement recording quotas and explicit truncated-file outcomes.",
+            "anchors": [
+              {
+                "path": "crates/core/src/audio_replay_logger.rs",
+                "line": 16,
+                "needle": "pub const CAPACITY: usize = 2560;",
+                "role": "incident_recording_5"
+              }
+            ],
+            "native_bindings": [],
+            "entry_boundary_only": true,
+            "full_task_scope_complete": false,
+            "existing_unknown_id": "OLU-462f1c98-efde-505f-b752-1a58074eac3a"
+          },
+          {
+            "task_id": "SYS-21.3-06",
+            "finding": "Windows diagnostic FILE closes on Drop;not a complete match recording finalization contract.",
+            "remaining": "Finalize and flush the authoritative recording with terminal status on every session exit path.",
+            "anchors": [
+              {
+                "path": "crates/core/src/audio_replay_windows_recording.rs",
+                "line": 19,
+                "needle": "(self.api.fclose)(self.pointer);",
+                "role": "incident_recording_6"
+              }
+            ],
+            "native_bindings": [],
+            "entry_boundary_only": true,
+            "full_task_scope_complete": false,
+            "existing_unknown_id": "OLU-397f54e3-72ad-5efe-848e-5c9978dffd47"
+          }
+        ],
+        "inherited_recording_receipt": {
+          "path": "F:\\OpenLeague\\docs\\replay_stream_recording_validation.json",
+          "bytes": 17190,
+          "sha256": "22be7119f244ab511fdc656b6dbff2217c42e0263443391c63af47f9f0c229f8"
+        },
+        "historical_source_comparison": [
+          {
+            "path": "crates/core/src/audio_replay_recording_resource.rs",
+            "old_sha256": "5e0f3ad54a659ad4f89566a81d96b78e195f6c23bbeb5304a4875ea31af74669",
+            "current": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\audio_replay_recording_resource.rs",
+              "bytes": 7471,
+              "sha256": "5e0f3ad54a659ad4f89566a81d96b78e195f6c23bbeb5304a4875ea31af74669"
+            },
+            "matches": true
+          },
+          {
+            "path": "crates/core/src/audio_replay_recording_resource_tests.rs",
+            "old_sha256": "643cdc18f216a5a2c512c4487acd3b2d4fd035ce9e4e4c89d3c0931fa4e01da0",
+            "current": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\audio_replay_recording_resource_tests.rs",
+              "bytes": 12834,
+              "sha256": "643cdc18f216a5a2c512c4487acd3b2d4fd035ce9e4e4c89d3c0931fa4e01da0"
+            },
+            "matches": true
+          },
+          {
+            "path": "crates/core/src/audio_replay_path_registry.rs",
+            "old_sha256": "0568c9be6a7f3af494df6de7ae159d541fb270c569b833cdb69efd9ae0dbec84",
+            "current": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\audio_replay_path_registry.rs",
+              "bytes": 13420,
+              "sha256": "0568c9be6a7f3af494df6de7ae159d541fb270c569b833cdb69efd9ae0dbec84"
+            },
+            "matches": true
+          },
+          {
+            "path": "crates/core/src/audio_replay_path_registry_tests.rs",
+            "old_sha256": "b2757a2afd92f02943985ba784b1b2fbed6f1043f1d08df88f1937e3db70cac5",
+            "current": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\audio_replay_path_registry_tests.rs",
+              "bytes": 9570,
+              "sha256": "b2757a2afd92f02943985ba784b1b2fbed6f1043f1d08df88f1937e3db70cac5"
+            },
+            "matches": true
+          },
+          {
+            "path": "crates/core/src/audio_replay_windows_opening.rs",
+            "old_sha256": "a3526ae768642b8d36e7d43b3e4c735959e8bd9eb366ed6aabfd29f27eafb345",
+            "current": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_opening.rs",
+              "bytes": 15659,
+              "sha256": "16f4da687be6dc186b33c90647599f25c56c7c88a60fd21ddf6851f8d518a53e"
+            },
+            "matches": false
+          },
+          {
+            "path": "crates/core/src/audio_replay_windows_recording.rs",
+            "old_sha256": "e13b4bd5eed5b308201a9ed3e44b60f013d53e8165ab6c69fdeb4524d8f611cb",
+            "current": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_recording.rs",
+              "bytes": 18509,
+              "sha256": "c88aa8b65a04882fb4723c1649e6b9d7e917d78c580626a4d7cc41b187aa7514"
+            },
+            "matches": false
+          },
+          {
+            "path": "crates/core/src/audio_replay_windows_recording_tests.rs",
+            "old_sha256": "95caa3d3e2fcdf125ec7a5475b251d3a2ecf40a7fac1f42d32b6a17bde123c18",
+            "current": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_recording_tests.rs",
+              "bytes": 6633,
+              "sha256": "95caa3d3e2fcdf125ec7a5475b251d3a2ecf40a7fac1f42d32b6a17bde123c18"
+            },
+            "matches": true
+          },
+          {
+            "path": "crates/core/src/audio_replay_windows_transport.rs",
+            "old_sha256": "f0157c71bd766e2516b3aa01aecfb429d7a0934a6c25174b668724921cfc0b23",
+            "current": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_transport.rs",
+              "bytes": 41234,
+              "sha256": "7f7e0376b69f5e8520d58430790f464464b2c883f3deb6eab7ac5ae09cc3da6f"
+            },
+            "matches": false
+          },
+          {
+            "path": "crates/core/src/audio_replay_runtime_image.rs",
+            "old_sha256": "c6ffdbb85a387f89fcb300106313cb94dd157d2de6e63164584bae9f09c44e0e",
+            "current": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\audio_replay_runtime_image.rs",
+              "bytes": 7108,
+              "sha256": "2750a3891aa10896ea770c65133925230101dfafe91e3881d3e2c180930c2d18"
+            },
+            "matches": false
+          },
+          {
+            "path": "crates/core/src/lib.rs",
+            "old_sha256": "590f6dde4f279bc393bad5aac938d265df97e32bc303cd0c48446596c4b9bb2b",
+            "current": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+              "bytes": 52808,
+              "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+            },
+            "matches": false
+          },
+          {
+            "path": "crates/client/src/main.rs",
+            "old_sha256": "339f84e762be166fb28f2b952d51d9100f5ae011e69b301e6e5dd8f788a4a411",
+            "current": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+              "bytes": 141376,
+              "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+            },
+            "matches": false
+          },
+          {
+            "path": "docs/replay_parent_order_report.md",
+            "old_sha256": "7b4d48ce55df8e286f59688e18e35e8da214fe92f9772b0b2cc7d4787fa1c958",
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\replay_parent_order_report.md",
+              "bytes": 5932,
+              "sha256": "7b4d48ce55df8e286f59688e18e35e8da214fe92f9772b0b2cc7d4787fa1c958"
+            },
+            "matches": true
+          },
+          {
+            "path": "tools/probe_parent_order.py",
+            "old_sha256": "ad89a776bc0022c971091b0a7d1bbacfbc19c7bfa815081b2db1f7664856930d",
+            "current": {
+              "path": "F:\\OpenLeague\\tools\\probe_parent_order.py",
+              "bytes": 4442,
+              "sha256": "ad89a776bc0022c971091b0a7d1bbacfbc19c7bfa815081b2db1f7664856930d"
+            },
+            "matches": true
+          },
+          {
+            "path": "tools/probe_recording_preparation.py",
+            "old_sha256": "1a98eb01008517d7d5feb43d090107545d4f7e6583fcf851b9eab47223e31b70",
+            "current": {
+              "path": "F:\\OpenLeague\\tools\\probe_recording_preparation.py",
+              "bytes": 3467,
+              "sha256": "1a98eb01008517d7d5feb43d090107545d4f7e6583fcf851b9eab47223e31b70"
+            },
+            "matches": true
+          },
+          {
+            "path": "tools/probe_replay_path_registry.py",
+            "old_sha256": "78b382eea40ac88e409e947005c945af13d6b5ad375ca737fe8291c89258c71d",
+            "current": {
+              "path": "F:\\OpenLeague\\tools\\probe_replay_path_registry.py",
+              "bytes": 2817,
+              "sha256": "78b382eea40ac88e409e947005c945af13d6b5ad375ca737fe8291c89258c71d"
+            },
+            "matches": true
+          },
+          {
+            "path": "tools/probe_replay_path_registry_edges.py",
+            "old_sha256": "4e1c4c99abafe3efd7184bad47dcfabb217261607fedaee893477fab631b4613",
+            "current": {
+              "path": "F:\\OpenLeague\\tools\\probe_replay_path_registry_edges.py",
+              "bytes": 4543,
+              "sha256": "4e1c4c99abafe3efd7184bad47dcfabb217261607fedaee893477fab631b4613"
+            },
+            "matches": true
+          },
+          {
+            "path": "tools/extract_replay_path_registry_tables.py",
+            "old_sha256": "b8928177c49f388b632d08934f2a5720d71b627bdda2a23c69241f3d74c7f0b2",
+            "current": {
+              "path": "F:\\OpenLeague\\tools\\extract_replay_path_registry_tables.py",
+              "bytes": 1108,
+              "sha256": "b8928177c49f388b632d08934f2a5720d71b627bdda2a23c69241f3d74c7f0b2"
+            },
+            "matches": true
+          },
+          {
+            "path": "tools/extract_replay_runtime_image.py",
+            "old_sha256": "63d02043cd2e3c78dc40f36e407c0608388c401b660999b841790dbbe1f7b632",
+            "current": {
+              "path": "F:\\OpenLeague\\tools\\extract_replay_runtime_image.py",
+              "bytes": 5895,
+              "sha256": "e7976e7cb7d313605da012bb31ce113cf94ca7c88a3efa35b08298e1ee4167d0"
+            },
+            "matches": false
+          },
+          {
+            "path": "tools/record_replay_stream_recording.py",
+            "old_sha256": "f45f66d5c9f74c7ad70f6fdd0aeb02a4ed9fad8d26e8cbff02e9213478503523",
+            "current": {
+              "path": "F:\\OpenLeague\\tools\\record_replay_stream_recording.py",
+              "bytes": 15443,
+              "sha256": "f45f66d5c9f74c7ad70f6fdd0aeb02a4ed9fad8d26e8cbff02e9213478503523"
+            },
+            "matches": true
+          }
+        ],
+        "historical_limits": [
+          "Diagnostic text resource and dedicated no-op stream probe only. Normal configured service remains disconnected from parent manager, metadata and replay frame delivery. No actual replay serialization/playback, active network host, six-client graphical match or whole-game completion is claimed.",
+          "Native parent16-lifetime fixture is prepared evidence, not a Rust parent port. Derived host is explicitly supplied failure0; native worker runs at join after the stop flag in that oracle. Game-wide atexit order and repeated sessions are not qualified.",
+          "Windows open_stream still disables recording. Recorded qualification owns and immediately retires the logger chain after source resource destruction; do not allow later emissions through raw freed resource pointers.",
+          "Path registration active data structure is qualified with supplied buffer/gates; actual crash-report activation/OS service and close8C8C10/8C8D30 are not implemented. Custom callback/destructor, custom deallocation, OOM and constructor rollback remain boundaries.",
+          "Windows stdio uses installed msvcrt.dll; original CRT primitives are supplied in the native oracle. Four Windows lifetimes and seven final-client commands are targeted checks, not full test-suite, graphical/audio/fidelity acceptance."
+        ],
+        "native_runtime_executed": false,
+        "rust_tests_executed": false,
+        "full_scope_complete": false,
+        "scope": "Six incident-recording trace boundaries. AIR replay interfaces and native text logger do not establish full game replay;family backlog mapping retained only as historical context.",
+        "remaining": [
+          "Qualify reader and integrate six candidate boundaries;do not mark recording features complete."
+        ]
+      }
+    },
+    "source_checks": [
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision144\\incident_recording-associations.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision144\\prepare_incident_recording_reader.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision144\\incident-recording-research.json",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+      "pin_F:\\OpenLeague\\tools\\capture_projected_reconnect_v67.py",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\result_store.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_replay_service.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_logger.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_recording.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision144\\research_incident_recording.py",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_4_20.json",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\watch\\IReplayDownloadService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\watch\\IReplayDownloadService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\watch\\IReplayFileManagerService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\watch\\IReplayFileManagerService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\server\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\main.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\client\\src\\native_replay_service.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_replay_service.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+      "pin_F:\\OpenLeague\\tools\\capture_projected_reconnect_v67.py",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\result_store.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\native_replay_service.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_logger.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_recording.rs",
+      "pin_F:\\OpenLeague\\docs\\replay_stream_recording_validation.json",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_recording_resource.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_recording_resource_tests.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_path_registry.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_path_registry_tests.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_opening.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_recording.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_recording_tests.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_transport.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_runtime_image.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "pin_F:\\OpenLeague\\docs\\replay_parent_order_report.md",
+      "pin_F:\\OpenLeague\\tools\\probe_parent_order.py",
+      "pin_F:\\OpenLeague\\tools\\probe_recording_preparation.py",
+      "pin_F:\\OpenLeague\\tools\\probe_replay_path_registry.py",
+      "pin_F:\\OpenLeague\\tools\\probe_replay_path_registry_edges.py",
+      "pin_F:\\OpenLeague\\tools\\extract_replay_path_registry_tables.py",
+      "pin_F:\\OpenLeague\\tools\\extract_replay_runtime_image.py",
+      "pin_F:\\OpenLeague\\tools\\record_replay_stream_recording.py",
+      "six_associations",
+      "research_scope",
+      "no_runtime_claim",
+      "six_boundaries",
+      "task_SYS-21.3-01",
+      "anchor_incident_recording_1",
+      "task_SYS-21.3-02",
+      "anchor_incident_recording_2",
+      "task_SYS-21.3-03",
+      "anchor_incident_recording_3",
+      "task_SYS-21.3-04",
+      "anchor_incident_recording_4",
+      "task_SYS-21.3-05",
+      "anchor_incident_recording_5",
+      "task_SYS-21.3-06",
+      "anchor_incident_recording_6"
+    ],
+    "all_incident_recordings_qualified": false,
+    "all_required_effects_covered": false
+  },
+  "source_identities": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision144\\incident_recording-associations.json",
+      "bytes": 6142,
+      "sha256": "7e158113a1a1cafd4dae94188efc480e5b32d15bb2ef728cf8100ca4f0ebbf01"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision144\\prepare_incident_recording_reader.py",
+      "bytes": 1778,
+      "sha256": "169746fcc8571349ffe3e64fb7c1ef852c21d7efbf1c62da067a43528cef3d53"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision144\\incident-recording-research.json",
+      "bytes": 23249,
+      "sha256": "820057e83365dd2c75578f39bd8341f1f66ce5e2cee5eabe7dc7ebd041ea0741"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+      "bytes": 17469,
+      "sha256": "fdd81b790bca52dd4e20ca5d34e81d78136f3958ab7028f5ca193d078fb9acd1"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\capture_projected_reconnect_v67.py",
+      "bytes": 8766,
+      "sha256": "cbe44bec02e878bf45d5b27a34b24af870ec36747a03d1d820bf8a9aad1b0dc2"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\server\\src\\result_store.rs",
+      "bytes": 2007,
+      "sha256": "bbb88cc61148681b0edd3ebd38c5dc1ed797a86867d54db0344f34ee8d862415"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\native_replay_service.rs",
+      "bytes": 12275,
+      "sha256": "00b3379e4936f45595f9df62b75914d6a916ed2a8cb0b01f3b12af9040720908"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\audio_replay_logger.rs",
+      "bytes": 11335,
+      "sha256": "8bd2d11824a96ab3a6fe5983136826027a1283128f9a53c7bb143e38e9ade1fc"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_recording.rs",
+      "bytes": 18509,
+      "sha256": "c88aa8b65a04882fb4723c1649e6b9d7e917d78c580626a4d7cc41b187aa7514"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision144\\research_incident_recording.py",
+      "bytes": 5442,
+      "sha256": "c13ead1b2b15d167f7b58c8837d8c07fe3f73c78d7555e3336d2f48d652e44e7"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_4_20.json",
+      "bytes": 317028,
+      "sha256": "8a6afdc263b5c0959212425feb9e437b3a2264ea1d3a3590f825cb52ef406efb"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "bytes": 15297,
+      "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "bytes": 15297,
+      "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\watch\\IReplayDownloadService.as",
+      "bytes": 389,
+      "sha256": "dc026fa40f536ba191475a23c9a6852187dc8a84670c0501475a174759ce9848"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\watch\\IReplayDownloadService.as",
+      "bytes": 389,
+      "sha256": "dc026fa40f536ba191475a23c9a6852187dc8a84670c0501475a174759ce9848"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\watch\\IReplayFileManagerService.as",
+      "bytes": 2343,
+      "sha256": "99c826692b79aa73478f1c2f6b5a7e478f784bb08e8fc522278b37b7841cc93f"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\watch\\IReplayFileManagerService.as",
+      "bytes": 2343,
+      "sha256": "99c826692b79aa73478f1c2f6b5a7e478f784bb08e8fc522278b37b7841cc93f"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\launcher\\src-tauri\\src\\main.rs",
+      "bytes": 3491,
+      "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+    },
+    {
+      "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "bytes": 3491,
+      "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\server\\src\\main.rs",
+      "bytes": 13628,
+      "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\server\\src\\main.rs",
+      "bytes": 13628,
+      "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\client\\src\\native_replay_service.rs",
+      "bytes": 12275,
+      "sha256": "00b3379e4936f45595f9df62b75914d6a916ed2a8cb0b01f3b12af9040720908"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\replay_stream_recording_validation.json",
+      "bytes": 17190,
+      "sha256": "22be7119f244ab511fdc656b6dbff2217c42e0263443391c63af47f9f0c229f8"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\audio_replay_recording_resource.rs",
+      "bytes": 7471,
+      "sha256": "5e0f3ad54a659ad4f89566a81d96b78e195f6c23bbeb5304a4875ea31af74669"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\audio_replay_recording_resource_tests.rs",
+      "bytes": 12834,
+      "sha256": "643cdc18f216a5a2c512c4487acd3b2d4fd035ce9e4e4c89d3c0931fa4e01da0"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\audio_replay_path_registry.rs",
+      "bytes": 13420,
+      "sha256": "0568c9be6a7f3af494df6de7ae159d541fb270c569b833cdb69efd9ae0dbec84"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\audio_replay_path_registry_tests.rs",
+      "bytes": 9570,
+      "sha256": "b2757a2afd92f02943985ba784b1b2fbed6f1043f1d08df88f1937e3db70cac5"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_opening.rs",
+      "bytes": 15659,
+      "sha256": "16f4da687be6dc186b33c90647599f25c56c7c88a60fd21ddf6851f8d518a53e"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_recording_tests.rs",
+      "bytes": 6633,
+      "sha256": "95caa3d3e2fcdf125ec7a5475b251d3a2ecf40a7fac1f42d32b6a17bde123c18"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_transport.rs",
+      "bytes": 41234,
+      "sha256": "7f7e0376b69f5e8520d58430790f464464b2c883f3deb6eab7ac5ae09cc3da6f"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\audio_replay_runtime_image.rs",
+      "bytes": 7108,
+      "sha256": "2750a3891aa10896ea770c65133925230101dfafe91e3881d3e2c180930c2d18"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "bytes": 52808,
+      "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "bytes": 141376,
+      "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\replay_parent_order_report.md",
+      "bytes": 5932,
+      "sha256": "7b4d48ce55df8e286f59688e18e35e8da214fe92f9772b0b2cc7d4787fa1c958"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\probe_parent_order.py",
+      "bytes": 4442,
+      "sha256": "ad89a776bc0022c971091b0a7d1bbacfbc19c7bfa815081b2db1f7664856930d"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\probe_recording_preparation.py",
+      "bytes": 3467,
+      "sha256": "1a98eb01008517d7d5feb43d090107545d4f7e6583fcf851b9eab47223e31b70"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\probe_replay_path_registry.py",
+      "bytes": 2817,
+      "sha256": "78b382eea40ac88e409e947005c945af13d6b5ad375ca737fe8291c89258c71d"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\probe_replay_path_registry_edges.py",
+      "bytes": 4543,
+      "sha256": "4e1c4c99abafe3efd7184bad47dcfabb217261607fedaee893477fab631b4613"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\extract_replay_path_registry_tables.py",
+      "bytes": 1108,
+      "sha256": "b8928177c49f388b632d08934f2a5720d71b627bdda2a23c69241f3d74c7f0b2"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\extract_replay_runtime_image.py",
+      "bytes": 5895,
+      "sha256": "e7976e7cb7d313605da012bb31ce113cf94ca7c88a3efa35b08298e1ee4167d0"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\record_replay_stream_recording.py",
+      "bytes": 15443,
+      "sha256": "f45f66d5c9f74c7ad70f6fdd0aeb02a4ed9fad8d26e8cbff02e9213478503523"
+    }
+  ],
+  "checks": [
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision144\\incident_recording-associations.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision144\\prepare_incident_recording_reader.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision144\\incident-recording-research.json",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+    "pin_F:\\OpenLeague\\tools\\capture_projected_reconnect_v67.py",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\result_store.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_replay_service.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_logger.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_recording.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision144\\research_incident_recording.py",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_4_20.json",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\watch\\IReplayDownloadService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\watch\\IReplayDownloadService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\watch\\IReplayFileManagerService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\watch\\IReplayFileManagerService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\server\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\main.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\client\\src\\native_replay_service.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_replay_service.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\session_connection.rs",
+    "pin_F:\\OpenLeague\\tools\\capture_projected_reconnect_v67.py",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\result_store.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\native_replay_service.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_logger.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_recording.rs",
+    "pin_F:\\OpenLeague\\docs\\replay_stream_recording_validation.json",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_recording_resource.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_recording_resource_tests.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_path_registry.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_path_registry_tests.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_opening.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_recording.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_recording_tests.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_windows_transport.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\audio_replay_runtime_image.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+    "pin_F:\\OpenLeague\\docs\\replay_parent_order_report.md",
+    "pin_F:\\OpenLeague\\tools\\probe_parent_order.py",
+    "pin_F:\\OpenLeague\\tools\\probe_recording_preparation.py",
+    "pin_F:\\OpenLeague\\tools\\probe_replay_path_registry.py",
+    "pin_F:\\OpenLeague\\tools\\probe_replay_path_registry_edges.py",
+    "pin_F:\\OpenLeague\\tools\\extract_replay_path_registry_tables.py",
+    "pin_F:\\OpenLeague\\tools\\extract_replay_runtime_image.py",
+    "pin_F:\\OpenLeague\\tools\\record_replay_stream_recording.py",
+    "six_associations",
+    "research_scope",
+    "no_runtime_claim",
+    "six_boundaries",
+    "task_SYS-21.3-01",
+    "anchor_incident_recording_1",
+    "task_SYS-21.3-02",
+    "anchor_incident_recording_2",
+    "task_SYS-21.3-03",
+    "anchor_incident_recording_3",
+    "task_SYS-21.3-04",
+    "anchor_incident_recording_4",
+    "task_SYS-21.3-05",
+    "anchor_incident_recording_5",
+    "task_SYS-21.3-06",
+    "anchor_incident_recording_6"
+  ],
+  "checks_count": 65,
+  "associations": [
+    {
+      "task_id": "SYS-21.3-01",
+      "finding": "Command sender returns public metadata;no authoritative tick/seed/assets manifest is persisted by this branch.",
+      "remaining": "Server admission tick,seed,versions and resource manifest must be captured with actual accepted commands.",
+      "anchors": [
+        {
+          "path": "crates/client/src/session_connection.rs",
+          "line": 135,
+          "needle": "let public=message.public_log();self.send_secure",
+          "role": "incident_recording_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-18acbd62-56d2-55bb-81a7-580a9de8fcf2"
+    },
+    {
+      "task_id": "SYS-21.3-02",
+      "finding": "Fixture event journal stores elapsed wall clock and selected command/state summaries;not all deterministic inputs.",
+      "remaining": "Define incident event completeness and privacy;qualify reproduction from ordinary runtime records.",
+      "anchors": [
+        {
+          "path": "tools/capture_projected_reconnect_v67.py",
+          "line": 11,
+          "needle": "def record(kind,value):",
+          "role": "incident_recording_2"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-b4e8549f-186d-58e6-ba91-f45b637c482e"
+    },
+    {
+      "task_id": "SYS-21.3-03",
+      "finding": "Immutable result writer compares existing bytes,not replay integrity validation before playback.",
+      "remaining": "Validate format,lengths,integrity and exact dependencies before replay.",
+      "anchors": [
+        {
+          "path": "crates/server/src/result_store.rs",
+          "line": 8,
+          "needle": "if path.exists(){if fs::read(&path)?==bytes",
+          "role": "incident_recording_3"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-8a8022a5-5df3-5315-b0ef-0ee21636feb1"
+    },
+    {
+      "task_id": "SYS-21.3-04",
+      "finding": "Native service attaches ownership to audio runtime;this consumer is not a deterministic Simulation replay entry.",
+      "remaining": "Connect versioned recorded inputs to deterministic Simulation replay and compare state/events.",
+      "anchors": [
+        {
+          "path": "crates/client/src/native_replay_service.rs",
+          "line": 103,
+          "needle": "pub fn attach(&mut self, runtime:",
+          "role": "incident_recording_4"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-3785037d-328e-5c89-8575-db861c9d85b6"
+    },
+    {
+      "task_id": "SYS-21.3-05",
+      "finding": "Native diagnostic message buffer is bounded;this is not a total recording storage quota or truncated replay parser.",
+      "remaining": "Implement recording quotas and explicit truncated-file outcomes.",
+      "anchors": [
+        {
+          "path": "crates/core/src/audio_replay_logger.rs",
+          "line": 16,
+          "needle": "pub const CAPACITY: usize = 2560;",
+          "role": "incident_recording_5"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-462f1c98-efde-505f-b752-1a58074eac3a"
+    },
+    {
+      "task_id": "SYS-21.3-06",
+      "finding": "Windows diagnostic FILE closes on Drop;not a complete match recording finalization contract.",
+      "remaining": "Finalize and flush the authoritative recording with terminal status on every session exit path.",
+      "anchors": [
+        {
+          "path": "crates/core/src/audio_replay_windows_recording.rs",
+          "line": 19,
+          "needle": "(self.api.fclose)(self.pointer);",
+          "role": "incident_recording_6"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-397f54e3-72ad-5efe-848e-5c9978dffd47"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+<div class="modal">
+  <!-- for now just use the same assets as initialPopup -->
+  <style scoped media='screen and (max-width: 1250px)'>
+    @import 'style/modals/initialPopup-small.css';
+  </style>
+  <style scoped media='screen and (min-width: 1251px)'>
+    @import 'style/modals/initialPopup-large.css';
+  </style>
+  <div id="modal-pando-media-booster" class="modal-popup-main modal-default">
+    <div class="modal-frame"></div>
+    <div class="modal-content">
+
+        <div class="modal-header">
+          <div class="modal-text-container">
+            <div class="modal-header-text clip-text font-lol">{{popupHeader}}</div>
+          </div>
+          <div><img src="images/initialPopupSeparator.png"></div>
+        </div>
+
+        <div class="modal-message font-lol">
+          <p>{{popupBody1}}</p>
+            <br>
+          <p>{{popupBody2}}</p>
+        </div>        
+    </div>
+    <div class="modal-footer">
+      <div class="background"></div>
+      <div class="modal-buttons">
+        <button id="buttonYes" ng-click="close(); yesClick()" class="modal-button"><p class="modal-button-text font-lol">{{popupYesLabel}}</p></button>
+        <button id="buttonNo" ng-click="close(); noClick()" class="modal-button"><p class="modal-button-text font-lol">{{popupNoLabel}}</p></button>
+      </div>
+      <div class="external-link-container flex">
+        <a href={{externalLink}} target="_blank" class="external-link link-text font-lol">{{learnMoreLabel}}</a>
+        <button id="buttonNever" ng-click="close(); neverClick()" class="model-link-button"><p class="external-link font-lol">{{popupNeverLabel}}</p></button>
+      </div>
+    </div>
+  </div>
+</div>

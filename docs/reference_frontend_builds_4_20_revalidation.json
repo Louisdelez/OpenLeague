@@ -1,0 +1,296 @@
+{
+  "schema": "openleague_frontend_build_revalidation/v1",
+  "task": "SYS-01.1-02",
+  "updated_utc": "2026-10-20T17:51:14.901517+00:00",
+  "scope": "Identify patcher and AIR build identities only; no screen reconstruction or historical binary execution.",
+  "status": "a_valider",
+  "implementation_complete": true,
+  "technical_verification_complete": true,
+  "acceptance_complete": false,
+  "human_acceptance": "not_given",
+  "manual_state_mutated": false,
+  "prerequisites": {
+    "task_depends_on": [],
+    "package_requires_packages": [],
+    "phase_all_dependency_phases": [],
+    "source": "E:\\mapslol3v3\\Build_identity_revalidation_4_20_2026-10-20\\prerequisites.json",
+    "necessary_sources_available": true
+  },
+  "facts": {
+    "task": "SYS-01.1-02",
+    "facts_verified": true,
+    "native_executed": false,
+    "patcher": {
+      "project": "lol_patcher",
+      "rads_release": "0.0.0.11",
+      "file_version": "0.4.0.122",
+      "product_version": "0.4.0.122",
+      "version_semantics": "Windows VS_FIXEDFILEINFO FileVersion and ProductVersion; RADS release is a separate namespace"
+    },
+    "air": {
+      "project": "lol_air_client",
+      "rads_release": "0.0.1.119",
+      "build": "4.20.14_11_18_18_52",
+      "build_source": "air_common",
+      "class_name": "com.riotgames.platform.gameclient.application.Version",
+      "field": "CURRENT_VERSION",
+      "field_format": "AVM2 static String, trait_slot with default UTF-8 value",
+      "regional_config_project": "lol_air_client_config_euw",
+      "regional_config_release": "0.0.0.50",
+      "descriptor_version": "1.0.0",
+      "descriptor_source_release": "0.0.1.76",
+      "descriptor_namespace": "http://ns.adobe.com/air/application/3.7",
+      "build_timezone": null,
+      "pe_loader_version": null,
+      "descriptor_scope": "Archive union candidate from release 0.0.1.76; bytes do not match release119 manifest. Not the qualified 4.20 descriptor.",
+      "descriptor_expected_by_release119": {
+        "source_release": "0.0.1.67",
+        "bytes": 927,
+        "md5": "332b2a5cb3619cab02c8682a847e0ee9",
+        "exact_payload_recovered_for_this_task": false,
+        "version_number": null,
+        "namespace": null
+      }
+    },
+    "verified_sources": 10,
+    "manifest_verification": {
+      "patcher": {
+        "project": "lol_patcher",
+        "release": "0.0.0.11",
+        "member": {
+          "path": "LoLPatcher.exe",
+          "release": "0.0.0.11",
+          "md5": "ace2737187b05155ed3aa317d5c307f1",
+          "bytes": 4247544,
+          "compressed_bytes": 1959009,
+          "sha256": "fd4a4edcd45694e08779373286afdaa6870cd86f9847e4fc9db1d0bd556914cb"
+        }
+      },
+      "air": {
+        "project": "lol_air_client",
+        "release": "0.0.1.119",
+        "manifest_files": 7886,
+        "member": {
+          "path": "lib/ClientLibCommon.dat",
+          "release": "0.0.1.119",
+          "md5": "18e2488befd98ec98ab3a2fa459e2178",
+          "bytes": 78498,
+          "compressed_bytes": 0,
+          "sha256": "f5915bfc68556608cb6aba924b9773862c09dd9e52414dc488aa01621efee638"
+        }
+      },
+      "excluded_union_candidates": [
+        {
+          "path": "META-INF/AIR/application.xml",
+          "classification": "different_content_from_release_manifest",
+          "candidate_bytes": 927,
+          "candidate_md5": "a28037fc7d3fdc4a090d8dc981179d18",
+          "manifest_entry": {
+            "release": "0.0.1.67",
+            "md5": "332b2a5cb3619cab02c8682a847e0ee9",
+            "bytes": 927,
+            "compressed_bytes": 0
+          }
+        },
+        {
+          "path": "version.txt",
+          "classification": "absent_from_release_manifest",
+          "candidate_bytes": 31,
+          "candidate_md5": "f8e13ecd43faaedeab55e29e4dd9190e",
+          "manifest_entry": null
+        }
+      ]
+    },
+    "human_acceptance": "not_given",
+    "manual_state_mutated": false
+  },
+  "tests": {
+    "baseline": {
+      "passed": 17,
+      "failed": 0,
+      "log": "E:\\mapslol3v3\\Build_identity_revalidation_4_20_2026-10-20\\baseline-tests.log"
+    },
+    "targeted": {
+      "command": [
+        "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "-E",
+        "-u",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/project-plan",
+        "-p",
+        "test_frontend*.py",
+        "-v"
+      ],
+      "cwd": "E:\\OpenLeague",
+      "started_utc": "2026-10-20T17:49:34.426890+00:00",
+      "ended_utc": "2026-10-20T17:49:38.350972+00:00",
+      "exit_code": 0,
+      "log": "E:\\mapslol3v3\\Build_identity_revalidation_4_20_2026-10-20\\frontend-tests.log",
+      "passed": 31,
+      "failed": 0
+    },
+    "read_only_cli": {
+      "command": [
+        "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "-E",
+        "-u",
+        "-B",
+        "tools/project-plan/frontend_builds.py",
+        "--root",
+        "E:\\OpenLeague",
+        "--output",
+        "E:\\mapslol3v3\\Build_identity_revalidation_4_20_2026-10-20\\native-verification.json"
+      ],
+      "cwd": "E:\\OpenLeague",
+      "started_utc": "2026-10-20T17:49:34.427890+00:00",
+      "ended_utc": "2026-10-20T17:49:34.783399+00:00",
+      "exit_code": 0,
+      "log": "E:\\mapslol3v3\\Build_identity_revalidation_4_20_2026-10-20\\frontend-cli.log"
+    },
+    "plan_regression": {
+      "command": [
+        "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "-E",
+        "-u",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/project-plan",
+        "-p",
+        "test_plan.py",
+        "-v"
+      ],
+      "cwd": "E:\\OpenLeague",
+      "started_utc": "2026-10-20T17:51:53.689673+00:00",
+      "ended_utc": "2026-10-20T17:53:31.588679+00:00",
+      "exit_code": 0,
+      "log": "E:\\mapslol3v3\\Build_identity_revalidation_4_20_2026-10-20\\plan-regression.log",
+      "passed": 14,
+      "failed": 0,
+      "database": "isolated temporary database; not user progress"
+    }
+  },
+  "integration": {
+    "source_status": "a_valider",
+    "active_catalog_tasks": 42214,
+    "manual_states_compared": 42606,
+    "all_manual_states_unchanged": true,
+    "task_state_write": false,
+    "live_http_consumer_verified": true,
+    "manual_done": 1,
+    "manual_revision": 1,
+    "human_acceptance": "not_given",
+    "stored_instruction_sha256": "3fb61eaffb01e316733433e52dc9b0995cdf27d8860c20bf7289142871e8c749",
+    "catalog_changed_rows": [
+      "SYS-01.1-02"
+    ],
+    "manual_history_unchanged": true
+  },
+  "prior_evidence": "docs/reference_frontend_builds_4_20_verification.json",
+  "prior_evidence_sha256": "05fbc066be3d8d1c76b76eaae508e61465f08b131919524c0f34177c40404697",
+  "findings_corrected": [
+    "Build values already identified; now both original binaries/libraries are compared to exact release manifests, not just folder names/archive-union records.",
+    "The union version.txt is absent from AIR release119.",
+    "The union AIR descriptor from release76 differs from the actual release119 member sourced from release67. Its generic values are excluded as qualified release119 metadata."
+  ],
+  "expected_observed": [
+    {
+      "case": "patcher build",
+      "expected": "VERSIONINFO 0.4.0.122, exact RADS0.0.0.11 member",
+      "observed": "Both Windows version fields and manifest member size/MD5 match",
+      "result": "pass"
+    },
+    {
+      "case": "AIR build",
+      "expected": "Version.CURRENT_VERSION 4.20.14_11_18_18_52 from exact RADS0.0.1.119 library",
+      "observed": "ABC field, native installation logs, exact member release/size/MD5 agree",
+      "result": "pass"
+    },
+    {
+      "case": "wrong identity or corrupt/missing source",
+      "expected": "Explicit refusal",
+      "observed": "Targeted tests refuse wrong build/project/release/field binding, absent member, altered content, truncated manifest and changed provenance",
+      "result": "pass"
+    },
+    {
+      "case": "archive union candidates",
+      "expected": "Do not qualify stale/mismatched content as release119",
+      "observed": "version.txt absent; application.xml divergent; false promotions refused",
+      "result": "pass"
+    },
+    {
+      "case": "manual plan state",
+      "expected": "No automatic check, notes or revision changes",
+      "observed": {
+        "source_status": "a_valider",
+        "active_catalog_tasks": 42214,
+        "manual_states_compared": 42606,
+        "all_manual_states_unchanged": true,
+        "task_state_write": false,
+        "live_http_consumer_verified": true,
+        "manual_done": 1,
+        "manual_revision": 1,
+        "human_acceptance": "not_given",
+        "stored_instruction_sha256": "0f3143af7cce5e15a04bf3d36ada68caeae53a58d994cfe3f2b5abd4b2c5fc75"
+      },
+      "result": "pass"
+    }
+  ],
+  "modified_files": [
+    "tools/project-plan/frontend_builds.py",
+    "tools/project-plan/test_frontend_builds.py",
+    "tools/project-plan/test_frontend_manifest_bindings.py",
+    "docs/reference_frontend_builds_4_20.json",
+    "docs/REFERENCE_FRONTEND_BUILDS_4_20.md",
+    "docs/reference_frontend_sources/air_0.0.1.119.releasemanifest",
+    "docs/reference_frontend_sources/air_0.0.1.119.provenance.json",
+    "docs/reference_frontend_builds_4_20_revalidation.json",
+    "docs/completion_tasks_2026-10-20.json",
+    "docs/coverage.json",
+    "docs/completion_plan.json",
+    "docs/resume_checkpoint.json",
+    "docs/ai/CURRENT.md",
+    "docs/ai/HANDOFF.md",
+    "docs/ai/DECISIONS.md",
+    "runtime/project-plan/plan.sqlite3 (catalog only)"
+  ],
+  "backup": "E:\\mapslol3v3\\Build_identity_revalidation_4_20_2026-10-20\\before",
+  "git": {
+    "head": "8c19026eb8fdc2d9e47960b0110c5f9175f4d1ca",
+    "branch": "main",
+    "status": "See backup; preexisting dirty checkout preserved; no staging, reset or commit"
+  },
+  "limits": [
+    "La copie D: et son archive 4.20 ne contiennent pas les projets AIR ; le numéro de release est corroboré par deux journaux natifs et le build interne par une bibliothèque récupérée séparément.",
+    "LolClient.exe et le runtime Adobe AIR de cette copie ne sont pas exécutés ni qualifiés ; leur présence ne découle pas de la bibliothèque.",
+    "Le descripteur versionNumber 1.0.0 et son namespace AIR 3.7 ne sont ni le build PvP.net, ni une version vérifiée du runtime installé.",
+    "version.txt contient v[Mon 10/03/2011 18:36:35.70] dans l’union d’archives (source 0.0.0.85) ; ce chemin est absent du manifeste exact 0.0.1.119 et ne date pas AIR 4.20.",
+    "Aucun fuseau, date de déploiement EUW ou fidélité de tous les écrans n’est déduit des suffixes de build ou des noms de journaux.",
+    "Le build du jeu 4.20.0.315, celui du patcher 0.4.0.122, le build AIR 4.20.14_11_18_18_52 et le catalogue 4.20.1 restent des identités distinctes.",
+    "Le descripteur récupéré depuis 0.0.1.76 est divergent du membre attendu par le manifeste 0.0.1.119 (source 0.0.1.67) ; ses valeurs 1.0.0 et namespace 3.7 décrivent seulement ce candidat ancien, pas le descripteur 4.20 qualifié. Le contenu exact de ce membre n’a pas été récupéré pour cette tâche de builds."
+  ],
+  "native_executed": false,
+  "game_code_changed": false,
+  "game_builds_or_tests_run": false,
+  "first_install_tauri_seed_refreshed": false,
+  "seed_limit": "Only the existing shared plan database is refreshed; the prior first-install seed is unchanged.",
+  "final_audit_pending": false,
+  "final_audit": {
+    "passed": true,
+    "checks": 33,
+    "proof": "E:\\mapslol3v3\\Build_identity_revalidation_4_20_2026-10-20\\FINAL_AUDIT.json"
+  },
+  "verified_utc": "2026-10-20T17:55:30.855610+00:00"
+}

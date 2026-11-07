@@ -73,14 +73,16 @@ impl Capture {
 pub(super) fn input(mut capture:ResMut<Capture>,live:Res<Live>,state:Res<crate::Match>,mut connection:ResMut<crate::Connection>,
     shop:Res<crate::shop_ui::Filters>,inventory:Res<crate::native_hud_inventory::Capture>,windows:Query<(Entity,&Window),With<PrimaryWindow>>,
     mut events:MessageReader<WindowEvent>,terrain:Res<crate::picking::Terrain>,mut camera:ResMut<crate::ordinary_camera_input::Controls>,
-    mut focus:ResMut<crate::CameraFocus>) {
+    mut focus:ResMut<crate::CameraFocus>,mut lock:Option<ResMut<crate::camera_lock::Setting>>,
+    camera_capture:Option<Res<crate::camera_lock_ui::Capture>>) {
     let window=windows.single().ok();let rect=live.rect;
     let identity=connection.inventory_input_identity();
     let snapshot=state.snapshot.as_ref().filter(|s|Some(s.session)==connection.session);
     let context=window.and_then(|(window_id,window)|{
-        if !window.focused || shop.open || shop.focused || inventory.blocks_commands() || live.error.is_some() {return None;}
+        if !window.focused || shop.open || shop.focused || inventory.blocks_commands() || live.error.is_some()
+            || camera_capture.as_ref().is_some_and(|capture|capture.blocks_world_pointer()) {return None;}
         let identity=identity?;let snapshot=snapshot?;
-        if snapshot.winner.is_some() || !snapshot.players.iter().any(|p|p.id==identity.1) {return None;}
+        if snapshot.winner.is_some() || snapshot.result.is_some() || !snapshot.players.iter().any(|p|p.id==identity.1) {return None;}
         Some(Context{identity,window:window_id,rect:rect?.bits()})
     });
     let intents=capture.frame(window.map(|w|w.0),window.is_some_and(|w|w.1.focused),rect,context,events.read());
@@ -91,7 +93,15 @@ pub(super) fn input(mut capture:ResMut<Capture>,live:Res<Live>,state:Res<crate::
             // Preserve current focus Y, exactly as the existing arrow pan does.
             // Camera inspection does not require a walkable cell; no guessed
             // wall height or mutation of the native camera solver is involved.
-            Intent::Camera(_)=>{camera.minimap_focus();focus.0.x=point.x/20.;focus.0.z=point.z/20.;}
+            Intent::Camera(_)=>{
+                let Some(lock)=lock.as_mut() else {eprintln!("Minimap camera refused: CameraLock unavailable");continue;};
+                let matching=lock.owner().is_some_and(|owner|Some((owner.session,owner.player,owner.epoch))==identity
+                    && window.is_some_and(|(entity,_)|owner.primary_window==entity));
+                if !matching {eprintln!("Minimap camera refused: foreign CameraLock owner");continue;}
+                let request=lock.request(false,crate::camera_lock::Origin::Minimap);
+                if let Err(error)=request.and_then(|request|lock.consume(request)) {eprintln!("Minimap camera refused: {error:?}");continue;}
+                camera.minimap_focus();focus.0.x=point.x/20.;focus.0.z=point.z/20.;
+            }
             Intent::Move(_)=>{
                 // Ordinary navigation validation. Never relocate a blocked cell.
                 if terrain.0.ground(point).is_none() {continue;}

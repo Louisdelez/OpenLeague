@@ -1,0 +1,2186 @@
+{
+  "schema": "openleague_patcher_lifecycle_links/v1",
+  "passed": true,
+  "utc": "2026-10-23T07:26:52.708457+00:00",
+  "full_task_scope_complete": false,
+  "native_or_game_executed": false,
+  "historical_server_policy_qualified": false,
+  "facts": {
+    "candidates": {
+      "producer": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\prepare_patcher_lifecycle_reader.py",
+        "bytes": 3855,
+        "sha256": "eb17286f1737f5c5094dd334ca890b1657aa9ba65cf9686e5b6cdac1f16f1849"
+      },
+      "associations": [
+        {
+          "task_id": "SYS-18.5-01",
+          "finding": "CLI verified pack status,not patcher UI.",
+          "remaining": "CLI pack verification status exists;historical patcher UI states not implemented.",
+          "anchors": [
+            {
+              "path": "tools/download_assets.py",
+              "line": 100,
+              "needle": "print('Verified ' + row['name']",
+              "role": "patcher_lifecycle_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-7b9af414-a997-54b1-a7d8-90126f8b186a"
+        },
+        {
+          "task_id": "SYS-18.5-02",
+          "finding": "Fresh download overwrites partial;no HTTP Range resume.",
+          "remaining": "Download stream exists;no measured bytes/progress UI.",
+          "anchors": [
+            {
+              "path": "tools/download_assets.py",
+              "line": 91,
+              "needle": "with urllib.request.urlopen(request, timeout=120) as source, partial.open('wb')",
+              "role": "patcher_lifecycle_2"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-5b5989ec-fd84-5a91-8a1f-972d20831ec5"
+        },
+        {
+          "task_id": "SYS-18.5-03",
+          "finding": "Fresh download overwrites partial;no HTTP Range resume.",
+          "remaining": "Partial opened wb without Range;interrupted transfer resumes not implemented.",
+          "anchors": [
+            {
+              "path": "tools/download_assets.py",
+              "line": 91,
+              "needle": "with urllib.request.urlopen(request, timeout=120) as source, partial.open('wb')",
+              "role": "patcher_lifecycle_3"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-0d86306b-eda8-5fdb-9c76-5da6a074cce1"
+        },
+        {
+          "task_id": "SYS-18.5-04",
+          "finding": "Per-file restoration and divergence refusal;not whole-build transaction.",
+          "remaining": "Exact per-file restore/refusal tested;complete user repair flow remains open.",
+          "anchors": [
+            {
+              "path": "tools/download_assets.py",
+              "line": 27,
+              "needle": "def restore(",
+              "role": "patcher_lifecycle_4"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-b8993c45-c0e2-521e-836b-f9071123c370"
+        },
+        {
+          "task_id": "SYS-18.5-05",
+          "finding": "Atomic per-file replacement,not all-build update or rollback.",
+          "remaining": "Atomic file replacement is not an atomic build transaction.",
+          "anchors": [
+            {
+              "path": "tools/download_assets.py",
+              "line": 61,
+              "needle": "os.replace(temporary, target)",
+              "role": "patcher_lifecycle_5"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-2fece08b-a8d5-5c16-b761-9a20c4d479d7"
+        },
+        {
+          "task_id": "SYS-18.5-06",
+          "finding": "Atomic per-file replacement,not all-build update or rollback.",
+          "remaining": "Per-file replace has no previous-build rollback manager.",
+          "anchors": [
+            {
+              "path": "tools/download_assets.py",
+              "line": 61,
+              "needle": "os.replace(temporary, target)",
+              "role": "patcher_lifecycle_6"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-71399ad5-3896-50fd-9b9a-04c019d57be9"
+        },
+        {
+          "task_id": "SYS-18.5-07",
+          "finding": "Owned client launch/bootstrap path.",
+          "remaining": "Owned launch/bootstrap exists;full historical session contract and readiness remain open.",
+          "anchors": [
+            {
+              "path": "launcher/src-tauri/src/sessions.rs",
+              "line": 92,
+              "needle": "fn spawn(&self,generation:",
+              "role": "patcher_lifecycle_7"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-70be5165-2238-5d11-97b9-3c6787ab3cbf"
+        },
+        {
+          "task_id": "SYS-18.5-08",
+          "finding": "Resume requires observed failed exit and live owned server.",
+          "remaining": "Observed failed client/live server permits resume;all lifecycle scenarios remain open.",
+          "anchors": [
+            {
+              "path": "launcher/src-tauri/src/sessions.rs",
+              "line": 174,
+              "needle": "fn can_resume(&self)",
+              "role": "patcher_lifecycle_8"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-6f2f391f-25ce-5a10-833a-62e5f9ac36f1"
+        },
+        {
+          "task_id": "SYS-18.5-09",
+          "finding": "Current faults separated from historical diagnostics.",
+          "remaining": "Current crash faults surfaced separately from history;fresh end-to-end crash return not executed.",
+          "anchors": [
+            {
+              "path": "launcher/src-tauri/src/sessions.rs",
+              "line": 129,
+              "needle": "fn current_errors(&self)",
+              "role": "patcher_lifecycle_9"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-70cca5fd-8e63-596c-96fd-3feeef66344b"
+        },
+        {
+          "task_id": "SYS-18.5-10",
+          "finding": "Owned local server/client launch;not full original AIR lifecycle.",
+          "remaining": "Local launcher lifecycle is not original AIR restoration.",
+          "anchors": [
+            {
+              "path": "launcher/src-tauri/src/sessions.rs",
+              "line": 332,
+              "needle": "pub fn play(&self, root:",
+              "role": "patcher_lifecycle_10"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-4d0278d2-bf5a-5ea8-9924-c77c8032b815"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\patcher-lifecycle-consumers.json",
+          "bytes": 3444,
+          "sha256": "bf255f41e931ff1ca07308df3a9cb7b1f25dad4fa645acb5d102b2ee9d04a9cf"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\patcher-lifecycle-native-research.json",
+          "bytes": 25717,
+          "sha256": "ae66e7515910d477c3991486373288fd05bd4d4bf26dd8bb57ca5e395a6d5b19"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\asset-restore-tests.json",
+          "bytes": 1999,
+          "sha256": "9f70307b5e057f43cd5f547ed720afeb9daf14d00a4360c193e42835fd135dff"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\launcher-lifecycle-stable-tests.json",
+          "bytes": 6004,
+          "sha256": "9dd001e80c3c109459380bdb9bafc5a916401df530ab2e575719451d152f2c58"
+        }
+      ],
+      "current_sources": [
+        {
+          "path": "F:\\OpenLeague\\tools\\download_assets.py",
+          "bytes": 5228,
+          "sha256": "6d2519fda28f5d8a34a78693faa7526cc4855eb3109a87e99e89ce47df35bb9c"
+        },
+        {
+          "path": "F:\\OpenLeague\\tools\\download_assets.py",
+          "bytes": 5228,
+          "sha256": "6d2519fda28f5d8a34a78693faa7526cc4855eb3109a87e99e89ce47df35bb9c"
+        },
+        {
+          "path": "F:\\OpenLeague\\tools\\download_assets.py",
+          "bytes": 5228,
+          "sha256": "6d2519fda28f5d8a34a78693faa7526cc4855eb3109a87e99e89ce47df35bb9c"
+        },
+        {
+          "path": "F:\\OpenLeague\\tools\\download_assets.py",
+          "bytes": 5228,
+          "sha256": "6d2519fda28f5d8a34a78693faa7526cc4855eb3109a87e99e89ce47df35bb9c"
+        },
+        {
+          "path": "F:\\OpenLeague\\tools\\download_assets.py",
+          "bytes": 5228,
+          "sha256": "6d2519fda28f5d8a34a78693faa7526cc4855eb3109a87e99e89ce47df35bb9c"
+        },
+        {
+          "path": "F:\\OpenLeague\\tools\\download_assets.py",
+          "bytes": 5228,
+          "sha256": "6d2519fda28f5d8a34a78693faa7526cc4855eb3109a87e99e89ce47df35bb9c"
+        },
+        {
+          "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+          "bytes": 30278,
+          "sha256": "54bc7a2a66296cdf2cededcca19d1846287c5108974efda2a0151b17503da7f6"
+        },
+        {
+          "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+          "bytes": 30278,
+          "sha256": "54bc7a2a66296cdf2cededcca19d1846287c5108974efda2a0151b17503da7f6"
+        },
+        {
+          "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+          "bytes": 30278,
+          "sha256": "54bc7a2a66296cdf2cededcca19d1846287c5108974efda2a0151b17503da7f6"
+        },
+        {
+          "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+          "bytes": 30278,
+          "sha256": "54bc7a2a66296cdf2cededcca19d1846287c5108974efda2a0151b17503da7f6"
+        }
+      ],
+      "scope": "Partial restore/session consumers and explicit full-update/AIR boundaries;isolated and simulated tests only."
+    },
+    "receipts": {
+      "patcher-lifecycle-consumers.json": {
+        "utc": "2026-10-23T07:24:26.417776+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\research_patcher_lifecycle.py",
+          "bytes": 2551,
+          "sha256": "07cec61df8b720cbd853b39b326613c251a63d74a9b1e36b980e00bc673b8e1e"
+        },
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\tools\\download_assets.py",
+              "bytes": 5228,
+              "sha256": "6d2519fda28f5d8a34a78693faa7526cc4855eb3109a87e99e89ce47df35bb9c"
+            },
+            "line": 100,
+            "needle": "print('Verified ' + row['name']",
+            "finding": "CLI verified pack status,not patcher UI."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\tools\\download_assets.py",
+              "bytes": 5228,
+              "sha256": "6d2519fda28f5d8a34a78693faa7526cc4855eb3109a87e99e89ce47df35bb9c"
+            },
+            "line": 91,
+            "needle": "with urllib.request.urlopen(request, timeout=120) as source, partial.open('wb')",
+            "finding": "Fresh download overwrites partial;no HTTP Range resume."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\tools\\download_assets.py",
+              "bytes": 5228,
+              "sha256": "6d2519fda28f5d8a34a78693faa7526cc4855eb3109a87e99e89ce47df35bb9c"
+            },
+            "line": 27,
+            "needle": "def restore(",
+            "finding": "Per-file restoration and divergence refusal;not whole-build transaction."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\tools\\download_assets.py",
+              "bytes": 5228,
+              "sha256": "6d2519fda28f5d8a34a78693faa7526cc4855eb3109a87e99e89ce47df35bb9c"
+            },
+            "line": 61,
+            "needle": "os.replace(temporary, target)",
+            "finding": "Atomic per-file replacement,not all-build update or rollback."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+              "bytes": 30278,
+              "sha256": "54bc7a2a66296cdf2cededcca19d1846287c5108974efda2a0151b17503da7f6"
+            },
+            "line": 92,
+            "needle": "fn spawn(&self,generation:",
+            "finding": "Owned client launch/bootstrap path."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+              "bytes": 30278,
+              "sha256": "54bc7a2a66296cdf2cededcca19d1846287c5108974efda2a0151b17503da7f6"
+            },
+            "line": 174,
+            "needle": "fn can_resume(&self)",
+            "finding": "Resume requires observed failed exit and live owned server."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+              "bytes": 30278,
+              "sha256": "54bc7a2a66296cdf2cededcca19d1846287c5108974efda2a0151b17503da7f6"
+            },
+            "line": 129,
+            "needle": "fn current_errors(&self)",
+            "finding": "Current faults separated from historical diagnostics."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+              "bytes": 30278,
+              "sha256": "54bc7a2a66296cdf2cededcca19d1846287c5108974efda2a0151b17503da7f6"
+            },
+            "line": 332,
+            "needle": "pub fn play(&self, root:",
+            "finding": "Owned local server/client launch;not full original AIR lifecycle."
+          }
+        ],
+        "limits": [
+          "No download/project asset mutation performed.",
+          "Patcher percentage/resume/whole-build rollback and original AIR restoration remain open."
+        ]
+      },
+      "patcher-lifecycle-native-research.json": {
+        "utc": "2026-10-23T07:25:26.743273+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\record_lifecycle_native.py",
+          "bytes": 2626,
+          "sha256": "fabd71d88dd56a4f7a4e80c63a784667ef40d10165ecf024136e5d7cce18ee97"
+        },
+        "patcher_tests": {
+          "original": {
+            "path": "F:\\OpenLeague\\tools\\project-plan\\test_patcher_controllers.cjs",
+            "bytes": 4108,
+            "sha256": "9c6aab71121b92436df8d88dc7335dd28433861121b274545e7cd2b1d888d4bb"
+          },
+          "adapted": {
+            "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\test_patcher_controllers.current-root.cjs",
+            "bytes": 4110,
+            "sha256": "9972b666da44dd7f3bc6dd877f21db941db40b908ef35e1104563f26d7d63b01"
+          },
+          "adaptation": "Project root only",
+          "log": {
+            "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\patcher-controller-tests.log",
+            "bytes": 676,
+            "sha256": "7aba01ce77fbf87aac32c79640595983852b5060f17c3fd3c052304a844c70f4"
+          },
+          "passed": 7,
+          "failed": 0,
+          "sources": [
+            {
+              "path": "F:\\OpenLeague\\docs\\reference_patcher_sources\\review\\bundle-chrome\\src\\js\\app\\displayAgreement\\DisplayAgreementController.js",
+              "bytes": 879,
+              "sha256": "4b0fc22a8235a921a2360301c80dc497ce63f4aa9157300e4f95d69ca1407892"
+            },
+            {
+              "path": "F:\\OpenLeague\\docs\\reference_patcher_sources\\review\\bundle-chrome\\src\\js\\app\\errorMessage\\ErrorMessageController.js",
+              "bytes": 476,
+              "sha256": "cd2462373f2d18cabc75d9b3f0bc4915bc137b7255fed2273ccc8baf3c2085bd"
+            },
+            {
+              "path": "F:\\OpenLeague\\docs\\reference_patcher_sources\\review\\bundle-chrome\\src\\js\\app\\pandoRemovalPopup\\PandoRemovalPopupController.js",
+              "bytes": 6251,
+              "sha256": "be23a3eeb78a6306e58dfba66d474fa890dbbd4191640b49d2d6cf8c60aa8b03"
+            },
+            {
+              "path": "F:\\OpenLeague\\docs\\reference_patcher_sources\\review\\bundle-chrome\\src\\js\\app\\regionalSettings\\RegionalSettingsController.js",
+              "bytes": 2201,
+              "sha256": "477c37578bafed30548df923bfdb10da2ad97cffad164d088e78501322398d1e"
+            },
+            {
+              "path": "F:\\OpenLeague\\docs\\reference_patcher_sources\\review\\bundle-chrome\\src\\js\\app\\settings\\SettingsController.js",
+              "bytes": 3933,
+              "sha256": "1df66cc29b48f79c849820fa61602e0baa0861e1d147f097b42e9b6aaf3a9219"
+            }
+          ],
+          "host": "simulated no native calls"
+        },
+        "loading_contract": {
+          "path": "F:\\OpenLeague\\docs\\reference_loading_return_4_20.json",
+          "bytes": 491497,
+          "sha256": "ab3b20e39f96e6ca4c5bf57f85a0cfd9ad539059213be529f7e6e2a6162bc284"
+        },
+        "loading_snapshots": [
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\GameViewState.as",
+            "bytes": 1395,
+            "sha256": "6ca78f107598b613a54415248a8ef2b70453ebd5cec8030c6bb9341cecd1b368"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\GameState.as",
+            "bytes": 1868,
+            "sha256": "65fb2589cd3100adf292ca9f5812d9330e9bf2d1045ef21b2badd28bbb36a84b"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\IAppControllerConstants.as",
+            "bytes": 1307,
+            "sha256": "00e6b3f108ba3dddf434f29714756cf349e684ab20c913dfee179078966a1630"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\GameEvent.as",
+            "bytes": 1359,
+            "sha256": "9f914a305cfe639fff055e752840a226b610edaf051d9129d5a1f2988a924a35"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\LolGamePreloadController.as",
+            "bytes": 6856,
+            "sha256": "77802043e559e443cb5bb61de1c14d1242e1da9a7b2e7d292bb10884b7a528a9"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MasterGameController.as",
+            "bytes": 124421,
+            "sha256": "6cee283b81ad29909c1dd700b4896effcd0d63a36ed648358f70428139d9d348"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\ApplicationController.as",
+            "bytes": 60553,
+            "sha256": "14614012a94c79933e7af2f6ec50334d33d6ae2cb88c99873d480862dd7649b9"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\InGameController.as",
+            "bytes": 11615,
+            "sha256": "c71c817a60b579370febf6cf1352090ad1f3a44b98741581e8209103a3d45bf6"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\InGameView.as",
+            "bytes": 36323,
+            "sha256": "c492e173a93cab7f42c72d97a45c7ec9e80a45cc26db78a974aec42a3a9b563e"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\EndOfGameStatsController.as",
+            "bytes": 78440,
+            "sha256": "d96ecebfd9d763c59dfa84f0f3778cba5db3cc0144de9862978d7429315eee1a"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\EndOfGameView.as",
+            "bytes": 21325,
+            "sha256": "5f2a7df983c4204c2cf646141404f268ae47f1ea804e62ba558a759315b5de75"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\EndOfTutorialGameView.as",
+            "bytes": 27109,
+            "sha256": "b39a647e04d774f0cbfd8a97871e5e1d05034007b04ab5eeff895d975796412f"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MasterGameViewController.as",
+            "bytes": 46735,
+            "sha256": "a804982133e0fcb3ce5365cae564c56c2a7aaf6887bd533c2cdd0610abad9e72"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MaestroController.as",
+            "bytes": 25208,
+            "sha256": "68d93de952531962b04f5cbca79f9feb3e48a2ba9b0b5c2ff0c2b0c9c51eea36"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MaestroServiceImpl.as",
+            "bytes": 26464,
+            "sha256": "768839d5028fb4764ba2f2832fe3ca574fa06f3dcf2d80d6a11770a2fe953a88"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MaestroConstants.as",
+            "bytes": 2313,
+            "sha256": "efb31da7d10fad736d40b038555609f2718dc2595d63a461e4ee4de009e06bb8"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MaestroMessage.as",
+            "bytes": 2333,
+            "sha256": "200262de829bde0efa6fc616edddfd041dbdff510763ace6eba3723b55945ed5"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MaestroProviderProxy.as",
+            "bytes": 7440,
+            "sha256": "95420569f729d578e20263c4d27529b508970e07d76d2d510cda4343b2bb455a"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\ClientConfig.as",
+            "bytes": 93171,
+            "sha256": "dedc99b1d3067c5a9fb96dbf5659625e43919db0e5cb8c5c33701beead67b65c"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\NewGameViews.as",
+            "bytes": 29417,
+            "sha256": "cf9629bdea6f8f5437919eb61e7e643e23fd25a58040e4ae37329940d1d4f574"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\LobbyController.as",
+            "bytes": 26022,
+            "sha256": "d1f61b672a2872ea7e9644d3e17d8277ab3939fd8e6b76fda146688d967dd9f0"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\SpectatorController.as",
+            "bytes": 20561,
+            "sha256": "290f8baf89d9f1263c0811867edee71003b313f29112aeb1971a047f40ffd18d"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\LoginMediator.as",
+            "bytes": 29670,
+            "sha256": "21481600f0167ae7dc9fd58b9d4d4e9b8df7c14b288c769d031d2dcbf87011a1"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\GameCrashedEvent.as",
+            "bytes": 450,
+            "sha256": "49e42a0b06aec389ca260880011b575346d3e3066249119419b5fe329317f7fd"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\EndOfGameStats.as",
+            "bytes": 34514,
+            "sha256": "d2fe98ca97ef64353848f4ca27327fc21fcce2a7e5081a686352faed047414bd"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\HardcodedEndOfGameStats.as",
+            "bytes": 22365,
+            "sha256": "254ed17a954e2c1fb471b1ad57e25dbf0c9cda173f434b69818a1d14ab3c0644"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\GameType.as",
+            "bytes": 1223,
+            "sha256": "16ba10046e2467ad73f09298ac607edb3ba2c9328297ada099d913faddcf3c74"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\IMaestroProvider.as",
+            "bytes": 3127,
+            "sha256": "e02de758955a7b77b0160b588d78535a07fe9f5aa950b765c3d52528213e7dae"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\PreloadMediator.as",
+            "bytes": 1093,
+            "sha256": "952e9b0a5d32dc142cf32e468552682919a1b7c1e9cb24d1c4ca5026f0c0fed1"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\launcher\\src-tauri\\src\\sessions.rs",
+            "bytes": 30278,
+            "sha256": "54bc7a2a66296cdf2cededcca19d1846287c5108974efda2a0151b17503da7f6"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\launcher\\src-tauri\\src\\sessions_joined.rs",
+            "bytes": 6559,
+            "sha256": "b7c44064076cab4a4ec3274e07a6fe28fe5f33477ac088a4eb82f24d2a89b60c"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\launcher\\src-tauri\\src\\sessions_output.rs",
+            "bytes": 20465,
+            "sha256": "771407092830a4e780427b3dc89bc63e4b699eef06c5aee6aa00dd29bb8de011"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\launcher\\web\\app.js",
+            "bytes": 2960,
+            "sha256": "f4f58340d72d2bedbf94b88a847a537c2ea7d76594f053d6a5dc4eba1cf64ad6"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\session_client.rs",
+            "bytes": 12507,
+            "sha256": "4df6dc629e5a428bb7d7bc258ec83ce763d999da34587228ea76208de06b76e4"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\session_connection.rs",
+            "bytes": 17469,
+            "sha256": "fdd81b790bca52dd4e20ca5d34e81d78136f3958ab7028f5ca193d078fb9acd1"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\session_departure.rs",
+            "bytes": 9218,
+            "sha256": "6cc8e1889fec2d6d2af8ae5f334126410ed5af2ef48b32f005c419617a3fdfe9"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\native_runtime_shutdown.rs",
+            "bytes": 11275,
+            "sha256": "3e21c3f74afd883e1c7ab512c52d081907e8425750a8da3cd8f4c31983c687b3"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\native_endgame_ui.rs",
+            "bytes": 12985,
+            "sha256": "99290ade51f68a84cb8e680a2778f1d6dfb0d393f258a490726e431bcd941149"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\endgame_timeline.rs",
+            "bytes": 4954,
+            "sha256": "4741f27b81f7aff4e9940755c1bb1a9bcac6e35113fd3ace8624b07e3b82714c"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\match_results_ui.rs",
+            "bytes": 6200,
+            "sha256": "ce96ed7771c5ee6f3823386ecbb61b73875cd2b78088ec83695a81d9ef621cb2"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\main.rs",
+            "bytes": 141376,
+            "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\core\\src\\match_results.rs",
+            "bytes": 4021,
+            "sha256": "48c15c370a316084296c8a1e356fddf30730ca10223d37fbe71ee6cacec37be7"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\core\\src\\session_transport.rs",
+            "bytes": 13206,
+            "sha256": "139a7ce15ac5261dee15fe0aa60716fb1bb6993ecd9acb0d41c34acb84ab00bc"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\server\\src\\owned_session.rs",
+            "bytes": 6304,
+            "sha256": "f8166aac8cd04e02fd35d981f859883e18e462f00a066e683efb12ed29304415"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\server\\src\\main.rs",
+            "bytes": 13628,
+            "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\server\\src\\session_host.rs",
+            "bytes": 33360,
+            "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\evidence\\native_endgame_default_timing.json",
+            "bytes": 1282,
+            "sha256": "d490c13cab7da6197ec82b257717db56a699f56b5edfa6c9e2d60040bcfaf25c"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\evidence\\endgame_lua_source_audit.json",
+            "bytes": 9955,
+            "sha256": "de95b91fbc18a93582ed5bea57aaba830ada1eb083d0c76dafa61cb4335a7ae2"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\evidence\\endgame_ui_native.json",
+            "bytes": 31448,
+            "sha256": "79ef17ad69ef3660a5493cf034fe737d919be1a8a8a33e1be0266340d2c65ee0"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\native\\EndOfGame.luaobj",
+            "bytes": 2899,
+            "sha256": "5548ca1ce30a6bc2740d787b2bc224c5d11f06d89ca9b2dcd8659e1e4a263379"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\native\\EndOfGame.gfx",
+            "bytes": 20387,
+            "sha256": "3d2f17dd944ca14b66aee9177e25a5c8f4637557758734d5ced34c5f0a479954"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Communication\\Comm.as",
+            "bytes": 1005,
+            "sha256": "dc5c5ca0096c2c4db4a922a6fc6d9de555388f407d0df58b8b54ff3737e9700f"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\Cursor.as",
+            "bytes": 1204,
+            "sha256": "5fdf6235ffe94fdad9ac71dd762a2076cc169875d4c4519c6984fd49b4f25b5b"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DefaultButton.as",
+            "bytes": 8861,
+            "sha256": "ad54600c6fb3f5fcb62f38740cf07d4af90bf1fac950270a4f812c1f2cef80a9"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DefaultProgressBar.as",
+            "bytes": 2362,
+            "sha256": "0bdc310ca74cac253bcd5b90c9daa5f9bd420de88af9667b08ae8ac0c9377df6"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DefaultTextBox.as",
+            "bytes": 6359,
+            "sha256": "806f90f8adcbc661df2d43981c6f5c1c464b019a1b9ab41394db64ec485cae6f"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DisplayObject.as",
+            "bytes": 30572,
+            "sha256": "d695536705f9343a6afb142eeb33a539b6e5473a71b424b682215425d0b830e5"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DisplayObjectContainer.as",
+            "bytes": 12049,
+            "sha256": "1b217633f96080bcf77e77471f1cc41dc106469d720ed7c7866da8fcec4b9c71"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DrawnProgressBar.as",
+            "bytes": 940,
+            "sha256": "48f5dec5c9a4cf6cc256374a3acbd8b3ffaec9a0c0ba860c0f098482b9e63710"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\TextProgressBar.as",
+            "bytes": 755,
+            "sha256": "7504fc3536cfeb652c992d3ef734204eb4bd770ba8256a42887b4c4d32e15463"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\ToggleButton.as",
+            "bytes": 1574,
+            "sha256": "795fb494f611573f900b737a0e00eca3585ec67e4196715137c560901efbfbdb"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Enums\\DisplayMode.as",
+            "bytes": 164,
+            "sha256": "9243cf95b20ac4d41a779b78b0407b11f1597558e0730594fc58608d8a0d55d5"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Events\\Event.as",
+            "bytes": 665,
+            "sha256": "9e9e8093cdacc1a99c204b14ef57779bcfe95cc38e51c081feed02ebf1adab22"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Events\\KeyboardEvent.as",
+            "bytes": 507,
+            "sha256": "9587e37795c6dbdb05cc7f331958fc27e7947cdfa304061c360304ffba528f47"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Events\\MouseEvent.as",
+            "bytes": 1290,
+            "sha256": "8e2617d21b0b5f6c928794e0da15957d4af39720d408ff9e035c3f192cacf63f"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Managers\\ComponentFactory.as",
+            "bytes": 2103,
+            "sha256": "fb22b4628b1c99687a1f02eac430946c64f4c3101f967725c3fbd835e50a6f83"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Managers\\GameManager.as",
+            "bytes": 2185,
+            "sha256": "f9c7eaf81b71e7fb6441c16c81df81ede81b4d83ab0838ca2a0576d18c9c8f43"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Managers\\LayoutManager.as",
+            "bytes": 2215,
+            "sha256": "21faee000890f76020227eb27579b0b51d3e7906e61217f9c960f8f1374932e4"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Managers\\MouseManager.as",
+            "bytes": 692,
+            "sha256": "1414d0f915b56d25c3bea813eb0fdd60828f0357cd2c6b86db56a43c0406de4b"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Utils\\AnimationMetric.as",
+            "bytes": 3452,
+            "sha256": "1343b003137d676114b51ab11014d862028b4593a261940742317c9afff03f88"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Utils\\DrawingUtils.as",
+            "bytes": 6344,
+            "sha256": "0e6393695fcca587d329e0b825362ba4b52bb5896d18fd779502df9d1e0a9440"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Utils\\Metrics.as",
+            "bytes": 710,
+            "sha256": "3d35ade54e57933e343ffa1e76b721c900baff844c06a6367451c6b73a7c3387"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Utils\\TextMetrics.as",
+            "bytes": 778,
+            "sha256": "b3632545e6595dc8741c1f5d831003c6b97eea128ce41b3fdd9fa2477c09d5b2"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\org\\flashdevelop\\utils\\FlashViewer.as",
+            "bytes": 957,
+            "sha256": "9ea5cc92ac2bcde3579ffc7b25cc01ffc1fa01c8ba2fa16b9ccee19e2ddaf8df"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\Communication\\CommandParser.as",
+            "bytes": 2167,
+            "sha256": "a1f8bb30eadfe57a94d7da703eab25683de95ee8f120222f073591ec04d3a6ca"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\GameComponents\\DefeatSplash.as",
+            "bytes": 1711,
+            "sha256": "1eb45194571a3ddba25880d69b0c81cbf75fb66e84e0fd0f0b4f1a132b376eb0"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\GameComponents\\EndOfGame.as",
+            "bytes": 2308,
+            "sha256": "756f0731bd62f9b5dc73250737551a87f64ca37a9f8a52d483b805f5c9b542d9"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\GameComponents\\GameComponentFactory.as",
+            "bytes": 1111,
+            "sha256": "8e9c1a73378b1904c7613ee4c307d5a4ae5648a3d3205b24eff12b64a208a7a6"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\GameComponents\\SplashScreen.as",
+            "bytes": 312,
+            "sha256": "8746e52aabbbaed5bd4f803ab9318ddac9e5e09e2783739cce63004ece5e01a8"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\GameComponents\\VictorySplash.as",
+            "bytes": 1722,
+            "sha256": "50be906603253e06c9a4a641d59e792d1954a2de2ec7dcc2027fb9822b8f44fe"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\Main.as",
+            "bytes": 745,
+            "sha256": "13db93fb0197140b22c0291d20388559170acc8424cf6200ca3b91420624f792"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\frame_1\\DoAction.as",
+            "bytes": 61,
+            "sha256": "149f89d6898fa46ace749c4397852407475cb44e36e1828117e6da1beda8dae6"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\pcode\\InGameController.pcode",
+            "bytes": 123726,
+            "sha256": "da4d70220fffba21637e497dfab415ac88eaa535dac869418d2ed3c9b800e038"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\probes\\native-decompilation.json",
+            "bytes": 1900,
+            "sha256": "dfa4a8f2323d4bb669de35b6b5d8cf6224d7c224a3002129428ce267e214bc0c"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\probes\\loading-event-trace.json",
+            "bytes": 3700,
+            "sha256": "d3f3ef266127be0d76c85d4fbe1f9ac6f9ce711d6bcf4cf78a61c4ccc310c67a"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\probes\\lua-probe-runtime.json",
+            "bytes": 1177,
+            "sha256": "4ace89a658b6825692a5e1d6f0c9ed4cf9f64ada276d94a15aa691c23120180a"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\probes\\native_endgame_lua51_contract.json",
+            "bytes": 121173,
+            "sha256": "8a5f5afdb8c384aa934cfdf27dc340fcc14fa55de1b0c7bcc286615db80df0fd"
+          },
+          {
+            "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\probes\\filtered-log-events.json",
+            "bytes": 302146,
+            "sha256": "eec1907020060c0cf539e74a436b9a5e9487bae580e584abd68a1321e6281f94"
+          }
+        ],
+        "loading_unknowns": [
+          "GameEvent.COMPLETE_LOAD_SCREEN has only a declaration and listener add/remove in all9139 exports. The emitter and bridge from Maestro GameLoadingComplete33 to that event are not established.",
+          "preloadGameClient defaults false in ClientConfig. Actual historical remote/regional override availability is not established; unused preload branches are not promoted as default behavior.",
+          "Native GFx sends Press_Continue, but its C++ sink and exact process-exit/IPC linkage are not qualified. The AIR stopped/crashed/abandoned handlers are separate verified definitions.",
+          "Historical logs self-report build4.20 and include later filenames; they do not establish deployment date, old runtime binary SHA, a complete3v3 match, or successful AIR stats retrieval.",
+          "Native player loading progress percentages and all-player readiness sequencing are not qualified by resource-loading messages or updater install progress.",
+          "InGameController.deactivate compares currentState==connected then discards the result (AVM2 equals/pop), not a reset assignment. Preserve this original source behavior.",
+          "Original processMessageHeader checks size/version and types>40 but does not reject negative types/payload sizes. No stronger native validation is inferred or implemented by this inventory.",
+          "Current Rust process state playing is not proof of transport/asset/graphical readiness; failed-exit errors take precedence over the reconnecting label while can_resume may remain true.",
+          "Current timeline starts from first immutable result reception; original engine timers, full ceremony rendering/audio, network protocol compatibility and original AIR runtime are not qualified by this inventory."
+        ],
+        "limits": [
+          "Controller VM stubs are not patcher runtime/update engine.",
+          "No logs sent,no repair or download triggered.",
+          "Historical loading return snapshots rehashed;original AIR/native IPC not executed."
+        ]
+      },
+      "asset-restore-tests.json": {
+        "utc": "2026-10-23T07:22:57.010731+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\test_asset_restore.py",
+          "bytes": 3242,
+          "sha256": "a6eab93d9d29b64488a21b537eaf46bd56dd214cb1438d8d3ad5913f321dcd86"
+        },
+        "consumer": {
+          "path": "F:\\OpenLeague\\tools\\download_assets.py",
+          "bytes": 5228,
+          "sha256": "6d2519fda28f5d8a34a78693faa7526cc4855eb3109a87e99e89ce47df35bb9c"
+        },
+        "fixture_archive": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\isolated-restore\\pack.zip",
+          "bytes": 157,
+          "sha256": "754fb69ce24f5e2f8b6862c7a665c23e91415012301f9982192f32e56b42493e"
+        },
+        "passed": true,
+        "cases": [
+          {
+            "name": "nominal",
+            "expected": "exact restored bytes",
+            "observed": "exact restored bytes"
+          },
+          {
+            "name": "local_divergence",
+            "expected": "refused and local bytes preserved",
+            "observed": "Local file differs; preserve it or use --force: assets/probe.bin"
+          },
+          {
+            "name": "corrupt_payload",
+            "expected": "refused,no installed payload or temporary",
+            "observed": "Extracted file checksum mismatch: assets/probe.bin"
+          },
+          {
+            "name": "unsafe_../outside",
+            "expected": "refused",
+            "observed": "refused"
+          },
+          {
+            "name": "unsafe_/absolute",
+            "expected": "refused",
+            "observed": "refused"
+          },
+          {
+            "name": "unsafe_C:/escape",
+            "expected": "refused",
+            "observed": "refused"
+          },
+          {
+            "name": "unsafe_assets\\escape",
+            "expected": "refused",
+            "observed": "refused"
+          }
+        ],
+        "limits": [
+          "Isolated local fixtures only;no network or project asset write.",
+          "Per-file atomic replacement is not whole-build atomic update.",
+          "Downloader opens partial file wb without HTTP Range;resume unqualified.",
+          "No rollback build manager or progress UI tested."
+        ]
+      },
+      "launcher-lifecycle-stable-tests.json": {
+        "utc": "2026-10-23T07:26:52.528276+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\test_launcher_stable_binary.py",
+          "bytes": 1627,
+          "sha256": "a2ac86886f4976bdce43d772ecec278236565d6ca5bb68da58ad6670323c25f6"
+        },
+        "runs": [
+          {
+            "command": [
+              "F:\\OpenLeague\\launcher\\src-tauri\\target\\debug\\deps\\openleague_launcher-fe1ba6052869eb77.exe",
+              "sessions::status_tests::",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "sessions::status_tests::identical_observation_fault_becomes_current_again_after_successful_retry",
+              "sessions::status_tests::successful_observation_clears_current_faults_only_and_keeps_both_owners",
+              "sessions::status_tests::early_normal_server_exit_remains_current_until_live_client_retires",
+              "sessions::status_tests::resumed_client_and_normal_retirement_do_not_repeat_historical_crash",
+              "sessions::status_tests::launch_error_requires_successful_bootstrap_not_just_a_live_process",
+              "sessions::status_tests::supervisor_interruption_remains_current_after_bootstrap_and_observation",
+              "sessions::status_tests::failed_server_exit_is_not_hidden_by_a_successful_client_bootstrap",
+              "sessions::status_tests::repeated_exit_code_on_replacement_is_current_even_with_deduplicated_history"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\status_tests-same-binary.log",
+              "bytes": 963,
+              "sha256": "d0f940877066c14155954082e893fccc9c65e0bf390f58f098fcdda247619f6c"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\launcher\\src-tauri\\target\\debug\\deps\\openleague_launcher-fe1ba6052869eb77.exe",
+                "bytes": 2131968,
+                "sha256": "7f1b91149f144ebeba6cb172532d4d647f4e6ca7a40d5103cd50829201d63876"
+              }
+            ]
+          },
+          {
+            "command": [
+              "F:\\OpenLeague\\launcher\\src-tauri\\target\\debug\\deps\\openleague_launcher-fe1ba6052869eb77.exe",
+              "sessions::recovery_tests::",
+              "--nocapture"
+            ],
+            "exit_code": 0,
+            "tests": [
+              "sessions::recovery_tests::dead_server_never_allows_resume_into_an_external_or_replacement_server",
+              "sessions::recovery_tests::failed_observation_retains_live_client_and_never_authorizes_a_second_process",
+              "sessions::recovery_tests::server_observation_error_blocks_restart_until_owned_live_child_is_observed",
+              "sessions::recovery_tests::bootstrap_writer_is_dropped_even_on_partial_failure_and_error_has_no_payload",
+              "sessions::recovery_tests::normal_close_keeps_existing_drain_contract_and_does_not_offer_resume",
+              "sessions::recovery_tests::failed_client_keeps_only_its_owned_server_and_credential_until_explicit_abandon",
+              "sessions::recovery_tests::private_pipe_changes_only_recovery_mode_and_never_appears_in_argv_or_environment"
+            ],
+            "log": {
+              "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\recovery_tests-same-binary.log",
+              "bytes": 910,
+              "sha256": "dea5cfb1833a0d11c942c56e284643de01290fde9f0c48de5ae2b0f3ffbb3731"
+            },
+            "binaries": [
+              {
+                "path": "F:\\OpenLeague\\launcher\\src-tauri\\target\\debug\\deps\\openleague_launcher-fe1ba6052869eb77.exe",
+                "bytes": 2131968,
+                "sha256": "7f1b91149f144ebeba6cb172532d4d647f4e6ca7a40d5103cd50829201d63876"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+            "bytes": 3491,
+            "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+          },
+          {
+            "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\session_recovery_tests.rs",
+            "bytes": 5759,
+            "sha256": "c5bef55c88488c663ada4268735485ef4b31e11cb828d7a823601bc10c75886f"
+          },
+          {
+            "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\session_status_tests.rs",
+            "bytes": 6432,
+            "sha256": "1a8df55633cfe3f3119f04c009c08d59afe0f717a61ed09c5e4cb63c556c51ae"
+          },
+          {
+            "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+            "bytes": 30278,
+            "sha256": "54bc7a2a66296cdf2cededcca19d1846287c5108974efda2a0151b17503da7f6"
+          },
+          {
+            "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions_joined.rs",
+            "bytes": 6559,
+            "sha256": "b7c44064076cab4a4ec3274e07a6fe28fe5f33477ac088a4eb82f24d2a89b60c"
+          },
+          {
+            "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions_joined_tests.rs",
+            "bytes": 8422,
+            "sha256": "f9afbbb1b75907c6abce1cd458f9b432120dfb9a346855b2d20f36907bcb3b3e"
+          },
+          {
+            "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions_output.rs",
+            "bytes": 20465,
+            "sha256": "771407092830a4e780427b3dc89bc63e4b699eef06c5aee6aa00dd29bb8de011"
+          },
+          {
+            "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions_output_tests.rs",
+            "bytes": 13353,
+            "sha256": "9ce6513463e6ccd55719d126eef908c0636cddd333439aea41326ef016ee30ad"
+          },
+          {
+            "path": "F:\\OpenLeague\\launcher\\src-tauri\\Cargo.lock",
+            "bytes": 110146,
+            "sha256": "5b47d480307f3d10d3a0c8dbd530a89318a174e841379535822e51859387dd40"
+          },
+          {
+            "path": "F:\\OpenLeague\\launcher\\src-tauri\\Cargo.toml",
+            "bytes": 217,
+            "sha256": "1eb5cb9d772deacc8e66643c54a93e81bd466b1ce860bade5d17f3056421fc59"
+          }
+        ],
+        "scope": "Same existing test executable used directly for both targeted groups;fake process observations,not game runtime.",
+        "previous_receipt_path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\launcher-lifecycle-tests.json",
+        "correction": "Prior receipt retained;first Cargo run binary identity drifted before second run. This fresh receipt pins one unchanged binary."
+      }
+    },
+    "source_checks": [
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\patcher-lifecycle-associations.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\prepare_patcher_lifecycle_reader.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\patcher-lifecycle-consumers.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\patcher-lifecycle-native-research.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\asset-restore-tests.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\launcher-lifecycle-stable-tests.json",
+      "pin_F:\\OpenLeague\\tools\\download_assets.py",
+      "pin_F:\\OpenLeague\\tools\\download_assets.py",
+      "pin_F:\\OpenLeague\\tools\\download_assets.py",
+      "pin_F:\\OpenLeague\\tools\\download_assets.py",
+      "pin_F:\\OpenLeague\\tools\\download_assets.py",
+      "pin_F:\\OpenLeague\\tools\\download_assets.py",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\research_patcher_lifecycle.py",
+      "pin_F:\\OpenLeague\\tools\\download_assets.py",
+      "pin_F:\\OpenLeague\\tools\\download_assets.py",
+      "pin_F:\\OpenLeague\\tools\\download_assets.py",
+      "pin_F:\\OpenLeague\\tools\\download_assets.py",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\record_lifecycle_native.py",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\test_patcher_controllers.cjs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\test_patcher_controllers.current-root.cjs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\patcher-controller-tests.log",
+      "pin_F:\\OpenLeague\\docs\\reference_patcher_sources\\review\\bundle-chrome\\src\\js\\app\\displayAgreement\\DisplayAgreementController.js",
+      "pin_F:\\OpenLeague\\docs\\reference_patcher_sources\\review\\bundle-chrome\\src\\js\\app\\errorMessage\\ErrorMessageController.js",
+      "pin_F:\\OpenLeague\\docs\\reference_patcher_sources\\review\\bundle-chrome\\src\\js\\app\\pandoRemovalPopup\\PandoRemovalPopupController.js",
+      "pin_F:\\OpenLeague\\docs\\reference_patcher_sources\\review\\bundle-chrome\\src\\js\\app\\regionalSettings\\RegionalSettingsController.js",
+      "pin_F:\\OpenLeague\\docs\\reference_patcher_sources\\review\\bundle-chrome\\src\\js\\app\\settings\\SettingsController.js",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_4_20.json",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\GameViewState.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\GameState.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\IAppControllerConstants.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\GameEvent.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\LolGamePreloadController.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MasterGameController.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\ApplicationController.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\InGameController.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\InGameView.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\EndOfGameStatsController.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\EndOfGameView.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\EndOfTutorialGameView.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MasterGameViewController.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MaestroController.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MaestroServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MaestroConstants.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MaestroMessage.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MaestroProviderProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\ClientConfig.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\NewGameViews.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\LobbyController.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\SpectatorController.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\LoginMediator.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\GameCrashedEvent.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\EndOfGameStats.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\HardcodedEndOfGameStats.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\GameType.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\IMaestroProvider.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\PreloadMediator.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\launcher\\src-tauri\\src\\sessions.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\launcher\\src-tauri\\src\\sessions_joined.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\launcher\\src-tauri\\src\\sessions_output.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\launcher\\web\\app.js",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\session_client.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\session_connection.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\session_departure.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\native_runtime_shutdown.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\native_endgame_ui.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\endgame_timeline.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\match_results_ui.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\main.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\core\\src\\match_results.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\core\\src\\session_transport.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\server\\src\\owned_session.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\server\\src\\main.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\server\\src\\session_host.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\evidence\\native_endgame_default_timing.json",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\evidence\\endgame_lua_source_audit.json",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\evidence\\endgame_ui_native.json",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\native\\EndOfGame.luaobj",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\native\\EndOfGame.gfx",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Communication\\Comm.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\Cursor.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DefaultButton.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DefaultProgressBar.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DefaultTextBox.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DisplayObject.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DisplayObjectContainer.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DrawnProgressBar.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\TextProgressBar.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\ToggleButton.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Enums\\DisplayMode.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Events\\Event.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Events\\KeyboardEvent.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Events\\MouseEvent.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Managers\\ComponentFactory.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Managers\\GameManager.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Managers\\LayoutManager.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Managers\\MouseManager.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Utils\\AnimationMetric.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Utils\\DrawingUtils.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Utils\\Metrics.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Utils\\TextMetrics.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\org\\flashdevelop\\utils\\FlashViewer.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\Communication\\CommandParser.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\GameComponents\\DefeatSplash.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\GameComponents\\EndOfGame.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\GameComponents\\GameComponentFactory.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\GameComponents\\SplashScreen.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\GameComponents\\VictorySplash.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\Main.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\frame_1\\DoAction.as",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\pcode\\InGameController.pcode",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\probes\\native-decompilation.json",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\probes\\loading-event-trace.json",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\probes\\lua-probe-runtime.json",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\probes\\native_endgame_lua51_contract.json",
+      "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\probes\\filtered-log-events.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\test_asset_restore.py",
+      "pin_F:\\OpenLeague\\tools\\download_assets.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\isolated-restore\\pack.zip",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\test_launcher_stable_binary.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\status_tests-same-binary.log",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\target\\debug\\deps\\openleague_launcher-fe1ba6052869eb77.exe",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\recovery_tests-same-binary.log",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\target\\debug\\deps\\openleague_launcher-fe1ba6052869eb77.exe",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\session_recovery_tests.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\session_status_tests.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions_joined.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions_joined_tests.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions_output.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions_output_tests.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\Cargo.lock",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\Cargo.toml",
+      "ten_associations",
+      "native_evidence",
+      "restore_tests",
+      "launcher_tests",
+      "task_SYS-18.5-01",
+      "anchor_patcher_lifecycle_1",
+      "task_SYS-18.5-02",
+      "anchor_patcher_lifecycle_2",
+      "task_SYS-18.5-03",
+      "anchor_patcher_lifecycle_3",
+      "task_SYS-18.5-04",
+      "anchor_patcher_lifecycle_4",
+      "task_SYS-18.5-05",
+      "anchor_patcher_lifecycle_5",
+      "task_SYS-18.5-06",
+      "anchor_patcher_lifecycle_6",
+      "task_SYS-18.5-07",
+      "anchor_patcher_lifecycle_7",
+      "task_SYS-18.5-08",
+      "anchor_patcher_lifecycle_8",
+      "task_SYS-18.5-09",
+      "anchor_patcher_lifecycle_9",
+      "task_SYS-18.5-10",
+      "anchor_patcher_lifecycle_10"
+    ],
+    "all_patcher_lifecycles_qualified": false,
+    "all_required_effects_covered": false
+  },
+  "source_identities": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\patcher-lifecycle-associations.json",
+      "bytes": 9622,
+      "sha256": "23ae1e5732e019d28dba262c1daee082f2693c49cd85c5baf072c2f972552fe3"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\prepare_patcher_lifecycle_reader.py",
+      "bytes": 3855,
+      "sha256": "eb17286f1737f5c5094dd334ca890b1657aa9ba65cf9686e5b6cdac1f16f1849"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\patcher-lifecycle-consumers.json",
+      "bytes": 3444,
+      "sha256": "bf255f41e931ff1ca07308df3a9cb7b1f25dad4fa645acb5d102b2ee9d04a9cf"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\patcher-lifecycle-native-research.json",
+      "bytes": 25717,
+      "sha256": "ae66e7515910d477c3991486373288fd05bd4d4bf26dd8bb57ca5e395a6d5b19"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\asset-restore-tests.json",
+      "bytes": 1999,
+      "sha256": "9f70307b5e057f43cd5f547ed720afeb9daf14d00a4360c193e42835fd135dff"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\launcher-lifecycle-stable-tests.json",
+      "bytes": 6004,
+      "sha256": "9dd001e80c3c109459380bdb9bafc5a916401df530ab2e575719451d152f2c58"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\download_assets.py",
+      "bytes": 5228,
+      "sha256": "6d2519fda28f5d8a34a78693faa7526cc4855eb3109a87e99e89ce47df35bb9c"
+    },
+    {
+      "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+      "bytes": 30278,
+      "sha256": "54bc7a2a66296cdf2cededcca19d1846287c5108974efda2a0151b17503da7f6"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\research_patcher_lifecycle.py",
+      "bytes": 2551,
+      "sha256": "07cec61df8b720cbd853b39b326613c251a63d74a9b1e36b980e00bc673b8e1e"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\record_lifecycle_native.py",
+      "bytes": 2626,
+      "sha256": "fabd71d88dd56a4f7a4e80c63a784667ef40d10165ecf024136e5d7cce18ee97"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\test_patcher_controllers.cjs",
+      "bytes": 4108,
+      "sha256": "9c6aab71121b92436df8d88dc7335dd28433861121b274545e7cd2b1d888d4bb"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\test_patcher_controllers.current-root.cjs",
+      "bytes": 4110,
+      "sha256": "9972b666da44dd7f3bc6dd877f21db941db40b908ef35e1104563f26d7d63b01"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\patcher-controller-tests.log",
+      "bytes": 676,
+      "sha256": "7aba01ce77fbf87aac32c79640595983852b5060f17c3fd3c052304a844c70f4"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_patcher_sources\\review\\bundle-chrome\\src\\js\\app\\displayAgreement\\DisplayAgreementController.js",
+      "bytes": 879,
+      "sha256": "4b0fc22a8235a921a2360301c80dc497ce63f4aa9157300e4f95d69ca1407892"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_patcher_sources\\review\\bundle-chrome\\src\\js\\app\\errorMessage\\ErrorMessageController.js",
+      "bytes": 476,
+      "sha256": "cd2462373f2d18cabc75d9b3f0bc4915bc137b7255fed2273ccc8baf3c2085bd"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_patcher_sources\\review\\bundle-chrome\\src\\js\\app\\pandoRemovalPopup\\PandoRemovalPopupController.js",
+      "bytes": 6251,
+      "sha256": "be23a3eeb78a6306e58dfba66d474fa890dbbd4191640b49d2d6cf8c60aa8b03"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_patcher_sources\\review\\bundle-chrome\\src\\js\\app\\regionalSettings\\RegionalSettingsController.js",
+      "bytes": 2201,
+      "sha256": "477c37578bafed30548df923bfdb10da2ad97cffad164d088e78501322398d1e"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_patcher_sources\\review\\bundle-chrome\\src\\js\\app\\settings\\SettingsController.js",
+      "bytes": 3933,
+      "sha256": "1df66cc29b48f79c849820fa61602e0baa0861e1d147f097b42e9b6aaf3a9219"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_4_20.json",
+      "bytes": 491497,
+      "sha256": "ab3b20e39f96e6ca4c5bf57f85a0cfd9ad539059213be529f7e6e2a6162bc284"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\GameViewState.as",
+      "bytes": 1395,
+      "sha256": "6ca78f107598b613a54415248a8ef2b70453ebd5cec8030c6bb9341cecd1b368"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\GameState.as",
+      "bytes": 1868,
+      "sha256": "65fb2589cd3100adf292ca9f5812d9330e9bf2d1045ef21b2badd28bbb36a84b"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\IAppControllerConstants.as",
+      "bytes": 1307,
+      "sha256": "00e6b3f108ba3dddf434f29714756cf349e684ab20c913dfee179078966a1630"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\GameEvent.as",
+      "bytes": 1359,
+      "sha256": "9f914a305cfe639fff055e752840a226b610edaf051d9129d5a1f2988a924a35"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\LolGamePreloadController.as",
+      "bytes": 6856,
+      "sha256": "77802043e559e443cb5bb61de1c14d1242e1da9a7b2e7d292bb10884b7a528a9"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MasterGameController.as",
+      "bytes": 124421,
+      "sha256": "6cee283b81ad29909c1dd700b4896effcd0d63a36ed648358f70428139d9d348"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\ApplicationController.as",
+      "bytes": 60553,
+      "sha256": "14614012a94c79933e7af2f6ec50334d33d6ae2cb88c99873d480862dd7649b9"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\InGameController.as",
+      "bytes": 11615,
+      "sha256": "c71c817a60b579370febf6cf1352090ad1f3a44b98741581e8209103a3d45bf6"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\InGameView.as",
+      "bytes": 36323,
+      "sha256": "c492e173a93cab7f42c72d97a45c7ec9e80a45cc26db78a974aec42a3a9b563e"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\EndOfGameStatsController.as",
+      "bytes": 78440,
+      "sha256": "d96ecebfd9d763c59dfa84f0f3778cba5db3cc0144de9862978d7429315eee1a"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\EndOfGameView.as",
+      "bytes": 21325,
+      "sha256": "5f2a7df983c4204c2cf646141404f268ae47f1ea804e62ba558a759315b5de75"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\EndOfTutorialGameView.as",
+      "bytes": 27109,
+      "sha256": "b39a647e04d774f0cbfd8a97871e5e1d05034007b04ab5eeff895d975796412f"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MasterGameViewController.as",
+      "bytes": 46735,
+      "sha256": "a804982133e0fcb3ce5365cae564c56c2a7aaf6887bd533c2cdd0610abad9e72"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MaestroController.as",
+      "bytes": 25208,
+      "sha256": "68d93de952531962b04f5cbca79f9feb3e48a2ba9b0b5c2ff0c2b0c9c51eea36"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MaestroServiceImpl.as",
+      "bytes": 26464,
+      "sha256": "768839d5028fb4764ba2f2832fe3ca574fa06f3dcf2d80d6a11770a2fe953a88"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MaestroConstants.as",
+      "bytes": 2313,
+      "sha256": "efb31da7d10fad736d40b038555609f2718dc2595d63a461e4ee4de009e06bb8"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MaestroMessage.as",
+      "bytes": 2333,
+      "sha256": "200262de829bde0efa6fc616edddfd041dbdff510763ace6eba3723b55945ed5"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MaestroProviderProxy.as",
+      "bytes": 7440,
+      "sha256": "95420569f729d578e20263c4d27529b508970e07d76d2d510cda4343b2bb455a"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\ClientConfig.as",
+      "bytes": 93171,
+      "sha256": "dedc99b1d3067c5a9fb96dbf5659625e43919db0e5cb8c5c33701beead67b65c"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\NewGameViews.as",
+      "bytes": 29417,
+      "sha256": "cf9629bdea6f8f5437919eb61e7e643e23fd25a58040e4ae37329940d1d4f574"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\LobbyController.as",
+      "bytes": 26022,
+      "sha256": "d1f61b672a2872ea7e9644d3e17d8277ab3939fd8e6b76fda146688d967dd9f0"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\SpectatorController.as",
+      "bytes": 20561,
+      "sha256": "290f8baf89d9f1263c0811867edee71003b313f29112aeb1971a047f40ffd18d"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\LoginMediator.as",
+      "bytes": 29670,
+      "sha256": "21481600f0167ae7dc9fd58b9d4d4e9b8df7c14b288c769d031d2dcbf87011a1"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\GameCrashedEvent.as",
+      "bytes": 450,
+      "sha256": "49e42a0b06aec389ca260880011b575346d3e3066249119419b5fe329317f7fd"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\EndOfGameStats.as",
+      "bytes": 34514,
+      "sha256": "d2fe98ca97ef64353848f4ca27327fc21fcce2a7e5081a686352faed047414bd"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\HardcodedEndOfGameStats.as",
+      "bytes": 22365,
+      "sha256": "254ed17a954e2c1fb471b1ad57e25dbf0c9cda173f434b69818a1d14ab3c0644"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\GameType.as",
+      "bytes": 1223,
+      "sha256": "16ba10046e2467ad73f09298ac607edb3ba2c9328297ada099d913faddcf3c74"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\IMaestroProvider.as",
+      "bytes": 3127,
+      "sha256": "e02de758955a7b77b0160b588d78535a07fe9f5aa950b765c3d52528213e7dae"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\PreloadMediator.as",
+      "bytes": 1093,
+      "sha256": "952e9b0a5d32dc142cf32e468552682919a1b7c1e9cb24d1c4ca5026f0c0fed1"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\launcher\\src-tauri\\src\\sessions.rs",
+      "bytes": 30278,
+      "sha256": "54bc7a2a66296cdf2cededcca19d1846287c5108974efda2a0151b17503da7f6"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\launcher\\src-tauri\\src\\sessions_joined.rs",
+      "bytes": 6559,
+      "sha256": "b7c44064076cab4a4ec3274e07a6fe28fe5f33477ac088a4eb82f24d2a89b60c"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\launcher\\src-tauri\\src\\sessions_output.rs",
+      "bytes": 20465,
+      "sha256": "771407092830a4e780427b3dc89bc63e4b699eef06c5aee6aa00dd29bb8de011"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\launcher\\web\\app.js",
+      "bytes": 2960,
+      "sha256": "f4f58340d72d2bedbf94b88a847a537c2ea7d76594f053d6a5dc4eba1cf64ad6"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\session_client.rs",
+      "bytes": 12507,
+      "sha256": "4df6dc629e5a428bb7d7bc258ec83ce763d999da34587228ea76208de06b76e4"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\session_connection.rs",
+      "bytes": 17469,
+      "sha256": "fdd81b790bca52dd4e20ca5d34e81d78136f3958ab7028f5ca193d078fb9acd1"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\session_departure.rs",
+      "bytes": 9218,
+      "sha256": "6cc8e1889fec2d6d2af8ae5f334126410ed5af2ef48b32f005c419617a3fdfe9"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\native_runtime_shutdown.rs",
+      "bytes": 11275,
+      "sha256": "3e21c3f74afd883e1c7ab512c52d081907e8425750a8da3cd8f4c31983c687b3"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\native_endgame_ui.rs",
+      "bytes": 12985,
+      "sha256": "99290ade51f68a84cb8e680a2778f1d6dfb0d393f258a490726e431bcd941149"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\endgame_timeline.rs",
+      "bytes": 4954,
+      "sha256": "4741f27b81f7aff4e9940755c1bb1a9bcac6e35113fd3ace8624b07e3b82714c"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\match_results_ui.rs",
+      "bytes": 6200,
+      "sha256": "ce96ed7771c5ee6f3823386ecbb61b73875cd2b78088ec83695a81d9ef621cb2"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\main.rs",
+      "bytes": 141376,
+      "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\core\\src\\match_results.rs",
+      "bytes": 4021,
+      "sha256": "48c15c370a316084296c8a1e356fddf30730ca10223d37fbe71ee6cacec37be7"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\core\\src\\session_transport.rs",
+      "bytes": 13206,
+      "sha256": "139a7ce15ac5261dee15fe0aa60716fb1bb6993ecd9acb0d41c34acb84ab00bc"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\server\\src\\owned_session.rs",
+      "bytes": 6304,
+      "sha256": "f8166aac8cd04e02fd35d981f859883e18e462f00a066e683efb12ed29304415"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\server\\src\\main.rs",
+      "bytes": 13628,
+      "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\server\\src\\session_host.rs",
+      "bytes": 33360,
+      "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\evidence\\native_endgame_default_timing.json",
+      "bytes": 1282,
+      "sha256": "d490c13cab7da6197ec82b257717db56a699f56b5edfa6c9e2d60040bcfaf25c"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\evidence\\endgame_lua_source_audit.json",
+      "bytes": 9955,
+      "sha256": "de95b91fbc18a93582ed5bea57aaba830ada1eb083d0c76dafa61cb4335a7ae2"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\evidence\\endgame_ui_native.json",
+      "bytes": 31448,
+      "sha256": "79ef17ad69ef3660a5493cf034fe737d919be1a8a8a33e1be0266340d2c65ee0"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\native\\EndOfGame.luaobj",
+      "bytes": 2899,
+      "sha256": "5548ca1ce30a6bc2740d787b2bc224c5d11f06d89ca9b2dcd8659e1e4a263379"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\native\\EndOfGame.gfx",
+      "bytes": 20387,
+      "sha256": "3d2f17dd944ca14b66aee9177e25a5c8f4637557758734d5ced34c5f0a479954"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Communication\\Comm.as",
+      "bytes": 1005,
+      "sha256": "dc5c5ca0096c2c4db4a922a6fc6d9de555388f407d0df58b8b54ff3737e9700f"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\Cursor.as",
+      "bytes": 1204,
+      "sha256": "5fdf6235ffe94fdad9ac71dd762a2076cc169875d4c4519c6984fd49b4f25b5b"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DefaultButton.as",
+      "bytes": 8861,
+      "sha256": "ad54600c6fb3f5fcb62f38740cf07d4af90bf1fac950270a4f812c1f2cef80a9"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DefaultProgressBar.as",
+      "bytes": 2362,
+      "sha256": "0bdc310ca74cac253bcd5b90c9daa5f9bd420de88af9667b08ae8ac0c9377df6"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DefaultTextBox.as",
+      "bytes": 6359,
+      "sha256": "806f90f8adcbc661df2d43981c6f5c1c464b019a1b9ab41394db64ec485cae6f"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DisplayObject.as",
+      "bytes": 30572,
+      "sha256": "d695536705f9343a6afb142eeb33a539b6e5473a71b424b682215425d0b830e5"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DisplayObjectContainer.as",
+      "bytes": 12049,
+      "sha256": "1b217633f96080bcf77e77471f1cc41dc106469d720ed7c7866da8fcec4b9c71"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DrawnProgressBar.as",
+      "bytes": 940,
+      "sha256": "48f5dec5c9a4cf6cc256374a3acbd8b3ffaec9a0c0ba860c0f098482b9e63710"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\TextProgressBar.as",
+      "bytes": 755,
+      "sha256": "7504fc3536cfeb652c992d3ef734204eb4bd770ba8256a42887b4c4d32e15463"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\ToggleButton.as",
+      "bytes": 1574,
+      "sha256": "795fb494f611573f900b737a0e00eca3585ec67e4196715137c560901efbfbdb"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Enums\\DisplayMode.as",
+      "bytes": 164,
+      "sha256": "9243cf95b20ac4d41a779b78b0407b11f1597558e0730594fc58608d8a0d55d5"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Events\\Event.as",
+      "bytes": 665,
+      "sha256": "9e9e8093cdacc1a99c204b14ef57779bcfe95cc38e51c081feed02ebf1adab22"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Events\\KeyboardEvent.as",
+      "bytes": 507,
+      "sha256": "9587e37795c6dbdb05cc7f331958fc27e7947cdfa304061c360304ffba528f47"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Events\\MouseEvent.as",
+      "bytes": 1290,
+      "sha256": "8e2617d21b0b5f6c928794e0da15957d4af39720d408ff9e035c3f192cacf63f"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Managers\\ComponentFactory.as",
+      "bytes": 2103,
+      "sha256": "fb22b4628b1c99687a1f02eac430946c64f4c3101f967725c3fbd835e50a6f83"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Managers\\GameManager.as",
+      "bytes": 2185,
+      "sha256": "f9c7eaf81b71e7fb6441c16c81df81ede81b4d83ab0838ca2a0576d18c9c8f43"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Managers\\LayoutManager.as",
+      "bytes": 2215,
+      "sha256": "21faee000890f76020227eb27579b0b51d3e7906e61217f9c960f8f1374932e4"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Managers\\MouseManager.as",
+      "bytes": 692,
+      "sha256": "1414d0f915b56d25c3bea813eb0fdd60828f0357cd2c6b86db56a43c0406de4b"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Utils\\AnimationMetric.as",
+      "bytes": 3452,
+      "sha256": "1343b003137d676114b51ab11014d862028b4593a261940742317c9afff03f88"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Utils\\DrawingUtils.as",
+      "bytes": 6344,
+      "sha256": "0e6393695fcca587d329e0b825362ba4b52bb5896d18fd779502df9d1e0a9440"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Utils\\Metrics.as",
+      "bytes": 710,
+      "sha256": "3d35ade54e57933e343ffa1e76b721c900baff844c06a6367451c6b73a7c3387"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Utils\\TextMetrics.as",
+      "bytes": 778,
+      "sha256": "b3632545e6595dc8741c1f5d831003c6b97eea128ce41b3fdd9fa2477c09d5b2"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\org\\flashdevelop\\utils\\FlashViewer.as",
+      "bytes": 957,
+      "sha256": "9ea5cc92ac2bcde3579ffc7b25cc01ffc1fa01c8ba2fa16b9ccee19e2ddaf8df"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\Communication\\CommandParser.as",
+      "bytes": 2167,
+      "sha256": "a1f8bb30eadfe57a94d7da703eab25683de95ee8f120222f073591ec04d3a6ca"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\GameComponents\\DefeatSplash.as",
+      "bytes": 1711,
+      "sha256": "1eb45194571a3ddba25880d69b0c81cbf75fb66e84e0fd0f0b4f1a132b376eb0"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\GameComponents\\EndOfGame.as",
+      "bytes": 2308,
+      "sha256": "756f0731bd62f9b5dc73250737551a87f64ca37a9f8a52d483b805f5c9b542d9"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\GameComponents\\GameComponentFactory.as",
+      "bytes": 1111,
+      "sha256": "8e9c1a73378b1904c7613ee4c307d5a4ae5648a3d3205b24eff12b64a208a7a6"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\GameComponents\\SplashScreen.as",
+      "bytes": 312,
+      "sha256": "8746e52aabbbaed5bd4f803ab9318ddac9e5e09e2783739cce63004ece5e01a8"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\GameComponents\\VictorySplash.as",
+      "bytes": 1722,
+      "sha256": "50be906603253e06c9a4a641d59e792d1954a2de2ec7dcc2027fb9822b8f44fe"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\Main.as",
+      "bytes": 745,
+      "sha256": "13db93fb0197140b22c0291d20388559170acc8424cf6200ca3b91420624f792"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\frame_1\\DoAction.as",
+      "bytes": 61,
+      "sha256": "149f89d6898fa46ace749c4397852407475cb44e36e1828117e6da1beda8dae6"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\pcode\\InGameController.pcode",
+      "bytes": 123726,
+      "sha256": "da4d70220fffba21637e497dfab415ac88eaa535dac869418d2ed3c9b800e038"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\probes\\native-decompilation.json",
+      "bytes": 1900,
+      "sha256": "dfa4a8f2323d4bb669de35b6b5d8cf6224d7c224a3002129428ce267e214bc0c"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\probes\\loading-event-trace.json",
+      "bytes": 3700,
+      "sha256": "d3f3ef266127be0d76c85d4fbe1f9ac6f9ce711d6bcf4cf78a61c4ccc310c67a"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\probes\\lua-probe-runtime.json",
+      "bytes": 1177,
+      "sha256": "4ace89a658b6825692a5e1d6f0c9ed4cf9f64ada276d94a15aa691c23120180a"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\probes\\native_endgame_lua51_contract.json",
+      "bytes": 121173,
+      "sha256": "8a5f5afdb8c384aa934cfdf27dc340fcc14fa55de1b0c7bcc286615db80df0fd"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_loading_return_sources\\probes\\filtered-log-events.json",
+      "bytes": 302146,
+      "sha256": "eec1907020060c0cf539e74a436b9a5e9487bae580e584abd68a1321e6281f94"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\test_asset_restore.py",
+      "bytes": 3242,
+      "sha256": "a6eab93d9d29b64488a21b537eaf46bd56dd214cb1438d8d3ad5913f321dcd86"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\isolated-restore\\pack.zip",
+      "bytes": 157,
+      "sha256": "754fb69ce24f5e2f8b6862c7a665c23e91415012301f9982192f32e56b42493e"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\test_launcher_stable_binary.py",
+      "bytes": 1627,
+      "sha256": "a2ac86886f4976bdce43d772ecec278236565d6ca5bb68da58ad6670323c25f6"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\status_tests-same-binary.log",
+      "bytes": 963,
+      "sha256": "d0f940877066c14155954082e893fccc9c65e0bf390f58f098fcdda247619f6c"
+    },
+    {
+      "path": "F:\\OpenLeague\\launcher\\src-tauri\\target\\debug\\deps\\openleague_launcher-fe1ba6052869eb77.exe",
+      "bytes": 2131968,
+      "sha256": "7f1b91149f144ebeba6cb172532d4d647f4e6ca7a40d5103cd50829201d63876"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\recovery_tests-same-binary.log",
+      "bytes": 910,
+      "sha256": "dea5cfb1833a0d11c942c56e284643de01290fde9f0c48de5ae2b0f3ffbb3731"
+    },
+    {
+      "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "bytes": 3491,
+      "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+    },
+    {
+      "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\session_recovery_tests.rs",
+      "bytes": 5759,
+      "sha256": "c5bef55c88488c663ada4268735485ef4b31e11cb828d7a823601bc10c75886f"
+    },
+    {
+      "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\session_status_tests.rs",
+      "bytes": 6432,
+      "sha256": "1a8df55633cfe3f3119f04c009c08d59afe0f717a61ed09c5e4cb63c556c51ae"
+    },
+    {
+      "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions_joined.rs",
+      "bytes": 6559,
+      "sha256": "b7c44064076cab4a4ec3274e07a6fe28fe5f33477ac088a4eb82f24d2a89b60c"
+    },
+    {
+      "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions_joined_tests.rs",
+      "bytes": 8422,
+      "sha256": "f9afbbb1b75907c6abce1cd458f9b432120dfb9a346855b2d20f36907bcb3b3e"
+    },
+    {
+      "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions_output.rs",
+      "bytes": 20465,
+      "sha256": "771407092830a4e780427b3dc89bc63e4b699eef06c5aee6aa00dd29bb8de011"
+    },
+    {
+      "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions_output_tests.rs",
+      "bytes": 13353,
+      "sha256": "9ce6513463e6ccd55719d126eef908c0636cddd333439aea41326ef016ee30ad"
+    },
+    {
+      "path": "F:\\OpenLeague\\launcher\\src-tauri\\Cargo.lock",
+      "bytes": 110146,
+      "sha256": "5b47d480307f3d10d3a0c8dbd530a89318a174e841379535822e51859387dd40"
+    },
+    {
+      "path": "F:\\OpenLeague\\launcher\\src-tauri\\Cargo.toml",
+      "bytes": 217,
+      "sha256": "1eb5cb9d772deacc8e66643c54a93e81bd466b1ce860bade5d17f3056421fc59"
+    }
+  ],
+  "checks": [
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\patcher-lifecycle-associations.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\prepare_patcher_lifecycle_reader.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\patcher-lifecycle-consumers.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\patcher-lifecycle-native-research.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\asset-restore-tests.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\launcher-lifecycle-stable-tests.json",
+    "pin_F:\\OpenLeague\\tools\\download_assets.py",
+    "pin_F:\\OpenLeague\\tools\\download_assets.py",
+    "pin_F:\\OpenLeague\\tools\\download_assets.py",
+    "pin_F:\\OpenLeague\\tools\\download_assets.py",
+    "pin_F:\\OpenLeague\\tools\\download_assets.py",
+    "pin_F:\\OpenLeague\\tools\\download_assets.py",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\research_patcher_lifecycle.py",
+    "pin_F:\\OpenLeague\\tools\\download_assets.py",
+    "pin_F:\\OpenLeague\\tools\\download_assets.py",
+    "pin_F:\\OpenLeague\\tools\\download_assets.py",
+    "pin_F:\\OpenLeague\\tools\\download_assets.py",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\record_lifecycle_native.py",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\test_patcher_controllers.cjs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\test_patcher_controllers.current-root.cjs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\patcher-controller-tests.log",
+    "pin_F:\\OpenLeague\\docs\\reference_patcher_sources\\review\\bundle-chrome\\src\\js\\app\\displayAgreement\\DisplayAgreementController.js",
+    "pin_F:\\OpenLeague\\docs\\reference_patcher_sources\\review\\bundle-chrome\\src\\js\\app\\errorMessage\\ErrorMessageController.js",
+    "pin_F:\\OpenLeague\\docs\\reference_patcher_sources\\review\\bundle-chrome\\src\\js\\app\\pandoRemovalPopup\\PandoRemovalPopupController.js",
+    "pin_F:\\OpenLeague\\docs\\reference_patcher_sources\\review\\bundle-chrome\\src\\js\\app\\regionalSettings\\RegionalSettingsController.js",
+    "pin_F:\\OpenLeague\\docs\\reference_patcher_sources\\review\\bundle-chrome\\src\\js\\app\\settings\\SettingsController.js",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_4_20.json",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\GameViewState.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\GameState.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\IAppControllerConstants.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\GameEvent.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\LolGamePreloadController.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MasterGameController.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\ApplicationController.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\InGameController.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\InGameView.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\EndOfGameStatsController.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\EndOfGameView.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\EndOfTutorialGameView.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MasterGameViewController.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MaestroController.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MaestroServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MaestroConstants.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MaestroMessage.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\MaestroProviderProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\ClientConfig.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\NewGameViews.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\LobbyController.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\SpectatorController.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\LoginMediator.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\GameCrashedEvent.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\EndOfGameStats.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\HardcodedEndOfGameStats.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\GameType.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\IMaestroProvider.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\air\\PreloadMediator.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\launcher\\src-tauri\\src\\sessions.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\launcher\\src-tauri\\src\\sessions_joined.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\launcher\\src-tauri\\src\\sessions_output.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\launcher\\web\\app.js",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\session_client.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\session_connection.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\session_departure.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\native_runtime_shutdown.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\native_endgame_ui.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\endgame_timeline.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\match_results_ui.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\client\\src\\main.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\core\\src\\match_results.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\core\\src\\session_transport.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\server\\src\\owned_session.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\server\\src\\main.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\current\\crates\\server\\src\\session_host.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\evidence\\native_endgame_default_timing.json",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\evidence\\endgame_lua_source_audit.json",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\evidence\\endgame_ui_native.json",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\native\\EndOfGame.luaobj",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\native\\EndOfGame.gfx",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Communication\\Comm.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\Cursor.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DefaultButton.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DefaultProgressBar.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DefaultTextBox.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DisplayObject.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DisplayObjectContainer.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\DrawnProgressBar.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\TextProgressBar.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Components\\ToggleButton.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Enums\\DisplayMode.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Events\\Event.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Events\\KeyboardEvent.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Events\\MouseEvent.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Managers\\ComponentFactory.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Managers\\GameManager.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Managers\\LayoutManager.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Managers\\MouseManager.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Utils\\AnimationMetric.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Utils\\DrawingUtils.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Utils\\Metrics.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\DDW\\Utils\\TextMetrics.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\org\\flashdevelop\\utils\\FlashViewer.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\Communication\\CommandParser.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\GameComponents\\DefeatSplash.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\GameComponents\\EndOfGame.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\GameComponents\\GameComponentFactory.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\GameComponents\\SplashScreen.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\GameComponents\\VictorySplash.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\__Packages\\Riot\\EndOfGame\\Main.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\gfx-review\\frame_1\\DoAction.as",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\pcode\\InGameController.pcode",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\probes\\native-decompilation.json",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\probes\\loading-event-trace.json",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\probes\\lua-probe-runtime.json",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\probes\\native_endgame_lua51_contract.json",
+    "pin_F:\\OpenLeague\\docs\\reference_loading_return_sources\\probes\\filtered-log-events.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\test_asset_restore.py",
+    "pin_F:\\OpenLeague\\tools\\download_assets.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\isolated-restore\\pack.zip",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\test_launcher_stable_binary.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\status_tests-same-binary.log",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\target\\debug\\deps\\openleague_launcher-fe1ba6052869eb77.exe",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision130\\recovery_tests-same-binary.log",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\target\\debug\\deps\\openleague_launcher-fe1ba6052869eb77.exe",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\session_recovery_tests.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\session_status_tests.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions_joined.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions_joined_tests.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions_output.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions_output_tests.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\Cargo.lock",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\Cargo.toml",
+    "ten_associations",
+    "native_evidence",
+    "restore_tests",
+    "launcher_tests",
+    "task_SYS-18.5-01",
+    "anchor_patcher_lifecycle_1",
+    "task_SYS-18.5-02",
+    "anchor_patcher_lifecycle_2",
+    "task_SYS-18.5-03",
+    "anchor_patcher_lifecycle_3",
+    "task_SYS-18.5-04",
+    "anchor_patcher_lifecycle_4",
+    "task_SYS-18.5-05",
+    "anchor_patcher_lifecycle_5",
+    "task_SYS-18.5-06",
+    "anchor_patcher_lifecycle_6",
+    "task_SYS-18.5-07",
+    "anchor_patcher_lifecycle_7",
+    "task_SYS-18.5-08",
+    "anchor_patcher_lifecycle_8",
+    "task_SYS-18.5-09",
+    "anchor_patcher_lifecycle_9",
+    "task_SYS-18.5-10",
+    "anchor_patcher_lifecycle_10"
+  ],
+  "checks_count": 165,
+  "associations": [
+    {
+      "task_id": "SYS-18.5-01",
+      "finding": "CLI verified pack status,not patcher UI.",
+      "remaining": "CLI pack verification status exists;historical patcher UI states not implemented.",
+      "anchors": [
+        {
+          "path": "tools/download_assets.py",
+          "line": 100,
+          "needle": "print('Verified ' + row['name']",
+          "role": "patcher_lifecycle_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-7b9af414-a997-54b1-a7d8-90126f8b186a"
+    },
+    {
+      "task_id": "SYS-18.5-02",
+      "finding": "Fresh download overwrites partial;no HTTP Range resume.",
+      "remaining": "Download stream exists;no measured bytes/progress UI.",
+      "anchors": [
+        {
+          "path": "tools/download_assets.py",
+          "line": 91,
+          "needle": "with urllib.request.urlopen(request, timeout=120) as source, partial.open('wb')",
+          "role": "patcher_lifecycle_2"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-5b5989ec-fd84-5a91-8a1f-972d20831ec5"
+    },
+    {
+      "task_id": "SYS-18.5-03",
+      "finding": "Fresh download overwrites partial;no HTTP Range resume.",
+      "remaining": "Partial opened wb without Range;interrupted transfer resumes not implemented.",
+      "anchors": [
+        {
+          "path": "tools/download_assets.py",
+          "line": 91,
+          "needle": "with urllib.request.urlopen(request, timeout=120) as source, partial.open('wb')",
+          "role": "patcher_lifecycle_3"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-0d86306b-eda8-5fdb-9c76-5da6a074cce1"
+    },
+    {
+      "task_id": "SYS-18.5-04",
+      "finding": "Per-file restoration and divergence refusal;not whole-build transaction.",
+      "remaining": "Exact per-file restore/refusal tested;complete user repair flow remains open.",
+      "anchors": [
+        {
+          "path": "tools/download_assets.py",
+          "line": 27,
+          "needle": "def restore(",
+          "role": "patcher_lifecycle_4"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-b8993c45-c0e2-521e-836b-f9071123c370"
+    },
+    {
+      "task_id": "SYS-18.5-05",
+      "finding": "Atomic per-file replacement,not all-build update or rollback.",
+      "remaining": "Atomic file replacement is not an atomic build transaction.",
+      "anchors": [
+        {
+          "path": "tools/download_assets.py",
+          "line": 61,
+          "needle": "os.replace(temporary, target)",
+          "role": "patcher_lifecycle_5"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-2fece08b-a8d5-5c16-b761-9a20c4d479d7"
+    },
+    {
+      "task_id": "SYS-18.5-06",
+      "finding": "Atomic per-file replacement,not all-build update or rollback.",
+      "remaining": "Per-file replace has no previous-build rollback manager.",
+      "anchors": [
+        {
+          "path": "tools/download_assets.py",
+          "line": 61,
+          "needle": "os.replace(temporary, target)",
+          "role": "patcher_lifecycle_6"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-71399ad5-3896-50fd-9b9a-04c019d57be9"
+    },
+    {
+      "task_id": "SYS-18.5-07",
+      "finding": "Owned client launch/bootstrap path.",
+      "remaining": "Owned launch/bootstrap exists;full historical session contract and readiness remain open.",
+      "anchors": [
+        {
+          "path": "launcher/src-tauri/src/sessions.rs",
+          "line": 92,
+          "needle": "fn spawn(&self,generation:",
+          "role": "patcher_lifecycle_7"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-70be5165-2238-5d11-97b9-3c6787ab3cbf"
+    },
+    {
+      "task_id": "SYS-18.5-08",
+      "finding": "Resume requires observed failed exit and live owned server.",
+      "remaining": "Observed failed client/live server permits resume;all lifecycle scenarios remain open.",
+      "anchors": [
+        {
+          "path": "launcher/src-tauri/src/sessions.rs",
+          "line": 174,
+          "needle": "fn can_resume(&self)",
+          "role": "patcher_lifecycle_8"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-6f2f391f-25ce-5a10-833a-62e5f9ac36f1"
+    },
+    {
+      "task_id": "SYS-18.5-09",
+      "finding": "Current faults separated from historical diagnostics.",
+      "remaining": "Current crash faults surfaced separately from history;fresh end-to-end crash return not executed.",
+      "anchors": [
+        {
+          "path": "launcher/src-tauri/src/sessions.rs",
+          "line": 129,
+          "needle": "fn current_errors(&self)",
+          "role": "patcher_lifecycle_9"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-70cca5fd-8e63-596c-96fd-3feeef66344b"
+    },
+    {
+      "task_id": "SYS-18.5-10",
+      "finding": "Owned local server/client launch;not full original AIR lifecycle.",
+      "remaining": "Local launcher lifecycle is not original AIR restoration.",
+      "anchors": [
+        {
+          "path": "launcher/src-tauri/src/sessions.rs",
+          "line": 332,
+          "needle": "pub fn play(&self, root:",
+          "role": "patcher_lifecycle_10"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-4d0278d2-bf5a-5ea8-9924-c77c8032b815"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "schema": "openleague_native_locale_setter_static_review/v1",
+  "observed_utc": "2026-10-21T01:02:30.267972+00:00",
+  "binary": {
+    "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\League of Legends.exe",
+    "bytes": 15973880,
+    "sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862"
+  },
+  "reference": {
+    "path": "E:\\OpenLeague\\docs\\reference_client_4_20.json",
+    "bytes": 3684,
+    "sha256": "efdf40252574a98f439829d43c6b29606d3c12d631c4a64c89ef15637e859d02"
+  },
+  "literal_addresses": {
+    "0x10868c8": "General",
+    "0x10c1ae0": "LanguageLocaleRegion",
+    "0x10c1b24": "Data/Cfg/Locale.cfg",
+    "0x1089d04": "en_US"
+  },
+  "aligned_functions": [
+    {
+      "entry": "0x8b2e70",
+      "scope": "Native setter: if switch0x2d78db8 already nonzero returns; otherwise bounded strlen5 and copy6 to0x14beb74 then switch1. Reviewed original instructions; not executed by this static review."
+    },
+    {
+      "entry": "0x82d1a0",
+      "call_site": "0x82d207",
+      "scope": "Calls0x8b0630 with General/LanguageLocaleRegion and Data/Cfg/Locale.cfg. On empty result calls0x8b15d0 with same names and default en_US, then passes the resulting pointer to setter0x8b2e70. Effective global-fallback input and caller startup context not established."
+    }
+  ],
+  "loose_reference_locale_cfg": {
+    "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\DATA\\CFG\\Locale.cfg",
+    "exists": false,
+    "method": "Exact path existence check in supplied deploy; not a search of all possible archive/overlay/generated inputs."
+  },
+  "artifacts": [
+    {
+      "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision9\\context-xref-candidates.json",
+      "origin": "local_readonly_static_analysis",
+      "version": "content-sha256:213383c040b3bad2caa1cc98caa8d8f0a56e932bc20bcf153a14e8c48ae2b9b1",
+      "bytes": 6719,
+      "sha256": "213383c040b3bad2caa1cc98caa8d8f0a56e932bc20bcf153a14e8c48ae2b9b1"
+    },
+    {
+      "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision9\\locale-setter-candidate-disassembly.txt",
+      "origin": "local_readonly_static_analysis",
+      "version": "content-sha256:0034157485445939856c7548182fac0b9b0a79601f4a817d493718494644fd3b",
+      "bytes": 2885,
+      "sha256": "0034157485445939856c7548182fac0b9b0a79601f4a817d493718494644fd3b"
+    },
+    {
+      "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision9\\find_context_candidates.py",
+      "origin": "local_readonly_static_analysis",
+      "version": "content-sha256:d19ab35cfb7e75e10cf6df1535cf95703c2e55a97be6264853b29bb8975db037",
+      "bytes": 1750,
+      "sha256": "d19ab35cfb7e75e10cf6df1535cf95703c2e55a97be6264853b29bb8975db037"
+    }
+  ],
+  "inspector": {
+    "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision4\\inspect_crt.py",
+    "origin": "local_pe_disassembler",
+    "version": "content-sha256:d2ed4368e662a93080ab7b284b59bda2922d0146396939212492edaa97a991bf",
+    "bytes": 1152,
+    "sha256": "d2ed4368e662a93080ab7b284b59bda2922d0146396939212492edaa97a991bf"
+  },
+  "producer": {
+    "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision9\\record_locale_review.py",
+    "origin": "local_analysis_recorder",
+    "version": "content-sha256:e58bd038d374585d8ff57c21dcffbb7805d55302046ec43e73095657f2d7fce9",
+    "bytes": 2937,
+    "sha256": "e58bd038d374585d8ff57c21dcffbb7805d55302046ec43e73095657f2d7fce9"
+  },
+  "setter_executed": false,
+  "effective_runtime_locale_qualified": false,
+  "remaining": "Qualify0x8b15d0global-fallback configuration origin and launch-time overrides, outer startup call path, generated/overlay Locale.cfg and actual file-provider mounting. Missing loose Locale.cfg does not establish en_US; configured RADS en_GB does not establish this native switch/tag."
+}

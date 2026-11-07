@@ -1,6 +1,6 @@
 $ErrorActionPreference='Stop'
 $root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
-if($root -ne 'E:\OpenLeague'){throw 'Unexpected project root'}
+if($root -ne 'F:\OpenLeague'){throw 'Unexpected project root'}
 $receiptPath=Join-Path $root 'logs\live_processes.json'
 if(!(Test-Path -LiteralPath $receiptPath)){return}
 $receipt=Get-Content -LiteralPath $receiptPath -Raw | ConvertFrom-Json

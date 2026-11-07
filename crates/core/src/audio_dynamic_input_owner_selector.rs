@@ -442,3 +442,18 @@ impl<S:crate::audio_path_source_input_acquisition::Services+Services>crate::audi
 pub fn acquire_native_rtpc<S:crate::audio_path_source_input_acquisition::Services+Services>(m:&mut BTreeMap<u32,Memory>,d:&mut BTreeSet<u32>,source:u32,selector:u32,pool:u32,c:Context,s:&mut S)->Result<u8,Error>{
  crate::audio_path_source_input_acquisition::acquire_recursive(m,d,source,selector,pool,&mut NativeRtpc{backend:s,context:c})
 }
+
+/// Selected ADECF0/B11850 single parameter4, scaling2 curve accumulation.
+/// OLD/default lookup remains separate. No owner value or default is inserted.
+pub(crate) fn evaluate_first_global_curve(
+ m:&mut BTreeMap<u32,Memory>,d:&BTreeSet<u32>,curve_address:u32,
+ input:u32,parameter:u32,cache_address:u32,
+)->Result<([u8;10],u32),Error>{
+ if parameter!=4||get(m,d,curve_address.wrapping_add(4),4)?!=2||get(m,d,curve_address.wrapping_add(8),4)?!=2||!f32::from_bits(input).is_finite(){
+  return Err(Error::Backend("first-global finite parameter4/two-point scaling2 curve required"));
+ }
+ let result=curve(m,d,curve_address,loaded(input)?,cache_address)?;
+ // Original B11850 initializes its selected curve accumulator to +0 before
+ // adding the retained result; this also preserves its native zero sign.
+ Ok(add(&result,0))
+}

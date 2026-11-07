@@ -1,0 +1,149 @@
+{
+  "schema": "openleague_patcher_routes_verification/v1",
+  "task": "SYS-01.1-04",
+  "updated_utc": "2026-10-20T17:29:34.923969+00:00",
+  "status": "a_valider",
+  "technical_verification_complete": true,
+  "acceptance_complete": false,
+  "human_acceptance": "not_given",
+  "source_verification": {
+    "task": "SYS-01.1-04",
+    "facts_verified": true,
+    "source_files": 18,
+    "bundles": 7,
+    "members": 457,
+    "screens": 25,
+    "journeys": 15,
+    "controllers": 8,
+    "host_commands": 13,
+    "historical_log_evidence": 420,
+    "native_binary_executed": false,
+    "native_visual_acceptance": false,
+    "human_acceptance": "not_given",
+    "manual_state_mutated": false
+  },
+  "integration": {
+    "task": "SYS-01.1-04",
+    "utc": "2026-10-20T17:29:34.923969+00:00",
+    "all_manual_states_identical": 42606,
+    "all_notes_and_revisions_preserved": true,
+    "manual_done": false,
+    "manual_revision": 0,
+    "source_status": "a_valider",
+    "live_consumer_verified": true,
+    "task_state_mutation_performed": false,
+    "human_acceptance": "not_given",
+    "catalog_tasks": 42214
+  },
+  "tests": {
+    "python": {
+      "command": "python -B tools/project-plan/test_patcher_reference.py",
+      "passed": 13,
+      "failed": 0,
+      "log": "E:\\mapslol3v3\\Patcher_routes_4_20_2026-10-20\\python-tests.log"
+    },
+    "original_controller_vm": {
+      "command": "node --test tools/project-plan/test_patcher_controllers.cjs",
+      "passed": 7,
+      "failed": 0,
+      "log": "E:\\mapslol3v3\\Patcher_routes_4_20_2026-10-20\\controller-tests.log",
+      "execution": "Original archived JS run in isolated Node VM with explicit fake native host and no network/native actions; not a rendered UI qualification."
+    }
+  },
+  "maintained_cli": {
+    "command": "python -B tools/project-plan/patcher_reference.py --root E:/OpenLeague",
+    "proof": "E:\\mapslol3v3\\Patcher_routes_4_20_2026-10-20\\cli-verification.json",
+    "passed": true
+  },
+  "modified_files": [
+    "docs/reference_patcher_routes_4_20.json",
+    "docs/REFERENCE_PATCHER_ROUTES_4_20.md",
+    "docs/reference_patcher_routes_4_20_verification.json",
+    "tools/project-plan/patcher_formats.py",
+    "tools/project-plan/patcher_reference.py",
+    "tools/project-plan/test_patcher_reference.py",
+    "tools/project-plan/test_patcher_controllers.cjs",
+    "docs/completion_tasks_2026-10-20.json",
+    "docs/OpenLeague_PLAN_DETAILS/D01.md",
+    "docs/OpenLeague_PLAN_COMPLET_DETAILLE_A_Z.md",
+    "docs/coverage.json",
+    "docs/completion_plan.json",
+    "docs/resume_checkpoint.json",
+    "docs/ai/CURRENT.md",
+    "docs/ai/HANDOFF.md",
+    "docs/ai/DECISIONS.md"
+  ],
+  "source_evidence_directory": "docs/reference_patcher_sources/",
+  "database_catalog_updated": "runtime/project-plan/plan.sqlite3; manual states unchanged",
+  "backup": "E:\\mapslol3v3\\Patcher_routes_4_20_2026-10-20\\before",
+  "historical_binary_executed": false,
+  "game_source_changed": false,
+  "game_build_or_tests_executed": false,
+  "recovery": {
+    "files": 9,
+    "bytes": 7340206,
+    "bundles": 7,
+    "members": 457,
+    "native_manifest_checks": "Each exact path/size/MD5, plus pinned SHA-256",
+    "receipt": "E:\\mapslol3v3\\Patcher_routes_4_20_2026-10-20\\recovered-ui.json",
+    "first_six_receipt": "E:\\mapslol3v3\\Patcher_routes_4_20_2026-10-20\\recovered-ui-first-six.json",
+    "logs": [
+      "E:\\mapslol3v3\\Patcher_routes_4_20_2026-10-20\\recovery.log",
+      "E:\\mapslol3v3\\Patcher_routes_4_20_2026-10-20\\recovery-final.log",
+      "E:\\mapslol3v3\\Patcher_routes_4_20_2026-10-20\\recovery-complete.log"
+    ],
+    "source_root_original": "E:\\mapslol3v3\\Patcher_routes_4_20_2026-10-20\\archive_recovered",
+    "source_root_maintained": "docs/reference_patcher_sources/"
+  },
+  "initial_attempts": [
+    "Archive scan first encountered a releaselisting entry; selector now requires a numeric release and exact live prefix for recovered data.",
+    "Initial serial HTTP recovery returned HTTP500; terminal failure verified, existing cache retained, bounded grouped retries succeeded.",
+    "Initial LOAD reader assumed 16-byte member MD5 and no alignment. Data shows opaque repeated marker and 4-byte alignment; assumptions removed before integration. Whole bundles are checked against exact native RLSM MD5 records."
+  ],
+  "prerequisites": {
+    "phase": "D01",
+    "package": "D01-SYS-01-1",
+    "explicit_dependencies": [],
+    "native_game_reference_verified": true
+  },
+  "limits": [
+    "Aucune observation native nouvelle, exécution du patcher ou modification du client D:.",
+    "Les parcours recensés sont des définitions de sources ; seuls les événements présents dans les journaux sont marqués comme observations historiques.",
+    "Les confirmations natives à deux boutons sont attestées par les symboles du binaire et les textes ; leur présentation et leurs branches n’ont pas été rejouées dans une fenêtre native.",
+    "Les textes/pages de prototype ou exemples de contenu distant ne sont pas promus comme écrans AIR ou contenu public EUW historique validé.",
+    "Le launcher OpenLeague actuel est une préparation de partie locale ; cet inventaire ne prétend pas que les écrans du patcher y sont reconstruits."
+  ],
+  "first_install_app_seed_updated": false,
+  "app_consumer": "Existing Tauri application reads the updated linked SQLite database; prior first-install seed unchanged.",
+  "final_audit": {
+    "passed": true,
+    "count": 31,
+    "proof": "E:\\mapslol3v3\\Patcher_routes_4_20_2026-10-20\\FINAL_AUDIT.json",
+    "requirements": {
+      "1_objective": {
+        "evidence": "25 named screen/state entries and 15 journeys with source anchors; complete UI route and command coverage",
+        "proved": true
+      },
+      "2_source_contract": {
+        "evidence": "18 pinned sources; native patcher 0.4.0.122, RADS0.0.0.11; all nine recovered files match exact native manifest records",
+        "proved": true
+      },
+      "3_consumer": {
+        "evidence": "Canonical target context and actual generated instruction read from live shared SQLite/HTTP; Tauri links that database",
+        "proved": true
+      },
+      "4_nominal_refusals_limits": {
+        "evidence": "Native historical update/agreements trace; 13 negative/nominal reference tests and 7 original-controller VM tests; no new native runtime claim",
+        "proved": true
+      },
+      "5_registry_coverage_preservation": {
+        "evidence": "Only SYS-01.1-04 catalog row changed; all 42606 states/notes/revisions preserved; additive coverage/resume and source-linked report",
+        "proved": true
+      }
+    },
+    "manual_states_unchanged": 42606,
+    "only_catalog_row_changed": [
+      "SYS-01.1-04"
+    ]
+  }
+}

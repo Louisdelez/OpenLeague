@@ -1,0 +1,13 @@
+# Lecteur des fiches de sources runes et maîtrises — V50
+
+Le relevé de couverture distingue2840exigences qui n'avaient que le générateur de consignes comme consommateur.353sont des tâches de sources (296runes,57maîtrises),et ne doivent pas être confondues avec les tâches de simulation/recette voisines. Cette révision leur fournit un lecteur de fiche réellement exécuté,lié dans le registre et dans les consignes.
+
+Le lecteur ouvre353INIBIN exacts de la copie4.20,contrôle leur sélection dans les manifestes EUW et leurs empreintes,lit359champs précis (302statistiques de runes/57Ranks) et les rapproche des catalogues officiels4.20.1 hachés. La fiche conserve la date de build de référence2014-11-17,la régionEUW/en_GB,les sources/SHA,versions de projet/membre,les métadonnées du catalogueen_US et les valeurs natives distinctes. Le lecteur refuse les tâches de simulation/acceptation. Il n'invente aucun défaut0 pour un champ absent.
+
+Les deux questions4312/4313 restent ouvertes :SpellData.Ranks n'est pas promu en Talent.maxRank d'un service. Les décisions de comparaison antérieures ne sont pas réécrites. Présence dans un catalogue/manifeste et égalité numérique ne prouvent pas achats,disponibilité datée,pages ou effets. Les353tâches restent non acceptées et leurs353questions runtime sont conservées,en précisant que le consommateur de champs existe maintenant. Cela ne constitue pas une nouvelle implémentation des runes/maîtrises du jeu.
+
+Les sélecteurs Data*champ et SpellData*Ranks sont ajoutés sans retirer les anciennes associations. Quatre sites actuels sont liés :lecteur de fiche installé,décodeur INIBIN,comparateur numérique et vérificateur de membre.32contrôles passent :nominal,27refus d'altérations,3refus publics hors périmètre et un contrôle numérique équivalent. Le catalogue complet et les accès task/copy sont vérifiés ;toutes les cases,notes,révisions et l'historique restent intacts.
+
+Interface réutilisable :python -B tools/project-plan/audit_rune_mastery_source_links.py --root E:/OpenLeague --task RUNE-10001-SCOPE. Une tâche -EFFECT/-SIM ou de recette est refusée. Le résultat expose les champs connus et ses limites,avec source_fields_verified=true mais whole_source_scope_accepted=false et account_loadout_or_effect_application_proven=false.
+
+Reçu :docs/reference_rune_mastery_sources/source-fiches.json. Livraison :docs/fidelity_registry_rune_mastery_source_links_revision_4_20.json. Producteurs et qualification :E:/mapslol3v3/Requirements_registry_4_20_2026-10-20/revision50. V49,SYS01102 et les six objectifs du Goal sont conservés ;leur complétude reste non démontrée.

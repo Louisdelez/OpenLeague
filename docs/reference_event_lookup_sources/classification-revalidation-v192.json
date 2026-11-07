@@ -1,0 +1,180 @@
+{
+  "tasks": [
+    "SYS-01.3-01",
+    "SYS-01.3-02",
+    "SYS-01.3-03",
+    "SYS-01.3-04",
+    "SYS-01.3-05",
+    "SYS-01.3-06"
+  ],
+  "qualification": {
+    "source_checks": 315,
+    "negative_cases": 3
+  },
+  "evidence": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision190\\INSTALLED_CLASSIFICATION_REVALIDATION.json",
+      "bytes": 2141,
+      "sha256": "1fd0d74dd388fe382c736f881080315837d22a53b1a9086870f7b61afaec68a9"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\audit_content_classification_revalidation.py",
+      "bytes": 1649,
+      "sha256": "989fa7f81186e911046b386cec529be882fb30ad1fd1761f089b523b8be2ef93"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\audit_content_classification_reference.py",
+      "bytes": 16784,
+      "sha256": "045420d74d08796d2e0a9a925762a3124de4f9a553db6f9a04684ff7f3c5f20a"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_content_classification_sources\\content_classification-links.json",
+      "bytes": 138137,
+      "sha256": "deb45f4e3389f48319455bf2a87b0c3030b118b11f2456bfb96ecb994ae9ccb8"
+    }
+  ],
+  "associations": [
+    {
+      "task_id": "SYS-01.3-01",
+      "finding": "Les122 identifiants numériques et noms de code AIR correspondent au catalogue officiel4.20.1 ;la jointure explicite par nom de code insensible à la casse retrouve les122 identifiants locaux sans doublon,manque ni ajout. champion_catalog et le roster du launcher lisent le catalogue local. Le test Rust existant passe,mais contrôle le nombre/statistiques et non cette jointure exacte.",
+      "remaining": "Conserver la comparaison au changement de catalogue ;qualifier disponibilité historique,skins et kits séparément. Le catalogue local ne contient pas de champ numérique Riot :la jointure est documentée,aucune nouvelle politique globale d’identité imposée.",
+      "native_bindings": [
+        {
+          "path": "F:\\OpenLeague\\docs\\reference_event_modes_sources\\AirGeneratedContent.swf",
+          "role": "native_generated_content_identity_not_release_activation",
+          "selector": "ChampionGeneratedData.fillChampionData;122 IDs"
+        }
+      ],
+      "entry_boundary_only": false,
+      "fresh_execution": {
+        "python_source_audit": true,
+        "rust_test": false,
+        "native_client": false,
+        "game": false
+      }
+    },
+    {
+      "task_id": "SYS-01.3-02",
+      "finding": "Le binaire et cinq sources de référence sont revérifiés par reference_client.validate. Le build du17novembre,le timestamp PE,la version du catalogue et la date de sortie sont distincts. ChampionGeneratedData ne contient aucune date de sortie. Les recherches ciblées ne fournissent pas de preuve primaire EUW adoptée.",
+      "remaining": "Retrouver les annonces et activations primaires datées pour les contenus proches de la référence,dont Kalista,sans transformer le build ni une date communautaire US en déploiement EUW ;garder les dates non prouvées inconnues.",
+      "native_bindings": [
+        {
+          "path": "F:\\OpenLeague\\docs\\reference_event_modes_sources\\AirGeneratedContent.swf",
+          "role": "native_generated_content_identity_not_release_activation",
+          "selector": "MapGeneratedData.fillMapData;10 candidates,not10 active maps"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\League of Legends.exe",
+          "role": "native_build_date_not_content_release_date",
+          "selector": "PUBLIC4.20.0.315;Nov17 2014 17:46:45;timezone/deployment unknown"
+        }
+      ],
+      "entry_boundary_only": true,
+      "fresh_execution": {
+        "python_source_audit": true,
+        "rust_test": false,
+        "native_client": false,
+        "game": false
+      }
+    },
+    {
+      "task_id": "SYS-01.3-03",
+      "finding": "MapGeneratedData contient dix cartes candidates. PlatformConfigController filtre les cartes générées par gameMapEnabledDTOList ou prend une liste reçue du service ;GameQueueManager demande getAvailableQueues et vide la liste sur échec. Les lecteurs locaux de région et de services ne reproduisent pas ces payloads historiques.",
+      "remaining": "Qualifier la matrice carte/région/file/date à partir de données serveur ou annonces primaires et relier ses consommateurs ordinaires. Les cartes anciennes,performance et DebugMap5 ne sont pas déclarées disponibles sur leur seule présence.",
+      "native_bindings": [
+        {
+          "path": "F:\\OpenLeague\\docs\\reference_event_modes_sources\\AirGeneratedContent.swf",
+          "role": "native_generated_content_identity_not_release_activation",
+          "selector": "MapGeneratedData.fillMapData;10 candidates,not10 active maps"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\League of Legends.exe",
+          "role": "native_build_date_not_content_release_date",
+          "selector": "PUBLIC4.20.0.315;Nov17 2014 17:46:45;timezone/deployment unknown"
+        },
+        {
+          "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibSystem.dat",
+          "role": "native_map_queue_service_boundary",
+          "selector": "PlatformConfigController;export=F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibSystem_dat\\scripts\\com\\riotgames\\pvpnet\\system\\config\\PlatformConfigController.as;payload not recovered"
+        },
+        {
+          "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibGame.dat",
+          "role": "native_map_queue_service_boundary",
+          "selector": "GameQueueManager;export=F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibGame_dat\\scripts\\com\\riotgames\\pvpnet\\game\\domain\\GameQueueManager.as;payload not recovered"
+        }
+      ],
+      "entry_boundary_only": true,
+      "fresh_execution": {
+        "python_source_audit": true,
+        "rust_test": false,
+        "native_client": false,
+        "game": false
+      }
+    },
+    {
+      "task_id": "SYS-01.3-04",
+      "finding": "Le lecteur V94 est relu et ses sources vérifiées :neuf clés générées et neuf clés factory forment dix candidats,mais leur activation dépend de configuration dynamique. Son rôle actuel est la traçabilité ;reference_label conserve la date de build distincte du déploiement.",
+      "remaining": "Retrouver les fenêtres primaires début/fin,régions et files de chaque événement retenu. Aucun calendrier actif ni date événementielle établi ;conserver sr6/ppp distincts et ne pas prendre la présence AIR pour une activation.",
+      "native_bindings": [
+        {
+          "path": "F:\\OpenLeague\\docs\\reference_event_modes_sources\\AirGeneratedContent.swf",
+          "role": "native_generated_content_identity_not_release_activation",
+          "selector": "FeaturedGameGeneratedData and factory/dynamic configuration,qualified by V94 reader;no dated activation"
+        },
+        {
+          "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\League of Legends.exe",
+          "role": "native_build_date_not_content_release_date",
+          "selector": "PUBLIC4.20.0.315;Nov17 2014 17:46:45;timezone/deployment unknown"
+        }
+      ],
+      "entry_boundary_only": true,
+      "fresh_execution": {
+        "python_source_audit": true,
+        "rust_test": false,
+        "native_client": false,
+        "game": false
+      }
+    },
+    {
+      "task_id": "SYS-01.3-05",
+      "finding": "Les noms OldTwistedTreeline et DebugMap5 sont des indices textuels natifs,non des décisions de statut. excluded_union_candidate classe l’appartenance exacte à un manifeste ;l’inventaire courant indique explicitement que présence et disponibilité sont distinctes. Aucun de ces consommateurs ne définit la taxonomie complète sorti/interne/obsolète/inconnu.",
+      "remaining": "Définir le contrat des quatre statuts,leur preuve datée et leur consommateur d’affichage/filtrage ;qualifier chaque contenu sans utiliser le nom de fichier ou l’absence au catalogue comme preuve suffisante. Aucune taxonomie globale implémentée dans ce lot.",
+      "native_bindings": [
+        {
+          "path": "F:\\OpenLeague\\docs\\reference_event_modes_sources\\AirGeneratedContent.swf",
+          "role": "native_generated_content_identity_not_release_activation",
+          "selector": "MapGeneratedData.fillMapData;10 candidates,not10 active maps"
+        }
+      ],
+      "entry_boundary_only": true,
+      "fresh_execution": {
+        "python_source_audit": true,
+        "rust_test": false,
+        "native_client": false,
+        "game": false
+      }
+    },
+    {
+      "task_id": "SYS-01.3-06",
+      "finding": "manifest_member refuse un fichier absent ou divergent du manifeste sélectionné ;choose conserve une liaison de skin non résolue ou ambiguë sans conclure à une indisponibilité. Les sources AIR générées montrent elles-mêmes des candidats distincts des listes actives. Ces gardes sont des frontières locales,non une politique globale d’exclusion.",
+      "remaining": "Relier et tester tous les chemins de décision d’exclusion ;une absence dans un export doit rester une observation limitée avec recherche de variantes/sources et inconnue ouverte. Ne pas assimiler absence de membre RADS,liaison non résolue et contenu historiquement non sorti.",
+      "native_bindings": [
+        {
+          "path": "F:\\OpenLeague\\docs\\reference_event_modes_sources\\AirGeneratedContent.swf",
+          "role": "native_generated_content_identity_not_release_activation",
+          "selector": "MapGeneratedData.fillMapData;10 candidates,not10 active maps"
+        }
+      ],
+      "entry_boundary_only": true,
+      "fresh_execution": {
+        "python_source_audit": true,
+        "rust_test": false,
+        "native_client": false,
+        "game": false
+      }
+    }
+  ],
+  "limits": [
+    "Source revalidation only; no fresh Rust or native game execution; feature completeness remains unchanged."
+  ]
+}

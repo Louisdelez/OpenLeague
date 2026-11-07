@@ -1,0 +1,24 @@
+package
+{
+   import flash.display.MovieClip;
+   import mx.flash.UIMovieClip;
+   
+   [Embed(source="/_assets/assets.swf", symbol="symbol390")]
+   public dynamic class smallGameButton_tutorialBasic extends UIMovieClip
+   {
+      
+      public var button_text_mc:MovieClip;
+      
+      public function smallGameButton_tutorialBasic()
+      {
+         super();
+         addFrameScript(0,this.frame1);
+      }
+      
+      internal function frame1() : *
+      {
+         stop();
+      }
+   }
+}
+

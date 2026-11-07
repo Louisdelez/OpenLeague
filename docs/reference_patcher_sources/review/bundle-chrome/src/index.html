@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LoL Patcher</title>
+  <link href="style/normalize.css">
+  <link href='style/main-small.css' rel='stylesheet' media='screen and (max-width: 1279px)'/>
+  <link href='style/main.css' rel='stylesheet' media='screen and (min-width: 1280px)'/>
+  <link href="js/vendor/angular-modal/modal.css" rel="stylesheet">
+  <link href="/role/assets/fonts.css" rel="stylesheet">
+  <link href="/role/assets/scrollbars.css" rel="stylesheet">
+  <link href="/role/assets/locales.css" rel="stylesheet">
+
+  <script src="js/vendor/platform/platform.js"></script>
+  <script src="js/vendor/jquery/dist/jquery.js"></script>
+  <script src="js/vendor/angular/angular.js"></script>
+  <script src="js/vendor/angular-route/angular-route.js"></script>
+  <script src="js/vendor/angular-modal/modal.js"></script>
+  <script src="js/vendor/angular-sanitize/angular-sanitize.js"></script>
+  <script src="js/vendor/angular-local-storage/angular-local-storage.js"></script>
+  <script src="js/vendor/requirejs/require.js" data-main="js/main"></script>
+  <script>var _analyticsData = {};</script>
+</head>
+<body ng-controller="ChromeController">
+<div id="chrome" class="chrome-width chrome-height margin-center">
+  <div class="modal-error-container chrome-height chrome-width flex column center middle space-around" style="align-items:center;"></div>
+  <div class="modal-popup-container chrome-height chrome-width flex column center middle space-around" style="align-items:center;"></div>
+  <div class="modal-container chrome-height chrome-width flex column center middle space-around" ng-hide="popupActive" style="align-items:center;"></div>
+  <header id="header" class="header-height chrome-dropshadow">
+    <div id="status-header" class="header-height chrome-width {{patchStatus}} status-content"></div>
+    <span id="version">{{version}}</span>
+    <span id="logo-league" class="logo button-chrome" ng-click="goHome()">
+      <img class="nonDraggableImage" src="images/logoLeagueOfLegends.png">
+    </span>
+    <input id="ticker-handler" value={{maxSeverity}} type="checkbox" ng-hide="bTicker"/>
+    <div class="ticker-container" style="" ng-hide="bTicker">
+      <div class="ticker-frame">
+        <div class="ticker-message font-lol">
+          <table>
+            <tr ng-repeat='tickerMessage in tickerMessages'>
+              <td>
+                <div class="ticker-message-container ticker-width">
+                  <label for={{tickerMessage.id}} class="ticker-header-font">
+                    <input class="ticker-checkbox" type="checkbox" id="{{tickerMessage.id}}" ng-model="check"/>
+                    <div class="ticker-alert" value={{tickerMessage.severity}}></div>
+                    {{tickerMessage.title}}
+                  </label>
+                  <a class="ticker-body" value={{check}} href="http://status.dev.leagueoflegends.com/" target="_blank">{{tickerMessage.message}}</a>
+                  <div class="ticker-line-separator"></div>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="hidden chrome-width header-height flex row wrap center progress-area"><div class="chrome-width patch-progress-super-container">
+        <div id="patch-progress-container" class="font-lol centered status-content" ng-hide="ready || bPatchComplete">
+          <div id="patch-progress" class="">
+              <span class="progress-span animate-hide patch-text-color">{{progressHeader}} </span>
+              <span class="progress-span animate-hide patch-text-color" ng-hide="scanning">{{progressTask}} </span>
+              <span class="progress-span animate-hide patch-text-color details">{{progressDetail}}</span>
+              <audio id="audio-patcher-complete" src="audio/sfx_patcher_button_launch.ogg"></audio>
+          </div>
+        </div>
+        <button id="play" class="button-play {{buttonLaunchSize}} ng-hide" ng-disabled="(bDisabled || bServerStatus) && bUrf" ng-show="ready" ng-click="launchClient()"><span class="font-lol button-play-text status-content">{{buttonLaunch}}</span></button>
+        <audio id="audio-launch" src="audio/sfx_patcher_patching_complete.ogg"></audio>
+      </div>
+      <div ng-hide="(ready || bPatchComplete)" class="status-content">
+          <progress id="progress-bar-main" max="100" ng-hide="scanning" value={{percentBar}}></progress>
+          <progress id="progress-bar-glow" max="100" ng-hide="scanning" value={{percentBar}}></progress>
+          <progress id="progress-bar-busy" max="100" ng-show="scanning" value={{progressStepPercent}}></progress>
+      </div>
+        <div id="progress-detail-container" ng-hide="scanning">
+          <span id="progress-detail-number" ng-hide="(ready || bPatchComplete)" class="patch-text-gradient status-content">{{percent}}%</span>
+        </div>
+      </div>
+      <div class="chrome-buttons">
+        <button id="button-settings" class="button button-chrome button-control button-control-setup" ng-disabled="bSettings" ng-click="openSettings()"></button>
+        <button id="button-minimize" class="button button-chrome button-control button-control-min" ng-click="minimize()"></button>
+        <button id="button-close" class="button button-chrome button-control button-control-close" ng-click="exit()"></button>
+      </div>
+      <div id="region-settings" class="hidden font-spiegel">
+        <div id="selected-region" class="status-{{serverStatus}} {{locale}}">
+          {{serverLabel}}
+        </div>
+        <button id="change-region" class="button-unstyled font-spiegel" ng-disabled="bRepairing" ng-click="openRegionalSettings()">{{regionName}}</button>
+      </div>
+    </header>
+    <div id="content-container" class="content-width content-height">
+    </div>
+    <span id="logo-riot" class="logo">
+      <img class="nonDraggableImage" src="images/logoRiotGames.png">
+    </span>
+  </div>
+  <script type="text/javascript" src="https://riot-dradis-assets-oregon.s3.amazonaws.com/dradis-0.5.0-prod.min.js"></script>
+  <script type="text/javascript" src="js/lib/analytics.js"></script>
+
+  </body>
+  </html>
+  

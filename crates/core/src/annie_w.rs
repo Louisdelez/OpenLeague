@@ -31,7 +31,19 @@ impl Simulation {
   if slot>3 {return Err("invalid skill slot".into());}
   if !point.finite() {return Err("invalid spell point".into());}
   let p=self.players.get(&id).ok_or("unknown player")?;
+  if trundle_e::champion_forced(p,self.tick) {return Err("champion in forced movement".into());}
   if p.health<=0. {return Err("champion dead".into());}
+  if p.champion=="ezreal" {
+   if self.ezreal_e_casting(id) || self.ezreal_r_casting(id) {return Err("skill blocked during cast".into());}
+   if slot==3 {return self.cast_ezreal_r_at(id,point);}
+   if slot==2 {return self.cast_ezreal_e_at(id,point);}
+   if slot==1 {return self.cast_ezreal_w_at(id,point);}
+   if slot!=0 {return Err("invalid Ezreal skill slot".into());}
+   if p.effects.ezreal_w.is_some() {return Err("skill blocked during cast".into());}
+   return self.cast_ezreal_q_at(id,point);
+  }
+  if p.champion=="trundle" && slot==1 {return self.cast_trundle_w_at(id,point);}
+  if p.champion=="trundle" && slot==2 {return self.cast_trundle_e_at(id,point);}
   if p.champion=="annie" && slot==3 {return self.cast_tibbers(id,point);}
   if stuns::active(p,self.tick) {return Err("champion stunned".into());}
   if p.champion!="annie" || slot!=1 {return Err("champion ground spell not implemented".into());}
@@ -44,6 +56,8 @@ impl Simulation {
   let direction=Point{x:x/length,z:z/length};let cost=value(&format!("cost{rank}"));
   if p.mana<cost {return Err("insufficient mana".into());}
   let stats=self.stats(id);let raw=value(&format!("damage{rank}"))+stats.ability_power*value("coefficient");let cd=cooldown::ticks(value("cooldown"),stats.cooldown_reduction);
+  // Only a validated initial cast closes the current presentation identity.
+  self.cancel_attack_presentation(id,attack_presentation::CancelReason::OtherCast);
   let p=self.players.get_mut(&id).unwrap();p.mana-=cost;p.cooldowns[1]=self.tick+cd;p.cooldown_totals[1]=Some(cd);p.windup=None;
   p.effects.annie_w=Some(Pending{direction,releases:self.tick+spells::seconds(value("cast_seconds")),raw});Ok(())
  }

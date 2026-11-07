@@ -1,0 +1,1094 @@
+{
+  "schema": "openleague_roster_lifecycle_resolution_links/v1",
+  "utc": "2026-10-23T16:54:20.251535+00:00",
+  "passed": true,
+  "objective": "SYS-01.2-02",
+  "target_unknown_id": "OLU-62a2cad5-8fe3-54e4-afb7-a84ca99183e6",
+  "exact_condition": {
+    "analytical_objective": "Compare current local champion string IDs to official4.20.1 roster, corroborated by generated AIR numeric/code identities.",
+    "comparison_result_qualified": true,
+    "local_numeric_runtime_field_required": false,
+    "reason_no_numeric_field_required": "The task is an explicit comparison. compare_roster joins AIR numeric ID to official numeric key, checks their code relation and then joins to local string ID by casefold; the local game need not store the Riot number to compare its roster.",
+    "runtime_catalogue_readers": "champion_catalog and launcher roster consume the exact same local input; they are relevant current data routes, not the three-way comparison function.",
+    "ongoing_maintenance": "Conserver la comparaison au changement de catalogue is an invariant/regression obligation. It does not describe a presently unobserved roster identity when the pinned current catalogues and guards pass."
+  },
+  "source_contract": {
+    "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision251_identity_comparison_unknown_review\\IDENTITY_COMPARISON_UNKNOWN_REVIEW.json",
+    "bytes": 63214,
+    "sha256": "510982f6676a012fe228a0dcb148cb3bd29da82a0bf38e394621baf5807c817d"
+  },
+  "sourcepins": [
+    {
+      "path": "E:\\mapslol3v3\\Full_project_audit_2026-10-20\\official_reference\\championFull.json",
+      "bytes": 1495117,
+      "sha256": "72e26ad631c42f76cbd87ec6c5f656a79650ea5091d0fa2a604789d51c3b7404"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision251_identity_comparison_unknown_review\\review_identity_comparison_unknown_v2.py",
+      "bytes": 17938,
+      "sha256": "61812c30063a995d826d2c11316dec918c312b28ca4d98165770d08e23b5eb12"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "bytes": 52808,
+      "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\champions.json",
+      "bytes": 32052,
+      "sha256": "7cc80048c9460419041134232345d9b4da6d8f4e6795f7236720bef39e99de88"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_content_classification_sources\\ChampionGeneratedData.as",
+      "bytes": 104606,
+      "sha256": "201435f87ebabb45ec62174c18556d558f0281e06757e147098bff1a0638b7da"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_content_classification_sources\\content_classification-links.json",
+      "bytes": 138137,
+      "sha256": "deb45f4e3389f48319455bf2a87b0c3030b118b11f2456bfb96ecb994ae9ccb8"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_content_classification_sources\\generated-decompilation.json",
+      "bytes": 10677,
+      "sha256": "e10765c3cdf1225b0f85e0543ea403a22e3a2228f954f492054d2ac039d1411d"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_content_classification_sources\\rust-catalogue-test.json",
+      "bytes": 1437,
+      "sha256": "0afb16f15792a8109d343102cd50ba60b6dfc4d91e8106431f7456d09ce82445"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_event_lookup_sources\\classification-revalidation-v192.json",
+      "bytes": 10553,
+      "sha256": "fc2747428bef7c5e394eda503ae1c444c98dda9ffcfdf63afc366bee536c3132"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_event_modes_sources\\AirGeneratedContent.swf",
+      "bytes": 63377,
+      "sha256": "838c3c06f90926dc77f10656d88c08f992575f286ec06f07bca4171daa61cf02"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_frontend_sources\\air_0.0.1.119.releasemanifest",
+      "bytes": 447012,
+      "sha256": "df8c52f34537e9c0d13a6ba1d88f089afa4067a4b5a6b87668e64edf08036463"
+    },
+    {
+      "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "bytes": 3491,
+      "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+    },
+    {
+      "path": "F:\\OpenLeague\\launcher\\web\\app.js",
+      "bytes": 2960,
+      "sha256": "f4f58340d72d2bedbf94b88a847a537c2ea7d76594f053d6a5dc4eba1cf64ad6"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\audit_content_classification_reference.py",
+      "bytes": 16784,
+      "sha256": "045420d74d08796d2e0a9a925762a3124de4f9a553db6f9a04684ff7f3c5f20a"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\audit_content_classification_revalidation.py",
+      "bytes": 1649,
+      "sha256": "989fa7f81186e911046b386cec529be882fb30ad1fd1761f089b523b8be2ef93"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\project_location.json",
+      "bytes": 678,
+      "sha256": "119994f2ffdce0ee11e8f53b969d98cbdd25e36c7932f2e5a7326a952121974c"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_routes_4_20.json",
+      "bytes": 11465788,
+      "sha256": "6219091152d3fd95cc207aa85126eceb532b20fa822a694d1c2f6f0545223623"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibGame_dat\\scripts\\com\\riotgames\\pvpnet\\game\\variants\\GameFlowVariantFactory.as",
+      "bytes": 4776,
+      "sha256": "edf0500eb5bb263af5d9816e7caf38604ccfb1959d238fe8adade6aa1d5d6c2d"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibGame.dat",
+      "bytes": 89667,
+      "sha256": "72ec60851e9ab4570d0d02587327c65fab45e9f932beb52950accd9b98dd26f9"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibGame_dat\\scripts\\com\\riotgames\\pvpnet\\game\\variants\\FeaturedGameFlowVariant.as",
+      "bytes": 6547,
+      "sha256": "83f8411f232b2d292ab52cec95886453d8367afa9160448c151f258d6e735c9c"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibGame_dat\\scripts\\com\\riotgames\\pvpnet\\game\\domain\\MutatorsConfiguration.as",
+      "bytes": 2204,
+      "sha256": "c465b3ab3696fe4090a1cb9d53d0fdf2163bb0dd86b22347a54bd035ebac1905"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibCommon_dat\\scripts\\com\\riotgames\\platform\\common\\GeneratedContentLoader.as",
+      "bytes": 9341,
+      "sha256": "e00c8a8fe62e88f171990bb7e1db295bee77ee6e843efe11cca71d0874ea5f4a"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibCommon.dat",
+      "bytes": 78498,
+      "sha256": "f5915bfc68556608cb6aba924b9773862c09dd9e52414dc488aa01621efee638"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibDomain_dat\\scripts\\com\\riotgames\\platform\\gameclient\\domain\\featuredgame\\FeaturedGameDefinition.as",
+      "bytes": 343,
+      "sha256": "3e995ddd18465e30558ff7f70ce533b25dec636a39e9622c24b9ef23c5535541"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibDomain.dat",
+      "bytes": 169947,
+      "sha256": "31d7fc4597de774fa643a2789fbdc9202a48f4cd8c01449a3c642bbd5b27336e"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibGame_dat\\scripts\\com\\riotgames\\pvpnet\\game\\variants\\UrfGameFlowVariant.as",
+      "bytes": 763,
+      "sha256": "2916b620511951b1bc9c18ae6fb49f093f97befe57883ec192489355fc9b39a1"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibGame_dat\\scripts\\com\\riotgames\\pvpnet\\game\\variants\\PPPGameFlowVariant.as",
+      "bytes": 909,
+      "sha256": "526e7a1437c88ab5a356bffdf765d8218969a411f9296a2cb52320bf5df92cc6"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibGame_dat\\scripts\\com\\riotgames\\pvpnet\\game\\variants\\HexakillGameFlowVariant.as",
+      "bytes": 1026,
+      "sha256": "0e86867c00ea10621fd37f2351e9f7103a77b3fc90fd8ee5be97703a4bedb163"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibGame_dat\\scripts\\com\\riotgames\\pvpnet\\game\\variants\\AscensionGameFlowVariant.as",
+      "bytes": 1600,
+      "sha256": "e5193298927a43a8f5e48dec5d93699605ea08e22afe3c10b943b673fb62d4f2"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibGame_dat\\scripts\\com\\riotgames\\pvpnet\\game\\variants\\NightmareBotsGameFlowVariant.as",
+      "bytes": 2698,
+      "sha256": "3b4dd01c175ff10f21da2b89fbb209dd488fdd2927a1cdcdafcd69289c0e1734"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibGame_dat\\scripts\\com\\riotgames\\pvpnet\\game\\variants\\OneForAllGameFlowVariant.as",
+      "bytes": 775,
+      "sha256": "62742a6595907895ffc78ba00e2282fbda44e2613a71f256c19e3d1b16bd2ef3"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibGame_dat\\scripts\\com\\riotgames\\pvpnet\\game\\variants\\OneForAllXGameFlowVariant.as",
+      "bytes": 889,
+      "sha256": "98c44bd51fb2c330a26f78d4475664d83b600c9e0254da82d21a71d049b23623"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibGame_dat\\scripts\\com\\riotgames\\pvpnet\\game\\variants\\FirstBloodGameFlowVariant.as",
+      "bytes": 1207,
+      "sha256": "9753949a045438fe8eaed4590a7e373c9bbf6e947f0835b988c1e776ad3165cd"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibGame_dat\\scripts\\com\\riotgames\\pvpnet\\game\\QuitPracticeGameAction.as",
+      "bytes": 2659,
+      "sha256": "778606faef716349c7da149b9ee4dca9a043f1fea6f3d6f708531d71ebeec91b"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibGame_dat\\scripts\\com\\riotgames\\pvpnet\\game\\controllers\\MasterGameController.as",
+      "bytes": 124421,
+      "sha256": "6cee283b81ad29909c1dd700b4896effcd0d63a36ed648358f70428139d9d348"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibDomain_dat\\scripts\\com\\riotgames\\platform\\gameclient\\domain\\game\\GameMap.as",
+      "bytes": 6458,
+      "sha256": "824a58325ebc7781bc14aba50bb97b1360a78cf996a12b5a8f1d8131588a96fa"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibDomain_dat\\scripts\\com\\riotgames\\platform\\gameclient\\domain\\gameconfig\\GameTypeConfig.as",
+      "bytes": 10558,
+      "sha256": "a25a479b0e6ac43c0933a1de51d51e8af098d066ae43f9af7c80438d7069607a"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_event_modes_sources\\FeaturedGameGeneratedData.as",
+      "bytes": 1469,
+      "sha256": "366ceb0104b9d928b76ffa79b1c7cde27681a5c6bec5ab9003f369e2d9c81ffa"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_event_modes_sources\\recovery.json",
+      "bytes": 2674,
+      "sha256": "a7d42f27b5c58f314790a696a7bfbd20dda6a560ff2e2a4c4dd6e145c535b21b"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_event_modes_sources\\decompilation.json",
+      "bytes": 10397,
+      "sha256": "183acee99d5479ceb81883ea21899efbe8c45060080d9a93e5428422cad6ae90"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_event_modes_sources\\archive-index.json",
+      "bytes": 348,
+      "sha256": "c1caa8995ef752a3012e7a711072a5139edf6f7e0d98171143a1f0c48ef42072"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_event_modes_sources\\web-search-notes.json",
+      "bytes": 594,
+      "sha256": "baef3102189bc4bc0a14c104cfb8dd61c606d14467fbb19a8a0305c507e95351"
+    },
+    {
+      "path": "C:\\Program Files\\Eclipse Adoptium\\jdk-21.0.10.7-hotspot\\bin\\java.exe",
+      "bytes": 50344,
+      "sha256": "bd3d87dfb44651a1c61c995e08ca4fcadb458437a373d46941381f9aeff9d6a0"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\ffdec-cli.jar",
+      "bytes": 1575,
+      "sha256": "84573b0e260f2288ddb12afd54cdba853e1df77ca2514d6cff0c3a875f1e70cd"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\ffdec.jar",
+      "bytes": 5271501,
+      "sha256": "80f8ced0bfde98b434c28e9807e91fe5558255b2f712051a0e65221519bd392a"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\antlr-runtime-4.11.1.jar",
+      "bytes": 324039,
+      "sha256": "e06c6553c1ccc14d36052ec4b0fc6f13b808cf957b5b1dc3f61bf401996ada59"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\avi.jar",
+      "bytes": 215818,
+      "sha256": "7b8da48be20447ca3a840ae1136541841e1a44915a6edf924d83529362bd40ff"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\cmykjpeg.jar",
+      "bytes": 90166,
+      "sha256": "0ae56cee0cca3f2c54593b08dd2f450f6f8fea5dd9054b9949b9f08f34e98b5a"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\ddsreader.jar",
+      "bytes": 16380,
+      "sha256": "398f194e6de07a85e09ba70fb55f01ec30de26ff38c0487e6989d4b5a924f83d"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\decimal.jar",
+      "bytes": 43030,
+      "sha256": "feeb9f89f44cd6a921a9a4701358c8c63e3e677424fb2953ddba6e15872c0e91"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\ffdec_lib.jar",
+      "bytes": 6070931,
+      "sha256": "ed9314b24190f497a9e02236dae7caaf69062cbbe9d98157c005c3f1c25481d4"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\flacomdoc.jar",
+      "bytes": 318704,
+      "sha256": "fc0d7e4be9591c6e187258f1b2be6f798ce78831d22cb990ffbf95e99c8f85cf"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\flamingo-6.2.jar",
+      "bytes": 1291349,
+      "sha256": "5baee0ef62342a53952116548aa3434db5b629af76c9a267d8c23b34db3a479c"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\flashdebugger.jar",
+      "bytes": 261421,
+      "sha256": "86bb7f0fba4aa7b217f9a276dfa94d1c38dc07e4a69b5cd5f389e29a2e8cf1ba"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\gif.jar",
+      "bytes": 25871,
+      "sha256": "e81c505f104689d4e8d4da2cba09db0a7a8c02c7f8d19de6ed194d8d2cff09bd"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\gifreader.jar",
+      "bytes": 25666,
+      "sha256": "2afdcb18d174476ef1e8550acb902ad0e998d6d6bbfb493bba4e7e6c5817f45b"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\gnujpdf.jar",
+      "bytes": 209261,
+      "sha256": "2f06fde287d8d5c5f0f903d13bca91e78ae1c69409a73e4b3f7374366b31bf31"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\jansi-2.4.0.jar",
+      "bytes": 221009,
+      "sha256": "6cd91991323dd7b2fb28ca93d7ac12af5a86a2f53279e2b35827b30313fd0b9f"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\jargs.jar",
+      "bytes": 11406,
+      "sha256": "d488f6c10690597b93767af3b1c35018f02770790e5e3822871ac09f332386c7"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\jlayer-1.0.2.jar",
+      "bytes": 147964,
+      "sha256": "bf6286c69dabeadab49ba2b5e9322243c23722585faf52452c15593a14d20e36"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\jna-3.5.1.jar",
+      "bytes": 692603,
+      "sha256": "3f8889f51d570a26f3ac2c1323e6be828bb73eb5e66cf25e979eb5b109d92021"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\jna-platform-3.5.1.jar",
+      "bytes": 952411,
+      "sha256": "b0b30404f6a9e29d4d9a7b53fd47322e7137cab3846fd5f149d5589fc68c2126"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\jpacker.jar",
+      "bytes": 53685,
+      "sha256": "4eaba3e39d3e8d0eb242534d56bda72b1bbca6599aa949a7876ff6fc2cbfce52"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\jpexs-apng.jar",
+      "bytes": 41017,
+      "sha256": "4062e281730f841ff936f7c4f6587dee8024afadde7fe1e849960a2c039c6d50"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\jpexs-jxr-1.0.0.jar",
+      "bytes": 1589228,
+      "sha256": "f4f881633c68c2821eb01ce72e43e2006524f3a45ded0d909316db9dd6aa73f6"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\jsyntaxpane-0.9.5.jar",
+      "bytes": 630353,
+      "sha256": "8698a7951bbd7b2fb00a2dd6dc25bd6eefb37cba8907dbda894b91d2a80a8cae"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\LZMA.jar",
+      "bytes": 91320,
+      "sha256": "2604dab00935023b183d82d9a5c5198ae34d40112c7524e75be20e4528798e95"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\minimal-json-0.9.5.jar",
+      "bytes": 34221,
+      "sha256": "69ff84463d1d7cc5cfdb8baf2b6e5f7af153d351bf0dbee3bbc8916247afac74"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\miterstroke.jar",
+      "bytes": 46206,
+      "sha256": "becca6da411463f872f69f48de2dc50d53974b888da09bae0b27096b9d4d1663"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\nellymoser.jar",
+      "bytes": 24911,
+      "sha256": "bf12eb3a4c793e66b4e0c917aaa4091a6bd2b9da446c357f600f2da36f3c36e0"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\sfntly.jar",
+      "bytes": 342808,
+      "sha256": "40c9a46afc02479096e68275eb9f40f72ca3e9944d687856b600684dc9acbef7"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\substance-6.2.jar",
+      "bytes": 1852224,
+      "sha256": "376b6ccb53860a78934c92fc732d5c7dc7964aa5dbd8616dba1dead3493cb362"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\substance-fix.jar",
+      "bytes": 188255,
+      "sha256": "31ee9108267435b0ec806679694616bafcb954065af139874f251a4166a245e5"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\substance-flamingo-6.2.jar",
+      "bytes": 164374,
+      "sha256": "1c4b4427bef2943ac81ed35fd475736287bce53120274f6ac353f5c0e48c7549"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\tablelayout.jar",
+      "bytes": 11962,
+      "sha256": "133759470163a1abc3e0b6bbba6c5e6037eac785d313dd229c6adac3a5f013fe"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\tga.jar",
+      "bytes": 12995,
+      "sha256": "43d6c7b688953ddc8a7c513b31c63b1597154e917d4e8222581fb7952c5af463"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\tomlj-1.1.1.jar",
+      "bytes": 179432,
+      "sha256": "383b7c66966c42ee4913ec977a7b6573631866bddc5318ec4a6215b688dd0d6c"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\treetable.jar",
+      "bytes": 26528,
+      "sha256": "bfdcb1e2c0947f947fa750780fbd8c137b0a2cdc1439632200f815bf44ea2d5a"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\trident-6.2.jar",
+      "bytes": 105569,
+      "sha256": "b4726f518ccdb40b8da1fac4d78a741b736afd433d903c76f62b7a01090a63f9"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\ttf.jar",
+      "bytes": 142030,
+      "sha256": "25cb6f0bf447edd29c70bb061bf2d7d72e376cda5050252aac949546d3bbd0f4"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\vlcj-4.7.3.jar",
+      "bytes": 391844,
+      "sha256": "3f8e3233809932e9a02e0f0de79a34e0544f8a3c4b779bdcca1e3ce13eee3cea"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\vlcj-natives-4.7.0.jar",
+      "bytes": 90694,
+      "sha256": "47c300792c248f8708095430136a3aeb7def4695e8d7527d21651973049ea36f"
+    },
+    {
+      "path": "E:\\mapslol3v3\\AIR_routes_4_20_2026-10-20\\tool\\ffdec\\lib\\webp4j-core-2.1.1.jar",
+      "bytes": 2159570,
+      "sha256": "46d2c3561fce9838cf56881580c954db5ff07df0ca1543b40cf8fb4b93accfcd"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\reference_client.py",
+      "bytes": 6633,
+      "sha256": "52ab5a24d2bf656789db993038cd7e0b99b9d12620aa0c0534baabde2dd61781"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\local_services_reference.py",
+      "bytes": 11004,
+      "sha256": "519b660379cb297d32ebc987232d541fe41cd6111534f0c192fa0347b40280a6"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\fidelity_ids.py",
+      "bytes": 7109,
+      "sha256": "73c2429425d4d6b13920af3b025abbb90bfad1d89c2e5b6e3802a0ffb472b44b"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\store.py",
+      "bytes": 17975,
+      "sha256": "603e84c19f1e927d9beff2ac66a14d885af8961eaceae19c584d3d42ea1ef656"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\shop.rs",
+      "bytes": 30601,
+      "sha256": "3db7b79f20d15e95b6b92affe0087e730c9110d876ea41cc36416435159a2cd0"
+    },
+    {
+      "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\sessions.rs",
+      "bytes": 30278,
+      "sha256": "54bc7a2a66296cdf2cededcca19d1846287c5108974efda2a0151b17503da7f6"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\match_results.rs",
+      "bytes": 4021,
+      "sha256": "48c15c370a316084296c8a1e356fddf30730ca10223d37fbe71ee6cacec37be7"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\frontend_builds.py",
+      "bytes": 19454,
+      "sha256": "d66e6cbce783e18bfc2b890468f571e439b14cba9bca6c294970f8f35d5fccf8"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\rads_reference_membership.py",
+      "bytes": 15059,
+      "sha256": "533002c4d63f749a0658a1ddf00175c2a294aead63dba7a69a55895731a73de6"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_client_4_20.json",
+      "bytes": 3684,
+      "sha256": "efdf40252574a98f439829d43c6b29606d3c12d631c4a64c89ef15637e859d02"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_4_20.json",
+      "bytes": 317028,
+      "sha256": "8a6afdc263b5c0959212425feb9e437b3a2264ea1d3a3590f825cb52ef406efb"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\audit_event_modes_reference.py",
+      "bytes": 17307,
+      "sha256": "0e87333c5fb15fadfbe09d2df19e28fb7903b824a610c747809538cecf600dae"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_event_modes_sources\\event_modes-links.json",
+      "bytes": 112006,
+      "sha256": "d13856632b92a7af3660e2facf70a18e49e2178596e741c32ae9d94f9bbe86ad"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_content_classification_sources\\MapGeneratedData.as",
+      "bytes": 1633,
+      "sha256": "0f2f7cf33a7d40433c34575c9f6fbfbb23693a0c9d1287c6563064e4ca413a44"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\system\\system.cfg",
+      "bytes": 72,
+      "sha256": "a99ea26414fbd7deebace37c9e2c109f818a8c394f92607cfa082bd49f35c16a"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\system\\locale.cfg",
+      "bytes": 12,
+      "sha256": "82ecb50f4bf707a35a13a6b6987df89fa6044bedac6fc8aca179890a7890d6ae"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\system\\launcher.cfg",
+      "bytes": 138,
+      "sha256": "f3417678c2e9a39bb40c937d5b8d63265092376756514652e5a22eb6c5195379"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\configurationmanifest",
+      "bytes": 88,
+      "sha256": "f601219e81fe20e4c805c5faaa7af664c0c6adcdd43d591c7a4f22ebbd7601f3"
+    },
+    {
+      "path": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy\\League of Legends.exe",
+      "bytes": 15973880,
+      "sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibSystem_dat\\scripts\\com\\riotgames\\pvpnet\\system\\config\\PlatformConfigController.as",
+      "bytes": 8592,
+      "sha256": "5b56c98eccf7acdcf03122b303a8458e723123cda2e5df8e3b09fdd39f2ffa62"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\lib\\ClientLibSystem.dat",
+      "bytes": 75671,
+      "sha256": "0992c7993945390d1bc43763832b8ae98aeb624a3b745241d20bb8967a3a8759"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibGame_dat\\scripts\\com\\riotgames\\pvpnet\\game\\domain\\GameQueueManager.as",
+      "bytes": 23164,
+      "sha256": "6b3d9e5eca4886cf453d2509f15af84e0d0186a5f5fd57e30fea738a7c412618"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_core-21eb81eb13817108.exe",
+      "bytes": 787789824,
+      "sha256": "46d3732181601e8bfdc1923857d66192fd2a18fba13fe7aa3bd2f80876f74e6d"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision95\\rust-catalogue-test.log",
+      "bytes": 9203,
+      "sha256": "ed09fd9ba5ad6557da0773024810a31776d98b82a631371c1ee09dcb3ae2669d"
+    },
+    {
+      "path": "F:\\OpenLeague\\Cargo.lock",
+      "bytes": 153304,
+      "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\inventory_reference_content.py",
+      "bytes": 3076,
+      "sha256": "c1c7b9d296b076d17c6d658bac037ca17606b86da028acfc7a55c2bf965a25df"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\native_skin_reference.py",
+      "bytes": 4923,
+      "sha256": "85b31e036bd5e4bbf5aaafa63b1ccfec9ac0f524191e6be84894fe60a5272c90"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_content_classification_sources\\web-search-notes.json",
+      "bytes": 782,
+      "sha256": "82938eda333d0c512270eed080e65a8073be4dcb04f55b36b97230f3fbbfb44b"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision251_identity_comparison_unknown_review\\IDENTITY_COMPARISON_UNKNOWN_REVIEW.json",
+      "bytes": 63214,
+      "sha256": "510982f6676a012fe228a0dcb148cb3bd29da82a0bf38e394621baf5807c817d"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision253_roster_public_consumer\\PUBLIC_ROSTER_CONSUMER_QUALIFICATION.json",
+      "bytes": 37781,
+      "sha256": "0bf8d4b986eb6c1c9fe8cf23cf02cf7f263ccc0bd3abe08ead34869bab1796be"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision253_roster_public_consumer\\PUBLIC_CONSUMER_INSTALLATION.json",
+      "bytes": 32764,
+      "sha256": "a586e24020b8d66f6892a20281d37eaf03e7014782c1cd9c78507951df26cc07"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision253_roster_public_consumer\\PROCESS_RECEIPT.json",
+      "bytes": 2324,
+      "sha256": "63929db6b209789c6cc8841ac195e4921ba05ccac586c5d0369ac89ea176d3e8"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision253_roster_public_consumer\\V253_POSTINSTALL_SCOPE_REVIEW.json",
+      "bytes": 47816,
+      "sha256": "63de3e402a4539115e925115d96b0d974acc9fe1a40866d8b1f8f667ed293dcc"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision252_roster_lifecycle_successor\\ROSTER_LIFECYCLE_SUCCESSOR_QUALIFICATION.json",
+      "bytes": 13648,
+      "sha256": "c69c8d007628c5f7e49ebee949210924cba07dff5431629892f5c8838114afd2"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision254_register_roster_lifecycle.py",
+      "bytes": 21143,
+      "sha256": "91665d0c7fd843582e7fbf9195aa40510b2cfb7b165185db2d605ad0d63e0a03"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\roster_lifecycle_successor.py",
+      "bytes": 10476,
+      "sha256": "28a7e1197ab6787147e3bdd4cb8164485b29058df75aaa2914db99475431809b"
+    }
+  ],
+  "selection_anchors": [
+    {
+      "path": "tools/project-plan/audit_content_classification_reference.py",
+      "pathrel": "tools/project-plan/audit_content_classification_reference.py",
+      "line": 25,
+      "needle": "def compare_roster(official,local,native):",
+      "excerpt": "def compare_roster(official,local,native):",
+      "role": "analytic_identity_comparison_body",
+      "scope": "Actual task-specific analytical consumer; current14direct cases.",
+      "source": {
+        "path": "F:\\OpenLeague\\tools\\project-plan\\audit_content_classification_reference.py",
+        "bytes": 16784,
+        "sha256": "045420d74d08796d2e0a9a925762a3124de4f9a553db6f9a04684ff7f3c5f20a"
+      },
+      "anchor_key": "existing-0",
+      "provides_feature_consumer": true
+    },
+    {
+      "path": "tools/project-plan/audit_content_classification_reference.py",
+      "pathrel": "tools/project-plan/audit_content_classification_reference.py",
+      "line": 26,
+      "needle": "require(official.get('version')=='4.20.1'",
+      "excerpt": " require(official.get('version')=='4.20.1','official version');data=official['data'];o=list(data.values())",
+      "role": "official_catalogue_version_guard",
+      "scope": "Exact official catalogue4.20.1 guard.",
+      "source": {
+        "path": "F:\\OpenLeague\\tools\\project-plan\\audit_content_classification_reference.py",
+        "bytes": 16784,
+        "sha256": "045420d74d08796d2e0a9a925762a3124de4f9a553db6f9a04684ff7f3c5f20a"
+      },
+      "anchor_key": "existing-1",
+      "provides_feature_consumer": false
+    },
+    {
+      "path": "tools/project-plan/audit_content_classification_reference.py",
+      "pathrel": "tools/project-plan/audit_content_classification_reference.py",
+      "line": 31,
+      "needle": "ln=[v['id'].casefold() for v in local]",
+      "excerpt": " ln=[v['id'].casefold() for v in local];require(len(set(ln))==len(ln),'local identity uniqueness');require(set(ln)==set(names) and len(local)==len(o)==122,'local roster exact')",
+      "role": "local_casefold_uniqueness_and_set_guard",
+      "scope": "Reject local duplicate/casefold collision/missing/extra identities.",
+      "source": {
+        "path": "F:\\OpenLeague\\tools\\project-plan\\audit_content_classification_reference.py",
+        "bytes": 16784,
+        "sha256": "045420d74d08796d2e0a9a925762a3124de4f9a553db6f9a04684ff7f3c5f20a"
+      },
+      "anchor_key": "existing-2",
+      "provides_feature_consumer": false
+    },
+    {
+      "path": "tools/project-plan/audit_content_classification_reference.py",
+      "pathrel": "tools/project-plan/audit_content_classification_reference.py",
+      "line": 35,
+      "needle": "require(all(om[str(v['id'])]['id'].casefold()==v['code'].casefold()",
+      "excerpt": " require(all(om[str(v['id'])]['id'].casefold()==v['code'].casefold() for v in native),'AIR code numeric relation')",
+      "role": "AIR_numeric_code_coupling_guard",
+      "scope": "Equal numeric sets alone are insufficient; actual numeric/code relation checked.",
+      "source": {
+        "path": "F:\\OpenLeague\\tools\\project-plan\\audit_content_classification_reference.py",
+        "bytes": 16784,
+        "sha256": "045420d74d08796d2e0a9a925762a3124de4f9a553db6f9a04684ff7f3c5f20a"
+      },
+      "anchor_key": "existing-3",
+      "provides_feature_consumer": false
+    },
+    {
+      "path": "tools/project-plan/audit_content_classification_reference.py",
+      "pathrel": "tools/project-plan/audit_content_classification_reference.py",
+      "line": 36,
+      "needle": "return [dict(riot_id=v['id'],air_code=v['code']",
+      "excerpt": " return [dict(riot_id=v['id'],air_code=v['code'],official_id=om[str(v['id'])]['id'],local_id=lm[v['code'].casefold()]['id']) for v in sorted(native,key=lambda v:v['id'])]",
+      "role": "comparison_result_constructor",
+      "scope": "122 explicit numericAIR/codeofficial/local joined rows sorted by numeric ID.",
+      "source": {
+        "path": "F:\\OpenLeague\\tools\\project-plan\\audit_content_classification_reference.py",
+        "bytes": 16784,
+        "sha256": "045420d74d08796d2e0a9a925762a3124de4f9a553db6f9a04684ff7f3c5f20a"
+      },
+      "anchor_key": "existing-4",
+      "provides_feature_consumer": false
+    },
+    {
+      "path": "tools/project-plan/audit_content_classification_reference.py",
+      "pathrel": "tools/project-plan/audit_content_classification_reference.py",
+      "line": 57,
+      "needle": "joined=compare_roster(official,lc,native);",
+      "excerpt": " joined=compare_roster(official,lc,native);check('three_rosters_122_exact',len(joined)==122);check('local_numeric_RiotID_absent',all('key' not in c and 'riot_id' not in c for c in lc))",
+      "role": "actual_comparison_caller",
+      "scope": "Collector reads pinned official/local/export and calls exact comparison.",
+      "source": {
+        "path": "F:\\OpenLeague\\tools\\project-plan\\audit_content_classification_reference.py",
+        "bytes": 16784,
+        "sha256": "045420d74d08796d2e0a9a925762a3124de4f9a553db6f9a04684ff7f3c5f20a"
+      },
+      "anchor_key": "existing-5",
+      "provides_feature_consumer": false
+    },
+    {
+      "path": "crates/core/src/lib.rs",
+      "pathrel": "crates/core/src/lib.rs",
+      "line": 149,
+      "needle": "pub fn champion_catalog()",
+      "excerpt": "pub fn champion_catalog() -> Result<BTreeMap<String, ChampionDefinition>, serde_json::Error> {",
+      "role": "current_local_catalogue_reader",
+      "scope": "Deserializes Vec<ChampionDefinition> and keys BTreeMap by local String id. Does not compare AIR/Riot IDs.",
+      "source": {
+        "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+        "bytes": 52808,
+        "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+      },
+      "anchor_key": "existing-6",
+      "provides_feature_consumer": false
+    },
+    {
+      "path": "crates/core/src/lib.rs",
+      "pathrel": "crates/core/src/lib.rs",
+      "line": 151,
+      "needle": "serde_json::from_str(include_str!(\"../../../data/4.20/champions.json\"))?;",
+      "excerpt": "        serde_json::from_str(include_str!(\"../../../data/4.20/champions.json\"))?;",
+      "role": "current_local_catalogue_data_route",
+      "scope": "Compiled-in exact local catalogue; not numeric Riot runtime storage.",
+      "source": {
+        "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+        "bytes": 52808,
+        "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+      },
+      "anchor_key": "existing-7",
+      "provides_feature_consumer": false
+    },
+    {
+      "path": "launcher/src-tauri/src/main.rs",
+      "pathrel": "launcher/src-tauri/src/main.rs",
+      "line": 16,
+      "needle": "fn roster() -> Result<serde_json::Value, String> {",
+      "excerpt": "fn roster() -> Result<serde_json::Value, String> {",
+      "role": "current_launcher_local_roster_reader",
+      "scope": "Reads same local champions.json from current project root.",
+      "source": {
+        "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+        "bytes": 3491,
+        "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+      },
+      "anchor_key": "existing-8",
+      "provides_feature_consumer": false
+    },
+    {
+      "path": "launcher/src-tauri/src/main.rs",
+      "pathrel": "launcher/src-tauri/src/main.rs",
+      "line": 19,
+      "needle": "&std::fs::read_to_string(root.join(\"data/4.20/champions.json\"))",
+      "excerpt": "        &std::fs::read_to_string(root.join(\"data/4.20/champions.json\"))",
+      "role": "current_launcher_roster_data_route",
+      "scope": "Same file identity as analytical comparison input.",
+      "source": {
+        "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+        "bytes": 3491,
+        "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+      },
+      "anchor_key": "existing-9",
+      "provides_feature_consumer": false
+    },
+    {
+      "path": "launcher/web/app.js",
+      "pathrel": "launcher/web/app.js",
+      "line": 27,
+      "needle": "const rows=await window.__TAURI__.core.invoke('roster');",
+      "excerpt": "    const rows=await window.__TAURI__.core.invoke('roster');",
+      "role": "current_launcher_roster_UI_caller",
+      "scope": "Static ordinary UI route to roster; no UI launch in this review.",
+      "source": {
+        "path": "F:\\OpenLeague\\launcher\\web\\app.js",
+        "bytes": 2960,
+        "sha256": "f4f58340d72d2bedbf94b88a847a537c2ea7d76594f053d6a5dc4eba1cf64ad6"
+      },
+      "anchor_key": "existing-10",
+      "provides_feature_consumer": false
+    },
+    {
+      "path": "crates/core/src/lib.rs",
+      "pathrel": "crates/core/src/lib.rs",
+      "line": 809,
+      "needle": "fn catalog_contains_native_roster()",
+      "excerpt": "    fn catalog_contains_native_roster() {",
+      "role": "inherited_Rust_catalogue_test_body",
+      "scope": "Checks count122 and positive statistics; does not assert the exact three-way join. No fresh Rust test here.",
+      "source": {
+        "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+        "bytes": 52808,
+        "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+      },
+      "anchor_key": "existing-11",
+      "provides_feature_consumer": false
+    },
+    {
+      "path": "tools/project-plan/roster_lifecycle_successor.py",
+      "line": 40,
+      "needle": "def proof_document():",
+      "source": {
+        "path": "F:\\OpenLeague\\tools\\project-plan\\roster_lifecycle_successor.py",
+        "bytes": 10476,
+        "sha256": "28a7e1197ab6787147e3bdd4cb8164485b29058df75aaa2914db99475431809b"
+      },
+      "role": "pinned_qualification_reader",
+      "scope": "Current public read-only analytical comparison/lifecycle checker; explicitly accepts only this qualified resolved target and keeps five other questions open",
+      "anchor_key": "public-40",
+      "provides_feature_consumer": false
+    },
+    {
+      "path": "tools/project-plan/roster_lifecycle_successor.py",
+      "line": 52,
+      "needle": "def validate_lifecycle(unknown_document, root=ROOT):",
+      "source": {
+        "path": "F:\\OpenLeague\\tools\\project-plan\\roster_lifecycle_successor.py",
+        "bytes": 10476,
+        "sha256": "28a7e1197ab6787147e3bdd4cb8164485b29058df75aaa2914db99475431809b"
+      },
+      "role": "actual_unknown_lifecycle_validation",
+      "scope": "Current public read-only analytical comparison/lifecycle checker; explicitly accepts only this qualified resolved target and keeps five other questions open",
+      "anchor_key": "public-52",
+      "provides_feature_consumer": false
+    },
+    {
+      "path": "tools/project-plan/roster_lifecycle_successor.py",
+      "line": 114,
+      "needle": "def revalidate(document, unknown_document, root=ROOT):",
+      "source": {
+        "path": "F:\\OpenLeague\\tools\\project-plan\\roster_lifecycle_successor.py",
+        "bytes": 10476,
+        "sha256": "28a7e1197ab6787147e3bdd4cb8164485b29058df75aaa2914db99475431809b"
+      },
+      "role": "current_evidence_revalidation_body",
+      "scope": "Current public read-only analytical comparison/lifecycle checker; explicitly accepts only this qualified resolved target and keeps five other questions open",
+      "anchor_key": "public-114",
+      "provides_feature_consumer": false
+    },
+    {
+      "path": "tools/project-plan/roster_lifecycle_successor.py",
+      "line": 122,
+      "needle": "facts,pins=legacy.collect(root)",
+      "source": {
+        "path": "F:\\OpenLeague\\tools\\project-plan\\roster_lifecycle_successor.py",
+        "bytes": 10476,
+        "sha256": "28a7e1197ab6787147e3bdd4cb8164485b29058df75aaa2914db99475431809b"
+      },
+      "role": "current_pinned_source_collector_call",
+      "scope": "Current public read-only analytical comparison/lifecycle checker; explicitly accepts only this qualified resolved target and keeps five other questions open",
+      "anchor_key": "public-122",
+      "provides_feature_consumer": false
+    },
+    {
+      "path": "tools/project-plan/roster_lifecycle_successor.py",
+      "line": 141,
+      "needle": "joined=legacy.compare_roster(official,local,native)",
+      "source": {
+        "path": "F:\\OpenLeague\\tools\\project-plan\\roster_lifecycle_successor.py",
+        "bytes": 10476,
+        "sha256": "28a7e1197ab6787147e3bdd4cb8164485b29058df75aaa2914db99475431809b"
+      },
+      "role": "current_exact_roster_comparison_call",
+      "scope": "Current public read-only analytical comparison/lifecycle checker; explicitly accepts only this qualified resolved target and keeps five other questions open",
+      "anchor_key": "public-141",
+      "provides_feature_consumer": false
+    }
+  ],
+  "source_declaration_anchors": [
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_content_classification_sources\\ChampionGeneratedData.as",
+      "pathrel": "docs/reference_content_classification_sources/ChampionGeneratedData.as",
+      "line": 43,
+      "needle": "public function fillChampionData() : void",
+      "excerpt": "      public function fillChampionData() : void",
+      "sourcepin": {
+        "path": "F:\\OpenLeague\\docs\\reference_content_classification_sources\\ChampionGeneratedData.as",
+        "bytes": 104606,
+        "sha256": "201435f87ebabb45ec62174c18556d558f0281e06757e147098bff1a0638b7da"
+      },
+      "role": "native_static_generated_roster_export",
+      "scope": "122 generated IDs and codes; does not prove historical regional availability."
+    }
+  ],
+  "associations": [
+    {
+      "task_id": "SYS-01.3-01",
+      "requirement_id": "OLF-f09e69fc-50e8-5e95-b6c2-eeda4203f1f8",
+      "scope": "analytical_roster_identity_comparison_only",
+      "entry_boundary_only": false,
+      "current_feature_consumer_identified": true,
+      "consumer_anchor_keys": [
+        "existing-0",
+        "existing-1",
+        "existing-2",
+        "existing-3",
+        "existing-4",
+        "existing-5",
+        "existing-6",
+        "existing-7",
+        "existing-8",
+        "existing-9",
+        "existing-10",
+        "existing-11",
+        "public-40",
+        "public-52",
+        "public-114",
+        "public-122",
+        "public-141"
+      ],
+      "legacy_contract": "V95/V192 immutable historical six-open lifecycle; current legacy.audit refuses after this one resolution; use explicit new successor on actual registry",
+      "open_unknowns_preserved": [],
+      "full_task_scope_complete": false,
+      "gameplay_accepted": false
+    },
+    {
+      "task_id": "SYS-01.3-02",
+      "requirement_id": "OLF-b41ca1ed-9152-58e5-8d52-85fe3b522ce2",
+      "scope": "Source/current boundary revalidation only; feature remains unknown",
+      "entry_boundary_only": true,
+      "current_feature_consumer_identified": false,
+      "consumer_anchor_keys": [
+        "public-40",
+        "public-52",
+        "public-114",
+        "public-122",
+        "public-141"
+      ],
+      "legacy_contract": "V95/V192 immutable historical six-open lifecycle; current legacy.audit refuses after this one resolution; use explicit new successor on actual registry",
+      "open_unknowns_preserved": [
+        "OLU-a9b1c2f1-bf04-5bfc-b4d9-98eac6555eff"
+      ],
+      "full_task_scope_complete": false,
+      "gameplay_accepted": false
+    },
+    {
+      "task_id": "SYS-01.3-03",
+      "requirement_id": "OLF-8206dc5c-7957-50e2-8a24-c9627166e84d",
+      "scope": "Source/current boundary revalidation only; feature remains unknown",
+      "entry_boundary_only": true,
+      "current_feature_consumer_identified": false,
+      "consumer_anchor_keys": [
+        "public-40",
+        "public-52",
+        "public-114",
+        "public-122",
+        "public-141"
+      ],
+      "legacy_contract": "V95/V192 immutable historical six-open lifecycle; current legacy.audit refuses after this one resolution; use explicit new successor on actual registry",
+      "open_unknowns_preserved": [
+        "OLU-90a7cde0-6c8c-5f90-b769-130661412d6e"
+      ],
+      "full_task_scope_complete": false,
+      "gameplay_accepted": false
+    },
+    {
+      "task_id": "SYS-01.3-04",
+      "requirement_id": "OLF-fe729378-dd70-51cc-a604-2187f23f8792",
+      "scope": "Source/current boundary revalidation only; feature remains unknown",
+      "entry_boundary_only": true,
+      "current_feature_consumer_identified": false,
+      "consumer_anchor_keys": [
+        "public-40",
+        "public-52",
+        "public-114",
+        "public-122",
+        "public-141"
+      ],
+      "legacy_contract": "V95/V192 immutable historical six-open lifecycle; current legacy.audit refuses after this one resolution; use explicit new successor on actual registry",
+      "open_unknowns_preserved": [
+        "OLU-b8d5c132-0ac1-5138-abb5-ec75c6f81b8a"
+      ],
+      "full_task_scope_complete": false,
+      "gameplay_accepted": false
+    },
+    {
+      "task_id": "SYS-01.3-05",
+      "requirement_id": "OLF-8959154c-d2ad-551d-92c1-e24fda6542b9",
+      "scope": "Source/current boundary revalidation only; feature remains unknown",
+      "entry_boundary_only": true,
+      "current_feature_consumer_identified": false,
+      "consumer_anchor_keys": [
+        "public-40",
+        "public-52",
+        "public-114",
+        "public-122",
+        "public-141"
+      ],
+      "legacy_contract": "V95/V192 immutable historical six-open lifecycle; current legacy.audit refuses after this one resolution; use explicit new successor on actual registry",
+      "open_unknowns_preserved": [
+        "OLU-ba5151eb-6169-58a1-8193-542cb2146608"
+      ],
+      "full_task_scope_complete": false,
+      "gameplay_accepted": false
+    },
+    {
+      "task_id": "SYS-01.3-06",
+      "requirement_id": "OLF-3672b112-e71c-57f9-bdf3-9790b631b70f",
+      "scope": "Source/current boundary revalidation only; feature remains unknown",
+      "entry_boundary_only": true,
+      "current_feature_consumer_identified": false,
+      "consumer_anchor_keys": [
+        "public-40",
+        "public-52",
+        "public-114",
+        "public-122",
+        "public-141"
+      ],
+      "legacy_contract": "V95/V192 immutable historical six-open lifecycle; current legacy.audit refuses after this one resolution; use explicit new successor on actual registry",
+      "open_unknowns_preserved": [
+        "OLU-27c9c84a-e2c9-5739-bbeb-8923c8770c36"
+      ],
+      "full_task_scope_complete": false,
+      "gameplay_accepted": false
+    }
+  ],
+  "qualification": {
+    "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision253_roster_public_consumer\\PUBLIC_ROSTER_CONSUMER_QUALIFICATION.json",
+    "bytes": 37781,
+    "sha256": "0bf8d4b986eb6c1c9fe8cf23cf02cf7f263ccc0bd3abe08ead34869bab1796be"
+  },
+  "source_comparison_counts": {
+    "joined": 122,
+    "source_checks": 315,
+    "source_pins": 105,
+    "direct_comparison_cases": 14,
+    "direct_refusals": 12,
+    "lifecycle_controls": 13,
+    "lifecycle_refusals": 11
+  },
+  "native_static_provenance": {
+    "AIR_SWF": {
+      "path": "F:\\OpenLeague\\docs\\reference_event_modes_sources\\AirGeneratedContent.swf",
+      "bytes": 63377,
+      "sha256": "838c3c06f90926dc77f10656d88c08f992575f286ec06f07bca4171daa61cf02"
+    },
+    "manifest_membership": {
+      "path": "assets/swfs/AirGeneratedContent.swf",
+      "release": "0.0.1.119",
+      "md5": "fd8778eedf8d83e22f34660ac37fc166",
+      "bytes": 63377,
+      "compressed_bytes": 0,
+      "sha256": "838c3c06f90926dc77f10656d88c08f992575f286ec06f07bca4171daa61cf02"
+    },
+    "decompilation_receipt": {
+      "path": "F:\\OpenLeague\\docs\\reference_content_classification_sources\\generated-decompilation.json",
+      "bytes": 10677,
+      "sha256": "e10765c3cdf1225b0f85e0543ea403a22e3a2228f954f492054d2ac039d1411d"
+    },
+    "new_JPEXS_export": false,
+    "AIR_or_native_game_executed": false
+  },
+  "inherited_Rust_test": {
+    "receipt": {
+      "path": "F:\\OpenLeague\\docs\\reference_content_classification_sources\\rust-catalogue-test.json",
+      "bytes": 1437,
+      "sha256": "0afb16f15792a8109d343102cd50ba60b6dfc4d91e8106431f7456d09ce82445"
+    },
+    "prior_result_verified_by_installed_reader": true,
+    "fresh_Rust_executed": false,
+    "scope": "Existing test checks122count and positive statistics, not exactjoin. Exactjoin is freshly tested through actual Python comparison function."
+  },
+  "portability_limit": "Public checker requires exact private Fwork V251 proof; local availability verified, portable independent deployment not qualified",
+  "historical_legacy_guard": {
+    "case": "one_unknown_resolved_in_memory_only",
+    "expected": "unknown SYS-01.3-01",
+    "observed": "unknown SYS-01.3-01",
+    "legacy_revalidation_refuses": true,
+    "passed": true,
+    "disk_registry_changed": false,
+    "meaning": "Legacy auditor hardcodes open status. This lifecycle guard is not a missing identity comparison and not a product failure."
+  },
+  "postinstall_scope_review": {
+    "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision253_roster_public_consumer\\V253_POSTINSTALL_SCOPE_REVIEW.json",
+    "bytes": 47816,
+    "sha256": "63de3e402a4539115e925115d96b0d974acc9fe1a40866d8b1f8f667ed293dcc"
+  },
+  "human_acceptance": false,
+  "gameplay_accepted": false,
+  "full_scope": false,
+  "goal_complete": false
+}

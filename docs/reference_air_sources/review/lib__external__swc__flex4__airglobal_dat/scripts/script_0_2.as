@@ -1,0 +1,26 @@
+include "flash/sampler/StackFrame.as";
+include "flash/sampler/Sample.as";
+include "flash/sampler/NewObjectSample.as";
+include "flash/sampler/DeleteObjectSample.as";
+include "flash/sampler/clearSamples.as";
+include "flash/sampler/startSampling.as";
+include "flash/sampler/stopSampling.as";
+include "flash/sampler/pauseSampling.as";
+include "flash/sampler/sampleInternalAllocs.as";
+include "flash/sampler/setSamplerCallback.as";
+include "flash/sampler/_setSamplerCallback.as";
+include "flash/sampler/getSize.as";
+include "flash/sampler/getMemberNames.as";
+include "flash/sampler/getSamples.as";
+include "flash/sampler/_getSamples.as";
+include "flash/sampler/getSampleCount.as";
+include "flash/sampler/getInvocationCount.as";
+include "flash/sampler/getSetterInvocationCount.as";
+include "flash/sampler/getGetterInvocationCount.as";
+include "flash/sampler/_getInvocationCount.as";
+include "flash/sampler/isGetterSetter.as";
+include "flash/sampler/getLexicalScopes.as";
+include "flash/sampler/getSavedThis.as";
+include "flash/sampler/getMasterString.as";
+include "flash/sampler/ClassFactory.as";
+

@@ -1,0 +1,741 @@
+{
+  "schema": "openleague_visual_comparison_links/v1",
+  "passed": true,
+  "utc": "2026-10-23T05:38:56.899695+00:00",
+  "full_task_scope_complete": false,
+  "native_or_game_executed": false,
+  "historical_server_policy_qualified": false,
+  "facts": {
+    "candidates": {
+      "producer": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision116\\prepare_visual_reader.py",
+        "bytes": 3644,
+        "sha256": "b792c0563f787465a8627d3aafd84927df94db5aaabfbfd1b6de5464ed933199"
+      },
+      "associations": [
+        {
+          "task_id": "SYS-15.4-01",
+          "finding": "Cadrage diagnostic fourni par environnement ;ne fixe pas toute condition lumineuse. Synchronisation des vues A/B avec caméra principale.",
+          "remaining": "Fixed focus and copied cameras exist;complete lighting/time/reference capture conditions remain unqualified.",
+          "anchors": [
+            {
+              "path": "crates/client/src/main.rs",
+              "line": 1523,
+              "needle": "if let Ok(raw) = std::env::var(\"OPENLEAGUE_RENDER_FOCUS\")",
+              "role": "visual_comparison_1_0"
+            },
+            {
+              "path": "crates/client/src/projected_pixel_pair.rs",
+              "line": 54,
+              "needle": "fn synchronize_cameras(",
+              "role": "visual_comparison_1_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-b58a3160-10a5-58af-8b8b-03573e72d7e0"
+        },
+        {
+          "task_id": "SYS-15.4-02",
+          "finding": "Capture fenêtre réelle optionnelle ;délai25..600s,redimensionnement et restauration ;pas reçu de succès lié au callback. Analyse pixels A/B du consommateur local,non comparaison framebuffer natif.",
+          "remaining": "Capture request and GPU readback consumers exist;fresh successful current runtime capture not performed.",
+          "anchors": [
+            {
+              "path": "crates/client/src/render_probe.rs",
+              "line": 20,
+              "needle": "pub fn capture(",
+              "role": "visual_comparison_2_0"
+            },
+            {
+              "path": "crates/client/src/projected_pixel_pair.rs",
+              "line": 116,
+              "needle": "fn read(event:On<ReadbackComplete>",
+              "role": "visual_comparison_2_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-cb34ca57-6b51-5056-8788-f3e4cafbbfb4"
+        },
+        {
+          "task_id": "SYS-15.4-03",
+          "finding": "Synchronisation des vues A/B avec caméra principale. Analyse pixels A/B du consommateur local,non comparaison framebuffer natif.",
+          "remaining": "Historical per-backend self-suppression receipts are not cross-backend or native equivalence;code/executable pins differ.",
+          "anchors": [
+            {
+              "path": "crates/client/src/projected_pixel_pair.rs",
+              "line": 54,
+              "needle": "fn synchronize_cameras(",
+              "role": "visual_comparison_3_0"
+            },
+            {
+              "path": "crates/client/src/projected_pixel_pair.rs",
+              "line": 116,
+              "needle": "fn read(event:On<ReadbackComplete>",
+              "role": "visual_comparison_3_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-61710597-f53f-5ce8-8c8d-9d99f28fdad3"
+        },
+        {
+          "task_id": "SYS-15.4-04",
+          "finding": "Notes/cases manuelles avec révision et historique ;pas preuve d’acceptation de fidélité.",
+          "remaining": "Manual task notes/history exist;named visual anomaly workflow with screenshots and reproduction not identified.",
+          "anchors": [
+            {
+              "path": "tools/project-plan/store.py",
+              "line": 134,
+              "needle": "    def change(self,updates,allow_archived=False):",
+              "role": "visual_comparison_4_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-76866170-b0eb-5fec-ab6f-2b6bcff30ac9"
+        },
+        {
+          "task_id": "SYS-15.4-05",
+          "finding": "Capture fenêtre réelle optionnelle ;délai25..600s,redimensionnement et restauration ;pas reçu de succès lié au callback. Restriction actuelle E: empêche activation avec sortie F: ;aucun ancien script lancé.",
+          "remaining": "Capture output may reuse paths;immutable replay/comparison workflow not identified and A/B still restricts output to E.",
+          "anchors": [
+            {
+              "path": "crates/client/src/render_probe.rs",
+              "line": 20,
+              "needle": "pub fn capture(",
+              "role": "visual_comparison_5_0"
+            },
+            {
+              "path": "crates/client/src/projected_pixel_pair.rs",
+              "line": 17,
+              "needle": ".filter(|p|p.parent()==Some(std::path::Path::new(\"E:/OpenLeague/logs\"))) else{return;};",
+              "role": "visual_comparison_5_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-625eba3c-a047-50eb-af07-3d79a88f821d"
+        },
+        {
+          "task_id": "SYS-15.4-06",
+          "finding": "Notes/cases manuelles avec révision et historique ;pas preuve d’acceptation de fidélité.",
+          "remaining": "Manual done/notes are not explicit human acceptance of residual visual differences;no acceptance supplied.",
+          "anchors": [
+            {
+              "path": "tools/project-plan/store.py",
+              "line": 134,
+              "needle": "    def change(self,updates,allow_archived=False):",
+              "role": "visual_comparison_6_0"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-5cae9a30-990b-5133-970e-4b58397df467"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision116\\visual-consumer-research.json",
+          "bytes": 2661,
+          "sha256": "ad90b86b5908f71c6d977157bf42ba37b2d33d4d459188095dbcc692dbfe7dcc"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision116\\historical-backend-evidence-audit.json",
+          "bytes": 6706,
+          "sha256": "5f5aeec6f3ab496c57e833d013b2a2aa4fbcb56bd32ac0077283d451a8eab4da"
+        }
+      ],
+      "current_sources": [
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+          "bytes": 141376,
+          "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+          "bytes": 18356,
+          "sha256": "504fab23e9cd9da8b1d43768ce5ce9fe6511592556ad052bfb2384df13eeed41"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\render_probe.rs",
+          "bytes": 3174,
+          "sha256": "ef998353d99c24592ed7f7fa8c3941a69466345f2d7d9701618879de748ef968"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+          "bytes": 18356,
+          "sha256": "504fab23e9cd9da8b1d43768ce5ce9fe6511592556ad052bfb2384df13eeed41"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+          "bytes": 18356,
+          "sha256": "504fab23e9cd9da8b1d43768ce5ce9fe6511592556ad052bfb2384df13eeed41"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+          "bytes": 18356,
+          "sha256": "504fab23e9cd9da8b1d43768ce5ce9fe6511592556ad052bfb2384df13eeed41"
+        },
+        {
+          "path": "F:\\OpenLeague\\tools\\project-plan\\store.py",
+          "bytes": 17975,
+          "sha256": "603e84c19f1e927d9beff2ac66a14d885af8961eaceae19c584d3d42ea1ef656"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\render_probe.rs",
+          "bytes": 3174,
+          "sha256": "ef998353d99c24592ed7f7fa8c3941a69466345f2d7d9701618879de748ef968"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+          "bytes": 18356,
+          "sha256": "504fab23e9cd9da8b1d43768ce5ce9fe6511592556ad052bfb2384df13eeed41"
+        },
+        {
+          "path": "F:\\OpenLeague\\tools\\project-plan\\store.py",
+          "bytes": 17975,
+          "sha256": "603e84c19f1e927d9beff2ac66a14d885af8961eaceae19c584d3d42ea1ef656"
+        }
+      ],
+      "scope": "Static current consumers and historical artifact identity audit;no fresh GPU test or human acceptance."
+    },
+    "receipts": {
+      "visual-consumer-research.json": {
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\render_probe.rs",
+              "bytes": 3174,
+              "sha256": "ef998353d99c24592ed7f7fa8c3941a69466345f2d7d9701618879de748ef968"
+            },
+            "line": 20,
+            "needle": "pub fn capture(",
+            "finding": "Capture fenêtre réelle optionnelle ;délai25..600s,redimensionnement et restauration ;pas reçu de succès lié au callback."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+              "bytes": 141376,
+              "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+            },
+            "line": 1523,
+            "needle": "if let Ok(raw) = std::env::var(\"OPENLEAGUE_RENDER_FOCUS\")",
+            "finding": "Cadrage diagnostic fourni par environnement ;ne fixe pas toute condition lumineuse."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+              "bytes": 18356,
+              "sha256": "504fab23e9cd9da8b1d43768ce5ce9fe6511592556ad052bfb2384df13eeed41"
+            },
+            "line": 54,
+            "needle": "fn synchronize_cameras(",
+            "finding": "Synchronisation des vues A/B avec caméra principale."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+              "bytes": 18356,
+              "sha256": "504fab23e9cd9da8b1d43768ce5ce9fe6511592556ad052bfb2384df13eeed41"
+            },
+            "line": 116,
+            "needle": "fn read(event:On<ReadbackComplete>",
+            "finding": "Analyse pixels A/B du consommateur local,non comparaison framebuffer natif."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+              "bytes": 18356,
+              "sha256": "504fab23e9cd9da8b1d43768ce5ce9fe6511592556ad052bfb2384df13eeed41"
+            },
+            "line": 17,
+            "needle": ".filter(|p|p.parent()==Some(std::path::Path::new(\"E:/OpenLeague/logs\"))) else{return;};",
+            "finding": "Restriction actuelle E: empêche activation avec sortie F: ;aucun ancien script lancé."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\tools\\project-plan\\store.py",
+              "bytes": 17975,
+              "sha256": "603e84c19f1e927d9beff2ac66a14d885af8961eaceae19c584d3d42ea1ef656"
+            },
+            "line": 134,
+            "needle": "    def change(self,updates,allow_archived=False):",
+            "finding": "Notes/cases manuelles avec révision et historique ;pas preuve d’acceptation de fidélité."
+          }
+        ],
+        "fresh_gpu_execution": false,
+        "human_acceptance": false,
+        "full_task_scope_complete": false
+      },
+      "historical-backend-evidence-audit.json": {
+        "rows": [
+          {
+            "backend": "vulkan",
+            "receipt": {
+              "path": "F:\\OpenLeague\\docs\\projected_receiver_pixels_v69_vulkan.json",
+              "bytes": 2118,
+              "sha256": "5a5258933d3e94576aa1c4ec25fe0014d89e50b5a1d694c7afb598b7f8fcccfc"
+            },
+            "historical_pass": true,
+            "complete": false,
+            "limits": [
+              "Opt-in duplicate camera views render the same scene snapshot; only projected render layer differs. Raw atlas and frame metadata copied after both camera passes, before one GPU readback.",
+              "Baseline equality must pass; no original D3D pixel equivalence, audio or full kit acceptance.",
+              "Three camera views impose diagnostic overhead. This compares the reconstructed consumer with itself suppressed; it does not qualify original LoL framebuffer equivalence or the full game."
+            ],
+            "checks": [
+              {
+                "path": "F:\\OpenLeague\\logs\\projected-core-cycle-v69-receivers-vulkan-pixels.json",
+                "expected_sha256": "8f9af7128716d12d021ecb0dc5d421f54959ffd5eec6f658f200eb885aa1573e",
+                "current": {
+                  "path": "F:\\OpenLeague\\logs\\projected-core-cycle-v69-receivers-vulkan-pixels.json",
+                  "bytes": 233402,
+                  "sha256": "8f9af7128716d12d021ecb0dc5d421f54959ffd5eec6f658f200eb885aa1573e"
+                },
+                "matches": true
+              },
+              {
+                "path": "F:\\OpenLeague\\docs\\projected_core_cycle_capture_v69_receivers_vulkan.json",
+                "expected_sha256": "88c32eef9ed365594776a9788247332132986870e9a5343075e8e053f3bae024",
+                "current": {
+                  "path": "F:\\OpenLeague\\docs\\projected_core_cycle_capture_v69_receivers_vulkan.json",
+                  "bytes": 22034,
+                  "sha256": "88c32eef9ed365594776a9788247332132986870e9a5343075e8e053f3bae024"
+                },
+                "matches": true
+              },
+              {
+                "path": "F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+                "expected_sha256": "38480f9c6eedd39f61cb825c60207f06fa33fe42ab1152a8e6d75d1e87de6ca5",
+                "current": {
+                  "path": "F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+                  "bytes": 18356,
+                  "sha256": "504fab23e9cd9da8b1d43768ce5ce9fe6511592556ad052bfb2384df13eeed41"
+                },
+                "matches": false
+              },
+              {
+                "path": "F:\\OpenLeague\\logs\\native-effect-clock-v69-build.log",
+                "expected_sha256": "79d58ab03a3e5737b2befa93a7388f954d596a5712eadcb2234303a87b61e737",
+                "current": {
+                  "path": "F:\\OpenLeague\\logs\\native-effect-clock-v69-build.log",
+                  "bytes": 26472,
+                  "sha256": "79d58ab03a3e5737b2befa93a7388f954d596a5712eadcb2234303a87b61e737"
+                },
+                "matches": true
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\openleague-client.exe",
+                "expected_sha256": "d78d68557c38624d62891ce3b7419e6318fcf17164b8044f6a8dfee07775db90",
+                "current": {
+                  "path": "F:\\OpenLeague\\target\\debug\\openleague-client.exe",
+                  "bytes": 169926144,
+                  "sha256": "13aae8f0c8984963b42653e02c31348ac4c73298300cba6f9ad850f3928ca4ba"
+                },
+                "matches": false
+              }
+            ]
+          },
+          {
+            "backend": "dx12",
+            "receipt": {
+              "path": "F:\\OpenLeague\\docs\\projected_receiver_pixels_v69_dx12.json",
+              "bytes": 2110,
+              "sha256": "4af19331b1a0a2828de5f113dd01295074cc694cf3a0053744e451dca5526076"
+            },
+            "historical_pass": true,
+            "complete": false,
+            "limits": [
+              "Opt-in duplicate camera views render the same scene snapshot; only projected render layer differs. Raw atlas and frame metadata copied after both camera passes, before one GPU readback.",
+              "Baseline equality must pass; no original D3D pixel equivalence, audio or full kit acceptance.",
+              "Three camera views impose diagnostic overhead. This compares the reconstructed consumer with itself suppressed; it does not qualify original LoL framebuffer equivalence or the full game."
+            ],
+            "checks": [
+              {
+                "path": "F:\\OpenLeague\\logs\\projected-core-cycle-v69-receivers-dx12-pixels.json",
+                "expected_sha256": "74bd9f5b11be8346281c8d4f7e4e722a9992a6095ad85ed47adffcd8d754e3ef",
+                "current": {
+                  "path": "F:\\OpenLeague\\logs\\projected-core-cycle-v69-receivers-dx12-pixels.json",
+                  "bytes": 135652,
+                  "sha256": "74bd9f5b11be8346281c8d4f7e4e722a9992a6095ad85ed47adffcd8d754e3ef"
+                },
+                "matches": true
+              },
+              {
+                "path": "F:\\OpenLeague\\docs\\projected_core_cycle_capture_v69_receivers_dx12.json",
+                "expected_sha256": "14508a4f49c125a28825db850936bd276f09c5664845763913080b1029b1de93",
+                "current": {
+                  "path": "F:\\OpenLeague\\docs\\projected_core_cycle_capture_v69_receivers_dx12.json",
+                  "bytes": 16502,
+                  "sha256": "14508a4f49c125a28825db850936bd276f09c5664845763913080b1029b1de93"
+                },
+                "matches": true
+              },
+              {
+                "path": "F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+                "expected_sha256": "38480f9c6eedd39f61cb825c60207f06fa33fe42ab1152a8e6d75d1e87de6ca5",
+                "current": {
+                  "path": "F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+                  "bytes": 18356,
+                  "sha256": "504fab23e9cd9da8b1d43768ce5ce9fe6511592556ad052bfb2384df13eeed41"
+                },
+                "matches": false
+              },
+              {
+                "path": "F:\\OpenLeague\\logs\\native-effect-clock-v69-build.log",
+                "expected_sha256": "79d58ab03a3e5737b2befa93a7388f954d596a5712eadcb2234303a87b61e737",
+                "current": {
+                  "path": "F:\\OpenLeague\\logs\\native-effect-clock-v69-build.log",
+                  "bytes": 26472,
+                  "sha256": "79d58ab03a3e5737b2befa93a7388f954d596a5712eadcb2234303a87b61e737"
+                },
+                "matches": true
+              },
+              {
+                "path": "F:\\OpenLeague\\target\\debug\\openleague-client.exe",
+                "expected_sha256": "d78d68557c38624d62891ce3b7419e6318fcf17164b8044f6a8dfee07775db90",
+                "current": {
+                  "path": "F:\\OpenLeague\\target\\debug\\openleague-client.exe",
+                  "bytes": 169926144,
+                  "sha256": "13aae8f0c8984963b42653e02c31348ac4c73298300cba6f9ad850f3928ca4ba"
+                },
+                "matches": false
+              }
+            ]
+          }
+        ],
+        "fresh_gpu_execution": false,
+        "native_framebuffer_comparison": false,
+        "all_task_scope_complete": false
+      }
+    },
+    "source_checks": [
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision116\\visual-comparison-associations.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision116\\prepare_visual_reader.py",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision116\\visual-consumer-research.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision116\\historical-backend-evidence-audit.json",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\render_probe.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\store.py",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\render_probe.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\store.py",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\render_probe.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\store.py",
+      "pin_F:\\OpenLeague\\docs\\projected_receiver_pixels_v69_vulkan.json",
+      "pin_F:\\OpenLeague\\logs\\projected-core-cycle-v69-receivers-vulkan-pixels.json",
+      "pin_F:\\OpenLeague\\docs\\projected_core_cycle_capture_v69_receivers_vulkan.json",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+      "pin_F:\\OpenLeague\\logs\\native-effect-clock-v69-build.log",
+      "pin_F:\\OpenLeague\\target\\debug\\openleague-client.exe",
+      "pin_F:\\OpenLeague\\docs\\projected_receiver_pixels_v69_dx12.json",
+      "pin_F:\\OpenLeague\\logs\\projected-core-cycle-v69-receivers-dx12-pixels.json",
+      "pin_F:\\OpenLeague\\docs\\projected_core_cycle_capture_v69_receivers_dx12.json",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+      "pin_F:\\OpenLeague\\logs\\native-effect-clock-v69-build.log",
+      "pin_F:\\OpenLeague\\target\\debug\\openleague-client.exe",
+      "two_historical_backends",
+      "historical_scope",
+      "historical_pin_drift",
+      "six_associations",
+      "task_SYS-15.4-01",
+      "anchor_visual_comparison_1_0",
+      "anchor_visual_comparison_1_1",
+      "task_SYS-15.4-02",
+      "anchor_visual_comparison_2_0",
+      "anchor_visual_comparison_2_1",
+      "task_SYS-15.4-03",
+      "anchor_visual_comparison_3_0",
+      "anchor_visual_comparison_3_1",
+      "task_SYS-15.4-04",
+      "anchor_visual_comparison_4_0",
+      "task_SYS-15.4-05",
+      "anchor_visual_comparison_5_0",
+      "anchor_visual_comparison_5_1",
+      "task_SYS-15.4-06",
+      "anchor_visual_comparison_6_0"
+    ],
+    "all_visual_comparisons_qualified": false,
+    "all_required_effects_covered": false
+  },
+  "source_identities": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision116\\visual-comparison-associations.json",
+      "bytes": 8360,
+      "sha256": "5245d537cd01b38c15d5bca3a09c0771374acf01254d28964d701a96a512e81d"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision116\\prepare_visual_reader.py",
+      "bytes": 3644,
+      "sha256": "b792c0563f787465a8627d3aafd84927df94db5aaabfbfd1b6de5464ed933199"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision116\\visual-consumer-research.json",
+      "bytes": 2661,
+      "sha256": "ad90b86b5908f71c6d977157bf42ba37b2d33d4d459188095dbcc692dbfe7dcc"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision116\\historical-backend-evidence-audit.json",
+      "bytes": 6706,
+      "sha256": "5f5aeec6f3ab496c57e833d013b2a2aa4fbcb56bd32ac0077283d451a8eab4da"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\main.rs",
+      "bytes": 141376,
+      "sha256": "eba4e38b4c5c244426e74feeb70ed351e9cddcb58e2507cfcd1bfc771dc4b620"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+      "bytes": 18356,
+      "sha256": "504fab23e9cd9da8b1d43768ce5ce9fe6511592556ad052bfb2384df13eeed41"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\render_probe.rs",
+      "bytes": 3174,
+      "sha256": "ef998353d99c24592ed7f7fa8c3941a69466345f2d7d9701618879de748ef968"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\store.py",
+      "bytes": 17975,
+      "sha256": "603e84c19f1e927d9beff2ac66a14d885af8961eaceae19c584d3d42ea1ef656"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\projected_receiver_pixels_v69_vulkan.json",
+      "bytes": 2118,
+      "sha256": "5a5258933d3e94576aa1c4ec25fe0014d89e50b5a1d694c7afb598b7f8fcccfc"
+    },
+    {
+      "path": "F:\\OpenLeague\\logs\\projected-core-cycle-v69-receivers-vulkan-pixels.json",
+      "bytes": 233402,
+      "sha256": "8f9af7128716d12d021ecb0dc5d421f54959ffd5eec6f658f200eb885aa1573e"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\projected_core_cycle_capture_v69_receivers_vulkan.json",
+      "bytes": 22034,
+      "sha256": "88c32eef9ed365594776a9788247332132986870e9a5343075e8e053f3bae024"
+    },
+    {
+      "path": "F:\\OpenLeague\\logs\\native-effect-clock-v69-build.log",
+      "bytes": 26472,
+      "sha256": "79d58ab03a3e5737b2befa93a7388f954d596a5712eadcb2234303a87b61e737"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\openleague-client.exe",
+      "bytes": 169926144,
+      "sha256": "13aae8f0c8984963b42653e02c31348ac4c73298300cba6f9ad850f3928ca4ba"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\projected_receiver_pixels_v69_dx12.json",
+      "bytes": 2110,
+      "sha256": "4af19331b1a0a2828de5f113dd01295074cc694cf3a0053744e451dca5526076"
+    },
+    {
+      "path": "F:\\OpenLeague\\logs\\projected-core-cycle-v69-receivers-dx12-pixels.json",
+      "bytes": 135652,
+      "sha256": "74bd9f5b11be8346281c8d4f7e4e722a9992a6095ad85ed47adffcd8d754e3ef"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\projected_core_cycle_capture_v69_receivers_dx12.json",
+      "bytes": 16502,
+      "sha256": "14508a4f49c125a28825db850936bd276f09c5664845763913080b1029b1de93"
+    }
+  ],
+  "checks": [
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision116\\visual-comparison-associations.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision116\\prepare_visual_reader.py",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision116\\visual-consumer-research.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision116\\historical-backend-evidence-audit.json",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\render_probe.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\store.py",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\render_probe.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\store.py",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\render_probe.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\store.py",
+    "pin_F:\\OpenLeague\\docs\\projected_receiver_pixels_v69_vulkan.json",
+    "pin_F:\\OpenLeague\\logs\\projected-core-cycle-v69-receivers-vulkan-pixels.json",
+    "pin_F:\\OpenLeague\\docs\\projected_core_cycle_capture_v69_receivers_vulkan.json",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+    "pin_F:\\OpenLeague\\logs\\native-effect-clock-v69-build.log",
+    "pin_F:\\OpenLeague\\target\\debug\\openleague-client.exe",
+    "pin_F:\\OpenLeague\\docs\\projected_receiver_pixels_v69_dx12.json",
+    "pin_F:\\OpenLeague\\logs\\projected-core-cycle-v69-receivers-dx12-pixels.json",
+    "pin_F:\\OpenLeague\\docs\\projected_core_cycle_capture_v69_receivers_dx12.json",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\projected_pixel_pair.rs",
+    "pin_F:\\OpenLeague\\logs\\native-effect-clock-v69-build.log",
+    "pin_F:\\OpenLeague\\target\\debug\\openleague-client.exe",
+    "two_historical_backends",
+    "historical_scope",
+    "historical_pin_drift",
+    "six_associations",
+    "task_SYS-15.4-01",
+    "anchor_visual_comparison_1_0",
+    "anchor_visual_comparison_1_1",
+    "task_SYS-15.4-02",
+    "anchor_visual_comparison_2_0",
+    "anchor_visual_comparison_2_1",
+    "task_SYS-15.4-03",
+    "anchor_visual_comparison_3_0",
+    "anchor_visual_comparison_3_1",
+    "task_SYS-15.4-04",
+    "anchor_visual_comparison_4_0",
+    "task_SYS-15.4-05",
+    "anchor_visual_comparison_5_0",
+    "anchor_visual_comparison_5_1",
+    "task_SYS-15.4-06",
+    "anchor_visual_comparison_6_0"
+  ],
+  "checks_count": 52,
+  "associations": [
+    {
+      "task_id": "SYS-15.4-01",
+      "finding": "Cadrage diagnostic fourni par environnement ;ne fixe pas toute condition lumineuse. Synchronisation des vues A/B avec caméra principale.",
+      "remaining": "Fixed focus and copied cameras exist;complete lighting/time/reference capture conditions remain unqualified.",
+      "anchors": [
+        {
+          "path": "crates/client/src/main.rs",
+          "line": 1523,
+          "needle": "if let Ok(raw) = std::env::var(\"OPENLEAGUE_RENDER_FOCUS\")",
+          "role": "visual_comparison_1_0"
+        },
+        {
+          "path": "crates/client/src/projected_pixel_pair.rs",
+          "line": 54,
+          "needle": "fn synchronize_cameras(",
+          "role": "visual_comparison_1_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-b58a3160-10a5-58af-8b8b-03573e72d7e0"
+    },
+    {
+      "task_id": "SYS-15.4-02",
+      "finding": "Capture fenêtre réelle optionnelle ;délai25..600s,redimensionnement et restauration ;pas reçu de succès lié au callback. Analyse pixels A/B du consommateur local,non comparaison framebuffer natif.",
+      "remaining": "Capture request and GPU readback consumers exist;fresh successful current runtime capture not performed.",
+      "anchors": [
+        {
+          "path": "crates/client/src/render_probe.rs",
+          "line": 20,
+          "needle": "pub fn capture(",
+          "role": "visual_comparison_2_0"
+        },
+        {
+          "path": "crates/client/src/projected_pixel_pair.rs",
+          "line": 116,
+          "needle": "fn read(event:On<ReadbackComplete>",
+          "role": "visual_comparison_2_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-cb34ca57-6b51-5056-8788-f3e4cafbbfb4"
+    },
+    {
+      "task_id": "SYS-15.4-03",
+      "finding": "Synchronisation des vues A/B avec caméra principale. Analyse pixels A/B du consommateur local,non comparaison framebuffer natif.",
+      "remaining": "Historical per-backend self-suppression receipts are not cross-backend or native equivalence;code/executable pins differ.",
+      "anchors": [
+        {
+          "path": "crates/client/src/projected_pixel_pair.rs",
+          "line": 54,
+          "needle": "fn synchronize_cameras(",
+          "role": "visual_comparison_3_0"
+        },
+        {
+          "path": "crates/client/src/projected_pixel_pair.rs",
+          "line": 116,
+          "needle": "fn read(event:On<ReadbackComplete>",
+          "role": "visual_comparison_3_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-61710597-f53f-5ce8-8c8d-9d99f28fdad3"
+    },
+    {
+      "task_id": "SYS-15.4-04",
+      "finding": "Notes/cases manuelles avec révision et historique ;pas preuve d’acceptation de fidélité.",
+      "remaining": "Manual task notes/history exist;named visual anomaly workflow with screenshots and reproduction not identified.",
+      "anchors": [
+        {
+          "path": "tools/project-plan/store.py",
+          "line": 134,
+          "needle": "    def change(self,updates,allow_archived=False):",
+          "role": "visual_comparison_4_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-76866170-b0eb-5fec-ab6f-2b6bcff30ac9"
+    },
+    {
+      "task_id": "SYS-15.4-05",
+      "finding": "Capture fenêtre réelle optionnelle ;délai25..600s,redimensionnement et restauration ;pas reçu de succès lié au callback. Restriction actuelle E: empêche activation avec sortie F: ;aucun ancien script lancé.",
+      "remaining": "Capture output may reuse paths;immutable replay/comparison workflow not identified and A/B still restricts output to E.",
+      "anchors": [
+        {
+          "path": "crates/client/src/render_probe.rs",
+          "line": 20,
+          "needle": "pub fn capture(",
+          "role": "visual_comparison_5_0"
+        },
+        {
+          "path": "crates/client/src/projected_pixel_pair.rs",
+          "line": 17,
+          "needle": ".filter(|p|p.parent()==Some(std::path::Path::new(\"E:/OpenLeague/logs\"))) else{return;};",
+          "role": "visual_comparison_5_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-625eba3c-a047-50eb-af07-3d79a88f821d"
+    },
+    {
+      "task_id": "SYS-15.4-06",
+      "finding": "Notes/cases manuelles avec révision et historique ;pas preuve d’acceptation de fidélité.",
+      "remaining": "Manual done/notes are not explicit human acceptance of residual visual differences;no acceptance supplied.",
+      "anchors": [
+        {
+          "path": "tools/project-plan/store.py",
+          "line": 134,
+          "needle": "    def change(self,updates,allow_archived=False):",
+          "role": "visual_comparison_6_0"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-5cae9a30-990b-5133-970e-4b58397df467"
+    }
+  ]
+}

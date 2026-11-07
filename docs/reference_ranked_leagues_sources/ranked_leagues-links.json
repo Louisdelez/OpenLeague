@@ -1,0 +1,1384 @@
+{
+  "schema": "openleague_ranked_leagues_links/v1",
+  "passed": true,
+  "utc": "2026-10-23T08:06:25.632720+00:00",
+  "full_task_scope_complete": false,
+  "native_or_game_executed": false,
+  "historical_server_policy_qualified": false,
+  "facts": {
+    "candidates": {
+      "producer": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision136\\prepare_ranked_leagues_reader.py",
+        "bytes": 3313,
+        "sha256": "f2256bacba9d9ede6dca20f939b137fc3854a19132f032f1aa5399bad07b98b1"
+      },
+      "associations": [
+        {
+          "task_id": "SYS-19.5-01",
+          "finding": "Two retained AIR screen groups and ten source views identified;full public rules remain to qualify.",
+          "remaining": "Complete the documented task;keep public UI contracts,unknown Riot backend and explicit local ranking rules distinct. Two retained AIR screen groups and ten source views identified;full public rules remain to qualify.",
+          "anchors": [
+            {
+              "path": "tools/project-plan/air_reference.py",
+              "line": 93,
+              "needle": "def verify(doc,root,verify_sources=True):",
+              "role": "ranked_leagues_1"
+            }
+          ],
+          "native_bindings": [
+            {
+              "service_family": "leagues",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+                "bytes": 15297,
+                "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+              }
+            },
+            {
+              "service_family": "leagues",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+                "bytes": 1175,
+                "sha256": "d9c3699c4d50c2d082e6ea22c4bfc9327d4f31621c22c24ed9dc098ed6cabd55"
+              }
+            }
+          ],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-4db1a92d-78fb-5362-983a-99803f3e6608"
+        },
+        {
+          "task_id": "SYS-19.5-02",
+          "finding": "AIR league interfaces do not recover Riot MMR/placement/LP algorithms;local launcher exposes no league command.",
+          "remaining": "Complete the documented task;keep public UI contracts,unknown Riot backend and explicit local ranking rules distinct. AIR league interfaces do not recover Riot MMR/placement/LP algorithms;local launcher exposes no league command.",
+          "anchors": [
+            {
+              "path": "launcher/src-tauri/src/main.rs",
+              "line": 72,
+              "needle": ".invoke_handler(",
+              "role": "ranked_leagues_2"
+            }
+          ],
+          "native_bindings": [
+            {
+              "service_family": "leagues",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+                "bytes": 15297,
+                "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+              }
+            },
+            {
+              "service_family": "leagues",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+                "bytes": 1175,
+                "sha256": "d9c3699c4d50c2d082e6ea22c4bfc9327d4f31621c22c24ed9dc098ed6cabd55"
+              }
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-ef8060a6-74d6-58d8-af74-bbdfa66a8df1"
+        },
+        {
+          "task_id": "SYS-19.5-03",
+          "finding": "Final match results do not define a local placement/progression algorithm.",
+          "remaining": "Complete the documented task;keep public UI contracts,unknown Riot backend and explicit local ranking rules distinct. Final match results do not define a local placement/progression algorithm.",
+          "anchors": [
+            {
+              "path": "crates/core/src/match_results.rs",
+              "line": 12,
+              "needle": "pub struct MatchResult",
+              "role": "ranked_leagues_3"
+            }
+          ],
+          "native_bindings": [
+            {
+              "service_family": "leagues",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+                "bytes": 15297,
+                "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+              }
+            },
+            {
+              "service_family": "leagues",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+                "bytes": 1175,
+                "sha256": "d9c3699c4d50c2d082e6ea22c4bfc9327d4f31621c22c24ed9dc098ed6cabd55"
+              }
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-322f7634-8d5d-5de5-bbda-efc4e77fe88a"
+        },
+        {
+          "task_id": "SYS-19.5-04",
+          "finding": "Immutable match JSON does not persist ranked divisions,points or promotion series.",
+          "remaining": "Complete the documented task;keep public UI contracts,unknown Riot backend and explicit local ranking rules distinct. Immutable match JSON does not persist ranked divisions,points or promotion series.",
+          "anchors": [
+            {
+              "path": "crates/server/src/result_store.rs",
+              "line": 4,
+              "needle": "pub fn save(",
+              "role": "ranked_leagues_4"
+            }
+          ],
+          "native_bindings": [
+            {
+              "service_family": "leagues",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+                "bytes": 15297,
+                "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+              }
+            },
+            {
+              "service_family": "leagues",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+                "bytes": 1175,
+                "sha256": "d9c3699c4d50c2d082e6ea22c4bfc9327d4f31621c22c24ed9dc098ed6cabd55"
+              }
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-662ca387-a6dd-521e-ab22-fac3ba68db5d"
+        },
+        {
+          "task_id": "SYS-19.5-05",
+          "finding": "Balanced in-match sides are not persistent ranked teams with owners and members.",
+          "remaining": "Complete the documented task;keep public UI contracts,unknown Riot backend and explicit local ranking rules distinct. Balanced in-match sides are not persistent ranked teams with owners and members.",
+          "anchors": [
+            {
+              "path": "crates/core/src/lib.rs",
+              "line": 533,
+              "needle": "pub fn join(&mut self, name:",
+              "role": "ranked_leagues_5"
+            }
+          ],
+          "native_bindings": [
+            {
+              "service_family": "teams",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+                "bytes": 15297,
+                "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+              }
+            },
+            {
+              "service_family": "teams",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\TeamService.as",
+                "bytes": 2041,
+                "sha256": "8ed8bfc0df7cb546116d14cd3a9a2050e1459cdb32e3edbbb3d7c66034a67f1a"
+              }
+            },
+            {
+              "service_family": "teams",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\TeamServiceImpl.as",
+                "bytes": 5105,
+                "sha256": "2fc61c62e940dc9a86d37f6e79ae614a258ef6d6c1d7eb50b66444576f5625ce"
+              }
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-bf1fc0ff-a491-536b-a87b-07ec1ca268e6"
+        },
+        {
+          "task_id": "SYS-19.5-06",
+          "finding": "No local ranked-team profile/history/roster command.",
+          "remaining": "Complete the documented task;keep public UI contracts,unknown Riot backend and explicit local ranking rules distinct. No local ranked-team profile/history/roster command.",
+          "anchors": [
+            {
+              "path": "launcher/src-tauri/src/main.rs",
+              "line": 72,
+              "needle": ".invoke_handler(",
+              "role": "ranked_leagues_6"
+            }
+          ],
+          "native_bindings": [
+            {
+              "service_family": "teams",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+                "bytes": 15297,
+                "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+              }
+            },
+            {
+              "service_family": "teams",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\TeamService.as",
+                "bytes": 2041,
+                "sha256": "8ed8bfc0df7cb546116d14cd3a9a2050e1459cdb32e3edbbb3d7c66034a67f1a"
+              }
+            },
+            {
+              "service_family": "teams",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\TeamServiceImpl.as",
+                "bytes": 5105,
+                "sha256": "2fc61c62e940dc9a86d37f6e79ae614a258ef6d6c1d7eb50b66444576f5625ce"
+              }
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-9912be3d-d698-527e-803d-2791108637ac"
+        },
+        {
+          "task_id": "SYS-19.5-07",
+          "finding": "Result JSON idempotence is not idempotent ranked ledger application or restoration.",
+          "remaining": "Complete the documented task;keep public UI contracts,unknown Riot backend and explicit local ranking rules distinct. Result JSON idempotence is not idempotent ranked ledger application or restoration.",
+          "anchors": [
+            {
+              "path": "crates/server/src/result_store.rs",
+              "line": 4,
+              "needle": "pub fn save(",
+              "role": "ranked_leagues_7"
+            }
+          ],
+          "native_bindings": [
+            {
+              "service_family": "leagues",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+                "bytes": 15297,
+                "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+              }
+            },
+            {
+              "service_family": "leagues",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+                "bytes": 1175,
+                "sha256": "d9c3699c4d50c2d082e6ea22c4bfc9327d4f31621c22c24ed9dc098ed6cabd55"
+              }
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-8625c7a9-1752-5b68-b5bf-c767cb2becae"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision136\\ranked-leagues-research.json",
+          "bytes": 20174,
+          "sha256": "18c212287ea768d1bd6e7b5258c4c0a7a6c4af6bcf0a5fb2e36d04d6dd27540a"
+        }
+      ],
+      "current_sources": [
+        {
+          "path": "F:\\OpenLeague\\tools\\project-plan\\air_reference.py",
+          "bytes": 16399,
+          "sha256": "4421bb1b6215b11371e137bc292dd891eda498e16aaeea2955d84f1997eed33e"
+        },
+        {
+          "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+          "bytes": 3491,
+          "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\match_results.rs",
+          "bytes": 4021,
+          "sha256": "48c15c370a316084296c8a1e356fddf30730ca10223d37fbe71ee6cacec37be7"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\server\\src\\result_store.rs",
+          "bytes": 2007,
+          "sha256": "bbb88cc61148681b0edd3ebd38c5dc1ed797a86867d54db0344f34ee8d862415"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+          "bytes": 52808,
+          "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+        },
+        {
+          "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+          "bytes": 3491,
+          "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\server\\src\\result_store.rs",
+          "bytes": 2007,
+          "sha256": "bbb88cc61148681b0edd3ebd38c5dc1ed797a86867d54db0344f34ee8d862415"
+        }
+      ],
+      "scope": "Partial native UI inventory and explicit ranking backend boundaries;no ranked result applied."
+    },
+    "receipts": {
+      "ranked-leagues-research.json": {
+        "utc": "2026-10-23T08:05:13.092762+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision136\\research_ranked_leagues.py",
+          "bytes": 3544,
+          "sha256": "b7dfd2199d7c618aeb11c8efd4455ec955f31f64a2c04c3dfcd98f932ae6e0a1"
+        },
+        "contract": {
+          "path": "F:\\OpenLeague\\docs\\reference_local_services_4_20.json",
+          "bytes": 317028,
+          "sha256": "8a6afdc263b5c0959212425feb9e437b3a2264ea1d3a3590f825cb52ef406efb"
+        },
+        "air_contract": {
+          "path": "F:\\OpenLeague\\docs\\reference_air_routes_4_20.json",
+          "bytes": 11465788,
+          "sha256": "6219091152d3fd95cc207aa85126eceb532b20fa822a694d1c2f6f0545223623"
+        },
+        "families": [
+          {
+            "id": "teams",
+            "title": "Équipes classées historiques",
+            "scope_decision": "replace_locally",
+            "current_state": "not_implemented",
+            "riot_server_implementation_recovered": false,
+            "runtime_qualified_in_this_task": false,
+            "historical_proxy_properties": [
+              "teamService"
+            ],
+            "local_contract": "Équipe locale, propriétaire, membres, invitations et historique pour le périmètre classé4.20 applicable.",
+            "authority": "Permissions du propriétaire/membres et contraintes du mode.",
+            "persistence": "Identité d’équipe, roster, invitations et résultats associés.",
+            "nominal_acceptance": "Création/adhésion/retour persistants et cohérents avec file et résultat.",
+            "refusal_acceptance": "Équipe pleine, membre non invité, joueur inéligible ou modification sans permission : refus.",
+            "current_evidence": "summonerTeamService n’a pas d’équivalent de compte/équipe local actuellement exposé.",
+            "source_ids": [
+              "air.ServiceProxy",
+              "air.TeamService",
+              "air.TeamServiceImpl",
+              "current.launcher/src-tauri/src/main.rs",
+              "current.crates/server/src/main.rs"
+            ],
+            "backlog_task_ids": [
+              "SYS-19.5-01",
+              "SYS-19.5-02",
+              "SYS-19.5-03",
+              "SYS-19.5-04",
+              "SYS-19.5-05",
+              "SYS-19.5-06",
+              "SYS-19.5-07"
+            ],
+            "depends_on": [
+              "identity",
+              "social"
+            ],
+            "remaining_work": "Implémenter et qualifier ce contrat dans les tâches liées ; conserver les acquis listés, sans déduire la disponibilité du service de ce périmètre."
+          },
+          {
+            "id": "leagues",
+            "title": "Classement, ligues et placements locaux",
+            "scope_decision": "replace_locally",
+            "current_state": "not_implemented",
+            "riot_server_implementation_recovered": false,
+            "runtime_qualified_in_this_task": false,
+            "historical_proxy_properties": [
+              "leagueService"
+            ],
+            "local_contract": "Système local explicitement nommé : divisions, points, placements/séries/décroissance à spécifier ; MMR interne Riot non récupéré.",
+            "authority": "Règle de classement locale versionnée, résultats autoritaires et éligibilité vérifiée.",
+            "persistence": "Points/divisions/séries et ledger de résultats appliqués une fois.",
+            "nominal_acceptance": "Rejeu de résultats et restauration ne modifient pas une seconde fois le classement.",
+            "refusal_acceptance": "Règle non définie ou résultat contradictoire : classement indisponible, aucune valeur Riot inventée.",
+            "current_evidence": "InterfacesCLSServicePlatform récupérées ; algorithme serveur et service local absents du périmètre exécuté.",
+            "source_ids": [
+              "air.ServiceProxy",
+              "air.CLSServicePlatform",
+              "current.launcher/src-tauri/src/main.rs",
+              "current.crates/server/src/main.rs"
+            ],
+            "backlog_task_ids": [
+              "SYS-19.5-01",
+              "SYS-19.5-02",
+              "SYS-19.5-03",
+              "SYS-19.5-04",
+              "SYS-19.5-05",
+              "SYS-19.5-06",
+              "SYS-19.5-07"
+            ],
+            "depends_on": [
+              "results",
+              "teams"
+            ],
+            "remaining_work": "Implémenter et qualifier ce contrat dans les tâches liées ; conserver les acquis listés, sans déduire la disponibilité du service de ce périmètre."
+          }
+        ],
+        "sources": [
+          {
+            "id": "air.ServiceProxy",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+              "bytes": 15297,
+              "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+              "bytes": 15297,
+              "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+            }
+          },
+          {
+            "id": "air.CLSServicePlatform",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+              "bytes": 1175,
+              "sha256": "d9c3699c4d50c2d082e6ea22c4bfc9327d4f31621c22c24ed9dc098ed6cabd55"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+              "bytes": 1175,
+              "sha256": "d9c3699c4d50c2d082e6ea22c4bfc9327d4f31621c22c24ed9dc098ed6cabd55"
+            }
+          },
+          {
+            "id": "air.TeamService",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\TeamService.as",
+              "bytes": 2041,
+              "sha256": "8ed8bfc0df7cb546116d14cd3a9a2050e1459cdb32e3edbbb3d7c66034a67f1a"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\TeamService.as",
+              "bytes": 2041,
+              "sha256": "8ed8bfc0df7cb546116d14cd3a9a2050e1459cdb32e3edbbb3d7c66034a67f1a"
+            }
+          },
+          {
+            "id": "air.TeamServiceImpl",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\TeamServiceImpl.as",
+              "bytes": 5105,
+              "sha256": "2fc61c62e940dc9a86d37f6e79ae614a258ef6d6c1d7eb50b66444576f5625ce"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\TeamServiceImpl.as",
+              "bytes": 5105,
+              "sha256": "2fc61c62e940dc9a86d37f6e79ae614a258ef6d6c1d7eb50b66444576f5625ce"
+            }
+          },
+          {
+            "id": "current.launcher/src-tauri/src/main.rs",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\launcher\\src-tauri\\src\\main.rs",
+              "bytes": 3491,
+              "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+              "bytes": 3491,
+              "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+            }
+          },
+          {
+            "id": "current.crates/server/src/main.rs",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\server\\src\\main.rs",
+              "bytes": 13628,
+              "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\crates\\server\\src\\main.rs",
+              "bytes": 13628,
+              "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+            }
+          }
+        ],
+        "screens": [
+          {
+            "id": "leagues",
+            "label": "Ligues, promotions, séries et statistiques classées",
+            "sources": [
+              "review/mod__lsi__mod_lsi_dat/scripts/com/riotgames/pvpnet/CLS/views/LeagueSystemMainView.as",
+              "review/mod__lsi__mod_lsi_dat/scripts/com/riotgames/pvpnet/CLS/views/LeagueSystemOverviewView.as",
+              "review/mod__lsi__mod_lsi_dat/scripts/com/riotgames/pvpnet/CLS/views/rankingview/RankingView.as",
+              "review/mod__lsi__mod_lsi_dat/scripts/com/riotgames/pvpnet/CLS/views/promotionseries/PromotionSeriesView.as",
+              "review/mod__lsi__mod_lsi_dat/scripts/com/riotgames/pvpnet/CLS/views/noleagues/NoLeaguesView.as"
+            ],
+            "availability": "service_dependent",
+            "availability_note": "Définition présente dans la release ; affichage natif non observé.",
+            "observed_native": false
+          },
+          {
+            "id": "ranked-teams",
+            "label": "Équipes classées : création, gestion, profil et historique",
+            "sources": [
+              "review/mod__rkt__mod_rkt_dat/scripts/com/riotgames/platform/gameclient/module/rt/view/RTModuleShell.as",
+              "review/mod__rkt__mod_rkt_dat/scripts/com/riotgames/platform/gameclient/module/rt/view/modal/CreateTeamModal.as",
+              "review/mod__rkt__mod_rkt_dat/scripts/com/riotgames/platform/gameclient/module/rt/view/manage/ManageTeamView.as",
+              "review/mod__rkt__mod_rkt_dat/scripts/com/riotgames/platform/gameclient/module/rt/view/profile/ProfileTeamView.as",
+              "review/mod__rkt__mod_rkt_dat/scripts/com/riotgames/platform/gameclient/module/rt/view/history/HistoryView.as"
+            ],
+            "availability": "service_dependent",
+            "availability_note": "Définition présente dans la release ; affichage natif non observé.",
+            "observed_native": false
+          }
+        ],
+        "screen_sources": [
+          {
+            "screen": "leagues",
+            "source": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__lsi__mod_lsi_dat\\scripts\\com\\riotgames\\pvpnet\\CLS\\views\\LeagueSystemMainView.as",
+              "bytes": 6738,
+              "sha256": "1ff1b5b5d416a079875b5bf54aa15b00dd55d74bfca8a4425995028c93b20836"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\lsi\\mod_lsi.dat",
+              "bytes": 55597,
+              "sha256": "c9b4eaab4f28defaeccf2f75e8415063eb0593e5cea91607a27430f709561403"
+            },
+            "release": {
+              "release": "0.0.1.119",
+              "md5": "dfab3e5a10f1d47232b191409c9ac5a3",
+              "bytes": 55597,
+              "compressed_bytes": 0
+            }
+          },
+          {
+            "screen": "leagues",
+            "source": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__lsi__mod_lsi_dat\\scripts\\com\\riotgames\\pvpnet\\CLS\\views\\LeagueSystemOverviewView.as",
+              "bytes": 1809,
+              "sha256": "ec7fe2c9136de533de6db407bf7928d3e14c87b007d2a868815e779835ff6231"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\lsi\\mod_lsi.dat",
+              "bytes": 55597,
+              "sha256": "c9b4eaab4f28defaeccf2f75e8415063eb0593e5cea91607a27430f709561403"
+            },
+            "release": {
+              "release": "0.0.1.119",
+              "md5": "dfab3e5a10f1d47232b191409c9ac5a3",
+              "bytes": 55597,
+              "compressed_bytes": 0
+            }
+          },
+          {
+            "screen": "leagues",
+            "source": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__lsi__mod_lsi_dat\\scripts\\com\\riotgames\\pvpnet\\CLS\\views\\rankingview\\RankingView.as",
+              "bytes": 23054,
+              "sha256": "48fed0ec865ee62e315236e3820c56c24a11fee9e5a2cfd9b357a952284c187e"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\lsi\\mod_lsi.dat",
+              "bytes": 55597,
+              "sha256": "c9b4eaab4f28defaeccf2f75e8415063eb0593e5cea91607a27430f709561403"
+            },
+            "release": {
+              "release": "0.0.1.119",
+              "md5": "dfab3e5a10f1d47232b191409c9ac5a3",
+              "bytes": 55597,
+              "compressed_bytes": 0
+            }
+          },
+          {
+            "screen": "leagues",
+            "source": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__lsi__mod_lsi_dat\\scripts\\com\\riotgames\\pvpnet\\CLS\\views\\promotionseries\\PromotionSeriesView.as",
+              "bytes": 11878,
+              "sha256": "b1e5263e844299488368cce8f7c57141a59e9c4c88fa9a84f210847dc912507c"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\lsi\\mod_lsi.dat",
+              "bytes": 55597,
+              "sha256": "c9b4eaab4f28defaeccf2f75e8415063eb0593e5cea91607a27430f709561403"
+            },
+            "release": {
+              "release": "0.0.1.119",
+              "md5": "dfab3e5a10f1d47232b191409c9ac5a3",
+              "bytes": 55597,
+              "compressed_bytes": 0
+            }
+          },
+          {
+            "screen": "leagues",
+            "source": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__lsi__mod_lsi_dat\\scripts\\com\\riotgames\\pvpnet\\CLS\\views\\noleagues\\NoLeaguesView.as",
+              "bytes": 5544,
+              "sha256": "0cfe820574f832b7b264dd345a3ce261d29905a051fac1a7e0c3c40965f87ae2"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\lsi\\mod_lsi.dat",
+              "bytes": 55597,
+              "sha256": "c9b4eaab4f28defaeccf2f75e8415063eb0593e5cea91607a27430f709561403"
+            },
+            "release": {
+              "release": "0.0.1.119",
+              "md5": "dfab3e5a10f1d47232b191409c9ac5a3",
+              "bytes": 55597,
+              "compressed_bytes": 0
+            }
+          },
+          {
+            "screen": "ranked-teams",
+            "source": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__rkt__mod_rkt_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\rt\\view\\RTModuleShell.as",
+              "bytes": 12319,
+              "sha256": "302ef4b61c4190f07e9c02029b21994beb70e68505cbb8f447b3e3ce2049bcfe"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\rkt\\mod_rkt.dat",
+              "bytes": 87550,
+              "sha256": "ae6fd631809529be3a513f694acc7aa8889ae08fd3013d7ca729c87cb8d515a5"
+            },
+            "release": {
+              "release": "0.0.1.119",
+              "md5": "17977add390df209679cb88ae5ff5de4",
+              "bytes": 87550,
+              "compressed_bytes": 0
+            }
+          },
+          {
+            "screen": "ranked-teams",
+            "source": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__rkt__mod_rkt_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\rt\\view\\modal\\CreateTeamModal.as",
+              "bytes": 29685,
+              "sha256": "af83f0a3153e2d711c04c0f41a16bc406128a56c16c6b0487c31f4a28953cac6"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\rkt\\mod_rkt.dat",
+              "bytes": 87550,
+              "sha256": "ae6fd631809529be3a513f694acc7aa8889ae08fd3013d7ca729c87cb8d515a5"
+            },
+            "release": {
+              "release": "0.0.1.119",
+              "md5": "17977add390df209679cb88ae5ff5de4",
+              "bytes": 87550,
+              "compressed_bytes": 0
+            }
+          },
+          {
+            "screen": "ranked-teams",
+            "source": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__rkt__mod_rkt_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\rt\\view\\manage\\ManageTeamView.as",
+              "bytes": 15097,
+              "sha256": "97b9547df73c8b2f59821f68c94ddbed250c5ad8856e16dcda15102d10077c63"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\rkt\\mod_rkt.dat",
+              "bytes": 87550,
+              "sha256": "ae6fd631809529be3a513f694acc7aa8889ae08fd3013d7ca729c87cb8d515a5"
+            },
+            "release": {
+              "release": "0.0.1.119",
+              "md5": "17977add390df209679cb88ae5ff5de4",
+              "bytes": 87550,
+              "compressed_bytes": 0
+            }
+          },
+          {
+            "screen": "ranked-teams",
+            "source": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__rkt__mod_rkt_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\rt\\view\\profile\\ProfileTeamView.as",
+              "bytes": 3082,
+              "sha256": "73b1c7c1dddf609a23b07ddcef4bebfa0c1da5a1c2c01a78098e0d1a08b82e72"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\rkt\\mod_rkt.dat",
+              "bytes": 87550,
+              "sha256": "ae6fd631809529be3a513f694acc7aa8889ae08fd3013d7ca729c87cb8d515a5"
+            },
+            "release": {
+              "release": "0.0.1.119",
+              "md5": "17977add390df209679cb88ae5ff5de4",
+              "bytes": 87550,
+              "compressed_bytes": 0
+            }
+          },
+          {
+            "screen": "ranked-teams",
+            "source": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__rkt__mod_rkt_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\rt\\view\\history\\HistoryView.as",
+              "bytes": 7630,
+              "sha256": "de737db2acfe94a2b2f32e45381cdaf32727e54f5bcbdc061ea8caaca0c9dd0e"
+            },
+            "original": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\rkt\\mod_rkt.dat",
+              "bytes": 87550,
+              "sha256": "ae6fd631809529be3a513f694acc7aa8889ae08fd3013d7ca729c87cb8d515a5"
+            },
+            "release": {
+              "release": "0.0.1.119",
+              "md5": "17977add390df209679cb88ae5ff5de4",
+              "bytes": 87550,
+              "compressed_bytes": 0
+            }
+          }
+        ],
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\tools\\project-plan\\air_reference.py",
+              "bytes": 16399,
+              "sha256": "4421bb1b6215b11371e137bc292dd891eda498e16aaeea2955d84f1997eed33e"
+            },
+            "path": "tools/project-plan/air_reference.py",
+            "line": 93,
+            "needle": "def verify(doc,root,verify_sources=True):",
+            "finding": "Existing inventory reader;screen definitions do not prove service behavior."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+              "bytes": 3491,
+              "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+            },
+            "path": "launcher/src-tauri/src/main.rs",
+            "line": 72,
+            "needle": ".invoke_handler(",
+            "finding": "No league/team management command."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+              "bytes": 52808,
+              "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+            },
+            "path": "crates/core/src/lib.rs",
+            "line": 533,
+            "needle": "pub fn join(&mut self, name:",
+            "finding": "Two balanced match sides are not persistent ranked teams."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\server\\src\\result_store.rs",
+              "bytes": 2007,
+              "sha256": "bbb88cc61148681b0edd3ebd38c5dc1ed797a86867d54db0344f34ee8d862415"
+            },
+            "path": "crates/server/src/result_store.rs",
+            "line": 4,
+            "needle": "pub fn save(",
+            "finding": "Immutable match JSON is not ranked points/series ledger."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\core\\src\\match_results.rs",
+              "bytes": 4021,
+              "sha256": "48c15c370a316084296c8a1e356fddf30730ca10223d37fbe71ee6cacec37be7"
+            },
+            "path": "crates/core/src/match_results.rs",
+            "line": 12,
+            "needle": "pub struct MatchResult",
+            "finding": "Final match result is not ranked placement algorithm."
+          }
+        ],
+        "limits": [
+          "Only two selected inventory screen groups rehashed;not fresh full AIR verifier execution.",
+          "Original release member hashes and retained decompilation identity verified;native display not observed.",
+          "Riot MMR/placement/LP algorithms are not recovered by these interfaces.",
+          "Local ranking rules remain to be specified and versioned;no ranked results applied or restored."
+        ],
+        "full_scope_complete": false
+      }
+    },
+    "source_checks": [
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision136\\ranked_leagues-associations.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision136\\prepare_ranked_leagues_reader.py",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\TeamService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\TeamServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\TeamService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\TeamServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision136\\ranked-leagues-research.json",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\air_reference.py",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\match_results.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\result_store.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\result_store.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision136\\research_ranked_leagues.py",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_4_20.json",
+      "pin_F:\\OpenLeague\\docs\\reference_air_routes_4_20.json",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\TeamService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\TeamService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\TeamServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\TeamServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\server\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\main.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__lsi__mod_lsi_dat\\scripts\\com\\riotgames\\pvpnet\\CLS\\views\\LeagueSystemMainView.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\lsi\\mod_lsi.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__lsi__mod_lsi_dat\\scripts\\com\\riotgames\\pvpnet\\CLS\\views\\LeagueSystemOverviewView.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\lsi\\mod_lsi.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__lsi__mod_lsi_dat\\scripts\\com\\riotgames\\pvpnet\\CLS\\views\\rankingview\\RankingView.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\lsi\\mod_lsi.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__lsi__mod_lsi_dat\\scripts\\com\\riotgames\\pvpnet\\CLS\\views\\promotionseries\\PromotionSeriesView.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\lsi\\mod_lsi.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__lsi__mod_lsi_dat\\scripts\\com\\riotgames\\pvpnet\\CLS\\views\\noleagues\\NoLeaguesView.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\lsi\\mod_lsi.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__rkt__mod_rkt_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\rt\\view\\RTModuleShell.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\rkt\\mod_rkt.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__rkt__mod_rkt_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\rt\\view\\modal\\CreateTeamModal.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\rkt\\mod_rkt.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__rkt__mod_rkt_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\rt\\view\\manage\\ManageTeamView.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\rkt\\mod_rkt.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__rkt__mod_rkt_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\rt\\view\\profile\\ProfileTeamView.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\rkt\\mod_rkt.dat",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__rkt__mod_rkt_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\rt\\view\\history\\HistoryView.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\rkt\\mod_rkt.dat",
+      "pin_F:\\OpenLeague\\tools\\project-plan\\air_reference.py",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\result_store.rs",
+      "pin_F:\\OpenLeague\\crates\\core\\src\\match_results.rs",
+      "seven_associations",
+      "families_and_sources",
+      "current_sources_match",
+      "ranked_views",
+      "task_SYS-19.5-01",
+      "anchor_ranked_leagues_1",
+      "task_SYS-19.5-02",
+      "anchor_ranked_leagues_2",
+      "task_SYS-19.5-03",
+      "anchor_ranked_leagues_3",
+      "task_SYS-19.5-04",
+      "anchor_ranked_leagues_4",
+      "task_SYS-19.5-05",
+      "anchor_ranked_leagues_5",
+      "task_SYS-19.5-06",
+      "anchor_ranked_leagues_6",
+      "task_SYS-19.5-07",
+      "anchor_ranked_leagues_7"
+    ],
+    "all_ranked_leaguess_qualified": false,
+    "all_required_effects_covered": false
+  },
+  "source_identities": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision136\\ranked_leagues-associations.json",
+      "bytes": 13927,
+      "sha256": "0cd159b08d9a4c2d638b3fa2497a06436394c982a71ed055efac6f3334e783ce"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision136\\prepare_ranked_leagues_reader.py",
+      "bytes": 3313,
+      "sha256": "f2256bacba9d9ede6dca20f939b137fc3854a19132f032f1aa5399bad07b98b1"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "bytes": 15297,
+      "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+      "bytes": 1175,
+      "sha256": "d9c3699c4d50c2d082e6ea22c4bfc9327d4f31621c22c24ed9dc098ed6cabd55"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\TeamService.as",
+      "bytes": 2041,
+      "sha256": "8ed8bfc0df7cb546116d14cd3a9a2050e1459cdb32e3edbbb3d7c66034a67f1a"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\TeamServiceImpl.as",
+      "bytes": 5105,
+      "sha256": "2fc61c62e940dc9a86d37f6e79ae614a258ef6d6c1d7eb50b66444576f5625ce"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision136\\ranked-leagues-research.json",
+      "bytes": 20174,
+      "sha256": "18c212287ea768d1bd6e7b5258c4c0a7a6c4af6bcf0a5fb2e36d04d6dd27540a"
+    },
+    {
+      "path": "F:\\OpenLeague\\tools\\project-plan\\air_reference.py",
+      "bytes": 16399,
+      "sha256": "4421bb1b6215b11371e137bc292dd891eda498e16aaeea2955d84f1997eed33e"
+    },
+    {
+      "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "bytes": 3491,
+      "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\match_results.rs",
+      "bytes": 4021,
+      "sha256": "48c15c370a316084296c8a1e356fddf30730ca10223d37fbe71ee6cacec37be7"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\server\\src\\result_store.rs",
+      "bytes": 2007,
+      "sha256": "bbb88cc61148681b0edd3ebd38c5dc1ed797a86867d54db0344f34ee8d862415"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "bytes": 52808,
+      "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision136\\research_ranked_leagues.py",
+      "bytes": 3544,
+      "sha256": "b7dfd2199d7c618aeb11c8efd4455ec955f31f64a2c04c3dfcd98f932ae6e0a1"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_4_20.json",
+      "bytes": 317028,
+      "sha256": "8a6afdc263b5c0959212425feb9e437b3a2264ea1d3a3590f825cb52ef406efb"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_routes_4_20.json",
+      "bytes": 11465788,
+      "sha256": "6219091152d3fd95cc207aa85126eceb532b20fa822a694d1c2f6f0545223623"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "bytes": 15297,
+      "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+      "bytes": 1175,
+      "sha256": "d9c3699c4d50c2d082e6ea22c4bfc9327d4f31621c22c24ed9dc098ed6cabd55"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\TeamService.as",
+      "bytes": 2041,
+      "sha256": "8ed8bfc0df7cb546116d14cd3a9a2050e1459cdb32e3edbbb3d7c66034a67f1a"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\TeamServiceImpl.as",
+      "bytes": 5105,
+      "sha256": "2fc61c62e940dc9a86d37f6e79ae614a258ef6d6c1d7eb50b66444576f5625ce"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\launcher\\src-tauri\\src\\main.rs",
+      "bytes": 3491,
+      "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\server\\src\\main.rs",
+      "bytes": 13628,
+      "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\server\\src\\main.rs",
+      "bytes": 13628,
+      "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__lsi__mod_lsi_dat\\scripts\\com\\riotgames\\pvpnet\\CLS\\views\\LeagueSystemMainView.as",
+      "bytes": 6738,
+      "sha256": "1ff1b5b5d416a079875b5bf54aa15b00dd55d74bfca8a4425995028c93b20836"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\lsi\\mod_lsi.dat",
+      "bytes": 55597,
+      "sha256": "c9b4eaab4f28defaeccf2f75e8415063eb0593e5cea91607a27430f709561403"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__lsi__mod_lsi_dat\\scripts\\com\\riotgames\\pvpnet\\CLS\\views\\LeagueSystemOverviewView.as",
+      "bytes": 1809,
+      "sha256": "ec7fe2c9136de533de6db407bf7928d3e14c87b007d2a868815e779835ff6231"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__lsi__mod_lsi_dat\\scripts\\com\\riotgames\\pvpnet\\CLS\\views\\rankingview\\RankingView.as",
+      "bytes": 23054,
+      "sha256": "48fed0ec865ee62e315236e3820c56c24a11fee9e5a2cfd9b357a952284c187e"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__lsi__mod_lsi_dat\\scripts\\com\\riotgames\\pvpnet\\CLS\\views\\promotionseries\\PromotionSeriesView.as",
+      "bytes": 11878,
+      "sha256": "b1e5263e844299488368cce8f7c57141a59e9c4c88fa9a84f210847dc912507c"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__lsi__mod_lsi_dat\\scripts\\com\\riotgames\\pvpnet\\CLS\\views\\noleagues\\NoLeaguesView.as",
+      "bytes": 5544,
+      "sha256": "0cfe820574f832b7b264dd345a3ce261d29905a051fac1a7e0c3c40965f87ae2"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__rkt__mod_rkt_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\rt\\view\\RTModuleShell.as",
+      "bytes": 12319,
+      "sha256": "302ef4b61c4190f07e9c02029b21994beb70e68505cbb8f447b3e3ce2049bcfe"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\rkt\\mod_rkt.dat",
+      "bytes": 87550,
+      "sha256": "ae6fd631809529be3a513f694acc7aa8889ae08fd3013d7ca729c87cb8d515a5"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__rkt__mod_rkt_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\rt\\view\\modal\\CreateTeamModal.as",
+      "bytes": 29685,
+      "sha256": "af83f0a3153e2d711c04c0f41a16bc406128a56c16c6b0487c31f4a28953cac6"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__rkt__mod_rkt_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\rt\\view\\manage\\ManageTeamView.as",
+      "bytes": 15097,
+      "sha256": "97b9547df73c8b2f59821f68c94ddbed250c5ad8856e16dcda15102d10077c63"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__rkt__mod_rkt_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\rt\\view\\profile\\ProfileTeamView.as",
+      "bytes": 3082,
+      "sha256": "73b1c7c1dddf609a23b07ddcef4bebfa0c1da5a1c2c01a78098e0d1a08b82e72"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__rkt__mod_rkt_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\rt\\view\\history\\HistoryView.as",
+      "bytes": 7630,
+      "sha256": "de737db2acfe94a2b2f32e45381cdaf32727e54f5bcbdc061ea8caaca0c9dd0e"
+    }
+  ],
+  "checks": [
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision136\\ranked_leagues-associations.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision136\\prepare_ranked_leagues_reader.py",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\TeamService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\TeamServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\TeamService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\TeamServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision136\\ranked-leagues-research.json",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\air_reference.py",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\match_results.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\result_store.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\result_store.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision136\\research_ranked_leagues.py",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_4_20.json",
+    "pin_F:\\OpenLeague\\docs\\reference_air_routes_4_20.json",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\TeamService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\TeamService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\TeamServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\TeamServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\server\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\main.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__lsi__mod_lsi_dat\\scripts\\com\\riotgames\\pvpnet\\CLS\\views\\LeagueSystemMainView.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\lsi\\mod_lsi.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__lsi__mod_lsi_dat\\scripts\\com\\riotgames\\pvpnet\\CLS\\views\\LeagueSystemOverviewView.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\lsi\\mod_lsi.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__lsi__mod_lsi_dat\\scripts\\com\\riotgames\\pvpnet\\CLS\\views\\rankingview\\RankingView.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\lsi\\mod_lsi.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__lsi__mod_lsi_dat\\scripts\\com\\riotgames\\pvpnet\\CLS\\views\\promotionseries\\PromotionSeriesView.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\lsi\\mod_lsi.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__lsi__mod_lsi_dat\\scripts\\com\\riotgames\\pvpnet\\CLS\\views\\noleagues\\NoLeaguesView.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\lsi\\mod_lsi.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__rkt__mod_rkt_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\rt\\view\\RTModuleShell.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\rkt\\mod_rkt.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__rkt__mod_rkt_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\rt\\view\\modal\\CreateTeamModal.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\rkt\\mod_rkt.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__rkt__mod_rkt_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\rt\\view\\manage\\ManageTeamView.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\rkt\\mod_rkt.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__rkt__mod_rkt_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\rt\\view\\profile\\ProfileTeamView.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\rkt\\mod_rkt.dat",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__rkt__mod_rkt_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\rt\\view\\history\\HistoryView.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\original\\mod\\rkt\\mod_rkt.dat",
+    "pin_F:\\OpenLeague\\tools\\project-plan\\air_reference.py",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\result_store.rs",
+    "pin_F:\\OpenLeague\\crates\\core\\src\\match_results.rs",
+    "seven_associations",
+    "families_and_sources",
+    "current_sources_match",
+    "ranked_views",
+    "task_SYS-19.5-01",
+    "anchor_ranked_leagues_1",
+    "task_SYS-19.5-02",
+    "anchor_ranked_leagues_2",
+    "task_SYS-19.5-03",
+    "anchor_ranked_leagues_3",
+    "task_SYS-19.5-04",
+    "anchor_ranked_leagues_4",
+    "task_SYS-19.5-05",
+    "anchor_ranked_leagues_5",
+    "task_SYS-19.5-06",
+    "anchor_ranked_leagues_6",
+    "task_SYS-19.5-07",
+    "anchor_ranked_leagues_7"
+  ],
+  "checks_count": 84,
+  "associations": [
+    {
+      "task_id": "SYS-19.5-01",
+      "finding": "Two retained AIR screen groups and ten source views identified;full public rules remain to qualify.",
+      "remaining": "Complete the documented task;keep public UI contracts,unknown Riot backend and explicit local ranking rules distinct. Two retained AIR screen groups and ten source views identified;full public rules remain to qualify.",
+      "anchors": [
+        {
+          "path": "tools/project-plan/air_reference.py",
+          "line": 93,
+          "needle": "def verify(doc,root,verify_sources=True):",
+          "role": "ranked_leagues_1"
+        }
+      ],
+      "native_bindings": [
+        {
+          "service_family": "leagues",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+            "bytes": 15297,
+            "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+          }
+        },
+        {
+          "service_family": "leagues",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+            "bytes": 1175,
+            "sha256": "d9c3699c4d50c2d082e6ea22c4bfc9327d4f31621c22c24ed9dc098ed6cabd55"
+          }
+        }
+      ],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-4db1a92d-78fb-5362-983a-99803f3e6608"
+    },
+    {
+      "task_id": "SYS-19.5-02",
+      "finding": "AIR league interfaces do not recover Riot MMR/placement/LP algorithms;local launcher exposes no league command.",
+      "remaining": "Complete the documented task;keep public UI contracts,unknown Riot backend and explicit local ranking rules distinct. AIR league interfaces do not recover Riot MMR/placement/LP algorithms;local launcher exposes no league command.",
+      "anchors": [
+        {
+          "path": "launcher/src-tauri/src/main.rs",
+          "line": 72,
+          "needle": ".invoke_handler(",
+          "role": "ranked_leagues_2"
+        }
+      ],
+      "native_bindings": [
+        {
+          "service_family": "leagues",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+            "bytes": 15297,
+            "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+          }
+        },
+        {
+          "service_family": "leagues",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+            "bytes": 1175,
+            "sha256": "d9c3699c4d50c2d082e6ea22c4bfc9327d4f31621c22c24ed9dc098ed6cabd55"
+          }
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-ef8060a6-74d6-58d8-af74-bbdfa66a8df1"
+    },
+    {
+      "task_id": "SYS-19.5-03",
+      "finding": "Final match results do not define a local placement/progression algorithm.",
+      "remaining": "Complete the documented task;keep public UI contracts,unknown Riot backend and explicit local ranking rules distinct. Final match results do not define a local placement/progression algorithm.",
+      "anchors": [
+        {
+          "path": "crates/core/src/match_results.rs",
+          "line": 12,
+          "needle": "pub struct MatchResult",
+          "role": "ranked_leagues_3"
+        }
+      ],
+      "native_bindings": [
+        {
+          "service_family": "leagues",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+            "bytes": 15297,
+            "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+          }
+        },
+        {
+          "service_family": "leagues",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+            "bytes": 1175,
+            "sha256": "d9c3699c4d50c2d082e6ea22c4bfc9327d4f31621c22c24ed9dc098ed6cabd55"
+          }
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-322f7634-8d5d-5de5-bbda-efc4e77fe88a"
+    },
+    {
+      "task_id": "SYS-19.5-04",
+      "finding": "Immutable match JSON does not persist ranked divisions,points or promotion series.",
+      "remaining": "Complete the documented task;keep public UI contracts,unknown Riot backend and explicit local ranking rules distinct. Immutable match JSON does not persist ranked divisions,points or promotion series.",
+      "anchors": [
+        {
+          "path": "crates/server/src/result_store.rs",
+          "line": 4,
+          "needle": "pub fn save(",
+          "role": "ranked_leagues_4"
+        }
+      ],
+      "native_bindings": [
+        {
+          "service_family": "leagues",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+            "bytes": 15297,
+            "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+          }
+        },
+        {
+          "service_family": "leagues",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+            "bytes": 1175,
+            "sha256": "d9c3699c4d50c2d082e6ea22c4bfc9327d4f31621c22c24ed9dc098ed6cabd55"
+          }
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-662ca387-a6dd-521e-ab22-fac3ba68db5d"
+    },
+    {
+      "task_id": "SYS-19.5-05",
+      "finding": "Balanced in-match sides are not persistent ranked teams with owners and members.",
+      "remaining": "Complete the documented task;keep public UI contracts,unknown Riot backend and explicit local ranking rules distinct. Balanced in-match sides are not persistent ranked teams with owners and members.",
+      "anchors": [
+        {
+          "path": "crates/core/src/lib.rs",
+          "line": 533,
+          "needle": "pub fn join(&mut self, name:",
+          "role": "ranked_leagues_5"
+        }
+      ],
+      "native_bindings": [
+        {
+          "service_family": "teams",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+            "bytes": 15297,
+            "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+          }
+        },
+        {
+          "service_family": "teams",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\TeamService.as",
+            "bytes": 2041,
+            "sha256": "8ed8bfc0df7cb546116d14cd3a9a2050e1459cdb32e3edbbb3d7c66034a67f1a"
+          }
+        },
+        {
+          "service_family": "teams",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\TeamServiceImpl.as",
+            "bytes": 5105,
+            "sha256": "2fc61c62e940dc9a86d37f6e79ae614a258ef6d6c1d7eb50b66444576f5625ce"
+          }
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-bf1fc0ff-a491-536b-a87b-07ec1ca268e6"
+    },
+    {
+      "task_id": "SYS-19.5-06",
+      "finding": "No local ranked-team profile/history/roster command.",
+      "remaining": "Complete the documented task;keep public UI contracts,unknown Riot backend and explicit local ranking rules distinct. No local ranked-team profile/history/roster command.",
+      "anchors": [
+        {
+          "path": "launcher/src-tauri/src/main.rs",
+          "line": 72,
+          "needle": ".invoke_handler(",
+          "role": "ranked_leagues_6"
+        }
+      ],
+      "native_bindings": [
+        {
+          "service_family": "teams",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+            "bytes": 15297,
+            "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+          }
+        },
+        {
+          "service_family": "teams",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\TeamService.as",
+            "bytes": 2041,
+            "sha256": "8ed8bfc0df7cb546116d14cd3a9a2050e1459cdb32e3edbbb3d7c66034a67f1a"
+          }
+        },
+        {
+          "service_family": "teams",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\TeamServiceImpl.as",
+            "bytes": 5105,
+            "sha256": "2fc61c62e940dc9a86d37f6e79ae614a258ef6d6c1d7eb50b66444576f5625ce"
+          }
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-9912be3d-d698-527e-803d-2791108637ac"
+    },
+    {
+      "task_id": "SYS-19.5-07",
+      "finding": "Result JSON idempotence is not idempotent ranked ledger application or restoration.",
+      "remaining": "Complete the documented task;keep public UI contracts,unknown Riot backend and explicit local ranking rules distinct. Result JSON idempotence is not idempotent ranked ledger application or restoration.",
+      "anchors": [
+        {
+          "path": "crates/server/src/result_store.rs",
+          "line": 4,
+          "needle": "pub fn save(",
+          "role": "ranked_leagues_7"
+        }
+      ],
+      "native_bindings": [
+        {
+          "service_family": "leagues",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+            "bytes": 15297,
+            "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+          }
+        },
+        {
+          "service_family": "leagues",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\CLSServicePlatform.as",
+            "bytes": 1175,
+            "sha256": "d9c3699c4d50c2d082e6ea22c4bfc9327d4f31621c22c24ed9dc098ed6cabd55"
+          }
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-8625c7a9-1752-5b68-b5bf-c767cb2becae"
+    }
+  ]
+}

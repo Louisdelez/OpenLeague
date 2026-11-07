@@ -1,0 +1,928 @@
+{
+  "schema": "openleague_frontend_build_targeted_verification/v1",
+  "task": "SYS-01.1-02",
+  "observed_utc": "2026-10-21T21:51:09.987616+00:00",
+  "evidence": "docs/reference_frontend_builds_4_20_scoped_request_20261021_214947Z.json",
+  "status": "a_valider",
+  "implementation_complete": true,
+  "technical_verification_complete": true,
+  "acceptance_complete": false,
+  "human_acceptance": "not_given",
+  "manual_state_mutated": false,
+  "targeted_tests_passed": 31,
+  "verified_build_sources": 10,
+  "verified_game_reference_sources": 5,
+  "patcher_build": "0.4.0.122",
+  "patcher_rads_release": "0.0.0.11",
+  "air_build": "4.20.14_11_18_18_52",
+  "air_rads_release": "0.0.1.119",
+  "air_euw_configuration_release": "0.0.0.50",
+  "objective": "Identifier les numéros de build du patcher et du client AIR",
+  "fidelity_requirement_id": "OLF-4d8e86e2-2c0c-5f1d-9172-2e2cc0e0d627",
+  "scope_task_ids": [
+    "SYS-01.1-02"
+  ],
+  "complete": false,
+  "prerequisites": {
+    "task": "SYS-01.1-02",
+    "package": {
+      "id": "D01-SYS-01-1",
+      "phase": "D01",
+      "key": "SYS-01.1",
+      "title": "Référence historique et périmètre",
+      "entity": null,
+      "task_ids": [
+        "SYS-01.1-01",
+        "SYS-01.1-02",
+        "SYS-01.1-03",
+        "SYS-01.1-04",
+        "SYS-01.1-05",
+        "SYS-01.1-06",
+        "SYS-01.1-07"
+      ],
+      "depends_on": [],
+      "status": "a_faire",
+      "requires_packages": [],
+      "task_count": 7
+    },
+    "phase": {
+      "id": "D01",
+      "title": "Référentiel complet de LoL 4.20",
+      "domain": "01",
+      "depends_on": [],
+      "deliverable": "Référentiel complet de LoL 4.20 terminé avec tous ses contenus requis et ses preuves.",
+      "exit_criteria": "Chaque sous-tâche requise est acceptée ; chaque classification incertaine est résolue sur preuve ; aucun défaut bloquant ne reste ouvert.",
+      "all_dependency_phases": [],
+      "package_ids": [
+        "D01-SYS-01-1",
+        "D01-SYS-01-2",
+        "D01-SYS-01-3",
+        "D01-SYS-01-4"
+      ],
+      "task_count": 28,
+      "detail_file": "E:\\OpenLeague\\docs\\OpenLeague_PLAN_DETAILS\\D01.md"
+    },
+    "task_dependencies": [],
+    "missing_inputs": []
+  },
+  "source_contract": {
+    "path": "docs/reference_frontend_builds_4_20.json",
+    "bytes": 8932,
+    "sha256": "49793684095695858ea0ff8ec75237e8644ef4ad6702c668fc243c3aa9e0d46c"
+  },
+  "source_roots": {
+    "native": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20",
+    "air": "E:\\mapslol3v3\\output\\Launcher_420_Research\\air_119",
+    "archive": "E:\\mapslol3v3\\output\\Launcher_420_Research",
+    "project": "E:\\OpenLeague"
+  },
+  "build_sources": [
+    {
+      "id": "patcher",
+      "root": "native",
+      "path": "RADS/projects/lol_patcher/releases/0.0.0.11/deploy/LoLPatcher.exe",
+      "bytes": 4247544,
+      "sha256": "fd4a4edcd45694e08779373286afdaa6870cd86f9847e4fc9db1d0bd556914cb"
+    },
+    {
+      "id": "patcher_manifest",
+      "root": "native",
+      "path": "RADS/projects/lol_patcher/releases/0.0.0.11/releasemanifest",
+      "bytes": 14711,
+      "sha256": "bd219424546ed10c60d5b7629eb75c4e6bbcdf2f23b57a702aba8ee53f605158"
+    },
+    {
+      "id": "installed_log_21",
+      "root": "native",
+      "path": "Logs/Patcher Logs/2014-11-21T16-29-18_LoLPatcher.log",
+      "bytes": 80464,
+      "sha256": "2e5a7f617e74db6d15b381289fb6874726e0cf2b2e88093f4fface23e9e5eeab"
+    },
+    {
+      "id": "installed_log_22",
+      "root": "native",
+      "path": "Logs/Patcher Logs/2014-11-22T18-38-24_LoLPatcher.log",
+      "bytes": 86801,
+      "sha256": "2ca1ea0eb3b35a5eb83fa9c576de2cb351dd9848f6f4132b21e11bc901b00e2d"
+    },
+    {
+      "id": "air_common",
+      "root": "air",
+      "path": "lib/ClientLibCommon.dat",
+      "bytes": 78498,
+      "sha256": "f5915bfc68556608cb6aba924b9773862c09dd9e52414dc488aa01621efee638"
+    },
+    {
+      "id": "air_descriptor",
+      "root": "air",
+      "path": "META-INF/AIR/application.xml",
+      "bytes": 927,
+      "sha256": "cc65d3a4400c2ffa4e95c8d5c6fcad48893f6914c61c8af0e84316722e117c52"
+    },
+    {
+      "id": "stale_version",
+      "root": "air",
+      "path": "version.txt",
+      "bytes": 31,
+      "sha256": "cf1bf5f5d64611df93510e71a4ed88bb545169b792b562231d83c68e9d77e40a"
+    },
+    {
+      "id": "archive_merged",
+      "root": "archive",
+      "path": "air_119_merged.json",
+      "bytes": 4114736,
+      "sha256": "4e78204d2add031880c4772da329900dcf65c00fc2d36c2cfb19cc8fd7435111"
+    },
+    {
+      "id": "archive_inventory",
+      "root": "archive",
+      "path": "complete_recovered_inventory.json",
+      "bytes": 487462,
+      "sha256": "a502e3210a267d0ef34f4f62b00bcd6288e6c1e726a5acbe2cfdac837e02ba53"
+    },
+    {
+      "id": "air_manifest",
+      "root": "project",
+      "path": "docs/reference_frontend_sources/air_0.0.1.119.releasemanifest",
+      "bytes": 447012,
+      "sha256": "df8c52f34537e9c0d13a6ba1d88f089afa4067a4b5a6b87668e64edf08036463"
+    }
+  ],
+  "game_reference": {
+    "schema": "openleague_reference_client/v1",
+    "task": "SYS-01.1-01",
+    "reference": {
+      "date": "2014-11-17",
+      "date_kind": "embedded_client_build_date",
+      "region": "EUW",
+      "locale": "en_GB"
+    },
+    "client": {
+      "patch": "4.20",
+      "version": "4.20.0.315",
+      "channel": "PUBLIC",
+      "branch": "Releases/4.20",
+      "build_date": "2014-11-17",
+      "build_date_literal": "Nov 17 2014",
+      "build_time_literal": "17:46:45",
+      "build_timezone": null,
+      "pe_linker_timestamp_utc": "2014-11-18T01:55:38+00:00",
+      "identity_literal_offset": 13103356,
+      "binary": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/League of Legends.exe",
+      "configuration_manifest": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/configurationmanifest"
+    },
+    "regional_patch_deployment_date": null,
+    "source_root": "D:\\LeagueOfLegendsV2\\4.20\\Client\\League of Legends_UNPACKED\\League-of-Legends-4-20",
+    "sources": [
+      {
+        "path": "RADS/system/system.cfg",
+        "bytes": 72,
+        "sha256": "a99ea26414fbd7deebace37c9e2c109f818a8c394f92607cfa082bd49f35c16a",
+        "selected_fields": {
+          "Region": "EUW"
+        }
+      },
+      {
+        "path": "RADS/system/locale.cfg",
+        "bytes": 12,
+        "sha256": "82ecb50f4bf707a35a13a6b6987df89fa6044bedac6fc8aca179890a7890d6ae",
+        "selected_fields": {
+          "locale": "en_gb"
+        }
+      },
+      {
+        "path": "RADS/system/launcher.cfg",
+        "bytes": 138,
+        "sha256": "f3417678c2e9a39bb40c937d5b8d63265092376756514652e5a22eb6c5195379",
+        "selected_fields": {
+          "airConfigProject": "lol_air_client_config_euw",
+          "airProject": "lol_air_client",
+          "gameProject": "lol_game_client_sln"
+        }
+      },
+      {
+        "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/configurationmanifest",
+        "bytes": 88,
+        "sha256": "f601219e81fe20e4c805c5faaa7af664c0c6adcdd43d591c7a4f22ebbd7601f3"
+      },
+      {
+        "path": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/League of Legends.exe",
+        "bytes": 15973880,
+        "sha256": "402bf2b9d5f09b8dd4f20b312c533a764712f2912cc3807a10fd721638d37862"
+      }
+    ],
+    "catalogue": {
+      "version": "4.20.1",
+      "locale": "en_US",
+      "type": "official_data_dragon_comparison_catalogue",
+      "url": "https://ddragon.leagueoflegends.com/cdn/4.20.1/data/en_US/championFull.json",
+      "notice": "Le numéro du catalogue et sa locale ne sont ni le numéro du binaire, ni la région configurée du client.",
+      "local_path": "E:\\mapslol3v3\\Full_project_audit_2026-10-20\\official_reference\\championFull.json",
+      "sha256": "72e26ad631c42f76cbd87ec6c5f656a79650ea5091d0fa2a604789d51c3b7404"
+    },
+    "selection_policy": "Client PUBLIC fourni, identité du binaire 4.20.0.315 figée ; région et locale configurées de cette copie. Date de référence = date de build littérale embarquée.",
+    "limits": [
+      "Le fuseau de la chaîne 17:46:45 n’est pas identifié.",
+      "La date de déploiement de 4.20 sur EUW n’est pas établie par les sources primaires consultées ; le 17 novembre est une date de build, pas de mise en ligne.",
+      "L’horodatage PE UTC du 18 novembre est un fait distinct de la date de build littérale du 17 novembre ; aucune conversion de fuseau inventée.",
+      "La copie contient des fichiers de plusieurs langues et des traces ajoutées ultérieurement ; leurs noms et dates ne prouvent pas le déploiement régional.",
+      "La présence de fichiers natifs ne qualifie pas la disponibilité historique de chaque contenu, ni un client AIR complet, ni l’accès aux services officiels."
+    ]
+  },
+  "observed_identity": {
+    "task": "SYS-01.1-02",
+    "facts_verified": true,
+    "native_executed": false,
+    "patcher": {
+      "project": "lol_patcher",
+      "rads_release": "0.0.0.11",
+      "file_version": "0.4.0.122",
+      "product_version": "0.4.0.122",
+      "version_semantics": "Windows VS_FIXEDFILEINFO FileVersion and ProductVersion; RADS release is a separate namespace"
+    },
+    "air": {
+      "project": "lol_air_client",
+      "rads_release": "0.0.1.119",
+      "build": "4.20.14_11_18_18_52",
+      "build_source": "air_common",
+      "class_name": "com.riotgames.platform.gameclient.application.Version",
+      "field": "CURRENT_VERSION",
+      "field_format": "AVM2 static String, trait_slot with default UTF-8 value",
+      "regional_config_project": "lol_air_client_config_euw",
+      "regional_config_release": "0.0.0.50",
+      "descriptor_version": "1.0.0",
+      "descriptor_source_release": "0.0.1.76",
+      "descriptor_namespace": "http://ns.adobe.com/air/application/3.7",
+      "build_timezone": null,
+      "pe_loader_version": null,
+      "descriptor_scope": "Archive union candidate from release 0.0.1.76; bytes do not match release119 manifest. Not the qualified 4.20 descriptor.",
+      "descriptor_expected_by_release119": {
+        "source_release": "0.0.1.67",
+        "bytes": 927,
+        "md5": "332b2a5cb3619cab02c8682a847e0ee9",
+        "exact_payload_recovered_for_this_task": false,
+        "version_number": null,
+        "namespace": null
+      }
+    },
+    "verified_sources": 10,
+    "manifest_verification": {
+      "patcher": {
+        "project": "lol_patcher",
+        "release": "0.0.0.11",
+        "member": {
+          "path": "LoLPatcher.exe",
+          "release": "0.0.0.11",
+          "md5": "ace2737187b05155ed3aa317d5c307f1",
+          "bytes": 4247544,
+          "compressed_bytes": 1959009,
+          "sha256": "fd4a4edcd45694e08779373286afdaa6870cd86f9847e4fc9db1d0bd556914cb"
+        }
+      },
+      "air": {
+        "project": "lol_air_client",
+        "release": "0.0.1.119",
+        "manifest_files": 7886,
+        "member": {
+          "path": "lib/ClientLibCommon.dat",
+          "release": "0.0.1.119",
+          "md5": "18e2488befd98ec98ab3a2fa459e2178",
+          "bytes": 78498,
+          "compressed_bytes": 0,
+          "sha256": "f5915bfc68556608cb6aba924b9773862c09dd9e52414dc488aa01621efee638"
+        }
+      },
+      "excluded_union_candidates": [
+        {
+          "path": "META-INF/AIR/application.xml",
+          "classification": "different_content_from_release_manifest",
+          "candidate_bytes": 927,
+          "candidate_md5": "a28037fc7d3fdc4a090d8dc981179d18",
+          "manifest_entry": {
+            "release": "0.0.1.67",
+            "md5": "332b2a5cb3619cab02c8682a847e0ee9",
+            "bytes": 927,
+            "compressed_bytes": 0
+          }
+        },
+        {
+          "path": "version.txt",
+          "classification": "absent_from_release_manifest",
+          "candidate_bytes": 31,
+          "candidate_md5": "f8e13ecd43faaedeab55e29e4dd9190e",
+          "manifest_entry": null
+        }
+      ]
+    },
+    "human_acceptance": "not_given",
+    "manual_state_mutated": false
+  },
+  "exact_descriptor_crosscheck": {
+    "path": "E:\\OpenLeague\\docs\\reference_air_sources\\original\\META-INF\\AIR\\application.xml",
+    "bytes": 927,
+    "sha256": "9eae11aee5feb06196abe74178f87cbed5915ea2b5425792645368babe1e9ab6",
+    "manifest_member": {
+      "path": "META-INF/AIR/application.xml",
+      "release": "0.0.1.67",
+      "md5": "332b2a5cb3619cab02c8682a847e0ee9",
+      "bytes": 927,
+      "compressed_bytes": 0,
+      "sha256": "9eae11aee5feb06196abe74178f87cbed5915ea2b5425792645368babe1e9ab6"
+    },
+    "version_number": "1.0.0",
+    "namespace": "http://ns.adobe.com/air/application/3.7",
+    "installed_runtime_qualified": false
+  },
+  "expected_observed": [
+    {
+      "case": "Patcher native VERSIONINFO and release membership",
+      "expected": {
+        "file_version": "0.4.0.122",
+        "product_version": "0.4.0.122",
+        "rads_release": "0.0.0.11"
+      },
+      "observed": {
+        "file_version": "0.4.0.122",
+        "product_version": "0.4.0.122",
+        "rads_release": "0.0.0.11"
+      },
+      "result": "pass"
+    },
+    {
+      "case": "AIR ABC field and release membership",
+      "expected": {
+        "class_name": "com.riotgames.platform.gameclient.application.Version",
+        "field": "CURRENT_VERSION",
+        "build": "4.20.14_11_18_18_52",
+        "rads_release": "0.0.1.119",
+        "regional_config_release": "0.0.0.50"
+      },
+      "observed": {
+        "class_name": "com.riotgames.platform.gameclient.application.Version",
+        "field": "CURRENT_VERSION",
+        "build": "4.20.14_11_18_18_52",
+        "rads_release": "0.0.1.119",
+        "regional_config_release": "0.0.0.50"
+      },
+      "result": "pass"
+    },
+    {
+      "case": "Source integrity and EUW association",
+      "expected": "Ten build sources and five game-reference sources match their recorded identities; two original logs validate AIR119/EUW50 and game solution68.",
+      "observed": {
+        "build_sources": 10,
+        "game_reference_sources": 5,
+        "build_verifier_exit": 0,
+        "game_reference_verifier_exit": 0
+      },
+      "result": "pass"
+    },
+    {
+      "case": "Nominal and refusal cases",
+      "expected": "Reject absent, changed, corrupt, ambiguous, wrong-project/release/field, traversal and invented timezone inputs.",
+      "observed": {
+        "tests_passed": 31,
+        "log": {
+          "command": [
+            "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+            "-X",
+            "utf8",
+            "-E",
+            "-u",
+            "-B",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "tools/project-plan",
+            "-p",
+            "test_frontend*.py",
+            "-v"
+          ],
+          "cwd": "E:\\OpenLeague",
+          "started_utc": "2026-10-21T21:50:43.485604+00:00",
+          "elapsed_seconds": 6.609,
+          "exit_code": 0,
+          "log": "E:\\mapslol3v3\\Build_identity_SYS_01_1_02_20261021_214947Z\\targeted-tests.log",
+          "log_identity": {
+            "bytes": 4384,
+            "sha256": "96b8095b0f94a8201b8a4034d4e7b04d2d919d0f0690d0812e234d6e9df01277"
+          }
+        }
+      },
+      "result": "pass"
+    },
+    {
+      "case": "Exact descriptor and excluded old candidates",
+      "expected": "Exact descriptor source67 matches release119 manifest; union76 and version.txt2011 do not identify the build/runtime.",
+      "observed": {
+        "descriptor": {
+          "path": "E:\\OpenLeague\\docs\\reference_air_sources\\original\\META-INF\\AIR\\application.xml",
+          "bytes": 927,
+          "sha256": "9eae11aee5feb06196abe74178f87cbed5915ea2b5425792645368babe1e9ab6",
+          "manifest_member": {
+            "path": "META-INF/AIR/application.xml",
+            "release": "0.0.1.67",
+            "md5": "332b2a5cb3619cab02c8682a847e0ee9",
+            "bytes": 927,
+            "compressed_bytes": 0,
+            "sha256": "9eae11aee5feb06196abe74178f87cbed5915ea2b5425792645368babe1e9ab6"
+          },
+          "version_number": "1.0.0",
+          "namespace": "http://ns.adobe.com/air/application/3.7",
+          "installed_runtime_qualified": false
+        },
+        "excluded": [
+          {
+            "path": "META-INF/AIR/application.xml",
+            "classification": "different_content_from_release_manifest",
+            "candidate_bytes": 927,
+            "candidate_md5": "a28037fc7d3fdc4a090d8dc981179d18",
+            "manifest_entry": {
+              "release": "0.0.1.67",
+              "md5": "332b2a5cb3619cab02c8682a847e0ee9",
+              "bytes": 927,
+              "compressed_bytes": 0
+            }
+          },
+          {
+            "path": "version.txt",
+            "classification": "absent_from_release_manifest",
+            "candidate_bytes": 31,
+            "candidate_md5": "f8e13ecd43faaedeab55e29e4dd9190e",
+            "manifest_entry": null
+          }
+        ]
+      },
+      "result": "pass"
+    },
+    {
+      "case": "Real plan consumer and preserved manual states",
+      "expected": "Only task SYS-01.1-02 metadata and instruction change; live HTTP task/copy match current generator; manual states/history unchanged.",
+      "observed": {
+        "manual_states_preserved": 42606,
+        "manual_history_preserved": true,
+        "changed_catalog_tasks": [
+          "SYS-01.1-02"
+        ],
+        "http_task_and_copy_match": true,
+        "tauri_same_database": true,
+        "native_window_observed": false,
+        "instruction_sha256": "bb87be332797085835a6341431b72e0d11470b61f2e486ccab78f9a42c91f7bd"
+      },
+      "result": "pass"
+    }
+  ],
+  "open_unknowns": [
+    {
+      "id": "installed_air_loader_runtime",
+      "unknown": "Matching installed AIR runtime and PE loader version",
+      "searches": "Inspected native copy, exact AIR119 manifest, recovered ClientLibCommon.dat and exact application.xml67; none establishes the installed runtime.",
+      "closure": "Recover matching loader/runtime artifacts and verify their VERSIONINFO and provenance; schema3.7 is insufficient."
+    },
+    {
+      "id": "historical_air_behavior",
+      "unknown": "Actual historical client execution, rendering and remote services",
+      "searches": "Static PE/ABC parsing and original logs establish identity only; no historical program launched.",
+      "closure": "Separate local runtime qualification identifying all executed binaries and local service behavior; outside this build-identification task."
+    },
+    {
+      "id": "build_timezones_deployment",
+      "unknown": "Literal build timezones and EUW deployment date",
+      "searches": "Reference binary literal, PE timestamp, native logs and AIR build suffix inspected; no explicit regional deployment/timezone record.",
+      "closure": "Find authoritative dated records explicitly identifying timezone and EUW deployment, without extrapolating filenames or suffixes."
+    }
+  ],
+  "checks": {
+    "targeted-tests": {
+      "command": [
+        "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "-E",
+        "-u",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/project-plan",
+        "-p",
+        "test_frontend*.py",
+        "-v"
+      ],
+      "cwd": "E:\\OpenLeague",
+      "started_utc": "2026-10-21T21:50:43.485604+00:00",
+      "elapsed_seconds": 6.609,
+      "exit_code": 0,
+      "log": "E:\\mapslol3v3\\Build_identity_SYS_01_1_02_20261021_214947Z\\targeted-tests.log",
+      "log_identity": {
+        "bytes": 4384,
+        "sha256": "96b8095b0f94a8201b8a4034d4e7b04d2d919d0f0690d0812e234d6e9df01277"
+      }
+    },
+    "frontend-cli": {
+      "command": [
+        "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "-E",
+        "-u",
+        "-B",
+        "tools/project-plan/frontend_builds.py",
+        "--root",
+        "E:\\OpenLeague",
+        "--output",
+        "E:\\mapslol3v3\\Build_identity_SYS_01_1_02_20261021_214947Z\\native-verification.json"
+      ],
+      "cwd": "E:\\OpenLeague",
+      "started_utc": "2026-10-21T21:50:50.106577+00:00",
+      "elapsed_seconds": 0.313,
+      "exit_code": 0,
+      "log": "E:\\mapslol3v3\\Build_identity_SYS_01_1_02_20261021_214947Z\\frontend-cli.log",
+      "log_identity": {
+        "bytes": 3090,
+        "sha256": "49a80d6068fdbada52fa34c757f6672c46006125078e6b93033c69e3250e3621"
+      }
+    },
+    "reference-cli": {
+      "command": [
+        "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "-E",
+        "-u",
+        "-B",
+        "tools/project-plan/reference_client.py",
+        "--root",
+        "E:\\OpenLeague",
+        "--output",
+        "E:\\mapslol3v3\\Build_identity_SYS_01_1_02_20261021_214947Z\\game-reference-verification.json"
+      ],
+      "cwd": "E:\\OpenLeague",
+      "started_utc": "2026-10-21T21:50:50.428451+00:00",
+      "elapsed_seconds": 0.203,
+      "exit_code": 0,
+      "log": "E:\\mapslol3v3\\Build_identity_SYS_01_1_02_20261021_214947Z\\reference-cli.log",
+      "log_identity": {
+        "bytes": 1064,
+        "sha256": "a6dc4e1643462d9e04a493a36151366b322797af8fb03e1c746bb932993a54c9"
+      }
+    },
+    "resume": {
+      "command": [
+        "node",
+        ".ai-tools/project.mjs",
+        "resume"
+      ],
+      "cwd": "E:\\OpenLeague",
+      "started_utc": "2026-10-21T21:50:43.137603+00:00",
+      "elapsed_seconds": 0.343,
+      "exit_code": 0,
+      "log": "E:\\mapslol3v3\\Build_identity_SYS_01_1_02_20261021_214947Z\\resume.log",
+      "log_identity": {
+        "bytes": 292942,
+        "sha256": "6c56303d2bc34b5b3cfcfb18e5d4a19a675e22c2f035800b72c42c92a2196a80"
+      }
+    }
+  },
+  "tools": {
+    "tools/project-plan/frontend_builds.py": {
+      "bytes": 19454,
+      "sha256": "d66e6cbce783e18bfc2b890468f571e439b14cba9bca6c294970f8f35d5fccf8"
+    },
+    "tools/project-plan/test_frontend_builds.py": {
+      "bytes": 6131,
+      "sha256": "dabcf73d7d23a5f55d2e8fc17fdc61aba4d0d9321e962335d10d689fa0403b30"
+    },
+    "tools/project-plan/test_frontend_manifest_bindings.py": {
+      "bytes": 5104,
+      "sha256": "c7cc59fc0a28b4f46b9ad00b9a90e0b66bad1d567dd5e63e0d1d21fb5b7f6c7d"
+    },
+    "tools/project-plan/instructions.py": {
+      "bytes": 15352,
+      "sha256": "ae016a0bd3a5f69e4413083486de322bd657e62d4484039e7001a469f1813965"
+    },
+    "tools/project-plan/reference_client.py": {
+      "bytes": 6633,
+      "sha256": "52ab5a24d2bf656789db993038cd7e0b99b9d12620aa0c0534baabde2dd61781"
+    },
+    "tools/project-plan/requirement_trace.py": {
+      "bytes": 11190,
+      "sha256": "337292047c69892edb73e1e02b49975451353ef2147817c44a7a2f50c54a0e1f"
+    }
+  },
+  "python": {
+    "path": "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "bytes": 107312,
+    "sha256": "dea78bb78043f0d53ef4a475f85fa0312b90fa93c136a0686d17946781c60e16"
+  },
+  "producer": {
+    "path": "E:\\mapslol3v3\\Build_identity_SYS_01_1_02_20261021_214947Z\\verify_task.py",
+    "bytes": 25573,
+    "sha256": "871b07d26d4490e0948df98f51bac94cebfe71e6f20ca468b3a994f349fb9b9d"
+  },
+  "git": {
+    "head": "8c19026eb8fdc2d9e47960b0110c5f9175f4d1ca",
+    "branch": "main"
+  },
+  "previous_evidence_preserved": {
+    "docs/reference_frontend_builds_4_20.json": {
+      "bytes": 8932,
+      "sha256": "49793684095695858ea0ff8ec75237e8644ef4ad6702c668fc243c3aa9e0d46c"
+    },
+    "docs/reference_frontend_builds_4_20_confirmation.json": {
+      "bytes": 23013,
+      "sha256": "069a686ffdcfb9a523cc1da99d026936a8b9cc8f4b19883f84af32a6e4965ffa"
+    },
+    "docs/reference_frontend_builds_4_20_final_check_2026_10_21.json": {
+      "bytes": 32377,
+      "sha256": "7e6cd42ce81fe261b3e4cc9a75b3828e99355fc7ac0e277da49573683f0aa07f"
+    },
+    "docs/reference_frontend_builds_4_20_requested_verification.json": {
+      "bytes": 25847,
+      "sha256": "8cfc289b123c0a46cae572d3bb1609142c4b6597f4a8e95c101d5d2f8b18d6c5"
+    },
+    "docs/reference_frontend_builds_4_20_revalidation.json": {
+      "bytes": 12162,
+      "sha256": "d0ce52a649cbe8b506dc3ce6e4ef8b426e11a61e052497f07d5eb3008d12f682"
+    },
+    "docs/reference_frontend_builds_4_20_review.json": {
+      "bytes": 34901,
+      "sha256": "5f31c2d8221035bbd7cea2f7115acc0141910a4bbddba129535af337f0fb02e8"
+    },
+    "docs/reference_frontend_builds_4_20_scoped_request_20261021_101042.json": {
+      "bytes": 32825,
+      "sha256": "702d539e8cd3673a2d21397034df79ee6cb0812c58eceecb00b03f67dc9841f8"
+    },
+    "docs/reference_frontend_builds_4_20_scoped_request_20261021_115433.json": {
+      "bytes": 33390,
+      "sha256": "ff6704e8a1b69648fda372c8c2767a4569c8322f5162fed4ddcbc7adacab9e49"
+    },
+    "docs/reference_frontend_builds_4_20_scoped_request_20261021_141751.json": {
+      "bytes": 34143,
+      "sha256": "1f4c72ff35b929f2a6a66cf147c151e7d2ea929872396b5e2b0f7f82ac43328e"
+    },
+    "docs/reference_frontend_builds_4_20_scoped_request_20261021_174700.json": {
+      "bytes": 34711,
+      "sha256": "89a16b710fdd8536608c976b3a4184eed71a2e8533b37658fca76f5e9a6c26c0"
+    },
+    "docs/reference_frontend_builds_4_20_scoped_request_20261021_191645.json": {
+      "bytes": 35276,
+      "sha256": "fe3bcd1f5d84de2e16f10326d8c6d8dbfaab5d8a49d4ae20020b7b00b53677c1"
+    },
+    "docs/reference_frontend_builds_4_20_scoped_request_20261021_205200.json": {
+      "bytes": 35858,
+      "sha256": "00bd51ccdb871710a34d95690f2c0a45c62f54c2940847de32923cb8c00a1149"
+    },
+    "docs/reference_frontend_builds_4_20_scoped_request_20261021_222620.json": {
+      "bytes": 36817,
+      "sha256": "267710919b48b396904b8c861a79f2541dd8831d8bcd0f625751c9143d4ded98"
+    },
+    "docs/reference_frontend_builds_4_20_scope_verification_2026_10_21.json": {
+      "bytes": 31015,
+      "sha256": "f2d1cfa9e01544095b2f345d6df7e7d664b09a83800c92df2f4f931375be167f"
+    },
+    "docs/reference_frontend_builds_4_20_sys01102_verification_2026_10_21.json": {
+      "bytes": 31509,
+      "sha256": "23c68bbfa87e83bd361bbdf697d292c8c19556a0b6e727e863acf711732ceea4"
+    },
+    "docs/reference_frontend_builds_4_20_task_verification_2026_10_21.json": {
+      "bytes": 30573,
+      "sha256": "a009c58bab5a703dad3ef1db5be3c9da264a02ad5eb281b7c85d2dca467a709b"
+    },
+    "docs/reference_frontend_builds_4_20_verification.json": {
+      "bytes": 6302,
+      "sha256": "05fbc066be3d8d1c76b76eaae508e61465f08b131919524c0f34177c40404697"
+    },
+    "docs/reference_frontend_builds_4_20_verification_2026_10_21.json": {
+      "bytes": 28274,
+      "sha256": "63a29d079262e1221b99c6b5fd63e5da127f12f45a8e122f67868558b5a7394f"
+    },
+    "docs/reference_frontend_builds_4_20_verification_2026_10_21_recheck.json": {
+      "bytes": 30005,
+      "sha256": "66b62de98c761f5cf66be0fbe88883bb8090ec8cc3c1f74cda4fc6c81bd293aa"
+    },
+    "docs/reference_frontend_builds_4_20_verified_request_20261021_100113.json": {
+      "bytes": 34476,
+      "sha256": "39c7acba838e5a80a870aaf0f524b80163cb21d1591fda542f8402579dc0c952"
+    },
+    "docs/reference_client_4_20.json": {
+      "bytes": 3684,
+      "sha256": "efdf40252574a98f439829d43c6b29606d3c12d631c4a64c89ef15637e859d02"
+    },
+    "docs/execution_plan_A_Z.json": {
+      "bytes": 5323596,
+      "sha256": "91c52fe828ed1aee3432e85ef312e4b29349ca08401063608d64136be7f88556"
+    },
+    "docs/ai/DECISIONS.md": {
+      "bytes": 32169,
+      "sha256": "48833d3f11d5b2162be9517af0de5d3695acc9ecd28445db158f2960caffb23a"
+    },
+    "docs/fidelity_requirement_trace_4_20.json": {
+      "bytes": 182882458,
+      "sha256": "f847170909686f4f6d86e8792a4cdecfdcd07fa960c6fd4691e4ec1afbd6e6f7"
+    },
+    "docs/fidelity_sources_4_20.json": {
+      "bytes": 113669447,
+      "sha256": "c777e568495e68c7ee51b83c4bc7979f2cb7b4146e847129a7ac128fb8dbc0cc"
+    },
+    "docs/fidelity_unknowns_4_20.json": {
+      "bytes": 69929624,
+      "sha256": "a87b090f19ee2da2f34bc99b75ea4f2c934f30cec53194612a5af46c90ef7ec2"
+    },
+    "docs/fidelity_registry_actual_scale_consumer_revision_4_20.json": {
+      "bytes": 23983,
+      "sha256": "e7e9a8fdfaf4d3551a47b738679670ea5e986798ff518a8d35860e66344c16cf"
+    },
+    "docs/fidelity_registry_animation_role_reference_revision_4_20.json": {
+      "bytes": 100677,
+      "sha256": "89ae8bc994a0581d5f4c46de3fb0ad04b699ce275f3d4a81ad6c41b1b7d8838f"
+    },
+    "docs/fidelity_registry_config_cache_revision_4_20.json": {
+      "bytes": 39503,
+      "sha256": "a6e77517ff9dfe69354b2c460b85779c04df51e00967c34604ed08463419a7ba"
+    },
+    "docs/fidelity_registry_constructor_revision_4_20.json": {
+      "bytes": 20763,
+      "sha256": "f0f4be41872c864fb794e7682ce7bac93ca0884e5a5f602638bf36fb7bb8d245"
+    },
+    "docs/fidelity_registry_cooperative_wait_revision_4_20.json": {
+      "bytes": 25696,
+      "sha256": "81e77f723e4fbf86ee5970fab0b8a775e5ce0eb5fd4f3339ef4d6fd4302d56ec"
+    },
+    "docs/fidelity_registry_core_reference_revision_4_20.json": {
+      "bytes": 3240111,
+      "sha256": "07a781c330e36c9d0e884ba19109aebe346e6206eb3dbb12f229b9899b331be4"
+    },
+    "docs/fidelity_registry_directory_iterator_revision_4_20.json": {
+      "bytes": 463815,
+      "sha256": "2323fe985608db045ae4ac5e15cd1ee8b1a04950b3b9edc6b3b05bbf2c6ce704"
+    },
+    "docs/fidelity_registry_directory_revision_4_20.json": {
+      "bytes": 37075,
+      "sha256": "0d3a5158f1030590c972edbca19ac1d8d441f7bedd0568fba342a11a4061354f"
+    },
+    "docs/fidelity_registry_effective_native_alias_revision_4_20.json": {
+      "bytes": 90580,
+      "sha256": "7503a0daf43c01d28078823b02ca8bc9f2703a9dc06a3cee597192c7b7fb567c"
+    },
+    "docs/fidelity_registry_lifecycle_retirement_revision_4_20.json": {
+      "bytes": 30644,
+      "sha256": "2fb0254ab14d84109b49b5a977a4d0718a2e655d2eeed67db9414b31de7ce4ec"
+    },
+    "docs/fidelity_registry_native_community_spell_fields_revision_4_20.json": {
+      "bytes": 101697,
+      "sha256": "4a4e61cce487b70cec6982d9414a69e7cefd4ff82abccd93b187d9ddc2b8fc23"
+    },
+    "docs/fidelity_registry_native_graph_owner_revision_4_20.json": {
+      "bytes": 59318,
+      "sha256": "4ac4271713b768aee22be29247c69f3d24153107ab13d4ca851447ee5f74a6f2"
+    },
+    "docs/fidelity_registry_native_graph_predicate_revision_4_20.json": {
+      "bytes": 56433,
+      "sha256": "0fc20800170cf21848de0ad26532591ecc6cb91dc39f4668bb0ff8588afef9c2"
+    },
+    "docs/fidelity_registry_native_heap_revision_4_20.json": {
+      "bytes": 32581,
+      "sha256": "46fd31ae7e3ef699be1de9e41b9fbec406d2e8bb22c5da8b1594e7bebffcd24c"
+    },
+    "docs/fidelity_registry_native_preload_keys_revision_4_20.json": {
+      "bytes": 120520,
+      "sha256": "f0a9107e62545b52abbb6da1a9499ad86abd4d27a5e132301a12624b555c0b80"
+    },
+    "docs/fidelity_registry_native_preload_revision_4_20.json": {
+      "bytes": 81215,
+      "sha256": "d27f044fb68b68b553f76e732a9e5ca34217276110843ee405885f57e670a2e0"
+    },
+    "docs/fidelity_registry_native_scale_revision_4_20.json": {
+      "bytes": 55390,
+      "sha256": "52ae54d8aa4019e9105257cd40a106a00f1d9493cb6274e0a1527d7fba18dca0"
+    },
+    "docs/fidelity_registry_native_thread_startup_revision_4_20.json": {
+      "bytes": 27597,
+      "sha256": "aaaf698b150ae63bdae634bdae8dbc8e1545caef451e3cb903e458718fd46406"
+    },
+    "docs/fidelity_registry_numeric_revision_4_20.json": {
+      "bytes": 28302,
+      "sha256": "586b8697ed08eeec8e4520a027a3d8c5be622481cf67653523f52c78569ba645"
+    },
+    "docs/fidelity_registry_overlay_configuration_revision_4_20.json": {
+      "bytes": 52637,
+      "sha256": "f7a4e7b754ec310702ce1b59e8e1fc3c37c7f075422cb4a772571c7baf771ccf"
+    },
+    "docs/fidelity_registry_package_startup_revision_4_20.json": {
+      "bytes": 33282,
+      "sha256": "4fdf7f818a29d7512a2d156881ceda033fcbd4caf096201b596fc44000f80ee9"
+    },
+    "docs/fidelity_registry_physical_workers_revision_4_20.json": {
+      "bytes": 32527,
+      "sha256": "2df3bf9c67832881ef0504961c915d4783086b05f33b2405c805b89851a05329"
+    },
+    "docs/fidelity_registry_rads_archive_factory_revision_4_20.json": {
+      "bytes": 30785,
+      "sha256": "1f658e740bd618e50f4dde623676bbb807f9d9ced7c87f149b090579ad86a404"
+    },
+    "docs/fidelity_registry_rads_managed_layout_revision_4_20.json": {
+      "bytes": 60852,
+      "sha256": "10063fd89368bda151174f9ecd38658d206069b54a77664bef4d89939c5fe66b"
+    },
+    "docs/fidelity_registry_release_membership_revision_4_20.json": {
+      "bytes": 1550157,
+      "sha256": "6563d5213744ca8b0299e8cbbf09288afe457a166554857b2daf53e687241ef3"
+    },
+    "docs/fidelity_registry_root_lifecycle_revision_4_20.json": {
+      "bytes": 30121,
+      "sha256": "33399f669aed7a61ed9018c1faf72d11852ab166add4129e60cf771cffeb76f2"
+    },
+    "docs/fidelity_registry_semantic_revision_4_20.json": {
+      "bytes": 32862,
+      "sha256": "18dec2549d1201f6bd9a99705e925ca0a4da6afbeb969029d9f4661ce5317c3a"
+    },
+    "docs/fidelity_registry_skin_loader_revision_4_20.json": {
+      "bytes": 40521,
+      "sha256": "cd2333d4f76eab9866e12bfe23ac5d49c8c040a57009c7f708b8ceb3cddd8eb7"
+    },
+    "docs/fidelity_registry_skin_resources_revision_4_20.json": {
+      "bytes": 63039,
+      "sha256": "50398b0830f686c144393dd2cd7820d11c9aecb49f62117274aa5950d5689925"
+    },
+    "docs/fidelity_registry_skin_revision_4_20.json": {
+      "bytes": 28281,
+      "sha256": "0439360f37106ac39ed66db3f4ba43cdd68c24435d0a52e4ae588a0aaf4371d4"
+    },
+    "docs/fidelity_registry_text_config_locale_revision_4_20.json": {
+      "bytes": 44447,
+      "sha256": "b90571499d4fa28e3fc9937387e054d46324e9d3ebea30bda26ac6b1fcb833cd"
+    },
+    "docs/fidelity_registry_unpacked_filesystem_revision_4_20.json": {
+      "bytes": 39828,
+      "sha256": "c1d0a4d24c3b1d701292903b4fc51638d7c37de1e0748a1c2468edc9c73eaf2b"
+    },
+    "docs/fidelity_registry_verification_4_20.json": {
+      "bytes": 417432,
+      "sha256": "86b2700db7ba2662c76b9b2fca6b98aad5f0996b79574d5f42a49b3324c8b4b1"
+    }
+  },
+  "modified_files": [
+    "docs/completion_tasks_2026-10-20.json",
+    "docs/coverage.json",
+    "docs/completion_plan.json",
+    "docs/resume_checkpoint.json",
+    "docs/ai/CURRENT.md",
+    "docs/ai/HANDOFF.md",
+    "docs/reference_frontend_builds_4_20_scoped_request_20261021_214947Z.json",
+    "runtime/project-plan/plan.sqlite3"
+  ],
+  "native_executed": false,
+  "game_code_changed": false,
+  "game_builds_or_tests_run": false,
+  "resources_reconstructed": false,
+  "evidence_workspace": "E:\\mapslol3v3\\Build_identity_SYS_01_1_02_20261021_214947Z",
+  "final_audit_pending": false,
+  "final_audit": {
+    "observed_utc": "2026-10-21T21:51:36.766730+00:00",
+    "passed": true,
+    "checks": {
+      "only_requested_registry_task_changed": true,
+      "registry_metadata_preserved": true,
+      "previous_evidence_and_unrelated_work_preserved": true,
+      "tools_and_producer_unchanged": true,
+      "docs/coverage.json_only_task_evidence_added": true,
+      "docs/completion_plan.json_only_task_evidence_added": true,
+      "docs/resume_checkpoint.json_only_task_evidence_added": true,
+      "report_preserved": true,
+      "docs/ai/CURRENT.md_preserved": true,
+      "docs/ai/HANDOFF.md_preserved": true,
+      "fresh_source_verification_matches_receipt": true,
+      "31_tests_passed": true,
+      "checks_exit_zero_and_logs_unchanged": true,
+      "five_game_reference_sources_verified": true,
+      "exact_descriptor_verified_separately": true,
+      "sqlite_integrity_ok": true,
+      "all_manual_states_notes_revisions_preserved": true,
+      "entire_manual_history_preserved": true,
+      "only_requested_catalog_row_changed": true,
+      "catalog_and_generator_match": true,
+      "live_task_and_copy_match": true,
+      "new_evidence_linked_to_consumers": true,
+      "tauri_same_database": true,
+      "no_human_acceptance_or_false_completion": true,
+      "unknowns_retained_with_research_and_closure": true,
+      "no_historical_execution_or_game_changes": true
+    },
+    "checks_count": 26,
+    "manual_states_preserved": 42606
+  },
+  "integration": {
+    "changed_catalog_tasks": [
+      "SYS-01.1-02"
+    ],
+    "manual_states_preserved": 42606,
+    "manual_history_preserved": true,
+    "instruction_sha256": "bb87be332797085835a6341431b72e0d11470b61f2e486ccab78f9a42c91f7bd",
+    "http_task_and_copy_verified": true,
+    "tauri_same_database": true,
+    "native_window_observed": false
+  }
+}

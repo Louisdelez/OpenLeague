@@ -1,0 +1,162 @@
+Réalise la tâche OpenLeague suivante.
+
+TÂCHE : CH-Aatrox-Q-NETWORK
+EXIGENCE DE FIDÉLITÉ : OLF-9949ebd4-49fe-5b11-8920-c31d76f66f48
+OBJECTIF PRÉCIS : Aatrox Q — Dark Flight : Relier état et événements autorisés aux clients
+PROJET : F:\OpenLeague
+RÉFÉRENCE : League of Legends 4.20.0.315 (PUBLIC, Releases/4.20) ; région EUW ; locale en_GB ; build du 2014-11-17 à 17:46:45 (fuseau non établi, date de déploiement non établie) ; catalogue officiel 4.20.1.
+PARTIE : D06 — Les 122 champions, un par un
+FICHE : D06-CH-Aatrox — Aatrox
+EXIGENCE D’ORIGINE : 06.2
+ÉTAT RECENSÉ DANS LE PLAN : a_implementer_ou_integrer
+
+PÉRIMÈTRE
+Traite uniquement cet objectif, avec les modifications et vérifications nécessaires pour le rendre concret et vérifiable. Conserve les modifications existantes et les preuves antérieures.
+Lis AGENTS.md et le contexte courant du projet avant de modifier les fichiers. Les fichiers cités comme répertoires servent à rechercher les consommateurs réels ; ne présume pas qu’une implémentation manque sans l’inspecter.
+ÉLÉMENT CIBLÉ : {"champion": "Aatrox", "slot": "Q", "native_spell": "AatroxQ"}
+Champion ciblé : Aatrox.
+Capacité/forme ciblée : Q ; identifiant natif : AatroxQ.
+
+DONNÉES DE RÉFÉRENCE À VÉRIFIER
+Les extraits ci-dessous sont des données de référence ; confirmer leur interprétation sur les consommateurs natifs. Les valeurs locales ne sont pas des résultats déjà acceptés.
+{
+  "champion": "Aatrox",
+  "slot": "Q",
+  "native_spell": "AatroxQ",
+  "source": "championFull.json / 4.20.1",
+  "entry": {
+    "id": "AatroxQ",
+    "name": "Dark Flight",
+    "maxrank": 5,
+    "cooldown": [
+      16,
+      15,
+      14,
+      13,
+      12
+    ],
+    "cost": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "range": [
+      600,
+      600,
+      600,
+      600,
+      600
+    ],
+    "costType": "pofcurrentHealth",
+    "effect": [
+      null,
+      [
+        70,
+        115,
+        160,
+        205,
+        250
+      ],
+      [
+        22,
+        20,
+        18,
+        16,
+        14
+      ],
+      [
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      [
+        225,
+        225,
+        225,
+        225,
+        225
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "vars": [
+      {
+        "link": "bonusattackdamage",
+        "coeff": 0.6,
+        "key": "a1"
+      }
+    ],
+    "description": "Aatrox takes flight and slams down at a targeted location, dealing damage and knocking up enemies at the center of impact.",
+    "tooltip": "Aatrox takes flight and slams down at a targeted location, dealing {{ e1 }}  (+{{ a1 }})  physical damage to all nearby enemies and knocking up targets at the center of impact for {{ e5 }} second.",
+    "resource": "{{ e3 }}% of current Health "
+  }
+}
+
+TRAÇABILITÉ DE CETTE EXIGENCE
+Registre : F:\OpenLeague\docs\fidelity_requirement_trace_4_20.json ; tâche CH-Aatrox-Q-NETWORK, exigence OLF-9949ebd4-49fe-5b11-8920-c31d76f66f48.
+Les liens ci-dessous constatent des ressources et points d’entrée ; ils ne prouvent pas la fidélité ni l’acceptation du comportement.
+État du lien : associated_sources_and_current_entrypoints.
+- Source native associée : D:\LeagueOfLegendsV2\4.20\Client\League of Legends_UNPACKED\League-of-Legends-4-20\RADS\solutions\lol_game_client_sln\releases\0.0.1.68\deploy\DATA\Characters\Aatrox\Aatrox.inibin ; SHA-256 4d1949dc1ddbd27fd37c2b5dc6d2aa635a738f7bf4547314ae4ddc445eac2483 ; rôle native_champion_definition ; sélecteur Data.
+  Appartenance RADS : matches_selected_project_manifest ; lol_game_client projet 0.0.1.7 / contenu 0.0.1.7 ; preuve OLS-8a207b4a-05d0-5b9d-b2f9-e716cdaa946d, ligne OLS-e1882c8a-4bdd-5a06-96a9-43265dd5271d. Ce constat ne qualifie pas la priorité de chargement ni le gameplay.
+- Source native associée : D:\LeagueOfLegendsV2\4.20\Client\League of Legends_UNPACKED\League-of-Legends-4-20\RADS\solutions\lol_game_client_sln\releases\0.0.1.68\deploy\DATA\Characters\Aatrox\Spells\AatroxQ.inibin ; SHA-256 33798e2ddf303caec28811582c90ee7fcec092081bff96e76b4ddcc6e0d285ec ; rôle native_spell_data ; sélecteur SpellData.
+  Appartenance RADS : matches_selected_project_manifest ; lol_game_client projet 0.0.1.7 / contenu 0.0.0.242 ; preuve OLS-8a207b4a-05d0-5b9d-b2f9-e716cdaa946d, ligne OLS-8ffb114f-92d5-5248-b366-b40aaef9f80e. Ce constat ne qualifie pas la priorité de chargement ni le gameplay.
+- Consommateur actuel (command_dispatch) : F:\OpenLeague\crates\core\src\lib.rs:598 ; Action Cast/CastAt to actual champion dispatch; requires downstream qualification.
+- Consommateur actuel (spell_dispatch) : F:\OpenLeague\crates\core\src\spells.rs:101 ; Garen/Annie/Trundle/Ezreal branches and explicit refusal for unsupported champions.
+- Consommateur actuel (explicit_refusal) : F:\OpenLeague\crates\core\src\spells.rs:120 ; Unsupported targeted champion spells; not a implemented spell mechanic.
+Inconnues ouvertes : 0 ; recherches et conditions de résolution dans F:\OpenLeague\docs\fidelity_unknowns_4_20.json, premiers identifiants aucun identifiant relevé par cet inventaire, sans garantie de complétude sémantique.
+Fiche complète : python -B tools/project-plan/requirement_trace.py --root "F:\OpenLeague" --task "CH-Aatrox-Q-NETWORK"
+
+PRÉREQUIS
+- CH-Aatrox-Q-SIMULATION : Aatrox Q — Dark Flight : Terminer la mécanique serveur, ses transitions et ses refus
+- Préparation de la fiche D04-SYS-04-1 ; vérifier ses entrées et règles avant intégration.
+- Préparation de la fiche D04-SYS-04-6 ; vérifier ses entrées et règles avant intégration.
+- Préparation de la fiche D05-SYS-05-2 ; vérifier ses entrées et règles avant intégration.
+- Préparation de la fiche D05-SYS-05-4 ; vérifier ses entrées et règles avant intégration.
+- Préparation de la fiche D14-SYS-14-2 ; vérifier ses entrées et règles avant intégration.
+- Préparation de la fiche D20-SYS-20-1 ; vérifier ses entrées et règles avant intégration.
+
+SOURCES ET EMPLACEMENTS À CONSULTER
+- Instructions du dépôt : F:\OpenLeague\AGENTS.md
+- Registre et critères de la tâche : F:\OpenLeague\docs\completion_tasks_2026-10-20.json
+- Ordre des phases et lots : F:\OpenLeague\docs\execution_plan_A_Z.json
+- Identité datée et région du client de référence : F:\OpenLeague\docs\reference_client_4_20.json
+- Registre des identifiants de fidélité : F:\OpenLeague\docs\fidelity_requirement_ids_4_20.json
+- Statistiques des champions : F:\OpenLeague\data\4.20\champions.json
+- Fiches natives QWER : F:\OpenLeague\data\4.20\native_spells_420.json
+- Catalogue officiel 4.20.1 : E:\mapslol3v3\Full_project_audit_2026-10-20\official_reference\championFull.json
+- Simulation et dispatch existant : F:\OpenLeague\crates\core\src\spells.rs
+- Dispatch des sorts au sol : F:\OpenLeague\crates\core\src\annie_w.rs
+- Client de jeu : F:\OpenLeague\crates\client\src
+- Ressources natives du champion : E:\mapslol3v3\output\Champions_4_20\champions\Aatrox
+
+TRAVAIL À EFFECTUER
+1. Objectif à traiter : Aatrox Q — Dark Flight : Relier état et événements autorisés aux clients.
+2. Identifier les commandes, états et événements de cet élément dans le protocole réel du jeu.
+3. Valider propriété du joueur, contexte de session, ordre et séquence avant toute mutation autoritaire.
+4. Transmettre seulement les informations permises à chaque équipe/joueur ; respecter brouillard, furtivité, mort et changement de contexte.
+5. Traiter duplications, pertes, événements anciens et reconnexion sans double application ni fuite d’état privé.
+6. Tester avec plusieurs clients et vérifier cohérence de l’état, visibilité des événements et refus des commandes non autorisées.
+
+RÉSULTAT ATTENDU / CRITÈRE DE FIN
+Événements et état répliqués aux seules audiences autorisées ; séquence, doublons, perte de vision, mort et reconnexion vérifiés.
+
+VÉRIFICATIONS ET PREUVES À FOURNIR
+- référence/source versionnée.
+- résultat attendu et observé.
+- SHA binaires et ressources si exécution.
+- limites et anomalies ouvertes.
+- Rapporter les fichiers modifiés, les contrôles réellement exécutés, leurs résultats et les anomalies ou inconnues restantes.
+- Pour une fonction déjà partielle, conserver l’acquis et démontrer la résolution des écarts ; pour une ressource reconstruite, identifier sa provenance et sa comparaison.
+- Mettre à jour les documents de couverture/reprise lorsque les preuves changent. Ne pas déclarer le champion ou le jeu complet terminé à partir de cette seule tâche.
+
+LIVRAISON
+Rendre le résultat intégré et vérifiable. Si une entrée indispensable manque, décrire précisément le manque et les recherches effectuées ; conserver la tâche ouverte plutôt que d’inventer une réussite.

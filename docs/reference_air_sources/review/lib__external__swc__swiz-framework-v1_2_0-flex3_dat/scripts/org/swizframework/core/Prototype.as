@@ -1,0 +1,106 @@
+package org.swizframework.core
+{
+   public class Prototype extends Bean
+   {
+      
+      public var constructorArguments:*;
+      
+      public var singleton:Boolean = false;
+      
+      protected var _type:Class;
+      
+      public function Prototype(type:Class = null)
+      {
+         super();
+         this.type = type;
+      }
+      
+      override public function get type() : *
+      {
+         return this._type;
+      }
+      
+      public function set type(clazz:Class) : void
+      {
+         this._type = clazz;
+      }
+      
+      override public function get source() : *
+      {
+         return this.getObject();
+      }
+      
+      protected function getObject() : *
+      {
+         var instance:* = _source;
+         if(instance == null)
+         {
+            _source = instance = this.createInstance();
+            beanFactory.setUpBean(new Bean(_source,name,typeDescriptor));
+            if(!this.singleton)
+            {
+               _source = null;
+            }
+            else
+            {
+               initialized = true;
+            }
+         }
+         return instance;
+      }
+      
+      protected function createInstance() : Object
+      {
+         var instance:* = undefined;
+         var args:Array = null;
+         if(this.type == null)
+         {
+            throw new Error("Bean Creation exception! You must supply type to Prototype!");
+         }
+         if(this.constructorArguments != null)
+         {
+            args = this.constructorArguments is Array ? this.constructorArguments : [this.constructorArguments];
+            switch(args.length)
+            {
+               case 1:
+                  instance = new this.type(args[0]);
+                  break;
+               case 2:
+                  instance = new this.type(args[0],args[1]);
+                  break;
+               case 3:
+                  instance = new this.type(args[0],args[1],args[2]);
+                  break;
+               case 4:
+                  instance = new this.type(args[0],args[1],args[2],args[3]);
+                  break;
+               case 5:
+                  instance = new this.type(args[0],args[1],args[2],args[3],args[4]);
+                  break;
+               case 6:
+                  instance = new this.type(args[0],args[1],args[2],args[3],args[4],args[5]);
+                  break;
+               case 7:
+                  instance = new this.type(args[0],args[1],args[2],args[3],args[4],args[5],args[6]);
+                  break;
+               case 8:
+                  instance = new this.type(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7]);
+                  break;
+               default:
+                  throw new Error("No more than 8 constructor arguments are support by Prototype.");
+            }
+         }
+         else
+         {
+            instance = new this.type();
+         }
+         return instance;
+      }
+      
+      override public function toString() : String
+      {
+         return "Prototype{ type: " + this.type + ", name: " + name + " }";
+      }
+   }
+}
+

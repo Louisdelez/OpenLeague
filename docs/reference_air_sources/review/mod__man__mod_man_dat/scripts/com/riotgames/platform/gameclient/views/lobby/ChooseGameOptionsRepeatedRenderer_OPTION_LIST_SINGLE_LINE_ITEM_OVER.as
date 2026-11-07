@@ -1,0 +1,15 @@
+package com.riotgames.platform.gameclient.views.lobby
+{
+   import mx.core.SpriteAsset;
+   
+   [Embed(source="/_assets/assets.swf", symbol="symbol41")]
+   public class ChooseGameOptionsRepeatedRenderer_OPTION_LIST_SINGLE_LINE_ITEM_OVER extends SpriteAsset
+   {
+      
+      public function ChooseGameOptionsRepeatedRenderer_OPTION_LIST_SINGLE_LINE_ITEM_OVER()
+      {
+         super();
+      }
+   }
+}
+

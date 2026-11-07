@@ -1,0 +1,91 @@
+<div class="modal">
+  <style scoped>
+    #modal-main {
+      position: relative;
+      width: 454px;
+      height: auto;
+      z-index: 2000;
+      background-image: url('images/bgOptionsMenu.jpg');
+    }
+
+    .modal-default {
+      color: white;
+    }
+
+    .modal-content {
+      display: inline-block;
+      width: 100%;
+      height: auto;
+      margin-top: 5px;
+    }
+
+    .modal-header {
+        width: 100%;
+        text-align: center;
+    }
+
+    .modal-options {
+      width: 75%;
+      height: auto;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .clip-text {
+        color: transparent;
+        -webkit-background-clip: text;
+    }
+
+    h1 {
+        font-size: 16px;
+        font-weight: 500;
+        font-style: normal;
+        text-align: center;
+        text-transform: uppercase;
+        background-color: #e2e7eb;
+    }
+
+    label {
+      font-size: 13px;
+      color: #ece6de;
+      display:inline-block;
+      padding-top:20px;
+    }
+
+  </style>
+  <div id="modal-main" class="modal-default">
+    <div class="modal-button-group pull-right">
+      <button id="buttonRegionClose" class="button button-chrome button-modal" ng-click="close()"><i
+        class="icon-close chrome-text-gradient"></i></button>
+    </div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="clip-text font-lol">{{headerLabel}}</h1>
+            <div><img src="images/artSettingsSeparator.png"></div>
+        </div>
+        <div class="modal-options">
+        <label class="font-spiegel">{{selectRegionLabel}}</label>
+        <dropdown id="dropdownRegionRegion" ng-model="regionId" class="long">
+          <dropdown-item ng-repeat="region in regions" value="{{region.id}}" ng-selected="region.id === regionId" class="font-spiegel">
+            {{region.name}}
+          </dropdown-item>
+        </dropdown>
+
+        <label class="font-spiegel">{{selectLanguageLabel}}</label>
+        <dropdown id="dropdownRegionLanguage" ng-model="languageId" class="long">
+          <dropdown-item ng-repeat="language in regionLanguages" value="{{language.id}}" ng-selected="language.id === languageId" class="font-spiegel">
+            {{language.name}}
+          </dropdown-item>
+        </dropdown>
+
+          <div class="modal-footer">
+              <div class="modal-buttons">
+                  <button id="buttonRegionSave" ng-click="save(); close()" class="button-primary"><p class="button-primary-text">{{saveLabel}}</p></button>
+                  <button id="buttonRegionCancel" ng-click="close()" class="button-primary"><p class="button-primary-text">{{cancelLabel}}</p></button>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+

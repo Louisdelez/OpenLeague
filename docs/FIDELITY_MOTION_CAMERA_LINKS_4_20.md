@@ -1,0 +1,48 @@
+# Déplacements spéciaux, ciblage et caméra — SYS-01.2-02, V84
+
+Les14 exigences SYS-09.3/09.4 sont reliées à33 rôles précis :11 partiels et3 frontières seules (dash générique,saut de champion,défilement caméra aux bords). Les sources et les corps courants ont été relus ; aucun code/asset du jeu modifié et aucun jeu,Rust,GUI ou binaire historique exécuté dans ce lot. Les états manuels restent réservés à l’utilisateur.
+
+## Sources vérifiées
+
+Input.ini,Constants.var,la grille et les bornes Map10,l’exécutable de référence,les quatre INIBIN de sorts et les150 profils de sélection sont confrontés aux manifestes sélectionnés. Input.ini installé est identique à la source native. Les13 bindings relevés incluent Y,Space,les quatre flèches,MoveClick,AttackMoveClick,AttackOnly,AttackMove,Hold etStop. Ils décrivent des associations d’événements, pas l’algorithme du contrôleur.
+
+Les sept constantes caméra sont relues : rectangleX/Z800/4200/14700/10000,FarZ5000 etKeyboardOrbitSpeedX/Y100/50. La vitesse locale PAN_SPEED150 reste distincte de ces valeurs d’orbite. Les122 rayons de sélection champions et28 profils PNJ sont relus ; quatre champs absents restent absents,avec fallback local160 explicitement identifié. Le type brut est conservé et les valeurs numériques sont comparées sans remplacer les absences.
+
+GravesMove,RocketJump,EzrealArcaneShift etTrundleCircle sont des exemples natifs nommés. Leurs champs d’auteur sont comparés au tableau actuel. Ils ne démontrent pas les callbacks serveur ni la disponibilité de tous les dashs et sauts. Le code Simple/Complex de particules ne constitue pas un déplacement de champion.
+
+## Mouvements spéciaux constatés
+
+Les dispatchs courants inspectés refusent les sorts de Graves etTristana. EzrealE a un chemin local partiel :8 ticks interruptibles,clamp radial475,contrôle d’un disque d’atterrissage contre terrain,piliers et occupation à l’admission et à la libération. Le radius est celui de target_info,distinct du rayon de pathfinding allié. La source475 est CastRangeDisplayOverride ; son emploi comme limite gameplay est une politique locale, pas un callback natif récupéré. L’arrivée est contrôlée sans test du segment depuis l’origine et sans wall snap. La libération manquée,le déplacement forcé,le stun,le silence ou le changement d’origine annulent la tentative selon ce chemin local.
+
+TrundleE crée un cercle temporaire. Rayon150,vitesse de poussée600,zone180 vers arrivée200 sont explicitement reconstruits. La poussée teste son segment et exclut seulement son propre pilier. Les cibles sont triées parID ; pushes.insert stocke une seule poussée par acteur. Le tick avance Trundle avant EzrealE. Cet ordre local ne qualifie pas l’arbitrage historique de deux capacités simultanées ni l’ordre global de réception réseau.
+
+## Ciblage et caméra constatés
+
+Picking intersecte le rayon avec le plan horizontal à la hauteur de l’acteur,compare le rayon de sélection,puis choisit la distance horizontale minimale. Il ne réalise pas par cette seule opération un volume3D natif,une priorité par profondeur ou une preuve d’occlusion. Dans commands,le clic droit contextuel émet Attack si une cible est trouvée,sinon Move issu du raycast_floor. Les autres bindings historiques ne sont pas déclarés complets par ce constat.
+
+Le contrôleur de caméra ordinaire nommé reçoit clavier,focus et état de session. La fonction apply n’a ni position de curseur ni dimensions de fenêtre ; cette frontière ne prouve pas le défilement aux bords. Y passe par CameraLock.consume et ses gardes propriétaire,révision,serial,état terminal et disponibilité. Space recentre ; le suivi utilise la position du Snapshot accepté. Le clic gauche minimap demande déverrouillage,écrit X/Z du focus et conserveY avant que la pose normale applique ses contraintes.
+
+camera_native reçoit les limites de Constants.var ; camera_sequence remetY à0 avant camera_focus et ses deux passes. Les384 cas camera_focus et512 cas camera_sequence sont des preuves héritées liées au même SHA du binaire. Leurs fichiers et limites sont relus,mais les exécutions originales et les tests Rust correspondants ne sont pas rejoués ici. Le reçu ordinary_camera_hud conserve ses tentatives,dates et limites ; il n’est pas promu en recette actuelle de toutes les zones.
+
+## Vérifications et intégration
+
+70 requêtes de champs de sorts et150 profils de sélection vérifiés ;635 contrôles de collecte. 46 cas du lecteur,dont45 refus attendus : source ou champ remplacé,absence convertie en160,binding modifié,fausse règle de traversée,priorité universelle,preuve héritée promue en exécution fraîche et clôture indue.
+
+| Tâche | Consommateur constaté | Travail ouvert |
+|---|---|---|
+| SYS-09.3-01 | GravesMove fournit un exemple natif de ressource de déplacement ; les deux dispatchs locaux refusent les sorts de Graves dans les corps inspectés. | Qualifier et relier chaque dash réellement demandé,destination,collision et interruptions ; le blink Ezreal et les mouvements de particules ne réalisent pas un dash générique. |
+| SYS-09.3-02 | RocketJump fournit une ressource native de saut ; les dispatchs inspectés ne proposent pas de sort Tristana. La présence des particules Simple/Complex n’est pas un saut de champion. | Qualifier simulation,trajectoire et hauteur visuelle indépendante par capacité ; conserver l’absence de consommateur de saut dans cette frontière explicite. |
+| SYS-09.3-03 | EzrealE réalise un blink local : clamp radial475,contrôle disque terrain/piliers/occupation à l’admission et au tick de libération,puis commit position/hauteur. Aucun wall snap. | Qualifier politique historique et autres téléportations ; la valeur475 vient du display override natif,son usage gameplay est une décision locale explicite. |
+| SYS-09.3-04 | Le blink Ezreal vérifie l’arrivée sans tester le segment origine-arrivée ; la poussée Trundle vérifie le segment et exclut uniquement son pilier d’origine. | Qualifier le droit de traverser pour chaque capacité et chaque mur ; aucune matrice générale de permissions n’est déduite de ces deux chemins. |
+| SYS-09.3-05 | EzrealE en attente refuse stun,déplacement forcé,silence,changement d’origine et tick de libération sauté. La poussée Trundle utilise vie,marqueur,position attendue et durée propres. | Qualifier root,suppression,interruptions et buffering par capacité ; les champs INIBIN ne prouvent pas les callbacks serveur ou les règles locales. |
+| SYS-09.3-06 | TrundleE ajoute un cercle temporaire,expire ses piliers et les fournit au pathfinding dynamique. Rayon150 et politique de poussée restent reconstruits. | Qualifier empreintes,vision,interactions et autres obstacles créés par champions ; ne pas généraliser ce seul cercle local. |
+| SYS-09.3-07 | Trundle stocke une seule poussée par acteur via insert ; les cibles sont triées parID. Le tick avance Trundle avant EzrealE,qui refuse un déplacement forcé actif. | Qualifier ordre d’admission et résolution de tous les déplacements simultanés ; remplacement local d’une poussée et ordre des fonctions ne prouvent pas une politique historique universelle. |
+| SYS-09.4-01 | Picking croise le rayon avec le plan horizontal à la hauteur de l’acteur,puis compare SelectionRadius et choisit la distance horizontale minimale. Quatre rayons de structures absents gardent un fallback local160. | Qualifier volumes3D,occlusion,priorités et tous les types de cibles ; rayon natif ne signifie pas algorithme de sélection natif. |
+| SYS-09.4-02 | Input.ini distingue MoveClick,AttackMove etAttackOnly ; le client local émet Attack si picking trouve une cible,sinon Move depuis raycast_floor,avec gardes UI. | Qualifier tous les gestes historiques et modificateurs ; clic droit contextuel ne couvre pas automatiquement attack-move,attack-only et sélection gauche. |
+| SYS-09.4-03 | Le contrôleur ordinaire inspecté consomme flèches,Space etY ; sa fonction apply ne reçoit ni position de curseur ni dimensions de fenêtre. Le point d’entrée caméra consomme focus et molette. | Relier/implémenter le défilement aux bords avec vitesse,marge,focus et captures UI ; aucune absence globale inférée au-delà des corps inspectés. |
+| SYS-09.4-04 | Y passe par CameraLock.consume avec propriétaire,serial,révision et gardes ; le suivi lit le Snapshot local accepté. Space recentre temporairement. | Qualifier le comportement historique et les transitions complètes ; les bindings natifs ne prouvent pas la fidélité du contrôleur local. |
+| SYS-09.4-05 | Le clic gauche minimap inverse les coordonnées Map10,demande déverrouillage puis écrit X/Z du focus en gardant Y ; la pose caméra applique ensuite ses contraintes. | Qualifier drag,bords,DPI et interactions avec suivi/fin de partie ; ce contrôleur est local et les callbacks souris natifs ne sont pas portés. |
+| SYS-09.4-06 | Constants.var fournit800/4200/14700/10000 ; camera_native passe ces limites à la restriction X/Z,et la séquence remet Y à0 avant les deux passes. Les384/512 cas natifs sont des preuves héritées identifiées. | Qualifier bootstrap effectif et toutes cartes/modes/services ; aucun ancien cas ni rendu n’est présenté comme réexécuté dans ce lot. |
+| SYS-09.4-07 | Des tests courants couvrent bindings clavier,projection minimap/DPI et picking par hauteur/rayon. Le reçu antérieur ordinary_camera_hud conserve ses tentatives et limites. | Construire la recette complète bases,voies,jungle et passages étroits sur le build courant ; tests définis et essais hérités ne prouvent pas cette couverture actuelle. |
+
+Reçu : docs/reference_motion_camera_sources/motion_camera-links.json. Livraison : docs/fidelity_registry_motion_camera_links_revision_4_20.json. Les14 périmètres et le Goal restent ouverts.

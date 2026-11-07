@@ -54,8 +54,8 @@ mod tests {
  }
  #[test]
  fn two_altar_power_bonus_uses_the_current_item_power() {
-  let (mut s,id)=game();s.players.get_mut(&id).unwrap().gold=10000.;s.buy_item(id,1058).unwrap();assert_eq!(s.stats(id).ability_power,80.);
+  let (mut s,id)=game();s.players.get_mut(&id).unwrap().gold=10000.;s.buy_item(id,1052).unwrap();assert_eq!(s.stats(id).ability_power,20.);
   for altar in &mut s.interactions.as_mut().unwrap().state.altars {altar.owner=Some(0);}
-  assert_eq!(s.stats(id).ability_power,88.);s.sell_item(id,0).unwrap();assert_eq!(s.stats(id).ability_power,0.);
+  assert_eq!(s.stats(id).ability_power,22.);s.sell_item(id,0).unwrap();assert_eq!(s.stats(id).ability_power,0.);
  }
 }

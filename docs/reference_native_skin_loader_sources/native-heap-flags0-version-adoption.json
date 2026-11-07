@@ -1,0 +1,319 @@
+{
+  "schema": "openleague_current_heap_flags0_version_adoption/v1",
+  "utc": "2026-10-21T10:13:59.456723+00:00",
+  "native_trigger": {
+    "receipt": {
+      "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision17\\native-package-static-CRT-attempt7.json",
+      "bytes": 58344,
+      "sha256": "b213bc60ad70b34d5f3cc12ef43ec03b62ee1adc6d1a4e8e56e9079be0a7f4bf"
+    },
+    "callsite": "0xc9f3de",
+    "API": "HeapAlloc",
+    "flags": 0,
+    "bytes": 140,
+    "previous_refusal": "UnsupportedFlags"
+  },
+  "scope": "Current owned process heap accepts flags0and8. Actualexclusiveownedself-processbytes are observed then written unchanged before Rustsliceexposure. Otherflags/rawforeignpointers remain refused.",
+  "source_changes": [
+    {
+      "path": "crates/core/src/audio_crt_windows_process_heap.rs",
+      "source_id": "OLS-856366c6-3658-547c-b19b-4a2a6a564c5d",
+      "before": {
+        "bytes": 28948,
+        "sha256": "87e1482d8a7a00417658282943e8010d5357fec7864beeaca13d149d968b1abb"
+      },
+      "after": {
+        "bytes": 31024,
+        "sha256": "4867f502360276b5ab85dcadbda51403bcf1e38adc1e5fcf362aae07c4cc973d"
+      },
+      "archive_path": "docs/fidelity_source_versions/OLS-856366c6-3658-547c-b19b-4a2a6a564c5d/87e1482d8a7a00417658282943e8010d5357fec7864beeaca13d149d968b1abb/audio_crt_windows_process_heap.rs"
+    },
+    {
+      "path": "tools/project-plan/source_versions.py",
+      "source_id": "OLS-4614984e-3db6-5d88-b2b2-1e34d00335cd",
+      "before": {
+        "bytes": 8220,
+        "sha256": "32678dc0adef1cbd0cb8d517d736086dea58585e5a4e9857430235970e901056"
+      },
+      "after": {
+        "bytes": 8453,
+        "sha256": "c807086c9d722a1a87dbedb633dbff1dd15784b57bfa7319647016f180f63d2b"
+      },
+      "archive_path": "docs/fidelity_source_versions/OLS-4614984e-3db6-5d88-b2b2-1e34d00335cd/32678dc0adef1cbd0cb8d517d736086dea58585e5a4e9857430235970e901056/source_versions.py"
+    }
+  ],
+  "consumer_anchor_changes": [
+    {
+      "consumer_id": "OLC-5e301e40-dac6-54ee-9fb2-c12d0718d3a9",
+      "previous": {
+        "path": "crates/core/src/audio_crt_windows_process_heap.rs",
+        "role": "actual_process_heap_owned_mirror_consumer",
+        "needle": " pub fn allocate(",
+        "line": 48,
+        "excerpt": " pub fn allocate(&mut self,heap:u32,flags:u32,size:u32,m:&mut BTreeMap<u32,Memory>,d:&mut BTreeSet<u32>)->Result<u32,Failure>{",
+        "scope": "Existing real HeapAlloc backend with full-width host ownership and explicit logical32 references. Inspect/reuse this code before introducing a new allocator.",
+        "qualification": "Current exact source review only; existing native and Rust test receipts are inherited, not rerun in this review.",
+        "consumer_id": "OLC-5e301e40-dac6-54ee-9fb2-c12d0718d3a9",
+        "source_id": "OLS-856366c6-3658-547c-b19b-4a2a6a564c5d"
+      },
+      "current": {
+        "path": "crates/core/src/audio_crt_windows_process_heap.rs",
+        "role": "actual_process_heap_owned_mirror_consumer",
+        "needle": " pub fn allocate(",
+        "line": 77,
+        "excerpt": " pub fn allocate(&mut self,heap:u32,flags:u32,size:u32,m:&mut BTreeMap<u32,Memory>,d:&mut BTreeSet<u32>)->Result<u32,Failure>{",
+        "scope": "Existing real HeapAlloc backend with full-width host ownership and explicit logical32 references. Inspect/reuse this code before introducing a new allocator.",
+        "qualification": "Current exact source review only; existing native and Rust test receipts are inherited, not rerun in this review.",
+        "consumer_id": "OLC-5e301e40-dac6-54ee-9fb2-c12d0718d3a9",
+        "source_id": "OLS-856366c6-3658-547c-b19b-4a2a6a564c5d",
+        "anchor_history": [
+          {
+            "utc": "2026-10-21T10:13:59.456723+00:00",
+            "previous_record": {
+              "path": "crates/core/src/audio_crt_windows_process_heap.rs",
+              "role": "actual_process_heap_owned_mirror_consumer",
+              "needle": " pub fn allocate(",
+              "line": 48,
+              "excerpt": " pub fn allocate(&mut self,heap:u32,flags:u32,size:u32,m:&mut BTreeMap<u32,Memory>,d:&mut BTreeSet<u32>)->Result<u32,Failure>{",
+              "scope": "Existing real HeapAlloc backend with full-width host ownership and explicit logical32 references. Inspect/reuse this code before introducing a new allocator.",
+              "qualification": "Current exact source review only; existing native and Rust test receipts are inherited, not rerun in this review.",
+              "consumer_id": "OLC-5e301e40-dac6-54ee-9fb2-c12d0718d3a9",
+              "source_id": "OLS-856366c6-3658-547c-b19b-4a2a6a564c5d"
+            },
+            "previous_had_history": false,
+            "prior_history_count": 0,
+            "previous_record_sha256": "0094ebcd40188d033cfdd363d5c02f472d11cb6911b042fd93c52c1748c63c47",
+            "previous_source_sha256": "87e1482d8a7a00417658282943e8010d5357fec7864beeaca13d149d968b1abb",
+            "reason": "Authorized source version change;stable consumer role retained,new actual line/excerpt verified.",
+            "change_evidence": "docs/reference_native_skin_loader_sources/native-heap-flags0-version-adoption.json"
+          }
+        ]
+      }
+    },
+    {
+      "consumer_id": "OLC-46b7170e-c3dd-5767-97a0-afc19e2b83a6",
+      "previous": {
+        "path": "crates/core/src/audio_crt_windows_process_heap.rs",
+        "role": "actual_process_heap_initialization_consumer",
+        "needle": " pub fn initialize(",
+        "line": 22,
+        "excerpt": " pub fn initialize(&mut self,m:&mut BTreeMap<u32,Memory>,d:&BTreeSet<u32>)->Result<u32,Error>{crate::audio_crt_heap::initialize(m,d,self)}",
+        "scope": "Existing real process-heap initialization consumes original CRT heap bootstrap through Heap::initialize.",
+        "qualification": "Current exact source review only; existing native and Rust test receipts are inherited, not rerun in this review.",
+        "consumer_id": "OLC-46b7170e-c3dd-5767-97a0-afc19e2b83a6",
+        "source_id": "OLS-856366c6-3658-547c-b19b-4a2a6a564c5d"
+      },
+      "current": {
+        "path": "crates/core/src/audio_crt_windows_process_heap.rs",
+        "role": "actual_process_heap_initialization_consumer",
+        "needle": " pub fn initialize(",
+        "line": 50,
+        "excerpt": " pub fn initialize(&mut self,m:&mut BTreeMap<u32,Memory>,d:&BTreeSet<u32>)->Result<u32,Error>{crate::audio_crt_heap::initialize(m,d,self)}",
+        "scope": "Existing real process-heap initialization consumes original CRT heap bootstrap through Heap::initialize.",
+        "qualification": "Current exact source review only; existing native and Rust test receipts are inherited, not rerun in this review.",
+        "consumer_id": "OLC-46b7170e-c3dd-5767-97a0-afc19e2b83a6",
+        "source_id": "OLS-856366c6-3658-547c-b19b-4a2a6a564c5d",
+        "anchor_history": [
+          {
+            "utc": "2026-10-21T10:13:59.456723+00:00",
+            "previous_record": {
+              "path": "crates/core/src/audio_crt_windows_process_heap.rs",
+              "role": "actual_process_heap_initialization_consumer",
+              "needle": " pub fn initialize(",
+              "line": 22,
+              "excerpt": " pub fn initialize(&mut self,m:&mut BTreeMap<u32,Memory>,d:&BTreeSet<u32>)->Result<u32,Error>{crate::audio_crt_heap::initialize(m,d,self)}",
+              "scope": "Existing real process-heap initialization consumes original CRT heap bootstrap through Heap::initialize.",
+              "qualification": "Current exact source review only; existing native and Rust test receipts are inherited, not rerun in this review.",
+              "consumer_id": "OLC-46b7170e-c3dd-5767-97a0-afc19e2b83a6",
+              "source_id": "OLS-856366c6-3658-547c-b19b-4a2a6a564c5d"
+            },
+            "previous_had_history": false,
+            "prior_history_count": 0,
+            "previous_record_sha256": "6642d3c54d16ed8e5ad2550c4fc1cf1ad8bfcf44479aeef4a330e48e032be497",
+            "previous_source_sha256": "87e1482d8a7a00417658282943e8010d5357fec7864beeaca13d149d968b1abb",
+            "reason": "Authorized source version change;stable consumer role retained,new actual line/excerpt verified.",
+            "change_evidence": "docs/reference_native_skin_loader_sources/native-heap-flags0-version-adoption.json"
+          }
+        ]
+      }
+    },
+    {
+      "consumer_id": "OLC-718dcdfd-5dbb-5833-ae32-ef944747ff58",
+      "previous": {
+        "consumer_id": "OLC-718dcdfd-5dbb-5833-ae32-ef944747ff58",
+        "source_id": "OLS-4614984e-3db6-5d88-b2b2-1e34d00335cd",
+        "path": "tools/project-plan/source_versions.py",
+        "line": 98,
+        "needle": "def validate_history(",
+        "excerpt": "def validate_history(source, root, verify_files=False):",
+        "role": "source_version_archive_validation",
+        "scope": "Validate exact old records,linearhistory,evidence,archives/currentbytes and explicitmutableallowlist.",
+        "qualification": "Exact role only; not historical provider/FP, complete GLTF rendering, gameplay or final game acceptance."
+      },
+      "current": {
+        "consumer_id": "OLC-718dcdfd-5dbb-5833-ae32-ef944747ff58",
+        "source_id": "OLS-4614984e-3db6-5d88-b2b2-1e34d00335cd",
+        "path": "tools/project-plan/source_versions.py",
+        "line": 99,
+        "needle": "def validate_history(",
+        "excerpt": "def validate_history(source, root, verify_files=False):",
+        "role": "source_version_archive_validation",
+        "scope": "Validate exact old records,linearhistory,evidence,archives/currentbytes and explicitmutableallowlist.",
+        "qualification": "Exact role only; not historical provider/FP, complete GLTF rendering, gameplay or final game acceptance.",
+        "anchor_history": [
+          {
+            "utc": "2026-10-21T10:13:59.456723+00:00",
+            "previous_record": {
+              "consumer_id": "OLC-718dcdfd-5dbb-5833-ae32-ef944747ff58",
+              "source_id": "OLS-4614984e-3db6-5d88-b2b2-1e34d00335cd",
+              "path": "tools/project-plan/source_versions.py",
+              "line": 98,
+              "needle": "def validate_history(",
+              "excerpt": "def validate_history(source, root, verify_files=False):",
+              "role": "source_version_archive_validation",
+              "scope": "Validate exact old records,linearhistory,evidence,archives/currentbytes and explicitmutableallowlist.",
+              "qualification": "Exact role only; not historical provider/FP, complete GLTF rendering, gameplay or final game acceptance."
+            },
+            "previous_had_history": false,
+            "prior_history_count": 0,
+            "previous_record_sha256": "163a0202d718f1f524bd2f27c98946975e460d71be5db546329ee3c6cf96b13d",
+            "previous_source_sha256": "32678dc0adef1cbd0cb8d517d736086dea58585e5a4e9857430235970e901056",
+            "reason": "Authorized source version change;stable consumer role retained,new actual line/excerpt verified.",
+            "change_evidence": "docs/reference_native_skin_loader_sources/native-heap-flags0-version-adoption.json"
+          }
+        ]
+      }
+    },
+    {
+      "consumer_id": "OLC-bff07083-abe1-5fa6-919c-750062877a20",
+      "previous": {
+        "consumer_id": "OLC-bff07083-abe1-5fa6-919c-750062877a20",
+        "source_id": "OLS-4614984e-3db6-5d88-b2b2-1e34d00335cd",
+        "path": "tools/project-plan/source_versions.py",
+        "line": 149,
+        "needle": "def prepare_version(",
+        "excerpt": "def prepare_version(source, root, old_bytes, new_bytes, evidence, reason, changed_utc):",
+        "role": "source_version_adoption_preparation",
+        "scope": "Refuse native/oldproof/source drift;prepare explicit newrecord and exact oldbytearchive without writing files.",
+        "qualification": "Exact role only; not historical provider/FP, complete GLTF rendering, gameplay or final game acceptance."
+      },
+      "current": {
+        "consumer_id": "OLC-bff07083-abe1-5fa6-919c-750062877a20",
+        "source_id": "OLS-4614984e-3db6-5d88-b2b2-1e34d00335cd",
+        "path": "tools/project-plan/source_versions.py",
+        "line": 150,
+        "needle": "def prepare_version(",
+        "excerpt": "def prepare_version(source, root, old_bytes, new_bytes, evidence, reason, changed_utc):",
+        "role": "source_version_adoption_preparation",
+        "scope": "Refuse native/oldproof/source drift;prepare explicit newrecord and exact oldbytearchive without writing files.",
+        "qualification": "Exact role only; not historical provider/FP, complete GLTF rendering, gameplay or final game acceptance.",
+        "anchor_history": [
+          {
+            "utc": "2026-10-21T10:13:59.456723+00:00",
+            "previous_record": {
+              "consumer_id": "OLC-bff07083-abe1-5fa6-919c-750062877a20",
+              "source_id": "OLS-4614984e-3db6-5d88-b2b2-1e34d00335cd",
+              "path": "tools/project-plan/source_versions.py",
+              "line": 149,
+              "needle": "def prepare_version(",
+              "excerpt": "def prepare_version(source, root, old_bytes, new_bytes, evidence, reason, changed_utc):",
+              "role": "source_version_adoption_preparation",
+              "scope": "Refuse native/oldproof/source drift;prepare explicit newrecord and exact oldbytearchive without writing files.",
+              "qualification": "Exact role only; not historical provider/FP, complete GLTF rendering, gameplay or final game acceptance."
+            },
+            "previous_had_history": false,
+            "prior_history_count": 0,
+            "previous_record_sha256": "58a25fc6203827dc3bfbf95198092d3428c407aa1d4c27585f733b4d01045879",
+            "previous_source_sha256": "32678dc0adef1cbd0cb8d517d736086dea58585e5a4e9857430235970e901056",
+            "reason": "Authorized source version change;stable consumer role retained,new actual line/excerpt verified.",
+            "change_evidence": "docs/reference_native_skin_loader_sources/native-heap-flags0-version-adoption.json"
+          }
+        ]
+      }
+    },
+    {
+      "consumer_id": "OLC-75f6c206-fb17-5bad-ad37-eb6c3adc488a",
+      "previous": {
+        "consumer_id": "OLC-75f6c206-fb17-5bad-ad37-eb6c3adc488a",
+        "source_id": "OLS-4614984e-3db6-5d88-b2b2-1e34d00335cd",
+        "path": "tools/project-plan/source_versions.py",
+        "line": 138,
+        "needle": "def historical_record(",
+        "excerpt": "def historical_record(source, sha256):",
+        "role": "source_version_old_SHA_resolution",
+        "scope": "Resolve a previous full source record without rebinding stable source identity.",
+        "qualification": "Exact role only; not historical provider/FP, complete GLTF rendering, gameplay or final game acceptance."
+      },
+      "current": {
+        "consumer_id": "OLC-75f6c206-fb17-5bad-ad37-eb6c3adc488a",
+        "source_id": "OLS-4614984e-3db6-5d88-b2b2-1e34d00335cd",
+        "path": "tools/project-plan/source_versions.py",
+        "line": 139,
+        "needle": "def historical_record(",
+        "excerpt": "def historical_record(source, sha256):",
+        "role": "source_version_old_SHA_resolution",
+        "scope": "Resolve a previous full source record without rebinding stable source identity.",
+        "qualification": "Exact role only; not historical provider/FP, complete GLTF rendering, gameplay or final game acceptance.",
+        "anchor_history": [
+          {
+            "utc": "2026-10-21T10:13:59.456723+00:00",
+            "previous_record": {
+              "consumer_id": "OLC-75f6c206-fb17-5bad-ad37-eb6c3adc488a",
+              "source_id": "OLS-4614984e-3db6-5d88-b2b2-1e34d00335cd",
+              "path": "tools/project-plan/source_versions.py",
+              "line": 138,
+              "needle": "def historical_record(",
+              "excerpt": "def historical_record(source, sha256):",
+              "role": "source_version_old_SHA_resolution",
+              "scope": "Resolve a previous full source record without rebinding stable source identity.",
+              "qualification": "Exact role only; not historical provider/FP, complete GLTF rendering, gameplay or final game acceptance."
+            },
+            "previous_had_history": false,
+            "prior_history_count": 0,
+            "previous_record_sha256": "06d7d00c568a565d3620a59335f052de8f3ed58a04d7afb64378558af82e0f08",
+            "previous_source_sha256": "32678dc0adef1cbd0cb8d517d736086dea58585e5a4e9857430235970e901056",
+            "reason": "Authorized source version change;stable consumer role retained,new actual line/excerpt verified.",
+            "change_evidence": "docs/reference_native_skin_loader_sources/native-heap-flags0-version-adoption.json"
+          }
+        ]
+      }
+    }
+  ],
+  "new_test_source": {
+    "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision17\\stage2\\crates\\core\\src\\audio_crt_windows_process_heap_raw_tests.rs",
+    "bytes": 3809,
+    "sha256": "c23562ad55107f030300c6bbd6d76e48ceed8e83e5cd403c8c7894d20dfb6efd"
+  },
+  "primary_contracts": {
+    "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision17\\heap-raw-primary-contracts.json",
+    "bytes": 4273,
+    "sha256": "941bb8b61ad7f8113ab20ddfc4163b075004559dba40a5d64c5e564c18754835"
+  },
+  "staged_build": {
+    "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision17\\heap-bridge-malloc-stage-build.json",
+    "bytes": 7955,
+    "sha256": "77d8af966c8c3cd7faff60f08e24fac52828b80a9b92abf18899a0f4b718c96b"
+  },
+  "staged_controls": {
+    "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision17\\heap-bridge-malloc-stage-tests.json",
+    "bytes": 103553,
+    "sha256": "b161af5973c8c635312ca7cc5b8b4338d4448fb53c5a42bfce98e4ee251fc833"
+  },
+  "staged_native_attempt": {
+    "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision17\\native-package-malloc-stage-attempt8.json",
+    "bytes": 81471,
+    "sha256": "1a1ae24c4757b4b7507e1c4e8d60ba21172754b9acde48cc983b03165e4452b6"
+  },
+  "staged_native_initializer_completed": false,
+  "next_native_boundary": "TlsGetValue@cabcd9/fa43fc",
+  "installed_current_Cargo_checks_pending": true,
+  "full_Goal_delivery_pending": true,
+  "native_bytes_or_historical_proofs_changed": false,
+  "historical_heap_contents_recovered": false,
+  "source_allowlist_extension_only": "crates/core/src/audio_crt_windows_process_heap.rs",
+  "producer": {
+    "path": "E:\\mapslol3v3\\Requirements_registry_4_20_2026-10-20\\revision17\\adopt_current_malloc_backend.py",
+    "bytes": 9137,
+    "sha256": "2f8e66551730e9cf6618445aa436d89285173a353cb3724c9dee65da3c24b8d2"
+  }
+}

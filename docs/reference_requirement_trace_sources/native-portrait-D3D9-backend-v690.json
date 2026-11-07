@@ -1,0 +1,873 @@
+{
+  "schema": "openleague_native_portrait_D3D9_backend_links/v690",
+  "utc": "2026-10-27T19:47:30.279138+00:00",
+  "summary": {
+    "notice": "V690 :32contextes natifs,30requêtes jusqu’à COMCreateTexture via les wrappersD3D9 originaux sous backend déclaré.24cas standard demandent512x1024/1mip,usage0,poolMANAGED1 ; formats propres aux12DDS conservés (5ARGB8,4DXT1,3DXT5). Trente retoursCOMGetDeviceCaps déclarés sont traduits par le code natif. Huit consommateurs antérieurs conservés, aucune texture native renvoyée ou écran accepté ; question ouverte précisée avec historique. Le premier lecteur trop général et son code2 sont conservés.",
+    "counts": {
+      "native_contexts": 32,
+      "COM_creation_requests": 30,
+      "declared_COM_GetDeviceCaps_calls": 30,
+      "standard_native_creation_requests": 24,
+      "diagnostic_native_creation_requests": 6,
+      "negative_metadata_diagnostic_boundaries": 2,
+      "format_families": 3,
+      "retained_consumers": 8,
+      "new_boundary_consumers": 0,
+      "evidence_refusals": 5
+    },
+    "report": "docs/FIDELITY_NATIVE_PORTRAIT_D3D9_BACKEND_V690.md",
+    "one_open_question_refined": "OLU-ac85c18c-d131-517e-83a7-d0987d643c48",
+    "complete": false,
+    "goal_complete": false
+  },
+  "association": {
+    "task_id": "SYS-17.3-01",
+    "requirement_id": "OLF-2ffda321-9b6c-5cac-85ee-b5bd79d30ba7",
+    "native_inputs": [
+      {
+        "source_id": "OLS-0d51b5dc-fb9b-51dc-b32f-f9afdb925d39",
+        "relation": "original_DDS_source_to_conditional_D3D9_COM_creation_arguments",
+        "selector": "989500→9BB3D0/9BB2D0/9BB220; nativevtable10E2F30;F0=9C3A40/9C77C0/9C4750;60=9C2D40/9C6070; stopbeforeCOM5C"
+      },
+      {
+        "source_id": "OLS-c1e86f59-3e17-5b67-aff6-e94a69c4f8d7",
+        "relation": "original_DDS_source_to_conditional_D3D9_COM_creation_arguments",
+        "selector": "989500→9BB3D0/9BB2D0/9BB220; nativevtable10E2F30;F0=9C3A40/9C77C0/9C4750;60=9C2D40/9C6070; stopbeforeCOM5C"
+      },
+      {
+        "source_id": "OLS-fd990e9a-59e5-5128-b8be-099463b28b83",
+        "relation": "original_DDS_source_to_conditional_D3D9_COM_creation_arguments",
+        "selector": "989500→9BB3D0/9BB2D0/9BB220; nativevtable10E2F30;F0=9C3A40/9C77C0/9C4750;60=9C2D40/9C6070; stopbeforeCOM5C"
+      },
+      {
+        "source_id": "OLS-e8d2572c-860a-5ef2-b92a-02d35b02b0d2",
+        "relation": "original_DDS_source_to_conditional_D3D9_COM_creation_arguments",
+        "selector": "989500→9BB3D0/9BB2D0/9BB220; nativevtable10E2F30;F0=9C3A40/9C77C0/9C4750;60=9C2D40/9C6070; stopbeforeCOM5C"
+      },
+      {
+        "source_id": "OLS-4de58398-9fa0-565f-9c9e-9d861cc7fa07",
+        "relation": "original_DDS_source_to_conditional_D3D9_COM_creation_arguments",
+        "selector": "989500→9BB3D0/9BB2D0/9BB220; nativevtable10E2F30;F0=9C3A40/9C77C0/9C4750;60=9C2D40/9C6070; stopbeforeCOM5C"
+      },
+      {
+        "source_id": "OLS-a36a1227-dfaa-5c6c-9836-e29ed5e43b0c",
+        "relation": "original_DDS_source_to_conditional_D3D9_COM_creation_arguments",
+        "selector": "989500→9BB3D0/9BB2D0/9BB220; nativevtable10E2F30;F0=9C3A40/9C77C0/9C4750;60=9C2D40/9C6070; stopbeforeCOM5C"
+      },
+      {
+        "source_id": "OLS-b48b651d-389d-53b8-af06-ecbc1690bdc4",
+        "relation": "original_DDS_source_to_conditional_D3D9_COM_creation_arguments",
+        "selector": "989500→9BB3D0/9BB2D0/9BB220; nativevtable10E2F30;F0=9C3A40/9C77C0/9C4750;60=9C2D40/9C6070; stopbeforeCOM5C"
+      },
+      {
+        "source_id": "OLS-7fd8af2c-e1ad-5a0d-bff9-f0e37c3efe20",
+        "relation": "original_DDS_source_to_conditional_D3D9_COM_creation_arguments",
+        "selector": "989500→9BB3D0/9BB2D0/9BB220; nativevtable10E2F30;F0=9C3A40/9C77C0/9C4750;60=9C2D40/9C6070; stopbeforeCOM5C"
+      },
+      {
+        "source_id": "OLS-13e210de-3c91-5d46-946a-227a24604ee9",
+        "relation": "original_DDS_source_to_conditional_D3D9_COM_creation_arguments",
+        "selector": "989500→9BB3D0/9BB2D0/9BB220; nativevtable10E2F30;F0=9C3A40/9C77C0/9C4750;60=9C2D40/9C6070; stopbeforeCOM5C"
+      },
+      {
+        "source_id": "OLS-649fe5cc-5a8d-551c-b1ca-b6fb149bbde7",
+        "relation": "original_DDS_source_to_conditional_D3D9_COM_creation_arguments",
+        "selector": "989500→9BB3D0/9BB2D0/9BB220; nativevtable10E2F30;F0=9C3A40/9C77C0/9C4750;60=9C2D40/9C6070; stopbeforeCOM5C"
+      },
+      {
+        "source_id": "OLS-f5fcaab6-eee5-592c-9664-026b4061049a",
+        "relation": "original_DDS_source_to_conditional_D3D9_COM_creation_arguments",
+        "selector": "989500→9BB3D0/9BB2D0/9BB220; nativevtable10E2F30;F0=9C3A40/9C77C0/9C4750;60=9C2D40/9C6070; stopbeforeCOM5C"
+      },
+      {
+        "source_id": "OLS-07810f9c-c92f-55d2-8fed-edb00bdf7145",
+        "relation": "original_DDS_source_to_conditional_D3D9_COM_creation_arguments",
+        "selector": "989500→9BB3D0/9BB2D0/9BB220; nativevtable10E2F30;F0=9C3A40/9C77C0/9C4750;60=9C2D40/9C6070; stopbeforeCOM5C"
+      },
+      {
+        "source_id": "OLS-4cb84998-c039-526a-9975-cfb594553b33",
+        "relation": "original_DDS_source_to_conditional_D3D9_COM_creation_arguments",
+        "selector": "989500→9BB3D0/9BB2D0/9BB220; nativevtable10E2F30;F0=9C3A40/9C77C0/9C4750;60=9C2D40/9C6070; stopbeforeCOM5C"
+      }
+    ],
+    "reference_inputs": [
+      {
+        "source_id": "OLS-81740cd3-9b19-5b92-8005-6856b79a1097",
+        "relation": "verified_conditional_DDS_to_D3D9_COM_request_chain",
+        "selector": "/summary"
+      },
+      {
+        "source_id": "OLS-d0a8774a-1d95-59f4-80ed-c39ee2dcdb08",
+        "relation": "retained_current_boundaries_not_full_loading_screen",
+        "selector": "/association"
+      },
+      {
+        "source_id": "OLS-52adfe7f-1518-5658-90e4-a57e0ed16322",
+        "relation": "local_SDK_API_contract_not_historical_runtime",
+        "selector": "IDirect3DDevice9::GetDeviceCaps slot1C;CreateTexture slot5C"
+      },
+      {
+        "source_id": "OLS-69bbc32d-bd9e-51dd-a6cc-5249aa4e93bd",
+        "relation": "local_SDK_storage_format_and_pool_numbers",
+        "selector": "A8R8G8B8=21;DXT1/DXT5;MANAGED=1"
+      }
+    ],
+    "context": {
+      "report": "docs/FIDELITY_NATIVE_PORTRAIT_D3D9_BACKEND_V690.md",
+      "receipt": "docs/reference_requirement_trace_sources/native-portrait-D3D9-backend-v690.json",
+      "source_observation": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision690_backend_associations\\OBSERVATIONS.json",
+      "counts": {
+        "native_contexts": 32,
+        "COM_creation_requests": 30,
+        "declared_COM_GetDeviceCaps_calls": 30,
+        "standard_native_creation_requests": 24,
+        "diagnostic_native_creation_requests": 6,
+        "negative_metadata_diagnostic_boundaries": 2,
+        "format_families": 3,
+        "retained_consumers": 8,
+        "new_boundary_consumers": 0,
+        "evidence_refusals": 5
+      },
+      "native_D3D9_requests": {
+        "source_guards": [
+          {
+            "address": "0x9c14a3",
+            "hex": "c703302f0e01",
+            "instruction": "mov dword ptr [ebx], 0x10e2f30"
+          },
+          {
+            "address": "0x9bb247",
+            "hex": "ff5260",
+            "instruction": "call dword ptr [edx + 0x60]"
+          },
+          {
+            "address": "0x9bb2ed",
+            "hex": "ff90f0000000",
+            "instruction": "call dword ptr [eax + 0xf0]"
+          },
+          {
+            "address": "0x9c3a65",
+            "hex": "e8563d0000",
+            "instruction": "call 0x9c77c0"
+          },
+          {
+            "address": "0x9c3a70",
+            "hex": "e8db0c0000",
+            "instruction": "call 0x9c4750"
+          },
+          {
+            "address": "0x9c77ed",
+            "hex": "ff501c",
+            "instruction": "call dword ptr [eax + 0x1c]"
+          },
+          {
+            "address": "0x9c47d3",
+            "hex": "8b4e0c",
+            "instruction": "mov ecx, dword ptr [esi + 0xc]"
+          },
+          {
+            "address": "0x9c47ff",
+            "hex": "89421c",
+            "instruction": "mov dword ptr [edx + 0x1c], eax"
+          },
+          {
+            "address": "0x9c2dca",
+            "hex": "8b4914",
+            "instruction": "mov ecx, dword ptr [ecx + 0x14]"
+          },
+          {
+            "address": "0x9c2de6",
+            "hex": "e885320000",
+            "instruction": "call 0x9c6070"
+          },
+          {
+            "address": "0x9c60be",
+            "hex": "ff565c",
+            "instruction": "call dword ptr [esi + 0x5c]"
+          }
+        ],
+        "API_contract": {
+          "GetDeviceCaps_slot": 28,
+          "CreateTexture_slot": 92,
+          "reference_kind": "current_SDK_API_contract_not_historical_runtime",
+          "methods_through_CreateTexture": [
+            "QueryInterface",
+            "AddRef",
+            "Release",
+            "TestCooperativeLevel",
+            "GetAvailableTextureMem",
+            "EvictManagedResources",
+            "GetDirect3D",
+            "GetDeviceCaps",
+            "GetDisplayMode",
+            "GetCreationParameters",
+            "SetCursorProperties",
+            "SetCursorPosition",
+            "ShowCursor",
+            "CreateAdditionalSwapChain",
+            "GetSwapChain",
+            "GetNumberOfSwapChains",
+            "Reset",
+            "Present",
+            "GetBackBuffer",
+            "GetRasterStatus",
+            "SetDialogBoxMode",
+            "SetGammaRamp",
+            "GetGammaRamp",
+            "CreateTexture"
+          ]
+        },
+        "native_request_profiles": [
+          {
+            "label": "Ahri:0:standard:caps0",
+            "selector": 1,
+            "raw_caps2": 0,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 21,
+            "native_format_name": "D3DFMT_A8R8G8B8",
+            "current_format": "Bgra8Unorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Ahri:0:standard:caps256",
+            "selector": 1,
+            "raw_caps2": 256,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 21,
+            "native_format_name": "D3DFMT_A8R8G8B8",
+            "current_format": "Bgra8Unorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Ahri:1:standard:caps0",
+            "selector": 1,
+            "raw_caps2": 0,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 21,
+            "native_format_name": "D3DFMT_A8R8G8B8",
+            "current_format": "Bgra8Unorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Ahri:1:standard:caps256",
+            "selector": 1,
+            "raw_caps2": 256,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 21,
+            "native_format_name": "D3DFMT_A8R8G8B8",
+            "current_format": "Bgra8Unorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Braum:0:standard:caps0",
+            "selector": 1,
+            "raw_caps2": 0,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 894720068,
+            "native_format_name": "D3DFMT_DXT5",
+            "current_format": "Bc3RgbaUnorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Braum:0:standard:caps256",
+            "selector": 1,
+            "raw_caps2": 256,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 894720068,
+            "native_format_name": "D3DFMT_DXT5",
+            "current_format": "Bc3RgbaUnorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Braum:1:standard:caps0",
+            "selector": 1,
+            "raw_caps2": 0,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 827611204,
+            "native_format_name": "D3DFMT_DXT1",
+            "current_format": "Bc1RgbaUnorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Braum:1:standard:caps256",
+            "selector": 1,
+            "raw_caps2": 256,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 827611204,
+            "native_format_name": "D3DFMT_DXT1",
+            "current_format": "Bc1RgbaUnorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Kalista:0:standard:caps0",
+            "selector": 1,
+            "raw_caps2": 0,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 827611204,
+            "native_format_name": "D3DFMT_DXT1",
+            "current_format": "Bc1RgbaUnorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Kalista:0:standard:caps256",
+            "selector": 1,
+            "raw_caps2": 256,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 827611204,
+            "native_format_name": "D3DFMT_DXT1",
+            "current_format": "Bc1RgbaUnorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Kalista:1:standard:caps0",
+            "selector": 1,
+            "raw_caps2": 0,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 894720068,
+            "native_format_name": "D3DFMT_DXT5",
+            "current_format": "Bc3RgbaUnorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Kalista:1:standard:caps256",
+            "selector": 1,
+            "raw_caps2": 256,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 894720068,
+            "native_format_name": "D3DFMT_DXT5",
+            "current_format": "Bc3RgbaUnorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Lulu:0:standard:caps0",
+            "selector": 1,
+            "raw_caps2": 0,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 21,
+            "native_format_name": "D3DFMT_A8R8G8B8",
+            "current_format": "Bgra8Unorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Lulu:0:standard:caps256",
+            "selector": 1,
+            "raw_caps2": 256,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 21,
+            "native_format_name": "D3DFMT_A8R8G8B8",
+            "current_format": "Bgra8Unorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Lulu:1:standard:caps0",
+            "selector": 1,
+            "raw_caps2": 0,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 21,
+            "native_format_name": "D3DFMT_A8R8G8B8",
+            "current_format": "Bgra8Unorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Lulu:1:standard:caps256",
+            "selector": 1,
+            "raw_caps2": 256,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 21,
+            "native_format_name": "D3DFMT_A8R8G8B8",
+            "current_format": "Bgra8Unorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Rengar:0:standard:caps0",
+            "selector": 1,
+            "raw_caps2": 0,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 827611204,
+            "native_format_name": "D3DFMT_DXT1",
+            "current_format": "Bc1RgbaUnorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Rengar:0:standard:caps256",
+            "selector": 1,
+            "raw_caps2": 256,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 827611204,
+            "native_format_name": "D3DFMT_DXT1",
+            "current_format": "Bc1RgbaUnorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Rengar:1:standard:caps0",
+            "selector": 1,
+            "raw_caps2": 0,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 21,
+            "native_format_name": "D3DFMT_A8R8G8B8",
+            "current_format": "Bgra8Unorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Rengar:1:standard:caps256",
+            "selector": 1,
+            "raw_caps2": 256,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 21,
+            "native_format_name": "D3DFMT_A8R8G8B8",
+            "current_format": "Bgra8Unorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Zac:0:standard:caps0",
+            "selector": 1,
+            "raw_caps2": 0,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 894720068,
+            "native_format_name": "D3DFMT_DXT5",
+            "current_format": "Bc3RgbaUnorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Zac:0:standard:caps256",
+            "selector": 1,
+            "raw_caps2": 256,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 894720068,
+            "native_format_name": "D3DFMT_DXT5",
+            "current_format": "Bc3RgbaUnorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Zac:1:standard:caps0",
+            "selector": 1,
+            "raw_caps2": 0,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 827611204,
+            "native_format_name": "D3DFMT_DXT1",
+            "current_format": "Bc1RgbaUnorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Zac:1:standard:caps256",
+            "selector": 1,
+            "raw_caps2": 256,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 827611204,
+            "native_format_name": "D3DFMT_DXT1",
+            "current_format": "Bc1RgbaUnorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Kalista:1:diagnostic_selector0:caps0",
+            "selector": 0,
+            "raw_caps2": 0,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 894720068,
+            "native_format_name": "D3DFMT_DXT5",
+            "current_format": "Bc3RgbaUnorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Kalista:1:diagnostic_selector0:caps256",
+            "selector": 0,
+            "raw_caps2": 256,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 894720068,
+            "native_format_name": "D3DFMT_DXT5",
+            "current_format": "Bc3RgbaUnorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Kalista:1:diagnostic_selector2:caps0",
+            "selector": 2,
+            "raw_caps2": 0,
+            "width": 512,
+            "height": 1024,
+            "mips": 10,
+            "native_format": 894720068,
+            "native_format_name": "D3DFMT_DXT5",
+            "current_format": "Bc3RgbaUnorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Kalista:1:diagnostic_selector2:caps256",
+            "selector": 2,
+            "raw_caps2": 256,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 894720068,
+            "native_format_name": "D3DFMT_DXT5",
+            "current_format": "Bc3RgbaUnorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Kalista:1:diagnostic_selector10:caps0",
+            "selector": 10,
+            "raw_caps2": 0,
+            "width": 512,
+            "height": 1024,
+            "mips": 10,
+            "native_format": 894720068,
+            "native_format_name": "D3DFMT_DXT5",
+            "current_format": "Bc3RgbaUnorm",
+            "pool": 1,
+            "usage": 0
+          },
+          {
+            "label": "Kalista:1:diagnostic_selector10:caps256",
+            "selector": 10,
+            "raw_caps2": 256,
+            "width": 512,
+            "height": 1024,
+            "mips": 1,
+            "native_format": 894720068,
+            "native_format_name": "D3DFMT_DXT5",
+            "current_format": "Bc3RgbaUnorm",
+            "pool": 1,
+            "usage": 0
+          }
+        ],
+        "raw_Caps2_translation_pairs": [
+          [
+            536870912,
+            536870912
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            256,
+            256
+          ]
+        ],
+        "formats": [
+          {
+            "native": 21,
+            "name": "D3DFMT_A8R8G8B8",
+            "current": "Bgra8Unorm",
+            "portraits": 5
+          },
+          {
+            "native": 827611204,
+            "name": "D3DFMT_DXT1",
+            "current": "Bc1RgbaUnorm",
+            "portraits": 4
+          },
+          {
+            "native": 894720068,
+            "name": "D3DFMT_DXT5",
+            "current": "Bc3RgbaUnorm",
+            "portraits": 3
+          }
+        ],
+        "native_profile_requested_extent": [
+          512,
+          1024
+        ],
+        "inherited_current_GPU_extent": [
+          308,
+          560
+        ],
+        "refusals": [
+          {
+            "name": "wrong_COM_format",
+            "observed": "refused"
+          },
+          {
+            "name": "changed_standard_mip_request",
+            "observed": "refused"
+          },
+          {
+            "name": "changed_native_caps_translation",
+            "observed": "refused"
+          },
+          {
+            "name": "wrong_COM_API_slot",
+            "observed": "refused"
+          },
+          {
+            "name": "pretend_historical_instance",
+            "observed": "refused"
+          }
+        ],
+        "native_wrappers_executed": true,
+        "COM_creation_method_executed": false,
+        "historical_backend_instance_qualified": false,
+        "normal_loading_caller_executed": false,
+        "current_GPU_replayed": false,
+        "prior_metadata_replayed": false,
+        "first_attempt_false_single_format_expectation_retained": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision690_native_backend_requests\\OBSERVATIONS.json",
+          "bytes": 942403,
+          "sha256": "787e5b4a494aeaf9cf15db95246d963212e42865af8fd24d1cddde79c227fa61"
+        }
+      },
+      "own_questions_preserved": [
+        "OLU-ac85c18c-d131-517e-83a7-d0987d643c48"
+      ],
+      "dependencies_preserved": [],
+      "package_id": "D17-SYS-17-3",
+      "requires_packages": [
+        "D20-SYS-20-3"
+      ],
+      "instructions": "V690 relie les DDS et le caller Standard au backendD3D9 déclaré. Le fragment9C14A3 publie10E2F30 ; les wrappersF0=9C3A40/9C77C0/9C4750 traduisent30retoursGetDeviceCaps déclarés, et60=9C2D40/9C6070 transmet30requêtes jusqu’à COMCreateTexture.24cas standard à1mip,6diagnostics et2arrêts avant diagnostic de métadonnées. Paramètres observés512x1024,usage0,poolMANAGED1 et formats source propres (5ARGB8,4DXT1,3DXT5) ; la première attente de format unique était incorrecte et son échec reste archivé. Les formats de stockage correspondent aux observationsGPUV689, héritées non rejouées. Le SDK local identifie le contrat API, pas un runtime2014. L’instance effective, le contexteflash, le retour COM, le wrapper de ressource, la copie/padding/UV/sampler/couleur, le caller normal et le rendu restent ouverts. Conserver la différence Kalista288octets, les12noms non résolus et les acquis. Huit consommateurs conservés, aucun consommateur complet ajouté, aucune case cochée.",
+      "limits": [
+        "Original portrait CPU route now executes the native backend vtable publication fragment, F0 capability wrappers9C3A40/9C77C0/9C4750 and60 creation wrappers9C2D40/9C6070 up to unexecuted COM CreateTexture. The full backend constructor, historical active instance and GPU method are not run.",
+        "COM GetDeviceCaps returns two declared raw304byte structures with Caps2=0/100h and max texture8192. Native translation executes; these are neither current hardware queries nor historical device capabilities. No invented semantic name is assigned to the raw100h bit.",
+        "Native metadata import remains bridged from previously measured local x86D3DX39; those API calls are inherited, not replayed in this probe. Allocation/free/cookie leaves remain declared. Borrowed category manager current=null, not actual flash bootstrap.",
+        "CreateTexture arguments are conditional original-code requests:512x1024,the format reported by each source metadata,managed pool1,usage0. Five files are A8R8G8B8 numeric21, four DXT1 and three DXT5. No texture is returned, uploaded, sampled, released or accepted visually.",
+        "Negative metadata stops before diagnostic lookup as before; native CreateTexture HRESULT/error, resource wrapper and later pixel copy/UV paths are not qualified. Existing Vulkan byte-transport evidence stays separate.",
+        "The local SDK identifies API slot/order/format numbers only, not a 2014 DLL or hardware identity.",
+        "The earlier6144FXAAcases are read as inherited partial evidence, not replayed or extended into a full historical backend.",
+        "The failed expectation that every DDS used ARGB8 is preserved with20failed/12passed contexts. The distinct corrected probe checks each source format and passes32.",
+        "Eight current consumer descriptors remain unchanged; normal loading still refuses missing UI/provider continuations. No code/asset/checkbox is changed by this association."
+      ],
+      "fresh_native_execution": true,
+      "fresh_COM_GPU_execution": false,
+      "prior_metadata_replayed": false,
+      "current_GPU_replayed": false,
+      "historical_backend_instance_qualified": false,
+      "normal_loading_caller_executed": false,
+      "feature_scope_complete": false,
+      "gameplay_accepted": false,
+      "complete": false
+    },
+    "retained_consumers": [
+      "OLC-27883219-c832-5aea-b7b0-1370e3839391",
+      "OLC-d2a747cf-c6d6-5fa7-ad1b-b4d4d180b223",
+      "OLC-6e68f4b7-37a4-57e1-a122-2a8986c845a1",
+      "OLC-82f6a132-a446-53f3-923b-de66e0b3014f",
+      "OLC-8dafc174-18c9-5315-9ddf-95e1552c342b",
+      "OLC-1dfcb9b9-e720-50de-8c2d-0f73abcf33ed",
+      "OLC-16b8e718-bb7d-5f06-9f36-8b6047f24f7a",
+      "OLC-533c8c35-5aa3-545c-aac0-6d3e5197e3eb",
+      "OLC-ea479386-3f00-53eb-a1c6-2defc31ee281",
+      "OLC-e6974bd5-949a-5aa7-bb7c-72eae7550f08"
+    ],
+    "retained_questions": [
+      "OLU-ac85c18c-d131-517e-83a7-d0987d643c48"
+    ]
+  },
+  "source_audit": {
+    "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision690_backend_associations\\OBSERVATIONS.json",
+    "bytes": 65474,
+    "sha256": "c37ccdc20e009d0ff497c401bc2b62350991828cb3ac2ad6fd7fcf5892ec67bd"
+  },
+  "new_boundary_consumers": [],
+  "new_game_consumers": [],
+  "unknown_question_refined_still_open": {
+    "unknown_id": "OLU-ac85c18c-d131-517e-83a7-d0987d643c48",
+    "before": {
+      "unknown_id": "OLU-ac85c18c-d131-517e-83a7-d0987d643c48",
+      "requirement_id": "OLF-2ffda321-9b6c-5cac-85ee-b5bd79d30ba7",
+      "task_id": "SYS-17.3-01",
+      "aspect": "specific_native_and_runtime_anchor",
+      "status": "open",
+      "question": "V689 : le parcoursDDS989500→9BB3D0→9B65E0 et la requête virtuelle de texture sont exécutés sous profils déclarés. L’appel de l’écran transmet1 ;24requêtes natives standard demandent1mip, et la capture Kalista confirme la table native à borne0 avec le même écart de288octets sur les niveaux suivants. La DLL locale x86d3dx9_39, nom réellement importé, fournit12métadonnées et2refus ; son hash historique reste inconnu. Le GPU Vulkan actuel relit33mips de24textures avec bytes exacts. Le profil natif sans catégorie demande512×1024, le transport actuel308×560. Le montage/catégorieflash, le vrai backend natif, la compilation vendor actuelle, les UV/sampler/couleur et le caller complet demeurent non qualifiés.",
+      "research_performed": [
+        {
+          "query": "SYS-17.3-01 Reproduire l’écran de chargement avec champion, skin et équipe",
+          "scope": "existing task evidence list/reference_context plus the recorded current entrypoint files only; no exhaustive semantic code search claimed",
+          "method": "task metadata and explicit references inspected; generic directory association never asserts implemented feature"
+        },
+        {
+          "query": "Process metadata only;no champion/skin/team loading screen identified.",
+          "scope": "docs/reference_match_screens_sources/match_screens-links.json",
+          "method": "V123 match screens links:nine requirements,nine roles including three entry boundaries.139 files,188 checks,38 reader cases including37 refusals;50 retained Rust CPU tests.15 native files,7 localized lines,88 historical snapshots checked. Local death countdown,reconnect,pause and immutable results are partial consumers;loading progress and team surrender remain open. No fresh GPU or historical game execution.",
+          "outcome": "Process metadata only;no champion/skin/team loading screen identified."
+        },
+        {
+          "query": "SYS-17.3-01 native portrait DDS and current CPU owner chain",
+          "scope": "docs/fidelity_native_portrait_CPU_chain_v688.json; original8E50F0 and9B65E0; exact current module compilation on12sourceDDS",
+          "method": "36original hashes and36current comparisons;12original constructor returns;12current CPU images and6refusals. One native/header-ceil mip-table mismatch retained, not a corrupt-file or GPU-acceptance claim.",
+          "outcome": "Precise partial source/consumer anchors identified; normal loading composition and native/current rendered mip equivalence remain open."
+        },
+        {
+          "query": "SYS-17.3-01 original metadata import, mip selector and GPU transport",
+          "scope": "docs/fidelity_native_portrait_GPU_route_v689.json; original caller instructions,32native contexts plus1Kalista frame, installedx86d3dx9_39 and identifiedcachedVulkanGPU probe",
+          "method": "Metadata12+2; native creation requests24standard+6diagnostic and2negative-diagnostic stops;24actualGPUuploads/33rawmipreadbacks. One-file table capture under actual borrowed-end0. No full historical/nativeGPU/backend or normal screen.",
+          "outcome": "Partial route now evidenced and standardrequest1mip distinguished from full-file10mips; screen and rendered equivalence remain open."
+        }
+      ],
+      "resolution_condition": "Établir le montage et la catégorieflash réels du chargement, le backend derrière les slots de création, les dimensions/UV et la politique de mipmaps effectivement rendus ; relier le parcours au caller normal, aux équipes/progressions/variants et au nettoyage. Comparer un rendu natif/actuel sous état identifié avant acceptation. Le transport GPU exact et la demande native1mip ne résolvent pas ces points ; conserver la différence des mipmaps supérieures pour les autres parcours sans modifier le DDS par hypothèse.",
+      "not_resolved_by_presence_or_build": true,
+      "question_history": [
+        {
+          "utc": "2026-10-23T06:43:07.890656+00:00",
+          "question": "The generic plan consumer and existing proof paths alone do not establish this exact native contract/current game consumer.",
+          "resolution_condition": "Inspect the task-specific native rule/media/API and current function/data consumer for SYS-17.3-01; record exact anchors and applicable local-policy boundary rather than a directory-only link.",
+          "reason": "Precise match_screens source/current role; historical behavior remains open."
+        },
+        {
+          "utc": "2026-10-27T18:26:00.036962+00:00",
+          "question": "The generic plan consumer and existing proof paths alone do not establish this exact native contract/current game consumer. V123: Process metadata only;no champion/skin/team loading screen identified.",
+          "resolution_condition": "Inspect the task-specific native rule/media/API and current function/data consumer for SYS-17.3-01; record exact anchors and applicable local-policy boundary rather than a directory-only link. V123: Process metadata only;no champion/skin/team loading screen identified.",
+          "reason": "V688 replaces obsolete process-only wording with verified partial native/current anchors and a precise unresolved mip/layout/loading scope.",
+          "proof": "docs/fidelity_native_portrait_CPU_chain_v688.json"
+        },
+        {
+          "utc": "2026-10-27T19:17:05.448398+00:00",
+          "question": "V688 : le nom/skin, les fournisseurs et portraits ont des sources partielles vérifiées ; le chargement Standard actuel conserve un refus après90AD00. Trois modules actuels créent12ImagesCPU, comparent36hashes et refusent6cas de propriété/données. Le constructeur natif9B65E0 retourne sur12DDS ; Kalista skin1 présente une table de mipmaps finissant288octets avant la formule ceil du fichier. Le vrai routage98A7F0/989B10 vers ce parseur et les offsets GPU actuels ne sont pas établis. Équipe, progressions, variants et écran complet restent non qualifiés.",
+          "resolution_condition": "Établir la chaîne effective du chargement Standard, du montage/fournisseur au renderer et à ses propriétaires ; confronter le routage natif98A7F0/989B10 au parseur réellement utilisé pour Kalista skin1 et au découpage des mipmaps côtéGPU courant. Vérifier les données de session/équipe/LE, les refus, le nettoyage et l’affichage complet avant acceptation. La créationCPU ou une présence de fichier ne résout pas cette question.",
+          "reason": "V689 adds the original39metadata import, conditional native request route and actual current GPU byte transport, without accepting the loading screen.",
+          "proof": "docs/fidelity_native_portrait_GPU_route_v689.json"
+        }
+      ]
+    },
+    "after": {
+      "unknown_id": "OLU-ac85c18c-d131-517e-83a7-d0987d643c48",
+      "requirement_id": "OLF-2ffda321-9b6c-5cac-85ee-b5bd79d30ba7",
+      "task_id": "SYS-17.3-01",
+      "aspect": "specific_native_and_runtime_anchor",
+      "status": "open",
+      "question": "V690 : sous backend D3D9 déclaré, la publication de vtable10E2F30 puis les wrappersF0/60 natifs sont exécutés. Trente requêtes atteignent la frontière COM CreateTexture, dont24standard à1mip :512×1024,usage0,poolMANAGED1 et formats propres aux12DDS (5ARGB8,4DXT1,3DXT5). Deux GetDeviceCaps déclarés sont réellement traduits par le code natif, sans requête à un périphérique historique. Les familles de format correspondent à celles des observationsGPUV689 à308×560 ; aucune conversion générale versARGB8 n’est démontrée. L’instance historique, le contexteflash, le retour COM, les pixels copiés/padding, les UV/couleur/sampler et le caller normal restent non qualifiés ; l’écart Kalista supérieur288octets et les preuves antérieures sont conservés.",
+      "research_performed": [
+        {
+          "query": "SYS-17.3-01 Reproduire l’écran de chargement avec champion, skin et équipe",
+          "scope": "existing task evidence list/reference_context plus the recorded current entrypoint files only; no exhaustive semantic code search claimed",
+          "method": "task metadata and explicit references inspected; generic directory association never asserts implemented feature"
+        },
+        {
+          "query": "Process metadata only;no champion/skin/team loading screen identified.",
+          "scope": "docs/reference_match_screens_sources/match_screens-links.json",
+          "method": "V123 match screens links:nine requirements,nine roles including three entry boundaries.139 files,188 checks,38 reader cases including37 refusals;50 retained Rust CPU tests.15 native files,7 localized lines,88 historical snapshots checked. Local death countdown,reconnect,pause and immutable results are partial consumers;loading progress and team surrender remain open. No fresh GPU or historical game execution.",
+          "outcome": "Process metadata only;no champion/skin/team loading screen identified."
+        },
+        {
+          "query": "SYS-17.3-01 native portrait DDS and current CPU owner chain",
+          "scope": "docs/fidelity_native_portrait_CPU_chain_v688.json; original8E50F0 and9B65E0; exact current module compilation on12sourceDDS",
+          "method": "36original hashes and36current comparisons;12original constructor returns;12current CPU images and6refusals. One native/header-ceil mip-table mismatch retained, not a corrupt-file or GPU-acceptance claim.",
+          "outcome": "Precise partial source/consumer anchors identified; normal loading composition and native/current rendered mip equivalence remain open."
+        },
+        {
+          "query": "SYS-17.3-01 original metadata import, mip selector and GPU transport",
+          "scope": "docs/fidelity_native_portrait_GPU_route_v689.json; original caller instructions,32native contexts plus1Kalista frame, installedx86d3dx9_39 and identifiedcachedVulkanGPU probe",
+          "method": "Metadata12+2; native creation requests24standard+6diagnostic and2negative-diagnostic stops;24actualGPUuploads/33rawmipreadbacks. One-file table capture under actual borrowed-end0. No full historical/nativeGPU/backend or normal screen.",
+          "outcome": "Partial route now evidenced and standardrequest1mip distinguished from full-file10mips; screen and rendered equivalence remain open."
+        },
+        {
+          "query": "SYS-17.3-01 original D3D9 backend request chain",
+          "scope": "docs/fidelity_native_portrait_D3D9_backend_v690.json; vtable10E2F30,9C3A40/9C77C0/9C4750,9C2D40/9C6070; SDK local API contracts",
+          "method": "32native contexts,30COMcreation boundaries,30declaredCOMcaps returns converted natively;24standard1mip,6diagnostics,2metadata diagnostic stops. PriorGPU/metadata and6144FXAAcases are inherited, not freshly rerun.",
+          "outcome": "Conditional backend identity and API argument families identified; no returned texture, historical instance, copy/padding or complete screen qualification. First overgeneralized format assertion retained as failed."
+        }
+      ],
+      "resolution_condition": "Établir le producteur et la sélection effectifs du backend/catégorieflash, puis qualifier le retour de création, le wrapper de ressource et la copie/rééchantillonnage/padding jusqu’aux UV et au rendu. Relier ce parcours au caller normal et au nettoyage avec état couleur/sampler identifié. Le pont D3D9 conditionnel et les familles de formats concordantes ne résolvent ni la différence512×1024/308×560 ni la fidélité de l’écran. Ne pas modifier les DDS à partir de ces seules requêtes.",
+      "not_resolved_by_presence_or_build": true,
+      "question_history": [
+        {
+          "utc": "2026-10-23T06:43:07.890656+00:00",
+          "question": "The generic plan consumer and existing proof paths alone do not establish this exact native contract/current game consumer.",
+          "resolution_condition": "Inspect the task-specific native rule/media/API and current function/data consumer for SYS-17.3-01; record exact anchors and applicable local-policy boundary rather than a directory-only link.",
+          "reason": "Precise match_screens source/current role; historical behavior remains open."
+        },
+        {
+          "utc": "2026-10-27T18:26:00.036962+00:00",
+          "question": "The generic plan consumer and existing proof paths alone do not establish this exact native contract/current game consumer. V123: Process metadata only;no champion/skin/team loading screen identified.",
+          "resolution_condition": "Inspect the task-specific native rule/media/API and current function/data consumer for SYS-17.3-01; record exact anchors and applicable local-policy boundary rather than a directory-only link. V123: Process metadata only;no champion/skin/team loading screen identified.",
+          "reason": "V688 replaces obsolete process-only wording with verified partial native/current anchors and a precise unresolved mip/layout/loading scope.",
+          "proof": "docs/fidelity_native_portrait_CPU_chain_v688.json"
+        },
+        {
+          "utc": "2026-10-27T19:17:05.448398+00:00",
+          "question": "V688 : le nom/skin, les fournisseurs et portraits ont des sources partielles vérifiées ; le chargement Standard actuel conserve un refus après90AD00. Trois modules actuels créent12ImagesCPU, comparent36hashes et refusent6cas de propriété/données. Le constructeur natif9B65E0 retourne sur12DDS ; Kalista skin1 présente une table de mipmaps finissant288octets avant la formule ceil du fichier. Le vrai routage98A7F0/989B10 vers ce parseur et les offsets GPU actuels ne sont pas établis. Équipe, progressions, variants et écran complet restent non qualifiés.",
+          "resolution_condition": "Établir la chaîne effective du chargement Standard, du montage/fournisseur au renderer et à ses propriétaires ; confronter le routage natif98A7F0/989B10 au parseur réellement utilisé pour Kalista skin1 et au découpage des mipmaps côtéGPU courant. Vérifier les données de session/équipe/LE, les refus, le nettoyage et l’affichage complet avant acceptation. La créationCPU ou une présence de fichier ne résout pas cette question.",
+          "reason": "V689 adds the original39metadata import, conditional native request route and actual current GPU byte transport, without accepting the loading screen.",
+          "proof": "docs/fidelity_native_portrait_GPU_route_v689.json"
+        },
+        {
+          "utc": "2026-10-27T19:45:42.661412+00:00",
+          "question": "V689 : le parcoursDDS989500→9BB3D0→9B65E0 et la requête virtuelle de texture sont exécutés sous profils déclarés. L’appel de l’écran transmet1 ;24requêtes natives standard demandent1mip, et la capture Kalista confirme la table native à borne0 avec le même écart de288octets sur les niveaux suivants. La DLL locale x86d3dx9_39, nom réellement importé, fournit12métadonnées et2refus ; son hash historique reste inconnu. Le GPU Vulkan actuel relit33mips de24textures avec bytes exacts. Le profil natif sans catégorie demande512×1024, le transport actuel308×560. Le montage/catégorieflash, le vrai backend natif, la compilation vendor actuelle, les UV/sampler/couleur et le caller complet demeurent non qualifiés.",
+          "resolution_condition": "Établir le montage et la catégorieflash réels du chargement, le backend derrière les slots de création, les dimensions/UV et la politique de mipmaps effectivement rendus ; relier le parcours au caller normal, aux équipes/progressions/variants et au nettoyage. Comparer un rendu natif/actuel sous état identifié avant acceptation. Le transport GPU exact et la demande native1mip ne résolvent pas ces points ; conserver la différence des mipmaps supérieures pour les autres parcours sans modifier le DDS par hypothèse.",
+          "reason": "V690 executes the conditional native D3D9 wrappers up to COM CreateTexture, retaining absent historical instance and later pixel/render context.",
+          "proof": "docs/fidelity_native_portrait_D3D9_backend_v690.json"
+        }
+      ]
+    },
+    "status_preserved": "open"
+  },
+  "goal_complete": false
+}

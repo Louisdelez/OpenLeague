@@ -1,0 +1,294 @@
+{
+  "schema": "openleague_frontend_build_recheck/v1",
+  "task": "SYS-01.1-02",
+  "observed_utc": "2026-10-22T17:42:00.801405+00:00",
+  "result": "pass",
+  "scope_task_ids": [
+    "SYS-01.1-02"
+  ],
+  "prerequisites": {
+    "package": "D01-SYS-01-1",
+    "phase": "D01",
+    "dependencies": [],
+    "missing_inputs": []
+  },
+  "facts": {
+    "task": "SYS-01.1-02",
+    "facts_verified": true,
+    "native_executed": false,
+    "patcher": {
+      "project": "lol_patcher",
+      "rads_release": "0.0.0.11",
+      "file_version": "0.4.0.122",
+      "product_version": "0.4.0.122",
+      "version_semantics": "Windows VS_FIXEDFILEINFO FileVersion and ProductVersion; RADS release is a separate namespace"
+    },
+    "air": {
+      "project": "lol_air_client",
+      "rads_release": "0.0.1.119",
+      "build": "4.20.14_11_18_18_52",
+      "build_source": "air_common",
+      "class_name": "com.riotgames.platform.gameclient.application.Version",
+      "field": "CURRENT_VERSION",
+      "field_format": "AVM2 static String, trait_slot with default UTF-8 value",
+      "regional_config_project": "lol_air_client_config_euw",
+      "regional_config_release": "0.0.0.50",
+      "descriptor_version": "1.0.0",
+      "descriptor_source_release": "0.0.1.76",
+      "descriptor_namespace": "http://ns.adobe.com/air/application/3.7",
+      "build_timezone": null,
+      "pe_loader_version": null,
+      "descriptor_scope": "Archive union candidate from release 0.0.1.76; bytes do not match release119 manifest. Not the qualified 4.20 descriptor.",
+      "descriptor_expected_by_release119": {
+        "source_release": "0.0.1.67",
+        "bytes": 927,
+        "md5": "332b2a5cb3619cab02c8682a847e0ee9",
+        "exact_payload_recovered_for_this_task": false,
+        "version_number": null,
+        "namespace": null
+      }
+    },
+    "verified_sources": 10,
+    "manifest_verification": {
+      "patcher": {
+        "project": "lol_patcher",
+        "release": "0.0.0.11",
+        "member": {
+          "path": "LoLPatcher.exe",
+          "release": "0.0.0.11",
+          "md5": "ace2737187b05155ed3aa317d5c307f1",
+          "bytes": 4247544,
+          "compressed_bytes": 1959009,
+          "sha256": "fd4a4edcd45694e08779373286afdaa6870cd86f9847e4fc9db1d0bd556914cb"
+        }
+      },
+      "air": {
+        "project": "lol_air_client",
+        "release": "0.0.1.119",
+        "manifest_files": 7886,
+        "member": {
+          "path": "lib/ClientLibCommon.dat",
+          "release": "0.0.1.119",
+          "md5": "18e2488befd98ec98ab3a2fa459e2178",
+          "bytes": 78498,
+          "compressed_bytes": 0,
+          "sha256": "f5915bfc68556608cb6aba924b9773862c09dd9e52414dc488aa01621efee638"
+        }
+      },
+      "excluded_union_candidates": [
+        {
+          "path": "META-INF/AIR/application.xml",
+          "classification": "different_content_from_release_manifest",
+          "candidate_bytes": 927,
+          "candidate_md5": "a28037fc7d3fdc4a090d8dc981179d18",
+          "manifest_entry": {
+            "release": "0.0.1.67",
+            "md5": "332b2a5cb3619cab02c8682a847e0ee9",
+            "bytes": 927,
+            "compressed_bytes": 0
+          }
+        },
+        {
+          "path": "version.txt",
+          "classification": "absent_from_release_manifest",
+          "candidate_bytes": 31,
+          "candidate_md5": "f8e13ecd43faaedeab55e29e4dd9190e",
+          "manifest_entry": null
+        }
+      ]
+    },
+    "human_acceptance": "not_given",
+    "manual_state_mutated": false
+  },
+  "reference": {
+    "task": "SYS-01.1-01",
+    "passed": true,
+    "reference": {
+      "date": "2014-11-17",
+      "date_kind": "embedded_client_build_date",
+      "region": "EUW",
+      "locale": "en_GB"
+    },
+    "client": {
+      "patch": "4.20",
+      "version": "4.20.0.315",
+      "channel": "PUBLIC",
+      "branch": "Releases/4.20",
+      "build_date": "2014-11-17",
+      "build_date_literal": "Nov 17 2014",
+      "build_time_literal": "17:46:45",
+      "build_timezone": null,
+      "pe_linker_timestamp_utc": "2014-11-18T01:55:38+00:00",
+      "identity_literal_offset": 13103356,
+      "binary": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/League of Legends.exe",
+      "configuration_manifest": "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/configurationmanifest"
+    },
+    "sources_verified": 5,
+    "native_executed": false,
+    "label": "RÉFÉRENCE : League of Legends 4.20.0.315 (PUBLIC, Releases/4.20) ; région EUW ; locale en_GB ; build du 2014-11-17 à 17:46:45 (fuseau non établi, date de déploiement non établie) ; catalogue officiel 4.20.1."
+  },
+  "exact_descriptor": {
+    "path": "META-INF/AIR/application.xml",
+    "release": "0.0.1.67",
+    "md5": "332b2a5cb3619cab02c8682a847e0ee9",
+    "bytes": 927,
+    "compressed_bytes": 0,
+    "sha256": "9eae11aee5feb06196abe74178f87cbed5915ea2b5425792645368babe1e9ab6"
+  },
+  "checks": {
+    "tests": {
+      "command": [
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/project-plan",
+        "-p",
+        "test_frontend*.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "E:\\mapslol3v3\\SYS01102_current_verification_20261022_qualified\\tests.log",
+      "sha256": "2f33a40bbddbf75ec23738bb54ea728224daea89f8813a73eb2646fc67d3a6a6"
+    },
+    "builds_cli": {
+      "command": [
+        "tools/project-plan/frontend_builds.py",
+        "--root",
+        "E:\\OpenLeague",
+        "--output",
+        "E:\\mapslol3v3\\SYS01102_current_verification_20261022_qualified\\builds.json"
+      ],
+      "exit_code": 0,
+      "log": "E:\\mapslol3v3\\SYS01102_current_verification_20261022_qualified\\builds.log",
+      "sha256": "49a80d6068fdbada52fa34c757f6672c46006125078e6b93033c69e3250e3621"
+    },
+    "reference_cli": {
+      "command": [
+        "tools/project-plan/reference_client.py",
+        "--root",
+        "E:\\OpenLeague",
+        "--output",
+        "E:\\mapslol3v3\\SYS01102_current_verification_20261022_qualified\\reference.json"
+      ],
+      "exit_code": 0,
+      "log": "E:\\mapslol3v3\\SYS01102_current_verification_20261022_qualified\\reference.log",
+      "sha256": "a6dc4e1643462d9e04a493a36151366b322797af8fb03e1c746bb932993a54c9"
+    }
+  },
+  "tests_passed": 31,
+  "consumers": [
+    {
+      "path": "E:\\OpenLeague\\runtime\\project-plan\\plan.sqlite3",
+      "task_read_matches_registry": true,
+      "copy_matches_current_generator": true,
+      "native_gui_observed": false,
+      "manual_states": 42606
+    },
+    {
+      "path": "C:\\Users\\loicd\\AppData\\Local\\Programs\\OpenLeague Plan\\data\\plan.sqlite3",
+      "task_read_matches_registry": true,
+      "copy_matches_current_generator": true,
+      "native_gui_observed": false,
+      "manual_states": 42606
+    }
+  ],
+  "open_unknowns": [
+    {
+      "id": "installed_air_loader_runtime",
+      "unknown": "Matching installed AIR runtime and PE loader version",
+      "searches": "Inspected native copy, exact AIR119 manifest, recovered ClientLibCommon.dat and exact application.xml67; none establishes the installed runtime.",
+      "closure": "Recover matching loader/runtime artifacts and verify their VERSIONINFO and provenance; schema3.7 is insufficient."
+    },
+    {
+      "id": "historical_air_behavior",
+      "unknown": "Actual historical client execution, rendering and remote services",
+      "searches": "Static PE/ABC parsing and original logs establish identity only; no historical program launched.",
+      "closure": "Separate local runtime qualification identifying all executed binaries and local service behavior; outside this build-identification task."
+    },
+    {
+      "id": "build_timezones_deployment",
+      "unknown": "Literal build timezones and EUW deployment date",
+      "searches": "Reference binary literal, PE timestamp, native logs and AIR build suffix inspected; no explicit regional deployment/timezone record.",
+      "closure": "Find authoritative dated records explicitly identifying timezone and EUW deployment, without extrapolating filenames or suffixes."
+    }
+  ],
+  "native_executed": false,
+  "game_code_changed": false,
+  "manual_state_mutated": false,
+  "acceptance_complete": false,
+  "previous_evidence": {
+    "docs/reference_frontend_builds_4_20.json": "49793684095695858ea0ff8ec75237e8644ef4ad6702c668fc243c3aa9e0d46c",
+    "docs/reference_frontend_builds_4_20_confirmation.json": "069a686ffdcfb9a523cc1da99d026936a8b9cc8f4b19883f84af32a6e4965ffa",
+    "docs/reference_frontend_builds_4_20_final_check_2026_10_21.json": "7e6cd42ce81fe261b3e4cc9a75b3828e99355fc7ac0e277da49573683f0aa07f",
+    "docs/reference_frontend_builds_4_20_requested_verification.json": "8cfc289b123c0a46cae572d3bb1609142c4b6597f4a8e95c101d5d2f8b18d6c5",
+    "docs/reference_frontend_builds_4_20_revalidation.json": "d0ce52a649cbe8b506dc3ce6e4ef8b426e11a61e052497f07d5eb3008d12f682",
+    "docs/reference_frontend_builds_4_20_review.json": "5f31c2d8221035bbd7cea2f7115acc0141910a4bbddba129535af337f0fb02e8",
+    "docs/reference_frontend_builds_4_20_scoped_request_20261021_101042.json": "702d539e8cd3673a2d21397034df79ee6cb0812c58eceecb00b03f67dc9841f8",
+    "docs/reference_frontend_builds_4_20_scoped_request_20261021_115433.json": "ff6704e8a1b69648fda372c8c2767a4569c8322f5162fed4ddcbc7adacab9e49",
+    "docs/reference_frontend_builds_4_20_scoped_request_20261021_141751.json": "1f4c72ff35b929f2a6a66cf147c151e7d2ea929872396b5e2b0f7f82ac43328e",
+    "docs/reference_frontend_builds_4_20_scoped_request_20261021_174700.json": "89a16b710fdd8536608c976b3a4184eed71a2e8533b37658fca76f5e9a6c26c0",
+    "docs/reference_frontend_builds_4_20_scoped_request_20261021_191645.json": "fe3bcd1f5d84de2e16f10326d8c6d8dbfaab5d8a49d4ae20020b7b00b53677c1",
+    "docs/reference_frontend_builds_4_20_scoped_request_20261021_205200.json": "00bd51ccdb871710a34d95690f2c0a45c62f54c2940847de32923cb8c00a1149",
+    "docs/reference_frontend_builds_4_20_scoped_request_20261021_214947Z.json": "e4490da471eb90ed4fbb6f0161ebae6466af11e921a33cf72c37b25841adf218",
+    "docs/reference_frontend_builds_4_20_scoped_request_20261021_222620.json": "267710919b48b396904b8c861a79f2541dd8831d8bcd0f625751c9143d4ded98",
+    "docs/reference_frontend_builds_4_20_scoped_request_20261021_232521Z.json": "02aee7eb68bd3fdfd6d218225d9e1ddab28d2d9e6c737030e772f1f37f6ae6df",
+    "docs/reference_frontend_builds_4_20_scoped_request_20261022_003843Z.json": "54ed78251e11a852bc3e65fc0cd8b6df9924ac1c15f367f4f64ef17706ba278d",
+    "docs/reference_frontend_builds_4_20_scoped_request_20261022_015958Z.json": "7c7864e5039df5682b2647509cbd64e58c6ab404b6dd1a03c6b121cee5814754",
+    "docs/reference_frontend_builds_4_20_scoped_request_20261022_170048Z.json": "c40fb2ccab50136ad2382f5090dac4532a4a335143c756266036a9846fe08190",
+    "docs/reference_frontend_builds_4_20_scope_verification_2026_10_21.json": "f2d1cfa9e01544095b2f345d6df7e7d664b09a83800c92df2f4f931375be167f",
+    "docs/reference_frontend_builds_4_20_sys01102_verification_2026_10_21.json": "23c68bbfa87e83bd361bbdf697d292c8c19556a0b6e727e863acf711732ceea4",
+    "docs/reference_frontend_builds_4_20_task_verification_2026_10_21.json": "a009c58bab5a703dad3ef1db5be3c9da264a02ad5eb281b7c85d2dca467a709b",
+    "docs/reference_frontend_builds_4_20_verification.json": "05fbc066be3d8d1c76b76eaae508e61465f08b131919524c0f34177c40404697",
+    "docs/reference_frontend_builds_4_20_verification_2026_10_21.json": "63a29d079262e1221b99c6b5fd63e5da127f12f45a8e122f67868558b5a7394f",
+    "docs/reference_frontend_builds_4_20_verification_2026_10_21_recheck.json": "66b62de98c761f5cf66be0fbe88883bb8090ec8cc3c1f74cda4fc6c81bd293aa",
+    "docs/reference_frontend_builds_4_20_verified_request_20261021_100113.json": "39c7acba838e5a80a870aaf0f524b80163cb21d1591fda542f8402579dc0c952"
+  },
+  "files_before": {
+    "docs/completion_tasks_2026-10-20.json": "2c6df013a76cccb6dcd6058a143496baa584ed4040ba72eedbbad7b4ae73e624",
+    "docs/coverage.json": "686ad869e768a5f3a26210e9a1b4a1287a6470f5e987b88c944c4380673e8453",
+    "docs/completion_plan.json": "3505e85c9634e1d8596a9a4ef884e56914ca84d22e1ae6a8187209692734ee7e",
+    "docs/resume_checkpoint.json": "1cf57554165c1402104c349bd99435d123fd7d66477fb83da9dd27158b8fe4d6",
+    "docs/ai/CURRENT.md": "688e70fe3c0a552ca2bba69d26dbe6b26491750c3515aecaea6e5e2722484010",
+    "docs/ai/HANDOFF.md": "cf68dd83d6f4b0db51694e017872d578a5d3200567a72478327ca43da8963865"
+  },
+  "source_contract_sha256": "49793684095695858ea0ff8ec75237e8644ef4ad6702c668fc243c3aa9e0d46c",
+  "producer": {
+    "path": "E:\\mapslol3v3\\verify_sys01102_current.py",
+    "sha256": "9411cdf94434be5a30e2b32a457d350a95d4ce46dd2de687b1df20f8d9b060b7"
+  },
+  "publication_pending": false,
+  "initial_attempt": {
+    "path": "E:/mapslol3v3/SYS01102_current_verification_20261022",
+    "result": "31 tests and both CLIs passed; sandbox SQLite integrity read raised unable to open database file before publication; no project mutation."
+  },
+  "delivery_checks": {
+    "only_requested_task_changed": true,
+    "registry_metadata_preserved": true,
+    "all_previous_build_evidence_preserved": true,
+    "db0_only_target_changed": true,
+    "db0_manual_history_preserved": true,
+    "db0_consumer_matches": true,
+    "db1_only_target_changed": true,
+    "db1_manual_history_preserved": true,
+    "db1_consumer_matches": true,
+    "docs/coverage.json_preserved": true,
+    "docs/completion_plan.json_preserved": true,
+    "docs/resume_checkpoint.json_preserved": true,
+    "docs/ai/CURRENT.md_preserved": true,
+    "docs/ai/HANDOFF.md_preserved": true,
+    "native_recheck_identical": true
+  },
+  "evidence": "docs/reference_frontend_builds_4_20_recheck_20261022T174200.json",
+  "modified_files": [
+    "docs/completion_tasks_2026-10-20.json",
+    "docs/coverage.json",
+    "docs/completion_plan.json",
+    "docs/resume_checkpoint.json",
+    "docs/ai/CURRENT.md",
+    "docs/ai/HANDOFF.md",
+    "docs/reference_frontend_builds_4_20_recheck_20261022T174200.json",
+    "E:\\OpenLeague\\runtime\\project-plan\\plan.sqlite3",
+    "C:\\Users\\loicd\\AppData\\Local\\Programs\\OpenLeague Plan\\data\\plan.sqlite3"
+  ]
+}

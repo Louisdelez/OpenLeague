@@ -1,0 +1,742 @@
+{
+  "schema": "openleague_vision_transition_links/v1",
+  "passed": true,
+  "utc": "2026-10-23T03:46:32.949690+00:00",
+  "full_task_scope_complete": false,
+  "native_or_game_executed": false,
+  "historical_server_policy_qualified": false,
+  "facts": {
+    "candidates": {
+      "producer": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\prepare_transition_associations.py",
+        "bytes": 4905,
+        "sha256": "56688cd6c68498beff76ca5540a969039d559c7d99d8b2dccf814d62b3238534"
+      },
+      "utc": "2026-10-23T03:44:23.242629+00:00",
+      "associations": [
+        {
+          "task_id": "SYS-13.4-01",
+          "finding": "Annie Q refuses a hidden target before commitment without spending; Map10-enabled public test.",
+          "remaining": "Other targeted casts, exact loss ordering and historical server policy remain unqualified.",
+          "anchors": [
+            {
+              "path": "crates/core/src/annie.rs",
+              "line": 45,
+              "needle": "fn cast_annie(",
+              "role": "vision_transition_SYS_13_4_01_0"
+            },
+            {
+              "path": "crates/core/src/vision.rs",
+              "line": 79,
+              "needle": "pub fn visible_to(",
+              "role": "vision_transition_SYS_13_4_01_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-ab18e825-dc57-50ac-9b5d-42de3c83b7a6"
+        },
+        {
+          "task_id": "SYS-13.4-02",
+          "finding": "Current committed or released Annie Q continues to damage a subsequently hidden target while its projectile is filtered from owner snapshot.",
+          "remaining": "All projectile families and historical policy remain unqualified; radius-zero test is not actual stealth.",
+          "anchors": [
+            {
+              "path": "crates/core/src/annie.rs",
+              "line": 73,
+              "needle": "fn advance_annie(",
+              "role": "vision_transition_SYS_13_4_02_0"
+            },
+            {
+              "path": "crates/core/src/vision.rs",
+              "line": 137,
+              "needle": "pub fn snapshot_for(",
+              "role": "vision_transition_SYS_13_4_02_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-d7db3dcc-a6b6-5eed-b483-0fd55379a97e"
+        },
+        {
+          "task_id": "SYS-13.4-03",
+          "finding": "Public targeted dispatcher supports scoped Annie/Trundle/Garen paths; Ezreal E explicitly takes a ground point. No targeted dash behavior is established by these consumers.",
+          "remaining": "Identify and qualify a true targeted dash and its visibility transition; never substitute ground blink or a homing bolt.",
+          "anchors": [
+            {
+              "path": "crates/core/src/spells.rs",
+              "line": 101,
+              "needle": "pub fn cast(",
+              "role": "vision_transition_SYS_13_4_03_0"
+            },
+            {
+              "path": "crates/core/src/ezreal_e.rs",
+              "line": 213,
+              "needle": "fn cast_ezreal_e_at(",
+              "role": "vision_transition_SYS_13_4_03_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-2f1b3dc0-5e35-5d14-a84f-ef85115172eb"
+        },
+        {
+          "task_id": "SYS-13.4-04",
+          "finding": "Current Annie W damages a hidden enemy in its cone without publishing that enemy in owner snapshot.",
+          "remaining": "All AoE families and native server selection policy remain unqualified.",
+          "anchors": [
+            {
+              "path": "crates/core/src/annie_w.rs",
+              "line": 64,
+              "needle": "fn advance_annie_w(",
+              "role": "vision_transition_SYS_13_4_04_0"
+            },
+            {
+              "path": "crates/core/src/vision.rs",
+              "line": 137,
+              "needle": "pub fn snapshot_for(",
+              "role": "vision_transition_SYS_13_4_04_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-87dbc1b6-65d9-5f48-9cae-bf6a15a04651"
+        },
+        {
+          "task_id": "SYS-13.4-05",
+          "finding": "Actual R creates Tibbers,whose vision reveals an enemy when owner vision is zero; expiration removes this contribution.",
+          "remaining": "Other summons, owner death, radius/visibility boundary combinations and native server semantics remain unqualified.",
+          "anchors": [
+            {
+              "path": "crates/core/src/annie_r.rs",
+              "line": 82,
+              "needle": "fn advance_pet_orders(",
+              "role": "vision_transition_SYS_13_4_05_0"
+            },
+            {
+              "path": "crates/core/src/vision.rs",
+              "line": 95,
+              "needle": "pub fn visible_point_to(",
+              "role": "vision_transition_SYS_13_4_05_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-e04e6ab8-df2b-5c5a-82ad-1df2e077b3b5"
+        },
+        {
+          "task_id": "SYS-13.4-06",
+          "finding": "Actual lethal damage removes champion vision and snapshot presence of the observed enemy; due respawn restores both.",
+          "remaining": "Historical death timer, resurrection spells, other sources and full-match scheduling remain unqualified.",
+          "anchors": [
+            {
+              "path": "crates/core/src/lifecycle.rs",
+              "line": 33,
+              "needle": "fn advance_respawns(",
+              "role": "vision_transition_SYS_13_4_06_0"
+            },
+            {
+              "path": "crates/core/src/vision.rs",
+              "line": 95,
+              "needle": "pub fn visible_point_to(",
+              "role": "vision_transition_SYS_13_4_06_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-43554718-fb05-5a69-aa7d-b1cdb0398226"
+        },
+        {
+          "task_id": "SYS-13.4-07",
+          "finding": "Current spectator source/mask filter passes inherited 2304 native vectors; actor/context providers are supplied.",
+          "remaining": "Delayed spectator network stream, full team-view pipeline and historical runtime remain unqualified.",
+          "anchors": [
+            {
+              "path": "crates/client/src/fow_spectator_filter.rs",
+              "line": 14,
+              "needle": "pub fn select_spectator_source(",
+              "role": "vision_transition_SYS_13_4_07_0"
+            },
+            {
+              "path": "crates/client/src/fow_spectator_filter.rs",
+              "line": 9,
+              "needle": "pub fn descriptor_visible(",
+              "role": "vision_transition_SYS_13_4_07_1"
+            }
+          ],
+          "native_bindings": [],
+          "entry_boundary_only": false,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-a434fd6f-d441-54c9-a8bc-2094e45a629d"
+        }
+      ],
+      "current_sources": [
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\annie.rs",
+          "bytes": 15209,
+          "sha256": "cc03328f3151a3ef7a1b777249df7885b1cfc313de57a012e82bf81b89ca4f31"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\vision.rs",
+          "bytes": 10267,
+          "sha256": "1b13d6ee8dbd0561a79cb12bc8a622e1d47890c54231b745d4bedf55f28ac9fe"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\spells.rs",
+          "bytes": 11510,
+          "sha256": "26fc5175f41325935b7e7ad91d6aba72cf4560b1be97f69f69d70e0dfe0680a5"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\ezreal_e.rs",
+          "bytes": 29578,
+          "sha256": "b1ca5f9f517a60be0c74abd332182294df7f466b211f5ee6f40485100d671c73"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\annie_w.rs",
+          "bytes": 13293,
+          "sha256": "b15cfe63f6bd51560917af5e6270ebc4b2b7d73fd63fd5fc5061145de9f74553"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\annie_r.rs",
+          "bytes": 11054,
+          "sha256": "508b096ee103dcc4d96dcf8f283a830e40d93c8a6339f6e49f5c5f83dcc2008e"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\core\\src\\lifecycle.rs",
+          "bytes": 6109,
+          "sha256": "06be09d79a6b96cbe5822a5f6e91d85013f82c2ed6e2135671b4441d0a705f30"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\fow_spectator_filter.rs",
+          "bytes": 6199,
+          "sha256": "f4cdf288134dd6fd3f41391e42dc01cc082b4d8f651dd92332db4d0418fd5646"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\transition-test-receipt.json",
+          "bytes": 3293,
+          "sha256": "e22505e518603f8c3d12c84d63375dcb2ffbb2c87abee06ab9aa654cc8f4baa7"
+        },
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\lifecycle-spectator-receipt.json",
+          "bytes": 4783,
+          "sha256": "fc468a81bcbe52a4eb6a103f641104a1da29a1c28fef5ffc32048d6fad7e8944"
+        }
+      ],
+      "lexical_scope": {
+        "files": 639,
+        "pattern": "\\b(dash|blink)\\b",
+        "hits": [
+          {
+            "path": "crates\\core\\src\\ezreal_e_accepted_releases.rs",
+            "line": 1,
+            "text": "//! Optional LOCAL facts of a committed blink, not native E callbacks."
+          },
+          {
+            "path": "crates\\core\\src\\ezreal_e_tests.rs",
+            "line": 76,
+            "text": "// A wall between endpoints is not a walking-route requirement for this blink."
+          },
+          {
+            "path": "crates\\core\\src\\lib.rs",
+            "line": 261,
+            "text": "/// Independent successful blink phases, authenticated atomic OLSR only."
+          }
+        ],
+        "proof_of_global_absence": false
+      },
+      "basis": "Explicit current local vision-transition consumers. Spectator vectors inherited; no native server policy or delayed stream inferred.",
+      "registered": false
+    },
+    "tests": [
+      "hidden_target_before_commit_is_refused_without_spending",
+      "current_local_cone_hits_hidden_enemy_without_publishing_its_state",
+      "released_current_local_q_hits_hidden_target_but_is_not_projected_to_owner",
+      "loss_during_committed_cast_does_not_cancel_current_local_q",
+      "death_removes_champion_vision_and_due_respawn_restores_it",
+      "summoned_tibbers_supplies_vision_until_actual_expiration_consumer",
+      "fow_spectator_filter::tests::spectator_modes_visibility_bits_and_neutral_withdrawal_match_2304_native_frames"
+    ],
+    "source_checks": [
+      "producer",
+      "source_F:\\OpenLeague\\crates\\core\\src\\annie.rs",
+      "source_F:\\OpenLeague\\crates\\core\\src\\vision.rs",
+      "source_F:\\OpenLeague\\crates\\core\\src\\spells.rs",
+      "source_F:\\OpenLeague\\crates\\core\\src\\ezreal_e.rs",
+      "source_F:\\OpenLeague\\crates\\core\\src\\annie_w.rs",
+      "source_F:\\OpenLeague\\crates\\core\\src\\annie_r.rs",
+      "source_F:\\OpenLeague\\crates\\core\\src\\lifecycle.rs",
+      "source_F:\\OpenLeague\\crates\\client\\src\\fow_spectator_filter.rs",
+      "receipt_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\transition-test-receipt.json",
+      "input_F:\\OpenLeague\\crates\\core\\tests\\vision_transition_observation.rs",
+      "input_F:\\OpenLeague\\crates\\core\\src\\annie.rs",
+      "input_F:\\OpenLeague\\crates\\core\\src\\annie_w.rs",
+      "input_F:\\OpenLeague\\crates\\core\\src\\vision.rs",
+      "input_F:\\OpenLeague\\crates\\core\\src\\world.rs",
+      "input_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "input_F:\\OpenLeague\\data\\4.20\\annie_q_rules.json",
+      "input_F:\\OpenLeague\\data\\4.20\\annie_w_rules.json",
+      "input_F:\\OpenLeague\\crates\\client\\src\\fow_spectator_filter.rs",
+      "input_F:\\OpenLeague\\Cargo.lock",
+      "binary_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+      "log_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\transition-tests.log",
+      "test_exit_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\transition-tests.log",
+      "test_hidden_target_before_commit_is_refused_without_spending",
+      "test_current_local_cone_hits_hidden_enemy_without_publishing_its_state",
+      "test_released_current_local_q_hits_hidden_target_but_is_not_projected_to_owner",
+      "test_loss_during_committed_cast_does_not_cancel_current_local_q",
+      "receipt_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\lifecycle-spectator-receipt.json",
+      "input_F:\\OpenLeague\\crates\\core\\tests\\vision_lifecycle_observation.rs",
+      "input_F:\\OpenLeague\\crates\\core\\src\\lifecycle.rs",
+      "input_F:\\OpenLeague\\crates\\core\\src\\damage.rs",
+      "input_F:\\OpenLeague\\crates\\core\\src\\vision.rs",
+      "input_F:\\OpenLeague\\crates\\core\\src\\annie_r.rs",
+      "input_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "input_F:\\OpenLeague\\crates\\client\\src\\fow_spectator_filter.rs",
+      "input_F:\\OpenLeague\\data\\4.20\\fow_spectator_filter_contract.json",
+      "input_F:\\OpenLeague\\data\\4.20\\native_vision_radii.json",
+      "input_F:\\OpenLeague\\data\\4.20\\champion_spawns_map10.json",
+      "input_F:\\OpenLeague\\assets\\maps\\tt_navigation_grid.json",
+      "input_F:\\OpenLeague\\assets\\maps\\tt_navigation_grid.cells.bin",
+      "input_F:\\OpenLeague\\Cargo.lock",
+      "binary_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+      "log_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\lifecycle-tests.log",
+      "test_exit_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\lifecycle-tests.log",
+      "test_death_removes_champion_vision_and_due_respawn_restores_it",
+      "test_summoned_tibbers_supplies_vision_until_actual_expiration_consumer",
+      "binary_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "log_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\spectator-test.log",
+      "test_exit_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\spectator-test.log",
+      "test_fow_spectator_filter::tests::spectator_modes_visibility_bits_and_neutral_withdrawal_match_2304_native_frames",
+      "seven_behavior_tests",
+      "scope_SYS-13.4-01",
+      "anchor_vision_transition_SYS_13_4_01_0",
+      "anchor_vision_transition_SYS_13_4_01_1",
+      "scope_SYS-13.4-02",
+      "anchor_vision_transition_SYS_13_4_02_0",
+      "anchor_vision_transition_SYS_13_4_02_1",
+      "scope_SYS-13.4-03",
+      "anchor_vision_transition_SYS_13_4_03_0",
+      "anchor_vision_transition_SYS_13_4_03_1",
+      "scope_SYS-13.4-04",
+      "anchor_vision_transition_SYS_13_4_04_0",
+      "anchor_vision_transition_SYS_13_4_04_1",
+      "scope_SYS-13.4-05",
+      "anchor_vision_transition_SYS_13_4_05_0",
+      "anchor_vision_transition_SYS_13_4_05_1",
+      "scope_SYS-13.4-06",
+      "anchor_vision_transition_SYS_13_4_06_0",
+      "anchor_vision_transition_SYS_13_4_06_1",
+      "scope_SYS-13.4-07",
+      "anchor_vision_transition_SYS_13_4_07_0",
+      "anchor_vision_transition_SYS_13_4_07_1",
+      "task_census"
+    ],
+    "explicit_local_contract": true,
+    "historical_server_policy_qualified": false,
+    "delayed_spectator_qualified": false
+  },
+  "source_identities": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\prepare_transition_associations.py",
+      "bytes": 4905,
+      "sha256": "56688cd6c68498beff76ca5540a969039d559c7d99d8b2dccf814d62b3238534"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\vision-transition-associations.json",
+      "bytes": 9678,
+      "sha256": "68ac6b3cf3d7f787f17da256660cdb7fb357c5f59a81d223e8bbac3b5b279dc5"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\annie.rs",
+      "bytes": 15209,
+      "sha256": "cc03328f3151a3ef7a1b777249df7885b1cfc313de57a012e82bf81b89ca4f31"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\vision.rs",
+      "bytes": 10267,
+      "sha256": "1b13d6ee8dbd0561a79cb12bc8a622e1d47890c54231b745d4bedf55f28ac9fe"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\spells.rs",
+      "bytes": 11510,
+      "sha256": "26fc5175f41325935b7e7ad91d6aba72cf4560b1be97f69f69d70e0dfe0680a5"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\ezreal_e.rs",
+      "bytes": 29578,
+      "sha256": "b1ca5f9f517a60be0c74abd332182294df7f466b211f5ee6f40485100d671c73"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\annie_w.rs",
+      "bytes": 13293,
+      "sha256": "b15cfe63f6bd51560917af5e6270ebc4b2b7d73fd63fd5fc5061145de9f74553"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\annie_r.rs",
+      "bytes": 11054,
+      "sha256": "508b096ee103dcc4d96dcf8f283a830e40d93c8a6339f6e49f5c5f83dcc2008e"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\lifecycle.rs",
+      "bytes": 6109,
+      "sha256": "06be09d79a6b96cbe5822a5f6e91d85013f82c2ed6e2135671b4441d0a705f30"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\fow_spectator_filter.rs",
+      "bytes": 6199,
+      "sha256": "f4cdf288134dd6fd3f41391e42dc01cc082b4d8f651dd92332db4d0418fd5646"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\transition-test-receipt.json",
+      "bytes": 3293,
+      "sha256": "e22505e518603f8c3d12c84d63375dcb2ffbb2c87abee06ab9aa654cc8f4baa7"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\tests\\vision_transition_observation.rs",
+      "bytes": 3606,
+      "sha256": "4dda96c7fcac64d69219b428544c851f33f9264a9bb88d9c4c7a11799f482559"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\world.rs",
+      "bytes": 32878,
+      "sha256": "407c75f77e8e4e06e6bea352f77ee3b4f90eb3357dd74cddc05a22e219651c54"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+      "bytes": 52808,
+      "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\annie_q_rules.json",
+      "bytes": 355,
+      "sha256": "172e45602b79caae019e53cc0e35fa99c3e3d2db1e55fb98bb30499066395d9c"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\annie_w_rules.json",
+      "bytes": 340,
+      "sha256": "ee2c591926b8037858fc9e9a4fc14b85c43304504430b431345930373ef5479b"
+    },
+    {
+      "path": "F:\\OpenLeague\\Cargo.lock",
+      "bytes": 153304,
+      "sha256": "3e9ea3337fcc652667aebcbace8415622406e8b7f39b5641ce33d234605ac615"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+      "bytes": 5990912,
+      "sha256": "20f86f1140ab38925ee9fb8cd07da4a12e28c6cfa2d71da169d79ea73873073b"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\transition-tests.log",
+      "bytes": 8033,
+      "sha256": "d03d65f45b047cae0e254055cc796d99eaf833d4769d1630e2e34dd95f5ec257"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\lifecycle-spectator-receipt.json",
+      "bytes": 4783,
+      "sha256": "fc468a81bcbe52a4eb6a103f641104a1da29a1c28fef5ffc32048d6fad7e8944"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\tests\\vision_lifecycle_observation.rs",
+      "bytes": 2453,
+      "sha256": "d8691d94b8e698dedab23c5d672476de2a892482e1f9c62d3abbe20533221544"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\core\\src\\damage.rs",
+      "bytes": 14316,
+      "sha256": "0d579a7b4e7a3941df7e70f78d62029c9f34df0c345749c2adc17153f9624387"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\fow_spectator_filter_contract.json",
+      "bytes": 6528622,
+      "sha256": "0abf9d883e1cc49bfb374f28f28ef428e448c9ff17d7b8ef024d7d5b38d30467"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\native_vision_radii.json",
+      "bytes": 65798,
+      "sha256": "fa5cf5b1f326d314c48eaf885b04dd333ad4a8341264db8aa623be01677f9d70"
+    },
+    {
+      "path": "F:\\OpenLeague\\data\\4.20\\champion_spawns_map10.json",
+      "bytes": 503,
+      "sha256": "c11e94e16ff18e1b1c490b9c63ae3530951d78d22ec816e5dc86bf28c5e85b5d"
+    },
+    {
+      "path": "F:\\OpenLeague\\assets\\maps\\tt_navigation_grid.json",
+      "bytes": 1361,
+      "sha256": "98903341b52e204145eafc92a949394712257abc352bc3dad5e5fe204f1c1321"
+    },
+    {
+      "path": "F:\\OpenLeague\\assets\\maps\\tt_navigation_grid.cells.bin",
+      "bytes": 434214,
+      "sha256": "beeeff7df5b236e7617cacf0c848b850c1114e007253434ce59d7ad6410b7e72"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+      "bytes": 6248448,
+      "sha256": "e4124365733329f6e095d0b67fc20e57940d2496de1c2401b0bd0a8439cd42e0"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\lifecycle-tests.log",
+      "bytes": 7874,
+      "sha256": "80c258c30586230cb834258f19bcb4fd2d131798a60afc9ac225d4392092460e"
+    },
+    {
+      "path": "F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+      "bytes": 352612864,
+      "sha256": "34bca123434a097ebb9430c8b1953eaef9116c850ae7244cf944112fd7637321"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\spectator-test.log",
+      "bytes": 81621,
+      "sha256": "82fe56f7dea755820758d02d8e489354259783c6f62f1d49664a19425aa42528"
+    }
+  ],
+  "checks": [
+    "producer",
+    "source_F:\\OpenLeague\\crates\\core\\src\\annie.rs",
+    "source_F:\\OpenLeague\\crates\\core\\src\\vision.rs",
+    "source_F:\\OpenLeague\\crates\\core\\src\\spells.rs",
+    "source_F:\\OpenLeague\\crates\\core\\src\\ezreal_e.rs",
+    "source_F:\\OpenLeague\\crates\\core\\src\\annie_w.rs",
+    "source_F:\\OpenLeague\\crates\\core\\src\\annie_r.rs",
+    "source_F:\\OpenLeague\\crates\\core\\src\\lifecycle.rs",
+    "source_F:\\OpenLeague\\crates\\client\\src\\fow_spectator_filter.rs",
+    "receipt_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\transition-test-receipt.json",
+    "input_F:\\OpenLeague\\crates\\core\\tests\\vision_transition_observation.rs",
+    "input_F:\\OpenLeague\\crates\\core\\src\\annie.rs",
+    "input_F:\\OpenLeague\\crates\\core\\src\\annie_w.rs",
+    "input_F:\\OpenLeague\\crates\\core\\src\\vision.rs",
+    "input_F:\\OpenLeague\\crates\\core\\src\\world.rs",
+    "input_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+    "input_F:\\OpenLeague\\data\\4.20\\annie_q_rules.json",
+    "input_F:\\OpenLeague\\data\\4.20\\annie_w_rules.json",
+    "input_F:\\OpenLeague\\crates\\client\\src\\fow_spectator_filter.rs",
+    "input_F:\\OpenLeague\\Cargo.lock",
+    "binary_F:\\OpenLeague\\target\\debug\\deps\\vision_transition_observation-cef01bd7a68a7844.exe",
+    "log_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\transition-tests.log",
+    "test_exit_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\transition-tests.log",
+    "test_hidden_target_before_commit_is_refused_without_spending",
+    "test_current_local_cone_hits_hidden_enemy_without_publishing_its_state",
+    "test_released_current_local_q_hits_hidden_target_but_is_not_projected_to_owner",
+    "test_loss_during_committed_cast_does_not_cancel_current_local_q",
+    "receipt_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\lifecycle-spectator-receipt.json",
+    "input_F:\\OpenLeague\\crates\\core\\tests\\vision_lifecycle_observation.rs",
+    "input_F:\\OpenLeague\\crates\\core\\src\\lifecycle.rs",
+    "input_F:\\OpenLeague\\crates\\core\\src\\damage.rs",
+    "input_F:\\OpenLeague\\crates\\core\\src\\vision.rs",
+    "input_F:\\OpenLeague\\crates\\core\\src\\annie_r.rs",
+    "input_F:\\OpenLeague\\crates\\core\\src\\lib.rs",
+    "input_F:\\OpenLeague\\crates\\client\\src\\fow_spectator_filter.rs",
+    "input_F:\\OpenLeague\\data\\4.20\\fow_spectator_filter_contract.json",
+    "input_F:\\OpenLeague\\data\\4.20\\native_vision_radii.json",
+    "input_F:\\OpenLeague\\data\\4.20\\champion_spawns_map10.json",
+    "input_F:\\OpenLeague\\assets\\maps\\tt_navigation_grid.json",
+    "input_F:\\OpenLeague\\assets\\maps\\tt_navigation_grid.cells.bin",
+    "input_F:\\OpenLeague\\Cargo.lock",
+    "binary_F:\\OpenLeague\\target\\debug\\deps\\vision_lifecycle_observation-c122b2a12e6c108c.exe",
+    "log_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\lifecycle-tests.log",
+    "test_exit_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\lifecycle-tests.log",
+    "test_death_removes_champion_vision_and_due_respawn_restores_it",
+    "test_summoned_tibbers_supplies_vision_until_actual_expiration_consumer",
+    "binary_F:\\OpenLeague\\target\\debug\\deps\\openleague_client-170289a4dedad9dd.exe",
+    "log_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\spectator-test.log",
+    "test_exit_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision107\\spectator-test.log",
+    "test_fow_spectator_filter::tests::spectator_modes_visibility_bits_and_neutral_withdrawal_match_2304_native_frames",
+    "seven_behavior_tests",
+    "scope_SYS-13.4-01",
+    "anchor_vision_transition_SYS_13_4_01_0",
+    "anchor_vision_transition_SYS_13_4_01_1",
+    "scope_SYS-13.4-02",
+    "anchor_vision_transition_SYS_13_4_02_0",
+    "anchor_vision_transition_SYS_13_4_02_1",
+    "scope_SYS-13.4-03",
+    "anchor_vision_transition_SYS_13_4_03_0",
+    "anchor_vision_transition_SYS_13_4_03_1",
+    "scope_SYS-13.4-04",
+    "anchor_vision_transition_SYS_13_4_04_0",
+    "anchor_vision_transition_SYS_13_4_04_1",
+    "scope_SYS-13.4-05",
+    "anchor_vision_transition_SYS_13_4_05_0",
+    "anchor_vision_transition_SYS_13_4_05_1",
+    "scope_SYS-13.4-06",
+    "anchor_vision_transition_SYS_13_4_06_0",
+    "anchor_vision_transition_SYS_13_4_06_1",
+    "scope_SYS-13.4-07",
+    "anchor_vision_transition_SYS_13_4_07_0",
+    "anchor_vision_transition_SYS_13_4_07_1",
+    "task_census"
+  ],
+  "checks_count": 73,
+  "associations": [
+    {
+      "task_id": "SYS-13.4-01",
+      "finding": "Annie Q refuses a hidden target before commitment without spending; Map10-enabled public test.",
+      "remaining": "Other targeted casts, exact loss ordering and historical server policy remain unqualified.",
+      "anchors": [
+        {
+          "path": "crates/core/src/annie.rs",
+          "line": 45,
+          "needle": "fn cast_annie(",
+          "role": "vision_transition_SYS_13_4_01_0"
+        },
+        {
+          "path": "crates/core/src/vision.rs",
+          "line": 79,
+          "needle": "pub fn visible_to(",
+          "role": "vision_transition_SYS_13_4_01_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-ab18e825-dc57-50ac-9b5d-42de3c83b7a6"
+    },
+    {
+      "task_id": "SYS-13.4-02",
+      "finding": "Current committed or released Annie Q continues to damage a subsequently hidden target while its projectile is filtered from owner snapshot.",
+      "remaining": "All projectile families and historical policy remain unqualified; radius-zero test is not actual stealth.",
+      "anchors": [
+        {
+          "path": "crates/core/src/annie.rs",
+          "line": 73,
+          "needle": "fn advance_annie(",
+          "role": "vision_transition_SYS_13_4_02_0"
+        },
+        {
+          "path": "crates/core/src/vision.rs",
+          "line": 137,
+          "needle": "pub fn snapshot_for(",
+          "role": "vision_transition_SYS_13_4_02_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-d7db3dcc-a6b6-5eed-b483-0fd55379a97e"
+    },
+    {
+      "task_id": "SYS-13.4-03",
+      "finding": "Public targeted dispatcher supports scoped Annie/Trundle/Garen paths; Ezreal E explicitly takes a ground point. No targeted dash behavior is established by these consumers.",
+      "remaining": "Identify and qualify a true targeted dash and its visibility transition; never substitute ground blink or a homing bolt.",
+      "anchors": [
+        {
+          "path": "crates/core/src/spells.rs",
+          "line": 101,
+          "needle": "pub fn cast(",
+          "role": "vision_transition_SYS_13_4_03_0"
+        },
+        {
+          "path": "crates/core/src/ezreal_e.rs",
+          "line": 213,
+          "needle": "fn cast_ezreal_e_at(",
+          "role": "vision_transition_SYS_13_4_03_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-2f1b3dc0-5e35-5d14-a84f-ef85115172eb"
+    },
+    {
+      "task_id": "SYS-13.4-04",
+      "finding": "Current Annie W damages a hidden enemy in its cone without publishing that enemy in owner snapshot.",
+      "remaining": "All AoE families and native server selection policy remain unqualified.",
+      "anchors": [
+        {
+          "path": "crates/core/src/annie_w.rs",
+          "line": 64,
+          "needle": "fn advance_annie_w(",
+          "role": "vision_transition_SYS_13_4_04_0"
+        },
+        {
+          "path": "crates/core/src/vision.rs",
+          "line": 137,
+          "needle": "pub fn snapshot_for(",
+          "role": "vision_transition_SYS_13_4_04_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-87dbc1b6-65d9-5f48-9cae-bf6a15a04651"
+    },
+    {
+      "task_id": "SYS-13.4-05",
+      "finding": "Actual R creates Tibbers,whose vision reveals an enemy when owner vision is zero; expiration removes this contribution.",
+      "remaining": "Other summons, owner death, radius/visibility boundary combinations and native server semantics remain unqualified.",
+      "anchors": [
+        {
+          "path": "crates/core/src/annie_r.rs",
+          "line": 82,
+          "needle": "fn advance_pet_orders(",
+          "role": "vision_transition_SYS_13_4_05_0"
+        },
+        {
+          "path": "crates/core/src/vision.rs",
+          "line": 95,
+          "needle": "pub fn visible_point_to(",
+          "role": "vision_transition_SYS_13_4_05_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-e04e6ab8-df2b-5c5a-82ad-1df2e077b3b5"
+    },
+    {
+      "task_id": "SYS-13.4-06",
+      "finding": "Actual lethal damage removes champion vision and snapshot presence of the observed enemy; due respawn restores both.",
+      "remaining": "Historical death timer, resurrection spells, other sources and full-match scheduling remain unqualified.",
+      "anchors": [
+        {
+          "path": "crates/core/src/lifecycle.rs",
+          "line": 33,
+          "needle": "fn advance_respawns(",
+          "role": "vision_transition_SYS_13_4_06_0"
+        },
+        {
+          "path": "crates/core/src/vision.rs",
+          "line": 95,
+          "needle": "pub fn visible_point_to(",
+          "role": "vision_transition_SYS_13_4_06_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-43554718-fb05-5a69-aa7d-b1cdb0398226"
+    },
+    {
+      "task_id": "SYS-13.4-07",
+      "finding": "Current spectator source/mask filter passes inherited 2304 native vectors; actor/context providers are supplied.",
+      "remaining": "Delayed spectator network stream, full team-view pipeline and historical runtime remain unqualified.",
+      "anchors": [
+        {
+          "path": "crates/client/src/fow_spectator_filter.rs",
+          "line": 14,
+          "needle": "pub fn select_spectator_source(",
+          "role": "vision_transition_SYS_13_4_07_0"
+        },
+        {
+          "path": "crates/client/src/fow_spectator_filter.rs",
+          "line": 9,
+          "needle": "pub fn descriptor_visible(",
+          "role": "vision_transition_SYS_13_4_07_1"
+        }
+      ],
+      "native_bindings": [],
+      "entry_boundary_only": false,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-a434fd6f-d441-54c9-a8bc-2094e45a629d"
+    }
+  ]
+}

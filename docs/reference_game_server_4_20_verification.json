@@ -1,0 +1,217 @@
+{
+  "schema": "openleague_game_server_reference_verification/v1",
+  "task": "SYS-01.1-03",
+  "updated_utc": "2026-10-20T17:03:46.838691+00:00",
+  "status": "a_valider",
+  "technical_verification_complete": true,
+  "acceptance_complete": false,
+  "human_acceptance": "not_given",
+  "native_verification": {
+    "task": "SYS-01.1-03",
+    "facts_verified": true,
+    "client_version": "4.20.0.315",
+    "source_files_verified": 65,
+    "community_configs": 8,
+    "native_client_configs": 37,
+    "consumer_contracts": {
+      "openleague": {
+        "source_origin": "local_rust_reconstruction",
+        "transport": "UDP, local JSON session protocol",
+        "default_bind": "127.0.0.1:5896",
+        "launcher_forced_bind": "127.0.0.1:5896",
+        "map_id_enabled_in_code": 10,
+        "tick_rate_hz": 30,
+        "settings": {
+          "OPENLEAGUE_SERVER": "bind address; default above",
+          "OPENLEAGUE_ALLOW_PAUSE": "enabled only by literal 1",
+          "OPENLEAGUE_OWNED_STDIN": "absent = independent; 1 = launcher pipe ownership; other values refused"
+        },
+        "config_file_loader_for_server_settings": false
+      },
+      "community": {
+        "source_origin": "LeagueSandbox modified community source; not Riot server source",
+        "declared_client_version": "4.20.0.315",
+        "transport": "ENet Patch420 with per-player Blowfish keys; source declaration only",
+        "bind_policy": "Address.Any with CLI port",
+        "default_game_port": 5119,
+        "game_info_path_relative_to_working_directory": "Settings/GameInfo.json",
+        "debug_client_settings_path": "Settings/GameServerSettings.json",
+        "config_priority": [
+          "explicit --config-json",
+          "--config path if existing",
+          "embedded GameInfo template, written when missing"
+        ],
+        "other_cli_options": [
+          "--config-gameserver",
+          "--config-gameserver-json",
+          "--port"
+        ],
+        "master_config_priority": [
+          "LOLSBX_MASTER_URL with siblings when URL nonempty",
+          "Settings/MasterRegistry.json",
+          "defaults with empty MasterUrl"
+        ],
+        "master_environment_names": [
+          "LOLSBX_DESCRIPTION",
+          "LOLSBX_HEARTBEAT",
+          "LOLSBX_MASTER_URL",
+          "LOLSBX_PUBLIC",
+          "LOLSBX_PUBLIC_HOST",
+          "LOLSBX_REGION",
+          "LOLSBX_SERVER_NAME"
+        ]
+      },
+      "master": {
+        "source_origin": "local community HTTP registry, not Riot platform",
+        "default_bind": "0.0.0.0:8080",
+        "environment_names": [
+          "LOLSBX_PORT",
+          "LOLSBX_DB"
+        ],
+        "default_db_literal": "master.db",
+        "runtime_started": false
+      }
+    },
+    "native_or_server_executed": false,
+    "human_acceptance": "not_given",
+    "manual_state_mutated": false
+  },
+  "tests": {
+    "command": "python -B tools/project-plan/test_game_server_reference.py",
+    "passed": 15,
+    "failed": 0,
+    "log": "E:\\mapslol3v3\\Game_client_server_reference_4_20_2026-10-20\\tests.log"
+  },
+  "integration": {
+    "utc": "2026-10-20T17:03:46.838691+00:00",
+    "task": "SYS-01.1-03",
+    "manual_states_unchanged": 42606,
+    "manual_done": false,
+    "manual_revision": 0,
+    "all_notes_preserved": true,
+    "live_consumer_verified": true,
+    "source_status": "a_valider",
+    "human_acceptance": "not_given",
+    "task_state_write_performed": false,
+    "catalog_task_count": 42214
+  },
+  "modified_files": [
+    "docs/reference_game_server_4_20.json",
+    "docs/REFERENCE_GAME_SERVER_4_20.md",
+    "docs/reference_game_server_4_20_verification.json",
+    "tools/project-plan/game_server_reference.py",
+    "tools/project-plan/test_game_server_reference.py",
+    "docs/completion_tasks_2026-10-20.json",
+    "docs/OpenLeague_PLAN_DETAILS/D01.md",
+    "docs/OpenLeague_PLAN_COMPLET_DETAILLE_A_Z.md",
+    "docs/REFERENCE_CLIENT_4_20.md",
+    "docs/coverage.json",
+    "docs/completion_plan.json",
+    "docs/resume_checkpoint.json",
+    "docs/ai/CURRENT.md",
+    "docs/ai/HANDOFF.md",
+    "docs/ai/DECISIONS.md"
+  ],
+  "database_catalog_updated": "runtime/project-plan/plan.sqlite3; task_state unchanged",
+  "backup": "E:\\mapslol3v3\\Game_client_server_reference_4_20_2026-10-20\\before",
+  "game_code_changed": false,
+  "game_build_or_tests_executed": false,
+  "historical_client_or_servers_executed": false,
+  "scope": {
+    "included": [
+      "Pinned game-client identity",
+      "Available local server configuration files and real source consumers",
+      "Native shipped defaults classified separately",
+      "Version/provenance/availability mismatches documented",
+      "Plan catalog and coverage/resume links"
+    ],
+    "not_claimed": [
+      "Riot production server configuration recovered",
+      "Native client connectivity to Rust proven",
+      "Working LeagueSandbox net8 startup",
+      "Complete Map10 3v3 configuration",
+      "Runtime or full-game acceptance"
+    ]
+  },
+  "search_scope": {
+    "native_config_roots": [
+      "Config",
+      "RADS/system",
+      "RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy/DATA/cfg"
+    ],
+    "community_configuration_root": "D:/LeagueOfLegendsV2/4.20/GameServer/GameServerConsole",
+    "community_configuration_names": [
+      "GameInfo.json",
+      "GameInfo.json.template",
+      "GameServerSettings.json",
+      "GameServerSettings.json.template",
+      "MasterRegistry.json"
+    ],
+    "consumers": "65 files hashed in reference_game_server_4_20.json; source templates, bin output, entrypoints, parsers and launchers distinguished"
+  },
+  "observed_anomalies": [
+    "Initial strict JSON parse refused comments in GameInfo template; JSON.NET-compatible comment/trailing-comma reader identifies its actual values.",
+    "Legacy start-server wrappers target absent net8.0; actual project/runtime declaration is net6.0.",
+    "Available community GameInfo profiles target Map1 and Map11 with one player; neither is a completed 3v3 Map10 profile."
+  ],
+  "limits": [
+    "Identification statique uniquement : ni client historique, serveur C#, registre HTTP ni serveur Rust exécuté par cette tâche.",
+    "Le template LeagueSandbox utilise Map1 et désactive mana/coûts, recharges et sbires ; la configuration net6 présente utilise Map11, un joueur et les règles correspondantes. Aucune des deux ne constitue une configuration 3v3 Map10 terminée.",
+    "Les anciens scripts start-server visent net8.0, absent ; le projet et les fichiers disponibles sont net6.0. La tâche constate cet écart sans modifier ces projets sources.",
+    "Les valeurs par défaut livrées dans le client, y compris NetConfig et ServerPerformanceTweaks, ne prouvent pas une configuration serveur Riot exécutée.",
+    "Le serveur OpenLeague active Map10 dans son code et utilise 127.0.0.1:5896 par défaut avec le protocole UDP JSON local. Sa compatibilité avec le client natif ENet 4.20 n’est pas établie.",
+    "Les secrets, clés, noms et profils de joueurs ne sont pas exportés. Les données natives et communautaires restent séparées des politiques locales.",
+    "Aucune disponibilité d’un service distant, d’un serveur Riot original ou d’un runtime complet n’est déduite de fichiers ou d’un build déclaré."
+  ],
+  "app_seed_rebuilt": false,
+  "app_database": "Existing linked shared SQLite catalog; first-install embedded seed unchanged.",
+  "final_audit": {
+    "passed": true,
+    "count": 28,
+    "proof": "E:\\mapslol3v3\\Game_client_server_reference_4_20_2026-10-20\\FINAL_AUDIT.json",
+    "requirements": {
+      "1_precise_objective": {
+        "result": "Client build and all discovered config files identified",
+        "proof": [
+          "reference_game_server_4_20.json",
+          "cli-verification.json"
+        ]
+      },
+      "2_exact_contract_and_consumers": {
+        "result": "65 pinned source files, native identity and three consumer contracts",
+        "proof": [
+          "REFERENCE_GAME_SERVER_4_20.md",
+          "game_server_reference.py"
+        ]
+      },
+      "3_real_consumer_integration": {
+        "result": "Target context, generated instructions and live shared DB/HTTP agree",
+        "proof": [
+          "integration.json"
+        ]
+      },
+      "4_success_refusals_limits": {
+        "result": "15 actual tests pass; missing/changed files, wrong build/origin/availability refused; runtime unknowns retained",
+        "proof": [
+          "tests.log"
+        ]
+      },
+      "5_registry_coverage_resume_and_prior_proofs": {
+        "result": "Only target task catalog changed, additive coverage/resume updates, 42606 user states identical",
+        "proof": [
+          "FINAL_AUDIT.json"
+        ]
+      }
+    },
+    "manual_states_unchanged": 42606,
+    "only_catalog_rows_changed": [
+      "SYS-01.1-03"
+    ]
+  },
+  "prerequisite_review": {
+    "phase": "D01",
+    "package": "D01-SYS-01-1",
+    "explicit_dependencies": [],
+    "reference_client_contract_verified": true
+  }
+}

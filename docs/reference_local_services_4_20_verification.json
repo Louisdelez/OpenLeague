@@ -1,0 +1,1551 @@
+{
+  "schema": "openleague_local_services_scope_verification/v1",
+  "task": "SYS-01.1-07",
+  "updated_utc": "2026-10-20T19:30:10.458476+00:00",
+  "scope": "Définition du périmètre des remplacements locaux ; aucune implémentation de backend ajoutée ni service de productionRiot récupéré.",
+  "status": "a_valider",
+  "implementation_complete": true,
+  "technical_verification_complete": true,
+  "acceptance_complete": false,
+  "human_acceptance": "not_given",
+  "manual_state_mutated": false,
+  "facts": {
+    "task": "SYS-01.1-07",
+    "verified": true,
+    "families": 32,
+    "sources": 218,
+    "service_proxy_properties": 37,
+    "riot_classes_scanned": 2877,
+    "literal_client_calls": 153,
+    "dynamic_client_calls": 15,
+    "rpc_destinations": 20,
+    "local_tauri_commands": 6,
+    "native_executed": false,
+    "backend_services_implemented_by_this_task": false,
+    "manual_state_mutated": false,
+    "human_acceptance": "not_given"
+  },
+  "contract_sha256": "8a6afdc263b5c0959212425feb9e437b3a2264ea1d3a3590f825cb52ef406efb",
+  "prerequisites": {
+    "task_dependencies": [],
+    "package_dependencies": [],
+    "phase_dependencies": [],
+    "necessary_inputs_available": true,
+    "record": "E:\\mapslol3v3\\Local_services_scope_4_20_2026-10-20\\prerequisites.json"
+  },
+  "tests": {
+    "installed_python": {
+      "command": [
+        "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "-E",
+        "-u",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/project-plan",
+        "-p",
+        "test_local_services_reference.py",
+        "-v"
+      ],
+      "cwd": "E:\\OpenLeague",
+      "started_utc": "2026-10-20T19:28:28.380430+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 28.766,
+      "log": "E:\\mapslol3v3\\Local_services_scope_4_20_2026-10-20\\installed-tests.log",
+      "log_sha256": "a828776d43853128975e3b2dcaed87512415609c88b2340d0e18c443cb2f68fd",
+      "passed": 22,
+      "failed": 0,
+      "scope": "Definition/source/refusal tests; not future backend acceptance."
+    },
+    "installed_cli": {
+      "command": [
+        "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-X",
+        "utf8",
+        "-E",
+        "-u",
+        "-B",
+        "tools/project-plan/local_services_reference.py",
+        "--root",
+        "E:\\OpenLeague",
+        "--output",
+        "E:\\mapslol3v3\\Local_services_scope_4_20_2026-10-20\\installed-verification.json"
+      ],
+      "cwd": "E:\\OpenLeague",
+      "started_utc": "2026-10-20T19:28:57.148522+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 1.812,
+      "log": "E:\\mapslol3v3\\Local_services_scope_4_20_2026-10-20\\installed-cli.log",
+      "log_sha256": "3cb1932063b443c56d1083052ea403cb49c9b95d37e1ecb02ae7962a1e129f2a"
+    }
+  },
+  "tools": {
+    "python": {
+      "path": "C:\\Users\\loicd\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "version": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "bytes": 107312,
+      "sha256": "dea78bb78043f0d53ef4a475f85fa0312b90fa93c136a0686d17946781c60e16"
+    },
+    "dependencies": {
+      "E:\\OpenLeague\\tools\\project-plan\\air_reference.py": {
+        "bytes": 16399,
+        "sha256": "4421bb1b6215b11371e137bc292dd891eda498e16aaeea2955d84f1997eed33e"
+      },
+      "E:\\OpenLeague\\tools\\project-plan\\reference_client.py": {
+        "bytes": 6633,
+        "sha256": "52ab5a24d2bf656789db993038cd7e0b99b9d12620aa0c0534baabde2dd61781"
+      },
+      "E:\\OpenLeague\\tools\\project-plan\\frontend_builds.py": {
+        "bytes": 19454,
+        "sha256": "d66e6cbce783e18bfc2b890468f571e439b14cba9bca6c294970f8f35d5fccf8"
+      }
+    }
+  },
+  "expected_observed": [
+    {
+      "requirement": "Référence et contrat côté client",
+      "expected": "Sources4.20 explicites, sans assimiler le client au serveurRiot",
+      "observed": {
+        "task": "SYS-01.1-07",
+        "verified": true,
+        "families": 32,
+        "sources": 218,
+        "service_proxy_properties": 37,
+        "riot_classes_scanned": 2877,
+        "literal_client_calls": 153,
+        "dynamic_client_calls": 15,
+        "rpc_destinations": 20,
+        "local_tauri_commands": 6,
+        "native_executed": false,
+        "backend_services_implemented_by_this_task": false,
+        "manual_state_mutated": false,
+        "human_acceptance": "not_given"
+      },
+      "result": "pass"
+    },
+    {
+      "requirement": "Périmètre local complet dans les familles définies",
+      "expected": "Autorité, données, persistance, dépendances, nominal/refus, acquis/écarts et tâches liées pour chaque famille",
+      "observed": "32 familles,37 propriétés de proxy et20 destinationsLCDS nommées couvertes ;8 invariants transversaux et7 inconnues maintenues",
+      "result": "pass"
+    },
+    {
+      "requirement": "Cas nominal de consultation de périmètre",
+      "expected": "Définir le remplacement sans exécuter ni déclarer disponible un service de compte",
+      "observed": {
+        "decision": "replace_locally",
+        "current_state": "not_implemented",
+        "implemented": false,
+        "runtime_call_executed": false,
+        "family": "identity",
+        "implementation_gate": "Use the linked implementation tasks and their acceptance tests; scope definition is not service availability."
+      },
+      "result": "pass"
+    },
+    {
+      "requirement": "Refus pertinents",
+      "expected": "Référence/source/liaison manquante ou altérée, service ready injustifié, backendRiot inventé et demande externe non couverte refusés",
+      "observed": "22 tests réussis ; les refus de assess sont des décisions de périmètre, pas un middleware réseau implémenté",
+      "result": "pass"
+    },
+    {
+      "requirement": "Consommateur réel et conservation",
+      "expected": "Contexte et consigne deSYS07 dans registre/base/site ; autres tâches et tous états manuels conservés",
+      "observed": {
+        "catalog_changed_rows": [
+          "SYS-01.1-07"
+        ],
+        "active_catalog_tasks": 42214,
+        "manual_states_compared": 42606,
+        "manual_states_notes_revisions_unchanged": true,
+        "manual_history_unchanged": true,
+        "source_status": "a_valider",
+        "manual_done": 0,
+        "manual_revision": 0,
+        "generated_catalog_data_verified": true,
+        "live_http_consumer_verified": true,
+        "installed_tauri_reads_same_database": true,
+        "native_window_observed": false,
+        "manual_state_mutated": false,
+        "human_acceptance": "not_given",
+        "instruction_sha256": "3dcfe08b1a4aaac0de8ec263fdcb4e8922e0f1663ddbc1491cd18bad7680b861"
+      },
+      "result": "pass"
+    }
+  ],
+  "integration": {
+    "catalog_changed_rows": [
+      "SYS-01.1-07"
+    ],
+    "active_catalog_tasks": 42214,
+    "manual_states_compared": 42606,
+    "manual_states_notes_revisions_unchanged": true,
+    "manual_history_unchanged": true,
+    "source_status": "a_valider",
+    "manual_done": 0,
+    "manual_revision": 0,
+    "generated_catalog_data_verified": true,
+    "live_http_consumer_verified": true,
+    "installed_tauri_reads_same_database": true,
+    "native_window_observed": false,
+    "manual_state_mutated": false,
+    "human_acceptance": "not_given",
+    "instruction_sha256": "3dcfe08b1a4aaac0de8ec263fdcb4e8922e0f1663ddbc1491cd18bad7680b861"
+  },
+  "modified_files": [
+    "docs/reference_local_services_4_20.json",
+    "docs/REFERENCE_LOCAL_SERVICES_4_20.md",
+    "docs/reference_local_services_sources/current/assets-manifest.json",
+    "docs/reference_local_services_sources/probes/source-tests.json",
+    "docs/reference_local_services_sources/probes/source-tests.log",
+    "docs/reference_local_services_sources/air/lib__ClientLibChampionDetailServices_dat/scripts/com/riotgames/store/dao/IStoreCatalogDao.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibChampionDetailServices_dat/scripts/com/riotgames/store/dao/MockStoreCatalogDao.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibChampionDetailServices_dat/scripts/com/riotgames/store/dao/StoreCatalogDao.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibChampionSelectionCore_dat/scripts/com/riotgames/platform/gameclient/controllers/game/commands/UpdateSpectatorsCommand.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibChampionSelectionCore_dat/scripts/com/riotgames/platform/gameclient/controllers/game/controllers/SpectatorDelayManager.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibChat_dat/scripts/com/riotgames/platform/gameclient/chat/event/XMPPEvent.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibCommon_dat/scripts/com/riotgames/platform/common/provider/ISpectatorProvider.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibCommon_dat/scripts/com/riotgames/platform/common/provider/IStoreImagesProvider.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibCommon_dat/scripts/com/riotgames/platform/common/provider/IStoreProvider.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibCommon_dat/scripts/com/riotgames/platform/common/provider/IStoreProvider_proxy.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibCommon_dat/scripts/com/riotgames/platform/common/provider/StoreProviderProxy.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibDomain_dat/scripts/com/riotgames/platform/common/domain/XMPPMessageSubjectTypes.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibDomain_dat/scripts/com/riotgames/platform/gameclient/domain/SpectatorEndOfGameStats.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibDomain_dat/scripts/com/riotgames/platform/gameclient/domain/SpectatorPlayerParticipantStatsSummary.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibDomain_dat/scripts/com/riotgames/platform/gameclient/domain/SpectatorRawStatDTO.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibDomain_dat/scripts/com/riotgames/platform/gameclient/exception/SkinRentalStoreException.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibDomain_dat/scripts/com/riotgames/platform/gameclient/kudos/LcdsResponseString.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibDomain_dat/scripts/com/riotgames/platform/gameclient/notification/LcdsServiceProxyResponse.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibDomain_dat/scripts/com/riotgames/platform/gameclient/domain/game/AllowSpectators.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibDomain_dat/scripts/com/riotgames/platform/gameclient/domain/store/StoreAccountBalanceNotification.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibDomain_dat/scripts/com/riotgames/platform/gameclient/domain/store/StoreFulfillmentNotification.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibDomain_dat/scripts/com/riotgames/platform/gameclient/domain/store/StoreURLNotification.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibGame_dat/scripts/com/riotgames/pvpnet/game/controllers/SpectatorController.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibGame_dat/scripts/com/riotgames/pvpnet/game/controllers/contextalert/StoreAlertParser.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibKudos_dat/scripts/com/riotgames/platform/gameclient/kudos/KudosServicePlatform.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibLogin_dat/scripts/com/riotgames/platform/gameclient/module/login/controller/LoginQueueController.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibLogin_dat/scripts/com/riotgames/platform/gameclient/module/login/controller/LoginQueueMediator.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibLogin_dat/scripts/com/riotgames/platform/gameclient/module/login/view/ILoginQueueView.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/RiotServiceConfig.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/event/LoginQueueEvent.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/ChatService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/ChatServiceState.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/DomainType.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/GameInviteService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/GasToken.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/IAuthService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/ILoginQueueMonitor.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/InterruptibleRemoteService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/InventoryService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/IRemoteExceptionFactory.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/LoginService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/MessageRouterService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/PollingService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/QueueRestrictionService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/RemoteObjectGeneratorService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/RerollService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/RESTService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/ServerStatusService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/ServiceProxy.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/StatisticsService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/ILcdsProxyMessageRouter.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/ILcdsProxyServiceMessenger.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/LcdsProxyFunctionMessenger.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/LcdsProxyMessageRouter.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/LcdsProxyServiceMessenger.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/responses/ILcdsProxyMessageAction.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/responses/LcdsProxyMessageAction.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/servicecalls/AsyncLcdsProxyServiceCall.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/servicecalls/IAsyncLcdsProxyServiceCall.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/servicecalls/ILcdsProxyServiceCall.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/servicecalls/LcdsProxyServiceCall.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/responses/factory/ILcdsProxyMessageActionFactory.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/login/queue/AuthResult.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/login/queue/InGameCredentials.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/login/queue/LoginQueueState.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/login/queue/PollingLoginQueueMonitor.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/login/queue/QueuePosition.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/xmpp/logging/XMPPSessionLogger.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/AccountManagementService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/AccountService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/AggregatedStatsService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/ClientFacadeService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/CLSServicePlatform.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/GameClientAcknowledgeTypes.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/GameMapService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/GameService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/GameZoneGameService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/IBaseLcdsService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/ILeagueCache.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/LocalGameDataService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/MasteryBookService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/MatchMakerService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/MicroFeedbackService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/PlayerPreferencesService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/PlayerStatsService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/SpellBookService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/SummonerIconService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/SummonerRuneService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/SummonerService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/TeamService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/maestro/MaestroConstants.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/maestro/MaestroEnumerateClientVersionEvent.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/maestro/MaestroGetLatestClientVersionsEvent.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/maestro/MaestroMessage.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/maestro/MaestroProgressUpdateEvent.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/maestro/MaestroService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/maestro/MaestroUpdatePlayerConnectionEvent.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/mail/SMTPMailService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/socket/ISocketServerService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/socket/SocketServerService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/trade/IChampionTradeService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/watch/IReplayDownloadAgent.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/watch/IReplayDownloadService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/watch/IReplayFileManagerService.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/watch/ReplayFileEvent.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/watch/ReplayServiceConstants.as",
+    "docs/reference_local_services_sources/air/lib__ClientLibSystem_dat/scripts/com/riotgames/pvpnet/system/boot/actions/InitializeRpcRemotingAction.as",
+    "docs/reference_local_services_sources/air/mod__cap__mod_cap_dat/scripts/com/riotgames/pvpnet/cap/services/CapLcdsMessageRouter.as",
+    "docs/reference_local_services_sources/air/mod__cap__mod_cap_dat/scripts/com/riotgames/pvpnet/cap/services/CapLcdsProxyServiceMessangerGroup.as",
+    "docs/reference_local_services_sources/air/mod__cap__mod_cap_dat/scripts/com/riotgames/pvpnet/cap/services/CapService.as",
+    "docs/reference_local_services_sources/air/mod__cap__mod_cap_dat/scripts/com/riotgames/pvpnet/cap/util/LcdsProxyMessageActionDataUtil.as",
+    "docs/reference_local_services_sources/air/mod__ced__mod_ced_dat/scripts/com/riotgames/pvpnet/contextualeducation/services/ContextualEducationLocalService.as",
+    "docs/reference_local_services_sources/air/mod__ced__mod_ced_dat/scripts/com/riotgames/pvpnet/contextualeducation/services/ContextualEducationServiceManager.as",
+    "docs/reference_local_services_sources/air/mod__ced__mod_ced_dat/scripts/com/riotgames/pvpnet/contextualeducation/services/ContextualEducationTipRecord.as",
+    "docs/reference_local_services_sources/air/mod__ced__mod_ced_dat/scripts/com/riotgames/pvpnet/contextualeducation/services/IContextualEducationService.as",
+    "docs/reference_local_services_sources/air/mod__cs__mod_cs_dat/scripts/_com_riotgames_platform_gameclient_controllers_game_views_SpectatorChampionSelectionViewWatcherSetupUtil.as",
+    "docs/reference_local_services_sources/air/mod__cs__mod_cs_dat/scripts/_com_riotgames_platform_gameclient_controllers_game_views_SpectatorWaitBarWatcherSetupUtil.as",
+    "docs/reference_local_services_sources/air/mod__cs__mod_cs_dat/scripts/com/riotgames/platform/gameclient/controllers/game/views/SpectatorChampionSelectionView.as",
+    "docs/reference_local_services_sources/air/mod__cs__mod_cs_dat/scripts/com/riotgames/platform/gameclient/controllers/game/views/SpectatorChampionSelectionView_SUNSET_BG.as",
+    "docs/reference_local_services_sources/air/mod__cs__mod_cs_dat/scripts/com/riotgames/platform/gameclient/controllers/game/views/SpectatorChampionSelectionView__embed_mxml___________ClientAssets_imageEmbeds_championSelect_spectatorCS_blindPick_summonerBlue_png_1420628713.as",
+    "docs/reference_local_services_sources/air/mod__cs__mod_cs_dat/scripts/com/riotgames/platform/gameclient/controllers/game/views/SpectatorChampionSelectionView__embed_mxml___________ClientAssets_imageEmbeds_championSelect_spectatorCS_blindPick_summonerPurple_png_1289890477.as",
+    "docs/reference_local_services_sources/air/mod__cs__mod_cs_dat/scripts/com/riotgames/platform/gameclient/controllers/game/views/SpectatorWaitBar.as",
+    "docs/reference_local_services_sources/air/mod__eogg__mod_eogg_dat/scripts/com/riotgames/pvpnet/endofgamegiftwindow/services/EndOfGameGiftService.as",
+    "docs/reference_local_services_sources/air/mod__eogg__mod_eogg_dat/scripts/com/riotgames/pvpnet/endofgamegiftwindow/services/EndOfGameGiftServiceResponseTypes.as",
+    "docs/reference_local_services_sources/air/mod__eogg__mod_eogg_dat/scripts/com/riotgames/pvpnet/endofgamegiftwindow/services/IEndOfGameGiftService.as",
+    "docs/reference_local_services_sources/air/mod__eogg__mod_eogg_dat/scripts/com/riotgames/pvpnet/endofgamegiftwindow/services/IServiceCallResponseSubscribable.as",
+    "docs/reference_local_services_sources/air/mod__itb__mod_itb_dat/scripts/com/riotgames/pvpnet/itembrowser/sets/service/IItemSetsService.as",
+    "docs/reference_local_services_sources/air/mod__itb__mod_itb_dat/scripts/com/riotgames/pvpnet/itembrowser/sets/service/ItemSetServiceManager.as",
+    "docs/reference_local_services_sources/air/mod__itb__mod_itb_dat/scripts/com/riotgames/pvpnet/itembrowser/sets/service/ItemSetsService.as",
+    "docs/reference_local_services_sources/air/mod__itb__mod_itb_dat/scripts/com/riotgames/pvpnet/itembrowser/sets/service/LocalItemSetsService.as",
+    "docs/reference_local_services_sources/air/mod__lgn__mod_lgn2_dat/scripts/com/riotgames/pvpnet/login/LoginQueueStatusPane.as",
+    "docs/reference_local_services_sources/air/mod__lsi__mod_lsi_dat/scripts/com/riotgames/pvpnet/CLS/commands/RetrieveInProgressGameSpectatorInfoCall.as",
+    "docs/reference_local_services_sources/air/mod__lsi__mod_lsi_dat/scripts/com/riotgames/pvpnet/CLS/commands/SpectatorProxyServiceCall.as",
+    "docs/reference_local_services_sources/air/mod__lsi__mod_lsi_dat/scripts/com/riotgames/pvpnet/CLS/services/LeaguesService.as",
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/_com_riotgames_platform_gameclient_views_game_practice_teamselection_SpectatorMemberRendererWatcherSetupUtil.as",
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/_com_riotgames_platform_gameclient_views_game_practice_teamselection_SpectatorPanelWatcherSetupUtil.as",
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/_com_riotgames_platform_gameclient_views_store_StoreHtmlViewWatcherSetupUtil.as",
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/_com_riotgames_platform_gameclient_views_store_StoreViewWatcherSetupUtil.as",
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/com/riotgames/platform/gameclient/controllers/store/StoreController.as",
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/com/riotgames/platform/gameclient/controllers/lobby/event/StoreNavigationEvent.as",
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/com/riotgames/platform/gameclient/views/store/StoreBuddy.as",
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/com/riotgames/platform/gameclient/views/store/StoreHtmlView.as",
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/com/riotgames/platform/gameclient/views/store/StoreView.as",
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/com/riotgames/platform/gameclient/views/game/common/StoreImageCache.as",
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/com/riotgames/platform/gameclient/views/game/common/StoreImages.as",
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/com/riotgames/platform/gameclient/views/game/practice/teamselection/SpectatorMemberRenderer.as",
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/com/riotgames/platform/gameclient/views/game/practice/teamselection/SpectatorMemberRenderer__embed_mxml________ClientAssets_imageEmbeds_teamSelection_gameOwner_png_1567169566.as",
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/com/riotgames/platform/gameclient/views/game/practice/teamselection/SpectatorMemberRenderer__embed_mxml________ClientAssets_imageEmbeds_teamSelection_separator_centered_blue_png_359335774.as",
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/com/riotgames/platform/gameclient/views/game/practice/teamselection/SpectatorPanel.as",
+    "docs/reference_local_services_sources/air/mod__mtrk__cmmtrks_dat/scripts/com/riotgames/pvpnet/tracking/services/DradisServiceLoggerTarget.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/RemoteObjectGenerator.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/async/MessageRouterServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/AccountManagementServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/AccountServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/BaseLcdsService.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/ChampionTradeService.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/ChatServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/ClientFacadeServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/CLSServicePlatformImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/GameInviteServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/GameMapServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/GameServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/InventoryServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/LcdsErrorHandler.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/LoginServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/MasteryBookServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/MatchMakerServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/MicroFeedbackServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/PlayerPreferencesServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/PlayerStatsServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/QueueRestrictionServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/RerollServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/SpellBookServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/StatisticsServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/SummonerIconServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/SummonerRuneServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/SummonerServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/TeamServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/local/KeybindingDAO.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/local/LocalGameDataServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/maestro/MaestroServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/mail/SMTPMailServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/rest/AuthSanitizer.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/rest/HttpRequest.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/rest/RemoteObjectGeneratorServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/rest/RestAuthService.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/rest/ServerStatusServiceImpl.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/utils/ServicesPersistenceUtils.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/watch/ReplayDirectoryScan.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/watch/ReplayDirectoryScanManager.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/watch/ReplayDownloadAgent.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/watch/ReplayDownloadService.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/watch/ReplayFileCacheEntry.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/watch/ReplayFileManagerService.as",
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/watch/ReplayMetaDataCacheEntry.as",
+    "docs/reference_local_services_sources/air/mod__sgst__mod_sgst_dat/scripts/com/riotgames/pvpnet/suggestedplayers/service/SuggestedPlayersService.as",
+    "docs/reference_local_services_sources/current/docs/REFERENCE_GAME_SERVER_4_20.md",
+    "docs/reference_local_services_sources/current/tools/download_assets.py",
+    "docs/reference_local_services_sources/current/crates/client/src/match_results_ui.rs",
+    "docs/reference_local_services_sources/current/crates/client/src/native_replay_service.rs",
+    "docs/reference_local_services_sources/current/crates/client/src/session_connection.rs",
+    "docs/reference_local_services_sources/current/crates/client/src/session_departure.rs",
+    "docs/reference_local_services_sources/current/crates/core/src/lib.rs",
+    "docs/reference_local_services_sources/current/crates/core/src/match_results.rs",
+    "docs/reference_local_services_sources/current/crates/core/src/session_transport.rs",
+    "docs/reference_local_services_sources/current/crates/core/src/session_wire.rs",
+    "docs/reference_local_services_sources/current/crates/server/src/main.rs",
+    "docs/reference_local_services_sources/current/crates/server/src/owned_session.rs",
+    "docs/reference_local_services_sources/current/crates/server/src/reconnect.rs",
+    "docs/reference_local_services_sources/current/crates/server/src/result_store.rs",
+    "docs/reference_local_services_sources/current/crates/server/src/session_host.rs",
+    "docs/reference_local_services_sources/current/data/4.20/champions.json",
+    "docs/reference_local_services_sources/current/launcher/web/app.js",
+    "docs/reference_local_services_sources/current/launcher/src-tauri/src/main.rs",
+    "docs/reference_local_services_sources/current/launcher/src-tauri/src/sessions.rs",
+    "docs/reference_local_services_sources/current/launcher/src-tauri/src/sessions_joined.rs",
+    "docs/reference_local_services_sources/current/launcher/src-tauri/src/sessions_output.rs",
+    "tools/project-plan/local_services_reference.py",
+    "tools/project-plan/test_local_services_reference.py",
+    "docs/reference_local_services_4_20_verification.json",
+    "docs/completion_tasks_2026-10-20.json",
+    "docs/coverage.json",
+    "docs/completion_plan.json",
+    "docs/resume_checkpoint.json",
+    "docs/ai/CURRENT.md",
+    "docs/ai/HANDOFF.md",
+    "docs/ai/DECISIONS.md",
+    "runtime/project-plan/plan.sqlite3 (catalogue uniquement)"
+  ],
+  "backup": "E:\\mapslol3v3\\Local_services_scope_4_20_2026-10-20\\before",
+  "git_before": {
+    "head": "8c19026eb8fdc2d9e47960b0110c5f9175f4d1ca",
+    "branch": "main",
+    "status": "M AGENTS.md\n M Cargo.lock\n M Cargo.toml\n M assets-manifest.json\n M crates/client/src/animation.rs\n M crates/client/src/attack_animation.rs\n M crates/client/src/fow_champion_sources.rs\n M crates/client/src/fow_gpu.rs\n M crates/client/src/fow_visibility_texture.rs\n M crates/client/src/main.rs\n M crates/client/src/map_fog.rs\n M crates/client/src/native_effect_clock.rs\n M crates/client/src/native_endgame_ui.rs\n M crates/client/src/native_hud_inventory_tests.rs\n M crates/client/src/native_hud_learning.rs\n M crates/client/src/native_hud_ranks.rs\n M crates/client/src/native_hud_widgets.rs\n M crates/client/src/native_minimap_input.rs\n M crates/client/src/native_minimap_input_tests.rs\n M crates/client/src/nexus_complex_material.rs\n M crates/client/src/nexus_complex_mesh.rs\n M crates/client/src/nexus_complex_mesh_tests.rs\n M crates/client/src/nexus_glow_material.rs\n M crates/client/src/ordinary_camera_input.rs\n M crates/client/src/projected_pixel_pair.rs\n M crates/client/src/session_client.rs\n M crates/client/src/session_client_tests.rs\n M crates/client/src/session_connection.rs\n M crates/client/src/session_connection_tests.rs\n M crates/client/src/shop_ui.rs\n M crates/client/src/spell_input.rs\n M crates/client/src/terrain_material.rs\n M crates/core/src/annie.rs\n M crates/core/src/annie_r.rs\n M crates/core/src/annie_r_tests.rs\n M crates/core/src/annie_w.rs\n M crates/core/src/attack_presentation.rs\n M crates/core/src/attack_presentation_server_tests.rs\n M crates/core/src/attacks.rs\n M crates/core/src/audio_dynamic_input_owner_selector.rs\n M crates/core/src/audio_replay_windows_receive.rs\n M crates/core/src/audio_replay_windows_receive_tests.rs\n M crates/core/src/collision.rs\n M crates/core/src/combat.rs\n M crates/core/src/consumables.rs\n M crates/core/src/cooldown.rs\n M crates/core/src/damage.rs\n M crates/core/src/entity_facing.rs\n M crates/core/src/entity_facing_tests.rs\n M crates/core/src/healing.rs\n M crates/core/src/lib.rs\n M crates/core/src/lifecycle.rs\n M crates/core/src/match_results.rs\n M crates/core/src/movement.rs\n M crates/core/src/native_simple_type0_quad.rs\n M crates/core/src/progression.rs\n M crates/core/src/shop.rs\n M crates/core/src/slows.rs\n M crates/core/src/spells.rs\n M crates/core/src/summoners.rs\n M crates/core/src/vision.rs\n M crates/core/src/world.rs\n M crates/server/src/main.rs\n M crates/server/src/session_host.rs\n M data/4.20/animation_manifest.json\n M data/4.20/native_inventory_icons.json\n M data/4.20/shop_foundation.json\n M data/4.20/tibbers_definition.json\n M docs/BUILDING.md\n M docs/completion_plan.html\n M launcher/src-tauri/src/sessions.rs\n M launcher/src-tauri/src/sessions_joined.rs\n M tools/download_assets.py"
+  },
+  "source_interpretation": [
+    {
+      "subject": "MockStoreCatalogDao et classes de test/cache",
+      "decision": "Fixtures/caches du client, jamais un backend de boutiqueRiot ou une collection locale fonctionnelle."
+    },
+    {
+      "subject": "RiotServiceConfig",
+      "decision": "Valeurs de framework, dont hôtesbeta et portsMaestro/RTMPS/XMPP ; ne pas les promouvoir comme endpointsEUW effectivement déployés."
+    },
+    {
+      "subject": "LocalGameDataService et catalogue roster",
+      "decision": "Données et définitions, distinctes des droits de contenu et de la progression persistante."
+    },
+    {
+      "subject": "native_replay_service.rs et servicesaudio",
+      "decision": "Propriétaires/servicesaudio du runtime ; distincts du spectateur et des enregistrements de parties."
+    },
+    {
+      "subject": "BaseLcdsService.invokeServiceWithoutSession",
+      "decision": "Le nom client de la méthode ne prouve pas une absence d’authentification/autorisation côté serveur."
+    }
+  ],
+  "open_questions": [
+    "Aucune implémentation des serveurs de productionRiot n’a été identifiée dans les références du client fournies ; les classes et messages côtéAIR ne donnent pas les règles internes serveur.",
+    "Règles internes MMR, matchmaking, gains/progression, anti-abus et certaines transactions inconnues : spécifier et nommer des règles locales dans les tâches dédiées, sans les attribuer àRiot.",
+    "Les appels dynamiquesLCDS/proxy, contenusHTTP, protocoleXMPP et champs serveur non présents exigent des adaptateurs et validations supplémentaires ; la liste des appels littéraux ne constitue pas toutes les API du jeu.",
+    "Disponibilité régionale/historique des fonctionnalités conditionnelles, contenus de boutique/nouvelles/enquêtes et réponses distantes non déduits de leur seule présence dans le client.",
+    "Compatibilité d’un clientAIR/natif4.20 non modifié avec les servicesRust non démontrée ; aucun endpointRiot contacté et aucun ticket officiel généré.",
+    "Les comptes, collections, social, files, classement, économie et historique persistants du jeu restent à implémenter/qualifier ; aucun de ces services n’est déclaré disponible par la définition de leur périmètre.",
+    "Patcher/CDN/Spectateur et certains logiciels/serveurs communautaires sont des références ou candidats distincts des implémentationsRiot ; leur simple présence ne vaut ni intégration ni fidélité de production."
+  ],
+  "native_executed": false,
+  "game_code_changed": false,
+  "game_builds_or_tests_run": false,
+  "network_backend_tested": false,
+  "new_services_implemented": false,
+  "messages_emails_payments_sent": false,
+  "first_install_tauri_seed_refreshed": false,
+  "resources_reconstructed": false,
+  "research_corrections": [
+    "Initial keyword search also matched native audio services and framework caches; they are now explicitly distinguished from match replays and account backends.",
+    "Initial RPC discovery counted six function declarations as dynamic calls; the maintained scanner skips declarations and retains15 actual dynamic call references.",
+    "No guessed network.rs file was treated as missing implementation; actual packet variants are in crates/core/src/lib.rs."
+  ],
+  "final_audit_pending": false,
+  "final_audit": {
+    "task": "SYS-01.1-07",
+    "passed": true,
+    "checks_count": 50,
+    "checks": {
+      "exact_task_and_original_acceptance_contract": true,
+      "task_package_phase_prerequisites_checked": true,
+      "only_requested_registry_task_changed": true,
+      "42213_other_registry_tasks_and_all_metadata_preserved": true,
+      "task_count_and_phase_order_preserved": true,
+      "technical_scope_ready_without_human_acceptance": true,
+      "all_218_source_origins_and_snapshots_verified": true,
+      "client420_and_five_native_identity_sources_reverified": true,
+      "complete_proxy_and_named_destination_mapping": true,
+      "real_call_scan_distinguishes_literal_and_dynamic_calls": true,
+      "all_32_local_families_define_authority_data_persistence_acceptance_refusals_and_work": true,
+      "family_dependencies_and_existing_implementation_tasks_verified": true,
+      "all_eight_cross_service_requirements_defined": true,
+      "current_partial_services_are_preserved_without_readiness_promotion": true,
+      "client_does_not_claim_recovered_riot_server": true,
+      "actual_launcher_registers_only_six_named_commands": true,
+      "launcher_endpoint_matches_actual_code": true,
+      "standalone_server_override_not_presented_as_firewall": true,
+      "result_file_storage_is_real_and_distinct_from_account_ledger": true,
+      "account_authentication_and_native_wire_compatibility_not_inferred": true,
+      "scope_query_nominal_does_not_execute_or_declare_a_service_available": true,
+      "external_riot_and_real_money_requests_outside_defined_contract": true,
+      "plan_database_not_confused_with_game_accounts": true,
+      "mocks_framework_defaults_audio_replays_and_without_session_limits_documented": true,
+      "all_seven_known_unknowns_left_open": true,
+      "22_installed_definition_and_refusal_tests_passed": true,
+      "installed_maintained_cli_passed": true,
+      "all_224_published_artifacts_unchanged": true,
+      "executed_python_identity_and_version_recorded": true,
+      "all_prior_reference_contracts_and_receipts_preserved": true,
+      "all_73_preexisting_tracked_modifications_preserved": true,
+      "tools/project-plan/instructions.py_unchanged": true,
+      "tools/project-plan/store.py_unchanged": true,
+      "coverage.json_all_previous_evidence_preserved": true,
+      "completion_plan.json_all_previous_evidence_preserved": true,
+      "resume_checkpoint.json_all_previous_evidence_preserved": true,
+      "docs/ai/CURRENT.md_history_preserved": true,
+      "docs/ai/HANDOFF.md_history_preserved": true,
+      "docs/ai/DECISIONS.md_history_preserved": true,
+      "42606_manual_states_notes_revisions_preserved": true,
+      "manual_change_history_preserved": true,
+      "sqlite_integrity_ok": true,
+      "only_requested_catalog_row_changed": true,
+      "real_registry_generated_instruction_and_catalog_match": true,
+      "scope_contract_and_evidence_linked_in_real_consumer": true,
+      "live_http_reader_matches_catalog_and_manual_state": true,
+      "installed_tauri_uses_same_database": true,
+      "human_report_covers_every_family_proxy_destination_and_cross_requirement": true,
+      "expected_observed_nominal_refusals_limits_are_documented": true,
+      "no_backend_game_mail_payment_or_acceptance_claimed": true
+    },
+    "requirements": {
+      "1_objective_and_prerequisites": {
+        "evidence": [
+          "AGENTS.md",
+          "docs/completion_tasks_2026-10-20.json",
+          "docs/execution_plan_A_Z.json",
+          "E:\\mapslol3v3\\Local_services_scope_4_20_2026-10-20\\prerequisites.json"
+        ],
+        "proven": true
+      },
+      "2_historical_and_current_contract": {
+        "evidence": [
+          "docs/reference_local_services_4_20.json",
+          "docs/reference_client_4_20.json",
+          "docs/reference_air_routes_4_20.json",
+          "docs/reference_local_services_sources/"
+        ],
+        "proven": true
+      },
+      "3_actual_consumer_integration": {
+        "evidence": [
+          "tools/project-plan/instructions.py",
+          "runtime/project-plan/plan.sqlite3",
+          "http://127.0.0.1:10427/api/task/SYS-01.1-07"
+        ],
+        "proven": true
+      },
+      "4_nominal_and_refusal_verification": {
+        "evidence": [
+          "tools/project-plan/test_local_services_reference.py",
+          "E:\\mapslol3v3\\Local_services_scope_4_20_2026-10-20\\installed-tests.log",
+          "E:\\mapslol3v3\\Local_services_scope_4_20_2026-10-20\\installed-cli.log"
+        ],
+        "proven": true
+      },
+      "5_evidence_preservation_coverage_resume_and_unknowns": {
+        "evidence": [
+          "docs/coverage.json",
+          "docs/completion_plan.json",
+          "docs/resume_checkpoint.json",
+          "docs/ai/CURRENT.md",
+          "docs/ai/HANDOFF.md",
+          "docs/ai/DECISIONS.md",
+          "docs/reference_local_services_4_20_verification.json"
+        ],
+        "proven": true
+      },
+      "6_delivery_without_redefining_definition_as_implementation": {
+        "evidence": [
+          "docs/REFERENCE_LOCAL_SERVICES_4_20.md",
+          "docs/reference_local_services_4_20_verification.json"
+        ],
+        "proven": true
+      }
+    },
+    "facts": {
+      "task": "SYS-01.1-07",
+      "verified": true,
+      "families": 32,
+      "sources": 218,
+      "service_proxy_properties": 37,
+      "riot_classes_scanned": 2877,
+      "literal_client_calls": 153,
+      "dynamic_client_calls": 15,
+      "rpc_destinations": 20,
+      "local_tauri_commands": 6,
+      "native_executed": false,
+      "backend_services_implemented_by_this_task": false,
+      "manual_state_mutated": false,
+      "human_acceptance": "not_given"
+    },
+    "verified_utc": "2026-10-20T19:32:23.619121+00:00",
+    "manual_states_preserved": 42606,
+    "catalog_changed_rows": [
+      "SYS-01.1-07"
+    ],
+    "manual_state_mutated": false,
+    "human_acceptance": "not_given"
+  },
+  "verified_utc": "2026-10-20T19:32:23.619121+00:00",
+  "test_log_outputs": {
+    "installed-tests": "test_01_real_sources_nominal_complete_scope (test_local_services_reference.LocalServiceScopeTests.test_01_real_sources_nominal_complete_scope) ... ok\ntest_02_missing_family_refused (test_local_services_reference.LocalServiceScopeTests.test_02_missing_family_refused) ... ok\ntest_03_do_not_promote_scope_to_operational_service (test_local_services_reference.LocalServiceScopeTests.test_03_do_not_promote_scope_to_operational_service) ... ok\ntest_04_recovered_client_is_not_recovered_riot_backend (test_local_services_reference.LocalServiceScopeTests.test_04_recovered_client_is_not_recovered_riot_backend) ... ok\ntest_05_every_proxy_property_has_explicit_local_scope (test_local_services_reference.LocalServiceScopeTests.test_05_every_proxy_property_has_explicit_local_scope) ... ok\ntest_06_every_named_rpc_destination_is_mapped (test_local_services_reference.LocalServiceScopeTests.test_06_every_named_rpc_destination_is_mapped) ... ok\ntest_07_original_call_inventory_cannot_omit_observed_call (test_local_services_reference.LocalServiceScopeTests.test_07_original_call_inventory_cannot_omit_observed_call) ... ok\ntest_08_services_must_link_real_implementation_tasks (test_local_services_reference.LocalServiceScopeTests.test_08_services_must_link_real_implementation_tasks) ... ok\ntest_09_dependency_cycle_refused (test_local_services_reference.LocalServiceScopeTests.test_09_dependency_cycle_refused) ... ok\ntest_10_wrong_historical_reference_refused (test_local_services_reference.LocalServiceScopeTests.test_10_wrong_historical_reference_refused) ... ok\ntest_11_changed_source_bytes_refused (test_local_services_reference.LocalServiceScopeTests.test_11_changed_source_bytes_refused) ... ok\ntest_12_snapshot_cannot_escape_root (test_local_services_reference.LocalServiceScopeTests.test_12_snapshot_cannot_escape_root) ... ok\ntest_13_call_parser_preserves_session_kind_and_literal_binding (test_local_services_reference.LocalServiceScopeTests.test_13_call_parser_preserves_session_kind_and_literal_binding) ... ok\ntest_14_interfaces_comments_and_strings_are_not_remote_calls (test_local_services_reference.LocalServiceScopeTests.test_14_interfaces_comments_and_strings_are_not_remote_calls) ... ok\ntest_15_dynamic_calls_are_not_invented_operations (test_local_services_reference.LocalServiceScopeTests.test_15_dynamic_calls_are_not_invented_operations) ... ok\ntest_16_current_command_registration_is_explicit (test_local_services_reference.LocalServiceScopeTests.test_16_current_command_registration_is_explicit) ... ok\ntest_17_nominal_scope_query_is_read_only_not_a_successful_backend_call (test_local_services_reference.LocalServiceScopeTests.test_17_nominal_scope_query_is_read_only_not_a_successful_backend_call) ... ok\ntest_18_original_riot_real_money_or_external_requests_are_outside_contract (test_local_services_reference.LocalServiceScopeTests.test_18_original_riot_real_money_or_external_requests_are_outside_contract) ... ok\ntest_19_match_capability_cannot_claim_account_or_native_compatibility (test_local_services_reference.LocalServiceScopeTests.test_19_match_capability_cannot_claim_account_or_native_compatibility) ... ok\ntest_20_no_fallback_no_silent_success_no_plan_database_as_game_store (test_local_services_reference.LocalServiceScopeTests.test_20_no_fallback_no_silent_success_no_plan_database_as_game_store) ... ok\ntest_21_scope_does_not_hide_unknowns_or_accept_for_user (test_local_services_reference.LocalServiceScopeTests.test_21_scope_does_not_hide_unknowns_or_accept_for_user) ... ok\ntest_22_every_family_has_nominal_refusal_storage_authority_and_backlog (test_local_services_reference.LocalServiceScopeTests.test_22_every_family_has_nominal_refusal_storage_authority_and_backlog) ... ok\n\n----------------------------------------------------------------------\nRan 22 tests in 28.577s\n\nOK\n",
+    "installed-cli": "{\n  \"task\": \"SYS-01.1-07\",\n  \"verified\": true,\n  \"families\": 32,\n  \"sources\": 218,\n  \"service_proxy_properties\": 37,\n  \"riot_classes_scanned\": 2877,\n  \"literal_client_calls\": 153,\n  \"dynamic_client_calls\": 15,\n  \"rpc_destinations\": 20,\n  \"local_tauri_commands\": 6,\n  \"native_executed\": false,\n  \"backend_services_implemented_by_this_task\": false,\n  \"manual_state_mutated\": false,\n  \"human_acceptance\": \"not_given\"\n}\n"
+  },
+  "final_file_identities": {
+    "docs/reference_local_services_4_20.json": {
+      "bytes": 317028,
+      "sha256": "8a6afdc263b5c0959212425feb9e437b3a2264ea1d3a3590f825cb52ef406efb"
+    },
+    "docs/REFERENCE_LOCAL_SERVICES_4_20.md": {
+      "bytes": 116815,
+      "sha256": "c76e47be3837f23606b1c2bc9368b259be8c8af7560c48d3ade01a5c630df671"
+    },
+    "docs/reference_local_services_sources/current/assets-manifest.json": {
+      "bytes": 1811051,
+      "sha256": "e9391aee8fba8166cb994786a602af996c0d1786e77c3c29b89c5bcf7dc5cc3f"
+    },
+    "docs/reference_local_services_sources/probes/source-tests.json": {
+      "bytes": 756,
+      "sha256": "a74a469babe0b22a3bb683484932f03bbcc0bd53345ab24181a7e7a0c4b27751"
+    },
+    "docs/reference_local_services_sources/probes/source-tests.log": {
+      "bytes": 3845,
+      "sha256": "a00260c0f25335f4fd0b5353d6a8aae945444ecf38f8fbeb1ef3856a43cc4c62"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibChampionDetailServices_dat/scripts/com/riotgames/store/dao/IStoreCatalogDao.as": {
+      "bytes": 343,
+      "sha256": "5fe2a6bf8ae7bafbd128cf37055698a3eff8fbe0c1e798f30b37c4c601e74b57"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibChampionDetailServices_dat/scripts/com/riotgames/store/dao/MockStoreCatalogDao.as": {
+      "bytes": 3616,
+      "sha256": "7d367db5da43666f56fdab3abc1a2d91b00e9412a2822eb686789cd3b9903e20"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibChampionDetailServices_dat/scripts/com/riotgames/store/dao/StoreCatalogDao.as": {
+      "bytes": 7442,
+      "sha256": "6e7f810793ad7b9da1ea26c4745a7604ff821daec0304ac2a00740846296f21d"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibChampionSelectionCore_dat/scripts/com/riotgames/platform/gameclient/controllers/game/commands/UpdateSpectatorsCommand.as": {
+      "bytes": 1755,
+      "sha256": "7f37601a5260f0598f2c3a2516bc0b1036de9970d2e2db5dea9914d7c53216f5"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibChampionSelectionCore_dat/scripts/com/riotgames/platform/gameclient/controllers/game/controllers/SpectatorDelayManager.as": {
+      "bytes": 3871,
+      "sha256": "4df9c4a75a7af132bd78b8c5402bb7a4cfcfc3673931f25e67e356fde72821fe"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibChat_dat/scripts/com/riotgames/platform/gameclient/chat/event/XMPPEvent.as": {
+      "bytes": 3086,
+      "sha256": "9d571116ff4cd535273a7b25f62380f436638e3ce4fd787b7d806c1b091ff088"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibCommon_dat/scripts/com/riotgames/platform/common/provider/ISpectatorProvider.as": {
+      "bytes": 632,
+      "sha256": "9ac1f939378effbd63b04931f7d4aad617c9e459c47934abb02598a3186866f9"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibCommon_dat/scripts/com/riotgames/platform/common/provider/IStoreImagesProvider.as": {
+      "bytes": 1048,
+      "sha256": "900a7b7816e625a5b8738c9a40e1a5bf1757dc0ae3e5a8e03625c4e6cb9223e2"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibCommon_dat/scripts/com/riotgames/platform/common/provider/IStoreProvider.as": {
+      "bytes": 750,
+      "sha256": "835e2a5ff661f94b51d03e0a649d126a2bba8dcf692d22fcf5b7c9849baa06ee"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibCommon_dat/scripts/com/riotgames/platform/common/provider/IStoreProvider_proxy.as": {
+      "bytes": 2307,
+      "sha256": "80b63efb611857885e326df3a74d2886e2eb6fc6bb6e129e29e9de84804c288b"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibCommon_dat/scripts/com/riotgames/platform/common/provider/StoreProviderProxy.as": {
+      "bytes": 411,
+      "sha256": "3525735554df8cefcb68f0bce79d9d1a69222873587a643ffc057e1e6096a378"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibDomain_dat/scripts/com/riotgames/platform/common/domain/XMPPMessageSubjectTypes.as": {
+      "bytes": 2749,
+      "sha256": "ea32987eb276d461dde33b7ad3cc44ddfc4571083b641510cc31733e9232dd9d"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibDomain_dat/scripts/com/riotgames/platform/gameclient/domain/SpectatorEndOfGameStats.as": {
+      "bytes": 309,
+      "sha256": "c25c69f99baa7a3a84a542bd16f6ad96bacbac8fc37dc857d2258dcf4afcc868"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibDomain_dat/scripts/com/riotgames/platform/gameclient/domain/SpectatorPlayerParticipantStatsSummary.as": {
+      "bytes": 369,
+      "sha256": "c96eb6dfa4e1cceee4869a6eaaa67e67511add92eb3683438da15a8fcaea6466"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibDomain_dat/scripts/com/riotgames/platform/gameclient/domain/SpectatorRawStatDTO.as": {
+      "bytes": 293,
+      "sha256": "12bc01ff8a5e286638c3289a245ce42dc1495d01452708204d942fcb213c460a"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibDomain_dat/scripts/com/riotgames/platform/gameclient/exception/SkinRentalStoreException.as": {
+      "bytes": 723,
+      "sha256": "66214d2a01bde2b10f614418bc4fcde5951663c448621205aa61a928eb1bf832"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibDomain_dat/scripts/com/riotgames/platform/gameclient/kudos/LcdsResponseString.as": {
+      "bytes": 314,
+      "sha256": "42c8b15a33e3f9c3c4e28fe5d7b9be76e8a11508ee14c22b2a0b8ce38d3b4b89"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibDomain_dat/scripts/com/riotgames/platform/gameclient/notification/LcdsServiceProxyResponse.as": {
+      "bytes": 4783,
+      "sha256": "ca7c1a3ece269bacf3986f7739bf75e353c2b012f7a9b9930568deb729185c43"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibDomain_dat/scripts/com/riotgames/platform/gameclient/domain/game/AllowSpectators.as": {
+      "bytes": 704,
+      "sha256": "31d1e8e32e0b27ebd67c17b94c905e02e6d8197cafe6052fa62d204bc7981ffe"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibDomain_dat/scripts/com/riotgames/platform/gameclient/domain/store/StoreAccountBalanceNotification.as": {
+      "bytes": 2878,
+      "sha256": "c1c79c5e0cffdcea5b5ead9a2d14925f4bc7596a1c4cf91b628dfa9879416235"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibDomain_dat/scripts/com/riotgames/platform/gameclient/domain/store/StoreFulfillmentNotification.as": {
+      "bytes": 802,
+      "sha256": "bd04af74a725054d9b82f3d2f2ba0a1102567b3d6e394199da401af4432777cb"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibDomain_dat/scripts/com/riotgames/platform/gameclient/domain/store/StoreURLNotification.as": {
+      "bytes": 840,
+      "sha256": "861adfa8b356cb597116f5d5100c312dc3866c8cda9805959d53e96f9e006513"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibGame_dat/scripts/com/riotgames/pvpnet/game/controllers/SpectatorController.as": {
+      "bytes": 20561,
+      "sha256": "290f8baf89d9f1263c0811867edee71003b313f29112aeb1971a047f40ffd18d"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibGame_dat/scripts/com/riotgames/pvpnet/game/controllers/contextalert/StoreAlertParser.as": {
+      "bytes": 3151,
+      "sha256": "cb7cfa0210234a52655ea73e117bc99faaa5e3cab7390e4ee375c34f3580f243"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibKudos_dat/scripts/com/riotgames/platform/gameclient/kudos/KudosServicePlatform.as": {
+      "bytes": 5046,
+      "sha256": "c72626af140566e564db47598f7ef45aa8337068980a1105d86c514c326b84b6"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibLogin_dat/scripts/com/riotgames/platform/gameclient/module/login/controller/LoginQueueController.as": {
+      "bytes": 9208,
+      "sha256": "5220ef4e248d9167f3198a8284e82442e45d8fe87e5d9d00d37804aba7f4a8cd"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibLogin_dat/scripts/com/riotgames/platform/gameclient/module/login/controller/LoginQueueMediator.as": {
+      "bytes": 7581,
+      "sha256": "7390d256faa6191fbcca123b62c92c3fe5962b4f9d6ac009309cf7b60406a93c"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibLogin_dat/scripts/com/riotgames/platform/gameclient/module/login/view/ILoginQueueView.as": {
+      "bytes": 989,
+      "sha256": "53bd0bfa55aff9dc043493a167ae18ccd8adae558705d48fb7c1f2120016fc94"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/RiotServiceConfig.as": {
+      "bytes": 4534,
+      "sha256": "678f381bedd9a67e2fdc701d4a9d27b1cb6bb5a2c12aee483426f385d40e4ea4"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/event/LoginQueueEvent.as": {
+      "bytes": 1400,
+      "sha256": "658b08e8eded3e31006eb7608dea50d8ee1c3c5a7070a6e65ff2626b07e0e1d7"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/ChatService.as": {
+      "bytes": 2780,
+      "sha256": "45680629260587bc89bf06b11fba7ed933e84f8f51c2edac42f06f53c27ed6ee"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/ChatServiceState.as": {
+      "bytes": 688,
+      "sha256": "5bca280226bc0872abdbadc30784c597e4fb63a77fffeeff983199e215da7835"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/DomainType.as": {
+      "bytes": 347,
+      "sha256": "b291fc88034060b4ab3b04d4e958c07f230372eb59d98b15f1c78aa898b3421f"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/GameInviteService.as": {
+      "bytes": 2179,
+      "sha256": "ce0480859289e5e16251f3ccd4843de5b2359e4ea415c932f6366948d5944a68"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/GasToken.as": {
+      "bytes": 460,
+      "sha256": "f6c6552f1c6d34dec595c5c5389e9a10b9af4c4d07c5432611056a55f97f6293"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/IAuthService.as": {
+      "bytes": 796,
+      "sha256": "9aebf69a1647c325e74b12c5e1204b76819811e73aa6722c2b679667ca84db4f"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/ILoginQueueMonitor.as": {
+      "bytes": 813,
+      "sha256": "53ae8a0ba5821d8ebeb86106bd804e101f99c4c83b2ab2ece83d641ddfd91c8e"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/InterruptibleRemoteService.as": {
+      "bytes": 206,
+      "sha256": "c4f1a2f9b495dbf098fc050d917ca5a1211a641ba9544fad0908868a2cb0d2a8"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/InventoryService.as": {
+      "bytes": 933,
+      "sha256": "cbff49d6ebf4d40791ead648e0d71cce95537a51e048ad565ecee0aebf0007f6"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/IRemoteExceptionFactory.as": {
+      "bytes": 333,
+      "sha256": "833be5af323ed6162cbdc31d65269b3c6a7af43c9dd717a0759b376cffebfe11"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/LoginService.as": {
+      "bytes": 1238,
+      "sha256": "a7e752ddb9539f85e37a036ed997c1c99c403d01c0f612cc89d39e8963a5092e"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/MessageRouterService.as": {
+      "bytes": 954,
+      "sha256": "f79e98367c796df11803566524106584b7541b1f0b7d88b07075869aa5a162ef"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/PollingService.as": {
+      "bytes": 324,
+      "sha256": "43f216dc8bbc44f8b76e3f835f2aa4fc20a426940794177da1aa765882abf742"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/QueueRestrictionService.as": {
+      "bytes": 246,
+      "sha256": "f2be53404986d05b77610b689cba484619161a83dab97fb0fa7306330c9e16a3"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/RemoteObjectGeneratorService.as": {
+      "bytes": 459,
+      "sha256": "805e7b5b3c2cf41f407e5019afba86d904bb2fcc8da0791a98f8091ebdf4fd01"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/RerollService.as": {
+      "bytes": 296,
+      "sha256": "92155a9e173cabd35ea5f2fc85dcd4239b7d64a2f7d5302366dd6e0831589670"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/RESTService.as": {
+      "bytes": 268,
+      "sha256": "b1e2505d6b0003add89a48b71a049b45b2ddd732b2981d351db1054ae82e1b3f"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/ServerStatusService.as": {
+      "bytes": 448,
+      "sha256": "251a9837cf102d5bd008aac809ea4e91743c398d4f038e43589e09b3ab64066e"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/ServiceProxy.as": {
+      "bytes": 15297,
+      "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/StatisticsService.as": {
+      "bytes": 333,
+      "sha256": "dfb7338d5df241b81b0a3ea461270969968439f31285f219262af8fe05ea0f4c"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/ILcdsProxyMessageRouter.as": {
+      "bytes": 366,
+      "sha256": "432ea0027ac7fac064e2089be5670af72370753f623e0cc4073a70bfeb6eff37"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/ILcdsProxyServiceMessenger.as": {
+      "bytes": 914,
+      "sha256": "cce463c622a9d6f09528e9d8fa30bf708755051e61b269fd2280ecacd29a754f"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/LcdsProxyFunctionMessenger.as": {
+      "bytes": 1524,
+      "sha256": "4b02e13aa4e6e79564a92d42b17457f08a4ced4adc98468ad950425467b36924"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/LcdsProxyMessageRouter.as": {
+      "bytes": 2745,
+      "sha256": "5e83b710e394651572f4287fb763e5c69a22b98ab9a745e6b353912cea7fbcd0"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/LcdsProxyServiceMessenger.as": {
+      "bytes": 9881,
+      "sha256": "2fd99a5494c49613e17bf27dc82f7bf9cc35cf5f2d2c0de962d5f4912de0aab5"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/responses/ILcdsProxyMessageAction.as": {
+      "bytes": 291,
+      "sha256": "e822edd94dee0866519b5eb68b1292bbb0770e49a4a2346ef540ace760ba5ef1"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/responses/LcdsProxyMessageAction.as": {
+      "bytes": 2829,
+      "sha256": "1249f3bc04c72a258e80a53cf27fd1e762bcedb1108d5ddb3000a5532a7b7e92"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/servicecalls/AsyncLcdsProxyServiceCall.as": {
+      "bytes": 3284,
+      "sha256": "74c2c12b6e9dd8f4c770860d29af18442b923c3a0391feeea79a46085ab1daae"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/servicecalls/IAsyncLcdsProxyServiceCall.as": {
+      "bytes": 440,
+      "sha256": "16ccd4277704251e356ba427528ad1e0b1440bdb5bc37e241ff1f2362cef72e9"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/servicecalls/ILcdsProxyServiceCall.as": {
+      "bytes": 938,
+      "sha256": "5b681224b25809f897a3a2302fd157db41d34ba4ca4a08b6af1ef0d01c5c37c2"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/servicecalls/LcdsProxyServiceCall.as": {
+      "bytes": 4841,
+      "sha256": "bbd8dbdeb6394426419fd14833cb895cacea9e6d4f9e62bcb7bdc378b98a3407"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/lcdsproxy/responses/factory/ILcdsProxyMessageActionFactory.as": {
+      "bytes": 263,
+      "sha256": "dc6e1e60a565b708cc8a95c232b03310721477355e6b19505f62f1007e54840d"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/login/queue/AuthResult.as": {
+      "bytes": 978,
+      "sha256": "631e07ba9506ef8bbc54a3c67186e947ac7179b0113b400879e9a0f4549b46f1"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/login/queue/InGameCredentials.as": {
+      "bytes": 478,
+      "sha256": "06c92cab0b7023b5104800ca7607e5ba5f130d95c39c4de024dd9c22f8b171c7"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/login/queue/LoginQueueState.as": {
+      "bytes": 3246,
+      "sha256": "40de15389bd0b539764c5149dfaf26eaa2ed1ec0d8e852d4a6491173795bbde7"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/login/queue/PollingLoginQueueMonitor.as": {
+      "bytes": 10221,
+      "sha256": "25aa2150353d3e10c4fa788a845c28c57b51dbeae47b65930d296e9397d52d1d"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/services/login/queue/QueuePosition.as": {
+      "bytes": 777,
+      "sha256": "0c784b0cf2950254b28bfefbb4a05f3544c302177fbeead72a51ce15ba0417b0"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/common/xmpp/logging/XMPPSessionLogger.as": {
+      "bytes": 2849,
+      "sha256": "991ec0aac16c85baebffa66f14bb1cd1bbcbbb6154605a813970a627d4d51cef"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/AccountManagementService.as": {
+      "bytes": 1003,
+      "sha256": "61ac2132736b970e4b7d036edb549f10ab9f2c28f3630cdb3600b2869ce9adc5"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/AccountService.as": {
+      "bytes": 207,
+      "sha256": "5b0fb7a6bd52897ad0e840c3806c95366070478e63b0f87872bd14186a9dd456"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/AggregatedStatsService.as": {
+      "bytes": 288,
+      "sha256": "92eb8ef5f52733e9dc0de44dd4e08d144aa313468fb7c05d0c3457d1f8e5c451"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/ClientFacadeService.as": {
+      "bytes": 701,
+      "sha256": "fc262219355dfcd5a1a46385cadc331a527b0dca452cd93588a2bcb49c3339e4"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/CLSServicePlatform.as": {
+      "bytes": 1175,
+      "sha256": "d9c3699c4d50c2d082e6ea22c4bfc9327d4f31621c22c24ed9dc098ed6cabd55"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/GameClientAcknowledgeTypes.as": {
+      "bytes": 383,
+      "sha256": "ba6911e5b260913c65346aee98e5733344e67e1117d905e7981a9245858e91d3"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/GameMapService.as": {
+      "bytes": 303,
+      "sha256": "019a76c69c261f271712e2c441e75a82778b1309db70054411cc4e86ad39f52e"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/GameService.as": {
+      "bytes": 4720,
+      "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/GameZoneGameService.as": {
+      "bytes": 445,
+      "sha256": "64d07ff06d4eaa6be33d0d7b1dcde075a03a00294ebd15961ffe64aab42c1b74"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/IBaseLcdsService.as": {
+      "bytes": 838,
+      "sha256": "b6a0fd6184d7c10139d6105c6497dd7a27896a5bf65a9b57b37ebcce4a7684f3"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/ILeagueCache.as": {
+      "bytes": 1739,
+      "sha256": "0f3cb821406b2ac0ce6c7ecfd42416bd01ff2b7c10e5d0ae2a1e8f29c1f19734"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/LocalGameDataService.as": {
+      "bytes": 356,
+      "sha256": "363d22fa112238458abf37d0e6700d8b1ff5740c563207de5d02b495ee202b0f"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/MasteryBookService.as": {
+      "bytes": 631,
+      "sha256": "c193908baa3b67a28fe75e09bd298ce6261d242616d917344903dda6ef512e72"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/MatchMakerService.as": {
+      "bytes": 973,
+      "sha256": "2ba7b9e1d1604fdda4d5a5d88c3d1111fb12d84a9ce6d2d7d0f6f7c7c262983b"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/MicroFeedbackService.as": {
+      "bytes": 465,
+      "sha256": "36b1aab39a03994c47fe6cc2c9b729dab89a911a105efba0be37fc6fd19381b1"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/PlayerPreferencesService.as": {
+      "bytes": 600,
+      "sha256": "21fe1506d566af38d157954ef07c758b6be7b4c43c7c9f2ef0cc5890826e873b"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/PlayerStatsService.as": {
+      "bytes": 1019,
+      "sha256": "eb8b0c02ce80df5a264eb6a26b1242cef4d5d8a9b9c6357b8732576240d76dd2"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/SpellBookService.as": {
+      "bytes": 615,
+      "sha256": "63781675664132cabe575cbcd6755b777c7fed4b981b0eef85fc75031b5b73ba"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/SummonerIconService.as": {
+      "bytes": 226,
+      "sha256": "fae74b4d844444135f5f0f33d0a04c2858269f216c56e133c98ad47f200661a2"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/SummonerRuneService.as": {
+      "bytes": 351,
+      "sha256": "bee46c76c28fc7156ee04599e914f721d605a90bc242fdd29abf5cec203aa76b"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/SummonerService.as": {
+      "bytes": 2245,
+      "sha256": "4875365ba50c125789b97ec073a3abf6533d243f673744caa6da7f942d58ae78"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/TeamService.as": {
+      "bytes": 2041,
+      "sha256": "8ed8bfc0df7cb546116d14cd3a9a2050e1459cdb32e3edbbb3d7c66034a67f1a"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/maestro/MaestroConstants.as": {
+      "bytes": 2313,
+      "sha256": "efb31da7d10fad736d40b038555609f2718dc2595d63a461e4ee4de009e06bb8"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/maestro/MaestroEnumerateClientVersionEvent.as": {
+      "bytes": 406,
+      "sha256": "6d4ce96107c7efd0ae12d4d04d4463200cc6759a2e3a649f6b2ebe33da8f35d5"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/maestro/MaestroGetLatestClientVersionsEvent.as": {
+      "bytes": 408,
+      "sha256": "b463b92fff4093565150a24044e46369bd9217a37a2832ed4f1e6bf5481b0020"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/maestro/MaestroMessage.as": {
+      "bytes": 2333,
+      "sha256": "200262de829bde0efa6fc616edddfd041dbdff510763ace6eba3723b55945ed5"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/maestro/MaestroProgressUpdateEvent.as": {
+      "bytes": 382,
+      "sha256": "e18e6c28416d8b36b95c0368a4792710ae108ac498323ca5cc7bb637f63a031d"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/maestro/MaestroService.as": {
+      "bytes": 2191,
+      "sha256": "d72fce03fd14a46d26670c29fab290cfd36b30955cfb09b6aea6d605b38218ae"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/maestro/MaestroUpdatePlayerConnectionEvent.as": {
+      "bytes": 398,
+      "sha256": "d184c739cb80240ecc62d5fae36b365039b69ec10ce4045e948bd4a3263b66e2"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/mail/SMTPMailService.as": {
+      "bytes": 323,
+      "sha256": "4052d44f5e6c854eb7902266510565bd7d7aa3fc919ba4c2ff14484e65ac345f"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/socket/ISocketServerService.as": {
+      "bytes": 516,
+      "sha256": "640db7dc5a51800f418f0cf5386acdee6147a2fee476d2f9d9cc0d652f6d1a97"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/socket/SocketServerService.as": {
+      "bytes": 5381,
+      "sha256": "d3ca9e6f1586b5fe104dd48c6345d82edb2862ccf1f96628dc26d02102e93046"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/trade/IChampionTradeService.as": {
+      "bytes": 459,
+      "sha256": "d4895dce8d986ae0184590ef8ea66a06bb053e2cd84474aa17cd34d5fa082503"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/watch/IReplayDownloadAgent.as": {
+      "bytes": 785,
+      "sha256": "efc02ae3d78d1e0d9c6771af5a42194cb8371814a8cf6e1ef2f7fc8e9b3202e5"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/watch/IReplayDownloadService.as": {
+      "bytes": 389,
+      "sha256": "dc026fa40f536ba191475a23c9a6852187dc8a84670c0501475a174759ce9848"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/watch/IReplayFileManagerService.as": {
+      "bytes": 2343,
+      "sha256": "99c826692b79aa73478f1c2f6b5a7e478f784bb08e8fc522278b37b7841cc93f"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/watch/ReplayFileEvent.as": {
+      "bytes": 1156,
+      "sha256": "8d0ff23386e0b1381594236df2550b5345702d01c040ee6fa90ca7c21505599c"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibServices_dat/scripts/com/riotgames/platform/gameclient/services/watch/ReplayServiceConstants.as": {
+      "bytes": 355,
+      "sha256": "f9d5ba3bd54cdd7c48e1dc021ec61bee4384fd1e77f10fea31b0365e54d8600e"
+    },
+    "docs/reference_local_services_sources/air/lib__ClientLibSystem_dat/scripts/com/riotgames/pvpnet/system/boot/actions/InitializeRpcRemotingAction.as": {
+      "bytes": 2815,
+      "sha256": "5376dd13894447ea4af48f55cfb250b4117c63155e5d891c5605ba8609a2c403"
+    },
+    "docs/reference_local_services_sources/air/mod__cap__mod_cap_dat/scripts/com/riotgames/pvpnet/cap/services/CapLcdsMessageRouter.as": {
+      "bytes": 2397,
+      "sha256": "aa3f96c0724a399ad32db90c124df141bec81e68a98758fc34a2ed4a52f6ce68"
+    },
+    "docs/reference_local_services_sources/air/mod__cap__mod_cap_dat/scripts/com/riotgames/pvpnet/cap/services/CapLcdsProxyServiceMessangerGroup.as": {
+      "bytes": 2259,
+      "sha256": "669df0fe7700785fe2aa0f38cd231c3a02805d321ccc737bdc6c1d508b7df8f3"
+    },
+    "docs/reference_local_services_sources/air/mod__cap__mod_cap_dat/scripts/com/riotgames/pvpnet/cap/services/CapService.as": {
+      "bytes": 7303,
+      "sha256": "29392778768a8ec874c028ce8fc0ee701f7d98fba3afd4e02e98c0ec9aa48be6"
+    },
+    "docs/reference_local_services_sources/air/mod__cap__mod_cap_dat/scripts/com/riotgames/pvpnet/cap/util/LcdsProxyMessageActionDataUtil.as": {
+      "bytes": 841,
+      "sha256": "41460863f0bc55fcd0f1bb2cdb09e7fbb2e93f38f9593124fc2d51c3b73dff40"
+    },
+    "docs/reference_local_services_sources/air/mod__ced__mod_ced_dat/scripts/com/riotgames/pvpnet/contextualeducation/services/ContextualEducationLocalService.as": {
+      "bytes": 2810,
+      "sha256": "8e3a7b93e60a6b03e9c5cbed0a7aed5ad6d88bda7506d52f117a821a36d5cae0"
+    },
+    "docs/reference_local_services_sources/air/mod__ced__mod_ced_dat/scripts/com/riotgames/pvpnet/contextualeducation/services/ContextualEducationServiceManager.as": {
+      "bytes": 813,
+      "sha256": "660a040deb5bde3274c55f0c14c954ab5f269014e9dc402fdfd1b02b84ed37b6"
+    },
+    "docs/reference_local_services_sources/air/mod__ced__mod_ced_dat/scripts/com/riotgames/pvpnet/contextualeducation/services/ContextualEducationTipRecord.as": {
+      "bytes": 1430,
+      "sha256": "03b6cfd2c428c871c30dca2958143b7a70263f06134170fc6fd4404ed20c4ec3"
+    },
+    "docs/reference_local_services_sources/air/mod__ced__mod_ced_dat/scripts/com/riotgames/pvpnet/contextualeducation/services/IContextualEducationService.as": {
+      "bytes": 282,
+      "sha256": "69df15fef57fad3c2370c6995eb1626eee0222cc046f37e13c5fbac4c7677fed"
+    },
+    "docs/reference_local_services_sources/air/mod__cs__mod_cs_dat/scripts/_com_riotgames_platform_gameclient_controllers_game_views_SpectatorChampionSelectionViewWatcherSetupUtil.as": {
+      "bytes": 2685,
+      "sha256": "7a97079cc719e05e9664b4f374605ffbdf685bfc3336110d4d73b236725a9b86"
+    },
+    "docs/reference_local_services_sources/air/mod__cs__mod_cs_dat/scripts/_com_riotgames_platform_gameclient_controllers_game_views_SpectatorWaitBarWatcherSetupUtil.as": {
+      "bytes": 907,
+      "sha256": "ed73cc18fbfe7903235e38164ff260ce4d1fa987dcf83657239f9b2df24f756e"
+    },
+    "docs/reference_local_services_sources/air/mod__cs__mod_cs_dat/scripts/com/riotgames/platform/gameclient/controllers/game/views/SpectatorChampionSelectionView.as": {
+      "bytes": 55490,
+      "sha256": "5169c204a31cb19d293052932e1b103293f644af0ef9c3c10874f4db16b4b1d1"
+    },
+    "docs/reference_local_services_sources/air/mod__cs__mod_cs_dat/scripts/com/riotgames/platform/gameclient/controllers/game/views/SpectatorChampionSelectionView_SUNSET_BG.as": {
+      "bytes": 350,
+      "sha256": "9152e3e230e4c583941fa351461f4c3aa316dd2b8b26fed5f985117b2a58ce0f"
+    },
+    "docs/reference_local_services_sources/air/mod__cs__mod_cs_dat/scripts/com/riotgames/platform/gameclient/controllers/game/views/SpectatorChampionSelectionView__embed_mxml___________ClientAssets_imageEmbeds_championSelect_spectatorCS_blindPick_summonerBlue_png_1420628713.as": {
+      "bytes": 754,
+      "sha256": "8905aa85140925383927320caab26c63e8b7493eeb7fb8a5f43aa2f62103facd"
+    },
+    "docs/reference_local_services_sources/air/mod__cs__mod_cs_dat/scripts/com/riotgames/platform/gameclient/controllers/game/views/SpectatorChampionSelectionView__embed_mxml___________ClientAssets_imageEmbeds_championSelect_spectatorCS_blindPick_summonerPurple_png_1289890477.as": {
+      "bytes": 760,
+      "sha256": "a45c7b777fdd2646b26642fb6741c0ee00c6ed7ce8978bfa06d52095a1b38ea7"
+    },
+    "docs/reference_local_services_sources/air/mod__cs__mod_cs_dat/scripts/com/riotgames/platform/gameclient/controllers/game/views/SpectatorWaitBar.as": {
+      "bytes": 14319,
+      "sha256": "7b9805e6bf0d5ccfe98b23cc583879263d1f0295a730f1644103e1b8d92fd2d6"
+    },
+    "docs/reference_local_services_sources/air/mod__eogg__mod_eogg_dat/scripts/com/riotgames/pvpnet/endofgamegiftwindow/services/EndOfGameGiftService.as": {
+      "bytes": 4222,
+      "sha256": "4fb47bbadbf08b08786bdb1a52110957d9d04f81c480afc1acb0fb5b4dfb7565"
+    },
+    "docs/reference_local_services_sources/air/mod__eogg__mod_eogg_dat/scripts/com/riotgames/pvpnet/endofgamegiftwindow/services/EndOfGameGiftServiceResponseTypes.as": {
+      "bytes": 5053,
+      "sha256": "91442ca5174a8db0721452d6eae728956506a080e943261fd77ac8d4369004cc"
+    },
+    "docs/reference_local_services_sources/air/mod__eogg__mod_eogg_dat/scripts/com/riotgames/pvpnet/endofgamegiftwindow/services/IEndOfGameGiftService.as": {
+      "bytes": 300,
+      "sha256": "cdd792207d4abe77048813c673321be7116eca1d98de5ad6c70290de2a418959"
+    },
+    "docs/reference_local_services_sources/air/mod__eogg__mod_eogg_dat/scripts/com/riotgames/pvpnet/endofgamegiftwindow/services/IServiceCallResponseSubscribable.as": {
+      "bytes": 292,
+      "sha256": "cce7b8b2220c8660c7ae809f4ba701f485d7b5842b01fbae9dc150c16e27e8e2"
+    },
+    "docs/reference_local_services_sources/air/mod__itb__mod_itb_dat/scripts/com/riotgames/pvpnet/itembrowser/sets/service/IItemSetsService.as": {
+      "bytes": 344,
+      "sha256": "d30522c9e4c0a8997d05b3d369c22e4b0cb0bc009d609ad146dea2f91a5eb6c8"
+    },
+    "docs/reference_local_services_sources/air/mod__itb__mod_itb_dat/scripts/com/riotgames/pvpnet/itembrowser/sets/service/ItemSetServiceManager.as": {
+      "bytes": 1793,
+      "sha256": "e1181bbe069e819ac538cc52190250cdc841679bf36d903de1019c9e73fc3e04"
+    },
+    "docs/reference_local_services_sources/air/mod__itb__mod_itb_dat/scripts/com/riotgames/pvpnet/itembrowser/sets/service/ItemSetsService.as": {
+      "bytes": 1438,
+      "sha256": "c371c52ef00aeb8140cdca266797cdeff3f96998c372a5d20ea0420434a99800"
+    },
+    "docs/reference_local_services_sources/air/mod__itb__mod_itb_dat/scripts/com/riotgames/pvpnet/itembrowser/sets/service/LocalItemSetsService.as": {
+      "bytes": 2248,
+      "sha256": "aa169a7d1f660654cb5ac9a679e6f7edcecf94177ef90fa3e77afd9fa507721d"
+    },
+    "docs/reference_local_services_sources/air/mod__lgn__mod_lgn2_dat/scripts/com/riotgames/pvpnet/login/LoginQueueStatusPane.as": {
+      "bytes": 13718,
+      "sha256": "6077771843d12198287e0914c2ef955ac4c47bf843bcabcc808b233a5aa8083d"
+    },
+    "docs/reference_local_services_sources/air/mod__lsi__mod_lsi_dat/scripts/com/riotgames/pvpnet/CLS/commands/RetrieveInProgressGameSpectatorInfoCall.as": {
+      "bytes": 1838,
+      "sha256": "afeeb44aa22a8ae4f131f07456fc5120d402802d384b69a0cf2aec00f5151a99"
+    },
+    "docs/reference_local_services_sources/air/mod__lsi__mod_lsi_dat/scripts/com/riotgames/pvpnet/CLS/commands/SpectatorProxyServiceCall.as": {
+      "bytes": 1038,
+      "sha256": "80e1fce9e5945d493feb07256eee282ab41eb9dd806eb43aaa602e062a645825"
+    },
+    "docs/reference_local_services_sources/air/mod__lsi__mod_lsi_dat/scripts/com/riotgames/pvpnet/CLS/services/LeaguesService.as": {
+      "bytes": 4429,
+      "sha256": "2592937cbcc0bf0d4bff1925eb17f4a245c936662c1a52b2cd048db544948177"
+    },
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/_com_riotgames_platform_gameclient_views_game_practice_teamselection_SpectatorMemberRendererWatcherSetupUtil.as": {
+      "bytes": 4360,
+      "sha256": "6dbe459f121dd18a651eb2fb15f8b2609662da604de1539334a68811396acda3"
+    },
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/_com_riotgames_platform_gameclient_views_game_practice_teamselection_SpectatorPanelWatcherSetupUtil.as": {
+      "bytes": 1264,
+      "sha256": "ba52a17347a44cd477396dfe132afc685d91b830a51ae50f54fbedcfe9be3f84"
+    },
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/_com_riotgames_platform_gameclient_views_store_StoreHtmlViewWatcherSetupUtil.as": {
+      "bytes": 1314,
+      "sha256": "9daf6f3e70a290c8ca544c939ace811278c2280b7dac38b7490227d94e81d821"
+    },
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/_com_riotgames_platform_gameclient_views_store_StoreViewWatcherSetupUtil.as": {
+      "bytes": 2089,
+      "sha256": "8a23e426f0a51af3ecbf42b1bc060538c0541771ecb63ab6b4984389d1fe102e"
+    },
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/com/riotgames/platform/gameclient/controllers/store/StoreController.as": {
+      "bytes": 8589,
+      "sha256": "c3d84b7bf5b3782a390c659bd9f56f8f3444bea6f5d627f1b624b67a8f597f66"
+    },
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/com/riotgames/platform/gameclient/controllers/lobby/event/StoreNavigationEvent.as": {
+      "bytes": 904,
+      "sha256": "70b20ff69661f9ed4d4a0231b3d11fda6fc0d72a0622473411d98f10d801efd2"
+    },
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/com/riotgames/platform/gameclient/views/store/StoreBuddy.as": {
+      "bytes": 773,
+      "sha256": "ad32b771ca8ce6580c670e99159010ae9d97aec720b57f7567e7e70ad8b66352"
+    },
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/com/riotgames/platform/gameclient/views/store/StoreHtmlView.as": {
+      "bytes": 18796,
+      "sha256": "6df7e3736a1030c8c2341ef9cac255270a6ccc647c03cb35087c198348227b64"
+    },
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/com/riotgames/platform/gameclient/views/store/StoreView.as": {
+      "bytes": 13991,
+      "sha256": "c3f4b7dfe588b736ecef3651bdce911e49372e30378be2ee78c758c63a0a0bb0"
+    },
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/com/riotgames/platform/gameclient/views/game/common/StoreImageCache.as": {
+      "bytes": 5965,
+      "sha256": "ee94815c4d51cfea143da0ae1a27c267b42f0b828f4b051611eaac9b4cb6fa12"
+    },
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/com/riotgames/platform/gameclient/views/game/common/StoreImages.as": {
+      "bytes": 2343,
+      "sha256": "046c81a20172803a1412c9729d58b857007439e65ce7b2cf80e40dbf454e505e"
+    },
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/com/riotgames/platform/gameclient/views/game/practice/teamselection/SpectatorMemberRenderer.as": {
+      "bytes": 38049,
+      "sha256": "c32f27a416ba4e1dbb3bb1894caa2357308c84a6f441d4326788accb618e41e4"
+    },
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/com/riotgames/platform/gameclient/views/game/practice/teamselection/SpectatorMemberRenderer__embed_mxml________ClientAssets_imageEmbeds_teamSelection_gameOwner_png_1567169566.as": {
+      "bytes": 669,
+      "sha256": "e0064788a3f0f335896acaca0fbd9999136b8105168422acbdca7b8c8b5b03df"
+    },
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/com/riotgames/platform/gameclient/views/game/practice/teamselection/SpectatorMemberRenderer__embed_mxml________ClientAssets_imageEmbeds_teamSelection_separator_centered_blue_png_359335774.as": {
+      "bytes": 520,
+      "sha256": "4a3d7a51d097a4d1afd5162b2cf8746ea72bf33584308745d8e2ceaace39d744"
+    },
+    "docs/reference_local_services_sources/air/mod__man__mod_man_dat/scripts/com/riotgames/platform/gameclient/views/game/practice/teamselection/SpectatorPanel.as": {
+      "bytes": 16646,
+      "sha256": "5ee57ae8bbd6b820bcbcf8570551d52db27c38863325729000b3abafb29fe5f2"
+    },
+    "docs/reference_local_services_sources/air/mod__mtrk__cmmtrks_dat/scripts/com/riotgames/pvpnet/tracking/services/DradisServiceLoggerTarget.as": {
+      "bytes": 4835,
+      "sha256": "de865ed3912d7a71b2bc5c93b89e9785a3df2a6ac8cf94e9741cddd7796049e1"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/RemoteObjectGenerator.as": {
+      "bytes": 10670,
+      "sha256": "50ecbc6add25b0337823cbdced6795fad80ce3d0a3b06644194db776659a2a69"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/async/MessageRouterServiceImpl.as": {
+      "bytes": 10815,
+      "sha256": "fe70c99ba8a1ea4bf834f5989c3cc0a5e4dc6237b4e2cecfb3f99d65575b0752"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/AccountManagementServiceImpl.as": {
+      "bytes": 3460,
+      "sha256": "66bed3004c711547c5959987bc3a3c9886656f5972c9861cba8bb5de4f9f10f9"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/AccountServiceImpl.as": {
+      "bytes": 783,
+      "sha256": "0d3386cc598283408bfbbaef261f0f21c1f70dda0f8eb3e2447ed0cb6a94c814"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/BaseLcdsService.as": {
+      "bytes": 5596,
+      "sha256": "15f79ca2f3c248575a6ffd31f1c1fce80c93dde5f3e6c0a28548b44271258516"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/ChampionTradeService.as": {
+      "bytes": 1994,
+      "sha256": "8e780d850ca58713ac67a614b841569809ca67062c15ed22cf92b7cf0fb7b6e1"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/ChatServiceImpl.as": {
+      "bytes": 30867,
+      "sha256": "4db99fa3fd2725eeb9f17448b18853cf3777ff0f335b7ecf6b36dc9161b5923d"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/ClientFacadeServiceImpl.as": {
+      "bytes": 1613,
+      "sha256": "e70144966a5405ec77e61a80fef5db0362b4eaa76f91b831a5a152b05b521118"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/CLSServicePlatformImpl.as": {
+      "bytes": 5718,
+      "sha256": "0b5637d21a62280e196dc90e58f9bd5a57fd96239c916e98127dda6c5a223c13"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/GameInviteServiceImpl.as": {
+      "bytes": 11388,
+      "sha256": "ce0df31bd7c2b95e4bbd6dd9ca3271c2fd63526ce703f44b01dd0615174f0a17"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/GameMapServiceImpl.as": {
+      "bytes": 758,
+      "sha256": "9769a4d693b1132ac62c360795ffd89185c41ef65d0d8bc81ddf754fb67a8903"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/GameServiceImpl.as": {
+      "bytes": 19283,
+      "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/InventoryServiceImpl.as": {
+      "bytes": 2660,
+      "sha256": "0c9de5bd223ed1d03e49975d63cc4e5e168415c1b494b6a699803f697a61f13d"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/LcdsErrorHandler.as": {
+      "bytes": 12175,
+      "sha256": "724ed35fcbbed0ee1b86c6e2aca51e2fc53544a83fd43a04efe07b64606a0390"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/LoginServiceImpl.as": {
+      "bytes": 5688,
+      "sha256": "673ed37143e2e2c1b279408239961be92eb4a5749a99dc479d43cd70320ee7f9"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/MasteryBookServiceImpl.as": {
+      "bytes": 1254,
+      "sha256": "9fc2c7c323019b672ce76f41b2b2691e49e2abe0189a840c7396ff109f519a0b"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/MatchMakerServiceImpl.as": {
+      "bytes": 2890,
+      "sha256": "5088c0752d38dfcb1450cde2c9e412d0b93d918b59aa8ee3d0b242aad177d580"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/MicroFeedbackServiceImpl.as": {
+      "bytes": 999,
+      "sha256": "cd544c7810c6e9a9383033634a49de33ed3eb15abed01b204c5782ad484f5624"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/PlayerPreferencesServiceImpl.as": {
+      "bytes": 1775,
+      "sha256": "113d60e3cc083e6af193497e24ef42b700f169e51fdcf4e2a4d83299e2ac2cb3"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/PlayerStatsServiceImpl.as": {
+      "bytes": 2706,
+      "sha256": "f3ce740e04fd1fa2b51e9701b349aad10796e8ab19d3cc0aac991e0b39b134b8"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/QueueRestrictionServiceImpl.as": {
+      "bytes": 897,
+      "sha256": "a2edd4a0fb7c4a4224bbdd2b396a87426bdfb420f40d83b3b2dc2997b72791a1"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/RerollServiceImpl.as": {
+      "bytes": 1399,
+      "sha256": "64760427102a19768645f6c4406ccf202a32f0e091a8ac1259efcfc5be5c3c15"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/SpellBookServiceImpl.as": {
+      "bytes": 1220,
+      "sha256": "b212bf77fbc859ae68e2994ea62695d34653e8260a8ba4bba9ffd349b45c78b4"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/StatisticsServiceImpl.as": {
+      "bytes": 849,
+      "sha256": "24c7e4b0237417c7db3bbd58828a3a15ecc2157540198f4b381c584d21ae842c"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/SummonerIconServiceImpl.as": {
+      "bytes": 603,
+      "sha256": "d636995cc1bba1140db5336185194398a7c4a0b7b9bef9d7481a54feccee34ab"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/SummonerRuneServiceImpl.as": {
+      "bytes": 856,
+      "sha256": "4c80fca3904f31aeb6473d5cf0963415cfc3c51c277f6cbe04b737ed00401909"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/SummonerServiceImpl.as": {
+      "bytes": 6872,
+      "sha256": "bf8e0392fa4340bf87ffb20f0c8e0d6fd70f7a1316c9d4f2e9a05c45ac32c712"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/lcds/TeamServiceImpl.as": {
+      "bytes": 5105,
+      "sha256": "2fc61c62e940dc9a86d37f6e79ae614a258ef6d6c1d7eb50b66444576f5625ce"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/local/KeybindingDAO.as": {
+      "bytes": 3999,
+      "sha256": "4788cdecb7dbfcae90d31c55557e4217623cc811c35b93cb3ff174600f88947f"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/local/LocalGameDataServiceImpl.as": {
+      "bytes": 1116,
+      "sha256": "ad0ad788e384b73f20945f452bf7554db3b139984a2bd2ef5e9abce35483ae1e"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/maestro/MaestroServiceImpl.as": {
+      "bytes": 26464,
+      "sha256": "768839d5028fb4764ba2f2832fe3ca574fa06f3dcf2d80d6a11770a2fe953a88"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/mail/SMTPMailServiceImpl.as": {
+      "bytes": 5289,
+      "sha256": "6e6a1a48a6da4edeb62c4b470cb414e0af20ab53271368f36de540a56c9b3d22"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/rest/AuthSanitizer.as": {
+      "bytes": 1082,
+      "sha256": "95889b6c818822d4dadb4194e28da44e4067161574de5a72b6decc44a81e010e"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/rest/HttpRequest.as": {
+      "bytes": 6646,
+      "sha256": "f0ce1bc31c64b085cacf6e84ec6aff9855f6a29fef32e13f3e089656ff5bd405"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/rest/RemoteObjectGeneratorServiceImpl.as": {
+      "bytes": 1278,
+      "sha256": "4207a0453c4c1b694ef48b27fd049ffe57d89716bb826a9ba1803fdc97a22688"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/rest/RestAuthService.as": {
+      "bytes": 14032,
+      "sha256": "9d0163f35ae4681ed5a1e39110785f50addd6ec28b576038115bdd825920de8b"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/rest/ServerStatusServiceImpl.as": {
+      "bytes": 4806,
+      "sha256": "c73b3192b32d6043792aeac3009d8be56e4d40df63bba43141800b3166aab2fb"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/utils/ServicesPersistenceUtils.as": {
+      "bytes": 3107,
+      "sha256": "4901085b5bb94ceba7510a0b42e8977441ecced75c01414975990b55b0317109"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/watch/ReplayDirectoryScan.as": {
+      "bytes": 7691,
+      "sha256": "68cdd86dab50e3211a18ad76a23b11e95cf4886467588aaf06e88366a57e94b3"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/watch/ReplayDirectoryScanManager.as": {
+      "bytes": 5851,
+      "sha256": "7ac0f4d723b7d99187aec4fdd74a07450ced790638848d05f69f849be12c9cc4"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/watch/ReplayDownloadAgent.as": {
+      "bytes": 11432,
+      "sha256": "74ab89818ed352151e53e3e3aa447f98db56407efc5e35aa99f64c3ffcdb9093"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/watch/ReplayDownloadService.as": {
+      "bytes": 2851,
+      "sha256": "5c18795b3f843f85eef3bf0990df00f6486c8e2c226b9a3998060f70c7223f24"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/watch/ReplayFileCacheEntry.as": {
+      "bytes": 378,
+      "sha256": "66a8ffc91f26a5a48a44ec3a974ed8d432c0042a43261f66c1cf6de7ccaa4d5e"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/watch/ReplayFileManagerService.as": {
+      "bytes": 18282,
+      "sha256": "9f3aeb6855177b54aeb68dc534f3431ce7cd756822f4a6fc2571bb33b138acd0"
+    },
+    "docs/reference_local_services_sources/air/mod__ser__mod_ser_dat/scripts/com/riotgames/platform/gameclient/module/services/watch/ReplayMetaDataCacheEntry.as": {
+      "bytes": 863,
+      "sha256": "d52906968ee6ce1bd306e65ee933d290901c4b0727e193e320459611dab5f62a"
+    },
+    "docs/reference_local_services_sources/air/mod__sgst__mod_sgst_dat/scripts/com/riotgames/pvpnet/suggestedplayers/service/SuggestedPlayersService.as": {
+      "bytes": 4061,
+      "sha256": "0b45057317a0893f0edaf573c5e0410bc3373927dce886c0bf290ce9f13d25f4"
+    },
+    "docs/reference_local_services_sources/current/docs/REFERENCE_GAME_SERVER_4_20.md": {
+      "bytes": 11154,
+      "sha256": "5dda80db1399cfc474986c6a396136535e9d478da554d77ec688bb46ea4d717a"
+    },
+    "docs/reference_local_services_sources/current/tools/download_assets.py": {
+      "bytes": 5228,
+      "sha256": "6d2519fda28f5d8a34a78693faa7526cc4855eb3109a87e99e89ce47df35bb9c"
+    },
+    "docs/reference_local_services_sources/current/crates/client/src/match_results_ui.rs": {
+      "bytes": 6200,
+      "sha256": "ce96ed7771c5ee6f3823386ecbb61b73875cd2b78088ec83695a81d9ef621cb2"
+    },
+    "docs/reference_local_services_sources/current/crates/client/src/native_replay_service.rs": {
+      "bytes": 12275,
+      "sha256": "00b3379e4936f45595f9df62b75914d6a916ed2a8cb0b01f3b12af9040720908"
+    },
+    "docs/reference_local_services_sources/current/crates/client/src/session_connection.rs": {
+      "bytes": 17469,
+      "sha256": "fdd81b790bca52dd4e20ca5d34e81d78136f3958ab7028f5ca193d078fb9acd1"
+    },
+    "docs/reference_local_services_sources/current/crates/client/src/session_departure.rs": {
+      "bytes": 9218,
+      "sha256": "6cc8e1889fec2d6d2af8ae5f334126410ed5af2ef48b32f005c419617a3fdfe9"
+    },
+    "docs/reference_local_services_sources/current/crates/core/src/lib.rs": {
+      "bytes": 52808,
+      "sha256": "cb2af93a240737ed3f1d3ee31cf4ff916e730f402e7d0b128e7f29e5a3ed004d"
+    },
+    "docs/reference_local_services_sources/current/crates/core/src/match_results.rs": {
+      "bytes": 4021,
+      "sha256": "48c15c370a316084296c8a1e356fddf30730ca10223d37fbe71ee6cacec37be7"
+    },
+    "docs/reference_local_services_sources/current/crates/core/src/session_transport.rs": {
+      "bytes": 13206,
+      "sha256": "139a7ce15ac5261dee15fe0aa60716fb1bb6993ecd9acb0d41c34acb84ab00bc"
+    },
+    "docs/reference_local_services_sources/current/crates/core/src/session_wire.rs": {
+      "bytes": 8798,
+      "sha256": "bcba74190ca3c3a034b730f0242c348c8950aa6cdb474e5be262d581f464a9bb"
+    },
+    "docs/reference_local_services_sources/current/crates/server/src/main.rs": {
+      "bytes": 13628,
+      "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+    },
+    "docs/reference_local_services_sources/current/crates/server/src/owned_session.rs": {
+      "bytes": 6304,
+      "sha256": "f8166aac8cd04e02fd35d981f859883e18e462f00a066e683efb12ed29304415"
+    },
+    "docs/reference_local_services_sources/current/crates/server/src/reconnect.rs": {
+      "bytes": 18879,
+      "sha256": "60fe14f416cf800688b0353d5499738302bb1ad4e40e09a3b0eb6549a90328e1"
+    },
+    "docs/reference_local_services_sources/current/crates/server/src/result_store.rs": {
+      "bytes": 2007,
+      "sha256": "bbb88cc61148681b0edd3ebd38c5dc1ed797a86867d54db0344f34ee8d862415"
+    },
+    "docs/reference_local_services_sources/current/crates/server/src/session_host.rs": {
+      "bytes": 33360,
+      "sha256": "ae65f3a022f1d235751dba408ba1a8856398f9e47943ddd3302b4f1428bc0ba7"
+    },
+    "docs/reference_local_services_sources/current/data/4.20/champions.json": {
+      "bytes": 32052,
+      "sha256": "7cc80048c9460419041134232345d9b4da6d8f4e6795f7236720bef39e99de88"
+    },
+    "docs/reference_local_services_sources/current/launcher/web/app.js": {
+      "bytes": 2960,
+      "sha256": "f4f58340d72d2bedbf94b88a847a537c2ea7d76594f053d6a5dc4eba1cf64ad6"
+    },
+    "docs/reference_local_services_sources/current/launcher/src-tauri/src/main.rs": {
+      "bytes": 3491,
+      "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+    },
+    "docs/reference_local_services_sources/current/launcher/src-tauri/src/sessions.rs": {
+      "bytes": 30278,
+      "sha256": "54bc7a2a66296cdf2cededcca19d1846287c5108974efda2a0151b17503da7f6"
+    },
+    "docs/reference_local_services_sources/current/launcher/src-tauri/src/sessions_joined.rs": {
+      "bytes": 6559,
+      "sha256": "b7c44064076cab4a4ec3274e07a6fe28fe5f33477ac088a4eb82f24d2a89b60c"
+    },
+    "docs/reference_local_services_sources/current/launcher/src-tauri/src/sessions_output.rs": {
+      "bytes": 20465,
+      "sha256": "771407092830a4e780427b3dc89bc63e4b699eef06c5aee6aa00dd29bb8de011"
+    },
+    "tools/project-plan/local_services_reference.py": {
+      "bytes": 11004,
+      "sha256": "519b660379cb297d32ebc987232d541fe41cd6111534f0c192fa0347b40280a6"
+    },
+    "tools/project-plan/test_local_services_reference.py": {
+      "bytes": 7792,
+      "sha256": "f4901929b340d47513c7148cd1c078047589309ace35eafaecfbf13658090abc"
+    },
+    "docs/completion_tasks_2026-10-20.json": {
+      "bytes": 122595305,
+      "sha256": "3c65e2dab3dc5023a6af3917c5fc7ad9b25f808ae881e9aa7a570020f7d211ed"
+    },
+    "docs/coverage.json": {
+      "bytes": 5141628,
+      "sha256": "9016a949a36474176c1b0b13b61ff1d6e9615ab1d43aa78e07b6cc2eedda1e7a"
+    },
+    "docs/completion_plan.json": {
+      "bytes": 4251910,
+      "sha256": "a536b45321be1f35f0a491d0ac6f46895cf619c49d568374b8b04920bc6010b4"
+    },
+    "docs/resume_checkpoint.json": {
+      "bytes": 4822044,
+      "sha256": "904dc2c05eece22eb12d835fe8c6e88a016c3a32be829187e3e0c7a8536e308a"
+    },
+    "docs/ai/CURRENT.md": {
+      "bytes": 29424,
+      "sha256": "5259a7c936ed3c3ee0e507511c96d53980e60100581007585b16107a72fdfa42"
+    },
+    "docs/ai/HANDOFF.md": {
+      "bytes": 28532,
+      "sha256": "9ab3fbaace1f4663f1b7b2525df87aeb8e387b3887c12d24a1c973487b1d11e8"
+    },
+    "docs/ai/DECISIONS.md": {
+      "bytes": 32169,
+      "sha256": "48833d3f11d5b2162be9517af0de5d3695acc9ecd28445db158f2960caffb23a"
+    }
+  }
+}

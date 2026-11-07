@@ -1,0 +1,124 @@
+{
+  "schema": "openleague-ai-planning-research/v2",
+  "reviewed_at": "2026-10-22",
+  "sources": [
+    {
+      "id": "selection",
+      "title": "OpenAI — Model selection",
+      "url": "https://developers.openai.com/api/docs/guides/model-selection",
+      "supports": "Luna pour les tâches ciblées ; Sol pour le travail complexe courant ; Astra pour les problèmes ambigus et exigeants. Comparaison sur le travail réel recommandée."
+    },
+    {
+      "id": "reasoning",
+      "title": "OpenAI — Reasoning models",
+      "url": "https://developers.openai.com/api/docs/guides/reasoning",
+      "supports": "Faible, moyen, élevé, très élevé et max ont des usages distincts. Un effort plus élevé peut augmenter la latence. Max et très élevé nécessitent une évaluation de leur bénéfice."
+    },
+    {
+      "id": "latency",
+      "title": "OpenAI — Latency optimization",
+      "url": "https://developers.openai.com/api/docs/guides/latency-optimization",
+      "supports": "Le temps dépend des générations, appels d’outils et allers-retours. Les scripts déterministes et les opérations indépendantes groupées réduisent le travail répétitif."
+    },
+    {
+      "id": "sol",
+      "title": "OpenAI — GPT-6.1 Sol",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+      "supports": "Code complexe, usage d’outils et travail professionnel ; low, medium, high, xhigh, max. Les modes de service rapides sont distincts de l’effort."
+    },
+    {
+      "id": "astra",
+      "title": "OpenAI — GPT-6 Astra",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+      "supports": "Raisonnement et tâches complexes avec outils ; choix à comparer au travail réel, sans délai garanti déduit du nom du modèle."
+    },
+    {
+      "id": "luna",
+      "title": "OpenAI — GPT-6 Luna",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+      "supports": "Tâches ciblées à fort volume ; ne remplace pas une expertise sur des sources historiques contradictoires."
+    },
+    {
+      "id": "agent-loop",
+      "title": "OpenAI — Run long horizon tasks with Codex",
+      "url": "https://developers.openai.com/blog/run-long-horizon-tasks-with-codex",
+      "supports": "L’agent alterne plan, modifications, outils, vérifications et corrections. Une tâche ne se réduit pas à un appel au modèle."
+    },
+    {
+      "id": "field-comparison",
+      "title": "OpenAI — Maintaining software with the GPT-6 family",
+      "url": "https://developers.openai.com/blog/maintaining-software-with-the-gpt-6-family",
+      "supports": "Une comparaison publiée trouve des compromis entre configurations sur un audit réel ; ses coûts, résultats et durées ne sont pas transférables directement à OpenLeague."
+    },
+    {
+      "id": "metr-method",
+      "title": "METR — Task-Completion Time Horizons",
+      "url": "https://metr.org/time-horizons/",
+      "supports": "Les horizons de capacité sont exprimés en durée humaine de référence ; ils ne donnent pas le temps mural que met un agent IA. Cette page, arrêtée au 8 septembre 2026, ne classe pas les modèles actuels pour ce projet."
+    }
+  ],
+  "supported_api_efforts": [
+    "low",
+    "medium",
+    "high",
+    "xhigh",
+    "max"
+  ],
+  "codex_specific_modes": "Ultra dans Codex et Ultrafast/Fast de l’API ne sont pas interchangeables avec reasoning.effort. Aucun gain de temps chiffré ni parallélisme automatique supposé ici.",
+  "model_timing_benchmark": "Aucun benchmark comparatif d’inférence de ces modèles sur ce compte. Aucun coefficient de vitesse fictif par modèle.",
+  "timing_assumptions": {
+    "basis": "Boucles d’un agent IA qui lit, modifie, appelle ses outils et vérifie le résultat ; ce ne sont pas des heures de travail humain.",
+    "cycle_seconds_low": 35,
+    "cycle_seconds_high": 120,
+    "cycle_time_status": "Hypothèse de planification explicite, pas cadence publiée par OpenAI ni mesure d’inférence.",
+    "single_agent": true,
+    "service_tier": "standard ou offre interactive courante ; aucun abonnement rapide ni accès spécialisé présumé",
+    "tool_allowance_minutes": [
+      1,
+      5
+    ],
+    "missing_source_policy": "Pour un périmètre transversal ou une recherche non bornée, estimer un premier lot d’investigation et laisser la durée totale ouverte.",
+    "excluded": [
+      "attente de validation humaine",
+      "prérequis non réalisés",
+      "file d’attente inconnue du fournisseur",
+      "téléchargement important non mesuré",
+      "nouvelle compilation complète à cache froid non mesurée"
+    ]
+  },
+  "local_tool_evidence": [
+    {
+      "tool": "Compilation incrémentale de l’application Tauri",
+      "seconds": 22.4,
+      "source": "E:/mapslol3v3/Plan_Tauri_2026-10-20/release-final.log",
+      "kind": "historical tool time, not AI task time"
+    },
+    {
+      "tool": "Préparation et compilation des tests Tauri",
+      "seconds": 7.23,
+      "source": "E:/mapslol3v3/Plan_Tauri_2026-10-20/tests-final.log",
+      "kind": "historical tool time, not AI task time"
+    },
+    {
+      "tool": "Exécution de 10 tests de stockage Rust",
+      "seconds": 0.42,
+      "source": "E:/mapslol3v3/Plan_Tauri_2026-10-20/tests-final.log",
+      "kind": "historical tool time, not AI task time"
+    }
+  ],
+  "local_ai_workflow_anchor": {
+    "workflow": "Ajout des badges, du générateur, tests, compilation et vérification installée de la version 1.1.0",
+    "observed_interval_start_utc": "2026-10-22T13:48:22.860480+00:00",
+    "observed_interval_end_utc": "2026-10-22T14:12:59.921530+00:00",
+    "elapsed_minutes": 24.62,
+    "scope": "Intervalle entre la préparation matérialisée et la validation finale ; pas le début exact de la demande.",
+    "sample_size": 1,
+    "model_exposed": false,
+    "statistical_calibration": false,
+    "inference_latency_measured": false,
+    "source_artifacts": [
+      "E:/mapslol3v3/Plan_badges_2026-10-22/before.json",
+      "E:/mapslol3v3/Plan_badges_2026-10-22/FINAL_VERIFICATION.json"
+    ]
+  }
+}

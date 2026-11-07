@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title></title>
+    <style type="text/css">
+        * {
+            /*   use border-box for all elements  */
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            /*   no selections  */
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            /* ensure the cursor doesn't look like you can select text  */
+            cursor: default;
+        }
+
+        body {
+            background: #000000;
+            color: #678AAA;
+            margin:0;
+            padding:0;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size:12px;
+            overflow:hidden;
+        }
+
+        .flex-page {
+            background: #000000 url('img/bg-landing.jpg') no-repeat 0 0;
+            height: 673px;
+            width: 1264px;
+            -webkit-transform-origin: 0 0;
+            -moz-transform-origin: 0 0;
+            transform-origin: 0 0;
+            overflow: hidden;
+            position: relative;
+        }
+        h1, h2, h3, h4 {
+            margin-top: 0px;
+            font-family: Georgia,"Times New Roman",Times,serif;
+            font-weight: normal;
+        }
+        h2 {
+            color: #678AAA;
+        }
+        h3 {
+            color: #A4D0E4;
+            font-size: 16px;
+            margin-top: 0px;
+            margin-bottom: 10px;
+        }
+
+        .content-center {
+            text-align: center;
+        }
+
+        .content-right {
+            text-align: right;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        /*
+         * ----- Button Styling -----
+         */
+        a:link,
+        a:link * {
+            cursor: pointer;
+        }
+        a.btn {
+            height: 26px;
+            line-height: 26px;
+            padding: 0px 10px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 0 2px;
+
+            border-top: 1px solid rgba(153, 180, 216, 0.8);
+            background: #122846;
+            background: -webkit-gradient(linear, left top, left bottom, from(#255A9A), to(#122846));
+            background: -webkit-linear-gradient(top, #255A9A, #122846);
+
+            font-family: Georgia,"Times New Roman",Times,serif;
+            font-size: 12px;
+            text-align: center;
+            color: #FFFFFF;
+            text-decoration: none;
+            vertical-align: middle;
+            text-shadow: rgba(0,0,0,.4) 0 1px 0;
+            text-transform: uppercase;
+
+            cursor: pointer;
+
+        }
+        a.btn:hover {
+            text-decoration: none;
+            background: #103B6A;
+            background: -webkit-gradient(linear, left top, left bottom, from(#2486D0), to(#103B6A));
+            background: -webkit-linear-gradient(top, #2486D0, #103B6A);
+        }
+        a.btn-large {
+            width: 180px;
+        }
+        a.btn-large:hover {
+        }
+        a.btn-normal {
+            width: 100px;
+        }
+        a.btn-normal:hover {
+        }
+
+        #reload-page {
+            text-transform: uppercase;
+        }
+
+        .tile .wrapper {
+            background-color: #011527;
+            border: 1px solid #081F39;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            padding: 10px;
+        }
+        .box-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 25%;
+            -webkit-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+        }
+        p {
+            margin-top: 0px;
+        }
+
+    </style>
+
+    <script type="text/javascript" src="js/require-2.1.11.min.js" data-main="js/fallback.js" />
+</head>
+<body>
+<div class="flex-page">
+    <div class="tile box-center">
+        <div class="wrapper content-center">
+            <p class="translate">cant_load_content</p>
+            <div class="actions">
+                <a id="reload-page" class="btn translate">retry</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

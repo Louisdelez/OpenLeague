@@ -1,0 +1,1903 @@
+{
+  "schema": "openleague_commerce_links/v1",
+  "passed": true,
+  "utc": "2026-10-23T07:18:50.767121+00:00",
+  "full_task_scope_complete": false,
+  "native_or_game_executed": false,
+  "historical_server_policy_qualified": false,
+  "facts": {
+    "candidates": {
+      "producer": {
+        "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision129\\prepare_commerce_reader.py",
+        "bytes": 3227,
+        "sha256": "ee85143490aba2cf80fb2acf0172f02403b8cff8a923e8259d1357508dad37a8"
+      },
+      "associations": [
+        {
+          "task_id": "SYS-18.4-01",
+          "finding": "Champion match gold is not account currency/balance.",
+          "remaining": "Champion match gold is not account currency/balance.",
+          "anchors": [
+            {
+              "path": "crates/client/src/shop_ui.rs",
+              "line": 422,
+              "needle": "NativeText::Gold=>",
+              "role": "commerce_1"
+            }
+          ],
+          "native_bindings": [
+            {
+              "service_family": "economy",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+                "bytes": 15297,
+                "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+              }
+            },
+            {
+              "service_family": "economy",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+                "bytes": 1003,
+                "sha256": "61ac2132736b970e4b7d036edb549f10ab9f2c28f3630cdb3600b2869ce9adc5"
+              }
+            },
+            {
+              "service_family": "economy",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+                "bytes": 4720,
+                "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+              }
+            },
+            {
+              "service_family": "economy",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+                "bytes": 3460,
+                "sha256": "66bed3004c711547c5959987bc3a3c9886656f5972c9861cba8bb5de4f9f10f9"
+              }
+            },
+            {
+              "service_family": "economy",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+                "bytes": 19283,
+                "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+              }
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-b0a20275-3fea-5798-87a8-4764df44afe8"
+        },
+        {
+          "task_id": "SYS-18.4-02",
+          "finding": "Champion definitions are not priced account unlock offers.",
+          "remaining": "Champion definitions are not priced account unlock offers.",
+          "anchors": [
+            {
+              "path": "launcher/src-tauri/src/main.rs",
+              "line": 16,
+              "needle": "fn roster()",
+              "role": "commerce_2"
+            }
+          ],
+          "native_bindings": [
+            {
+              "service_family": "collections",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+                "bytes": 15297,
+                "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+              }
+            },
+            {
+              "service_family": "collections",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\InventoryService.as",
+                "bytes": 933,
+                "sha256": "cbff49d6ebf4d40791ead648e0d71cce95537a51e048ad565ecee0aebf0007f6"
+              }
+            },
+            {
+              "service_family": "collections",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\InventoryServiceImpl.as",
+                "bytes": 2660,
+                "sha256": "0c9de5bd223ed1d03e49975d63cc4e5e168415c1b494b6a699803f697a61f13d"
+              }
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-c29e8cc5-41a0-5fff-a7c5-117c3e2b38e2"
+        },
+        {
+          "task_id": "SYS-18.4-03",
+          "finding": "Champion catalogue is not owned/unlockable skin catalogue.",
+          "remaining": "Champion catalogue is not owned/unlockable skin catalogue.",
+          "anchors": [
+            {
+              "path": "launcher/src-tauri/src/main.rs",
+              "line": 16,
+              "needle": "fn roster()",
+              "role": "commerce_3"
+            }
+          ],
+          "native_bindings": [
+            {
+              "service_family": "collections",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+                "bytes": 15297,
+                "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+              }
+            },
+            {
+              "service_family": "collections",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\InventoryService.as",
+                "bytes": 933,
+                "sha256": "cbff49d6ebf4d40791ead648e0d71cce95537a51e048ad565ecee0aebf0007f6"
+              }
+            },
+            {
+              "service_family": "collections",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\InventoryServiceImpl.as",
+                "bytes": 2660,
+                "sha256": "0c9de5bd223ed1d03e49975d63cc4e5e168415c1b494b6a699803f697a61f13d"
+              }
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-255df3c0-b84d-5049-a6e0-ecce7d01eabc"
+        },
+        {
+          "task_id": "SYS-18.4-04",
+          "finding": "No account page/content shop command in launcher.",
+          "remaining": "No account page/content shop command in launcher.",
+          "anchors": [
+            {
+              "path": "launcher/src-tauri/src/main.rs",
+              "line": 72,
+              "needle": ".invoke_handler(",
+              "role": "commerce_4"
+            }
+          ],
+          "native_bindings": [
+            {
+              "service_family": "store",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+                "bytes": 15297,
+                "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+              }
+            },
+            {
+              "service_family": "store",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\RESTService.as",
+                "bytes": 268,
+                "sha256": "b1e2505d6b0003add89a48b71a049b45b2ddd732b2981d351db1054ae82e1b3f"
+              }
+            },
+            {
+              "service_family": "store",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\ClientFacadeService.as",
+                "bytes": 701,
+                "sha256": "fc262219355dfcd5a1a46385cadc331a527b0dca452cd93588a2bcb49c3339e4"
+              }
+            },
+            {
+              "service_family": "store",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\ClientFacadeServiceImpl.as",
+                "bytes": 1613,
+                "sha256": "e70144966a5405ec77e61a80fef5db0362b4eaa76f91b831a5a152b05b521118"
+              }
+            },
+            {
+              "service_family": "store",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\MicroFeedbackServiceImpl.as",
+                "bytes": 999,
+                "sha256": "cd544c7810c6e9a9383033634a49de33ed3eb15abed01b204c5782ad484f5624"
+              }
+            },
+            {
+              "service_family": "store",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__man__mod_man_dat\\scripts\\com\\riotgames\\platform\\gameclient\\views\\store\\StoreView.as",
+                "bytes": 13991,
+                "sha256": "c3f4b7dfe588b736ecef3651bdce911e49372e30378be2ee78c758c63a0a0bb0"
+              }
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-9d9417da-a87a-586c-8f72-362eae51e10a"
+        },
+        {
+          "task_id": "SYS-18.4-05",
+          "finding": "Match item quote is not account purchase details/conditions.",
+          "remaining": "Match item quote is not account purchase details/conditions.",
+          "anchors": [
+            {
+              "path": "crates/client/src/shop_ui.rs",
+              "line": 273,
+              "needle": "(quote.cost<=player.gold).then_some",
+              "role": "commerce_5"
+            }
+          ],
+          "native_bindings": [
+            {
+              "service_family": "store",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+                "bytes": 15297,
+                "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+              }
+            },
+            {
+              "service_family": "store",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\RESTService.as",
+                "bytes": 268,
+                "sha256": "b1e2505d6b0003add89a48b71a049b45b2ddd732b2981d351db1054ae82e1b3f"
+              }
+            },
+            {
+              "service_family": "store",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\ClientFacadeService.as",
+                "bytes": 701,
+                "sha256": "fc262219355dfcd5a1a46385cadc331a527b0dca452cd93588a2bcb49c3339e4"
+              }
+            },
+            {
+              "service_family": "store",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\ClientFacadeServiceImpl.as",
+                "bytes": 1613,
+                "sha256": "e70144966a5405ec77e61a80fef5db0362b4eaa76f91b831a5a152b05b521118"
+              }
+            },
+            {
+              "service_family": "store",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\MicroFeedbackServiceImpl.as",
+                "bytes": 999,
+                "sha256": "cd544c7810c6e9a9383033634a49de33ed3eb15abed01b204c5782ad484f5624"
+              }
+            },
+            {
+              "service_family": "store",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__man__mod_man_dat\\scripts\\com\\riotgames\\platform\\gameclient\\views\\store\\StoreView.as",
+                "bytes": 13991,
+                "sha256": "c3f4b7dfe588b736ecef3651bdce911e49372e30378be2ee78c758c63a0a0bb0"
+              }
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-aea57340-1796-5da1-a4e9-e915c0efa927"
+        },
+        {
+          "task_id": "SYS-18.4-06",
+          "finding": "No persistent account transaction command or authoritative account receipt.",
+          "remaining": "No persistent account transaction command or authoritative account receipt.",
+          "anchors": [
+            {
+              "path": "launcher/src-tauri/src/main.rs",
+              "line": 72,
+              "needle": ".invoke_handler(",
+              "role": "commerce_6"
+            }
+          ],
+          "native_bindings": [
+            {
+              "service_family": "economy",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+                "bytes": 15297,
+                "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+              }
+            },
+            {
+              "service_family": "economy",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+                "bytes": 1003,
+                "sha256": "61ac2132736b970e4b7d036edb549f10ab9f2c28f3630cdb3600b2869ce9adc5"
+              }
+            },
+            {
+              "service_family": "economy",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+                "bytes": 4720,
+                "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+              }
+            },
+            {
+              "service_family": "economy",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+                "bytes": 3460,
+                "sha256": "66bed3004c711547c5959987bc3a3c9886656f5972c9861cba8bb5de4f9f10f9"
+              }
+            },
+            {
+              "service_family": "economy",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+                "bytes": 19283,
+                "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+              }
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-f6ad096f-8048-5f85-a15c-d41ac40f5b78"
+        },
+        {
+          "task_id": "SYS-18.4-07",
+          "finding": "No account transaction recovery/inventory restoration consumer identified.",
+          "remaining": "No account transaction recovery/inventory restoration consumer identified.",
+          "anchors": [
+            {
+              "path": "launcher/src-tauri/src/main.rs",
+              "line": 72,
+              "needle": ".invoke_handler(",
+              "role": "commerce_7"
+            }
+          ],
+          "native_bindings": [
+            {
+              "service_family": "economy",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+                "bytes": 15297,
+                "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+              }
+            },
+            {
+              "service_family": "economy",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+                "bytes": 1003,
+                "sha256": "61ac2132736b970e4b7d036edb549f10ab9f2c28f3630cdb3600b2869ce9adc5"
+              }
+            },
+            {
+              "service_family": "economy",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+                "bytes": 4720,
+                "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+              }
+            },
+            {
+              "service_family": "economy",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+                "bytes": 3460,
+                "sha256": "66bed3004c711547c5959987bc3a3c9886656f5972c9861cba8bb5de4f9f10f9"
+              }
+            },
+            {
+              "service_family": "economy",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+                "bytes": 19283,
+                "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+              }
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-15bf4053-9028-5821-a380-196153c5f9e6"
+        },
+        {
+          "task_id": "SYS-18.4-08",
+          "finding": "No account purchase history/refund command;historical eligibility remains open.",
+          "remaining": "No account purchase history/refund command;historical eligibility remains open.",
+          "anchors": [
+            {
+              "path": "launcher/src-tauri/src/main.rs",
+              "line": 72,
+              "needle": ".invoke_handler(",
+              "role": "commerce_8"
+            }
+          ],
+          "native_bindings": [
+            {
+              "service_family": "economy",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+                "bytes": 15297,
+                "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+              }
+            },
+            {
+              "service_family": "economy",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+                "bytes": 1003,
+                "sha256": "61ac2132736b970e4b7d036edb549f10ab9f2c28f3630cdb3600b2869ce9adc5"
+              }
+            },
+            {
+              "service_family": "economy",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+                "bytes": 4720,
+                "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+              }
+            },
+            {
+              "service_family": "economy",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+                "bytes": 3460,
+                "sha256": "66bed3004c711547c5959987bc3a3c9886656f5972c9861cba8bb5de4f9f10f9"
+              }
+            },
+            {
+              "service_family": "economy",
+              "source": {
+                "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+                "bytes": 19283,
+                "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+              }
+            }
+          ],
+          "entry_boundary_only": true,
+          "full_task_scope_complete": false,
+          "existing_unknown_id": "OLU-d39b3ee3-ae44-51aa-8e18-4f0c14793926"
+        }
+      ],
+      "receipts": [
+        {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision129\\commerce-research.json",
+          "bytes": 23271,
+          "sha256": "e60b4d2218514a9b8b5a3297d2794b2e64d0e0a7276a90e5d3659ddb897cd7b8"
+        }
+      ],
+      "current_sources": [
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+          "bytes": 36049,
+          "sha256": "cf7405045e6541866543c447b31aef33730ef6c11d2eb6b275387fbb27adcfc1"
+        },
+        {
+          "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+          "bytes": 3491,
+          "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+        },
+        {
+          "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+          "bytes": 3491,
+          "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+        },
+        {
+          "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+          "bytes": 3491,
+          "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+        },
+        {
+          "path": "F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+          "bytes": 36049,
+          "sha256": "cf7405045e6541866543c447b31aef33730ef6c11d2eb6b275387fbb27adcfc1"
+        },
+        {
+          "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+          "bytes": 3491,
+          "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+        },
+        {
+          "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+          "bytes": 3491,
+          "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+        },
+        {
+          "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+          "bytes": 3491,
+          "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+        }
+      ],
+      "scope": "Account commerce native declarations and current absent-feature boundaries;match item purchases are distinct. No transactions executed."
+    },
+    "receipts": {
+      "commerce-research.json": {
+        "utc": "2026-10-23T07:18:12.970200+00:00",
+        "producer": {
+          "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision129\\research_commerce.py",
+          "bytes": 3394,
+          "sha256": "560ea25011d6749c51560b86320eadda191083a5245be88581cc0e1145c2f9a0"
+        },
+        "contract": {
+          "path": "F:\\OpenLeague\\docs\\reference_local_services_4_20.json",
+          "bytes": 317028,
+          "sha256": "8a6afdc263b5c0959212425feb9e437b3a2264ea1d3a3590f825cb52ef406efb"
+        },
+        "families": [
+          {
+            "id": "catalogue",
+            "title": "Catalogue et bootstrap du client",
+            "scope_decision": "replace_locally",
+            "current_state": "local_content_present",
+            "riot_server_implementation_recovered": false,
+            "runtime_qualified_in_this_task": false,
+            "historical_proxy_properties": [
+              "gameMapService",
+              "localGameDataService",
+              "clientFacadeService"
+            ],
+            "local_contract": "Publier un catalogue4.20 versionné, cartes/modes/disponibilités, configuration du client et inventaire de ressources ; distinguer définitions, disponibilité et contenu achevé.",
+            "authority": "Catalogue local haché et contrats natifs datés ; aucun placeholder présenté comme original complet.",
+            "persistence": "Versions, provenance et disponibilité des données ; lecture du catalogue non assimilée à une collection de compte.",
+            "nominal_acceptance": "Le launcher lit le même catalogue identifié que la partie ; entrée absente reste indisponible.",
+            "refusal_acceptance": "Version non compatible, entrée inconnue, ressource manquante : refus explicite.",
+            "current_evidence": "roster lit data/4.20/champions.json ; cela ne prouve ni122 kits terminés ni droits de propriété.",
+            "source_ids": [
+              "air.ServiceProxy",
+              "air.GameMapService",
+              "air.LocalGameDataService",
+              "air.ClientFacadeService",
+              "air.ClientFacadeServiceImpl",
+              "air.GameMapServiceImpl",
+              "air.MicroFeedbackServiceImpl",
+              "current.launcher/src-tauri/src/main.rs",
+              "current.crates/server/src/main.rs"
+            ],
+            "backlog_task_ids": [
+              "SYS-18.3-01",
+              "SYS-18.3-02",
+              "SYS-18.3-03",
+              "SYS-18.3-04",
+              "SYS-18.3-05",
+              "SYS-18.3-06",
+              "SYS-18.3-07",
+              "SYS-18.3-08",
+              "SYS-18.3-09",
+              "SYS-18.3-10",
+              "SYS-18.3-11",
+              "SYS-18.3-12"
+            ],
+            "depends_on": [
+              "distribution"
+            ],
+            "remaining_work": "Implémenter et qualifier ce contrat dans les tâches liées ; conserver les acquis listés, sans déduire la disponibilité du service de ce périmètre."
+          },
+          {
+            "id": "collections",
+            "title": "Champions, skins, pages et déblocages",
+            "scope_decision": "replace_locally",
+            "current_state": "not_implemented",
+            "riot_server_implementation_recovered": false,
+            "runtime_qualified_in_this_task": false,
+            "historical_proxy_properties": [
+              "inventoryService"
+            ],
+            "local_contract": "Collection locale persistante et politique de déblocage explicite ; disponibilité des assets séparée des droits locaux.",
+            "authority": "Service de collection ; les octets importés ne confèrent pas une propriété officielle Riot.",
+            "persistence": "Déblocages, sources d’attribution et révisions transactionnelles.",
+            "nominal_acceptance": "Déblocage conservé après restauration et consommé par la sélection du même compte.",
+            "refusal_acceptance": "Contenu absent, opération non autorisée ou attribution déjà appliquée : erreur/idempotence, aucun double gain.",
+            "current_evidence": "Catalogue de définitions présent ; aucune collection persistante de compte exposée par le launcher.",
+            "source_ids": [
+              "air.ServiceProxy",
+              "air.InventoryService",
+              "air.InventoryServiceImpl",
+              "current.launcher/src-tauri/src/main.rs",
+              "current.crates/server/src/main.rs"
+            ],
+            "backlog_task_ids": [
+              "SYS-19.2-01",
+              "SYS-19.2-02",
+              "SYS-19.2-03",
+              "SYS-19.2-04",
+              "SYS-19.2-05",
+              "SYS-19.2-06",
+              "SYS-19.2-07",
+              "SYS-19.2-08"
+            ],
+            "depends_on": [
+              "identity",
+              "catalogue"
+            ],
+            "remaining_work": "Implémenter et qualifier ce contrat dans les tâches liées ; conserver les acquis listés, sans déduire la disponibilité du service de ce périmètre."
+          },
+          {
+            "id": "store",
+            "title": "Boutique locale et catalogue commercial",
+            "scope_decision": "replace_locally",
+            "current_state": "not_implemented",
+            "riot_server_implementation_recovered": false,
+            "runtime_qualified_in_this_task": false,
+            "historical_proxy_properties": [
+              "restService",
+              "clientFacadeService"
+            ],
+            "local_contract": "Boutique locale reproduisant les parcours applicables avec catalogue/provenance/versions ; aucune boutique Riot distante par défaut.",
+            "authority": "Service de catalogue local ; mutation de collection uniquement par transaction économique autorisée.",
+            "persistence": "Catalogue, offres datées et état local des achats/déblocages.",
+            "nominal_acceptance": "Consultation locale, prix/règles identifiés, erreurs d’indisponibilité sans chargement distant implicite.",
+            "refusal_acceptance": "Offre inconnue, prix non qualifié ou session expirée : refus explicite ; aucun succès d’achat fictif.",
+            "current_evidence": "StoreView/StoreCatalogDao décrivent le client/HTML ; aucune boutique persistante locale reliée au launcher actuel.",
+            "source_ids": [
+              "air.ServiceProxy",
+              "air.RESTService",
+              "air.ClientFacadeService",
+              "air.ClientFacadeServiceImpl",
+              "air.MicroFeedbackServiceImpl",
+              "current.launcher/src-tauri/src/main.rs",
+              "current.crates/server/src/main.rs",
+              "air.StoreView"
+            ],
+            "backlog_task_ids": [
+              "SYS-18.3-01",
+              "SYS-18.3-02",
+              "SYS-18.3-03",
+              "SYS-18.3-04",
+              "SYS-18.3-05",
+              "SYS-18.3-06",
+              "SYS-18.3-07",
+              "SYS-18.3-08",
+              "SYS-18.3-09",
+              "SYS-18.3-10",
+              "SYS-18.3-11",
+              "SYS-18.3-12"
+            ],
+            "depends_on": [
+              "catalogue",
+              "identity"
+            ],
+            "remaining_work": "Implémenter et qualifier ce contrat dans les tâches liées ; conserver les acquis listés, sans déduire la disponibilité du service de ce périmètre."
+          },
+          {
+            "id": "economy",
+            "title": "Monnaies locales, achats, cadeaux et locations",
+            "scope_decision": "replace_locally",
+            "current_state": "not_implemented",
+            "riot_server_implementation_recovered": false,
+            "runtime_qualified_in_this_task": false,
+            "historical_proxy_properties": [
+              "accountManagementService",
+              "gameService"
+            ],
+            "local_contract": "Soldes et transactions locales clairement identifiés ; cadeaux/locations/remboursements applicables avec règles locales ; aucun paiement réel ou solde Riot.",
+            "authority": "Ledger propriétaire des soldes et droits ; transaction débit+attribution atomique et idempotente.",
+            "persistence": "Soldes, écritures, achats/dons/expiration et clés d’idempotence.",
+            "nominal_acceptance": "Achat local débite et attribue une fois ; panne/retry sans perte ni duplication.",
+            "refusal_acceptance": "Fonds insuffisants, destinataire invalide, location expirée, offre incompatible : refus et zéro mutation partielle.",
+            "current_evidence": "Les méthodes4.20 d’achat/location ne fournissent pas leurs règles serveur ; aucun ledger actuel exposé.",
+            "source_ids": [
+              "air.ServiceProxy",
+              "air.AccountManagementService",
+              "air.GameService",
+              "air.AccountManagementServiceImpl",
+              "air.GameServiceImpl",
+              "current.launcher/src-tauri/src/main.rs",
+              "current.crates/server/src/main.rs"
+            ],
+            "backlog_task_ids": [
+              "SYS-19.2-01",
+              "SYS-19.2-02",
+              "SYS-19.2-03",
+              "SYS-19.2-04",
+              "SYS-19.2-05",
+              "SYS-19.2-06",
+              "SYS-19.2-07",
+              "SYS-19.2-08"
+            ],
+            "depends_on": [
+              "collections",
+              "store",
+              "persistence"
+            ],
+            "remaining_work": "Implémenter et qualifier ce contrat dans les tâches liées ; conserver les acquis listés, sans déduire la disponibilité du service de ce périmètre."
+          }
+        ],
+        "sources": [
+          {
+            "id": "air.InventoryService",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\InventoryService.as",
+              "bytes": 933,
+              "sha256": "cbff49d6ebf4d40791ead648e0d71cce95537a51e048ad565ecee0aebf0007f6"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\InventoryService.as",
+              "bytes": 933,
+              "sha256": "cbff49d6ebf4d40791ead648e0d71cce95537a51e048ad565ecee0aebf0007f6"
+            },
+            "current_matches": true
+          },
+          {
+            "id": "air.RESTService",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\RESTService.as",
+              "bytes": 268,
+              "sha256": "b1e2505d6b0003add89a48b71a049b45b2ddd732b2981d351db1054ae82e1b3f"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\RESTService.as",
+              "bytes": 268,
+              "sha256": "b1e2505d6b0003add89a48b71a049b45b2ddd732b2981d351db1054ae82e1b3f"
+            },
+            "current_matches": true
+          },
+          {
+            "id": "air.ServiceProxy",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+              "bytes": 15297,
+              "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+              "bytes": 15297,
+              "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+            },
+            "current_matches": true
+          },
+          {
+            "id": "air.AccountManagementService",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+              "bytes": 1003,
+              "sha256": "61ac2132736b970e4b7d036edb549f10ab9f2c28f3630cdb3600b2869ce9adc5"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+              "bytes": 1003,
+              "sha256": "61ac2132736b970e4b7d036edb549f10ab9f2c28f3630cdb3600b2869ce9adc5"
+            },
+            "current_matches": true
+          },
+          {
+            "id": "air.ClientFacadeService",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\ClientFacadeService.as",
+              "bytes": 701,
+              "sha256": "fc262219355dfcd5a1a46385cadc331a527b0dca452cd93588a2bcb49c3339e4"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\ClientFacadeService.as",
+              "bytes": 701,
+              "sha256": "fc262219355dfcd5a1a46385cadc331a527b0dca452cd93588a2bcb49c3339e4"
+            },
+            "current_matches": true
+          },
+          {
+            "id": "air.GameMapService",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameMapService.as",
+              "bytes": 303,
+              "sha256": "019a76c69c261f271712e2c441e75a82778b1309db70054411cc4e86ad39f52e"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameMapService.as",
+              "bytes": 303,
+              "sha256": "019a76c69c261f271712e2c441e75a82778b1309db70054411cc4e86ad39f52e"
+            },
+            "current_matches": true
+          },
+          {
+            "id": "air.GameService",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+              "bytes": 4720,
+              "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+              "bytes": 4720,
+              "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+            },
+            "current_matches": true
+          },
+          {
+            "id": "air.LocalGameDataService",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\LocalGameDataService.as",
+              "bytes": 356,
+              "sha256": "363d22fa112238458abf37d0e6700d8b1ff5740c563207de5d02b495ee202b0f"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\LocalGameDataService.as",
+              "bytes": 356,
+              "sha256": "363d22fa112238458abf37d0e6700d8b1ff5740c563207de5d02b495ee202b0f"
+            },
+            "current_matches": true
+          },
+          {
+            "id": "air.StoreView",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__man__mod_man_dat\\scripts\\com\\riotgames\\platform\\gameclient\\views\\store\\StoreView.as",
+              "bytes": 13991,
+              "sha256": "c3f4b7dfe588b736ecef3651bdce911e49372e30378be2ee78c758c63a0a0bb0"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__man__mod_man_dat\\scripts\\com\\riotgames\\platform\\gameclient\\views\\store\\StoreView.as",
+              "bytes": 13991,
+              "sha256": "c3f4b7dfe588b736ecef3651bdce911e49372e30378be2ee78c758c63a0a0bb0"
+            },
+            "current_matches": true
+          },
+          {
+            "id": "air.AccountManagementServiceImpl",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+              "bytes": 3460,
+              "sha256": "66bed3004c711547c5959987bc3a3c9886656f5972c9861cba8bb5de4f9f10f9"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+              "bytes": 3460,
+              "sha256": "66bed3004c711547c5959987bc3a3c9886656f5972c9861cba8bb5de4f9f10f9"
+            },
+            "current_matches": true
+          },
+          {
+            "id": "air.ClientFacadeServiceImpl",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\ClientFacadeServiceImpl.as",
+              "bytes": 1613,
+              "sha256": "e70144966a5405ec77e61a80fef5db0362b4eaa76f91b831a5a152b05b521118"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\ClientFacadeServiceImpl.as",
+              "bytes": 1613,
+              "sha256": "e70144966a5405ec77e61a80fef5db0362b4eaa76f91b831a5a152b05b521118"
+            },
+            "current_matches": true
+          },
+          {
+            "id": "air.GameMapServiceImpl",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameMapServiceImpl.as",
+              "bytes": 758,
+              "sha256": "9769a4d693b1132ac62c360795ffd89185c41ef65d0d8bc81ddf754fb67a8903"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameMapServiceImpl.as",
+              "bytes": 758,
+              "sha256": "9769a4d693b1132ac62c360795ffd89185c41ef65d0d8bc81ddf754fb67a8903"
+            },
+            "current_matches": true
+          },
+          {
+            "id": "air.GameServiceImpl",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+              "bytes": 19283,
+              "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+              "bytes": 19283,
+              "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+            },
+            "current_matches": true
+          },
+          {
+            "id": "air.InventoryServiceImpl",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\InventoryServiceImpl.as",
+              "bytes": 2660,
+              "sha256": "0c9de5bd223ed1d03e49975d63cc4e5e168415c1b494b6a699803f697a61f13d"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\InventoryServiceImpl.as",
+              "bytes": 2660,
+              "sha256": "0c9de5bd223ed1d03e49975d63cc4e5e168415c1b494b6a699803f697a61f13d"
+            },
+            "current_matches": true
+          },
+          {
+            "id": "air.MicroFeedbackServiceImpl",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\MicroFeedbackServiceImpl.as",
+              "bytes": 999,
+              "sha256": "cd544c7810c6e9a9383033634a49de33ed3eb15abed01b204c5782ad484f5624"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\MicroFeedbackServiceImpl.as",
+              "bytes": 999,
+              "sha256": "cd544c7810c6e9a9383033634a49de33ed3eb15abed01b204c5782ad484f5624"
+            },
+            "current_matches": true
+          },
+          {
+            "id": "current.launcher/src-tauri/src/main.rs",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\launcher\\src-tauri\\src\\main.rs",
+              "bytes": 3491,
+              "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+              "bytes": 3491,
+              "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+            },
+            "current_matches": true
+          },
+          {
+            "id": "current.crates/server/src/main.rs",
+            "snapshot": {
+              "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\server\\src\\main.rs",
+              "bytes": 13628,
+              "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+            },
+            "current": {
+              "path": "F:\\OpenLeague\\crates\\server\\src\\main.rs",
+              "bytes": 13628,
+              "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+            },
+            "current_matches": true
+          }
+        ],
+        "anchors": [
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+              "bytes": 3491,
+              "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+            },
+            "line": 16,
+            "needle": "fn roster()",
+            "finding": "Champion catalogue,not an owned/unlock catalogue."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+              "bytes": 3491,
+              "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+            },
+            "line": 72,
+            "needle": ".invoke_handler(",
+            "finding": "No persistent account purchase/refund/wallet command among six launcher commands."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+              "bytes": 36049,
+              "sha256": "cf7405045e6541866543c447b31aef33730ef6c11d2eb6b275387fbb27adcfc1"
+            },
+            "line": 422,
+            "needle": "NativeText::Gold=>",
+            "finding": "Champion match gold,not local account currency ledger."
+          },
+          {
+            "source": {
+              "path": "F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+              "bytes": 36049,
+              "sha256": "cf7405045e6541866543c447b31aef33730ef6c11d2eb6b275387fbb27adcfc1"
+            },
+            "line": 273,
+            "needle": "(quote.cost<=player.gold).then_some",
+            "finding": "Match item purchase selected from champion gold;not account content transaction."
+          }
+        ],
+        "search": {
+          "command": [
+            "rg",
+            "-n",
+            "-i",
+            "refund|purchase|wallet|ledger",
+            "F:\\OpenLeague\\launcher",
+            "F:\\OpenLeague\\crates",
+            "-g",
+            "*.rs",
+            "-g",
+            "*.js",
+            "-g",
+            "*.html"
+          ],
+          "exit_code": 0,
+          "log": {
+            "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision129\\commerce-consumer-search.log",
+            "bytes": 19135,
+            "sha256": "de744e565d59e4fa22bc78c6f57019676d8a0e389991b0d6c51235f298e7f655"
+          }
+        },
+        "limits": [
+          "Account commerce distinct from in-match item shop.",
+          "AIR requests do not recover server pricing/ownership/refund rules.",
+          "Manifest changes,if present,remain explicit;no old receipt rewritten.",
+          "No purchase or balance mutation performed."
+        ]
+      }
+    },
+    "source_checks": [
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision129\\commerce-associations.json",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision129\\prepare_commerce_reader.py",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\InventoryService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\InventoryServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\InventoryService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\InventoryServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\RESTService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\ClientFacadeService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\ClientFacadeServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\MicroFeedbackServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__man__mod_man_dat\\scripts\\com\\riotgames\\platform\\gameclient\\views\\store\\StoreView.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\RESTService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\ClientFacadeService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\ClientFacadeServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\MicroFeedbackServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__man__mod_man_dat\\scripts\\com\\riotgames\\platform\\gameclient\\views\\store\\StoreView.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision129\\commerce-research.json",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision129\\research_commerce.py",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_4_20.json",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\InventoryService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\InventoryService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\RESTService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\RESTService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\ClientFacadeService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\ClientFacadeService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameMapService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameMapService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\LocalGameDataService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\LocalGameDataService.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__man__mod_man_dat\\scripts\\com\\riotgames\\platform\\gameclient\\views\\store\\StoreView.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__man__mod_man_dat\\scripts\\com\\riotgames\\platform\\gameclient\\views\\store\\StoreView.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\ClientFacadeServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\ClientFacadeServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameMapServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameMapServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\InventoryServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\InventoryServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\MicroFeedbackServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\MicroFeedbackServiceImpl.as",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\server\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\server\\src\\main.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+      "pin_F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+      "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision129\\commerce-consumer-search.log",
+      "eight_associations",
+      "families_and_sources",
+      "current_sources_match",
+      "task_SYS-18.4-01",
+      "anchor_commerce_1",
+      "task_SYS-18.4-02",
+      "anchor_commerce_2",
+      "task_SYS-18.4-03",
+      "anchor_commerce_3",
+      "task_SYS-18.4-04",
+      "anchor_commerce_4",
+      "task_SYS-18.4-05",
+      "anchor_commerce_5",
+      "task_SYS-18.4-06",
+      "anchor_commerce_6",
+      "task_SYS-18.4-07",
+      "anchor_commerce_7",
+      "task_SYS-18.4-08",
+      "anchor_commerce_8"
+    ],
+    "all_commerces_qualified": false,
+    "all_required_effects_covered": false
+  },
+  "source_identities": [
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision129\\commerce-associations.json",
+      "bytes": 22695,
+      "sha256": "f23931419a68182ca3fe7ceaebefa888111020b2cd419fb0e8e7a3812a81e2ab"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision129\\prepare_commerce_reader.py",
+      "bytes": 3227,
+      "sha256": "ee85143490aba2cf80fb2acf0172f02403b8cff8a923e8259d1357508dad37a8"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "bytes": 15297,
+      "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+      "bytes": 1003,
+      "sha256": "61ac2132736b970e4b7d036edb549f10ab9f2c28f3630cdb3600b2869ce9adc5"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+      "bytes": 4720,
+      "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+      "bytes": 3460,
+      "sha256": "66bed3004c711547c5959987bc3a3c9886656f5972c9861cba8bb5de4f9f10f9"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+      "bytes": 19283,
+      "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\InventoryService.as",
+      "bytes": 933,
+      "sha256": "cbff49d6ebf4d40791ead648e0d71cce95537a51e048ad565ecee0aebf0007f6"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\InventoryServiceImpl.as",
+      "bytes": 2660,
+      "sha256": "0c9de5bd223ed1d03e49975d63cc4e5e168415c1b494b6a699803f697a61f13d"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\RESTService.as",
+      "bytes": 268,
+      "sha256": "b1e2505d6b0003add89a48b71a049b45b2ddd732b2981d351db1054ae82e1b3f"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\ClientFacadeService.as",
+      "bytes": 701,
+      "sha256": "fc262219355dfcd5a1a46385cadc331a527b0dca452cd93588a2bcb49c3339e4"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\ClientFacadeServiceImpl.as",
+      "bytes": 1613,
+      "sha256": "e70144966a5405ec77e61a80fef5db0362b4eaa76f91b831a5a152b05b521118"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\MicroFeedbackServiceImpl.as",
+      "bytes": 999,
+      "sha256": "cd544c7810c6e9a9383033634a49de33ed3eb15abed01b204c5782ad484f5624"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__man__mod_man_dat\\scripts\\com\\riotgames\\platform\\gameclient\\views\\store\\StoreView.as",
+      "bytes": 13991,
+      "sha256": "c3f4b7dfe588b736ecef3651bdce911e49372e30378be2ee78c758c63a0a0bb0"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision129\\commerce-research.json",
+      "bytes": 23271,
+      "sha256": "e60b4d2218514a9b8b5a3297d2794b2e64d0e0a7276a90e5d3659ddb897cd7b8"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+      "bytes": 36049,
+      "sha256": "cf7405045e6541866543c447b31aef33730ef6c11d2eb6b275387fbb27adcfc1"
+    },
+    {
+      "path": "F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+      "bytes": 3491,
+      "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision129\\research_commerce.py",
+      "bytes": 3394,
+      "sha256": "560ea25011d6749c51560b86320eadda191083a5245be88581cc0e1145c2f9a0"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_4_20.json",
+      "bytes": 317028,
+      "sha256": "8a6afdc263b5c0959212425feb9e437b3a2264ea1d3a3590f825cb52ef406efb"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\InventoryService.as",
+      "bytes": 933,
+      "sha256": "cbff49d6ebf4d40791ead648e0d71cce95537a51e048ad565ecee0aebf0007f6"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\RESTService.as",
+      "bytes": 268,
+      "sha256": "b1e2505d6b0003add89a48b71a049b45b2ddd732b2981d351db1054ae82e1b3f"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+      "bytes": 15297,
+      "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+      "bytes": 1003,
+      "sha256": "61ac2132736b970e4b7d036edb549f10ab9f2c28f3630cdb3600b2869ce9adc5"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\ClientFacadeService.as",
+      "bytes": 701,
+      "sha256": "fc262219355dfcd5a1a46385cadc331a527b0dca452cd93588a2bcb49c3339e4"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameMapService.as",
+      "bytes": 303,
+      "sha256": "019a76c69c261f271712e2c441e75a82778b1309db70054411cc4e86ad39f52e"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameMapService.as",
+      "bytes": 303,
+      "sha256": "019a76c69c261f271712e2c441e75a82778b1309db70054411cc4e86ad39f52e"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+      "bytes": 4720,
+      "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\LocalGameDataService.as",
+      "bytes": 356,
+      "sha256": "363d22fa112238458abf37d0e6700d8b1ff5740c563207de5d02b495ee202b0f"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\LocalGameDataService.as",
+      "bytes": 356,
+      "sha256": "363d22fa112238458abf37d0e6700d8b1ff5740c563207de5d02b495ee202b0f"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__man__mod_man_dat\\scripts\\com\\riotgames\\platform\\gameclient\\views\\store\\StoreView.as",
+      "bytes": 13991,
+      "sha256": "c3f4b7dfe588b736ecef3651bdce911e49372e30378be2ee78c758c63a0a0bb0"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+      "bytes": 3460,
+      "sha256": "66bed3004c711547c5959987bc3a3c9886656f5972c9861cba8bb5de4f9f10f9"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\ClientFacadeServiceImpl.as",
+      "bytes": 1613,
+      "sha256": "e70144966a5405ec77e61a80fef5db0362b4eaa76f91b831a5a152b05b521118"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameMapServiceImpl.as",
+      "bytes": 758,
+      "sha256": "9769a4d693b1132ac62c360795ffd89185c41ef65d0d8bc81ddf754fb67a8903"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameMapServiceImpl.as",
+      "bytes": 758,
+      "sha256": "9769a4d693b1132ac62c360795ffd89185c41ef65d0d8bc81ddf754fb67a8903"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+      "bytes": 19283,
+      "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\InventoryServiceImpl.as",
+      "bytes": 2660,
+      "sha256": "0c9de5bd223ed1d03e49975d63cc4e5e168415c1b494b6a699803f697a61f13d"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\MicroFeedbackServiceImpl.as",
+      "bytes": 999,
+      "sha256": "cd544c7810c6e9a9383033634a49de33ed3eb15abed01b204c5782ad484f5624"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\launcher\\src-tauri\\src\\main.rs",
+      "bytes": 3491,
+      "sha256": "d132e610f9810e1b2bd9d35edd15ccb12d41f6fa8f66a8c59b232f5e6a5e1074"
+    },
+    {
+      "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\server\\src\\main.rs",
+      "bytes": 13628,
+      "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+    },
+    {
+      "path": "F:\\OpenLeague\\crates\\server\\src\\main.rs",
+      "bytes": 13628,
+      "sha256": "befc3f71ac9959061e18c5c63d8912887d7be2485ef05a27253b1ac6aef97512"
+    },
+    {
+      "path": "F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision129\\commerce-consumer-search.log",
+      "bytes": 19135,
+      "sha256": "de744e565d59e4fa22bc78c6f57019676d8a0e389991b0d6c51235f298e7f655"
+    }
+  ],
+  "checks": [
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision129\\commerce-associations.json",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision129\\prepare_commerce_reader.py",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\InventoryService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\InventoryServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\InventoryService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\InventoryServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\RESTService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\ClientFacadeService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\ClientFacadeServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\MicroFeedbackServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__man__mod_man_dat\\scripts\\com\\riotgames\\platform\\gameclient\\views\\store\\StoreView.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\RESTService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\ClientFacadeService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\ClientFacadeServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\MicroFeedbackServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__man__mod_man_dat\\scripts\\com\\riotgames\\platform\\gameclient\\views\\store\\StoreView.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision129\\commerce-research.json",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision129\\research_commerce.py",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_4_20.json",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\InventoryService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\InventoryService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\RESTService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\RESTService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\ClientFacadeService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\ClientFacadeService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameMapService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameMapService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\LocalGameDataService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\LocalGameDataService.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__man__mod_man_dat\\scripts\\com\\riotgames\\platform\\gameclient\\views\\store\\StoreView.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__man__mod_man_dat\\scripts\\com\\riotgames\\platform\\gameclient\\views\\store\\StoreView.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\ClientFacadeServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\ClientFacadeServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameMapServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameMapServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\InventoryServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\InventoryServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\MicroFeedbackServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_air_sources\\review\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\MicroFeedbackServiceImpl.as",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\docs\\reference_local_services_sources\\current\\crates\\server\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\server\\src\\main.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\launcher\\src-tauri\\src\\main.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+    "pin_F:\\OpenLeague\\crates\\client\\src\\shop_ui.rs",
+    "pin_F:\\OpenLeague-work\\Requirements_registry_4_20_2026-10-20\\revision129\\commerce-consumer-search.log",
+    "eight_associations",
+    "families_and_sources",
+    "current_sources_match",
+    "task_SYS-18.4-01",
+    "anchor_commerce_1",
+    "task_SYS-18.4-02",
+    "anchor_commerce_2",
+    "task_SYS-18.4-03",
+    "anchor_commerce_3",
+    "task_SYS-18.4-04",
+    "anchor_commerce_4",
+    "task_SYS-18.4-05",
+    "anchor_commerce_5",
+    "task_SYS-18.4-06",
+    "anchor_commerce_6",
+    "task_SYS-18.4-07",
+    "anchor_commerce_7",
+    "task_SYS-18.4-08",
+    "anchor_commerce_8"
+  ],
+  "checks_count": 109,
+  "associations": [
+    {
+      "task_id": "SYS-18.4-01",
+      "finding": "Champion match gold is not account currency/balance.",
+      "remaining": "Champion match gold is not account currency/balance.",
+      "anchors": [
+        {
+          "path": "crates/client/src/shop_ui.rs",
+          "line": 422,
+          "needle": "NativeText::Gold=>",
+          "role": "commerce_1"
+        }
+      ],
+      "native_bindings": [
+        {
+          "service_family": "economy",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+            "bytes": 15297,
+            "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+          }
+        },
+        {
+          "service_family": "economy",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+            "bytes": 1003,
+            "sha256": "61ac2132736b970e4b7d036edb549f10ab9f2c28f3630cdb3600b2869ce9adc5"
+          }
+        },
+        {
+          "service_family": "economy",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+            "bytes": 4720,
+            "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+          }
+        },
+        {
+          "service_family": "economy",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+            "bytes": 3460,
+            "sha256": "66bed3004c711547c5959987bc3a3c9886656f5972c9861cba8bb5de4f9f10f9"
+          }
+        },
+        {
+          "service_family": "economy",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+            "bytes": 19283,
+            "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+          }
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-b0a20275-3fea-5798-87a8-4764df44afe8"
+    },
+    {
+      "task_id": "SYS-18.4-02",
+      "finding": "Champion definitions are not priced account unlock offers.",
+      "remaining": "Champion definitions are not priced account unlock offers.",
+      "anchors": [
+        {
+          "path": "launcher/src-tauri/src/main.rs",
+          "line": 16,
+          "needle": "fn roster()",
+          "role": "commerce_2"
+        }
+      ],
+      "native_bindings": [
+        {
+          "service_family": "collections",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+            "bytes": 15297,
+            "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+          }
+        },
+        {
+          "service_family": "collections",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\InventoryService.as",
+            "bytes": 933,
+            "sha256": "cbff49d6ebf4d40791ead648e0d71cce95537a51e048ad565ecee0aebf0007f6"
+          }
+        },
+        {
+          "service_family": "collections",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\InventoryServiceImpl.as",
+            "bytes": 2660,
+            "sha256": "0c9de5bd223ed1d03e49975d63cc4e5e168415c1b494b6a699803f697a61f13d"
+          }
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-c29e8cc5-41a0-5fff-a7c5-117c3e2b38e2"
+    },
+    {
+      "task_id": "SYS-18.4-03",
+      "finding": "Champion catalogue is not owned/unlockable skin catalogue.",
+      "remaining": "Champion catalogue is not owned/unlockable skin catalogue.",
+      "anchors": [
+        {
+          "path": "launcher/src-tauri/src/main.rs",
+          "line": 16,
+          "needle": "fn roster()",
+          "role": "commerce_3"
+        }
+      ],
+      "native_bindings": [
+        {
+          "service_family": "collections",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+            "bytes": 15297,
+            "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+          }
+        },
+        {
+          "service_family": "collections",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\InventoryService.as",
+            "bytes": 933,
+            "sha256": "cbff49d6ebf4d40791ead648e0d71cce95537a51e048ad565ecee0aebf0007f6"
+          }
+        },
+        {
+          "service_family": "collections",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\InventoryServiceImpl.as",
+            "bytes": 2660,
+            "sha256": "0c9de5bd223ed1d03e49975d63cc4e5e168415c1b494b6a699803f697a61f13d"
+          }
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-255df3c0-b84d-5049-a6e0-ecce7d01eabc"
+    },
+    {
+      "task_id": "SYS-18.4-04",
+      "finding": "No account page/content shop command in launcher.",
+      "remaining": "No account page/content shop command in launcher.",
+      "anchors": [
+        {
+          "path": "launcher/src-tauri/src/main.rs",
+          "line": 72,
+          "needle": ".invoke_handler(",
+          "role": "commerce_4"
+        }
+      ],
+      "native_bindings": [
+        {
+          "service_family": "store",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+            "bytes": 15297,
+            "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+          }
+        },
+        {
+          "service_family": "store",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\RESTService.as",
+            "bytes": 268,
+            "sha256": "b1e2505d6b0003add89a48b71a049b45b2ddd732b2981d351db1054ae82e1b3f"
+          }
+        },
+        {
+          "service_family": "store",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\ClientFacadeService.as",
+            "bytes": 701,
+            "sha256": "fc262219355dfcd5a1a46385cadc331a527b0dca452cd93588a2bcb49c3339e4"
+          }
+        },
+        {
+          "service_family": "store",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\ClientFacadeServiceImpl.as",
+            "bytes": 1613,
+            "sha256": "e70144966a5405ec77e61a80fef5db0362b4eaa76f91b831a5a152b05b521118"
+          }
+        },
+        {
+          "service_family": "store",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\MicroFeedbackServiceImpl.as",
+            "bytes": 999,
+            "sha256": "cd544c7810c6e9a9383033634a49de33ed3eb15abed01b204c5782ad484f5624"
+          }
+        },
+        {
+          "service_family": "store",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__man__mod_man_dat\\scripts\\com\\riotgames\\platform\\gameclient\\views\\store\\StoreView.as",
+            "bytes": 13991,
+            "sha256": "c3f4b7dfe588b736ecef3651bdce911e49372e30378be2ee78c758c63a0a0bb0"
+          }
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-9d9417da-a87a-586c-8f72-362eae51e10a"
+    },
+    {
+      "task_id": "SYS-18.4-05",
+      "finding": "Match item quote is not account purchase details/conditions.",
+      "remaining": "Match item quote is not account purchase details/conditions.",
+      "anchors": [
+        {
+          "path": "crates/client/src/shop_ui.rs",
+          "line": 273,
+          "needle": "(quote.cost<=player.gold).then_some",
+          "role": "commerce_5"
+        }
+      ],
+      "native_bindings": [
+        {
+          "service_family": "store",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+            "bytes": 15297,
+            "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+          }
+        },
+        {
+          "service_family": "store",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\RESTService.as",
+            "bytes": 268,
+            "sha256": "b1e2505d6b0003add89a48b71a049b45b2ddd732b2981d351db1054ae82e1b3f"
+          }
+        },
+        {
+          "service_family": "store",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\ClientFacadeService.as",
+            "bytes": 701,
+            "sha256": "fc262219355dfcd5a1a46385cadc331a527b0dca452cd93588a2bcb49c3339e4"
+          }
+        },
+        {
+          "service_family": "store",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\ClientFacadeServiceImpl.as",
+            "bytes": 1613,
+            "sha256": "e70144966a5405ec77e61a80fef5db0362b4eaa76f91b831a5a152b05b521118"
+          }
+        },
+        {
+          "service_family": "store",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\MicroFeedbackServiceImpl.as",
+            "bytes": 999,
+            "sha256": "cd544c7810c6e9a9383033634a49de33ed3eb15abed01b204c5782ad484f5624"
+          }
+        },
+        {
+          "service_family": "store",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__man__mod_man_dat\\scripts\\com\\riotgames\\platform\\gameclient\\views\\store\\StoreView.as",
+            "bytes": 13991,
+            "sha256": "c3f4b7dfe588b736ecef3651bdce911e49372e30378be2ee78c758c63a0a0bb0"
+          }
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-aea57340-1796-5da1-a4e9-e915c0efa927"
+    },
+    {
+      "task_id": "SYS-18.4-06",
+      "finding": "No persistent account transaction command or authoritative account receipt.",
+      "remaining": "No persistent account transaction command or authoritative account receipt.",
+      "anchors": [
+        {
+          "path": "launcher/src-tauri/src/main.rs",
+          "line": 72,
+          "needle": ".invoke_handler(",
+          "role": "commerce_6"
+        }
+      ],
+      "native_bindings": [
+        {
+          "service_family": "economy",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+            "bytes": 15297,
+            "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+          }
+        },
+        {
+          "service_family": "economy",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+            "bytes": 1003,
+            "sha256": "61ac2132736b970e4b7d036edb549f10ab9f2c28f3630cdb3600b2869ce9adc5"
+          }
+        },
+        {
+          "service_family": "economy",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+            "bytes": 4720,
+            "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+          }
+        },
+        {
+          "service_family": "economy",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+            "bytes": 3460,
+            "sha256": "66bed3004c711547c5959987bc3a3c9886656f5972c9861cba8bb5de4f9f10f9"
+          }
+        },
+        {
+          "service_family": "economy",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+            "bytes": 19283,
+            "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+          }
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-f6ad096f-8048-5f85-a15c-d41ac40f5b78"
+    },
+    {
+      "task_id": "SYS-18.4-07",
+      "finding": "No account transaction recovery/inventory restoration consumer identified.",
+      "remaining": "No account transaction recovery/inventory restoration consumer identified.",
+      "anchors": [
+        {
+          "path": "launcher/src-tauri/src/main.rs",
+          "line": 72,
+          "needle": ".invoke_handler(",
+          "role": "commerce_7"
+        }
+      ],
+      "native_bindings": [
+        {
+          "service_family": "economy",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+            "bytes": 15297,
+            "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+          }
+        },
+        {
+          "service_family": "economy",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+            "bytes": 1003,
+            "sha256": "61ac2132736b970e4b7d036edb549f10ab9f2c28f3630cdb3600b2869ce9adc5"
+          }
+        },
+        {
+          "service_family": "economy",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+            "bytes": 4720,
+            "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+          }
+        },
+        {
+          "service_family": "economy",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+            "bytes": 3460,
+            "sha256": "66bed3004c711547c5959987bc3a3c9886656f5972c9861cba8bb5de4f9f10f9"
+          }
+        },
+        {
+          "service_family": "economy",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+            "bytes": 19283,
+            "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+          }
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-15bf4053-9028-5821-a380-196153c5f9e6"
+    },
+    {
+      "task_id": "SYS-18.4-08",
+      "finding": "No account purchase history/refund command;historical eligibility remains open.",
+      "remaining": "No account purchase history/refund command;historical eligibility remains open.",
+      "anchors": [
+        {
+          "path": "launcher/src-tauri/src/main.rs",
+          "line": 72,
+          "needle": ".invoke_handler(",
+          "role": "commerce_8"
+        }
+      ],
+      "native_bindings": [
+        {
+          "service_family": "economy",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\common\\services\\ServiceProxy.as",
+            "bytes": 15297,
+            "sha256": "744e716f9f4512cab2b5ad62436456a23bcb5c3a90c3b92f450f6a0c39b9366f"
+          }
+        },
+        {
+          "service_family": "economy",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\AccountManagementService.as",
+            "bytes": 1003,
+            "sha256": "61ac2132736b970e4b7d036edb549f10ab9f2c28f3630cdb3600b2869ce9adc5"
+          }
+        },
+        {
+          "service_family": "economy",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\lib__ClientLibServices_dat\\scripts\\com\\riotgames\\platform\\gameclient\\services\\GameService.as",
+            "bytes": 4720,
+            "sha256": "bc6d9b62d9f1dbc72ea930d766b6575b383d1e8dab4ac09c7b62aa36ec6dbc62"
+          }
+        },
+        {
+          "service_family": "economy",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\AccountManagementServiceImpl.as",
+            "bytes": 3460,
+            "sha256": "66bed3004c711547c5959987bc3a3c9886656f5972c9861cba8bb5de4f9f10f9"
+          }
+        },
+        {
+          "service_family": "economy",
+          "source": {
+            "path": "F:\\OpenLeague\\docs\\reference_local_services_sources\\air\\mod__ser__mod_ser_dat\\scripts\\com\\riotgames\\platform\\gameclient\\module\\services\\lcds\\GameServiceImpl.as",
+            "bytes": 19283,
+            "sha256": "9cdd24a82d8124e766c9c4b036813031f73df81f0d89e88750e9a807c708777e"
+          }
+        }
+      ],
+      "entry_boundary_only": true,
+      "full_task_scope_complete": false,
+      "existing_unknown_id": "OLU-d39b3ee3-ae44-51aa-8e18-4f0c14793926"
+    }
+  ]
+}
