@@ -20,10 +20,10 @@ For setup and tool commands read docs/ai/README.md. Use the openleague-resume sk
 
 For Git/GitHub work follow docs/GIT_WORKFLOW.md and docs/VERSIONING.md when present, and the openleague-git-workflow skill when available. Inspect Git status before changes. Isolate independent repository maintenance; stage only its files. Do not reset, switch or clean a checkout containing active game development. Follow docs/BUILDING.md for the checks relevant to the actual change. Keep asset packs and assets-manifest.json as the distribution mechanism.
 
-For Git/GitHub work, follow docs/GIT_WORKFLOW.md and docs/VERSIONING.md. Use the repository skill at .agents/skills/openleague-git-workflow/SKILL.md when preparing commits, PRs or releases. Preserve any ongoing game-development checkout; isolate independent repository maintenance and stage only its files. Run the repository-policy checker and the checks appropriate to the actual change. Repository hygiene checks are not complete-game acceptance.
-
 ## Shared memory and handoffs
 
 Keep durable project decisions with reasons and source references in docs/ai/DECISIONS.md or docs/ai/memory/. Store concise current state in docs/ai/CURRENT.md and the latest intentional handoff in docs/ai/HANDOFF.md. Record dates, source revisions, tests actually run, limitations, failed approaches and the next concrete action. Link detailed evidence instead of copying multi-megabyte reports into these files. Do not label inherited evidence as freshly executed.
 
 Basic Memory is an optional shared local MCP index over docs/ai/memory/. Plain files and the resume command remain usable without MCP. Do not store credentials, personal chat archives or raw session exports in public Git. Private exports go under ignored .ai-tools/state/. Configurations and skills are generated from .rulesync; update that source and run `node .ai-tools/project.mjs sync` rather than editing generated copies independently.
+
+For Git/GitHub work, follow docs/GIT_WORKFLOW.md and docs/VERSIONING.md. Use the repository skill at .agents/skills/openleague-git-workflow/SKILL.md when preparing commits, PRs or releases. Preserve any ongoing game-development checkout; isolate independent repository maintenance and stage only its files. Run the repository-policy checker and the checks appropriate to the actual change. Repository hygiene checks are not complete-game acceptance.
